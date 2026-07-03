@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-07",
+  "title": "발주서(PO)·거래명세서",
+  "folder": "workbench/documents/발주서(PO)·거래명세서__TRD-07",
+  "registry": {
+    "docId": "TRD-07",
+    "title": "발주서(PO)·거래명세서",
+    "issuer": "기업",
+    "genre": "증빙",
+    "structure": "표중심",
+    "modality": "전자PDF",
+    "sensitivity": "공개",
+    "fields": "발주번호·품목·수량·납기",
+    "notes": "MFG 재사용",
+    "hasPersonalInfo": "미포함",
+    "personalInfoDetail": "거래처, 품목, 납기, 금액",
+    "validationRules": "금액 합계, 사업자번호, 승인번호, 중복검사, 품목별 합계, 금액 형식, 거래처명, 날짜 형식",
+    "validationRuleCodes": "VAL-002, VAL-004, VAL-005, VAL-011",
+    "writingMethod": "인쇄",
+    "aliases": [
+      "발주서(PO)·거래명세서",
+      "발주서",
+      "거래명세서"
+    ],
+    "workflowIds": [
+      "MFG-01",
+      "MFG-02"
+    ],
+    "domains": [
+      "제조·구매·SCM"
+    ],
+    "isFirstPriority": true,
+    "firstPriorityDomains": [
+      "제조"
+    ],
+    "firstPriorityScopeCount": 1
+  },
+  "source_seed_folders": [
+    "seed_samples/발주서(PO)·거래명세서"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서.pdf",
+      "source": "seed_samples/발주서(PO)·거래명세서/발주서.pdf"
+    },
+    {
+      "path": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+      "source": "seed_samples/발주서(PO)·거래명세서/발주서_page_001.jpg"
+    }
+  ],
+  "status": "authoring_done",
+  "created_at": "2026-06-30T02:10:30.722244+00:00",
+  "updated_at": "2026-07-03T03:22:11.758764+00:00",
+  "artifacts": {
+    "ocr": "workbench/documents/발주서(PO)·거래명세서__TRD-07/ocr/paddleocr/precise/original_발주서_page_001/detections.json",
+    "review": "workbench/documents/발주서(PO)·거래명세서__TRD-07/review/original_발주서_page_001/review.json",
+    "inpaint": "workbench/documents/발주서(PO)·거래명세서__TRD-07/inpaint/original_발주서_page_001/lama/comparison_lama.png",
+    "authoring": "workbench/documents/발주서(PO)·거래명세서__TRD-07/authoring/schema.json",
+    "authoring_stylesheet": "workbench/documents/발주서(PO)·거래명세서__TRD-07/authoring/stylesheet.json",
+    "authoring_faker_profile": "workbench/documents/발주서(PO)·거래명세서__TRD-07/authoring/faker_profile.json",
+    "authoring_preview": "workbench/documents/발주서(PO)·거래명세서__TRD-07/authoring/render_preview/preview_000001.png",
+    "authoring_overlay": "workbench/documents/발주서(PO)·거래명세서__TRD-07/authoring/render_preview/preview_000001.overlay.png",
+    "authoring_batch": "outputs/render/batch_authoring_20260702/TRD-07_발주서(PO)·거래명세서/summary.json",
+    "authoring_contact_sheet": "outputs/pipeline_ready/TRD-07_발주서(PO)·거래명세서/contact_sheet.jpg",
+    "authoring_style_comparison": "outputs/style_calibration/TRD-07_발주서(PO)·거래명세서/full_comparison.jpg",
+    "authoring_semantic_schema": "workbench/documents/발주서(PO)·거래명세서__TRD-07/authoring/semantic_schema.json"
+  }
+}

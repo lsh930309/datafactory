@@ -1,0 +1,28 @@
+[project]
+name = "datafactory"
+version = "0.1.0"
+description = "GUI-assisted synthetic document image and GT generation toolkit"
+requires-python = ">=3.14"
+dependencies = [
+  "Pillow>=12.2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.1.1"]
+gui = ["streamlit>=1.58.0", "altair>=6.0.0", "pandas>=3.0.0"]
+inpaint = ["opencv-python>=4.10.0", "numpy>=2.0.0"]
+
+[project.scripts]
+datafactory = "datafactory.cli:main"
+datafactory-web-api = "datafactory.web_api:main"
+
+[build-system]
+requires = ["setuptools>=80", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

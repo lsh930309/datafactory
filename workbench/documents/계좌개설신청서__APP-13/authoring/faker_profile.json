@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-02T01:00:23.514712+00:00",
+  "updated_at": "2026-07-02T08:01:23.531230+00:00",
+  "doc_id": "APP-13",
+  "locale": "ko_KR",
+  "field_generators": {
+    "application_date": "literal:",
+    "company_name_inline": "literal:",
+    "existing_account_number": "literal:",
+    "account_name": "literal:",
+    "account_type_currency": "literal:",
+    "legal_address": "literal:",
+    "business_address": "literal:",
+    "signatories": "literal:",
+    "attorney_identity": "literal:",
+    "attorney_address": "literal:",
+    "attorney_phone": "literal:",
+    "behalf_company": "literal:",
+    "authorised_signatory": "literal:"
+  },
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "app13_account_profiles",
+      "targets": {
+        "application_date": "date",
+        "company_name_inline": "company_name",
+        "existing_account_number": "existing_account_number",
+        "account_name": "account_name",
+        "account_type_currency": "account_type_currency",
+        "legal_address": "legal_address",
+        "business_address": "business_address",
+        "signatories": "signatories",
+        "attorney_identity": "attorney_identity",
+        "attorney_address": "attorney_address",
+        "attorney_phone": "attorney_phone",
+        "behalf_company": "behalf_company",
+        "authorised_signatory": "authorised_signatory"
+      }
+    }
+  ],
+  "data_pools": {
+    "app13_account_profiles": [
+      {
+        "date": "2026-06-02",
+        "company_name": "주식회사 한빛테크놀로지",
+        "existing_account_number": "834-231916-96",
+        "account_name": "주식회사 한빛테크놀로지",
+        "account_type_currency": "보통예금 / KRW",
+        "legal_address": "서울특별시 강남구 테헤란로 152, 18층",
+        "business_address": "서울특별시 강남구 테헤란로 152, 18층",
+        "signatories": "김민준 대표이사, 박서연 재무담당",
+        "attorney_identity": "박서연 / 785141-1404410",
+        "attorney_address": "서울특별시 강남구 테헤란로 152, 18층",
+        "attorney_phone": "010-9586-4391",
+        "behalf_company": "주식회사 한빛테크놀로지",
+        "authorised_signatory": "김민준 대표이사"
+      },
+      {
+        "date": "2026-06-06",
+        "company_name": "새론모빌리티 주식회사",
+        "existing_account_number": "225-420455-50",
+        "account_name": "새론모빌리티 주식회사",
+        "account_type_currency": "기업자유예금 / KRW",
+        "legal_address": "경기도 성남시 분당구 판교역로 235",
+        "business_address": "경기도 성남시 분당구 대왕판교로 660",
+        "signatories": "이도윤 대표이사, 최하은 재무담당",
+        "attorney_identity": "최하은 / 819162-3287463",
+        "attorney_address": "경기도 성남시 분당구 대왕판교로 660",
+        "attorney_phone": "010-9378-3768",
+        "behalf_company": "새론모빌리티 주식회사",
+        "authorised_signatory": "이도윤 대표이사"
+      },
+      {
+        "date": "2026-06-10",
+        "company_name": "대한소재 주식회사",
+        "existing_account_number": "994-690466-74",
+        "account_name": "대한소재 주식회사",
+        "account_type_currency": "외화보통예금 / USD",
+        "legal_address": "부산광역시 해운대구 센텀중앙로 79",
+        "business_address": "부산광역시 해운대구 센텀중앙로 79",
+        "signatories": "정우진 대표이사, 강서윤 재무담당",
+        "attorney_identity": "강서윤 / 835297-1376900",
+        "attorney_address": "부산광역시 해운대구 센텀중앙로 79",
+        "attorney_phone": "010-9234-1761",
+        "behalf_company": "대한소재 주식회사",
+        "authorised_signatory": "정우진 대표이사"
+      },
+      {
+        "date": "2026-06-14",
+        "company_name": "미래식품 주식회사",
+        "existing_account_number": "309-513915-83",
+        "account_name": "미래식품 주식회사",
+        "account_type_currency": "정기예금 / KRW",
+        "legal_address": "대전광역시 유성구 테크노중앙로 50",
+        "business_address": "충청남도 천안시 서북구 직산읍 공단로 21",
+        "signatories": "조현우 대표이사, 오지민 재무담당",
+        "attorney_identity": "오지민 / 874835-3679585",
+        "attorney_address": "충청남도 천안시 서북구 직산읍 공단로 21",
+        "attorney_phone": "010-4724-1782",
+        "behalf_company": "미래식품 주식회사",
+        "authorised_signatory": "조현우 대표이사"
+      },
+      {
+        "date": "2026-06-18",
+        "company_name": "세종바이오 주식회사",
+        "existing_account_number": "839-842461-52",
+        "account_name": "세종바이오 주식회사",
+        "account_type_currency": "보통예금 / KRW",
+        "legal_address": "서울특별시 마포구 월드컵북로 396",
+        "business_address": "인천광역시 연수구 송도과학로 32",
+        "signatories": "윤지호 대표이사, 한유진 재무담당",
+        "attorney_identity": "한유진 / 990020-1461972",
+        "attorney_address": "인천광역시 연수구 송도과학로 32",
+        "attorney_phone": "010-6609-7773",
+        "behalf_company": "세종바이오 주식회사",
+        "authorised_signatory": "윤지호 대표이사"
+      },
+      {
+        "date": "2026-06-22",
+        "company_name": "누리패키징 주식회사",
+        "existing_account_number": "723-714912-83",
+        "account_name": "누리패키징 주식회사",
+        "account_type_currency": "기업자유예금 / KRW",
+        "legal_address": "광주광역시 북구 첨단과기로 123",
+        "business_address": "광주광역시 북구 첨단벤처로 108",
+        "signatories": "임서준 대표이사, 문하린 재무담당",
+        "attorney_identity": "문하린 / 782648-3825157",
+        "attorney_address": "광주광역시 북구 첨단벤처로 108",
+        "attorney_phone": "010-6505-6492",
+        "behalf_company": "누리패키징 주식회사",
+        "authorised_signatory": "임서준 대표이사"
+      }
+    ]
+  },
+  "notes": "APP-13 계좌개설신청서 faker profile. 회사명/주소/대리인/계좌 정보를 하나의 record에서 선택해 정합성을 유지함."
+}

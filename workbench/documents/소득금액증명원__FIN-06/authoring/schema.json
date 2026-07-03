@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:24:50.875020+00:00",
+  "doc_id": "FIN-06",
+  "title": "소득금액증명원",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/소득금액증명원__FIN-06/review/original_EgovPageLink.do_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/소득금액증명원__FIN-06/samples/original/EgovPageLink.do_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/소득금액증명원__FIN-06/inpaint/original_EgovPageLink.do_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1191,
+    "height": 1684
+  },
+  "fields": [
+    {
+      "field_id": "page_number",
+      "label": "페이지",
+      "source_detection_id": "det_000003",
+      "source_text": "(1 / 11)",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin06_income_records.page_number",
+      "style_class": "style_page_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page.number",
+        "csv_column": "page_number"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000003"
+    },
+    {
+      "field_id": "document_confirmation_number",
+      "label": "문서확인번호",
+      "source_detection_id": "det_000007",
+      "source_text": "6611-577-1341-677",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin06_income_records.document_confirmation_number",
+      "style_class": "style_document_confirmation_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "document.confirmation.number",
+        "csv_column": "document_confirmation_number"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000007"
+    },
+    {
+      "field_id": "income_year",
+      "label": "귀속연도",
+      "source_detection_id": "det_000008",
+      "source_text": "(2025년 귀속)",
+      "value_type": "date.kr",
+      "generator": "pool_record:fin06_income_records.income_year",
+      "style_class": "style_income_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "income.year",
+        "csv_column": "income_year"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000008"
+    },
+    {
+      "field_id": "taxpayer_name",
+      "label": "성명",
+      "source_detection_id": "det_000011",
+      "source_text": "이승훈",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin06_income_records.taxpayer_name",
+      "style_class": "style_taxpayer_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "taxpayer.name",
+        "csv_column": "taxpayer_name"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000011"
+    },
+    {
+      "field_id": "taxpayer_rrn",
+      "label": "주민등록번호",
+      "source_detection_id": "det_000013",
+      "source_text": "930309-1069114",
+      "value_type": "person.rrn",
+      "generator": "pool_record:fin06_income_records.taxpayer_rrn",
+      "style_class": "style_taxpayer_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "taxpayer.rrn",
+        "csv_column": "taxpayer_rrn"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000013"
+    },
+    {
+      "field_id": "taxpayer_address",
+      "label": "주소",
+      "source_detection_id": "det_000015",
+      "source_text": "서울특별시동대문구제기로2길28-12(제기동)",
+      "value_type": "address.ko",
+      "generator": "pool_record:fin06_income_records.taxpayer_address",
+      "style_class": "style_taxpayer_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "taxpayer.address",
+        "csv_column": "taxpayer_address"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000015"
+    },
+    {
+      "field_id": "business_registration_number",
+      "label": "사업자등록번호",
+      "source_detection_id": "det_000053",
+      "source_text": "368-81-01409",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin06_income_records.business_registration_number",
+      "style_class": "style_business_registration_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.registration.number",
+        "csv_column": "business_registration_number"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000053"
+    },
+    {
+      "field_id": "revenue_amount_1",
+      "label": "수입금액 1",
+      "source_detection_id": "det_000054",
+      "source_text": "11,000,000",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin06_income_records.revenue_amount_1",
+      "style_class": "style_revenue_amount_1",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "revenue.amount.1",
+        "csv_column": "revenue_amount_1"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000054"
+    },
+    {
+      "field_id": "income_amount_1",
+      "label": "소득금액 1",
+      "source_detection_id": "det_000055",
+      "source_text": "5,100,000",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin06_income_records.income_amount_1",
+      "style_class": "style_income_amount_1",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "income.amount.1",
+        "csv_column": "income_amount_1"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000055"
+    },
+    {
+      "field_id": "tax_amount_1",
+      "label": "총결정세액 1",
+      "source_detection_id": "det_000056",
+      "source_text": "0",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin06_income_records.tax_amount_1",
+      "style_class": "style_tax_amount_1",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "tax.amount.1",
+        "csv_column": "tax_amount_1"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000056"
+    },
+    {
+      "field_id": "income_type_1",
+      "label": "소득구분 1",
+      "source_detection_id": "det_000057",
+      "source_text": "(연말정산)",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin06_income_records.income_type_1",
+      "style_class": "style_income_type_1",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "income.type.1",
+        "csv_column": "income_type_1"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000057"
+    },
+    {
+      "field_id": "revenue_amount_2",
+      "label": "수입금액 2",
+      "source_detection_id": "det_000059",
+      "source_text": "11,000,000",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin06_income_records.revenue_amount_2",
+      "style_class": "style_revenue_amount_2",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "revenue.amount.2",
+        "csv_column": "revenue_amount_2"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000059"
+    },
+    {
+      "field_id": "income_amount_2",
+      "label": "소득금액 2",
+      "source_detection_id": "det_000060",
+      "source_text": "5,100,000",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin06_income_records.income_amount_2",
+      "style_class": "style_income_amount_2",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "income.amount.2",
+        "csv_column": "income_amount_2"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000060"
+    },
+    {
+      "field_id": "tax_amount_2",
+      "label": "총결정세액 2",
+      "source_detection_id": "det_000061",
+      "source_text": "0",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin06_income_records.tax_amount_2",
+      "style_class": "style_tax_amount_2",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "tax.amount.2",
+        "csv_column": "tax_amount_2"
+      },
+      "required": true,
+      "notes": "FIN-06 소득금액증명원 생산용 보정 필드. 개인정보/소득금액/세액을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000061"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "fin06_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/소득금액증명원__FIN-06/review/original_EgovPageLink.do_page_001/review.json"
+  }
+}

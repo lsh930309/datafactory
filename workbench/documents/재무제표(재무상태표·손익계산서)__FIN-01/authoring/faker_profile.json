@@ -1,0 +1,1215 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-30T11:49:12.318967+00:00",
+  "updated_at": "2026-07-02T05:45:57.128587+00:00",
+  "doc_id": "FIN-01",
+  "locale": "ko_KR",
+  "field_generators": {
+    "page_number": "literal:(  1  /  4  )",
+    "document_confirmation_number": "pattern:####-###-####-###",
+    "applicant_type_individual_checkbox": "literal:false",
+    "applicant_type_corporate_checkbox": "literal:true",
+    "company_name": "pool:fin01_company_names",
+    "business_registration_number": "pattern:###-##-#####",
+    "representative_name": "person.name_ko",
+    "corporate_registration_number_masked": "pattern:######-#######",
+    "business_type": "pool:fin01_business_types",
+    "business_item": "pool:fin01_business_items",
+    "company_address": "address.ko",
+    "fiscal_period_start": "pool:fin01_period_starts",
+    "fiscal_period_end": "pool:fin01_period_ends",
+    "filing_type": "choice:정 기 신 고|수 정 신 고|기 한 후 신 고",
+    "filing_date": "choice:2023. 03. 31|2024. 03. 31|2025. 03. 31",
+    "certificate_issue_date": "choice:2024년 4월 5일|2025년 4월 11일|2026년 4월 7일",
+    "receipt_number": "pattern:############",
+    "service_counter": "pool:fin01_service_counters",
+    "tax_office_chief": "pool:fin01_tax_office_chiefs",
+    "tax_office_phone": "pool:fin01_tax_office_phones"
+  },
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "fin01_company_profiles",
+      "targets": {
+        "company_name": "name",
+        "business_registration_number": "biz_no",
+        "representative_name": "representative",
+        "corporate_registration_number_masked": "corp_no_masked",
+        "business_type": "business_type",
+        "business_item": "business_item",
+        "company_address": "address"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "fin01_accounting_periods",
+      "targets": {
+        "fiscal_period_start": "start",
+        "fiscal_period_end": "end",
+        "filing_type": "filing_type",
+        "filing_date": "filing_date",
+        "certificate_issue_date": "issue_date"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "fin01_tax_office_profiles",
+      "targets": {
+        "tax_office_chief": "chief",
+        "tax_office_phone": "phone",
+        "service_counter": "counter"
+      }
+    }
+  ],
+  "data_pools": {
+    "fin01_company_profiles": [
+      {
+        "name": "한빛정밀 주식회사",
+        "biz_no": "101-11-20137",
+        "representative": "김민준",
+        "corp_no_masked": "110001-*******",
+        "business_type": "제조업",
+        "business_item": "산업용 기계 및 장비 제조",
+        "address": "서울특별시 강남구 테헤란로 152"
+      },
+      {
+        "name": "대한소재 주식회사",
+        "biz_no": "102-12-20274",
+        "representative": "이서준",
+        "corp_no_masked": "110002-*******",
+        "business_type": "건설업",
+        "business_item": "전자부품 제조 및 도소매",
+        "address": "서울특별시 중구 세종대로 110"
+      },
+      {
+        "name": "미래모빌리티 주식회사",
+        "biz_no": "103-13-20411",
+        "representative": "박도윤",
+        "corp_no_masked": "110003-*******",
+        "business_type": "정보통신업",
+        "business_item": "시스템 소프트웨어 개발 및 공급업",
+        "address": "서울특별시 마포구 월드컵북로 396"
+      },
+      {
+        "name": "세종바이오 주식회사",
+        "biz_no": "104-14-20548",
+        "representative": "최예준",
+        "corp_no_masked": "110004-*******",
+        "business_type": "도매 및 소매업",
+        "business_item": "금속구조물 및 창호공사",
+        "address": "경기도 성남시 분당구 판교역로 235"
+      },
+      {
+        "name": "주식회사 지엘어소시에이츠",
+        "biz_no": "105-15-20685",
+        "representative": "정시우",
+        "corp_no_masked": "110005-*******",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "식품 가공 및 유통",
+        "address": "경기도 화성시 동탄산단6길 15"
+      },
+      {
+        "name": "주식회사 엔식품",
+        "biz_no": "106-16-20822",
+        "representative": "강하준",
+        "corp_no_masked": "110006-*******",
+        "business_type": "운수 및 창고업",
+        "business_item": "전시물 제작 및 환경연출 설치",
+        "address": "경기도 안산시 단원구 산단로 325"
+      },
+      {
+        "name": "주식회사 엠케이컨텐츠",
+        "biz_no": "107-17-20959",
+        "representative": "조주원",
+        "corp_no_masked": "110007-*******",
+        "business_type": "음식료품 제조업",
+        "business_item": "물류대행 및 보관서비스",
+        "address": "인천광역시 연수구 송도과학로 32"
+      },
+      {
+        "name": "아라전자 주식회사",
+        "biz_no": "108-18-21096",
+        "representative": "윤지호",
+        "corp_no_masked": "110008-*******",
+        "business_type": "전기장비 제조업",
+        "business_item": "의료기기 연구개발",
+        "address": "부산광역시 해운대구 센텀중앙로 79"
+      },
+      {
+        "name": "태성기계 주식회사",
+        "biz_no": "109-19-21233",
+        "representative": "장지후",
+        "corp_no_masked": "110009-*******",
+        "business_type": "제조업",
+        "business_item": "자동차 부품 제조",
+        "address": "대구광역시 달서구 성서공단로 11"
+      },
+      {
+        "name": "누리패키징 주식회사",
+        "biz_no": "110-20-21370",
+        "representative": "임준우",
+        "corp_no_masked": "110010-*******",
+        "business_type": "건설업",
+        "business_item": "건축공사업 및 실내건축",
+        "address": "대전광역시 유성구 테크노중앙로 50"
+      },
+      {
+        "name": "동원테크놀로지 주식회사",
+        "biz_no": "111-21-21507",
+        "representative": "한서연",
+        "corp_no_masked": "110011-*******",
+        "business_type": "정보통신업",
+        "business_item": "화학소재 제조",
+        "address": "광주광역시 북구 첨단과기로 123"
+      },
+      {
+        "name": "서린화학 주식회사",
+        "biz_no": "112-22-21644",
+        "representative": "오서윤",
+        "corp_no_masked": "110012-*******",
+        "business_type": "도매 및 소매업",
+        "business_item": "정보통신 공사업",
+        "address": "울산광역시 남구 산업로 100"
+      },
+      {
+        "name": "대영물류 주식회사",
+        "biz_no": "113-23-21781",
+        "representative": "서지우",
+        "corp_no_masked": "110013-*******",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "산업플랜트 설계 및 제작",
+        "address": "서울특별시 강남구 테헤란로 152"
+      },
+      {
+        "name": "케이엠디지털 주식회사",
+        "biz_no": "114-24-21918",
+        "representative": "신서현",
+        "corp_no_masked": "110014-*******",
+        "business_type": "운수 및 창고업",
+        "business_item": "농산물 가공 및 판매",
+        "address": "서울특별시 중구 세종대로 110"
+      },
+      {
+        "name": "비전메디칼 주식회사",
+        "biz_no": "115-25-22055",
+        "representative": "권민서",
+        "corp_no_masked": "110015-*******",
+        "business_type": "음식료품 제조업",
+        "business_item": "반도체 장비 부품 제조",
+        "address": "서울특별시 마포구 월드컵북로 396"
+      },
+      {
+        "name": "해솔에너지 주식회사",
+        "biz_no": "116-26-22192",
+        "representative": "김하은",
+        "corp_no_masked": "110016-*******",
+        "business_type": "전기장비 제조업",
+        "business_item": "산업용 기계 및 장비 제조",
+        "address": "경기도 성남시 분당구 판교역로 235"
+      },
+      {
+        "name": "우리푸드 주식회사",
+        "biz_no": "117-27-22329",
+        "representative": "이하윤",
+        "corp_no_masked": "110017-*******",
+        "business_type": "제조업",
+        "business_item": "전자부품 제조 및 도소매",
+        "address": "경기도 화성시 동탄산단6길 15"
+      },
+      {
+        "name": "금강건설 주식회사",
+        "biz_no": "118-28-22466",
+        "representative": "박윤서",
+        "corp_no_masked": "110018-*******",
+        "business_type": "건설업",
+        "business_item": "시스템 소프트웨어 개발 및 공급업",
+        "address": "경기도 안산시 단원구 산단로 325"
+      },
+      {
+        "name": "중앙산업 주식회사",
+        "biz_no": "119-29-22603",
+        "representative": "최지유",
+        "corp_no_masked": "110019-*******",
+        "business_type": "정보통신업",
+        "business_item": "금속구조물 및 창호공사",
+        "address": "인천광역시 연수구 송도과학로 32"
+      },
+      {
+        "name": "유니온오토 주식회사",
+        "biz_no": "120-30-22740",
+        "representative": "정지민",
+        "corp_no_masked": "110020-*******",
+        "business_type": "도매 및 소매업",
+        "business_item": "식품 가공 및 유통",
+        "address": "부산광역시 해운대구 센텀중앙로 79"
+      },
+      {
+        "name": "블루웨이브 주식회사",
+        "biz_no": "121-31-22877",
+        "representative": "김민준",
+        "corp_no_masked": "110021-*******",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "전시물 제작 및 환경연출 설치",
+        "address": "대구광역시 달서구 성서공단로 11"
+      },
+      {
+        "name": "청명금속 주식회사",
+        "biz_no": "122-32-23014",
+        "representative": "이서준",
+        "corp_no_masked": "110022-*******",
+        "business_type": "운수 및 창고업",
+        "business_item": "물류대행 및 보관서비스",
+        "address": "대전광역시 유성구 테크노중앙로 50"
+      },
+      {
+        "name": "에이치앤에스테크 주식회사",
+        "biz_no": "123-33-23151",
+        "representative": "박도윤",
+        "corp_no_masked": "110023-*******",
+        "business_type": "음식료품 제조업",
+        "business_item": "의료기기 연구개발",
+        "address": "광주광역시 북구 첨단과기로 123"
+      },
+      {
+        "name": "제일플랜트 주식회사",
+        "biz_no": "124-34-23288",
+        "representative": "최예준",
+        "corp_no_masked": "110024-*******",
+        "business_type": "전기장비 제조업",
+        "business_item": "자동차 부품 제조",
+        "address": "울산광역시 남구 산업로 100"
+      },
+      {
+        "name": "도담소프트 주식회사",
+        "biz_no": "125-35-23425",
+        "representative": "정시우",
+        "corp_no_masked": "110025-*******",
+        "business_type": "제조업",
+        "business_item": "건축공사업 및 실내건축",
+        "address": "서울특별시 강남구 테헤란로 152"
+      },
+      {
+        "name": "라온시스템 주식회사",
+        "biz_no": "126-36-23562",
+        "representative": "강하준",
+        "corp_no_masked": "110026-*******",
+        "business_type": "건설업",
+        "business_item": "화학소재 제조",
+        "address": "서울특별시 중구 세종대로 110"
+      },
+      {
+        "name": "에코그린 주식회사",
+        "biz_no": "127-37-23699",
+        "representative": "조주원",
+        "corp_no_masked": "110027-*******",
+        "business_type": "정보통신업",
+        "business_item": "정보통신 공사업",
+        "address": "서울특별시 마포구 월드컵북로 396"
+      },
+      {
+        "name": "스마트팩토리솔루션 주식회사",
+        "biz_no": "128-38-23836",
+        "representative": "윤지호",
+        "corp_no_masked": "110028-*******",
+        "business_type": "도매 및 소매업",
+        "business_item": "산업플랜트 설계 및 제작",
+        "address": "경기도 성남시 분당구 판교역로 235"
+      },
+      {
+        "name": "대림정공 주식회사",
+        "biz_no": "129-39-23973",
+        "representative": "장지후",
+        "corp_no_masked": "110029-*******",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "농산물 가공 및 판매",
+        "address": "경기도 화성시 동탄산단6길 15"
+      },
+      {
+        "name": "경인유통 주식회사",
+        "biz_no": "130-40-24110",
+        "representative": "임준우",
+        "corp_no_masked": "110030-*******",
+        "business_type": "운수 및 창고업",
+        "business_item": "반도체 장비 부품 제조",
+        "address": "경기도 안산시 단원구 산단로 325"
+      },
+      {
+        "name": "아이앤씨로지스 주식회사",
+        "biz_no": "131-41-24247",
+        "representative": "한서연",
+        "corp_no_masked": "110031-*******",
+        "business_type": "음식료품 제조업",
+        "business_item": "산업용 기계 및 장비 제조",
+        "address": "인천광역시 연수구 송도과학로 32"
+      },
+      {
+        "name": "케이알푸드 주식회사",
+        "biz_no": "132-42-24384",
+        "representative": "오서윤",
+        "corp_no_masked": "110032-*******",
+        "business_type": "전기장비 제조업",
+        "business_item": "전자부품 제조 및 도소매",
+        "address": "부산광역시 해운대구 센텀중앙로 79"
+      },
+      {
+        "name": "성우전자부품 주식회사",
+        "biz_no": "133-43-24521",
+        "representative": "서지우",
+        "corp_no_masked": "110033-*******",
+        "business_type": "제조업",
+        "business_item": "시스템 소프트웨어 개발 및 공급업",
+        "address": "대구광역시 달서구 성서공단로 11"
+      },
+      {
+        "name": "동서바이오팜 주식회사",
+        "biz_no": "134-44-24658",
+        "representative": "신서현",
+        "corp_no_masked": "110034-*******",
+        "business_type": "건설업",
+        "business_item": "금속구조물 및 창호공사",
+        "address": "대전광역시 유성구 테크노중앙로 50"
+      },
+      {
+        "name": "비케이첨단소재 주식회사",
+        "biz_no": "135-45-24795",
+        "representative": "권민서",
+        "corp_no_masked": "110035-*******",
+        "business_type": "정보통신업",
+        "business_item": "식품 가공 및 유통",
+        "address": "광주광역시 북구 첨단과기로 123"
+      },
+      {
+        "name": "에스엠이노베이션 주식회사",
+        "biz_no": "136-46-24932",
+        "representative": "김하은",
+        "corp_no_masked": "110036-*******",
+        "business_type": "도매 및 소매업",
+        "business_item": "전시물 제작 및 환경연출 설치",
+        "address": "울산광역시 남구 산업로 100"
+      },
+      {
+        "name": "한국전장 주식회사",
+        "biz_no": "137-47-25069",
+        "representative": "이하윤",
+        "corp_no_masked": "110037-*******",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "물류대행 및 보관서비스",
+        "address": "서울특별시 강남구 테헤란로 152"
+      },
+      {
+        "name": "더원건축 주식회사",
+        "biz_no": "138-48-25206",
+        "representative": "박윤서",
+        "corp_no_masked": "110038-*******",
+        "business_type": "운수 및 창고업",
+        "business_item": "의료기기 연구개발",
+        "address": "서울특별시 중구 세종대로 110"
+      },
+      {
+        "name": "프라임디스플레이 주식회사",
+        "biz_no": "139-49-25343",
+        "representative": "최지유",
+        "corp_no_masked": "110039-*******",
+        "business_type": "음식료품 제조업",
+        "business_item": "자동차 부품 제조",
+        "address": "서울특별시 마포구 월드컵북로 396"
+      },
+      {
+        "name": "메트로솔루션 주식회사",
+        "biz_no": "140-50-25480",
+        "representative": "정지민",
+        "corp_no_masked": "110040-*******",
+        "business_type": "전기장비 제조업",
+        "business_item": "건축공사업 및 실내건축",
+        "address": "경기도 성남시 분당구 판교역로 235"
+      },
+      {
+        "name": "한울정보통신 주식회사",
+        "biz_no": "141-51-25617",
+        "representative": "김민준",
+        "corp_no_masked": "110041-*******",
+        "business_type": "제조업",
+        "business_item": "화학소재 제조",
+        "address": "경기도 화성시 동탄산단6길 15"
+      },
+      {
+        "name": "리치팜 주식회사",
+        "biz_no": "142-52-25754",
+        "representative": "이서준",
+        "corp_no_masked": "110042-*******",
+        "business_type": "건설업",
+        "business_item": "정보통신 공사업",
+        "address": "경기도 안산시 단원구 산단로 325"
+      },
+      {
+        "name": "새론패션 주식회사",
+        "biz_no": "143-53-25891",
+        "representative": "박도윤",
+        "corp_no_masked": "110043-*******",
+        "business_type": "정보통신업",
+        "business_item": "산업플랜트 설계 및 제작",
+        "address": "인천광역시 연수구 송도과학로 32"
+      },
+      {
+        "name": "제이앤케이상사 주식회사",
+        "biz_no": "144-54-26028",
+        "representative": "최예준",
+        "corp_no_masked": "110044-*******",
+        "business_type": "도매 및 소매업",
+        "business_item": "농산물 가공 및 판매",
+        "address": "부산광역시 해운대구 센텀중앙로 79"
+      },
+      {
+        "name": "오션테크 주식회사",
+        "biz_no": "145-55-26165",
+        "representative": "정시우",
+        "corp_no_masked": "110045-*******",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "반도체 장비 부품 제조",
+        "address": "대구광역시 달서구 성서공단로 11"
+      },
+      {
+        "name": "그린팩토리 주식회사",
+        "biz_no": "146-56-26302",
+        "representative": "강하준",
+        "corp_no_masked": "110046-*******",
+        "business_type": "운수 및 창고업",
+        "business_item": "산업용 기계 및 장비 제조",
+        "address": "대전광역시 유성구 테크노중앙로 50"
+      },
+      {
+        "name": "나래정밀화학 주식회사",
+        "biz_no": "147-57-26439",
+        "representative": "조주원",
+        "corp_no_masked": "110047-*******",
+        "business_type": "음식료품 제조업",
+        "business_item": "전자부품 제조 및 도소매",
+        "address": "광주광역시 북구 첨단과기로 123"
+      },
+      {
+        "name": "인사이트랩 주식회사",
+        "biz_no": "148-58-26576",
+        "representative": "윤지호",
+        "corp_no_masked": "110048-*******",
+        "business_type": "전기장비 제조업",
+        "business_item": "시스템 소프트웨어 개발 및 공급업",
+        "address": "울산광역시 남구 산업로 100"
+      },
+      {
+        "name": "코리아컴포넌트 주식회사",
+        "biz_no": "149-59-26713",
+        "representative": "장지후",
+        "corp_no_masked": "110049-*******",
+        "business_type": "제조업",
+        "business_item": "금속구조물 및 창호공사",
+        "address": "서울특별시 강남구 테헤란로 152"
+      },
+      {
+        "name": "엘앤비서비스 주식회사",
+        "biz_no": "150-60-26850",
+        "representative": "임준우",
+        "corp_no_masked": "110050-*******",
+        "business_type": "건설업",
+        "business_item": "식품 가공 및 유통",
+        "address": "서울특별시 중구 세종대로 110"
+      },
+      {
+        "name": "에이스금형 주식회사",
+        "biz_no": "151-61-26987",
+        "representative": "한서연",
+        "corp_no_masked": "110051-*******",
+        "business_type": "정보통신업",
+        "business_item": "전시물 제작 및 환경연출 설치",
+        "address": "서울특별시 마포구 월드컵북로 396"
+      },
+      {
+        "name": "파인로보틱스 주식회사",
+        "biz_no": "152-62-27124",
+        "representative": "오서윤",
+        "corp_no_masked": "110052-*******",
+        "business_type": "도매 및 소매업",
+        "business_item": "물류대행 및 보관서비스",
+        "address": "경기도 성남시 분당구 판교역로 235"
+      },
+      {
+        "name": "넥스트에너지 주식회사",
+        "biz_no": "153-63-27261",
+        "representative": "서지우",
+        "corp_no_masked": "110053-*******",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "의료기기 연구개발",
+        "address": "경기도 화성시 동탄산단6길 15"
+      },
+      {
+        "name": "에버메디 주식회사",
+        "biz_no": "154-64-27398",
+        "representative": "신서현",
+        "corp_no_masked": "110054-*******",
+        "business_type": "운수 및 창고업",
+        "business_item": "자동차 부품 제조",
+        "address": "경기도 안산시 단원구 산단로 325"
+      },
+      {
+        "name": "신화산전 주식회사",
+        "biz_no": "155-65-27535",
+        "representative": "권민서",
+        "corp_no_masked": "110055-*******",
+        "business_type": "음식료품 제조업",
+        "business_item": "건축공사업 및 실내건축",
+        "address": "인천광역시 연수구 송도과학로 32"
+      },
+      {
+        "name": "마루물산 주식회사",
+        "biz_no": "156-66-27672",
+        "representative": "김하은",
+        "corp_no_masked": "110056-*******",
+        "business_type": "전기장비 제조업",
+        "business_item": "화학소재 제조",
+        "address": "부산광역시 해운대구 센텀중앙로 79"
+      },
+      {
+        "name": "티에스반도체 주식회사",
+        "biz_no": "157-67-27809",
+        "representative": "이하윤",
+        "corp_no_masked": "110057-*******",
+        "business_type": "제조업",
+        "business_item": "정보통신 공사업",
+        "address": "대구광역시 달서구 성서공단로 11"
+      },
+      {
+        "name": "제니스바이오 주식회사",
+        "biz_no": "158-68-27946",
+        "representative": "박윤서",
+        "corp_no_masked": "110058-*******",
+        "business_type": "건설업",
+        "business_item": "산업플랜트 설계 및 제작",
+        "address": "대전광역시 유성구 테크노중앙로 50"
+      },
+      {
+        "name": "한강디자인 주식회사",
+        "biz_no": "159-69-28083",
+        "representative": "최지유",
+        "corp_no_masked": "110059-*******",
+        "business_type": "정보통신업",
+        "business_item": "농산물 가공 및 판매",
+        "address": "광주광역시 북구 첨단과기로 123"
+      },
+      {
+        "name": "오름제조 주식회사",
+        "biz_no": "160-70-28220",
+        "representative": "정지민",
+        "corp_no_masked": "110060-*******",
+        "business_type": "도매 및 소매업",
+        "business_item": "반도체 장비 부품 제조",
+        "address": "울산광역시 남구 산업로 100"
+      }
+    ],
+    "fin01_company_names": [
+      "한빛정밀 주식회사",
+      "대한소재 주식회사",
+      "미래모빌리티 주식회사",
+      "세종바이오 주식회사",
+      "주식회사 지엘어소시에이츠",
+      "주식회사 엔식품",
+      "주식회사 엠케이컨텐츠",
+      "아라전자 주식회사",
+      "태성기계 주식회사",
+      "누리패키징 주식회사",
+      "동원테크놀로지 주식회사",
+      "서린화학 주식회사",
+      "대영물류 주식회사",
+      "케이엠디지털 주식회사",
+      "비전메디칼 주식회사",
+      "해솔에너지 주식회사",
+      "우리푸드 주식회사",
+      "금강건설 주식회사",
+      "중앙산업 주식회사",
+      "유니온오토 주식회사",
+      "블루웨이브 주식회사",
+      "청명금속 주식회사",
+      "에이치앤에스테크 주식회사",
+      "제일플랜트 주식회사",
+      "도담소프트 주식회사",
+      "라온시스템 주식회사",
+      "에코그린 주식회사",
+      "스마트팩토리솔루션 주식회사",
+      "대림정공 주식회사",
+      "경인유통 주식회사",
+      "아이앤씨로지스 주식회사",
+      "케이알푸드 주식회사",
+      "성우전자부품 주식회사",
+      "동서바이오팜 주식회사",
+      "비케이첨단소재 주식회사",
+      "에스엠이노베이션 주식회사",
+      "한국전장 주식회사",
+      "더원건축 주식회사",
+      "프라임디스플레이 주식회사",
+      "메트로솔루션 주식회사",
+      "한울정보통신 주식회사",
+      "리치팜 주식회사",
+      "새론패션 주식회사",
+      "제이앤케이상사 주식회사",
+      "오션테크 주식회사",
+      "그린팩토리 주식회사",
+      "나래정밀화학 주식회사",
+      "인사이트랩 주식회사",
+      "코리아컴포넌트 주식회사",
+      "엘앤비서비스 주식회사",
+      "에이스금형 주식회사",
+      "파인로보틱스 주식회사",
+      "넥스트에너지 주식회사",
+      "에버메디 주식회사",
+      "신화산전 주식회사",
+      "마루물산 주식회사",
+      "티에스반도체 주식회사",
+      "제니스바이오 주식회사",
+      "한강디자인 주식회사",
+      "오름제조 주식회사"
+    ],
+    "fin01_business_types": [
+      "건설업",
+      "도매 및 소매업",
+      "운수 및 창고업",
+      "음식료품 제조업",
+      "전기장비 제조업",
+      "전문, 과학 및 기술서비스업",
+      "정보통신업",
+      "제조업"
+    ],
+    "fin01_business_items": [
+      "건축공사업 및 실내건축",
+      "금속구조물 및 창호공사",
+      "농산물 가공 및 판매",
+      "물류대행 및 보관서비스",
+      "반도체 장비 부품 제조",
+      "산업용 기계 및 장비 제조",
+      "산업플랜트 설계 및 제작",
+      "시스템 소프트웨어 개발 및 공급업",
+      "식품 가공 및 유통",
+      "의료기기 연구개발",
+      "자동차 부품 제조",
+      "전시물 제작 및 환경연출 설치",
+      "전자부품 제조 및 도소매",
+      "정보통신 공사업",
+      "화학소재 제조"
+    ],
+    "fin01_accounting_periods": [
+      {
+        "start": "2021. 01. 01",
+        "end": "~ 2021. 12. 31",
+        "filing_type": "정 기 신 고",
+        "filing_date": "2022. 03. 31",
+        "issue_date": "2022년 4월 5일"
+      },
+      {
+        "start": "2022. 01. 01",
+        "end": "~ 2022. 12. 31",
+        "filing_type": "정 기 신 고",
+        "filing_date": "2023. 03. 31",
+        "issue_date": "2023년 4월 5일"
+      },
+      {
+        "start": "2023. 01. 01",
+        "end": "~ 2023. 12. 31",
+        "filing_type": "정 기 신 고",
+        "filing_date": "2024. 03. 31",
+        "issue_date": "2024년 4월 8일"
+      },
+      {
+        "start": "2024. 01. 01",
+        "end": "~ 2024. 12. 31",
+        "filing_type": "정 기 신 고",
+        "filing_date": "2025. 03. 31",
+        "issue_date": "2025년 4월 11일"
+      },
+      {
+        "start": "2025. 01. 01",
+        "end": "~ 2025. 12. 31",
+        "filing_type": "정 기 신 고",
+        "filing_date": "2026. 03. 31",
+        "issue_date": "2026년 4월 7일"
+      },
+      {
+        "start": "2023. 07. 01",
+        "end": "~ 2024. 06. 30",
+        "filing_type": "수 정 신 고",
+        "filing_date": "2024. 09. 30",
+        "issue_date": "2024년 10월 8일"
+      },
+      {
+        "start": "2024. 04. 01",
+        "end": "~ 2025. 03. 31",
+        "filing_type": "정 기 신 고",
+        "filing_date": "2025. 06. 30",
+        "issue_date": "2025년 7월 14일"
+      }
+    ],
+    "fin01_period_starts": [
+      "2021.01.01",
+      "2022.01.01",
+      "2023.01.01",
+      "2024.01.01",
+      "2025.01.01",
+      "2023.07.01",
+      "2024.04.01"
+    ],
+    "fin01_period_ends": [
+      "2021.12.31",
+      "2022.12.31",
+      "2023.12.31",
+      "2024.12.31",
+      "2025.12.31",
+      "2024.06.30",
+      "2025.03.31"
+    ],
+    "fin01_tax_office_profiles": [
+      {
+        "chief": "종로세무서장",
+        "phone": "02-3001-7037",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "중부세무서장",
+        "phone": "02-3002-7074",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "남대문세무서장",
+        "phone": "02-3003-7111",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "용산세무서장",
+        "phone": "02-3004-7148",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "성북세무서장",
+        "phone": "02-3005-7185",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "서대문세무서장",
+        "phone": "02-3006-7222",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "마포세무서장",
+        "phone": "02-3007-7259",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "영등포세무서장",
+        "phone": "02-3008-7296",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "강서세무서장",
+        "phone": "02-3009-7333",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "양천세무서장",
+        "phone": "02-3010-7370",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "구로세무서장",
+        "phone": "02-3011-7407",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "동작세무서장",
+        "phone": "02-3012-7444",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "금천세무서장",
+        "phone": "02-3013-7481",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "관악세무서장",
+        "phone": "02-3014-7518",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "강남세무서장",
+        "phone": "02-3015-7555",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "삼성세무서장",
+        "phone": "02-3016-7592",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "반포세무서장",
+        "phone": "02-3017-7629",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "서초세무서장",
+        "phone": "02-3018-7666",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "역삼세무서장",
+        "phone": "02-3019-7703",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "성동세무서장",
+        "phone": "02-3020-7740",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "동대문세무서장",
+        "phone": "02-3021-7777",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "중랑세무서장",
+        "phone": "02-3022-7814",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "도봉세무서장",
+        "phone": "02-3023-7851",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "노원세무서장",
+        "phone": "02-3024-7888",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "송파세무서장",
+        "phone": "02-3025-7925",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "잠실세무서장",
+        "phone": "02-3026-7962",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "강동세무서장",
+        "phone": "02-3027-7999",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "분당세무서장",
+        "phone": "02-3028-7036",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "성남세무서장",
+        "phone": "02-3029-7073",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "수원세무서장",
+        "phone": "02-3030-7110",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "동수원세무서장",
+        "phone": "02-3031-7147",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "화성세무서장",
+        "phone": "02-3032-7184",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "평택세무서장",
+        "phone": "02-3033-7221",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "안산세무서장",
+        "phone": "02-3034-7258",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "동안양세무서장",
+        "phone": "02-3035-7295",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "안양세무서장",
+        "phone": "02-3036-7332",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "부천세무서장",
+        "phone": "02-3037-7369",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "인천세무서장",
+        "phone": "02-3038-7406",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "북인천세무서장",
+        "phone": "02-3039-7443",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "서인천세무서장",
+        "phone": "02-3040-7480",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "남인천세무서장",
+        "phone": "02-3041-7517",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "김포세무서장",
+        "phone": "02-3042-7554",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "고양세무서장",
+        "phone": "02-3043-7591",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "파주세무서장",
+        "phone": "02-3044-7628",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "의정부세무서장",
+        "phone": "02-3045-7665",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "남양주세무서장",
+        "phone": "02-3046-7702",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "춘천세무서장",
+        "phone": "02-3047-7739",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "원주세무서장",
+        "phone": "02-3048-7776",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "대전세무서장",
+        "phone": "02-3049-7813",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "서대전세무서장",
+        "phone": "02-3050-7850",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "북대전세무서장",
+        "phone": "02-3051-7887",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "청주세무서장",
+        "phone": "02-3052-7924",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "천안세무서장",
+        "phone": "02-3053-7961",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "전주세무서장",
+        "phone": "02-3054-7998",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "광주세무서장",
+        "phone": "02-3055-7035",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "북광주세무서장",
+        "phone": "02-3056-7072",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "대구세무서장",
+        "phone": "02-3057-7109",
+        "counter": "민원봉사실"
+      },
+      {
+        "chief": "서대구세무서장",
+        "phone": "02-3058-7146",
+        "counter": "세무민원실"
+      },
+      {
+        "chief": "부산진세무서장",
+        "phone": "02-3059-7183",
+        "counter": "통합민원실"
+      },
+      {
+        "chief": "동울산세무서장",
+        "phone": "02-3060-7220",
+        "counter": "민원봉사실"
+      }
+    ],
+    "fin01_tax_office_chiefs": [
+      "종로세무서장",
+      "중부세무서장",
+      "남대문세무서장",
+      "용산세무서장",
+      "성북세무서장",
+      "서대문세무서장",
+      "마포세무서장",
+      "영등포세무서장",
+      "강서세무서장",
+      "양천세무서장",
+      "구로세무서장",
+      "동작세무서장",
+      "금천세무서장",
+      "관악세무서장",
+      "강남세무서장",
+      "삼성세무서장",
+      "반포세무서장",
+      "서초세무서장",
+      "역삼세무서장",
+      "성동세무서장",
+      "동대문세무서장",
+      "중랑세무서장",
+      "도봉세무서장",
+      "노원세무서장",
+      "송파세무서장",
+      "잠실세무서장",
+      "강동세무서장",
+      "분당세무서장",
+      "성남세무서장",
+      "수원세무서장",
+      "동수원세무서장",
+      "화성세무서장",
+      "평택세무서장",
+      "안산세무서장",
+      "동안양세무서장",
+      "안양세무서장",
+      "부천세무서장",
+      "인천세무서장",
+      "북인천세무서장",
+      "서인천세무서장",
+      "남인천세무서장",
+      "김포세무서장",
+      "고양세무서장",
+      "파주세무서장",
+      "의정부세무서장",
+      "남양주세무서장",
+      "춘천세무서장",
+      "원주세무서장",
+      "대전세무서장",
+      "서대전세무서장",
+      "북대전세무서장",
+      "청주세무서장",
+      "천안세무서장",
+      "전주세무서장",
+      "광주세무서장",
+      "북광주세무서장",
+      "대구세무서장",
+      "서대구세무서장",
+      "부산진세무서장",
+      "동울산세무서장"
+    ],
+    "fin01_tax_office_phones": [
+      "02-3001-7037",
+      "02-3002-7074",
+      "02-3003-7111",
+      "02-3004-7148",
+      "02-3005-7185",
+      "02-3006-7222",
+      "02-3007-7259",
+      "02-3008-7296",
+      "02-3009-7333",
+      "02-3010-7370",
+      "02-3011-7407",
+      "02-3012-7444",
+      "02-3013-7481",
+      "02-3014-7518",
+      "02-3015-7555",
+      "02-3016-7592",
+      "02-3017-7629",
+      "02-3018-7666",
+      "02-3019-7703",
+      "02-3020-7740",
+      "02-3021-7777",
+      "02-3022-7814",
+      "02-3023-7851",
+      "02-3024-7888",
+      "02-3025-7925",
+      "02-3026-7962",
+      "02-3027-7999",
+      "02-3028-7036",
+      "02-3029-7073",
+      "02-3030-7110",
+      "02-3031-7147",
+      "02-3032-7184",
+      "02-3033-7221",
+      "02-3034-7258",
+      "02-3035-7295",
+      "02-3036-7332",
+      "02-3037-7369",
+      "02-3038-7406",
+      "02-3039-7443",
+      "02-3040-7480",
+      "02-3041-7517",
+      "02-3042-7554",
+      "02-3043-7591",
+      "02-3044-7628",
+      "02-3045-7665",
+      "02-3046-7702",
+      "02-3047-7739",
+      "02-3048-7776",
+      "02-3049-7813",
+      "02-3050-7850",
+      "02-3051-7887",
+      "02-3052-7924",
+      "02-3053-7961",
+      "02-3054-7998",
+      "02-3055-7035",
+      "02-3056-7072",
+      "02-3057-7109",
+      "02-3058-7146",
+      "02-3059-7183",
+      "02-3060-7220"
+    ],
+    "fin01_service_counters": [
+      "민원봉사실",
+      "세무민원실",
+      "통합민원실"
+    ]
+  },
+  "source_notes": [
+    {
+      "source": "source_image",
+      "url": "workbench/documents/재무제표(재무상태표·손익계산서)__FIN-01/samples/original/표준재무제표증명원＿지엘-1_page_001.jpg",
+      "note": "표준재무제표증명 페이지 1 원본 이미지의 발급번호, 사업자, 과세기간, 신고일, 접수번호, 세무서장, 연락처 필드 구조를 기준으로 schema를 정의함."
+    },
+    {
+      "source": "official_site",
+      "url": "https://www.hometax.go.kr/",
+      "note": "원본 문서 하단에 홈택스 발급/원본확인 안내가 표시되어 있어 국세청 홈택스 발급 문서로 간주."
+    },
+    {
+      "source": "official_site",
+      "url": "https://www.nts.go.kr/",
+      "note": "세무서장/세무서 연락처 계열 필드의 기관 맥락 확인용 국세청 공식 사이트."
+    }
+  ],
+  "notes": "FIN-01 page 1 표준재무제표증명 faker profile. 회사/기간/세무서 record pool 제약은 기존 수동 authoring을 유지하고, page_number는 원본 page 1 템플릿과 일치하도록 고정했다."
+}

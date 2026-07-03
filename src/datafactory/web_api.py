@@ -1,0 +1,1229 @@
+from __future__ import annotations
+
+import argparse
+import base64
+import json
+import mimetypes
+import os
+import subprocess
+import sys
+import tempfile
+from datetime import datetime, timezone
+from http import HTTPStatus
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from time import perf_counter
+from typing import Any
+from urllib.parse import parse_qs, unquote, urlparse
+
+from PIL import Image
+
+from .authoring import (
+    authoring_review_prune_candidates,
+    draft_authoring_bundle,
+    load_authoring_bundle,
+    migrate_authoring_schema_bboxes_to_review,
+    prune_authoring_fields_by_review,
+    render_authoring_batch,
+    render_authoring_live_preview,
+    render_authoring_preview,
+    save_authoring_bundle,
+    update_authoring_source_inpainted,
+)
+from .first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
+from .fonts import default_font_id, list_font_faces
+from .final_results_export import export_final_results
+from .inpaint import InpaintConfig, InpaintResult, inpaint_from_review_policy, lama_inpaint, render_mask_overlay
+from .inpaint_export import write_inpaint_result
+from .manual_cleanup import load_manual_mask, save_manual_mask
+from .ocr_detectors import PADDLEOCR_PRESETS, normalize_paddleocr_preset
+from .ocr_worker import run_ocr_eval
+from .policy import ReviewPolicy, draft_review_policy, load_review_policy, review_summary, write_review_policy
+from .registry import load_registry
+from .workbench import (
+    import_seed_batch,
+    import_seed_folder,
+    list_work_items,
+    save_seed_mapping,
+    save_uploaded_seed_files,
+    scan_seed_samples,
+    trash_seed_folder,
+    update_manifest_artifact,
+    workbench_subdir,
+)
+
+ROOT = Path(__file__).resolve().parents[2]
+RENDER_OUTPUT_ROOT = ROOT / "outputs" / "render"
+
+
+def runtime_health() -> dict[str, Any]:
+    try:
+        import cv2  # type: ignore
+
+        opencv = {"available": True, "version": str(getattr(cv2, "__version__", "unknown"))}
+    except Exception as exc:
+        opencv = {"available": False, "error": str(exc)}
+    try:
+        import simple_lama_inpainting  # type: ignore
+        import torch  # type: ignore
+
+        lama = {
+            "available": True,
+            "package": "simple-lama-inpainting",
+            "torch_version": str(getattr(torch, "__version__", "unknown")),
+            "device": "mps" if getattr(torch.backends, "mps", None) and torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu"),
+            "model_env": bool(__import__("os").environ.get("LAMA_MODEL")),
+        }
+    except Exception as exc:
+        lama = {"available": False, "error": str(exc)}
+    try:
+        import pypdfium2 as pdfium  # type: ignore
+
+        pdf_render = {"available": True, "package": "pypdfium2", "version": str(getattr(pdfium, "__version__", "unknown"))}
+    except Exception as exc:
+        pdf_render = {"available": False, "error": str(exc)}
+    return {
+        "ok": True,
+        "python": sys.executable,
+        "python_version": sys.version.split()[0],
+        "opencv": opencv,
+        "lama": lama,
+        "pdfRender": pdf_render,
+        "root": str(ROOT),
+        "features": {
+            "lama_resize": True,
+            "seed_images": True,
+            "ocr_detect_endpoint": True,
+            "staged_gui": True,
+            "registry": True,
+            "seed_scan": True,
+            "seed_import": True,
+            "seed_import_batch": True,
+            "seed_mapping": True,
+            "seed_upload": True,
+            "seed_trash": True,
+            "pdf_render": pdf_render["available"],
+            "work_items": True,
+            "workbench": True,
+            "authoring_1cycle": True,
+            "ocr_recrop_review": True,
+            "first_priority_assessment": True,
+            "final_results_export": True,
+            "manual_template_cleanup": True,
+            "font_registry": True,
+            "ocr_presets": list(PADDLEOCR_PRESETS),
+            "inpaint_methods": ["fill", "telea", "ns", "lama"],
+        },
+    }
+
+
+def list_assets(root: Path = ROOT) -> dict[str, list[str]]:
+    images = sorted(
+        path
+        for ext in ("*.jpg", "*.jpeg", "*.png")
+        for path in (root / "seed_samples").rglob(ext)
+        if path.is_file() and not path.name.startswith(".")
+    )
+    detections = sorted(root.glob("outputs/ocr_eval/paddleocr/*/detections.json"))
+    detections += sorted(path for path in root.glob("outputs/ocr_eval/*/*/detections.json") if "/paddleocr/" not in str(path))
+    reviews = sorted(root.glob("outputs/reviews/*/review.json"))
+    return {
+        "images": [_display_path(path, root) for path in images],
+        "detections": [_display_path(path, root) for path in detections],
+        "reviews": [_display_path(path, root) for path in reviews],
+    }
+
+
+def policy_to_client(policy: ReviewPolicy, *, review_path: Path | None = None) -> dict[str, Any]:
+    data = policy.to_dict()
+    image_path = _resolve_workspace_path(policy.source_image)
+    data["review_path"] = _display_path(review_path, ROOT) if review_path is not None else None
+    data["image_url"] = f"/api/image?path={_display_path(image_path, ROOT)}"
+    data["summary"] = review_summary(policy.labels)
+    return data
+
+
+def save_policy_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    raw_policy = payload.get("policy")
+    if not isinstance(raw_policy, dict):
+        raise ValueError("payload.policy must be an object")
+    policy = ReviewPolicy.from_dict(raw_policy, base_dir=ROOT)
+    doc_id = str(payload.get("docId") or "")
+    default_review_path = "outputs/reviews/review/review.json"
+    if doc_id:
+        default_review_path = str(workbench_subdir(doc_id, "review") / _safe_template_id(policy.source_image) / "review.json")
+    review_path = _resolve_workspace_path(str(payload.get("reviewPath") or raw_policy.get("review_path") or default_review_path))
+    paths = write_review_policy(policy, review_path.parent)
+    pruned_authoring: dict[str, Any] | None = None
+    if doc_id:
+        update_manifest_artifact(doc_id, "review", paths["review"])
+        if bool(payload.get("pruneAuthoring")):
+            schema_path, stylesheet_path, faker_profile_path = _authoring_paths_from_payload(payload, doc_id)
+            if schema_path.exists() and stylesheet_path.exists() and faker_profile_path.exists():
+                pruned_authoring = prune_authoring_fields_by_review(
+                    schema_path,
+                    stylesheet_path,
+                    faker_profile_path,
+                    policy=policy,
+                )
+                update_manifest_artifact(doc_id, "authoring", schema_path)
+                update_manifest_artifact(doc_id, "authoring_stylesheet", stylesheet_path)
+                update_manifest_artifact(doc_id, "authoring_faker_profile", faker_profile_path)
+    return {"paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "prunedAuthoring": pruned_authoring}
+
+
+def _authoring_paths_from_payload(payload: dict[str, Any], doc_id: str) -> tuple[Path, Path, Path]:
+    authoring_dir = workbench_subdir(doc_id, "authoring")
+    schema_path = _resolve_workspace_path(str(payload.get("schemaPath") or authoring_dir / "schema.json"))
+    stylesheet_path = _resolve_workspace_path(str(payload.get("stylesheetPath") or authoring_dir / "stylesheet.json"))
+    faker_profile_path = _resolve_workspace_path(str(payload.get("fakerProfilePath") or authoring_dir / "faker_profile.json"))
+    return schema_path, stylesheet_path, faker_profile_path
+
+
+def authoring_review_prune_candidates_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    raw_policy = payload.get("policy")
+    if not isinstance(raw_policy, dict):
+        raise ValueError("payload.policy must be an object")
+    policy = ReviewPolicy.from_dict(raw_policy, base_dir=ROOT)
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    schema_path, _stylesheet_path, _faker_profile_path = _authoring_paths_from_payload(payload, doc_id)
+    return {"docId": doc_id, **authoring_review_prune_candidates(schema_path, policy)}
+
+
+def recognize_review_crops_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    raw_policy = payload.get("policy")
+    if not isinstance(raw_policy, dict):
+        raise ValueError("payload.policy must be an object")
+    policy = ReviewPolicy.from_dict(raw_policy, base_dir=ROOT)
+    doc_id = str(payload.get("docId") or "")
+    preset = normalize_paddleocr_preset(str(payload.get("preset") or "precise"))
+    padding = max(0, int(payload.get("padding") or 0))
+    raw_label_ids = payload.get("labelIds")
+    selected_ids = {str(item) for item in raw_label_ids if item is not None} if isinstance(raw_label_ids, list) else set()
+    labels = [
+        label
+        for label in policy.labels
+        if (label.id in selected_ids) or (not selected_ids and label.ocr_text_stale)
+    ]
+    if not labels:
+        return {
+            "summary": {"engine": "paddleocr", "preset": preset, "count": 0, "recognized": 0, "elapsed_seconds": 0.0},
+            "candidates": [],
+            "recUpdatedAt": datetime.now(timezone.utc).isoformat(),
+        }
+
+    image_path = _resolve_workspace_path(policy.source_image)
+    out_root = workbench_subdir(doc_id, "ocr_recrop") if doc_id else Path("outputs/ocr_recrop")
+    run_dir = _resolve_workspace_path(out_root) / _safe_template_id(policy.source_image) / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    crops: list[dict[str, Any]] = []
+    with Image.open(image_path) as opened_image:
+        image = opened_image.convert("RGB")
+        for index, label in enumerate(labels, start=1):
+            crop_box = label.bbox.padded(padding).clipped(policy.image_width, policy.image_height)
+            crop_path = run_dir / f"crop_{index:04d}_{_safe_name(label.id)}.png"
+            image.crop((crop_box.x, crop_box.y, crop_box.right, crop_box.bottom)).save(crop_path)
+            crops.append(
+                {
+                    "id": label.id,
+                    "oldText": label.text,
+                    "oldConfidence": label.confidence,
+                    "bbox": crop_box.to_list(),
+                    "originalBbox": label.bbox.to_list(),
+                    "cropPath": str(crop_path),
+                }
+            )
+
+    manifest_path = run_dir / "crop_manifest.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "sourceImage": str(image_path),
+                "image": {"width": policy.image_width, "height": policy.image_height},
+                "padding": padding,
+                "crops": crops,
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    result = _run_paddle_crop_recognition_subprocess(manifest_path, preset=preset, out_dir=run_dir)
+    rec_updated_at = datetime.now(timezone.utc).isoformat()
+    candidates = []
+    for candidate in result.get("candidates", []):
+        if not isinstance(candidate, dict):
+            continue
+        item = dict(candidate)
+        if item.get("cropPath"):
+            item["cropPath"] = _display_path(item["cropPath"], ROOT)
+        candidates.append(item)
+    summary = dict(result.get("summary") or {})
+    summary["manifest"] = _display_path(manifest_path, ROOT)
+    return {"summary": summary, "candidates": candidates, "recUpdatedAt": rec_updated_at}
+
+
+def load_cleanup_mask_payload(*, doc_id: str, review_path: Path) -> dict[str, Any]:
+    policy = load_review_policy(review_path)
+    cleanup_dir = _cleanup_dir(doc_id, policy)
+    mask_payload = load_manual_mask(cleanup_dir, size=(policy.image_width, policy.image_height))
+    paths: dict[str, Path] = {}
+    for name, filename in {
+        "mask_json": "mask.json",
+        "manual_mask": "manual_mask.png",
+        "mask_overlay": "mask_overlay.png",
+        "inpainted": "inpainted_lama.png",
+        "comparison": "comparison_lama.png",
+        "summary": "summary.json",
+    }.items():
+        candidate = cleanup_dir / filename
+        if candidate.exists():
+            paths[name] = candidate
+    response: dict[str, Any] = {
+        "docId": doc_id,
+        "reviewPath": _display_path(review_path, ROOT),
+        "exists": bool(paths),
+        "mask": mask_payload,
+        "paths": _paths_to_client(paths),
+    }
+    if paths.get("manual_mask"):
+        response["manualMaskUrl"] = f"/api/file?path={_display_path(paths['manual_mask'], ROOT)}"
+    if paths.get("comparison"):
+        response["comparisonUrl"] = f"/api/file?path={_display_path(paths['comparison'], ROOT)}"
+    return response
+
+
+def save_cleanup_mask_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    review_path = _resolve_workspace_path(str(payload.get("reviewPath") or ""))
+    policy = load_review_policy(review_path)
+    cleanup_dir = _cleanup_dir(doc_id, policy)
+    mask_payload, paths = save_manual_mask(payload.get("mask"), directory=cleanup_dir, size=(policy.image_width, policy.image_height))
+    update_manifest_artifact(doc_id, "inpaint_cleanup_mask", paths.manual_mask)
+    client_paths = _paths_to_client(paths.as_dict())
+    return {
+        "docId": doc_id,
+        "reviewPath": _display_path(review_path, ROOT),
+        "mask": mask_payload,
+        "paths": client_paths,
+        "manualMaskUrl": f"/api/file?path={client_paths['manual_mask']}",
+    }
+
+
+def run_cleanup_inpaint_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    review_path = _resolve_workspace_path(str(payload.get("reviewPath") or ""))
+    base_image_path = _resolve_workspace_path(str(payload.get("baseImagePath") or ""))
+    policy = load_review_policy(review_path)
+    cleanup_dir = _cleanup_dir(doc_id, policy)
+    mask_payload, mask_paths = save_manual_mask(payload.get("mask"), directory=cleanup_dir, size=(policy.image_width, policy.image_height))
+    lama_max_side = int(payload.get("lamaMaxSide") or 2400)
+    started_at = perf_counter()
+    print(f"Starting manual cleanup postprocess doc={doc_id} base={base_image_path} lama_max_side={lama_max_side}", flush=True)
+    result = _inpaint_cleanup_template(
+        base_image_path=base_image_path,
+        mask_path=mask_paths.manual_mask,
+        detections_path=mask_paths.mask_json,
+        lama_max_side=lama_max_side,
+        detection_count=len(mask_payload.get("strokes") or []),
+    )
+    elapsed_seconds = perf_counter() - started_at
+    paths = write_inpaint_result(result, cleanup_dir)
+    paths["mask_json"] = mask_paths.mask_json
+    paths["manual_mask"] = mask_paths.manual_mask
+    _augment_cleanup_summary(paths["summary"], paths=paths, elapsed_seconds=elapsed_seconds)
+    update_manifest_artifact(doc_id, "inpaint", paths["comparison"])
+    update_manifest_artifact(doc_id, "inpaint_cleanup", paths["comparison"])
+    update_manifest_artifact(doc_id, "inpaint_cleanup_inpainted", paths["inpainted"])
+    update_manifest_artifact(doc_id, "inpaint_cleanup_mask", mask_paths.manual_mask)
+    synced_authoring = _sync_authoring_source_inpainted_for_doc(doc_id, source_image=policy.source_image, inpainted_path=paths["inpainted"])
+    print(f"Finished manual cleanup postprocess doc={doc_id} elapsed={elapsed_seconds:.2f}s", flush=True)
+    client_paths = _paths_to_client(paths)
+    return {
+        "docId": doc_id,
+        "reviewPath": _display_path(review_path, ROOT),
+        "mask": mask_payload,
+        "summary": result.summary(paths) | {"elapsed_seconds": elapsed_seconds, "manual_mask_count": len(mask_payload.get("strokes") or [])},
+        "paths": client_paths,
+        "comparisonUrl": f"/api/file?path={client_paths['comparison']}",
+        "manualMaskUrl": f"/api/file?path={client_paths['manual_mask']}",
+        "syncedAuthoringTemplates": synced_authoring,
+    }
+
+
+def _cleanup_dir(doc_id: str, policy: ReviewPolicy) -> Path:
+    return _resolve_workspace_path(workbench_subdir(doc_id, "inpaint") / _safe_template_id(policy.source_image) / "manual_cleanup")
+
+
+def _sync_authoring_source_inpainted_for_doc(doc_id: str, *, source_image: Path, inpainted_path: Path) -> dict[str, Any]:
+    authoring_dir = _resolve_workspace_path(workbench_subdir(doc_id, "authoring"))
+    schema_paths: list[Path] = []
+    main_schema = authoring_dir / "schema.json"
+    if main_schema.exists():
+        schema_paths.append(main_schema)
+    if authoring_dir.exists():
+        schema_paths.extend(sorted(path for path in authoring_dir.glob("page_*/schema.json") if path not in schema_paths))
+    results = [
+        update_authoring_source_inpainted(schema_path, source_image=source_image, inpainted_path=inpainted_path)
+        for schema_path in schema_paths
+    ]
+    updated = [item for item in results if item.get("updated")]
+    return {
+        "sourceImage": _display_path(source_image, ROOT),
+        "sourceInpainted": _display_path(inpainted_path, ROOT),
+        "checked": len(results),
+        "updated": len(updated),
+        "items": results,
+    }
+
+
+def _sync_authoring_template_from_schema_path(schema_path: Path) -> dict[str, Any] | None:
+    if not schema_path.exists():
+        return None
+    try:
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    doc_id = str(schema.get("doc_id") or "").strip()
+    if not doc_id:
+        return None
+    return _sync_authoring_template_from_latest_work_item(doc_id)
+
+
+def _sync_authoring_template_from_latest_work_item(doc_id: str) -> dict[str, Any] | None:
+    registry = load_registry()
+    for item in list_work_items(registry=registry):
+        if str(item.get("docId") or "") == doc_id:
+            return _sync_authoring_template_from_work_item(item)
+    return None
+
+
+def _sync_authoring_template_from_work_item(item: dict[str, Any]) -> dict[str, Any] | None:
+    doc_id = str(item.get("docId") or "").strip()
+    review_path_value = str(item.get("latestReview") or "").strip()
+    inpainted_path_value = str(item.get("latestInpainted") or "").strip()
+    if not doc_id or not review_path_value or not inpainted_path_value:
+        return None
+    try:
+        policy = load_review_policy(_resolve_workspace_path(review_path_value))
+    except Exception:
+        return None
+    inpainted_path = _resolve_workspace_path(inpainted_path_value)
+    if not inpainted_path.exists():
+        return None
+    return _sync_authoring_source_inpainted_for_doc(doc_id, source_image=policy.source_image, inpainted_path=inpainted_path)
+
+
+def _inpaint_cleanup_template(*, base_image_path: Path, mask_path: Path, detections_path: Path, lama_max_side: int, detection_count: int) -> InpaintResult:
+    base_image = Image.open(base_image_path).convert("RGB")
+    manual_mask = Image.open(mask_path).convert("L").point(lambda value: 255 if value > 0 else 0)
+    if manual_mask.size != base_image.size:
+        raise ValueError(f"manual mask size mismatch: {manual_mask.size} != {base_image.size}")
+    mask_pixels = sum(count for value, count in enumerate(manual_mask.histogram()) if value > 0)
+    inpainted = base_image.copy() if mask_pixels == 0 else lama_inpaint(base_image, manual_mask, max_side=lama_max_side)
+    mask_overlay = render_mask_overlay(base_image, manual_mask)
+    return InpaintResult(
+        source_image=base_image_path,
+        detections_path=detections_path,
+        image_width=base_image.width,
+        image_height=base_image.height,
+        detection_count=detection_count,
+        mask_pixels=mask_pixels,
+        mask_ratio=mask_pixels / float(base_image.width * base_image.height),
+        method="lama",
+        mask_shape="polygon",
+        padding=0,
+        dilation=0,
+        radius=3.0,
+        lama_max_side=lama_max_side,
+        image=inpainted,
+        mask=manual_mask,
+        mask_overlay=mask_overlay,
+    )
+
+
+def _augment_cleanup_summary(summary_path: Path, *, paths: dict[str, Path], elapsed_seconds: float) -> None:
+    try:
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    except Exception:
+        summary = {}
+    summary["elapsed_seconds"] = elapsed_seconds
+    summary["cleanup"] = {
+        "strategy": "postprocess_inpainted_template_with_manual_mask",
+        "outputs": {name: str(path) for name, path in paths.items()},
+    }
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+class DataFactoryRequestHandler(BaseHTTPRequestHandler):
+    server_version = "DataFactoryWebAPI/0.1"
+
+    def do_OPTIONS(self) -> None:  # noqa: N802 - BaseHTTPRequestHandler API
+        self.send_response(HTTPStatus.NO_CONTENT)
+        self._cors_headers()
+        self.end_headers()
+
+    def do_GET(self) -> None:  # noqa: N802 - BaseHTTPRequestHandler API
+        try:
+            parsed = urlparse(self.path)
+            if parsed.path == "/api/health":
+                self._send_json(runtime_health())
+                return
+            if parsed.path == "/api/assets":
+                self._send_json(list_assets())
+                return
+            if parsed.path == "/api/fonts":
+                query = parse_qs(parsed.query)
+                refresh = (query.get("refresh") or [""])[0].lower() in {"1", "true", "yes"}
+                fonts = list_font_faces(refresh=refresh)
+                self._send_json({"defaultFontId": default_font_id(), "fonts": fonts})
+                return
+            if parsed.path == "/api/outputs/batches":
+                self._send_json(list_output_batches())
+                return
+            if parsed.path == "/api/registry":
+                self._send_json(load_registry().to_dict())
+                return
+            if parsed.path == "/api/seed/scan":
+                self._send_json(scan_seed_samples(registry=load_registry()))
+                return
+            if parsed.path == "/api/work-items":
+                registry = load_registry()
+                items = list_work_items(registry=registry)
+                self._send_json(
+                    {
+                        "summary": {
+                            "total": len(items),
+                            "imported": len([item for item in items if item["status"] != "missing"]),
+                            "bboxDone": len([item for item in items if item["hasOcr"]]),
+                            "reviewDone": len([item for item in items if item["hasReview"]]),
+                            "inpaintDone": len([item for item in items if item["hasInpaint"]]),
+                        },
+                        "items": items,
+                    }
+                )
+                return
+            if parsed.path == "/api/first-priority/assessments":
+                self._send_json(list_first_priority_assessments(registry=load_registry()))
+                return
+            if parsed.path == "/api/review":
+                review_path = _query_path(parsed.query)
+                policy = load_review_policy(review_path)
+                self._send_json(policy_to_client(policy, review_path=review_path))
+                return
+            if parsed.path == "/api/cleanup-mask":
+                query = parse_qs(parsed.query)
+                doc_id = _first_query_value(query, "docId")
+                review_path = _resolve_workspace_path(_first_query_value(query, "reviewPath"))
+                self._send_json(load_cleanup_mask_payload(doc_id=doc_id, review_path=review_path))
+                return
+            if parsed.path == "/api/authoring":
+                query = parse_qs(parsed.query)
+                schema_path = _resolve_workspace_path(_first_query_value(query, "schema"))
+                stylesheet_path = _resolve_workspace_path(_first_query_value(query, "stylesheet"))
+                faker_profile_path = _resolve_workspace_path(_first_query_value(query, "fakerProfile"))
+                _sync_authoring_template_from_schema_path(schema_path)
+                result = load_authoring_bundle(schema_path, stylesheet_path, faker_profile_path)
+                self._send_json(
+                    {
+                        "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
+                        **result.payload,
+                    }
+                )
+                return
+            if parsed.path in {"/api/image", "/api/file"}:
+                file_path = _query_path(parsed.query)
+                self._send_file(file_path)
+                return
+            self._send_json({"error": f"Unknown endpoint: {parsed.path}"}, status=HTTPStatus.NOT_FOUND)
+        except Exception as exc:  # pragma: no cover - exercised by manual server use
+            self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+
+    def do_POST(self) -> None:  # noqa: N802 - BaseHTTPRequestHandler API
+        try:
+            parsed = urlparse(self.path)
+            payload = self._read_json()
+            if parsed.path == "/api/seed/import":
+                seed_folder = _resolve_workspace_path(str(payload.get("seedFolder") or ""))
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                self._send_json(import_seed_folder(seed_folder, doc_id, registry=load_registry(), remember_mapping=bool(payload.get("rememberMapping"))))
+                return
+            if parsed.path == "/api/seed/import-batch":
+                raw_items = payload.get("items")
+                if not isinstance(raw_items, list):
+                    raise ValueError("items must be a list")
+                items: list[dict[str, Any]] = []
+                for item in raw_items:
+                    if not isinstance(item, dict):
+                        raise ValueError("each batch item must be an object")
+                    items.append(
+                        {
+                            "seedFolder": str(_resolve_workspace_path(str(item.get("seedFolder") or ""))),
+                            "docId": str(item.get("docId") or ""),
+                            "rememberMapping": bool(item.get("rememberMapping")),
+                        }
+                    )
+                self._send_json(import_seed_batch(items, registry=load_registry()))
+                return
+            if parsed.path == "/api/seed/mapping":
+                folder_name = str(payload.get("folderName") or "")
+                doc_id = str(payload.get("docId") or "")
+                if not folder_name or not doc_id:
+                    raise ValueError("folderName and docId are required")
+                self._send_json({"mapping": save_seed_mapping(folder_name, doc_id, registry=load_registry())})
+                return
+            if parsed.path == "/api/seed/upload":
+                doc_id = str(payload.get("docId") or "")
+                raw_files = payload.get("files")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                if not isinstance(raw_files, list) or not raw_files:
+                    raise ValueError("files must be a non-empty list")
+                files: list[dict[str, Any]] = []
+                for item in raw_files:
+                    if not isinstance(item, dict):
+                        raise ValueError("each file must be an object")
+                    name = str(item.get("name") or "")
+                    data = str(item.get("dataBase64") or "")
+                    if "," in data and data.split(",", 1)[0].startswith("data:"):
+                        data = data.split(",", 1)[1]
+                    try:
+                        decoded = base64.b64decode(data, validate=True)
+                    except Exception as exc:
+                        raise ValueError(f"invalid base64 payload: {name}") from exc
+                    files.append({"name": name, "contentType": str(item.get("contentType") or ""), "bytes": decoded})
+                self._send_json(save_uploaded_seed_files(doc_id, files, registry=load_registry()))
+                return
+            if parsed.path == "/api/seed/trash":
+                seed_folder = _resolve_workspace_path(str(payload.get("seedFolder") or ""))
+                self._send_json(trash_seed_folder(seed_folder))
+                return
+            if parsed.path == "/api/ocr/detect":
+                image_path = _resolve_workspace_path(str(payload.get("imagePath") or ""))
+                engine = str(payload.get("engine") or "paddleocr")
+                if engine not in {"paddleocr", "projection", "doctr"}:
+                    raise ValueError("engine must be one of paddleocr, projection, doctr")
+                preset = normalize_paddleocr_preset(str(payload.get("preset") or "precise")) if engine == "paddleocr" else ""
+                doc_id = str(payload.get("docId") or "")
+                default_out_dir = workbench_subdir(doc_id, "ocr") if doc_id else Path("outputs/ocr_eval")
+                out_dir = _resolve_workspace_path(str(payload.get("outDir") or default_out_dir))
+                started_at = perf_counter()
+                print(f"Starting OCR detection engine={engine} preset={preset or '-'} image={image_path}", flush=True)
+                payload_result = _run_paddle_ocr_subprocess(image_path, preset=preset, out_dir=out_dir) if engine == "paddleocr" else run_ocr_eval(image_path, engine=engine, preset=preset, out_dir=out_dir)
+                elapsed_seconds = perf_counter() - started_at
+                summary = dict(payload_result["summary"])
+                paths = {name: Path(path) for name, path in dict(payload_result["paths"]).items()}
+                summary["elapsed_seconds"] = elapsed_seconds
+                if doc_id:
+                    update_manifest_artifact(doc_id, "ocr", paths["detections"])
+                print(f"Finished OCR detection engine={engine} preset={preset or '-'} count={summary['detection_count']} elapsed={elapsed_seconds:.2f}s", flush=True)
+                self._send_json(
+                    {
+                        "docId": doc_id or None,
+                        "summary": {
+                            "engine": summary["engine"],
+                            "preset": summary.get("preset"),
+                            "source_image": _display_path(summary["source_image"], ROOT),
+                            "image": summary["image"],
+                            "detection_count": summary["detection_count"],
+                            "elapsed_seconds": summary["elapsed_seconds"],
+                        },
+                        "paths": _paths_to_client(paths),
+                        "overlayUrl": f"/api/file?path={_display_path(paths['overlay'], ROOT)}",
+                    }
+                )
+                return
+            if parsed.path == "/api/review/draft":
+                detections_path = _resolve_workspace_path(str(payload.get("detectionsPath") or ""))
+                doc_id = str(payload.get("docId") or "")
+                default_out_dir = workbench_subdir(doc_id, "review") if doc_id else Path("outputs/reviews")
+                out_dir = _resolve_workspace_path(str(payload.get("outDir") or default_out_dir))
+                policy = draft_review_policy(detections_path)
+                paths = write_review_policy(policy, out_dir / _safe_template_id(policy.source_image))
+                if doc_id:
+                    update_manifest_artifact(doc_id, "review", paths["review"])
+                self._send_json({"docId": doc_id or None, "paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"])})
+                return
+            if parsed.path == "/api/review/save":
+                self._send_json(save_policy_payload(payload))
+                return
+            if parsed.path == "/api/review/recognize-crops":
+                self._send_json(recognize_review_crops_payload(payload))
+                return
+            if parsed.path == "/api/authoring/review-prune-candidates":
+                self._send_json(authoring_review_prune_candidates_payload(payload))
+                return
+            if parsed.path == "/api/first-priority/assessment":
+                self._send_json(
+                    save_assessment_entry(
+                        domain=str(payload.get("domain") or ""),
+                        doc_id=str(payload.get("docId") or ""),
+                        document_type=str(payload.get("documentType") or "unknown"),
+                        feasibility=str(payload.get("feasibility") or "unknown"),
+                        comment=str(payload.get("comment") or ""),
+                        registry=load_registry(),
+                    )
+                )
+                return
+            if parsed.path == "/api/first-priority/export-xlsx":
+                out_dir = _resolve_workspace_path(str(payload.get("outDir") or "outputs/first_priority_assessment"))
+                result = export_first_priority_assessment_xlsx(out_dir=out_dir, registry=load_registry())
+                path = _resolve_workspace_path(result["path"])
+                self._send_json(
+                    {
+                        "summary": result["summary"],
+                        "rowCount": result["rowCount"],
+                        "path": _display_path(path, ROOT),
+                        "url": f"/api/file?path={_display_path(path, ROOT)}",
+                    }
+                )
+                return
+            if parsed.path == "/api/results/final-export":
+                count = int(payload.get("count") or 1)
+                seed = int(payload.get("seed") or 20260703)
+                render_scale = int(payload.get("renderScale") or 2)
+                out_dir = _resolve_workspace_path(str(payload.get("outDir") or "outputs/results"))
+                result = export_final_results(
+                    count=count,
+                    out_dir=out_dir,
+                    seed=seed,
+                    render_scale=render_scale,
+                    clean=bool(payload.get("clean", True)),
+                    registry=load_registry(),
+                )
+                manifest_path = _resolve_workspace_path(result["paths"]["manifest"])
+                summary_path = _resolve_workspace_path(result["paths"]["summary"])
+                self._send_json(
+                    {
+                        **result,
+                        "urls": {
+                            "manifest": f"/api/file?path={_display_path(manifest_path, ROOT)}",
+                            "summary": f"/api/file?path={_display_path(summary_path, ROOT)}",
+                        },
+                    }
+                )
+                return
+            if parsed.path == "/api/cleanup-mask":
+                self._send_json(save_cleanup_mask_payload(payload))
+                return
+            if parsed.path == "/api/cleanup-inpaint":
+                self._send_json(run_cleanup_inpaint_payload(payload))
+                return
+            if parsed.path == "/api/inpaint":
+                saved: dict[str, Any] | None = None
+                doc_id = str(payload.get("docId") or "")
+                review_path_value = str(payload.get("reviewPath") or "")
+                review_path = _resolve_workspace_path(review_path_value) if review_path_value else None
+                if isinstance(payload.get("policy"), dict):
+                    saved = save_policy_payload(payload)
+                    review_path = _resolve_workspace_path(saved["paths"]["review"])
+                if review_path is None:
+                    raise ValueError("reviewPath or policy is required")
+                method = str(payload.get("method") or "lama")
+                if method not in {"fill", "telea", "ns", "lama"}:
+                    raise ValueError("method must be one of fill, telea, ns, lama")
+                default_out_dir = workbench_subdir(doc_id, "inpaint") if doc_id else Path("outputs/inpaint_eval/react_reviewed")
+                out_dir = _resolve_workspace_path(str(payload.get("outDir") or default_out_dir))
+                lama_max_side = int(payload.get("lamaMaxSide") or 2400)
+                started_at = perf_counter()
+                print(f"Starting inpaint method={method} review={review_path} lama_max_side={lama_max_side}", flush=True)
+                result = inpaint_from_review_policy(
+                    review_path,
+                    InpaintConfig(method=method, mask_shape="bbox", padding=2, dilation=1, radius=3.0, lama_max_side=lama_max_side),
+                )
+                elapsed_seconds = perf_counter() - started_at
+                print(f"Finished inpaint method={method} regions={result.detection_count} elapsed={elapsed_seconds:.2f}s", flush=True)
+                paths = write_inpaint_result(result, out_dir / _safe_template_id(result.source_image) / method)
+                synced_authoring: dict[str, Any] | None = None
+                if doc_id:
+                    update_manifest_artifact(doc_id, "inpaint", paths["comparison"])
+                    synced_authoring = _sync_authoring_source_inpainted_for_doc(doc_id, source_image=result.source_image, inpainted_path=paths["inpainted"])
+                self._send_json(
+                    {
+                        "docId": doc_id or None,
+                        "saved": saved,
+                        "summary": result.summary(paths) | {"elapsed_seconds": elapsed_seconds},
+                        "paths": _paths_to_client(paths),
+                        "comparisonUrl": f"/api/file?path={_display_path(paths['comparison'], ROOT)}",
+                        "syncedAuthoringTemplates": synced_authoring,
+                    }
+                )
+                return
+            if parsed.path == "/api/authoring/draft":
+                self._send_json(
+                    {
+                        "error": "authoring_draft_disabled",
+                        "message": "Schema 초안 생성은 기존 authoring 데이터를 덮어쓸 위험이 있어 비활성화되었습니다.",
+                    },
+                    status=410,
+                )
+                return
+            if parsed.path == "/api/authoring/migrate-bboxes":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                authoring_dir = workbench_subdir(doc_id, "authoring")
+                schema_path = _resolve_workspace_path(str(payload.get("schemaPath") or authoring_dir / "schema.json"))
+                review_path_value = str(payload.get("reviewPath") or "")
+                review_path = _resolve_workspace_path(review_path_value) if review_path_value else None
+                result = migrate_authoring_schema_bboxes_to_review(schema_path, review_path=review_path)
+                if result.get("review"):
+                    update_manifest_artifact(doc_id, "review", _resolve_workspace_path(str(result["review"])))
+                update_manifest_artifact(doc_id, "authoring", schema_path)
+                self._send_json({"docId": doc_id, "summary": result})
+                return
+            if parsed.path == "/api/authoring/render-preview":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                _sync_authoring_template_from_latest_work_item(doc_id)
+                authoring_dir = workbench_subdir(doc_id, "authoring")
+                schema_path = _resolve_workspace_path(str(payload.get("schemaPath") or authoring_dir / "schema.json"))
+                stylesheet_path = _resolve_workspace_path(str(payload.get("stylesheetPath") or authoring_dir / "stylesheet.json"))
+                faker_profile_path = _resolve_workspace_path(str(payload.get("fakerProfilePath") or authoring_dir / "faker_profile.json"))
+                seed = int(payload.get("seed") or 1234)
+                render_scale = int(payload.get("renderScale") or 2)
+                result = render_authoring_preview(
+                    schema_path,
+                    stylesheet_path,
+                    faker_profile_path,
+                    out_dir=authoring_dir / "render_preview",
+                    seed=seed,
+                    render_scale=render_scale,
+                )
+                update_manifest_artifact(doc_id, "authoring_preview", result.image)
+                update_manifest_artifact(doc_id, "authoring_overlay", result.overlay)
+                self._send_json(
+                    {
+                        "docId": doc_id,
+                        "summary": {"sample_id": result.sample_id, "field_count": result.field_count, "warning_count": result.warning_count},
+                        "paths": _paths_to_client(
+                            {
+                                "image": result.image,
+                                "kv": result.kv,
+                                "bbox": result.bbox,
+                                "overlay": result.overlay,
+                                "validation_report": result.validation_report,
+                                "manifest": result.manifest,
+                            }
+                        ),
+                        "imageUrl": f"/api/file?path={_display_path(result.image, ROOT)}",
+                        "overlayUrl": f"/api/file?path={_display_path(result.overlay, ROOT)}",
+                    }
+                )
+                return
+            if parsed.path == "/api/authoring/live-preview":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                raw_schema = payload.get("schema")
+                raw_stylesheet = payload.get("stylesheet")
+                raw_faker_profile = payload.get("fakerProfile")
+                if not isinstance(raw_schema, dict) or not isinstance(raw_stylesheet, dict) or not isinstance(raw_faker_profile, dict):
+                    raise ValueError("schema, stylesheet and fakerProfile are required")
+                seed = int(payload.get("seed") or 1234)
+                render_scale = int(payload.get("renderScale") or 2)
+                result = render_authoring_live_preview(
+                    raw_schema,
+                    raw_stylesheet,
+                    raw_faker_profile,
+                    out_dir=RENDER_OUTPUT_ROOT / "live_preview" / _safe_name(doc_id),
+                    seed=seed,
+                    sample_id="live_preview",
+                    render_scale=render_scale,
+                )
+                self._send_json(
+                    {
+                        "docId": doc_id,
+                        "summary": {"sample_id": result.sample_id, "field_count": result.field_count, "warning_count": result.warning_count},
+                        "paths": _paths_to_client(
+                            {
+                                "image": result.image,
+                                "kv": result.kv,
+                                "bbox": result.bbox,
+                                "overlay": result.overlay,
+                                "validation_report": result.validation_report,
+                            }
+                        ),
+                        "imageUrl": f"/api/file?path={_display_path(result.image, ROOT)}",
+                    }
+                )
+                return
+            if parsed.path == "/api/authoring/render-batch":
+                doc_ids = payload.get("docIds")
+                count = int(payload.get("count") or 5)
+                seed = int(payload.get("seed") or 20260702)
+                render_scale = int(payload.get("renderScale") or 2)
+                out_dir = _resolve_workspace_path(str(payload.get("outDir") or "outputs/render/batch_authoring_20260702"))
+                if doc_ids is not None and not isinstance(doc_ids, list):
+                    raise ValueError("docIds must be a list when provided")
+                result = render_authoring_batch_for_work_items(
+                    doc_ids=[str(item) for item in doc_ids] if doc_ids is not None else None,
+                    count=count,
+                    seed=seed,
+                    out_dir=out_dir,
+                    render_scale=render_scale,
+                )
+                self._send_json(result)
+                return
+            if parsed.path == "/api/authoring/save":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                authoring_dir = workbench_subdir(doc_id, "authoring")
+                schema_path = _resolve_workspace_path(str(payload.get("schemaPath") or authoring_dir / "schema.json"))
+                stylesheet_path = _resolve_workspace_path(str(payload.get("stylesheetPath") or authoring_dir / "stylesheet.json"))
+                faker_profile_path = _resolve_workspace_path(str(payload.get("fakerProfilePath") or authoring_dir / "faker_profile.json"))
+                raw_schema = payload.get("schema")
+                raw_stylesheet = payload.get("stylesheet")
+                raw_faker_profile = payload.get("fakerProfile")
+                if not isinstance(raw_schema, dict) or not isinstance(raw_stylesheet, dict) or not isinstance(raw_faker_profile, dict):
+                    raise ValueError("schema, stylesheet and fakerProfile are required")
+                result = save_authoring_bundle(
+                    schema_path,
+                    stylesheet_path,
+                    faker_profile_path,
+                    schema=raw_schema,
+                    stylesheet=raw_stylesheet,
+                    faker_profile=raw_faker_profile,
+                )
+                update_manifest_artifact(doc_id, "authoring", result.schema)
+                update_manifest_artifact(doc_id, "authoring_stylesheet", result.stylesheet)
+                update_manifest_artifact(doc_id, "authoring_faker_profile", result.faker_profile)
+                self._send_json(
+                    {
+                        "docId": doc_id,
+                        "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
+                        **result.payload,
+                    }
+                )
+                return
+            self._send_json({"error": f"Unknown endpoint: {parsed.path}"}, status=HTTPStatus.NOT_FOUND)
+        except Exception as exc:  # pragma: no cover - exercised by manual server use
+            self._send_json({"error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+
+    def _read_json(self) -> dict[str, Any]:
+        length = int(self.headers.get("Content-Length") or "0")
+        if length <= 0:
+            return {}
+        return json.loads(self.rfile.read(length).decode("utf-8"))
+
+    def _send_json(self, payload: dict[str, Any], *, status: HTTPStatus = HTTPStatus.OK) -> None:
+        body = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
+        self.send_response(status)
+        self._cors_headers()
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _send_file(self, path: Path) -> None:
+        if not path.exists() or not path.is_file():
+            raise FileNotFoundError(path)
+        content_type = mimetypes.guess_type(str(path))[0] or "application/octet-stream"
+        body = path.read_bytes()
+        self.send_response(HTTPStatus.OK)
+        self._cors_headers()
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _cors_headers(self) -> None:
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+
+
+def list_output_batches() -> dict[str, Any]:
+    batches: list[dict[str, Any]] = []
+    seen: set[Path] = set()
+    for output_root in (ROOT / "outputs", RENDER_OUTPUT_ROOT):
+        if not output_root.exists():
+            continue
+        for summary_path in sorted(output_root.glob("batch_*/summary.json")):
+            resolved = summary_path.resolve()
+            if resolved in seen:
+                continue
+            seen.add(resolved)
+            try:
+                data = json.loads(summary_path.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            batches.append(
+                {
+                    "name": summary_path.parent.name,
+                    "summary": _display_path(summary_path, ROOT),
+                    "outDir": _display_path(summary_path.parent, ROOT),
+                    "createdAt": data.get("created_at"),
+                    "documentCount": data.get("document_count", 0),
+                    "sampleCount": data.get("sample_count", 0),
+                    "warningCount": data.get("warning_count", 0),
+                }
+            )
+    return {"batches": batches}
+
+
+def render_authoring_batch_for_work_items(
+    *,
+    doc_ids: list[str] | None,
+    count: int,
+    seed: int,
+    out_dir: Path,
+    render_scale: int = 2,
+) -> dict[str, Any]:
+    registry = load_registry()
+    items = list_work_items(registry=registry)
+    requested = set(doc_ids or [])
+    selected = [item for item in items if (not requested or item["docId"] in requested) and item.get("latestAuthoringSchema") and item.get("latestAuthoringStylesheet") and item.get("latestAuthoringFakerProfile")]
+    if requested:
+        found = {item["docId"] for item in selected}
+        missing = sorted(requested - found)
+        if missing:
+            raise ValueError(f"authoring bundle not found for docIds: {', '.join(missing)}")
+    if not selected:
+        raise ValueError("no authoring-ready documents found")
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    root_manifest = out_dir / "manifest.jsonl"
+    root_manifest.unlink(missing_ok=True)
+    documents: list[dict[str, Any]] = []
+    warning_count = 0
+    sample_count = 0
+    for doc_index, item in enumerate(selected, start=1):
+        doc_id = str(item["docId"])
+        _sync_authoring_template_from_work_item(item)
+        doc_title = str(item.get("title") or doc_id)
+        doc_out = out_dir / f"{_safe_name(doc_id)}_{_safe_name(doc_title)}"
+        batch = render_authoring_batch(
+            _resolve_workspace_path(str(item["latestAuthoringSchema"])),
+            _resolve_workspace_path(str(item["latestAuthoringStylesheet"])),
+            _resolve_workspace_path(str(item["latestAuthoringFakerProfile"])),
+            out_dir=doc_out,
+            count=count,
+            seed=seed + (doc_index - 1) * 1000,
+            clean=True,
+            render_scale=render_scale,
+        )
+        update_manifest_artifact(doc_id, "authoring_batch", batch.summary, registry=registry)
+        doc_payload = {
+            "docId": doc_id,
+            "title": doc_title,
+            "outDir": _display_path(batch.out_dir, ROOT),
+            "summary": _display_path(batch.summary, ROOT),
+            "manifest": _display_path(batch.manifest, ROOT),
+            "sampleCount": batch.sample_count,
+            "fieldCount": batch.field_count,
+            "warningCount": batch.warning_count,
+            "firstImage": _display_path(batch.samples[0].image, ROOT) if batch.samples else "",
+            "firstOverlay": _display_path(batch.samples[0].overlay, ROOT) if batch.samples else "",
+        }
+        documents.append(doc_payload)
+        warning_count += batch.warning_count
+        sample_count += batch.sample_count
+        with root_manifest.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(doc_payload, ensure_ascii=False, separators=(",", ":")))
+            handle.write("\n")
+
+    summary_path = out_dir / "summary.json"
+    summary_payload = {
+        "schema_version": 1,
+        "created_at": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
+        "outDir": _display_path(out_dir, ROOT),
+        "document_count": len(documents),
+        "sample_count": sample_count,
+        "count_per_document": count,
+        "warning_count": warning_count,
+        "documents": documents,
+    }
+    summary_path.write_text(json.dumps(summary_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return {
+        "summary": {
+            "documentCount": len(documents),
+            "sampleCount": sample_count,
+            "countPerDocument": count,
+            "warningCount": warning_count,
+        },
+        "paths": {
+            "outDir": _display_path(out_dir, ROOT),
+            "summary": _display_path(summary_path, ROOT),
+            "manifest": _display_path(root_manifest, ROOT),
+        },
+        "documents": documents,
+    }
+
+
+def _safe_name(value: str) -> str:
+    name = "".join(ch if ch.isalnum() or ch in "가-힣_-()·" else "_" for ch in value).strip("_")
+    while "__" in name:
+        name = name.replace("__", "_")
+    return name[:80] or "document"
+
+
+def _query_path(query: str) -> Path:
+    values = parse_qs(query).get("path")
+    if not values:
+        raise ValueError("missing query parameter: path")
+    return _resolve_workspace_path(unquote(values[0]))
+
+
+def _first_query_value(query: dict[str, list[str]], name: str) -> str:
+    values = query.get(name)
+    if not values:
+        raise ValueError(f"missing query parameter: {name}")
+    return unquote(values[0])
+
+
+def _resolve_workspace_path(value: str | Path) -> Path:
+    if not value:
+        raise ValueError("empty path")
+    path = Path(value)
+    if not path.is_absolute():
+        path = ROOT / path
+    resolved = path.resolve()
+    if resolved != ROOT and ROOT not in resolved.parents:
+        raise ValueError(f"path escapes workspace: {value}")
+    return resolved
+
+
+def _display_path(path: str | Path, root: Path) -> str:
+    resolved = Path(path).resolve()
+    try:
+        return str(resolved.relative_to(root))
+    except ValueError:
+        return str(resolved)
+
+
+def _paths_to_client(paths: dict[str, Path]) -> dict[str, str]:
+    return {name: _display_path(path, ROOT) for name, path in paths.items()}
+
+
+def _run_paddle_ocr_subprocess(image_path: Path, *, preset: str, out_dir: Path) -> dict[str, Any]:
+    """Run PaddleOCR outside the long-lived API process.
+
+    Paddle loads native worker threads that can segfault during Ctrl+C shutdown on
+    macOS. Keeping it in a short-lived child process prevents the API server
+    itself from importing libpaddle and makes normal GUI shutdown much quieter.
+    """
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    result_fd, result_name = tempfile.mkstemp(prefix="paddle_ocr_", suffix=".json", dir=out_dir)
+    os.close(result_fd)
+    result_path = Path(result_name)
+    env = os.environ.copy()
+    src_path = str(ROOT / "src")
+    env["PYTHONPATH"] = src_path if not env.get("PYTHONPATH") else f"{src_path}{os.pathsep}{env['PYTHONPATH']}"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "datafactory.ocr_worker",
+            "--image",
+            str(image_path),
+            "--engine",
+            "paddleocr",
+            "--preset",
+            preset,
+            "--out-dir",
+            str(out_dir),
+            "--result-json",
+            str(result_path),
+        ],
+        cwd=ROOT,
+        env=env,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        detail = (completed.stderr or completed.stdout or "").strip()
+        raise RuntimeError(f"PaddleOCR worker failed with exit code {completed.returncode}: {detail[-4000:]}")
+    try:
+        with result_path.open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    finally:
+        result_path.unlink(missing_ok=True)
+    if not isinstance(payload, dict) or not isinstance(payload.get("summary"), dict) or not isinstance(payload.get("paths"), dict):
+        raise RuntimeError("PaddleOCR worker returned invalid metadata")
+    return payload
+
+
+def _run_paddle_crop_recognition_subprocess(crops_json: Path, *, preset: str, out_dir: Path) -> dict[str, Any]:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    result_fd, result_name = tempfile.mkstemp(prefix="paddle_crop_ocr_", suffix=".json", dir=out_dir)
+    os.close(result_fd)
+    result_path = Path(result_name)
+    env = os.environ.copy()
+    src_path = str(ROOT / "src")
+    env["PYTHONPATH"] = src_path if not env.get("PYTHONPATH") else f"{src_path}{os.pathsep}{env['PYTHONPATH']}"
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "datafactory.ocr_worker",
+            "--crops-json",
+            str(crops_json),
+            "--engine",
+            "paddleocr",
+            "--preset",
+            preset,
+            "--out-dir",
+            str(out_dir),
+            "--result-json",
+            str(result_path),
+        ],
+        cwd=ROOT,
+        env=env,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        detail = (completed.stderr or completed.stdout or "").strip()
+        raise RuntimeError(f"PaddleOCR crop worker failed with exit code {completed.returncode}: {detail[-4000:]}")
+    try:
+        with result_path.open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    finally:
+        result_path.unlink(missing_ok=True)
+    if not isinstance(payload, dict) or not isinstance(payload.get("summary"), dict) or not isinstance(payload.get("candidates"), list):
+        raise RuntimeError("PaddleOCR crop worker returned invalid metadata")
+    return payload
+
+
+def _safe_template_id(path: Path) -> str:
+    parent = path.parent.name
+    if parent:
+        return f"{parent}_{path.stem}"
+    return path.stem
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Run the DataFactory React GUI backend API.")
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8766)
+    args = parser.parse_args()
+    server = ThreadingHTTPServer((args.host, args.port), DataFactoryRequestHandler)
+    print(f"DataFactory API listening on http://{args.host}:{args.port}")
+    print(f"Workspace root: {ROOT}")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:  # pragma: no cover - manual use
+        pass
+    finally:
+        server.server_close()
+
+
+if __name__ == "__main__":
+    main()

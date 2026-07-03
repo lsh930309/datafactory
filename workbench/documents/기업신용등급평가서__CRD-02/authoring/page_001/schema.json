@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-02T00:45:02.797169+00:00",
+  "updated_at": "2026-07-02T07:07:56.649671+00:00",
+  "doc_id": "CRD-02",
+  "title": "기업신용등급평가서 page 1",
+  "page_index": 1,
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/기업신용등급평가서__CRD-02/samples/original/기업신용평가서_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/기업신용등급평가서__CRD-02/inpaint/original_기업신용평가서_page_001/manual_cleanup/inpainted_lama.png",
+  "image": {
+    "width": 1190,
+    "height": 1684
+  },
+  "fields": [
+    {
+      "field_id": "certificate_serial_number",
+      "label": "일련번호",
+      "bbox": [
+        206,
+        134,
+        210,
+        21
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd02_profiles.certificate_serial_number",
+      "style_class": "style_header",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.certificate_serial_number",
+        "csv_column": "certificate_serial_number"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "issue_number",
+      "label": "교부번호",
+      "bbox": [
+        206,
+        161,
+        205,
+        22
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd02_profiles.issue_number",
+      "style_class": "style_header",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.issue_number",
+        "csv_column": "issue_number"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "recipient_company_name",
+      "label": "수신 기업체명",
+      "bbox": [
+        149,
+        400,
+        175,
+        40
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:crd02_profiles.recipient_company_name",
+      "style_class": "style_recipient",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.recipient_company_name",
+        "csv_column": "recipient_company_name"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "recipient_suffix",
+      "label": "수신처 접미어",
+      "bbox": [
+        330,
+        400,
+        70,
+        40
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd02_profiles.recipient_suffix",
+      "style_class": "style_recipient",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.recipient_suffix",
+        "csv_column": "recipient_suffix"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "evaluated_company_name",
+      "label": "기업체",
+      "bbox": [
+        374,
+        482,
+        325,
+        29
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:crd02_profiles.evaluated_company_name",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.evaluated_company_name",
+        "csv_column": "evaluated_company_name"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "representative_name",
+      "label": "대표자",
+      "bbox": [
+        374,
+        526,
+        160,
+        30
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:crd02_profiles.representative_name",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.representative_name",
+        "csv_column": "representative_name"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "corporate_registration_number",
+      "label": "법인등록번호",
+      "bbox": [
+        374,
+        571,
+        210,
+        29
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd02_profiles.corporate_registration_number",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.corporate_registration_number",
+        "csv_column": "corporate_registration_number"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "business_registration_number",
+      "label": "사업자등록번호",
+      "bbox": [
+        374,
+        617,
+        180,
+        29
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd02_profiles.business_registration_number",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.business_registration_number",
+        "csv_column": "business_registration_number"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "headquarters_address",
+      "label": "주소",
+      "bbox": [
+        374,
+        664,
+        335,
+        61
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "address.ko",
+      "generator": "pool_record:crd02_profiles.headquarters_address",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.headquarters_address",
+        "csv_column": "headquarters_address"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "fiscal_year_end",
+      "label": "재무결산기준일",
+      "bbox": [
+        374,
+        740,
+        180,
+        30
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "date.kr",
+      "generator": "pool_record:crd02_profiles.fiscal_year_end",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.fiscal_year_end",
+        "csv_column": "fiscal_year_end"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "rating_evaluation_date",
+      "label": "등급평가일",
+      "bbox": [
+        374,
+        781,
+        180,
+        30
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "date.kr",
+      "generator": "pool_record:crd02_profiles.rating_evaluation_date",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.rating_evaluation_date",
+        "csv_column": "rating_evaluation_date"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "rating_valid_until",
+      "label": "등급유효기한",
+      "bbox": [
+        374,
+        825,
+        180,
+        30
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "date.kr",
+      "generator": "pool_record:crd02_profiles.rating_valid_until",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.rating_valid_until",
+        "csv_column": "rating_valid_until"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "submission_purpose",
+      "label": "제출처 및 용도",
+      "bbox": [
+        374,
+        876,
+        185,
+        29
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd02_profiles.submission_purpose",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.submission_purpose",
+        "csv_column": "submission_purpose"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "credit_rating",
+      "label": "기업신용평가등급",
+      "bbox": [
+        775,
+        638,
+        230,
+        90
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd02_profiles.credit_rating",
+      "style_class": "style_credit_rating",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page1.credit_rating",
+        "csv_column": "credit_rating"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    },
+    {
+      "field_id": "rating_description",
+      "label": "등급 설명",
+      "bbox": [
+        755,
+        842,
+        300,
+        68
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd02_pipeline_ready_20260702",
+      "source_text": "",
+      "value_type": "free_text.long",
+      "generator": "pool_record:crd02_profiles.rating_description",
+      "style_class": "style_rating_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "wrap",
+        "overflow": "wrap"
+      },
+      "export": {
+        "json_path": "page1.rating_description",
+        "csv_column": "rating_description"
+      },
+      "required": false,
+      "notes": "CRD-02 page 1 생산용 수동 bbox/style 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수."
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "page1_certificate",
+      "type": "credit_rating_certificate",
+      "notes": "CRD-02 생산용 확장 schema"
+    }
+  ],
+  "authoring_mode": "crd02_page_1_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate"
+}

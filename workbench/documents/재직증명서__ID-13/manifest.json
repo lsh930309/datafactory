@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "doc_id": "ID-13",
+  "title": "재직증명서",
+  "folder": "workbench/documents/재직증명서__ID-13",
+  "registry": {
+    "docId": "ID-13",
+    "title": "재직증명서",
+    "issuer": "기업",
+    "genre": "증명",
+    "structure": "반정형",
+    "modality": "스캔이미지",
+    "sensitivity": "개인정보(일반)",
+    "fields": "성명·부서·직위·재직기간",
+    "notes": "다도메인 재사용",
+    "hasPersonalInfo": "포함",
+    "personalInfoDetail": "성명, 생년월일, 소속, 직위",
+    "validationRules": "재직기간, 발급일, 직인 존재, 성명 일치",
+    "validationRuleCodes": "VAL-002, VAL-009",
+    "writingMethod": "인쇄",
+    "aliases": [
+      "재직증명서"
+    ],
+    "workflowIds": [
+      "BANK-02"
+    ],
+    "domains": [
+      "금융 - 은행 (여신·신용·외환)"
+    ],
+    "isFirstPriority": false
+  },
+  "source_seed_folders": [
+    "seed_samples/재직증명서"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/재직증명서__ID-13/samples/original/재직증명서.jpg",
+      "source": "seed_samples/재직증명서/재직증명서.jpg"
+    }
+  ],
+  "status": "authoring_done",
+  "created_at": "2026-06-29T04:29:43.661669+00:00",
+  "updated_at": "2026-07-02T04:25:03.880514+00:00",
+  "artifacts": {
+    "ocr": "workbench/documents/재직증명서__ID-13/ocr/paddleocr/precise/original_재직증명서/detections.json",
+    "review": "workbench/documents/재직증명서__ID-13/review/original_재직증명서/review.json",
+    "inpaint": "workbench/documents/재직증명서__ID-13/inpaint/original_재직증명서/lama/comparison_lama.png",
+    "authoring": "workbench/documents/재직증명서__ID-13/authoring/schema.json",
+    "authoring_stylesheet": "workbench/documents/재직증명서__ID-13/authoring/stylesheet.json",
+    "authoring_faker_profile": "workbench/documents/재직증명서__ID-13/authoring/faker_profile.json",
+    "authoring_preview": "workbench/documents/재직증명서__ID-13/authoring/render_preview/preview_000001.png",
+    "authoring_overlay": "workbench/documents/재직증명서__ID-13/authoring/render_preview/preview_000001.overlay.png",
+    "authoring_batch": "outputs/pipeline_ready/ID-13_재직증명서/summary.json",
+    "authoring_contact_sheet": "outputs/pipeline_ready/ID-13_재직증명서/contact_sheet.jpg",
+    "authoring_style_comparison": "outputs/style_calibration/ID-13_재직증명서/full_comparison.jpg"
+  }
+}

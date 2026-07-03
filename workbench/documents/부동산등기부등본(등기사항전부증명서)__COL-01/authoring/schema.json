@@ -1,0 +1,1496 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:25:04.193261+00:00",
+  "doc_id": "COL-01",
+  "title": "부동산등기부등본(등기사항전부증명서)",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/부동산등기부등본(등기사항전부증명서)__COL-01/review/original_건축물등기부등본_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/부동산등기부등본(등기사항전부증명서)__COL-01/samples/original/건축물등기부등본_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/부동산등기부등본(등기사항전부증명서)__COL-01/inpaint/original_건축물등기부등본_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1191,
+    "height": 1684
+  },
+  "fields": [
+    {
+      "field_id": "unique_property_number",
+      "label": "부동산 고유번호",
+      "source_detection_id": "det_000008",
+      "source_text": "고유번호 1101-2017-014587",
+      "value_type": "free_text.short",
+      "generator": "template:고유번호 {{pattern:####-####-######}}",
+      "style_class": "style_unique_property_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "unique.property.number",
+        "csv_column": "unique_property_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000008"
+    },
+    {
+      "field_id": "property_title",
+      "label": "부동산 표시 제목",
+      "source_detection_id": "det_000009",
+      "source_text": "[건물] 서울특별시 서초구 반포동 709-7 르헤브빌딩",
+      "value_type": "address.ko",
+      "generator": "template:[건물] {{address.ko}} 르헤브빌딩",
+      "style_class": "style_property_title",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "property.title",
+        "csv_column": "property_title"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000009"
+    },
+    {
+      "field_id": "real_estate_register_item_01",
+      "label": "표제부 순번 1",
+      "source_detection_id": "det_000021",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_real_estate_register_item_01",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.01",
+        "csv_column": "real_estate_register_item_01"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000021"
+    },
+    {
+      "field_id": "real_estate_register_item_02",
+      "label": "표제부 항목 2",
+      "source_detection_id": "det_000022",
+      "source_text": "2017년12원1인",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_02",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.02",
+        "csv_column": "real_estate_register_item_02"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000022"
+    },
+    {
+      "field_id": "real_estate_register_item_03",
+      "label": "표제부 항목 3",
+      "source_detection_id": "det_000023",
+      "source_text": "우특벽사 서초구 반포동",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_03",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.03",
+        "csv_column": "real_estate_register_item_03"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000023"
+    },
+    {
+      "field_id": "real_estate_register_item_04",
+      "label": "표제부 소형 기호 1",
+      "source_detection_id": "det_000024",
+      "source_text": "z",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_real_estate_register_item_04",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.04",
+        "csv_column": "real_estate_register_item_04"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000024"
+    },
+    {
+      "field_id": "real_estate_register_item_05",
+      "label": "표제부 소형 기호 2",
+      "source_detection_id": "det_000025",
+      "source_text": "고",
+      "value_type": "free_text.short",
+      "generator": "choice:가|나|다",
+      "style_class": "style_real_estate_register_item_05",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.05",
+        "csv_column": "real_estate_register_item_05"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000025"
+    },
+    {
+      "field_id": "real_estate_register_item_06",
+      "label": "표제부 항목 6",
+      "source_detection_id": "det_000026",
+      "source_text": "청근코그리드주",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_06",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.06",
+        "csv_column": "real_estate_register_item_06"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000026"
+    },
+    {
+      "field_id": "real_estate_register_item_07",
+      "label": "표제부 항목 7",
+      "source_detection_id": "det_000027",
+      "source_text": "709-7",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_07",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.07",
+        "csv_column": "real_estate_register_item_07"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000027"
+    },
+    {
+      "field_id": "real_estate_register_item_08",
+      "label": "표제부 소형 텍스트",
+      "source_detection_id": "det_000028",
+      "source_text": "최고",
+      "value_type": "free_text.short",
+      "generator": "choice:최고|등기|변경",
+      "style_class": "style_real_estate_register_item_08",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.08",
+        "csv_column": "real_estate_register_item_08"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000028"
+    },
+    {
+      "field_id": "real_estate_register_item_09",
+      "label": "표제부 항목 9",
+      "source_detection_id": "det_000029",
+      "source_text": "1Zz부",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_09",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.09",
+        "csv_column": "real_estate_register_item_09"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000029"
+    },
+    {
+      "field_id": "real_estate_register_item_10",
+      "label": "표제부 층/기호",
+      "source_detection_id": "det_000030",
+      "source_text": "5X",
+      "value_type": "free_text.short",
+      "generator": "choice:5층|4층|B1",
+      "style_class": "style_real_estate_register_item_10",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.10",
+        "csv_column": "real_estate_register_item_10"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000030"
+    },
+    {
+      "field_id": "real_estate_register_item_11",
+      "label": "표제부 항목 11",
+      "source_detection_id": "det_000031",
+      "source_text": "제2종근리생학시설(하위)",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_11",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.11",
+        "csv_column": "real_estate_register_item_11"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000031"
+    },
+    {
+      "field_id": "real_estate_register_item_12",
+      "label": "표제부 순번 3",
+      "source_detection_id": "det_000032",
+      "source_text": "2",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_real_estate_register_item_12",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.12",
+        "csv_column": "real_estate_register_item_12"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000032"
+    },
+    {
+      "field_id": "real_estate_register_item_13",
+      "label": "표제부 항목 13",
+      "source_detection_id": "det_000033",
+      "source_text": "으트시",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_13",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.13",
+        "csv_column": "real_estate_register_item_13"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000033"
+    },
+    {
+      "field_id": "real_estate_register_item_14",
+      "label": "표제부 항목 14",
+      "source_detection_id": "det_000034",
+      "source_text": "서추구",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_14",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.14",
+        "csv_column": "real_estate_register_item_14"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000034"
+    },
+    {
+      "field_id": "real_estate_register_item_15",
+      "label": "표제부 항목 15",
+      "source_detection_id": "det_000035",
+      "source_text": "강남대로89길",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_15",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.15",
+        "csv_column": "real_estate_register_item_15"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000035"
+    },
+    {
+      "field_id": "real_estate_register_item_16",
+      "label": "표제부 소형 기호 3",
+      "source_detection_id": "det_000036",
+      "source_text": "t",
+      "value_type": "free_text.short",
+      "generator": "choice:t|x|z",
+      "style_class": "style_real_estate_register_item_16",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.16",
+        "csv_column": "real_estate_register_item_16"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000036"
+    },
+    {
+      "field_id": "real_estate_register_item_17",
+      "label": "표제부 숫자",
+      "source_detection_id": "det_000037",
+      "source_text": "30",
+      "value_type": "free_text.short",
+      "generator": "choice:30|20|10",
+      "style_class": "style_real_estate_register_item_17",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.17",
+        "csv_column": "real_estate_register_item_17"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000037"
+    },
+    {
+      "field_id": "real_estate_register_item_18",
+      "label": "표제부 층수 2",
+      "source_detection_id": "det_000038",
+      "source_text": "2층",
+      "value_type": "free_text.short",
+      "generator": "choice:2층|3층|4층",
+      "style_class": "style_real_estate_register_item_18",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.18",
+        "csv_column": "real_estate_register_item_18"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000038"
+    },
+    {
+      "field_id": "real_estate_register_item_19",
+      "label": "표제부 항목 19",
+      "source_detection_id": "det_000039",
+      "source_text": "114.11m²",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_19",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.19",
+        "csv_column": "real_estate_register_item_19"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000039"
+    },
+    {
+      "field_id": "real_estate_register_item_20",
+      "label": "표제부 숫자 2",
+      "source_detection_id": "det_000040",
+      "source_text": "22",
+      "value_type": "free_text.short",
+      "generator": "choice:22|24|26",
+      "style_class": "style_real_estate_register_item_20",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.20",
+        "csv_column": "real_estate_register_item_20"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000040"
+    },
+    {
+      "field_id": "real_estate_register_item_21",
+      "label": "표제부 항목 21",
+      "source_detection_id": "det_000041",
+      "source_text": "114.11m²",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_21",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.21",
+        "csv_column": "real_estate_register_item_21"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000041"
+    },
+    {
+      "field_id": "real_estate_register_item_22",
+      "label": "표제부 기호",
+      "source_detection_id": "det_000042",
+      "source_text": "X",
+      "value_type": "free_text.short",
+      "generator": "choice:X|O|-",
+      "style_class": "style_real_estate_register_item_22",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.22",
+        "csv_column": "real_estate_register_item_22"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000042"
+    },
+    {
+      "field_id": "real_estate_register_item_23",
+      "label": "표제부 항목 23",
+      "source_detection_id": "det_000043",
+      "source_text": "78.86m",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_23",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.23",
+        "csv_column": "real_estate_register_item_23"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000043"
+    },
+    {
+      "field_id": "real_estate_register_item_24",
+      "label": "표제부 층수",
+      "source_detection_id": "det_000044",
+      "source_text": "5층",
+      "value_type": "free_text.short",
+      "generator": "choice:5층|4층|3층",
+      "style_class": "style_real_estate_register_item_24",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.24",
+        "csv_column": "real_estate_register_item_24"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000044"
+    },
+    {
+      "field_id": "real_estate_register_item_25",
+      "label": "표제부 숫자 3",
+      "source_detection_id": "det_000045",
+      "source_text": "40",
+      "value_type": "free_text.short",
+      "generator": "choice:40|30|20",
+      "style_class": "style_real_estate_register_item_25",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.25",
+        "csv_column": "real_estate_register_item_25"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000045"
+    },
+    {
+      "field_id": "real_estate_register_item_26",
+      "label": "표제부 항목 26",
+      "source_detection_id": "det_000046",
+      "source_text": "63.06m²",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_26",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.26",
+        "csv_column": "real_estate_register_item_26"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000046"
+    },
+    {
+      "field_id": "real_estate_register_item_27",
+      "label": "표제부 항목 27",
+      "source_detection_id": "det_000047",
+      "source_text": "지1층 107.69m2",
+      "value_type": "money.krw",
+      "generator": "choice:서울특별시 서초구 반포동|르헤브빌딩|철골조,철근콘크리트조|제2종근린생활시설(학원)|114.11m²|5층|지1층 107.69m²",
+      "style_class": "style_real_estate_register_item_27",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.27",
+        "csv_column": "real_estate_register_item_27"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000047"
+    },
+    {
+      "field_id": "real_estate_register_item_28",
+      "label": "표제부 층 기호 2",
+      "source_detection_id": "det_000048",
+      "source_text": "f1o",
+      "value_type": "free_text.short",
+      "generator": "choice:f1|f2|b1",
+      "style_class": "style_real_estate_register_item_28",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.28",
+        "csv_column": "real_estate_register_item_28"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000048"
+    },
+    {
+      "field_id": "real_estate_register_item_29",
+      "label": "표제부 순번 2",
+      "source_detection_id": "det_000049",
+      "source_text": "2",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_real_estate_register_item_29",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.29",
+        "csv_column": "real_estate_register_item_29"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000049"
+    },
+    {
+      "field_id": "real_estate_register_item_30",
+      "label": "건물 표시 변경 항목 1",
+      "source_detection_id": "det_000050",
+      "source_text": "2021년10월19일",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_30",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.30",
+        "csv_column": "real_estate_register_item_30"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000050"
+    },
+    {
+      "field_id": "real_estate_register_item_31",
+      "label": "건물 표시 변경 항목 2",
+      "source_detection_id": "det_000051",
+      "source_text": "서울특별시서초구 반포동",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_31",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.31",
+        "csv_column": "real_estate_register_item_31"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000051"
+    },
+    {
+      "field_id": "real_estate_register_item_32",
+      "label": "건물 표시 변경 항목 3",
+      "source_detection_id": "det_000052",
+      "source_text": "철골조,철근콘크리트조",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_32",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.32",
+        "csv_column": "real_estate_register_item_32"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000052"
+    },
+    {
+      "field_id": "real_estate_register_item_33",
+      "label": "건물 표시 변경 항목 4",
+      "source_detection_id": "det_000053",
+      "source_text": "명칭기재",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_33",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.33",
+        "csv_column": "real_estate_register_item_33"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000053"
+    },
+    {
+      "field_id": "real_estate_register_item_34",
+      "label": "건물 표시 변경 항목 5",
+      "source_detection_id": "det_000054",
+      "source_text": "709-7르헤브빌딩",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_34",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.34",
+        "csv_column": "real_estate_register_item_34"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000054"
+    },
+    {
+      "field_id": "real_estate_register_item_35",
+      "label": "건물 표시 변경 항목 6",
+      "source_detection_id": "det_000055",
+      "source_text": "철골구조지붕 5층",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_35",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.35",
+        "csv_column": "real_estate_register_item_35"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000055"
+    },
+    {
+      "field_id": "real_estate_register_item_36",
+      "label": "건물 표시 변경 항목 7",
+      "source_detection_id": "det_000056",
+      "source_text": "[도로명주소]",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_36",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.36",
+        "csv_column": "real_estate_register_item_36"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000056"
+    },
+    {
+      "field_id": "real_estate_register_item_37",
+      "label": "건물 표시 변경 항목 8",
+      "source_detection_id": "det_000057",
+      "source_text": "제2종근린생활시설(학원)",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_37",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.37",
+        "csv_column": "real_estate_register_item_37"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000057"
+    },
+    {
+      "field_id": "real_estate_register_item_38",
+      "label": "건물 표시 변경 항목 9",
+      "source_detection_id": "det_000058",
+      "source_text": "서울특별시 서초구",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_38",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.38",
+        "csv_column": "real_estate_register_item_38"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000058"
+    },
+    {
+      "field_id": "real_estate_register_item_39",
+      "label": "건물 표시 변경 항목 10",
+      "source_detection_id": "det_000059",
+      "source_text": "1층 59.17m2",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_39",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.39",
+        "csv_column": "real_estate_register_item_39"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000059"
+    },
+    {
+      "field_id": "real_estate_register_item_40",
+      "label": "건물 표시 변경 항목 11",
+      "source_detection_id": "det_000060",
+      "source_text": "강남대로89길30",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_40",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.40",
+        "csv_column": "real_estate_register_item_40"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000060"
+    },
+    {
+      "field_id": "real_estate_register_item_41",
+      "label": "건물 표시 변경 항목 12",
+      "source_detection_id": "det_000061",
+      "source_text": "2층 114.11m2",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_41",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.41",
+        "csv_column": "real_estate_register_item_41"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000061"
+    },
+    {
+      "field_id": "real_estate_register_item_42",
+      "label": "건물 표시 변경 항목 13",
+      "source_detection_id": "det_000062",
+      "source_text": "3층 114.11m2",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_42",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.42",
+        "csv_column": "real_estate_register_item_42"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000062"
+    },
+    {
+      "field_id": "real_estate_register_item_43",
+      "label": "건물 표시 변경 항목 14",
+      "source_detection_id": "det_000063",
+      "source_text": "4층 78.86m2",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_43",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.43",
+        "csv_column": "real_estate_register_item_43"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000063"
+    },
+    {
+      "field_id": "real_estate_register_item_44",
+      "label": "건물 표시 변경 항목 15",
+      "source_detection_id": "det_000064",
+      "source_text": "5층 63.06m2",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_44",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.44",
+        "csv_column": "real_estate_register_item_44"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000064"
+    },
+    {
+      "field_id": "real_estate_register_item_45",
+      "label": "건물 표시 변경 항목 16",
+      "source_detection_id": "det_000065",
+      "source_text": "지1층 107.69m²",
+      "value_type": "date.kr",
+      "generator": "choice:2021년10월20일|서울특별시 서초구 반포동|709-7 르헤브빌딩|제2종근린생활시설(학원)|1층 59.17m2|2층 114.11m2|3층 114.11m2",
+      "style_class": "style_real_estate_register_item_45",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.45",
+        "csv_column": "real_estate_register_item_45"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000065"
+    },
+    {
+      "field_id": "real_estate_register_item_46",
+      "label": "갑구 순번 1",
+      "source_detection_id": "det_000074",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_real_estate_register_item_46",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.46",
+        "csv_column": "real_estate_register_item_46"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000074"
+    },
+    {
+      "field_id": "real_estate_register_item_47",
+      "label": "갑구 권리사항 항목 2",
+      "source_detection_id": "det_000075",
+      "source_text": "소유권보존",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_47",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.47",
+        "csv_column": "real_estate_register_item_47"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000075"
+    },
+    {
+      "field_id": "real_estate_register_item_48",
+      "label": "갑구 권리사항 항목 3",
+      "source_detection_id": "det_000076",
+      "source_text": "2017년12월1일",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_48",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.48",
+        "csv_column": "real_estate_register_item_48"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000076"
+    },
+    {
+      "field_id": "real_estate_register_item_49",
+      "label": "갑구 권리사항 항목 4",
+      "source_detection_id": "det_000077",
+      "source_text": "소유자이민영",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_49",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.49",
+        "csv_column": "real_estate_register_item_49"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000077"
+    },
+    {
+      "field_id": "real_estate_register_item_50",
+      "label": "갑구 권리사항 항목 5",
+      "source_detection_id": "det_000078",
+      "source_text": "661002-*******",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_50",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.50",
+        "csv_column": "real_estate_register_item_50"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000078"
+    },
+    {
+      "field_id": "real_estate_register_item_51",
+      "label": "갑구 권리사항 항목 6",
+      "source_detection_id": "det_000079",
+      "source_text": "제230199호",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_51",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.51",
+        "csv_column": "real_estate_register_item_51"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000079"
+    },
+    {
+      "field_id": "real_estate_register_item_52",
+      "label": "갑구 권리사항 항목 7",
+      "source_detection_id": "det_000080",
+      "source_text": "서울특별시 강남구 도산대로70길 25, 202동",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_52",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.52",
+        "csv_column": "real_estate_register_item_52"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000080"
+    },
+    {
+      "field_id": "real_estate_register_item_53",
+      "label": "갑구 권리사항 항목 8",
+      "source_detection_id": "det_000081",
+      "source_text": "801호(청담동,청담2차이편한세상)",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_53",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.53",
+        "csv_column": "real_estate_register_item_53"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000081"
+    },
+    {
+      "field_id": "real_estate_register_item_54",
+      "label": "갑구 순번 2",
+      "source_detection_id": "det_000082",
+      "source_text": "2",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_real_estate_register_item_54",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.54",
+        "csv_column": "real_estate_register_item_54"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000082"
+    },
+    {
+      "field_id": "real_estate_register_item_55",
+      "label": "갑구 권리사항 항목 10",
+      "source_detection_id": "det_000083",
+      "source_text": "소유권이전",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_55",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.55",
+        "csv_column": "real_estate_register_item_55"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000083"
+    },
+    {
+      "field_id": "real_estate_register_item_56",
+      "label": "갑구 권리사항 항목 11",
+      "source_detection_id": "det_000084",
+      "source_text": "2021년10월20일",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_56",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.56",
+        "csv_column": "real_estate_register_item_56"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000084"
+    },
+    {
+      "field_id": "real_estate_register_item_57",
+      "label": "갑구 권리사항 항목 12",
+      "source_detection_id": "det_000085",
+      "source_text": "2021년5월6일",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_57",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.57",
+        "csv_column": "real_estate_register_item_57"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000085"
+    },
+    {
+      "field_id": "real_estate_register_item_58",
+      "label": "갑구 권리사항 항목 13",
+      "source_detection_id": "det_000086",
+      "source_text": "소유자 주식회사엠케이컨텐츠 110111-6189636",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_58",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.58",
+        "csv_column": "real_estate_register_item_58"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000086"
+    },
+    {
+      "field_id": "real_estate_register_item_59",
+      "label": "갑구 권리사항 항목 14",
+      "source_detection_id": "det_000087",
+      "source_text": "제204121호",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_59",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.59",
+        "csv_column": "real_estate_register_item_59"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000087"
+    },
+    {
+      "field_id": "real_estate_register_item_60",
+      "label": "갑구 등기원인",
+      "source_detection_id": "det_000088",
+      "source_text": "매매",
+      "value_type": "free_text.short",
+      "generator": "choice:매매|증여|상속",
+      "style_class": "style_real_estate_register_item_60",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.60",
+        "csv_column": "real_estate_register_item_60"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000088"
+    },
+    {
+      "field_id": "real_estate_register_item_61",
+      "label": "갑구 권리사항 항목 16",
+      "source_detection_id": "det_000089",
+      "source_text": "서울특별시용산구서빙고로 67,103동",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_61",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.61",
+        "csv_column": "real_estate_register_item_61"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000089"
+    },
+    {
+      "field_id": "real_estate_register_item_62",
+      "label": "갑구 권리사항 항목 17",
+      "source_detection_id": "det_000090",
+      "source_text": "1607호(용산동5가, 파크타워)",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_62",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.62",
+        "csv_column": "real_estate_register_item_62"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000090"
+    },
+    {
+      "field_id": "real_estate_register_item_63",
+      "label": "갑구 권리사항 항목 18",
+      "source_detection_id": "det_000091",
+      "source_text": "매매꼭록 제2021-4625호",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_63",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.63",
+        "csv_column": "real_estate_register_item_63"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000091"
+    },
+    {
+      "field_id": "real_estate_register_item_64",
+      "label": "갑구 권리사항 항목 19",
+      "source_detection_id": "det_000092",
+      "source_text": "열람일시:2026년06월09일08시54분21초",
+      "value_type": "company.name_ko",
+      "generator": "choice:소유권보존|소유권이전|매매|소유자 김민준|소유자 주식회사엠케이컨텐츠|제230199호|서울특별시 강남구 도산대로70길 25",
+      "style_class": "style_real_estate_register_item_64",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.64",
+        "csv_column": "real_estate_register_item_64"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000092"
+    },
+    {
+      "field_id": "real_estate_register_item_65",
+      "label": "등기부 페이지",
+      "source_detection_id": "det_000093",
+      "source_text": "1/3",
+      "value_type": "free_text.short",
+      "generator": "choice:1/3|2/3|3/3",
+      "style_class": "style_real_estate_register_item_65",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "real.estate.register.item.65",
+        "csv_column": "real_estate_register_item_65"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000093"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "manual_20260702",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/부동산등기부등본(등기사항전부증명서)__COL-01/review/original_건축물등기부등본_page_001/review.json"
+  }
+}

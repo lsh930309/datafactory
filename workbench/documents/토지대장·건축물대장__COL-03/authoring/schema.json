@@ -1,0 +1,1232 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:25:04.290074+00:00",
+  "doc_id": "COL-03",
+  "title": "토지대장·건축물대장",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/토지대장·건축물대장__COL-03/samples/original/건축물대장_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/토지대장·건축물대장__COL-03/inpaint/original_건축물대장_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1584,
+    "height": 1224
+  },
+  "fields": [
+    {
+      "field_id": "document_confirmation_number",
+      "label": "문서확인번호",
+      "source_detection_id": "det_000003",
+      "source_text": "문서확인번호:1782-7058-1373-03440",
+      "value_type": "free_text.short",
+      "generator": "template:문서확인번호:{{pattern:####-####-####-#####}}",
+      "style_class": "style_document_confirmation_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "document.confirmation.number",
+        "csv_column": "document_confirmation_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000003"
+    },
+    {
+      "field_id": "print_date",
+      "label": "출력일자",
+      "source_detection_id": "det_000004",
+      "source_text": "2026/06/29",
+      "value_type": "free_text.short",
+      "generator": "choice:2026/06/29|2025/09/19",
+      "style_class": "style_print_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "print.date",
+        "csv_column": "print_date"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000004"
+    },
+    {
+      "field_id": "print_time",
+      "label": "출력시각",
+      "source_detection_id": "det_000006",
+      "source_text": "13:03:34",
+      "value_type": "free_text.short",
+      "generator": "pattern:##:##:##",
+      "style_class": "style_print_time",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "print.time",
+        "csv_column": "print_time"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000006"
+    },
+    {
+      "field_id": "page_number",
+      "label": "페이지",
+      "source_detection_id": "det_000009",
+      "source_text": "(2쪽 중 제1쪽)",
+      "value_type": "free_text.short",
+      "generator": "choice:(2쪽 중 제1쪽)|(1쪽 중 제1쪽)",
+      "style_class": "style_page_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page.number",
+        "csv_column": "page_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000009"
+    },
+    {
+      "field_id": "building_management_number",
+      "label": "건축물관리번호",
+      "source_detection_id": "det_000013",
+      "source_text": "1165010700-1-07090007",
+      "value_type": "free_text.short",
+      "generator": "pattern:##########-#-########",
+      "style_class": "style_building_management_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.management.number",
+        "csv_column": "building_management_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000013"
+    },
+    {
+      "field_id": "ledger_pk",
+      "label": "대장 고유번호",
+      "source_detection_id": "det_000015",
+      "source_text": "2120171230000250",
+      "value_type": "free_text.short",
+      "generator": "pattern:################",
+      "style_class": "style_ledger_pk",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "ledger.pk",
+        "csv_column": "ledger_pk"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000015"
+    },
+    {
+      "field_id": "building_name",
+      "label": "건물명",
+      "source_detection_id": "det_000016",
+      "source_text": "르헤브빌딩",
+      "value_type": "free_text.short",
+      "generator": "choice:르헤브빌딩|테헤란빌딩|한빛타워",
+      "style_class": "style_building_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.name",
+        "csv_column": "building_name"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000016"
+    },
+    {
+      "field_id": "household_summary",
+      "label": "호가구세대수",
+      "source_detection_id": "det_000018",
+      "source_text": "0호/0가구/0세대",
+      "value_type": "free_text.short",
+      "generator": "choice:0호/0가구/0세대|12호/0가구/0세대",
+      "style_class": "style_household_summary",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "household.summary",
+        "csv_column": "household_summary"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000018"
+    },
+    {
+      "field_id": "site_location",
+      "label": "대지위치",
+      "source_detection_id": "det_000021",
+      "source_text": "서울특별시서초구반포동",
+      "value_type": "free_text.short",
+      "generator": "choice:서울특별시서초구반포동|서울특별시강남구역삼동",
+      "style_class": "style_site_location",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "site.location",
+        "csv_column": "site_location"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000021"
+    },
+    {
+      "field_id": "lot_number",
+      "label": "지번",
+      "source_detection_id": "det_000022",
+      "source_text": "709-7",
+      "value_type": "free_text.short",
+      "generator": "choice:709-7|123-45|30",
+      "style_class": "style_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "lot.number",
+        "csv_column": "lot_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000022"
+    },
+    {
+      "field_id": "road_address",
+      "label": "도로명주소",
+      "source_detection_id": "det_000024",
+      "source_text": "서울특별시 서초구 강남대로89길30(반포동)",
+      "value_type": "address.ko",
+      "generator": "address.ko",
+      "style_class": "style_road_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "road.address",
+        "csv_column": "road_address"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000024"
+    },
+    {
+      "field_id": "site_area",
+      "label": "대지면적",
+      "source_detection_id": "det_000030",
+      "source_text": "220.2m",
+      "value_type": "free_text.short",
+      "generator": "choice:220.2m²|537m2|122.44m2",
+      "style_class": "style_site_area",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "site.area",
+        "csv_column": "site_area"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000030"
+    },
+    {
+      "field_id": "building_area",
+      "label": "건축면적",
+      "source_detection_id": "det_000031",
+      "source_text": "537m2",
+      "value_type": "free_text.short",
+      "generator": "choice:537m2|429.31m²|194.96%",
+      "style_class": "style_building_area",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.area",
+        "csv_column": "building_area"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000031"
+    },
+    {
+      "field_id": "zoning",
+      "label": "지역지구",
+      "source_detection_id": "det_000032",
+      "source_text": "제2종일반주거지역 외1",
+      "value_type": "free_text.short",
+      "generator": "choice:제2종일반주거지역 외1|상업지역|준주거지역",
+      "style_class": "style_zoning",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "zoning",
+        "csv_column": "zoning"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000032"
+    },
+    {
+      "field_id": "restriction_zone",
+      "label": "제한구역",
+      "source_detection_id": "det_000033",
+      "source_text": "가축사육제한구역",
+      "value_type": "free_text.short",
+      "generator": "choice:가축사육제한구역|상대보호구역|해당없음",
+      "style_class": "style_restriction_zone",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "restriction.zone",
+        "csv_column": "restriction_zone"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000033"
+    },
+    {
+      "field_id": "building_ledger_item_01",
+      "label": "건축물 현황 항목 1",
+      "source_detection_id": "det_000039",
+      "source_text": "122.44m2",
+      "value_type": "free_text.short",
+      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
+      "style_class": "style_building_ledger_item_01",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.01",
+        "csv_column": "building_ledger_item_01"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000039"
+    },
+    {
+      "field_id": "building_ledger_item_02",
+      "label": "건축물 현황 항목 2",
+      "source_detection_id": "det_000040",
+      "source_text": "429.31m'",
+      "value_type": "free_text.short",
+      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
+      "style_class": "style_building_ledger_item_02",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.02",
+        "csv_column": "building_ledger_item_02"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000040"
+    },
+    {
+      "field_id": "building_ledger_item_03",
+      "label": "건축물 현황 항목 3",
+      "source_detection_id": "det_000041",
+      "source_text": "철골조,철근콘크리트조",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_03",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.03",
+        "csv_column": "building_ledger_item_03"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000041"
+    },
+    {
+      "field_id": "building_ledger_item_04",
+      "label": "건축물 현황 항목 4",
+      "source_detection_id": "det_000042",
+      "source_text": "제2종근린생활시설(학원)",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_04",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.04",
+        "csv_column": "building_ledger_item_04"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000042"
+    },
+    {
+      "field_id": "building_ledger_item_05",
+      "label": "건축물 현황 항목 5",
+      "source_detection_id": "det_000043",
+      "source_text": "지하:1층,지상:5층",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_05",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.05",
+        "csv_column": "building_ledger_item_05"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000043"
+    },
+    {
+      "field_id": "building_ledger_item_06",
+      "label": "건축물 현황 항목 6",
+      "source_detection_id": "det_000049",
+      "source_text": "55.6%",
+      "value_type": "free_text.short",
+      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
+      "style_class": "style_building_ledger_item_06",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.06",
+        "csv_column": "building_ledger_item_06"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000049"
+    },
+    {
+      "field_id": "building_ledger_item_07",
+      "label": "건축물 현황 항목 7",
+      "source_detection_id": "det_000050",
+      "source_text": "194.96%",
+      "value_type": "free_text.short",
+      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
+      "style_class": "style_building_ledger_item_07",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.07",
+        "csv_column": "building_ledger_item_07"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000050"
+    },
+    {
+      "field_id": "building_ledger_item_08",
+      "label": "건축물 현황 항목 8",
+      "source_detection_id": "det_000051",
+      "source_text": "14.5m",
+      "value_type": "free_text.short",
+      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
+      "style_class": "style_building_ledger_item_08",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.08",
+        "csv_column": "building_ledger_item_08"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000051"
+    },
+    {
+      "field_id": "building_ledger_item_09",
+      "label": "건축물 현황 항목 9",
+      "source_detection_id": "det_000052",
+      "source_text": "철골구조지붕",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_09",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.09",
+        "csv_column": "building_ledger_item_09"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000052"
+    },
+    {
+      "field_id": "building_ledger_item_10",
+      "label": "건축물 현황 항목 10",
+      "source_detection_id": "det_000077",
+      "source_text": "주1",
+      "value_type": "free_text.short",
+      "generator": "choice:주1|지1층|1층|2층|3층|5층",
+      "style_class": "style_building_ledger_item_10",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.10",
+        "csv_column": "building_ledger_item_10"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000077"
+    },
+    {
+      "field_id": "building_ledger_item_11",
+      "label": "건축물 현황 항목 11",
+      "source_detection_id": "det_000078",
+      "source_text": "z1층",
+      "value_type": "free_text.short",
+      "generator": "choice:주1|지1층|1층|2층|3층|5층",
+      "style_class": "style_building_ledger_item_11",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.11",
+        "csv_column": "building_ledger_item_11"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000078"
+    },
+    {
+      "field_id": "building_ledger_item_12",
+      "label": "건축물 현황 항목 12",
+      "source_detection_id": "det_000079",
+      "source_text": "철근콘크리트구조",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_12",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.12",
+        "csv_column": "building_ledger_item_12"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000079"
+    },
+    {
+      "field_id": "building_ledger_item_13",
+      "label": "건축물 현황 항목 13",
+      "source_detection_id": "det_000080",
+      "source_text": "제2종근린생활시설(사진관)",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_13",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.13",
+        "csv_column": "building_ledger_item_13"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000080"
+    },
+    {
+      "field_id": "building_ledger_item_14",
+      "label": "건축물 현황 항목 14",
+      "source_detection_id": "det_000081",
+      "source_text": "107.69",
+      "value_type": "free_text.short",
+      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
+      "style_class": "style_building_ledger_item_14",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.14",
+        "csv_column": "building_ledger_item_14"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000081"
+    },
+    {
+      "field_id": "building_ledger_item_15",
+      "label": "건축물 현황 항목 15",
+      "source_detection_id": "det_000082",
+      "source_text": "주식회사엠케이컨텐츠",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_15",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.15",
+        "csv_column": "building_ledger_item_15"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000082"
+    },
+    {
+      "field_id": "building_ledger_item_16",
+      "label": "건축물 현황 항목 16",
+      "source_detection_id": "det_000083",
+      "source_text": "서울특별시용산구서빙고로 67,",
+      "value_type": "date.kr",
+      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
+      "style_class": "style_building_ledger_item_16",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.16",
+        "csv_column": "building_ledger_item_16"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000083"
+    },
+    {
+      "field_id": "building_ledger_item_17",
+      "label": "건축물 현황 항목 17",
+      "source_detection_id": "det_000084",
+      "source_text": "2021.10.20.",
+      "value_type": "date.kr",
+      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
+      "style_class": "style_building_ledger_item_17",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.17",
+        "csv_column": "building_ledger_item_17"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000084"
+    },
+    {
+      "field_id": "building_ledger_item_18",
+      "label": "건축물 현황 페이지 표기",
+      "source_detection_id": "det_000085",
+      "source_text": "1/1",
+      "value_type": "free_text.short",
+      "generator": "choice:1/1|1/2|2/2",
+      "style_class": "style_building_ledger_item_18",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.18",
+        "csv_column": "building_ledger_item_18"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000085"
+    },
+    {
+      "field_id": "building_ledger_item_19",
+      "label": "건축물 현황 항목 19",
+      "source_detection_id": "det_000086",
+      "source_text": "주1",
+      "value_type": "free_text.short",
+      "generator": "choice:주1|지1층|1층|2층|3층|5층",
+      "style_class": "style_building_ledger_item_19",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.19",
+        "csv_column": "building_ledger_item_19"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000086"
+    },
+    {
+      "field_id": "building_ledger_item_20",
+      "label": "건축물 현황 항목 20",
+      "source_detection_id": "det_000087",
+      "source_text": "1층",
+      "value_type": "free_text.short",
+      "generator": "choice:주1|지1층|1층|2층|3층|5층",
+      "style_class": "style_building_ledger_item_20",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.20",
+        "csv_column": "building_ledger_item_20"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000087"
+    },
+    {
+      "field_id": "building_ledger_item_21",
+      "label": "건축물 현황 항목 21",
+      "source_detection_id": "det_000088",
+      "source_text": "일반철골구조",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_21",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.21",
+        "csv_column": "building_ledger_item_21"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000088"
+    },
+    {
+      "field_id": "building_ledger_item_22",
+      "label": "건축물 현황 항목 22",
+      "source_detection_id": "det_000089",
+      "source_text": "제1종근린생활시설(소매점)",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_22",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.22",
+        "csv_column": "building_ledger_item_22"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000089"
+    },
+    {
+      "field_id": "building_ledger_item_23",
+      "label": "건축물 현황 항목 23",
+      "source_detection_id": "det_000090",
+      "source_text": "59.17",
+      "value_type": "free_text.short",
+      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
+      "style_class": "style_building_ledger_item_23",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.23",
+        "csv_column": "building_ledger_item_23"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000090"
+    },
+    {
+      "field_id": "building_ledger_item_24",
+      "label": "건축물 현황 항목 24",
+      "source_detection_id": "det_000091",
+      "source_text": "110111–6******",
+      "value_type": "date.kr",
+      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
+      "style_class": "style_building_ledger_item_24",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.24",
+        "csv_column": "building_ledger_item_24"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000091"
+    },
+    {
+      "field_id": "building_ledger_item_25",
+      "label": "건축물 현황 항목 25",
+      "source_detection_id": "det_000092",
+      "source_text": "103동1607호(용산동5가,파크타워)",
+      "value_type": "date.kr",
+      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
+      "style_class": "style_building_ledger_item_25",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.25",
+        "csv_column": "building_ledger_item_25"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000092"
+    },
+    {
+      "field_id": "building_ledger_item_26",
+      "label": "건축물 현황 항목 26",
+      "source_detection_id": "det_000093",
+      "source_text": "소유권이전",
+      "value_type": "date.kr",
+      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
+      "style_class": "style_building_ledger_item_26",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.26",
+        "csv_column": "building_ledger_item_26"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000093"
+    },
+    {
+      "field_id": "building_ledger_item_27",
+      "label": "건축물 현황 항목 27",
+      "source_detection_id": "det_000094",
+      "source_text": "주1",
+      "value_type": "free_text.short",
+      "generator": "choice:주1|지1층|1층|2층|3층|5층",
+      "style_class": "style_building_ledger_item_27",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.27",
+        "csv_column": "building_ledger_item_27"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000094"
+    },
+    {
+      "field_id": "building_ledger_item_28",
+      "label": "건축물 현황 항목 28",
+      "source_detection_id": "det_000095",
+      "source_text": "2층",
+      "value_type": "free_text.short",
+      "generator": "choice:주1|지1층|1층|2층|3층|5층",
+      "style_class": "style_building_ledger_item_28",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.28",
+        "csv_column": "building_ledger_item_28"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000095"
+    },
+    {
+      "field_id": "building_ledger_item_29",
+      "label": "건축물 현황 항목 29",
+      "source_detection_id": "det_000096",
+      "source_text": "일반철골구조",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_29",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.29",
+        "csv_column": "building_ledger_item_29"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000096"
+    },
+    {
+      "field_id": "building_ledger_item_30",
+      "label": "건축물 현황 항목 30",
+      "source_detection_id": "det_000097",
+      "source_text": "제2종근린생활시설(학원)",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_30",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.30",
+        "csv_column": "building_ledger_item_30"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000097"
+    },
+    {
+      "field_id": "building_ledger_item_31",
+      "label": "건축물 현황 항목 31",
+      "source_detection_id": "det_000098",
+      "source_text": "114.11",
+      "value_type": "free_text.short",
+      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
+      "style_class": "style_building_ledger_item_31",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.31",
+        "csv_column": "building_ledger_item_31"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000098"
+    },
+    {
+      "field_id": "building_ledger_item_32",
+      "label": "건축물 현황 항목 32",
+      "source_detection_id": "det_000100",
+      "source_text": "주1",
+      "value_type": "free_text.short",
+      "generator": "choice:주1|지1층|1층|2층|3층|5층",
+      "style_class": "style_building_ledger_item_32",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.32",
+        "csv_column": "building_ledger_item_32"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000100"
+    },
+    {
+      "field_id": "building_ledger_item_33",
+      "label": "건축물 현황 항목 33",
+      "source_detection_id": "det_000101",
+      "source_text": "3층",
+      "value_type": "free_text.short",
+      "generator": "choice:주1|지1층|1층|2층|3층|5층",
+      "style_class": "style_building_ledger_item_33",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.33",
+        "csv_column": "building_ledger_item_33"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000101"
+    },
+    {
+      "field_id": "building_ledger_item_34",
+      "label": "건축물 현황 항목 34",
+      "source_detection_id": "det_000102",
+      "source_text": "일반철골구조",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_34",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.34",
+        "csv_column": "building_ledger_item_34"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000102"
+    },
+    {
+      "field_id": "building_ledger_item_35",
+      "label": "건축물 현황 항목 35",
+      "source_detection_id": "det_000103",
+      "source_text": "제2종근린생활시설(학원)",
+      "value_type": "money.krw",
+      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
+      "style_class": "style_building_ledger_item_35",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.35",
+        "csv_column": "building_ledger_item_35"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000103"
+    },
+    {
+      "field_id": "building_ledger_item_36",
+      "label": "건축물 현황 항목 36",
+      "source_detection_id": "det_000104",
+      "source_text": "114.11",
+      "value_type": "free_text.short",
+      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
+      "style_class": "style_building_ledger_item_36",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.36",
+        "csv_column": "building_ledger_item_36"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000104"
+    },
+    {
+      "field_id": "building_ledger_item_37",
+      "label": "건축물 현황 항목 37",
+      "source_detection_id": "det_000107",
+      "source_text": "발급일:2026년06월29일",
+      "value_type": "date.kr",
+      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
+      "style_class": "style_building_ledger_item_37",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.37",
+        "csv_column": "building_ledger_item_37"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000107"
+    },
+    {
+      "field_id": "building_ledger_item_38",
+      "label": "건축물 현황 항목 38",
+      "source_detection_id": "det_000110",
+      "source_text": "담당자:오-케이민원센터",
+      "value_type": "date.kr",
+      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
+      "style_class": "style_building_ledger_item_38",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.38",
+        "csv_column": "building_ledger_item_38"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000110"
+    },
+    {
+      "field_id": "building_ledger_item_39",
+      "label": "건축물 현황 항목 39",
+      "source_detection_id": "det_000111",
+      "source_text": "전화:02-2155-6306",
+      "value_type": "date.kr",
+      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
+      "style_class": "style_building_ledger_item_39",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.39",
+        "csv_column": "building_ledger_item_39"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000111"
+    },
+    {
+      "field_id": "building_ledger_item_40",
+      "label": "건축물 현황 항목 40",
+      "source_detection_id": "det_000113",
+      "source_text": "서울특별시 서초구청장",
+      "value_type": "date.kr",
+      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
+      "style_class": "style_building_ledger_item_40",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "building.ledger.item.40",
+        "csv_column": "building_ledger_item_40"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000113"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "manual_20260702",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json"
+  }
+}

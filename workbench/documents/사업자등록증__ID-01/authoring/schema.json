@@ -1,0 +1,551 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-30T08:34:45.236025+00:00",
+  "updated_at": "2026-07-02T04:24:33.198905+00:00",
+  "doc_id": "ID-01",
+  "title": "사업자등록증",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/사업자등록증__ID-01/review/original_15-4/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/사업자등록증__ID-01/samples/original/15-4.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/사업자등록증__ID-01/inpaint/original_15-4/lama/inpainted_lama.png",
+  "image": {
+    "width": 4473,
+    "height": 6326
+  },
+  "fields": [
+    {
+      "field_id": "business_registration_number",
+      "label": "등록번호",
+      "source_detection_id": "det_000005",
+      "source_text": "등록번호:347-86-00558",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_registration_numbers",
+      "style_class": "style_business_registration_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.registration.number",
+        "csv_column": "business_registration_number"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000005"
+    },
+    {
+      "field_id": "corporate_name",
+      "label": "법인명",
+      "source_detection_id": "det_000006",
+      "source_text": "법인명(단 체명):농업회사법인 주식회사 그린",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_corporate_names",
+      "style_class": "style_corporate_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "corporate.name",
+        "csv_column": "corporate_name"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000006"
+    },
+    {
+      "field_id": "representative_name",
+      "label": "대표자",
+      "source_detection_id": "det_000007",
+      "source_text": "대 표 자 :권기표",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_representative_names",
+      "style_class": "style_representative_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "representative.name",
+        "csv_column": "representative_name"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000007"
+    },
+    {
+      "field_id": "opening_date",
+      "label": "개업연월일",
+      "source_detection_id": "det_000008",
+      "source_text": "개 업 연 월 일 :2016 년 09월30일",
+      "value_type": "date.kr",
+      "generator": "pool:id01_opening_dates",
+      "style_class": "style_opening_date",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "opening.date",
+        "csv_column": "opening_date"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000008"
+    },
+    {
+      "field_id": "corporate_registration_number",
+      "label": "법인등록번호",
+      "source_detection_id": "det_000009",
+      "source_text": "법인등록 번호 :124411-0183393",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_corporate_registration_numbers",
+      "style_class": "style_corporate_registration_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "corporate.registration.number",
+        "csv_column": "corporate_registration_number"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000009"
+    },
+    {
+      "field_id": "workplace_address",
+      "label": "사업장 소재지",
+      "source_detection_id": "det_000010",
+      "source_text": "사 업 장 소 재 지 :경기도 김포시 고촌읍 상미로9번길 51-5",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_workplace_addresses",
+      "style_class": "style_workplace_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "workplace.address",
+        "csv_column": "workplace_address"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000010"
+    },
+    {
+      "field_id": "head_office_address_line1",
+      "label": "본점 소재지 1행",
+      "source_detection_id": "det_000011",
+      "source_text": "본 점 소 재 지 :경기도김포시",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_head_office_address_line1",
+      "style_class": "style_head_office_address_line1",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "head.office.address.line1",
+        "csv_column": "head_office_address_line1"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000011"
+    },
+    {
+      "field_id": "head_office_address_line2",
+      "label": "본점 소재지 2행",
+      "source_detection_id": "det_000012",
+      "source_text": "읍 상미로9번길 51-5",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_head_office_address_line2",
+      "style_class": "style_head_office_address_line2",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "head.office.address.line2",
+        "csv_column": "head_office_address_line2"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000012"
+    },
+    {
+      "field_id": "business_type_1",
+      "label": "업태 1",
+      "source_detection_id": "det_000015",
+      "source_text": "농업",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_type_1",
+      "style_class": "style_business_type_1",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.type.1",
+        "csv_column": "business_type_1"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000015"
+    },
+    {
+      "field_id": "business_item_1",
+      "label": "종목 1",
+      "source_detection_id": "det_000016",
+      "source_text": "채소작물 재배업",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_item_1",
+      "style_class": "style_business_item_1",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.item.1",
+        "csv_column": "business_item_1"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000016"
+    },
+    {
+      "field_id": "business_type_2",
+      "label": "업태 2",
+      "source_detection_id": "det_000017",
+      "source_text": "농업",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_type_2",
+      "style_class": "style_business_type_2",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.type.2",
+        "csv_column": "business_type_2"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000017"
+    },
+    {
+      "field_id": "business_item_2",
+      "label": "종목 2",
+      "source_detection_id": "det_000018",
+      "source_text": "채소류 수경재배",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_item_2",
+      "style_class": "style_business_item_2",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.item.2",
+        "csv_column": "business_item_2"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000018"
+    },
+    {
+      "field_id": "business_type_3",
+      "label": "업태 3",
+      "source_detection_id": "det_000020",
+      "source_text": "농업",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_type_3",
+      "style_class": "style_business_type_3",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.type.3",
+        "csv_column": "business_type_3"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000020"
+    },
+    {
+      "field_id": "business_item_3",
+      "label": "종목 3",
+      "source_detection_id": "det_000021",
+      "source_text": "작물재배 지원 서비스업",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_item_3",
+      "style_class": "style_business_item_3",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.item.3",
+        "csv_column": "business_item_3"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000021"
+    },
+    {
+      "field_id": "business_type_4",
+      "label": "업태 4",
+      "source_detection_id": "det_000022",
+      "source_text": "농업",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_type_4",
+      "style_class": "style_business_type_4",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.type.4",
+        "csv_column": "business_type_4"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000022"
+    },
+    {
+      "field_id": "business_type_5",
+      "label": "업태 5",
+      "source_detection_id": "det_000023",
+      "source_text": "제조업",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_type_5",
+      "style_class": "style_business_type_5",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.type.5",
+        "csv_column": "business_type_5"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000023"
+    },
+    {
+      "field_id": "business_item_4",
+      "label": "종목 4",
+      "source_detection_id": "det_000024",
+      "source_text": "농산물(식품)의 생산, 제조, 가공,",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_item_4",
+      "style_class": "style_business_item_4",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.item.4",
+        "csv_column": "business_item_4"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000024"
+    },
+    {
+      "field_id": "business_type_6",
+      "label": "업태 6",
+      "source_detection_id": "det_000025",
+      "source_text": "도소매",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_type_6",
+      "style_class": "style_business_type_6",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.type.6",
+        "csv_column": "business_type_6"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000025"
+    },
+    {
+      "field_id": "business_item_5",
+      "label": "종목 5",
+      "source_detection_id": "det_000026",
+      "source_text": "농산물의 유통,판매",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_item_5",
+      "style_class": "style_business_item_5",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.item.5",
+        "csv_column": "business_item_5"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000026"
+    },
+    {
+      "field_id": "business_type_7",
+      "label": "업태 7",
+      "source_detection_id": "det_000027",
+      "source_text": "전문,과학 및 기술서비스업",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_type_7",
+      "style_class": "style_business_type_7",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.type.7",
+        "csv_column": "business_type_7"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000027"
+    },
+    {
+      "field_id": "business_item_6",
+      "label": "종목 6",
+      "source_detection_id": "det_000028",
+      "source_text": "농림수산학 및 수의학 연구개발업",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_business_item_6",
+      "style_class": "style_business_item_6",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.item.6",
+        "csv_column": "business_item_6"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000028"
+    },
+    {
+      "field_id": "issue_reason",
+      "label": "발급사유",
+      "source_detection_id": "det_000029",
+      "source_text": "발 급 사 유 :공공기관 제출용",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_issue_reasons",
+      "style_class": "style_issue_reason",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "issue.reason",
+        "csv_column": "issue_reason"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000029"
+    },
+    {
+      "field_id": "issue_date",
+      "label": "발급일",
+      "source_detection_id": "det_000033",
+      "source_text": "2024 년 03 월 08 일",
+      "value_type": "date.kr",
+      "generator": "pool:id01_issue_dates",
+      "style_class": "style_issue_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "issue.date",
+        "csv_column": "issue_date"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000033"
+    },
+    {
+      "field_id": "tax_office_chief",
+      "label": "세무서장",
+      "source_detection_id": "det_000034",
+      "source_text": "김 포 세 무 서 장",
+      "value_type": "free_text.short",
+      "generator": "pool:id01_tax_office_chiefs",
+      "style_class": "style_tax_office_chief",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "tax.office.chief",
+        "csv_column": "tax_office_chief"
+      },
+      "required": true,
+      "notes": "ID-01 생산용 보정 필드. 원본/템플릿/렌더 전체 비교 기준으로 검수하며 crop 비교는 사용하지 않음.",
+      "bbox_label_id": "det_000034"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "id01_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/사업자등록증__ID-01/review/original_15-4/review.json"
+  }
+}

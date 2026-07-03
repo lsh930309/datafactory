@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-02T00:41:25.734628+00:00",
+  "updated_at": "2026-07-02T00:41:25.734628+00:00",
+  "doc_id": "CRD-01",
+  "title": "신용정보조회서(NICE·KCB) page 2",
+  "page_index": 2,
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/samples/original/개인신용정보서_page_002.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/authoring/templates/blank_page_002.png",
+  "image": {
+    "width": 734,
+    "height": 927
+  },
+  "fields": [
+    {
+      "field_id": "p2_issued_at",
+      "label": "발급일시",
+      "bbox": [
+        75,
+        104,
+        150,
+        18
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd01_profiles.p2_issued_at",
+      "style_class": "style_header",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "p2.issued.at",
+        "csv_column": "p2_issued_at"
+      },
+      "required": false,
+      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성"
+    },
+    {
+      "field_id": "p2_issue_number",
+      "label": "발급번호",
+      "bbox": [
+        75,
+        122,
+        180,
+        18
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd01_profiles.p2_issue_number",
+      "style_class": "style_header",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "p2.issue.number",
+        "csv_column": "p2_issue_number"
+      },
+      "required": false,
+      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성"
+    },
+    {
+      "field_id": "p2_page_number",
+      "label": "페이지",
+      "bbox": [
+        708,
+        113,
+        18,
+        18
+      ],
+      "bbox_format": "xywh",
+      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:crd01_profiles.p2_page_number",
+      "style_class": "style_header",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "p2.page.number",
+        "csv_column": "p2_page_number"
+      },
+      "required": false,
+      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성"
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "header",
+      "type": "common_header"
+    },
+    {
+      "group_id": "credit_rows",
+      "type": "table_rows",
+      "notes": "page1 account/loan rows are record-generated"
+    }
+  ],
+  "authoring_mode": "crd01_page_2_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate"
+}

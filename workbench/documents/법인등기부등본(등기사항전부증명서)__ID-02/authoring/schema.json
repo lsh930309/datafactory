@@ -1,0 +1,836 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:24:33.286213+00:00",
+  "doc_id": "ID-02",
+  "title": "법인등기부등본(등기사항전부증명서)",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/법인등기부등본(등기사항전부증명서)__ID-02/review/original_17_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/법인등기부등본(등기사항전부증명서)__ID-02/samples/original/17_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/법인등기부등본(등기사항전부증명서)__ID-02/inpaint/original_17_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1191,
+    "height": 1684
+  },
+  "fields": [
+    {
+      "field_id": "registry_serial_number",
+      "label": "등기부 일련번호",
+      "source_detection_id": "det_000003",
+      "source_text": "916661",
+      "value_type": "free_text.short",
+      "generator": "pattern:######",
+      "style_class": "style_registry_serial_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "registry.serial.number",
+        "csv_column": "registry_serial_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000003"
+    },
+    {
+      "field_id": "corporate_registration_number",
+      "label": "법인등록번호",
+      "source_detection_id": "det_000005",
+      "source_text": "134511-0395655",
+      "value_type": "free_text.short",
+      "generator": "pattern:######-#######",
+      "style_class": "style_corporate_registration_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "corporate.registration.number",
+        "csv_column": "corporate_registration_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000005"
+    },
+    {
+      "field_id": "corporate_name",
+      "label": "상호",
+      "source_detection_id": "det_000007",
+      "source_text": "한국답러닝 주식회사(Korea Deep Learning Inc.)",
+      "value_type": "company.name_ko",
+      "generator": "choice:한국딥러닝 주식회사|미래테크 주식회사|대한산업 주식회사|한빛솔루션 주식회사|주식회사 지엘어소시에이츠|메가스터디교육(주)|주식회사엔식품|주식회사엠케이컨텐츠",
+      "style_class": "style_corporate_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "corporate.name",
+        "csv_column": "corporate_name"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000007"
+    },
+    {
+      "field_id": "head_office_address",
+      "label": "본점 소재지",
+      "source_detection_id": "det_000009",
+      "source_text": "서울특별시서초구강남대로89길30,르헤브빌딩(반포동)",
+      "value_type": "address.ko",
+      "generator": "address.ko",
+      "style_class": "style_head_office_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "head.office.address",
+        "csv_column": "head_office_address"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000009"
+    },
+    {
+      "field_id": "public_notice_line_1",
+      "label": "공고방법 1행",
+      "source_detection_id": "det_000011",
+      "source_text": "당회사의공고는 회사의인터넷 홈페이지(www.koreadeep.com)에한",
+      "value_type": "company.name_ko",
+      "generator": "template:당회사의 공고는 회사의 인터넷 홈페이지(www.{{company.name_ko}}.co.kr)에 한다.",
+      "style_class": "style_public_notice_line_1",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "public.notice.line.1",
+        "csv_column": "public_notice_line_1"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000011"
+    },
+    {
+      "field_id": "public_notice_line_2",
+      "label": "공고방법 2행",
+      "source_detection_id": "det_000012",
+      "source_text": "다.다만 전산장애 또는그 밖의 부득이한 사유로 회사의 인터넷홈페",
+      "value_type": "company.name_ko",
+      "generator": "literal:다만 전산장애 또는 그 밖의 부득이한 사유로 회사의 인터넷 홈페이지에",
+      "style_class": "style_public_notice_line_2",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "public.notice.line.2",
+        "csv_column": "public_notice_line_2"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000012"
+    },
+    {
+      "field_id": "public_notice_line_3",
+      "label": "공고방법 3행",
+      "source_detection_id": "det_000013",
+      "source_text": "이지에 공고를 할 수 없을 때에는 서울특별시내에서발행하는 일간",
+      "value_type": "free_text.short",
+      "generator": "literal:공고를 할 수 없을 때에는 서울특별시내에서 발행하는 일간",
+      "style_class": "style_public_notice_line_3",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "public.notice.line.3",
+        "csv_column": "public_notice_line_3"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000013"
+    },
+    {
+      "field_id": "public_notice_line_4",
+      "label": "공고방법 4행",
+      "source_detection_id": "det_000014",
+      "source_text": "한국경제신문에게재한다",
+      "value_type": "free_text.short",
+      "generator": "choice:한국경제신문에 게재한다|매일경제신문에 게재한다|서울경제신문에 게재한다",
+      "style_class": "style_public_notice_line_4",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "public.notice.line.4",
+        "csv_column": "public_notice_line_4"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000014"
+    },
+    {
+      "field_id": "par_value",
+      "label": "1주의 금액",
+      "source_detection_id": "det_000016",
+      "source_text": "금100원",
+      "value_type": "money.krw",
+      "generator": "choice:금100원|금500원|금5,000원",
+      "style_class": "style_par_value",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "par.value",
+        "csv_column": "par_value"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000016"
+    },
+    {
+      "field_id": "authorized_shares",
+      "label": "발행할 주식의 총수",
+      "source_detection_id": "det_000017",
+      "source_text": "발행할주식의 총수2,000,000주",
+      "value_type": "free_text.short",
+      "generator": "choice:발행할주식의 총수2,000,000주|발행할주식의 총수1,000,000주",
+      "style_class": "style_authorized_shares",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "authorized.shares",
+        "csv_column": "authorized_shares"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000017"
+    },
+    {
+      "field_id": "issued_shares_before",
+      "label": "발행주식수 변경전",
+      "source_detection_id": "det_000024",
+      "source_text": "512,112주",
+      "value_type": "free_text.short",
+      "generator": "choice:512,112주|501,000주|532,597주",
+      "style_class": "style_issued_shares_before",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "issued.shares.before",
+        "csv_column": "issued_shares_before"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000024"
+    },
+    {
+      "field_id": "common_shares",
+      "label": "보통주식 수",
+      "source_detection_id": "det_000026",
+      "source_text": "501,000주",
+      "value_type": "free_text.short",
+      "generator": "choice:501,000주|450,000주|300,000주",
+      "style_class": "style_common_shares",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "common.shares",
+        "csv_column": "common_shares"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000026"
+    },
+    {
+      "field_id": "preferred_shares",
+      "label": "우선주식 수",
+      "source_detection_id": "det_000028",
+      "source_text": "11,112주",
+      "value_type": "free_text.short",
+      "generator": "choice:11,112주|20,485주|32,000주",
+      "style_class": "style_preferred_shares",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "preferred.shares",
+        "csv_column": "preferred_shares"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000028"
+    },
+    {
+      "field_id": "capital_amount",
+      "label": "자본금",
+      "source_detection_id": "det_000029",
+      "source_text": "751,211,200원",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_capital_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "capital.amount",
+        "csv_column": "capital_amount"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000029"
+    },
+    {
+      "field_id": "issued_shares_after",
+      "label": "변경 후 발행주식수",
+      "source_detection_id": "det_000031",
+      "source_text": "532,597주",
+      "value_type": "free_text.short",
+      "generator": "choice:532,597주|600,000주|750,000주",
+      "style_class": "style_issued_shares_after",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "issued.shares.after",
+        "csv_column": "issued_shares_after"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000031"
+    },
+    {
+      "field_id": "change_registration_date",
+      "label": "변경일",
+      "source_detection_id": "det_000032",
+      "source_text": "2025.08.27변경",
+      "value_type": "free_text.short",
+      "generator": "choice:2025.08.27변경|2024.06.21변경",
+      "style_class": "style_change_registration_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "change.registration.date",
+        "csv_column": "change_registration_date"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000032"
+    },
+    {
+      "field_id": "common_shares_after",
+      "label": "변경 후 보통주식",
+      "source_detection_id": "det_000034",
+      "source_text": "501,000주",
+      "value_type": "free_text.short",
+      "generator": "choice:501,000주|550,000주|700,000주",
+      "style_class": "style_common_shares_after",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "common.shares.after",
+        "csv_column": "common_shares_after"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000034"
+    },
+    {
+      "field_id": "registration_date",
+      "label": "등기일",
+      "source_detection_id": "det_000035",
+      "source_text": "2025.09.05등기",
+      "value_type": "free_text.short",
+      "generator": "choice:2025.09.05등기|2024.07.01등기",
+      "style_class": "style_registration_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "registration.date",
+        "csv_column": "registration_date"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000035"
+    },
+    {
+      "field_id": "preferred_shares_after",
+      "label": "변경 후 우선주식",
+      "source_detection_id": "det_000037",
+      "source_text": "11,112주",
+      "value_type": "free_text.short",
+      "generator": "choice:11,112주|20,485주|32,000주",
+      "style_class": "style_preferred_shares_after",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "preferred.shares.after",
+        "csv_column": "preferred_shares_after"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000037"
+    },
+    {
+      "field_id": "other_shares",
+      "label": "기타 주식수",
+      "source_detection_id": "det_000039",
+      "source_text": "20,485 주",
+      "value_type": "free_text.short",
+      "generator": "choice:20,485 주|10,000 주|15,000 주",
+      "style_class": "style_other_shares",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "other.shares",
+        "csv_column": "other_shares"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000039"
+    },
+    {
+      "field_id": "capital_increase_amount",
+      "label": "증가 자본금",
+      "source_detection_id": "det_000040",
+      "source_text": "금53,259,700원",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_capital_increase_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "capital.increase.amount",
+        "csv_column": "capital_increase_amount"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000040"
+    },
+    {
+      "field_id": "business_purpose_01",
+      "label": "사업목적 1",
+      "source_detection_id": "det_000043",
+      "source_text": "1.시스템 소프트웨어개발및 공급업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_01",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.01",
+        "csv_column": "business_purpose_01"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000043"
+    },
+    {
+      "field_id": "business_purpose_02",
+      "label": "사업목적 2",
+      "source_detection_id": "det_000044",
+      "source_text": "1.컴퓨터 시스템 통합 자문및구축서비스업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_02",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.02",
+        "csv_column": "business_purpose_02"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000044"
+    },
+    {
+      "field_id": "business_purpose_03",
+      "label": "사업목적 3",
+      "source_detection_id": "det_000045",
+      "source_text": "1.컴퓨터및 주변장치, 소프트웨어도소매업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_03",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.03",
+        "csv_column": "business_purpose_03"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000045"
+    },
+    {
+      "field_id": "business_purpose_04",
+      "label": "사업목적 4",
+      "source_detection_id": "det_000046",
+      "source_text": "1.컴퓨터프로그래밍서비스업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_04",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.04",
+        "csv_column": "business_purpose_04"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000046"
+    },
+    {
+      "field_id": "business_purpose_05",
+      "label": "사업목적 5",
+      "source_detection_id": "det_000047",
+      "source_text": "1.정보서비스업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_05",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.05",
+        "csv_column": "business_purpose_05"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000047"
+    },
+    {
+      "field_id": "business_purpose_06",
+      "label": "사업목적 6",
+      "source_detection_id": "det_000048",
+      "source_text": "1.전문, 과학 및 기술 서비스업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_06",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.06",
+        "csv_column": "business_purpose_06"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000048"
+    },
+    {
+      "field_id": "business_purpose_07",
+      "label": "사업목적 7",
+      "source_detection_id": "det_000049",
+      "source_text": "1.전문디자인업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_07",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.07",
+        "csv_column": "business_purpose_07"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000049"
+    },
+    {
+      "field_id": "business_purpose_08",
+      "label": "사업목적 8",
+      "source_detection_id": "det_000050",
+      "source_text": "1.위각호에관련된 부대사업일체",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_08",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.08",
+        "csv_column": "business_purpose_08"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000050"
+    },
+    {
+      "field_id": "business_purpose_09",
+      "label": "사업목적 9",
+      "source_detection_id": "det_000051",
+      "source_text": "1.전자감지장치제조업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_09",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.09",
+        "csv_column": "business_purpose_09"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000051"
+    },
+    {
+      "field_id": "business_purpose_10",
+      "label": "사업목적 10",
+      "source_detection_id": "det_000052",
+      "source_text": "1.전기전자공학연구개발업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_10",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.10",
+        "csv_column": "business_purpose_10"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000052"
+    },
+    {
+      "field_id": "business_purpose_11",
+      "label": "사업목적 11",
+      "source_detection_id": "det_000053",
+      "source_text": "1.전시 컨벤션 및 행사 대행업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_11",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.11",
+        "csv_column": "business_purpose_11"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000053"
+    },
+    {
+      "field_id": "business_purpose_12",
+      "label": "사업목적 12",
+      "source_detection_id": "det_000054",
+      "source_text": "1.자연과학 및융합연구개발업",
+      "value_type": "free_text.short",
+      "generator": "choice:1.시스템 소프트웨어개발및 공급업|1.컴퓨터 시스템 통합 자문및구축서비스업|1.전문, 과학 및 기술 서비스업|1.전시 컨벤션 및 행사 대행업",
+      "style_class": "style_business_purpose_12",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "business.purpose.12",
+        "csv_column": "business_purpose_12"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000054"
+    },
+    {
+      "field_id": "publication_number",
+      "label": "발행번호",
+      "source_detection_id": "det_000058",
+      "source_text": "발행번호 1100302008601090129100522001261606T1E9N1R1E1T0N1I1C",
+      "value_type": "free_text.short",
+      "generator": "template:발행번호 {{pattern:################################****}}",
+      "style_class": "style_publication_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "publication.number",
+        "csv_column": "publication_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000058"
+    },
+    {
+      "field_id": "verification_number",
+      "label": "발급확인번호",
+      "source_detection_id": "det_000059",
+      "source_text": "발급확인번호 6614-AAYU-CPVW",
+      "value_type": "free_text.short",
+      "generator": "pattern:발급확인번호 ####-AAAA-AAAA",
+      "style_class": "style_verification_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "verification.number",
+        "csv_column": "verification_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000059"
+    },
+    {
+      "field_id": "registry_issue_date",
+      "label": "발행일",
+      "source_detection_id": "det_000060",
+      "source_text": "발행일2025/09/19",
+      "value_type": "free_text.short",
+      "generator": "choice:발행일2025/09/19|발행일2026/06/29",
+      "style_class": "style_registry_issue_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "registry.issue.date",
+        "csv_column": "registry_issue_date"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000060"
+    },
+    {
+      "field_id": "page_number",
+      "label": "페이지",
+      "source_detection_id": "det_000061",
+      "source_text": "1/8",
+      "value_type": "free_text.short",
+      "generator": "choice:1/8|2/8|1/3",
+      "style_class": "style_page_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page.number",
+        "csv_column": "page_number"
+      },
+      "required": true,
+      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
+      "bbox_label_id": "det_000061"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "manual_20260702",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/법인등기부등본(등기사항전부증명서)__ID-02/review/original_17_page_001/review.json"
+  }
+}

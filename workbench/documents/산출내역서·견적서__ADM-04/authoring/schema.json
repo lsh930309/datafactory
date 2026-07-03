@@ -1,0 +1,3024 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-03T02:13:35.947426+00:00",
+  "updated_at": "2026-07-03T02:50:11.269970+00:00",
+  "doc_id": "ADM-04",
+  "title": "산출내역서·견적서",
+  "page_index": 0,
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/산출내역서·견적서__ADM-04/review/original_견적서_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/산출내역서·견적서__ADM-04/inpaint/original_견적서_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1190,
+    "height": 1684
+  },
+  "fields": [
+    {
+      "field_id": "top_contact_line",
+      "label": "상단 담당자/연락처",
+      "bbox_label_id": "det_000001",
+      "source_detection_id": "det_000001",
+      "source_text": "슬기계측기 법정장비 담당자:김남재 팀장(010-6319-1529)",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_top_contact_line",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "상단 담당자/연락처",
+        "csv_column": "상단 담당자/연락처"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "supplier_company_stamp_name",
+      "label": "발행처 인감명",
+      "bbox_label_id": "det_000006",
+      "source_detection_id": "det_000006",
+      "source_text": "슬기계측기",
+      "value_type": "company.name_ko",
+      "generator": "literal:",
+      "style_class": "style_supplier_company_stamp_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "발행처 인감명",
+        "csv_column": "발행처 인감명"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "recipient_company_name",
+      "label": "고객 업체명",
+      "bbox_label_id": "manual_1783045002652",
+      "source_detection_id": "manual_1783045002652",
+      "source_text": "",
+      "value_type": "company.name_ko",
+      "generator": "literal:",
+      "style_class": "style_recipient_company_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "고객 업체명",
+        "csv_column": "고객 업체명"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "recipient_title",
+      "label": "수신자",
+      "bbox_label_id": "det_000008",
+      "source_detection_id": "det_000008",
+      "source_text": "법정장비 담당자 님",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_recipient_title",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "수신자",
+        "csv_column": "수신자"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "supplier_business_registration_number",
+      "label": "발행처 사업자등록번호",
+      "bbox_label_id": "det_000010",
+      "source_detection_id": "det_000010",
+      "source_text": "105-07-16785",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_supplier_business_registration_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "발행처 사업자등록번호",
+        "csv_column": "발행처 사업자등록번호"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "estimate_date_text",
+      "label": "견적일자",
+      "bbox_label_id": "det_000012",
+      "source_detection_id": "det_000012",
+      "source_text": "2013년 일 월",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_estimate_date_text",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "견적일자",
+        "csv_column": "견적일자"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "supplier_company_name",
+      "label": "발행처 상호",
+      "bbox_label_id": "det_000016",
+      "source_detection_id": "det_000016",
+      "source_text": "슬기계측기",
+      "value_type": "company.name_ko",
+      "generator": "literal:",
+      "style_class": "style_supplier_company_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "발행처 상호",
+        "csv_column": "발행처 상호"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "payment_terms",
+      "label": "지불조건",
+      "bbox_label_id": "det_000018",
+      "source_detection_id": "det_000018",
+      "source_text": "현금결재",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_payment_terms",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "지불조건",
+        "csv_column": "지불조건"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "supplier_representative_name",
+      "label": "발행처 대표자",
+      "bbox_label_id": "det_000021",
+      "source_detection_id": "det_000021",
+      "source_text": "김남재",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_supplier_representative_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "발행처 대표자",
+        "csv_column": "발행처 대표자"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "delivery_period",
+      "label": "납품기간",
+      "bbox_label_id": "det_000023",
+      "source_detection_id": "det_000023",
+      "source_text": "발주 후 9일이내(검교정기간포함)",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_delivery_period",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "납품기간",
+        "csv_column": "납품기간"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "supplier_address",
+      "label": "발행처 주소",
+      "bbox_label_id": "det_000025",
+      "source_detection_id": "det_000025",
+      "source_text": "서울 종로구 장사동 27번지 1층",
+      "value_type": "address.ko",
+      "generator": "literal:",
+      "style_class": "style_supplier_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "발행처 주소",
+        "csv_column": "발행처 주소"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "supplier_business_type_item",
+      "label": "발행처 업태/종목",
+      "bbox_label_id": "det_000028",
+      "source_detection_id": "det_000028",
+      "source_text": "도소매/계측기,자동화부품",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_supplier_business_type_item",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "발행처 업태/종목",
+        "csv_column": "발행처 업태/종목"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "supplier_tel",
+      "label": "발행처 전화",
+      "bbox_label_id": "det_000031",
+      "source_detection_id": "det_000031",
+      "source_text": "02-2263–5826",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_supplier_tel",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "발행처 전화",
+        "csv_column": "발행처 전화"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "supplier_fax",
+      "label": "발행처 팩스",
+      "bbox_label_id": "det_000033",
+      "source_detection_id": "det_000033",
+      "source_text": "02-2272–5827",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_supplier_fax",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "발행처 팩스",
+        "csv_column": "발행처 팩스"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "estimate_subject",
+      "label": "견적 제목",
+      "bbox_label_id": "det_000037",
+      "source_detection_id": "det_000037",
+      "source_text": "전기제조 형식승인 법정장비 보유품목",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_estimate_subject",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "견적 제목",
+        "csv_column": "견적 제목"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "estimate_total_text",
+      "label": "견적 합계 문구",
+      "bbox_label_id": "det_000038",
+      "source_detection_id": "det_000038",
+      "source_text": "삼백사만원(W3,040,000--)부가세별도",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_estimate_total_text",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "견적 합계 문구",
+        "csv_column": "견적 합계 문구"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_number",
+      "label": "행 번호",
+      "bbox_label_id": "det_000047",
+      "source_detection_id": "det_000047",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_1_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호",
+        "csv_column": "행 번호"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_item_name",
+      "label": "행 품목",
+      "bbox_label_id": "det_000048",
+      "source_detection_id": "det_000048",
+      "source_text": "전압계(V METER)-O.5급",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_1_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목",
+        "csv_column": "행 품목"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_model",
+      "label": "행 모델",
+      "bbox_label_id": "det_000049",
+      "source_detection_id": "det_000049",
+      "source_text": "DW-6090",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_1_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델",
+        "csv_column": "행 모델"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_unit",
+      "label": "행 단위",
+      "bbox_label_id": "det_000050",
+      "source_detection_id": "det_000050",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_1_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위",
+        "csv_column": "행 단위"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_quantity",
+      "label": "행 수량",
+      "bbox_label_id": "det_000051",
+      "source_detection_id": "det_000051",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_1_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량",
+        "csv_column": "행 수량"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_unit_price",
+      "label": "행 단가",
+      "bbox_label_id": "det_000052",
+      "source_detection_id": "det_000052",
+      "source_text": "W450,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_1_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가",
+        "csv_column": "행 단가"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_calibration_fee",
+      "label": "행 검교정",
+      "bbox_label_id": "det_000053",
+      "source_detection_id": "det_000053",
+      "source_text": "W210,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_1_calibration_fee",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정",
+        "csv_column": "행 검교정"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_amount",
+      "label": "행 견적금액",
+      "bbox_label_id": "det_000054",
+      "source_detection_id": "det_000054",
+      "source_text": "W660,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_1_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액",
+        "csv_column": "행 견적금액"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_number",
+      "label": "행 번호[1]",
+      "bbox_label_id": "det_000055",
+      "source_detection_id": "det_000055",
+      "source_text": "2",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[1]",
+        "csv_column": "행 번호[1]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_item_name",
+      "label": "행 품목[1]",
+      "bbox_label_id": "det_000056",
+      "source_detection_id": "det_000056",
+      "source_text": "전류계(A METER)-O.5급",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_2_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[1]",
+        "csv_column": "행 품목[1]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_model",
+      "label": "행 모델[1]",
+      "bbox_label_id": "det_000057",
+      "source_detection_id": "det_000057",
+      "source_text": "DW-6090",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[1]",
+        "csv_column": "행 모델[1]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_unit",
+      "label": "행 단위[1]",
+      "bbox_label_id": "det_000058",
+      "source_detection_id": "det_000058",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[1]",
+        "csv_column": "행 단위[1]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_quantity",
+      "label": "행 수량[1]",
+      "bbox_label_id": "det_000059",
+      "source_detection_id": "det_000059",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[1]",
+        "csv_column": "행 수량[1]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_note",
+      "label": "행 비고",
+      "bbox_label_id": "det_000060",
+      "source_detection_id": "det_000060",
+      "source_text": "*한장비로 전압,전류,전력 공통사용",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_note",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 비고",
+        "csv_column": "행 비고"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_number",
+      "label": "행 번호[2]",
+      "bbox_label_id": "det_000061",
+      "source_detection_id": "det_000061",
+      "source_text": "3",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_3_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[2]",
+        "csv_column": "행 번호[2]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_item_name",
+      "label": "행 품목[2]",
+      "bbox_label_id": "det_000062",
+      "source_detection_id": "det_000062",
+      "source_text": "전력계(WMETER)-O.5급",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_3_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[2]",
+        "csv_column": "행 품목[2]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_model",
+      "label": "행 모델[2]",
+      "bbox_label_id": "det_000063",
+      "source_detection_id": "det_000063",
+      "source_text": "DW-6090",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_3_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[2]",
+        "csv_column": "행 모델[2]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_unit",
+      "label": "행 단위[2]",
+      "bbox_label_id": "det_000064",
+      "source_detection_id": "det_000064",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_3_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[2]",
+        "csv_column": "행 단위[2]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_quantity",
+      "label": "행 수량[2]",
+      "bbox_label_id": "det_000065",
+      "source_detection_id": "det_000065",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_3_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[2]",
+        "csv_column": "행 수량[2]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_note",
+      "label": "행 비고[1]",
+      "bbox_label_id": "det_000066",
+      "source_detection_id": "det_000066",
+      "source_text": "*검교정 전압,전류,전력3개모두",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_3_note",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 비고[1]",
+        "csv_column": "행 비고[1]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_number",
+      "label": "행 번호[3]",
+      "bbox_label_id": "det_000067",
+      "source_detection_id": "det_000067",
+      "source_text": "4",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_4_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[3]",
+        "csv_column": "행 번호[3]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_item_name",
+      "label": "행 품목[3]",
+      "bbox_label_id": "det_000068",
+      "source_detection_id": "det_000068",
+      "source_text": "절연저항계",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_4_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[3]",
+        "csv_column": "행 품목[3]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_model",
+      "label": "행 모델[3]",
+      "bbox_label_id": "det_000069",
+      "source_detection_id": "det_000069",
+      "source_text": "500V 1000M",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_4_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[3]",
+        "csv_column": "행 모델[3]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_unit",
+      "label": "행 단위[3]",
+      "bbox_label_id": "det_000070",
+      "source_detection_id": "det_000070",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_4_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[3]",
+        "csv_column": "행 단위[3]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_quantity",
+      "label": "행 수량[3]",
+      "bbox_label_id": "det_000071",
+      "source_detection_id": "det_000071",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_4_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[3]",
+        "csv_column": "행 수량[3]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_unit_price",
+      "label": "행 단가[1]",
+      "bbox_label_id": "det_000072",
+      "source_detection_id": "det_000072",
+      "source_text": "W70,000|",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_4_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가[1]",
+        "csv_column": "행 단가[1]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_calibration_fee",
+      "label": "행 검교정[1]",
+      "bbox_label_id": "det_000073",
+      "source_detection_id": "det_000073",
+      "source_text": "W90,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_4_calibration_fee",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정[1]",
+        "csv_column": "행 검교정[1]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_amount",
+      "label": "행 견적금액[1]",
+      "bbox_label_id": "det_000074",
+      "source_detection_id": "det_000074",
+      "source_text": "W160,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_4_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액[1]",
+        "csv_column": "행 견적금액[1]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_5_number",
+      "label": "행 번호[4]",
+      "bbox_label_id": "det_000075",
+      "source_detection_id": "det_000075",
+      "source_text": "5",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_5_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[4]",
+        "csv_column": "행 번호[4]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_5_item_name",
+      "label": "행 품목[4]",
+      "bbox_label_id": "det_000076",
+      "source_detection_id": "det_000076",
+      "source_text": "내전압시험기",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_5_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[4]",
+        "csv_column": "행 품목[4]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_5_model",
+      "label": "행 모델[4]",
+      "bbox_label_id": "det_000077",
+      "source_detection_id": "det_000077",
+      "source_text": "AC 5KV/HS",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_5_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[4]",
+        "csv_column": "행 모델[4]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_5_unit",
+      "label": "행 단위[4]",
+      "bbox_label_id": "det_000078",
+      "source_detection_id": "det_000078",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_5_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[4]",
+        "csv_column": "행 단위[4]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_5_quantity",
+      "label": "행 수량[4]",
+      "bbox_label_id": "det_000079",
+      "source_detection_id": "det_000079",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_5_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[4]",
+        "csv_column": "행 수량[4]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_5_unit_price",
+      "label": "행 단가[2]",
+      "bbox_label_id": "det_000080",
+      "source_detection_id": "det_000080",
+      "source_text": "W290,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_5_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가[2]",
+        "csv_column": "행 단가[2]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_5_calibration_fee",
+      "label": "행 검교정[2]",
+      "bbox_label_id": "det_000081",
+      "source_detection_id": "det_000081",
+      "source_text": "W80,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_5_calibration_fee",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정[2]",
+        "csv_column": "행 검교정[2]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_5_amount",
+      "label": "행 견적금액[2]",
+      "bbox_label_id": "det_000082",
+      "source_detection_id": "det_000082",
+      "source_text": "W370,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_5_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액[2]",
+        "csv_column": "행 견적금액[2]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_6_number",
+      "label": "행 번호[5]",
+      "bbox_label_id": "det_000083",
+      "source_detection_id": "det_000083",
+      "source_text": "6",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_6_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[5]",
+        "csv_column": "행 번호[5]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_6_item_name",
+      "label": "행 품목[5]",
+      "bbox_label_id": "det_000084",
+      "source_detection_id": "det_000084",
+      "source_text": "자동전압조정기",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_6_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[5]",
+        "csv_column": "행 품목[5]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_6_model",
+      "label": "행 모델[5]",
+      "bbox_label_id": "det_000085",
+      "source_detection_id": "det_000085",
+      "source_text": "AVR 3KVA",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_6_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[5]",
+        "csv_column": "행 모델[5]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_6_unit",
+      "label": "행 단위[5]",
+      "bbox_label_id": "det_000086",
+      "source_detection_id": "det_000086",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_6_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[5]",
+        "csv_column": "행 단위[5]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_6_quantity",
+      "label": "행 수량[5]",
+      "bbox_label_id": "det_000087",
+      "source_detection_id": "det_000087",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_6_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[5]",
+        "csv_column": "행 수량[5]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_6_unit_price",
+      "label": "행 단가[3]",
+      "bbox_label_id": "det_000088",
+      "source_detection_id": "det_000088",
+      "source_text": "W340,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_6_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가[3]",
+        "csv_column": "행 단가[3]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_6_calibration_fee",
+      "label": "행 검교정[3]",
+      "bbox_label_id": "det_000089",
+      "source_detection_id": "det_000089",
+      "source_text": "W70,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_6_calibration_fee",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정[3]",
+        "csv_column": "행 검교정[3]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_6_amount",
+      "label": "행 견적금액[3]",
+      "bbox_label_id": "det_000090",
+      "source_detection_id": "det_000090",
+      "source_text": "W410,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_6_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액[3]",
+        "csv_column": "행 견적금액[3]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_7_number",
+      "label": "행 번호[6]",
+      "bbox_label_id": "det_000091",
+      "source_detection_id": "det_000091",
+      "source_text": "7",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_7_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[6]",
+        "csv_column": "행 번호[6]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_7_item_name",
+      "label": "행 품목[6]",
+      "bbox_label_id": "det_000092",
+      "source_detection_id": "det_000092",
+      "source_text": "열전식온도계",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_7_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[6]",
+        "csv_column": "행 품목[6]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_7_model",
+      "label": "행 모델[6]",
+      "bbox_label_id": "det_000093",
+      "source_detection_id": "det_000093",
+      "source_text": "YF-160A",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_7_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[6]",
+        "csv_column": "행 모델[6]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_7_unit",
+      "label": "행 단위[6]",
+      "bbox_label_id": "det_000094",
+      "source_detection_id": "det_000094",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_7_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[6]",
+        "csv_column": "행 단위[6]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_7_quantity",
+      "label": "행 수량[6]",
+      "bbox_label_id": "det_000095",
+      "source_detection_id": "det_000095",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_7_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[6]",
+        "csv_column": "행 수량[6]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_7_unit_price",
+      "label": "행 단가[4]",
+      "bbox_label_id": "det_000096",
+      "source_detection_id": "det_000096",
+      "source_text": "W78,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_7_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가[4]",
+        "csv_column": "행 단가[4]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_7_calibration_fee",
+      "label": "행 검교정[4]",
+      "bbox_label_id": "det_000097",
+      "source_detection_id": "det_000097",
+      "source_text": "W55,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_7_calibration_fee",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정[4]",
+        "csv_column": "행 검교정[4]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_7_amount",
+      "label": "행 견적금액[4]",
+      "bbox_label_id": "det_000098",
+      "source_detection_id": "det_000098",
+      "source_text": "W133,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_7_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액[4]",
+        "csv_column": "행 견적금액[4]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_8_number",
+      "label": "행 번호[7]",
+      "bbox_label_id": "det_000099",
+      "source_detection_id": "det_000099",
+      "source_text": "8",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_8_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[7]",
+        "csv_column": "행 번호[7]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_8_item_name",
+      "label": "행 품목[7]",
+      "bbox_label_id": "det_000100",
+      "source_detection_id": "det_000100",
+      "source_text": "버어니어켈리퍼스",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_8_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[7]",
+        "csv_column": "행 품목[7]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_8_model",
+      "label": "행 모델[7]",
+      "bbox_label_id": "det_000101",
+      "source_detection_id": "det_000101",
+      "source_text": "150mm 0.05mm",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_8_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[7]",
+        "csv_column": "행 모델[7]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_8_unit",
+      "label": "행 단위[7]",
+      "bbox_label_id": "det_000102",
+      "source_detection_id": "det_000102",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_8_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[7]",
+        "csv_column": "행 단위[7]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_8_quantity",
+      "label": "행 수량[7]",
+      "bbox_label_id": "det_000103",
+      "source_detection_id": "det_000103",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_8_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[7]",
+        "csv_column": "행 수량[7]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_8_unit_price",
+      "label": "행 단가[5]",
+      "bbox_label_id": "det_000104",
+      "source_detection_id": "det_000104",
+      "source_text": "W45,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_8_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가[5]",
+        "csv_column": "행 단가[5]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_8_calibration_fee",
+      "label": "행 검교정[5]",
+      "bbox_label_id": "det_000105",
+      "source_detection_id": "det_000105",
+      "source_text": "W30,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_8_calibration_fee",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정[5]",
+        "csv_column": "행 검교정[5]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_8_amount",
+      "label": "행 견적금액[5]",
+      "bbox_label_id": "det_000106",
+      "source_detection_id": "det_000106",
+      "source_text": "W75,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_8_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액[5]",
+        "csv_column": "행 견적금액[5]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_9_number",
+      "label": "행 번호[8]",
+      "bbox_label_id": "det_000107",
+      "source_detection_id": "det_000107",
+      "source_text": "9",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_9_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[8]",
+        "csv_column": "행 번호[8]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_9_item_name",
+      "label": "행 품목[8]",
+      "bbox_label_id": "det_000108",
+      "source_detection_id": "det_000108",
+      "source_text": "마이크로메타25mm",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_9_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[8]",
+        "csv_column": "행 품목[8]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_9_model",
+      "label": "행 모델[8]",
+      "bbox_label_id": "det_000109",
+      "source_detection_id": "det_000109",
+      "source_text": "0-25mm(0.01)",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_9_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[8]",
+        "csv_column": "행 모델[8]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_9_unit",
+      "label": "행 단위[8]",
+      "bbox_label_id": "det_000110",
+      "source_detection_id": "det_000110",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_9_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[8]",
+        "csv_column": "행 단위[8]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_9_quantity",
+      "label": "행 수량[8]",
+      "bbox_label_id": "det_000111",
+      "source_detection_id": "det_000111",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_9_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[8]",
+        "csv_column": "행 수량[8]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_9_unit_price",
+      "label": "행 단가[6]",
+      "bbox_label_id": "det_000112",
+      "source_detection_id": "det_000112",
+      "source_text": "W45,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_9_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가[6]",
+        "csv_column": "행 단가[6]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_9_calibration_fee",
+      "label": "행 검교정[6]",
+      "bbox_label_id": "det_000113",
+      "source_detection_id": "det_000113",
+      "source_text": "W30,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_9_calibration_fee",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정[6]",
+        "csv_column": "행 검교정[6]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_9_amount",
+      "label": "행 견적금액[6]",
+      "bbox_label_id": "det_000114",
+      "source_detection_id": "det_000114",
+      "source_text": "W75,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_9_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액[6]",
+        "csv_column": "행 견적금액[6]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_10_number",
+      "label": "행 번호[9]",
+      "bbox_label_id": "det_000115",
+      "source_detection_id": "det_000115",
+      "source_text": "10",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_10_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[9]",
+        "csv_column": "행 번호[9]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_10_item_name",
+      "label": "행 품목[9]",
+      "bbox_label_id": "det_000116",
+      "source_detection_id": "det_000116",
+      "source_text": "토크게이지(법정검사용)",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_10_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[9]",
+        "csv_column": "행 품목[9]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_10_model",
+      "label": "행 모델[9]",
+      "bbox_label_id": "det_000117",
+      "source_detection_id": "det_000117",
+      "source_text": "2800kg/cm",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_10_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[9]",
+        "csv_column": "행 모델[9]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_10_unit",
+      "label": "행 단위[9]",
+      "bbox_label_id": "det_000118",
+      "source_detection_id": "det_000118",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_10_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[9]",
+        "csv_column": "행 단위[9]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_10_quantity",
+      "label": "행 수량[9]",
+      "bbox_label_id": "det_000119",
+      "source_detection_id": "det_000119",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_10_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[9]",
+        "csv_column": "행 수량[9]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_10_unit_price",
+      "label": "행 단가[7]",
+      "bbox_label_id": "det_000120",
+      "source_detection_id": "det_000120",
+      "source_text": "W620,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_10_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가[7]",
+        "csv_column": "행 단가[7]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_10_calibration_fee",
+      "label": "행 검교정[7]",
+      "bbox_label_id": "det_000121",
+      "source_detection_id": "det_000121",
+      "source_text": "W80,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_10_calibration_fee",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정[7]",
+        "csv_column": "행 검교정[7]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_10_amount",
+      "label": "행 견적금액[7]",
+      "bbox_label_id": "det_000122",
+      "source_detection_id": "det_000122",
+      "source_text": "W700,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_10_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액[7]",
+        "csv_column": "행 견적금액[7]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_11_number",
+      "label": "행 번호[10]",
+      "bbox_label_id": "det_000123",
+      "source_detection_id": "det_000123",
+      "source_text": "11",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_11_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[10]",
+        "csv_column": "행 번호[10]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_11_item_name",
+      "label": "행 품목[10]",
+      "bbox_label_id": "det_000124",
+      "source_detection_id": "det_000124",
+      "source_text": "토크드라이버",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_11_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[10]",
+        "csv_column": "행 품목[10]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_11_model",
+      "label": "행 모델[10]",
+      "bbox_label_id": "det_000125",
+      "source_detection_id": "det_000125",
+      "source_text": "LTDK(일본)",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_11_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[10]",
+        "csv_column": "행 모델[10]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_11_unit",
+      "label": "행 단위[10]",
+      "bbox_label_id": "det_000126",
+      "source_detection_id": "det_000126",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_11_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[10]",
+        "csv_column": "행 단위[10]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_11_quantity",
+      "label": "행 수량[10]",
+      "bbox_label_id": "det_000127",
+      "source_detection_id": "det_000127",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_11_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[10]",
+        "csv_column": "행 수량[10]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_11_unit_price",
+      "label": "행 단가[8]",
+      "bbox_label_id": "det_000128",
+      "source_detection_id": "det_000128",
+      "source_text": "W250,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_11_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가[8]",
+        "csv_column": "행 단가[8]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_11_calibration_fee",
+      "label": "행 검교정[8]",
+      "bbox_label_id": "det_000129",
+      "source_detection_id": "det_000129",
+      "source_text": "W47,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_11_calibration_fee",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정[8]",
+        "csv_column": "행 검교정[8]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_11_amount",
+      "label": "행 견적금액[8]",
+      "bbox_label_id": "det_000130",
+      "source_detection_id": "det_000130",
+      "source_text": "W297,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_11_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액[8]",
+        "csv_column": "행 견적금액[8]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_12_number",
+      "label": "행 번호[11]",
+      "bbox_label_id": "det_000131",
+      "source_detection_id": "det_000131",
+      "source_text": "12",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_12_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 번호[11]",
+        "csv_column": "행 번호[11]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_12_item_name",
+      "label": "행 품목[11]",
+      "bbox_label_id": "det_000132",
+      "source_detection_id": "det_000132",
+      "source_text": "테스트 핀/핑거",
+      "value_type": "person.name_ko",
+      "generator": "literal:",
+      "style_class": "style_line_12_item_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 품목[11]",
+        "csv_column": "행 품목[11]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_12_model",
+      "label": "행 모델[11]",
+      "bbox_label_id": "det_000133",
+      "source_detection_id": "det_000133",
+      "source_text": "SS-100",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_12_model",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 모델[11]",
+        "csv_column": "행 모델[11]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_12_unit",
+      "label": "행 단위[11]",
+      "bbox_label_id": "det_000134",
+      "source_detection_id": "det_000134",
+      "source_text": "SET",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_12_unit",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단위[11]",
+        "csv_column": "행 단위[11]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_12_quantity",
+      "label": "행 수량[11]",
+      "bbox_label_id": "det_000135",
+      "source_detection_id": "det_000135",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_12_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 수량[11]",
+        "csv_column": "행 수량[11]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_12_unit_price",
+      "label": "행 단가[9]",
+      "bbox_label_id": "det_000136",
+      "source_detection_id": "det_000136",
+      "source_text": "W160,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_12_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 단가[9]",
+        "csv_column": "행 단가[9]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_12_calibration_fee",
+      "label": "행 검교정[9]",
+      "bbox_label_id": "det_000137",
+      "source_detection_id": "det_000137",
+      "source_text": "교정제외품목",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_12_calibration_fee",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 검교정[9]",
+        "csv_column": "행 검교정[9]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_12_amount",
+      "label": "행 견적금액[9]",
+      "bbox_label_id": "det_000138",
+      "source_detection_id": "det_000138",
+      "source_text": "W160,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_12_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "행 견적금액[9]",
+        "csv_column": "행 견적금액[9]"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "bank_account_kb",
+      "label": "국민은행 계좌",
+      "bbox_label_id": "det_000139",
+      "source_detection_id": "det_000139",
+      "source_text": "국민:408801-01-167169",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_bank_account_kb",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "국민은행 계좌",
+        "csv_column": "국민은행 계좌"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "bank_account_holder",
+      "label": "예금주",
+      "bbox_label_id": "det_000140",
+      "source_detection_id": "det_000140",
+      "source_text": "예금주:김남재(슬기상사)",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_bank_account_holder",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "예금주",
+        "csv_column": "예금주"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "subtotal_amount",
+      "label": "소계",
+      "bbox_label_id": "det_000142",
+      "source_detection_id": "det_000142",
+      "source_text": "W3,040,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_subtotal_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "소계",
+        "csv_column": "소계"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "bank_account_shinhan",
+      "label": "신한은행 계좌",
+      "bbox_label_id": "det_000143",
+      "source_detection_id": "det_000143",
+      "source_text": "신한:110-219-132688",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_bank_account_shinhan",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신한은행 계좌",
+        "csv_column": "신한은행 계좌"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "bank_account_woori",
+      "label": "우리은행 계좌",
+      "bbox_label_id": "det_000144",
+      "source_detection_id": "det_000144",
+      "source_text": "우리:077-290768-13-101",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_bank_account_woori",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "우리은행 계좌",
+        "csv_column": "우리은행 계좌"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "vat_amount",
+      "label": "부가세",
+      "bbox_label_id": "det_000146",
+      "source_detection_id": "det_000146",
+      "source_text": "W304,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_vat_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "부가세",
+        "csv_column": "부가세"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "bank_account_enterprise_nonghyup",
+      "label": "기업/농협 계좌",
+      "bbox_label_id": "det_000147",
+      "source_detection_id": "det_000147",
+      "source_text": "기업:023-081255-04–017농협:1271-01-000873",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_bank_account_enterprise_nonghyup",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "기업/농협 계좌",
+        "csv_column": "기업/농협 계좌"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "grand_total_amount",
+      "label": "합계",
+      "bbox_label_id": "det_000149",
+      "source_detection_id": "det_000149",
+      "source_text": "W3,344,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_grand_total_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "합계",
+        "csv_column": "합계"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "company_description",
+      "label": "회사 설명",
+      "bbox_label_id": "det_000150",
+      "source_detection_id": "det_000150",
+      "source_text": "저희 슬기계측기 회사는 각종 검교정 대행 및 법정장비(시험장비) 등록 업체입니다.",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_company_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "회사 설명",
+        "csv_column": "회사 설명"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "footer_recipient_company_name",
+      "label": "하단 고객 업체명",
+      "bbox_label_id": "manual_1783045954214",
+      "source_detection_id": "manual_1783045954214",
+      "source_text": "",
+      "value_type": "company.name_ko",
+      "generator": "literal:",
+      "style_class": "style_footer_recipient_company_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "하단 고객 업체명",
+        "csv_column": "하단 고객 업체명"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "recipient_tel",
+      "label": "고객 전화번호",
+      "bbox_label_id": "manual_1783045959179",
+      "source_detection_id": "manual_1783045959179",
+      "source_text": "",
+      "value_type": "person.phone_kr",
+      "generator": "literal:",
+      "style_class": "style_recipient_tel",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "고객 전화번호",
+        "csv_column": "고객 전화번호"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "recipient_fax",
+      "label": "고객 팩스번호",
+      "bbox_label_id": "manual_1783045964113",
+      "source_detection_id": "manual_1783045964113",
+      "source_text": "",
+      "value_type": "person.phone_kr",
+      "generator": "literal:",
+      "style_class": "style_recipient_fax",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "고객 팩스번호",
+        "csv_column": "고객 팩스번호"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "recipient_mobile",
+      "label": "고객 휴대전화",
+      "bbox_label_id": "manual_1783045947279",
+      "source_detection_id": "manual_1783045947279",
+      "source_text": "",
+      "value_type": "person.phone_kr",
+      "generator": "literal:",
+      "style_class": "style_recipient_mobile",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "고객 휴대전화",
+        "csv_column": "고객 휴대전화"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "homepage_url",
+      "label": "홈페이지",
+      "bbox_label_id": "manual_1782796396598",
+      "source_detection_id": "manual_1782796396598",
+      "source_text": "www.sulgicom.co.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_homepage_url",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "홈페이지",
+        "csv_column": "홈페이지"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "email_address",
+      "label": "이메일",
+      "bbox_label_id": "manual_1782796412897",
+      "source_detection_id": "manual_1782796412897",
+      "source_text": "knjds@naver.com",
+      "value_type": "address.ko",
+      "generator": "literal:",
+      "style_class": "style_email_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "이메일",
+        "csv_column": "이메일"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "quote_validity_period",
+      "label": "견적유효기간",
+      "bbox_label_id": "manual_1782796478664",
+      "source_detection_id": "manual_1782796478664",
+      "source_text": "견적일로부터 2주",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_quote_validity_period",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "견적유효기간",
+        "csv_column": "견적유효기간"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "calibration_period",
+      "label": "검교정기간",
+      "bbox_label_id": "manual_1782796484230",
+      "source_detection_id": "manual_1782796484230",
+      "source_text": "발주일로부터 8일 이내",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_calibration_period",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "검교정기간",
+        "csv_column": "검교정기간"
+      },
+      "required": true,
+      "notes": "ADM-04 생산용 보정 필드. bbox는 기존 수동 authoring을 유지하고, 품목/합계는 record 기반으로 일관 생성.",
+      "bbox_status": "use"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "adm04_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/산출내역서·견적서__ADM-04/review/original_견적서_page_001/review.json"
+  }
+}

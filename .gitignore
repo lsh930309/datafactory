@@ -1,0 +1,66 @@
+# Runtime / local environment
+.env/
+.venv/
+.venv-ocr/
+.cache/
+.playwright-browsers/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Local orchestration / scratch / backups
+.bin/
+.omx/
+.codeboarding/
+tmp/
+
+# Frontend build/dependencies
+web/node_modules/
+web/dist/
+
+# Generated outputs and heavy document samples
+outputs/
+seed_samples/
+
+# Workbench: keep JSON state, exclude heavy source/render artifacts
+workbench/.trash/
+workbench/**/samples/
+workbench/**/samples/**
+workbench/**/inpaint/
+workbench/**/inpaint/**
+workbench/**/cleanup/
+workbench/**/cleanup/**
+workbench/**/authoring/render_preview/
+workbench/**/authoring/render_preview/**
+workbench/**/*.png
+workbench/**/*.jpg
+workbench/**/*.jpeg
+workbench/**/*.webp
+workbench/**/*.tif
+workbench/**/*.tiff
+workbench/**/*.bmp
+workbench/**/*.pdf
+
+# Generated visual assets are intentionally not committed.
+assets/**
+!assets/.gitkeep
+!assets/cleanroom_generated/.gitkeep
+!assets/logo_pool/.gitkeep
+!assets/map_pool/.gitkeep
+!assets/photo_pool/.gitkeep
+
+# External/local fonts are user-provided runtime assets.
+fonts/**
+!fonts/.gitkeep
+
+# Playwright CLI logs
+.playwright-cli/
+
+# OCR intermediate results are reproducible and may contain source-derived text.
+workbench/**/ocr/
+workbench/**/ocr/**
+workbench/**/ocr_recrop/
+workbench/**/ocr_recrop/**
+# Generated authoring previews (regenerable UI artifacts)
+workbench/**/authoring/live_preview/**

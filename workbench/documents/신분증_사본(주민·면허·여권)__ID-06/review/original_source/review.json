@@ -1,0 +1,418 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T02:21:35.917849+00:00",
+  "source_engine": "paddleocr",
+  "source_detections": "/Users/lsh930309/projects/dataFatory/workbench/documents/신분증_사본(주민·면허·여권)__ID-06/ocr/paddleocr/original_source/detections.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/신분증_사본(주민·면허·여권)__ID-06/samples/original/source.jpg",
+  "image": {
+    "width": 1248,
+    "height": 832
+  },
+  "summary": {
+    "total": 9,
+    "by_status": {
+      "use": 7,
+      "keep": 1,
+      "ignore": 1
+    },
+    "by_auto_type": {
+      "field_value": 7,
+      "static_label": 0,
+      "table_cell": 0,
+      "long_paragraph": 0,
+      "header_footer": 0,
+      "stamp_or_seal": 1,
+      "watermark": 0,
+      "unknown": 1
+    }
+  },
+  "labels": [
+    {
+      "id": "det_000001",
+      "text": "주민등록증",
+      "confidence": 0.9982551336288452,
+      "bbox": [
+        200,
+        103,
+        432,
+        92
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          200,
+          103
+        ],
+        [
+          632,
+          105
+        ],
+        [
+          632,
+          195
+        ],
+        [
+          200,
+          193
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "주민등록증",
+      "original_confidence": 0.9982551336288452,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000009",
+      "text": "장인",
+      "confidence": 0.9898291230201721,
+      "bbox": [
+        885,
+        656,
+        121,
+        75
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          885,
+          656
+        ],
+        [
+          1006,
+          656
+        ],
+        [
+          1006,
+          731
+        ],
+        [
+          885,
+          731
+        ]
+      ],
+      "status": "ignore",
+      "auto_type": "stamp_or_seal",
+      "reason": "red pixel ratio 0.28",
+      "locked": false,
+      "notes": "",
+      "original_text": "장인",
+      "original_confidence": 0.9898291230201721,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000002",
+      "text": "김민준()",
+      "confidence": null,
+      "bbox": [
+        190,
+        235,
+        430,
+        68
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          190,
+          235
+        ],
+        [
+          620,
+          235
+        ],
+        [
+          620,
+          303
+        ],
+        [
+          190,
+          303
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "김민준()",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000003",
+      "text": "950101-3456789",
+      "confidence": null,
+      "bbox": [
+        150,
+        338,
+        466,
+        52
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          150,
+          338
+        ],
+        [
+          616,
+          338
+        ],
+        [
+          616,
+          390
+        ],
+        [
+          150,
+          390
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "950101-3456789",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000004",
+      "text": "서울특별시 강남구 테혜란로 123",
+      "confidence": null,
+      "bbox": [
+        130,
+        430,
+        650,
+        52
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          130,
+          430
+        ],
+        [
+          780,
+          430
+        ],
+        [
+          780,
+          482
+        ],
+        [
+          130,
+          482
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "서울특별시 강남구 테혜란로 123",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000005",
+      "text": "456",
+      "confidence": null,
+      "bbox": [
+        130,
+        480,
+        200,
+        45
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          130,
+          480
+        ],
+        [
+          330,
+          480
+        ],
+        [
+          330,
+          525
+        ],
+        [
+          130,
+          525
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "456",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000006",
+      "text": "아파트 101동 505호",
+      "confidence": null,
+      "bbox": [
+        130,
+        520,
+        440,
+        54
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          130,
+          520
+        ],
+        [
+          570,
+          520
+        ],
+        [
+          570,
+          574
+        ],
+        [
+          130,
+          574
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "아파트 101동 505호",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000007",
+      "text": "2024.08.15.",
+      "confidence": null,
+      "bbox": [
+        560,
+        608,
+        290,
+        50
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          560,
+          608
+        ],
+        [
+          850,
+          608
+        ],
+        [
+          850,
+          658
+        ],
+        [
+          560,
+          658
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "2024.08.15.",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000008",
+      "text": "서울특별시 시장",
+      "confidence": null,
+      "bbox": [
+        468,
+        660,
+        390,
+        70
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          468,
+          660
+        ],
+        [
+          858,
+          660
+        ],
+        [
+          858,
+          730
+        ],
+        [
+          468,
+          730
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "서울특별시 시장",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    }
+  ]
+}

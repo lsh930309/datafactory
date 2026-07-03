@@ -1,0 +1,1127 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-30T11:49:12.318967+00:00",
+  "updated_at": "2026-07-03T03:18:12.660745+00:00",
+  "doc_id": "TRD-07",
+  "title": "발주서(PO)·거래명세서",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/발주서(PO)·거래명세서__TRD-07/review/original_발주서_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/발주서(PO)·거래명세서__TRD-07/inpaint/original_발주서_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1684,
+    "height": 1191
+  },
+  "fields": [
+    {
+      "field_id": "purchase_order_number",
+      "label": "발주번호",
+      "source_detection_id": "det_000006",
+      "source_text": "P201209-11",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_purchase_order_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "purchase.order.number",
+        "csv_column": "purchase_order_number"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000006",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "receiver_company_name",
+      "label": "수신 회사명",
+      "source_detection_id": "det_000008",
+      "source_text": "아남정밀",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_receiver_company_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "receiver.company.name",
+        "csv_column": "receiver_company_name"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000008",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sender_company_name",
+      "label": "발신 회사명",
+      "source_detection_id": "det_000010",
+      "source_text": "()고려이노테크",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_sender_company_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "sender.company.name",
+        "csv_column": "sender_company_name"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000010",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "receiver_contact_title",
+      "label": "수신 담당/직함",
+      "source_detection_id": "det_000015",
+      "source_text": "정창식 사장님",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_receiver_contact_title",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "receiver.contact.title",
+        "csv_column": "receiver_contact_title"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000015",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sender_department_contact",
+      "label": "발신 부서/담당",
+      "source_detection_id": "det_000017",
+      "source_text": "구매팀 정규현대리",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_sender_department_contact",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "sender.department.contact",
+        "csv_column": "sender_department_contact"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000017",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "receiver_tel",
+      "label": "수신 전화",
+      "source_detection_id": "det_000020",
+      "source_text": "010-3873-7636",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_receiver_tel",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "receiver.tel",
+        "csv_column": "receiver_tel"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000020",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sender_tel",
+      "label": "발신 전화",
+      "source_detection_id": "det_000022",
+      "source_text": "055-242-6196(328)",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_sender_tel",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "sender.tel",
+        "csv_column": "sender_tel"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000022",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "receiver_fax",
+      "label": "수신 FAX",
+      "source_detection_id": "det_000024",
+      "source_text": "055-246-2951",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_receiver_fax",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "receiver.fax",
+        "csv_column": "receiver_fax"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000024",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "receiver_email",
+      "label": "수신 이메일",
+      "source_detection_id": "manual_1783047953282",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool_record:trd07_purchase_order_records.receiver_email",
+      "style_class": "style_receiver_email",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "receiver.email",
+        "csv_column": "receiver_email"
+      },
+      "required": true,
+      "notes": "TRD-07 수신처 e-mail 값 필드. 기존 수동 authoring에 병합 추가.",
+      "bbox_label_id": "manual_1783047953282",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sender_fax",
+      "label": "발신 FAX",
+      "source_detection_id": "det_000026",
+      "source_text": "055-245-3123",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_sender_fax",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "sender.fax",
+        "csv_column": "sender_fax"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000026",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sender_email",
+      "label": "발신 이메일",
+      "source_detection_id": "det_000030",
+      "source_text": "gyuhyun@kinno.co.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_sender_email",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "sender.email",
+        "csv_column": "sender_email"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000030",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "receiver_address",
+      "label": "수신 주소",
+      "source_detection_id": "det_000032",
+      "source_text": "경남창원시마산합포구 문화동3길14",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_receiver_address",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "receiver.address",
+        "csv_column": "receiver_address"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000032",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sender_address",
+      "label": "발신 주소",
+      "source_detection_id": "det_000034",
+      "source_text": "경남창원시마산합포구진북면산단1길5",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_sender_address",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "sender.address",
+        "csv_column": "sender_address"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000034",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "prepared_date",
+      "label": "작성일",
+      "source_detection_id": "det_000035",
+      "source_text": "12/9",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_prepared_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "prepared.date",
+        "csv_column": "prepared_date"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000035",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "reviewed_date",
+      "label": "검토일",
+      "source_detection_id": "det_000036",
+      "source_text": "12/9",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_reviewed_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "reviewed.date",
+        "csv_column": "reviewed_date"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000036",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "approved_date",
+      "label": "승인일",
+      "source_detection_id": "det_000037",
+      "source_text": "12/9",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_approved_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "approved.date",
+        "csv_column": "approved_date"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000037",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_number",
+      "label": "품목 1 번호",
+      "source_detection_id": "det_000053",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_1_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.1.number",
+        "csv_column": "line_1_number"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000053",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_item_description",
+      "label": "품목 1 품명/규격",
+      "source_detection_id": "det_000054",
+      "source_text": "Side Retainer Core 직경 및 길이 검사용Jig 폭76.3mm*길이 10Omm",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_1_item_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.1.item.description",
+        "csv_column": "line_1_item_description"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000054",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_quantity",
+      "label": "품목 1 수량",
+      "source_detection_id": "det_000060",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_1_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.1.quantity",
+        "csv_column": "line_1_quantity"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000060",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_unit_price",
+      "label": "품목 1 단가",
+      "source_detection_id": "det_000061",
+      "source_text": "60,000",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_1_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.1.unit.price",
+        "csv_column": "line_1_unit_price"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000061",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_amount",
+      "label": "품목 1 금액",
+      "source_detection_id": "det_000062",
+      "source_text": "60,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_1_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.1.amount",
+        "csv_column": "line_1_amount"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000062",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_1_due_date",
+      "label": "품목 1 납기",
+      "source_detection_id": "det_000063",
+      "source_text": "ASAP",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_line_1_due_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.1.due.date",
+        "csv_column": "line_1_due_date"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000063",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_number",
+      "label": "품목 2 번호",
+      "source_detection_id": "det_000064",
+      "source_text": "2",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.2.number",
+        "csv_column": "line_2_number"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000064",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_item_description",
+      "label": "품목 2 품명/규격",
+      "source_detection_id": "det_000065",
+      "source_text": "Side Retainer Core 직경 및 길이 검사용Jig폭 77.7mm*길이10Omm",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_item_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.2.item.description",
+        "csv_column": "line_2_item_description"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000065",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_quantity",
+      "label": "품목 2 수량",
+      "source_detection_id": "det_000071",
+      "source_text": "-",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.2.quantity",
+        "csv_column": "line_2_quantity"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000071",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_unit_price",
+      "label": "품목 2 단가",
+      "source_detection_id": "det_000072",
+      "source_text": "60,000",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.2.unit.price",
+        "csv_column": "line_2_unit_price"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000072",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_amount",
+      "label": "품목 2 금액",
+      "source_detection_id": "det_000073",
+      "source_text": "60,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_2_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.2.amount",
+        "csv_column": "line_2_amount"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000073",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_due_date",
+      "label": "품목 2 납기",
+      "source_detection_id": "det_000074",
+      "source_text": "ASAP",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_line_2_due_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.2.due.date",
+        "csv_column": "line_2_due_date"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000074",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_2_remark",
+      "label": "품목 2 비고",
+      "source_detection_id": "det_000075",
+      "source_text": "Core 직경 및 길이 검사용",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_2_remark",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "wrap",
+        "overflow": "wrap",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.2.remark",
+        "csv_column": "line_2_remark"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000075",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_number",
+      "label": "품목 3 번호",
+      "source_detection_id": "det_000076",
+      "source_text": "3",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_3_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.3.number",
+        "csv_column": "line_3_number"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000076",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_item_description",
+      "label": "품목 3 품명/규격",
+      "source_detection_id": "det_000077",
+      "source_text": "Side Retainer Core 직경 및 길이 검사용Jig폭 76.3mm*길이 12Omm",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_3_item_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.3.item.description",
+        "csv_column": "line_3_item_description"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000077",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_quantity",
+      "label": "품목 3 수량",
+      "source_detection_id": "det_000082",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_3_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.3.quantity",
+        "csv_column": "line_3_quantity"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000082",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_unit_price",
+      "label": "품목 3 단가",
+      "source_detection_id": "det_000083",
+      "source_text": "60,000",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_3_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.3.unit.price",
+        "csv_column": "line_3_unit_price"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000083",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_amount",
+      "label": "품목 3 금액",
+      "source_detection_id": "det_000084",
+      "source_text": "60,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_3_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.3.amount",
+        "csv_column": "line_3_amount"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000084",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_3_due_date",
+      "label": "품목 3 납기",
+      "source_detection_id": "det_000085",
+      "source_text": "ASAP",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_line_3_due_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.3.due.date",
+        "csv_column": "line_3_due_date"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000085",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_number",
+      "label": "품목 4 번호",
+      "source_detection_id": "det_000087",
+      "source_text": "4",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_4_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.4.number",
+        "csv_column": "line_4_number"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000087",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_item_description",
+      "label": "품목 4 품명/규격",
+      "source_detection_id": "det_000088",
+      "source_text": "Side Retainer Core 직경 및 길이 검사용Jig폭 77.7mm*길이 12Omm",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_4_item_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.4.item.description",
+        "csv_column": "line_4_item_description"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000088",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_quantity",
+      "label": "품목 4 수량",
+      "source_detection_id": "det_000093",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_4_quantity",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.4.quantity",
+        "csv_column": "line_4_quantity"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000093",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_unit_price",
+      "label": "품목 4 단가",
+      "source_detection_id": "det_000094",
+      "source_text": "60,000",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_line_4_unit_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.4.unit.price",
+        "csv_column": "line_4_unit_price"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000094",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_amount",
+      "label": "품목 4 금액",
+      "source_detection_id": "det_000095",
+      "source_text": "60,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_line_4_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.4.amount",
+        "csv_column": "line_4_amount"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000095",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "line_4_due_date",
+      "label": "품목 4 납기",
+      "source_detection_id": "det_000096",
+      "source_text": "ASAP",
+      "value_type": "date.kr",
+      "generator": "literal:",
+      "style_class": "style_line_4_due_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "line.4.due.date",
+        "csv_column": "line_4_due_date"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000096",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "shipping_address",
+      "label": "발송지",
+      "source_detection_id": "det_000097",
+      "source_text": "발송지: 경남 창원시 마산합포구 진북면 산단1길5",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_shipping_address",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "shipping.address",
+        "csv_column": "shipping_address"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000097",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "delivery_site_name",
+      "label": "납품처",
+      "source_detection_id": "det_000098",
+      "source_text": "고려이노테크 진북공장",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_delivery_site_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "delivery.site.name",
+        "csv_column": "delivery_site_name"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000098",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "supply_total_amount",
+      "label": "공급가 합계",
+      "source_detection_id": "det_000100",
+      "source_text": "240,000",
+      "value_type": "money.krw",
+      "generator": "literal:",
+      "style_class": "style_supply_total_amount",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "supply.total.amount",
+        "csv_column": "supply_total_amount"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000100",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "form_code",
+      "label": "양식 코드",
+      "source_detection_id": "det_000107",
+      "source_text": "KIT–QP-S09-01_ReV.0",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_form_code",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "form.code",
+        "csv_column": "form_code"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000107",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issuer_company_footer",
+      "label": "하단 발주회사",
+      "source_detection_id": "det_000108",
+      "source_text": "(주)고려이노테크",
+      "value_type": "free_text.short",
+      "generator": "literal:",
+      "style_class": "style_issuer_company_footer",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "issuer.company.footer",
+        "csv_column": "issuer_company_footer"
+      },
+      "required": true,
+      "notes": "TRD-07 발주서 생산용 보정 필드. 발주처/수신처/품목/수량/단가/금액/합계를 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000108",
+      "bbox_status": "use"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "trd07_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/발주서(PO)·거래명세서__TRD-07/review/original_발주서_page_001/review.json"
+  }
+}

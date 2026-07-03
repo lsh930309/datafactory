@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:24:34.029881+00:00",
+  "doc_id": "ID-06",
+  "title": "신분증 사본(주민등록증)",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/신분증_사본(주민·면허·여권)__ID-06/review/original_source/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/신분증_사본(주민·면허·여권)__ID-06/samples/original/source.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/신분증_사본(주민·면허·여권)__ID-06/inpaint/original_source/lama/inpainted_lama.png",
+  "image": {
+    "width": 1248,
+    "height": 832
+  },
+  "fields": [
+    {
+      "field_id": "resident_name",
+      "label": "성명",
+      "source_detection_id": "det_000002",
+      "source_text": "김민준()",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id06_resident_id_records.resident_name",
+      "style_class": "style_resident_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "resident.name",
+        "csv_column": "resident_name"
+      },
+      "required": true,
+      "notes": "ID-06 주민등록증 사본 생산용 보정 필드. 이름/주민번호/주소/발급일/발급기관을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000002"
+    },
+    {
+      "field_id": "resident_registration_number",
+      "label": "주민등록번호",
+      "source_detection_id": "det_000003",
+      "source_text": "950101-3456789",
+      "value_type": "person.rrn",
+      "generator": "pool_record:id06_resident_id_records.resident_registration_number",
+      "style_class": "style_resident_registration_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "resident.registration.number",
+        "csv_column": "resident_registration_number"
+      },
+      "required": true,
+      "notes": "ID-06 주민등록증 사본 생산용 보정 필드. 이름/주민번호/주소/발급일/발급기관을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000003"
+    },
+    {
+      "field_id": "resident_address_line1",
+      "label": "주소 1행",
+      "source_detection_id": "det_000004",
+      "source_text": "서울특별시 강남구 테혜란로 123",
+      "value_type": "address.ko",
+      "generator": "pool_record:id06_resident_id_records.resident_address_line1",
+      "style_class": "style_resident_address_line1",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "resident.address.line1",
+        "csv_column": "resident_address_line1"
+      },
+      "required": true,
+      "notes": "ID-06 주민등록증 사본 생산용 보정 필드. 이름/주민번호/주소/발급일/발급기관을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000004"
+    },
+    {
+      "field_id": "resident_address_line2",
+      "label": "주소 2행",
+      "source_detection_id": "det_000005",
+      "source_text": "456",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id06_resident_id_records.resident_address_line2",
+      "style_class": "style_resident_address_line2",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "resident.address.line2",
+        "csv_column": "resident_address_line2"
+      },
+      "required": true,
+      "notes": "ID-06 주민등록증 사본 생산용 보정 필드. 이름/주민번호/주소/발급일/발급기관을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000005"
+    },
+    {
+      "field_id": "resident_address_line3",
+      "label": "주소 3행",
+      "source_detection_id": "det_000006",
+      "source_text": "아파트 101동 505호",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id06_resident_id_records.resident_address_line3",
+      "style_class": "style_resident_address_line3",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "resident.address.line3",
+        "csv_column": "resident_address_line3"
+      },
+      "required": true,
+      "notes": "ID-06 주민등록증 사본 생산용 보정 필드. 이름/주민번호/주소/발급일/발급기관을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000006"
+    },
+    {
+      "field_id": "id_issue_date",
+      "label": "발급일",
+      "source_detection_id": "det_000007",
+      "source_text": "2024.08.15.",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id06_resident_id_records.id_issue_date",
+      "style_class": "style_id_issue_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "id.issue.date",
+        "csv_column": "id_issue_date"
+      },
+      "required": true,
+      "notes": "ID-06 주민등록증 사본 생산용 보정 필드. 이름/주민번호/주소/발급일/발급기관을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000007"
+    },
+    {
+      "field_id": "id_issuer",
+      "label": "발급기관",
+      "source_detection_id": "det_000008",
+      "source_text": "서울특별시 시장",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id06_resident_id_records.id_issuer",
+      "style_class": "style_id_issuer",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "id.issuer",
+        "csv_column": "id_issuer"
+      },
+      "required": true,
+      "notes": "ID-06 주민등록증 사본 생산용 보정 필드. 이름/주민번호/주소/발급일/발급기관을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000008"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "id06_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/신분증_사본(주민·면허·여권)__ID-06/review/original_source/review.json"
+  }
+}

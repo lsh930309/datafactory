@@ -1,0 +1,595 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T07:07:56.847094+00:00",
+  "doc_id": "FIN-05",
+  "title": "근로소득 원천징수영수증",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/review/original_이승훈님_원천징수영수증(2023년)_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/이승훈님_원천징수영수증(2023년)_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/inpaint/original_이승훈님_원천징수영수증(2023년)_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1190,
+    "height": 1684
+  },
+  "fields": [
+    {
+      "field_id": "employer_name",
+      "label": "징수의무자 상호",
+      "source_detection_id": "det_000026",
+      "source_text": "메가스터디교육(주)",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:fin05_withholding_records.employer_name",
+      "style_class": "style_employer_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employer.name",
+        "csv_column": "employer_name"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000026"
+    },
+    {
+      "field_id": "employer_representative_name",
+      "label": "대표자",
+      "source_detection_id": "det_000028",
+      "source_text": "손성은",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin05_withholding_records.employer_representative_name",
+      "style_class": "style_employer_representative_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employer.representative.name",
+        "csv_column": "employer_representative_name"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000028"
+    },
+    {
+      "field_id": "employer_business_registration_number",
+      "label": "사업자등록번호",
+      "source_detection_id": "det_000030",
+      "source_text": "780-87-00034",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin05_withholding_records.employer_business_registration_number",
+      "style_class": "style_employer_business_registration_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employer.business.registration.number",
+        "csv_column": "employer_business_registration_number"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000030"
+    },
+    {
+      "field_id": "employer_address",
+      "label": "사업장 소재지",
+      "source_detection_id": "det_000036",
+      "source_text": "서울특별시 서초구 효령로321(서초동,덕원빌딩)",
+      "value_type": "address.ko",
+      "generator": "pool_record:fin05_withholding_records.employer_address",
+      "style_class": "style_employer_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employer.address",
+        "csv_column": "employer_address"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000036"
+    },
+    {
+      "field_id": "employee_name",
+      "label": "소득자 성명",
+      "source_detection_id": "det_000039",
+      "source_text": "이승훈",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin05_withholding_records.employee_name",
+      "style_class": "style_employee_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employee.name",
+        "csv_column": "employee_name"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000039"
+    },
+    {
+      "field_id": "employee_rrn",
+      "label": "주민등록번호",
+      "source_detection_id": "det_000041",
+      "source_text": "930309-1069114",
+      "value_type": "person.rrn",
+      "generator": "pool_record:fin05_withholding_records.employee_rrn",
+      "style_class": "style_employee_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employee.rrn",
+        "csv_column": "employee_rrn"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000041"
+    },
+    {
+      "field_id": "workplace_business_registration_number",
+      "label": "근무처 사업자번호",
+      "source_detection_id": "det_000055",
+      "source_text": "780-87-00034",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin05_withholding_records.workplace_business_registration_number",
+      "style_class": "style_workplace_business_registration_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "workplace.business.registration.number",
+        "csv_column": "workplace_business_registration_number"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000055"
+    },
+    {
+      "field_id": "employment_period",
+      "label": "근무기간",
+      "source_detection_id": "det_000058",
+      "source_text": "2023.01.01 ~2023.07.07",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin05_withholding_records.employment_period",
+      "style_class": "style_employment_period",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employment.period",
+        "csv_column": "employment_period"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000058"
+    },
+    {
+      "field_id": "gross_salary_current",
+      "label": "총급여 현재",
+      "source_detection_id": "det_000062",
+      "source_text": "12,063, 480",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.gross_salary_current",
+      "style_class": "style_gross_salary_current",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "gross.salary.current",
+        "csv_column": "gross_salary_current"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000062"
+    },
+    {
+      "field_id": "gross_salary_total",
+      "label": "총급여 합계",
+      "source_detection_id": "det_000063",
+      "source_text": "12,063,480",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.gross_salary_total",
+      "style_class": "style_gross_salary_total",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "gross.salary.total",
+        "csv_column": "gross_salary_total"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000063"
+    },
+    {
+      "field_id": "taxable_income_current",
+      "label": "과세소득 현재",
+      "source_detection_id": "det_000072",
+      "source_text": "12,063,480",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.taxable_income_current",
+      "style_class": "style_taxable_income_current",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "taxable.income.current",
+        "csv_column": "taxable_income_current"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000072"
+    },
+    {
+      "field_id": "taxable_income_total",
+      "label": "과세소득 합계",
+      "source_detection_id": "det_000073",
+      "source_text": "12,063,480",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.taxable_income_total",
+      "style_class": "style_taxable_income_total",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "taxable.income.total",
+        "csv_column": "taxable_income_total"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000073"
+    },
+    {
+      "field_id": "income_tax_paid",
+      "label": "기납부 소득세",
+      "source_detection_id": "det_000094",
+      "source_text": "119,100",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.income_tax_paid",
+      "style_class": "style_income_tax_paid",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "income.tax.paid",
+        "csv_column": "income_tax_paid"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000094"
+    },
+    {
+      "field_id": "local_income_tax_paid",
+      "label": "기납부 지방소득세",
+      "source_detection_id": "det_000095",
+      "source_text": "11,880",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.local_income_tax_paid",
+      "style_class": "style_local_income_tax_paid",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "local.income.tax.paid",
+        "csv_column": "local_income_tax_paid"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000095"
+    },
+    {
+      "field_id": "income_tax_refund",
+      "label": "차감징수 소득세",
+      "source_detection_id": "det_000099",
+      "source_text": "-119,100",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.income_tax_refund",
+      "style_class": "style_income_tax_refund",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "income.tax.refund",
+        "csv_column": "income_tax_refund"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000099"
+    },
+    {
+      "field_id": "local_income_tax_refund",
+      "label": "차감징수 지방소득세",
+      "source_detection_id": "det_000100",
+      "source_text": "-11,880",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.local_income_tax_refund",
+      "style_class": "style_local_income_tax_refund",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "local.income.tax.refund",
+        "csv_column": "local_income_tax_refund"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000100"
+    },
+    {
+      "field_id": "determined_income_tax_current",
+      "label": "결정세액 소득세 현재",
+      "source_detection_id": "det_000102",
+      "source_text": "482,340",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.determined_income_tax_current",
+      "style_class": "style_determined_income_tax_current",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "determined.income.tax.current",
+        "csv_column": "determined_income_tax_current"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000102"
+    },
+    {
+      "field_id": "determined_income_tax_total",
+      "label": "결정세액 소득세 합계",
+      "source_detection_id": "det_000104",
+      "source_text": "482,340",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.determined_income_tax_total",
+      "style_class": "style_determined_income_tax_total",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "determined.income.tax.total",
+        "csv_column": "determined_income_tax_total"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000104"
+    },
+    {
+      "field_id": "determined_local_tax_current",
+      "label": "결정세액 지방소득세 현재",
+      "source_detection_id": "det_000107",
+      "source_text": "108,540",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.determined_local_tax_current",
+      "style_class": "style_determined_local_tax_current",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "determined.local.tax.current",
+        "csv_column": "determined_local_tax_current"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000107"
+    },
+    {
+      "field_id": "determined_local_tax_total",
+      "label": "결정세액 지방소득세 합계",
+      "source_detection_id": "det_000109",
+      "source_text": "108,540",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.determined_local_tax_total",
+      "style_class": "style_determined_local_tax_total",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "determined.local.tax.total",
+        "csv_column": "determined_local_tax_total"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000109"
+    },
+    {
+      "field_id": "receipt_date",
+      "label": "영수일",
+      "source_detection_id": "det_000110",
+      "source_text": "2023 년 07월 31일",
+      "value_type": "date.kr",
+      "generator": "pool_record:fin05_withholding_records.receipt_date",
+      "style_class": "style_receipt_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "receipt.date",
+        "csv_column": "receipt_date"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000110"
+    },
+    {
+      "field_id": "tax_due_income",
+      "label": "납부특례 소득세",
+      "source_detection_id": "det_000112",
+      "source_text": "456,540",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.tax_due_income",
+      "style_class": "style_tax_due_income",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "tax.due.income",
+        "csv_column": "tax_due_income"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000112"
+    },
+    {
+      "field_id": "tax_due_total",
+      "label": "납부특례 합계",
+      "source_detection_id": "det_000114",
+      "source_text": "456,540",
+      "value_type": "money.krw",
+      "generator": "pool_record:fin05_withholding_records.tax_due_total",
+      "style_class": "style_tax_due_total",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "tax.due.total",
+        "csv_column": "tax_due_total"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000114"
+    },
+    {
+      "field_id": "withholding_agent_name",
+      "label": "원천징수의무자",
+      "source_detection_id": "det_000118",
+      "source_text": "메가스터디교육(주)",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:fin05_withholding_records.withholding_agent_name",
+      "style_class": "style_withholding_agent_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "withholding.agent.name",
+        "csv_column": "withholding_agent_name"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000118"
+    },
+    {
+      "field_id": "tax_office_recipient",
+      "label": "세무서장 귀하",
+      "source_detection_id": "det_000122",
+      "source_text": "서초세무서장귀하",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin05_withholding_records.tax_office_recipient",
+      "style_class": "style_tax_office_recipient",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "tax.office.recipient",
+        "csv_column": "tax_office_recipient"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "det_000122"
+    },
+    {
+      "field_id": "workplace_name",
+      "label": "근무처명",
+      "source_detection_id": "manual_fin05_workplace_name",
+      "source_text": "메가스터디교육(주)",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:fin05_withholding_records.workplace_name",
+      "style_class": "style_workplace_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employment.workplace.name",
+        "csv_column": "workplace_name"
+      },
+      "required": true,
+      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
+      "bbox_label_id": "manual_fin05_workplace_name"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "fin05_pipeline_ready_20260702_page1",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/review/original_이승훈님_원천징수영수증(2023년)_page_001/review.json"
+  }
+}

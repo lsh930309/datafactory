@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-03",
+  "title": "납세증명서(국세·지방세 완납)",
+  "folder": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03",
+  "registry": {
+    "docId": "FIN-03",
+    "title": "납세증명서(국세·지방세 완납)",
+    "issuer": "정부/공공",
+    "genre": "증명",
+    "structure": "정형양식",
+    "modality": "스캔이미지",
+    "sensitivity": "금융정보",
+    "fields": "체납유무·발급일·유효기간",
+    "notes": "",
+    "hasPersonalInfo": "포함",
+    "personalInfoDetail": "납세자, 사업자번호, 유효기간, 주소",
+    "validationRules": "발급일 유효성, 문서번호, 필수필드, 직인 또는 확인번호",
+    "validationRuleCodes": "VAL-001, VAL-002, VAL-003, VAL-009, VAL-011, VAL-013",
+    "writingMethod": "인쇄",
+    "aliases": [
+      "납세증명서(국세·지방세 완납)",
+      "납세증명서(국세)",
+      "지방세 납세증명서"
+    ],
+    "workflowIds": [
+      "BANK-01",
+      "GOV-04"
+    ],
+    "domains": [
+      "공공·행정 (B2G)",
+      "금융 - 은행 (여신·신용·외환)"
+    ],
+    "isFirstPriority": false
+  },
+  "source_seed_folders": [
+    "seed_samples/납세증명서(국세·지방세_완납)"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/samples/original/국세납세증명서.pdf",
+      "source": "seed_samples/납세증명서(국세·지방세_완납)/국세납세증명서.pdf"
+    },
+    {
+      "path": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/samples/original/국세납세증명서_page_001.jpg",
+      "source": "seed_samples/납세증명서(국세·지방세_완납)/국세납세증명서_page_001.jpg"
+    }
+  ],
+  "status": "authoring_done",
+  "created_at": "2026-06-29T04:37:00.288991+00:00",
+  "updated_at": "2026-07-02T04:25:03.881443+00:00",
+  "artifacts": {
+    "ocr": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/ocr/paddleocr/precise/original_국세납세증명서_page_001/detections.json",
+    "review": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/review/original_국세납세증명서_page_001/review.json",
+    "inpaint": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/inpaint/original_국세납세증명서_page_001/lama/comparison_lama.png",
+    "authoring": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/authoring/schema.json",
+    "authoring_stylesheet": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/authoring/stylesheet.json",
+    "authoring_faker_profile": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/authoring/faker_profile.json",
+    "authoring_preview": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/authoring/render_preview/preview_000001.png",
+    "authoring_overlay": "workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/authoring/render_preview/preview_000001.overlay.png",
+    "authoring_batch": "outputs/pipeline_ready/FIN-03_납세증명서(국세·지방세_완납)/summary.json",
+    "authoring_contact_sheet": "outputs/pipeline_ready/FIN-03_납세증명서(국세·지방세_완납)/contact_sheet.jpg",
+    "authoring_style_comparison": "outputs/style_calibration/FIN-03_납세증명서(국세·지방세_완납)/full_comparison.jpg"
+  }
+}

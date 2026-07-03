@@ -1,0 +1,1079 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:24:33.740497+00:00",
+  "doc_id": "ID-04",
+  "title": "주민등록등본",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/주민등록등본__ID-04/review/original_009/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/주민등록등본__ID-04/samples/original/009.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/주민등록등본__ID-04/inpaint/original_009/lama/inpainted_lama.png",
+  "image": {
+    "width": 3721,
+    "height": 5192
+  },
+  "fields": [
+    {
+      "field_id": "document_confirmation_number",
+      "label": "문서확인번호",
+      "source_detection_id": "det_000001",
+      "source_text": "문서확인번호:1754-5330-7337-8146",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.document_confirmation_number",
+      "style_class": "style_document_confirmation_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "document.confirmation.number",
+        "csv_column": "document_confirmation_number"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000001"
+    },
+    {
+      "field_id": "contact_phone",
+      "label": "전화번호",
+      "source_detection_id": "det_000014",
+      "source_text": "전화:031-6193-5732",
+      "value_type": "person.phone_kr",
+      "generator": "pool_record:id04_resident_register_records.contact_phone",
+      "style_class": "style_contact_phone",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "contact.phone",
+        "csv_column": "contact_phone"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000014"
+    },
+    {
+      "field_id": "applicant_name",
+      "label": "신청인",
+      "source_detection_id": "det_000015",
+      "source_text": "신청인:김지현",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id04_resident_register_records.applicant_name",
+      "style_class": "style_applicant_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "applicant.name",
+        "csv_column": "applicant_name"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000015"
+    },
+    {
+      "field_id": "applicant_birth_date",
+      "label": "신청인 생년월일",
+      "source_detection_id": "det_000016",
+      "source_text": "(1997-08-04 )",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.applicant_birth_date",
+      "style_class": "style_applicant_birth_date",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "applicant.birth.date",
+        "csv_column": "applicant_birth_date"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000016"
+    },
+    {
+      "field_id": "certificate_issue_date",
+      "label": "발급일",
+      "source_detection_id": "det_000020",
+      "source_text": "2025년08월07일",
+      "value_type": "date.kr",
+      "generator": "pool_record:id04_resident_register_records.certificate_issue_date",
+      "style_class": "style_certificate_issue_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "certificate.issue.date",
+        "csv_column": "certificate_issue_date"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000020"
+    },
+    {
+      "field_id": "issuer",
+      "label": "발급기관",
+      "source_detection_id": "det_000021",
+      "source_text": "경기도 용인시장",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.issuer",
+      "style_class": "style_issuer",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "issuer",
+        "csv_column": "issuer"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000021"
+    },
+    {
+      "field_id": "household_change_reason_1",
+      "label": "세대 변동사유 1",
+      "source_detection_id": "det_000023",
+      "source_text": "세대주변경",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.household_change_reason_1",
+      "style_class": "style_household_change_reason_1",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "household.change.reason.1",
+        "csv_column": "household_change_reason_1"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000023"
+    },
+    {
+      "field_id": "household_head_name",
+      "label": "세대주 성명",
+      "source_detection_id": "det_000025",
+      "source_text": "정혜라",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id04_resident_register_records.household_head_name",
+      "style_class": "style_household_head_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "household.head.name",
+        "csv_column": "household_head_name"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000025"
+    },
+    {
+      "field_id": "household_head_name_hanja_open",
+      "label": "세대주 한자 괄호 시작",
+      "source_detection_id": "det_000026",
+      "source_text": "(",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.household_head_name_hanja_open",
+      "style_class": "style_household_head_name_hanja_open",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "household.head.name.hanja.open",
+        "csv_column": "household_head_name_hanja_open"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000026"
+    },
+    {
+      "field_id": "household_head_name_hanja_close",
+      "label": "세대주 한자 괄호 끝",
+      "source_detection_id": "det_000027",
+      "source_text": ")",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.household_head_name_hanja_close",
+      "style_class": "style_household_head_name_hanja_close",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "household.head.name.hanja.close",
+        "csv_column": "household_head_name_hanja_close"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000027"
+    },
+    {
+      "field_id": "household_change_date_1",
+      "label": "세대 변동일 1",
+      "source_detection_id": "det_000029",
+      "source_text": "2020-07-30",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.household_change_date_1",
+      "style_class": "style_household_change_date_1",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "household.change.date.1",
+        "csv_column": "household_change_date_1"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000029"
+    },
+    {
+      "field_id": "address_line_1",
+      "label": "주소 1행",
+      "source_detection_id": "det_000041",
+      "source_text": "경기도 용인시처인구 금어로46,",
+      "value_type": "address.ko",
+      "generator": "pool_record:id04_resident_register_records.address_line_1",
+      "style_class": "style_address_line_1",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "address.line.1",
+        "csv_column": "address_line_1"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000041"
+    },
+    {
+      "field_id": "address_change_date",
+      "label": "주소 변동일",
+      "source_detection_id": "det_000042",
+      "source_text": "2025-07-14",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.address_change_date",
+      "style_class": "style_address_change_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "address.change.date",
+        "csv_column": "address_change_date"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000042"
+    },
+    {
+      "field_id": "address_line_2_building",
+      "label": "주소 2행 동",
+      "source_detection_id": "det_000044",
+      "source_text": "112동",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.address_line_2_building",
+      "style_class": "style_address_line_2_building",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "address.line.2.building",
+        "csv_column": "address_line_2_building"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000044"
+    },
+    {
+      "field_id": "address_line_2_detail",
+      "label": "주소 2행 상세",
+      "source_detection_id": "det_000045",
+      "source_text": "2704호(고림동,힐스테이트용인 둔전역)",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.address_line_2_detail",
+      "style_class": "style_address_line_2_detail",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "address.line.2.detail",
+        "csv_column": "address_line_2_detail"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000045"
+    },
+    {
+      "field_id": "address_change_reason",
+      "label": "주소 변동사유",
+      "source_detection_id": "det_000046",
+      "source_text": "행정구역변경",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.address_change_reason",
+      "style_class": "style_address_change_reason",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "address.change.reason",
+        "csv_column": "address_change_reason"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000046"
+    },
+    {
+      "field_id": "member_1_name",
+      "label": "세대원 1 성명",
+      "source_detection_id": "det_000064",
+      "source_text": "정혜라",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id04_resident_register_records.member_1_name",
+      "style_class": "style_member_1_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.1.name",
+        "csv_column": "member_1_name"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000064"
+    },
+    {
+      "field_id": "member_1_hanja_open",
+      "label": "세대원 1 한자 괄호 시작",
+      "source_detection_id": "det_000065",
+      "source_text": "(",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_1_hanja_open",
+      "style_class": "style_member_1_hanja_open",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.1.hanja.open",
+        "csv_column": "member_1_hanja_open"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000065"
+    },
+    {
+      "field_id": "member_1_hanja_close",
+      "label": "세대원 1 한자 괄호 끝",
+      "source_detection_id": "det_000066",
+      "source_text": ")",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_1_hanja_close",
+      "style_class": "style_member_1_hanja_close",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.1.hanja.close",
+        "csv_column": "member_1_hanja_close"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000066"
+    },
+    {
+      "field_id": "member_1_change_date",
+      "label": "세대원 1 변동일",
+      "source_detection_id": "det_000067",
+      "source_text": "2020-07-30",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_1_change_date",
+      "style_class": "style_member_1_change_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.1.change.date",
+        "csv_column": "member_1_change_date"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000067"
+    },
+    {
+      "field_id": "member_1_no",
+      "label": "세대원 1 번호",
+      "source_detection_id": "det_000068",
+      "source_text": "1",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_1_no",
+      "style_class": "style_member_1_no",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.1.no",
+        "csv_column": "member_1_no"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000068"
+    },
+    {
+      "field_id": "member_1_relation",
+      "label": "세대원 1 관계",
+      "source_detection_id": "det_000069",
+      "source_text": "본인",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_1_relation",
+      "style_class": "style_member_1_relation",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.1.relation",
+        "csv_column": "member_1_relation"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000069"
+    },
+    {
+      "field_id": "member_1_change_reason",
+      "label": "세대원 1 변동사유",
+      "source_detection_id": "det_000070",
+      "source_text": "세대주변경",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_1_change_reason",
+      "style_class": "style_member_1_change_reason",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.1.change.reason",
+        "csv_column": "member_1_change_reason"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000070"
+    },
+    {
+      "field_id": "member_1_status",
+      "label": "세대원 1 등록상태",
+      "source_detection_id": "det_000071",
+      "source_text": "거주자",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_1_status",
+      "style_class": "style_member_1_status",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.1.status",
+        "csv_column": "member_1_status"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000071"
+    },
+    {
+      "field_id": "member_1_rrn",
+      "label": "세대원 1 주민등록번호",
+      "source_detection_id": "det_000072",
+      "source_text": "700628-2830617",
+      "value_type": "person.rrn",
+      "generator": "pool_record:id04_resident_register_records.member_1_rrn",
+      "style_class": "style_member_1_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.1.rrn",
+        "csv_column": "member_1_rrn"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000072"
+    },
+    {
+      "field_id": "member_2_name",
+      "label": "세대원 2 성명",
+      "source_detection_id": "det_000073",
+      "source_text": "김관혁",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id04_resident_register_records.member_2_name",
+      "style_class": "style_member_2_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.2.name",
+        "csv_column": "member_2_name"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000073"
+    },
+    {
+      "field_id": "member_2_hanja_open",
+      "label": "세대원 2 한자 괄호 시작",
+      "source_detection_id": "det_000074",
+      "source_text": "(",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_2_hanja_open",
+      "style_class": "style_member_2_hanja_open",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.2.hanja.open",
+        "csv_column": "member_2_hanja_open"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000074"
+    },
+    {
+      "field_id": "member_2_hanja_close",
+      "label": "세대원 2 한자 괄호 끝",
+      "source_detection_id": "det_000075",
+      "source_text": ")",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_2_hanja_close",
+      "style_class": "style_member_2_hanja_close",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.2.hanja.close",
+        "csv_column": "member_2_hanja_close"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000075"
+    },
+    {
+      "field_id": "member_2_change_date",
+      "label": "세대원 2 변동일",
+      "source_detection_id": "det_000076",
+      "source_text": "2020-07-30",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_2_change_date",
+      "style_class": "style_member_2_change_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.2.change.date",
+        "csv_column": "member_2_change_date"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000076"
+    },
+    {
+      "field_id": "member_2_relation",
+      "label": "세대원 2 관계",
+      "source_detection_id": "det_000077",
+      "source_text": "배우자",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_2_relation",
+      "style_class": "style_member_2_relation",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.2.relation",
+        "csv_column": "member_2_relation"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000077"
+    },
+    {
+      "field_id": "member_2_no",
+      "label": "세대원 2 번호",
+      "source_detection_id": "det_000078",
+      "source_text": "2",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_2_no",
+      "style_class": "style_member_2_no",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.2.no",
+        "csv_column": "member_2_no"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000078"
+    },
+    {
+      "field_id": "member_2_change_reason",
+      "label": "세대원 2 변동사유",
+      "source_detection_id": "det_000079",
+      "source_text": "세대주변경",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_2_change_reason",
+      "style_class": "style_member_2_change_reason",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.2.change.reason",
+        "csv_column": "member_2_change_reason"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000079"
+    },
+    {
+      "field_id": "member_2_rrn",
+      "label": "세대원 2 주민등록번호",
+      "source_detection_id": "det_000080",
+      "source_text": "670601-1691210",
+      "value_type": "person.rrn",
+      "generator": "pool_record:id04_resident_register_records.member_2_rrn",
+      "style_class": "style_member_2_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.2.rrn",
+        "csv_column": "member_2_rrn"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000080"
+    },
+    {
+      "field_id": "member_2_status",
+      "label": "세대원 2 등록상태",
+      "source_detection_id": "det_000081",
+      "source_text": "거주자",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_2_status",
+      "style_class": "style_member_2_status",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.2.status",
+        "csv_column": "member_2_status"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000081"
+    },
+    {
+      "field_id": "member_3_name",
+      "label": "세대원 3 성명",
+      "source_detection_id": "det_000082",
+      "source_text": "김지현",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id04_resident_register_records.member_3_name",
+      "style_class": "style_member_3_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.3.name",
+        "csv_column": "member_3_name"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000082"
+    },
+    {
+      "field_id": "member_3_hanja_open",
+      "label": "세대원 3 한자 괄호 시작",
+      "source_detection_id": "det_000083",
+      "source_text": "(",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_3_hanja_open",
+      "style_class": "style_member_3_hanja_open",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.3.hanja.open",
+        "csv_column": "member_3_hanja_open"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000083"
+    },
+    {
+      "field_id": "member_3_hanja_close",
+      "label": "세대원 3 한자 괄호 끝",
+      "source_detection_id": "det_000084",
+      "source_text": ")",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_3_hanja_close",
+      "style_class": "style_member_3_hanja_close",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.3.hanja.close",
+        "csv_column": "member_3_hanja_close"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000084"
+    },
+    {
+      "field_id": "member_3_change_date",
+      "label": "세대원 3 변동일",
+      "source_detection_id": "det_000085",
+      "source_text": "2020-07-30",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_3_change_date",
+      "style_class": "style_member_3_change_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.3.change.date",
+        "csv_column": "member_3_change_date"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000085"
+    },
+    {
+      "field_id": "member_3_no",
+      "label": "세대원 3 번호",
+      "source_detection_id": "det_000086",
+      "source_text": "3",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_3_no",
+      "style_class": "style_member_3_no",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.3.no",
+        "csv_column": "member_3_no"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000086"
+    },
+    {
+      "field_id": "member_3_relation",
+      "label": "세대원 3 관계",
+      "source_detection_id": "det_000087",
+      "source_text": "자녀",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_3_relation",
+      "style_class": "style_member_3_relation",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.3.relation",
+        "csv_column": "member_3_relation"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000087"
+    },
+    {
+      "field_id": "member_3_change_reason",
+      "label": "세대원 3 변동사유",
+      "source_detection_id": "det_000088",
+      "source_text": "세대주변경",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_3_change_reason",
+      "style_class": "style_member_3_change_reason",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.3.change.reason",
+        "csv_column": "member_3_change_reason"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000088"
+    },
+    {
+      "field_id": "member_3_status",
+      "label": "세대원 3 등록상태",
+      "source_detection_id": "det_000089",
+      "source_text": "거주자",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.member_3_status",
+      "style_class": "style_member_3_status",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.3.status",
+        "csv_column": "member_3_status"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000089"
+    },
+    {
+      "field_id": "member_3_rrn",
+      "label": "세대원 3 주민등록번호",
+      "source_detection_id": "det_000090",
+      "source_text": "970804–2063314",
+      "value_type": "person.rrn",
+      "generator": "pool_record:id04_resident_register_records.member_3_rrn",
+      "style_class": "style_member_3_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "member.3.rrn",
+        "csv_column": "member_3_rrn"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000090"
+    },
+    {
+      "field_id": "blank_line_marker",
+      "label": "이하여백",
+      "source_detection_id": "det_000091",
+      "source_text": "==이하여백==",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id04_resident_register_records.blank_line_marker",
+      "style_class": "style_blank_line_marker",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "blank.line.marker",
+        "csv_column": "blank_line_marker"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "det_000091"
+    },
+    {
+      "field_id": "household_head_hanja_value",
+      "label": "세대주 한자",
+      "source_detection_id": "manual_grid_addition_20260702",
+      "source_text": "",
+      "value_type": "person.name_hanja",
+      "generator": "pool_record:id04_resident_register_records.household_head_hanja_value",
+      "style_class": "style_household_head_hanja_value",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "household.head.name_hanja",
+        "csv_column": "household_head_hanja_value"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "manual_grid_addition_20260702"
+    },
+    {
+      "field_id": "member_1_hanja_value",
+      "label": "세대원 1 한자",
+      "source_detection_id": "manual_grid_addition_20260702",
+      "source_text": "",
+      "value_type": "person.name_hanja",
+      "generator": "pool_record:id04_resident_register_records.member_1_hanja_value",
+      "style_class": "style_member_1_hanja_value",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "members.1.name_hanja",
+        "csv_column": "member_1_hanja_value"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "manual_grid_addition_20260702_2"
+    },
+    {
+      "field_id": "member_2_hanja_value",
+      "label": "세대원 2 한자",
+      "source_detection_id": "manual_grid_addition_20260702",
+      "source_text": "",
+      "value_type": "person.name_hanja",
+      "generator": "pool_record:id04_resident_register_records.member_2_hanja_value",
+      "style_class": "style_member_2_hanja_value",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "members.2.name_hanja",
+        "csv_column": "member_2_hanja_value"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "manual_grid_addition_20260702_3"
+    },
+    {
+      "field_id": "member_3_hanja_value",
+      "label": "세대원 3 한자",
+      "source_detection_id": "manual_grid_addition_20260702",
+      "source_text": "",
+      "value_type": "person.name_hanja",
+      "generator": "pool_record:id04_resident_register_records.member_3_hanja_value",
+      "style_class": "style_member_3_hanja_value",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "members.3.name_hanja",
+        "csv_column": "member_3_hanja_value"
+      },
+      "required": true,
+      "notes": "ID-04 주민등록등본 생산용 보정 필드. 세대/주소/세대원 정보를 하나의 record로 일관 생성하고 표 grid에 맞춰 bbox를 보정했다.",
+      "bbox_label_id": "manual_grid_addition_20260702_4"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "id04_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/주민등록등본__ID-04/review/original_009/review.json"
+  }
+}

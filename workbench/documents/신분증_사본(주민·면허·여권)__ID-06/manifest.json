@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "doc_id": "ID-06",
+  "title": "신분증 사본(주민·면허·여권)",
+  "folder": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06",
+  "registry": {
+    "docId": "ID-06",
+    "title": "신분증 사본(주민·면허·여권)",
+    "issuer": "정부/공공",
+    "genre": "증명",
+    "structure": "정형양식",
+    "modality": "스캔이미지",
+    "sensitivity": "개인정보(민감)",
+    "fields": "성명·생년월일·발급일·진위확인",
+    "notes": "다도메인 고재사용",
+    "hasPersonalInfo": "포함",
+    "personalInfoDetail": "성명, 주민등록번호, 주소, 사진, 생년월일, 면허번호, 여권번호, 국적",
+    "validationRules": "식별번호 형식, 유효기간, 사진영역, 마스킹",
+    "validationRuleCodes": "VAL-002, VAL-007",
+    "writingMethod": "인쇄",
+    "aliases": [
+      "신분증 사본(주민·면허·여권)",
+      "주민등록증",
+      "운전면허증",
+      "여권"
+    ],
+    "workflowIds": [
+      "BANK-05",
+      "CARD-01",
+      "INS-01"
+    ],
+    "domains": [
+      "금융 - 은행 (여신·신용·외환)",
+      "금융 - 카드·여신전문",
+      "보험 (생명·손해)"
+    ],
+    "isFirstPriority": false
+  },
+  "source_seed_folders": [
+    "seed_samples/신분증"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/samples/original/source.jpg",
+      "source": "seed_samples/신분증/source.jpg"
+    },
+    {
+      "path": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/samples/original/임대인_신분증.jpg",
+      "source": "seed_samples/신분증/임대인_신분증.jpg"
+    },
+    {
+      "path": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/samples/original/임차인_신분증.jpg",
+      "source": "seed_samples/신분증/임차인_신분증.jpg"
+    }
+  ],
+  "status": "authoring_done",
+  "created_at": "2026-06-29T00:23:26.078339+00:00",
+  "updated_at": "2026-07-02T04:25:03.879716+00:00",
+  "artifacts": {
+    "ocr": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/ocr/paddleocr/original_source/detections.json",
+    "review": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/review/original_source/review.json",
+    "inpaint": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/inpaint/original_source/lama/comparison_lama.png",
+    "authoring": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/authoring/schema.json",
+    "authoring_stylesheet": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/authoring/stylesheet.json",
+    "authoring_faker_profile": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/authoring/faker_profile.json",
+    "authoring_preview": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/authoring/render_preview/preview_000001.png",
+    "authoring_overlay": "workbench/documents/신분증_사본(주민·면허·여권)__ID-06/authoring/render_preview/preview_000001.overlay.png",
+    "authoring_batch": "outputs/pipeline_ready/ID-06_신분증_사본(주민·면허·여권)/summary.json",
+    "authoring_contact_sheet": "outputs/pipeline_ready/ID-06_신분증_사본(주민·면허·여권)/contact_sheet.jpg",
+    "authoring_style_comparison": "outputs/style_calibration/ID-06_신분증_사본(주민·면허·여권)/full_comparison.jpg"
+  }
+}

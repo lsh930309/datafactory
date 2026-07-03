@@ -1,0 +1,727 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:24:50.676316+00:00",
+  "doc_id": "FIN-04",
+  "title": "4대보험 가입증명원",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/4대보험_가입증명원__FIN-04/review/original_4대보험가입확인서_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/4대보험_가입증명원__FIN-04/inpaint/original_4대보험가입확인서_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1191,
+    "height": 1684
+  },
+  "fields": [
+    {
+      "field_id": "header_document_confirmation",
+      "label": "상단 문서확인번호",
+      "source_detection_id": "det_000001",
+      "source_text": "문서확인번호:1782-7007-6764-4051(신청인:이승훈)",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin04_profiles.header_document_confirmation",
+      "style_class": "style_header_document_confirmation",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "header.document.confirmation",
+        "csv_column": "header_document_confirmation"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000001"
+    },
+    {
+      "field_id": "print_date",
+      "label": "출력일자",
+      "source_detection_id": "det_000005",
+      "source_text": "2026/06/29",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.print_date",
+      "style_class": "style_print_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "print.date",
+        "csv_column": "print_date"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000005"
+    },
+    {
+      "field_id": "print_time",
+      "label": "출력시각",
+      "source_detection_id": "det_000006",
+      "source_text": "11:39:28",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.print_time",
+      "style_class": "style_print_time",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "print.time",
+        "csv_column": "print_time"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000006"
+    },
+    {
+      "field_id": "application_number",
+      "label": "신청번호",
+      "source_detection_id": "det_000012",
+      "source_text": "20260629113711",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.application_number",
+      "style_class": "style_application_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "application.number",
+        "csv_column": "application_number"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000012"
+    },
+    {
+      "field_id": "application_datetime",
+      "label": "신청일시",
+      "source_detection_id": "det_000014",
+      "source_text": "2026-06-29 11:37",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.application_datetime",
+      "style_class": "style_application_datetime",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "application.datetime",
+        "csv_column": "application_datetime"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000014"
+    },
+    {
+      "field_id": "applicant_rrn",
+      "label": "신청인 주민등록번호",
+      "source_detection_id": "det_000016",
+      "source_text": "930309-1069114",
+      "value_type": "person.rrn",
+      "generator": "pool_record:fin04_profiles.applicant_rrn",
+      "style_class": "style_applicant_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "applicant.rrn",
+        "csv_column": "applicant_rrn"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000016"
+    },
+    {
+      "field_id": "applicant_name",
+      "label": "신청인 성명",
+      "source_detection_id": "det_000018",
+      "source_text": "이승훈",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin04_profiles.applicant_name",
+      "style_class": "style_applicant_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "applicant.name",
+        "csv_column": "applicant_name"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000018"
+    },
+    {
+      "field_id": "page_number",
+      "label": "페이지",
+      "source_detection_id": "det_000020",
+      "source_text": "1 / 1",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.page_number",
+      "style_class": "style_page_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page.number",
+        "csv_column": "page_number"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000020"
+    },
+    {
+      "field_id": "np_acquisition_date",
+      "label": "국민연금 취득일",
+      "source_detection_id": "det_000030",
+      "source_text": "2025.08.01",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.np_acquisition_date",
+      "style_class": "style_np_acquisition_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "np.acquisition.date",
+        "csv_column": "np_acquisition_date"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000030"
+    },
+    {
+      "field_id": "np_subscriber_name",
+      "label": "국민연금 가입자명",
+      "source_detection_id": "det_000032",
+      "source_text": "이승훈",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin04_profiles.np_subscriber_name",
+      "style_class": "style_np_subscriber_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "np.subscriber.name",
+        "csv_column": "np_subscriber_name"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000032"
+    },
+    {
+      "field_id": "np_subscriber_type",
+      "label": "국민연금 가입자 구분",
+      "source_detection_id": "det_000033",
+      "source_text": "사업장가입자",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.np_subscriber_type",
+      "style_class": "style_np_subscriber_type",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "np.subscriber.type",
+        "csv_column": "np_subscriber_type"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000033"
+    },
+    {
+      "field_id": "np_workplace_number",
+      "label": "국민연금 사업장관리번호",
+      "source_detection_id": "det_000034",
+      "source_text": "36881014090",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.np_workplace_number",
+      "style_class": "style_np_workplace_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "np.workplace.number",
+        "csv_column": "np_workplace_number"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000034"
+    },
+    {
+      "field_id": "np_workplace_name",
+      "label": "국민연금 사업장명",
+      "source_detection_id": "det_000035",
+      "source_text": "한국답러닝 주식회사",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:fin04_profiles.np_workplace_name",
+      "style_class": "style_np_workplace_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "np.workplace.name",
+        "csv_column": "np_workplace_name"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000035"
+    },
+    {
+      "field_id": "np_notice_date",
+      "label": "국민연금 기준일",
+      "source_detection_id": "det_000036",
+      "source_text": "(2025.08.06)",
+      "value_type": "date.kr",
+      "generator": "pool_record:fin04_profiles.np_notice_date",
+      "style_class": "style_np_notice_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "np.notice.date",
+        "csv_column": "np_notice_date"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000036"
+    },
+    {
+      "field_id": "hi_acquisition_date",
+      "label": "건강보험 취득일",
+      "source_detection_id": "det_000037",
+      "source_text": "2025.08.01",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.hi_acquisition_date",
+      "style_class": "style_hi_acquisition_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "hi.acquisition.date",
+        "csv_column": "hi_acquisition_date"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000037"
+    },
+    {
+      "field_id": "hi_subscriber_name",
+      "label": "건강보험 가입자명",
+      "source_detection_id": "det_000039",
+      "source_text": "이승훈",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin04_profiles.hi_subscriber_name",
+      "style_class": "style_hi_subscriber_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "hi.subscriber.name",
+        "csv_column": "hi_subscriber_name"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000039"
+    },
+    {
+      "field_id": "hi_subscriber_type",
+      "label": "건강보험 가입자 구분",
+      "source_detection_id": "det_000040",
+      "source_text": "직장가입자",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.hi_subscriber_type",
+      "style_class": "style_hi_subscriber_type",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "hi.subscriber.type",
+        "csv_column": "hi_subscriber_type"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000040"
+    },
+    {
+      "field_id": "hi_workplace_number",
+      "label": "건강보험 사업장관리번호",
+      "source_detection_id": "det_000041",
+      "source_text": "36881014090",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.hi_workplace_number",
+      "style_class": "style_hi_workplace_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "hi.workplace.number",
+        "csv_column": "hi_workplace_number"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000041"
+    },
+    {
+      "field_id": "hi_workplace_name",
+      "label": "건강보험 사업장명",
+      "source_detection_id": "det_000042",
+      "source_text": "한국답러닝 주식회사",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:fin04_profiles.hi_workplace_name",
+      "style_class": "style_hi_workplace_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "hi.workplace.name",
+        "csv_column": "hi_workplace_name"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000042"
+    },
+    {
+      "field_id": "hi_notice_date",
+      "label": "건강보험 기준일",
+      "source_detection_id": "det_000043",
+      "source_text": "(2025.08.06)",
+      "value_type": "date.kr",
+      "generator": "pool_record:fin04_profiles.hi_notice_date",
+      "style_class": "style_hi_notice_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "hi.notice.date",
+        "csv_column": "hi_notice_date"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000043"
+    },
+    {
+      "field_id": "ei_acquisition_date",
+      "label": "고용보험 취득일",
+      "source_detection_id": "det_000044",
+      "source_text": "2025.08.01",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.ei_acquisition_date",
+      "style_class": "style_ei_acquisition_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "ei.acquisition.date",
+        "csv_column": "ei_acquisition_date"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000044"
+    },
+    {
+      "field_id": "ei_subscriber_name",
+      "label": "고용보험 가입자명",
+      "source_detection_id": "det_000046",
+      "source_text": "이승훈",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin04_profiles.ei_subscriber_name",
+      "style_class": "style_ei_subscriber_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "ei.subscriber.name",
+        "csv_column": "ei_subscriber_name"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000046"
+    },
+    {
+      "field_id": "ei_subscriber_type",
+      "label": "고용보험 가입자 구분",
+      "source_detection_id": "det_000047",
+      "source_text": "사업장가입자",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.ei_subscriber_type",
+      "style_class": "style_ei_subscriber_type",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "ei.subscriber.type",
+        "csv_column": "ei_subscriber_type"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000047"
+    },
+    {
+      "field_id": "ei_workplace_number",
+      "label": "고용보험 사업장관리번호",
+      "source_detection_id": "det_000048",
+      "source_text": "36881014090",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.ei_workplace_number",
+      "style_class": "style_ei_workplace_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "ei.workplace.number",
+        "csv_column": "ei_workplace_number"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000048"
+    },
+    {
+      "field_id": "ei_workplace_name",
+      "label": "고용보험 사업장명",
+      "source_detection_id": "det_000049",
+      "source_text": "한국됩러닝 주식회사",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:fin04_profiles.ei_workplace_name",
+      "style_class": "style_ei_workplace_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "ei.workplace.name",
+        "csv_column": "ei_workplace_name"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000049"
+    },
+    {
+      "field_id": "ei_notice_date",
+      "label": "고용보험 기준일",
+      "source_detection_id": "det_000050",
+      "source_text": "(2025.08.01)",
+      "value_type": "date.kr",
+      "generator": "pool_record:fin04_profiles.ei_notice_date",
+      "style_class": "style_ei_notice_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "ei.notice.date",
+        "csv_column": "ei_notice_date"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000050"
+    },
+    {
+      "field_id": "wc_acquisition_date",
+      "label": "산재보험 취득일",
+      "source_detection_id": "det_000051",
+      "source_text": "2025.08.01",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.wc_acquisition_date",
+      "style_class": "style_wc_acquisition_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "wc.acquisition.date",
+        "csv_column": "wc_acquisition_date"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000051"
+    },
+    {
+      "field_id": "wc_subscriber_name",
+      "label": "산재보험 가입자명",
+      "source_detection_id": "det_000053",
+      "source_text": "이승훈",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin04_profiles.wc_subscriber_name",
+      "style_class": "style_wc_subscriber_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "wc.subscriber.name",
+        "csv_column": "wc_subscriber_name"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000053"
+    },
+    {
+      "field_id": "wc_subscriber_type",
+      "label": "산재보험 가입자 구분",
+      "source_detection_id": "det_000054",
+      "source_text": "사업장가입자",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.wc_subscriber_type",
+      "style_class": "style_wc_subscriber_type",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "wc.subscriber.type",
+        "csv_column": "wc_subscriber_type"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000054"
+    },
+    {
+      "field_id": "wc_workplace_number",
+      "label": "산재보험 사업장관리번호",
+      "source_detection_id": "det_000055",
+      "source_text": "36881014090",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin04_profiles.wc_workplace_number",
+      "style_class": "style_wc_workplace_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "wc.workplace.number",
+        "csv_column": "wc_workplace_number"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000055"
+    },
+    {
+      "field_id": "wc_workplace_name",
+      "label": "산재보험 사업장명",
+      "source_detection_id": "det_000056",
+      "source_text": "한국답러닝 주식회사",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:fin04_profiles.wc_workplace_name",
+      "style_class": "style_wc_workplace_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "wc.workplace.name",
+        "csv_column": "wc_workplace_name"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000056"
+    },
+    {
+      "field_id": "wc_notice_date",
+      "label": "산재보험 기준일",
+      "source_detection_id": "det_000057",
+      "source_text": "(2025.08.01)",
+      "value_type": "date.kr",
+      "generator": "pool_record:fin04_profiles.wc_notice_date",
+      "style_class": "style_wc_notice_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "wc.notice.date",
+        "csv_column": "wc_notice_date"
+      },
+      "required": true,
+      "notes": "FIN-04 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000057"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "fin04_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/4대보험_가입증명원__FIN-04/review/original_4대보험가입확인서_page_001/review.json"
+  }
+}

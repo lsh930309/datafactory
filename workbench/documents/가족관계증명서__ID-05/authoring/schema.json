@@ -1,0 +1,529 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:24:33.973807+00:00",
+  "doc_id": "ID-05",
+  "title": "가족관계증명서",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/가족관계증명서__ID-05/review/original_11-1/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/가족관계증명서__ID-05/samples/original/11-1.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/가족관계증명서__ID-05/inpaint/original_11-1/lama/inpainted_lama.png",
+  "image": {
+    "width": 3711,
+    "height": 5251
+  },
+  "fields": [
+    {
+      "field_id": "subject_registration_base",
+      "label": "본관",
+      "source_detection_id": "det_000011",
+      "source_text": "",
+      "value_type": "address.ko",
+      "generator": "pool_record:id05_family_records.subject_registration_base",
+      "style_class": "style_subject_registration_base",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "subject.registration.base",
+        "csv_column": "subject_registration_base"
+      },
+      "required": true,
+      "notes": "기존 필드명은 registration_base지만 실제 bbox는 우측 '본' 칸이므로 본관 값을 렌더링한다.",
+      "bbox_label_id": "det_000011"
+    },
+    {
+      "field_id": "subject_relation",
+      "label": "본인 관계",
+      "source_detection_id": "det_000012",
+      "source_text": "본인",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id05_family_records.subject_relation",
+      "style_class": "style_subject_relation",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "subject.relation",
+        "csv_column": "subject_relation"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000012"
+    },
+    {
+      "field_id": "subject_name",
+      "label": "본인 성명",
+      "source_detection_id": "det_000013",
+      "source_text": "권민정()",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id05_family_records.subject_name",
+      "style_class": "style_subject_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "subject.name",
+        "csv_column": "subject_name"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000013"
+    },
+    {
+      "field_id": "subject_birth_date",
+      "label": "본인 출생연월일",
+      "source_detection_id": "det_000014",
+      "source_text": "1989년01월31일",
+      "value_type": "date.kr",
+      "generator": "pool_record:id05_family_records.subject_birth_date",
+      "style_class": "style_subject_birth_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "subject.birth.date",
+        "csv_column": "subject_birth_date"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000014"
+    },
+    {
+      "field_id": "subject_gender",
+      "label": "본인 성별",
+      "source_detection_id": "det_000015",
+      "source_text": "여",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id05_family_records.subject_gender",
+      "style_class": "style_subject_gender",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "subject.gender",
+        "csv_column": "subject_gender"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000015"
+    },
+    {
+      "field_id": "subject_rrn",
+      "label": "본인 주민등록번호",
+      "source_detection_id": "det_000016",
+      "source_text": "890131-2229918",
+      "value_type": "person.rrn",
+      "generator": "pool_record:id05_family_records.subject_rrn",
+      "style_class": "style_subject_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "subject.rrn",
+        "csv_column": "subject_rrn"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000016"
+    },
+    {
+      "field_id": "father_relation",
+      "label": "부 관계",
+      "source_detection_id": "det_000025",
+      "source_text": "부",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id05_family_records.father_relation",
+      "style_class": "style_father_relation",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "father.relation",
+        "csv_column": "father_relation"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000025"
+    },
+    {
+      "field_id": "father_birth_date",
+      "label": "부 출생연월일",
+      "source_detection_id": "det_000026",
+      "source_text": "1962년01월17일",
+      "value_type": "date.kr",
+      "generator": "pool_record:id05_family_records.father_birth_date",
+      "style_class": "style_father_birth_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "father.birth.date",
+        "csv_column": "father_birth_date"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000026"
+    },
+    {
+      "field_id": "father_rrn",
+      "label": "부 주민등록번호",
+      "source_detection_id": "det_000027",
+      "source_text": "620117-1721927",
+      "value_type": "person.rrn",
+      "generator": "pool_record:id05_family_records.father_rrn",
+      "style_class": "style_father_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "father.rrn",
+        "csv_column": "father_rrn"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000027"
+    },
+    {
+      "field_id": "father_gender",
+      "label": "부 성별",
+      "source_detection_id": "det_000028",
+      "source_text": "남",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id05_family_records.father_gender",
+      "style_class": "style_father_gender",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "father.gender",
+        "csv_column": "father_gender"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000028"
+    },
+    {
+      "field_id": "father_registration_base",
+      "label": "부 본관",
+      "source_detection_id": "det_000029",
+      "source_text": "",
+      "value_type": "address.ko",
+      "generator": "pool_record:id05_family_records.father_registration_base",
+      "style_class": "style_father_registration_base",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "father.registration.base",
+        "csv_column": "father_registration_base"
+      },
+      "required": true,
+      "notes": "기존 필드명은 registration_base지만 실제 bbox는 우측 '본' 칸이므로 본관 값을 렌더링한다.",
+      "bbox_label_id": "det_000029"
+    },
+    {
+      "field_id": "father_name",
+      "label": "부 성명",
+      "source_detection_id": "det_000030",
+      "source_text": "권영기()",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id05_family_records.father_name",
+      "style_class": "style_father_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "father.name",
+        "csv_column": "father_name"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000030"
+    },
+    {
+      "field_id": "mother_relation",
+      "label": "모 관계",
+      "source_detection_id": "det_000031",
+      "source_text": "모",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id05_family_records.mother_relation",
+      "style_class": "style_mother_relation",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "mother.relation",
+        "csv_column": "mother_relation"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000031"
+    },
+    {
+      "field_id": "mother_name",
+      "label": "모 성명",
+      "source_detection_id": "det_000032",
+      "source_text": "임양빈(T:)",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id05_family_records.mother_name",
+      "style_class": "style_mother_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "mother.name",
+        "csv_column": "mother_name"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000032"
+    },
+    {
+      "field_id": "mother_birth_date",
+      "label": "모 출생연월일",
+      "source_detection_id": "det_000033",
+      "source_text": "1961년03월30일",
+      "value_type": "date.kr",
+      "generator": "pool_record:id05_family_records.mother_birth_date",
+      "style_class": "style_mother_birth_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "mother.birth.date",
+        "csv_column": "mother_birth_date"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000033"
+    },
+    {
+      "field_id": "mother_gender",
+      "label": "모 성별",
+      "source_detection_id": "det_000034",
+      "source_text": "여",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id05_family_records.mother_gender",
+      "style_class": "style_mother_gender",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "mother.gender",
+        "csv_column": "mother_gender"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000034"
+    },
+    {
+      "field_id": "mother_registration_base",
+      "label": "모 본관",
+      "source_detection_id": "det_000035",
+      "source_text": "",
+      "value_type": "address.ko",
+      "generator": "pool_record:id05_family_records.mother_registration_base",
+      "style_class": "style_mother_registration_base",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "mother.registration.base",
+        "csv_column": "mother_registration_base"
+      },
+      "required": true,
+      "notes": "기존 필드명은 registration_base지만 실제 bbox는 우측 '본' 칸이므로 본관 값을 렌더링한다.",
+      "bbox_label_id": "det_000035"
+    },
+    {
+      "field_id": "mother_rrn",
+      "label": "모 주민등록번호",
+      "source_detection_id": "det_000036",
+      "source_text": "610330-2229718",
+      "value_type": "person.rrn",
+      "generator": "pool_record:id05_family_records.mother_rrn",
+      "style_class": "style_mother_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "mother.rrn",
+        "csv_column": "mother_rrn"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000036"
+    },
+    {
+      "field_id": "certificate_issue_date",
+      "label": "증명 발급일",
+      "source_detection_id": "det_000038",
+      "source_text": "2024년06월21일",
+      "value_type": "date.kr",
+      "generator": "pool_record:id05_family_records.certificate_issue_date",
+      "style_class": "style_certificate_issue_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "certificate.issue.date",
+        "csv_column": "certificate_issue_date"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000038"
+    },
+    {
+      "field_id": "issuing_officer",
+      "label": "발급 책임관",
+      "source_detection_id": "det_000041",
+      "source_text": "법원행정처전산정보중앙관리소전산운영책임관유진오",
+      "value_type": "money.krw",
+      "generator": "pool_record:id05_family_records.issuing_officer",
+      "style_class": "style_issuing_officer",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "issuing.officer",
+        "csv_column": "issuing_officer"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000041"
+    },
+    {
+      "field_id": "issue_time",
+      "label": "발급시각",
+      "source_detection_id": "det_000046",
+      "source_text": "발급시각:17시16분",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id05_family_records.issue_time",
+      "style_class": "style_issue_time",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "issue.time",
+        "csv_column": "issue_time"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000046"
+    },
+    {
+      "field_id": "applicant_name",
+      "label": "신청인",
+      "source_detection_id": "det_000047",
+      "source_text": "신청인: 권민정",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id05_family_records.applicant_name",
+      "style_class": "style_applicant_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "applicant.name",
+        "csv_column": "applicant_name"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000047"
+    },
+    {
+      "field_id": "publication_number",
+      "label": "발행번호",
+      "source_detection_id": "det_000048",
+      "source_text": "발행번호:3194-2503-4916-2061",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id05_family_records.publication_number",
+      "style_class": "style_publication_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "publication.number",
+        "csv_column": "publication_number"
+      },
+      "required": true,
+      "notes": "ID-05 가족관계증명서 생산용 보정 필드. 가족 구성원 record 기반으로 생년월일/성별/주민번호를 일관 생성.",
+      "bbox_label_id": "det_000048"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "id05_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/가족관계증명서__ID-05/review/original_11-1/review.json"
+  }
+}

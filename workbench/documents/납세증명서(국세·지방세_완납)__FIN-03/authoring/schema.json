@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:24:50.573749+00:00",
+  "doc_id": "FIN-03",
+  "title": "납세증명서(국세·지방세 완납)",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/review/original_국세납세증명서_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/samples/original/국세납세증명서_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/inpaint/original_국세납세증명서_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1191,
+    "height": 1684
+  },
+  "fields": [
+    {
+      "field_id": "page_number",
+      "label": "페이지",
+      "source_detection_id": "det_000004",
+      "source_text": "( 1 / 1",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin03_tax_payment_profiles.page_number",
+      "style_class": "style_page_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "page.number",
+        "csv_column": "page_number"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000004"
+    },
+    {
+      "field_id": "document_confirmation_number",
+      "label": "문서확인번호",
+      "source_detection_id": "det_000007",
+      "source_text": "8234–597–7474–427",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin03_tax_payment_profiles.document_confirmation_number",
+      "style_class": "style_document_confirmation_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "document.confirmation.number",
+        "csv_column": "document_confirmation_number"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000007"
+    },
+    {
+      "field_id": "processing_period",
+      "label": "처리기간",
+      "source_detection_id": "det_000009",
+      "source_text": "즉시(단 해외이주용 10일)",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin03_tax_payment_profiles.processing_period",
+      "style_class": "style_processing_period",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "processing.period",
+        "csv_column": "processing_period"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000009"
+    },
+    {
+      "field_id": "taxpayer_name",
+      "label": "납세자 성명",
+      "source_detection_id": "det_000013",
+      "source_text": "이승훈",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:fin03_tax_payment_profiles.taxpayer_name",
+      "style_class": "style_taxpayer_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "taxpayer.name",
+        "csv_column": "taxpayer_name"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000013"
+    },
+    {
+      "field_id": "taxpayer_rrn",
+      "label": "주민등록번호",
+      "source_detection_id": "det_000014",
+      "source_text": "930309–1069114",
+      "value_type": "person.rrn",
+      "generator": "pool_record:fin03_tax_payment_profiles.taxpayer_rrn",
+      "style_class": "style_taxpayer_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "taxpayer.rrn",
+        "csv_column": "taxpayer_rrn"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000014"
+    },
+    {
+      "field_id": "taxpayer_address",
+      "label": "주소",
+      "source_detection_id": "det_000017",
+      "source_text": "서울특별시 동대문구 제기로2길28-12(제기동)",
+      "value_type": "address.ko",
+      "generator": "pool_record:fin03_tax_payment_profiles.taxpayer_address",
+      "style_class": "style_taxpayer_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "taxpayer.address",
+        "csv_column": "taxpayer_address"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000017"
+    },
+    {
+      "field_id": "valid_until",
+      "label": "증명 유효일",
+      "source_detection_id": "det_000023",
+      "source_text": "2026년 07월 29일",
+      "value_type": "date.kr",
+      "generator": "pool_record:fin03_tax_payment_profiles.valid_until",
+      "style_class": "style_valid_until",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "valid.until",
+        "csv_column": "valid_until"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000023"
+    },
+    {
+      "field_id": "issue_date",
+      "label": "발급일",
+      "source_detection_id": "det_000074",
+      "source_text": "2026년 6월29일",
+      "value_type": "date.kr",
+      "generator": "pool_record:fin03_tax_payment_profiles.issue_date",
+      "style_class": "style_issue_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "issue.date",
+        "csv_column": "issue_date"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000074"
+    },
+    {
+      "field_id": "tax_office_chief",
+      "label": "세무서장",
+      "source_detection_id": "det_000076",
+      "source_text": "동대문세무서장",
+      "value_type": "free_text.short",
+      "generator": "pool_record:fin03_tax_payment_profiles.tax_office_chief",
+      "style_class": "style_tax_office_chief",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "tax.office.chief",
+        "csv_column": "tax_office_chief"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000076"
+    },
+    {
+      "field_id": "tax_office_phone",
+      "label": "세무서 연락처",
+      "source_detection_id": "det_000078",
+      "source_text": "02-958-0226",
+      "value_type": "person.phone_kr",
+      "generator": "pool_record:fin03_tax_payment_profiles.tax_office_phone",
+      "style_class": "style_tax_office_phone",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "tax.office.phone",
+        "csv_column": "tax_office_phone"
+      },
+      "required": true,
+      "notes": "FIN-03 국세 납세증명서 생산용 보정 필드. crop 비교 없이 전체 문서/overlay 기준으로 검수.",
+      "bbox_label_id": "det_000078"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "fin03_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/납세증명서(국세·지방세_완납)__FIN-03/review/original_국세납세증명서_page_001/review.json"
+  }
+}

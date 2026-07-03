@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-01",
+  "title": "상업송장(Commercial Invoice)",
+  "folder": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01",
+  "registry": {
+    "docId": "TRD-01",
+    "title": "상업송장(Commercial Invoice)",
+    "issuer": "기업",
+    "genre": "증빙",
+    "structure": "표중심",
+    "modality": "전자PDF",
+    "sensitivity": "공개",
+    "fields": "품목·수량·단가·금액·거래조건",
+    "notes": "",
+    "hasPersonalInfo": "미포함",
+    "personalInfoDetail": "거래처, 품목, 금액",
+    "validationRules": "금액 합계, 통화, Invoice No, 영문명 유지",
+    "validationRuleCodes": "VAL-004",
+    "writingMethod": "인쇄",
+    "aliases": [
+      "상업송장(Commercial Invoice)",
+      "상업송장"
+    ],
+    "workflowIds": [
+      "MFG-04",
+      "TRD-T1",
+      "TRD-T2"
+    ],
+    "domains": [
+      "무역·물류",
+      "제조·구매·SCM"
+    ],
+    "isFirstPriority": true,
+    "firstPriorityDomains": [
+      "제조"
+    ],
+    "firstPriorityScopeCount": 1
+  },
+  "source_seed_folders": [
+    "seed_samples/상업송장(Commercial_Invoice)"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/samples/original/상업송장.png",
+      "source": "seed_samples/상업송장(Commercial_Invoice)/상업송장.png"
+    }
+  ],
+  "status": "authoring_done",
+  "created_at": "2026-06-30T04:08:51.822356+00:00",
+  "updated_at": "2026-07-02T23:48:42.351500+00:00",
+  "artifacts": {
+    "ocr": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/ocr/paddleocr/precise/original_상업송장/detections.json",
+    "review": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/review/original_상업송장/review.json",
+    "inpaint": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/inpaint/original_상업송장/lama/comparison_lama.png",
+    "authoring": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/authoring/schema.json",
+    "authoring_stylesheet": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/authoring/stylesheet.json",
+    "authoring_faker_profile": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/authoring/faker_profile.json",
+    "authoring_preview": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/authoring/render_preview/preview_000001.png",
+    "authoring_overlay": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/authoring/render_preview/preview_000001.overlay.png",
+    "authoring_batch": "outputs/render/batch_authoring_20260702/TRD-01_상업송장(Commercial_Invoice)/summary.json",
+    "authoring_contact_sheet": "outputs/pipeline_ready/TRD-01_상업송장(Commercial Invoice)/contact_sheet.jpg",
+    "authoring_style_comparison": "outputs/style_calibration/TRD-01_상업송장(Commercial Invoice)/full_comparison.jpg",
+    "authoring_semantic_schema": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/authoring/semantic_schema.json"
+  }
+}

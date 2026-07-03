@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-13",
+  "title": "계좌개설신청서",
+  "folder": "workbench/documents/계좌개설신청서__APP-13",
+  "registry": {
+    "docId": "APP-13",
+    "title": "계좌개설신청서",
+    "issuer": "개인",
+    "genre": "신청",
+    "structure": "정형양식",
+    "modality": "스캔이미지",
+    "sensitivity": "금융정보",
+    "fields": "고객정보·계좌종류·실명확인",
+    "notes": "",
+    "hasPersonalInfo": "포함",
+    "personalInfoDetail": "성명, 연락처, 주소, 계좌정보",
+    "validationRules": "필수필드, 서명 존재, 필수 체크박스, 손글씨 confidence",
+    "validationRuleCodes": "VAL-001, VAL-008, VAL-010, VAL-014",
+    "writingMethod": "수기",
+    "aliases": [
+      "계좌개설신청서"
+    ],
+    "workflowIds": [],
+    "domains": [],
+    "isFirstPriority": true,
+    "firstPriorityDomains": [
+      "금융"
+    ],
+    "firstPriorityScopeCount": 1
+  },
+  "source_seed_folders": [
+    "seed_samples/계좌개설신청서"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/계좌개설신청서__APP-13/samples/original/계좌개설신청서.pdf",
+      "source": "seed_samples/계좌개설신청서/계좌개설신청서.pdf"
+    },
+    {
+      "path": "workbench/documents/계좌개설신청서__APP-13/samples/original/계좌개설신청서_page_001.jpg",
+      "source": "seed_samples/계좌개설신청서/계좌개설신청서_page_001.jpg"
+    }
+  ],
+  "status": "sample_imported",
+  "created_at": "2026-06-30T02:09:48.677190+00:00",
+  "updated_at": "2026-07-02T08:01:31.759658+00:00",
+  "artifacts": {
+    "ocr": "workbench/documents/계좌개설신청서__APP-13/ocr/paddleocr/precise/original_계좌개설신청서_page_001/detections.json",
+    "review": "workbench/documents/계좌개설신청서__APP-13/review/original_계좌개설신청서_page_001/review.json",
+    "inpaint": "workbench/documents/계좌개설신청서__APP-13/inpaint/original/lama/comparison_lama.png",
+    "inpainted": "workbench/documents/계좌개설신청서__APP-13/inpaint/original/lama/inpainted_lama.png",
+    "authoring": "workbench/documents/계좌개설신청서__APP-13/authoring/schema.json",
+    "authoring_stylesheet": "workbench/documents/계좌개설신청서__APP-13/authoring/stylesheet.json",
+    "authoring_faker_profile": "workbench/documents/계좌개설신청서__APP-13/authoring/faker_profile.json",
+    "authoring_preview": "workbench/documents/계좌개설신청서__APP-13/authoring/render_preview/preview_000001.png",
+    "authoring_overlay": "workbench/documents/계좌개설신청서__APP-13/authoring/render_preview/preview_000001.overlay.png",
+    "authoring_batch": "outputs/render/batch_authoring_20260702/APP-13_계좌개설신청서/summary.json",
+    "authoring_contact_sheet": "outputs/pipeline_ready/APP-13_계좌개설신청서/contact_sheet.jpg",
+    "authoring_style_comparison": "outputs/style_calibration/APP-13_계좌개설신청서/full_comparison.jpg",
+    "authoring_semantic_schema": "workbench/documents/계좌개설신청서__APP-13/authoring/semantic_schema.json"
+  }
+}

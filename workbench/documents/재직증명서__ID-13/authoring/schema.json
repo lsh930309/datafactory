@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-29T12:13:18.401338+00:00",
+  "updated_at": "2026-07-02T04:24:50.348563+00:00",
+  "doc_id": "ID-13",
+  "title": "재직증명서",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/재직증명서__ID-13/review/original_재직증명서/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/재직증명서__ID-13/samples/original/재직증명서.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/재직증명서__ID-13/inpaint/original_재직증명서/lama/inpainted_lama.png",
+  "image": {
+    "width": 903,
+    "height": 1280
+  },
+  "fields": [
+    {
+      "field_id": "certificate_number",
+      "label": "증명서 번호",
+      "source_detection_id": "det_000001",
+      "source_text": "제KA0GI04-029호",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id13_employment_profiles.certificate_number",
+      "style_class": "style_certificate_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "certificate.number",
+        "csv_column": "certificate_number"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000001"
+    },
+    {
+      "field_id": "department",
+      "label": "소속",
+      "source_detection_id": "det_000004",
+      "source_text": "소 속:(사)한국게임산업협회",
+      "value_type": "company.name_ko",
+      "generator": "pool_record:id13_employment_profiles.department",
+      "style_class": "style_department",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "department",
+        "csv_column": "department"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000004"
+    },
+    {
+      "field_id": "job_title",
+      "label": "직책",
+      "source_detection_id": "det_000005",
+      "source_text": "직책: 기획이사",
+      "value_type": "money.krw",
+      "generator": "pool_record:id13_employment_profiles.job_title",
+      "style_class": "style_job_title",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "job.title",
+        "csv_column": "job_title"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000005"
+    },
+    {
+      "field_id": "employee_name",
+      "label": "성명",
+      "source_detection_id": "det_000006",
+      "source_text": "성 명:김명신",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id13_employment_profiles.employee_name",
+      "style_class": "style_employee_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employee.name",
+        "csv_column": "employee_name"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000006"
+    },
+    {
+      "field_id": "employment_period",
+      "label": "근무기간",
+      "source_detection_id": "det_000009",
+      "source_text": "근무기간 : 2002년 03월 01일부터 2005월 3월 31일 현재까지 (3년 1개월)",
+      "value_type": "date.kr",
+      "generator": "pool_record:id13_employment_profiles.employment_period",
+      "style_class": "style_employment_period",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "employment.period",
+        "csv_column": "employment_period"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000009"
+    },
+    {
+      "field_id": "submission_to",
+      "label": "제출처",
+      "source_detection_id": "det_000010",
+      "source_text": "제 출 처 : 학교 제출",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id13_employment_profiles.submission_to",
+      "style_class": "style_submission_to",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "submission.to",
+        "csv_column": "submission_to"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000010"
+    },
+    {
+      "field_id": "purpose",
+      "label": "용도",
+      "source_detection_id": "det_000011",
+      "source_text": "용   도: 구비 서류",
+      "value_type": "money.krw",
+      "generator": "pool_record:id13_employment_profiles.purpose",
+      "style_class": "style_purpose",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "purpose",
+        "csv_column": "purpose"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000011"
+    },
+    {
+      "field_id": "issue_date",
+      "label": "발급일",
+      "source_detection_id": "det_000013",
+      "source_text": "2006년 6월 29일",
+      "value_type": "date.kr",
+      "generator": "pool_record:id13_employment_profiles.issue_date",
+      "style_class": "style_issue_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "issue.date",
+        "csv_column": "issue_date"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000013"
+    },
+    {
+      "field_id": "organization_name",
+      "label": "기관명",
+      "source_detection_id": "det_000014",
+      "source_text": "(사)한 국 게 임 산 업/협회",
+      "value_type": "free_text.short",
+      "generator": "pool_record:id13_employment_profiles.organization_name",
+      "style_class": "style_organization_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "organization.name",
+        "csv_column": "organization_name"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000014"
+    },
+    {
+      "field_id": "chairperson_name",
+      "label": "대표자명",
+      "source_detection_id": "det_000015",
+      "source_text": "회 장 김",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id13_employment_profiles.chairperson_name",
+      "style_class": "style_chairperson_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "chairperson.name",
+        "csv_column": "chairperson_name"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000015"
+    },
+    {
+      "field_id": "confirmation_department",
+      "label": "확인부서",
+      "source_detection_id": "det_000017",
+      "source_text": "확인부서: 직책 국장,성명:임",
+      "value_type": "person.name_ko",
+      "generator": "pool_record:id13_employment_profiles.confirmation_department",
+      "style_class": "style_confirmation_department",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "confirmation.department",
+        "csv_column": "confirmation_department"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000017"
+    },
+    {
+      "field_id": "confirmation_phone",
+      "label": "확인부서 연락처",
+      "source_detection_id": "det_000020",
+      "source_text": "(확인부서 연락처: 02-",
+      "value_type": "person.phone_kr",
+      "generator": "pool_record:id13_employment_profiles.confirmation_phone",
+      "style_class": "style_confirmation_phone",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink"
+      },
+      "export": {
+        "json_path": "confirmation.phone",
+        "csv_column": "confirmation_phone"
+      },
+      "required": true,
+      "notes": "ID-13 재직증명서 생산용 보정 필드. 원본 라벨과 중복되지 않도록 값만 주입하며 crop 비교 없이 전체 문서 기준으로 검수.",
+      "bbox_label_id": "det_000020"
+    }
+  ],
+  "groups": [],
+  "authoring_mode": "id13_pipeline_ready_20260702",
+  "quality_status": "pipeline_ready_candidate",
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/재직증명서__ID-13/review/original_재직증명서/review.json"
+  }
+}

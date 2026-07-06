@@ -183,7 +183,7 @@ def fields_for_page(page: int) -> list[dict[str, Any]]:
     boxes.update(PAGE1_BOXES if page == 1 else PAGE2_BOXES)
     fields: list[dict[str, Any]] = []
     for key, bbox in boxes.items():
-        fields.append(field(f'p{page}_{key}', f'페이지 {page} 체크 {key}', bbox, 'style_check', generator=f'pool_record:sec03_profiles.p{page}_{key}', align='center', json_path=f'page{page}.checkboxes.{key}', notes='선택된 항목은 ■, 미선택 항목은 공란으로 렌더링'))
+        fields.append(field(f'p{page}_{key}', f'페이지 {page} 체크 {key}', bbox, 'style_check', generator=f'pool_record:sec03_profiles.p{page}_{key}', value_type='bool.checkbox', align='center', json_path=f'page{page}.checkboxes.{key}', notes='선택된 항목은 ■, 미선택 항목은 공란으로 렌더링'))
     text_fields = TEXT_FIELDS_PAGE1 if page == 1 else TEXT_FIELDS_PAGE2
     labels = {
         'identity_number': '실명번호', 'company_reg_no': '사업자등록번호', 'confirmation_date': '확인 날짜', 'customer_name': '고객성명', 'reconfirm_date': '기존정보 동일 확인 날짜', 'reconfirm_name': '기존정보 동일 고객성명',

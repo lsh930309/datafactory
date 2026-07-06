@@ -1239,7 +1239,7 @@ def _normalize_generated_value_for_field(field: dict[str, Any], rule: str, value
 
 
 def _field_is_checkbox(field: dict[str, Any], rule: str) -> bool:
-    return _is_checkbox_rule(rule) or _is_checkbox_value(str(field.get("value_type") or "")) or _checkbox_like_id_or_label(field)
+    return _is_checkbox_rule(rule) or _is_checkbox_value(str(field.get("value_type") or ""))
 
 
 def _is_checkbox_rule(value: str) -> bool:
@@ -1253,11 +1253,6 @@ def _is_checkbox_rule(value: str) -> bool:
 
 def _is_checkbox_value(value: str) -> bool:
     return str(value or "").strip().lower().replace("_", ".").replace("-", ".") == CHECKBOX_VALUE_TYPE
-
-
-def _checkbox_like_id_or_label(field: dict[str, Any]) -> bool:
-    text = " ".join(str(field.get(key) or "") for key in ("field_id", "label", "name", "style_class")).lower()
-    return any(token in text for token in ("checkbox", "_check", " check", "체크박스", "선택"))
 
 
 def _truthy_checkbox_value(value: str) -> bool:

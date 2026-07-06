@@ -158,6 +158,105 @@ def test_render_authoring_live_preview_fills_blank_values_for_visual_review(tmp_
     assert kv["values"]["field_001"] == "검수용 빈 값"
 
 
+def test_live_preview_does_not_infer_checkbox_from_selection_label(tmp_path: Path) -> None:
+    source = tmp_path / "selection_label.png"
+    Image.new("RGB", (240, 100), "white").save(source)
+    schema = {
+        "schema_version": 1,
+        "doc_id": "APP-14",
+        "source_inpainted": str(source),
+        "fields": [
+            {
+                "field_id": "p1_optional_consent_year",
+                "label": "선택동의년",
+                "bbox": [20, 20, 80, 30],
+                "bbox_format": "xywh",
+                "value_type": "free_text.short",
+                "generator": "literal:26",
+                "style_class": "body_default",
+                "render_policy": {"align": "center", "valign": "middle", "overflow": "shrink"},
+                "export": {"json_path": "선택동의.년"},
+            }
+        ],
+    }
+    stylesheet = {
+        "schema_version": 1,
+        "doc_id": "APP-14",
+        "style_classes": [{"style_class": "body_default", "font_size": 18, "fill": [0, 0, 0]}],
+    }
+    faker_profile = {
+        "schema_version": 1,
+        "doc_id": "APP-14",
+        "field_generators": {"p1_optional_consent_year": "literal:26"},
+        "constraints": [],
+    }
+
+    result = render_authoring_live_preview(
+        schema,
+        stylesheet,
+        faker_profile,
+        out_dir=tmp_path / "authoring" / "selection_label_live_preview",
+    )
+
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    bbox = json.loads(result.bbox.read_text(encoding="utf-8"))
+    assert kv["values"]["p1_optional_consent_year"] == "26"
+    assert bbox["annotations"][0]["text"] == "26"
+
+
+def test_checkbox_text_is_not_inferred_from_label_without_explicit_type(tmp_path: Path) -> None:
+    source = tmp_path / "checkbox_word_label.png"
+    Image.new("RGB", (240, 100), "white").save(source)
+    schema = {
+        "schema_version": 1,
+        "doc_id": "TEST",
+        "source_inpainted": str(source),
+        "fields": [
+            {
+                "field_id": "plain_check_word",
+                "label": "체크 표시 안내",
+                "bbox": [20, 20, 80, 30],
+                "bbox_format": "xywh",
+                "value_type": "free_text.short",
+                "generator": "literal:✓",
+                "style_class": "body_default",
+                "render_policy": {"align": "center", "valign": "middle", "overflow": "shrink"},
+                "export": {"json_path": "plain_check_word"},
+            }
+        ],
+    }
+    stylesheet = {
+        "schema_version": 1,
+        "doc_id": "TEST",
+        "style_classes": [{"style_class": "body_default", "font_size": 18, "fill": [0, 0, 0]}],
+    }
+    faker_profile = {
+        "schema_version": 1,
+        "doc_id": "TEST",
+        "field_generators": {"plain_check_word": "literal:✓"},
+        "constraints": [],
+    }
+
+    schema_path = tmp_path / "schema.json"
+    stylesheet_path = tmp_path / "stylesheet.json"
+    faker_profile_path = tmp_path / "faker_profile.json"
+    schema_path.write_text(json.dumps(schema, ensure_ascii=False), encoding="utf-8")
+    stylesheet_path.write_text(json.dumps(stylesheet, ensure_ascii=False), encoding="utf-8")
+    faker_profile_path.write_text(json.dumps(faker_profile, ensure_ascii=False), encoding="utf-8")
+
+    result = render_authoring_preview(
+        schema_path,
+        stylesheet_path,
+        faker_profile_path,
+        out_dir=tmp_path / "authoring" / "check_word_preview",
+    )
+
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    bbox = json.loads(result.bbox.read_text(encoding="utf-8"))
+    assert kv["values"]["plain_check_word"] == "✓"
+    assert bbox["annotations"][0]["text"] == "✓"
+
+
 def test_render_template_applies_x_shift_without_changing_requested_bbox(tmp_path: Path) -> None:
     source = tmp_path / "x_shift_base.png"
     Image.new("RGB", (220, 90), "white").save(source)

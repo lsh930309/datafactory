@@ -1636,7 +1636,7 @@ function App() {
         ...current.schema,
         fields: (current.schema?.fields || []).map((field) => {
           if (!targetIds.has(field.field_id)) return field;
-          const checkboxPatch = patch.checkbox_style && isAuthoringCheckboxField(field) ? { checkbox_style: patch.checkbox_style } : {};
+          const checkboxPatch = patch.checkbox_style && isAuthoringCheckboxField(field, current.faker_profile) ? { checkbox_style: patch.checkbox_style } : {};
           const nextPolicy = {
             ...(field.render_policy || {}),
             ...(patch.align ? { align: patch.align } : {}),
@@ -2349,9 +2349,23 @@ function App() {
   );
 }
 
-function isAuthoringCheckboxField(field) {
-  const text = `${field?.value_type || ''} ${field?.generator || ''} ${field?.field_id || ''} ${field?.label || ''}`.toLowerCase();
-  return text.includes('bool.checkbox') || text.includes('checkbox') || text.includes('_check') || text.includes('체크');
+function isAuthoringCheckboxField(field, fakerProfile = null) {
+  const fieldId = field?.field_id || '';
+  const explicitRule = fakerProfile?.field_generators?.[fieldId] || field?.generator || '';
+  const explicitType = field?.value_type || '';
+  return isCheckboxRule(explicitRule) || isCheckboxRule(explicitType);
+}
+
+function isCheckboxRule(value) {
+  const normalized = String(value || '').trim().toLowerCase().replaceAll('_', '.').replaceAll('-', '.');
+  return normalized === 'bool.checkbox'
+    || normalized === 'checkbox'
+    || normalized === 'checkbox.bool'
+    || normalized === 'boolean'
+    || normalized.startsWith('bool.checkbox')
+    || normalized.startsWith('checkbox:')
+    || normalized.startsWith('boolean:')
+    || normalized.startsWith('bool:');
 }
 
 function hasRenderableAuthoringBbox(field) {
@@ -2491,7 +2505,7 @@ function AuthoringEditor({
   const currentRule = selectedField ? (fakerProfile?.field_generators?.[selectedField.field_id] || selectedField.generator || selectedField.value_type || 'free_text.short') : '';
   const selectedFontId = fontIdForStyle(selectedStyle, fontOptions);
   const selectedExport = selectedField?.export || {};
-  const selectedCheckboxFields = selectedFields.filter(isAuthoringCheckboxField);
+  const selectedCheckboxFields = selectedFields.filter((field) => isAuthoringCheckboxField(field, fakerProfile));
   const hasCheckboxSelection = selectedCheckboxFields.length > 0;
   const checkboxStyles = [...new Set(selectedCheckboxFields.map((field) => field.render_policy?.checkbox_style || 'v_mark'))];
   const checkboxStyleValue = checkboxStyles.length === 1 ? checkboxStyles[0] : 'mixed';

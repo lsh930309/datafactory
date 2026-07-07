@@ -8,7 +8,19 @@ from xml.etree import ElementTree as ET
 from PIL import Image
 
 from datafactory.registry import FIRST_PRIORITY_DOC_IDS, FIRST_PRIORITY_SCOPE_ENTRIES, load_registry, normalize_title, slugify_title
-from datafactory.workbench import import_seed_batch, import_seed_folder, list_work_items, save_seed_mapping, save_uploaded_seed_files, scan_seed_samples, trash_seed_folder
+from datafactory.workbench import (
+    delete_target_group,
+    import_seed_batch,
+    import_seed_folder,
+    list_target_groups,
+    list_work_items,
+    preview_seed_revert,
+    save_seed_mapping,
+    save_target_group,
+    save_uploaded_seed_files,
+    scan_seed_samples,
+    trash_seed_folder,
+)
 from datafactory.first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
 from datafactory.models import BBox, FieldSpec, TemplateSpec
 from datafactory.render import render_template
@@ -27,11 +39,78 @@ def test_registry_loads_title_first_documents_and_priority_flags() -> None:
     assert "FIN-01" in FIRST_PRIORITY_DOC_IDS
     assert finance.workflow_ids
     assert finance.domains
+    assert finance.po_domains[:2] == ("금융", "제조")
+    assert "공공·행정 (B2G)" in finance.domains
     assert len(FIRST_PRIORITY_SCOPE_ENTRIES) == 30
     assert len(FIRST_PRIORITY_DOC_IDS) == 28
-    assert registry.to_dict()["summary"]["firstPriorityScopeEntryCount"] == 30
-    assert registry.to_dict()["summary"]["firstPriorityDocumentCount"] == 28
+    payload = registry.to_dict()
+    assert payload["summary"]["firstPriorityScopeEntryCount"] == 30
+    assert payload["summary"]["firstPriorityDocumentCount"] == 28
+    assert payload["domains"][:2] == ["금융", "제조"]
+    assert "금융 - 은행 (여신·신용·외환)" in payload["workflowDomains"]
+    assert payload["poDomainSummary"][0] == {"id": "금융", "label": "금융", "total": 37, "active": 17, "inactive": 20}
+    assert payload["targetGroups"][0]["id"] == "first_priority"
+    assert len(payload["targetGroups"][0]["scopeEntries"]) == 30
     assert finance.first_priority_domains == ("금융", "제조")
+    assert registry.documents["APP-13"].po_domains == ("금융",)
+
+
+def test_target_groups_store_custom_groups_without_touching_default(tmp_path: Path) -> None:
+    registry = load_registry()
+    workbench_root = tmp_path / "workbench" / "documents"
+
+    saved = save_target_group(
+        {
+            "label": "카드/계좌 authoring",
+            "description": "수동 구성 그룹",
+            "scopeEntries": [{"domain": "금융", "docId": "APP-14"}, {"domain": "금융", "docId": "APP-13"}],
+        },
+        registry=registry,
+        root=workbench_root,
+    )
+
+    groups = saved["groups"]
+    assert groups[0]["id"] == "first_priority"
+    custom = next(group for group in groups if group["label"] == "카드/계좌 authoring")
+    assert not custom["protected"]
+    assert [entry["docId"] for entry in custom["scopeEntries"]] == ["APP-14", "APP-13"]
+
+    listed = list_target_groups(registry=registry, root=workbench_root)
+    assert listed["summary"]["customCount"] == 1
+
+    deleted = delete_target_group(custom["id"], registry=registry, root=workbench_root)
+    assert deleted["summary"]["customCount"] == 0
+
+
+def test_target_groups_can_hide_default_first_priority_group(tmp_path: Path) -> None:
+    registry = load_registry()
+    workbench_root = tmp_path / "workbench" / "documents"
+
+    before = list_target_groups(registry=registry, root=workbench_root)
+    assert before["summary"]["defaultCount"] == 1
+
+    after = delete_target_group("first_priority", registry=registry, root=workbench_root)
+
+    assert after["summary"]["defaultCount"] == 0
+    assert after["summary"]["hiddenDefaultCount"] == 1
+    assert all(group["id"] != "first_priority" for group in after["groups"])
+
+
+def test_seed_revert_preview_lists_paths_before_move(tmp_path: Path) -> None:
+    registry = load_registry()
+    seed_folder = tmp_path / "seed_samples" / "가족관계증명서"
+    seed_folder.mkdir(parents=True)
+    (seed_folder / "sample.jpg").write_bytes(b"seed-original")
+    workbench_root = tmp_path / "workbench" / "documents"
+    import_seed_folder(seed_folder, "ID-05", registry=registry, root=workbench_root)
+    ocr_dir = workbench_root / "가족관계증명서__ID-05" / "ocr"
+    ocr_dir.mkdir(parents=True)
+    (ocr_dir / "detections.json").write_text("{}", encoding="utf-8")
+
+    preview = preview_seed_revert("ID-05", registry=registry, root=workbench_root)
+
+    assert preview["willResetStatusTo"] == "missing"
+    assert {Path(item["path"]).name for item in preview["willMove"]} >= {"samples", "ocr"}
 
 
 def test_title_normalization_and_slug_keep_korean_readability() -> None:
@@ -620,3 +699,37 @@ def test_render_template_applies_baseline_shift(tmp_path: Path) -> None:
     _image_flat, flat_annotations = render_template(template_flat, {"value": "기준값"})
 
     assert up_annotations[0].bbox.y == flat_annotations[0].bbox.y - 6
+
+
+def test_revert_seed_import_resets_manifest_and_moves_pipeline_dirs(tmp_path: Path) -> None:
+    from datafactory.workbench import revert_seed_import
+
+    registry = load_registry()
+    seed_folder = tmp_path / "seed_samples" / "가족관계증명서"
+    seed_folder.mkdir(parents=True)
+    (seed_folder / "sample.jpg").write_bytes(b"seed-original")
+    workbench_root = tmp_path / "workbench" / "documents"
+    import_seed_folder(seed_folder, "ID-05", registry=registry, root=workbench_root)
+    doc_root = workbench_root / "가족관계증명서__ID-05"
+    (doc_root / "ocr" / "sample").mkdir(parents=True)
+    (doc_root / "ocr" / "sample" / "detections.json").write_text("{}", encoding="utf-8")
+    (doc_root / "review" / "sample").mkdir(parents=True)
+    (doc_root / "review" / "sample" / "review.json").write_text("{}", encoding="utf-8")
+    manifest_path = doc_root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["artifacts"] = {"ocr": "x", "review": "y", "inpaint": "z", "authoring": "keep-me"}
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False), encoding="utf-8")
+
+    result = revert_seed_import("ID-05", registry=registry, root=workbench_root)
+
+    updated = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert updated["status"] == "missing"
+    assert updated["samples"] == []
+    assert updated["source_seed_folders"] == []
+    assert updated["artifacts"]["ocr"] is None
+    assert updated["artifacts"]["review"] is None
+    assert updated["artifacts"]["inpaint"] is None
+    assert updated["artifacts"]["authoring"] == "keep-me"
+    assert not (doc_root / "samples").exists()
+    assert not (doc_root / "ocr").exists()
+    assert (tmp_path / result["trashPath"] if not Path(result["trashPath"]).is_absolute() else Path(result["trashPath"])).exists()

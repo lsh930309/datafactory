@@ -5,6 +5,7 @@ import base64
 import json
 import mimetypes
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -16,7 +17,7 @@ from time import perf_counter
 from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
 
-from PIL import Image
+from PIL import Image, ImageChops, ImageDraw
 
 from .authoring import (
     authoring_review_prune_candidates,
@@ -41,13 +42,19 @@ from .ocr_worker import run_ocr_eval
 from .policy import ReviewPolicy, draft_review_policy, load_review_policy, review_summary, write_review_policy
 from .registry import load_registry
 from .workbench import (
+    delete_target_group,
+    document_dir,
     import_seed_batch,
     import_seed_folder,
     list_work_items,
+    list_target_groups,
+    preview_seed_revert,
     save_seed_mapping,
+    save_target_group,
     save_uploaded_seed_files,
     scan_seed_samples,
     trash_seed_folder,
+    revert_seed_import,
     update_manifest_artifact,
     workbench_subdir,
 )
@@ -170,6 +177,241 @@ def save_policy_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 update_manifest_artifact(doc_id, "authoring_stylesheet", stylesheet_path)
                 update_manifest_artifact(doc_id, "authoring_faker_profile", faker_profile_path)
     return {"paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "prunedAuthoring": pruned_authoring}
+
+
+def registry_payload() -> dict[str, Any]:
+    registry = load_registry()
+    payload = registry.to_dict()
+    payload["targetGroups"] = list_target_groups(registry=registry)["groups"]
+    return payload
+
+
+def scan_review_legacy_issues() -> dict[str, Any]:
+    registry = load_registry()
+    items = []
+    total_ignore = 0
+    for doc in registry.documents.values():
+        doc_root = document_dir(doc)
+        if not doc_root.exists():
+            continue
+        review_paths = sorted(path for path in doc_root.glob("review/**/review.json") if "/backups/" not in str(path))
+        for review_path in review_paths:
+            policy = load_review_policy(review_path)
+            ignore_labels = [label for label in policy.labels if label.status == "ignore"]
+            if not ignore_labels:
+                continue
+            total_ignore += len(ignore_labels)
+            items.append(
+                {
+                    "docId": doc.doc_id,
+                    "title": doc.title,
+                    "reviewPath": _display_path(review_path, ROOT),
+                    "ignoreCount": len(ignore_labels),
+                    "labelIds": [label.id for label in ignore_labels],
+                }
+            )
+    return {"summary": {"documentCount": len(items), "ignoreCount": total_ignore}, "items": items}
+
+
+def remove_ignore_bboxes_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    review_path = _resolve_workspace_path(str(payload.get("reviewPath") or ""))
+    policy = load_review_policy(review_path)
+    removed = [label for label in policy.labels if label.status == "ignore"]
+    if not removed:
+        return {"docId": doc_id, "removed": 0, "backup": None, "paths": {"review": _display_path(review_path, ROOT)}}
+    backup = backup_review_draft_outputs(review_path.parent)
+    cleaned = ReviewPolicy(
+        source_detections=policy.source_detections,
+        source_image=policy.source_image,
+        image_width=policy.image_width,
+        image_height=policy.image_height,
+        labels=[label for label in policy.labels if label.status != "ignore"],
+        source_engine=policy.source_engine,
+        schema_version=policy.schema_version,
+        created_at=policy.created_at,
+    )
+    paths = write_review_policy(cleaned, review_path.parent)
+    update_manifest_artifact(doc_id, "review", paths["review"])
+    return {
+        "docId": doc_id,
+        "removed": len(removed),
+        "removedLabelIds": [label.id for label in removed],
+        "backup": backup,
+        "paths": _paths_to_client(paths),
+        "policy": policy_to_client(cleaned, review_path=paths["review"]),
+    }
+
+
+def scan_manual_cleanup_legacy() -> dict[str, Any]:
+    registry = load_registry()
+    items = []
+    for item in list_work_items(registry=registry):
+        doc = registry.documents.get(str(item.get("docId") or ""))
+        if doc is None:
+            continue
+        doc_root = document_dir(doc)
+        for cleanup_dir in sorted(doc_root.glob("inpaint/**/manual_cleanup")):
+            if not cleanup_dir.is_dir():
+                continue
+            promoted_candidate = cleanup_dir / "painted_template.png"
+            legacy_candidate = cleanup_dir / "inpainted_lama.png"
+            comparison_candidate = cleanup_dir / "comparison_paint.png"
+            if not comparison_candidate.exists():
+                comparison_candidate = cleanup_dir / "comparison_lama.png"
+            items.append(
+                {
+                    "docId": item["docId"],
+                    "title": item["title"],
+                    "cleanupDir": _display_path(cleanup_dir, ROOT),
+                    "templateId": cleanup_dir.parent.name,
+                    "hasPaintResult": promoted_candidate.exists(),
+                    "hasLegacyInpaintResult": legacy_candidate.exists(),
+                    "promoteSource": _display_path(promoted_candidate if promoted_candidate.exists() else legacy_candidate, ROOT) if (promoted_candidate.exists() or legacy_candidate.exists()) else "",
+                    "comparisonSource": _display_path(comparison_candidate, ROOT) if comparison_candidate.exists() else "",
+                    "currentInpainted": str(item.get("latestInpainted") or ""),
+                }
+            )
+    return {"summary": {"legacyCleanupCount": len(items)}, "items": items}
+
+
+def promote_manual_cleanup_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    cleanup_dir = _resolve_workspace_path(str(payload.get("cleanupDir") or ""))
+    if not doc_id:
+        raise ValueError("docId is required")
+    if cleanup_dir.name != "manual_cleanup" or ROOT not in cleanup_dir.resolve().parents:
+        raise ValueError("cleanupDir must be a manual_cleanup directory inside the workspace")
+    if not cleanup_dir.exists() or not cleanup_dir.is_dir():
+        raise FileNotFoundError(cleanup_dir)
+    source_image = cleanup_dir / "painted_template.png"
+    if not source_image.exists():
+        source_image = cleanup_dir / "inpainted_lama.png"
+    if not source_image.exists():
+        raise FileNotFoundError("manual_cleanup has no promoted inpaint result")
+    comparison = cleanup_dir / "comparison_paint.png"
+    if not comparison.exists():
+        comparison = cleanup_dir / "comparison_lama.png"
+
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    backup_root = ROOT / "workbench" / ".trash" / "manual_cleanup_promote" / f"{timestamp}_{_safe_name(doc_id)}_{_safe_name(cleanup_dir.parent.name)}"
+    backup_root.mkdir(parents=True, exist_ok=True)
+    target_dir = cleanup_dir.parent / "lama"
+    target_dir.mkdir(parents=True, exist_ok=True)
+    for existing_name in ("inpainted_lama.png", "comparison_lama.png", "summary.json"):
+        existing = target_dir / existing_name
+        if existing.exists():
+            backup_existing_dir = backup_root / "previous_lama"
+            backup_existing_dir.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(existing, backup_existing_dir / existing.name)
+    promoted_inpainted = target_dir / "inpainted_lama.png"
+    promoted_comparison = target_dir / "comparison_lama.png"
+    shutil.copy2(source_image, promoted_inpainted)
+    if comparison.exists():
+        shutil.copy2(comparison, promoted_comparison)
+    summary_path = target_dir / "summary.json"
+    summary_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "strategy": "promoted_manual_cleanup_result",
+                "source_cleanup_dir": _display_path(cleanup_dir, ROOT),
+                "source_image": _display_path(source_image, ROOT),
+                "outputs": {
+                    "inpainted": _display_path(promoted_inpainted, ROOT),
+                    "comparison": _display_path(promoted_comparison, ROOT) if promoted_comparison.exists() else "",
+                },
+                "backup": _display_path(backup_root, ROOT),
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    removed_dir = backup_root / "manual_cleanup"
+    shutil.move(str(cleanup_dir), str(removed_dir))
+    update_manifest_artifact(doc_id, "inpaint", promoted_comparison if promoted_comparison.exists() else promoted_inpainted)
+    _clear_manifest_artifacts(doc_id, ["inpaint_cleanup", "inpaint_cleanup_inpainted", "inpaint_cleanup_mask"])
+    return {
+        "docId": doc_id,
+        "promoted": {
+            "inpainted": _display_path(promoted_inpainted, ROOT),
+            "comparison": _display_path(promoted_comparison, ROOT) if promoted_comparison.exists() else "",
+            "summary": _display_path(summary_path, ROOT),
+        },
+        "backup": _display_path(backup_root, ROOT),
+        "removedManualCleanup": _display_path(removed_dir, ROOT),
+    }
+
+
+def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    registry = load_registry()
+    doc = registry.documents.get(doc_id)
+    if doc is None:
+        raise ValueError(f"unknown docId: {doc_id}")
+    item = next((candidate for candidate in list_work_items(registry=registry) if candidate.get("docId") == doc_id), None)
+    request_dir = workbench_subdir(doc_id, "authoring") / "agent_requests" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    request_dir.mkdir(parents=True, exist_ok=True)
+    request = {
+        "schema_version": 1,
+        "status": "ready_for_agent",
+        "docId": doc_id,
+        "title": doc.title,
+        "instruction": str(payload.get("instruction") or "").strip(),
+        "contract": {
+            "mode": "agentic_authoring_a_to_z",
+            "outputs": ["schema.json", "stylesheet.json", "faker_profile.json", "preview render report"],
+            "rules": [
+                "문서 이미지, OCR, bbox review를 근거로 key-value hierarchy를 설계한다.",
+                "렌더러는 결과 authoring 파일을 임의 보정하지 않으므로 agent 산출물이 최종 계약이다.",
+                "기존 파일을 덮어쓰기 전 사용자 승인과 백업 경로를 요구한다.",
+            ],
+        },
+        "inputs": {
+            "registry": doc.to_dict(),
+            "sample": item.get("samples", [None])[0] if item else "",
+            "latestDetections": item.get("latestDetections") if item else "",
+            "latestReview": item.get("latestReview") if item else "",
+            "latestInpainted": item.get("latestInpainted") if item else "",
+            "existingAuthoring": {
+                "schema": item.get("latestAuthoringSchema") if item else "",
+                "stylesheet": item.get("latestAuthoringStylesheet") if item else "",
+                "fakerProfile": item.get("latestAuthoringFakerProfile") if item else "",
+            },
+        },
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    path = request_dir / "request.json"
+    path.write_text(json.dumps(request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return {"docId": doc_id, "status": "ready_for_agent", "paths": {"request": _display_path(path, ROOT)}, "request": request}
+
+
+def _clear_manifest_artifacts(doc_id: str, artifact_keys: list[str]) -> None:
+    registry = load_registry()
+    doc = registry.documents.get(doc_id)
+    if doc is None:
+        return
+    manifest_path = document_dir(doc) / "manifest.json"
+    if not manifest_path.exists():
+        return
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return
+    artifacts = manifest.get("artifacts")
+    if not isinstance(artifacts, dict):
+        return
+    for key in artifact_keys:
+        artifacts.pop(key, None)
+    manifest["updated_at"] = datetime.now(timezone.utc).isoformat()
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _authoring_paths_from_payload(payload: dict[str, Any], doc_id: str) -> tuple[Path, Path, Path]:
@@ -341,7 +583,6 @@ def run_cleanup_inpaint_payload(payload: dict[str, Any]) -> dict[str, Any]:
     paths["mask_json"] = mask_paths.mask_json
     paths["manual_mask"] = mask_paths.manual_mask
     _augment_cleanup_summary(paths["summary"], paths=paths, elapsed_seconds=elapsed_seconds)
-    update_manifest_artifact(doc_id, "inpaint", paths["comparison"])
     update_manifest_artifact(doc_id, "inpaint_cleanup", paths["comparison"])
     update_manifest_artifact(doc_id, "inpaint_cleanup_inpainted", paths["inpainted"])
     update_manifest_artifact(doc_id, "inpaint_cleanup_mask", mask_paths.manual_mask)
@@ -362,6 +603,220 @@ def run_cleanup_inpaint_payload(payload: dict[str, Any]) -> dict[str, Any]:
 
 def _cleanup_dir(doc_id: str, policy: ReviewPolicy) -> Path:
     return _resolve_workspace_path(workbench_subdir(doc_id, "inpaint") / _safe_template_id(policy.source_image) / "manual_cleanup")
+
+
+
+def empty_cleanup_paint_payload(width: int, height: int) -> dict[str, Any]:
+    return {
+        "schema_version": 2,
+        "tool": "paint_cleanup",
+        "image": {"width": int(width), "height": int(height)},
+        "strokes": [],
+        "selected_color": [255, 255, 255],
+        "brush_radius": 10,
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+def normalize_cleanup_paint_payload(payload: dict[str, Any] | None, *, width: int, height: int) -> dict[str, Any]:
+    raw = payload if isinstance(payload, dict) else {}
+    strokes: list[dict[str, Any]] = []
+    for index, stroke in enumerate(raw.get("strokes") or []):
+        if not isinstance(stroke, dict):
+            continue
+        points = []
+        for point in stroke.get("points") or []:
+            if not isinstance(point, dict):
+                continue
+            try:
+                x = int(round(float(point.get("x"))))
+                y = int(round(float(point.get("y"))))
+            except (TypeError, ValueError):
+                continue
+            points.append({"x": max(0, min(width - 1, x)), "y": max(0, min(height - 1, y))})
+        if not points:
+            continue
+        color = _normalize_rgb(stroke.get("color") or raw.get("selected_color") or [255, 255, 255])
+        radius = _clamped_int(stroke.get("radius") or raw.get("brush_radius") or 10, default=10, minimum=1, maximum=160)
+        strokes.append(
+            {
+                "id": str(stroke.get("id") or f"paint_{index + 1:04d}"),
+                "type": "brush",
+                "color": color,
+                "radius": radius,
+                "points": points,
+            }
+        )
+    return {
+        "schema_version": 2,
+        "tool": "paint_cleanup",
+        "image": {"width": int(width), "height": int(height)},
+        "strokes": strokes,
+        "selected_color": _normalize_rgb(raw.get("selected_color") or [255, 255, 255]),
+        "brush_radius": _clamped_int(raw.get("brush_radius") or 10, default=10, minimum=1, maximum=160),
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+def _clamped_int(value: Any, *, default: int, minimum: int, maximum: int) -> int:
+    try:
+        numeric = int(round(float(value)))
+    except (TypeError, ValueError):
+        numeric = default
+    return max(minimum, min(maximum, numeric))
+
+
+def _normalize_rgb(value: Any) -> list[int]:
+    raw = value if isinstance(value, (list, tuple)) else []
+    result: list[int] = []
+    for index in range(3):
+        try:
+            channel = int(round(float(raw[index])))
+        except (IndexError, TypeError, ValueError):
+            channel = 255
+        result.append(max(0, min(255, channel)))
+    return result
+
+
+def _render_cleanup_paint(base_image_path: Path, payload: dict[str, Any]) -> Image.Image:
+    image = Image.open(base_image_path).convert("RGB")
+    normalized = normalize_cleanup_paint_payload(payload, width=image.width, height=image.height)
+    draw = ImageDraw.Draw(image)
+    for stroke in normalized.get("strokes") or []:
+        points = [(int(point["x"]), int(point["y"])) for point in stroke.get("points") or []]
+        if not points:
+            continue
+        radius = int(stroke.get("radius") or 10)
+        color = tuple(_normalize_rgb(stroke.get("color")))
+        if len(points) == 1:
+            x, y = points[0]
+            draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=color)
+            continue
+        draw.line(points, fill=color, width=radius * 2, joint="curve")
+        for x, y in points:
+            draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=color)
+    return image
+
+
+def _cleanup_paint_paths(cleanup_dir: Path) -> dict[str, Path]:
+    return {
+        "paint_json": cleanup_dir / "paint.json",
+        "inpainted": cleanup_dir / "painted_template.png",
+        "comparison": cleanup_dir / "comparison_paint.png",
+        "summary": cleanup_dir / "paint_summary.json",
+    }
+
+
+def load_cleanup_paint_payload(*, doc_id: str, review_path: Path, base_image_path: Path | None = None) -> dict[str, Any]:
+    policy = load_review_policy(review_path)
+    cleanup_dir = _cleanup_dir(doc_id, policy)
+    base_path = base_image_path or _resolve_workspace_path(policy.source_image)
+    if base_image_path is None:
+        existing = cleanup_dir / "painted_template.png"
+        if existing.exists():
+            base_path = existing
+    with Image.open(base_path) as base:
+        width, height = base.size
+    paint_path = cleanup_dir / "paint.json"
+    if paint_path.exists():
+        try:
+            paint = json.loads(paint_path.read_text(encoding="utf-8"))
+        except Exception:
+            paint = {}
+    else:
+        paint = empty_cleanup_paint_payload(width, height)
+    saved_base = str(paint.get("base_image_path") or "") if isinstance(paint, dict) else ""
+    if saved_base:
+        saved_base_path = _resolve_workspace_path(saved_base)
+        if saved_base_path.exists():
+            base_path = saved_base_path
+            with Image.open(base_path) as base:
+                width, height = base.size
+    paint = normalize_cleanup_paint_payload(paint, width=width, height=height)
+    paint["base_image_path"] = _display_path(base_path, ROOT)
+    paths = {name: path for name, path in _cleanup_paint_paths(cleanup_dir).items() if path.exists()}
+    return {
+        "docId": doc_id,
+        "reviewPath": _display_path(review_path, ROOT),
+        "baseImagePath": _display_path(base_path, ROOT),
+        "exists": bool(paths),
+        "paint": paint,
+        "paths": _paths_to_client(paths),
+        "imageUrl": f"/api/file?path={_display_path(paths.get('inpainted', base_path), ROOT)}",
+    }
+
+
+def save_cleanup_paint_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    review_path = _resolve_workspace_path(str(payload.get("reviewPath") or ""))
+    base_image_path = _resolve_workspace_path(str(payload.get("baseImagePath") or ""))
+    policy = load_review_policy(review_path)
+    cleanup_dir = _cleanup_dir(doc_id, policy)
+    cleanup_dir.mkdir(parents=True, exist_ok=True)
+    with Image.open(base_image_path) as source_base:
+        base = source_base.convert("RGB")
+    paint = normalize_cleanup_paint_payload(payload.get("paint"), width=base.width, height=base.height)
+    paint["base_image_path"] = _display_path(base_image_path, ROOT)
+    rendered = _render_cleanup_paint(base_image_path, paint)
+    paths = _cleanup_paint_paths(cleanup_dir)
+    paths["paint_json"].write_text(json.dumps(paint, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    rendered.save(paths["inpainted"])
+    diff = ImageChops.difference(base, rendered)
+    comparison = Image.new("RGB", (base.width * 2, base.height), "white")
+    comparison.paste(base, (0, 0))
+    comparison.paste(rendered, (base.width, 0))
+    comparison.save(paths["comparison"])
+    paths["summary"].write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "strategy": "eyedropper_brush_template_cleanup",
+                "stroke_count": len(paint.get("strokes") or []),
+                "changed_bbox": diff.getbbox(),
+                "outputs": {name: _display_path(path, ROOT) for name, path in paths.items()},
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    update_manifest_artifact(doc_id, "inpaint_cleanup", paths["comparison"])
+    update_manifest_artifact(doc_id, "inpaint_cleanup_inpainted", paths["inpainted"])
+    update_manifest_artifact(doc_id, "inpaint_cleanup_mask", paths["paint_json"])
+    synced_authoring = _sync_authoring_source_inpainted_for_doc(doc_id, source_image=policy.source_image, inpainted_path=paths["inpainted"])
+    client_paths = _paths_to_client(paths)
+    return {
+        "docId": doc_id,
+        "reviewPath": _display_path(review_path, ROOT),
+        "baseImagePath": _display_path(base_image_path, ROOT),
+        "paint": paint,
+        "summary": {"stroke_count": len(paint.get("strokes") or []), "strategy": "eyedropper_brush_template_cleanup"},
+        "paths": client_paths,
+        "imageUrl": f"/api/file?path={client_paths['inpainted']}",
+        "comparisonUrl": f"/api/file?path={client_paths['comparison']}",
+        "syncedAuthoringTemplates": synced_authoring,
+    }
+
+
+def backup_review_draft_outputs(output_dir: Path) -> dict[str, str] | None:
+    review_path = output_dir / "review.json"
+    overlay_path = output_dir / "review_overlay.png"
+    existing = [path for path in (review_path, overlay_path) if path.exists()]
+    if not existing:
+        return None
+    backup_dir = output_dir / "backups" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    copied: dict[str, str] = {}
+    for path in existing:
+        destination = backup_dir / path.name
+        import shutil
+        shutil.copy2(path, destination)
+        copied[path.stem] = _display_path(destination, ROOT)
+    return {"dir": _display_path(backup_dir, ROOT), **copied}
 
 
 def _sync_authoring_source_inpainted_for_doc(doc_id: str, *, source_image: Path, inpainted_path: Path) -> dict[str, Any]:
@@ -491,10 +946,19 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(list_output_batches())
                 return
             if parsed.path == "/api/registry":
-                self._send_json(load_registry().to_dict())
+                self._send_json(registry_payload())
+                return
+            if parsed.path == "/api/target-groups":
+                self._send_json(list_target_groups(registry=load_registry()))
                 return
             if parsed.path == "/api/seed/scan":
                 self._send_json(scan_seed_samples(registry=load_registry()))
+                return
+            if parsed.path == "/api/audit/reviews":
+                self._send_json(scan_review_legacy_issues())
+                return
+            if parsed.path == "/api/audit/manual-cleanup":
+                self._send_json(scan_manual_cleanup_legacy())
                 return
             if parsed.path == "/api/work-items":
                 registry = load_registry()
@@ -525,6 +989,14 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 doc_id = _first_query_value(query, "docId")
                 review_path = _resolve_workspace_path(_first_query_value(query, "reviewPath"))
                 self._send_json(load_cleanup_mask_payload(doc_id=doc_id, review_path=review_path))
+                return
+            if parsed.path == "/api/cleanup-paint":
+                query = parse_qs(parsed.query)
+                doc_id = _first_query_value(query, "docId")
+                review_path = _resolve_workspace_path(_first_query_value(query, "reviewPath"))
+                base_value = _first_query_value(query, "baseImagePath")
+                base_image_path = _resolve_workspace_path(base_value) if base_value else None
+                self._send_json(load_cleanup_paint_payload(doc_id=doc_id, review_path=review_path, base_image_path=base_image_path))
                 return
             if parsed.path == "/api/authoring":
                 query = parse_qs(parsed.query)
@@ -609,6 +1081,24 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 seed_folder = _resolve_workspace_path(str(payload.get("seedFolder") or ""))
                 self._send_json(trash_seed_folder(seed_folder))
                 return
+            if parsed.path == "/api/seed/revert-preview":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                self._send_json(preview_seed_revert(doc_id, registry=load_registry()))
+                return
+            if parsed.path == "/api/seed/revert":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                self._send_json(revert_seed_import(doc_id, registry=load_registry()))
+                return
+            if parsed.path == "/api/target-groups/save":
+                self._send_json(save_target_group(payload, registry=load_registry()))
+                return
+            if parsed.path == "/api/target-groups/delete":
+                self._send_json(delete_target_group(str(payload.get("id") or ""), registry=load_registry()))
+                return
             if parsed.path == "/api/ocr/detect":
                 image_path = _resolve_workspace_path(str(payload.get("imagePath") or ""))
                 engine = str(payload.get("engine") or "paddleocr")
@@ -650,13 +1140,18 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 default_out_dir = workbench_subdir(doc_id, "review") if doc_id else Path("outputs/reviews")
                 out_dir = _resolve_workspace_path(str(payload.get("outDir") or default_out_dir))
                 policy = draft_review_policy(detections_path)
-                paths = write_review_policy(policy, out_dir / _safe_template_id(policy.source_image))
+                draft_dir = out_dir / _safe_template_id(policy.source_image)
+                backup = backup_review_draft_outputs(draft_dir)
+                paths = write_review_policy(policy, draft_dir)
                 if doc_id:
                     update_manifest_artifact(doc_id, "review", paths["review"])
-                self._send_json({"docId": doc_id or None, "paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"])})
+                self._send_json({"docId": doc_id or None, "paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "backup": backup})
                 return
             if parsed.path == "/api/review/save":
                 self._send_json(save_policy_payload(payload))
+                return
+            if parsed.path == "/api/review/remove-ignore":
+                self._send_json(remove_ignore_bboxes_payload(payload))
                 return
             if parsed.path == "/api/review/recognize-crops":
                 self._send_json(recognize_review_crops_payload(payload))
@@ -717,8 +1212,14 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
             if parsed.path == "/api/cleanup-mask":
                 self._send_json(save_cleanup_mask_payload(payload))
                 return
+            if parsed.path == "/api/cleanup-paint":
+                self._send_json(save_cleanup_paint_payload(payload))
+                return
             if parsed.path == "/api/cleanup-inpaint":
                 self._send_json(run_cleanup_inpaint_payload(payload))
+                return
+            if parsed.path == "/api/manual-cleanup/promote":
+                self._send_json(promote_manual_cleanup_payload(payload))
                 return
             if parsed.path == "/api/inpaint":
                 saved: dict[str, Any] | None = None
@@ -768,6 +1269,9 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     },
                     status=410,
                 )
+                return
+            if parsed.path == "/api/authoring/agent-request":
+                self._send_json(authoring_agent_request_payload(payload))
                 return
             if parsed.path == "/api/authoring/migrate-bboxes":
                 doc_id = str(payload.get("docId") or "")

@@ -16,6 +16,53 @@ SPREADSHEET_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
 REL_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 NS = {"a": SPREADSHEET_NS, "r": REL_NS}
 
+
+PO_DOMAIN_SUMMARY: dict[str, dict[str, int]] = {
+    # registry/데이터구축_UIUX_1차_금융제조.pdf p.1 하단 "구축 대상 요약" 기준.
+    # PO 문맥의 도메인은 업무분류 원문보다 거친 구축 범위 축이다.
+    "금융": {"total": 37, "active": 17, "inactive": 20},
+    "제조": {"total": 12, "active": 2, "inactive": 10},
+    "보험": {"total": 17, "active": 3, "inactive": 14},
+    "공공": {"total": 20, "active": 6, "inactive": 14},
+    "의료": {"total": 9, "active": 1, "inactive": 8},
+    "무역": {"total": 8, "active": 0, "inactive": 8},
+    "건설": {"total": 9, "active": 3, "inactive": 6},
+    "법무": {"total": 10, "active": 1, "inactive": 9},
+    "회계": {"total": 9, "active": 2, "inactive": 7},
+    "인사": {"total": 10, "active": 2, "inactive": 8},
+    "교육": {"total": 12, "active": 3, "inactive": 9},
+}
+PO_DOMAIN_ORDER: tuple[str, ...] = tuple(PO_DOMAIN_SUMMARY)
+
+
+def po_domain_for_workflow_domain(domain: str) -> str:
+    value = str(domain or "").strip()
+    if value.startswith("금융"):
+        return "금융"
+    prefix_map = {
+        "제조": "제조",
+        "보험": "보험",
+        "공공": "공공",
+        "의료": "의료",
+        "무역": "무역",
+        "건설": "건설",
+        "법무": "법무",
+        "회계": "회계",
+        "인사": "인사",
+        "교육": "교육",
+    }
+    for prefix, po_domain in prefix_map.items():
+        if value.startswith(prefix):
+            return po_domain
+    return value
+
+
+def _ordered_po_domains(values: set[str]) -> tuple[str, ...]:
+    known = [domain for domain in PO_DOMAIN_ORDER if domain in values]
+    extra = sorted(value for value in values if value not in PO_DOMAIN_SUMMARY)
+    return tuple([*known, *extra])
+
+
 FIRST_PRIORITY_SCOPE_ENTRIES: tuple[tuple[str, str], ...] = (
     # registry/데이터구축_UIUX_1차_금융제조.pdf p.2: 금융 · 비활성 20건 1차 우선
     ("금융", "ID-03"),
@@ -78,6 +125,7 @@ class RegistryDocument:
     aliases: tuple[str, ...] = ()
     workflow_ids: tuple[str, ...] = ()
     domains: tuple[str, ...] = ()
+    po_domains: tuple[str, ...] = ()
     is_first_priority: bool = False
     first_priority_domains: tuple[str, ...] = ()
 
@@ -100,6 +148,8 @@ class RegistryDocument:
             "aliases": list(self.aliases),
             "workflowIds": list(self.workflow_ids),
             "domains": list(self.domains),
+            "workflowDomains": list(self.domains),
+            "poDomains": list(self.po_domains),
             "isFirstPriority": self.is_first_priority,
             "firstPriorityDomains": list(self.first_priority_domains),
             "firstPriorityScopeCount": len(self.first_priority_domains),
@@ -154,22 +204,47 @@ class RegistryData:
     first_priority_scope_entries: tuple[tuple[str, str], ...] = FIRST_PRIORITY_SCOPE_ENTRIES
 
     def to_dict(self) -> dict[str, Any]:
-        domains = sorted({workflow.domain for workflow in self.workflows.values() if workflow.domain})
+        workflow_domains = sorted({workflow.domain for workflow in self.workflows.values() if workflow.domain})
+        po_domains = [domain for domain in PO_DOMAIN_ORDER if any(domain in doc.po_domains for doc in self.documents.values())]
+        po_domain_counts = {domain: sum(1 for doc in self.documents.values() if domain in doc.po_domains) for domain in po_domains}
         return {
             "sourcePath": str(self.source_path),
             "summary": {
                 "documentCount": len(self.documents),
                 "workflowCount": len(self.workflows),
                 "bindingCount": len(self.bindings),
-                "domainCount": len(domains),
+                "domainCount": len(po_domains),
+                "workflowDomainCount": len(workflow_domains),
                 "firstPriorityDocumentCount": len([doc for doc in self.documents.values() if doc.is_first_priority]),
                 "firstPriorityScopeEntryCount": len(self.first_priority_scope_entries),
             },
             "documents": [doc.to_dict() for doc in sorted(self.documents.values(), key=lambda item: (not item.is_first_priority, item.title, item.doc_id))],
             "workflows": [workflow.to_dict() for workflow in sorted(self.workflows.values(), key=lambda item: (item.domain, item.name, item.workflow_id))],
             "bindings": [binding.to_dict() for binding in self.bindings],
-            "domains": domains,
+            "domains": po_domains,
+            "poDomains": po_domains,
+            "workflowDomains": workflow_domains,
+            "poDomainCounts": po_domain_counts,
+            "poDomainSummary": [
+                {"id": domain, "label": domain, **PO_DOMAIN_SUMMARY[domain]}
+                for domain in PO_DOMAIN_ORDER
+            ],
             "firstPriorityDocIds": sorted(self.first_priority_doc_ids),
+            "targetGroups": [
+                {
+                    "id": "first_priority",
+                    "label": "기존 1차 목표",
+                    "description": "현재 authoring/생성 가능성 판정 기본 대상 그룹입니다.",
+                    "scopeEntries": [
+                        {
+                            "domain": domain,
+                            "docId": doc_id,
+                            "title": self.documents[doc_id].title if doc_id in self.documents else "",
+                        }
+                        for domain, doc_id in self.first_priority_scope_entries
+                    ],
+                }
+            ],
             "firstPriorityScopeEntries": [
                 {
                     "domain": domain,
@@ -190,6 +265,7 @@ def load_registry(registry_path: Path = DEFAULT_REGISTRY_PATH) -> RegistryData:
 
     workflow_ids_by_doc: dict[str, set[str]] = {doc_id: set() for doc_id in documents}
     domains_by_doc: dict[str, set[str]] = {doc_id: set() for doc_id in documents}
+    po_domains_by_doc: dict[str, set[str]] = {doc_id: set() for doc_id in documents}
     for binding in bindings:
         if binding.doc_id not in documents:
             continue
@@ -197,6 +273,10 @@ def load_registry(registry_path: Path = DEFAULT_REGISTRY_PATH) -> RegistryData:
         workflow = workflows.get(binding.workflow_id)
         if workflow and workflow.domain:
             domains_by_doc.setdefault(binding.doc_id, set()).add(workflow.domain)
+            po_domains_by_doc.setdefault(binding.doc_id, set()).add(po_domain_for_workflow_domain(workflow.domain))
+    for doc_id, domains in FIRST_PRIORITY_DOMAINS_BY_DOC_ID.items():
+        if doc_id in documents:
+            po_domains_by_doc.setdefault(doc_id, set()).update(domains)
 
     enriched: dict[str, RegistryDocument] = {}
     for doc_id, doc in documents.items():
@@ -219,6 +299,7 @@ def load_registry(registry_path: Path = DEFAULT_REGISTRY_PATH) -> RegistryData:
             aliases=alias_values,
             workflow_ids=tuple(sorted(workflow_ids_by_doc.get(doc_id, set()))),
             domains=tuple(sorted(domains_by_doc.get(doc_id, set()))),
+            po_domains=_ordered_po_domains(po_domains_by_doc.get(doc_id, set())),
             is_first_priority=doc_id in FIRST_PRIORITY_DOC_IDS,
             first_priority_domains=FIRST_PRIORITY_DOMAINS_BY_DOC_ID.get(doc_id, ()),
         )

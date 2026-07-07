@@ -50,6 +50,22 @@ FAKER_RULE_EXAMPLES = [
     "bool.checkbox",
 ]
 
+DEFAULT_VALUE_POOLS = {
+    "gender_ko": ["남", "여"],
+    "yes_no_ko": ["예", "아니오"],
+    "tax_offices": ["종로세무서", "중부세무서", "남대문세무서", "강남세무서"],
+    "banks_ko": ["국민은행", "신한은행", "우리은행", "하나은행", "농협은행", "기업은행"],
+}
+
+DEFAULT_FAKER_PROFILE_TYPES = [
+    {"id": "person", "label": "개인 정보", "rules": ["person.name_ko", "person.phone_kr", "person.rrn", "address.ko"]},
+    {"id": "company", "label": "기업 정보", "rules": ["company.name_ko", "business_reg_no", "address.ko"]},
+    {"id": "finance", "label": "금융/금액", "rules": ["money.krw", "bank", "account"]},
+    {"id": "date", "label": "날짜", "rules": ["date.kr"]},
+    {"id": "choice", "label": "선택/체크", "rules": ["choice:...", "bool.checkbox", "pool:..."]},
+    {"id": "free_text", "label": "짧은 자유 텍스트", "rules": ["free_text.short", "literal:...", "template:..."]},
+]
+
 
 @dataclass(frozen=True)
 class AuthoringDraftResult:
@@ -1478,3 +1494,200 @@ def _rgb_tuple(value: Any) -> tuple[int, int, int]:
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def review_anchor_map(review_path: Path, *, out_path: Path | None = None, doc_id: str | None = None, title: str | None = None) -> dict[str, Any]:
+    policy = load_review_policy(review_path)
+    anchors = []
+    for label in policy.labels:
+        if label.status != "use":
+            continue
+        anchors.append(
+            {
+                "anchor_id": label.id,
+                "source": "bbox_review",
+                "text": label.text,
+                "bbox": label.bbox.to_list(),
+                "bbox_format": "xywh",
+                "status": label.status,
+                "suggested_schema_key": label.text or label.id,
+                "confidence": label.confidence,
+            }
+        )
+    payload = {
+        "schema_version": AUTHORING_SCHEMA_VERSION,
+        "created_at": _now(),
+        "doc_id": doc_id,
+        "title": title,
+        "source_review": str(review_path.resolve()),
+        "source_image": str(policy.source_image.resolve()),
+        "image": {"width": policy.image_width, "height": policy.image_height},
+        "anchors": anchors,
+    }
+    if out_path is not None:
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        _write_json(out_path, payload)
+    return payload
+
+
+def draft_stylesheet_from_review(review_path: Path, *, out_path: Path, doc_id: str | None = None) -> dict[str, Any]:
+    policy = load_review_policy(review_path)
+    labels = use_labels(policy)
+    payload = {
+        "schema_version": AUTHORING_SCHEMA_VERSION,
+        "created_at": _now(),
+        "doc_id": doc_id,
+        "source_review": str(review_path.resolve()),
+        "source_image": str(policy.source_image.resolve()),
+        "image": {"width": policy.image_width, "height": policy.image_height},
+        "status": "draft_from_bbox_review",
+        "safe_application": "draft_only_no_final_stylesheet_overwrite",
+        "style_classes": [
+            {
+                **_default_style_class(),
+                "confidence": 0.2,
+                "source_detection_ids": [label.id for label in labels],
+            }
+        ],
+    }
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    _write_json(out_path, payload)
+    return payload
+
+
+def semantic_schema_to_authoring_schema(
+    semantic_schema: dict[str, Any],
+    *,
+    anchor_map: dict[str, Any] | None = None,
+    source_review: str | None = None,
+    source_image: str | None = None,
+    source_inpainted: str | None = None,
+    doc_id: str | None = None,
+    title: str | None = None,
+) -> dict[str, Any]:
+    fields = semantic_schema.get("fields") if isinstance(semantic_schema.get("fields"), list) else []
+    anchors = {str(anchor.get("anchor_id") or ""): anchor for anchor in (anchor_map or {}).get("anchors", []) if isinstance(anchor, dict)}
+    output_fields: list[dict[str, Any]] = []
+    for index, raw in enumerate(fields, start=1):
+        if not isinstance(raw, dict):
+            continue
+        field_id = str(raw.get("field_id") or raw.get("id") or f"field_{index:03d}").strip()
+        label = str(raw.get("label") or raw.get("key") or raw.get("name") or field_id).strip()
+        anchor_id = str(raw.get("anchor_id") or raw.get("bbox_label_id") or raw.get("source_detection_id") or "").strip()
+        anchor = anchors.get(anchor_id, {})
+        output_fields.append(
+            {
+                "field_id": field_id,
+                "label": label,
+                "bbox_label_id": anchor_id or field_id,
+                "source_detection_id": anchor_id or field_id,
+                "source_text": str(anchor.get("text") or raw.get("source_text") or label),
+                "value_type": str(raw.get("value_type") or "free_text.short"),
+                "generator": str(raw.get("generator") or raw.get("value_type") or "free_text.short"),
+                "style_class": str(raw.get("style_class") or DEFAULT_STYLE_CLASS),
+                "render_policy": _normalize_render_policy(raw.get("render_policy")),
+                "export": {"json_path": str(raw.get("json_path") or field_id), "csv_column": str(raw.get("csv_column") or raw.get("json_path") or field_id)},
+                "required": bool(raw.get("required", True)),
+                "notes": str(raw.get("notes") or ""),
+            }
+        )
+    return {
+        "schema_version": AUTHORING_SCHEMA_VERSION,
+        "created_at": _now(),
+        "doc_id": doc_id or semantic_schema.get("doc_id"),
+        "title": title or semantic_schema.get("title"),
+        "source_review": source_review or semantic_schema.get("source_review"),
+        "source_image": source_image or semantic_schema.get("source_image"),
+        "source_inpainted": source_inpainted or semantic_schema.get("source_inpainted") or source_image or semantic_schema.get("source_image"),
+        "image": (anchor_map or {}).get("image") or semantic_schema.get("image") or {},
+        "bbox_source": {"canonical": "review", "review_path": source_review or semantic_schema.get("source_review")},
+        "anchor_map_ref": (anchor_map or {}).get("source_review"),
+        "fields": output_fields,
+        "groups": semantic_schema.get("groups") if isinstance(semantic_schema.get("groups"), list) else [],
+    }
+
+
+def authoring_library_payload(library_root: Path) -> dict[str, Any]:
+    library_root.mkdir(parents=True, exist_ok=True)
+    index_path = library_root / "index.json"
+    if index_path.exists():
+        try:
+            index = json.loads(index_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            index = {}
+    else:
+        index = {}
+    approvals = index.get("approvals") if isinstance(index.get("approvals"), list) else []
+    value_pools = index.get("value_pools") if isinstance(index.get("value_pools"), dict) else DEFAULT_VALUE_POOLS
+    profile_types = index.get("profile_types") if isinstance(index.get("profile_types"), list) else DEFAULT_FAKER_PROFILE_TYPES
+    payload = {
+        "schema_version": AUTHORING_SCHEMA_VERSION,
+        "library_root": str(library_root),
+        "profile_types": profile_types,
+        "value_pools": value_pools,
+        "approvals": approvals,
+        "summary": {"profileTypeCount": len(profile_types), "valuePoolCount": len(value_pools), "approvalCount": len(approvals)},
+    }
+    if not index_path.exists():
+        _write_json(index_path, {k: payload[k] for k in ("schema_version", "profile_types", "value_pools", "approvals")})
+    return payload
+
+
+def approve_authoring_draft_to_library(request_path: Path, *, library_root: Path, note: str = "") -> dict[str, Any]:
+    request_path = request_path.resolve()
+    if not request_path.exists():
+        raise FileNotFoundError(request_path)
+    request_dir = request_path.parent
+    request = _read_json(request_path)
+    library_root.mkdir(parents=True, exist_ok=True)
+    index_path = library_root / "index.json"
+    current = authoring_library_payload(library_root)
+    if index_path.exists():
+        backup_dir = library_root / "backups" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        backup_dir.mkdir(parents=True, exist_ok=True)
+        (backup_dir / "index.json").write_text(index_path.read_text(encoding="utf-8"), encoding="utf-8")
+    approval_id = f"approval_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')}"
+    approval_dir = library_root / "approvals" / approval_id
+    approval_dir.mkdir(parents=True, exist_ok=True)
+    draft_names = [
+        "schema_draft.json",
+        "stylesheet_draft.json",
+        "faker_profile_draft.json",
+        "value_pool_draft.json",
+        "research_report.json",
+        "uncertainty_report.json",
+        "anchor_map_draft.json",
+        "application_notes.md",
+    ]
+    copied: list[dict[str, str]] = []
+    missing: list[str] = []
+    for name in draft_names:
+        source = request_dir / name
+        if not source.exists():
+            missing.append(name)
+            continue
+        destination = approval_dir / name
+        destination.write_bytes(source.read_bytes())
+        copied.append({"name": name, "path": str(destination)})
+    entry = {
+        "id": approval_id,
+        "docId": request.get("docId"),
+        "title": request.get("title"),
+        "request": str(request_path),
+        "path": str(approval_dir),
+        "copied": copied,
+        "missing": missing,
+        "note": note,
+        "approved_at": _now(),
+        "status": "approved_with_missing_drafts" if missing else "approved",
+    }
+    approvals = [entry, *current.get("approvals", [])]
+    index = {
+        "schema_version": AUTHORING_SCHEMA_VERSION,
+        "profile_types": current.get("profile_types", DEFAULT_FAKER_PROFILE_TYPES),
+        "value_pools": current.get("value_pools", DEFAULT_VALUE_POOLS),
+        "approvals": approvals,
+        "updated_at": _now(),
+    }
+    _write_json(index_path, index)
+    return {"library": str(library_root), "index": str(index_path), "approval": entry, "summary": {"copied": len(copied), "missing": len(missing)}}

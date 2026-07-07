@@ -1,0 +1,6911 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-07T12:23:36.715637+00:00",
+  "source_engine": "paddleocr",
+  "source_detections": "/Users/lsh930309/projects/dataFatory/workbench/documents/진료비계산서·영수증__MED-04/ocr/paddleocr/precise/original_[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001/detections.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+  "image": {
+    "width": 1190,
+    "height": 1682
+  },
+  "summary": {
+    "total": 160,
+    "by_status": {
+      "use": 4,
+      "keep": 156,
+      "ignore": 0
+    },
+    "by_auto_type": {
+      "field_value": 16,
+      "static_label": 8,
+      "table_cell": 2,
+      "long_paragraph": 17,
+      "header_footer": 10,
+      "stamp_or_seal": 0,
+      "watermark": 0,
+      "unknown": 107
+    }
+  },
+  "labels": [
+    {
+      "id": "det_000001",
+      "text": "국민건강보험 요양급여의 기준에 관한 규칙 [별지 제6호서식] <개정 2024.7. 18.>",
+      "confidence": 0.9394777417182922,
+      "bbox": [
+        122,
+        32,
+        666,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          122,
+          33
+        ],
+        [
+          788,
+          32
+        ],
+        [
+          788,
+          53
+        ],
+        [
+          122,
+          54
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "국민건강보험 요양급여의 기준에 관한 규칙 [별지 제6호서식] <개정 2024.7. 18.>",
+      "original_confidence": 0.9394777417182922,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000002",
+      "text": "진료비 계산서·영수증",
+      "confidence": 0.9973455667495728,
+      "bbox": [
+        677,
+        60,
+        275,
+        29
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          677,
+          60
+        ],
+        [
+          952,
+          60
+        ],
+        [
+          952,
+          89
+        ],
+        [
+          677,
+          89
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "[ ]외래[ ]입원([ ]퇴원[ ]중간) 진료비 계산서·영수증",
+      "original_confidence": 0.9410062432289124,
+      "text_source": "paddle_recrop",
+      "ocr_text_stale": false,
+      "rec_text": "진료비 계산서·영수증",
+      "rec_confidence": 0.9973455667495728,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-07T12:27:04.471424+00:00"
+    },
+    {
+      "id": "det_000003",
+      "text": "환자등록번호",
+      "confidence": 0.973703145980835,
+      "bbox": [
+        179,
+        98,
+        98,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          179,
+          98
+        ],
+        [
+          277,
+          98
+        ],
+        [
+          277,
+          119
+        ],
+        [
+          179,
+          119
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "환자등록번호",
+      "original_confidence": 0.973703145980835,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000004",
+      "text": "환자성명",
+      "confidence": 0.9976284503936768,
+      "bbox": [
+        446,
+        97,
+        77,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          446,
+          97
+        ],
+        [
+          523,
+          97
+        ],
+        [
+          523,
+          119
+        ],
+        [
+          446,
+          119
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "static_label",
+      "reason": "static document label keyword",
+      "locked": false,
+      "notes": "",
+      "original_text": "환자성명",
+      "original_confidence": 0.9976284503936768,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000005",
+      "text": "진료기간",
+      "confidence": 0.9813820719718933,
+      "bbox": [
+        733,
+        97,
+        69,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          733,
+          97
+        ],
+        [
+          802,
+          97
+        ],
+        [
+          802,
+          119
+        ],
+        [
+          733,
+          119
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "진료기간",
+      "original_confidence": 0.9813820719718933,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000006",
+      "text": "야간(공휴일)진료",
+      "confidence": 0.9866015911102295,
+      "bbox": [
+        924,
+        97,
+        126,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          924,
+          97
+        ],
+        [
+          1050,
+          97
+        ],
+        [
+          1050,
+          118
+        ],
+        [
+          924,
+          118
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "야간(공휴일)진료",
+      "original_confidence": 0.9866015911102295,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000007",
+      "text": ".부터",
+      "confidence": 0.9919130206108093,
+      "bbox": [
+        719,
+        123,
+        44,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          719,
+          123
+        ],
+        [
+          763,
+          123
+        ],
+        [
+          763,
+          146
+        ],
+        [
+          719,
+          146
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": ".부터",
+      "original_confidence": 0.9919130206108093,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000008",
+      "text": ".까지",
+      "confidence": 0.9816417694091797,
+      "bbox": [
+        856,
+        123,
+        47,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          856,
+          123
+        ],
+        [
+          903,
+          123
+        ],
+        [
+          903,
+          145
+        ],
+        [
+          856,
+          145
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": ".까지",
+      "original_confidence": 0.9816417694091797,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000009",
+      "text": "[]야간[]공휴일",
+      "confidence": 0.9893195629119873,
+      "bbox": [
+        903,
+        124,
+        165,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          903,
+          124
+        ],
+        [
+          1068,
+          124
+        ],
+        [
+          1068,
+          144
+        ],
+        [
+          903,
+          144
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "[]야간[]공휴일",
+      "original_confidence": 0.9893195629119873,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000010",
+      "text": "진료과목",
+      "confidence": 0.9910634756088257,
+      "bbox": [
+        193,
+        149,
+        68,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          193,
+          149
+        ],
+        [
+          261,
+          149
+        ],
+        [
+          261,
+          171
+        ],
+        [
+          193,
+          171
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "진료과목",
+      "original_confidence": 0.9910634756088257,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000011",
+      "text": "질병군(DRG)번호",
+      "confidence": 0.9777849316596985,
+      "bbox": [
+        420,
+        148,
+        130,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          420,
+          148
+        ],
+        [
+          550,
+          148
+        ],
+        [
+          550,
+          169
+        ],
+        [
+          420,
+          169
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "질병군(DRG)번호",
+      "original_confidence": 0.9777849316596985,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000012",
+      "text": "병실",
+      "confidence": 0.9985690116882324,
+      "bbox": [
+        661,
+        147,
+        41,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          661,
+          147
+        ],
+        [
+          702,
+          147
+        ],
+        [
+          702,
+          171
+        ],
+        [
+          661,
+          171
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "병실",
+      "original_confidence": 0.9985690116882324,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000013",
+      "text": "환자구분",
+      "confidence": 0.9989331960678101,
+      "bbox": [
+        755,
+        148,
+        67,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          755,
+          148
+        ],
+        [
+          822,
+          148
+        ],
+        [
+          822,
+          170
+        ],
+        [
+          755,
+          170
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "static_label",
+      "reason": "static document label keyword",
+      "locked": false,
+      "notes": "",
+      "original_text": "환자구분",
+      "original_confidence": 0.9989331960678101,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000014",
+      "text": "영수증번호(연월-일련번호)",
+      "confidence": 0.9881972074508667,
+      "bbox": [
+        859,
+        149,
+        199,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          859,
+          149
+        ],
+        [
+          1058,
+          149
+        ],
+        [
+          1058,
+          169
+        ],
+        [
+          859,
+          169
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "영수증번호(연월-일련번호)",
+      "original_confidence": 0.9881972074508667,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000015",
+      "text": "급여",
+      "confidence": 0.998132586479187,
+      "bbox": [
+        464,
+        195,
+        41,
+        27
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          464,
+          198
+        ],
+        [
+          503,
+          195
+        ],
+        [
+          505,
+          219
+        ],
+        [
+          466,
+          222
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "급여",
+      "original_confidence": 0.998132586479187,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000016",
+      "text": "금액산정내용",
+      "confidence": 0.9965507984161377,
+      "bbox": [
+        855,
+        198,
+        101,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          198
+        ],
+        [
+          956,
+          198
+        ],
+        [
+          956,
+          219
+        ],
+        [
+          855,
+          219
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "금액산정내용",
+      "original_confidence": 0.9965507984161377,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000017",
+      "text": "항목",
+      "confidence": 0.9980133771896362,
+      "bbox": [
+        208,
+        222,
+        39,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          208,
+          222
+        ],
+        [
+          247,
+          222
+        ],
+        [
+          247,
+          245
+        ],
+        [
+          208,
+          245
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "항목",
+      "original_confidence": 0.9980133771896362,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000018",
+      "text": "일부본인부담",
+      "confidence": 0.9869179725646973,
+      "bbox": [
+        382,
+        223,
+        108,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          382,
+          223
+        ],
+        [
+          490,
+          223
+        ],
+        [
+          490,
+          244
+        ],
+        [
+          382,
+          244
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "static_label",
+      "reason": "static document label keyword",
+      "locked": false,
+      "notes": "",
+      "original_text": "일부본인부담",
+      "original_confidence": 0.9869179725646973,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000019",
+      "text": "전액",
+      "confidence": 0.9903504848480225,
+      "bbox": [
+        563,
+        224,
+        39,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          563,
+          224
+        ],
+        [
+          602,
+          224
+        ],
+        [
+          602,
+          248
+        ],
+        [
+          563,
+          248
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "전액",
+      "original_confidence": 0.9903504848480225,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000020",
+      "text": "비급여",
+      "confidence": 0.9956805109977722,
+      "bbox": [
+        653,
+        221,
+        57,
+        25
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          653,
+          221
+        ],
+        [
+          710,
+          221
+        ],
+        [
+          710,
+          246
+        ],
+        [
+          653,
+          246
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "비급여",
+      "original_confidence": 0.9956805109977722,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000021",
+      "text": "⑥진료비총액",
+      "confidence": 0.9713687896728516,
+      "bbox": [
+        783,
+        226,
+        115,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          783,
+          226
+        ],
+        [
+          898,
+          226
+        ],
+        [
+          898,
+          247
+        ],
+        [
+          783,
+          247
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "⑥진료비총액",
+      "original_confidence": 0.9713687896728516,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000022",
+      "text": "본인부담금",
+      "confidence": 0.9978574514389038,
+      "bbox": [
+        345,
+        249,
+        84,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          345,
+          249
+        ],
+        [
+          429,
+          249
+        ],
+        [
+          429,
+          270
+        ],
+        [
+          345,
+          270
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "static_label",
+      "reason": "static document label keyword",
+      "locked": false,
+      "notes": "",
+      "original_text": "본인부담금",
+      "original_confidence": 0.9978574514389038,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000023",
+      "text": "공단부담금",
+      "confidence": 0.9957331418991089,
+      "bbox": [
+        440,
+        247,
+        88,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          440,
+          248
+        ],
+        [
+          527,
+          247
+        ],
+        [
+          528,
+          269
+        ],
+        [
+          440,
+          270
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "공단부담금",
+      "original_confidence": 0.9957331418991089,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000024",
+      "text": "본인부담",
+      "confidence": 0.9956099390983582,
+      "bbox": [
+        548,
+        245,
+        69,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          548,
+          245
+        ],
+        [
+          617,
+          245
+        ],
+        [
+          617,
+          267
+        ],
+        [
+          548,
+          267
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "static_label",
+      "reason": "static document label keyword",
+      "locked": false,
+      "notes": "",
+      "original_text": "본인부담",
+      "original_confidence": 0.9956099390983582,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000025",
+      "text": "(①+②+③+④)",
+      "confidence": 0.9900034666061401,
+      "bbox": [
+        787,
+        246,
+        109,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          787,
+          246
+        ],
+        [
+          896,
+          246
+        ],
+        [
+          896,
+          267
+        ],
+        [
+          787,
+          267
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "(①+②+③+④)",
+      "original_confidence": 0.9900034666061401,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000026",
+      "text": "진찰료",
+      "confidence": 0.7298821806907654,
+      "bbox": [
+        211,
+        274,
+        70,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          211,
+          274
+        ],
+        [
+          281,
+          274
+        ],
+        [
+          281,
+          295
+        ],
+        [
+          211,
+          295
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "진찰료",
+      "original_confidence": 0.7298821806907654,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000027",
+      "text": "⑦공단부담총액",
+      "confidence": 0.9172428846359253,
+      "bbox": [
+        775,
+        277,
+        131,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          775,
+          277
+        ],
+        [
+          906,
+          277
+        ],
+        [
+          906,
+          297
+        ],
+        [
+          775,
+          297
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "⑦공단부담총액",
+      "original_confidence": 0.9172428846359253,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000028",
+      "text": "1인실",
+      "confidence": 0.9990439414978027,
+      "bbox": [
+        261,
+        299,
+        49,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          261,
+          299
+        ],
+        [
+          310,
+          299
+        ],
+        [
+          310,
+          320
+        ],
+        [
+          261,
+          320
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "1인실",
+      "original_confidence": 0.9990439414978027,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000029",
+      "text": "(②+⑤)",
+      "confidence": 0.9929507970809937,
+      "bbox": [
+        810,
+        294,
+        60,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          810,
+          294
+        ],
+        [
+          870,
+          294
+        ],
+        [
+          870,
+          318
+        ],
+        [
+          810,
+          318
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "(②+⑤)",
+      "original_confidence": 0.9929507970809937,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000030",
+      "text": "입원료",
+      "confidence": 0.9775211215019226,
+      "bbox": [
+        159,
+        321,
+        69,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          159,
+          324
+        ],
+        [
+          228,
+          321
+        ],
+        [
+          228,
+          343
+        ],
+        [
+          159,
+          345
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "입원료",
+      "original_confidence": 0.9775211215019226,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000031",
+      "text": "2·3인실",
+      "confidence": 0.9499377012252808,
+      "bbox": [
+        253,
+        325,
+        64,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          253,
+          325
+        ],
+        [
+          317,
+          325
+        ],
+        [
+          317,
+          343
+        ],
+        [
+          253,
+          343
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "2·3인실",
+      "original_confidence": 0.9499377012252808,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000032",
+      "text": "⑧ 환자부담 총액",
+      "confidence": 0.8764152526855469,
+      "bbox": [
+        775,
+        326,
+        131,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          775,
+          326
+        ],
+        [
+          906,
+          326
+        ],
+        [
+          906,
+          347
+        ],
+        [
+          775,
+          347
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "⑧ 환자부담 총액",
+      "original_confidence": 0.8764152526855469,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000033",
+      "text": "4인실 이상",
+      "confidence": 0.9322125315666199,
+      "bbox": [
+        247,
+        349,
+        78,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          247,
+          349
+        ],
+        [
+          325,
+          349
+        ],
+        [
+          325,
+          370
+        ],
+        [
+          247,
+          370
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "4인실 이상",
+      "original_confidence": 0.9322125315666199,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000034",
+      "text": "(①−⑤)+③+④",
+      "confidence": 0.9175955653190613,
+      "bbox": [
+        786,
+        345,
+        109,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          786,
+          345
+        ],
+        [
+          895,
+          345
+        ],
+        [
+          895,
+          365
+        ],
+        [
+          786,
+          365
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "(①−⑤)+③+④",
+      "original_confidence": 0.9175955653190613,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000035",
+      "text": "식대",
+      "confidence": 0.9990437626838684,
+      "bbox": [
+        227,
+        373,
+        36,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          227,
+          373
+        ],
+        [
+          263,
+          373
+        ],
+        [
+          263,
+          396
+        ],
+        [
+          227,
+          396
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "식대",
+      "original_confidence": 0.9990437626838684,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000036",
+      "text": "9 이미 납부한 금액",
+      "confidence": 0.8140382170677185,
+      "bbox": [
+        764,
+        386,
+        153,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          764,
+          386
+        ],
+        [
+          917,
+          386
+        ],
+        [
+          917,
+          407
+        ],
+        [
+          764,
+          407
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "9 이미 납부한 금액",
+      "original_confidence": 0.8140382170677185,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000037",
+      "text": "투약및",
+      "confidence": 0.9947037696838379,
+      "bbox": [
+        164,
+        401,
+        60,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          164,
+          401
+        ],
+        [
+          224,
+          401
+        ],
+        [
+          224,
+          422
+        ],
+        [
+          164,
+          422
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "투약및",
+      "original_confidence": 0.9947037696838379,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000038",
+      "text": "행위료",
+      "confidence": 0.976972758769989,
+      "bbox": [
+        259,
+        399,
+        54,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          259,
+          399
+        ],
+        [
+          313,
+          399
+        ],
+        [
+          313,
+          420
+        ],
+        [
+          259,
+          420
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "행위료",
+      "original_confidence": 0.976972758769989,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000039",
+      "text": "조제료",
+      "confidence": 0.998968780040741,
+      "bbox": [
+        166,
+        420,
+        54,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          166,
+          420
+        ],
+        [
+          220,
+          420
+        ],
+        [
+          220,
+          441
+        ],
+        [
+          166,
+          441
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "조제료",
+      "original_confidence": 0.998968780040741,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000040",
+      "text": "약품비",
+      "confidence": 0.9991987347602844,
+      "bbox": [
+        259,
+        424,
+        54,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          259,
+          424
+        ],
+        [
+          313,
+          424
+        ],
+        [
+          313,
+          446
+        ],
+        [
+          259,
+          446
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "약품비",
+      "original_confidence": 0.9991987347602844,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000041",
+      "text": "①납부할금액",
+      "confidence": 0.8909742832183838,
+      "bbox": [
+        782,
+        426,
+        116,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          782,
+          426
+        ],
+        [
+          898,
+          426
+        ],
+        [
+          898,
+          447
+        ],
+        [
+          782,
+          447
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "①납부할금액",
+      "original_confidence": 0.8909742832183838,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000042",
+      "text": "행위료",
+      "confidence": 0.9881290793418884,
+      "bbox": [
+        258,
+        449,
+        55,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          258,
+          449
+        ],
+        [
+          313,
+          449
+        ],
+        [
+          313,
+          471
+        ],
+        [
+          258,
+          471
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "행위료",
+      "original_confidence": 0.9881290793418884,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000043",
+      "text": "(⑧−9)",
+      "confidence": 0.6851212382316589,
+      "bbox": [
+        811,
+        446,
+        58,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          811,
+          446
+        ],
+        [
+          869,
+          446
+        ],
+        [
+          869,
+          468
+        ],
+        [
+          811,
+          468
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(⑧−9)",
+      "original_confidence": 0.6851212382316589,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000044",
+      "text": "기본항목",
+      "confidence": 0.9776740074157715,
+      "bbox": [
+        130,
+        462,
+        22,
+        68
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          130,
+          462
+        ],
+        [
+          152,
+          462
+        ],
+        [
+          152,
+          530
+        ],
+        [
+          130,
+          530
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "static_label",
+      "reason": "static document label keyword",
+      "locked": false,
+      "notes": "",
+      "original_text": "기본항목",
+      "original_confidence": 0.9776740074157715,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000045",
+      "text": "주사료",
+      "confidence": 0.9992308616638184,
+      "bbox": [
+        168,
+        460,
+        52,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          168,
+          460
+        ],
+        [
+          220,
+          460
+        ],
+        [
+          220,
+          483
+        ],
+        [
+          168,
+          483
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "주사료",
+      "original_confidence": 0.9992308616638184,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000046",
+      "text": "약품비",
+      "confidence": 0.9991507530212402,
+      "bbox": [
+        259,
+        474,
+        54,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          259,
+          474
+        ],
+        [
+          313,
+          474
+        ],
+        [
+          313,
+          496
+        ],
+        [
+          259,
+          496
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "약품비",
+      "original_confidence": 0.9991507530212402,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000047",
+      "text": "카드",
+      "confidence": 0.9992101192474365,
+      "bbox": [
+        869,
+        473,
+        41,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          869,
+          473
+        ],
+        [
+          910,
+          473
+        ],
+        [
+          910,
+          496
+        ],
+        [
+          869,
+          496
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "카드",
+      "original_confidence": 0.9992101192474365,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000048",
+      "text": "마취료",
+      "confidence": 0.99713534116745,
+      "bbox": [
+        219,
+        500,
+        53,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          219,
+          500
+        ],
+        [
+          272,
+          500
+        ],
+        [
+          272,
+          521
+        ],
+        [
+          219,
+          521
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "마취료",
+      "original_confidence": 0.99713534116745,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000049",
+      "text": "11납부한",
+      "confidence": 0.966830849647522,
+      "bbox": [
+        741,
+        502,
+        78,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          741,
+          502
+        ],
+        [
+          819,
+          502
+        ],
+        [
+          819,
+          523
+        ],
+        [
+          741,
+          523
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "11납부한",
+      "original_confidence": 0.966830849647522,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000050",
+      "text": "현금영수증",
+      "confidence": 0.9972057342529297,
+      "bbox": [
+        848,
+        500,
+        84,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          848,
+          500
+        ],
+        [
+          932,
+          500
+        ],
+        [
+          932,
+          521
+        ],
+        [
+          848,
+          521
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "현금영수증",
+      "original_confidence": 0.9972057342529297,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000051",
+      "text": "처치 및 수술료",
+      "confidence": 0.9243490099906921,
+      "bbox": [
+        188,
+        524,
+        116,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          188,
+          524
+        ],
+        [
+          304,
+          524
+        ],
+        [
+          304,
+          544
+        ],
+        [
+          188,
+          544
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "처치 및 수술료",
+      "original_confidence": 0.9243490099906921,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000052",
+      "text": "금액",
+      "confidence": 0.9977615475654602,
+      "bbox": [
+        761,
+        521,
+        37,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          761,
+          521
+        ],
+        [
+          798,
+          521
+        ],
+        [
+          798,
+          543
+        ],
+        [
+          761,
+          543
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "금액",
+      "original_confidence": 0.9977615475654602,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000053",
+      "text": "현금",
+      "confidence": 0.9971126317977905,
+      "bbox": [
+        870,
+        524,
+        40,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          870,
+          524
+        ],
+        [
+          910,
+          524
+        ],
+        [
+          910,
+          546
+        ],
+        [
+          870,
+          546
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "현금",
+      "original_confidence": 0.9971126317977905,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000054",
+      "text": "검사료",
+      "confidence": 0.9994316101074219,
+      "bbox": [
+        219,
+        549,
+        53,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          219,
+          549
+        ],
+        [
+          272,
+          549
+        ],
+        [
+          272,
+          571
+        ],
+        [
+          219,
+          571
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "검사료",
+      "original_confidence": 0.9994316101074219,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000055",
+      "text": "합계",
+      "confidence": 0.9973059892654419,
+      "bbox": [
+        870,
+        548,
+        40,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          870,
+          548
+        ],
+        [
+          910,
+          548
+        ],
+        [
+          910,
+          571
+        ],
+        [
+          870,
+          571
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "합계",
+      "original_confidence": 0.9973059892654419,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000056",
+      "text": "영상진단료",
+      "confidence": 0.9990041851997375,
+      "bbox": [
+        205,
+        576,
+        81,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          205,
+          576
+        ],
+        [
+          286,
+          576
+        ],
+        [
+          286,
+          594
+        ],
+        [
+          205,
+          594
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "영상진단료",
+      "original_confidence": 0.9990041851997375,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000057",
+      "text": "납부하지 않은 금액 (①-①)",
+      "confidence": 0.8660300970077515,
+      "bbox": [
+        736,
+        574,
+        209,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          736,
+          574
+        ],
+        [
+          945,
+          574
+        ],
+        [
+          945,
+          595
+        ],
+        [
+          736,
+          595
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "납부하지 않은 금액 (①-①)",
+      "original_confidence": 0.8660300970077515,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000058",
+      "text": "방사선치료료",
+      "confidence": 0.9991869330406189,
+      "bbox": [
+        197,
+        600,
+        98,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          197,
+          600
+        ],
+        [
+          295,
+          600
+        ],
+        [
+          295,
+          621
+        ],
+        [
+          197,
+          621
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "방사선치료료",
+      "original_confidence": 0.9991869330406189,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000059",
+      "text": "현금영수증(",
+      "confidence": 0.9946170449256897,
+      "bbox": [
+        828,
+        600,
+        93,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          828,
+          600
+        ],
+        [
+          921,
+          600
+        ],
+        [
+          921,
+          621
+        ],
+        [
+          828,
+          621
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "현금영수증(",
+      "original_confidence": 0.9946170449256897,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000060",
+      "text": ")",
+      "confidence": 0.9985039234161377,
+      "bbox": [
+        953,
+        601,
+        12,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          953,
+          601
+        ],
+        [
+          965,
+          601
+        ],
+        [
+          965,
+          618
+        ],
+        [
+          953,
+          618
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "table_cell",
+      "reason": "short numeric cell",
+      "locked": false,
+      "notes": "",
+      "original_text": ")",
+      "original_confidence": 0.9985039234161377,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000061",
+      "text": "치료재료대",
+      "confidence": 0.9971023797988892,
+      "bbox": [
+        204,
+        625,
+        83,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          204,
+          625
+        ],
+        [
+          287,
+          625
+        ],
+        [
+          287,
+          646
+        ],
+        [
+          204,
+          646
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "치료재료대",
+      "original_confidence": 0.9971023797988892,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000062",
+      "text": "신분확인번호",
+      "confidence": 0.9854831695556641,
+      "bbox": [
+        791,
+        625,
+        99,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          791,
+          625
+        ],
+        [
+          890,
+          625
+        ],
+        [
+          890,
+          646
+        ],
+        [
+          791,
+          646
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "신분확인번호",
+      "original_confidence": 0.9854831695556641,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000063",
+      "text": "재활 및 물리치료료",
+      "confidence": 0.907023549079895,
+      "bbox": [
+        174,
+        651,
+        144,
+        19
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          174,
+          651
+        ],
+        [
+          318,
+          651
+        ],
+        [
+          318,
+          670
+        ],
+        [
+          174,
+          670
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "재활 및 물리치료료",
+      "original_confidence": 0.907023549079895,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000064",
+      "text": "현금영수증승인번호",
+      "confidence": 0.9830801486968994,
+      "bbox": [
+        762,
+        648,
+        157,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          762,
+          650
+        ],
+        [
+          918,
+          648
+        ],
+        [
+          919,
+          668
+        ],
+        [
+          762,
+          671
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "현금영수증승인번호",
+      "original_confidence": 0.9830801486968994,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000065",
+      "text": "정신요법료",
+      "confidence": 0.9991345405578613,
+      "bbox": [
+        205,
+        676,
+        81,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          205,
+          676
+        ],
+        [
+          286,
+          676
+        ],
+        [
+          286,
+          694
+        ],
+        [
+          205,
+          694
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "정신요법료",
+      "original_confidence": 0.9991345405578613,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000066",
+      "text": "*요양기관 임의활용공간",
+      "confidence": 0.970822274684906,
+      "bbox": [
+        734,
+        676,
+        187,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          734,
+          676
+        ],
+        [
+          921,
+          676
+        ],
+        [
+          921,
+          693
+        ],
+        [
+          734,
+          693
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "*요양기관 임의활용공간",
+      "original_confidence": 0.970822274684906,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000067",
+      "text": "전혈및혈액성분제제료",
+      "confidence": 0.9928559064865112,
+      "bbox": [
+        157,
+        700,
+        177,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          157,
+          700
+        ],
+        [
+          334,
+          700
+        ],
+        [
+          334,
+          720
+        ],
+        [
+          157,
+          720
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "전혈및혈액성분제제료",
+      "original_confidence": 0.9928559064865112,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000068",
+      "text": "CT진단료",
+      "confidence": 0.9833755493164062,
+      "bbox": [
+        206,
+        727,
+        79,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          206,
+          727
+        ],
+        [
+          285,
+          727
+        ],
+        [
+          285,
+          745
+        ],
+        [
+          206,
+          745
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "CT진단료",
+      "original_confidence": 0.9833755493164062,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000069",
+      "text": "MRI 진단료",
+      "confidence": 0.9108461737632751,
+      "bbox": [
+        202,
+        752,
+        86,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          202,
+          752
+        ],
+        [
+          288,
+          752
+        ],
+        [
+          288,
+          770
+        ],
+        [
+          202,
+          770
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "MRI 진단료",
+      "original_confidence": 0.9108461737632751,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000070",
+      "text": "선택항목",
+      "confidence": 0.993228018283844,
+      "bbox": [
+        125,
+        765,
+        21,
+        66
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          125,
+          765
+        ],
+        [
+          146,
+          765
+        ],
+        [
+          146,
+          831
+        ],
+        [
+          125,
+          831
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "선택항목",
+      "original_confidence": 0.993228018283844,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000071",
+      "text": "PET진단료",
+      "confidence": 0.9760026335716248,
+      "bbox": [
+        200,
+        776,
+        90,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          200,
+          776
+        ],
+        [
+          290,
+          776
+        ],
+        [
+          290,
+          796
+        ],
+        [
+          200,
+          796
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "PET진단료",
+      "original_confidence": 0.9760026335716248,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000072",
+      "text": "초음파진단료",
+      "confidence": 0.9764916300773621,
+      "bbox": [
+        193,
+        800,
+        106,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          193,
+          800
+        ],
+        [
+          299,
+          800
+        ],
+        [
+          299,
+          820
+        ],
+        [
+          193,
+          820
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "초음파진단료",
+      "original_confidence": 0.9764916300773621,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000073",
+      "text": "보철·교정료",
+      "confidence": 0.9869882464408875,
+      "bbox": [
+        197,
+        827,
+        97,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          197,
+          827
+        ],
+        [
+          294,
+          827
+        ],
+        [
+          294,
+          845
+        ],
+        [
+          197,
+          845
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "보철·교정료",
+      "original_confidence": 0.9869882464408875,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000074",
+      "text": "제증명수수료",
+      "confidence": 0.988336980342865,
+      "bbox": [
+        196,
+        852,
+        99,
+        19
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          196,
+          852
+        ],
+        [
+          295,
+          852
+        ],
+        [
+          295,
+          871
+        ],
+        [
+          196,
+          871
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "제증명수수료",
+      "original_confidence": 0.988336980342865,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000075",
+      "text": "선별급여",
+      "confidence": 0.9970311522483826,
+      "bbox": [
+        193,
+        876,
+        67,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          193,
+          876
+        ],
+        [
+          260,
+          876
+        ],
+        [
+          260,
+          897
+        ],
+        [
+          193,
+          897
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "선별급여",
+      "original_confidence": 0.9970311522483826,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000076",
+      "text": "65세 이상 등정액",
+      "confidence": 0.9057773351669312,
+      "bbox": [
+        155,
+        898,
+        143,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          155,
+          901
+        ],
+        [
+          297,
+          898
+        ],
+        [
+          298,
+          919
+        ],
+        [
+          155,
+          921
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "65세 이상 등정액",
+      "original_confidence": 0.9057773351669312,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000077",
+      "text": "정액수가(요양병원)",
+      "confidence": 0.9852175712585449,
+      "bbox": [
+        155,
+        926,
+        141,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          155,
+          926
+        ],
+        [
+          296,
+          926
+        ],
+        [
+          296,
+          946
+        ],
+        [
+          155,
+          946
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "정액수가(요양병원)",
+      "original_confidence": 0.9852175712585449,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000078",
+      "text": "정액수가(완화의료)",
+      "confidence": 0.9876853823661804,
+      "bbox": [
+        156,
+        951,
+        142,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          156,
+          951
+        ],
+        [
+          298,
+          951
+        ],
+        [
+          298,
+          971
+        ],
+        [
+          156,
+          971
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "정액수가(완화의료)",
+      "original_confidence": 0.9876853823661804,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000079",
+      "text": "질병군포괄수가",
+      "confidence": 0.9824627041816711,
+      "bbox": [
+        165,
+        976,
+        124,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          165,
+          976
+        ],
+        [
+          289,
+          976
+        ],
+        [
+          289,
+          996
+        ],
+        [
+          165,
+          996
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "질병군포괄수가",
+      "original_confidence": 0.9824627041816711,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000080",
+      "text": "기타",
+      "confidence": 0.9985440969467163,
+      "bbox": [
+        207,
+        1000,
+        40,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          207,
+          1000
+        ],
+        [
+          247,
+          1000
+        ],
+        [
+          247,
+          1022
+        ],
+        [
+          207,
+          1022
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "기타",
+      "original_confidence": 0.9985440969467163,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000081",
+      "text": "합계",
+      "confidence": 0.9976400136947632,
+      "bbox": [
+        208,
+        1024,
+        38,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          208,
+          1024
+        ],
+        [
+          246,
+          1024
+        ],
+        [
+          246,
+          1048
+        ],
+        [
+          208,
+          1048
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "합계",
+      "original_confidence": 0.9976400136947632,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000082",
+      "text": "①",
+      "confidence": 0.9934078454971313,
+      "bbox": [
+        339,
+        1024,
+        23,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          339,
+          1024
+        ],
+        [
+          362,
+          1024
+        ],
+        [
+          362,
+          1048
+        ],
+        [
+          339,
+          1048
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "①",
+      "original_confidence": 0.9934078454971313,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000083",
+      "text": "②",
+      "confidence": 0.9821188449859619,
+      "bbox": [
+        437,
+        1024,
+        24,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          437,
+          1024
+        ],
+        [
+          461,
+          1024
+        ],
+        [
+          461,
+          1047
+        ],
+        [
+          437,
+          1047
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "②",
+      "original_confidence": 0.9821188449859619,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000084",
+      "text": "③",
+      "confidence": 0.9848406910896301,
+      "bbox": [
+        535,
+        1025,
+        24,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          535,
+          1025
+        ],
+        [
+          559,
+          1025
+        ],
+        [
+          559,
+          1047
+        ],
+        [
+          535,
+          1047
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "③",
+      "original_confidence": 0.9848406910896301,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000085",
+      "text": "④",
+      "confidence": 0.9535439014434814,
+      "bbox": [
+        633,
+        1025,
+        24,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          633,
+          1025
+        ],
+        [
+          657,
+          1025
+        ],
+        [
+          657,
+          1048
+        ],
+        [
+          633,
+          1048
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "④",
+      "original_confidence": 0.9535439014434814,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000086",
+      "text": "상한액초과금",
+      "confidence": 0.9972453117370605,
+      "bbox": [
+        172,
+        1049,
+        108,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          172,
+          1049
+        ],
+        [
+          280,
+          1049
+        ],
+        [
+          280,
+          1070
+        ],
+        [
+          172,
+          1070
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "상한액초과금",
+      "original_confidence": 0.9972453117370605,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000087",
+      "text": "⑤",
+      "confidence": 0.9641233682632446,
+      "bbox": [
+        341,
+        1051,
+        21,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          341,
+          1051
+        ],
+        [
+          362,
+          1051
+        ],
+        [
+          362,
+          1072
+        ],
+        [
+          341,
+          1072
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "⑤",
+      "original_confidence": 0.9641233682632446,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000088",
+      "text": "-",
+      "confidence": 0.9894406199455261,
+      "bbox": [
+        577,
+        1057,
+        12,
+        9
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          577,
+          1057
+        ],
+        [
+          589,
+          1057
+        ],
+        [
+          589,
+          1066
+        ],
+        [
+          577,
+          1066
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "table_cell",
+      "reason": "short numeric cell",
+      "locked": false,
+      "notes": "",
+      "original_text": "-",
+      "original_confidence": 0.9894406199455261,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000089",
+      "text": "요양기관 종류",
+      "confidence": 0.9337811470031738,
+      "bbox": [
+        173,
+        1077,
+        108,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          173,
+          1077
+        ],
+        [
+          281,
+          1077
+        ],
+        [
+          281,
+          1097
+        ],
+        [
+          173,
+          1097
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "요양기관 종류",
+      "original_confidence": 0.9337811470031738,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000090",
+      "text": "[]의원급·보건기관",
+      "confidence": 0.9706045985221863,
+      "bbox": [
+        354,
+        1074,
+        167,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          354,
+          1076
+        ],
+        [
+          520,
+          1074
+        ],
+        [
+          521,
+          1095
+        ],
+        [
+          354,
+          1097
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "[]의원급·보건기관",
+      "original_confidence": 0.9706045985221863,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000091",
+      "text": "[]병원급",
+      "confidence": 0.9983789324760437,
+      "bbox": [
+        556,
+        1076,
+        84,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          556,
+          1076
+        ],
+        [
+          640,
+          1076
+        ],
+        [
+          640,
+          1097
+        ],
+        [
+          556,
+          1097
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "[]병원급",
+      "original_confidence": 0.9983789324760437,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000092",
+      "text": "[]종합병원",
+      "confidence": 0.9955838322639465,
+      "bbox": [
+        675,
+        1076,
+        102,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          675,
+          1076
+        ],
+        [
+          777,
+          1076
+        ],
+        [
+          777,
+          1097
+        ],
+        [
+          675,
+          1097
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "[]종합병원",
+      "original_confidence": 0.9955838322639465,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000093",
+      "text": "[]상급종합병원",
+      "confidence": 0.9907760620117188,
+      "bbox": [
+        812,
+        1076,
+        132,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          812,
+          1076
+        ],
+        [
+          944,
+          1076
+        ],
+        [
+          944,
+          1097
+        ],
+        [
+          812,
+          1097
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "[]상급종합병원",
+      "original_confidence": 0.9907760620117188,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000094",
+      "text": "사업자등록번호",
+      "confidence": 0.9807210564613342,
+      "bbox": [
+        170,
+        1102,
+        114,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          170,
+          1102
+        ],
+        [
+          284,
+          1102
+        ],
+        [
+          284,
+          1122
+        ],
+        [
+          170,
+          1122
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "사업자등록번호",
+      "original_confidence": 0.9807210564613342,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000095",
+      "text": "상호",
+      "confidence": 0.9939719438552856,
+      "bbox": [
+        587,
+        1100,
+        41,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          587,
+          1100
+        ],
+        [
+          628,
+          1100
+        ],
+        [
+          628,
+          1124
+        ],
+        [
+          587,
+          1124
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "상호",
+      "original_confidence": 0.9939719438552856,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000096",
+      "text": "전화번호",
+      "confidence": 0.9897923469543457,
+      "bbox": [
+        842,
+        1101,
+        70,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          842,
+          1101
+        ],
+        [
+          912,
+          1101
+        ],
+        [
+          912,
+          1122
+        ],
+        [
+          842,
+          1122
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "static_label",
+      "reason": "static document label keyword",
+      "locked": false,
+      "notes": "",
+      "original_text": "전화번호",
+      "original_confidence": 0.9897923469543457,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000097",
+      "text": "사업장소재지",
+      "confidence": 0.9920759797096252,
+      "bbox": [
+        174,
+        1127,
+        107,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          174,
+          1127
+        ],
+        [
+          281,
+          1127
+        ],
+        [
+          281,
+          1147
+        ],
+        [
+          174,
+          1147
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "static_label",
+      "reason": "static document label keyword",
+      "locked": false,
+      "notes": "",
+      "original_text": "사업장소재지",
+      "original_confidence": 0.9920759797096252,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000098",
+      "text": "대표자",
+      "confidence": 0.9977342486381531,
+      "bbox": [
+        776,
+        1126,
+        53,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          776,
+          1126
+        ],
+        [
+          829,
+          1126
+        ],
+        [
+          829,
+          1147
+        ],
+        [
+          776,
+          1147
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "대표자",
+      "original_confidence": 0.9977342486381531,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000099",
+      "text": "[인]",
+      "confidence": 0.9979333877563477,
+      "bbox": [
+        1005,
+        1125,
+        39,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          1005,
+          1125
+        ],
+        [
+          1044,
+          1125
+        ],
+        [
+          1044,
+          1148
+        ],
+        [
+          1005,
+          1148
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "[인]",
+      "original_confidence": 0.9979333877563477,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000100",
+      "text": "년",
+      "confidence": 0.97210693359375,
+      "bbox": [
+        476,
+        1148,
+        27,
+        27
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          476,
+          1151
+        ],
+        [
+          500,
+          1148
+        ],
+        [
+          503,
+          1172
+        ],
+        [
+          479,
+          1175
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "년",
+      "original_confidence": 0.97210693359375,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000101",
+      "text": "월",
+      "confidence": 0.9994613528251648,
+      "bbox": [
+        583,
+        1150,
+        23,
+        23
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          583,
+          1150
+        ],
+        [
+          606,
+          1150
+        ],
+        [
+          606,
+          1173
+        ],
+        [
+          583,
+          1173
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "월",
+      "original_confidence": 0.9994613528251648,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000102",
+      "text": "일",
+      "confidence": 0.9970799088478088,
+      "bbox": [
+        688,
+        1151,
+        22,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          688,
+          1151
+        ],
+        [
+          710,
+          1151
+        ],
+        [
+          710,
+          1172
+        ],
+        [
+          688,
+          1172
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "일",
+      "original_confidence": 0.9970799088478088,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000103",
+      "text": "항목별설명",
+      "confidence": 0.99695885181427,
+      "bbox": [
+        427,
+        1176,
+        92,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          427,
+          1176
+        ],
+        [
+          519,
+          1176
+        ],
+        [
+          519,
+          1197
+        ],
+        [
+          427,
+          1197
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "항목별설명",
+      "original_confidence": 0.99695885181427,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000104",
+      "text": "일반사항안내",
+      "confidence": 0.998079240322113,
+      "bbox": [
+        898,
+        1175,
+        107,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          898,
+          1175
+        ],
+        [
+          1005,
+          1175
+        ],
+        [
+          1005,
+          1195
+        ],
+        [
+          898,
+          1195
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "일반사항안내",
+      "original_confidence": 0.998079240322113,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000105",
+      "text": "1.일부 본인부담: 일반적으로 다음과 같이 본인부담률을 적용하나, 요양기관 지역, 요양기관의 종별, 환자",
+      "confidence": 0.8857611417770386,
+      "bbox": [
+        129,
+        1202,
+        687,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          129,
+          1202
+        ],
+        [
+          816,
+          1202
+        ],
+        [
+          816,
+          1219
+        ],
+        [
+          129,
+          1219
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "1.일부 본인부담: 일반적으로 다음과 같이 본인부담률을 적용하나, 요양기관 지역, 요양기관의 종별, 환자",
+      "original_confidence": 0.8857611417770386,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000106",
+      "text": "1.이계산서·영수증에대한세부",
+      "confidence": 0.9775375723838806,
+      "bbox": [
+        842,
+        1205,
+        217,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          842,
+          1205
+        ],
+        [
+          1059,
+          1205
+        ],
+        [
+          1059,
+          1222
+        ],
+        [
+          842,
+          1222
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "1.이계산서·영수증에대한세부",
+      "original_confidence": 0.9775375723838806,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000107",
+      "text": "자격, 선별급여(국민건강보험법 제41조의4에 따른 요양급여) 여부병실종류 등에 따라 달라질 수 있습니다.",
+      "confidence": 0.9023325443267822,
+      "bbox": [
+        150,
+        1219,
+        664,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          150,
+          1219
+        ],
+        [
+          814,
+          1219
+        ],
+        [
+          814,
+          1236
+        ],
+        [
+          150,
+          1236
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "자격, 선별급여(국민건강보험법 제41조의4에 따른 요양급여) 여부병실종류 등에 따라 달라질 수 있습니다.",
+      "original_confidence": 0.9023325443267822,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000108",
+      "text": "내용은 요양기관에 요구하여 제공",
+      "confidence": 0.9338823556900024,
+      "bbox": [
+        854,
+        1223,
+        205,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          854,
+          1223
+        ],
+        [
+          1059,
+          1223
+        ],
+        [
+          1059,
+          1240
+        ],
+        [
+          854,
+          1240
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "내용은 요양기관에 요구하여 제공",
+      "original_confidence": 0.9338823556900024,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000109",
+      "text": "-외래 본인부담를: 요양기관 종별에 따라 30%~60%(의료급여는 수급권자 종별 및 의료급여기관 유형",
+      "confidence": 0.9053792357444763,
+      "bbox": [
+        143,
+        1236,
+        671,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          143,
+          1236
+        ],
+        [
+          814,
+          1236
+        ],
+        [
+          814,
+          1253
+        ],
+        [
+          143,
+          1253
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "-외래 본인부담를: 요양기관 종별에 따라 30%~60%(의료급여는 수급권자 종별 및 의료급여기관 유형",
+      "original_confidence": 0.9053792357444763,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000110",
+      "text": "받을 수 있습니다.",
+      "confidence": 0.8815329670906067,
+      "bbox": [
+        855,
+        1240,
+        120,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1240
+        ],
+        [
+          975,
+          1240
+        ],
+        [
+          975,
+          1257
+        ],
+        [
+          855,
+          1257
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "받을 수 있습니다.",
+      "original_confidence": 0.8815329670906067,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000111",
+      "text": "등에따라 0원~2500원,0%~15%)등",
+      "confidence": 0.9441016912460327,
+      "bbox": [
+        158,
+        1253,
+        279,
+        16
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          158,
+          1253
+        ],
+        [
+          437,
+          1253
+        ],
+        [
+          437,
+          1269
+        ],
+        [
+          158,
+          1269
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "등에따라 0원~2500원,0%~15%)등",
+      "original_confidence": 0.9441016912460327,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000112",
+      "text": "2.[국민건강보험법제48조또는",
+      "confidence": 0.9855186939239502,
+      "bbox": [
+        839,
+        1258,
+        221,
+        19
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          839,
+          1258
+        ],
+        [
+          1060,
+          1258
+        ],
+        [
+          1060,
+          1277
+        ],
+        [
+          839,
+          1277
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "2.[국민건강보험법제48조또는",
+      "original_confidence": 0.9855186939239502,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000113",
+      "text": "-입원 본인부담률:20%(의료급여는 수급권자 종별 및 의료급여기관 유형 등에 따라0%~10%) 등",
+      "confidence": 0.9210147261619568,
+      "bbox": [
+        143,
+        1268,
+        637,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          143,
+          1268
+        ],
+        [
+          780,
+          1268
+        ],
+        [
+          780,
+          1285
+        ],
+        [
+          143,
+          1285
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "-입원 본인부담률:20%(의료급여는 수급권자 종별 및 의료급여기관 유형 등에 따라0%~10%) 등",
+      "original_confidence": 0.9210147261619568,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000114",
+      "text": "[의료급여법제11조의3에",
+      "confidence": 0.9855642318725586,
+      "bbox": [
+        860,
+        1274,
+        185,
+        22
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          860,
+          1274
+        ],
+        [
+          1045,
+          1276
+        ],
+        [
+          1045,
+          1296
+        ],
+        [
+          860,
+          1294
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "[의료급여법제11조의3에",
+      "original_confidence": 0.9855642318725586,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000115",
+      "text": "※식대: 50%(의료급여는 20%)/CT·MR·PET: 외래 본인부담률(의료급여는 입원 본인부담률과 동일)/",
+      "confidence": 0.9242351651191711,
+      "bbox": [
+        145,
+        1287,
+        670,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          145,
+          1287
+        ],
+        [
+          815,
+          1287
+        ],
+        [
+          815,
+          1301
+        ],
+        [
+          145,
+          1301
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "※식대: 50%(의료급여는 20%)/CT·MR·PET: 외래 본인부담률(의료급여는 입원 본인부담률과 동일)/",
+      "original_confidence": 0.9242351651191711,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000116",
+      "text": "선별급여([국민건강보험법제41조의4에 따른요양급여):보건복지부장관이 고시한항목별 본인부담률",
+      "confidence": 0.9512490630149841,
+      "bbox": [
+        165,
+        1303,
+        650,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          165,
+          1303
+        ],
+        [
+          815,
+          1303
+        ],
+        [
+          815,
+          1320
+        ],
+        [
+          165,
+          1320
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "선별급여([국민건강보험법제41조의4에 따른요양급여):보건복지부장관이 고시한항목별 본인부담률",
+      "original_confidence": 0.9512490630149841,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000117",
+      "text": "따라 환자가전액 부담한 비용과",
+      "confidence": 0.9228419661521912,
+      "bbox": [
+        855,
+        1295,
+        205,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1295
+        ],
+        [
+          1060,
+          1295
+        ],
+        [
+          1060,
+          1312
+        ],
+        [
+          855,
+          1312
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "따라 환자가전액 부담한 비용과",
+      "original_confidence": 0.9228419661521912,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000118",
+      "text": "(50%, 80%, 90%)",
+      "confidence": 0.964870035648346,
+      "bbox": [
+        165,
+        1320,
+        123,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          165,
+          1320
+        ],
+        [
+          288,
+          1320
+        ],
+        [
+          288,
+          1337
+        ],
+        [
+          165,
+          1337
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(50%, 80%, 90%)",
+      "original_confidence": 0.964870035648346,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000119",
+      "text": "비급여로 부담한 비용의 타당성",
+      "confidence": 0.9096454977989197,
+      "bbox": [
+        854,
+        1312,
+        204,
+        19
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          854,
+          1312
+        ],
+        [
+          1058,
+          1313
+        ],
+        [
+          1058,
+          1331
+        ],
+        [
+          854,
+          1330
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "비급여로 부담한 비용의 타당성",
+      "original_confidence": 0.9096454977989197,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000120",
+      "text": "※상급종합병원 입원료: 2인실 50%, 3인실40%, 4인실30%/병원급 의료기관(치과병원 제외) 입원료; 2인실 40%, 3인실30%",
+      "confidence": 0.9126012921333313,
+      "bbox": [
+        144,
+        1337,
+        672,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          144,
+          1337
+        ],
+        [
+          816,
+          1337
+        ],
+        [
+          816,
+          1354
+        ],
+        [
+          144,
+          1354
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "※상급종합병원 입원료: 2인실 50%, 3인실40%, 4인실30%/병원급 의료기관(치과병원 제외) 입원료; 2인실 40%, 3인실30%",
+      "original_confidence": 0.9126012921333313,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000121",
+      "text": "여부를건강보험심사평가원(",
+      "confidence": 0.9915154576301575,
+      "bbox": [
+        855,
+        1332,
+        200,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1332
+        ],
+        [
+          1055,
+          1332
+        ],
+        [
+          1055,
+          1349
+        ],
+        [
+          855,
+          1349
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "여부를건강보험심사평가원(",
+      "original_confidence": 0.9915154576301575,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000122",
+      "text": "2.전액 본인부담:[국민건강보험법시행규칙별표6또는[의료급여법시행규칙별표1의2에 따라",
+      "confidence": 0.9588801264762878,
+      "bbox": [
+        130,
+        1353,
+        686,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          130,
+          1353
+        ],
+        [
+          816,
+          1353
+        ],
+        [
+          816,
+          1370
+        ],
+        [
+          130,
+          1370
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "2.전액 본인부담:[국민건강보험법시행규칙별표6또는[의료급여법시행규칙별표1의2에 따라",
+      "original_confidence": 0.9588801264762878,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000123",
+      "text": "1644–2000,홈페이지: www.hira.",
+      "confidence": 0.9634219408035278,
+      "bbox": [
+        855,
+        1352,
+        204,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1352
+        ],
+        [
+          1059,
+          1352
+        ],
+        [
+          1059,
+          1369
+        ],
+        [
+          855,
+          1369
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "1644–2000,홈페이지: www.hira.",
+      "original_confidence": 0.9634219408035278,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000124",
+      "text": "적용되는 항목으로 건강보험(의료급여)에서 금액을 정하고 있으나 진료비 전액을 환자 본인이 부담합니다",
+      "confidence": 0.9145711660385132,
+      "bbox": [
+        150,
+        1369,
+        664,
+        16
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          150,
+          1369
+        ],
+        [
+          814,
+          1369
+        ],
+        [
+          814,
+          1385
+        ],
+        [
+          150,
+          1385
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "적용되는 항목으로 건강보험(의료급여)에서 금액을 정하고 있으나 진료비 전액을 환자 본인이 부담합니다",
+      "original_confidence": 0.9145711660385132,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000125",
+      "text": "or.kr)에 확인 요청하실 수 있습니다.",
+      "confidence": 0.9002662897109985,
+      "bbox": [
+        855,
+        1369,
+        203,
+        16
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1369
+        ],
+        [
+          1058,
+          1369
+        ],
+        [
+          1058,
+          1385
+        ],
+        [
+          855,
+          1385
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "or.kr)에 확인 요청하실 수 있습니다.",
+      "original_confidence": 0.9002662897109985,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000126",
+      "text": "3.상한액초과금:[국민건강보험법시행령별표3제1호에따른본인부담상한액의최고금액을초과하는",
+      "confidence": 0.980250895023346,
+      "bbox": [
+        130,
+        1388,
+        684,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          130,
+          1388
+        ],
+        [
+          814,
+          1388
+        ],
+        [
+          814,
+          1402
+        ],
+        [
+          130,
+          1402
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "3.상한액초과금:[국민건강보험법시행령별표3제1호에따른본인부담상한액의최고금액을초과하는",
+      "original_confidence": 0.980250895023346,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000127",
+      "text": "3.계산서·영수증은[소득세법]",
+      "confidence": 0.940924882888794,
+      "bbox": [
+        840,
+        1384,
+        215,
+        21
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          840,
+          1384
+        ],
+        [
+          1055,
+          1385
+        ],
+        [
+          1055,
+          1405
+        ],
+        [
+          840,
+          1404
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "3.계산서·영수증은[소득세법]",
+      "original_confidence": 0.940924882888794,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000128",
+      "text": "본인부담금이발생한경우[단[의료법제3조제2항제3호라목에따른요양병원([장애인복지법제58조제1항",
+      "confidence": 0.9581313133239746,
+      "bbox": [
+        151,
+        1405,
+        664,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          151,
+          1405
+        ],
+        [
+          815,
+          1405
+        ],
+        [
+          815,
+          1419
+        ],
+        [
+          151,
+          1419
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "본인부담금이발생한경우[단[의료법제3조제2항제3호라목에따른요양병원([장애인복지법제58조제1항",
+      "original_confidence": 0.9581313133239746,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000129",
+      "text": "에따른의료비 공제신청 또는",
+      "confidence": 0.9397129416465759,
+      "bbox": [
+        854,
+        1404,
+        201,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          854,
+          1404
+        ],
+        [
+          1055,
+          1404
+        ],
+        [
+          1055,
+          1421
+        ],
+        [
+          854,
+          1421
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "에따른의료비 공제신청 또는",
+      "original_confidence": 0.9397129416465759,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000130",
+      "text": "제4호에따른 장애인 의료재활시설로서[의료법제3조의2의 요건을갖춘의료기관인 요양병원은 제외)에",
+      "confidence": 0.9503752589225769,
+      "bbox": [
+        151,
+        1422,
+        663,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          151,
+          1422
+        ],
+        [
+          814,
+          1422
+        ],
+        [
+          814,
+          1436
+        ],
+        [
+          151,
+          1436
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "제4호에따른 장애인 의료재활시설로서[의료법제3조의2의 요건을갖춘의료기관인 요양병원은 제외)에",
+      "original_confidence": 0.9503752589225769,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000131",
+      "text": "[조세특례제한법에따른현금",
+      "confidence": 0.9245363473892212,
+      "bbox": [
+        860,
+        1422,
+        199,
+        19
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          860,
+          1422
+        ],
+        [
+          1059,
+          1424
+        ],
+        [
+          1059,
+          1441
+        ],
+        [
+          860,
+          1439
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "[조세특례제한법에따른현금",
+      "original_confidence": 0.9245363473892212,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000132",
+      "text": "입원한 기간이같은연도에120일을초과하는경우는 제외,공단이부담하는초과분중 사전정산하는",
+      "confidence": 0.9430462121963501,
+      "bbox": [
+        150,
+        1436,
+        664,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          150,
+          1436
+        ],
+        [
+          814,
+          1436
+        ],
+        [
+          814,
+          1453
+        ],
+        [
+          150,
+          1453
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "입원한 기간이같은연도에120일을초과하는경우는 제외,공단이부담하는초과분중 사전정산하는",
+      "original_confidence": 0.9430462121963501,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000133",
+      "text": "영수증공제신청(현금영수증승인",
+      "confidence": 0.9659355282783508,
+      "bbox": [
+        855,
+        1442,
+        204,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1442
+        ],
+        [
+          1059,
+          1442
+        ],
+        [
+          1059,
+          1459
+        ],
+        [
+          855,
+          1459
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "영수증공제신청(현금영수증승인",
+      "original_confidence": 0.9659355282783508,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000134",
+      "text": "금액을 말합니다.",
+      "confidence": 0.9253897070884705,
+      "bbox": [
+        150,
+        1454,
+        112,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          150,
+          1454
+        ],
+        [
+          262,
+          1454
+        ],
+        [
+          262,
+          1471
+        ],
+        [
+          150,
+          1471
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "금액을 말합니다.",
+      "original_confidence": 0.9253897070884705,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000135",
+      "text": "번호가 적힌 경우만 해당합니다)",
+      "confidence": 0.9193930625915527,
+      "bbox": [
+        855,
+        1460,
+        204,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1460
+        ],
+        [
+          1059,
+          1460
+        ],
+        [
+          1059,
+          1477
+        ],
+        [
+          855,
+          1477
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "번호가 적힌 경우만 해당합니다)",
+      "original_confidence": 0.9193930625915527,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000136",
+      "text": "※전액 본인부담 및 선별급여([국민건강보험법 제41조의4에 따른 요양급여)의 본인부담금 등은 본인부담",
+      "confidence": 0.9187651872634888,
+      "bbox": [
+        144,
+        1471,
+        672,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          144,
+          1471
+        ],
+        [
+          816,
+          1471
+        ],
+        [
+          816,
+          1488
+        ],
+        [
+          144,
+          1488
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "※전액 본인부담 및 선별급여([국민건강보험법 제41조의4에 따른 요양급여)의 본인부담금 등은 본인부담",
+      "original_confidence": 0.9187651872634888,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000137",
+      "text": "에 사용할 수 있습니다. 다만",
+      "confidence": 0.9037812352180481,
+      "bbox": [
+        855,
+        1478,
+        197,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1478
+        ],
+        [
+          1052,
+          1478
+        ],
+        [
+          1052,
+          1495
+        ],
+        [
+          855,
+          1495
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "에 사용할 수 있습니다. 다만",
+      "original_confidence": 0.9037812352180481,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000138",
+      "text": "상한액 산정시 제외합니다.",
+      "confidence": 0.9139623641967773,
+      "bbox": [
+        163,
+        1487,
+        175,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          163,
+          1488
+        ],
+        [
+          338,
+          1487
+        ],
+        [
+          338,
+          1503
+        ],
+        [
+          163,
+          1505
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "상한액 산정시 제외합니다.",
+      "original_confidence": 0.9139623641967773,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000139",
+      "text": "4.\"질병군포괄수가\"란[국민건강보험법시행령제21조제3항제2호 및[국민건강보험 요양급여의 기준에",
+      "confidence": 0.9209477305412292,
+      "bbox": [
+        129,
+        1503,
+        686,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          129,
+          1504
+        ],
+        [
+          815,
+          1503
+        ],
+        [
+          815,
+          1520
+        ],
+        [
+          129,
+          1521
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "4.\"질병군포괄수가\"란[국민건강보험법시행령제21조제3항제2호 및[국민건강보험 요양급여의 기준에",
+      "original_confidence": 0.9209477305412292,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000140",
+      "text": "지출증빙용으로 발급된\"현금",
+      "confidence": 0.9401546716690063,
+      "bbox": [
+        855,
+        1497,
+        194,
+        16
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1497
+        ],
+        [
+          1049,
+          1497
+        ],
+        [
+          1049,
+          1513
+        ],
+        [
+          855,
+          1513
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "지출증빙용으로 발급된\"현금",
+      "original_confidence": 0.9401546716690063,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000141",
+      "text": "관한규칙제8조제3항에따라보건복지부장관이 고시한질병군입원진료에대하여 해당입원진료와관련",
+      "confidence": 0.9596149325370789,
+      "bbox": [
+        149,
+        1520,
+        666,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          149,
+          1520
+        ],
+        [
+          815,
+          1520
+        ],
+        [
+          815,
+          1537
+        ],
+        [
+          149,
+          1537
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "관한규칙제8조제3항에따라보건복지부장관이 고시한질병군입원진료에대하여 해당입원진료와관련",
+      "original_confidence": 0.9596149325370789,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000142",
+      "text": "영수증(지출증빙)\"은공제신청에",
+      "confidence": 0.9879915714263916,
+      "bbox": [
+        856,
+        1514,
+        202,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          856,
+          1514
+        ],
+        [
+          1058,
+          1514
+        ],
+        [
+          1058,
+          1531
+        ],
+        [
+          856,
+          1531
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "영수증(지출증빙)\"은공제신청에",
+      "original_confidence": 0.9879915714263916,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000143",
+      "text": "되는 여러 의료행위를 하나의 행위로 정하여 요양급여비용을 결정한 것을 말합니다, 다만, 해당 질병군의",
+      "confidence": 0.8862965703010559,
+      "bbox": [
+        149,
+        1536,
+        666,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          149,
+          1537
+        ],
+        [
+          815,
+          1536
+        ],
+        [
+          815,
+          1553
+        ],
+        [
+          149,
+          1554
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "reason": "long wide text line",
+      "locked": false,
+      "notes": "",
+      "original_text": "되는 여러 의료행위를 하나의 행위로 정하여 요양급여비용을 결정한 것을 말합니다, 다만, 해당 질병군의",
+      "original_confidence": 0.8862965703010559,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000144",
+      "text": "사용할 수없습니다",
+      "confidence": 0.9704081416130066,
+      "bbox": [
+        855,
+        1532,
+        136,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1532
+        ],
+        [
+          991,
+          1532
+        ],
+        [
+          991,
+          1549
+        ],
+        [
+          855,
+          1549
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "사용할 수없습니다",
+      "original_confidence": 0.9704081416130066,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000145",
+      "text": "입원진료와 관련되는의료행위라도비급여대상이나이송처치료 등 포괄수가에서제외되는항목은위 표의",
+      "confidence": 0.9486098289489746,
+      "bbox": [
+        150,
+        1555,
+        665,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          150,
+          1555
+        ],
+        [
+          815,
+          1555
+        ],
+        [
+          815,
+          1572
+        ],
+        [
+          150,
+          1572
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "입원진료와 관련되는의료행위라도비급여대상이나이송처치료 등 포괄수가에서제외되는항목은위 표의",
+      "original_confidence": 0.9486098289489746,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000146",
+      "text": "(현금영수증 문의 126 인터넷",
+      "confidence": 0.9403546452522278,
+      "bbox": [
+        855,
+        1551,
+        193,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1551
+        ],
+        [
+          1048,
+          1551
+        ],
+        [
+          1048,
+          1568
+        ],
+        [
+          855,
+          1568
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "(현금영수증 문의 126 인터넷",
+      "original_confidence": 0.9403546452522278,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000147",
+      "text": "기본항목및선택항목란에합산하여표기됩니다",
+      "confidence": 0.9830745458602905,
+      "bbox": [
+        148,
+        1571,
+        315,
+        18
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          148,
+          1571
+        ],
+        [
+          463,
+          1572
+        ],
+        [
+          463,
+          1589
+        ],
+        [
+          148,
+          1588
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "기본항목및선택항목란에합산하여표기됩니다",
+      "original_confidence": 0.9830745458602905,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000148",
+      "text": "홈페이지:http://현금영수증.kr)",
+      "confidence": 0.975317120552063,
+      "bbox": [
+        855,
+        1569,
+        204,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          855,
+          1569
+        ],
+        [
+          1059,
+          1569
+        ],
+        [
+          1059,
+          1586
+        ],
+        [
+          855,
+          1586
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "홈페이지:http://현금영수증.kr)",
+      "original_confidence": 0.975317120552063,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000149",
+      "text": "주(): 1. 진료항목 중 선택항목은 요양기관의 특성에 따라 추가 또는 생략할 수 있으며, 야간(공휴일)진료 시 진료비가 가산될 수 있습니다.",
+      "confidence": 0.8922097086906433,
+      "bbox": [
+        121,
+        1595,
+        917,
+        17
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          121,
+          1595
+        ],
+        [
+          1038,
+          1595
+        ],
+        [
+          1038,
+          1612
+        ],
+        [
+          121,
+          1612
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "주(): 1. 진료항목 중 선택항목은 요양기관의 특성에 따라 추가 또는 생략할 수 있으며, 야간(공휴일)진료 시 진료비가 가산될 수 있습니다.",
+      "original_confidence": 0.8922097086906433,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000150",
+      "text": "2.환자가[위기임신 및 보호출산지원과아동보호에관한특별법제2조제3호에따른비식별화된가명을부여받은경우에는환자의성명",
+      "confidence": 0.9721654057502747,
+      "bbox": [
+        169,
+        1615,
+        899,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          169,
+          1615
+        ],
+        [
+          1068,
+          1615
+        ],
+        [
+          1068,
+          1628
+        ],
+        [
+          169,
+          1628
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "2.환자가[위기임신 및 보호출산지원과아동보호에관한특별법제2조제3호에따른비식별화된가명을부여받은경우에는환자의성명",
+      "original_confidence": 0.9721654057502747,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000151",
+      "text": "대신가명을기재할수있습니다",
+      "confidence": 0.9977020025253296,
+      "bbox": [
+        184,
+        1632,
+        212,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          184,
+          1632
+        ],
+        [
+          396,
+          1632
+        ],
+        [
+          396,
+          1646
+        ],
+        [
+          184,
+          1646
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "대신가명을기재할수있습니다",
+      "original_confidence": 0.9977020025253296,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000152",
+      "text": "210mm×297mm[백상지80g/m²]",
+      "confidence": 0.9666406512260437,
+      "bbox": [
+        841,
+        1654,
+        228,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          841,
+          1654
+        ],
+        [
+          1069,
+          1654
+        ],
+        [
+          1069,
+          1674
+        ],
+        [
+          841,
+          1674
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "210mm×297mm[백상지80g/m²]",
+      "original_confidence": 0.9666406512260437,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_1783427177297",
+      "text": "중간",
+      "confidence": 0.9990640878677368,
+      "bbox": [
+        607,
+        61,
+        50,
+        33
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          607,
+          61
+        ],
+        [
+          657,
+          61
+        ],
+        [
+          657,
+          94
+        ],
+        [
+          607,
+          94
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "manual bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": 0.9990640878677368,
+      "text_source": "paddle_recrop",
+      "ocr_text_stale": false,
+      "rec_text": "중간",
+      "rec_confidence": 0.9990640878677368,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-07T12:27:04.471424+00:00"
+    },
+    {
+      "id": "manual_1783427183109",
+      "text": "퇴원",
+      "confidence": 0.9998676776885986,
+      "bbox": [
+        513,
+        64,
+        45,
+        30
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          513,
+          64
+        ],
+        [
+          558,
+          64
+        ],
+        [
+          558,
+          94
+        ],
+        [
+          513,
+          94
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "manual bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": 0.9998676776885986,
+      "text_source": "paddle_recrop",
+      "ocr_text_stale": false,
+      "rec_text": "퇴원",
+      "rec_confidence": 0.9998676776885986,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-07T12:27:04.471424+00:00"
+    },
+    {
+      "id": "manual_1783427187080",
+      "text": "입원",
+      "confidence": 0.9996258020401001,
+      "bbox": [
+        391,
+        65,
+        58,
+        26
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          391,
+          65
+        ],
+        [
+          449,
+          65
+        ],
+        [
+          449,
+          91
+        ],
+        [
+          391,
+          91
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "manual bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": 0.9996258020401001,
+      "text_source": "paddle_recrop",
+      "ocr_text_stale": false,
+      "rec_text": "입원",
+      "rec_confidence": 0.9996258020401001,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-07T12:27:04.471424+00:00"
+    },
+    {
+      "id": "manual_1783427189831",
+      "text": "외래",
+      "confidence": 0.9881550073623657,
+      "bbox": [
+        282,
+        63,
+        55,
+        28
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          282,
+          63
+        ],
+        [
+          337,
+          63
+        ],
+        [
+          337,
+          91
+        ],
+        [
+          282,
+          91
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "manual bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": 0.9881550073623657,
+      "text_source": "paddle_recrop",
+      "ocr_text_stale": false,
+      "rec_text": "외래",
+      "rec_confidence": 0.9881550073623657,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-07T12:27:04.471424+00:00"
+    },
+    {
+      "id": "manual_1783427193147",
+      "text": "",
+      "confidence": null,
+      "bbox": [
+        249,
+        64,
+        23,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          249,
+          64
+        ],
+        [
+          272,
+          64
+        ],
+        [
+          272,
+          88
+        ],
+        [
+          249,
+          88
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "manual bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-07T12:27:04.471424+00:00"
+    },
+    {
+      "id": "manual_1783427198047",
+      "text": "",
+      "confidence": null,
+      "bbox": [
+        358,
+        64,
+        24,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          358,
+          64
+        ],
+        [
+          382,
+          64
+        ],
+        [
+          382,
+          88
+        ],
+        [
+          358,
+          88
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "manual bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-07T12:27:04.471424+00:00"
+    },
+    {
+      "id": "manual_1783427207030",
+      "text": "",
+      "confidence": null,
+      "bbox": [
+        474,
+        64,
+        24,
+        26
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          474,
+          64
+        ],
+        [
+          498,
+          64
+        ],
+        [
+          498,
+          90
+        ],
+        [
+          474,
+          90
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "manual bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-07T12:27:04.471424+00:00"
+    },
+    {
+      "id": "manual_1783427214097",
+      "text": "",
+      "confidence": null,
+      "bbox": [
+        570,
+        64,
+        25,
+        24
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          570,
+          64
+        ],
+        [
+          595,
+          64
+        ],
+        [
+          595,
+          88
+        ],
+        [
+          570,
+          88
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "manual bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-07T12:27:04.471424+00:00"
+    }
+  ]
+}

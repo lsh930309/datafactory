@@ -20,15 +20,20 @@ from urllib.parse import parse_qs, unquote, urlparse
 from PIL import Image, ImageChops, ImageDraw
 
 from .authoring import (
+    approve_authoring_draft_to_library,
+    authoring_library_payload,
     authoring_review_prune_candidates,
     draft_authoring_bundle,
+    draft_stylesheet_from_review,
     load_authoring_bundle,
     migrate_authoring_schema_bboxes_to_review,
     prune_authoring_fields_by_review,
     render_authoring_batch,
     render_authoring_live_preview,
     render_authoring_preview,
+    review_anchor_map,
     save_authoring_bundle,
+    semantic_schema_to_authoring_schema,
     update_authoring_source_inpainted,
 )
 from .first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
@@ -113,6 +118,8 @@ def runtime_health() -> dict[str, Any]:
             "work_items": True,
             "workbench": True,
             "authoring_1cycle": True,
+            "editable_office_template": True,
+            "office_com_backend": "external_render_required",
             "ocr_recrop_review": True,
             "first_priority_assessment": True,
             "final_results_export": True,
@@ -162,8 +169,10 @@ def save_policy_payload(payload: dict[str, Any]) -> dict[str, Any]:
     review_path = _resolve_workspace_path(str(payload.get("reviewPath") or raw_policy.get("review_path") or default_review_path))
     paths = write_review_policy(policy, review_path.parent)
     pruned_authoring: dict[str, Any] | None = None
+    sidecar_drafts: dict[str, Any] | None = None
     if doc_id:
         update_manifest_artifact(doc_id, "review", paths["review"])
+        sidecar_drafts = _write_review_sidecar_drafts(doc_id, paths["review"], policy)
         if bool(payload.get("pruneAuthoring")):
             schema_path, stylesheet_path, faker_profile_path = _authoring_paths_from_payload(payload, doc_id)
             if schema_path.exists() and stylesheet_path.exists() and faker_profile_path.exists():
@@ -176,7 +185,7 @@ def save_policy_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 update_manifest_artifact(doc_id, "authoring", schema_path)
                 update_manifest_artifact(doc_id, "authoring_stylesheet", stylesheet_path)
                 update_manifest_artifact(doc_id, "authoring_faker_profile", faker_profile_path)
-    return {"paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "prunedAuthoring": pruned_authoring}
+    return {"paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "prunedAuthoring": pruned_authoring, "authoringSidecarDrafts": sidecar_drafts}
 
 
 def registry_payload() -> dict[str, Any]:
@@ -348,6 +357,52 @@ def promote_manual_cleanup_payload(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _authoring_agent_prompt_markdown(request: dict[str, Any]) -> str:
+    contract = request["contract"]
+    registry = request["inputs"].get("registry") or {}
+    lines = [
+        f"# Agentic Authoring Request: {request['title']} ({request['docId']})",
+        "",
+        "## 목표",
+        "문서 이미지/OCR/BBox review와 실제 문서 리서치 근거를 사용해 authoring 초안을 A-to-Z로 생성한다.",
+        "산출물은 즉시 적용하지 않는 draft이며, UI에서 사용자 승인/수정/백업 후 확정한다.",
+        "",
+        "## 사용자 지시",
+        request.get("instruction") or "(추가 지시 없음)",
+        "",
+        "## 입력 문서 컨텍스트",
+        f"- 제목: {request['title']}",
+        f"- 문서 ID: {request['docId']}",
+        f"- PO 도메인: {', '.join(registry.get('poDomains') or registry.get('domains') or []) or '-'}",
+        f"- 업무 도메인: {', '.join(registry.get('workflowDomains') or []) or '-'}",
+        "",
+        "## 필수 산출물",
+        *[f"- `{name}`" for name in contract["outputs"]],
+        "",
+        "## 웹 리서치 필수 규칙",
+        *[f"- {rule}" for rule in contract["web_research_rules"]],
+        "",
+        "## Schema 규칙",
+        *[f"- {rule}" for rule in contract["schema_rules"]],
+        "",
+        "## Faker profile 규칙",
+        *[f"- {rule}" for rule in contract["faker_profile_rules"]],
+        "",
+        "## DOCX/빈 템플릿 anchor 규칙",
+        *[f"- {rule}" for rule in contract["template_anchor_rules"]],
+        "",
+        "## 적용/검수 정책",
+        *[f"- {rule}" for rule in contract["application_rules"]],
+        "",
+        "## 입력 파일",
+        f"- sample: {request['inputs'].get('sample') or '-'}",
+        f"- latestReview: {request['inputs'].get('latestReview') or '-'}",
+        f"- latestInpainted: {request['inputs'].get('latestInpainted') or '-'}",
+        "",
+    ]
+    return "\n".join(lines) + "\n"
+
+
 def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
     doc_id = str(payload.get("docId") or "")
     if not doc_id:
@@ -357,21 +412,70 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
     if doc is None:
         raise ValueError(f"unknown docId: {doc_id}")
     item = next((candidate for candidate in list_work_items(registry=registry) if candidate.get("docId") == doc_id), None)
+    created_at = datetime.now(timezone.utc).isoformat()
     request_dir = workbench_subdir(doc_id, "authoring") / "agent_requests" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     request_dir.mkdir(parents=True, exist_ok=True)
+    outputs = [
+        "schema_draft.json",
+        "stylesheet_draft.json",
+        "faker_profile_draft.json",
+        "value_pool_draft.json",
+        "research_report.json",
+        "uncertainty_report.json",
+        "anchor_map_draft.json",
+        "application_notes.md",
+    ]
     request = {
-        "schema_version": 1,
+        "schema_version": 2,
         "status": "ready_for_agent",
         "docId": doc_id,
         "title": doc.title,
         "instruction": str(payload.get("instruction") or "").strip(),
         "contract": {
             "mode": "agentic_authoring_a_to_z",
-            "outputs": ["schema.json", "stylesheet.json", "faker_profile.json", "preview render report"],
-            "rules": [
-                "문서 이미지, OCR, bbox review를 근거로 key-value hierarchy를 설계한다.",
-                "렌더러는 결과 authoring 파일을 임의 보정하지 않으므로 agent 산출물이 최종 계약이다.",
-                "기존 파일을 덮어쓰기 전 사용자 승인과 백업 경로를 요구한다.",
+            "input_formats": ["pdf", "jpg", "jpeg", "png", "docx"],
+            "generation_paths": ["image-template", "editable-office-template"],
+            "outputs": outputs,
+            "workflow_steps": [
+                "입력 파일, OCR, bbox review, 기존 authoring 파일을 먼저 읽고 근거 anchor를 정리한다.",
+                "실제 문서명을 웹 검색해 작성 방법, 문서 의미, 포함 정보, 실제 샘플 양식, 공식/공공/기관/기업 설명을 수집한다.",
+                "문서에 보이는 anchor와 리서치 근거를 연결해 schema_draft와 faker_profile_draft를 작성한다.",
+                "불확실하거나 출처가 충돌하는 항목은 확정하지 않고 uncertainty_report에 남긴다.",
+                "모든 산출물은 draft로만 저장하며 적용/덮어쓰기는 UI 승인 이후 수행한다.",
+            ],
+            "web_research_rules": [
+                "schema/faker 초안 생성 전에 실제 문서명과 유사 명칭을 웹 검색한다.",
+                "공식/원문/공공기관/법령/제도 설명/실제 샘플 양식을 우선 출처로 사용한다.",
+                "research_report에는 검색일, 검색어, 출처 URL, 출처 유형, 요약, 필드별 반영 근거를 기록한다.",
+                "리서치는 문서에 보이는 anchor의 의미 해석과 faker profile 정밀화를 위한 보조 근거일 뿐, 템플릿에 없는 필드를 자동 추가하는 근거가 아니다.",
+                "출처 간 내용이 다르거나 실제 템플릿 anchor와 연결되지 않으면 faker rule을 확정하지 않고 uncertainty_report에 남긴다.",
+            ],
+            "schema_rules": [
+                "KIE 관점의 key-value hierarchy만 작성한다.",
+                "모든 value는 빈 문자열로 둔다.",
+                "key는 실제 문서에 보이는 라벨, 표제, placeholder, 주변 텍스트, 편집 가능한 anchor 기반 한국어 자연어를 우선한다.",
+                "문서에 보이지 않는 추상 키, 업무 추론만으로 만든 키, downstream 편의용 임의 구조체를 만들지 않는다.",
+                "웹 리서치로 발견한 일반 항목이라도 대응 anchor가 없으면 schema_draft에 자동 추가하지 않는다.",
+            ],
+            "faker_profile_rules": [
+                "schema key의 의미가 충분히 명확하고 문서 anchor 또는 리서치 근거와 연결될 때만 faker rule을 제안한다.",
+                "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안한다.",
+                "의미가 불확실한 key는 literal:, choice:, pool: 등을 임의 생성하지 말고 보류 사유를 기록한다.",
+                "실제 개인정보, 실제 기업정보, 실제 계좌/식별번호처럼 오인 가능한 값은 만들지 않는다.",
+                "합성 더미 값 규칙 또는 승인된 value pool 참조만 사용한다.",
+                "faker_profile_draft의 각 rule은 관련 schema key, anchor, research_report 근거 ID를 추적 가능하게 남긴다.",
+            ],
+            "template_anchor_rules": [
+                "PDF/JPG는 visible text, OCR, bbox 위치, 주변 텍스트를 anchor 근거로 삼는다.",
+                "DOCX는 visible text, content control, form field, table cell, bookmark, placeholder 등 편집 가능한 anchor를 근거로 삼는다.",
+                "숨은 메타데이터나 파일명만으로 schema key 또는 faker rule을 만들지 않는다.",
+                "DOCX 경로에서는 원본 템플릿, 채워진 DOCX, 렌더링 PDF, 페이지 이미지, bbox/label/GT lineage가 manifest에 남아야 한다.",
+            ],
+            "application_rules": [
+                "렌더러는 authoring 데이터를 임의 보정하지 않고 schema/style/faker/render_policy를 그대로 따른다.",
+                "Agent 산출물은 바로 적용하지 않고 draft로 저장한다.",
+                "기존 authoring 파일을 덮어쓰기 전 사용자 승인과 백업 경로가 필요하다.",
+                "UI 확정 전에는 schema_draft, faker_profile_draft, value_pool_draft, research_report, uncertainty_report를 함께 검토 가능해야 한다.",
             ],
         },
         "inputs": {
@@ -386,11 +490,32 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "fakerProfile": item.get("latestAuthoringFakerProfile") if item else "",
             },
         },
-        "created_at": datetime.now(timezone.utc).isoformat(),
+        "created_at": created_at,
     }
     path = request_dir / "request.json"
+    prompt_path = request_dir / "request.md"
+    generated_sidecars: dict[str, str] = {}
+    latest_review = str(request["inputs"].get("latestReview") or "")
+    if latest_review:
+        try:
+            anchor_map_path = request_dir / "anchor_map_draft.json"
+            review_anchor_map(_resolve_workspace_path(latest_review), out_path=anchor_map_path, doc_id=doc_id, title=doc.title)
+            generated_sidecars["anchorMapDraft"] = _display_path(anchor_map_path, ROOT)
+        except Exception as exc:
+            generated_sidecars["anchorMapError"] = str(exc)
+    request["generated_sidecars"] = generated_sidecars
     path.write_text(json.dumps(request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    return {"docId": doc_id, "status": "ready_for_agent", "paths": {"request": _display_path(path, ROOT)}, "request": request}
+    prompt_path.write_text(_authoring_agent_prompt_markdown(request), encoding="utf-8")
+    update_manifest_artifact(doc_id, "authoring_agent_request", path)
+    update_manifest_artifact(doc_id, "authoring_agent_prompt", prompt_path)
+    if generated_sidecars.get("anchorMapDraft"):
+        update_manifest_artifact(doc_id, "authoring_agent_anchor_map", _resolve_workspace_path(generated_sidecars["anchorMapDraft"]))
+    return {
+        "docId": doc_id,
+        "status": "ready_for_agent",
+        "paths": {"request": _display_path(path, ROOT), "prompt": _display_path(prompt_path, ROOT)},
+        "request": request,
+    }
 
 
 def _clear_manifest_artifacts(doc_id: str, artifact_keys: list[str]) -> None:
@@ -413,6 +538,21 @@ def _clear_manifest_artifacts(doc_id: str, artifact_keys: list[str]) -> None:
     manifest["updated_at"] = datetime.now(timezone.utc).isoformat()
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+
+def _write_review_sidecar_drafts(doc_id: str, review_path: Path, policy: ReviewPolicy) -> dict[str, Any]:
+    authoring_dir = workbench_subdir(doc_id, "authoring")
+    draft_dir = authoring_dir / "review_sidecars" / _safe_template_id(policy.source_image)
+    stylesheet_path = draft_dir / "stylesheet_draft_from_review.json"
+    anchor_map_path = draft_dir / "anchor_map_draft.json"
+    stylesheet = draft_stylesheet_from_review(review_path, out_path=stylesheet_path, doc_id=doc_id)
+    anchors = review_anchor_map(review_path, out_path=anchor_map_path, doc_id=doc_id)
+    update_manifest_artifact(doc_id, "authoring_stylesheet_draft", stylesheet_path)
+    update_manifest_artifact(doc_id, "authoring_anchor_map", anchor_map_path)
+    return {
+        "stylesheetDraft": _display_path(stylesheet_path, ROOT),
+        "anchorMapDraft": _display_path(anchor_map_path, ROOT),
+        "summary": {"styleClassCount": len(stylesheet.get("style_classes") or []), "anchorCount": len(anchors.get("anchors") or [])},
+    }
 
 def _authoring_paths_from_payload(payload: dict[str, Any], doc_id: str) -> tuple[Path, Path, Path]:
     authoring_dir = workbench_subdir(doc_id, "authoring")
@@ -1380,6 +1520,38 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     render_scale=render_scale,
                 )
                 self._send_json(result)
+                return
+            if parsed.path == "/api/authoring/library":
+                library = authoring_library_payload(ROOT / "workbench" / "authoring_library")
+                self._send_json({**library, "library_root": _display_path(Path(library["library_root"]), ROOT)})
+                return
+            if parsed.path == "/api/authoring/approve-drafts":
+                request_path = _resolve_workspace_path(str(payload.get("requestPath") or ""))
+                result = approve_authoring_draft_to_library(
+                    request_path,
+                    library_root=ROOT / "workbench" / "authoring_library",
+                    note=str(payload.get("note") or ""),
+                )
+                approval = result["approval"]
+                approval = {**approval, "path": _display_path(approval["path"], ROOT), "request": _display_path(approval["request"], ROOT), "copied": [{**item, "path": _display_path(item["path"], ROOT)} for item in approval.get("copied", [])]}
+                self._send_json({**result, "library": _display_path(result["library"], ROOT), "index": _display_path(result["index"], ROOT), "approval": approval})
+                return
+            if parsed.path == "/api/authoring/semantic-to-authoring":
+                semantic_schema = payload.get("semanticSchema")
+                if not isinstance(semantic_schema, dict):
+                    raise ValueError("semanticSchema is required")
+                anchor_map = payload.get("anchorMap") if isinstance(payload.get("anchorMap"), dict) else None
+                doc_id = str(payload.get("docId") or "") or None
+                schema = semantic_schema_to_authoring_schema(
+                    semantic_schema,
+                    anchor_map=anchor_map,
+                    source_review=str(payload.get("sourceReview") or "") or None,
+                    source_image=str(payload.get("sourceImage") or "") or None,
+                    source_inpainted=str(payload.get("sourceInpainted") or "") or None,
+                    doc_id=doc_id,
+                    title=str(payload.get("title") or "") or None,
+                )
+                self._send_json({"schema": schema, "summary": {"fieldCount": len(schema.get("fields") or [])}})
                 return
             if parsed.path == "/api/authoring/save":
                 doc_id = str(payload.get("docId") or "")

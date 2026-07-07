@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "profile_types": [
+    {
+      "id": "person",
+      "label": "개인 정보",
+      "rules": [
+        "person.name_ko",
+        "person.phone_kr",
+        "person.rrn",
+        "address.ko"
+      ]
+    },
+    {
+      "id": "company",
+      "label": "기업 정보",
+      "rules": [
+        "company.name_ko",
+        "business_reg_no",
+        "address.ko"
+      ]
+    },
+    {
+      "id": "finance",
+      "label": "금융/금액",
+      "rules": [
+        "money.krw",
+        "bank",
+        "account"
+      ]
+    },
+    {
+      "id": "date",
+      "label": "날짜",
+      "rules": [
+        "date.kr"
+      ]
+    },
+    {
+      "id": "choice",
+      "label": "선택/체크",
+      "rules": [
+        "choice:...",
+        "bool.checkbox",
+        "pool:..."
+      ]
+    },
+    {
+      "id": "free_text",
+      "label": "짧은 자유 텍스트",
+      "rules": [
+        "free_text.short",
+        "literal:...",
+        "template:..."
+      ]
+    }
+  ],
+  "value_pools": {
+    "gender_ko": [
+      "남",
+      "여"
+    ],
+    "yes_no_ko": [
+      "예",
+      "아니오"
+    ],
+    "tax_offices": [
+      "종로세무서",
+      "중부세무서",
+      "남대문세무서",
+      "강남세무서"
+    ],
+    "banks_ko": [
+      "국민은행",
+      "신한은행",
+      "우리은행",
+      "하나은행",
+      "농협은행",
+      "기업은행"
+    ]
+  },
+  "approvals": []
+}

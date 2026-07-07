@@ -13,9 +13,10 @@ from .registry import RegistryData, RegistryDocument, load_registry, normalize_t
 ROOT = Path(__file__).resolve().parents[2]
 SEED_ROOT = ROOT / "seed_samples"
 WORKBENCH_ROOT = ROOT / "workbench" / "documents"
-SUPPORTED_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".pdf", ".tif", ".tiff", ".bmp", ".webp"}
-UPLOAD_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".pdf"}
+SUPPORTED_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".pdf", ".tif", ".tiff", ".bmp", ".webp", ".docx"}
+UPLOAD_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".pdf", ".docx"}
 IMAGE_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp", ".webp"}
+EDITABLE_OFFICE_EXTENSIONS = {".docx"}
 STATUS_LABELS = {
     "missing": "미적재",
     "sample_imported": "샘플 적재됨",
@@ -311,7 +312,7 @@ def import_seed_folder(seed_folder: Path, doc_id: str, registry: RegistryData | 
     sample_root.mkdir(parents=True, exist_ok=True)
     manifest = _read_manifest(doc_root) or _base_manifest(doc, doc_root, registry)
     imported_sources = {sample.get("source") for sample in manifest.get("samples", []) if isinstance(sample, dict)}
-    copied: list[dict[str, str]] = []
+    copied: list[dict[str, Any]] = []
     skipped: list[dict[str, str]] = []
     for source in _source_files(seed_folder):
         source_display = _display_path(source)
@@ -322,7 +323,7 @@ def import_seed_folder(seed_folder: Path, doc_id: str, registry: RegistryData | 
         destination = _unique_destination(sample_root / relative)
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, destination)
-        item = {"path": _display_path(destination), "source": source_display}
+        item = _sample_manifest_item(destination, source)
         copied.append(item)
         imported_sources.add(source_display)
     manifest = _merge_manifest(doc, doc_root, seed_folder, copied, registry, existing_manifest=manifest)
@@ -625,6 +626,9 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "statusLabel": STATUS_LABELS[status],
                 "sampleCount": len(samples),
                 "samples": [_display_path(path) for path in samples],
+                "sampleGenerationPaths": list(manifest.get("sample_generation_paths") or []),
+                "hasEditableOfficeTemplate": "editable-office-template" in set(manifest.get("sample_generation_paths") or []),
+                "officeRender": manifest.get("office_render") or {"required": False, "backend": "office-com", "status": "not_required"},
                 "hasOcr": artifact_flags["has_ocr"],
                 "hasReview": artifact_flags["has_review"],
                 "hasInpaint": artifact_flags["has_inpaint"],
@@ -643,6 +647,9 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "latestAuthoringPreview": artifact_flags.get("latest_authoring_preview"),
                 "latestAuthoringOverlay": artifact_flags.get("latest_authoring_overlay"),
                 "latestAuthoringBatch": artifact_flags.get("latest_authoring_batch"),
+                "latestAuthoringAgentRequest": artifact_flags.get("latest_authoring_agent_request"),
+                "latestAuthoringAgentPrompt": artifact_flags.get("latest_authoring_agent_prompt"),
+                "latestAuthoringAgentAnchorMap": artifact_flags.get("latest_authoring_agent_anchor_map"),
                 "latestCleanroomPreview": artifact_flags.get("latest_cleanroom_preview"),
                 "latestCleanroomPdf": artifact_flags.get("latest_cleanroom_pdf"),
                 "latestCleanroomContactSheet": artifact_flags.get("latest_cleanroom_contact_sheet"),
@@ -703,10 +710,15 @@ def _merge_manifest(doc: RegistryDocument, doc_root: Path, seed_folder: Path, co
     samples_by_source = {sample.get("source"): sample for sample in manifest.get("samples", []) if isinstance(sample, dict) and sample.get("source")}
     for item in copied:
         samples_by_source[item["source"]] = item
+    samples = list(samples_by_source.values())
+    generation_paths = sorted({str(sample.get("generation_path") or "image-template") for sample in samples if isinstance(sample, dict)})
+    editable_samples = [sample for sample in samples if isinstance(sample, dict) and sample.get("generation_path") == "editable-office-template"]
     manifest.update(
         {
             "source_seed_folders": source_folders,
-            "samples": list(samples_by_source.values()),
+            "samples": samples,
+            "sample_generation_paths": generation_paths,
+            "office_render": _office_render_manifest_state(editable_samples),
             "status": "sample_imported",
             "updated_at": _now(),
         }
@@ -723,6 +735,8 @@ def _base_manifest(doc: RegistryDocument, doc_root: Path, registry: RegistryData
         "registry": doc.to_dict(),
         "source_seed_folders": [],
         "samples": [],
+        "sample_generation_paths": [],
+        "office_render": {"required": False, "backend": "office-com", "status": "not_required"},
         "status": "missing",
         "created_at": _now(),
         "updated_at": _now(),
@@ -743,6 +757,48 @@ def _source_files(folder: Path) -> list[Path]:
 
 def _rendered_pages_for_pdf(pdf_path: Path) -> list[Path]:
     return sorted(pdf_path.parent.glob(f"{pdf_path.stem}_page_*.jpg"))
+
+
+def _sample_generation_path(path: Path) -> str:
+    return "editable-office-template" if path.suffix.lower() in EDITABLE_OFFICE_EXTENSIONS else "image-template"
+
+
+def _sample_manifest_item(destination: Path, source: Path) -> dict[str, Any]:
+    generation_path = _sample_generation_path(source)
+    item: dict[str, Any] = {
+        "path": _display_path(destination),
+        "source": _display_path(source),
+        "format": source.suffix.lower().lstrip("."),
+        "generation_path": generation_path,
+    }
+    if generation_path == "editable-office-template":
+        item["office_render"] = {
+            "backend": "office-com",
+            "status": "external_render_required",
+            "message": "DOCX 템플릿은 Office COM/호환 렌더러에서 값을 채운 DOCX와 PDF/page image를 생성한 뒤 bbox/label/GT lineage를 확정합니다.",
+        }
+        item["lineage"] = {
+            "original_template": _display_path(source),
+            "imported_template": _display_path(destination),
+            "filled_docx": "",
+            "rendered_pdf": "",
+            "page_images": [],
+            "bbox_label_gt": [],
+        }
+    return item
+
+
+def _office_render_manifest_state(samples: list[dict[str, Any]]) -> dict[str, Any]:
+    if not samples:
+        return {"required": False, "backend": "office-com", "status": "not_required"}
+    pending = [sample for sample in samples if (sample.get("office_render") or {}).get("status") != "rendered"]
+    return {
+        "required": True,
+        "backend": "office-com",
+        "status": "external_render_required" if pending else "rendered",
+        "template_count": len(samples),
+        "pending_count": len(pending),
+    }
 
 
 def _first_image_path(items: list[dict[str, Any]]) -> str:
@@ -783,6 +839,10 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         else []
     )
     authoring_overlay_paths = sorted((doc_root / "authoring" / "render_preview").glob("preview_*.overlay.png")) if (doc_root / "authoring" / "render_preview").exists() else []
+    authoring_agent_request_paths = sorted((doc_root / "authoring" / "agent_requests").glob("*/request.json")) if (doc_root / "authoring" / "agent_requests").exists() else []
+    latest_agent_request_dir = authoring_agent_request_paths[-1].parent if authoring_agent_request_paths else None
+    latest_agent_prompt = latest_agent_request_dir / "request.md" if latest_agent_request_dir else None
+    latest_agent_anchor_map = latest_agent_request_dir / "anchor_map_draft.json" if latest_agent_request_dir else None
     artifacts = manifest.get("artifacts", {}) if isinstance(manifest, dict) else {}
     manifest_ocr = _existing_display_path(artifacts.get("ocr"))
     manifest_review = _existing_display_path(artifacts.get("review"))
@@ -809,6 +869,9 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         "latest_authoring_preview": _display_path(authoring_preview_paths[-1]) if authoring_preview_paths else artifacts.get("authoring_preview"),
         "latest_authoring_overlay": _display_path(authoring_overlay_paths[-1]) if authoring_overlay_paths else artifacts.get("authoring_overlay"),
         "latest_authoring_batch": artifacts.get("authoring_batch"),
+        "latest_authoring_agent_request": _display_path(authoring_agent_request_paths[-1]) if authoring_agent_request_paths else artifacts.get("authoring_agent_request"),
+        "latest_authoring_agent_prompt": _display_path(latest_agent_prompt) if latest_agent_prompt and latest_agent_prompt.exists() else artifacts.get("authoring_agent_prompt"),
+        "latest_authoring_agent_anchor_map": _display_path(latest_agent_anchor_map) if latest_agent_anchor_map and latest_agent_anchor_map.exists() else artifacts.get("authoring_agent_anchor_map"),
         **cleanroom,
     }
 

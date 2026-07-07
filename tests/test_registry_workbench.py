@@ -733,3 +733,24 @@ def test_revert_seed_import_resets_manifest_and_moves_pipeline_dirs(tmp_path: Pa
     assert not (doc_root / "samples").exists()
     assert not (doc_root / "ocr").exists()
     assert (tmp_path / result["trashPath"] if not Path(result["trashPath"]).is_absolute() else Path(result["trashPath"])).exists()
+
+
+def test_import_seed_folder_accepts_docx_as_editable_office_template(tmp_path: Path) -> None:
+    registry = load_registry()
+    seed_folder = tmp_path / "seed_samples" / "사업계획서"
+    seed_folder.mkdir(parents=True)
+    source = seed_folder / "template.docx"
+    source.write_bytes(b"fake docx bytes")
+    workbench_root = tmp_path / "workbench" / "documents"
+
+    result = import_seed_folder(seed_folder, "RPT-01", registry=registry, root=workbench_root)
+
+    assert result["copied"][0]["generation_path"] == "editable-office-template"
+    assert result["copied"][0]["office_render"]["status"] == "external_render_required"
+    manifest = result["manifest"]
+    assert manifest["sample_generation_paths"] == ["editable-office-template"]
+    assert manifest["office_render"]["required"] is True
+    assert manifest["office_render"]["status"] == "external_render_required"
+    item = next(item for item in list_work_items(registry=registry, root=workbench_root) if item["docId"] == "RPT-01")
+    assert item["hasEditableOfficeTemplate"] is True
+    assert item["officeRender"]["backend"] == "office-com"

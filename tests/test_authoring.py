@@ -822,3 +822,25 @@ def test_authoring_stylesheet_preserves_font_selection_and_preview_uses_it(tmp_p
     assert result.image.exists()
     bbox = json.loads(result.bbox.read_text(encoding="utf-8"))
     assert bbox["annotations"][0]["text"] == "홍길동"
+
+
+def test_authoring_library_approval_records_missing_and_copied_drafts(tmp_path: Path) -> None:
+    import json
+
+    from datafactory.authoring import approve_authoring_draft_to_library, authoring_library_payload
+
+    request_dir = tmp_path / "request"
+    request_dir.mkdir()
+    request_path = request_dir / "request.json"
+    request_path.write_text(json.dumps({"docId": "APP-14", "title": "카드발급신청서"}), encoding="utf-8")
+    (request_dir / "faker_profile_draft.json").write_text("{}", encoding="utf-8")
+    library_root = tmp_path / "library"
+
+    result = approve_authoring_draft_to_library(request_path, library_root=library_root, note="approved")
+    library = authoring_library_payload(library_root)
+
+    assert result["summary"]["copied"] == 1
+    assert "schema_draft.json" in result["approval"]["missing"]
+    assert "anchor_map_draft.json" in result["approval"]["missing"]
+    assert library["summary"]["approvalCount"] == 1
+    assert library["summary"]["valuePoolCount"] >= 1

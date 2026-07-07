@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-04",
+  "title": "진료비계산서·영수증",
+  "folder": "workbench/documents/진료비계산서·영수증__MED-04",
+  "registry": {
+    "docId": "MED-04",
+    "title": "진료비계산서·영수증",
+    "issuer": "의료기관",
+    "genre": "증빙",
+    "structure": "표중심",
+    "modality": "스캔이미지",
+    "sensitivity": "의료정보",
+    "fields": "급여·비급여·본인부담·총액",
+    "notes": "",
+    "hasPersonalInfo": "포함",
+    "personalInfoDetail": "환자, 진료일, 진료비, 진료항목, 금액",
+    "validationRules": "금액 합계, 진료일 형식, 병원명, S4 권한, 표 구조, 합계, 기간",
+    "validationRuleCodes": "VAL-002, VAL-004, VAL-015",
+    "writingMethod": "인쇄",
+    "aliases": [
+      "진료비계산서·영수증",
+      "진료비영수증",
+      "진료비세부산정내역서"
+    ],
+    "workflowIds": [
+      "HC-02",
+      "INS-02",
+      "INS-05"
+    ],
+    "domains": [
+      "보험 (생명·손해)",
+      "의료·헬스케어"
+    ],
+    "workflowDomains": [
+      "보험 (생명·손해)",
+      "의료·헬스케어"
+    ],
+    "poDomains": [
+      "보험",
+      "의료"
+    ],
+    "isFirstPriority": false,
+    "firstPriorityDomains": [],
+    "firstPriorityScopeCount": 0
+  },
+  "source_seed_folders": [
+    "seed_samples/진료비계산서·영수증"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙).pdf",
+      "source": "seed_samples/진료비계산서·영수증/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙).pdf",
+      "format": "pdf",
+      "generation_path": "image-template"
+    },
+    {
+      "path": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+      "source": "seed_samples/진료비계산서·영수증/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+      "format": "jpg",
+      "generation_path": "image-template"
+    },
+    {
+      "path": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001_2.jpg",
+      "source": "seed_samples/진료비계산서·영수증/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001_2.jpg",
+      "format": "jpg",
+      "generation_path": "image-template"
+    }
+  ],
+  "sample_generation_paths": [
+    "image-template"
+  ],
+  "office_render": {
+    "required": false,
+    "backend": "office-com",
+    "status": "not_required"
+  },
+  "status": "sample_imported",
+  "created_at": "2026-07-07T12:22:45.643031+00:00",
+  "updated_at": "2026-07-07T12:32:35.012676+00:00",
+  "artifacts": {
+    "ocr": "workbench/documents/진료비계산서·영수증__MED-04/ocr/paddleocr/precise/original_[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001/detections.json",
+    "review": "workbench/documents/진료비계산서·영수증__MED-04/review/original_[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001/review.json",
+    "inpaint": "workbench/documents/진료비계산서·영수증__MED-04/inpaint/original_[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001/lama/comparison_lama.png",
+    "authoring_stylesheet_draft": "workbench/documents/진료비계산서·영수증__MED-04/authoring/review_sidecars/original_[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001/stylesheet_draft_from_review.json",
+    "authoring_anchor_map": "workbench/documents/진료비계산서·영수증__MED-04/authoring/review_sidecars/original_[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001/anchor_map_draft.json",
+    "authoring_agent_request": "workbench/documents/진료비계산서·영수증__MED-04/authoring/agent_requests/20260707T122814706746Z/request.json",
+    "authoring_agent_prompt": "workbench/documents/진료비계산서·영수증__MED-04/authoring/agent_requests/20260707T122814706746Z/request.md",
+    "authoring_agent_anchor_map": "workbench/documents/진료비계산서·영수증__MED-04/authoring/agent_requests/20260707T122814706746Z/anchor_map_draft.json"
+  }
+}

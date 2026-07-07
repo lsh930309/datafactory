@@ -19,7 +19,7 @@ const AUTO_TYPE_LABELS = {
   unknown: '미분류',
 };
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tif', '.tiff'];
-const UPLOAD_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.pdf'];
+const UPLOAD_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.pdf', '.docx'];
 const DEFAULT_OCR_PRESET = 'precise';
 const VIEWPORT_MODES = [
   ['auto', '자동'],
@@ -455,6 +455,8 @@ function App() {
   const [manualCleanupAudit, setManualCleanupAudit] = useState(null);
   const [authoringAgentInstruction, setAuthoringAgentInstruction] = useState('');
   const [authoringAgentRequest, setAuthoringAgentRequest] = useState(null);
+  const [authoringLibrary, setAuthoringLibrary] = useState(null);
+  const [authoringApprovalResult, setAuthoringApprovalResult] = useState(null);
   const [busy, setBusy] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -570,13 +572,14 @@ function App() {
   }, [documents, uploadSearch]);
 
   async function refreshAll({ preserveSelection = true } = {}) {
-    const [nextHealth, nextRegistry, nextWork, nextAssessment, nextSeed, nextFonts] = await Promise.all([
+    const [nextHealth, nextRegistry, nextWork, nextAssessment, nextSeed, nextFonts, nextAuthoringLibrary] = await Promise.all([
       apiJson('/api/health'),
       apiJson('/api/registry'),
       apiJson('/api/work-items'),
       apiJson('/api/first-priority/assessments'),
       apiJson('/api/seed/scan'),
       apiJson('/api/fonts').catch(() => ({ defaultFontId: '', fonts: [] })),
+      apiJson('/api/authoring/library', { method: 'POST', body: JSON.stringify({}) }).catch(() => null),
     ]);
     setHealth(nextHealth);
     setRegistry(nextRegistry);
@@ -584,6 +587,7 @@ function App() {
     setAssessmentPayload(nextAssessment);
     setSeedScan(nextSeed);
     setFontPayload(nextFonts);
+    if (nextAuthoringLibrary) setAuthoringLibrary(nextAuthoringLibrary);
     setSelectedDocId((current) => {
       if (preserveSelection && current && nextWork.items.some((item) => item.docId === current)) return current;
       const pendingSeed = nextSeed.folders.find((folder) => folder.status === 'importable' && folder.matchedDocId);
@@ -853,7 +857,52 @@ function App() {
         body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction }),
       });
       setAuthoringAgentRequest(payload);
-      setMessage(`Agent authoring 요청 패키지 생성 완료: ${payload.paths.request}`);
+      setMessage(`Agent authoring 요청 패키지 생성 완료: ${payload.paths.request}${payload.paths.prompt ? ` · ${payload.paths.prompt}` : ''}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+
+  function applyAuthoringRawJson(section, rawText) {
+    if (!authoringBundle) return;
+    try {
+      const parsed = JSON.parse(rawText);
+      setAuthoringBundle((current) => ({ ...current, [section]: parsed }));
+      setAuthoringDirty(true);
+      if (authoringResult?.paths?.image || selectedItem?.latestAuthoringPreview) setAuthoringPreviewStale(true);
+      setMessage(`${section} raw JSON을 적용했습니다. 저장 전까지 파일에는 반영되지 않습니다.`);
+    } catch (err) {
+      setError(`${section} JSON 파싱 실패: ${err.message || String(err)}`);
+    }
+  }
+
+  async function loadAuthoringLibrary() {
+    setBusy('authoringLibrary');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/library', { method: 'POST', body: JSON.stringify({}) });
+      setAuthoringLibrary(payload);
+      setMessage(`Authoring 라이브러리 로드: profile ${payload.summary.profileTypeCount}종 · pool ${payload.summary.valuePoolCount}개 · 승인 ${payload.summary.approvalCount}건`);
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function approveAuthoringDraftsToLibrary() {
+    const requestPath = authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest;
+    if (!requestPath) return;
+    setBusy('authoringApproveDrafts');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/approve-drafts', {
+        method: 'POST',
+        body: JSON.stringify({ requestPath, note: authoringAgentInstruction }),
+      });
+      setAuthoringApprovalResult(payload);
+      await loadAuthoringLibrary();
+      setMessage(`Authoring draft 라이브러리 승인 기록 완료: copied ${payload.summary.copied} · missing ${payload.summary.missing}`);
     } finally {
       setBusy('');
     }
@@ -957,7 +1006,7 @@ function App() {
     const accepted = Array.from(files || []).filter(isUploadFile);
     const rejected = Array.from(files || []).filter((file) => !isUploadFile(file));
     if (!accepted.length) {
-      setError('지원 파일 형식은 PDF, PNG, JPG/JPEG입니다.');
+      setError('지원 파일 형식은 PDF, PNG, JPG/JPEG, DOCX입니다.');
       setMessage('');
       return;
     }
@@ -2106,6 +2155,9 @@ function App() {
   const batchSummaryHref = batchSummaryPath ? fileUrl(batchSummaryPath, authoringVersion) : '';
   const batchManifestHref = batchManifestPath ? fileUrl(batchManifestPath, authoringVersion) : '';
   const batchFirstImageHref = batchFirstImagePath ? fileUrl(batchFirstImagePath, authoringVersion) : '';
+  const latestAgentRequestPath = authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest || '';
+  const latestAgentPromptPath = authoringAgentRequest?.paths?.prompt || selectedItem?.latestAuthoringAgentPrompt || '';
+  const latestAgentAnchorMapPath = authoringAgentRequest?.request?.generated_sidecars?.anchorMapDraft || selectedItem?.latestAuthoringAgentAnchorMap || '';
 
   useEffect(() => {
     function handleGlobalShortcuts(event) {
@@ -2656,6 +2708,13 @@ function App() {
             <button onClick={() => run(() => previewSelectedSeedRevert())} disabled={!selectedItem?.sampleCount || isBusy}>
               {busy === 'seedRevertPreview' ? '미리보기 중...' : '되돌리기 영향 미리보기'}
             </button>
+            {selectedItem?.hasEditableOfficeTemplate && (
+              <div className="audit-box office-render-box">
+                <b>편집 가능한 Office 템플릿</b>
+                <span>{selectedItem.officeRender?.backend || 'office-com'} · {selectedItem.officeRender?.status || 'external_render_required'}</span>
+                <small>DOCX 원본 → 채워진 DOCX → PDF/page image → bbox/label/GT lineage는 manifest 기준으로 추적합니다.</small>
+              </div>
+            )}
             {seedRevertPreview?.docId === selectedDocId && (
               <div className="audit-box">
                 <b>되돌리기 미리보기</b>
@@ -2687,17 +2746,19 @@ function App() {
             {detectionResult && <p className="mini-path">{detectionResult.paths.detections}</p>}
           </section>
 
-          <section className="panel-block">
-            <h2>리뷰/분류</h2>
-            <div className="status-summary"><Metric label="전체" value={stats.total} /><Metric label="사용" value={stats.byStatus.use} tone="use" /><Metric label="미사용" value={stats.byStatus.keep} tone="keep" /><Metric label="기존 무시" value={stats.byStatus.ignore} tone="ignore" /></div>
-            <p className="muted">
-              {bboxEditMode === 'edit'
-                ? '편집 ON: 좌클릭 드래그로 이동/리사이즈, 빈 영역 드래그로 신규 bbox 작성 · ⌘S 저장 · ⌘Z 실행 취소 · Delete 삭제'
-                : '편집 OFF: 좌클릭 선택/다중선택/범위선택 · bbox를 수정하려면 편집 모드를 켜세요.'}
-            </p>
-            <div className="selected-box">
-              {selectedIds.length ? `${selectedIds.length}개 선택됨` : '선택된 bbox 없음'}
-              {staleLabels.length ? ` · 텍스트 재확인 필요 ${staleLabels.length}개` : ''}
+          <section className="panel-block compact review-control-panel">
+            <div className="block-title-row">
+              <h2>리뷰/분류</h2>
+              <span className={bboxEditMode === 'edit' ? 'mode-pill edit' : 'mode-pill'}>{bboxEditMode === 'edit' ? '편집 ON' : '선택 모드'}</span>
+            </div>
+            <div className="status-summary compact"><Metric label="전체" value={stats.total} /><Metric label="사용" value={stats.byStatus.use} tone="use" /><Metric label="미사용" value={stats.byStatus.keep} tone="keep" /><Metric label="무시" value={stats.byStatus.ignore} tone="ignore" /></div>
+            <div className="review-hint-line">
+              <span>{bboxEditMode === 'edit' ? '드래그 이동/리사이즈 · 빈 영역 신규' : '클릭/범위/다중선택'}</span>
+              <span>⌘S 저장 · ⌘Z 취소 · Del 삭제</span>
+            </div>
+            <div className="selected-box compact">
+              {selectedIds.length ? `${selectedIds.length}개 선택` : '선택 없음'}
+              {staleLabels.length ? ` · 재확인 ${staleLabels.length}` : ''}
             </div>
             <div className="status-buttons">{STATUS.map((status, index) => <button key={status} className={`status ${status}`} title={`${index + 1}: ${STATUS_DESCRIPTIONS[status]}`} disabled={!policy || selectedIds.length === 0 || isBusy} onClick={() => setSelectedBboxStatus(status)}><b>{index + 1}</b>{STATUS_LABELS[status]}</button>)}</div>
             <button onClick={() => run(() => runCropRecognition({ mode: 'apply' }))} disabled={!policy || isBusy || (!selectedIds.length && !staleLabels.length)}>
@@ -2775,7 +2836,7 @@ function App() {
           <section className="panel-block authoring-control-panel">
             <h2>Authoring 작업</h2>
             <p className="muted">Schema / Style / Faker / Render를 분리해 다룹니다. 기존 파일 3종이 있으면 문서 선택 시 자동으로 불러와 최종 Pillow 렌더러 live preview를 표시합니다.</p>
-            <div className="authoring-step-label"><b>0. Agentic Authoring 요청</b><span>문서 이미지/OCR/review 기반 A-to-Z 생성 패키지</span></div>
+            <div className="authoring-step-label"><b>0. Agentic Authoring 요청</b><span>문서 이미지/OCR/review + 웹 리서치 기반 A-to-Z 생성 패키지</span></div>
             <textarea
               className="agent-request-input"
               placeholder="agent에게 전달할 생성 의도/주의사항을 적으세요. 예: 카드발급신청서 하단 체크박스는 날짜/카드종류/동의여부 의미를 이미지 기준으로 구분."
@@ -2785,8 +2846,14 @@ function App() {
             <button onClick={() => run(createAuthoringAgentRequest)} disabled={!selectedDocId || isBusy}>
               {busy === 'authoringAgentRequest' ? '요청 패키지 생성 중...' : 'Agent 요청 패키지 생성'}
             </button>
-            {authoringAgentRequest?.paths?.request && <p className="mini-path">Agent request: {authoringAgentRequest.paths.request}</p>}
-            <p className="warning-text">로컬 규칙 기반 schema 초안은 사용하지 않습니다. 위 버튼은 agent가 schema/style/faker를 A-to-Z 생성할 수 있도록 입력/계약 패키지를 생성합니다.</p>
+            {latestAgentRequestPath && <p className="mini-path">최근 Agent request: {latestAgentRequestPath}{latestAgentPromptPath ? ` · prompt: ${latestAgentPromptPath}` : ''}{latestAgentAnchorMapPath ? ` · anchor: ${latestAgentAnchorMapPath}` : ''}</p>}
+            <div className="button-row compact-buttons">
+              <button onClick={() => run(loadAuthoringLibrary)} disabled={isBusy}>{busy === 'authoringLibrary' ? '라이브러리 로드 중...' : 'Faker/Profile 라이브러리'}</button>
+              <button onClick={() => run(approveAuthoringDraftsToLibrary)} disabled={!latestAgentRequestPath || isBusy}>{busy === 'authoringApproveDrafts' ? '승인 기록 중...' : 'Draft 라이브러리 승인 기록'}</button>
+            </div>
+            {authoringLibrary && <p className="mini-path">Library: profile {authoringLibrary.summary.profileTypeCount}종 · pool {authoringLibrary.summary.valuePoolCount}개 · approval {authoringLibrary.summary.approvalCount}건</p>}
+            {authoringApprovalResult?.approval && <p className="mini-path">최근 승인: {authoringApprovalResult.approval.path} · missing {authoringApprovalResult.summary.missing}</p>}
+            <p className="warning-text">로컬 규칙 기반 schema 초안은 사용하지 않습니다. 위 버튼은 agent가 문서 웹 검색, research_report, uncertainty_report, schema/faker/style draft 계약에 맞춰 A-to-Z 생성할 수 있도록 입력/계약 패키지를 생성합니다. 실제 agent 실행은 이 패키지를 사용하는 다음 단계입니다.</p>
             <div className="authoring-step-label"><b>1. Schema · Style · Faker</b><span>키/생성 규칙/스타일 편집</span></div>
             <div className="button-row">
               <button onClick={() => run(() => loadAuthoringBundle())} disabled={!canLoadAuthoring || isBusy}>
@@ -2819,6 +2886,21 @@ function App() {
                 onGotoReview={() => setCanvasMode('review')}
               />
             )}
+            {authoringBundle && (
+              <details className="raw-json-section">
+                <summary>Schema / Style / Faker raw JSON 편집</summary>
+                <p className="muted">각 JSON은 blur 시 파싱해 draft 상태에만 적용합니다. 저장 버튼을 누르기 전까지 파일은 변경되지 않습니다.</p>
+                <label>Schema JSON
+                  <textarea key={`schema-${authoringVersion}-${authoringDirty}`} rows="7" defaultValue={JSON.stringify(authoringBundle.schema, null, 2)} onBlur={(event) => applyAuthoringRawJson('schema', event.target.value)} />
+                </label>
+                <label>Stylesheet JSON
+                  <textarea key={`stylesheet-${authoringVersion}-${authoringDirty}`} rows="7" defaultValue={JSON.stringify(authoringBundle.stylesheet, null, 2)} onBlur={(event) => applyAuthoringRawJson('stylesheet', event.target.value)} />
+                </label>
+                <label>Faker Profile JSON
+                  <textarea key={`faker-${authoringVersion}-${authoringDirty}`} rows="7" defaultValue={JSON.stringify(authoringBundle.faker_profile, null, 2)} onBlur={(event) => applyAuthoringRawJson('faker_profile', event.target.value)} />
+                </label>
+              </details>
+            )}
             <div className="authoring-step-label"><b>2. Render</b><span>live preview와 샘플 생성</span></div>
             <button onClick={() => run(() => renderAuthoringLivePreview({ silent: false }))} disabled={!authoringBundle || isBusy}>
               {busy === 'authoringLivePreview' ? 'Live preview 갱신 중...' : 'Live preview 새로고침'}
@@ -2829,12 +2911,25 @@ function App() {
               </button>
             </div>
             {authoringPaths.schema && <p className="mini-path">{authoringPaths.schema}{authoringDirty ? ' · 수정됨' : ''}</p>}
-            {(batchSummaryHref || batchFirstImageHref) && (
-              <div className="batch-result-box">
-                <b>배치 결과</b>
-                {batchSummaryHref && <a className="result-link" href={batchSummaryHref} target="_blank" rel="noreferrer">batch summary JSON</a>}
-                {batchManifestHref && <a className="result-link" href={batchManifestHref} target="_blank" rel="noreferrer">batch manifest JSONL</a>}
-                {batchFirstImageHref && <a className="result-link" href={batchFirstImageHref} target="_blank" rel="noreferrer">선택 문서 첫 샘플 이미지</a>}
+            {selectedItem?.hasEditableOfficeTemplate && (
+              <div className="batch-result-box compact office-render-box">
+                <div className="batch-result-head"><b>DOCX 템플릿 렌더 lineage</b><span>{selectedItem.officeRender?.status || 'external_render_required'}</span></div>
+                <p className="muted">채워진 DOCX와 PDF 변환 결과가 manifest에 연결되면 bbox/label/GT 근거 파일을 여기서 함께 추적합니다.</p>
+              </div>
+            )}
+            {(authoringPreviewPath || authoringOverlayHref || batchSummaryHref || batchFirstImageHref) && (
+              <div className="batch-result-box compact">
+                <div className="batch-result-head">
+                  <b>렌더 결과</b>
+                  {authoringBatchResult?.summary && <span>문서 {authoringBatchResult.summary.documentCount} · 이미지 {authoringBatchResult.summary.sampleCount} · 경고 {authoringBatchResult.summary.warningCount}</span>}
+                </div>
+                <div className="result-link-row">
+                  {authoringPreviewPath && <a className="result-link compact" href={fileUrl(authoringPreviewPath, authoringVersion)} target="_blank" rel="noreferrer">Preview</a>}
+                  {authoringOverlayHref && <a className="result-link compact" href={authoringOverlayHref} target="_blank" rel="noreferrer">Overlay</a>}
+                  {batchSummaryHref && <a className="result-link compact" href={batchSummaryHref} target="_blank" rel="noreferrer">Summary</a>}
+                  {batchManifestHref && <a className="result-link compact" href={batchManifestHref} target="_blank" rel="noreferrer">Manifest</a>}
+                  {batchFirstImageHref && <a className="result-link compact" href={batchFirstImageHref} target="_blank" rel="noreferrer">첫 샘플</a>}
+                </div>
               </div>
             )}
           </section>
@@ -3072,7 +3167,9 @@ function AuthoringEditor({
               </div>
             </>
           )}
-          <div className="triple-grid">
+          <div className="authoring-edit-section render-policy-section">
+            <div className="section-mini-title"><b>Render Policy</b><span>정렬/초과/체크박스 표현</span></div>
+            <div className="triple-grid">
             <label>가로
               <select value={renderPolicy.align || 'left'} onChange={(event) => updateRenderPolicy({ align: event.target.value })}>
                 <option value="left">left</option>
@@ -3110,10 +3207,13 @@ function AuthoringEditor({
               {isMulti && <small>선택된 체크박스 bbox {selectedCheckboxFields.length}개에만 일괄 적용됩니다.</small>}
             </label>
           )}
-          <div className="style-subhead">
-            <b>텍스트 스타일</b>
-            <button type="button" onClick={onRefreshFonts}>폰트 새로고침</button>
           </div>
+          <div className="authoring-edit-section text-style-section">
+            <div className="section-mini-title"><b>Text Style</b><span>폰트/크기/색상/위치 보정</span></div>
+            <div className="style-subhead">
+              <b>텍스트 스타일</b>
+              <button type="button" onClick={onRefreshFonts}>폰트 새로고침</button>
+            </div>
           <label>폰트
             <select
               value={selectedFontId}
@@ -3133,6 +3233,10 @@ function AuthoringEditor({
               {fontOptions.map((font) => <option key={font.id} value={font.id}>{font.label || `${font.family} ${font.style}`}</option>)}
             </select>
           </label>
+          <div className="font-preview-card" style={{ fontFamily: selectedStyle?.font_family || undefined, color: rgbToHex(selectedStyle?.fill), fontSize: `${Math.min(22, Math.max(12, Number(selectedStyle?.font_size || 16)))}px`, fontWeight: selectedStyle?.font_weight || 'normal', fontStyle: selectedStyle?.font_style || 'normal', opacity: selectedStyle?.opacity ?? 1 }}>
+            <span>가나다 ABC 123</span>
+            <small>{selectedStyle?.font_family || '기본/자동 폰트'} · {selectedStyle?.font_size || 28}px</small>
+          </div>
           <div className="triple-grid">
             <label>크기
               <input type="number" min="4" max="240" value={selectedStyle?.font_size || 28} onChange={(event) => updateStyle({ font_size: Number(event.target.value) || 28 })} />
@@ -3180,6 +3284,9 @@ function AuthoringEditor({
               <button type="button" onClick={() => updateStyle({}, { shared: true })}>현재 클래스 유지</button>
             </label>
           </div>
+          </div>
+          <div className="authoring-edit-section field-meta-section">
+            <div className="section-mini-title"><b>Field Meta</b><span>BBox 좌표/필수/메모</span></div>
           {!isMulti ? (
             <>
               <div className="bbox-readonly-grid">
@@ -3208,6 +3315,7 @@ function AuthoringEditor({
               <button type="button" onClick={onGotoReview}>BBox 리뷰로 이동</button>
             </div>
           )}
+          </div>
         </div>
       ) : <p className="muted">편집할 필드가 없습니다.</p>}
     </div>

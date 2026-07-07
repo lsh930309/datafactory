@@ -165,3 +165,57 @@ def test_recognize_review_crops_payload_creates_manifest_and_display_paths(tmp_p
     assert captured["manifest"]["crops"][0]["bbox"] == [8, 8, 24, 16]
     assert payload["candidates"][0]["cropPath"].startswith("outputs/ocr_recrop/")
     assert payload["summary"]["manifest"].startswith("outputs/ocr_recrop/")
+
+
+def test_authoring_agent_request_includes_research_and_draft_contract(tmp_path: Path, monkeypatch) -> None:
+    class FakeDoc:
+        doc_id = "APP-14"
+        title = "카드발급신청서"
+
+        def to_dict(self) -> dict[str, object]:
+            return {"docId": self.doc_id, "title": self.title, "poDomains": ["금융"], "workflowDomains": ["금융 - 카드"]}
+
+    fake_doc = FakeDoc()
+    fake_registry = SimpleNamespace(documents={fake_doc.doc_id: fake_doc})
+
+    def fake_workbench_subdir(doc_id: str, subdir: str):
+        target = tmp_path / "workbench" / doc_id / subdir
+        target.mkdir(parents=True, exist_ok=True)
+        return target
+
+    manifest_updates: list[tuple[str, str, str]] = []
+
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    monkeypatch.setattr(web_api, "load_registry", lambda: fake_registry)
+    monkeypatch.setattr(
+        web_api,
+        "list_work_items",
+        lambda registry: [
+            {
+                "docId": fake_doc.doc_id,
+                "samples": ["samples/card.png"],
+                "latestReview": "review.json",
+                "latestInpainted": "inpainted.png",
+            }
+        ],
+    )
+    monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
+    monkeypatch.setattr(web_api, "update_manifest_artifact", lambda doc_id, key, path: manifest_updates.append((doc_id, key, str(path))))
+
+    payload = web_api.authoring_agent_request_payload({"docId": fake_doc.doc_id, "instruction": "체크박스 의미를 보수적으로 판단"})
+
+    request_path = tmp_path / payload["paths"]["request"]
+    prompt_path = tmp_path / payload["paths"]["prompt"]
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    prompt = prompt_path.read_text(encoding="utf-8")
+
+    assert request["schema_version"] == 2
+    assert "research_report.json" in request["contract"]["outputs"]
+    assert "faker_profile_draft.json" in request["contract"]["outputs"]
+    assert any("웹 검색" in rule for rule in request["contract"]["web_research_rules"])
+    assert any("템플릿에 없는 필드" in rule for rule in request["contract"]["web_research_rules"])
+    assert any("literal:" in rule and "임의 생성" in rule for rule in request["contract"]["faker_profile_rules"])
+    assert "웹 리서치 필수 규칙" in prompt
+    assert "체크박스 의미를 보수적으로 판단" in prompt
+    assert ("APP-14", "authoring_agent_request", str(request_path)) in manifest_updates
+    assert ("APP-14", "authoring_agent_prompt", str(prompt_path)) in manifest_updates

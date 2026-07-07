@@ -9,6 +9,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -44,7 +45,7 @@ from .inpaint_export import write_inpaint_result
 from .manual_cleanup import load_manual_mask, save_manual_mask
 from .ocr_detectors import PADDLEOCR_PRESETS, normalize_paddleocr_preset
 from .ocr_worker import run_ocr_eval
-from .policy import ReviewPolicy, draft_review_policy, load_review_policy, review_summary, write_review_policy
+from .policy import ReviewPolicy, augment_blank_template_policy, draft_review_policy, load_review_policy, review_summary, write_review_policy
 from .registry import load_registry
 from .workbench import (
     delete_target_group,
@@ -58,6 +59,7 @@ from .workbench import (
     save_target_group,
     save_uploaded_seed_files,
     scan_seed_samples,
+    set_manifest_sample_kind,
     trash_seed_folder,
     revert_seed_import,
     update_manifest_artifact,
@@ -66,6 +68,17 @@ from .workbench import (
 
 ROOT = Path(__file__).resolve().parents[2]
 RENDER_OUTPUT_ROOT = ROOT / "outputs" / "render"
+AUTHORING_AGENT_REQUIRED_OUTPUTS = [
+    "schema_draft.json",
+    "stylesheet_draft.json",
+    "faker_profile_draft.json",
+    "value_pool_draft.json",
+    "research_report.json",
+    "uncertainty_report.json",
+    "anchor_map_draft.json",
+    "application_notes.md",
+]
+AUTHORING_AGENT_JSON_OUTPUTS = {name for name in AUTHORING_AGENT_REQUIRED_OUTPUTS if name.endswith(".json")}
 
 
 def runtime_health() -> dict[str, Any]:
@@ -412,6 +425,8 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
     if doc is None:
         raise ValueError(f"unknown docId: {doc_id}")
     item = next((candidate for candidate in list_work_items(registry=registry) if candidate.get("docId") == doc_id), None)
+    samples = item.get("samples") if item and isinstance(item.get("samples"), list) else []
+    sample_kind = str((item or {}).get("sampleKind") or "filled_sample")
     created_at = datetime.now(timezone.utc).isoformat()
     request_dir = workbench_subdir(doc_id, "authoring") / "agent_requests" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     request_dir.mkdir(parents=True, exist_ok=True)
@@ -433,6 +448,7 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "instruction": str(payload.get("instruction") or "").strip(),
         "contract": {
             "mode": "agentic_authoring_a_to_z",
+            "sample_kind": sample_kind,
             "input_formats": ["pdf", "jpg", "jpeg", "png", "docx"],
             "generation_paths": ["image-template", "editable-office-template"],
             "outputs": outputs,
@@ -470,6 +486,9 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "DOCX는 visible text, content control, form field, table cell, bookmark, placeholder 등 편집 가능한 anchor를 근거로 삼는다.",
                 "숨은 메타데이터나 파일명만으로 schema key 또는 faker rule을 만들지 않는다.",
                 "DOCX 경로에서는 원본 템플릿, 채워진 DOCX, 렌더링 PDF, 페이지 이미지, bbox/label/GT lineage가 manifest에 남아야 한다.",
+                "sample_kind가 blank_template이면 OCR/static label/keep bbox는 라벨 근거(label_anchor_ids)로만 쓰고 schema field의 anchor_id로 쓰지 않는다.",
+                "sample_kind가 blank_template이면 schema field의 anchor_id는 반드시 리뷰에서 use로 확정된 값 입력 후보, 체크박스, 표 셀, manual bbox, visual_line_detect bbox 중 하나여야 한다.",
+                "sample_kind가 blank_template이고 값 삽입 영역을 찾을 수 없으면 field를 만들지 말고 uncertainty_report에 남긴다.",
             ],
             "application_rules": [
                 "렌더러는 authoring 데이터를 임의 보정하지 않고 schema/style/faker/render_policy를 그대로 따른다.",
@@ -480,7 +499,8 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
         },
         "inputs": {
             "registry": doc.to_dict(),
-            "sample": item.get("samples", [None])[0] if item else "",
+            "sampleKind": sample_kind,
+            "sample": samples[0] if samples else "",
             "latestDetections": item.get("latestDetections") if item else "",
             "latestReview": item.get("latestReview") if item else "",
             "latestInpainted": item.get("latestInpainted") if item else "",
@@ -516,6 +536,374 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "paths": {"request": _display_path(path, ROOT), "prompt": _display_path(prompt_path, ROOT)},
         "request": request,
     }
+
+
+def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = True) -> dict[str, Any]:
+    """Start a real Codex-backed authoring inference job.
+
+    This is intentionally more than a request-package generator: the launched
+    Codex process must create the draft output files declared by the contract.
+    The files remain drafts in the request directory until the user explicitly
+    approves/saves them.
+    """
+
+    request_payload = authoring_agent_request_payload(payload)
+    doc_id = str(request_payload["docId"])
+    request_path = _resolve_workspace_path(request_payload["paths"]["request"])
+    request_dir = request_path.parent
+    run_dir = workbench_subdir(doc_id, "authoring") / "agent_runs" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    run_dir.mkdir(parents=True, exist_ok=True)
+    job_path = run_dir / "job.json"
+    prompt_path = run_dir / "codex_exec_prompt.md"
+    last_message_path = run_dir / "codex_last_message.md"
+    stdout_path = run_dir / "stdout.log"
+    stderr_path = run_dir / "stderr.log"
+    prompt = _authoring_agent_exec_prompt(request_path=request_path, request_dir=request_dir, run_dir=run_dir)
+    prompt_path.write_text(prompt, encoding="utf-8")
+    job = {
+        "schema_version": 1,
+        "jobId": run_dir.name,
+        "docId": doc_id,
+        "status": "queued",
+        "createdAt": datetime.now(timezone.utc).isoformat(),
+        "startedAt": None,
+        "finishedAt": None,
+        "requestPath": _display_path(request_path, ROOT),
+        "requestDir": _display_path(request_dir, ROOT),
+        "runDir": _display_path(run_dir, ROOT),
+        "promptPath": _display_path(prompt_path, ROOT),
+        "lastMessagePath": _display_path(last_message_path, ROOT),
+        "stdoutPath": _display_path(stdout_path, ROOT),
+        "stderrPath": _display_path(stderr_path, ROOT),
+        "requiredOutputs": list(AUTHORING_AGENT_REQUIRED_OUTPUTS),
+        "outputs": {},
+        "validation": {"missing": list(AUTHORING_AGENT_REQUIRED_OUTPUTS), "invalidJson": [], "ready": False},
+    }
+    _write_agent_job(job_path, job)
+    update_manifest_artifact(doc_id, "authoring_agent_run", job_path)
+    update_manifest_artifact(doc_id, "authoring_agent_prompt_exec", prompt_path)
+    if async_run:
+        thread = threading.Thread(
+            target=_run_authoring_agent_job,
+            args=(job_path, request_path, request_dir, run_dir, prompt_path, last_message_path, stdout_path, stderr_path),
+            daemon=True,
+        )
+        thread.start()
+        return _agent_job_payload(job_path)
+    _run_authoring_agent_job(job_path, request_path, request_dir, run_dir, prompt_path, last_message_path, stdout_path, stderr_path)
+    return _agent_job_payload(job_path)
+
+
+def authoring_agent_run_status_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    job_path_value = str(payload.get("jobPath") or "")
+    if job_path_value:
+        job_path = _resolve_workspace_path(job_path_value)
+    else:
+        doc_id = str(payload.get("docId") or "")
+        if not doc_id:
+            raise ValueError("jobPath or docId is required")
+        run_root = workbench_subdir(doc_id, "authoring") / "agent_runs"
+        job_paths = sorted(run_root.glob("*/job.json")) if run_root.exists() else []
+        if not job_paths:
+            raise FileNotFoundError(f"no authoring agent run for {doc_id}")
+        job_path = job_paths[-1]
+    return _agent_job_payload(job_path)
+
+
+def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    request_path_value = str(payload.get("requestPath") or "")
+    if request_path_value:
+        request_path = _resolve_workspace_path(request_path_value)
+    else:
+        run_status = authoring_agent_run_status_payload({"docId": doc_id})
+        request_path = _resolve_workspace_path(str(run_status.get("requestPath") or ""))
+    request_dir = request_path.parent
+    schema_draft_path = request_dir / "schema_draft.json"
+    stylesheet_draft_path = request_dir / "stylesheet_draft.json"
+    faker_profile_draft_path = request_dir / "faker_profile_draft.json"
+    anchor_map_path = request_dir / "anchor_map_draft.json"
+    for required in (schema_draft_path, stylesheet_draft_path, faker_profile_draft_path):
+        if not required.exists():
+            raise FileNotFoundError(required)
+    schema_draft = json.loads(schema_draft_path.read_text(encoding="utf-8"))
+    stylesheet_draft = json.loads(stylesheet_draft_path.read_text(encoding="utf-8"))
+    faker_profile_draft = json.loads(faker_profile_draft_path.read_text(encoding="utf-8"))
+    anchor_map = json.loads(anchor_map_path.read_text(encoding="utf-8")) if anchor_map_path.exists() else None
+    registry = load_registry()
+    doc = registry.documents.get(doc_id)
+    item = next((candidate for candidate in list_work_items(registry=registry) if candidate.get("docId") == doc_id), None)
+    source_review = str((item or {}).get("latestReview") or schema_draft.get("source_review") or "")
+    source_image = str((anchor_map or {}).get("source_image") or schema_draft.get("source_image") or ((item or {}).get("samples") or [""])[0] or "")
+    source_inpainted = str((item or {}).get("latestInpainted") or schema_draft.get("source_inpainted") or source_image)
+    schema = semantic_schema_to_authoring_schema(
+        schema_draft,
+        anchor_map=anchor_map,
+        source_review=source_review,
+        source_image=source_image,
+        source_inpainted=source_inpainted,
+        doc_id=doc_id,
+        title=doc.title if doc else str(schema_draft.get("title") or ""),
+    )
+    authoring_dir = workbench_subdir(doc_id, "authoring")
+    result = save_authoring_bundle(
+        authoring_dir / "schema.json",
+        authoring_dir / "stylesheet.json",
+        authoring_dir / "faker_profile.json",
+        schema=schema,
+        stylesheet=stylesheet_draft,
+        faker_profile=faker_profile_draft,
+    )
+    update_manifest_artifact(doc_id, "authoring", result.schema)
+    update_manifest_artifact(doc_id, "authoring_stylesheet", result.stylesheet)
+    update_manifest_artifact(doc_id, "authoring_faker_profile", result.faker_profile)
+    update_manifest_artifact(doc_id, "authoring_agent_applied_request", request_path)
+    return {
+        "docId": doc_id,
+        "requestPath": _display_path(request_path, ROOT),
+        "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
+        **result.payload,
+    }
+
+
+def _authoring_agent_exec_prompt(*, request_path: Path, request_dir: Path, run_dir: Path) -> str:
+    return f"""# Codex authoring inference job
+
+You are running as a local Codex subprocess for the DataFactory workbench.
+
+## Required behavior
+- Read the request package: `{_display_path(request_path, ROOT)}`.
+- Read every input file referenced by the request when it exists.
+- Use live web search for the document type research required by the request contract.
+- Follow `contract.sample_kind` strictly. If it is `blank_template`, treat OCR text bboxes as static label evidence unless review status/role proves they are value regions.
+- Generate the full draft outputs listed below.
+- Write outputs only inside this request directory: `{_display_path(request_dir, ROOT)}`.
+- Do not overwrite final `schema.json`, `stylesheet.json`, or `faker_profile.json`.
+- Do not edit source code, registry files, workbench manifests, or samples.
+- If a field is uncertain, keep the schema key anchored to visible/template evidence and record uncertainty instead of inventing a faker rule.
+- For blank templates, never use a static label/keep bbox as `schema_draft.fields[].anchor_id`. Use `label_anchor_ids` for label evidence and use only a confirmed value-region/checkbox/table-cell/manual/visual-line-detect anchor as the field target.
+
+## Required output files
+{chr(10).join(f"- `{name}`" for name in AUTHORING_AGENT_REQUIRED_OUTPUTS)}
+
+## Output contracts
+- `schema_draft.json`: semantic draft with `schema_version`, `doc_id`, `title`, `fields`; each field should include `field_id`, `key` or `label`, `anchor_id`, `value` as an empty string, and optional `value_type`.
+- `stylesheet_draft.json`: draft render style classes or field style hints; keep conservative defaults if visual style is uncertain.
+- `faker_profile_draft.json`: field-level faker rules with traceable references to schema keys, anchors, and research evidence. Do not use real personal/company/account data.
+- `value_pool_draft.json`: reusable value pools proposed by the agent, with source/usage notes.
+- `research_report.json`: search date, queries, source URLs, source type, summaries, and field-level evidence links.
+- `uncertainty_report.json`: unresolved fields, conflicting evidence, low-confidence faker rules, and user decisions needed.
+- `anchor_map_draft.json`: preserve or improve the anchor map from the request package.
+- For `blank_template`, `anchor_map_draft.json` must distinguish value targets from labels using `status`, `auto_type`, `role`, `text_source`, or `provenance`. Static labels may be listed, but schema field targets must point to value targets only.
+- `application_notes.md`: concise Korean notes explaining what was generated, what remains uncertain, and how to approve/apply.
+
+## Completion criteria
+Before finishing, verify all required files exist and all JSON files parse.
+Return a short Korean final summary only after the files are written.
+
+## Run directory
+Use this run directory only for logs or scratch notes if needed: `{_display_path(run_dir, ROOT)}`.
+"""
+
+
+def _run_authoring_agent_job(
+    job_path: Path,
+    request_path: Path,
+    request_dir: Path,
+    run_dir: Path,
+    prompt_path: Path,
+    last_message_path: Path,
+    stdout_path: Path,
+    stderr_path: Path,
+) -> None:
+    job = _read_agent_job(job_path)
+    job.update({"status": "running", "startedAt": datetime.now(timezone.utc).isoformat()})
+    _write_agent_job(job_path, job)
+    command = [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "exec",
+        "--cd",
+        str(ROOT),
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        str(last_message_path),
+        "-",
+    ]
+    try:
+        completed = subprocess.run(
+            command,
+            input=prompt_path.read_text(encoding="utf-8"),
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            timeout=60 * 30,
+            check=False,
+        )
+        stdout_path.write_text(completed.stdout or "", encoding="utf-8")
+        stderr_path.write_text(completed.stderr or "", encoding="utf-8")
+        validation = _validate_authoring_agent_outputs(request_dir)
+        job = _read_agent_job(job_path)
+        job.update(
+            {
+                "status": "succeeded" if completed.returncode == 0 and validation["ready"] else "failed",
+                "finishedAt": datetime.now(timezone.utc).isoformat(),
+                "returnCode": completed.returncode,
+                "command": command,
+                "outputs": validation["outputs"],
+                "validation": validation,
+            }
+        )
+        if completed.returncode != 0:
+            job["error"] = f"codex exec failed with exit code {completed.returncode}"
+        elif not validation["ready"]:
+            job["error"] = "codex exec finished but required draft outputs are missing or invalid"
+    except Exception as exc:  # pragma: no cover - defensive for manual job runtime
+        stderr_path.write_text(str(exc), encoding="utf-8")
+        validation = _validate_authoring_agent_outputs(request_dir)
+        job = _read_agent_job(job_path)
+        job.update(
+            {
+                "status": "failed",
+                "finishedAt": datetime.now(timezone.utc).isoformat(),
+                "returnCode": None,
+                "outputs": validation["outputs"],
+                "validation": validation,
+                "error": str(exc),
+            }
+        )
+    _write_agent_job(job_path, job)
+    update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_run", job_path)
+    if job.get("status") == "succeeded":
+        update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_schema_draft", request_dir / "schema_draft.json")
+        update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_faker_profile_draft", request_dir / "faker_profile_draft.json")
+        update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_research_report", request_dir / "research_report.json")
+
+
+def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
+    outputs: dict[str, str] = {}
+    missing: list[str] = []
+    invalid_json: list[dict[str, str]] = []
+    parsed_json: dict[str, Any] = {}
+    for name in AUTHORING_AGENT_REQUIRED_OUTPUTS:
+        path = request_dir / name
+        if not path.exists():
+            missing.append(name)
+            continue
+        outputs[name] = _display_path(path, ROOT)
+        if name in AUTHORING_AGENT_JSON_OUTPUTS:
+            try:
+                parsed_json[name] = json.loads(path.read_text(encoding="utf-8"))
+            except Exception as exc:
+                invalid_json.append({"name": name, "error": str(exc)})
+    contract_errors: list[dict[str, str]] = []
+    if not invalid_json:
+        contract_errors.extend(_validate_blank_template_agent_contract(request_dir, parsed_json))
+    return {
+        "ready": not missing and not invalid_json and not contract_errors,
+        "missing": missing,
+        "invalidJson": invalid_json,
+        "contractErrors": contract_errors,
+        "outputs": outputs,
+        "summary": {
+            "required": len(AUTHORING_AGENT_REQUIRED_OUTPUTS),
+            "present": len(outputs),
+            "missing": len(missing),
+            "invalidJson": len(invalid_json),
+            "contractErrors": len(contract_errors),
+        },
+    }
+
+
+def _validate_blank_template_agent_contract(request_dir: Path, parsed_json: dict[str, Any]) -> list[dict[str, str]]:
+    request_path = request_dir / "request.json"
+    if not request_path.exists():
+        return []
+    try:
+        request = json.loads(request_path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    sample_kind = str((request.get("inputs") or {}).get("sampleKind") or (request.get("contract") or {}).get("sample_kind") or "filled_sample")
+    if sample_kind != "blank_template":
+        return []
+    schema = parsed_json.get("schema_draft.json") if isinstance(parsed_json.get("schema_draft.json"), dict) else {}
+    anchor_map = parsed_json.get("anchor_map_draft.json") if isinstance(parsed_json.get("anchor_map_draft.json"), dict) else {}
+    anchors = {
+        str(anchor.get("anchor_id") or anchor.get("id") or ""): anchor
+        for anchor in anchor_map.get("anchors", [])
+        if isinstance(anchor, dict) and str(anchor.get("anchor_id") or anchor.get("id") or "")
+    }
+    errors: list[dict[str, str]] = []
+    value_anchor_ids = {anchor_id for anchor_id, anchor in anchors.items() if _blank_template_anchor_is_value_target(anchor)}
+    if not value_anchor_ids:
+        errors.append({"code": "blank_template_no_value_anchors", "message": "blank_template requires at least one value-region/use/manual/visual-line-detect anchor"})
+    seen_targets: dict[str, str] = {}
+    fields = schema.get("fields", []) if isinstance(schema.get("fields"), list) else []
+    for field in fields:
+        if not isinstance(field, dict):
+            continue
+        field_id = str(field.get("field_id") or field.get("key") or field.get("label") or "")
+        anchor_id = str(field.get("anchor_id") or field.get("bbox_label_id") or field.get("source_detection_id") or "")
+        if not anchor_id:
+            errors.append({"code": "blank_template_field_without_anchor", "field": field_id, "message": "blank_template field must define a value target anchor_id"})
+            continue
+        anchor = anchors.get(anchor_id)
+        if anchor is None:
+            errors.append({"code": "blank_template_missing_anchor", "field": field_id, "anchor_id": anchor_id, "message": "field anchor_id is not present in anchor_map_draft"})
+            continue
+        if not _blank_template_anchor_is_value_target(anchor):
+            errors.append({"code": "blank_template_static_label_as_field_anchor", "field": field_id, "anchor_id": anchor_id, "message": "static label/keep anchor cannot be used as schema field target"})
+        previous = seen_targets.get(anchor_id)
+        if previous:
+            errors.append({"code": "blank_template_duplicate_field_anchor", "field": field_id, "anchor_id": anchor_id, "message": f"anchor already used by {previous}"})
+        else:
+            seen_targets[anchor_id] = field_id
+    return errors
+
+
+def _blank_template_anchor_is_value_target(anchor: dict[str, Any]) -> bool:
+    status = str(anchor.get("status") or "").lower()
+    role = str(anchor.get("role") or anchor.get("anchor_role") or "").lower()
+    auto_type = str(anchor.get("auto_type") or anchor.get("type") or "").lower()
+    source = str(anchor.get("source") or anchor.get("text_source") or "").lower()
+    provenance = anchor.get("provenance")
+    provenance_text = json.dumps(provenance, ensure_ascii=False).lower() if isinstance(provenance, (dict, list)) else str(provenance or "").lower()
+    if status in {"keep", "ignore"} or role in {"static_label", "label", "header", "instruction_text"} or auto_type in {"static_label", "header_footer", "long_paragraph"}:
+        return False
+    if status == "use":
+        return True
+    return any(token in f"{role} {auto_type} {source} {provenance_text}" for token in ("value", "checkbox", "table_cell", "manual", "visual_line_detect", "opencv_grid", "grid"))
+
+
+
+def _payload_bool(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return value != 0
+    return str(value or "").strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def _visual_line_detection_requested(payload: dict[str, Any]) -> bool:
+    return _payload_bool(payload.get("includeVisualLineDetection"))
+
+def _read_agent_job(job_path: Path) -> dict[str, Any]:
+    return json.loads(job_path.read_text(encoding="utf-8"))
+
+
+def _write_agent_job(job_path: Path, job: dict[str, Any]) -> None:
+    job_path.parent.mkdir(parents=True, exist_ok=True)
+    job_path.write_text(json.dumps(job, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _agent_job_payload(job_path: Path) -> dict[str, Any]:
+    job = _read_agent_job(job_path)
+    return {**job, "jobPath": _display_path(job_path, ROOT)}
 
 
 def _clear_manifest_artifacts(doc_id: str, artifact_keys: list[str]) -> None:
@@ -1152,6 +1540,15 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     }
                 )
                 return
+            if parsed.path == "/api/authoring/agent-run-status":
+                query = parse_qs(parsed.query)
+                payload: dict[str, Any] = {}
+                if query.get("jobPath"):
+                    payload["jobPath"] = unquote(query["jobPath"][0])
+                if query.get("docId"):
+                    payload["docId"] = unquote(query["docId"][0])
+                self._send_json(authoring_agent_run_status_payload(payload))
+                return
             if parsed.path in {"/api/image", "/api/file"}:
                 file_path = _query_path(parsed.query)
                 self._send_file(file_path)
@@ -1277,18 +1674,33 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
             if parsed.path == "/api/review/draft":
                 detections_path = _resolve_workspace_path(str(payload.get("detectionsPath") or ""))
                 doc_id = str(payload.get("docId") or "")
+                sample_kind = str(payload.get("sampleKind") or "")
                 default_out_dir = workbench_subdir(doc_id, "review") if doc_id else Path("outputs/reviews")
                 out_dir = _resolve_workspace_path(str(payload.get("outDir") or default_out_dir))
                 policy = draft_review_policy(detections_path)
+                visual_detection: dict[str, Any] | None = None
+                if sample_kind == "blank_template":
+                    if _visual_line_detection_requested(payload):
+                        policy, visual_detection = augment_blank_template_policy(policy)
+                    else:
+                        visual_detection = {"enabled": False, "method": "pil_line_projection", "candidateCount": 0, "reason": "not_requested"}
                 draft_dir = out_dir / _safe_template_id(policy.source_image)
                 backup = backup_review_draft_outputs(draft_dir)
                 paths = write_review_policy(policy, draft_dir)
                 if doc_id:
+                    if sample_kind:
+                        set_manifest_sample_kind(doc_id, sample_kind)
                     update_manifest_artifact(doc_id, "review", paths["review"])
-                self._send_json({"docId": doc_id or None, "paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "backup": backup})
+                self._send_json({"docId": doc_id or None, "paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "backup": backup, "visualDetection": visual_detection})
                 return
             if parsed.path == "/api/review/save":
                 self._send_json(save_policy_payload(payload))
+                return
+            if parsed.path == "/api/work-item/sample-kind":
+                doc_id = str(payload.get("docId") or "")
+                sample_kind = str(payload.get("sampleKind") or "")
+                manifest = set_manifest_sample_kind(doc_id, sample_kind)
+                self._send_json({"docId": doc_id, "sampleKind": manifest.get("sample_kind"), "manifest": manifest})
                 return
             if parsed.path == "/api/review/remove-ignore":
                 self._send_json(remove_ignore_bboxes_payload(payload))
@@ -1364,6 +1776,10 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
             if parsed.path == "/api/inpaint":
                 saved: dict[str, Any] | None = None
                 doc_id = str(payload.get("docId") or "")
+                if doc_id:
+                    current_item = next((candidate for candidate in list_work_items() if candidate.get("docId") == doc_id), None)
+                    if str((current_item or {}).get("sampleKind") or "") == "blank_template":
+                        raise ValueError("blank_template samples do not need inpainting; review value-region bboxes and run agent authoring instead")
                 review_path_value = str(payload.get("reviewPath") or "")
                 review_path = _resolve_workspace_path(review_path_value) if review_path_value else None
                 if isinstance(payload.get("policy"), dict):
@@ -1412,6 +1828,12 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 return
             if parsed.path == "/api/authoring/agent-request":
                 self._send_json(authoring_agent_request_payload(payload))
+                return
+            if parsed.path == "/api/authoring/agent-run":
+                self._send_json(authoring_agent_run_payload(payload, async_run=not bool(payload.get("sync"))))
+                return
+            if parsed.path == "/api/authoring/agent-run-status":
+                self._send_json(authoring_agent_run_status_payload(payload))
                 return
             if parsed.path == "/api/authoring/migrate-bboxes":
                 doc_id = str(payload.get("docId") or "")
@@ -1535,6 +1957,9 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 approval = result["approval"]
                 approval = {**approval, "path": _display_path(approval["path"], ROOT), "request": _display_path(approval["request"], ROOT), "copied": [{**item, "path": _display_path(item["path"], ROOT)} for item in approval.get("copied", [])]}
                 self._send_json({**result, "library": _display_path(result["library"], ROOT), "index": _display_path(result["index"], ROOT), "approval": approval})
+                return
+            if parsed.path == "/api/authoring/apply-agent-drafts":
+                self._send_json(apply_authoring_agent_drafts_payload(payload))
                 return
             if parsed.path == "/api/authoring/semantic-to-authoring":
                 semantic_schema = payload.get("semanticSchema")

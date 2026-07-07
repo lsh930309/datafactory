@@ -317,6 +317,7 @@ function workItemNextAction(item) {
   if (!workItemStageState(item, 'sample')) return '다음: 샘플 추가';
   if (!workItemStageState(item, 'ocr')) return '다음: BBox 검출';
   if (!workItemStageState(item, 'review')) return '다음: BBox 리뷰';
+  if (item.sampleKind === 'blank_template' && !workItemStageState(item, 'authoring')) return '다음: blank authoring';
   if (!workItemStageState(item, 'inpaint')) return '다음: 인페인팅';
   if (!workItemStageState(item, 'cleanup')) return '선택: 템플릿 클린업';
   if (!workItemStageState(item, 'authoring')) return '다음: schema/faker';
@@ -414,6 +415,7 @@ function App() {
   const [selectedIds, setSelectedIds] = useState([]);
   const [lamaMaxSide, setLamaMaxSide] = useState(2400);
   const [ocrPreset] = useState(DEFAULT_OCR_PRESET);
+  const [blankTemplateLineDetectEnabled, setBlankTemplateLineDetectEnabled] = useState(false);
   const [detectionResult, setDetectionResult] = useState(null);
   const [inpaintResult, setInpaintResult] = useState(null);
   const [inpaintVersion, setInpaintVersion] = useState(0);
@@ -437,6 +439,7 @@ function App() {
   const [authoringLivePreview, setAuthoringLivePreview] = useState(null);
   const [authoringLivePreviewVersion, setAuthoringLivePreviewVersion] = useState(0);
   const authoringPreviewSeq = useRef(0);
+  const authoringAgentTerminalRefreshRef = useRef('');
   const [fontPayload, setFontPayload] = useState({ defaultFontId: '', fonts: [] });
   const [canvasMode, setCanvasMode] = useState('review');
   const [viewportMode, setViewportMode] = useState('auto');
@@ -455,6 +458,7 @@ function App() {
   const [manualCleanupAudit, setManualCleanupAudit] = useState(null);
   const [authoringAgentInstruction, setAuthoringAgentInstruction] = useState('');
   const [authoringAgentRequest, setAuthoringAgentRequest] = useState(null);
+  const [authoringAgentRun, setAuthoringAgentRun] = useState(null);
   const [authoringLibrary, setAuthoringLibrary] = useState(null);
   const [authoringApprovalResult, setAuthoringApprovalResult] = useState(null);
   const [busy, setBusy] = useState('');
@@ -475,6 +479,8 @@ function App() {
   const seedFolders = seedScan.folders || [];
   const selectedItem = useMemo(() => items.find((item) => item.docId === selectedDocId) || null, [items, selectedDocId]);
   const selectedDoc = selectedItem?.registry || documents.find((doc) => doc.docId === selectedDocId) || null;
+  const selectedSampleKind = selectedItem?.sampleKind || 'filled_sample';
+  const selectedIsBlankTemplate = selectedSampleKind === 'blank_template';
   const matchedSeedFolders = useMemo(() => seedFolders.filter((folder) => folder.matchedDocId === selectedDocId), [seedFolders, selectedDocId]);
   const intakeFolders = useMemo(() => seedFolders.filter((folder) => folder.status === intakeTab), [seedFolders, intakeTab]);
   const importableFolders = useMemo(() => seedFolders.filter((folder) => folder.status === 'importable' && folder.matchedDocId), [seedFolders]);
@@ -864,6 +870,71 @@ function App() {
     }
   }
 
+  async function updateSelectedSampleKind(sampleKind) {
+    if (!selectedDocId || selectedSampleKind === sampleKind) return;
+    setBusy('sampleKind');
+    setError('');
+    try {
+      const payload = await apiJson('/api/work-item/sample-kind', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId, sampleKind }),
+      });
+      setMessage(`샘플 유형 저장: ${payload.sampleKind === 'blank_template' ? '빈 템플릿' : payload.sampleKind === 'mixed_template' ? '혼합 템플릿' : '값 채워진 샘플'}`);
+      if (sampleKind === 'blank_template') {
+        setInpaintResult(null);
+        setInpaintVersion(0);
+        resetCleanupState();
+        if (canvasMode === 'inpaint' || canvasMode === 'cleanup') setCanvasMode('review');
+      }
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function runAuthoringAgentInference() {
+    if (!selectedDocId) return;
+    setBusy('authoringAgentRun');
+    setError('');
+    authoringAgentTerminalRefreshRef.current = '';
+    try {
+      const payload = await apiJson('/api/authoring/agent-run', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction }),
+      });
+      setAuthoringAgentRequest({ docId: payload.docId, paths: { request: payload.requestPath }, request: null });
+      setAuthoringAgentRun(payload);
+      setMessage(`Agent 추론 job 시작: ${payload.jobPath}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function refreshAuthoringAgentRunStatus(jobPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun) {
+    if (!jobPath && !selectedDocId) return null;
+    const query = jobPath ? `jobPath=${encodeURIComponent(jobPath)}` : `docId=${encodeURIComponent(selectedDocId)}`;
+    const payload = await apiJson(`/api/authoring/agent-run-status?${query}`);
+    setAuthoringAgentRun(payload);
+    const terminalKey = `${payload.jobPath || jobPath || ''}:${payload.status}:${payload.finishedAt || ''}`;
+    if (payload.status === 'succeeded') {
+      if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
+        authoringAgentTerminalRefreshRef.current = terminalKey;
+        setMessage(`Agent 추론 완료: draft ${payload.validation?.summary?.present || 0}/${payload.validation?.summary?.required || 0}개 생성`);
+        await refreshAll({ preserveSelection: true });
+      }
+    } else if (payload.status === 'failed') {
+      if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
+        authoringAgentTerminalRefreshRef.current = terminalKey;
+        setError(`Agent 추론 실패: ${payload.error || '필수 draft 산출물 검증 실패'}`);
+        await refreshAll({ preserveSelection: true });
+      }
+    } else {
+      authoringAgentTerminalRefreshRef.current = '';
+    }
+    return payload;
+  }
+
 
   function applyAuthoringRawJson(section, rawText) {
     if (!authoringBundle) return;
@@ -903,6 +974,27 @@ function App() {
       setAuthoringApprovalResult(payload);
       await loadAuthoringLibrary();
       setMessage(`Authoring draft 라이브러리 승인 기록 완료: copied ${payload.summary.copied} · missing ${payload.summary.missing}`);
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function applyAuthoringAgentDrafts() {
+    const requestPath = authoringAgentRun?.requestPath || authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest;
+    if (!selectedDocId || !requestPath) return;
+    setBusy('authoringApplyAgentDrafts');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/apply-agent-drafts', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId, requestPath }),
+      });
+      setAuthoringBundle(payload);
+      setAuthoringDirty(false);
+      setAuthoringResult(null);
+      setAuthoringVersion((value) => value + 1);
+      setMessage(`Agent draft를 최종 Authoring에 적용했습니다: field ${payload.summary.field_count}개`);
+      await refreshAll({ preserveSelection: true });
     } finally {
       setBusy('');
     }
@@ -1104,6 +1196,7 @@ function App() {
     setRecognitionPopover(null);
     resetReviewHistory();
     setDetectionResult(null);
+    setBlankTemplateLineDetectEnabled(false);
     setInpaintResult(null);
     setInpaintVersion(0);
     resetCleanupState();
@@ -1121,6 +1214,12 @@ function App() {
     setBboxEditMode('select');
     setReviewDirty(false);
   }, [selectedDocId]);
+
+  useEffect(() => {
+    if (!selectedIsBlankTemplate && blankTemplateLineDetectEnabled) {
+      setBlankTemplateLineDetectEnabled(false);
+    }
+  }, [selectedIsBlankTemplate, blankTemplateLineDetectEnabled]);
 
   useEffect(() => {
     setSelectedSample((current) => {
@@ -1154,7 +1253,7 @@ function App() {
       setCanvasMode('final');
       return undefined;
     }
-    const hasInpainted = Boolean(selectedItem.latestInpainted);
+    const hasInpainted = !selectedIsBlankTemplate && Boolean(selectedItem.latestInpainted);
     const hasAuthoring = Boolean(selectedItem.latestAuthoringSchema || selectedItem.latestAuthoringPreview);
     const hasAuthoringPreview = Boolean(selectedItem.latestAuthoringPreview);
 
@@ -1243,7 +1342,7 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [selectedDocId, selectedWorkflowLocked, selectedItem?.docId, selectedItem?.latestReview, selectedItem?.latestInpainted, selectedItem?.latestInpaintComparison, selectedItem?.latestAuthoringPreview, selectedItem?.latestAuthoringOverlay, selectedItem?.latestAuthoringSchema, selectedItem?.latestAuthoringStylesheet, selectedItem?.latestAuthoringFakerProfile, selectedItem?.latestAuthoringBatch]);
+  }, [selectedDocId, selectedWorkflowLocked, selectedIsBlankTemplate, selectedItem?.docId, selectedItem?.latestReview, selectedItem?.latestInpainted, selectedItem?.latestInpaintComparison, selectedItem?.latestAuthoringPreview, selectedItem?.latestAuthoringOverlay, selectedItem?.latestAuthoringSchema, selectedItem?.latestAuthoringStylesheet, selectedItem?.latestAuthoringFakerProfile, selectedItem?.latestAuthoringBatch]);
 
   useEffect(() => {
     if (!uploadOpen) return;
@@ -1388,11 +1487,12 @@ function App() {
     if (!selectedSample || !selectedDocId) return;
     setBusy('detect');
     setError('');
-    setMessage('PaddleOCR 정밀 BBox 검출 중입니다. 문서당 1회 고정밀 검출을 기본으로 사용합니다.');
+    const includeLineDetection = selectedIsBlankTemplate && blankTemplateLineDetectEnabled;
+    setMessage(includeLineDetection ? 'PaddleOCR 정밀 BBox 검출 후 선/그리드 후보를 추가 생성합니다.' : 'PaddleOCR 정밀 BBox 검출 중입니다. 문서당 1회 고정밀 검출을 기본으로 사용합니다.');
     try {
       const payload = await apiJson('/api/ocr/detect', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, imagePath: selectedSample, engine: 'paddleocr', preset: ocrPreset }),
+        body: JSON.stringify({ docId: selectedDocId, imagePath: selectedSample, engine: 'paddleocr', preset: ocrPreset, sampleKind: selectedSampleKind }),
       });
       setDetectionResult(payload);
       setMessage(`BBox 검출 완료: ${payload.summary.detection_count}개 · ${payload.summary.preset || ocrPreset} · ${payload.summary.elapsed_seconds.toFixed(1)}초`);
@@ -1411,7 +1511,12 @@ function App() {
     try {
       const payload = await apiJson('/api/review/draft', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, detectionsPath }),
+        body: JSON.stringify({
+          docId: selectedDocId,
+          detectionsPath,
+          sampleKind: selectedSampleKind,
+          includeVisualLineDetection: selectedIsBlankTemplate && blankTemplateLineDetectEnabled,
+        }),
       });
       setPolicy(payload.policy);
       setReviewPath(payload.paths.review);
@@ -1432,7 +1537,15 @@ function App() {
       setAuthoringPreviewStale(false);
       setCanvasMode('review');
       suppressRestoreDocRef.current = selectedDocId;
-      setMessage(`리뷰 정책 생성 완료: ${payload.paths.review}`);
+      const visualCount = payload.visualDetection?.candidateCount || 0;
+      const visualSkipped = selectedIsBlankTemplate && payload.visualDetection?.enabled === false;
+      setMessage(
+        visualCount
+          ? `리뷰 정책 생성 완료: ${payload.paths.review} · 선/그리드 후보 ${visualCount}개`
+          : visualSkipped
+            ? `리뷰 정책 생성 완료: ${payload.paths.review} · 선/그리드 후보 미적용`
+            : `리뷰 정책 생성 완료: ${payload.paths.review}`,
+      );
       await refreshAll();
     } finally {
       if (!silentBusy) setBusy('');
@@ -2143,7 +2256,7 @@ function App() {
     }
   }
 
-  const inpaintedPath = cleanupResult?.paths?.inpainted || inpaintResult?.paths?.inpainted || selectedItem?.latestInpainted || '';
+  const inpaintedPath = selectedIsBlankTemplate ? '' : (cleanupResult?.paths?.inpainted || inpaintResult?.paths?.inpainted || selectedItem?.latestInpainted || '');
   const authoringPreviewPath = authoringResult?.paths?.image || selectedItem?.latestAuthoringPreview || '';
   const authoringOverlayPath = authoringResult?.paths?.overlay || selectedItem?.latestAuthoringOverlay || '';
   const authoringOverlayHref = authoringResult?.overlayUrl || (authoringOverlayPath ? fileUrl(authoringOverlayPath, authoringVersion) : '');
@@ -2158,6 +2271,20 @@ function App() {
   const latestAgentRequestPath = authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest || '';
   const latestAgentPromptPath = authoringAgentRequest?.paths?.prompt || selectedItem?.latestAuthoringAgentPrompt || '';
   const latestAgentAnchorMapPath = authoringAgentRequest?.request?.generated_sidecars?.anchorMapDraft || selectedItem?.latestAuthoringAgentAnchorMap || '';
+  const latestAgentRunPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun || '';
+  const latestAgentRunStatus = authoringAgentRun?.status || (latestAgentRunPath ? 'unknown' : '');
+  const latestAgentRunReady = authoringAgentRun?.validation?.ready || false;
+  const latestAgentRunPolling = Boolean(latestAgentRunPath && !['succeeded', 'failed'].includes(latestAgentRunStatus));
+
+  useEffect(() => {
+    if (!latestAgentRunPolling) return undefined;
+    const pollPath = latestAgentRunPath;
+    const delayMs = latestAgentRunStatus === 'unknown' ? 500 : 3000;
+    const timer = window.setTimeout(() => {
+      refreshAuthoringAgentRunStatus(pollPath).catch((exc) => setError(exc.message || String(exc)));
+    }, delayMs);
+    return () => window.clearTimeout(timer);
+  }, [latestAgentRunPath, latestAgentRunStatus, latestAgentRunPolling]);
 
   useEffect(() => {
     function handleGlobalShortcuts(event) {
@@ -2642,8 +2769,8 @@ function App() {
                 ) : (
                   <div className="stage-tabs">
                     <button className={canvasMode === 'review' ? 'active' : ''} onClick={() => setCanvasMode('review')} disabled={!policy}>BBox 리뷰</button>
-                    <button className={canvasMode === 'inpaint' ? 'active' : ''} onClick={() => setCanvasMode('inpaint')} disabled={!inpaintedPath}>인페인팅</button>
-                    <button className={canvasMode === 'cleanup' ? 'active' : ''} onClick={() => setCanvasMode('cleanup')} disabled={!policy || !inpaintedPath}>템플릿 클린업</button>
+                    {!selectedIsBlankTemplate && <button className={canvasMode === 'inpaint' ? 'active' : ''} onClick={() => setCanvasMode('inpaint')} disabled={!inpaintedPath}>인페인팅</button>}
+                    {!selectedIsBlankTemplate && <button className={canvasMode === 'cleanup' ? 'active' : ''} onClick={() => setCanvasMode('cleanup')} disabled={!policy || !inpaintedPath}>템플릿 클린업</button>}
                     <button className={canvasMode === 'authoring' ? 'active' : ''} onClick={() => setCanvasMode('authoring')} disabled={!authoringBundle}>Authoring</button>
                   </div>
                 )}
@@ -2740,9 +2867,32 @@ function App() {
           <section className="panel-block">
             <h2>BBox 검출</h2>
             <label>작업 샘플<select value={selectedSample} onChange={(event) => setSelectedSample(event.target.value)}><option value="">샘플 선택</option>{(selectedItem?.samples || []).map((sample) => <option key={sample} value={sample}>{shortPath(sample)}</option>)}</select></label>
-            <p className="muted">검출 방식: PaddleOCR 정밀 모드({DEFAULT_OCR_PRESET}) 고정</p>
+            <div className="sample-kind-controls">
+              <label className={`check-row ${selectedSampleKind === 'blank_template' ? 'on' : ''}`}>
+                <input
+                  type="checkbox"
+                  checked={selectedSampleKind === 'blank_template'}
+                  disabled={!selectedDocId || isBusy}
+                  onChange={(event) => run(() => updateSelectedSampleKind(event.target.checked ? 'blank_template' : 'filled_sample'))}
+                />
+                <span>빈 템플릿 샘플</span>
+              </label>
+              <small>{selectedIsBlankTemplate ? '빈 템플릿은 인페인팅 없이 PaddleOCR 텍스트 bbox를 먼저 리뷰하고, 필요 시 선/그리드 후보를 추가합니다.' : '값이 들어 있는 샘플은 기존처럼 OCR → 리뷰 → 인페인팅 흐름을 사용합니다.'}</small>
+              {selectedIsBlankTemplate && (
+                <label className={`check-row ${blankTemplateLineDetectEnabled ? 'on' : ''}`}>
+                  <input
+                    type="checkbox"
+                    checked={blankTemplateLineDetectEnabled}
+                    disabled={!selectedDocId || isBusy}
+                    onChange={(event) => setBlankTemplateLineDetectEnabled(event.target.checked)}
+                  />
+                  <span>선/그리드 bbox 후보 추가</span>
+                </label>
+              )}
+            </div>
+            <p className="muted">검출 방식: PaddleOCR 정밀 모드({DEFAULT_OCR_PRESET}){selectedIsBlankTemplate && blankTemplateLineDetectEnabled ? ' + opt-in 선/그리드 후보' : ''}</p>
             {!isImagePath(selectedSample) && selectedSample && <p className="warning-text">현재 OCR GUI 실행은 이미지 파일을 대상으로 합니다. PDF는 변환된 JPG/PNG를 선택하세요.</p>}
-            <button className="primary" onClick={() => run(runOcrDetect)} disabled={!selectedDocId || !selectedSample || !isImagePath(selectedSample) || isBusy}>{busy === 'detect' ? 'BBox 검출 중...' : 'PaddleOCR 정밀 BBox 검출'}</button>
+            <button className="primary" onClick={() => run(runOcrDetect)} disabled={!selectedDocId || !selectedSample || !isImagePath(selectedSample) || isBusy}>{busy === 'detect' ? 'BBox 검출 중...' : selectedIsBlankTemplate && blankTemplateLineDetectEnabled ? 'PaddleOCR + 선/그리드 후보 검출' : 'PaddleOCR 정밀 BBox 검출'}</button>
             {detectionResult && <p className="mini-path">{detectionResult.paths.detections}</p>}
           </section>
 
@@ -2781,14 +2931,21 @@ function App() {
             <button className="primary" onClick={() => run(saveReview)} disabled={!policy || isBusy}>{busy === 'save' ? '저장 중...' : reviewDirty ? '리뷰 저장 *' : '리뷰 저장'}</button>
           </section>
 
-          <section className="panel-block">
-            <h2>LaMa 인페인팅</h2>
-            <label>LaMa max side<input type="number" min="512" max="4096" step="128" value={lamaMaxSide} onChange={(event) => setLamaMaxSide(Number(event.target.value) || 2400)} /></label>
-            <button className="primary" onClick={() => run(runInpaint)} disabled={!policy || stats.byStatus.use === 0 || !canUseLama || isBusy}>{busy === 'inpaint' ? 'LaMa 실행 중...' : 'LaMa 인페인팅 실행'}</button>
-            {!canUseLama && <p className="warning-text">LaMa 런타임이 감지되지 않았습니다. .venv-ocr 설치 상태를 확인하세요.</p>}
-          </section>
+          {selectedIsBlankTemplate ? (
+            <section className="panel-block">
+              <h2>빈 템플릿 흐름</h2>
+              <p className="muted">이 샘플은 이미 깨끗한 양식이므로 인페인팅/템플릿 보정을 건너뜁니다. 리뷰에서 값 입력 bbox를 확정한 뒤 Agentic Authoring 추론을 실행하세요.</p>
+            </section>
+          ) : (
+            <section className="panel-block">
+              <h2>LaMa 인페인팅</h2>
+              <label>LaMa max side<input type="number" min="512" max="4096" step="128" value={lamaMaxSide} onChange={(event) => setLamaMaxSide(Number(event.target.value) || 2400)} /></label>
+              <button className="primary" onClick={() => run(runInpaint)} disabled={!policy || stats.byStatus.use === 0 || !canUseLama || isBusy}>{busy === 'inpaint' ? 'LaMa 실행 중...' : 'LaMa 인페인팅 실행'}</button>
+              {!canUseLama && <p className="warning-text">LaMa 런타임이 감지되지 않았습니다. .venv-ocr 설치 상태를 확인하세요.</p>}
+            </section>
+          )}
 
-          <section className="panel-block compact">
+          {!selectedIsBlankTemplate && <section className="panel-block compact">
             <h2>템플릿 보정</h2>
             <p className="muted">LaMa 후처리 대신 스포이드로 주변색을 찍고 브러시로 직접 칠합니다.</p>
             <div className="selected-box">
@@ -2831,29 +2988,47 @@ function App() {
               </div>
             )}
             {cleanupResult?.paths?.inpainted && <p className="mini-path">{cleanupResult.paths.inpainted}</p>}
-          </section>
+          </section>}
 
           <section className="panel-block authoring-control-panel">
             <h2>Authoring 작업</h2>
             <p className="muted">Schema / Style / Faker / Render를 분리해 다룹니다. 기존 파일 3종이 있으면 문서 선택 시 자동으로 불러와 최종 Pillow 렌더러 live preview를 표시합니다.</p>
-            <div className="authoring-step-label"><b>0. Agentic Authoring 요청</b><span>문서 이미지/OCR/review + 웹 리서치 기반 A-to-Z 생성 패키지</span></div>
+            <div className="authoring-step-label"><b>0. Agentic Authoring 추론</b><span>Codex exec가 문서 이미지/OCR/review + 웹 리서치 기반 draft를 실제 생성</span></div>
             <textarea
               className="agent-request-input"
               placeholder="agent에게 전달할 생성 의도/주의사항을 적으세요. 예: 카드발급신청서 하단 체크박스는 날짜/카드종류/동의여부 의미를 이미지 기준으로 구분."
               value={authoringAgentInstruction}
               onChange={(event) => setAuthoringAgentInstruction(event.target.value)}
             />
-            <button onClick={() => run(createAuthoringAgentRequest)} disabled={!selectedDocId || isBusy}>
-              {busy === 'authoringAgentRequest' ? '요청 패키지 생성 중...' : 'Agent 요청 패키지 생성'}
-            </button>
+            <div className="button-row compact-buttons">
+              <button className="primary" onClick={() => run(runAuthoringAgentInference)} disabled={!selectedDocId || isBusy}>
+                {busy === 'authoringAgentRun' ? 'Agent 추론 시작 중...' : 'Agent 추론 실행'}
+              </button>
+              <button onClick={() => run(createAuthoringAgentRequest)} disabled={!selectedDocId || isBusy}>
+                {busy === 'authoringAgentRequest' ? '요청 패키지 생성 중...' : '요청 패키지만 생성'}
+              </button>
+              <button onClick={() => run(() => refreshAuthoringAgentRunStatus())} disabled={!latestAgentRunPath || isBusy}>
+                Agent 상태 새로고침
+              </button>
+            </div>
             {latestAgentRequestPath && <p className="mini-path">최근 Agent request: {latestAgentRequestPath}{latestAgentPromptPath ? ` · prompt: ${latestAgentPromptPath}` : ''}{latestAgentAnchorMapPath ? ` · anchor: ${latestAgentAnchorMapPath}` : ''}</p>}
+            {latestAgentRunPath && (
+              <div className={`audit-box agent-run-box ${latestAgentRunStatus}`}>
+                <b>Agent run: {latestAgentRunStatus}</b>
+                <small>{latestAgentRunPath}</small>
+                {latestAgentRunPolling && <small>상태 자동 갱신 중...</small>}
+                {authoringAgentRun?.validation?.summary && <small>draft {authoringAgentRun.validation.summary.present}/{authoringAgentRun.validation.summary.required} · missing {authoringAgentRun.validation.summary.missing} · invalid JSON {authoringAgentRun.validation.summary.invalidJson}</small>}
+                {latestAgentRunReady && <small>schema/faker/research draft 생성 및 JSON 검증 완료</small>}
+              </div>
+            )}
             <div className="button-row compact-buttons">
               <button onClick={() => run(loadAuthoringLibrary)} disabled={isBusy}>{busy === 'authoringLibrary' ? '라이브러리 로드 중...' : 'Faker/Profile 라이브러리'}</button>
               <button onClick={() => run(approveAuthoringDraftsToLibrary)} disabled={!latestAgentRequestPath || isBusy}>{busy === 'authoringApproveDrafts' ? '승인 기록 중...' : 'Draft 라이브러리 승인 기록'}</button>
+              <button onClick={() => run(applyAuthoringAgentDrafts)} disabled={!latestAgentRunReady || isBusy}>{busy === 'authoringApplyAgentDrafts' ? '적용 중...' : 'Draft 최종 Authoring 적용'}</button>
             </div>
             {authoringLibrary && <p className="mini-path">Library: profile {authoringLibrary.summary.profileTypeCount}종 · pool {authoringLibrary.summary.valuePoolCount}개 · approval {authoringLibrary.summary.approvalCount}건</p>}
             {authoringApprovalResult?.approval && <p className="mini-path">최근 승인: {authoringApprovalResult.approval.path} · missing {authoringApprovalResult.summary.missing}</p>}
-            <p className="warning-text">로컬 규칙 기반 schema 초안은 사용하지 않습니다. 위 버튼은 agent가 문서 웹 검색, research_report, uncertainty_report, schema/faker/style draft 계약에 맞춰 A-to-Z 생성할 수 있도록 입력/계약 패키지를 생성합니다. 실제 agent 실행은 이 패키지를 사용하는 다음 단계입니다.</p>
+            <p className="warning-text">로컬 규칙 기반 schema 초안은 사용하지 않습니다. Agent 추론 실행은 로컬 Codex CLI를 별도 프로세스로 호출해 schema/faker/style/research/uncertainty draft 파일을 생성합니다. 최종 authoring 파일 덮어쓰기는 별도 승인/저장 단계에서만 수행합니다.</p>
             <div className="authoring-step-label"><b>1. Schema · Style · Faker</b><span>키/생성 규칙/스타일 편집</span></div>
             <div className="button-row">
               <button onClick={() => run(() => loadAuthoringBundle())} disabled={!canLoadAuthoring || isBusy}>

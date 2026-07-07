@@ -210,6 +210,37 @@ def draft_review_policy(detections_path: Path) -> ReviewPolicy:
     )
 
 
+def augment_blank_template_policy(policy: ReviewPolicy) -> tuple[ReviewPolicy, dict[str, Any]]:
+    """Add machine-generated value-region candidates for blank form templates.
+
+    PaddleOCR usually returns static labels on blank forms. For grid/table forms,
+    this pass detects long horizontal/vertical rules and proposes empty cells as
+    reviewable value targets. It is deliberately conservative and reversible:
+    all generated labels are ordinary review labels with source
+    ``visual_line_detect`` so the reviewer can delete, resize, or reclassify
+    them before authoring.
+    """
+
+    image = Image.open(policy.source_image).convert("L")
+    candidates = _detect_blank_template_cells(image, policy.labels)
+    if not candidates:
+        return policy, {"enabled": True, "method": "pil_line_projection", "candidateCount": 0}
+    next_labels = [*policy.labels, *candidates]
+    return (
+        ReviewPolicy(
+            schema_version=policy.schema_version,
+            source_detections=policy.source_detections,
+            source_image=policy.source_image,
+            image_width=policy.image_width,
+            image_height=policy.image_height,
+            labels=next_labels,
+            source_engine=f"{policy.source_engine}+visual_line_detect",
+            created_at=policy.created_at,
+        ),
+        {"enabled": True, "method": "pil_line_projection", "candidateCount": len(candidates)},
+    )
+
+
 def load_review_policy(path: Path) -> ReviewPolicy:
     return ReviewPolicy.from_dict(json.loads(path.read_text(encoding="utf-8")), base_dir=path.parent)
 
@@ -330,6 +361,154 @@ def _label_detection(raw: dict[str, Any], image: Image.Image, width: int, height
         original_confidence=confidence,
         text_source="paddle_initial",
     )
+
+
+def _detect_blank_template_cells(image: Image.Image, existing_labels: list[ReviewLabel]) -> list[ReviewLabel]:
+    arr = np.asarray(image, dtype=np.uint8)
+    height, width = arr.shape[:2]
+    dark = arr < 185
+    # Use longest contiguous dark run, not simple dark-pixel density. Density is
+    # easily triggered by text rows and produced hundreds of false grid cells.
+    horizontal = _line_centers_from_runs(_max_dark_runs(dark), threshold=max(120, int(width * 0.18)), merge_gap=4)
+    vertical = _line_centers_from_runs(_max_dark_runs(dark.T), threshold=max(60, int(height * 0.05)), merge_gap=4)
+    if len(horizontal) < 2 or len(vertical) < 2:
+        return []
+    existing_boxes = [label.bbox for label in existing_labels]
+    labels: list[ReviewLabel] = []
+    seen: set[tuple[int, int, int, int]] = set()
+    for y1, y2 in zip(horizontal, horizontal[1:]):
+        cell_h = y2 - y1
+        if cell_h < 14 or cell_h > 120:
+            continue
+        for x1, x2 in zip(vertical, vertical[1:]):
+            cell_w = x2 - x1
+            if cell_w < 45 or cell_w > min(720, width):
+                continue
+            box = BBox(x=x1 + 2, y=y1 + 2, width=max(1, cell_w - 4), height=max(1, cell_h - 4)).clipped(width, height)
+            if box.width < 18 or box.height < 10:
+                continue
+            if _box_dark_ratio(arr, box) > 0.10:
+                continue
+            if any(_intersection_ratio(box, existing) > 0.32 for existing in existing_boxes):
+                continue
+            key = tuple(box.to_list())
+            if key in seen:
+                continue
+            seen.add(key)
+            label_id = f"visual_{len(labels) + 1:04d}"
+            labels.append(
+                ReviewLabel(
+                    id=label_id,
+                    text="",
+                    confidence=None,
+                    bbox=box,
+                    polygon=[[box.x, box.y], [box.right, box.y], [box.right, box.bottom], [box.x, box.bottom]],
+                    status="keep",
+                    auto_type="table_cell",
+                    reason="blank template visual candidate from line detection; reviewer must mark use before authoring",
+                    locked=False,
+                    notes="빈 템플릿 값 입력 후보입니다. 실제 값 삽입 영역이면 사용으로 변경하세요.",
+                    original_text="",
+                    original_confidence=None,
+                    text_source="visual_line_detect",
+                    ocr_text_stale=False,
+                )
+            )
+            if len(labels) >= 240:
+                return labels
+    return labels
+
+
+def _max_dark_runs(dark: np.ndarray) -> np.ndarray:
+    runs: list[int] = []
+    for row in dark:
+        best = 0
+        current = 0
+        for value in row:
+            if bool(value):
+                current += 1
+                best = max(best, current)
+            else:
+                current = 0
+        runs.append(best)
+    return np.asarray(runs, dtype=np.int32)
+
+
+def _line_centers_from_runs(runs: np.ndarray, *, threshold: int, merge_gap: int) -> list[int]:
+    indexes = np.where(runs >= threshold)[0].tolist()
+    if not indexes:
+        return []
+    groups: list[list[int]] = []
+    current = [indexes[0]]
+    for index in indexes[1:]:
+        if index <= current[-1] + 1:
+            current.append(index)
+        else:
+            groups.append(current)
+            current = [index]
+    groups.append(current)
+    centers = [int(round((group[0] + group[-1]) / 2)) for group in groups]
+    merged: list[int] = []
+    for center in centers:
+        if merged and center - merged[-1] <= merge_gap:
+            merged[-1] = int(round((merged[-1] + center) / 2))
+        else:
+            merged.append(center)
+    return merged
+
+
+def _line_centers(profile: np.ndarray, *, threshold: float, min_run: int, merge_gap: int) -> list[int]:
+    indexes = np.where(profile >= threshold)[0].tolist()
+    if not indexes:
+        return []
+    groups: list[list[int]] = []
+    current = [indexes[0]]
+    for index in indexes[1:]:
+        if index <= current[-1] + 1:
+            current.append(index)
+        else:
+            if len(current) >= min_run:
+                groups.append(current)
+            current = [index]
+    if len(current) >= min_run:
+        groups.append(current)
+    centers = [int(round((group[0] + group[-1]) / 2)) for group in groups]
+    merged: list[int] = []
+    for center in centers:
+        if merged and center - merged[-1] <= merge_gap:
+            merged[-1] = int(round((merged[-1] + center) / 2))
+        else:
+            merged.append(center)
+    return merged
+
+
+def _with_edges(positions: list[int], extent: int) -> list[int]:
+    values = sorted(set([pos for pos in positions if 0 <= pos <= extent]))
+    if not values:
+        return [0, extent]
+    if values[0] > 12:
+        values.insert(0, 0)
+    if extent - values[-1] > 12:
+        values.append(extent)
+    return values
+
+
+def _box_dark_ratio(arr: np.ndarray, bbox: BBox) -> float:
+    crop = arr[bbox.y : bbox.bottom, bbox.x : bbox.right]
+    if crop.size == 0:
+        return 0.0
+    return float(np.count_nonzero(crop < 185) / crop.size)
+
+
+def _intersection_ratio(a: BBox, b: BBox) -> float:
+    x1 = max(a.x, b.x)
+    y1 = max(a.y, b.y)
+    x2 = min(a.right, b.right)
+    y2 = min(a.bottom, b.bottom)
+    if x2 <= x1 or y2 <= y1:
+        return 0.0
+    intersection = (x2 - x1) * (y2 - y1)
+    return float(intersection / max(1, min(a.width * a.height, b.width * b.height)))
 
 
 def classify_detection(text: str, confidence: float | None, bbox: BBox, image: Image.Image, width: int, height: int) -> tuple[ReviewStatus, AutoType, str]:

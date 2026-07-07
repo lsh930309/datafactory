@@ -1510,6 +1510,9 @@ def review_anchor_map(review_path: Path, *, out_path: Path | None = None, doc_id
                 "bbox": label.bbox.to_list(),
                 "bbox_format": "xywh",
                 "status": label.status,
+                "auto_type": label.auto_type,
+                "text_source": label.text_source,
+                "role": "value_region" if label.status == "use" else "static_label",
                 "suggested_schema_key": label.text or label.id,
                 "confidence": label.confidence,
             }

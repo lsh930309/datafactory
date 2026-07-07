@@ -28,12 +28,14 @@ def render_labels_overlay(image: Image.Image, labels: list[ReviewLabel], *, show
     line_width = max(2, round(max(base.size) / 1400))
     font = load_font(max(12, line_width * 7))
     for label in labels:
-        color = STATUS_COLORS[label.status]
-        fill = (*color, FILL_ALPHA[label.status])
+        is_visual_candidate = getattr(label, "text_source", "") == "visual_line_detect"
+        color = (245, 158, 11) if is_visual_candidate else STATUS_COLORS[label.status]
+        fill_alpha = 18 if is_visual_candidate else FILL_ALPHA[label.status]
+        fill = (*color, fill_alpha)
         outline = (*color, 255)
         box = label.bbox
         draw.rectangle([box.x, box.y, box.right, box.bottom], fill=fill, outline=outline, width=line_width)
-        if show_labels:
+        if show_labels and not is_visual_candidate:
             _draw_label(draw, f"{label.id} {label.status}/{label.auto_type}", box.x, max(0, box.y - 22), font, color)
     return Image.alpha_composite(base, layer).convert("RGB")
 

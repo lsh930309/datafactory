@@ -32,6 +32,7 @@ INTAKE_STATUS_LABELS = {
     "needsReview": "확인 필요",
     "alreadyImported": "이미 적재됨",
 }
+SAMPLE_KINDS = {"filled_sample", "blank_template", "mixed_template"}
 
 PROTECTED_TARGET_GROUP_IDS = {"first_priority"}
 
@@ -626,6 +627,7 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "statusLabel": STATUS_LABELS[status],
                 "sampleCount": len(samples),
                 "samples": [_display_path(path) for path in samples],
+                "sampleKind": str(manifest.get("sample_kind") or "filled_sample"),
                 "sampleGenerationPaths": list(manifest.get("sample_generation_paths") or []),
                 "hasEditableOfficeTemplate": "editable-office-template" in set(manifest.get("sample_generation_paths") or []),
                 "officeRender": manifest.get("office_render") or {"required": False, "backend": "office-com", "status": "not_required"},
@@ -650,6 +652,10 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "latestAuthoringAgentRequest": artifact_flags.get("latest_authoring_agent_request"),
                 "latestAuthoringAgentPrompt": artifact_flags.get("latest_authoring_agent_prompt"),
                 "latestAuthoringAgentAnchorMap": artifact_flags.get("latest_authoring_agent_anchor_map"),
+                "latestAuthoringAgentRun": artifact_flags.get("latest_authoring_agent_run"),
+                "latestAuthoringAgentSchemaDraft": artifact_flags.get("latest_authoring_agent_schema_draft"),
+                "latestAuthoringAgentFakerProfileDraft": artifact_flags.get("latest_authoring_agent_faker_profile_draft"),
+                "latestAuthoringAgentResearchReport": artifact_flags.get("latest_authoring_agent_research_report"),
                 "latestCleanroomPreview": artifact_flags.get("latest_cleanroom_preview"),
                 "latestCleanroomPdf": artifact_flags.get("latest_cleanroom_pdf"),
                 "latestCleanroomContactSheet": artifact_flags.get("latest_cleanroom_contact_sheet"),
@@ -674,6 +680,22 @@ def update_manifest_artifact(doc_id: str, artifact: str, path: str | Path, regis
     artifacts[artifact] = _display_path(path)
     manifest["updated_at"] = _now()
     _write_json(doc_root / "manifest.json", manifest)
+
+
+def set_manifest_sample_kind(doc_id: str, sample_kind: str, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
+    registry = registry or load_registry()
+    doc = registry.documents.get(doc_id)
+    if doc is None:
+        raise ValueError(f"unknown docId: {doc_id}")
+    if sample_kind not in SAMPLE_KINDS:
+        raise ValueError(f"sampleKind must be one of {sorted(SAMPLE_KINDS)}")
+    doc_root = document_dir(doc, root)
+    manifest = _read_manifest(doc_root) or _base_manifest(doc, doc_root, registry)
+    manifest["sample_kind"] = sample_kind
+    manifest["updated_at"] = _now()
+    doc_root.mkdir(parents=True, exist_ok=True)
+    _write_json(doc_root / "manifest.json", manifest)
+    return manifest
 
 
 def workbench_subdir(doc_id: str, subdir: str, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> Path:
@@ -735,6 +757,7 @@ def _base_manifest(doc: RegistryDocument, doc_root: Path, registry: RegistryData
         "registry": doc.to_dict(),
         "source_seed_folders": [],
         "samples": [],
+        "sample_kind": "filled_sample",
         "sample_generation_paths": [],
         "office_render": {"required": False, "backend": "office-com", "status": "not_required"},
         "status": "missing",
@@ -843,6 +866,7 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     latest_agent_request_dir = authoring_agent_request_paths[-1].parent if authoring_agent_request_paths else None
     latest_agent_prompt = latest_agent_request_dir / "request.md" if latest_agent_request_dir else None
     latest_agent_anchor_map = latest_agent_request_dir / "anchor_map_draft.json" if latest_agent_request_dir else None
+    authoring_agent_run_paths = sorted((doc_root / "authoring" / "agent_runs").glob("*/job.json")) if (doc_root / "authoring" / "agent_runs").exists() else []
     artifacts = manifest.get("artifacts", {}) if isinstance(manifest, dict) else {}
     manifest_ocr = _existing_display_path(artifacts.get("ocr"))
     manifest_review = _existing_display_path(artifacts.get("review"))
@@ -872,6 +896,10 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         "latest_authoring_agent_request": _display_path(authoring_agent_request_paths[-1]) if authoring_agent_request_paths else artifacts.get("authoring_agent_request"),
         "latest_authoring_agent_prompt": _display_path(latest_agent_prompt) if latest_agent_prompt and latest_agent_prompt.exists() else artifacts.get("authoring_agent_prompt"),
         "latest_authoring_agent_anchor_map": _display_path(latest_agent_anchor_map) if latest_agent_anchor_map and latest_agent_anchor_map.exists() else artifacts.get("authoring_agent_anchor_map"),
+        "latest_authoring_agent_run": _display_path(authoring_agent_run_paths[-1]) if authoring_agent_run_paths else artifacts.get("authoring_agent_run"),
+        "latest_authoring_agent_schema_draft": artifacts.get("authoring_agent_schema_draft"),
+        "latest_authoring_agent_faker_profile_draft": artifacts.get("authoring_agent_faker_profile_draft"),
+        "latest_authoring_agent_research_report": artifacts.get("authoring_agent_research_report"),
         **cleanroom,
     }
 

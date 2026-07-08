@@ -1,0 +1,587 @@
+{
+  "schema_version": 2,
+  "created_at": "2026-07-08T02:48:14.562197+00:00",
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "render_target": "image-template",
+  "defaults": {
+    "font_family": "default_korean",
+    "font_path": "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+    "font_size": 22,
+    "fill": [
+      24,
+      24,
+      24
+    ],
+    "opacity": 1.0,
+    "align": "left",
+    "valign": "middle",
+    "overflow": "shrink",
+    "line_spacing": 1.0,
+    "letter_spacing": 0.0
+  },
+  "style_classes": [
+    {
+      "style_class": "table_cell",
+      "font_size": 22,
+      "align": "left",
+      "valign": "middle",
+      "x_shift": 8,
+      "y_shift": 0,
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "wide_table_cell",
+      "font_size": 22,
+      "align": "left",
+      "valign": "middle",
+      "x_shift": 8,
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "money_cell",
+      "font_size": 21,
+      "align": "right",
+      "valign": "middle",
+      "x_shift": -8,
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "number_cell",
+      "font_size": 21,
+      "align": "center",
+      "valign": "middle",
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "date_cell",
+      "font_size": 21,
+      "align": "center",
+      "valign": "middle",
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "date_component",
+      "font_size": 21,
+      "align": "center",
+      "valign": "middle",
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "date_component_small",
+      "font_size": 18,
+      "align": "center",
+      "valign": "middle",
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "short_code",
+      "font_size": 20,
+      "align": "center",
+      "valign": "middle",
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "checkbox_small",
+      "font_size": 18,
+      "align": "center",
+      "valign": "middle",
+      "checkbox_style": "v_mark"
+    },
+    {
+      "style_class": "approval_header_cell",
+      "font_size": 20,
+      "align": "center",
+      "valign": "middle",
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "approval_signature_cell",
+      "font_size": 22,
+      "align": "center",
+      "valign": "middle",
+      "overflow": "shrink"
+    },
+    {
+      "style_class": "audit_box",
+      "font_size": 22,
+      "align": "center",
+      "valign": "middle",
+      "overflow": "shrink"
+    }
+  ],
+  "field_style_hints": {
+    "approval_role_title": {
+      "style_class": "approval_header_cell",
+      "bbox": [
+        466,
+        200,
+        162,
+        28
+      ]
+    },
+    "approval_deputy_general_manager_signature": {
+      "style_class": "approval_signature_cell",
+      "bbox": [
+        124,
+        232,
+        168,
+        61
+      ]
+    },
+    "approval_office_manager_signature": {
+      "style_class": "approval_signature_cell",
+      "bbox": [
+        298,
+        232,
+        162,
+        61
+      ]
+    },
+    "approval_middle_signature": {
+      "style_class": "approval_signature_cell",
+      "bbox": [
+        466,
+        232,
+        162,
+        61
+      ]
+    },
+    "approval_executive_vp_signature": {
+      "style_class": "approval_signature_cell",
+      "bbox": [
+        634,
+        232,
+        162,
+        61
+      ]
+    },
+    "approval_bank_president_signature": {
+      "style_class": "approval_signature_cell",
+      "bbox": [
+        801,
+        232,
+        168,
+        61
+      ]
+    },
+    "request_type_single_transaction": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        150,
+        336,
+        15,
+        14
+      ]
+    },
+    "request_type_new": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        150,
+        355,
+        14,
+        14
+      ]
+    },
+    "request_type_increase": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        149,
+        374,
+        15,
+        15
+      ]
+    },
+    "request_type_credit_line": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        150,
+        395,
+        12,
+        14
+      ]
+    },
+    "request_type_term_renewal": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        149,
+        416,
+        15,
+        13
+      ]
+    },
+    "request_type_reduction": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        149,
+        436,
+        16,
+        15
+      ]
+    },
+    "application_date_year": {
+      "style_class": "date_component",
+      "bbox": [
+        414,
+        460,
+        36,
+        27
+      ]
+    },
+    "application_date_month": {
+      "style_class": "date_component",
+      "bbox": [
+        473,
+        458,
+        39,
+        31
+      ]
+    },
+    "application_date_day": {
+      "style_class": "date_component",
+      "bbox": [
+        541,
+        458,
+        35,
+        30
+      ]
+    },
+    "approval_document_number": {
+      "style_class": "short_code",
+      "bbox": [
+        736,
+        460,
+        31,
+        29
+      ]
+    },
+    "audit_confirmation": {
+      "style_class": "audit_box",
+      "bbox": [
+        800,
+        361,
+        169,
+        152
+      ]
+    },
+    "company_name": {
+      "style_class": "table_cell",
+      "bbox": [
+        244,
+        582,
+        310,
+        38
+      ]
+    },
+    "representative_name": {
+      "style_class": "table_cell",
+      "bbox": [
+        679,
+        583,
+        291,
+        38
+      ]
+    },
+    "loan_subject": {
+      "style_class": "table_cell",
+      "bbox": [
+        244,
+        624,
+        308,
+        40
+      ]
+    },
+    "loan_amount": {
+      "style_class": "money_cell",
+      "bbox": [
+        678,
+        624,
+        291,
+        40
+      ]
+    },
+    "loan_interest_rate": {
+      "style_class": "number_cell",
+      "bbox": [
+        245,
+        668,
+        307,
+        38
+      ]
+    },
+    "fund_purpose": {
+      "style_class": "table_cell",
+      "bbox": [
+        677,
+        668,
+        294,
+        38
+      ]
+    },
+    "limit_type": {
+      "style_class": "table_cell",
+      "bbox": [
+        245,
+        710,
+        308,
+        38
+      ]
+    },
+    "loan_maturity": {
+      "style_class": "date_cell",
+      "bbox": [
+        678,
+        710,
+        291,
+        38
+      ]
+    },
+    "approval_conditions": {
+      "style_class": "wide_table_cell",
+      "bbox": [
+        244,
+        752,
+        727,
+        40
+      ]
+    },
+    "company_address": {
+      "style_class": "wide_table_cell",
+      "bbox": [
+        259,
+        860,
+        710,
+        28
+      ]
+    },
+    "company_established_date": {
+      "style_class": "date_cell",
+      "bbox": [
+        258,
+        892,
+        110,
+        27
+      ]
+    },
+    "main_product": {
+      "style_class": "table_cell",
+      "bbox": [
+        471,
+        892,
+        135,
+        27
+      ]
+    },
+    "bank_credit_transaction_date": {
+      "style_class": "date_cell",
+      "bbox": [
+        761,
+        892,
+        208,
+        27
+      ]
+    },
+    "credit_rate_score_base_month": {
+      "style_class": "date_component_small",
+      "bbox": [
+        322,
+        926,
+        20,
+        25
+      ]
+    },
+    "credit_rate_score_base_day": {
+      "style_class": "date_component_small",
+      "bbox": [
+        349,
+        926,
+        27,
+        23
+      ]
+    },
+    "credit_review_score_base_month": {
+      "style_class": "date_component_small",
+      "bbox": [
+        322,
+        957,
+        19,
+        24
+      ]
+    },
+    "credit_review_score_base_day": {
+      "style_class": "date_component_small",
+      "bbox": [
+        349,
+        956,
+        26,
+        26
+      ]
+    },
+    "employee_count": {
+      "style_class": "number_cell",
+      "bbox": [
+        817,
+        954,
+        152,
+        28
+      ]
+    },
+    "total_assets": {
+      "style_class": "money_cell",
+      "bbox": [
+        124,
+        1018,
+        128,
+        27
+      ]
+    },
+    "equity_capital": {
+      "style_class": "money_cell",
+      "bbox": [
+        258,
+        1017,
+        163,
+        27
+      ]
+    },
+    "paid_in_capital": {
+      "style_class": "money_cell",
+      "bbox": [
+        426,
+        1017,
+        179,
+        27
+      ]
+    },
+    "sales_amount": {
+      "style_class": "money_cell",
+      "bbox": [
+        611,
+        1017,
+        145,
+        27
+      ]
+    },
+    "net_income": {
+      "style_class": "money_cell",
+      "bbox": [
+        762,
+        1017,
+        207,
+        27
+      ]
+    },
+    "financial_statement_base_year": {
+      "style_class": "date_component",
+      "bbox": [
+        248,
+        1051,
+        43,
+        26
+      ]
+    },
+    "financial_statement_base_month": {
+      "style_class": "date_component",
+      "bbox": [
+        320,
+        1051,
+        40,
+        27
+      ]
+    },
+    "collateral_type": {
+      "style_class": "table_cell",
+      "bbox": [
+        165,
+        1173,
+        161,
+        47
+      ]
+    },
+    "collateral_survey_price": {
+      "style_class": "money_cell",
+      "bbox": [
+        331,
+        1173,
+        178,
+        47
+      ]
+    },
+    "collateral_assessed_price": {
+      "style_class": "money_cell",
+      "bbox": [
+        513,
+        1173,
+        173,
+        47
+      ]
+    },
+    "collateral_provider": {
+      "style_class": "table_cell",
+      "bbox": [
+        689,
+        1173,
+        145,
+        47
+      ]
+    },
+    "preservation_method": {
+      "style_class": "table_cell",
+      "bbox": [
+        838,
+        1173,
+        127,
+        47
+      ]
+    },
+    "guarantor_name": {
+      "style_class": "table_cell",
+      "bbox": [
+        165,
+        1255,
+        161,
+        64
+      ]
+    },
+    "guarantor_age": {
+      "style_class": "number_cell",
+      "bbox": [
+        330,
+        1256,
+        179,
+        64
+      ]
+    },
+    "guarantor_occupation": {
+      "style_class": "table_cell",
+      "bbox": [
+        512,
+        1256,
+        173,
+        64
+      ]
+    },
+    "guarantor_relationship_to_borrower": {
+      "style_class": "table_cell",
+      "bbox": [
+        689,
+        1256,
+        144,
+        64
+      ]
+    },
+    "guarantor_note": {
+      "style_class": "table_cell",
+      "bbox": [
+        837,
+        1256,
+        127,
+        64
+      ]
+    }
+  },
+  "notes": [
+    "원본은 스캔 이미지 기반 정형양식이므로 보수적 폰트/크기/정렬만 제안했다."
+  ],
+  "updated_at": "2026-07-08T02:49:46.701226+00:00"
+}

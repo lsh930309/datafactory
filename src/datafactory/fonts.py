@@ -26,6 +26,39 @@ SYSTEM_FONT_DIRS = [
     Path("/Library/Fonts"),
     Path.home() / "Library" / "Fonts",
 ]
+KOREAN_FONT_TOKENS = (
+    "apple sd gothic",
+    "applesdgothic",
+    "apple gothic",
+    "applegothic",
+    "malgun",
+    "nanum",
+    "noto sans cjk",
+    "noto serif cjk",
+    "notosanscjk",
+    "notoserifcjk",
+    "source han",
+    "sourcehan",
+    "pretendard",
+    "spoqa",
+    "kopub",
+    "maruburi",
+    "hana",
+    "batang",
+    "dotum",
+    "gulim",
+    "gungsuh",
+    "gothic",
+    "myeongjo",
+    "고딕",
+    "명조",
+    "바탕",
+    "돋움",
+    "굴림",
+    "궁서",
+    "맑은",
+    "나눔",
+)
 
 
 @dataclass(frozen=True)
@@ -158,7 +191,7 @@ def _scan_font_faces(root_str: str) -> tuple[FontFace, ...]:
                 continue
             seen.add(key)
             face = _read_font_face(resolved, index, source=source, root=root)
-            if face:
+            if face and _is_korean_capable_face(face):
                 faces.append(face)
     faces.sort(key=lambda face: (face.source != "workspace", face.family.lower(), face.style.lower(), face.path.lower(), face.index))
     return tuple(faces)
@@ -210,6 +243,23 @@ def _read_font_face(path: Path, index: int, *, source: str, root: Path) -> FontF
         index=index,
         label=label,
     )
+
+
+def _is_korean_capable_face(face: FontFace) -> bool:
+    """Keep the UI font selector focused on fonts likely to render Korean text.
+
+    PIL does not expose a reliable glyph-coverage API for every font backend, so
+    the registry uses the workspace font folder plus conservative family/path
+    tokens for well-known Korean/CJK fonts. The renderer can still load an
+    explicit font path directly through ``load_font``/``resolve_font_path`` even
+    if it is not shown in this authoring selector.
+    """
+
+    if face.source == "workspace":
+        return True
+    haystack = " ".join([face.family, face.style, face.path, face.label]).lower()
+    compact = re.sub(r"[^0-9a-z가-힣]+", "", haystack)
+    return any(token in haystack or re.sub(r"[^0-9a-z가-힣]+", "", token) in compact for token in KOREAN_FONT_TOKENS)
 
 
 def _display_path(path: Path, root: Path = ROOT) -> str:

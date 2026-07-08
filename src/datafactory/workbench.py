@@ -13,9 +13,10 @@ from .registry import RegistryData, RegistryDocument, load_registry, normalize_t
 ROOT = Path(__file__).resolve().parents[2]
 SEED_ROOT = ROOT / "seed_samples"
 WORKBENCH_ROOT = ROOT / "workbench" / "documents"
-SUPPORTED_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".pdf", ".tif", ".tiff", ".bmp", ".webp"}
-UPLOAD_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".pdf"}
+SUPPORTED_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".pdf", ".tif", ".tiff", ".bmp", ".webp", ".docx"}
+UPLOAD_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".pdf", ".docx"}
 IMAGE_SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp", ".webp"}
+EDITABLE_OFFICE_EXTENSIONS = {".docx"}
 STATUS_LABELS = {
     "missing": "미적재",
     "sample_imported": "샘플 적재됨",
@@ -31,6 +32,9 @@ INTAKE_STATUS_LABELS = {
     "needsReview": "확인 필요",
     "alreadyImported": "이미 적재됨",
 }
+SAMPLE_KINDS = {"filled_sample", "blank_template", "mixed_template"}
+
+PROTECTED_TARGET_GROUP_IDS = {"first_priority"}
 
 
 @dataclass(frozen=True)
@@ -54,6 +58,170 @@ def manifest_path(doc: RegistryDocument, root: Path = WORKBENCH_ROOT) -> Path:
 
 def seed_mappings_path(root: Path = WORKBENCH_ROOT) -> Path:
     return root.parent / "seed_mappings.json"
+
+
+def target_groups_path(root: Path = WORKBENCH_ROOT) -> Path:
+    return root.parent / "target_groups.json"
+
+
+def default_target_groups(registry: RegistryData) -> list[dict[str, Any]]:
+    return [
+        {
+            "id": "first_priority",
+            "label": "기존 1차 목표",
+            "description": "현재 authoring/생성 가능성 판정 기본 대상 그룹입니다.",
+            "protected": True,
+            "scopeEntries": [
+                {
+                    "domain": domain,
+                    "docId": doc_id,
+                    "title": registry.documents[doc_id].title if doc_id in registry.documents else "",
+                }
+                for domain, doc_id in registry.first_priority_scope_entries
+            ],
+        }
+    ]
+
+
+def list_target_groups(registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
+    registry = registry or load_registry()
+    payload = _load_target_groups_payload(root=root)
+    hidden_default_ids = set(payload.get("hidden_default_ids") or [])
+    custom = _load_custom_target_groups(registry, root=root)
+    defaults = [group for group in default_target_groups(registry) if group["id"] not in hidden_default_ids]
+    groups = [*defaults, *custom]
+    return {
+        "path": _display_path(target_groups_path(root)),
+        "groups": groups,
+        "summary": {
+            "defaultCount": len(defaults),
+            "hiddenDefaultCount": len(hidden_default_ids),
+            "customCount": len(custom),
+            "groupCount": len(groups),
+        },
+    }
+
+
+def save_target_group(payload: dict[str, Any], registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
+    registry = registry or load_registry()
+    label = str(payload.get("label") or "").strip()
+    if not label:
+        raise ValueError("target group label is required")
+    group_id = str(payload.get("id") or "").strip() or f"grp_{slugify_title(label)}"
+    group_id = _safe_group_id(group_id)
+    if group_id in PROTECTED_TARGET_GROUP_IDS:
+        raise ValueError(f"protected target group cannot be modified: {group_id}")
+    scope_entries = _normalize_target_scope_entries(payload.get("scopeEntries"), registry)
+    if not scope_entries:
+        raise ValueError("target group requires at least one document")
+    group = {
+        "id": group_id,
+        "label": label,
+        "description": str(payload.get("description") or "").strip(),
+        "protected": False,
+        "scopeEntries": scope_entries,
+        "updatedAt": _now(),
+    }
+    existing_payload = _load_target_groups_payload(root=root)
+    hidden_default_ids = list(existing_payload.get("hidden_default_ids") or [])
+    custom = [item for item in _load_custom_target_groups(registry, root=root) if item.get("id") != group_id]
+    custom.append(group)
+    custom.sort(key=lambda item: (str(item.get("label") or ""), str(item.get("id") or "")))
+    _write_json(target_groups_path(root), {"schema_version": 1, "hidden_default_ids": hidden_default_ids, "groups": custom, "updated_at": _now()})
+    return {"group": group, **list_target_groups(registry, root=root)}
+
+
+def delete_target_group(group_id: str, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
+    registry = registry or load_registry()
+    group_id = _safe_group_id(group_id)
+    if group_id in PROTECTED_TARGET_GROUP_IDS:
+        payload = _load_target_groups_payload(root=root)
+        hidden_default_ids = list(dict.fromkeys([*(payload.get("hidden_default_ids") or []), group_id]))
+        custom = _load_custom_target_groups(registry, root=root)
+        _write_json(target_groups_path(root), {"schema_version": 1, "hidden_default_ids": hidden_default_ids, "groups": custom, "updated_at": _now()})
+        return list_target_groups(registry, root=root)
+    payload = _load_target_groups_payload(root=root)
+    hidden_default_ids = list(payload.get("hidden_default_ids") or [])
+    custom = _load_custom_target_groups(registry, root=root)
+    next_groups = [item for item in custom if item.get("id") != group_id]
+    if len(next_groups) == len(custom):
+        raise ValueError(f"target group not found: {group_id}")
+    _write_json(target_groups_path(root), {"schema_version": 1, "hidden_default_ids": hidden_default_ids, "groups": next_groups, "updated_at": _now()})
+    return list_target_groups(registry, root=root)
+
+
+def _load_target_groups_payload(root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
+    path = target_groups_path(root)
+    if not path.exists():
+        return {"schema_version": 1, "hidden_default_ids": [], "groups": []}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {"schema_version": 1, "hidden_default_ids": [], "groups": []}
+    if not isinstance(payload, dict):
+        return {"schema_version": 1, "hidden_default_ids": [], "groups": []}
+    if not isinstance(payload.get("groups"), list):
+        payload["groups"] = []
+    if not isinstance(payload.get("hidden_default_ids"), list):
+        payload["hidden_default_ids"] = []
+    return payload
+
+
+def _load_custom_target_groups(registry: RegistryData, root: Path = WORKBENCH_ROOT) -> list[dict[str, Any]]:
+    payload = _load_target_groups_payload(root=root)
+    raw_groups = payload.get("groups") if isinstance(payload, dict) else []
+    groups: list[dict[str, Any]] = []
+    for raw in raw_groups if isinstance(raw_groups, list) else []:
+        if not isinstance(raw, dict):
+            continue
+        group_id = _safe_group_id(str(raw.get("id") or ""))
+        if not group_id or group_id in PROTECTED_TARGET_GROUP_IDS:
+            continue
+        label = str(raw.get("label") or group_id).strip()
+        scope_entries = _normalize_target_scope_entries(raw.get("scopeEntries"), registry)
+        if not scope_entries:
+            continue
+        groups.append(
+            {
+                "id": group_id,
+                "label": label,
+                "description": str(raw.get("description") or "").strip(),
+                "protected": False,
+                "scopeEntries": scope_entries,
+                "updatedAt": str(raw.get("updatedAt") or raw.get("updated_at") or ""),
+            }
+        )
+    return groups
+
+
+def _normalize_target_scope_entries(raw_entries: Any, registry: RegistryData) -> list[dict[str, str]]:
+    entries: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    if not isinstance(raw_entries, list):
+        return entries
+    for raw in raw_entries:
+        if isinstance(raw, str):
+            doc_id = raw
+            domain = ""
+        elif isinstance(raw, dict):
+            doc_id = str(raw.get("docId") or raw.get("doc_id") or "").strip()
+            domain = str(raw.get("domain") or "").strip()
+        else:
+            continue
+        if doc_id not in registry.documents:
+            continue
+        key = (domain, doc_id)
+        if key in seen:
+            continue
+        seen.add(key)
+        doc = registry.documents[doc_id]
+        entries.append({"domain": domain, "docId": doc_id, "title": doc.title})
+    return entries
+
+
+def _safe_group_id(value: str) -> str:
+    normalized = slugify_title(value).strip("_").lower()
+    return normalized[:80]
 
 
 def scan_seed_samples(seed_root: Path = SEED_ROOT, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
@@ -145,7 +313,7 @@ def import_seed_folder(seed_folder: Path, doc_id: str, registry: RegistryData | 
     sample_root.mkdir(parents=True, exist_ok=True)
     manifest = _read_manifest(doc_root) or _base_manifest(doc, doc_root, registry)
     imported_sources = {sample.get("source") for sample in manifest.get("samples", []) if isinstance(sample, dict)}
-    copied: list[dict[str, str]] = []
+    copied: list[dict[str, Any]] = []
     skipped: list[dict[str, str]] = []
     for source in _source_files(seed_folder):
         source_display = _display_path(source)
@@ -156,7 +324,7 @@ def import_seed_folder(seed_folder: Path, doc_id: str, registry: RegistryData | 
         destination = _unique_destination(sample_root / relative)
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, destination)
-        item = {"path": _display_path(destination), "source": source_display}
+        item = _sample_manifest_item(destination, source)
         copied.append(item)
         imported_sources.add(source_display)
     manifest = _merge_manifest(doc, doc_root, seed_folder, copied, registry, existing_manifest=manifest)
@@ -319,6 +487,94 @@ def trash_seed_folder(seed_folder: Path, *, seed_root: Path = SEED_ROOT, root: P
     return {"name": seed_folder.name, "trashed": _display_path(seed_folder), "trashPath": _display_path(destination)}
 
 
+def preview_seed_revert(doc_id: str, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
+    registry = registry or load_registry()
+    doc = registry.documents.get(doc_id)
+    if doc is None:
+        raise ValueError(f"unknown docId: {doc_id}")
+    doc_root = document_dir(doc, root)
+    manifest = _read_manifest(doc_root) or _base_manifest(doc, doc_root, registry)
+    removable: list[dict[str, Any]] = []
+    for name in ("samples", "ocr", "review", "inpaint", "cleanup"):
+        source = doc_root / name
+        if not source.exists():
+            continue
+        files = [path for path in source.rglob("*") if path.is_file()]
+        removable.append({"path": _display_path(source), "fileCount": len(files), "bytes": sum(path.stat().st_size for path in files)})
+    artifacts = manifest.get("artifacts") if isinstance(manifest.get("artifacts"), dict) else {}
+    preserved_artifacts = sorted(str(key) for key in artifacts if str(key).startswith("authoring") or key == "cleanroom")
+    return {
+        "docId": doc.doc_id,
+        "title": doc.title,
+        "documentDir": _display_path(doc_root),
+        "status": manifest.get("status", "missing"),
+        "sampleCount": len(manifest.get("samples") or []),
+        "sourceSeedFolders": list(manifest.get("source_seed_folders") or []),
+        "willMove": removable,
+        "willPreserveArtifacts": preserved_artifacts,
+        "willResetStatusTo": "missing",
+        "backupRoot": _display_path(root.parent / ".trash" / "seed_revert"),
+    }
+
+
+
+def revert_seed_import(doc_id: str, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
+    """Move imported sample/pipeline artifacts aside and reset a document to sample-missing.
+
+    The operation is intentionally non-destructive: directories and the previous
+    manifest are moved/copied into workbench/.trash so manual work can be
+    recovered if the user reverts the wrong document.
+    """
+
+    registry = registry or load_registry()
+    doc = registry.documents.get(doc_id)
+    if doc is None:
+        raise ValueError(f"unknown docId: {doc_id}")
+    doc_root = document_dir(doc, root)
+    manifest_path = doc_root / "manifest.json"
+    manifest = _read_manifest(doc_root) or _base_manifest(doc, doc_root, registry)
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    trash_root = root.parent / ".trash" / "seed_revert" / f"{timestamp}_{slugify_title(doc.title)}__{doc.doc_id}"
+    trash_root.mkdir(parents=True, exist_ok=True)
+
+    moved: list[dict[str, str]] = []
+    for name in ("samples", "ocr", "review", "inpaint", "cleanup"):
+        source = doc_root / name
+        if not source.exists():
+            continue
+        destination = _unique_destination(trash_root / name)
+        shutil.move(str(source), str(destination))
+        moved.append({"from": _display_path(source), "to": _display_path(destination)})
+
+    if manifest_path.exists():
+        shutil.copy2(manifest_path, trash_root / "manifest.before_revert.json")
+
+    preserved_artifacts = {}
+    artifacts = manifest.get("artifacts") if isinstance(manifest.get("artifacts"), dict) else {}
+    for key, value in artifacts.items():
+        if str(key).startswith("authoring") or key == "cleanroom":
+            preserved_artifacts[key] = value
+    manifest.update(
+        {
+            "source_seed_folders": [],
+            "samples": [],
+            "status": "missing",
+            "updated_at": _now(),
+            "artifacts": {"ocr": None, "review": None, "inpaint": None, **preserved_artifacts},
+        }
+    )
+    doc_root.mkdir(parents=True, exist_ok=True)
+    _write_json(manifest_path, manifest)
+    return {
+        "docId": doc.doc_id,
+        "title": doc.title,
+        "documentDir": _display_path(doc_root),
+        "trashPath": _display_path(trash_root),
+        "moved": moved,
+        "manifest": manifest,
+    }
+
+
 def load_seed_mappings(root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
     path = seed_mappings_path(root)
     if not path.exists():
@@ -371,6 +627,10 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "statusLabel": STATUS_LABELS[status],
                 "sampleCount": len(samples),
                 "samples": [_display_path(path) for path in samples],
+                "sampleKind": str(manifest.get("sample_kind") or "filled_sample"),
+                "sampleGenerationPaths": list(manifest.get("sample_generation_paths") or []),
+                "hasEditableOfficeTemplate": "editable-office-template" in set(manifest.get("sample_generation_paths") or []),
+                "officeRender": manifest.get("office_render") or {"required": False, "backend": "office-com", "status": "not_required"},
                 "hasOcr": artifact_flags["has_ocr"],
                 "hasReview": artifact_flags["has_review"],
                 "hasInpaint": artifact_flags["has_inpaint"],
@@ -389,6 +649,13 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "latestAuthoringPreview": artifact_flags.get("latest_authoring_preview"),
                 "latestAuthoringOverlay": artifact_flags.get("latest_authoring_overlay"),
                 "latestAuthoringBatch": artifact_flags.get("latest_authoring_batch"),
+                "latestAuthoringAgentRequest": artifact_flags.get("latest_authoring_agent_request"),
+                "latestAuthoringAgentPrompt": artifact_flags.get("latest_authoring_agent_prompt"),
+                "latestAuthoringAgentAnchorMap": artifact_flags.get("latest_authoring_agent_anchor_map"),
+                "latestAuthoringAgentRun": artifact_flags.get("latest_authoring_agent_run"),
+                "latestAuthoringAgentSchemaDraft": artifact_flags.get("latest_authoring_agent_schema_draft"),
+                "latestAuthoringAgentFakerProfileDraft": artifact_flags.get("latest_authoring_agent_faker_profile_draft"),
+                "latestAuthoringAgentResearchReport": artifact_flags.get("latest_authoring_agent_research_report"),
                 "latestCleanroomPreview": artifact_flags.get("latest_cleanroom_preview"),
                 "latestCleanroomPdf": artifact_flags.get("latest_cleanroom_pdf"),
                 "latestCleanroomContactSheet": artifact_flags.get("latest_cleanroom_contact_sheet"),
@@ -413,6 +680,22 @@ def update_manifest_artifact(doc_id: str, artifact: str, path: str | Path, regis
     artifacts[artifact] = _display_path(path)
     manifest["updated_at"] = _now()
     _write_json(doc_root / "manifest.json", manifest)
+
+
+def set_manifest_sample_kind(doc_id: str, sample_kind: str, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
+    registry = registry or load_registry()
+    doc = registry.documents.get(doc_id)
+    if doc is None:
+        raise ValueError(f"unknown docId: {doc_id}")
+    if sample_kind not in SAMPLE_KINDS:
+        raise ValueError(f"sampleKind must be one of {sorted(SAMPLE_KINDS)}")
+    doc_root = document_dir(doc, root)
+    manifest = _read_manifest(doc_root) or _base_manifest(doc, doc_root, registry)
+    manifest["sample_kind"] = sample_kind
+    manifest["updated_at"] = _now()
+    doc_root.mkdir(parents=True, exist_ok=True)
+    _write_json(doc_root / "manifest.json", manifest)
+    return manifest
 
 
 def workbench_subdir(doc_id: str, subdir: str, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> Path:
@@ -449,10 +732,15 @@ def _merge_manifest(doc: RegistryDocument, doc_root: Path, seed_folder: Path, co
     samples_by_source = {sample.get("source"): sample for sample in manifest.get("samples", []) if isinstance(sample, dict) and sample.get("source")}
     for item in copied:
         samples_by_source[item["source"]] = item
+    samples = list(samples_by_source.values())
+    generation_paths = sorted({str(sample.get("generation_path") or "image-template") for sample in samples if isinstance(sample, dict)})
+    editable_samples = [sample for sample in samples if isinstance(sample, dict) and sample.get("generation_path") == "editable-office-template"]
     manifest.update(
         {
             "source_seed_folders": source_folders,
-            "samples": list(samples_by_source.values()),
+            "samples": samples,
+            "sample_generation_paths": generation_paths,
+            "office_render": _office_render_manifest_state(editable_samples),
             "status": "sample_imported",
             "updated_at": _now(),
         }
@@ -469,6 +757,9 @@ def _base_manifest(doc: RegistryDocument, doc_root: Path, registry: RegistryData
         "registry": doc.to_dict(),
         "source_seed_folders": [],
         "samples": [],
+        "sample_kind": "filled_sample",
+        "sample_generation_paths": [],
+        "office_render": {"required": False, "backend": "office-com", "status": "not_required"},
         "status": "missing",
         "created_at": _now(),
         "updated_at": _now(),
@@ -491,6 +782,48 @@ def _rendered_pages_for_pdf(pdf_path: Path) -> list[Path]:
     return sorted(pdf_path.parent.glob(f"{pdf_path.stem}_page_*.jpg"))
 
 
+def _sample_generation_path(path: Path) -> str:
+    return "editable-office-template" if path.suffix.lower() in EDITABLE_OFFICE_EXTENSIONS else "image-template"
+
+
+def _sample_manifest_item(destination: Path, source: Path) -> dict[str, Any]:
+    generation_path = _sample_generation_path(source)
+    item: dict[str, Any] = {
+        "path": _display_path(destination),
+        "source": _display_path(source),
+        "format": source.suffix.lower().lstrip("."),
+        "generation_path": generation_path,
+    }
+    if generation_path == "editable-office-template":
+        item["office_render"] = {
+            "backend": "office-com",
+            "status": "external_render_required",
+            "message": "DOCX 템플릿은 Office COM/호환 렌더러에서 값을 채운 DOCX와 PDF/page image를 생성한 뒤 bbox/label/GT lineage를 확정합니다.",
+        }
+        item["lineage"] = {
+            "original_template": _display_path(source),
+            "imported_template": _display_path(destination),
+            "filled_docx": "",
+            "rendered_pdf": "",
+            "page_images": [],
+            "bbox_label_gt": [],
+        }
+    return item
+
+
+def _office_render_manifest_state(samples: list[dict[str, Any]]) -> dict[str, Any]:
+    if not samples:
+        return {"required": False, "backend": "office-com", "status": "not_required"}
+    pending = [sample for sample in samples if (sample.get("office_render") or {}).get("status") != "rendered"]
+    return {
+        "required": True,
+        "backend": "office-com",
+        "status": "external_render_required" if pending else "rendered",
+        "template_count": len(samples),
+        "pending_count": len(pending),
+    }
+
+
 def _first_image_path(items: list[dict[str, Any]]) -> str:
     for item in items:
         path = str(item.get("path") or "")
@@ -509,11 +842,21 @@ def _sample_files(doc_root: Path) -> list[Path]:
 def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     ocr_paths = _mtime_sorted((doc_root / "ocr").glob("**/detections.json")) if (doc_root / "ocr").exists() else []
     review_paths = _mtime_sorted((doc_root / "review").glob("**/review.json")) if (doc_root / "review").exists() else []
-    inpaint_paths = sorted((doc_root / "inpaint").glob("**/comparison_*.png")) if (doc_root / "inpaint").exists() else []
-    inpainted_paths = sorted((doc_root / "inpaint").glob("**/inpainted_*.png")) if (doc_root / "inpaint").exists() else []
-    cleanup_comparison_paths = sorted((doc_root / "inpaint").glob("**/manual_cleanup/comparison_*.png")) if (doc_root / "inpaint").exists() else []
-    cleanup_inpainted_paths = sorted((doc_root / "inpaint").glob("**/manual_cleanup/inpainted_*.png")) if (doc_root / "inpaint").exists() else []
-    cleanup_mask_paths = sorted((doc_root / "inpaint").glob("**/manual_cleanup/manual_mask.png")) if (doc_root / "inpaint").exists() else []
+    inpaint_paths = _mtime_sorted(
+        path for path in (doc_root / "inpaint").glob("**/comparison_*.png") if "manual_cleanup" not in path.parts
+    ) if (doc_root / "inpaint").exists() else []
+    inpainted_paths = _mtime_sorted(
+        path for path in (doc_root / "inpaint").glob("**/inpainted_*.png") if "manual_cleanup" not in path.parts
+    ) if (doc_root / "inpaint").exists() else []
+    cleanup_comparison_paths = _mtime_sorted(
+        {*((doc_root / "inpaint").glob("**/manual_cleanup/comparison_*.png")), *((doc_root / "inpaint").glob("**/manual_cleanup/comparison_paint.png"))}
+    ) if (doc_root / "inpaint").exists() else []
+    cleanup_inpainted_paths = _mtime_sorted(
+        {*((doc_root / "inpaint").glob("**/manual_cleanup/inpainted_*.png")), *((doc_root / "inpaint").glob("**/manual_cleanup/painted_template.png"))}
+    ) if (doc_root / "inpaint").exists() else []
+    cleanup_mask_paths = _mtime_sorted(
+        {*((doc_root / "inpaint").glob("**/manual_cleanup/manual_mask.png")), *((doc_root / "inpaint").glob("**/manual_cleanup/paint.json"))}
+    ) if (doc_root / "inpaint").exists() else []
     authoring_schema_paths = sorted((doc_root / "authoring").glob("schema.json")) if (doc_root / "authoring").exists() else []
     authoring_stylesheet_paths = sorted((doc_root / "authoring").glob("stylesheet.json")) if (doc_root / "authoring").exists() else []
     authoring_faker_paths = sorted((doc_root / "authoring").glob("faker_profile.json")) if (doc_root / "authoring").exists() else []
@@ -523,12 +866,21 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         else []
     )
     authoring_overlay_paths = sorted((doc_root / "authoring" / "render_preview").glob("preview_*.overlay.png")) if (doc_root / "authoring" / "render_preview").exists() else []
+    authoring_agent_request_paths = sorted((doc_root / "authoring" / "agent_requests").glob("*/request.json")) if (doc_root / "authoring" / "agent_requests").exists() else []
+    latest_agent_request_dir = authoring_agent_request_paths[-1].parent if authoring_agent_request_paths else None
+    latest_agent_prompt = latest_agent_request_dir / "request.md" if latest_agent_request_dir else None
+    latest_agent_anchor_map = latest_agent_request_dir / "anchor_map_draft.json" if latest_agent_request_dir else None
+    authoring_agent_run_paths = sorted((doc_root / "authoring" / "agent_runs").glob("*/job.json")) if (doc_root / "authoring" / "agent_runs").exists() else []
     artifacts = manifest.get("artifacts", {}) if isinstance(manifest, dict) else {}
     manifest_ocr = _existing_display_path(artifacts.get("ocr"))
     manifest_review = _existing_display_path(artifacts.get("review"))
     cleanroom = _cleanroom_artifact_flags(artifacts.get("cleanroom"))
-    cleanup_comparison = _display_path(cleanup_comparison_paths[-1]) if cleanup_comparison_paths else artifacts.get("inpaint_cleanup")
-    cleanup_inpainted = _display_path(cleanup_inpainted_paths[-1]) if cleanup_inpainted_paths else artifacts.get("inpaint_cleanup_inpainted")
+    latest_inpaint_comparison_path = inpaint_paths[-1] if inpaint_paths else None
+    latest_inpainted_path = inpainted_paths[-1] if inpainted_paths else None
+    latest_cleanup_comparison_path = cleanup_comparison_paths[-1] if cleanup_comparison_paths else None
+    latest_cleanup_inpainted_path = cleanup_inpainted_paths[-1] if cleanup_inpainted_paths else None
+    cleanup_comparison = _display_path(latest_cleanup_comparison_path) if latest_cleanup_comparison_path else artifacts.get("inpaint_cleanup")
+    cleanup_inpainted = _display_path(latest_cleanup_inpainted_path) if latest_cleanup_inpainted_path else artifacts.get("inpaint_cleanup_inpainted")
     cleanup_mask = _display_path(cleanup_mask_paths[-1]) if cleanup_mask_paths else artifacts.get("inpaint_cleanup_mask")
     return {
         "has_ocr": bool(ocr_paths or artifacts.get("ocr")),
@@ -539,8 +891,8 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         "has_authoring_preview": bool(authoring_preview_paths or artifacts.get("authoring_preview")),
         "latest_detections": manifest_ocr or (_display_path(ocr_paths[-1]) if ocr_paths else artifacts.get("ocr")),
         "latest_review": manifest_review or (_display_path(review_paths[-1]) if review_paths else artifacts.get("review")),
-        "latest_inpaint_comparison": cleanup_comparison or (_display_path(inpaint_paths[-1]) if inpaint_paths else artifacts.get("inpaint")),
-        "latest_inpainted": cleanup_inpainted or (_display_path(inpainted_paths[-1]) if inpainted_paths else _inpainted_from_comparison(artifacts.get("inpaint"))),
+        "latest_inpaint_comparison": _display_path(latest_inpaint_comparison_path) if latest_inpaint_comparison_path else artifacts.get("inpaint"),
+        "latest_inpainted": _display_path(latest_inpainted_path) if latest_inpainted_path else _inpainted_from_comparison(artifacts.get("inpaint")),
         "latest_inpaint_cleanup_comparison": cleanup_comparison,
         "latest_inpaint_cleanup_mask": cleanup_mask,
         "latest_authoring_schema": _display_path(authoring_schema_paths[-1]) if authoring_schema_paths else artifacts.get("authoring"),
@@ -549,6 +901,13 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         "latest_authoring_preview": _display_path(authoring_preview_paths[-1]) if authoring_preview_paths else artifacts.get("authoring_preview"),
         "latest_authoring_overlay": _display_path(authoring_overlay_paths[-1]) if authoring_overlay_paths else artifacts.get("authoring_overlay"),
         "latest_authoring_batch": artifacts.get("authoring_batch"),
+        "latest_authoring_agent_request": _display_path(authoring_agent_request_paths[-1]) if authoring_agent_request_paths else artifacts.get("authoring_agent_request"),
+        "latest_authoring_agent_prompt": _display_path(latest_agent_prompt) if latest_agent_prompt and latest_agent_prompt.exists() else artifacts.get("authoring_agent_prompt"),
+        "latest_authoring_agent_anchor_map": _display_path(latest_agent_anchor_map) if latest_agent_anchor_map and latest_agent_anchor_map.exists() else artifacts.get("authoring_agent_anchor_map"),
+        "latest_authoring_agent_run": _display_path(authoring_agent_run_paths[-1]) if authoring_agent_run_paths else artifacts.get("authoring_agent_run"),
+        "latest_authoring_agent_schema_draft": artifacts.get("authoring_agent_schema_draft"),
+        "latest_authoring_agent_faker_profile_draft": artifacts.get("authoring_agent_faker_profile_draft"),
+        "latest_authoring_agent_research_report": artifacts.get("authoring_agent_research_report"),
         **cleanroom,
     }
 

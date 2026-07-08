@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-08T02:48:14.562197+00:00",
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "unresolved_fields": [
+    {
+      "field_id": "loan_amount",
+      "anchor_id": "visual_0017",
+      "issue": "신청개요 표에는 단위 문구가 직접 보이지 않고, 아래 업체개요/채권보전 표에만 단위 백만원이 표시된다.",
+      "suggested_decision": "대출금액도 백만원 단위 금액인지 업무 기준으로 승인한다."
+    },
+    {
+      "field_id": "audit_confirmation",
+      "anchor_id": "manual_1783476877030",
+      "issue": "감사 박스가 이름, 서명, 검토의견 중 어느 값을 요구하는지 템플릿만으로는 확정하기 어렵다.",
+      "suggested_decision": "초안은 person.name_ko로 두고 실제 감사 서명 렌더링 필요 여부를 별도 결정한다."
+    },
+    {
+      "field_id": "approval_role_title",
+      "anchor_id": "visual_0002",
+      "issue": "상단 세 번째 결재 칸의 직책명은 빈칸이며 사용자 지시로만 역할이 확정되었다.",
+      "suggested_decision": "직책명 후보 pool을 승인하거나 실제 직책 라벨을 지정한다."
+    },
+    {
+      "field_id": "branch_manager_name",
+      "anchor_id": null,
+      "issue": "제호 아래 부(점)장 (인) 주변에 이름 입력 위치가 보이나 request anchor_map에는 확정 use 값 anchor가 없다.",
+      "suggested_decision": "UI에서 부(점)장명 영역을 manual/use anchor로 추가한 뒤 schema field로 승격한다."
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "area": "상단 결재표",
+      "details": "OCR/라벨은 일부 칸만 직책명을 제공하지만 사용자 지시는 2행 5열 표의 윗줄 직책명/아랫줄 서명 구조를 명시한다. 사용자 지시와 전체 이미지 구조를 우선했다."
+    },
+    {
+      "area": "여신금리평점/여신심사평점",
+      "details": "점수 입력칸 자체는 use anchor로 확정되지 않았고 기준월/기준일 수동 anchor만 존재한다. 점수 필드는 만들지 않았다."
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "loan_interest_rate",
+      "generator": "template:{{pattern:##}}.{{pattern:##}}%",
+      "reason": "지원 grammar에서 범위 제한이 불가능해 두 자리 정수/소수 패턴으로 근사했다."
+    },
+    {
+      "field_id": "employee_count",
+      "generator": "pattern:###",
+      "reason": "정확한 종업원 수 범위 제한 grammar가 없어 세 자리 숫자로 근사했다."
+    },
+    {
+      "field_id": "guarantor_age",
+      "generator": "pattern:##",
+      "reason": "연령 범위 제한 grammar가 없어 두 자리 숫자로 근사했다."
+    }
+  ],
+  "user_decisions_needed": [
+    "감사 박스와 결재 서명 영역을 이름 텍스트로 유지할지, 별도 서명 이미지/필기 시뮬레이션으로 후처리할지 확인 필요.",
+    "대출금액 단위를 백만원으로 해석할지 원 단위 금액 문자열로 유지할지 확인 필요.",
+    "부(점)장명 입력 영역을 schema에 포함하려면 별도 manual/use anchor 승인이 필요하다."
+  ],
+  "updated_at": "2026-07-08T02:49:46.701226+00:00"
+}

@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "created_at": "2026-07-08T08:53:05+09:00",
+  "pools": [
+    {
+      "pool_id": "synthetic_building_names_ko",
+      "values": [
+        "한빛빌딩",
+        "가온타워",
+        "서림빌딩",
+        "도담프라자"
+      ],
+      "source": "agent_synthetic",
+      "usage_notes": "실제 샘플 명칭을 재사용하지 않는 합성 건물명"
+    },
+    {
+      "pool_id": "synthetic_ko_addresses",
+      "values": [
+        "서울특별시 강남구 테헤란로 100",
+        "서울특별시 마포구 월드컵북로 50",
+        "경기도 성남시 분당구 판교역로 20"
+      ],
+      "source": "agent_synthetic",
+      "usage_notes": "실제 소유자 주소가 아닌 합성 주소"
+    },
+    {
+      "pool_id": "building_structures",
+      "values": [
+        "철근콘크리트구조",
+        "일반철골구조",
+        "철골조, 철근콘크리트조",
+        "벽돌구조"
+      ],
+      "source": "template_visible_and_domain_generic",
+      "usage_notes": "건축물대장 구조/주구조 필드"
+    },
+    {
+      "pool_id": "building_uses",
+      "values": [
+        "제1종근린생활시설(소매점)",
+        "제2종근린생활시설(학원)",
+        "제2종근린생활시설(사무소)",
+        "업무시설"
+      ],
+      "source": "template_visible_and_domain_generic",
+      "usage_notes": "주용도 및 층별 용도 필드"
+    },
+    {
+      "pool_id": "zoning_area_types",
+      "values": [
+        "제1종일반주거지역",
+        "제2종일반주거지역",
+        "준주거지역",
+        "일반상업지역"
+      ],
+      "source": "land_use_generic",
+      "usage_notes": "지역 필드. 실제 토지이용 규제값은 별도 검증 필요"
+    },
+    {
+      "pool_id": "restriction_zone_types",
+      "values": [
+        "가축사육제한구역",
+        "상대보호구역",
+        "해당없음"
+      ],
+      "source": "template_visible_and_domain_generic",
+      "usage_notes": "구역 필드. 지구 필드는 page 1에 값 anchor가 없어 제외"
+    },
+    {
+      "pool_id": "floor_labels",
+      "values": [
+        "지1층",
+        "1층",
+        "2층",
+        "3층",
+        "4층",
+        "5층"
+      ],
+      "source": "template_visible",
+      "usage_notes": "건축물현황 층별"
+    },
+    {
+      "pool_id": "owner_change_reasons",
+      "values": [
+        "소유권이전",
+        "보존등기",
+        "표시변경"
+      ],
+      "source": "template_visible_and_domain_generic",
+      "usage_notes": "소유자현황 변동원인"
+    },
+    {
+      "pool_id": "public_office_titles",
+      "values": [
+        "서울특별시 강남구청장",
+        "서울특별시 마포구청장",
+        "경기도 성남시장"
+      ],
+      "source": "agent_synthetic",
+      "usage_notes": "발급기관장 합성값"
+    }
+  ]
+}

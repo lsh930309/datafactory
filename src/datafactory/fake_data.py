@@ -13,7 +13,7 @@ DISTRICTS = ["중구", "서구", "동구", "남구", "북구", "강남구", "서
 ROADS = ["중앙로", "테헤란로", "세종대로", "충무로", "을지로", "한강대로", "삼성로", "월드컵북로"]
 BANKS = ["국민은행", "신한은행", "우리은행", "하나은행", "농협은행", "기업은행", "카카오뱅크"]
 COMPANY_SUFFIXES = ["상사", "산업", "테크", "유통", "건설", "파트너스", "솔루션", "에프앤비"]
-TEXT_SNIPPETS = ["확인함", "해당없음", "정상", "발급완료", "계약완료", "납부완료"]
+TEXT_SNIPPETS = ["샘플값", "예시값", "더미값", "테스트값"]
 
 
 def generate_value(field_type: str, rng: random.Random, *, choices: list[str] | None = None, fmt: str | None = None) -> str:

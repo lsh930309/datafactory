@@ -1,0 +1,136 @@
+{
+  "schema_version": 2,
+  "status": "ready_for_agent",
+  "docId": "COL-03",
+  "title": "토지대장·건축물대장",
+  "instruction": "",
+  "contract": {
+    "mode": "agentic_authoring_a_to_z",
+    "sample_kind": "filled_sample",
+    "input_formats": [
+      "pdf",
+      "jpg",
+      "jpeg",
+      "png",
+      "docx"
+    ],
+    "generation_paths": [
+      "image-template",
+      "editable-office-template"
+    ],
+    "outputs": [
+      "schema_draft.json",
+      "stylesheet_draft.json",
+      "faker_profile_draft.json",
+      "value_pool_draft.json",
+      "research_report.json",
+      "uncertainty_report.json",
+      "anchor_map_draft.json",
+      "application_notes.md"
+    ],
+    "workflow_steps": [
+      "입력 파일, OCR, bbox review, 기존 authoring 파일을 먼저 읽고 근거 anchor를 정리한다.",
+      "실제 문서명을 웹 검색해 작성 방법, 문서 의미, 포함 정보, 실제 샘플 양식, 공식/공공/기관/기업 설명을 수집한다.",
+      "문서에 보이는 anchor와 리서치 근거를 연결해 schema_draft와 faker_profile_draft를 작성한다.",
+      "불확실하거나 출처가 충돌하는 항목은 확정하지 않고 uncertainty_report에 남긴다.",
+      "모든 산출물은 draft로만 저장하며 적용/덮어쓰기는 UI 승인 이후 수행한다."
+    ],
+    "web_research_rules": [
+      "schema/faker 초안 생성 전에 실제 문서명과 유사 명칭을 웹 검색한다.",
+      "공식/원문/공공기관/법령/제도 설명/실제 샘플 양식을 우선 출처로 사용한다.",
+      "research_report에는 검색일, 검색어, 출처 URL, 출처 유형, 요약, 필드별 반영 근거를 기록한다.",
+      "리서치는 문서에 보이는 anchor의 의미 해석과 faker profile 정밀화를 위한 보조 근거일 뿐, 템플릿에 없는 필드를 자동 추가하는 근거가 아니다.",
+      "출처 간 내용이 다르거나 실제 템플릿 anchor와 연결되지 않으면 faker rule을 확정하지 않고 uncertainty_report에 남긴다."
+    ],
+    "schema_rules": [
+      "KIE 관점의 key-value hierarchy만 작성한다.",
+      "모든 value는 빈 문자열로 둔다.",
+      "key는 실제 문서에 보이는 라벨, 표제, placeholder, 주변 텍스트, 편집 가능한 anchor 기반 한국어 자연어를 우선한다.",
+      "문서에 보이지 않는 추상 키, 업무 추론만으로 만든 키, downstream 편의용 임의 구조체를 만들지 않는다.",
+      "웹 리서치로 발견한 일반 항목이라도 대응 anchor가 없으면 schema_draft에 자동 추가하지 않는다."
+    ],
+    "faker_profile_rules": [
+      "schema key의 의미가 충분히 명확하고 문서 anchor 또는 리서치 근거와 연결될 때만 faker rule을 제안한다.",
+      "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안한다.",
+      "의미가 불확실한 key는 literal:, choice:, pool: 등을 임의 생성하지 말고 보류 사유를 기록한다.",
+      "실제 개인정보, 실제 기업정보, 실제 계좌/식별번호처럼 오인 가능한 값은 만들지 않는다.",
+      "합성 더미 값 규칙 또는 승인된 value pool 참조만 사용한다.",
+      "faker_profile_draft의 각 rule은 관련 schema key, anchor, research_report 근거 ID를 추적 가능하게 남긴다."
+    ],
+    "template_anchor_rules": [
+      "PDF/JPG는 visible text, OCR, bbox 위치, 주변 텍스트를 anchor 근거로 삼는다.",
+      "DOCX는 visible text, content control, form field, table cell, bookmark, placeholder 등 편집 가능한 anchor를 근거로 삼는다.",
+      "숨은 메타데이터나 파일명만으로 schema key 또는 faker rule을 만들지 않는다.",
+      "DOCX 경로에서는 원본 템플릿, 채워진 DOCX, 렌더링 PDF, 페이지 이미지, bbox/label/GT lineage가 manifest에 남아야 한다.",
+      "sample_kind가 blank_template이면 OCR/static label/keep bbox는 라벨 근거(label_anchor_ids)로만 쓰고 schema field의 anchor_id로 쓰지 않는다.",
+      "sample_kind가 blank_template이면 schema field의 anchor_id는 반드시 리뷰에서 use로 확정된 값 입력 후보, 체크박스, 표 셀, manual bbox, visual_line_detect bbox 중 하나여야 한다.",
+      "sample_kind가 blank_template이고 값 삽입 영역을 찾을 수 없으면 field를 만들지 말고 uncertainty_report에 남긴다."
+    ],
+    "application_rules": [
+      "렌더러는 authoring 데이터를 임의 보정하지 않고 schema/style/faker/render_policy를 그대로 따른다.",
+      "Agent 산출물은 바로 적용하지 않고 draft로 저장한다.",
+      "기존 authoring 파일을 덮어쓰기 전 사용자 승인과 백업 경로가 필요하다.",
+      "UI 확정 전에는 schema_draft, faker_profile_draft, value_pool_draft, research_report, uncertainty_report를 함께 검토 가능해야 한다."
+    ]
+  },
+  "inputs": {
+    "registry": {
+      "docId": "COL-03",
+      "title": "토지대장·건축물대장",
+      "issuer": "정부/공공",
+      "genre": "증명",
+      "structure": "표중심",
+      "modality": "스캔이미지",
+      "sensitivity": "공개",
+      "fields": "지목·면적·용도·소유자",
+      "notes": "",
+      "hasPersonalInfo": "미포함",
+      "personalInfoDetail": "소유자, 건축물 정보, 토지정보",
+      "validationRules": "발급일 유효성, 문서번호, 필수필드, 직인 또는 확인번호",
+      "validationRuleCodes": "VAL-001, VAL-002, VAL-003, VAL-009, VAL-011, VAL-013",
+      "writingMethod": "인쇄",
+      "aliases": [
+        "토지대장·건축물대장",
+        "건축물대장",
+        "토지대장"
+      ],
+      "workflowIds": [
+        "BANK-04",
+        "CON-T3",
+        "GOV-01"
+      ],
+      "domains": [
+        "건설·부동산",
+        "공공·행정 (B2G)",
+        "금융 - 은행 (여신·신용·외환)"
+      ],
+      "workflowDomains": [
+        "건설·부동산",
+        "공공·행정 (B2G)",
+        "금융 - 은행 (여신·신용·외환)"
+      ],
+      "poDomains": [
+        "금융",
+        "공공",
+        "건설"
+      ],
+      "isFirstPriority": false,
+      "firstPriorityDomains": [],
+      "firstPriorityScopeCount": 0
+    },
+    "sampleKind": "filled_sample",
+    "sample": "workbench/documents/토지대장·건축물대장__COL-03/samples/original/건축물대장.pdf",
+    "latestDetections": "workbench/documents/토지대장·건축물대장__COL-03/ocr/paddleocr/precise/original_건축물대장_page_001/detections.json",
+    "latestReview": "workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json",
+    "latestInpainted": "workbench/documents/토지대장·건축물대장__COL-03/inpaint/original_건축물대장_page_001/manual_cleanup/painted_template.png",
+    "existingAuthoring": {
+      "schema": "workbench/documents/토지대장·건축물대장__COL-03/authoring/schema.json",
+      "stylesheet": "workbench/documents/토지대장·건축물대장__COL-03/authoring/stylesheet.json",
+      "fakerProfile": "workbench/documents/토지대장·건축물대장__COL-03/authoring/faker_profile.json"
+    }
+  },
+  "created_at": "2026-07-07T23:48:07.298680+00:00",
+  "generated_sidecars": {
+    "anchorMapDraft": "workbench/documents/토지대장·건축물대장__COL-03/authoring/agent_requests/20260707T234807309664Z/anchor_map_draft.json"
+  }
+}

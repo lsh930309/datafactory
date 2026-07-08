@@ -5,9 +5,11 @@ import base64
 import json
 import mimetypes
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -16,18 +18,23 @@ from time import perf_counter
 from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
 
-from PIL import Image
+from PIL import Image, ImageChops, ImageDraw
 
 from .authoring import (
+    approve_authoring_draft_to_library,
+    authoring_library_payload,
     authoring_review_prune_candidates,
     draft_authoring_bundle,
+    draft_stylesheet_from_review,
     load_authoring_bundle,
     migrate_authoring_schema_bboxes_to_review,
     prune_authoring_fields_by_review,
     render_authoring_batch,
     render_authoring_live_preview,
     render_authoring_preview,
+    review_anchor_map,
     save_authoring_bundle,
+    semantic_schema_to_authoring_schema,
     update_authoring_source_inpainted,
 )
 from .first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
@@ -38,22 +45,60 @@ from .inpaint_export import write_inpaint_result
 from .manual_cleanup import load_manual_mask, save_manual_mask
 from .ocr_detectors import PADDLEOCR_PRESETS, normalize_paddleocr_preset
 from .ocr_worker import run_ocr_eval
-from .policy import ReviewPolicy, draft_review_policy, load_review_policy, review_summary, write_review_policy
+from .policy import ReviewPolicy, augment_blank_template_policy, draft_review_policy, load_review_policy, review_summary, write_review_policy
 from .registry import load_registry
 from .workbench import (
+    delete_target_group,
+    document_dir,
     import_seed_batch,
     import_seed_folder,
     list_work_items,
+    list_target_groups,
+    preview_seed_revert,
     save_seed_mapping,
+    save_target_group,
     save_uploaded_seed_files,
     scan_seed_samples,
+    set_manifest_sample_kind,
     trash_seed_folder,
+    revert_seed_import,
     update_manifest_artifact,
     workbench_subdir,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
 RENDER_OUTPUT_ROOT = ROOT / "outputs" / "render"
+AUTHORING_AGENT_REQUIRED_OUTPUTS = [
+    "schema_draft.json",
+    "stylesheet_draft.json",
+    "faker_profile_draft.json",
+    "value_pool_draft.json",
+    "research_report.json",
+    "uncertainty_report.json",
+    "anchor_map_draft.json",
+    "application_notes.md",
+]
+AUTHORING_AGENT_JSON_OUTPUTS = {name for name in AUTHORING_AGENT_REQUIRED_OUTPUTS if name.endswith(".json")}
+AUTHORING_AGENT_SUPPORTED_FAKER_RULES = [
+    "literal:<고정 더미 문자열>",
+    "choice:<값1>|<값2>|<값3>",
+    "pool:<data_pools 이름>",
+    "same_as:<다른 field_id>",
+    "pattern:<# 숫자, A 대문자, a 소문자, * 영문대문자/숫자 패턴>",
+    "template:<문자열과 {{지원 rule}} 조합>",
+    "person.name_ko",
+    "person.phone_kr",
+    "person.rrn",
+    "date.kr",
+    "date.year",
+    "date.month",
+    "date.day",
+    "money.krw",
+    "company.name_ko",
+    "address.ko",
+    "free_text.short",
+    "checkbox.bool",
+]
 
 
 def runtime_health() -> dict[str, Any]:
@@ -106,6 +151,8 @@ def runtime_health() -> dict[str, Any]:
             "work_items": True,
             "workbench": True,
             "authoring_1cycle": True,
+            "editable_office_template": True,
+            "office_com_backend": "external_render_required",
             "ocr_recrop_review": True,
             "first_priority_assessment": True,
             "final_results_export": True,
@@ -155,8 +202,10 @@ def save_policy_payload(payload: dict[str, Any]) -> dict[str, Any]:
     review_path = _resolve_workspace_path(str(payload.get("reviewPath") or raw_policy.get("review_path") or default_review_path))
     paths = write_review_policy(policy, review_path.parent)
     pruned_authoring: dict[str, Any] | None = None
+    sidecar_drafts: dict[str, Any] | None = None
     if doc_id:
         update_manifest_artifact(doc_id, "review", paths["review"])
+        sidecar_drafts = _write_review_sidecar_drafts(doc_id, paths["review"], policy)
         if bool(payload.get("pruneAuthoring")):
             schema_path, stylesheet_path, faker_profile_path = _authoring_paths_from_payload(payload, doc_id)
             if schema_path.exists() and stylesheet_path.exists() and faker_profile_path.exists():
@@ -169,8 +218,1075 @@ def save_policy_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 update_manifest_artifact(doc_id, "authoring", schema_path)
                 update_manifest_artifact(doc_id, "authoring_stylesheet", stylesheet_path)
                 update_manifest_artifact(doc_id, "authoring_faker_profile", faker_profile_path)
-    return {"paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "prunedAuthoring": pruned_authoring}
+    return {"paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "prunedAuthoring": pruned_authoring, "authoringSidecarDrafts": sidecar_drafts}
 
+
+def registry_payload() -> dict[str, Any]:
+    registry = load_registry()
+    payload = registry.to_dict()
+    payload["targetGroups"] = list_target_groups(registry=registry)["groups"]
+    return payload
+
+
+def scan_review_legacy_issues() -> dict[str, Any]:
+    registry = load_registry()
+    items = []
+    total_ignore = 0
+    for doc in registry.documents.values():
+        doc_root = document_dir(doc)
+        if not doc_root.exists():
+            continue
+        review_paths = sorted(path for path in doc_root.glob("review/**/review.json") if "/backups/" not in str(path))
+        for review_path in review_paths:
+            policy = load_review_policy(review_path)
+            ignore_labels = [label for label in policy.labels if label.status == "ignore"]
+            if not ignore_labels:
+                continue
+            total_ignore += len(ignore_labels)
+            items.append(
+                {
+                    "docId": doc.doc_id,
+                    "title": doc.title,
+                    "reviewPath": _display_path(review_path, ROOT),
+                    "ignoreCount": len(ignore_labels),
+                    "labelIds": [label.id for label in ignore_labels],
+                }
+            )
+    return {"summary": {"documentCount": len(items), "ignoreCount": total_ignore}, "items": items}
+
+
+def remove_ignore_bboxes_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    review_path = _resolve_workspace_path(str(payload.get("reviewPath") or ""))
+    policy = load_review_policy(review_path)
+    removed = [label for label in policy.labels if label.status == "ignore"]
+    if not removed:
+        return {"docId": doc_id, "removed": 0, "backup": None, "paths": {"review": _display_path(review_path, ROOT)}}
+    backup = backup_review_draft_outputs(review_path.parent)
+    cleaned = ReviewPolicy(
+        source_detections=policy.source_detections,
+        source_image=policy.source_image,
+        image_width=policy.image_width,
+        image_height=policy.image_height,
+        labels=[label for label in policy.labels if label.status != "ignore"],
+        source_engine=policy.source_engine,
+        schema_version=policy.schema_version,
+        created_at=policy.created_at,
+    )
+    paths = write_review_policy(cleaned, review_path.parent)
+    update_manifest_artifact(doc_id, "review", paths["review"])
+    return {
+        "docId": doc_id,
+        "removed": len(removed),
+        "removedLabelIds": [label.id for label in removed],
+        "backup": backup,
+        "paths": _paths_to_client(paths),
+        "policy": policy_to_client(cleaned, review_path=paths["review"]),
+    }
+
+
+def scan_manual_cleanup_legacy() -> dict[str, Any]:
+    registry = load_registry()
+    items = []
+    for item in list_work_items(registry=registry):
+        doc = registry.documents.get(str(item.get("docId") or ""))
+        if doc is None:
+            continue
+        doc_root = document_dir(doc)
+        for cleanup_dir in sorted(doc_root.glob("inpaint/**/manual_cleanup")):
+            if not cleanup_dir.is_dir():
+                continue
+            promoted_candidate = cleanup_dir / "painted_template.png"
+            legacy_candidate = cleanup_dir / "inpainted_lama.png"
+            comparison_candidate = cleanup_dir / "comparison_paint.png"
+            if not comparison_candidate.exists():
+                comparison_candidate = cleanup_dir / "comparison_lama.png"
+            items.append(
+                {
+                    "docId": item["docId"],
+                    "title": item["title"],
+                    "cleanupDir": _display_path(cleanup_dir, ROOT),
+                    "templateId": cleanup_dir.parent.name,
+                    "hasPaintResult": promoted_candidate.exists(),
+                    "hasLegacyInpaintResult": legacy_candidate.exists(),
+                    "promoteSource": _display_path(promoted_candidate if promoted_candidate.exists() else legacy_candidate, ROOT) if (promoted_candidate.exists() or legacy_candidate.exists()) else "",
+                    "comparisonSource": _display_path(comparison_candidate, ROOT) if comparison_candidate.exists() else "",
+                    "currentInpainted": str(item.get("latestInpainted") or ""),
+                }
+            )
+    return {"summary": {"legacyCleanupCount": len(items)}, "items": items}
+
+
+def promote_manual_cleanup_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    cleanup_dir = _resolve_workspace_path(str(payload.get("cleanupDir") or ""))
+    if not doc_id:
+        raise ValueError("docId is required")
+    if cleanup_dir.name != "manual_cleanup" or ROOT not in cleanup_dir.resolve().parents:
+        raise ValueError("cleanupDir must be a manual_cleanup directory inside the workspace")
+    if not cleanup_dir.exists() or not cleanup_dir.is_dir():
+        raise FileNotFoundError(cleanup_dir)
+    source_image = cleanup_dir / "painted_template.png"
+    if not source_image.exists():
+        source_image = cleanup_dir / "inpainted_lama.png"
+    if not source_image.exists():
+        raise FileNotFoundError("manual_cleanup has no promoted inpaint result")
+    comparison = cleanup_dir / "comparison_paint.png"
+    if not comparison.exists():
+        comparison = cleanup_dir / "comparison_lama.png"
+
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    backup_root = ROOT / "workbench" / ".trash" / "manual_cleanup_promote" / f"{timestamp}_{_safe_name(doc_id)}_{_safe_name(cleanup_dir.parent.name)}"
+    backup_root.mkdir(parents=True, exist_ok=True)
+    target_dir = cleanup_dir.parent / "lama"
+    target_dir.mkdir(parents=True, exist_ok=True)
+    for existing_name in ("inpainted_lama.png", "comparison_lama.png", "summary.json"):
+        existing = target_dir / existing_name
+        if existing.exists():
+            backup_existing_dir = backup_root / "previous_lama"
+            backup_existing_dir.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(existing, backup_existing_dir / existing.name)
+    promoted_inpainted = target_dir / "inpainted_lama.png"
+    promoted_comparison = target_dir / "comparison_lama.png"
+    shutil.copy2(source_image, promoted_inpainted)
+    if comparison.exists():
+        shutil.copy2(comparison, promoted_comparison)
+    summary_path = target_dir / "summary.json"
+    summary_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "strategy": "promoted_manual_cleanup_result",
+                "source_cleanup_dir": _display_path(cleanup_dir, ROOT),
+                "source_image": _display_path(source_image, ROOT),
+                "outputs": {
+                    "inpainted": _display_path(promoted_inpainted, ROOT),
+                    "comparison": _display_path(promoted_comparison, ROOT) if promoted_comparison.exists() else "",
+                },
+                "backup": _display_path(backup_root, ROOT),
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    removed_dir = backup_root / "manual_cleanup"
+    shutil.move(str(cleanup_dir), str(removed_dir))
+    update_manifest_artifact(doc_id, "inpaint", promoted_comparison if promoted_comparison.exists() else promoted_inpainted)
+    _clear_manifest_artifacts(doc_id, ["inpaint_cleanup", "inpaint_cleanup_inpainted", "inpaint_cleanup_mask"])
+    return {
+        "docId": doc_id,
+        "promoted": {
+            "inpainted": _display_path(promoted_inpainted, ROOT),
+            "comparison": _display_path(promoted_comparison, ROOT) if promoted_comparison.exists() else "",
+            "summary": _display_path(summary_path, ROOT),
+        },
+        "backup": _display_path(backup_root, ROOT),
+        "removedManualCleanup": _display_path(removed_dir, ROOT),
+    }
+
+
+def _authoring_agent_prompt_markdown(request: dict[str, Any]) -> str:
+    contract = request["contract"]
+    registry = request["inputs"].get("registry") or {}
+    lines = [
+        f"# Agentic Authoring Request: {request['title']} ({request['docId']})",
+        "",
+        "## 목표",
+        "문서 이미지/OCR/BBox review와 실제 문서 리서치 근거를 사용해 authoring 초안을 A-to-Z로 생성한다.",
+        "산출물은 즉시 적용하지 않는 draft이며, UI에서 사용자 승인/수정/백업 후 확정한다.",
+        "",
+        "## 사용자 지시",
+        request.get("instruction") or "(추가 지시 없음)",
+        "",
+        "## 입력 문서 컨텍스트",
+        f"- 제목: {request['title']}",
+        f"- 문서 ID: {request['docId']}",
+        f"- PO 도메인: {', '.join(registry.get('poDomains') or registry.get('domains') or []) or '-'}",
+        f"- 업무 도메인: {', '.join(registry.get('workflowDomains') or []) or '-'}",
+        "",
+        "## 필수 산출물",
+        *[f"- `{name}`" for name in contract["outputs"]],
+        "",
+        "## 웹 리서치 필수 규칙",
+        *[f"- {rule}" for rule in contract["web_research_rules"]],
+        "",
+        "## Schema 규칙",
+        *[f"- {rule}" for rule in contract["schema_rules"]],
+        "",
+        "## 시각 근거 우선 규칙",
+        *[f"- {rule}" for rule in contract["visual_source_of_truth_rules"]],
+        "",
+        "## Faker profile 규칙",
+        *[f"- {rule}" for rule in contract["faker_profile_rules"]],
+        "",
+        "## 지원 Faker rule 문법",
+        "faker_profile_draft.json.field_generators 값은 아래 형식만 사용한다.",
+        *[f"- `{rule}`" for rule in AUTHORING_AGENT_SUPPORTED_FAKER_RULES],
+        "",
+        "금지 예시: `date_between:-365d:+0d|format:%Y/%m/%d`, `time|format:%H:%M:%S`, `decimal_range:10..99`, `identifier.document_confirmation`, `area.square_meter`, `land_use.zoning`, `building.structure`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`.",
+        "",
+        "## DOCX/빈 템플릿 anchor 규칙",
+        *[f"- {rule}" for rule in contract["template_anchor_rules"]],
+        "",
+        "## 적용/검수 정책",
+        *[f"- {rule}" for rule in contract["application_rules"]],
+        "",
+        "## 입력 파일",
+        f"- sample: {request['inputs'].get('sample') or '-'}",
+        f"- latestReview: {request['inputs'].get('latestReview') or '-'}",
+        f"- latestInpainted: {request['inputs'].get('latestInpainted') or '-'}",
+        f"- visualEvidenceManifest: {(request.get('generated_sidecars') or {}).get('visualEvidenceManifest') or '-'}",
+        "",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    registry = load_registry()
+    doc = registry.documents.get(doc_id)
+    if doc is None:
+        raise ValueError(f"unknown docId: {doc_id}")
+    item = next((candidate for candidate in list_work_items(registry=registry) if candidate.get("docId") == doc_id), None)
+    samples = item.get("samples") if item and isinstance(item.get("samples"), list) else []
+    sample_kind = str((item or {}).get("sampleKind") or "filled_sample")
+    created_at = datetime.now(timezone.utc).isoformat()
+    request_dir = workbench_subdir(doc_id, "authoring") / "agent_requests" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    request_dir.mkdir(parents=True, exist_ok=True)
+    outputs = [
+        "schema_draft.json",
+        "stylesheet_draft.json",
+        "faker_profile_draft.json",
+        "value_pool_draft.json",
+        "research_report.json",
+        "uncertainty_report.json",
+        "anchor_map_draft.json",
+        "application_notes.md",
+    ]
+    request = {
+        "schema_version": 2,
+        "status": "ready_for_agent",
+        "docId": doc_id,
+        "title": doc.title,
+        "instruction": str(payload.get("instruction") or "").strip(),
+        "contract": {
+            "mode": "agentic_authoring_a_to_z",
+            "sample_kind": sample_kind,
+            "input_formats": ["pdf", "jpg", "jpeg", "png", "docx"],
+            "generation_paths": ["image-template", "editable-office-template"],
+            "outputs": outputs,
+            "workflow_steps": [
+                "입력 파일, OCR, bbox review, 기존 authoring 파일을 먼저 읽고 근거 anchor를 정리한다.",
+                "실제 문서명을 웹 검색해 작성 방법, 문서 의미, 포함 정보, 실제 샘플 양식, 공식/공공/기관/기업 설명을 수집한다.",
+                "문서에 보이는 anchor와 리서치 근거를 연결해 schema_draft와 faker_profile_draft를 작성한다.",
+                "불확실하거나 출처가 충돌하는 항목은 확정하지 않고 uncertainty_report에 남긴다.",
+                "모든 산출물은 draft로만 저장하며 적용/덮어쓰기는 UI 승인 이후 수행한다.",
+            ],
+            "web_research_rules": [
+                "schema/faker 초안 생성 전에 실제 문서명과 유사 명칭을 웹 검색한다.",
+                "공식/원문/공공기관/법령/제도 설명/실제 샘플 양식을 우선 출처로 사용한다.",
+                "research_report에는 검색일, 검색어, 출처 URL, 출처 유형, 요약, 필드별 반영 근거를 기록한다.",
+                "리서치는 문서에 보이는 anchor의 의미 해석과 faker profile 정밀화를 위한 보조 근거일 뿐, 템플릿에 없는 필드를 자동 추가하는 근거가 아니다.",
+                "출처 간 내용이 다르거나 실제 템플릿 anchor와 연결되지 않으면 faker rule을 확정하지 않고 uncertainty_report에 남긴다.",
+            ],
+            "schema_rules": [
+                "`schema_draft.json`은 constrained full authoring draft이다. Agent가 의미 판단과 bbox mapping을 함께 수행하되, 시스템이 deterministic하게 분할할 수 있는 JSON만 작성한다.",
+                "`schema_draft.json.semantic_schema`는 사용자와 GT가 보는 primary schema이다. 메타데이터 없이 KIE 관점의 key-value hierarchy만 작성하고 모든 leaf value는 빈 문자열로 둔다.",
+                "`schema_draft.json.fields` 또는 `schema_draft.json.field_bindings`는 semantic_schema leaf와 bbox anchor를 연결하기 위한 binding layer로만 사용한다.",
+                "각 binding은 `field_id`, 한국어 `key` 또는 `label`, `semantic_path`, `anchor_id`, 빈 `value`, 선택적 `label_anchor_ids`, `value_type`, `faker_rule`/`generator`, `style_class`, `unit_policy`, `research_evidence_ids`, `visual_evidence`를 포함한다.",
+                "각 binding의 `semantic_path`는 반드시 `semantic_schema`의 leaf path와 정확히 일치해야 한다.",
+                "각 binding의 `anchor_id`는 anchor_map_draft에 존재해야 하며, 값 target인 `use` anchor여야 한다. 라벨 bbox는 `label_anchor_ids`에만 둔다.",
+                "key는 실제 문서에 보이는 라벨, 표제, placeholder, 주변 텍스트, 편집 가능한 anchor 기반 한국어 자연어를 우선한다.",
+                "문서에 보이지 않는 추상 키, 업무 추론만으로 만든 키, downstream 편의용 임의 구조체를 만들지 않는다.",
+                "웹 리서치로 발견한 일반 항목이라도 대응 anchor가 없으면 schema_draft에 자동 추가하지 않는다.",
+                "`use` anchor 중 schema field로 매핑하지 않는 anchor가 있으면 `unmapped_use_anchors`에 anchor_id와 제외 사유를 기록한다.",
+            ],
+            "visual_source_of_truth_rules": [
+                "전체 템플릿 이미지가 최상위 source of truth이다. 웹 리서치, 문서명, 라벨 텍스트, 관행보다 실제 전체 문서 이미지에서 보이는 레이아웃/라벨/값 위치 관계가 우선한다.",
+                "agent_requests의 visual_evidence_manifest.json은 전체 템플릿 이미지 경로와 bbox 위치 인덱스이다. 먼저 전체 이미지를 보고 문맥을 판단하고, crops/*.png는 작은 글자나 경계가 애매할 때만 확대 보조 자료로 확인한다.",
+                "값 위치 바로 옆/안에 정적 단위나 prefix/suffix가 실제로 인쇄되어 있는지는 전체 이미지의 문맥에서 판단하고, 필요한 경우 해당 crop으로 확대 확인한다.",
+                "라벨에만 단위 의미가 있고 값 위치에는 별도 정적 단위가 없으면, 그 단위가 자연스러운 값 표기의 일부인지 판단해 포함할 수 있다. 예: 호수/가구수/세대수 값은 `0호/0가구/0세대`처럼 생성한다.",
+                "전체 이미지에서 보이는 시각 근거와 OCR/리서치가 충돌하면 전체 이미지 근거를 따르고, 결정 근거를 faker_profile_draft.json.field_rules 또는 uncertainty_report.json에 기록한다.",
+            ],
+            "faker_profile_rules": [
+                "schema key의 의미가 충분히 명확하고 문서 anchor 또는 리서치 근거와 연결될 때만 faker rule을 제안한다.",
+                "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안하되, 반드시 현재 DataFactory 렌더러가 지원하는 rule 문법만 사용한다.",
+                "연/월/일이 각각 다른 bbox로 분리된 날짜 placeholder에는 `date.year`, `date.month`, `date.day`를 우선 사용한다. 날짜의 월/일/연도에 `pattern:##` 또는 `pattern:####`를 쓰지 않는다.",
+                "문서 이미지/템플릿의 값 입력 위치 바로 옆/안에 `㎡`, `m²`, `m2`, `%`, `m`, `원`, `명`, `건`, `동`, `층` 같은 단위가 이미 정적 텍스트로 남아 있으면 faker 값에는 그 단위를 포함하지 않는다.",
+                "`호/가구/세대`처럼 라벨에만 단위 의미가 있고 값 위치에 별도 정적 단위가 없는 복합 값은 단위를 포함해 생성한다. 단위 포함/제외 근거를 field_rules 또는 uncertainty_report에 기록한다.",
+                "faker_profile_draft.json에는 렌더러가 직접 읽는 `field_generators` 객체를 반드시 포함하고, key는 schema_draft.fields[].field_id, value는 지원 rule 문자열이어야 한다.",
+                f"지원 rule 문법: {', '.join(AUTHORING_AGENT_SUPPORTED_FAKER_RULES)}.",
+                "`pool:<name>`을 쓰는 경우 faker_profile_draft.json의 `data_pools.<name>`에 반드시 실제 scalar 합성 값 배열을 함께 정의한다. data_pools에 없는 pool 이름은 절대 쓰지 않는다.",
+                "`date_between:`, `time|format:`, `decimal_range:`, `identifier.*`, `area.*`, `land_use.*`, `building.*`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`처럼 현재 렌더러가 모르는 custom rule/type 이름은 field_generators 값으로 쓰지 않는다.",
+                "지원 문법만으로 정밀 형식을 표현하기 어렵다면 `pattern:`, `choice:`, `pool:`, `template:` 중 하나로 근사하고, 근사 사유와 원래 의도는 field_rules 또는 uncertainty_report에 기록한다.",
+                "의미가 불확실한 key는 literal:, choice:, pool: 등을 임의 생성하지 말고 보류 사유를 기록한다.",
+                "실제 개인정보, 실제 기업정보, 실제 계좌/식별번호처럼 오인 가능한 값은 만들지 않는다.",
+                "합성 더미 값 규칙 또는 승인된 value pool 참조만 사용한다.",
+                "faker_profile_draft의 각 rule은 관련 schema key, anchor, research_report 근거 ID를 추적 가능하게 남긴다. 추적용 상세 목록은 선택적으로 `field_rules`에 중복 기록할 수 있지만, 최종 적용 기준은 `field_generators`이다.",
+            ],
+            "template_anchor_rules": [
+                "PDF/JPG는 visible text, OCR, bbox 위치, 주변 텍스트를 anchor 근거로 삼는다.",
+                "DOCX는 visible text, content control, form field, table cell, bookmark, placeholder 등 편집 가능한 anchor를 근거로 삼는다.",
+                "숨은 메타데이터나 파일명만으로 schema key 또는 faker rule을 만들지 않는다.",
+                "DOCX 경로에서는 원본 템플릿, 채워진 DOCX, 렌더링 PDF, 페이지 이미지, bbox/label/GT lineage가 manifest에 남아야 한다.",
+                "sample_kind가 blank_template이면 OCR/static label/keep bbox는 라벨 근거(label_anchor_ids)로만 쓰고 schema field의 anchor_id로 쓰지 않는다.",
+                "sample_kind가 blank_template이면 schema field의 anchor_id는 반드시 리뷰에서 use로 확정된 값 입력 후보, 체크박스, 표 셀, manual bbox, visual_line_detect bbox 중 하나여야 한다.",
+                "sample_kind가 blank_template이고 값 삽입 영역을 찾을 수 없으면 field를 만들지 말고 uncertainty_report에 남긴다.",
+            ],
+            "application_rules": [
+                "렌더러는 authoring 데이터를 임의 보정하지 않고 schema/style/faker/render_policy를 그대로 따른다.",
+                "Agent 산출물은 바로 적용하지 않고 draft로 저장한다.",
+                "기존 authoring 파일을 덮어쓰기 전 사용자 승인과 백업 경로가 필요하다.",
+                "UI 확정 전에는 schema_draft, faker_profile_draft, value_pool_draft, research_report, uncertainty_report를 함께 검토 가능해야 한다.",
+            ],
+        },
+        "inputs": {
+            "registry": doc.to_dict(),
+            "sampleKind": sample_kind,
+            "sample": samples[0] if samples else "",
+            "latestDetections": item.get("latestDetections") if item else "",
+            "latestReview": item.get("latestReview") if item else "",
+            "latestInpainted": item.get("latestInpainted") if item else "",
+            "existingAuthoring": {
+                "schema": item.get("latestAuthoringSchema") if item else "",
+                "stylesheet": item.get("latestAuthoringStylesheet") if item else "",
+                "fakerProfile": item.get("latestAuthoringFakerProfile") if item else "",
+            },
+        },
+        "created_at": created_at,
+    }
+    path = request_dir / "request.json"
+    prompt_path = request_dir / "request.md"
+    generated_sidecars: dict[str, str] = {}
+    latest_review = str(request["inputs"].get("latestReview") or "")
+    if latest_review:
+        try:
+            anchor_map_path = request_dir / "anchor_map_draft.json"
+            review_anchor_map(_resolve_workspace_path(latest_review), out_path=anchor_map_path, doc_id=doc_id, title=doc.title)
+            generated_sidecars["anchorMapDraft"] = _display_path(anchor_map_path, ROOT)
+        except Exception as exc:
+            generated_sidecars["anchorMapError"] = str(exc)
+        try:
+            visual_manifest_path = _write_authoring_visual_evidence_manifest(
+                doc_id=doc_id,
+                review_path=_resolve_workspace_path(latest_review),
+                request_dir=request_dir,
+                visual_source_path=_resolve_workspace_path(str(request["inputs"].get("latestInpainted") or "")) if request["inputs"].get("latestInpainted") else None,
+            )
+            generated_sidecars["visualEvidenceManifest"] = _display_path(visual_manifest_path, ROOT)
+        except Exception as exc:
+            generated_sidecars["visualEvidenceError"] = str(exc)
+    request["generated_sidecars"] = generated_sidecars
+    path.write_text(json.dumps(request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    prompt_path.write_text(_authoring_agent_prompt_markdown(request), encoding="utf-8")
+    update_manifest_artifact(doc_id, "authoring_agent_request", path)
+    update_manifest_artifact(doc_id, "authoring_agent_prompt", prompt_path)
+    if generated_sidecars.get("anchorMapDraft"):
+        update_manifest_artifact(doc_id, "authoring_agent_anchor_map", _resolve_workspace_path(generated_sidecars["anchorMapDraft"]))
+    return {
+        "docId": doc_id,
+        "status": "ready_for_agent",
+        "paths": {"request": _display_path(path, ROOT), "prompt": _display_path(prompt_path, ROOT)},
+        "request": request,
+    }
+
+
+def _write_authoring_visual_evidence_manifest(
+    *,
+    doc_id: str,
+    review_path: Path,
+    request_dir: Path,
+    visual_source_path: Path | None = None,
+    padding: int = 64,
+) -> Path:
+    policy = load_review_policy(review_path)
+    visual_source = visual_source_path if visual_source_path and visual_source_path.exists() else policy.source_image
+    visual_source = visual_source.resolve()
+    crop_dir = request_dir / "visual_evidence" / "crops"
+    crop_dir.mkdir(parents=True, exist_ok=True)
+    entries: list[dict[str, Any]] = []
+    with Image.open(visual_source) as image:
+        source_image = image.convert("RGB")
+        for index, label in enumerate(policy.labels, start=1):
+            if label.status != "use":
+                continue
+            padded = label.bbox.padded(padding).clipped(policy.image_width, policy.image_height)
+            crop_path = crop_dir / f"crop_{index:04d}_{_safe_name(label.id)}.png"
+            source_image.crop((padded.x, padded.y, padded.right, padded.bottom)).save(crop_path)
+            entries.append(
+                {
+                    "anchor_id": label.id,
+                    "status": label.status,
+                    "auto_type": label.auto_type,
+                    "text": label.text,
+                    "text_source": label.text_source,
+                    "confidence": label.confidence,
+                    "bbox": label.bbox.to_list(),
+                    "padded_bbox": padded.to_list(),
+                    "bbox_format": "xywh",
+                    "crop_path": _display_path(crop_path, ROOT),
+                    "visual_checklist": [
+                        "Use this crop only as a zoom aid after checking the full template image context.",
+                        "If static unit/prefix/suffix is visible at the value position, omit it from the generated value.",
+                        "If unit words appear only in the label and not beside the value position, keep them when they are part of the natural value notation.",
+                    ],
+                }
+            )
+    manifest = {
+        "schema_version": 1,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "doc_id": doc_id,
+        "source_review": _display_path(review_path, ROOT),
+        "visual_source": _display_path(visual_source, ROOT),
+        "source_image": _display_path(policy.source_image, ROOT),
+        "image": {"width": policy.image_width, "height": policy.image_height},
+        "padding": padding,
+        "source_of_truth_policy": [
+            "The full template image is the primary visual source of truth; crops are zoom aids, not replacements for full-page context.",
+            "Unit/prefix/suffix decisions must be made from value-position visual evidence, not from label text alone.",
+        ],
+        "crops": entries,
+    }
+    manifest_path = request_dir / "visual_evidence_manifest.json"
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return manifest_path
+
+
+def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = True) -> dict[str, Any]:
+    """Start a real Codex-backed authoring inference job.
+
+    This is intentionally more than a request-package generator: the launched
+    Codex process must create the draft output files declared by the contract.
+    The files remain drafts in the request directory until the user explicitly
+    approves/saves them.
+    """
+
+    request_payload = authoring_agent_request_payload(payload)
+    doc_id = str(request_payload["docId"])
+    request_path = _resolve_workspace_path(request_payload["paths"]["request"])
+    request_dir = request_path.parent
+    run_dir = workbench_subdir(doc_id, "authoring") / "agent_runs" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    run_dir.mkdir(parents=True, exist_ok=True)
+    job_path = run_dir / "job.json"
+    prompt_path = run_dir / "codex_exec_prompt.md"
+    last_message_path = run_dir / "codex_last_message.md"
+    stdout_path = run_dir / "stdout.log"
+    stderr_path = run_dir / "stderr.log"
+    prompt = _authoring_agent_exec_prompt(request_path=request_path, request_dir=request_dir, run_dir=run_dir)
+    prompt_path.write_text(prompt, encoding="utf-8")
+    job = {
+        "schema_version": 1,
+        "jobId": run_dir.name,
+        "docId": doc_id,
+        "status": "queued",
+        "createdAt": datetime.now(timezone.utc).isoformat(),
+        "startedAt": None,
+        "finishedAt": None,
+        "requestPath": _display_path(request_path, ROOT),
+        "requestDir": _display_path(request_dir, ROOT),
+        "runDir": _display_path(run_dir, ROOT),
+        "promptPath": _display_path(prompt_path, ROOT),
+        "lastMessagePath": _display_path(last_message_path, ROOT),
+        "stdoutPath": _display_path(stdout_path, ROOT),
+        "stderrPath": _display_path(stderr_path, ROOT),
+        "requiredOutputs": list(AUTHORING_AGENT_REQUIRED_OUTPUTS),
+        "outputs": {},
+        "validation": {"missing": list(AUTHORING_AGENT_REQUIRED_OUTPUTS), "invalidJson": [], "ready": False},
+    }
+    _write_agent_job(job_path, job)
+    update_manifest_artifact(doc_id, "authoring_agent_run", job_path)
+    update_manifest_artifact(doc_id, "authoring_agent_prompt_exec", prompt_path)
+    if async_run:
+        thread = threading.Thread(
+            target=_run_authoring_agent_job,
+            args=(job_path, request_path, request_dir, run_dir, prompt_path, last_message_path, stdout_path, stderr_path),
+            daemon=True,
+        )
+        thread.start()
+        return _agent_job_payload(job_path)
+    _run_authoring_agent_job(job_path, request_path, request_dir, run_dir, prompt_path, last_message_path, stdout_path, stderr_path)
+    return _agent_job_payload(job_path)
+
+
+def authoring_agent_run_status_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    job_path_value = str(payload.get("jobPath") or "")
+    if job_path_value:
+        job_path = _resolve_workspace_path(job_path_value)
+    else:
+        doc_id = str(payload.get("docId") or "")
+        if not doc_id:
+            raise ValueError("jobPath or docId is required")
+        run_root = workbench_subdir(doc_id, "authoring") / "agent_runs"
+        job_paths = sorted(run_root.glob("*/job.json")) if run_root.exists() else []
+        if not job_paths:
+            raise FileNotFoundError(f"no authoring agent run for {doc_id}")
+        job_path = job_paths[-1]
+    return _agent_job_payload(job_path)
+
+
+def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    request_path_value = str(payload.get("requestPath") or "")
+    if request_path_value:
+        request_path = _resolve_workspace_path(request_path_value)
+    else:
+        run_status = authoring_agent_run_status_payload({"docId": doc_id})
+        request_path = _resolve_workspace_path(str(run_status.get("requestPath") or ""))
+    request_dir = request_path.parent
+    schema_draft_path = request_dir / "schema_draft.json"
+    stylesheet_draft_path = request_dir / "stylesheet_draft.json"
+    faker_profile_draft_path = request_dir / "faker_profile_draft.json"
+    anchor_map_path = request_dir / "anchor_map_draft.json"
+    for required in (schema_draft_path, stylesheet_draft_path, faker_profile_draft_path):
+        if not required.exists():
+            raise FileNotFoundError(required)
+    schema_draft = json.loads(schema_draft_path.read_text(encoding="utf-8"))
+    stylesheet_draft = json.loads(stylesheet_draft_path.read_text(encoding="utf-8"))
+    faker_profile_draft = json.loads(faker_profile_draft_path.read_text(encoding="utf-8"))
+    anchor_map = json.loads(anchor_map_path.read_text(encoding="utf-8")) if anchor_map_path.exists() else None
+    registry = load_registry()
+    doc = registry.documents.get(doc_id)
+    item = next((candidate for candidate in list_work_items(registry=registry) if candidate.get("docId") == doc_id), None)
+    source_review = str((item or {}).get("latestReview") or schema_draft.get("source_review") or "")
+    source_image = str((anchor_map or {}).get("source_image") or schema_draft.get("source_image") or ((item or {}).get("samples") or [""])[0] or "")
+    source_inpainted = str((item or {}).get("latestInpainted") or schema_draft.get("source_inpainted") or source_image)
+    schema = semantic_schema_to_authoring_schema(
+        schema_draft,
+        anchor_map=anchor_map,
+        source_review=source_review,
+        source_image=source_image,
+        source_inpainted=source_inpainted,
+        doc_id=doc_id,
+        title=doc.title if doc else str(schema_draft.get("title") or ""),
+    )
+    authoring_dir = workbench_subdir(doc_id, "authoring")
+    result = save_authoring_bundle(
+        authoring_dir / "schema.json",
+        authoring_dir / "stylesheet.json",
+        authoring_dir / "faker_profile.json",
+        schema=schema,
+        stylesheet=stylesheet_draft,
+        faker_profile=faker_profile_draft,
+    )
+    update_manifest_artifact(doc_id, "authoring", result.schema)
+    update_manifest_artifact(doc_id, "authoring_stylesheet", result.stylesheet)
+    update_manifest_artifact(doc_id, "authoring_faker_profile", result.faker_profile)
+    update_manifest_artifact(doc_id, "authoring_agent_applied_request", request_path)
+    return {
+        "docId": doc_id,
+        "requestPath": _display_path(request_path, ROOT),
+        "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
+        **result.payload,
+    }
+
+
+def _authoring_agent_exec_prompt(*, request_path: Path, request_dir: Path, run_dir: Path) -> str:
+    return f"""# Codex authoring inference job
+
+You are running as a local Codex subprocess for the DataFactory workbench.
+
+## Required behavior
+- Read the request package: `{_display_path(request_path, ROOT)}`.
+- Read every input file referenced by the request when it exists.
+- Treat `generated_sidecars.visualEvidenceManifest` as the visual index for the full template image and bbox locations when present.
+- Inspect the full template image as the primary visual source of truth for field targets, static labels, prefix/suffix, and unit handling. Use crop images only as optional zoom aids for ambiguous or small regions. Do not infer unit inclusion/exclusion from label text alone.
+- Use live web search for the document type research required by the request contract.
+- Follow `contract.sample_kind` strictly. If it is `blank_template`, treat OCR text bboxes as static label evidence unless review status/role proves they are value regions.
+- Generate the full draft outputs listed below.
+- Write outputs only inside this request directory: `{_display_path(request_dir, ROOT)}`.
+- Do not overwrite final `schema.json`, `stylesheet.json`, or `faker_profile.json`.
+- Do not edit source code, registry files, workbench manifests, or samples.
+- If a field is uncertain, keep the schema key anchored to visible/template evidence and record uncertainty instead of inventing a faker rule.
+- For blank templates, never use a static label/keep bbox as `schema_draft.fields[].anchor_id`. Use `label_anchor_ids` for label evidence and use only a confirmed value-region/checkbox/table-cell/manual/visual-line-detect anchor as the field target.
+
+## Required output files
+{chr(10).join(f"- `{name}`" for name in AUTHORING_AGENT_REQUIRED_OUTPUTS)}
+
+## Output contracts
+- `schema_draft.json`: constrained full authoring draft with `schema_version`, `doc_id`, `title`, primary `semantic_schema`, and binding layer `fields` or `field_bindings`. `semantic_schema` must be a metadata-free KIE key-value hierarchy whose leaf values are empty strings. The binding layer is only the bridge from semantic leaf to bbox target; each binding must include `field_id`, `key` or `label`, `semantic_path`, `anchor_id`, `value` as an empty string, and optional `label_anchor_ids`, `value_type`, `faker_rule`/`generator`, `style_class`, `unit_policy`, `research_evidence_ids`, and `visual_evidence`.
+- Every binding `semantic_path` must point to an existing `semantic_schema` leaf. Every binding `anchor_id` must exist in `anchor_map_draft.json` and target a `use` value-region anchor. If a `use` anchor is intentionally not mapped, list it in `schema_draft.json.unmapped_use_anchors` with a reason.
+- `stylesheet_draft.json`: draft render style classes or field style hints; keep conservative defaults if visual style is uncertain.
+- `faker_profile_draft.json`: must include `field_generators` as the renderer-compatible source of truth. It may also include `field_rules` for traceability, but every `field_generators` value must use only the supported rule grammar below. Do not use real personal/company/account data.
+- `value_pool_draft.json`: reusable value pools proposed by the agent, with source/usage notes.
+- `research_report.json`: search date, queries, source URLs, source type, summaries, and field-level evidence links.
+- `uncertainty_report.json`: unresolved fields, conflicting evidence, low-confidence faker rules, and user decisions needed.
+- `anchor_map_draft.json`: preserve or improve the anchor map from the request package.
+- For `blank_template`, `anchor_map_draft.json` must distinguish value targets from labels using `status`, `auto_type`, `role`, `text_source`, or `provenance`. Static labels may be listed, but schema field targets must point to value targets only.
+- `application_notes.md`: concise Korean notes explaining what was generated, what remains uncertain, and how to approve/apply.
+
+## Supported faker rule grammar
+Use only these forms in `faker_profile_draft.json.field_generators`.
+{chr(10).join(f"- `{rule}`" for rule in AUTHORING_AGENT_SUPPORTED_FAKER_RULES)}
+
+Do not put unsupported semantic type names in `field_generators`.
+Before adding or removing a unit suffix in any generated value, inspect the full template image around the target bbox; use the crop only as a zoom aid if needed. If the unit remains as static text at the value position, omit the unit from the faker value. If the unit appears only in the label, such as 호/가구/세대, keep the unit in the generated value when it is part of the natural value notation.
+If you use `pool:<name>`, define `data_pools.<name>` as a non-empty array of scalar synthetic values in the same `faker_profile_draft.json`; never reference an undefined pool.
+Examples of forbidden generator values: `date_between:-365d:+0d|format:%Y/%m/%d`, `time|format:%H:%M:%S`, `decimal_range:10..99`, `identifier.document_confirmation`, `area.square_meter`, `land_use.zoning`, `building.structure`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`.
+If precision would require an unsupported rule, approximate with `pattern:`, `choice:`, `pool:`, or `template:` and record the limitation in `uncertainty_report.json`.
+
+## Completion criteria
+Before finishing, verify all required files exist and all JSON files parse.
+Return a short Korean final summary only after the files are written.
+
+## Run directory
+Use this run directory only for logs or scratch notes if needed: `{_display_path(run_dir, ROOT)}`.
+"""
+
+
+def _run_authoring_agent_job(
+    job_path: Path,
+    request_path: Path,
+    request_dir: Path,
+    run_dir: Path,
+    prompt_path: Path,
+    last_message_path: Path,
+    stdout_path: Path,
+    stderr_path: Path,
+) -> None:
+    job = _read_agent_job(job_path)
+    job.update({"status": "running", "startedAt": datetime.now(timezone.utc).isoformat()})
+    _write_agent_job(job_path, job)
+    command = [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        'model_reasoning_effort="medium"',
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        str(ROOT),
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        str(last_message_path),
+        "-",
+    ]
+    try:
+        completed = subprocess.run(
+            command,
+            input=prompt_path.read_text(encoding="utf-8"),
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            timeout=60 * 30,
+            check=False,
+        )
+        stdout_path.write_text(completed.stdout or "", encoding="utf-8")
+        stderr_path.write_text(completed.stderr or "", encoding="utf-8")
+        validation = _validate_authoring_agent_outputs(request_dir)
+        job = _read_agent_job(job_path)
+        job.update(
+            {
+                "status": "succeeded" if completed.returncode == 0 and validation["ready"] else "failed",
+                "finishedAt": datetime.now(timezone.utc).isoformat(),
+                "returnCode": completed.returncode,
+                "command": command,
+                "outputs": validation["outputs"],
+                "validation": validation,
+            }
+        )
+        if completed.returncode != 0:
+            job["error"] = f"codex exec failed with exit code {completed.returncode}"
+        elif not validation["ready"]:
+            job["error"] = "codex exec finished but required draft outputs are missing or invalid"
+    except Exception as exc:  # pragma: no cover - defensive for manual job runtime
+        stderr_path.write_text(str(exc), encoding="utf-8")
+        validation = _validate_authoring_agent_outputs(request_dir)
+        job = _read_agent_job(job_path)
+        job.update(
+            {
+                "status": "failed",
+                "finishedAt": datetime.now(timezone.utc).isoformat(),
+                "returnCode": None,
+                "outputs": validation["outputs"],
+                "validation": validation,
+                "error": str(exc),
+            }
+        )
+    _write_agent_job(job_path, job)
+    update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_run", job_path)
+    if job.get("status") == "succeeded":
+        update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_schema_draft", request_dir / "schema_draft.json")
+        update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_faker_profile_draft", request_dir / "faker_profile_draft.json")
+        update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_research_report", request_dir / "research_report.json")
+
+
+def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
+    outputs: dict[str, str] = {}
+    missing: list[str] = []
+    invalid_json: list[dict[str, str]] = []
+    parsed_json: dict[str, Any] = {}
+    for name in AUTHORING_AGENT_REQUIRED_OUTPUTS:
+        path = request_dir / name
+        if not path.exists():
+            missing.append(name)
+            continue
+        outputs[name] = _display_path(path, ROOT)
+        if name in AUTHORING_AGENT_JSON_OUTPUTS:
+            try:
+                parsed_json[name] = json.loads(path.read_text(encoding="utf-8"))
+            except Exception as exc:
+                invalid_json.append({"name": name, "error": str(exc)})
+    contract_errors: list[dict[str, Any]] = []
+    if not invalid_json:
+        contract_errors.extend(_validate_schema_draft_contract(parsed_json))
+        contract_errors.extend(_validate_blank_template_agent_contract(request_dir, parsed_json))
+    return {
+        "ready": not missing and not invalid_json and not contract_errors,
+        "missing": missing,
+        "invalidJson": invalid_json,
+        "contractErrors": contract_errors,
+        "outputs": outputs,
+        "summary": {
+            "required": len(AUTHORING_AGENT_REQUIRED_OUTPUTS),
+            "present": len(outputs),
+            "missing": len(missing),
+            "invalidJson": len(invalid_json),
+            "contractErrors": len(contract_errors),
+        },
+    }
+
+
+def _validate_schema_draft_contract(parsed_json: dict[str, Any]) -> list[dict[str, Any]]:
+    schema = parsed_json.get("schema_draft.json") if isinstance(parsed_json.get("schema_draft.json"), dict) else {}
+    anchor_map = parsed_json.get("anchor_map_draft.json") if isinstance(parsed_json.get("anchor_map_draft.json"), dict) else {}
+    faker_profile = parsed_json.get("faker_profile_draft.json") if isinstance(parsed_json.get("faker_profile_draft.json"), dict) else {}
+    research_report = parsed_json.get("research_report.json") if isinstance(parsed_json.get("research_report.json"), dict) else {}
+    errors: list[dict[str, Any]] = []
+    semantic_leaf_paths: set[str] = set()
+    semantic_schema = schema.get("semantic_schema")
+    if not isinstance(semantic_schema, dict):
+        errors.append({"code": "schema_missing_semantic_schema", "message": "schema_draft.json must include metadata-free semantic_schema object"})
+    else:
+        for path, value in _iter_semantic_leaf_values(semantic_schema):
+            if path:
+                semantic_leaf_paths.add(path)
+            if value != "":
+                errors.append({"code": "schema_semantic_value_not_empty", "path": path, "message": "semantic_schema leaf values must be empty strings"})
+    fields = _schema_draft_bindings(schema)
+    if not isinstance(fields, list):
+        errors.append({"code": "schema_fields_missing", "message": "schema_draft.json must include fields or field_bindings binding list"})
+        return errors
+    anchors = _anchor_map_by_id(anchor_map)
+    mapped_anchor_ids: set[str] = set()
+    research_source_ids = _research_source_ids(research_report)
+    for field in fields:
+        if not isinstance(field, dict):
+            continue
+        field_id = str(field.get("field_id") or field.get("key") or field.get("label") or "")
+        if "value" in field and field.get("value") != "":
+            errors.append({"code": "schema_field_value_not_empty", "field": field_id, "message": "schema_draft.fields[].value must remain an empty string"})
+        semantic_path = _binding_semantic_path(field)
+        if not semantic_path:
+            errors.append({"code": "schema_field_missing_semantic_path", "field": field_id, "message": "schema binding must define semantic_path/key/json_path"})
+        elif semantic_leaf_paths and semantic_path not in semantic_leaf_paths:
+            errors.append({"code": "schema_field_semantic_path_missing", "field": field_id, "semantic_path": semantic_path, "message": "binding semantic_path must point to an existing semantic_schema leaf"})
+        anchor_id = str(field.get("anchor_id") or field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+        if not anchor_id:
+            errors.append({"code": "schema_field_missing_anchor", "field": field_id, "message": "schema binding must define anchor_id"})
+        elif anchors:
+            anchor = anchors.get(anchor_id)
+            if anchor is None:
+                errors.append({"code": "schema_field_anchor_missing", "field": field_id, "anchor_id": anchor_id, "message": "binding anchor_id must exist in anchor_map_draft"})
+            else:
+                mapped_anchor_ids.add(anchor_id)
+                status = str(anchor.get("status") or "").strip().lower()
+                role = str(anchor.get("role") or anchor.get("anchor_role") or "").strip().lower()
+                if status and status != "use":
+                    errors.append({"code": "schema_field_anchor_not_use", "field": field_id, "anchor_id": anchor_id, "status": status, "message": "binding anchor_id must target a use value anchor"})
+                if role and role in {"static_label", "label", "keep"}:
+                    errors.append({"code": "schema_field_anchor_is_label", "field": field_id, "anchor_id": anchor_id, "role": role, "message": "label/static anchors must be label_anchor_ids, not field targets"})
+        for evidence_id in _binding_research_evidence_ids(field):
+            if research_source_ids and evidence_id not in research_source_ids:
+                errors.append({"code": "schema_field_unknown_research_evidence", "field": field_id, "research_evidence_id": evidence_id, "message": "research_evidence_ids must refer to research_report.sources[].id"})
+    errors.extend(_validate_faker_profile_contract(faker_profile, fields))
+    if anchors:
+        use_anchor_ids = {anchor_id for anchor_id, anchor in anchors.items() if str(anchor.get("status") or "").strip().lower() == "use"}
+        acknowledged_unmapped = _unmapped_use_anchor_ids(schema)
+        unmapped = sorted(use_anchor_ids - mapped_anchor_ids - acknowledged_unmapped)
+        if unmapped:
+            errors.append({"code": "schema_unmapped_use_anchors", "anchor_ids": unmapped[:20], "count": len(unmapped), "message": "every use anchor must be mapped or listed in unmapped_use_anchors with a reason"})
+    return errors
+
+
+def _schema_draft_bindings(schema: dict[str, Any]) -> list[Any] | None:
+    if isinstance(schema.get("fields"), list):
+        return schema.get("fields")
+    if isinstance(schema.get("field_bindings"), list):
+        return schema.get("field_bindings")
+    return None
+
+
+def _binding_semantic_path(field: dict[str, Any]) -> str:
+    raw_path = field.get("semantic_path") or field.get("key_path")
+    if isinstance(raw_path, list):
+        return "/".join(str(part).strip() for part in raw_path if str(part).strip())
+    for key in ("semantic_path", "json_path", "key"):
+        value = field.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip().replace(".", "/") if "/" not in value and "." in value else value.strip()
+    export = field.get("export") if isinstance(field.get("export"), dict) else {}
+    value = export.get("json_path")
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    label = str(field.get("label") or "").strip()
+    return label
+
+
+def _anchor_map_by_id(anchor_map: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    anchors: dict[str, dict[str, Any]] = {}
+    for anchor in anchor_map.get("anchors", []) if isinstance(anchor_map.get("anchors"), list) else []:
+        if not isinstance(anchor, dict):
+            continue
+        anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "").strip()
+        if anchor_id:
+            anchors[anchor_id] = anchor
+    return anchors
+
+
+def _research_source_ids(research_report: dict[str, Any]) -> set[str]:
+    return {
+        str(source.get("id")).strip()
+        for source in research_report.get("sources", [])
+        if isinstance(source, dict) and str(source.get("id") or "").strip()
+    }
+
+
+def _binding_research_evidence_ids(field: dict[str, Any]) -> list[str]:
+    values: list[Any] = []
+    for key in ("research_evidence_ids", "source_ids"):
+        if isinstance(field.get(key), list):
+            values.extend(field.get(key) or [])
+    evidence = field.get("evidence") if isinstance(field.get("evidence"), dict) else {}
+    for key in ("research_evidence_ids", "source_ids"):
+        if isinstance(evidence.get(key), list):
+            values.extend(evidence.get(key) or [])
+    return [str(value).strip() for value in values if str(value).strip()]
+
+
+def _validate_faker_profile_contract(faker_profile: dict[str, Any], fields: list[Any]) -> list[dict[str, Any]]:
+    errors: list[dict[str, Any]] = []
+    generators = faker_profile.get("field_generators")
+    if not isinstance(generators, dict):
+        errors.append({"code": "faker_missing_field_generators", "message": "faker_profile_draft.json must include field_generators object"})
+        return errors
+    field_ids = {str(field.get("field_id") or "").strip() for field in fields if isinstance(field, dict) and str(field.get("field_id") or "").strip()}
+    for field_id, rule_value in generators.items():
+        rule = str(rule_value or "").strip()
+        if field_ids and str(field_id) not in field_ids:
+            errors.append({"code": "faker_unknown_field", "field": str(field_id), "message": "field_generators key must match a schema binding field_id"})
+        if not _faker_rule_supported(rule):
+            errors.append({"code": "faker_unsupported_rule", "field": str(field_id), "rule": rule, "message": "faker rule is outside renderer-supported grammar"})
+        if rule.lower().startswith("pool:"):
+            pool_name = rule.split(":", 1)[1].strip()
+            pool = _faker_pool_values(faker_profile, pool_name)
+            if not pool:
+                errors.append({"code": "faker_missing_pool", "field": str(field_id), "pool": pool_name, "message": "pool rule must define data_pools.<name> with scalar values"})
+    return errors
+
+
+def _faker_rule_supported(rule: str) -> bool:
+    normalized = str(rule or "").strip()
+    lower = normalized.lower()
+    if not normalized:
+        return False
+    if lower.startswith(("literal:", "choice:", "pool:", "same_as:", "pattern:", "template:")):
+        return True
+    return lower in {
+        "person.name_ko",
+        "person.phone_kr",
+        "person.rrn",
+        "date.kr",
+        "date.year",
+        "date.month",
+        "date.day",
+        "money.krw",
+        "company.name_ko",
+        "address.ko",
+        "free_text.short",
+        "checkbox.bool",
+        "bool.checkbox",
+    }
+
+
+def _faker_pool_values(faker_profile: dict[str, Any], pool_name: str) -> list[Any]:
+    pools = faker_profile.get("data_pools")
+    if isinstance(pools, dict):
+        value = pools.get(pool_name)
+        return [item for item in value if not isinstance(item, dict) and str(item).strip()] if isinstance(value, list) else []
+    if isinstance(pools, list):
+        for item in pools:
+            if isinstance(item, dict) and str(item.get("name") or "") == pool_name and isinstance(item.get("values"), list):
+                return [value for value in item.get("values", []) if not isinstance(value, dict) and str(value).strip()]
+    return []
+
+
+def _unmapped_use_anchor_ids(schema: dict[str, Any]) -> set[str]:
+    items = schema.get("unmapped_use_anchors")
+    if not isinstance(items, list):
+        return set()
+    anchor_ids: set[str] = set()
+    for item in items:
+        if isinstance(item, dict):
+            anchor_id = str(item.get("anchor_id") or item.get("id") or "").strip()
+        else:
+            anchor_id = str(item or "").strip()
+        if anchor_id:
+            anchor_ids.add(anchor_id)
+    return anchor_ids
+
+
+def _iter_semantic_leaf_values(value: Any, prefix: str = "") -> list[tuple[str, Any]]:
+    if isinstance(value, dict):
+        leaves: list[tuple[str, Any]] = []
+        for key, child in value.items():
+            child_prefix = f"{prefix}/{key}" if prefix else str(key)
+            leaves.extend(_iter_semantic_leaf_values(child, child_prefix))
+        return leaves
+    if isinstance(value, list):
+        leaves = []
+        for index, child in enumerate(value):
+            child_prefix = f"{prefix}[{index}]"
+            leaves.extend(_iter_semantic_leaf_values(child, child_prefix))
+        return leaves
+    return [(prefix, value)]
+
+
+def _validate_blank_template_agent_contract(request_dir: Path, parsed_json: dict[str, Any]) -> list[dict[str, str]]:
+    request_path = request_dir / "request.json"
+    if not request_path.exists():
+        return []
+    try:
+        request = json.loads(request_path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    sample_kind = str((request.get("inputs") or {}).get("sampleKind") or (request.get("contract") or {}).get("sample_kind") or "filled_sample")
+    if sample_kind != "blank_template":
+        return []
+    schema = parsed_json.get("schema_draft.json") if isinstance(parsed_json.get("schema_draft.json"), dict) else {}
+    anchor_map = parsed_json.get("anchor_map_draft.json") if isinstance(parsed_json.get("anchor_map_draft.json"), dict) else {}
+    anchors = {
+        str(anchor.get("anchor_id") or anchor.get("id") or ""): anchor
+        for anchor in anchor_map.get("anchors", [])
+        if isinstance(anchor, dict) and str(anchor.get("anchor_id") or anchor.get("id") or "")
+    }
+    errors: list[dict[str, str]] = []
+    value_anchor_ids = {anchor_id for anchor_id, anchor in anchors.items() if _blank_template_anchor_is_value_target(anchor)}
+    if not value_anchor_ids:
+        errors.append({"code": "blank_template_no_value_anchors", "message": "blank_template requires at least one value-region/use/manual/visual-line-detect anchor"})
+    seen_targets: dict[str, str] = {}
+    fields = _schema_draft_bindings(schema) or []
+    for field in fields:
+        if not isinstance(field, dict):
+            continue
+        field_id = str(field.get("field_id") or field.get("key") or field.get("label") or "")
+        anchor_id = str(field.get("anchor_id") or field.get("bbox_label_id") or field.get("source_detection_id") or "")
+        if not anchor_id:
+            errors.append({"code": "blank_template_field_without_anchor", "field": field_id, "message": "blank_template field must define a value target anchor_id"})
+            continue
+        anchor = anchors.get(anchor_id)
+        if anchor is None:
+            errors.append({"code": "blank_template_missing_anchor", "field": field_id, "anchor_id": anchor_id, "message": "field anchor_id is not present in anchor_map_draft"})
+            continue
+        if not _blank_template_anchor_is_value_target(anchor):
+            errors.append({"code": "blank_template_static_label_as_field_anchor", "field": field_id, "anchor_id": anchor_id, "message": "static label/keep anchor cannot be used as schema field target"})
+        previous = seen_targets.get(anchor_id)
+        if previous:
+            errors.append({"code": "blank_template_duplicate_field_anchor", "field": field_id, "anchor_id": anchor_id, "message": f"anchor already used by {previous}"})
+        else:
+            seen_targets[anchor_id] = field_id
+    return errors
+
+
+def _blank_template_anchor_is_value_target(anchor: dict[str, Any]) -> bool:
+    status = str(anchor.get("status") or "").lower()
+    role = str(anchor.get("role") or anchor.get("anchor_role") or "").lower()
+    auto_type = str(anchor.get("auto_type") or anchor.get("type") or "").lower()
+    source = str(anchor.get("source") or anchor.get("text_source") or "").lower()
+    provenance = anchor.get("provenance")
+    provenance_text = json.dumps(provenance, ensure_ascii=False).lower() if isinstance(provenance, (dict, list)) else str(provenance or "").lower()
+    if status in {"keep", "ignore"} or role in {"static_label", "label", "header", "instruction_text"} or auto_type in {"static_label", "header_footer", "long_paragraph"}:
+        return False
+    if status != "use":
+        return False
+    if role in {"value", "value_region", "field_target", "input", "checkbox"}:
+        return True
+    return any(token in f"{role} {auto_type} {source} {provenance_text}" for token in ("value", "checkbox", "table_cell", "manual", "visual_line_detect", "opencv_grid", "grid"))
+
+
+
+def _payload_bool(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return value != 0
+    return str(value or "").strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def _visual_line_detection_requested(payload: dict[str, Any]) -> bool:
+    return _payload_bool(payload.get("includeVisualLineDetection"))
+
+def _read_agent_job(job_path: Path) -> dict[str, Any]:
+    return json.loads(job_path.read_text(encoding="utf-8"))
+
+
+def _write_agent_job(job_path: Path, job: dict[str, Any]) -> None:
+    job_path.parent.mkdir(parents=True, exist_ok=True)
+    job_path.write_text(json.dumps(job, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _agent_job_payload(job_path: Path) -> dict[str, Any]:
+    job = _read_agent_job(job_path)
+    return {**job, "jobPath": _display_path(job_path, ROOT)}
+
+
+def _clear_manifest_artifacts(doc_id: str, artifact_keys: list[str]) -> None:
+    registry = load_registry()
+    doc = registry.documents.get(doc_id)
+    if doc is None:
+        return
+    manifest_path = document_dir(doc, ROOT / "workbench" / "documents") / "manifest.json"
+    if not manifest_path.exists():
+        return
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return
+    artifacts = manifest.get("artifacts")
+    if not isinstance(artifacts, dict):
+        return
+    for key in artifact_keys:
+        artifacts.pop(key, None)
+    manifest["updated_at"] = datetime.now(timezone.utc).isoformat()
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _write_review_sidecar_drafts(doc_id: str, review_path: Path, policy: ReviewPolicy) -> dict[str, Any]:
+    authoring_dir = workbench_subdir(doc_id, "authoring")
+    draft_dir = authoring_dir / "review_sidecars" / _safe_template_id(policy.source_image)
+    stylesheet_path = draft_dir / "stylesheet_draft_from_review.json"
+    anchor_map_path = draft_dir / "anchor_map_draft.json"
+    stylesheet = draft_stylesheet_from_review(review_path, out_path=stylesheet_path, doc_id=doc_id)
+    anchors = review_anchor_map(review_path, out_path=anchor_map_path, doc_id=doc_id)
+    update_manifest_artifact(doc_id, "authoring_stylesheet_draft", stylesheet_path)
+    update_manifest_artifact(doc_id, "authoring_anchor_map", anchor_map_path)
+    return {
+        "stylesheetDraft": _display_path(stylesheet_path, ROOT),
+        "anchorMapDraft": _display_path(anchor_map_path, ROOT),
+        "summary": {"styleClassCount": len(stylesheet.get("style_classes") or []), "anchorCount": len(anchors.get("anchors") or [])},
+    }
 
 def _authoring_paths_from_payload(payload: dict[str, Any], doc_id: str) -> tuple[Path, Path, Path]:
     authoring_dir = workbench_subdir(doc_id, "authoring")
@@ -306,7 +1422,6 @@ def save_cleanup_mask_payload(payload: dict[str, Any]) -> dict[str, Any]:
     policy = load_review_policy(review_path)
     cleanup_dir = _cleanup_dir(doc_id, policy)
     mask_payload, paths = save_manual_mask(payload.get("mask"), directory=cleanup_dir, size=(policy.image_width, policy.image_height))
-    update_manifest_artifact(doc_id, "inpaint_cleanup_mask", paths.manual_mask)
     client_paths = _paths_to_client(paths.as_dict())
     return {
         "docId": doc_id,
@@ -337,14 +1452,13 @@ def run_cleanup_inpaint_payload(payload: dict[str, Any]) -> dict[str, Any]:
         detection_count=len(mask_payload.get("strokes") or []),
     )
     elapsed_seconds = perf_counter() - started_at
+    backup = _backup_existing_inpaint_outputs(doc_id, cleanup_dir)
     paths = write_inpaint_result(result, cleanup_dir)
     paths["mask_json"] = mask_paths.mask_json
     paths["manual_mask"] = mask_paths.manual_mask
     _augment_cleanup_summary(paths["summary"], paths=paths, elapsed_seconds=elapsed_seconds)
     update_manifest_artifact(doc_id, "inpaint", paths["comparison"])
-    update_manifest_artifact(doc_id, "inpaint_cleanup", paths["comparison"])
-    update_manifest_artifact(doc_id, "inpaint_cleanup_inpainted", paths["inpainted"])
-    update_manifest_artifact(doc_id, "inpaint_cleanup_mask", mask_paths.manual_mask)
+    _clear_manifest_artifacts(doc_id, ["inpaint_cleanup", "inpaint_cleanup_inpainted", "inpaint_cleanup_mask"])
     synced_authoring = _sync_authoring_source_inpainted_for_doc(doc_id, source_image=policy.source_image, inpainted_path=paths["inpainted"])
     print(f"Finished manual cleanup postprocess doc={doc_id} elapsed={elapsed_seconds:.2f}s", flush=True)
     client_paths = _paths_to_client(paths)
@@ -357,11 +1471,248 @@ def run_cleanup_inpaint_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "comparisonUrl": f"/api/file?path={client_paths['comparison']}",
         "manualMaskUrl": f"/api/file?path={client_paths['manual_mask']}",
         "syncedAuthoringTemplates": synced_authoring,
+        "backup": _display_path(backup, ROOT) if backup else "",
     }
 
 
 def _cleanup_dir(doc_id: str, policy: ReviewPolicy) -> Path:
-    return _resolve_workspace_path(workbench_subdir(doc_id, "inpaint") / _safe_template_id(policy.source_image) / "manual_cleanup")
+    return _resolve_workspace_path(workbench_subdir(doc_id, "inpaint") / _safe_template_id(policy.source_image) / "lama")
+
+
+def _backup_existing_inpaint_outputs(doc_id: str, inpaint_dir: Path) -> Path | None:
+    existing = [
+        path
+        for path in (
+            inpaint_dir / "inpainted_lama.png",
+            inpaint_dir / "comparison_lama.png",
+            inpaint_dir / "summary.json",
+            inpaint_dir / "paint.json",
+        )
+        if path.exists()
+    ]
+    if not existing:
+        return None
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    backup_dir = ROOT / "workbench" / ".trash" / "inpaint_overwrite" / f"{timestamp}_{_safe_name(doc_id)}_{_safe_name(inpaint_dir.parent.name)}"
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    for path in existing:
+        shutil.copy2(path, backup_dir / path.name)
+    return backup_dir
+
+
+
+def empty_cleanup_paint_payload(width: int, height: int) -> dict[str, Any]:
+    return {
+        "schema_version": 2,
+        "tool": "paint_cleanup",
+        "image": {"width": int(width), "height": int(height)},
+        "strokes": [],
+        "selected_color": [255, 255, 255],
+        "brush_radius": 10,
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+def normalize_cleanup_paint_payload(payload: dict[str, Any] | None, *, width: int, height: int) -> dict[str, Any]:
+    raw = payload if isinstance(payload, dict) else {}
+    strokes: list[dict[str, Any]] = []
+    for index, stroke in enumerate(raw.get("strokes") or []):
+        if not isinstance(stroke, dict):
+            continue
+        points = []
+        for point in stroke.get("points") or []:
+            if not isinstance(point, dict):
+                continue
+            try:
+                x = int(round(float(point.get("x"))))
+                y = int(round(float(point.get("y"))))
+            except (TypeError, ValueError):
+                continue
+            points.append({"x": max(0, min(width - 1, x)), "y": max(0, min(height - 1, y))})
+        if not points:
+            continue
+        color = _normalize_rgb(stroke.get("color") or raw.get("selected_color") or [255, 255, 255])
+        radius = _clamped_int(stroke.get("radius") or raw.get("brush_radius") or 10, default=10, minimum=1, maximum=160)
+        strokes.append(
+            {
+                "id": str(stroke.get("id") or f"paint_{index + 1:04d}"),
+                "type": "brush",
+                "color": color,
+                "radius": radius,
+                "points": points,
+            }
+        )
+    return {
+        "schema_version": 2,
+        "tool": "paint_cleanup",
+        "image": {"width": int(width), "height": int(height)},
+        "strokes": strokes,
+        "selected_color": _normalize_rgb(raw.get("selected_color") or [255, 255, 255]),
+        "brush_radius": _clamped_int(raw.get("brush_radius") or 10, default=10, minimum=1, maximum=160),
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+def _clamped_int(value: Any, *, default: int, minimum: int, maximum: int) -> int:
+    try:
+        numeric = int(round(float(value)))
+    except (TypeError, ValueError):
+        numeric = default
+    return max(minimum, min(maximum, numeric))
+
+
+def _normalize_rgb(value: Any) -> list[int]:
+    raw = value if isinstance(value, (list, tuple)) else []
+    result: list[int] = []
+    for index in range(3):
+        try:
+            channel = int(round(float(raw[index])))
+        except (IndexError, TypeError, ValueError):
+            channel = 255
+        result.append(max(0, min(255, channel)))
+    return result
+
+
+def _render_cleanup_paint(base_image_path: Path, payload: dict[str, Any]) -> Image.Image:
+    image = Image.open(base_image_path).convert("RGB")
+    normalized = normalize_cleanup_paint_payload(payload, width=image.width, height=image.height)
+    draw = ImageDraw.Draw(image)
+    for stroke in normalized.get("strokes") or []:
+        points = [(int(point["x"]), int(point["y"])) for point in stroke.get("points") or []]
+        if not points:
+            continue
+        radius = int(stroke.get("radius") or 10)
+        color = tuple(_normalize_rgb(stroke.get("color")))
+        if len(points) == 1:
+            x, y = points[0]
+            draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=color)
+            continue
+        draw.line(points, fill=color, width=radius * 2, joint="curve")
+        for x, y in points:
+            draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=color)
+    return image
+
+
+def _cleanup_paint_paths(cleanup_dir: Path) -> dict[str, Path]:
+    return {
+        "paint_json": cleanup_dir / "paint.json",
+        "inpainted": cleanup_dir / "inpainted_lama.png",
+        "comparison": cleanup_dir / "comparison_lama.png",
+        "summary": cleanup_dir / "summary.json",
+    }
+
+
+def load_cleanup_paint_payload(*, doc_id: str, review_path: Path, base_image_path: Path | None = None) -> dict[str, Any]:
+    policy = load_review_policy(review_path)
+    cleanup_dir = _cleanup_dir(doc_id, policy)
+    base_path = base_image_path or _resolve_workspace_path(policy.source_image)
+    if base_image_path is None:
+        existing = _cleanup_paint_paths(cleanup_dir)["inpainted"]
+        if existing.exists():
+            base_path = existing
+    with Image.open(base_path) as base:
+        width, height = base.size
+    paint_path = cleanup_dir / "paint.json"
+    if paint_path.exists():
+        try:
+            paint = json.loads(paint_path.read_text(encoding="utf-8"))
+        except Exception:
+            paint = {}
+    else:
+        paint = empty_cleanup_paint_payload(width, height)
+    saved_base = str(paint.get("base_image_path") or "") if isinstance(paint, dict) else ""
+    if saved_base:
+        saved_base_path = _resolve_workspace_path(saved_base)
+        if saved_base_path.exists():
+            base_path = saved_base_path
+            with Image.open(base_path) as base:
+                width, height = base.size
+    paint = normalize_cleanup_paint_payload(paint, width=width, height=height)
+    paint["base_image_path"] = _display_path(base_path, ROOT)
+    paths = {name: path for name, path in _cleanup_paint_paths(cleanup_dir).items() if path.exists()}
+    return {
+        "docId": doc_id,
+        "reviewPath": _display_path(review_path, ROOT),
+        "baseImagePath": _display_path(base_path, ROOT),
+        "exists": bool(paths),
+        "paint": paint,
+        "paths": _paths_to_client(paths),
+        "imageUrl": f"/api/file?path={_display_path(paths.get('inpainted', base_path), ROOT)}",
+    }
+
+
+def save_cleanup_paint_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    review_path = _resolve_workspace_path(str(payload.get("reviewPath") or ""))
+    base_image_path = _resolve_workspace_path(str(payload.get("baseImagePath") or ""))
+    policy = load_review_policy(review_path)
+    cleanup_dir = _cleanup_dir(doc_id, policy)
+    cleanup_dir.mkdir(parents=True, exist_ok=True)
+    with Image.open(base_image_path) as source_base:
+        base = source_base.convert("RGB")
+    paint = normalize_cleanup_paint_payload(payload.get("paint"), width=base.width, height=base.height)
+    paint["base_image_path"] = _display_path(base_image_path, ROOT)
+    rendered = _render_cleanup_paint(base_image_path, paint)
+    paths = _cleanup_paint_paths(cleanup_dir)
+    backup = _backup_existing_inpaint_outputs(doc_id, cleanup_dir)
+    paths["paint_json"].write_text(json.dumps(paint, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    rendered.save(paths["inpainted"])
+    diff = ImageChops.difference(base, rendered)
+    comparison = Image.new("RGB", (base.width * 2, base.height), "white")
+    comparison.paste(base, (0, 0))
+    comparison.paste(rendered, (base.width, 0))
+    comparison.save(paths["comparison"])
+    paths["summary"].write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "strategy": "eyedropper_brush_template_cleanup",
+                "stroke_count": len(paint.get("strokes") or []),
+                "changed_bbox": diff.getbbox(),
+                "outputs": {name: _display_path(path, ROOT) for name, path in paths.items()},
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    update_manifest_artifact(doc_id, "inpaint", paths["comparison"])
+    _clear_manifest_artifacts(doc_id, ["inpaint_cleanup", "inpaint_cleanup_inpainted", "inpaint_cleanup_mask"])
+    synced_authoring = _sync_authoring_source_inpainted_for_doc(doc_id, source_image=policy.source_image, inpainted_path=paths["inpainted"])
+    client_paths = _paths_to_client(paths)
+    return {
+        "docId": doc_id,
+        "reviewPath": _display_path(review_path, ROOT),
+        "baseImagePath": _display_path(base_image_path, ROOT),
+        "paint": paint,
+        "summary": {"stroke_count": len(paint.get("strokes") or []), "strategy": "eyedropper_brush_template_cleanup"},
+        "paths": client_paths,
+        "imageUrl": f"/api/file?path={client_paths['inpainted']}",
+        "comparisonUrl": f"/api/file?path={client_paths['comparison']}",
+        "syncedAuthoringTemplates": synced_authoring,
+        "backup": _display_path(backup, ROOT) if backup else "",
+    }
+
+
+def backup_review_draft_outputs(output_dir: Path) -> dict[str, str] | None:
+    review_path = output_dir / "review.json"
+    overlay_path = output_dir / "review_overlay.png"
+    existing = [path for path in (review_path, overlay_path) if path.exists()]
+    if not existing:
+        return None
+    backup_dir = output_dir / "backups" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    copied: dict[str, str] = {}
+    for path in existing:
+        destination = backup_dir / path.name
+        import shutil
+        shutil.copy2(path, destination)
+        copied[path.stem] = _display_path(destination, ROOT)
+    return {"dir": _display_path(backup_dir, ROOT), **copied}
 
 
 def _sync_authoring_source_inpainted_for_doc(doc_id: str, *, source_image: Path, inpainted_path: Path) -> dict[str, Any]:
@@ -491,10 +1842,19 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(list_output_batches())
                 return
             if parsed.path == "/api/registry":
-                self._send_json(load_registry().to_dict())
+                self._send_json(registry_payload())
+                return
+            if parsed.path == "/api/target-groups":
+                self._send_json(list_target_groups(registry=load_registry()))
                 return
             if parsed.path == "/api/seed/scan":
                 self._send_json(scan_seed_samples(registry=load_registry()))
+                return
+            if parsed.path == "/api/audit/reviews":
+                self._send_json(scan_review_legacy_issues())
+                return
+            if parsed.path == "/api/audit/manual-cleanup":
+                self._send_json(scan_manual_cleanup_legacy())
                 return
             if parsed.path == "/api/work-items":
                 registry = load_registry()
@@ -526,6 +1886,14 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 review_path = _resolve_workspace_path(_first_query_value(query, "reviewPath"))
                 self._send_json(load_cleanup_mask_payload(doc_id=doc_id, review_path=review_path))
                 return
+            if parsed.path == "/api/cleanup-paint":
+                query = parse_qs(parsed.query)
+                doc_id = _first_query_value(query, "docId")
+                review_path = _resolve_workspace_path(_first_query_value(query, "reviewPath"))
+                base_value = _first_query_value(query, "baseImagePath")
+                base_image_path = _resolve_workspace_path(base_value) if base_value else None
+                self._send_json(load_cleanup_paint_payload(doc_id=doc_id, review_path=review_path, base_image_path=base_image_path))
+                return
             if parsed.path == "/api/authoring":
                 query = parse_qs(parsed.query)
                 schema_path = _resolve_workspace_path(_first_query_value(query, "schema"))
@@ -539,6 +1907,15 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                         **result.payload,
                     }
                 )
+                return
+            if parsed.path == "/api/authoring/agent-run-status":
+                query = parse_qs(parsed.query)
+                payload: dict[str, Any] = {}
+                if query.get("jobPath"):
+                    payload["jobPath"] = unquote(query["jobPath"][0])
+                if query.get("docId"):
+                    payload["docId"] = unquote(query["docId"][0])
+                self._send_json(authoring_agent_run_status_payload(payload))
                 return
             if parsed.path in {"/api/image", "/api/file"}:
                 file_path = _query_path(parsed.query)
@@ -609,6 +1986,24 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 seed_folder = _resolve_workspace_path(str(payload.get("seedFolder") or ""))
                 self._send_json(trash_seed_folder(seed_folder))
                 return
+            if parsed.path == "/api/seed/revert-preview":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                self._send_json(preview_seed_revert(doc_id, registry=load_registry()))
+                return
+            if parsed.path == "/api/seed/revert":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                self._send_json(revert_seed_import(doc_id, registry=load_registry()))
+                return
+            if parsed.path == "/api/target-groups/save":
+                self._send_json(save_target_group(payload, registry=load_registry()))
+                return
+            if parsed.path == "/api/target-groups/delete":
+                self._send_json(delete_target_group(str(payload.get("id") or ""), registry=load_registry()))
+                return
             if parsed.path == "/api/ocr/detect":
                 image_path = _resolve_workspace_path(str(payload.get("imagePath") or ""))
                 engine = str(payload.get("engine") or "paddleocr")
@@ -647,16 +2042,36 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
             if parsed.path == "/api/review/draft":
                 detections_path = _resolve_workspace_path(str(payload.get("detectionsPath") or ""))
                 doc_id = str(payload.get("docId") or "")
+                sample_kind = str(payload.get("sampleKind") or "")
                 default_out_dir = workbench_subdir(doc_id, "review") if doc_id else Path("outputs/reviews")
                 out_dir = _resolve_workspace_path(str(payload.get("outDir") or default_out_dir))
                 policy = draft_review_policy(detections_path)
-                paths = write_review_policy(policy, out_dir / _safe_template_id(policy.source_image))
+                visual_detection: dict[str, Any] | None = None
+                if sample_kind == "blank_template":
+                    if _visual_line_detection_requested(payload):
+                        policy, visual_detection = augment_blank_template_policy(policy)
+                    else:
+                        visual_detection = {"enabled": False, "method": "pil_line_projection", "candidateCount": 0, "reason": "not_requested"}
+                draft_dir = out_dir / _safe_template_id(policy.source_image)
+                backup = backup_review_draft_outputs(draft_dir)
+                paths = write_review_policy(policy, draft_dir)
                 if doc_id:
+                    if sample_kind:
+                        set_manifest_sample_kind(doc_id, sample_kind)
                     update_manifest_artifact(doc_id, "review", paths["review"])
-                self._send_json({"docId": doc_id or None, "paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"])})
+                self._send_json({"docId": doc_id or None, "paths": _paths_to_client(paths), "policy": policy_to_client(policy, review_path=paths["review"]), "backup": backup, "visualDetection": visual_detection})
                 return
             if parsed.path == "/api/review/save":
                 self._send_json(save_policy_payload(payload))
+                return
+            if parsed.path == "/api/work-item/sample-kind":
+                doc_id = str(payload.get("docId") or "")
+                sample_kind = str(payload.get("sampleKind") or "")
+                manifest = set_manifest_sample_kind(doc_id, sample_kind)
+                self._send_json({"docId": doc_id, "sampleKind": manifest.get("sample_kind"), "manifest": manifest})
+                return
+            if parsed.path == "/api/review/remove-ignore":
+                self._send_json(remove_ignore_bboxes_payload(payload))
                 return
             if parsed.path == "/api/review/recognize-crops":
                 self._send_json(recognize_review_crops_payload(payload))
@@ -717,12 +2132,22 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
             if parsed.path == "/api/cleanup-mask":
                 self._send_json(save_cleanup_mask_payload(payload))
                 return
+            if parsed.path == "/api/cleanup-paint":
+                self._send_json(save_cleanup_paint_payload(payload))
+                return
             if parsed.path == "/api/cleanup-inpaint":
                 self._send_json(run_cleanup_inpaint_payload(payload))
+                return
+            if parsed.path == "/api/manual-cleanup/promote":
+                self._send_json(promote_manual_cleanup_payload(payload))
                 return
             if parsed.path == "/api/inpaint":
                 saved: dict[str, Any] | None = None
                 doc_id = str(payload.get("docId") or "")
+                if doc_id:
+                    current_item = next((candidate for candidate in list_work_items() if candidate.get("docId") == doc_id), None)
+                    if str((current_item or {}).get("sampleKind") or "") == "blank_template":
+                        raise ValueError("blank_template samples do not need inpainting; review value-region bboxes and run agent authoring instead")
                 review_path_value = str(payload.get("reviewPath") or "")
                 review_path = _resolve_workspace_path(review_path_value) if review_path_value else None
                 if isinstance(payload.get("policy"), dict):
@@ -768,6 +2193,15 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     },
                     status=410,
                 )
+                return
+            if parsed.path == "/api/authoring/agent-request":
+                self._send_json(authoring_agent_request_payload(payload))
+                return
+            if parsed.path == "/api/authoring/agent-run":
+                self._send_json(authoring_agent_run_payload(payload, async_run=not bool(payload.get("sync"))))
+                return
+            if parsed.path == "/api/authoring/agent-run-status":
+                self._send_json(authoring_agent_run_status_payload(payload))
                 return
             if parsed.path == "/api/authoring/migrate-bboxes":
                 doc_id = str(payload.get("docId") or "")
@@ -876,6 +2310,41 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     render_scale=render_scale,
                 )
                 self._send_json(result)
+                return
+            if parsed.path == "/api/authoring/library":
+                library = authoring_library_payload(ROOT / "workbench" / "authoring_library")
+                self._send_json({**library, "library_root": _display_path(Path(library["library_root"]), ROOT)})
+                return
+            if parsed.path == "/api/authoring/approve-drafts":
+                request_path = _resolve_workspace_path(str(payload.get("requestPath") or ""))
+                result = approve_authoring_draft_to_library(
+                    request_path,
+                    library_root=ROOT / "workbench" / "authoring_library",
+                    note=str(payload.get("note") or ""),
+                )
+                approval = result["approval"]
+                approval = {**approval, "path": _display_path(approval["path"], ROOT), "request": _display_path(approval["request"], ROOT), "copied": [{**item, "path": _display_path(item["path"], ROOT)} for item in approval.get("copied", [])]}
+                self._send_json({**result, "library": _display_path(result["library"], ROOT), "index": _display_path(result["index"], ROOT), "approval": approval})
+                return
+            if parsed.path == "/api/authoring/apply-agent-drafts":
+                self._send_json(apply_authoring_agent_drafts_payload(payload))
+                return
+            if parsed.path == "/api/authoring/semantic-to-authoring":
+                semantic_schema = payload.get("semanticSchema")
+                if not isinstance(semantic_schema, dict):
+                    raise ValueError("semanticSchema is required")
+                anchor_map = payload.get("anchorMap") if isinstance(payload.get("anchorMap"), dict) else None
+                doc_id = str(payload.get("docId") or "") or None
+                schema = semantic_schema_to_authoring_schema(
+                    semantic_schema,
+                    anchor_map=anchor_map,
+                    source_review=str(payload.get("sourceReview") or "") or None,
+                    source_image=str(payload.get("sourceImage") or "") or None,
+                    source_inpainted=str(payload.get("sourceInpainted") or "") or None,
+                    doc_id=doc_id,
+                    title=str(payload.get("title") or "") or None,
+                )
+                self._send_json({"schema": schema, "summary": {"fieldCount": len(schema.get("fields") or [])}})
                 return
             if parsed.path == "/api/authoring/save":
                 doc_id = str(payload.get("docId") or "")

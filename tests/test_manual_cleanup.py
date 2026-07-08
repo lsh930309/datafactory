@@ -132,3 +132,67 @@ def test_cleanup_template_uses_base_inpainted_image_and_manual_mask_only(tmp_pat
         "mask_old_bbox": 0,
         "max_side": 1024,
     }
+
+
+def test_cleanup_paint_payload_draws_template_and_updates_manifest(tmp_path: Path, monkeypatch) -> None:
+    import datafactory.web_api as web_api
+    from datafactory.registry import load_registry
+    from datafactory.workbench import document_dir
+
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    import datafactory.workbench as workbench_module
+    monkeypatch.setattr(workbench_module, "ROOT", tmp_path)
+    monkeypatch.setattr(workbench_module, "WORKBENCH_ROOT", tmp_path / "workbench" / "documents")
+
+    registry = load_registry()
+    workbench_root = tmp_path / "workbench" / "documents"
+    doc = registry.documents["ID-05"]
+    doc_root = document_dir(doc, workbench_root)
+    doc_root.mkdir(parents=True)
+    monkeypatch.setattr(web_api, "workbench_subdir", lambda doc_id, subdir: document_dir(registry.documents[doc_id], workbench_root) / subdir)
+    monkeypatch.setattr(
+        web_api,
+        "update_manifest_artifact",
+        lambda doc_id, artifact, path: workbench_module.update_manifest_artifact(doc_id, artifact, path, registry=registry, root=workbench_root),
+    )
+    base = tmp_path / "base.png"
+    Image.new("RGB", (20, 20), "white").save(base)
+    review_dir = doc_root / "review" / "base"
+    review_dir.mkdir(parents=True)
+    review = review_dir / "review.json"
+    review.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_detections": str(tmp_path / "detections.json"),
+                "source_image": str(base),
+                "image": {"width": 20, "height": 20},
+                "labels": [],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    result = web_api.save_cleanup_paint_payload(
+        {
+            "docId": "ID-05",
+            "reviewPath": str(review),
+            "baseImagePath": str(base),
+            "paint": {
+                "selected_color": [255, 0, 0],
+                "brush_radius": 2,
+                "strokes": [{"id": "s1", "color": [255, 0, 0], "radius": 2, "points": [{"x": 10, "y": 10}]}],
+            },
+        }
+    )
+
+    painted = tmp_path / result["paths"]["inpainted"]
+    assert painted.exists()
+    assert Image.open(painted).convert("RGB").getpixel((10, 10)) == (255, 0, 0)
+    manifest = json.loads((doc_root / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["artifacts"]["inpaint"].endswith("lama/comparison_lama.png")
+    assert "inpaint_cleanup_inpainted" not in manifest["artifacts"]
+    assert "inpaint_cleanup_mask" not in manifest["artifacts"]
+    assert result["paths"]["inpainted"].endswith("lama/inpainted_lama.png")
+    assert not (doc_root / "inpaint" / "base" / "manual_cleanup").exists()

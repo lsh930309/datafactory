@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-const STATUS = ['use', 'keep', 'ignore'];
+const STATUS = ['use', 'keep'];
 const STATUS_COLORS = { use: '#00c853', keep: '#448aff', ignore: '#ff5252' };
-const STATUS_LABELS = { use: '치환', keep: '보존', ignore: '무시' };
+const STATUS_LABELS = { use: '사용', keep: '미사용', ignore: '기존 무시' };
 const STATUS_DESCRIPTIONS = {
-  use: 'LaMa 인페인팅으로 지울 값/개인정보 영역',
-  keep: '양식/라벨처럼 보존할 영역',
-  ignore: '도장/노이즈 등 작업에서 제외할 영역',
+  use: '값/개인정보처럼 인페인팅 및 합성 대상으로 사용할 영역',
+  keep: '양식/라벨처럼 합성 대상에서 제외하고 템플릿에 남길 영역',
+  ignore: '기존 데이터 호환용 상태입니다. 새 지정은 삭제를 사용하세요.',
 };
 const AUTO_TYPE_LABELS = {
   field_value: '값/개인정보',
@@ -19,7 +19,7 @@ const AUTO_TYPE_LABELS = {
   unknown: '미분류',
 };
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tif', '.tiff'];
-const UPLOAD_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.pdf'];
+const UPLOAD_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.pdf', '.docx'];
 const DEFAULT_OCR_PRESET = 'precise';
 const VIEWPORT_MODES = [
   ['auto', '자동'],
@@ -37,10 +37,34 @@ const WORKFLOW_STAGES = [
   ['ocr', 'BBox'],
   ['review', '리뷰'],
   ['inpaint', '인페인트'],
-  ['cleanup', '클린업'],
+  ['cleanup', '보정'],
   ['authoring', '합성'],
 ];
 const COMPLETED_WORK_STATUSES = new Set(['approved', 'cleanroom_sample_ready', 'collection_done']);
+const WORK_STATUS_GROUPS = [
+  ['not_started', '미착수'],
+  ['in_progress', '진행중'],
+  ['done', '완료'],
+];
+const WORK_STATUS_GROUP_LABELS = Object.fromEntries(WORK_STATUS_GROUPS);
+const WORK_STATUS_TO_GROUP = {
+  missing: 'not_started',
+  sample_imported: 'in_progress',
+  ocr_done: 'in_progress',
+  review_done: 'in_progress',
+  inpaint_done: 'in_progress',
+  cleanroom_sample_ready: 'done',
+  collection_done: 'done',
+  approved: 'done',
+};
+const SAMPLE_AVAILABILITY_FILTERS = [
+  ['needs_synthesis', '합성 필요'],
+  ['internal_ready', '사내 샘플 준비'],
+  ['workbench_loaded', '워크벤치 적재'],
+  ['finalized', '대체/완료'],
+];
+const SAMPLE_AVAILABILITY_LABELS = Object.fromEntries(SAMPLE_AVAILABILITY_FILTERS);
+
 const DOCUMENT_TYPE_LABELS = {
   unknown: '미지정',
   structured_form: '정형양식',
@@ -57,6 +81,9 @@ const FALLBACK_FAKER_RULE_EXAMPLES = [
   'person.phone_kr',
   'person.rrn',
   'date.kr',
+  'date.year',
+  'date.month',
+  'date.day',
   'money.krw',
   'company.name_ko',
   'address.ko',
@@ -79,6 +106,26 @@ async function apiJson(path, options = {}) {
 
 function basename(path = '') {
   return path.split('/').filter(Boolean).at(-1) || path;
+}
+function normalizeSearchText(value = '') {
+  return String(value || '').normalize('NFKC').toLowerCase().replace(/[\s_\-·.,()[\]{}]/g, '');
+}
+function toggleArrayValue(values, value) {
+  return values.includes(value) ? values.filter((item) => item !== value) : [...values, value];
+}
+function sampleAvailabilityGroup(item) {
+  if (COMPLETED_WORK_STATUSES.has(item?.status)) return 'finalized';
+  if ((item?.sampleCount || 0) > 0) return 'workbench_loaded';
+  if ((item?.seeds || []).some((folder) => folder.matchedDocId === item?.docId)) return 'internal_ready';
+  return 'needs_synthesis';
+}
+function workStatusGroup(item) {
+  if (item?.isNonPipeline && !COMPLETED_WORK_STATUSES.has(item?.status)) return 'in_progress';
+  if (item?.hasPendingSeed || item?.needsCollection) return 'not_started';
+  return WORK_STATUS_TO_GROUP[item?.status] || 'not_started';
+}
+function matchesSampleAvailabilityFilter(item, selectedFilters = []) {
+  return !selectedFilters.length || selectedFilters.includes(item?.sampleAvailability || sampleAvailabilityGroup(item));
 }
 function shortPath(path = '') {
   return path.split('/').filter(Boolean).slice(-3).join('/');
@@ -269,10 +316,11 @@ function workItemNextAction(item) {
   if (item.status === 'collection_done') return '완료: 실문서 수집 완료';
   if (item.isNonPipeline) return '합성 제외: 최종 샘플 준비 필요';
   if (item.hasPendingSeed) return '다음: seed 적재';
-  if (item.needsCollection) return '다음: 샘플 수집';
+  if (item.needsSynthesis) return '다음: 합성 필요 여부 검토';
   if (!workItemStageState(item, 'sample')) return '다음: 샘플 추가';
   if (!workItemStageState(item, 'ocr')) return '다음: BBox 검출';
   if (!workItemStageState(item, 'review')) return '다음: BBox 리뷰';
+  if (item.sampleKind === 'blank_template' && !workItemStageState(item, 'authoring')) return '다음: blank authoring';
   if (!workItemStageState(item, 'inpaint')) return '다음: 인페인팅';
   if (!workItemStageState(item, 'cleanup')) return '선택: 템플릿 클린업';
   if (!workItemStageState(item, 'authoring')) return '다음: schema/faker';
@@ -322,7 +370,15 @@ function assessmentTone(feasibility = 'unknown') {
   return 'unknown';
 }
 function emptyCleanupMask(width = 1200, height = 1600) {
-  return { schema_version: 1, image: { width, height }, strokes: [], updated_at: new Date().toISOString() };
+  return {
+    schema_version: 2,
+    tool: 'paint_cleanup',
+    image: { width, height },
+    strokes: [],
+    selected_color: [255, 255, 255],
+    brush_radius: 10,
+    updated_at: new Date().toISOString(),
+  };
 }
 function cleanupStrokeId() {
   return `cleanup_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -349,13 +405,20 @@ function App() {
   const [manualDocId, setManualDocId] = useState('');
   const [intakeTab, setIntakeTab] = useState('importable');
   const [search, setSearch] = useState('');
-  const [domainFilter, setDomainFilter] = useState('all');
-  const [statusFilter, setStatusFilter] = useState('all');
+  const [domainFilters, setDomainFilters] = useState([]);
+  const [statusFilters, setStatusFilters] = useState([]);
+  const [sampleAvailabilityFilters, setSampleAvailabilityFilters] = useState([]);
+  const [activeTargetGroupId, setActiveTargetGroupId] = useState('first_priority');
+  const [targetGroupDraft, setTargetGroupDraft] = useState({ id: '', label: '', description: '', scopeEntries: [] });
+  const [targetGroupDocId, setTargetGroupDocId] = useState('');
+  const [targetGroupEditing, setTargetGroupEditing] = useState(false);
+  const [targetGroupListExpanded, setTargetGroupListExpanded] = useState(false);
   const [policy, setPolicy] = useState(null);
   const [reviewPath, setReviewPath] = useState('');
   const [selectedIds, setSelectedIds] = useState([]);
   const [lamaMaxSide, setLamaMaxSide] = useState(2400);
   const [ocrPreset] = useState(DEFAULT_OCR_PRESET);
+  const [blankTemplateLineDetectEnabled, setBlankTemplateLineDetectEnabled] = useState(false);
   const [detectionResult, setDetectionResult] = useState(null);
   const [inpaintResult, setInpaintResult] = useState(null);
   const [inpaintVersion, setInpaintVersion] = useState(0);
@@ -365,6 +428,8 @@ function App() {
   const [selectedCleanupId, setSelectedCleanupId] = useState('');
   const [cleanupResult, setCleanupResult] = useState(null);
   const [cleanupVersion, setCleanupVersion] = useState(0);
+  const [cleanupTool, setCleanupTool] = useState('brush');
+  const [cleanupBaseImagePath, setCleanupBaseImagePath] = useState('');
   const [authoringResult, setAuthoringResult] = useState(null);
   const [authoringBatchResult, setAuthoringBatchResult] = useState(null);
   const [authoringBundle, setAuthoringBundle] = useState(null);
@@ -377,6 +442,7 @@ function App() {
   const [authoringLivePreview, setAuthoringLivePreview] = useState(null);
   const [authoringLivePreviewVersion, setAuthoringLivePreviewVersion] = useState(0);
   const authoringPreviewSeq = useRef(0);
+  const authoringAgentTerminalRefreshRef = useRef('');
   const [fontPayload, setFontPayload] = useState({ defaultFontId: '', fonts: [] });
   const [canvasMode, setCanvasMode] = useState('review');
   const [viewportMode, setViewportMode] = useState('auto');
@@ -390,6 +456,14 @@ function App() {
   const [uploadWarnings, setUploadWarnings] = useState([]);
   const [recognitionPopover, setRecognitionPopover] = useState(null);
   const [reviewPrunePopover, setReviewPrunePopover] = useState(null);
+  const [seedRevertPreview, setSeedRevertPreview] = useState(null);
+  const [reviewAudit, setReviewAudit] = useState(null);
+  const [manualCleanupAudit, setManualCleanupAudit] = useState(null);
+  const [authoringAgentInstruction, setAuthoringAgentInstruction] = useState('');
+  const [authoringAgentRequest, setAuthoringAgentRequest] = useState(null);
+  const [authoringAgentRun, setAuthoringAgentRun] = useState(null);
+  const [authoringLibrary, setAuthoringLibrary] = useState(null);
+  const [authoringApprovalResult, setAuthoringApprovalResult] = useState(null);
   const [busy, setBusy] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -401,25 +475,24 @@ function App() {
   }
 
   const documents = registry?.documents || [];
-  const firstPriorityScopeEntries = registry?.firstPriorityScopeEntries || [];
+  const targetGroups = registry?.targetGroups || [];
+  const emptyTargetGroup = { id: '', label: '목표 그룹 없음', description: '', protected: true, scopeEntries: [] };
+  const activeTargetGroup = targetGroups.find((group) => group.id === activeTargetGroupId) || targetGroups[0] || emptyTargetGroup;
   const items = workPayload.items || [];
   const seedFolders = seedScan.folders || [];
   const selectedItem = useMemo(() => items.find((item) => item.docId === selectedDocId) || null, [items, selectedDocId]);
   const selectedDoc = selectedItem?.registry || documents.find((doc) => doc.docId === selectedDocId) || null;
+  const selectedSampleKind = selectedItem?.sampleKind || 'filled_sample';
+  const selectedIsBlankTemplate = selectedSampleKind === 'blank_template';
   const matchedSeedFolders = useMemo(() => seedFolders.filter((folder) => folder.matchedDocId === selectedDocId), [seedFolders, selectedDocId]);
   const intakeFolders = useMemo(() => seedFolders.filter((folder) => folder.status === intakeTab), [seedFolders, intakeTab]);
   const importableFolders = useMemo(() => seedFolders.filter((folder) => folder.status === 'importable' && folder.matchedDocId), [seedFolders]);
-  const needsCollectionItems = useMemo(
-    () => items.filter((item) => item.status === 'missing' && !seedFolders.some((folder) => folder.matchedDocId === item.docId)),
-    [items, seedFolders],
-  );
   const stats = useMemo(() => summary(policy?.labels || []), [policy]);
   const staleLabels = useMemo(() => staleRecognitionLabels(policy), [policy]);
   const selected = useMemo(() => new Set(selectedIds), [selectedIds]);
   const canUseLama = Boolean(health?.lama?.available);
   const isBusy = Boolean(busy);
   const uploadOpen = uploadFiles.length > 0;
-  const authoringReadyCount = useMemo(() => items.filter((item) => item.latestAuthoringSchema && item.latestAuthoringStylesheet && item.latestAuthoringFakerProfile).length, [items]);
   const assessmentRows = assessmentPayload.rows || [];
   const assessmentRowsByDocId = useMemo(() => {
     const byDoc = new Map();
@@ -440,23 +513,46 @@ function App() {
   const enrichedItems = useMemo(() => items.map((item) => {
     const seeds = seedFolders.filter((folder) => folder.matchedDocId === item.docId);
     const hasPendingSeed = seeds.some((folder) => folder.status === 'importable');
-    const needsCollection = item.status === 'missing' && seeds.length === 0;
+    const hasInternalSample = seeds.length > 0;
+    const sampleAvailable = (item.sampleCount || 0) > 0 || hasInternalSample || COMPLETED_WORK_STATUSES.has(item.status);
+    const needsCollection = item.status === 'missing' && !sampleAvailable;
     const assessmentRowsForDoc = assessmentRowsByDocId.get(item.docId) || [];
     const isNonPipeline = assessmentRowsForDoc.some((row) => row.feasibility === 'impossible');
-    return { ...item, seeds, hasPendingSeed, needsCollection, isNonPipeline, assessmentRows: assessmentRowsForDoc };
+    const enriched = { ...item, seeds, hasPendingSeed, hasInternalSample, sampleAvailable, needsCollection, isNonPipeline, assessmentRows: assessmentRowsForDoc };
+    const sampleAvailability = sampleAvailabilityGroup(enriched);
+    return {
+      ...enriched,
+      sampleAvailability,
+      sampleAvailabilityLabel: SAMPLE_AVAILABILITY_LABELS[sampleAvailability] || '미분류',
+      needsSynthesis: sampleAvailability === 'needs_synthesis',
+    };
   }), [items, seedFolders, assessmentRowsByDocId]);
-  const firstPriorityDocOrder = useMemo(() => {
+  const needsCollectionItems = useMemo(() => enrichedItems.filter((item) => item.needsSynthesis), [enrichedItems]);
+  const targetGroupDocOrder = useMemo(() => {
     const order = new Map();
-    firstPriorityScopeEntries.forEach((entry, index) => {
+    (activeTargetGroup.scopeEntries || []).forEach((entry, index) => {
       if (!order.has(entry.docId)) order.set(entry.docId, index);
     });
     return order;
-  }, [firstPriorityScopeEntries]);
-  const firstPriorityItems = useMemo(() => (
+  }, [activeTargetGroup]);
+  const targetGroupAllItems = useMemo(() => (
     enrichedItems
-      .filter((item) => item.registry?.isFirstPriority)
-      .sort((left, right) => (firstPriorityDocOrder.get(left.docId) ?? 9999) - (firstPriorityDocOrder.get(right.docId) ?? 9999))
-  ), [enrichedItems, firstPriorityDocOrder]);
+      .filter((item) => targetGroupDocOrder.has(item.docId))
+      .sort((left, right) => (targetGroupDocOrder.get(left.docId) ?? 9999) - (targetGroupDocOrder.get(right.docId) ?? 9999))
+  ), [enrichedItems, targetGroupDocOrder]);
+  const targetGroupItems = useMemo(() => (
+    targetGroupAllItems.filter((item) => matchesSampleAvailabilityFilter(item, sampleAvailabilityFilters))
+  ), [targetGroupAllItems, sampleAvailabilityFilters]);
+  const targetGroupAuthoringReadyItems = useMemo(() => (
+    targetGroupItems.filter((item) => item.latestAuthoringSchema && item.latestAuthoringStylesheet && item.latestAuthoringFakerProfile)
+  ), [targetGroupItems]);
+  const targetGroupAuthoringMissingItems = useMemo(() => (
+    targetGroupItems.filter((item) => !(item.latestAuthoringSchema && item.latestAuthoringStylesheet && item.latestAuthoringFakerProfile))
+  ), [targetGroupItems]);
+  const visibleTargetGroupItems = targetGroupListExpanded ? targetGroupItems : targetGroupItems.slice(0, 3);
+  const selectedManualCleanupItems = useMemo(() => (
+    (manualCleanupAudit?.items || []).filter((item) => item.docId === selectedDocId)
+  ), [manualCleanupAudit, selectedDocId]);
   const selectedFinalOutput = useMemo(
     () => finalOutputForItem(selectedItem, selectedIsNonPipeline, selectedSample),
     [selectedItem, selectedIsNonPipeline, selectedSample],
@@ -464,32 +560,35 @@ function App() {
   const selectedWorkflowLocked = Boolean(selectedFinalOutput?.locked);
 
   const filteredItems = useMemo(() => {
-    const query = search.trim().toLowerCase();
+    const query = normalizeSearchText(search);
+    const activeDomains = new Set(domainFilters);
+    const activeStatuses = new Set(statusFilters);
     return enrichedItems.filter((item) => {
       const doc = item.registry || {};
-      if (query && !`${item.title} ${item.docId} ${(doc.aliases || []).join(' ')}`.toLowerCase().includes(query)) return false;
-      if (domainFilter !== 'all' && !(doc.domains || []).includes(domainFilter)) return false;
-      if (statusFilter === 'pending_seed' && !item.hasPendingSeed) return false;
-      else if (statusFilter === 'needs_collection' && !item.needsCollection) return false;
-      else if (!['all', 'pending_seed', 'needs_collection'].includes(statusFilter) && item.status !== statusFilter) return false;
+      const haystack = normalizeSearchText(`${item.title} ${item.docId} ${(doc.aliases || []).join(' ')} ${(doc.poDomains || []).join(' ')} ${(doc.workflowDomains || doc.domains || []).join(' ')}`);
+      if (query && !haystack.includes(query)) return false;
+      if (activeDomains.size && !(doc.poDomains || []).some((domain) => activeDomains.has(domain))) return false;
+      if (activeStatuses.size && !activeStatuses.has(workStatusGroup(item))) return false;
+      if (!matchesSampleAvailabilityFilter(item, sampleAvailabilityFilters)) return false;
       return true;
     });
-  }, [enrichedItems, search, domainFilter, statusFilter]);
+  }, [enrichedItems, search, domainFilters, statusFilters, sampleAvailabilityFilters]);
 
   const uploadDocOptions = useMemo(() => {
-    const query = uploadSearch.trim().toLowerCase();
+    const query = normalizeSearchText(uploadSearch);
     if (!query) return documents.slice(0, 40);
-    return documents.filter((doc) => `${doc.title} ${doc.docId} ${(doc.aliases || []).join(' ')} ${(doc.domains || []).join(' ')}`.toLowerCase().includes(query)).slice(0, 60);
+    return documents.filter((doc) => normalizeSearchText(`${doc.title} ${doc.docId} ${(doc.aliases || []).join(' ')} ${(doc.poDomains || []).join(' ')} ${(doc.workflowDomains || doc.domains || []).join(' ')}`).includes(query)).slice(0, 60);
   }, [documents, uploadSearch]);
 
   async function refreshAll({ preserveSelection = true } = {}) {
-    const [nextHealth, nextRegistry, nextWork, nextAssessment, nextSeed, nextFonts] = await Promise.all([
+    const [nextHealth, nextRegistry, nextWork, nextAssessment, nextSeed, nextFonts, nextAuthoringLibrary] = await Promise.all([
       apiJson('/api/health'),
       apiJson('/api/registry'),
       apiJson('/api/work-items'),
       apiJson('/api/first-priority/assessments'),
       apiJson('/api/seed/scan'),
       apiJson('/api/fonts').catch(() => ({ defaultFontId: '', fonts: [] })),
+      apiJson('/api/authoring/library', { method: 'POST', body: JSON.stringify({}) }).catch(() => null),
     ]);
     setHealth(nextHealth);
     setRegistry(nextRegistry);
@@ -497,6 +596,7 @@ function App() {
     setAssessmentPayload(nextAssessment);
     setSeedScan(nextSeed);
     setFontPayload(nextFonts);
+    if (nextAuthoringLibrary) setAuthoringLibrary(nextAuthoringLibrary);
     setSelectedDocId((current) => {
       if (preserveSelection && current && nextWork.items.some((item) => item.docId === current)) return current;
       const pendingSeed = nextSeed.folders.find((folder) => folder.status === 'importable' && folder.matchedDocId);
@@ -532,6 +632,8 @@ function App() {
     setSelectedCleanupId('');
     setCleanupResult(null);
     setCleanupVersion(0);
+    setCleanupTool('brush');
+    setCleanupBaseImagePath('');
   }
 
   function setEditedPolicy(nextPolicy, options = {}) {
@@ -563,10 +665,361 @@ function App() {
     setMessage(`선택 BBox ${ids.size}개를 삭제했습니다.`);
   }
 
+  function editTargetGroup(group = activeTargetGroup) {
+    setTargetGroupDraft({
+      id: group?.protected ? '' : (group?.id || ''),
+      label: group?.protected ? `${group.label} 복사본` : (group?.label || ''),
+      description: group?.description || '',
+      scopeEntries: (group?.scopeEntries || []).map((entry) => ({ domain: entry.domain || '', docId: entry.docId, title: entry.title || '' })),
+    });
+    setTargetGroupDocId(selectedDocId || documents[0]?.docId || '');
+    setTargetGroupEditing(true);
+  }
+
+  function createTargetGroupDraft() {
+    setTargetGroupDraft({
+      id: '',
+      label: '',
+      description: '',
+      scopeEntries: selectedDocId && selectedDoc ? [{ domain: selectedDoc.poDomains?.[0] || selectedDoc.domains?.[0] || '', docId: selectedDoc.docId, title: selectedDoc.title }] : [],
+    });
+    setTargetGroupDocId(selectedDocId || documents[0]?.docId || '');
+    setTargetGroupEditing(true);
+    setTargetGroupListExpanded(false);
+  }
+
+  function targetGroupScopeDomainsForItem(item) {
+    const poDomains = item?.registry?.poDomains || [];
+    const active = domainFilters.filter((domain) => poDomains.includes(domain));
+    if (active.length) return active;
+    return [poDomains[0] || item?.registry?.firstPriorityDomains?.[0] || item?.registry?.domains?.[0] || ''];
+  }
+
+  function currentFilterLabel() {
+    const parts = [];
+    if (search.trim()) parts.push(`검색:${search.trim()}`);
+    if (domainFilters.length) parts.push(domainFilters.join('+'));
+    if (statusFilters.length) parts.push(statusFilters.map((id) => WORK_STATUS_GROUP_LABELS[id]).join('+'));
+    if (sampleAvailabilityFilters.length) parts.push(sampleAvailabilityFilters.map((id) => SAMPLE_AVAILABILITY_LABELS[id]).join('+'));
+    return parts.join(' · ') || '전체 문서';
+  }
+
+  function createTargetGroupDraftFromFilteredItems() {
+    const seen = new Set();
+    const scopeEntries = [];
+    for (const item of filteredItems) {
+      for (const domain of targetGroupScopeDomainsForItem(item)) {
+        const key = `${domain}::${item.docId}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        scopeEntries.push({ domain, docId: item.docId, title: item.title });
+      }
+    }
+    if (!scopeEntries.length) {
+      setMessage('현재 필터 결과에 그룹으로 만들 문서가 없습니다.');
+      return;
+    }
+    const filterLabel = currentFilterLabel();
+    setTargetGroupDraft({
+      id: '',
+      label: `필터 그룹 - ${filterLabel}`.slice(0, 80),
+      description: `문서 현황판 필터 결과에서 생성한 목표 그룹 초안입니다. 필터: ${filterLabel}`,
+      scopeEntries,
+    });
+    setTargetGroupDocId(scopeEntries[0]?.docId || selectedDocId || documents[0]?.docId || '');
+    setTargetGroupEditing(true);
+    setTargetGroupListExpanded(false);
+    setMessage(`필터 결과 ${scopeEntries.length}개 scope를 목표 그룹 초안으로 불러왔습니다. 그룹명을 확인한 뒤 저장하세요.`);
+  }
+
+  function addDocToTargetGroupDraft(docId = targetGroupDocId) {
+    const doc = documents.find((item) => item.docId === docId);
+    if (!doc) return;
+    setTargetGroupDraft((current) => {
+      if ((current.scopeEntries || []).some((entry) => entry.docId === doc.docId)) return current;
+      return { ...current, scopeEntries: [...(current.scopeEntries || []), { domain: doc.poDomains?.[0] || doc.domains?.[0] || '', docId: doc.docId, title: doc.title }] };
+    });
+  }
+
+  function removeDocFromTargetGroupDraft(docId) {
+    setTargetGroupDraft((current) => ({ ...current, scopeEntries: (current.scopeEntries || []).filter((entry) => entry.docId !== docId) }));
+  }
+
+  async function saveTargetGroupDraft() {
+    if (!targetGroupDraft.label.trim() || !targetGroupDraft.scopeEntries.length) return;
+    setBusy('targetGroupSave');
+    setError('');
+    try {
+      const payload = await apiJson('/api/target-groups/save', {
+        method: 'POST',
+        body: JSON.stringify(targetGroupDraft),
+      });
+      setRegistry((current) => ({ ...(current || {}), targetGroups: payload.groups }));
+      setActiveTargetGroupId(payload.group.id);
+      setTargetGroupEditing(false);
+      setMessage(`목표 그룹 저장 완료: ${payload.group.label}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function deleteActiveTargetGroup() {
+    if (!activeTargetGroup?.id) return;
+    const actionText = activeTargetGroup.protected ? '숨김 처리' : '삭제';
+    if (!window.confirm(`${activeTargetGroup.label} 목표 그룹을 ${actionText}할까요? 문서/산출물은 삭제하지 않고 그룹 목록에서만 제거합니다.`)) return;
+    setBusy('targetGroupDelete');
+    setError('');
+    try {
+      const payload = await apiJson('/api/target-groups/delete', {
+        method: 'POST',
+        body: JSON.stringify({ id: activeTargetGroup.id }),
+      });
+      setRegistry((current) => ({ ...(current || {}), targetGroups: payload.groups }));
+      setActiveTargetGroupId(payload.groups[0]?.id || '');
+      setTargetGroupEditing(false);
+      setTargetGroupListExpanded(false);
+      setMessage(activeTargetGroup.protected ? '기본 목표 그룹을 숨김 처리했습니다.' : '목표 그룹을 삭제했습니다.');
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
   function setSelectedBboxStatus(status) {
     if (!policy || !selectedIds.length || !STATUS.includes(status)) return;
     setEditedPolicy(relabel(policy, selectedIds, status));
     setMessage(`선택 BBox ${selectedIds.length}개 → ${STATUS_LABELS[status]}`);
+  }
+
+  async function scanReviewLegacyIssues() {
+    setBusy('reviewAudit');
+    setError('');
+    try {
+      const payload = await apiJson('/api/audit/reviews');
+      setReviewAudit(payload);
+      setMessage(`Review legacy 스캔 완료: ignore bbox ${payload.summary.ignoreCount}개 / 문서 ${payload.summary.documentCount}종`);
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function removeCurrentIgnoreBboxes() {
+    if (!policy || !reviewPath || stats.byStatus.ignore <= 0) return;
+    if (!window.confirm(`현재 리뷰의 기존 무시(ignore) bbox ${stats.byStatus.ignore}개를 백업 후 제거할까요?`)) return;
+    setBusy('removeIgnore');
+    setError('');
+    try {
+      const payload = await apiJson('/api/review/remove-ignore', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId, reviewPath }),
+      });
+      setPolicy(payload.policy);
+      setSelectedIds([]);
+      setReviewDirty(false);
+      setMessage(`ignore bbox 제거 완료: ${payload.removed}개 · 백업 ${payload.backup?.dir || '없음'}`);
+      await refreshAll({ preserveSelection: true });
+      await scanReviewLegacyIssues();
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function scanManualCleanupLegacy() {
+    setBusy('manualCleanupAudit');
+    setError('');
+    try {
+      const payload = await apiJson('/api/audit/manual-cleanup');
+      setManualCleanupAudit(payload);
+      setMessage(`manual_cleanup 스캔 완료: ${payload.summary.legacyCleanupCount}개`);
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function promoteManualCleanup(item) {
+    if (!item?.cleanupDir) return;
+    if (!window.confirm(`${item.title}의 manual_cleanup 결과를 최종 인페인트 결과로 승격하고 manual_cleanup 폴더를 백업 보관함으로 이동할까요?`)) return;
+    setBusy('manualCleanupPromote');
+    setError('');
+    try {
+      const payload = await apiJson('/api/manual-cleanup/promote', {
+        method: 'POST',
+        body: JSON.stringify({ docId: item.docId, cleanupDir: item.cleanupDir }),
+      });
+      setMessage(`manual_cleanup 승격 완료: ${payload.promoted.inpainted} · 백업 ${payload.backup}`);
+      setManualCleanupAudit(null);
+      await refreshAll({ preserveSelection: true });
+      await scanManualCleanupLegacy();
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function createAuthoringAgentRequest() {
+    if (!selectedDocId) return;
+    setBusy('authoringAgentRequest');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/agent-request', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction }),
+      });
+      setAuthoringAgentRequest(payload);
+      setMessage(`Agent authoring 요청 패키지 생성 완료: ${payload.paths.request}${payload.paths.prompt ? ` · ${payload.paths.prompt}` : ''}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function updateSelectedSampleKind(sampleKind) {
+    if (!selectedDocId || selectedSampleKind === sampleKind) return;
+    setBusy('sampleKind');
+    setError('');
+    try {
+      const payload = await apiJson('/api/work-item/sample-kind', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId, sampleKind }),
+      });
+      setMessage(`샘플 유형 저장: ${payload.sampleKind === 'blank_template' ? '빈 템플릿' : payload.sampleKind === 'mixed_template' ? '혼합 템플릿' : '값 채워진 샘플'}`);
+      if (sampleKind === 'blank_template') {
+        setInpaintResult(null);
+        setInpaintVersion(0);
+        resetCleanupState();
+        if (canvasMode === 'inpaint' || canvasMode === 'cleanup') setCanvasMode('review');
+      }
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function runAuthoringAgentInference() {
+    if (!selectedDocId) return;
+    setBusy('authoringAgentRun');
+    setError('');
+    authoringAgentTerminalRefreshRef.current = '';
+    try {
+      const payload = await apiJson('/api/authoring/agent-run', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction }),
+      });
+      setAuthoringAgentRequest({ docId: payload.docId, paths: { request: payload.requestPath }, request: null });
+      setAuthoringAgentRun(payload);
+      setMessage(`Agent 추론 job 시작: ${payload.jobPath}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function refreshAuthoringAgentRunStatus(jobPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun) {
+    if (!jobPath && !selectedDocId) return null;
+    const query = jobPath ? `jobPath=${encodeURIComponent(jobPath)}` : `docId=${encodeURIComponent(selectedDocId)}`;
+    const payload = await apiJson(`/api/authoring/agent-run-status?${query}`);
+    setAuthoringAgentRun(payload);
+    const terminalKey = `${payload.jobPath || jobPath || ''}:${payload.status}:${payload.finishedAt || ''}`;
+    if (payload.status === 'succeeded') {
+      if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
+        authoringAgentTerminalRefreshRef.current = terminalKey;
+        setMessage(`Agent 추론 완료: draft ${payload.validation?.summary?.present || 0}/${payload.validation?.summary?.required || 0}개 생성`);
+        await refreshAll({ preserveSelection: true });
+      }
+    } else if (payload.status === 'failed') {
+      if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
+        authoringAgentTerminalRefreshRef.current = terminalKey;
+        setError(`Agent 추론 실패: ${payload.error || '필수 draft 산출물 검증 실패'}`);
+        await refreshAll({ preserveSelection: true });
+      }
+    } else {
+      authoringAgentTerminalRefreshRef.current = '';
+    }
+    return payload;
+  }
+
+
+  function applyAuthoringRawJson(section, rawText) {
+    if (!authoringBundle) return;
+    try {
+      const parsed = JSON.parse(rawText);
+      setAuthoringBundle((current) => ({ ...current, [section]: parsed }));
+      setAuthoringDirty(true);
+      if (authoringResult?.paths?.image || selectedItem?.latestAuthoringPreview) setAuthoringPreviewStale(true);
+      setMessage(`${section} raw JSON을 적용했습니다. 저장 전까지 파일에는 반영되지 않습니다.`);
+    } catch (err) {
+      setError(`${section} JSON 파싱 실패: ${err.message || String(err)}`);
+    }
+  }
+
+  function applySemanticSchemaRawJson(rawText) {
+    if (!authoringBundle) return;
+    try {
+      const parsed = JSON.parse(rawText);
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        throw new Error('semantic schema는 JSON object여야 합니다.');
+      }
+      setAuthoringBundle((current) => ({
+        ...current,
+        schema: syncSemanticSchemaToAuthoringFields(current.schema || {}, parsed),
+      }));
+      setAuthoringDirty(true);
+      if (authoringResult?.paths?.image || selectedItem?.latestAuthoringPreview) setAuthoringPreviewStale(true);
+      setMessage('Semantic schema primary JSON을 적용했고, full schema field binding의 semantic_path/export를 자동 연동했습니다.');
+    } catch (err) {
+      setError(`semantic schema JSON 파싱 실패: ${err.message || String(err)}`);
+    }
+  }
+
+  async function loadAuthoringLibrary() {
+    setBusy('authoringLibrary');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/library', { method: 'POST', body: JSON.stringify({}) });
+      setAuthoringLibrary(payload);
+      setMessage(`Authoring 라이브러리 로드: profile ${payload.summary.profileTypeCount}종 · pool ${payload.summary.valuePoolCount}개 · 승인 ${payload.summary.approvalCount}건`);
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function approveAuthoringDraftsToLibrary() {
+    const requestPath = authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest;
+    if (!requestPath) return;
+    setBusy('authoringApproveDrafts');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/approve-drafts', {
+        method: 'POST',
+        body: JSON.stringify({ requestPath, note: authoringAgentInstruction }),
+      });
+      setAuthoringApprovalResult(payload);
+      await loadAuthoringLibrary();
+      setMessage(`Authoring draft 라이브러리 승인 기록 완료: copied ${payload.summary.copied} · missing ${payload.summary.missing}`);
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function applyAuthoringAgentDrafts() {
+    const requestPath = authoringAgentRun?.requestPath || authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest;
+    if (!selectedDocId || !requestPath) return;
+    setBusy('authoringApplyAgentDrafts');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/apply-agent-drafts', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId, requestPath }),
+      });
+      setAuthoringBundle(payload);
+      setAuthoringDirty(false);
+      setAuthoringResult(null);
+      setAuthoringVersion((value) => value + 1);
+      setMessage(`Agent draft를 최종 Authoring에 적용했습니다: field ${payload.summary.field_count}개`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
   }
 
   function assessmentValue(row, field) {
@@ -667,7 +1120,7 @@ function App() {
     const accepted = Array.from(files || []).filter(isUploadFile);
     const rejected = Array.from(files || []).filter((file) => !isUploadFile(file));
     if (!accepted.length) {
-      setError('지원 파일 형식은 PDF, PNG, JPG/JPEG입니다.');
+      setError('지원 파일 형식은 PDF, PNG, JPG/JPEG, DOCX입니다.');
       setMessage('');
       return;
     }
@@ -765,6 +1218,7 @@ function App() {
     setRecognitionPopover(null);
     resetReviewHistory();
     setDetectionResult(null);
+    setBlankTemplateLineDetectEnabled(false);
     setInpaintResult(null);
     setInpaintVersion(0);
     resetCleanupState();
@@ -782,6 +1236,12 @@ function App() {
     setBboxEditMode('select');
     setReviewDirty(false);
   }, [selectedDocId]);
+
+  useEffect(() => {
+    if (!selectedIsBlankTemplate && blankTemplateLineDetectEnabled) {
+      setBlankTemplateLineDetectEnabled(false);
+    }
+  }, [selectedIsBlankTemplate, blankTemplateLineDetectEnabled]);
 
   useEffect(() => {
     setSelectedSample((current) => {
@@ -815,7 +1275,7 @@ function App() {
       setCanvasMode('final');
       return undefined;
     }
-    const hasInpainted = Boolean(selectedItem.latestInpainted);
+    const hasInpainted = !selectedIsBlankTemplate && Boolean(selectedItem.latestInpainted);
     const hasAuthoring = Boolean(selectedItem.latestAuthoringSchema || selectedItem.latestAuthoringPreview);
     const hasAuthoringPreview = Boolean(selectedItem.latestAuthoringPreview);
 
@@ -904,7 +1364,7 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [selectedDocId, selectedWorkflowLocked, selectedItem?.docId, selectedItem?.latestReview, selectedItem?.latestInpainted, selectedItem?.latestInpaintComparison, selectedItem?.latestAuthoringPreview, selectedItem?.latestAuthoringOverlay, selectedItem?.latestAuthoringSchema, selectedItem?.latestAuthoringStylesheet, selectedItem?.latestAuthoringFakerProfile, selectedItem?.latestAuthoringBatch]);
+  }, [selectedDocId, selectedWorkflowLocked, selectedIsBlankTemplate, selectedItem?.docId, selectedItem?.latestReview, selectedItem?.latestInpainted, selectedItem?.latestInpaintComparison, selectedItem?.latestAuthoringPreview, selectedItem?.latestAuthoringOverlay, selectedItem?.latestAuthoringSchema, selectedItem?.latestAuthoringStylesheet, selectedItem?.latestAuthoringFakerProfile, selectedItem?.latestAuthoringBatch]);
 
   useEffect(() => {
     if (!uploadOpen) return;
@@ -912,6 +1372,17 @@ function App() {
       setUploadDocId(selectedDocId || documents[0]?.docId || '');
     }
   }, [documents, selectedDocId, uploadDocId, uploadOpen]);
+
+
+  useEffect(() => {
+    if (!targetGroups.length) {
+      if (activeTargetGroupId) setActiveTargetGroupId('');
+      return;
+    }
+    if (!targetGroups.some((group) => group.id === activeTargetGroupId)) {
+      setActiveTargetGroupId(targetGroups[0].id);
+    }
+  }, [targetGroups, activeTargetGroupId]);
 
   async function importSeed(folderPath, docId = selectedDocId, { rememberMapping = false } = {}) {
     if (!folderPath || !docId) return;
@@ -978,6 +1449,55 @@ function App() {
     }
   }
 
+  async function revertSelectedSeedImport() {
+    if (!selectedDocId || !selectedItem?.sampleCount) return;
+    const preview = seedRevertPreview?.docId === selectedDocId ? seedRevertPreview : await previewSelectedSeedRevert({ silent: true });
+    const moveText = (preview?.willMove || []).map((item) => `- ${item.path} (${item.fileCount} files)`).join('\n');
+    if (!window.confirm(`${selectedItem.title}의 적재 샘플과 OCR/BBox/인페인팅 산출물을 보관함으로 이동하고 미적재 상태로 되돌릴까요?\n\n이동 예정:\n${moveText || '- 이동 대상 없음'}\n\nAuthoring JSON과 cleanroom 산출물은 보존됩니다.`)) return;
+    setBusy('seedRevert');
+    setError('');
+    setMessage('선택 문서의 seed 적재 상태를 되돌리는 중입니다.');
+    try {
+      const payload = await apiJson('/api/seed/revert', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId }),
+      });
+      setSelectedSample('');
+      setPolicy(null);
+      setReviewPath('');
+      setSelectedIds([]);
+      resetReviewHistory();
+      setDetectionResult(null);
+      setInpaintResult(null);
+      setInpaintVersion(0);
+      resetCleanupState();
+      setSeedRevertPreview(null);
+      setMessage(`Seed 적재 되돌리기 완료: ${payload.title} · 백업 ${payload.trashPath}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function previewSelectedSeedRevert({ silent = false } = {}) {
+    if (!selectedDocId) return null;
+    if (!silent) {
+      setBusy('seedRevertPreview');
+      setError('');
+    }
+    try {
+      const payload = await apiJson('/api/seed/revert-preview', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId }),
+      });
+      setSeedRevertPreview(payload);
+      if (!silent) setMessage(`되돌리기 미리보기: 이동 대상 ${payload.willMove.length}개 · 백업 루트 ${payload.backupRoot}`);
+      return payload;
+    } finally {
+      if (!silent) setBusy('');
+    }
+  }
+
   async function saveMappingAndImport(folder) {
     const docId = manualDocId || folder.candidates?.[0]?.docId || selectedDocId;
     if (!folder?.folder || !docId) return;
@@ -989,11 +1509,12 @@ function App() {
     if (!selectedSample || !selectedDocId) return;
     setBusy('detect');
     setError('');
-    setMessage('PaddleOCR 정밀 BBox 검출 중입니다. 문서당 1회 고정밀 검출을 기본으로 사용합니다.');
+    const includeLineDetection = selectedIsBlankTemplate && blankTemplateLineDetectEnabled;
+    setMessage(includeLineDetection ? 'PaddleOCR 정밀 BBox 검출 후 선/그리드 후보를 추가 생성합니다.' : 'PaddleOCR 정밀 BBox 검출 중입니다. 문서당 1회 고정밀 검출을 기본으로 사용합니다.');
     try {
       const payload = await apiJson('/api/ocr/detect', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, imagePath: selectedSample, engine: 'paddleocr', preset: ocrPreset }),
+        body: JSON.stringify({ docId: selectedDocId, imagePath: selectedSample, engine: 'paddleocr', preset: ocrPreset, sampleKind: selectedSampleKind }),
       });
       setDetectionResult(payload);
       setMessage(`BBox 검출 완료: ${payload.summary.detection_count}개 · ${payload.summary.preset || ocrPreset} · ${payload.summary.elapsed_seconds.toFixed(1)}초`);
@@ -1012,7 +1533,12 @@ function App() {
     try {
       const payload = await apiJson('/api/review/draft', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, detectionsPath }),
+        body: JSON.stringify({
+          docId: selectedDocId,
+          detectionsPath,
+          sampleKind: selectedSampleKind,
+          includeVisualLineDetection: selectedIsBlankTemplate && blankTemplateLineDetectEnabled,
+        }),
       });
       setPolicy(payload.policy);
       setReviewPath(payload.paths.review);
@@ -1033,7 +1559,15 @@ function App() {
       setAuthoringPreviewStale(false);
       setCanvasMode('review');
       suppressRestoreDocRef.current = selectedDocId;
-      setMessage(`리뷰 정책 생성 완료: ${payload.paths.review}`);
+      const visualCount = payload.visualDetection?.candidateCount || 0;
+      const visualSkipped = selectedIsBlankTemplate && payload.visualDetection?.enabled === false;
+      setMessage(
+        visualCount
+          ? `리뷰 정책 생성 완료: ${payload.paths.review} · 선/그리드 후보 ${visualCount}개`
+          : visualSkipped
+            ? `리뷰 정책 생성 완료: ${payload.paths.review} · 선/그리드 후보 미적용`
+            : `리뷰 정책 생성 완료: ${payload.paths.review}`,
+      );
       await refreshAll();
     } finally {
       if (!silentBusy) setBusy('');
@@ -1272,7 +1806,7 @@ function App() {
       setAuthoringViewMode('template');
       setAuthoringPreviewStale(false);
       const elapsed = payload.summary.elapsed_seconds == null ? '' : ` · ${payload.summary.elapsed_seconds.toFixed(1)}초`;
-      setMessage(`LaMa 완료: ${payload.summary.detection_count}개 치환 영역 · mask ${(payload.summary.mask_ratio * 100).toFixed(2)}%${elapsed}`);
+      setMessage(`LaMa 완료: ${payload.summary.detection_count}개 사용 영역 · mask ${(payload.summary.mask_ratio * 100).toFixed(2)}%${elapsed}`);
       await refreshAll();
     } finally {
       setBusy('');
@@ -1293,22 +1827,35 @@ function App() {
     setCleanupHistory((current) => current.slice(0, -1));
     setSelectedCleanupId('');
     setCleanupDirty(true);
-    setMessage('클린업 마스크 변경을 실행 취소했습니다.');
+    setMessage('브러시 보정 변경을 실행 취소했습니다.');
   }
 
-  function addCleanupStroke(points) {
+  function addCleanupStroke(points, options = {}) {
     if (!policy || !points?.length) return;
-    const stroke = { id: cleanupStrokeId(), type: 'lasso', operation: 'add', points };
     const base = cleanupMask || emptyCleanupMask(policy.image.width, policy.image.height);
-    setEditedCleanupMask({ ...base, image: { width: policy.image.width, height: policy.image.height }, strokes: [...(base.strokes || []), stroke], updated_at: new Date().toISOString() });
+    const color = options.color || base.selected_color || [255, 255, 255];
+    const radius = options.radius || base.brush_radius || 10;
+    const stroke = { id: cleanupStrokeId(), type: 'brush', color, radius, points };
+    setEditedCleanupMask({ ...base, image: { width: policy.image.width, height: policy.image.height }, strokes: [...(base.strokes || []), stroke], selected_color: color, brush_radius: radius, updated_at: new Date().toISOString() });
     setSelectedCleanupId(stroke.id);
+  }
+
+  function updateCleanupPaintSettings(patch) {
+    const base = cleanupMask || emptyCleanupMask(policy?.image?.width || 1200, policy?.image?.height || 1600);
+    setCleanupMask({ ...base, ...patch, updated_at: new Date().toISOString() });
+  }
+
+  function sampleCleanupColor(color) {
+    updateCleanupPaintSettings({ selected_color: color });
+    setCleanupTool('brush');
+    setMessage(`스포이드 색상 선택: #${color.map((channel) => channel.toString(16).padStart(2, '0')).join('')}`);
   }
 
   function deleteSelectedCleanupMask() {
     if (!selectedCleanupId || !cleanupMask?.strokes?.length) return;
     setEditedCleanupMask({ ...cleanupMask, strokes: cleanupMask.strokes.filter((stroke) => stroke.id !== selectedCleanupId), updated_at: new Date().toISOString() });
     setSelectedCleanupId('');
-    setMessage('선택한 클린업 마스크를 삭제했습니다.');
+    setMessage('선택한 브러시 stroke를 삭제했습니다.');
   }
 
   async function loadCleanupMask({ silentBusy = false } = {}) {
@@ -1317,9 +1864,10 @@ function App() {
     if (!silentBusy) setBusy('cleanupLoad');
     setError('');
     try {
-      const query = new URLSearchParams({ docId: selectedDocId, reviewPath: sourceReviewPath });
-      const payload = await apiJson(`/api/cleanup-mask?${query.toString()}`);
-      setCleanupMask(payload.mask || emptyCleanupMask(policy.image.width, policy.image.height));
+      const query = new URLSearchParams({ docId: selectedDocId, reviewPath: sourceReviewPath, baseImagePath: inpaintedPath || selectedItem?.latestInpainted || '' });
+      const payload = await apiJson(`/api/cleanup-paint?${query.toString()}`);
+      setCleanupMask(payload.paint || emptyCleanupMask(policy.image.width, policy.image.height));
+      setCleanupBaseImagePath(payload.baseImagePath || inpaintedPath || selectedItem?.latestInpainted || '');
       setCleanupDirty(false);
       setCleanupHistory([]);
       setSelectedCleanupId('');
@@ -1331,7 +1879,7 @@ function App() {
         setCleanupResult(null);
         setCleanupVersion(0);
       }
-      if (!silentBusy) setMessage(payload.exists ? '저장된 클린업 마스크를 불러왔습니다.' : '아직 저장된 클린업 마스크가 없습니다.');
+      if (!silentBusy) setMessage(payload.exists ? '저장된 브러시 클린업을 불러왔습니다.' : '아직 저장된 브러시 클린업이 없습니다.');
       return payload;
     } finally {
       if (!silentBusy) setBusy('');
@@ -1344,56 +1892,25 @@ function App() {
     if (!silentBusy) setBusy('cleanupSave');
     setError('');
     try {
-      const payload = await apiJson('/api/cleanup-mask', {
+      const baseImagePath = cleanupBaseImagePath || inpaintResult?.baseImagePath || inpaintedPath || selectedItem?.latestInpainted || '';
+      const payload = await apiJson('/api/cleanup-paint', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, reviewPath: sourceReviewPath, mask: cleanupMask || emptyCleanupMask(policy.image.width, policy.image.height) }),
+        body: JSON.stringify({ docId: selectedDocId, reviewPath: sourceReviewPath, baseImagePath, paint: cleanupMask || emptyCleanupMask(policy.image.width, policy.image.height) }),
       });
-      setCleanupMask(payload.mask);
+      setCleanupMask(payload.paint);
+      setCleanupBaseImagePath(payload.baseImagePath || baseImagePath);
       setCleanupDirty(false);
       setCleanupHistory([]);
       setSelectedCleanupId('');
-      if (!silentBusy) setMessage(`클린업 마스크 저장 완료: ${payload.paths.manual_mask}`);
-      return payload;
-    } finally {
-      if (!silentBusy) setBusy('');
-    }
-  }
-
-  async function runCleanupInpaint() {
-    const sourceReviewPath = reviewPath || selectedItem?.latestReview || '';
-    const baseImagePath = cleanupResult?.paths?.inpainted || inpaintResult?.paths?.inpainted || selectedItem?.latestInpainted || '';
-    if (!selectedDocId || !sourceReviewPath || !policy || !baseImagePath) return;
-    setBusy('cleanupInpaint');
-    setError('');
-    setMessage(`현재 인페인팅 템플릿에 수동 마스크만 적용해 LaMa 후처리 중입니다. max_side=${lamaMaxSide}`);
-    try {
-      const payload = await apiJson('/api/cleanup-inpaint', {
-        method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, reviewPath: sourceReviewPath, baseImagePath, mask: cleanupMask || emptyCleanupMask(policy.image.width, policy.image.height), lamaMaxSide }),
-      });
       const version = Date.now();
-      setCleanupMask(payload.mask);
-      setCleanupDirty(false);
-      setCleanupHistory([]);
-      setSelectedCleanupId('');
       setCleanupVersion(version);
       setCleanupResult({ ...payload, comparisonUrl: payload.paths?.comparison ? fileUrl(payload.paths.comparison, version) : payload.comparisonUrl });
       setInpaintVersion(version);
       setInpaintResult((current) => ({ ...(current || {}), ...payload, paths: { ...(current?.paths || {}), ...payload.paths } }));
-      setCanvasMode('cleanup');
-      setAuthoringResult(null);
-      setAuthoringBatchResult(null);
-      setAuthoringBundle(null);
-      setAuthoringDirty(false);
-      selectAuthoringFields([]);
-      setAuthoringVersion(0);
-      setAuthoringViewMode('template');
-      setAuthoringPreviewStale(false);
-      const elapsed = payload.summary?.elapsed_seconds == null ? '' : ` · ${payload.summary.elapsed_seconds.toFixed(1)}초`;
-      setMessage(`템플릿 클린업 완료: 수동 마스크 ${payload.summary?.manual_mask_count || 0}개${elapsed}`);
-      await refreshAll();
+      if (!silentBusy) setMessage(`브러시 클린업 저장 완료: ${payload.paths.inpainted}`);
+      return payload;
     } finally {
-      setBusy('');
+      if (!silentBusy) setBusy('');
     }
   }
 
@@ -1636,7 +2153,7 @@ function App() {
         ...current.schema,
         fields: (current.schema?.fields || []).map((field) => {
           if (!targetIds.has(field.field_id)) return field;
-          const checkboxPatch = patch.checkbox_style && isAuthoringCheckboxField(field) ? { checkbox_style: patch.checkbox_style } : {};
+          const checkboxPatch = patch.checkbox_style && isAuthoringCheckboxField(field, current.faker_profile) ? { checkbox_style: patch.checkbox_style } : {};
           const nextPolicy = {
             ...(field.render_policy || {}),
             ...(patch.align ? { align: patch.align } : {}),
@@ -1732,20 +2249,24 @@ function App() {
     }
   }
 
-  async function renderAuthoringBatch({ all = false } = {}) {
-    if (!all && !selectedDocId) return;
-    setBusy(all ? 'authoringBatchAll' : 'authoringBatch');
+  async function renderAuthoringBatch({ all = false, docIds = null, label = '' } = {}) {
+    const requestedDocIds = all ? [...new Set((docIds || []).filter(Boolean))] : [selectedDocId].filter(Boolean);
+    if (!requestedDocIds.length) return;
+    setBusy(all ? 'authoringBatchGroup' : 'authoringBatch');
     setError('');
-    setMessage(all ? `Authoring 완료 문서 ${authoringReadyCount}종을 각 5장씩 배치 생성 중입니다.` : '선택 문서 합성 샘플 5장을 생성 중입니다.');
+    setMessage(all ? `${label || '목표 그룹'} Authoring 완료 문서 ${requestedDocIds.length}종을 각 5장씩 배치 생성 중입니다.` : '선택 문서 합성 샘플 5장을 생성 중입니다.');
     try {
       if (!all && authoringDirty) await saveAuthoringBundle({ silentBusy: true });
+      const outDir = all
+        ? `outputs/render/batch_authoring_${activeTargetGroup.id || 'target_group'}_20260702`
+        : `outputs/render/batch_authoring_${selectedDocId || 'selected'}_20260702`;
       const payload = await apiJson('/api/authoring/render-batch', {
         method: 'POST',
         body: JSON.stringify({
-          docIds: all ? undefined : [selectedDocId],
+          docIds: requestedDocIds,
           count: 5,
           seed: 20260702,
-          outDir: 'outputs/render/batch_authoring_20260702',
+          outDir,
           renderScale: 2,
         }),
       });
@@ -1757,9 +2278,7 @@ function App() {
     }
   }
 
-  const inpaintedPath = cleanupResult?.paths?.inpainted || inpaintResult?.paths?.inpainted || selectedItem?.latestInpainted || '';
-  const comparisonPath = cleanupResult?.paths?.comparison || inpaintResult?.paths?.comparison || selectedItem?.latestInpaintComparison || '';
-  const comparisonHref = cleanupResult?.comparisonUrl || inpaintResult?.comparisonUrl || (comparisonPath ? fileUrl(comparisonPath, cleanupVersion || inpaintVersion) : '');
+  const inpaintedPath = selectedIsBlankTemplate ? '' : (cleanupResult?.paths?.inpainted || inpaintResult?.paths?.inpainted || selectedItem?.latestInpainted || '');
   const authoringPreviewPath = authoringResult?.paths?.image || selectedItem?.latestAuthoringPreview || '';
   const authoringOverlayPath = authoringResult?.paths?.overlay || selectedItem?.latestAuthoringOverlay || '';
   const authoringOverlayHref = authoringResult?.overlayUrl || (authoringOverlayPath ? fileUrl(authoringOverlayPath, authoringVersion) : '');
@@ -1771,6 +2290,23 @@ function App() {
   const batchSummaryHref = batchSummaryPath ? fileUrl(batchSummaryPath, authoringVersion) : '';
   const batchManifestHref = batchManifestPath ? fileUrl(batchManifestPath, authoringVersion) : '';
   const batchFirstImageHref = batchFirstImagePath ? fileUrl(batchFirstImagePath, authoringVersion) : '';
+  const latestAgentRequestPath = authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest || '';
+  const latestAgentPromptPath = authoringAgentRequest?.paths?.prompt || selectedItem?.latestAuthoringAgentPrompt || '';
+  const latestAgentAnchorMapPath = authoringAgentRequest?.request?.generated_sidecars?.anchorMapDraft || selectedItem?.latestAuthoringAgentAnchorMap || '';
+  const latestAgentRunPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun || '';
+  const latestAgentRunStatus = authoringAgentRun?.status || (latestAgentRunPath ? 'unknown' : '');
+  const latestAgentRunReady = authoringAgentRun?.validation?.ready || false;
+  const latestAgentRunPolling = Boolean(latestAgentRunPath && !['succeeded', 'failed'].includes(latestAgentRunStatus));
+
+  useEffect(() => {
+    if (!latestAgentRunPolling) return undefined;
+    const pollPath = latestAgentRunPath;
+    const delayMs = latestAgentRunStatus === 'unknown' ? 500 : 3000;
+    const timer = window.setInterval(() => {
+      refreshAuthoringAgentRunStatus(pollPath).catch((exc) => setError(exc.message || String(exc)));
+    }, delayMs);
+    return () => window.clearInterval(timer);
+  }, [latestAgentRunPath, latestAgentRunStatus, latestAgentRunPolling]);
 
   useEffect(() => {
     function handleGlobalShortcuts(event) {
@@ -1812,8 +2348,8 @@ function App() {
         nudgeAuthoringStyleOffsets(selectedAuthoringFieldIds, { dx: authoringArrowNudge.dx * step, dy: authoringArrowNudge.dy * step });
         return;
       }
-      const numericStatusMap = { 1: 'use', 2: 'keep', 3: 'ignore' };
-      const numericStatus = numericStatusMap[event.key] || numericStatusMap[event.code === 'Numpad1' ? '1' : event.code === 'Numpad2' ? '2' : event.code === 'Numpad3' ? '3' : ''];
+      const numericStatusMap = { 1: 'use', 2: 'keep' };
+      const numericStatus = numericStatusMap[event.key] || numericStatusMap[event.code === 'Numpad1' ? '1' : event.code === 'Numpad2' ? '2' : ''];
       if (numericStatus && canvasMode === 'review' && policy && selectedIds.length && !isBusy && !isTextEditingTarget(event.target)) {
         event.preventDefault();
         event.stopPropagation();
@@ -1855,6 +2391,24 @@ function App() {
   const fontOptions = fontPayload.fonts?.length ? fontPayload.fonts : (authoringBundle?.fonts?.items || []);
   const fakerRuleExamples = authoringBundle?.faker_rule_examples || FALLBACK_FAKER_RULE_EXAMPLES;
   const canLoadAuthoring = Boolean(authoringPaths.schema && authoringPaths.stylesheet && authoringPaths.faker_profile);
+
+  useEffect(() => {
+    if (!selectedDocId || !canLoadAuthoring || authoringBundle || authoringDirty || selectedWorkflowLocked) return undefined;
+    let cancelled = false;
+    const handle = window.setTimeout(() => {
+      loadAuthoringBundle(authoringPaths, { silentBusy: true })
+        .then((payload) => {
+          if (!cancelled && payload) setMessage(`Authoring 자동 불러오기 완료: field ${payload.summary?.field_count || 0}개`);
+        })
+        .catch((exc) => {
+          if (!cancelled) setError(exc.message || String(exc));
+        });
+    }, 50);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(handle);
+    };
+  }, [selectedDocId, canLoadAuthoring, authoringPaths.schema, authoringPaths.stylesheet, authoringPaths.faker_profile, authoringBundle, authoringDirty, selectedWorkflowLocked]);
   const showFinalOutputCanvas = Boolean(selectedFinalOutput?.locked);
   const showInpaintCanvas = Boolean(inpaintedPath && canvasMode === 'inpaint');
   const showCleanupCanvas = Boolean(policy && inpaintedPath && canvasMode === 'cleanup');
@@ -1869,18 +2423,19 @@ function App() {
     : showAuthoringCanvas
     ? `${authoringLivePreviewPath ? '최종 렌더러 live preview' : '인페인팅 템플릿'} · 선택 ${selectedAuthoringFieldIds.length || 0}개${missingAuthoringFields.length ? ` · bbox 정합성 필요 ${missingAuthoringFields.length}개` : ''}${authoringDirty ? ' · 저장 안 됨' : ''}${authoringLivePreview?.error ? ` · 렌더 오류: ${authoringLivePreview.error}` : ''}`
     : (showCleanupCanvas
-      ? `${inpaintedPath} · 올가미 ${cleanupMask?.strokes?.length || 0}개${cleanupDirty ? ' · 저장 안 됨' : ''}`
+      ? `${inpaintedPath} · 브러시 stroke ${cleanupMask?.strokes?.length || 0}개${cleanupDirty ? ' · 저장 안 됨' : ''}`
       : (showInpaintCanvas ? inpaintedPath : (policy ? `${policy.image.width}×${policy.image.height} · ${reviewPath}` : selectedSample || '입고함에서 seed를 적재하거나 웹 수집 필요 문서를 확인하세요.')));
 
   useEffect(() => {
     const sourceReviewPath = reviewPath || selectedItem?.latestReview || '';
     if (!selectedDocId || !policy || !sourceReviewPath || !selectedItem?.latestInpainted || cleanupDirty) return undefined;
     let cancelled = false;
-    const query = new URLSearchParams({ docId: selectedDocId, reviewPath: sourceReviewPath });
-    apiJson(`/api/cleanup-mask?${query.toString()}`)
+    const query = new URLSearchParams({ docId: selectedDocId, reviewPath: sourceReviewPath, baseImagePath: inpaintedPath || selectedItem?.latestInpainted || '' });
+    apiJson(`/api/cleanup-paint?${query.toString()}`)
       .then((payload) => {
         if (cancelled) return;
-        setCleanupMask(payload.mask || emptyCleanupMask(policy.image.width, policy.image.height));
+        setCleanupMask(payload.paint || emptyCleanupMask(policy.image.width, policy.image.height));
+        setCleanupBaseImagePath(payload.baseImagePath || inpaintedPath || selectedItem?.latestInpainted || '');
         setCleanupDirty(false);
         setCleanupHistory([]);
         setSelectedCleanupId('');
@@ -1899,7 +2454,7 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [selectedDocId, reviewPath, selectedItem?.latestReview, selectedItem?.latestInpainted, policy?.image?.width, policy?.image?.height, cleanupDirty]);
+  }, [selectedDocId, reviewPath, selectedItem?.latestReview, selectedItem?.latestInpainted, inpaintedPath, policy?.image?.width, policy?.image?.height, cleanupDirty]);
 
   return (
     <div className="app workbench-app" onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
@@ -1968,7 +2523,7 @@ function App() {
         <div className="top-context">
           <span className="status-pill importable">자동 적재 {seedScan.summary?.importable || 0}</span>
           <span className="status-pill needsReview">확인 필요 {seedScan.summary?.needsReview || 0}</span>
-          <span>웹 수집 필요 {needsCollectionItems.length}</span>
+          <span>합성 필요 {needsCollectionItems.length}</span>
           <span>샘플 적재 {workPayload.summary?.imported || 0}</span>
         </div>
         <div className="runtime-inline">
@@ -1990,7 +2545,7 @@ function App() {
               <Metric label="자동" value={seedScan.summary?.importable || 0} />
               <Metric label="확인" value={seedScan.summary?.needsReview || 0} />
               <Metric label="완료" value={seedScan.summary?.alreadyImported || 0} />
-              <Metric label="수집" value={needsCollectionItems.length} />
+              <Metric label="합성" value={needsCollectionItems.length} />
             </div>
             <div className="intake-tabs">
               {INTAKE_TABS.map(([id, label]) => (
@@ -2016,10 +2571,62 @@ function App() {
 
           <section className="panel-block compact first-priority-block">
             <div className="block-title-row">
-              <h2>1차 목표 문서</h2>
-              <span className="priority">{firstPriorityScopeEntries.length || firstPriorityItems.length}건 / {firstPriorityItems.length}종</span>
+              <h2>목표 그룹</h2>
+              <span className="priority">{activeTargetGroup.label} · 표시 {targetGroupItems.length}종 / 전체 {targetGroupAllItems.length}종 · scope {(activeTargetGroup.scopeEntries || []).length || targetGroupAllItems.length}건</span>
             </div>
-            <p className="muted">좌클릭: 문서 선택 · 우클릭: 생성 가능성 판정. 금융 20건 + 제조 10건이며 FIN-01, RPT-08은 중복되어 28종으로 표시됩니다.</p>
+            <p className="muted">좌클릭: 문서 선택 · 우클릭: 생성 가능성 판정. 사용자 정의 목표 그룹은 `workbench/target_groups.json`에 저장됩니다.</p>
+            {sampleAvailabilityFilters.length > 0 && <p className="muted mini-help">샘플/합성 필터 적용 중: {sampleAvailabilityFilters.map((id) => SAMPLE_AVAILABILITY_LABELS[id]).join(', ')}. 목표 그룹 목록과 batch 대상에도 동일하게 적용됩니다.</p>}
+            <div className="button-row compact-buttons three-actions">
+              <button className="primary" onClick={createTargetGroupDraft} disabled={isBusy}>새 그룹</button>
+              <button onClick={() => editTargetGroup(activeTargetGroup)} disabled={!activeTargetGroup.id || isBusy}>{activeTargetGroup.protected ? '복사 편집' : '그룹 수정'}</button>
+              <button className="danger" onClick={deleteActiveTargetGroup} disabled={!activeTargetGroup.id || isBusy}>{activeTargetGroup.protected ? '숨김' : '삭제'}</button>
+            </div>
+            {targetGroups.length > 0 ? (
+              <label className="target-group-select">활성 목표 그룹
+                <select value={activeTargetGroup.id} onChange={(event) => setActiveTargetGroupId(event.target.value)}>
+                  {targetGroups.map((group) => <option key={group.id} value={group.id}>{group.label}</option>)}
+                </select>
+              </label>
+            ) : (
+              <p className="muted">표시 중인 목표 그룹이 없습니다. 새 그룹을 만들거나 기본 그룹을 다시 추가하려면 새 그룹으로 필요한 문서를 구성하세요.</p>
+            )}
+            {targetGroupEditing && (
+              <div className="target-group-editor">
+                <label>그룹명<input value={targetGroupDraft.label} onChange={(event) => setTargetGroupDraft((current) => ({ ...current, label: event.target.value }))} /></label>
+                <label>설명<input value={targetGroupDraft.description} onChange={(event) => setTargetGroupDraft((current) => ({ ...current, description: event.target.value }))} /></label>
+                <div className="target-group-add-row">
+                  <select value={targetGroupDocId} onChange={(event) => setTargetGroupDocId(event.target.value)}>
+                    {documents.map((doc) => <option key={doc.docId} value={doc.docId}>{doc.title} · {doc.docId}</option>)}
+                  </select>
+                  <button onClick={() => addDocToTargetGroupDraft()} disabled={!targetGroupDocId || isBusy}>추가</button>
+                </div>
+                <div className="target-group-draft-list">
+                  {(targetGroupDraft.scopeEntries || []).map((entry) => (
+                    <span key={`${entry.domain}:${entry.docId}`}>{entry.title || entry.docId}<button onClick={() => removeDocFromTargetGroupDraft(entry.docId)} disabled={isBusy}>×</button></span>
+                  ))}
+                </div>
+                <div className="button-row compact-buttons">
+                  <button className="primary" onClick={() => run(saveTargetGroupDraft)} disabled={!targetGroupDraft.label.trim() || !targetGroupDraft.scopeEntries.length || isBusy}>
+                    {busy === 'targetGroupSave' ? '저장 중...' : '그룹 저장'}
+                  </button>
+                  <button onClick={() => setTargetGroupEditing(false)} disabled={isBusy}>닫기</button>
+                </div>
+              </div>
+            )}
+            <div className="final-export-card group-authoring-card">
+              <div className="final-export-head">
+                <b>목표 그룹 Authoring Batch</b>
+                <span>준비 {targetGroupAuthoringReadyItems.length} · 미준비 {targetGroupAuthoringMissingItems.length}</span>
+              </div>
+              <button
+                className="primary"
+                onClick={() => run(() => renderAuthoringBatch({ all: true, docIds: targetGroupAuthoringReadyItems.map((item) => item.docId), label: activeTargetGroup.label }))}
+                disabled={!targetGroupAuthoringReadyItems.length || isBusy}
+              >
+                {busy === 'authoringBatchGroup' ? '그룹 배치 생성 중...' : `${activeTargetGroup.label} ${targetGroupAuthoringReadyItems.length}종 × 5장`}
+              </button>
+              {targetGroupAuthoringMissingItems.length > 0 && <p className="muted">미준비: {targetGroupAuthoringMissingItems.slice(0, 3).map((item) => item.title).join(', ')}{targetGroupAuthoringMissingItems.length > 3 ? ` 외 ${targetGroupAuthoringMissingItems.length - 3}종` : ''}</p>}
+            </div>
             <div className="final-export-card">
               <div className="final-export-head">
                 <b>최종 산출물 Export</b>
@@ -2047,7 +2654,7 @@ function App() {
               )}
             </div>
             <div className="first-priority-list">
-              {firstPriorityItems.length === 0 ? <p className="muted">1차 목표 문서가 없습니다.</p> : firstPriorityItems.map((item) => (
+              {targetGroupItems.length === 0 ? <p className="muted">목표 그룹 문서가 없습니다.</p> : visibleTargetGroupItems.map((item) => (
                 <button
                   key={item.docId}
                   className={`${item.docId === selectedDocId ? 'priority-doc-card active' : 'priority-doc-card'} status-bg-${workItemTone(item)}`}
@@ -2061,7 +2668,10 @@ function App() {
                     {(item.registry?.firstPriorityDomains || []).length > 0 && <span className="priority-domain">{item.registry.firstPriorityDomains.join('·')}</span>}
                     <span className={workItemIsComplete(item) ? 'next-action complete' : 'next-action'}>{workItemNextAction(item)}</span>
                     <span>{item.statusLabel}</span>
-                    {item.needsCollection && <span className="need-collect">수집 필요</span>}
+                    {item.needsSynthesis && <span className="need-collect">합성 필요</span>}
+                    {item.sampleAvailability === 'internal_ready' && <span className="sample-ready">사내 샘플</span>}
+                    {item.sampleAvailability === 'workbench_loaded' && <span className="seed-ready">적재됨</span>}
+                    {item.sampleAvailability === 'finalized' && <span className="sample-ready complete">대체 완료</span>}
                     {item.hasPendingSeed && <span className="seed-ready">seed 발견</span>}
                     {(assessmentRowsByDocId.get(item.docId) || []).map((row) => <span key={row.key} className={`assessment-mini ${assessmentTone(row.feasibility)}`}>{row.domain}:{row.feasibilityLabel}</span>)}
                     <span>{item.sampleCount}개</span>
@@ -2069,27 +2679,55 @@ function App() {
                 </button>
               ))}
             </div>
+            {targetGroupItems.length > 3 && (
+              <button className="target-group-toggle" onClick={() => setTargetGroupListExpanded((current) => !current)}>
+                {targetGroupListExpanded ? '목표 문서 접기' : `목표 문서 ${targetGroupItems.length - visibleTargetGroupItems.length}개 더 보기`}
+              </button>
+            )}
           </section>
 
           <section className="panel-block compact doc-filter-block">
             <h2>문서 현황판</h2>
             <input placeholder="문서명/ID 검색" value={search} onChange={(event) => setSearch(event.target.value)} />
-            <select value={domainFilter} onChange={(event) => setDomainFilter(event.target.value)}>
-              <option value="all">전체 도메인</option>
-              {(registry?.domains || []).map((domain) => <option key={domain} value={domain}>{domain}</option>)}
-            </select>
-            <select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value)}>
-              <option value="all">전체 상태</option>
-              <option value="pending_seed">seed 발견/미적재</option>
-              <option value="needs_collection">웹 수집 필요</option>
-              <option value="missing">미적재</option>
-              <option value="sample_imported">샘플 적재됨</option>
-              <option value="ocr_done">BBox 완료</option>
-              <option value="review_done">리뷰 완료</option>
-              <option value="inpaint_done">인페인팅 완료</option>
-              <option value="cleanroom_sample_ready">클린룸 완료</option>
-              <option value="collection_done">수집 완료</option>
-            </select>
+            <div className="checkbox-filter-block">
+              <div className="checkbox-filter-head"><b>PO 도메인</b><small>{domainFilters.length ? `${domainFilters.length}개 선택` : '전체'}</small></div>
+              <div className="checkbox-filter-list">
+                {(registry?.poDomains || registry?.domains || []).map((domain) => (
+                  <label key={domain} className="checkbox-filter-row">
+                    <input type="checkbox" checked={domainFilters.includes(domain)} onChange={() => setDomainFilters((current) => toggleArrayValue(current, domain))} />
+                    <span>{domain}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="checkbox-filter-block">
+              <div className="checkbox-filter-head"><b>진척도</b><small>{statusFilters.length ? statusFilters.map((id) => WORK_STATUS_GROUP_LABELS[id]).join(', ') : '전체'}</small></div>
+              <div className="checkbox-filter-list compact">
+                {WORK_STATUS_GROUPS.map(([id, label]) => (
+                  <label key={id} className="checkbox-filter-row">
+                    <input type="checkbox" checked={statusFilters.includes(id)} onChange={() => setStatusFilters((current) => toggleArrayValue(current, id))} />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="checkbox-filter-block">
+              <div className="checkbox-filter-head"><b>샘플/합성</b><small>{sampleAvailabilityFilters.length ? sampleAvailabilityFilters.map((id) => SAMPLE_AVAILABILITY_LABELS[id]).join(', ') : '전체'}</small></div>
+              <div className="checkbox-filter-list compact">
+                {SAMPLE_AVAILABILITY_FILTERS.map(([id, label]) => (
+                  <label key={id} className="checkbox-filter-row">
+                    <input type="checkbox" checked={sampleAvailabilityFilters.includes(id)} onChange={() => setSampleAvailabilityFilters((current) => toggleArrayValue(current, id))} />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <p className="muted mini-help">PO 도메인은 PDF 1페이지 하단의 구축 대상 요약 축입니다. 사내 샘플 준비는 seed_samples 매칭을 포함하며, 워크벤치 적재 전이어도 합성 불필요 후보로 분리됩니다.</p>
+            <div className="button-row compact-buttons single-action-row">
+              <button className="primary" onClick={createTargetGroupDraftFromFilteredItems} disabled={!filteredItems.length || isBusy}>
+                현재 필터 결과로 새 그룹
+              </button>
+            </div>
           </section>
 
           <section className="doc-list">
@@ -2101,7 +2739,10 @@ function App() {
                   {item.registry?.isFirstPriority && <span className="priority">1차</span>}
                   <span className={workItemIsComplete(item) ? 'next-action complete' : 'next-action'}>{workItemNextAction(item)}</span>
                   {item.hasPendingSeed && <span className="seed-ready">seed 발견</span>}
-                  {item.needsCollection && <span className="need-collect">수집 필요</span>}
+                  {item.needsSynthesis && <span className="need-collect">합성 필요</span>}
+                  {item.sampleAvailability === 'internal_ready' && <span className="sample-ready">사내 샘플</span>}
+                  {item.sampleAvailability === 'workbench_loaded' && <span className="seed-ready">적재됨</span>}
+                  {item.sampleAvailability === 'finalized' && <span className="sample-ready complete">대체 완료</span>}
                   <span>{item.statusLabel}</span>
                   <span>{item.sampleCount}개</span>
                 </div>
@@ -2116,7 +2757,7 @@ function App() {
           <section className="selected-context">
             <div>
               <h2>{selectedDoc?.title || '문서를 선택하세요'}</h2>
-              <p className="muted">{selectedDoc?.domains?.join(' · ') || '레지스트리 계층 정보 없음'}</p>
+              <p className="muted">{selectedDoc?.poDomains?.length ? `PO 도메인: ${selectedDoc.poDomains.join(' · ')}` : 'PO 도메인 정보 없음'}{(selectedDoc?.workflowDomains || selectedDoc?.domains || []).length ? ` / 업무: ${(selectedDoc.workflowDomains || selectedDoc.domains).join(' · ')}` : ''}</p>
             </div>
             <div className="context-chips">
               {selectedDoc?.issuer && <span>{selectedDoc.issuer}</span>}
@@ -2150,8 +2791,8 @@ function App() {
                 ) : (
                   <div className="stage-tabs">
                     <button className={canvasMode === 'review' ? 'active' : ''} onClick={() => setCanvasMode('review')} disabled={!policy}>BBox 리뷰</button>
-                    <button className={canvasMode === 'inpaint' ? 'active' : ''} onClick={() => setCanvasMode('inpaint')} disabled={!inpaintedPath}>인페인팅</button>
-                    <button className={canvasMode === 'cleanup' ? 'active' : ''} onClick={() => setCanvasMode('cleanup')} disabled={!policy || !inpaintedPath}>템플릿 클린업</button>
+                    {!selectedIsBlankTemplate && <button className={canvasMode === 'inpaint' ? 'active' : ''} onClick={() => setCanvasMode('inpaint')} disabled={!inpaintedPath}>인페인팅</button>}
+                    {!selectedIsBlankTemplate && <button className={canvasMode === 'cleanup' ? 'active' : ''} onClick={() => setCanvasMode('cleanup')} disabled={!policy || !inpaintedPath}>템플릿 클린업</button>}
                     <button className={canvasMode === 'authoring' ? 'active' : ''} onClick={() => setCanvasMode('authoring')} disabled={!authoringBundle}>Authoring</button>
                   </div>
                 )}
@@ -2189,6 +2830,10 @@ function App() {
                 mask={cleanupMask}
                 selectedId={selectedCleanupId}
                 setSelectedId={setSelectedCleanupId}
+                tool={cleanupTool}
+                color={cleanupMask?.selected_color || [255, 255, 255]}
+                radius={cleanupMask?.brush_radius || 10}
+                onSampleColor={sampleCleanupColor}
                 onAddStroke={addCleanupStroke}
                 viewportMode={viewportMode}
               />
@@ -2204,13 +2849,36 @@ function App() {
 
         <aside className="action-panel fixed-panel">
           <section className="panel-block">
-            <h2>선택 문서 seed</h2>
-            <p className="muted">선택한 문서에 연결된 seed 폴더와 적재 상태입니다.</p>
+            <div className="block-title-row">
+              <h2>선택 문서 seed</h2>
+              <button className="danger slim" onClick={() => run(revertSelectedSeedImport)} disabled={!selectedItem?.sampleCount || isBusy}>적재 되돌리기</button>
+            </div>
+            <p className="muted">연결된 seed 폴더와 적재 상태입니다. 되돌리기는 샘플/파이프라인 산출물을 보관함으로 이동합니다.</p>
+            <button onClick={() => run(() => previewSelectedSeedRevert())} disabled={!selectedItem?.sampleCount || isBusy}>
+              {busy === 'seedRevertPreview' ? '미리보기 중...' : '되돌리기 영향 미리보기'}
+            </button>
+            {selectedItem?.hasEditableOfficeTemplate && (
+              <div className="audit-box office-render-box">
+                <b>편집 가능한 Office 템플릿</b>
+                <span>{selectedItem.officeRender?.backend || 'office-com'} · {selectedItem.officeRender?.status || 'external_render_required'}</span>
+                <small>DOCX 원본 → 채워진 DOCX → PDF/page image → bbox/label/GT lineage는 manifest 기준으로 추적합니다.</small>
+              </div>
+            )}
+            {seedRevertPreview?.docId === selectedDocId && (
+              <div className="audit-box">
+                <b>되돌리기 미리보기</b>
+                <span>상태 → {seedRevertPreview.willResetStatusTo} · 보존 {seedRevertPreview.willPreserveArtifacts.length}종</span>
+                {(seedRevertPreview.willMove || []).map((item) => <small key={item.path}>{item.path} · {item.fileCount} files</small>)}
+                <small>백업 루트: {seedRevertPreview.backupRoot}</small>
+              </div>
+            )}
             {matchedSeedFolders.length ? matchedSeedFolders.map((folder) => (
               <div className={`seed-card ${folder.status}`} key={folder.folder}>
                 <b>{folder.name}</b><span>{folder.statusLabel} · {folder.fileCount}개</span>
-                <button onClick={() => run(() => importSeed(folder.folder, folder.matchedDocId))} disabled={folder.status === 'alreadyImported' || isBusy}>{folder.status === 'alreadyImported' ? '적재 완료' : '이 폴더 적재'}</button>
-                <button className="danger" onClick={() => run(() => trashSeedFolder(folder.folder, folder.name))} disabled={isBusy}>보관함 이동</button>
+                <div className="button-row compact-buttons">
+                  <button onClick={() => run(() => importSeed(folder.folder, folder.matchedDocId))} disabled={folder.status === 'alreadyImported' || isBusy}>{folder.status === 'alreadyImported' ? '적재 완료' : '적재'}</button>
+                  <button className="danger" onClick={() => run(() => trashSeedFolder(folder.folder, folder.name))} disabled={isBusy}>보관</button>
+                </div>
               </div>
             )) : <p className="muted">연결된 seed가 없습니다. 웹에서 샘플을 수집해 `seed_samples/{selectedDoc?.title || '문서명'}/`에 넣으면 입고함에 표시됩니다.</p>}
           </section>
@@ -2221,24 +2889,48 @@ function App() {
           <section className="panel-block">
             <h2>BBox 검출</h2>
             <label>작업 샘플<select value={selectedSample} onChange={(event) => setSelectedSample(event.target.value)}><option value="">샘플 선택</option>{(selectedItem?.samples || []).map((sample) => <option key={sample} value={sample}>{shortPath(sample)}</option>)}</select></label>
-            <p className="muted">검출 방식: PaddleOCR 정밀 모드({DEFAULT_OCR_PRESET}) 고정</p>
+            <div className="sample-kind-controls">
+              <label className={`check-row ${selectedSampleKind === 'blank_template' ? 'on' : ''}`}>
+                <input
+                  type="checkbox"
+                  checked={selectedSampleKind === 'blank_template'}
+                  disabled={!selectedDocId || isBusy}
+                  onChange={(event) => run(() => updateSelectedSampleKind(event.target.checked ? 'blank_template' : 'filled_sample'))}
+                />
+                <span>빈 템플릿 샘플</span>
+              </label>
+              <small>{selectedIsBlankTemplate ? '빈 템플릿은 인페인팅 없이 PaddleOCR 텍스트 bbox를 먼저 리뷰하고, 필요 시 선/그리드 후보를 추가합니다.' : '값이 들어 있는 샘플은 기존처럼 OCR → 리뷰 → 인페인팅 흐름을 사용합니다.'}</small>
+              {selectedIsBlankTemplate && (
+                <label className={`check-row ${blankTemplateLineDetectEnabled ? 'on' : ''}`}>
+                  <input
+                    type="checkbox"
+                    checked={blankTemplateLineDetectEnabled}
+                    disabled={!selectedDocId || isBusy}
+                    onChange={(event) => setBlankTemplateLineDetectEnabled(event.target.checked)}
+                  />
+                  <span>선/그리드 bbox 후보 추가</span>
+                </label>
+              )}
+            </div>
+            <p className="muted">검출 방식: PaddleOCR 정밀 모드({DEFAULT_OCR_PRESET}){selectedIsBlankTemplate && blankTemplateLineDetectEnabled ? ' + opt-in 선/그리드 후보' : ''}</p>
             {!isImagePath(selectedSample) && selectedSample && <p className="warning-text">현재 OCR GUI 실행은 이미지 파일을 대상으로 합니다. PDF는 변환된 JPG/PNG를 선택하세요.</p>}
-            <button className="primary" onClick={() => run(runOcrDetect)} disabled={!selectedDocId || !selectedSample || !isImagePath(selectedSample) || isBusy}>{busy === 'detect' ? 'BBox 검출 중...' : 'PaddleOCR 정밀 BBox 검출'}</button>
+            <button className="primary" onClick={() => run(runOcrDetect)} disabled={!selectedDocId || !selectedSample || !isImagePath(selectedSample) || isBusy}>{busy === 'detect' ? 'BBox 검출 중...' : selectedIsBlankTemplate && blankTemplateLineDetectEnabled ? 'PaddleOCR + 선/그리드 후보 검출' : 'PaddleOCR 정밀 BBox 검출'}</button>
             {detectionResult && <p className="mini-path">{detectionResult.paths.detections}</p>}
-            <button onClick={() => run(() => createDraft())} disabled={!selectedItem?.latestDetections || isBusy}>검출 결과로 리뷰 재생성</button>
           </section>
 
-          <section className="panel-block">
-            <h2>리뷰/분류</h2>
-            <div className="status-summary"><Metric label="전체" value={stats.total} /><Metric label="치환" value={stats.byStatus.use} tone="use" /><Metric label="보존" value={stats.byStatus.keep} tone="keep" /><Metric label="무시" value={stats.byStatus.ignore} tone="ignore" /></div>
-            <p className="muted">
-              {bboxEditMode === 'edit'
-                ? '편집 ON: 좌클릭 드래그로 이동/리사이즈, 빈 영역 드래그로 신규 bbox 작성 · ⌘S 저장 · ⌘Z 실행 취소 · Delete 삭제'
-                : '편집 OFF: 좌클릭 선택/다중선택/범위선택 · bbox를 수정하려면 편집 모드를 켜세요.'}
-            </p>
-            <div className="selected-box">
-              {selectedIds.length ? `${selectedIds.length}개 선택됨` : '선택된 bbox 없음'}
-              {staleLabels.length ? ` · 텍스트 재확인 필요 ${staleLabels.length}개` : ''}
+          <section className="panel-block compact review-control-panel">
+            <div className="block-title-row">
+              <h2>리뷰/분류</h2>
+              <span className={bboxEditMode === 'edit' ? 'mode-pill edit' : 'mode-pill'}>{bboxEditMode === 'edit' ? '편집 ON' : '선택 모드'}</span>
+            </div>
+            <div className="status-summary compact"><Metric label="전체" value={stats.total} /><Metric label="사용" value={stats.byStatus.use} tone="use" /><Metric label="미사용" value={stats.byStatus.keep} tone="keep" /><Metric label="무시" value={stats.byStatus.ignore} tone="ignore" /></div>
+            <div className="review-hint-line">
+              <span>{bboxEditMode === 'edit' ? '드래그 이동/리사이즈 · 빈 영역 신규' : '클릭/범위/다중선택'}</span>
+              <span>⌘S 저장 · ⌘Z 취소 · Del 삭제</span>
+            </div>
+            <div className="selected-box compact">
+              {selectedIds.length ? `${selectedIds.length}개 선택` : '선택 없음'}
+              {staleLabels.length ? ` · 재확인 ${staleLabels.length}` : ''}
             </div>
             <div className="status-buttons">{STATUS.map((status, index) => <button key={status} className={`status ${status}`} title={`${index + 1}: ${STATUS_DESCRIPTIONS[status]}`} disabled={!policy || selectedIds.length === 0 || isBusy} onClick={() => setSelectedBboxStatus(status)}><b>{index + 1}</b>{STATUS_LABELS[status]}</button>)}</div>
             <button onClick={() => run(() => runCropRecognition({ mode: 'apply' }))} disabled={!policy || isBusy || (!selectedIds.length && !staleLabels.length)}>
@@ -2249,47 +2941,117 @@ function App() {
                   : `수정 ${staleLabels.length}개 텍스트 재인식`}
             </button>
             <button className="danger" onClick={deleteSelectedBboxes} disabled={!policy || bboxEditMode !== 'edit' || selectedIds.length === 0 || isBusy}>선택 BBox 삭제</button>
+            <div className="button-row compact-buttons">
+              <button onClick={() => run(scanReviewLegacyIssues)} disabled={isBusy}>{busy === 'reviewAudit' ? '스캔 중...' : 'ignore 전체 스캔'}</button>
+              <button className="danger" onClick={() => run(removeCurrentIgnoreBboxes)} disabled={!policy || stats.byStatus.ignore <= 0 || isBusy}>
+                {busy === 'removeIgnore' ? '제거 중...' : `현재 ignore ${stats.byStatus.ignore}개 제거`}
+              </button>
+            </div>
+            {reviewAudit && <p className="mini-path">전체 ignore: {reviewAudit.summary.ignoreCount}개 / {reviewAudit.summary.documentCount}문서</p>}
             {reviewHistory.length > 0 && <button onClick={undoReview} disabled={!policy || isBusy}>실행 취소 (⌘Z)</button>}
             <button onClick={() => run(() => loadReview())} disabled={!selectedItem?.latestReview || isBusy}>기존 리뷰 불러오기</button>
             <button className="primary" onClick={() => run(saveReview)} disabled={!policy || isBusy}>{busy === 'save' ? '저장 중...' : reviewDirty ? '리뷰 저장 *' : '리뷰 저장'}</button>
           </section>
 
-          <section className="panel-block">
-            <h2>LaMa 인페인팅</h2>
-            <label>LaMa max side<input type="number" min="512" max="4096" step="128" value={lamaMaxSide} onChange={(event) => setLamaMaxSide(Number(event.target.value) || 2400)} /></label>
-            <button className="primary" onClick={() => run(runInpaint)} disabled={!policy || stats.byStatus.use === 0 || !canUseLama || isBusy}>{busy === 'inpaint' ? 'LaMa 실행 중...' : 'LaMa 인페인팅 실행'}</button>
-            {!canUseLama && <p className="warning-text">LaMa 런타임이 감지되지 않았습니다. .venv-ocr 설치 상태를 확인하세요.</p>}
-            {comparisonHref && <a className="result-link" href={comparisonHref} target="_blank" rel="noreferrer">4-in-1 비교 새 창</a>}
-          </section>
+          {selectedIsBlankTemplate ? (
+            <section className="panel-block">
+              <h2>빈 템플릿 흐름</h2>
+              <p className="muted">이 샘플은 이미 깨끗한 양식이므로 인페인팅/템플릿 보정을 건너뜁니다. 리뷰에서 값 입력 bbox를 확정한 뒤 Agentic Authoring 추론을 실행하세요.</p>
+            </section>
+          ) : (
+            <section className="panel-block">
+              <h2>LaMa 인페인팅</h2>
+              <label>LaMa max side<input type="number" min="512" max="4096" step="128" value={lamaMaxSide} onChange={(event) => setLamaMaxSide(Number(event.target.value) || 2400)} /></label>
+              <button className="primary" onClick={() => run(runInpaint)} disabled={!policy || stats.byStatus.use === 0 || !canUseLama || isBusy}>{busy === 'inpaint' ? 'LaMa 실행 중...' : 'LaMa 인페인팅 실행'}</button>
+              {!canUseLama && <p className="warning-text">LaMa 런타임이 감지되지 않았습니다. .venv-ocr 설치 상태를 확인하세요.</p>}
+            </section>
+          )}
 
-          <section className="panel-block">
-            <h2>템플릿 클린업</h2>
-            <p className="muted">인페인팅 결과에 남은 얼룩/잔흔을 중앙 캔버스에서 자유형 올가미로 표시한 뒤, 현재 템플릿에 수동 마스크만 LaMa 후처리로 적용합니다.</p>
+          {!selectedIsBlankTemplate && <section className="panel-block compact">
+            <h2>템플릿 보정</h2>
+            <p className="muted">LaMa 후처리 대신 스포이드로 주변색을 찍고 브러시로 직접 칠합니다.</p>
             <div className="selected-box">
-              올가미 {cleanupMask?.strokes?.length || 0}개{selectedCleanupId ? ` · 선택 ${selectedCleanupId}` : ''}{cleanupDirty ? ' · 저장 안 됨' : ''}
+              브러시 {cleanupMask?.strokes?.length || 0}개{selectedCleanupId ? ` · 선택 ${selectedCleanupId}` : ''}{cleanupDirty ? ' · 저장 안 됨' : ''}
             </div>
-            <div className="button-row">
+            <div className="button-row compact-buttons">
+              <button className={cleanupTool === 'eyedropper' ? 'active' : ''} onClick={() => { setCanvasMode('cleanup'); setCleanupTool('eyedropper'); }} disabled={!policy || !inpaintedPath || isBusy}>스포이드</button>
+              <button className={cleanupTool === 'brush' ? 'active' : ''} onClick={() => { setCanvasMode('cleanup'); setCleanupTool('brush'); }} disabled={!policy || !inpaintedPath || isBusy}>브러시</button>
+            </div>
+            <div className="cleanup-controls">
+              <label>색상
+                <input type="color" value={rgbToHex(cleanupMask?.selected_color || [255, 255, 255])} onChange={(event) => updateCleanupPaintSettings({ selected_color: hexToRgb(event.target.value) })} />
+              </label>
+              <label>크기
+                <input type="number" min="1" max="160" value={cleanupMask?.brush_radius || 10} onChange={(event) => updateCleanupPaintSettings({ brush_radius: clampNumber(event.target.value, 1, 160) })} />
+              </label>
+            </div>
+            <div className="button-row compact-buttons">
               <button onClick={() => { setCanvasMode('cleanup'); run(() => loadCleanupMask()); }} disabled={!policy || !inpaintedPath || isBusy}>
-                {busy === 'cleanupLoad' ? '불러오는 중...' : '마스크 불러오기'}
+                {busy === 'cleanupLoad' ? '불러오는 중...' : '불러오기'}
               </button>
               <button className={cleanupDirty ? 'primary' : ''} onClick={() => run(() => saveCleanupMask())} disabled={!policy || !inpaintedPath || isBusy}>
-                {busy === 'cleanupSave' ? '저장 중...' : cleanupDirty ? '마스크 저장 *' : '마스크 저장'}
+                {busy === 'cleanupSave' ? '저장 중...' : cleanupDirty ? '저장 *' : '저장'}
               </button>
             </div>
-            <div className="button-row">
-              <button onClick={deleteSelectedCleanupMask} disabled={!selectedCleanupId || isBusy}>선택 마스크 삭제</button>
+            <div className="button-row compact-buttons">
+              <button onClick={deleteSelectedCleanupMask} disabled={!selectedCleanupId || isBusy}>선택 삭제</button>
               <button onClick={undoCleanupMask} disabled={!cleanupHistory.length || isBusy}>실행 취소</button>
             </div>
-            <button className="primary" onClick={() => run(runCleanupInpaint)} disabled={!policy || !inpaintedPath || !canUseLama || isBusy}>
-              {busy === 'cleanupInpaint' ? 'LaMa 클린업 중...' : 'LaMa 클린업 재실행'}
-            </button>
-            {cleanupResult?.paths?.manual_mask && <p className="mini-path">{cleanupResult.paths.manual_mask}</p>}
-          </section>
+            <div className="button-row compact-buttons">
+              <button onClick={() => run(scanManualCleanupLegacy)} disabled={isBusy}>{busy === 'manualCleanupAudit' ? '스캔 중...' : 'legacy cleanup 스캔'}</button>
+              <button className="danger" onClick={() => run(() => promoteManualCleanup(selectedManualCleanupItems[0]))} disabled={!selectedManualCleanupItems.length || isBusy}>
+                {busy === 'manualCleanupPromote' ? '승격 중...' : '현재 문서 cleanup 승격'}
+              </button>
+            </div>
+            {manualCleanupAudit && (
+              <div className="audit-box">
+                <b>manual_cleanup {manualCleanupAudit.summary.legacyCleanupCount}개</b>
+                {selectedManualCleanupItems.length ? selectedManualCleanupItems.slice(0, 2).map((item) => <small key={item.cleanupDir}>{item.cleanupDir} → {item.promoteSource || '승격 대상 없음'}</small>) : <small>현재 문서에는 legacy cleanup이 없습니다.</small>}
+              </div>
+            )}
+            {cleanupResult?.paths?.inpainted && <p className="mini-path">{cleanupResult.paths.inpainted}</p>}
+          </section>}
 
-          <section className="panel-block">
-            <h2>합성 1-cycle</h2>
-            <p className="muted">Authoring에서는 최신 reviewed bbox를 읽기 전용으로 참조하고, 중앙 캔버스는 최종 Pillow 렌더러와 동일한 방식으로 live preview를 표시합니다.</p>
-            <p className="warning-text">Schema 초안 생성은 기존 authoring 데이터를 덮어쓸 위험이 있어 비활성화했습니다. 기존 Authoring 불러오기/저장만 사용하세요.</p>
+          <section className="panel-block authoring-control-panel">
+            <h2>Authoring 작업</h2>
+            <p className="muted">Schema / Style / Faker / Render를 분리해 다룹니다. 기존 파일 3종이 있으면 문서 선택 시 자동으로 불러와 최종 Pillow 렌더러 live preview를 표시합니다.</p>
+            <div className="authoring-step-label"><b>0. Agentic Authoring 추론</b><span>Codex exec가 문서 이미지/OCR/review + 웹 리서치 기반 draft를 실제 생성</span></div>
+            <textarea
+              className="agent-request-input"
+              placeholder="agent에게 전달할 생성 의도/주의사항을 적으세요. 예: 카드발급신청서 하단 체크박스는 날짜/카드종류/동의여부 의미를 이미지 기준으로 구분."
+              value={authoringAgentInstruction}
+              onChange={(event) => setAuthoringAgentInstruction(event.target.value)}
+            />
+            <div className="button-row compact-buttons">
+              <button className="primary" onClick={() => run(runAuthoringAgentInference)} disabled={!selectedDocId || isBusy}>
+                {busy === 'authoringAgentRun' ? 'Agent 추론 시작 중...' : 'Agent 추론 실행'}
+              </button>
+              <button onClick={() => run(createAuthoringAgentRequest)} disabled={!selectedDocId || isBusy}>
+                {busy === 'authoringAgentRequest' ? '요청 패키지 생성 중...' : '요청 패키지만 생성'}
+              </button>
+              <button onClick={() => run(() => refreshAuthoringAgentRunStatus())} disabled={!latestAgentRunPath || isBusy}>
+                Agent 상태 새로고침
+              </button>
+            </div>
+            {latestAgentRequestPath && <p className="mini-path">최근 Agent request: {latestAgentRequestPath}{latestAgentPromptPath ? ` · prompt: ${latestAgentPromptPath}` : ''}{latestAgentAnchorMapPath ? ` · anchor: ${latestAgentAnchorMapPath}` : ''}</p>}
+            {latestAgentRunPath && (
+              <div className={`audit-box agent-run-box ${latestAgentRunStatus}`}>
+                <b>Agent run: {latestAgentRunStatus}</b>
+                <small>{latestAgentRunPath}</small>
+                {latestAgentRunPolling && <small>상태 자동 갱신 중...</small>}
+                {authoringAgentRun?.validation?.summary && <small>draft {authoringAgentRun.validation.summary.present}/{authoringAgentRun.validation.summary.required} · missing {authoringAgentRun.validation.summary.missing} · invalid JSON {authoringAgentRun.validation.summary.invalidJson}</small>}
+                {latestAgentRunReady && <small>schema/faker/research draft 생성 및 JSON 검증 완료</small>}
+              </div>
+            )}
+            <div className="button-row compact-buttons">
+              <button onClick={() => run(loadAuthoringLibrary)} disabled={isBusy}>{busy === 'authoringLibrary' ? '라이브러리 로드 중...' : 'Faker/Profile 라이브러리'}</button>
+              <button onClick={() => run(approveAuthoringDraftsToLibrary)} disabled={!latestAgentRequestPath || isBusy}>{busy === 'authoringApproveDrafts' ? '승인 기록 중...' : 'Draft 라이브러리 승인 기록'}</button>
+              <button onClick={() => run(applyAuthoringAgentDrafts)} disabled={!latestAgentRunReady || isBusy}>{busy === 'authoringApplyAgentDrafts' ? '적용 중...' : 'Draft 최종 Authoring 적용'}</button>
+            </div>
+            {authoringLibrary && <p className="mini-path">Library: profile {authoringLibrary.summary.profileTypeCount}종 · pool {authoringLibrary.summary.valuePoolCount}개 · approval {authoringLibrary.summary.approvalCount}건</p>}
+            {authoringApprovalResult?.approval && <p className="mini-path">최근 승인: {authoringApprovalResult.approval.path} · missing {authoringApprovalResult.summary.missing}</p>}
+            <p className="warning-text">로컬 규칙 기반 schema 초안은 사용하지 않습니다. Agent 추론 실행은 로컬 Codex CLI를 별도 프로세스로 호출해 schema/faker/style/research/uncertainty draft 파일을 생성합니다. 최종 authoring 파일 덮어쓰기는 별도 승인/저장 단계에서만 수행합니다.</p>
+            <div className="authoring-step-label"><b>1. Schema · Style · Faker</b><span>키/생성 규칙/스타일 편집</span></div>
             <div className="button-row">
               <button onClick={() => run(() => loadAuthoringBundle())} disabled={!canLoadAuthoring || isBusy}>
                 {busy === 'authoringLoad' ? '불러오는 중...' : 'Authoring 불러오기'}
@@ -2321,24 +3083,53 @@ function App() {
                 onGotoReview={() => setCanvasMode('review')}
               />
             )}
+            {authoringBundle && (
+              <details className="raw-json-section">
+                <summary>Semantic Schema / Full Schema / Style / Faker raw JSON 편집</summary>
+                <p className="muted">사용자 primary schema는 Semantic Schema입니다. Semantic Schema를 수정하면 기존 bbox binding은 leaf 순서와 기존 semantic_path 기준으로 full schema에 자동 연동됩니다. 저장 버튼을 누르기 전까지 파일은 변경되지 않습니다.</p>
+                <label>Semantic Schema JSON (Primary)
+                  <textarea key={`semantic-${authoringVersion}-${authoringDirty}`} rows="7" defaultValue={JSON.stringify(authoringBundle.schema?.semantic_schema || {}, null, 2)} onBlur={(event) => applySemanticSchemaRawJson(event.target.value)} />
+                </label>
+                <label>Full Schema JSON (Advanced / bbox binding 포함)
+                  <textarea key={`schema-${authoringVersion}-${authoringDirty}`} rows="7" defaultValue={JSON.stringify(authoringBundle.schema, null, 2)} onBlur={(event) => applyAuthoringRawJson('schema', event.target.value)} />
+                </label>
+                <label>Stylesheet JSON
+                  <textarea key={`stylesheet-${authoringVersion}-${authoringDirty}`} rows="7" defaultValue={JSON.stringify(authoringBundle.stylesheet, null, 2)} onBlur={(event) => applyAuthoringRawJson('stylesheet', event.target.value)} />
+                </label>
+                <label>Faker Profile JSON
+                  <textarea key={`faker-${authoringVersion}-${authoringDirty}`} rows="7" defaultValue={JSON.stringify(authoringBundle.faker_profile, null, 2)} onBlur={(event) => applyAuthoringRawJson('faker_profile', event.target.value)} />
+                </label>
+              </details>
+            )}
+            <div className="authoring-step-label"><b>2. Render</b><span>live preview와 샘플 생성</span></div>
             <button onClick={() => run(() => renderAuthoringLivePreview({ silent: false }))} disabled={!authoringBundle || isBusy}>
               {busy === 'authoringLivePreview' ? 'Live preview 갱신 중...' : 'Live preview 새로고침'}
             </button>
-            <div className="button-row">
+            <div className="button-row single-action-row">
               <button onClick={() => run(() => renderAuthoringBatch({ all: false }))} disabled={!canLoadAuthoring || isBusy}>
                 {busy === 'authoringBatch' ? '5장 생성 중...' : '선택 문서 5장 생성'}
               </button>
-              <button className="primary" onClick={() => run(() => renderAuthoringBatch({ all: true }))} disabled={!authoringReadyCount || isBusy}>
-                {busy === 'authoringBatchAll' ? '전체 배치 생성 중...' : `전체 ${authoringReadyCount}종 × 5장`}
-              </button>
             </div>
             {authoringPaths.schema && <p className="mini-path">{authoringPaths.schema}{authoringDirty ? ' · 수정됨' : ''}</p>}
-            {(batchSummaryHref || batchFirstImageHref) && (
-              <div className="batch-result-box">
-                <b>배치 결과</b>
-                {batchSummaryHref && <a className="result-link" href={batchSummaryHref} target="_blank" rel="noreferrer">batch summary JSON</a>}
-                {batchManifestHref && <a className="result-link" href={batchManifestHref} target="_blank" rel="noreferrer">batch manifest JSONL</a>}
-                {batchFirstImageHref && <a className="result-link" href={batchFirstImageHref} target="_blank" rel="noreferrer">선택 문서 첫 샘플 이미지</a>}
+            {selectedItem?.hasEditableOfficeTemplate && (
+              <div className="batch-result-box compact office-render-box">
+                <div className="batch-result-head"><b>DOCX 템플릿 렌더 lineage</b><span>{selectedItem.officeRender?.status || 'external_render_required'}</span></div>
+                <p className="muted">채워진 DOCX와 PDF 변환 결과가 manifest에 연결되면 bbox/label/GT 근거 파일을 여기서 함께 추적합니다.</p>
+              </div>
+            )}
+            {(authoringPreviewPath || authoringOverlayHref || batchSummaryHref || batchFirstImageHref) && (
+              <div className="batch-result-box compact">
+                <div className="batch-result-head">
+                  <b>렌더 결과</b>
+                  {authoringBatchResult?.summary && <span>문서 {authoringBatchResult.summary.documentCount} · 이미지 {authoringBatchResult.summary.sampleCount} · 경고 {authoringBatchResult.summary.warningCount}</span>}
+                </div>
+                <div className="result-link-row">
+                  {authoringPreviewPath && <a className="result-link compact" href={fileUrl(authoringPreviewPath, authoringVersion)} target="_blank" rel="noreferrer">Preview</a>}
+                  {authoringOverlayHref && <a className="result-link compact" href={authoringOverlayHref} target="_blank" rel="noreferrer">Overlay</a>}
+                  {batchSummaryHref && <a className="result-link compact" href={batchSummaryHref} target="_blank" rel="noreferrer">Summary</a>}
+                  {batchManifestHref && <a className="result-link compact" href={batchManifestHref} target="_blank" rel="noreferrer">Manifest</a>}
+                  {batchFirstImageHref && <a className="result-link compact" href={batchFirstImageHref} target="_blank" rel="noreferrer">첫 샘플</a>}
+                </div>
               </div>
             )}
           </section>
@@ -2349,9 +3140,80 @@ function App() {
   );
 }
 
-function isAuthoringCheckboxField(field) {
-  const text = `${field?.value_type || ''} ${field?.generator || ''} ${field?.field_id || ''} ${field?.label || ''}`.toLowerCase();
-  return text.includes('bool.checkbox') || text.includes('checkbox') || text.includes('_check') || text.includes('체크');
+function isAuthoringCheckboxField(field, fakerProfile = null) {
+  const fieldId = field?.field_id || '';
+  const explicitRule = fakerProfile?.field_generators?.[fieldId] || field?.generator || '';
+  const explicitType = field?.value_type || '';
+  return isCheckboxRule(explicitRule) || isCheckboxRule(explicitType);
+}
+
+function isCheckboxRule(value) {
+  const normalized = String(value || '').trim().toLowerCase().replaceAll('_', '.').replaceAll('-', '.');
+  return normalized === 'bool.checkbox'
+    || normalized === 'checkbox'
+    || normalized === 'checkbox.bool'
+    || normalized === 'boolean'
+    || normalized.startsWith('bool.checkbox')
+    || normalized.startsWith('checkbox:')
+    || normalized.startsWith('boolean:')
+    || normalized.startsWith('bool:');
+}
+
+function syncSemanticSchemaToAuthoringFields(schema, nextSemanticSchema) {
+  const oldLeaves = collectSemanticLeafPaths(schema?.semantic_schema || {});
+  const nextLeaves = collectSemanticLeafPaths(nextSemanticSchema || {});
+  const nextByKey = new Map(nextLeaves.map((path) => [semanticPathKey(path), path]));
+  const oldIndexByKey = new Map(oldLeaves.map((path, index) => [semanticPathKey(path), index]));
+  const fields = Array.isArray(schema?.fields) ? schema.fields : [];
+  const syncedFields = fields.map((field, index) => {
+    const currentPath = fieldSemanticPathParts(field);
+    const currentKey = semanticPathKey(currentPath);
+    let targetPath = nextByKey.get(currentKey) || null;
+    if (!targetPath && oldIndexByKey.has(currentKey)) {
+      targetPath = nextLeaves[oldIndexByKey.get(currentKey)] || null;
+    }
+    if (!targetPath) {
+      targetPath = nextLeaves[index] || null;
+    }
+    if (!targetPath) return null;
+    const jsonPath = semanticPathKey(targetPath);
+    return {
+      ...field,
+      label: targetPath[targetPath.length - 1] || field.label,
+      semantic_path: targetPath,
+      export: {
+        ...(field.export || {}),
+        json_path: jsonPath,
+        csv_column: jsonPath,
+      },
+    };
+  }).filter(Boolean);
+  return {
+    ...schema,
+    semantic_schema: nextSemanticSchema,
+    fields: syncedFields,
+  };
+}
+
+function collectSemanticLeafPaths(value, prefix = []) {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const entries = Object.entries(value);
+    if (!entries.length) return prefix.length ? [prefix] : [];
+    return entries.flatMap(([key, child]) => collectSemanticLeafPaths(child, [...prefix, key]));
+  }
+  return prefix.length ? [prefix] : [];
+}
+
+function fieldSemanticPathParts(field) {
+  if (Array.isArray(field?.semantic_path)) {
+    return field.semantic_path.map((part) => String(part).trim()).filter(Boolean);
+  }
+  const raw = field?.semantic_path || field?.key_path || field?.json_path || field?.export?.json_path || field?.key || field?.label || field?.field_id || '';
+  return String(raw).split('/').map((part) => part.trim()).filter(Boolean);
+}
+
+function semanticPathKey(path) {
+  return (Array.isArray(path) ? path : []).map((part) => String(part).trim()).filter(Boolean).join('/');
 }
 
 function hasRenderableAuthoringBbox(field) {
@@ -2491,7 +3353,7 @@ function AuthoringEditor({
   const currentRule = selectedField ? (fakerProfile?.field_generators?.[selectedField.field_id] || selectedField.generator || selectedField.value_type || 'free_text.short') : '';
   const selectedFontId = fontIdForStyle(selectedStyle, fontOptions);
   const selectedExport = selectedField?.export || {};
-  const selectedCheckboxFields = selectedFields.filter(isAuthoringCheckboxField);
+  const selectedCheckboxFields = selectedFields.filter((field) => isAuthoringCheckboxField(field, fakerProfile));
   const hasCheckboxSelection = selectedCheckboxFields.length > 0;
   const checkboxStyles = [...new Set(selectedCheckboxFields.map((field) => field.render_policy?.checkbox_style || 'v_mark'))];
   const checkboxStyleValue = checkboxStyles.length === 1 ? checkboxStyles[0] : 'mixed';
@@ -2554,6 +3416,7 @@ function AuthoringEditor({
               </label>
               <div className="rule-help">
                 <span>preset: person.name_ko</span>
+                <span>date.year/month/day</span>
                 <span>choice:남|여</span>
                 <span>literal:고정값</span>
                 <span>bool.checkbox</span>
@@ -2562,7 +3425,9 @@ function AuthoringEditor({
               </div>
             </>
           )}
-          <div className="triple-grid">
+          <div className="authoring-edit-section render-policy-section">
+            <div className="section-mini-title"><b>Render Policy</b><span>정렬/초과/체크박스 표현</span></div>
+            <div className="triple-grid">
             <label>가로
               <select value={renderPolicy.align || 'left'} onChange={(event) => updateRenderPolicy({ align: event.target.value })}>
                 <option value="left">left</option>
@@ -2600,10 +3465,13 @@ function AuthoringEditor({
               {isMulti && <small>선택된 체크박스 bbox {selectedCheckboxFields.length}개에만 일괄 적용됩니다.</small>}
             </label>
           )}
-          <div className="style-subhead">
-            <b>텍스트 스타일</b>
-            <button type="button" onClick={onRefreshFonts}>폰트 새로고침</button>
           </div>
+          <div className="authoring-edit-section text-style-section">
+            <div className="section-mini-title"><b>Text Style</b><span>폰트/크기/색상/위치 보정</span></div>
+            <div className="style-subhead">
+              <b>텍스트 스타일</b>
+              <button type="button" onClick={onRefreshFonts}>폰트 새로고침</button>
+            </div>
           <label>폰트
             <select
               value={selectedFontId}
@@ -2623,6 +3491,10 @@ function AuthoringEditor({
               {fontOptions.map((font) => <option key={font.id} value={font.id}>{font.label || `${font.family} ${font.style}`}</option>)}
             </select>
           </label>
+          <div className="font-preview-card" style={{ fontFamily: selectedStyle?.font_family || undefined, color: rgbToHex(selectedStyle?.fill), fontSize: `${Math.min(22, Math.max(12, Number(selectedStyle?.font_size || 16)))}px`, fontWeight: selectedStyle?.font_weight || 'normal', fontStyle: selectedStyle?.font_style || 'normal', opacity: selectedStyle?.opacity ?? 1 }}>
+            <span>가나다 ABC 123</span>
+            <small>{selectedStyle?.font_family || '기본/자동 폰트'} · {selectedStyle?.font_size || 28}px</small>
+          </div>
           <div className="triple-grid">
             <label>크기
               <input type="number" min="4" max="240" value={selectedStyle?.font_size || 28} onChange={(event) => updateStyle({ font_size: Number(event.target.value) || 28 })} />
@@ -2670,6 +3542,9 @@ function AuthoringEditor({
               <button type="button" onClick={() => updateStyle({}, { shared: true })}>현재 클래스 유지</button>
             </label>
           </div>
+          </div>
+          <div className="authoring-edit-section field-meta-section">
+            <div className="section-mini-title"><b>Field Meta</b><span>BBox 좌표/필수/메모</span></div>
           {!isMulti ? (
             <>
               <div className="bbox-readonly-grid">
@@ -2698,6 +3573,7 @@ function AuthoringEditor({
               <button type="button" onClick={onGotoReview}>BBox 리뷰로 이동</button>
             </div>
           )}
+          </div>
         </div>
       ) : <p className="muted">편집할 필드가 없습니다.</p>}
     </div>
@@ -2731,7 +3607,7 @@ function UploadPopover({ files, warnings, documents, allDocuments, selectedDocId
           {documents.map((doc) => (
             <button key={doc.docId} className={doc.docId === selectedDocId ? 'upload-doc active' : 'upload-doc'} onClick={() => setSelectedDocId(doc.docId)}>
               <b>{doc.title}</b>
-              <small>{doc.docId}{doc.domains?.length ? ` · ${doc.domains.join(' · ')}` : ''}</small>
+              <small>{doc.docId}{doc.poDomains?.length ? ` · ${doc.poDomains.join(' · ')}` : ''}</small>
             </button>
           ))}
           {documents.length === 0 && <p className="muted">검색 결과가 없습니다.</p>}
@@ -2838,7 +3714,7 @@ function ReviewPrunePopover({ data, busy, onCancel, onConfirm }) {
           <div>
             <p className="eyebrow dark">Authoring 정합성 경고</p>
             <h2>사용하지 않거나 삭제된 BBox에 연결된 합성 정보가 있습니다</h2>
-            <p className="muted">보존/무시/삭제 상태로 저장하면 아래 bbox에 연결된 schema/faker/style 정보가 함께 삭제됩니다. 계속 진행할까요?</p>
+            <p className="muted">미사용/기존 무시/삭제 상태로 저장하면 아래 bbox에 연결된 schema/faker/style 정보가 함께 삭제됩니다. 계속 진행할까요?</p>
           </div>
           <button onClick={onCancel} disabled={busy}>아니오</button>
         </div>
@@ -3092,12 +3968,31 @@ function SamplePreview({ path, version = 0, viewportMode = 'fit' }) {
   );
 }
 
-function CleanupCanvas({ imagePath, version = 0, image, mask, selectedId, setSelectedId, onAddStroke, viewportMode }) {
+function CleanupCanvas({ imagePath, version = 0, image, mask, selectedId, setSelectedId, tool = 'brush', color = [255, 255, 255], radius = 10, onSampleColor, onAddStroke, viewportMode }) {
   const svgRef = useRef(null);
+  const sampleCanvasRef = useRef(null);
   const [drawing, setDrawing] = useState(null);
   const width = image?.width || mask?.image?.width || 1200;
   const height = image?.height || mask?.image?.height || 1600;
   const strokes = mask?.strokes || [];
+
+  useEffect(() => {
+    if (!imagePath) return undefined;
+    let cancelled = false;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      if (cancelled) return;
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      sampleCanvasRef.current = canvas;
+    };
+    img.src = imageUrl(imagePath, version);
+    return () => { cancelled = true; };
+  }, [imagePath, version, width, height]);
 
   function clientToImage(event) {
     const rect = svgRef.current.getBoundingClientRect();
@@ -3109,10 +4004,24 @@ function CleanupCanvas({ imagePath, version = 0, image, mask, selectedId, setSel
   function pointList(points = []) {
     return points.map((point) => `${point.x},${point.y}`).join(' ');
   }
+  function strokeColor(stroke) {
+    return rgbToHex(stroke.color || [255, 255, 255]);
+  }
+  function sampleAt(point) {
+    const canvas = sampleCanvasRef.current;
+    const ctx = canvas?.getContext?.('2d');
+    if (!ctx) return;
+    const pixel = ctx.getImageData(Math.round(point.x), Math.round(point.y), 1, 1).data;
+    onSampleColor?.([pixel[0], pixel[1], pixel[2]]);
+  }
   function handlePointerDown(event) {
     if (event.button !== 0) return;
     event.preventDefault();
     const start = clientToImage(event);
+    if (tool === 'eyedropper') {
+      sampleAt(start);
+      return;
+    }
     setSelectedId('');
     setDrawing({ points: [start] });
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -3121,13 +4030,13 @@ function CleanupCanvas({ imagePath, version = 0, image, mask, selectedId, setSel
     if (!drawing) return;
     const next = clientToImage(event);
     const last = drawing.points[drawing.points.length - 1];
-    if (pointDistance(last, next) < 4) return;
+    if (pointDistance(last, next) < 3) return;
     setDrawing({ points: [...drawing.points, next] });
   }
   function handlePointerUp() {
     if (!drawing) return;
     const points = drawing.points.map((point) => ({ x: Math.round(point.x), y: Math.round(point.y) }));
-    if (points.length >= 3) onAddStroke(points);
+    if (points.length >= 1) onAddStroke(points, { color, radius });
     setDrawing(null);
   }
   function preventContextMenu(event) {
@@ -3136,30 +4045,49 @@ function CleanupCanvas({ imagePath, version = 0, image, mask, selectedId, setSel
   }
   return (
     <DocumentViewport width={width} height={height} mode={viewportMode}>
-      <div className="svg-wrap cleanup-canvas">
-        <div className="cleanup-help-badge">드래그: 자유형 마스크 추가 · 클릭: 마스크 선택 · Delete: 삭제</div>
+      <div className={`svg-wrap cleanup-canvas ${tool}`}>
+        <div className="cleanup-help-badge">{tool === 'eyedropper' ? '클릭: 주변색 선택' : '드래그: 브러시 칠하기 · stroke 클릭: 선택 · Delete: 삭제'}</div>
         <svg ref={svgRef} className="document-svg" viewBox={`0 0 ${width} ${height}`} onContextMenu={preventContextMenu} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp}>
           <image href={imageUrl(imagePath, version)} x="0" y="0" width={width} height={height} preserveAspectRatio="none" />
           {strokes.map((stroke, index) => {
             const active = stroke.id === selectedId;
+            const points = stroke.points || [];
+            const commonProps = {
+              stroke: strokeColor(stroke),
+              className: active ? 'cleanup-brush selected' : 'cleanup-brush',
+              onPointerDown: (event) => {
+                if (event.button !== 0) return;
+                event.preventDefault();
+                event.stopPropagation();
+                setSelectedId(stroke.id);
+              },
+            };
+            if (points.length === 1) {
+              return (
+                <circle key={stroke.id || index} cx={points[0].x} cy={points[0].y} r={stroke.radius || 10} fill={strokeColor(stroke)} {...commonProps}>
+                  <title>{stroke.id}</title>
+                </circle>
+              );
+            }
             return (
-              <polygon
+              <polyline
                 key={stroke.id || index}
-                points={pointList(stroke.points)}
-                className={active ? 'cleanup-mask selected' : 'cleanup-mask'}
-                onPointerDown={(event) => {
-                  if (event.button !== 0) return;
-                  event.preventDefault();
-                  event.stopPropagation();
-                  setSelectedId(stroke.id);
-                }}
+                points={pointList(points)}
+                fill="none"
+                strokeWidth={(stroke.radius || 10) * 2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                {...commonProps}
               >
                 <title>{stroke.id}</title>
-              </polygon>
+              </polyline>
             );
           })}
+          {drawing?.points?.length === 1 && (
+            <circle cx={drawing.points[0].x} cy={drawing.points[0].y} r={radius} fill={rgbToHex(color)} className="cleanup-drawing" pointerEvents="none" />
+          )}
           {drawing?.points?.length > 1 && (
-            <polyline points={pointList(drawing.points)} className="cleanup-drawing" vectorEffect="non-scaling-stroke" pointerEvents="none" />
+            <polyline points={pointList(drawing.points)} fill="none" stroke={rgbToHex(color)} strokeWidth={radius * 2} strokeLinecap="round" strokeLinejoin="round" className="cleanup-drawing" vectorEffect="non-scaling-stroke" pointerEvents="none" />
           )}
         </svg>
       </div>

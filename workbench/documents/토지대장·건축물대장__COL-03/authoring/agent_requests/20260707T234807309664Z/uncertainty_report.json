@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "created_at": "2026-07-08T08:53:05+09:00",
+  "sample_kind": "filled_sample",
+  "unresolved_fields": [
+    {
+      "field_id": "machine_code_top_right",
+      "anchor_id": "det_000005",
+      "observed_text": "JXA06",
+      "reason": "Visible but no clear semantic label; excluded from schema_draft until role is confirmed."
+    },
+    {
+      "field_id": "floor_area_for_far",
+      "anchor_id": "det_000040",
+      "reason": "OCR rendered unit as apostrophe-like mark; visual image suggests m². Faker uses square-meter rule but confidence is reduced."
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "anchor_id": "det_000078",
+      "reason": "OCR reads z1층 while visual image appears 지1층. Pool uses 지1층 but anchor text should be reviewed."
+    },
+    {
+      "field_id": "land_district",
+      "label_anchor_id": "det_000028",
+      "reason": "Label 지구 is present but no use/value anchor was detected on page 1, so no schema field was created."
+    },
+    {
+      "field_id": "landscape_area_and_setback_fields",
+      "label_anchor_ids": [
+        "det_000054",
+        "det_000055",
+        "det_000056",
+        "det_000057"
+      ],
+      "reason": "Labels are visible but corresponding value regions are blank/undetected in the reviewed page."
+    },
+    {
+      "field_id": "pages_2_3_fields",
+      "source_pages": [
+        2,
+        3
+      ],
+      "reason": "Sample PDF has page images for page 2 and 3, but request-provided latest OCR/review/anchor map targets page 1 only. Additional page review is needed before adding anchor_id-backed fields."
+    },
+    {
+      "field_id": "토지대장_specific_fields",
+      "reason": "Registry title includes 토지대장·건축물대장, but the referenced sample and anchor map are 건축물대장. 토지대장-only fields such as 지목/토지소유자 are not added without visible anchors."
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "item": "sample title vs registry title",
+      "registry_title": "토지대장·건축물대장",
+      "sample_visible_title": "일반건축물대장(갑)",
+      "resolution": "Schema is anchored to the visible 건축물대장 sample; 토지대장 remains research context only."
+    },
+    {
+      "item": "review auto_type det_000107",
+      "auto_type": "static_label",
+      "resolution": "Although auto_type is static_label, status is use and it is positioned as 발급일 value. Kept with normal field but should be UI-reviewed."
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "floor_area_for_far",
+      "schema_key": "building.floor_area_for_far",
+      "label": "용적률 산정용 연면적",
+      "anchor_id": "det_000040",
+      "value_type": "area.square_meter",
+      "rule": "decimal_range:10.00..9999.99|unit:m²|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.55,
+      "notes": "OCR text uses apostrophe-like unit; visible image reads square meter."
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "schema_key": "building_status.rows[0].floor",
+      "label": "건축물현황 1행 층별",
+      "anchor_id": "det_000078",
+      "value_type": "floor.label",
+      "rule": "pool:floor_labels",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.55,
+      "notes": "OCR text is z1층; visible image appears 지1층."
+    }
+  ],
+  "user_decisions_needed": [
+    "page 2/3까지 authoring 대상이면 해당 페이지 OCR/review/anchor map을 생성한 뒤 draft를 확장해야 한다.",
+    "det_000005(JXA06)를 인쇄/QR 관련 코드 필드로 사용할지 확인이 필요하다.",
+    "토지대장 전용 샘플이 별도로 있으면 COL-03을 복합 문서로 나눌지 또는 건축물대장만 승인할지 결정해야 한다."
+  ]
+}

@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "created_at": "2026-07-08T09:19:11+09:00",
+  "sample_kind": "filled_sample",
+  "unresolved_fields": [
+    {
+      "field_id_or_anchor_id": "print_time",
+      "issue": "지원 grammar에 time 전용 규칙이 없어 pattern:##:##:##로 근사.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "page_number",
+      "issue": "페이지 총수/현재쪽 범위 생성기가 없어 choice로 제한.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "site_area",
+      "issue": "면적 소수 범위 및 m² 단위 정밀 생성기가 없어 template/pattern으로 근사.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "total_floor_area",
+      "issue": "면적 소수 범위 및 m² 단위 정밀 생성기가 없어 template/pattern으로 근사.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "floor_area_for_far",
+      "issue": "OCR 단위가 m'처럼 인식되어 visible review 필요. faker는 m2 template로 근사.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "building_coverage_ratio",
+      "issue": "백분율 범위 생성기가 없어 template/pattern으로 근사.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "floor_area_ratio",
+      "issue": "백분율 범위 생성기가 없어 template/pattern으로 근사.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "height",
+      "issue": "길이 범위 생성기가 없어 template/pattern으로 근사.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "status_row_1_floor",
+      "issue": "OCR 값이 z1층으로 인식되어 실제 지1층 여부 확인 필요.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "owner_registration_number_masked",
+      "issue": "개인/법인 등록번호는 실제값 생성 금지. 마스킹 패턴만 사용.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "clerk_name",
+      "issue": "담당자 anchor가 실제 개인명인지 부서명인지 불확실하여 공공부서명 pool로 제한.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "det_000005",
+      "issue": "상단 JXA06은 review use이나 명확한 라벨이 없어 schema 필드에는 포함하지 않음.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    },
+    {
+      "field_id_or_anchor_id": "det_000115",
+      "issue": "용지 규격/서식 footer로 보이며 업무 값 필드가 아니어서 schema 필드에는 포함하지 않음.",
+      "decision_needed": "UI 검토 후 유지/수정/제외 결정",
+      "severity": "medium"
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "anchor_id": "det_000040",
+      "text": "429.31m'",
+      "issue": "OCR 단위가 제곱미터 표시를 잘못 읽은 것으로 보임."
+    },
+    {
+      "anchor_id": "det_000078",
+      "text": "z1층",
+      "issue": "OCR이 지1층을 z1층으로 오인했을 가능성."
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "document_confirmation_number",
+      "schema_key": "문서확인번호",
+      "label": "문서확인번호",
+      "anchor_id": "manual_1783467788626",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "source_text": "1782-7058-1373-03440",
+      "generator": "pattern:####-####-####-#####",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "print_time",
+      "schema_key": "출력시각",
+      "label": "출력시각",
+      "anchor_id": "det_000006",
+      "label_anchor_ids": [
+        "det_000007"
+      ],
+      "source_text": "13:03:34",
+      "generator": "pattern:##:##:##",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "building_id",
+      "schema_key": "건물ID",
+      "label": "건물ID",
+      "anchor_id": "det_000015",
+      "label_anchor_ids": [
+        "det_000011"
+      ],
+      "source_text": "2120171230000250",
+      "generator": "pattern:################",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "building_management_number",
+      "schema_key": "고유번호",
+      "label": "고유번호",
+      "anchor_id": "det_000013",
+      "label_anchor_ids": [
+        "det_000012"
+      ],
+      "source_text": "1165010700-1-07090007",
+      "generator": "pattern:##########-#-########",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "lot_number",
+      "schema_key": "지번",
+      "label": "지번",
+      "anchor_id": "det_000022",
+      "label_anchor_ids": [
+        "det_000020"
+      ],
+      "source_text": "709-7",
+      "generator": "pattern:###-#",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE",
+        "R-LAND-CADASTRE-LAW"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "site_area",
+      "schema_key": "대지면적",
+      "label": "대지면적",
+      "anchor_id": "det_000030",
+      "label_anchor_ids": [
+        "det_000025"
+      ],
+      "source_text": "220.2m",
+      "generator": "template:{{pattern:###}}.{{pattern:#}}m2",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE",
+        "R-LAND-CADASTRE-LAW"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "total_floor_area",
+      "schema_key": "연면적",
+      "label": "연면적",
+      "anchor_id": "det_000031",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "source_text": "537m2",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}m2",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "building_area",
+      "schema_key": "건축면적",
+      "label": "건축면적",
+      "anchor_id": "det_000039",
+      "label_anchor_ids": [
+        "det_000034"
+      ],
+      "source_text": "122.44m2",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}m2",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "floor_area_for_far",
+      "schema_key": "용적률_산정용_연면적",
+      "label": "용적률 산정용 연면적",
+      "anchor_id": "det_000040",
+      "label_anchor_ids": [
+        "det_000035"
+      ],
+      "source_text": "429.31m'",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}m2",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.55,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "building_coverage_ratio",
+      "schema_key": "건폐율",
+      "label": "건폐율",
+      "anchor_id": "det_000049",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "source_text": "55.6%",
+      "generator": "template:{{pattern:##}}.{{pattern:#}}%",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "floor_area_ratio",
+      "schema_key": "용적률",
+      "label": "용적률",
+      "anchor_id": "det_000050",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "source_text": "194.96%",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}%",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "height",
+      "schema_key": "높이",
+      "label": "높이",
+      "anchor_id": "det_000051",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "source_text": "14.5m",
+      "generator": "template:{{pattern:##}}.{{pattern:#}}m",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "schema_key": "건축물현황_1행_층별",
+      "label": "건축물현황 1행 층별",
+      "anchor_id": "det_000078",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000068"
+      ],
+      "source_text": "z1층",
+      "generator": "pool:floor_labels",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.55,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_1_area",
+      "schema_key": "건축물현황_1행_면적",
+      "label": "건축물현황 1행 면적",
+      "anchor_id": "det_000081",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_text": "107.69",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "status_row_2_area",
+      "schema_key": "건축물현황_2행_면적",
+      "label": "건축물현황 2행 면적",
+      "anchor_id": "det_000090",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_text": "59.17",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "owner_registration_number_masked",
+      "schema_key": "주민(법인)등록번호",
+      "label": "주민(법인)등록번호",
+      "anchor_id": "det_000091",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000072",
+        "det_000075"
+      ],
+      "source_text": "110111–6******",
+      "generator": "pattern:######-*******",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "status_row_3_area",
+      "schema_key": "건축물현황_3행_면적",
+      "label": "건축물현황 3행 면적",
+      "anchor_id": "det_000098",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_text": "114.11",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    },
+    {
+      "field_id": "status_row_4_area",
+      "schema_key": "건축물현황_4행_면적",
+      "label": "건축물현황 4행 면적",
+      "anchor_id": "det_000104",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_text": "114.11",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "research_evidence_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "confidence": 0.72,
+      "notes": "지원 grammar로 근사"
+    }
+  ],
+  "user_decisions_needed": [
+    "상단 JXA06 및 하단 용지 규격을 schema 필드로 유지해야 하는지 확인.",
+    "면적/비율/높이의 정밀 generator가 필요한 경우 renderer grammar 확장 여부 결정.",
+    "소유자 성명(명칭)을 회사명 전용으로 둘지 개인명도 허용할지 결정.",
+    "토지대장 전용 필드를 별도 페이지/샘플에서 추가 작성할지 결정."
+  ]
+}

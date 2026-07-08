@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "folder": "workbench/documents/여신신청서__APP-01",
+  "registry": {
+    "docId": "APP-01",
+    "title": "여신신청서",
+    "issuer": "개인",
+    "genre": "신청",
+    "structure": "정형양식",
+    "modality": "스캔이미지",
+    "sensitivity": "금융정보",
+    "fields": "신청금액·자금용도·상환계획·담보",
+    "notes": "",
+    "hasPersonalInfo": "포함",
+    "personalInfoDetail": "성명, 소득, 계좌, 주소",
+    "validationRules": "필수필드, 서명 존재, 첨부서류, 체크박스",
+    "validationRuleCodes": "VAL-001, VAL-008, VAL-010",
+    "writingMethod": "수기",
+    "aliases": [
+      "여신신청서",
+      "대출신청서"
+    ],
+    "workflowIds": [
+      "BANK-01",
+      "BANK-02"
+    ],
+    "domains": [
+      "금융 - 은행 (여신·신용·외환)"
+    ],
+    "workflowDomains": [
+      "금융 - 은행 (여신·신용·외환)"
+    ],
+    "poDomains": [
+      "금융"
+    ],
+    "isFirstPriority": false,
+    "firstPriorityDomains": [],
+    "firstPriorityScopeCount": 0
+  },
+  "source_seed_folders": [
+    "seed_samples/여신신청서"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서.pdf",
+      "source": "seed_samples/여신신청서/여신승인신청서.pdf",
+      "format": "pdf",
+      "generation_path": "image-template"
+    },
+    {
+      "path": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+      "source": "seed_samples/여신신청서/여신승인신청서_page_001.jpg",
+      "format": "jpg",
+      "generation_path": "image-template"
+    },
+    {
+      "path": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_002.jpg",
+      "source": "seed_samples/여신신청서/여신승인신청서_page_002.jpg",
+      "format": "jpg",
+      "generation_path": "image-template"
+    }
+  ],
+  "sample_kind": "blank_template",
+  "sample_generation_paths": [
+    "image-template"
+  ],
+  "office_render": {
+    "required": false,
+    "backend": "office-com",
+    "status": "not_required"
+  },
+  "status": "sample_imported",
+  "created_at": "2026-07-08T02:05:06.663434+00:00",
+  "updated_at": "2026-07-08T02:51:15.703891+00:00",
+  "artifacts": {
+    "ocr": "workbench/documents/여신신청서__APP-01/ocr/paddleocr/precise/original_여신승인신청서_page_001/detections.json",
+    "review": "workbench/documents/여신신청서__APP-01/review/original_여신승인신청서_page_001/review.json",
+    "inpaint": null,
+    "authoring_stylesheet_draft": "workbench/documents/여신신청서__APP-01/authoring/review_sidecars/original_여신승인신청서_page_001/stylesheet_draft_from_review.json",
+    "authoring_anchor_map": "workbench/documents/여신신청서__APP-01/authoring/review_sidecars/original_여신승인신청서_page_001/anchor_map_draft.json",
+    "authoring_agent_request": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T024251787812Z/request.json",
+    "authoring_agent_prompt": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T024251787812Z/request.md",
+    "authoring_agent_anchor_map": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T024251787812Z/anchor_map_draft.json",
+    "authoring_agent_run": "workbench/documents/여신신청서__APP-01/authoring/agent_runs/20260708T024251876555Z/job.json",
+    "authoring_agent_prompt_exec": "workbench/documents/여신신청서__APP-01/authoring/agent_runs/20260708T024251876555Z/codex_exec_prompt.md",
+    "authoring": "workbench/documents/여신신청서__APP-01/authoring/schema.json",
+    "authoring_stylesheet": "workbench/documents/여신신청서__APP-01/authoring/stylesheet.json",
+    "authoring_faker_profile": "workbench/documents/여신신청서__APP-01/authoring/faker_profile.json",
+    "authoring_agent_applied_request": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T024251787812Z/request.json",
+    "authoring_agent_schema_draft": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T024251787812Z/schema_draft.json",
+    "authoring_agent_faker_profile_draft": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T024251787812Z/faker_profile_draft.json",
+    "authoring_agent_research_report": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T024251787812Z/research_report.json"
+  }
+}

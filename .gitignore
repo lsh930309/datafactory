@@ -64,3 +64,11 @@ workbench/**/ocr_recrop/
 workbench/**/ocr_recrop/**
 # Generated authoring previews (regenerable UI artifacts)
 workbench/**/authoring/live_preview/**
+# Local authoring backups are preserved on disk but not committed.
+workbench/**/authoring/backups/**
+# Agent run execution logs may contain local prompt/runtime context; keep job.json only.
+workbench/**/authoring/agent_runs/**/stdout.log
+workbench/**/authoring/agent_runs/**/stderr.log
+workbench/**/authoring/agent_runs/**/codex_exec_prompt.md
+workbench/**/authoring/agent_runs/**/codex_last_message.md
+workbench/**/authoring/agent_runs/**/generation_log.json

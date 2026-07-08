@@ -116,7 +116,7 @@ def page1_fields() -> list[dict[str, Any]]:
     fields: list[dict[str, Any]] = []
     for fid, label, bbox, style, align in P1_WRITER_TOP:
         fields.append(field(fid, label, bbox, style, page=1, align=align, json_path=f"page1.writer.{fid}"))
-    fields.append(field("p1_owner_path_25_percent_checkbox", "25% 이상 지분 소유자 체크", [1005, 751, 54, 31], "style_check", page=1, align="center", json_path="page1.owner_path.25_percent"))
+    fields.append(field("p1_owner_path_25_percent_checkbox", "25% 이상 지분 소유자 체크", [1005, 751, 54, 31], "style_check", page=1, value_type="bool.checkbox", align="center", json_path="page1.owner_path.25_percent"))
     for idx, x, w in P1_OWNER_COLS:
         fields.extend([
             field(f"p1_owner_{idx}_name_ko", f"실소유자 {idx} 한글명", [x, 1083, w, 31], "style_text", page=1, align="left", json_path=f"page1.owners.{idx}.name_ko"),
@@ -152,14 +152,14 @@ def page2_fields() -> list[dict[str, Any]]:
     fields: list[dict[str, Any]] = []
     for idx, y in enumerate(P2_ROW_Y, start=1):
         fields.extend([
-            field(f"p2_owner_{idx}_type_person_check", f"법인소유자 {idx} 개인 체크", [P2_COLS['type_person_check'][0], y + P2_COLS['type_person_check'][1], 26, 22], "style_check_small", page=2, align="center", json_path=f"page2.owners.{idx}.type_person"),
-            field(f"p2_owner_{idx}_type_corporation_check", f"법인소유자 {idx} 법인 체크", [P2_COLS['type_corporation_check'][0], y + P2_COLS['type_corporation_check'][1], 26, 22], "style_check_small", page=2, align="center", json_path=f"page2.owners.{idx}.type_corporation"),
+            field(f"p2_owner_{idx}_type_person_check", f"법인소유자 {idx} 개인 체크", [P2_COLS['type_person_check'][0], y + P2_COLS['type_person_check'][1], 26, 22], "style_check_small", page=2, value_type="bool.checkbox", align="center", json_path=f"page2.owners.{idx}.type_person"),
+            field(f"p2_owner_{idx}_type_corporation_check", f"법인소유자 {idx} 법인 체크", [P2_COLS['type_corporation_check'][0], y + P2_COLS['type_corporation_check'][1], 26, 22], "style_check_small", page=2, value_type="bool.checkbox", align="center", json_path=f"page2.owners.{idx}.type_corporation"),
             field(f"p2_owner_{idx}_name_ko", f"법인소유자 {idx} 국문", [P2_COLS['name_ko'][0], y + P2_COLS['name_ko'][1], P2_COLS['name_ko'][2], P2_COLS['name_ko'][3]], "style_small", page=2, align="left", json_path=f"page2.owners.{idx}.name_ko"),
             field(f"p2_owner_{idx}_name_en_surname", f"법인소유자 {idx} 영문성", [P2_COLS['name_en_surname'][0], y + P2_COLS['name_en_surname'][1], P2_COLS['name_en_surname'][2], P2_COLS['name_en_surname'][3]], "style_small", page=2, align="left", json_path=f"page2.owners.{idx}.name_en_surname"),
             field(f"p2_owner_{idx}_name_en_given", f"법인소유자 {idx} 영문명", [P2_COLS['name_en_given'][0], y + P2_COLS['name_en_given'][1], P2_COLS['name_en_given'][2], P2_COLS['name_en_given'][3]], "style_small", page=2, align="left", json_path=f"page2.owners.{idx}.name_en_given"),
             field(f"p2_owner_{idx}_birth_or_reg_no", f"법인소유자 {idx} 생년월일/사업자번호", [P2_COLS['birth_or_reg_no'][0], y + P2_COLS['birth_or_reg_no'][1], P2_COLS['birth_or_reg_no'][2], P2_COLS['birth_or_reg_no'][3]], "style_small", page=2, align="center", json_path=f"page2.owners.{idx}.birth_or_reg_no"),
             field(f"p2_owner_{idx}_nationality_or_address", f"법인소유자 {idx} 국적/소재지", [P2_COLS['nationality_or_address'][0], y + P2_COLS['nationality_or_address'][1], P2_COLS['nationality_or_address'][2], P2_COLS['nationality_or_address'][3]], "style_small", page=2, align="center", json_path=f"page2.owners.{idx}.nationality_or_address"),
-            field(f"p2_owner_{idx}_ownership_type_share_check", f"법인소유자 {idx} 지분 체크", [P2_COLS['ownership_type_share'][0], y + P2_COLS['ownership_type_share'][1], 26, 22], "style_check_small", page=2, align="center", json_path=f"page2.owners.{idx}.ownership_type_share"),
+            field(f"p2_owner_{idx}_ownership_type_share_check", f"법인소유자 {idx} 지분 체크", [P2_COLS['ownership_type_share'][0], y + P2_COLS['ownership_type_share'][1], 26, 22], "style_check_small", page=2, value_type="bool.checkbox", align="center", json_path=f"page2.owners.{idx}.ownership_type_share"),
             field(f"p2_owner_{idx}_ownership_percent", f"법인소유자 {idx} 지분율", [P2_COLS['ownership_percent'][0], y + P2_COLS['ownership_percent'][1], P2_COLS['ownership_percent'][2], P2_COLS['ownership_percent'][3]], "style_small", page=2, align="center", json_path=f"page2.owners.{idx}.ownership_percent"),
         ])
     return fields
@@ -168,8 +168,8 @@ def page2_fields() -> list[dict[str, Any]]:
 # Page 3: 사실상 지배자 여부 + 하단 확인/작성자.
 def page3_fields() -> list[dict[str, Any]]:
     fields: list[dict[str, Any]] = [
-        field("p3_controller_absent_check", "사실상 지배자 없음 체크", [235, 540, 24, 24], "style_check_small", page=3, align="center", json_path="page3.controller_absent"),
-        field("p3_controller_present_check", "사실상 지배자 있음 체크", [235, 572, 24, 24], "style_check_small", page=3, align="center", json_path="page3.controller_present"),
+        field("p3_controller_absent_check", "사실상 지배자 없음 체크", [235, 540, 24, 24], "style_check_small", page=3, value_type="bool.checkbox", align="center", json_path="page3.controller_absent"),
+        field("p3_controller_present_check", "사실상 지배자 있음 체크", [235, 572, 24, 24], "style_check_small", page=3, value_type="bool.checkbox", align="center", json_path="page3.controller_present"),
         field("p3_confirmation_year", "확인 연", [480, 1576, 80, 32], "style_text", page=3, align="center", json_path="page3.confirmation.year"),
         field("p3_confirmation_month", "확인 월", [604, 1576, 50, 32], "style_text", page=3, align="center", json_path="page3.confirmation.month"),
         field("p3_confirmation_day", "확인 일", [707, 1576, 50, 32], "style_text", page=3, align="center", json_path="page3.confirmation.day"),

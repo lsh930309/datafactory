@@ -74,7 +74,7 @@ def schema(page:int)->dict[str,Any]:
     checks=P1_CHECKS if page==1 else P4_CHECKS
     texts=P1_TEXTS if page==1 else P4_TEXTS
     fields=[]
-    for k,b in checks.items(): fields.append(field(f'p{page}_{k}',f'page{page} check {k}',b,'style_check',f'pool_record:app14_profiles.p{page}_{k}',align='center'))
+    for k,b in checks.items(): fields.append(field(f'p{page}_{k}',f'page{page} check {k}',b,'style_check',f'pool_record:app14_profiles.p{page}_{k}',align='center',value_type='bool.checkbox'))
     for k,b in texts.items():
         is_date_part = 'date' in k or k in {'receipt_year','receipt_month','receipt_day'} or k.endswith(('_year','_month','_day'))
         st='style_date' if is_date_part else ('style_text_small' if 'barcode' in k or 'tracking' in k else 'style_text')
@@ -114,8 +114,8 @@ def make_profiles():
     return profiles
 
 def faker_profile(fields):
-    gens={f['field_id']:f['generator'] for f in fields}; targets={f['field_id']:f['generator'].split('.',1)[1] for f in fields}
-    for k in list(gens): gens[k]='literal:'
+    gens={f['field_id']:('bool.checkbox' if str(f.get('style_class'))=='style_check' else 'literal:') for f in fields}
+    targets={f['field_id']:f['generator'].split('.',1)[1] for f in fields}
     return {'schema_version':1,'created_at':NOW,'updated_at':NOW,'doc_id':DOC_ID,'locale':'ko_KR','field_generators':gens,'constraints':[{'type':'pick_record','pool':'app14_profiles','targets':targets}],'data_pools':{'app14_profiles':make_profiles()},'notes':'APP-14 4페이지 카드발급신청서 faker profile. page1/page4는 같은 record로 체크/기입값을 렌더링하고 page2/page3은 안내 원문을 보존함.'}
 
 

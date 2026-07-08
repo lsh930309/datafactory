@@ -158,6 +158,105 @@ def test_render_authoring_live_preview_fills_blank_values_for_visual_review(tmp_
     assert kv["values"]["field_001"] == "검수용 빈 값"
 
 
+def test_live_preview_does_not_infer_checkbox_from_selection_label(tmp_path: Path) -> None:
+    source = tmp_path / "selection_label.png"
+    Image.new("RGB", (240, 100), "white").save(source)
+    schema = {
+        "schema_version": 1,
+        "doc_id": "APP-14",
+        "source_inpainted": str(source),
+        "fields": [
+            {
+                "field_id": "p1_optional_consent_year",
+                "label": "선택동의년",
+                "bbox": [20, 20, 80, 30],
+                "bbox_format": "xywh",
+                "value_type": "free_text.short",
+                "generator": "literal:26",
+                "style_class": "body_default",
+                "render_policy": {"align": "center", "valign": "middle", "overflow": "shrink"},
+                "export": {"json_path": "선택동의.년"},
+            }
+        ],
+    }
+    stylesheet = {
+        "schema_version": 1,
+        "doc_id": "APP-14",
+        "style_classes": [{"style_class": "body_default", "font_size": 18, "fill": [0, 0, 0]}],
+    }
+    faker_profile = {
+        "schema_version": 1,
+        "doc_id": "APP-14",
+        "field_generators": {"p1_optional_consent_year": "literal:26"},
+        "constraints": [],
+    }
+
+    result = render_authoring_live_preview(
+        schema,
+        stylesheet,
+        faker_profile,
+        out_dir=tmp_path / "authoring" / "selection_label_live_preview",
+    )
+
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    bbox = json.loads(result.bbox.read_text(encoding="utf-8"))
+    assert kv["values"]["p1_optional_consent_year"] == "26"
+    assert bbox["annotations"][0]["text"] == "26"
+
+
+def test_checkbox_text_is_not_inferred_from_label_without_explicit_type(tmp_path: Path) -> None:
+    source = tmp_path / "checkbox_word_label.png"
+    Image.new("RGB", (240, 100), "white").save(source)
+    schema = {
+        "schema_version": 1,
+        "doc_id": "TEST",
+        "source_inpainted": str(source),
+        "fields": [
+            {
+                "field_id": "plain_check_word",
+                "label": "체크 표시 안내",
+                "bbox": [20, 20, 80, 30],
+                "bbox_format": "xywh",
+                "value_type": "free_text.short",
+                "generator": "literal:✓",
+                "style_class": "body_default",
+                "render_policy": {"align": "center", "valign": "middle", "overflow": "shrink"},
+                "export": {"json_path": "plain_check_word"},
+            }
+        ],
+    }
+    stylesheet = {
+        "schema_version": 1,
+        "doc_id": "TEST",
+        "style_classes": [{"style_class": "body_default", "font_size": 18, "fill": [0, 0, 0]}],
+    }
+    faker_profile = {
+        "schema_version": 1,
+        "doc_id": "TEST",
+        "field_generators": {"plain_check_word": "literal:✓"},
+        "constraints": [],
+    }
+
+    schema_path = tmp_path / "schema.json"
+    stylesheet_path = tmp_path / "stylesheet.json"
+    faker_profile_path = tmp_path / "faker_profile.json"
+    schema_path.write_text(json.dumps(schema, ensure_ascii=False), encoding="utf-8")
+    stylesheet_path.write_text(json.dumps(stylesheet, ensure_ascii=False), encoding="utf-8")
+    faker_profile_path.write_text(json.dumps(faker_profile, ensure_ascii=False), encoding="utf-8")
+
+    result = render_authoring_preview(
+        schema_path,
+        stylesheet_path,
+        faker_profile_path,
+        out_dir=tmp_path / "authoring" / "check_word_preview",
+    )
+
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    bbox = json.loads(result.bbox.read_text(encoding="utf-8"))
+    assert kv["values"]["plain_check_word"] == "✓"
+    assert bbox["annotations"][0]["text"] == "✓"
+
+
 def test_render_template_applies_x_shift_without_changing_requested_bbox(tmp_path: Path) -> None:
     source = tmp_path / "x_shift_base.png"
     Image.new("RGB", (220, 90), "white").save(source)
@@ -462,6 +561,43 @@ def test_save_authoring_bundle_normalizes_field_and_faker_profile(tmp_path: Path
     assert saved_faker["field_generators"] == {"field_001": "choice:홍길동|김민준"}
 
 
+def test_semantic_schema_to_authoring_schema_preserves_hierarchy_in_export(tmp_path: Path) -> None:
+    from datafactory.authoring import semantic_schema_to_authoring_schema
+
+    review, base = _write_review(tmp_path)
+    schema = semantic_schema_to_authoring_schema(
+        {
+            "doc_id": "DOC-1",
+            "title": "테스트",
+            "semantic_schema": {"소유자 현황": {"성명": ""}},
+            "fields": [
+                {
+                    "field_id": "det_name",
+                    "label": "성명",
+                    "key": "소유자 현황/성명",
+                    "anchor_id": "det_name",
+                    "value": "",
+                    "value_type": "person.name_ko",
+                }
+            ],
+        },
+        anchor_map={"source_review": str(review), "anchors": [{"anchor_id": "det_name", "bbox": [50, 50, 120, 32], "text": "홍길동"}], "image": {"width": 360, "height": 220}},
+        source_review=str(review),
+        source_image=str(base),
+        source_inpainted=str(base),
+    )
+    stylesheet = {"schema_version": 1, "style_classes": [{"style_class": "body_default", "font_size": 16}]}
+    faker_profile = {"schema_version": 1, "field_generators": {"det_name": "literal:홍길동"}}
+    saved = save_authoring_bundle(tmp_path / "schema.json", tmp_path / "stylesheet.json", tmp_path / "faker.json", schema=schema, stylesheet=stylesheet, faker_profile=faker_profile)
+
+    result = render_authoring_preview(saved.schema, saved.stylesheet, saved.faker_profile, out_dir=tmp_path / "render", seed=1)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+
+    assert json.loads(saved.schema.read_text(encoding="utf-8"))["semantic_schema"] == {"소유자 현황": {"성명": ""}}
+    assert kv["semantic_values"] == {"소유자 현황": {"성명": "홍길동"}}
+    assert kv["flat_values"] == {"소유자 현황/성명": "홍길동"}
+
+
 def test_save_authoring_bundle_preserves_explicit_export_keys(tmp_path: Path) -> None:
     review, base = _write_review(tmp_path)
     draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
@@ -526,9 +662,84 @@ def test_render_authoring_preview_supports_rule_strings_and_unknown_warning(tmp_
     faker_profile["field_generators"]["field_001"] = "unknown.custom.rule"
     save_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile, schema=schema, stylesheet=loaded.payload["stylesheet"], faker_profile=faker_profile)
     result = render_authoring_preview(draft.schema, draft.stylesheet, draft.faker_profile, out_dir=tmp_path / "authoring" / "render_preview_unknown", seed=7)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
     validation = json.loads(result.validation_report.read_text(encoding="utf-8"))
+    assert kv["values"]["field_001"] == "전화번호"
     assert validation["warning_count"] >= 1
     assert any(warning["type"] == "unknown_faker_rule" for warning in validation["warnings"])
+
+
+def test_render_authoring_preview_normalizes_date_component_pattern_rules(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile)
+    base_field = loaded.payload["schema"]["fields"][0]
+    schema = loaded.payload["schema"]
+    schema["fields"] = [
+        dict(base_field, field_id="application_date_year", label="신청일자 연도"),
+        dict(base_field, field_id="application_date_month", label="신청일자 월"),
+        dict(base_field, field_id="application_date_day", label="신청일자 일"),
+        dict(base_field, field_id="guarantor_age", label="보증인 연령"),
+    ]
+    faker_profile = loaded.payload["faker_profile"]
+    faker_profile["field_generators"] = {
+        "application_date_year": "pattern:####",
+        "application_date_month": "pattern:##",
+        "application_date_day": "pattern:##",
+        "guarantor_age": "pattern:##",
+    }
+    save_authoring_bundle(
+        draft.schema,
+        draft.stylesheet,
+        draft.faker_profile,
+        schema=schema,
+        stylesheet=loaded.payload["stylesheet"],
+        faker_profile=faker_profile,
+    )
+
+    result = render_authoring_preview(draft.schema, draft.stylesheet, draft.faker_profile, out_dir=tmp_path / "authoring" / "render_date_components", seed=7)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    values = kv["values"]
+
+    assert 2020 <= int(values["application_date_year"]) <= 2027
+    assert len(values["application_date_month"]) == 2
+    assert 1 <= int(values["application_date_month"]) <= 12
+    assert len(values["application_date_day"]) == 2
+    assert 1 <= int(values["application_date_day"]) <= 28
+    assert len(values["guarantor_age"]) == 2
+
+
+def test_render_authoring_preview_uses_safe_placeholders_for_generic_or_missing_pool_rules(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile)
+    schema = loaded.payload["schema"]
+    first = dict(schema["fields"][0])
+    first["field_id"] = "generic_note"
+    first["label"] = "비고"
+    second = dict(first)
+    second["field_id"] = "missing_pool"
+    second["label"] = "구조"
+    schema["fields"] = [first, second]
+    faker_profile = loaded.payload["faker_profile"]
+    faker_profile["field_generators"] = {"generic_note": "free_text.short", "missing_pool": "pool:undefined_pool"}
+    save_authoring_bundle(
+        draft.schema,
+        draft.stylesheet,
+        draft.faker_profile,
+        schema=schema,
+        stylesheet=loaded.payload["stylesheet"],
+        faker_profile=faker_profile,
+    )
+
+    result = render_authoring_preview(draft.schema, draft.stylesheet, draft.faker_profile, out_dir=tmp_path / "authoring" / "render_safe_fallback", seed=7)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    validation = json.loads(result.validation_report.read_text(encoding="utf-8"))
+
+    assert kv["values"]["generic_note"] == "비고"
+    assert kv["values"]["missing_pool"] == "구조"
+    assert not {"확인함", "해당없음", "정상", "발급완료"} & set(kv["values"].values())
+    assert any(warning["rule"] == "pool:undefined_pool" for warning in validation["warnings"])
 
 
 def test_render_authoring_preview_supports_data_pools_and_pick_record_constraints(tmp_path: Path) -> None:
@@ -723,3 +934,25 @@ def test_authoring_stylesheet_preserves_font_selection_and_preview_uses_it(tmp_p
     assert result.image.exists()
     bbox = json.loads(result.bbox.read_text(encoding="utf-8"))
     assert bbox["annotations"][0]["text"] == "홍길동"
+
+
+def test_authoring_library_approval_records_missing_and_copied_drafts(tmp_path: Path) -> None:
+    import json
+
+    from datafactory.authoring import approve_authoring_draft_to_library, authoring_library_payload
+
+    request_dir = tmp_path / "request"
+    request_dir.mkdir()
+    request_path = request_dir / "request.json"
+    request_path.write_text(json.dumps({"docId": "APP-14", "title": "카드발급신청서"}), encoding="utf-8")
+    (request_dir / "faker_profile_draft.json").write_text("{}", encoding="utf-8")
+    library_root = tmp_path / "library"
+
+    result = approve_authoring_draft_to_library(request_path, library_root=library_root, note="approved")
+    library = authoring_library_payload(library_root)
+
+    assert result["summary"]["copied"] == 1
+    assert "schema_draft.json" in result["approval"]["missing"]
+    assert "anchor_map_draft.json" in result["approval"]["missing"]
+    assert library["summary"]["approvalCount"] == 1
+    assert library["summary"]["valuePoolCount"] >= 1

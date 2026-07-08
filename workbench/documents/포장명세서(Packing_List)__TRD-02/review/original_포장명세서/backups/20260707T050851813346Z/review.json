@@ -1,0 +1,3987 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-06-30T07:22:35.190016+00:00",
+  "source_engine": "paddleocr",
+  "source_detections": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/ocr/paddleocr/precise/original_포장명세서/detections.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+  "image": {
+    "width": 714,
+    "height": 875
+  },
+  "summary": {
+    "total": 92,
+    "by_status": {
+      "use": 57,
+      "keep": 34,
+      "ignore": 1
+    },
+    "by_auto_type": {
+      "field_value": 74,
+      "static_label": 0,
+      "table_cell": 2,
+      "long_paragraph": 0,
+      "header_footer": 1,
+      "stamp_or_seal": 0,
+      "watermark": 0,
+      "unknown": 15
+    }
+  },
+  "labels": [
+    {
+      "id": "det_000001",
+      "text": "PACKING LIST",
+      "confidence": 0.9816237092018127,
+      "bbox": [
+        247,
+        20,
+        214,
+        29
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          247,
+          20
+        ],
+        [
+          461,
+          20
+        ],
+        [
+          461,
+          49
+        ],
+        [
+          247,
+          49
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "header_footer",
+      "reason": "near page header/footer",
+      "locked": false,
+      "notes": "",
+      "original_text": "PACKING LIST",
+      "original_confidence": 0.9816237092018127,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000002",
+      "text": "() SHIPPER/ EXPORTER",
+      "confidence": 0.9671040773391724,
+      "bbox": [
+        25,
+        71,
+        137,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          25,
+          71
+        ],
+        [
+          162,
+          71
+        ],
+        [
+          162,
+          84
+        ],
+        [
+          25,
+          84
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "() SHIPPER/ EXPORTER",
+      "original_confidence": 0.9671040773391724,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000003",
+      "text": "(8) NO. & DATE OF PACKING LIST",
+      "confidence": 0.9441317319869995,
+      "bbox": [
+        330,
+        72,
+        184,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          330,
+          72
+        ],
+        [
+          514,
+          72
+        ],
+        [
+          514,
+          85
+        ],
+        [
+          330,
+          85
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(8) NO. & DATE OF PACKING LIST",
+      "original_confidence": 0.9441317319869995,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000007",
+      "text": "(9) REMARK",
+      "confidence": 0.9269615411758423,
+      "bbox": [
+        330,
+        99,
+        70,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          330,
+          99
+        ],
+        [
+          400,
+          99
+        ],
+        [
+          400,
+          113
+        ],
+        [
+          330,
+          113
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(9) REMARK",
+      "original_confidence": 0.9269615411758423,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000009",
+      "text": "TEL",
+      "confidence": null,
+      "bbox": [
+        39,
+        128,
+        24,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          39,
+          128
+        ],
+        [
+          63,
+          128
+        ],
+        [
+          63,
+          141
+        ],
+        [
+          39,
+          141
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "TEL: +82-2-000-0000 / FAX: +82-2-000-0000",
+      "original_confidence": 0.9803482890129089,
+      "text_source": "manual_override",
+      "ocr_text_stale": false,
+      "rec_text": "TrI",
+      "rec_confidence": 0.3088625967502594,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-06-30T07:26:13.431249+00:00"
+    },
+    {
+      "id": "det_000010",
+      "text": "(2) BUYER / IMPORTER/ APPLICANT",
+      "confidence": 0.9715847373008728,
+      "bbox": [
+        26,
+        141,
+        200,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          26,
+          141
+        ],
+        [
+          226,
+          141
+        ],
+        [
+          226,
+          154
+        ],
+        [
+          26,
+          154
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(2) BUYER / IMPORTER/ APPLICANT",
+      "original_confidence": 0.9715847373008728,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000011",
+      "text": "(10) NOTIFY PARTY",
+      "confidence": 0.9647784233093262,
+      "bbox": [
+        329,
+        142,
+        108,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          329,
+          142
+        ],
+        [
+          437,
+          142
+        ],
+        [
+          437,
+          155
+        ],
+        [
+          329,
+          155
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(10) NOTIFY PARTY",
+      "original_confidence": 0.9647784233093262,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000016",
+      "text": "TEL",
+      "confidence": null,
+      "bbox": [
+        39,
+        198,
+        24,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          39,
+          198
+        ],
+        [
+          63,
+          198
+        ],
+        [
+          63,
+          212
+        ],
+        [
+          39,
+          212
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "TEL:+ 1-123-456789",
+      "original_confidence": 0.9689637422561646,
+      "text_source": "manual_override",
+      "ocr_text_stale": false,
+      "rec_text": "TTL",
+      "rec_confidence": 0.7819240093231201,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-06-30T07:26:13.431249+00:00"
+    },
+    {
+      "id": "det_000017",
+      "text": "(3) CONSIGNEE",
+      "confidence": 0.9515365958213806,
+      "bbox": [
+        24,
+        212,
+        88,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          24,
+          213
+        ],
+        [
+          111,
+          212
+        ],
+        [
+          112,
+          226
+        ],
+        [
+          24,
+          227
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(3) CONSIGNEE",
+      "original_confidence": 0.9515365958213806,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000018",
+      "text": "(D) TERMS OF PAYMENT & DELIVERY",
+      "confidence": 0.9728037714958191,
+      "bbox": [
+        329,
+        213,
+        215,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          329,
+          214
+        ],
+        [
+          544,
+          213
+        ],
+        [
+          544,
+          227
+        ],
+        [
+          329,
+          228
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "(D) TERMS OF PAYMENT & DELIVERY",
+      "original_confidence": 0.9728037714958191,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000022",
+      "text": "(4) PORT OE LOADING",
+      "confidence": 0.953094482421875,
+      "bbox": [
+        27,
+        257,
+        121,
+        10
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          27,
+          257
+        ],
+        [
+          148,
+          257
+        ],
+        [
+          148,
+          267
+        ],
+        [
+          27,
+          267
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(4) PORT OE LOADING",
+      "original_confidence": 0.953094482421875,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000023",
+      "text": "(⑤) FINAL DESTINATION",
+      "confidence": 0.9657843708992004,
+      "bbox": [
+        155,
+        254,
+        135,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          155,
+          255
+        ],
+        [
+          290,
+          254
+        ],
+        [
+          290,
+          268
+        ],
+        [
+          155,
+          269
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "(⑤) FINAL DESTINATION",
+      "original_confidence": 0.9657843708992004,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000029",
+      "text": "(⑥ CARRIER/VESSEL",
+      "confidence": 0.972967803478241,
+      "bbox": [
+        26,
+        298,
+        121,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          26,
+          298
+        ],
+        [
+          147,
+          298
+        ],
+        [
+          147,
+          311
+        ],
+        [
+          26,
+          311
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "(⑥ CARRIER/VESSEL",
+      "original_confidence": 0.972967803478241,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000030",
+      "text": "(7) SAILING ON OR ABOUT",
+      "confidence": 0.947721004486084,
+      "bbox": [
+        157,
+        299,
+        145,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          157,
+          299
+        ],
+        [
+          302,
+          299
+        ],
+        [
+          302,
+          312
+        ],
+        [
+          157,
+          312
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(7) SAILING ON OR ABOUT",
+      "original_confidence": 0.947721004486084,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000033",
+      "text": "(12) SHIPPING MARK",
+      "confidence": 0.9906071424484253,
+      "bbox": [
+        25,
+        327,
+        117,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          25,
+          327
+        ],
+        [
+          142,
+          327
+        ],
+        [
+          142,
+          340
+        ],
+        [
+          25,
+          340
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(12) SHIPPING MARK",
+      "original_confidence": 0.9906071424484253,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000034",
+      "text": "(13) DESCRIPTION OF GOODS AND/ OR SERVICES",
+      "confidence": 0.9636216759681702,
+      "bbox": [
+        155,
+        327,
+        246,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          155,
+          327
+        ],
+        [
+          401,
+          327
+        ],
+        [
+          401,
+          340
+        ],
+        [
+          155,
+          340
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(13) DESCRIPTION OF GOODS AND/ OR SERVICES",
+      "original_confidence": 0.9636216759681702,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000035",
+      "text": "(14)",
+      "confidence": 0.9662036895751953,
+      "bbox": [
+        483,
+        326,
+        23,
+        16
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          483,
+          326
+        ],
+        [
+          506,
+          326
+        ],
+        [
+          506,
+          342
+        ],
+        [
+          483,
+          342
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "table_cell",
+      "reason": "small numeric/table-like value",
+      "locked": false,
+      "notes": "",
+      "original_text": "(14)",
+      "original_confidence": 0.9662036895751953,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000036",
+      "text": "(15) NET- (16) GROSS-",
+      "confidence": 0.9689303040504456,
+      "bbox": [
+        521,
+        328,
+        110,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          521,
+          328
+        ],
+        [
+          631,
+          328
+        ],
+        [
+          631,
+          341
+        ],
+        [
+          521,
+          341
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(15) NET- (16) GROSS-",
+      "original_confidence": 0.9689303040504456,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000037",
+      "text": "(17)",
+      "confidence": 0.9961237907409668,
+      "bbox": [
+        645,
+        327,
+        23,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          645,
+          327
+        ],
+        [
+          668,
+          327
+        ],
+        [
+          668,
+          342
+        ],
+        [
+          645,
+          342
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "table_cell",
+      "reason": "small numeric/table-like value",
+      "locked": false,
+      "notes": "",
+      "original_text": "(17)",
+      "original_confidence": 0.9961237907409668,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000038",
+      "text": "Q'TY",
+      "confidence": 0.9128599166870117,
+      "bbox": [
+        481,
+        340,
+        27,
+        16
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          481,
+          340
+        ],
+        [
+          508,
+          340
+        ],
+        [
+          508,
+          356
+        ],
+        [
+          481,
+          356
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "Q'TY",
+      "original_confidence": 0.9128599166870117,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000039",
+      "text": "WEIGHT",
+      "confidence": 0.978847324848175,
+      "bbox": [
+        521,
+        341,
+        46,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          521,
+          341
+        ],
+        [
+          567,
+          341
+        ],
+        [
+          567,
+          355
+        ],
+        [
+          521,
+          355
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "WEIGHT",
+      "original_confidence": 0.978847324848175,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000040",
+      "text": "WEIGHT",
+      "confidence": 0.981605052947998,
+      "bbox": [
+        583,
+        343,
+        46,
+        11
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          583,
+          343
+        ],
+        [
+          629,
+          343
+        ],
+        [
+          629,
+          354
+        ],
+        [
+          583,
+          354
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "WEIGHT",
+      "original_confidence": 0.981605052947998,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000041",
+      "text": "VOLUME",
+      "confidence": 0.9946362376213074,
+      "bbox": [
+        632,
+        343,
+        49,
+        11
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          632,
+          343
+        ],
+        [
+          681,
+          343
+        ],
+        [
+          681,
+          354
+        ],
+        [
+          632,
+          354
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "VOLUME",
+      "original_confidence": 0.9946362376213074,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000043",
+      "text": "(KGS)",
+      "confidence": 0.9751068949699402,
+      "bbox": [
+        522,
+        356,
+        39,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          522,
+          356
+        ],
+        [
+          561,
+          356
+        ],
+        [
+          561,
+          371
+        ],
+        [
+          522,
+          371
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "(KGS)",
+      "original_confidence": 0.9751068949699402,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000044",
+      "text": "(KGS)",
+      "confidence": 0.9592057466506958,
+      "bbox": [
+        587,
+        356,
+        39,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          587,
+          356
+        ],
+        [
+          626,
+          356
+        ],
+        [
+          626,
+          371
+        ],
+        [
+          587,
+          371
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "(KGS)",
+      "original_confidence": 0.9592057466506958,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000045",
+      "text": "(CBM)",
+      "confidence": 0.987751841545105,
+      "bbox": [
+        636,
+        356,
+        40,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          636,
+          356
+        ],
+        [
+          676,
+          356
+        ],
+        [
+          676,
+          371
+        ],
+        [
+          636,
+          371
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "(CBM)",
+      "original_confidence": 0.987751841545105,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000050",
+      "text": "BOX NO.1",
+      "confidence": 0.8786041140556335,
+      "bbox": [
+        98,
+        425,
+        51,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          98,
+          425
+        ],
+        [
+          149,
+          425
+        ],
+        [
+          149,
+          439
+        ],
+        [
+          98,
+          439
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "BOX NO. I - MOTORCYCLE GLOVES",
+      "original_confidence": 0.9538915753364563,
+      "text_source": "paddle_recrop",
+      "ocr_text_stale": false,
+      "rec_text": "BOX NO.1",
+      "rec_confidence": 0.8786041140556335,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-06-30T07:26:13.431249+00:00"
+    },
+    {
+      "id": "det_000058",
+      "text": "BOX NO. 2",
+      "confidence": null,
+      "bbox": [
+        97,
+        468,
+        53,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          97,
+          468
+        ],
+        [
+          150,
+          468
+        ],
+        [
+          150,
+          481
+        ],
+        [
+          97,
+          481
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "BOX NO. 2- MOTORCYCLE GLOVES",
+      "original_confidence": 0.9460898637771606,
+      "text_source": "manual_override",
+      "ocr_text_stale": false,
+      "rec_text": "BOXNO.2",
+      "rec_confidence": 0.9744023084640503,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-06-30T07:26:13.431249+00:00"
+    },
+    {
+      "id": "det_000066",
+      "text": "TOTAL",
+      "confidence": null,
+      "bbox": [
+        156,
+        512,
+        39,
+        11
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          156,
+          512
+        ],
+        [
+          195,
+          512
+        ],
+        [
+          195,
+          523
+        ],
+        [
+          156,
+          523
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "TOTAL : FOB BUSAN, SOUTH KOREA",
+      "original_confidence": 0.9399483799934387,
+      "text_source": "manual_override",
+      "ocr_text_stale": false,
+      "rec_text": "FovrAt",
+      "rec_confidence": 0.3391013443470001,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-06-30T07:26:13.431249+00:00"
+    },
+    {
+      "id": "det_000078",
+      "text": "(I7) TEL. NO.",
+      "confidence": 0.9111884832382202,
+      "bbox": [
+        26,
+        765,
+        67,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          26,
+          765
+        ],
+        [
+          93,
+          765
+        ],
+        [
+          93,
+          779
+        ],
+        [
+          26,
+          779
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(17) TEL.. NO. ; + 82-2-000-0000",
+      "original_confidence": 0.9261676073074341,
+      "text_source": "paddle_recrop",
+      "ocr_text_stale": false,
+      "rec_text": "(I7) TEL. NO.",
+      "rec_confidence": 0.9111884832382202,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-06-30T07:26:13.431249+00:00"
+    },
+    {
+      "id": "det_000079",
+      "text": "(19) SIGNED BY",
+      "confidence": 0.9751372933387756,
+      "bbox": [
+        359,
+        767,
+        85,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          359,
+          767
+        ],
+        [
+          444,
+          767
+        ],
+        [
+          444,
+          781
+        ],
+        [
+          359,
+          781
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "(19) SIGNED BY",
+      "original_confidence": 0.9751372933387756,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000080",
+      "text": "FAXNO.",
+      "confidence": 0.9704561233520508,
+      "bbox": [
+        49,
+        781,
+        45,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          49,
+          781
+        ],
+        [
+          94,
+          781
+        ],
+        [
+          94,
+          793
+        ],
+        [
+          49,
+          793
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "value-like text pattern",
+      "locked": false,
+      "notes": "",
+      "original_text": "FAX N0, ;+82-2-000-0000",
+      "original_confidence": 0.9416478872299194,
+      "text_source": "paddle_recrop",
+      "ocr_text_stale": false,
+      "rec_text": "FAXNO.",
+      "rec_confidence": 0.9704561233520508,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-06-30T07:26:13.431249+00:00"
+    },
+    {
+      "id": "det_000081",
+      "text": "K B. KONG",
+      "confidence": 0.7762463688850403,
+      "bbox": [
+        472,
+        778,
+        138,
+        30
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          473,
+          778
+        ],
+        [
+          610,
+          780
+        ],
+        [
+          609,
+          808
+        ],
+        [
+          472,
+          806
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "unknown",
+      "reason": "safe default keep",
+      "locked": false,
+      "notes": "",
+      "original_text": "K B. KONG",
+      "original_confidence": 0.7762463688850403,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "det_000083",
+      "text": "",
+      "confidence": 0.0,
+      "bbox": [
+        445,
+        859,
+        5,
+        7
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          445,
+          859
+        ],
+        [
+          450,
+          859
+        ],
+        [
+          450,
+          866
+        ],
+        [
+          445,
+          866
+        ]
+      ],
+      "status": "ignore",
+      "auto_type": "unknown",
+      "reason": "empty text or near-zero confidence",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": 0.0,
+      "text_source": "paddle_initial",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_1782804268366",
+      "text": "FAX",
+      "confidence": null,
+      "bbox": [
+        156,
+        129,
+        26,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          156,
+          129
+        ],
+        [
+          182,
+          129
+        ],
+        [
+          182,
+          142
+        ],
+        [
+          156,
+          142
+        ]
+      ],
+      "status": "keep",
+      "auto_type": "field_value",
+      "reason": "manual bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "",
+      "original_confidence": null,
+      "text_source": "manual_override",
+      "ocr_text_stale": false,
+      "rec_text": "EAV",
+      "rec_confidence": 0.7420617938041687,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-06-30T07:26:13.431249+00:00"
+    },
+    {
+      "id": "manual_trd_02_001",
+      "text": "ABC CORPORATION",
+      "confidence": null,
+      "bbox": [
+        40,
+        85,
+        160,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          40,
+          85
+        ],
+        [
+          200,
+          85
+        ],
+        [
+          200,
+          98
+        ],
+        [
+          40,
+          98
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "ABC CORPORATION",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_002",
+      "text": "ABCCI 2015-001 MAY 19, 2015",
+      "confidence": null,
+      "bbox": [
+        346,
+        85,
+        210,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          346,
+          85
+        ],
+        [
+          556,
+          85
+        ],
+        [
+          556,
+          98
+        ],
+        [
+          346,
+          98
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "ABCCI 2015-001 MAY 19, 2015",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_003",
+      "text": "120, SAMSUNG - DONG, GANGNAM - GU,",
+      "confidence": null,
+      "bbox": [
+        40,
+        99,
+        230,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          40,
+          99
+        ],
+        [
+          270,
+          99
+        ],
+        [
+          270,
+          112
+        ],
+        [
+          40,
+          112
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "120, SAMSUNG - DONG, GANGNAM - GU,",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_004",
+      "text": "SEOUL, SOUTH KOREA",
+      "confidence": null,
+      "bbox": [
+        39,
+        113,
+        150,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          39,
+          113
+        ],
+        [
+          189,
+          113
+        ],
+        [
+          189,
+          127
+        ],
+        [
+          39,
+          127
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "SEOUL, SOUTH KOREA",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_005",
+      "text": "+82-2-000-0000",
+      "confidence": null,
+      "bbox": [
+        69,
+        128,
+        78,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          69,
+          128
+        ],
+        [
+          147,
+          128
+        ],
+        [
+          147,
+          141
+        ],
+        [
+          69,
+          141
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "+82-2-000-0000",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "+82-2-000-0000",
+      "rec_confidence": 0.9996558427810669,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:52:57.916794+00:00"
+    },
+    {
+      "id": "manual_trd_02_006",
+      "text": "+82-2-000-0000",
+      "confidence": null,
+      "bbox": [
+        189,
+        128,
+        111,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          189,
+          128
+        ],
+        [
+          300,
+          128
+        ],
+        [
+          300,
+          143
+        ],
+        [
+          189,
+          143
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "+82-2-000-0000",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "+82-2-000-0000",
+      "rec_confidence": 0.9637224078178406,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:47:25.048063+00:00"
+    },
+    {
+      "id": "manual_trd_02_007",
+      "text": "DEF CORPORATION",
+      "confidence": null,
+      "bbox": [
+        39,
+        156,
+        160,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          39,
+          156
+        ],
+        [
+          199,
+          156
+        ],
+        [
+          199,
+          169
+        ],
+        [
+          39,
+          169
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "DEF CORPORATION",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_008",
+      "text": "110, FLOWER ROAD,",
+      "confidence": null,
+      "bbox": [
+        38,
+        169,
+        140,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          38,
+          169
+        ],
+        [
+          178,
+          169
+        ],
+        [
+          178,
+          184
+        ],
+        [
+          38,
+          184
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "110, FLOWER ROAD,",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_009",
+      "text": "SAME AS CONSIGNEE",
+      "confidence": null,
+      "bbox": [
+        349,
+        170,
+        180,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          349,
+          170
+        ],
+        [
+          529,
+          170
+        ],
+        [
+          529,
+          184
+        ],
+        [
+          349,
+          184
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "SAME AS CONSIGNEE",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_010",
+      "text": "NEW YORK, U.S.A",
+      "confidence": null,
+      "bbox": [
+        37,
+        183,
+        140,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          37,
+          183
+        ],
+        [
+          177,
+          183
+        ],
+        [
+          177,
+          196
+        ],
+        [
+          37,
+          196
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "NEW YORK, U.S.A",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_011",
+      "text": "+1-123-456789",
+      "confidence": null,
+      "bbox": [
+        68,
+        198,
+        110,
+        16
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          68,
+          198
+        ],
+        [
+          178,
+          198
+        ],
+        [
+          178,
+          214
+        ],
+        [
+          68,
+          214
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "+1-123-456789",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_012",
+      "text": "SAME AS ABOVE",
+      "confidence": null,
+      "bbox": [
+        39,
+        234,
+        120,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          39,
+          234
+        ],
+        [
+          159,
+          234
+        ],
+        [
+          159,
+          247
+        ],
+        [
+          39,
+          247
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "SAME AS ABOVE",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_013",
+      "text": "1) FREIGHT COLLECT BY OCEAN",
+      "confidence": null,
+      "bbox": [
+        349,
+        228,
+        190,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          349,
+          228
+        ],
+        [
+          539,
+          228
+        ],
+        [
+          539,
+          241
+        ],
+        [
+          349,
+          241
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "1) FREIGHT COLLECT BY OCEAN",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_014",
+      "text": "2)H.S. CODE NO. : 1234-00-0000",
+      "confidence": null,
+      "bbox": [
+        348,
+        242,
+        205,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          348,
+          242
+        ],
+        [
+          553,
+          242
+        ],
+        [
+          553,
+          255
+        ],
+        [
+          348,
+          255
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "2)H.S. CODE NO. : 1234-00-0000",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_015",
+      "text": "3) NO. OF BILL, OF LADING: ABC012345678",
+      "confidence": null,
+      "bbox": [
+        349,
+        256,
+        240,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          349,
+          256
+        ],
+        [
+          589,
+          256
+        ],
+        [
+          589,
+          269
+        ],
+        [
+          349,
+          269
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "3) NO. OF BILL, OF LADING: ABC012345678",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_016",
+      "text": "BUSAN,",
+      "confidence": null,
+      "bbox": [
+        69,
+        269,
+        60,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          69,
+          269
+        ],
+        [
+          129,
+          269
+        ],
+        [
+          129,
+          284
+        ],
+        [
+          69,
+          284
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "BUSAN,",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_017",
+      "text": "NEW YORK,",
+      "confidence": null,
+      "bbox": [
+        210,
+        269,
+        80,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          210,
+          269
+        ],
+        [
+          290,
+          269
+        ],
+        [
+          290,
+          284
+        ],
+        [
+          210,
+          284
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "NEW YORK,",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_018",
+      "text": "SOUTH KOREA",
+      "confidence": null,
+      "bbox": [
+        52,
+        284,
+        95,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          52,
+          284
+        ],
+        [
+          147,
+          284
+        ],
+        [
+          147,
+          297
+        ],
+        [
+          52,
+          297
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "SOUTH KOREA",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_019",
+      "text": "U.S.A",
+      "confidence": null,
+      "bbox": [
+        223,
+        284,
+        55,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          223,
+          284
+        ],
+        [
+          278,
+          284
+        ],
+        [
+          278,
+          298
+        ],
+        [
+          223,
+          298
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "U.S.A",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_020",
+      "text": "HAPPY VESSEL V.50E",
+      "confidence": null,
+      "bbox": [
+        32,
+        312,
+        121,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          32,
+          312
+        ],
+        [
+          153,
+          312
+        ],
+        [
+          153,
+          325
+        ],
+        [
+          32,
+          325
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "HAPPY VESSEL V.50E",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "HAPPY VESSEL V.SOE",
+      "rec_confidence": 0.9822390675544739,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:47:25.048063+00:00"
+    },
+    {
+      "id": "manual_trd_02_021",
+      "text": "MAY 25, 2015",
+      "confidence": null,
+      "bbox": [
+        206,
+        311,
+        85,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          206,
+          311
+        ],
+        [
+          291,
+          311
+        ],
+        [
+          291,
+          325
+        ],
+        [
+          206,
+          325
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "MAY 25, 2015",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_022",
+      "text": "DEF CORP.",
+      "confidence": null,
+      "bbox": [
+        37,
+        354,
+        85,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          37,
+          354
+        ],
+        [
+          122,
+          354
+        ],
+        [
+          122,
+          369
+        ],
+        [
+          37,
+          369
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "DEF CORP.",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_023",
+      "text": "NEW YORK",
+      "confidence": null,
+      "bbox": [
+        37,
+        371,
+        80,
+        11
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          37,
+          371
+        ],
+        [
+          117,
+          371
+        ],
+        [
+          117,
+          382
+        ],
+        [
+          37,
+          382
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "NEW YORK",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_024",
+      "text": "MOTORCYCLE GLOVES",
+      "confidence": null,
+      "bbox": [
+        156,
+        371,
+        135,
+        10
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          156,
+          371
+        ],
+        [
+          291,
+          371
+        ],
+        [
+          291,
+          381
+        ],
+        [
+          156,
+          381
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "MOTORCYCLE GLOVES",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_025",
+      "text": "C/NO.1~2",
+      "confidence": null,
+      "bbox": [
+        35,
+        383,
+        80,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          35,
+          383
+        ],
+        [
+          115,
+          383
+        ],
+        [
+          115,
+          397
+        ],
+        [
+          35,
+          397
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "C/NO.1~2",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_026",
+      "text": "ITEM NO.",
+      "confidence": null,
+      "bbox": [
+        35,
+        397,
+        70,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          35,
+          397
+        ],
+        [
+          105,
+          397
+        ],
+        [
+          105,
+          411
+        ],
+        [
+          35,
+          411
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "ITEM NO.",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_027",
+      "text": "MOTORCYCLE GLOVES",
+      "confidence": null,
+      "bbox": [
+        158,
+        428,
+        142,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          158,
+          428
+        ],
+        [
+          300,
+          428
+        ],
+        [
+          300,
+          440
+        ],
+        [
+          158,
+          440
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "MOTORCYCLE GLOVES",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "MOTORCYCLE GLOVES",
+      "rec_confidence": 0.9661267399787903,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:57:41.569957+00:00"
+    },
+    {
+      "id": "manual_trd_02_028",
+      "text": "420.000",
+      "confidence": null,
+      "bbox": [
+        525,
+        426,
+        45,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          525,
+          426
+        ],
+        [
+          570,
+          426
+        ],
+        [
+          570,
+          441
+        ],
+        [
+          525,
+          441
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "420.000",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_029",
+      "text": "500.000",
+      "confidence": null,
+      "bbox": [
+        582,
+        426,
+        45,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          582,
+          426
+        ],
+        [
+          627,
+          426
+        ],
+        [
+          627,
+          441
+        ],
+        [
+          582,
+          441
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "500.000",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_030",
+      "text": "0.212",
+      "confidence": null,
+      "bbox": [
+        643,
+        427,
+        35,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          643,
+          427
+        ],
+        [
+          678,
+          427
+        ],
+        [
+          678,
+          441
+        ],
+        [
+          643,
+          441
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "0.212",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_031",
+      "text": "(1,200 X 420 X 420 MM)",
+      "confidence": null,
+      "bbox": [
+        542,
+        441,
+        128,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          542,
+          441
+        ],
+        [
+          670,
+          441
+        ],
+        [
+          670,
+          454
+        ],
+        [
+          542,
+          454
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "(1,200 X 420 X 420 MM)",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_032",
+      "text": "(1) MG-001",
+      "confidence": null,
+      "bbox": [
+        155,
+        456,
+        70,
+        11
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          155,
+          456
+        ],
+        [
+          225,
+          456
+        ],
+        [
+          225,
+          467
+        ],
+        [
+          155,
+          467
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "(1) MG-001",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_033",
+      "text": "X 1,000 PRS",
+      "confidence": null,
+      "bbox": [
+        230,
+        456,
+        80,
+        11
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          230,
+          456
+        ],
+        [
+          310,
+          456
+        ],
+        [
+          310,
+          467
+        ],
+        [
+          230,
+          467
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "X 1,000 PRS",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_034",
+      "text": "(200 PRS X 5 CARTONS)",
+      "confidence": null,
+      "bbox": [
+        330,
+        455,
+        130,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          330,
+          455
+        ],
+        [
+          460,
+          455
+        ],
+        [
+          460,
+          467
+        ],
+        [
+          330,
+          467
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "(200 PRS X 5 CARTONS)",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "(200 PRS X S CARTONS",
+      "rec_confidence": 0.9247096180915833,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:57:41.569957+00:00"
+    },
+    {
+      "id": "manual_trd_02_035",
+      "text": "MOTORCYCLE GLOVES",
+      "confidence": null,
+      "bbox": [
+        158,
+        471,
+        142,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          158,
+          471
+        ],
+        [
+          300,
+          471
+        ],
+        [
+          300,
+          483
+        ],
+        [
+          158,
+          483
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "MOTORCYCLE GLOVES",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "MOTORCYCLE GLOVES",
+      "rec_confidence": 0.9863883852958679,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:57:41.569957+00:00"
+    },
+    {
+      "id": "manual_trd_02_036",
+      "text": "420.000",
+      "confidence": null,
+      "bbox": [
+        525,
+        469,
+        45,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          525,
+          469
+        ],
+        [
+          570,
+          469
+        ],
+        [
+          570,
+          483
+        ],
+        [
+          525,
+          483
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "420.000",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_037",
+      "text": "500,000",
+      "confidence": null,
+      "bbox": [
+        583,
+        471,
+        45,
+        11
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          583,
+          471
+        ],
+        [
+          628,
+          471
+        ],
+        [
+          628,
+          482
+        ],
+        [
+          583,
+          482
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "500,000",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_038",
+      "text": "0.212",
+      "confidence": null,
+      "bbox": [
+        642,
+        469,
+        35,
+        15
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          642,
+          469
+        ],
+        [
+          677,
+          469
+        ],
+        [
+          677,
+          484
+        ],
+        [
+          642,
+          484
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "0.212",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_039",
+      "text": "(1,200 X 420 X 420 MM)",
+      "confidence": null,
+      "bbox": [
+        543,
+        483,
+        128,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          543,
+          483
+        ],
+        [
+          671,
+          483
+        ],
+        [
+          671,
+          496
+        ],
+        [
+          543,
+          496
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "(1,200 X 420 X 420 MM)",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_040",
+      "text": "(1) MG-002",
+      "confidence": null,
+      "bbox": [
+        156,
+        498,
+        70,
+        11
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          156,
+          498
+        ],
+        [
+          226,
+          498
+        ],
+        [
+          226,
+          509
+        ],
+        [
+          156,
+          509
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "(1) MG-002",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_041",
+      "text": "X 1.000 PRS",
+      "confidence": null,
+      "bbox": [
+        230,
+        498,
+        80,
+        11
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          230,
+          498
+        ],
+        [
+          310,
+          498
+        ],
+        [
+          310,
+          509
+        ],
+        [
+          230,
+          509
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "X 1.000 PRS",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_042",
+      "text": "(200 PRS X 5 CARTONS )",
+      "confidence": null,
+      "bbox": [
+        330,
+        497,
+        130,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          330,
+          497
+        ],
+        [
+          460,
+          497
+        ],
+        [
+          460,
+          509
+        ],
+        [
+          330,
+          509
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "(200 PRS X 5 CARTONS )",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "(200 PRS X5 CARTONS",
+      "rec_confidence": 0.9255163073539734,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:57:41.569957+00:00"
+    },
+    {
+      "id": "manual_trd_02_043",
+      "text": "FOB BUSAN, SOUTH KOREA",
+      "confidence": null,
+      "bbox": [
+        200,
+        513,
+        150,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          200,
+          513
+        ],
+        [
+          350,
+          513
+        ],
+        [
+          350,
+          525
+        ],
+        [
+          200,
+          525
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "FOB BUSAN, SOUTH KOREA",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "FOB BUSAN, SOUTH KOREA",
+      "rec_confidence": 0.9345591068267822,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:57:41.569957+00:00"
+    },
+    {
+      "id": "manual_trd_02_044",
+      "text": "840.000",
+      "confidence": null,
+      "bbox": [
+        526,
+        513,
+        45,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          526,
+          513
+        ],
+        [
+          571,
+          513
+        ],
+        [
+          571,
+          525
+        ],
+        [
+          526,
+          525
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "840.000",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_045",
+      "text": "1,000.000",
+      "confidence": null,
+      "bbox": [
+        579,
+        513,
+        50,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          579,
+          513
+        ],
+        [
+          629,
+          513
+        ],
+        [
+          629,
+          525
+        ],
+        [
+          579,
+          525
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "1,000.000",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_046",
+      "text": "0.424",
+      "confidence": null,
+      "bbox": [
+        643,
+        512,
+        35,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          643,
+          512
+        ],
+        [
+          678,
+          512
+        ],
+        [
+          678,
+          526
+        ],
+        [
+          643,
+          526
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "0.424",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_047",
+      "text": "KGS",
+      "confidence": null,
+      "bbox": [
+        531,
+        527,
+        26,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          531,
+          527
+        ],
+        [
+          557,
+          527
+        ],
+        [
+          557,
+          539
+        ],
+        [
+          531,
+          539
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "KGS",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_048",
+      "text": "KGS",
+      "confidence": null,
+      "bbox": [
+        588,
+        527,
+        26,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          588,
+          527
+        ],
+        [
+          614,
+          527
+        ],
+        [
+          614,
+          539
+        ],
+        [
+          588,
+          539
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "KGS",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_049",
+      "text": "KGS",
+      "confidence": null,
+      "bbox": [
+        644,
+        527,
+        25,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          644,
+          527
+        ],
+        [
+          669,
+          527
+        ],
+        [
+          669,
+          539
+        ],
+        [
+          644,
+          539
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "KGS",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_050",
+      "text": "TWO (2) BOXES OF MOTORCYCLE GLOVES",
+      "confidence": null,
+      "bbox": [
+        311,
+        554,
+        230,
+        13
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          311,
+          554
+        ],
+        [
+          541,
+          554
+        ],
+        [
+          541,
+          567
+        ],
+        [
+          311,
+          567
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "TWO (2) BOXES OF MOTORCYCLE GLOVES",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "TWO (2) BOXES OFMIOTORCYCLE GLOVES",
+      "rec_confidence": 0.9417282342910767,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:57:41.569957+00:00"
+    },
+    {
+      "id": "manual_trd_02_051",
+      "text": "*SAY: TWO (2) BOXES ONLY.",
+      "confidence": null,
+      "bbox": [
+        154,
+        571,
+        180,
+        9
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          154,
+          571
+        ],
+        [
+          334,
+          571
+        ],
+        [
+          334,
+          580
+        ],
+        [
+          154,
+          580
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "*SAY: TWO (2) BOXES ONLY.",
+      "original_confidence": null,
+      "text_source": "initial_kept",
+      "ocr_text_stale": false,
+      "rec_text": "*SAY: TWO (2) BOXES ONLY.",
+      "rec_confidence": 0.9383335113525391,
+      "rec_engine": "paddleocr",
+      "rec_updated_at": "2026-07-02T22:57:41.569957+00:00"
+    },
+    {
+      "id": "manual_trd_02_052",
+      "text": "* CONTANER & SEAL NO. :ABCP1Z34567/EFB2IOOD",
+      "confidence": null,
+      "bbox": [
+        156,
+        581,
+        270,
+        12
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          156,
+          581
+        ],
+        [
+          426,
+          581
+        ],
+        [
+          426,
+          593
+        ],
+        [
+          156,
+          593
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "* CONTANER & SEAL NO. :ABCP1Z34567/EFB2IOOD",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_053",
+      "text": "*ORIGIN OF COUNTRY: REFUBLIC OF KOREA (R. O.K)",
+      "confidence": null,
+      "bbox": [
+        155,
+        594,
+        300,
+        16
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          155,
+          594
+        ],
+        [
+          455,
+          594
+        ],
+        [
+          455,
+          610
+        ],
+        [
+          155,
+          610
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "*ORIGIN OF COUNTRY: REFUBLIC OF KOREA (R. O.K)",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_054",
+      "text": "ABC CORPORATION",
+      "confidence": null,
+      "bbox": [
+        466,
+        738,
+        190,
+        25
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          466,
+          738
+        ],
+        [
+          656,
+          738
+        ],
+        [
+          656,
+          763
+        ],
+        [
+          466,
+          763
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "ABC CORPORATION",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_055",
+      "text": "+ 82-2-000-0000",
+      "confidence": null,
+      "bbox": [
+        100,
+        765,
+        95,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          100,
+          765
+        ],
+        [
+          195,
+          765
+        ],
+        [
+          195,
+          779
+        ],
+        [
+          100,
+          779
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "+ 82-2-000-0000",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_056",
+      "text": "+82-2-000-0000",
+      "confidence": null,
+      "bbox": [
+        100,
+        781,
+        95,
+        14
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          100,
+          781
+        ],
+        [
+          195,
+          781
+        ],
+        [
+          195,
+          795
+        ],
+        [
+          100,
+          795
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "+82-2-000-0000",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    },
+    {
+      "id": "manual_trd_02_057",
+      "text": "K. D. HONG / MANAGING DIRECTOR",
+      "confidence": null,
+      "bbox": [
+        470,
+        831,
+        214,
+        20
+      ],
+      "bbox_format": "xywh",
+      "polygon": [
+        [
+          470,
+          831
+        ],
+        [
+          684,
+          831
+        ],
+        [
+          684,
+          851
+        ],
+        [
+          470,
+          851
+        ]
+      ],
+      "status": "use",
+      "auto_type": "field_value",
+      "reason": "migrated from authoring schema bbox",
+      "locked": false,
+      "notes": "",
+      "original_text": "K. D. HONG / MANAGING DIRECTOR",
+      "original_confidence": null,
+      "text_source": "authoring_schema_migration",
+      "ocr_text_stale": false,
+      "rec_text": "",
+      "rec_confidence": null,
+      "rec_engine": "",
+      "rec_updated_at": ""
+    }
+  ]
+}

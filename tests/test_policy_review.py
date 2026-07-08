@@ -7,7 +7,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 from datafactory.inpaint import InpaintConfig, inpaint_from_review_policy
-from datafactory.policy import draft_review_policy, load_review_policy, policy_from_edited_rows, review_rows, write_review_policy
+from datafactory.policy import augment_blank_template_policy, draft_review_policy, load_review_policy, policy_from_edited_rows, review_rows, write_review_policy
 
 
 def _detection(id_: str, text: str, bbox: list[int], confidence: float = 0.95) -> dict[str, object]:
@@ -66,6 +66,40 @@ def test_draft_review_policy_prelabels_and_roundtrips(tmp_path: Path) -> None:
     assert len(loaded.labels) == 3
 
 
+def test_blank_template_augmentation_adds_visual_value_region_candidates(tmp_path: Path) -> None:
+    image_path = tmp_path / "blank_grid.png"
+    image = Image.new("RGB", (220, 140), (255, 255, 255))
+    draw = ImageDraw.Draw(image)
+    for x in (20, 90, 160, 210):
+        draw.line([(x, 20), (x, 120)], fill=(0, 0, 0), width=2)
+    for y in (20, 55, 90, 120):
+        draw.line([(20, y), (210, y)], fill=(0, 0, 0), width=2)
+    draw.text((28, 30), "항목", fill=(0, 0, 0))
+    image.save(image_path)
+    detections_path = tmp_path / "detections.json"
+    detections_path.write_text(
+        json.dumps(
+            {
+                "engine": "test",
+                "source_image": str(image_path),
+                "image": {"width": 220, "height": 140},
+                "detections": [_detection("det_label", "항목", [28, 30, 28, 14])],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    policy = draft_review_policy(detections_path)
+    augmented, summary = augment_blank_template_policy(policy)
+
+    visual = [label for label in augmented.labels if label.text_source == "visual_line_detect"]
+    assert summary["candidateCount"] == len(visual)
+    assert visual
+    assert all(label.status == "keep" for label in visual)
+    assert all(label.auto_type == "table_cell" for label in visual)
+
+
 def test_review_policy_roundtrips_manual_edited_bbox(tmp_path: Path) -> None:
     image_path = tmp_path / "source.png"
     Image.new("RGB", (260, 180), (255, 255, 255)).save(image_path)
@@ -118,6 +152,30 @@ def test_review_policy_roundtrips_manual_edited_bbox(tmp_path: Path) -> None:
     assert payload["labels"][0]["polygon"] == [[30, 40], [110, 40], [110, 60], [30, 60]]
     assert payload["labels"][0]["text_source"] == "manual_bbox"
     assert payload["labels"][0]["rec_confidence"] == 0.88
+
+
+def test_policy_from_edited_rows_updates_bbox_coordinates(tmp_path: Path) -> None:
+    image_path = tmp_path / "source.png"
+    Image.new("RGB", (160, 90), (255, 255, 255)).save(image_path)
+    detections_path = tmp_path / "detections.json"
+    detections_path.write_text(
+        json.dumps(
+            {
+                "engine": "test",
+                "source_image": str(image_path),
+                "image": {"width": 160, "height": 90},
+                "detections": [_detection("det_use", "2026.06.26", [20, 25, 40, 15])],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    policy = draft_review_policy(detections_path)
+
+    edited = policy_from_edited_rows(policy, [{**review_rows(policy)[0], "x": 90, "y": 30, "w": 50, "h": 20, "status": "use"}])
+
+    assert edited.labels[0].bbox.to_list() == [90, 30, 50, 20]
+    assert edited.labels[0].polygon == [[90, 30], [140, 30], [140, 50], [90, 50]]
 
 
 def test_inpaint_review_uses_only_use_status(tmp_path: Path) -> None:

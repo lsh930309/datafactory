@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "render_target": "image-template",
+  "defaults": {
+    "font_family": "serif",
+    "font_size_px": 18,
+    "color": "#111111",
+    "align": "left",
+    "vertical_align": "middle",
+    "fit": "shrink_to_bbox"
+  },
+  "style_classes": {
+    "amount_table_cell": {
+      "font_family": "serif",
+      "font_size_px": 20,
+      "align": "center",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "approval_stamp_cell": {
+      "font_family": "serif",
+      "font_size_px": 20,
+      "align": "center",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "audit_box": {
+      "font_family": "serif",
+      "font_size_px": 18,
+      "align": "left",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "checkbox_small": {
+      "font_family": "serif",
+      "font_size_px": 16,
+      "align": "center",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "collateral_table_cell": {
+      "font_family": "serif",
+      "font_size_px": 20,
+      "align": "left",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "date_cell": {
+      "font_family": "serif",
+      "font_size_px": 20,
+      "align": "left",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "date_component": {
+      "font_family": "serif",
+      "font_size_px": 20,
+      "align": "center",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "date_component_small": {
+      "font_family": "serif",
+      "font_size_px": 16,
+      "align": "center",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "guarantor_table_cell": {
+      "font_family": "serif",
+      "font_size_px": 20,
+      "align": "left",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "short_code": {
+      "font_family": "serif",
+      "font_size_px": 20,
+      "align": "left",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    },
+    "wide_table_cell": {
+      "font_family": "serif",
+      "font_size_px": 18,
+      "align": "left",
+      "vertical_align": "middle",
+      "padding_px": 2,
+      "color": "#111111",
+      "fit": "shrink_to_bbox",
+      "notes": "이미지 템플릿 기반 보수적 기본값"
+    }
+  },
+  "field_style_hints": {
+    "approval_deputy_general_manager": {
+      "style_class": "approval_stamp_cell",
+      "bbox": [
+        124,
+        232,
+        168,
+        61
+      ]
+    },
+    "approval_office_manager": {
+      "style_class": "approval_stamp_cell",
+      "bbox": [
+        298,
+        232,
+        162,
+        61
+      ]
+    },
+    "approval_executive_vp": {
+      "style_class": "approval_stamp_cell",
+      "bbox": [
+        634,
+        232,
+        162,
+        61
+      ]
+    },
+    "approval_bank_president": {
+      "style_class": "approval_stamp_cell",
+      "bbox": [
+        801,
+        232,
+        168,
+        61
+      ]
+    },
+    "request_type_single_transaction": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        150,
+        336,
+        15,
+        14
+      ]
+    },
+    "request_type_new": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        150,
+        355,
+        14,
+        14
+      ]
+    },
+    "request_type_increase": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        149,
+        374,
+        15,
+        15
+      ]
+    },
+    "request_type_credit_line": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        150,
+        395,
+        12,
+        14
+      ]
+    },
+    "request_type_term_renewal": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        149,
+        416,
+        15,
+        13
+      ]
+    },
+    "request_type_reduction": {
+      "style_class": "checkbox_small",
+      "bbox": [
+        149,
+        436,
+        16,
+        15
+      ]
+    },
+    "application_date_year": {
+      "style_class": "date_component",
+      "bbox": [
+        414,
+        460,
+        36,
+        27
+      ]
+    },
+    "application_date_month": {
+      "style_class": "date_component",
+      "bbox": [
+        473,
+        458,
+        39,
+        31
+      ]
+    },
+    "application_date_day": {
+      "style_class": "date_component",
+      "bbox": [
+        541,
+        458,
+        35,
+        30
+      ]
+    },
+    "approval_document_number": {
+      "style_class": "short_code",
+      "bbox": [
+        736,
+        460,
+        31,
+        29
+      ]
+    },
+    "audit_confirmation": {
+      "style_class": "audit_box",
+      "bbox": [
+        800,
+        361,
+        169,
+        152
+      ]
+    },
+    "company_address": {
+      "style_class": "wide_table_cell",
+      "bbox": [
+        259,
+        860,
+        710,
+        28
+      ]
+    },
+    "company_established_date": {
+      "style_class": "date_cell",
+      "bbox": [
+        258,
+        892,
+        110,
+        27
+      ]
+    },
+    "credit_rate_score_base_month": {
+      "style_class": "date_component_small",
+      "bbox": [
+        322,
+        926,
+        20,
+        25
+      ]
+    },
+    "credit_rate_score_base_day": {
+      "style_class": "date_component_small",
+      "bbox": [
+        349,
+        926,
+        27,
+        23
+      ]
+    },
+    "credit_review_score_base_month": {
+      "style_class": "date_component_small",
+      "bbox": [
+        322,
+        957,
+        19,
+        24
+      ]
+    },
+    "credit_review_score_base_day": {
+      "style_class": "date_component_small",
+      "bbox": [
+        349,
+        956,
+        26,
+        26
+      ]
+    },
+    "financial_statement_base_year": {
+      "style_class": "date_component",
+      "bbox": [
+        248,
+        1051,
+        43,
+        26
+      ]
+    },
+    "financial_statement_base_month": {
+      "style_class": "date_component",
+      "bbox": [
+        320,
+        1051,
+        40,
+        27
+      ]
+    },
+    "collateral_type": {
+      "style_class": "collateral_table_cell",
+      "bbox": [
+        165,
+        1173,
+        161,
+        47
+      ]
+    },
+    "collateral_appraised_market_price": {
+      "style_class": "amount_table_cell",
+      "bbox": [
+        331,
+        1173,
+        178,
+        47
+      ]
+    },
+    "collateral_assessed_price": {
+      "style_class": "amount_table_cell",
+      "bbox": [
+        513,
+        1173,
+        173,
+        47
+      ]
+    },
+    "collateral_provider": {
+      "style_class": "collateral_table_cell",
+      "bbox": [
+        689,
+        1173,
+        145,
+        47
+      ]
+    },
+    "collateral_preservation_method": {
+      "style_class": "collateral_table_cell",
+      "bbox": [
+        838,
+        1173,
+        127,
+        47
+      ]
+    },
+    "guarantor_name": {
+      "style_class": "guarantor_table_cell",
+      "bbox": [
+        165,
+        1255,
+        161,
+        64
+      ]
+    },
+    "guarantor_age": {
+      "style_class": "guarantor_table_cell",
+      "bbox": [
+        330,
+        1256,
+        179,
+        64
+      ]
+    },
+    "guarantor_occupation": {
+      "style_class": "guarantor_table_cell",
+      "bbox": [
+        512,
+        1256,
+        173,
+        64
+      ]
+    },
+    "guarantor_relationship_to_borrower": {
+      "style_class": "guarantor_table_cell",
+      "bbox": [
+        689,
+        1256,
+        144,
+        64
+      ]
+    },
+    "guarantor_note": {
+      "style_class": "guarantor_table_cell",
+      "bbox": [
+        837,
+        1256,
+        127,
+        64
+      ]
+    }
+  }
+}

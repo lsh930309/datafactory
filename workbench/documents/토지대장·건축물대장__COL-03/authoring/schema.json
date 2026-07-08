@@ -1,240 +1,232 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-29T12:13:18.401338+00:00",
-  "updated_at": "2026-07-02T04:25:04.290074+00:00",
+  "created_at": "2026-07-08T01:23:21.338276+00:00",
   "doc_id": "COL-03",
   "title": "토지대장·건축물대장",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json",
+  "source_review": "workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/토지대장·건축물대장__COL-03/samples/original/건축물대장_page_001.jpg",
   "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/토지대장·건축물대장__COL-03/inpaint/original_건축물대장_page_001/lama/inpainted_lama.png",
   "image": {
     "width": 1584,
     "height": 1224
   },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json"
+  },
+  "anchor_map_ref": "/Users/lsh930309/projects/dataFatory/workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json",
   "fields": [
     {
       "field_id": "document_confirmation_number",
       "label": "문서확인번호",
-      "source_detection_id": "det_000003",
-      "source_text": "문서확인번호:1782-7058-1373-03440",
+      "bbox_label_id": "manual_1783467788626",
+      "source_detection_id": "manual_1783467788626",
+      "source_text": "1782-7058-1373-03440",
       "value_type": "free_text.short",
-      "generator": "template:문서확인번호:{{pattern:####-####-####-#####}}",
+      "generator": "pattern:####-####-####-#####",
       "style_class": "style_document_confirmation_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "document.confirmation.number",
-        "csv_column": "document_confirmation_number"
+        "json_path": "문서확인번호",
+        "csv_column": "문서확인번호"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000003"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
       "field_id": "print_date",
       "label": "출력일자",
+      "bbox_label_id": "det_000004",
       "source_detection_id": "det_000004",
       "source_text": "2026/06/29",
-      "value_type": "free_text.short",
-      "generator": "choice:2026/06/29|2025/09/19",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_print_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "print.date",
-        "csv_column": "print_date"
+        "json_path": "출력일자",
+        "csv_column": "출력일자"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000004"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
       "field_id": "print_time",
       "label": "출력시각",
+      "bbox_label_id": "det_000006",
       "source_detection_id": "det_000006",
       "source_text": "13:03:34",
       "value_type": "free_text.short",
       "generator": "pattern:##:##:##",
       "style_class": "style_print_time",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "print.time",
-        "csv_column": "print_time"
+        "json_path": "출력시각",
+        "csv_column": "출력시각"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000006"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "page_number",
-      "label": "페이지",
-      "source_detection_id": "det_000009",
-      "source_text": "(2쪽 중 제1쪽)",
+      "field_id": "building_id",
+      "label": "건물ID",
+      "bbox_label_id": "det_000015",
+      "source_detection_id": "det_000015",
+      "source_text": "2120171230000250",
       "value_type": "free_text.short",
-      "generator": "choice:(2쪽 중 제1쪽)|(1쪽 중 제1쪽)",
-      "style_class": "style_page_number",
+      "generator": "pattern:################",
+      "style_class": "style_building_id",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "page.number",
-        "csv_column": "page_number"
+        "json_path": "건물ID",
+        "csv_column": "건물ID"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000009"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
       "field_id": "building_management_number",
-      "label": "건축물관리번호",
+      "label": "고유번호",
+      "bbox_label_id": "det_000013",
       "source_detection_id": "det_000013",
       "source_text": "1165010700-1-07090007",
       "value_type": "free_text.short",
       "generator": "pattern:##########-#-########",
       "style_class": "style_building_management_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.management.number",
-        "csv_column": "building_management_number"
+        "json_path": "고유번호",
+        "csv_column": "고유번호"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000013"
-    },
-    {
-      "field_id": "ledger_pk",
-      "label": "대장 고유번호",
-      "source_detection_id": "det_000015",
-      "source_text": "2120171230000250",
-      "value_type": "free_text.short",
-      "generator": "pattern:################",
-      "style_class": "style_ledger_pk",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "ledger.pk",
-        "csv_column": "ledger_pk"
-      },
-      "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000015"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
       "field_id": "building_name",
-      "label": "건물명",
+      "label": "명칭",
+      "bbox_label_id": "det_000016",
       "source_detection_id": "det_000016",
       "source_text": "르헤브빌딩",
       "value_type": "free_text.short",
-      "generator": "choice:르헤브빌딩|테헤란빌딩|한빛타워",
+      "generator": "pool:synthetic_building_names_ko",
       "style_class": "style_building_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.name",
-        "csv_column": "building_name"
+        "json_path": "명칭",
+        "csv_column": "명칭"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000016"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "household_summary",
-      "label": "호가구세대수",
+      "field_id": "unit_household_count",
+      "label": "호수/가구수/세대수",
+      "bbox_label_id": "det_000018",
       "source_detection_id": "det_000018",
       "source_text": "0호/0가구/0세대",
       "value_type": "free_text.short",
-      "generator": "choice:0호/0가구/0세대|12호/0가구/0세대",
-      "style_class": "style_household_summary",
+      "generator": "choice:0호/0가구/0세대|1호/1가구/1세대|5호/5가구/5세대",
+      "style_class": "style_unit_household_count",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "household.summary",
-        "csv_column": "household_summary"
+        "json_path": "호수/가구수/세대수",
+        "csv_column": "호수/가구수/세대수"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000018"
+      "notes": "호/가구/세대는 값 자체의 복합 단위 표기이며 값 위치에 별도 정적 단위가 없으므로 생성값에 포함한다."
     },
     {
       "field_id": "site_location",
       "label": "대지위치",
+      "bbox_label_id": "det_000021",
       "source_detection_id": "det_000021",
       "source_text": "서울특별시서초구반포동",
-      "value_type": "free_text.short",
-      "generator": "choice:서울특별시서초구반포동|서울특별시강남구역삼동",
+      "value_type": "address.ko",
+      "generator": "address.ko",
       "style_class": "style_site_location",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "site.location",
-        "csv_column": "site_location"
+        "json_path": "대지위치",
+        "csv_column": "대지위치"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000021"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
       "field_id": "lot_number",
       "label": "지번",
+      "bbox_label_id": "det_000022",
       "source_detection_id": "det_000022",
       "source_text": "709-7",
       "value_type": "free_text.short",
-      "generator": "choice:709-7|123-45|30",
+      "generator": "pattern:###-#",
       "style_class": "style_lot_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "lot.number",
-        "csv_column": "lot_number"
+        "json_path": "지번",
+        "csv_column": "지번"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000022"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
       "field_id": "road_address",
       "label": "도로명주소",
+      "bbox_label_id": "det_000024",
       "source_detection_id": "det_000024",
       "source_text": "서울특별시 서초구 강남대로89길30(반포동)",
       "value_type": "address.ko",
@@ -244,989 +236,1098 @@
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "road.address",
-        "csv_column": "road_address"
+        "json_path": "도로명주소",
+        "csv_column": "도로명주소"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000024"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
       "field_id": "site_area",
       "label": "대지면적",
+      "bbox_label_id": "det_000030",
       "source_detection_id": "det_000030",
-      "source_text": "220.2m",
+      "source_text": "220.2",
       "value_type": "free_text.short",
-      "generator": "choice:220.2m²|537m2|122.44m2",
+      "generator": "template:{{pattern:###}}.{{pattern:#}}",
       "style_class": "style_site_area",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "site.area",
-        "csv_column": "site_area"
-      },
-      "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000030"
-    },
-    {
-      "field_id": "building_area",
-      "label": "건축면적",
-      "source_detection_id": "det_000031",
-      "source_text": "537m2",
-      "value_type": "free_text.short",
-      "generator": "choice:537m2|429.31m²|194.96%",
-      "style_class": "style_building_area",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "building.area",
-        "csv_column": "building_area"
-      },
-      "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000031"
-    },
-    {
-      "field_id": "zoning",
-      "label": "지역지구",
-      "source_detection_id": "det_000032",
-      "source_text": "제2종일반주거지역 외1",
-      "value_type": "free_text.short",
-      "generator": "choice:제2종일반주거지역 외1|상업지역|준주거지역",
-      "style_class": "style_zoning",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "zoning",
-        "csv_column": "zoning"
+        "json_path": "대지면적",
+        "csv_column": "대지면적"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000032"
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+    },
+    {
+      "field_id": "total_floor_area",
+      "label": "연면적",
+      "bbox_label_id": "det_000031",
+      "source_detection_id": "det_000031",
+      "source_text": "537",
+      "value_type": "free_text.short",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_total_floor_area",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "연면적",
+        "csv_column": "연면적"
+      },
+      "required": true,
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+    },
+    {
+      "field_id": "zoning_area",
+      "label": "지역",
+      "bbox_label_id": "det_000032",
+      "source_detection_id": "det_000032",
+      "source_text": "제2종일반주거지역 외1",
+      "value_type": "free_text.short",
+      "generator": "pool:zoning_area_types",
+      "style_class": "style_zoning_area",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "지역",
+        "csv_column": "지역"
+      },
+      "required": true,
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
       "field_id": "restriction_zone",
-      "label": "제한구역",
+      "label": "구역",
+      "bbox_label_id": "det_000033",
       "source_detection_id": "det_000033",
       "source_text": "가축사육제한구역",
       "value_type": "free_text.short",
-      "generator": "choice:가축사육제한구역|상대보호구역|해당없음",
+      "generator": "pool:restriction_zone_types",
       "style_class": "style_restriction_zone",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "restriction.zone",
-        "csv_column": "restriction_zone"
+        "json_path": "구역",
+        "csv_column": "구역"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000033"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_01",
-      "label": "건축물 현황 항목 1",
+      "field_id": "building_area",
+      "label": "건축면적",
+      "bbox_label_id": "det_000039",
       "source_detection_id": "det_000039",
-      "source_text": "122.44m2",
+      "source_text": "122.44",
       "value_type": "free_text.short",
-      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
-      "style_class": "style_building_ledger_item_01",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_building_area",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.01",
-        "csv_column": "building_ledger_item_01"
+        "json_path": "건축면적",
+        "csv_column": "건축면적"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000039"
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
     },
     {
-      "field_id": "building_ledger_item_02",
-      "label": "건축물 현황 항목 2",
+      "field_id": "floor_area_for_far",
+      "label": "용적률 산정용 연면적",
+      "bbox_label_id": "det_000040",
       "source_detection_id": "det_000040",
-      "source_text": "429.31m'",
+      "source_text": "429.31",
       "value_type": "free_text.short",
-      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
-      "style_class": "style_building_ledger_item_02",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_floor_area_for_far",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.02",
-        "csv_column": "building_ledger_item_02"
+        "json_path": "용적률_산정용_연면적",
+        "csv_column": "용적률_산정용_연면적"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000040"
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
     },
     {
-      "field_id": "building_ledger_item_03",
-      "label": "건축물 현황 항목 3",
+      "field_id": "main_structure",
+      "label": "주구조",
+      "bbox_label_id": "det_000041",
       "source_detection_id": "det_000041",
       "source_text": "철골조,철근콘크리트조",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_03",
+      "value_type": "free_text.short",
+      "generator": "pool:building_structures",
+      "style_class": "style_main_structure",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.03",
-        "csv_column": "building_ledger_item_03"
+        "json_path": "주구조",
+        "csv_column": "주구조"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000041"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_04",
-      "label": "건축물 현황 항목 4",
+      "field_id": "main_use",
+      "label": "주용도",
+      "bbox_label_id": "det_000042",
       "source_detection_id": "det_000042",
       "source_text": "제2종근린생활시설(학원)",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_04",
+      "value_type": "free_text.short",
+      "generator": "pool:building_uses",
+      "style_class": "style_main_use",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.04",
-        "csv_column": "building_ledger_item_04"
+        "json_path": "주용도",
+        "csv_column": "주용도"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000042"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_05",
-      "label": "건축물 현황 항목 5",
+      "field_id": "floor_count_summary",
+      "label": "층수",
+      "bbox_label_id": "det_000043",
       "source_detection_id": "det_000043",
       "source_text": "지하:1층,지상:5층",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_05",
+      "value_type": "free_text.short",
+      "generator": "choice:지하:1,지상:5|지하:0,지상:3|지하:2,지상:10",
+      "style_class": "style_floor_count_summary",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.05",
-        "csv_column": "building_ledger_item_05"
+        "json_path": "층수",
+        "csv_column": "층수"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000043"
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
     },
     {
-      "field_id": "building_ledger_item_06",
-      "label": "건축물 현황 항목 6",
+      "field_id": "building_coverage_ratio",
+      "label": "건폐율",
+      "bbox_label_id": "det_000049",
       "source_detection_id": "det_000049",
-      "source_text": "55.6%",
+      "source_text": "55.6",
       "value_type": "free_text.short",
-      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
-      "style_class": "style_building_ledger_item_06",
+      "generator": "template:{{pattern:##}}.{{pattern:#}}",
+      "style_class": "style_building_coverage_ratio",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.06",
-        "csv_column": "building_ledger_item_06"
+        "json_path": "건폐율",
+        "csv_column": "건폐율"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000049"
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
     },
     {
-      "field_id": "building_ledger_item_07",
-      "label": "건축물 현황 항목 7",
+      "field_id": "floor_area_ratio",
+      "label": "용적률",
+      "bbox_label_id": "det_000050",
       "source_detection_id": "det_000050",
-      "source_text": "194.96%",
+      "source_text": "194.96",
       "value_type": "free_text.short",
-      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
-      "style_class": "style_building_ledger_item_07",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_floor_area_ratio",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.07",
-        "csv_column": "building_ledger_item_07"
+        "json_path": "용적률",
+        "csv_column": "용적률"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000050"
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
     },
     {
-      "field_id": "building_ledger_item_08",
-      "label": "건축물 현황 항목 8",
+      "field_id": "height",
+      "label": "높이",
+      "bbox_label_id": "det_000051",
       "source_detection_id": "det_000051",
-      "source_text": "14.5m",
+      "source_text": "14.5",
       "value_type": "free_text.short",
-      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
-      "style_class": "style_building_ledger_item_08",
+      "generator": "template:{{pattern:##}}.{{pattern:#}}",
+      "style_class": "style_height",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.08",
-        "csv_column": "building_ledger_item_08"
+        "json_path": "높이",
+        "csv_column": "높이"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000051"
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
     },
     {
-      "field_id": "building_ledger_item_09",
-      "label": "건축물 현황 항목 9",
+      "field_id": "roof",
+      "label": "지붕",
+      "bbox_label_id": "det_000052",
       "source_detection_id": "det_000052",
       "source_text": "철골구조지붕",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_09",
+      "value_type": "free_text.short",
+      "generator": "pool:roof_types",
+      "style_class": "style_roof",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.09",
-        "csv_column": "building_ledger_item_09"
+        "json_path": "지붕",
+        "csv_column": "지붕"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000052"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_10",
-      "label": "건축물 현황 항목 10",
+      "field_id": "status_row_1_section",
+      "label": "건축물현황 1행 구분",
+      "bbox_label_id": "det_000077",
       "source_detection_id": "det_000077",
       "source_text": "주1",
       "value_type": "free_text.short",
-      "generator": "choice:주1|지1층|1층|2층|3층|5층",
-      "style_class": "style_building_ledger_item_10",
+      "generator": "pool:building_section_codes",
+      "style_class": "style_status_row_1_section",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.10",
-        "csv_column": "building_ledger_item_10"
+        "json_path": "건축물현황_1행_구분",
+        "csv_column": "건축물현황_1행_구분"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000077"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_11",
-      "label": "건축물 현황 항목 11",
+      "field_id": "status_row_1_floor",
+      "label": "건축물현황 1행 층별",
+      "bbox_label_id": "det_000078",
       "source_detection_id": "det_000078",
       "source_text": "z1층",
       "value_type": "free_text.short",
-      "generator": "choice:주1|지1층|1층|2층|3층|5층",
-      "style_class": "style_building_ledger_item_11",
+      "generator": "pool:floor_labels",
+      "style_class": "style_status_row_1_floor",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.11",
-        "csv_column": "building_ledger_item_11"
+        "json_path": "건축물현황_1행_층별",
+        "csv_column": "건축물현황_1행_층별"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000078"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_12",
-      "label": "건축물 현황 항목 12",
+      "field_id": "status_row_1_structure",
+      "label": "건축물현황 1행 구조",
+      "bbox_label_id": "det_000079",
       "source_detection_id": "det_000079",
       "source_text": "철근콘크리트구조",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_12",
+      "value_type": "free_text.short",
+      "generator": "pool:building_structures",
+      "style_class": "style_status_row_1_structure",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.12",
-        "csv_column": "building_ledger_item_12"
+        "json_path": "건축물현황_1행_구조",
+        "csv_column": "건축물현황_1행_구조"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000079"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_13",
-      "label": "건축물 현황 항목 13",
+      "field_id": "status_row_1_use",
+      "label": "건축물현황 1행 용도",
+      "bbox_label_id": "det_000080",
       "source_detection_id": "det_000080",
       "source_text": "제2종근린생활시설(사진관)",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_13",
+      "value_type": "free_text.short",
+      "generator": "pool:building_uses",
+      "style_class": "style_status_row_1_use",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.13",
-        "csv_column": "building_ledger_item_13"
+        "json_path": "건축물현황_1행_용도",
+        "csv_column": "건축물현황_1행_용도"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000080"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_14",
-      "label": "건축물 현황 항목 14",
+      "field_id": "status_row_1_area",
+      "label": "건축물현황 1행 면적",
+      "bbox_label_id": "det_000081",
       "source_detection_id": "det_000081",
       "source_text": "107.69",
       "value_type": "free_text.short",
-      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
-      "style_class": "style_building_ledger_item_14",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_status_row_1_area",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.14",
-        "csv_column": "building_ledger_item_14"
+        "json_path": "건축물현황_1행_면적",
+        "csv_column": "건축물현황_1행_면적"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000081"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_15",
-      "label": "건축물 현황 항목 15",
+      "field_id": "owner_name",
+      "label": "소유자 성명(명칭)",
+      "bbox_label_id": "det_000082",
       "source_detection_id": "det_000082",
       "source_text": "주식회사엠케이컨텐츠",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_15",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
+      "style_class": "style_owner_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.15",
-        "csv_column": "building_ledger_item_15"
+        "json_path": "소유자_성명(명칭)",
+        "csv_column": "소유자_성명(명칭)"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000082"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_16",
-      "label": "건축물 현황 항목 16",
+      "field_id": "owner_address",
+      "label": "소유자 주소",
+      "bbox_label_id": "det_000083",
       "source_detection_id": "det_000083",
-      "source_text": "서울특별시용산구서빙고로 67,",
-      "value_type": "date.kr",
-      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
-      "style_class": "style_building_ledger_item_16",
+      "source_text": "서울특별시 용산구서빙고로 67, 103동1607호(용산동5가,파크타워)",
+      "value_type": "address.ko",
+      "generator": "address.ko",
+      "style_class": "style_owner_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.16",
-        "csv_column": "building_ledger_item_16"
+        "json_path": "소유자_주소",
+        "csv_column": "소유자_주소"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000083"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_17",
-      "label": "건축물 현황 항목 17",
+      "field_id": "owner_change_date",
+      "label": "소유자 변동일",
+      "bbox_label_id": "det_000084",
       "source_detection_id": "det_000084",
       "source_text": "2021.10.20.",
       "value_type": "date.kr",
-      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
-      "style_class": "style_building_ledger_item_17",
+      "generator": "date.kr",
+      "style_class": "style_owner_change_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.17",
-        "csv_column": "building_ledger_item_17"
+        "json_path": "소유자_변동일",
+        "csv_column": "소유자_변동일"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000084"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_18",
-      "label": "건축물 현황 페이지 표기",
-      "source_detection_id": "det_000085",
-      "source_text": "1/1",
-      "value_type": "free_text.short",
-      "generator": "choice:1/1|1/2|2/2",
-      "style_class": "style_building_ledger_item_18",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "building.ledger.item.18",
-        "csv_column": "building_ledger_item_18"
-      },
-      "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000085"
-    },
-    {
-      "field_id": "building_ledger_item_19",
-      "label": "건축물 현황 항목 19",
+      "field_id": "status_row_2_section",
+      "label": "건축물현황 2행 구분",
+      "bbox_label_id": "det_000086",
       "source_detection_id": "det_000086",
       "source_text": "주1",
       "value_type": "free_text.short",
-      "generator": "choice:주1|지1층|1층|2층|3층|5층",
-      "style_class": "style_building_ledger_item_19",
+      "generator": "pool:building_section_codes",
+      "style_class": "style_status_row_2_section",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.19",
-        "csv_column": "building_ledger_item_19"
+        "json_path": "건축물현황_2행_구분",
+        "csv_column": "건축물현황_2행_구분"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000086"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_20",
-      "label": "건축물 현황 항목 20",
+      "field_id": "status_row_2_floor",
+      "label": "건축물현황 2행 층별",
+      "bbox_label_id": "det_000087",
       "source_detection_id": "det_000087",
       "source_text": "1층",
       "value_type": "free_text.short",
-      "generator": "choice:주1|지1층|1층|2층|3층|5층",
-      "style_class": "style_building_ledger_item_20",
+      "generator": "pool:floor_labels",
+      "style_class": "style_status_row_2_floor",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.20",
-        "csv_column": "building_ledger_item_20"
+        "json_path": "건축물현황_2행_층별",
+        "csv_column": "건축물현황_2행_층별"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000087"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_21",
-      "label": "건축물 현황 항목 21",
+      "field_id": "status_row_2_structure",
+      "label": "건축물현황 2행 구조",
+      "bbox_label_id": "det_000088",
       "source_detection_id": "det_000088",
       "source_text": "일반철골구조",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_21",
+      "value_type": "free_text.short",
+      "generator": "pool:building_structures",
+      "style_class": "style_status_row_2_structure",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.21",
-        "csv_column": "building_ledger_item_21"
+        "json_path": "건축물현황_2행_구조",
+        "csv_column": "건축물현황_2행_구조"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000088"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_22",
-      "label": "건축물 현황 항목 22",
+      "field_id": "status_row_2_use",
+      "label": "건축물현황 2행 용도",
+      "bbox_label_id": "det_000089",
       "source_detection_id": "det_000089",
       "source_text": "제1종근린생활시설(소매점)",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_22",
+      "value_type": "free_text.short",
+      "generator": "pool:building_uses",
+      "style_class": "style_status_row_2_use",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.22",
-        "csv_column": "building_ledger_item_22"
+        "json_path": "건축물현황_2행_용도",
+        "csv_column": "건축물현황_2행_용도"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000089"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_23",
-      "label": "건축물 현황 항목 23",
+      "field_id": "status_row_2_area",
+      "label": "건축물현황 2행 면적",
+      "bbox_label_id": "det_000090",
       "source_detection_id": "det_000090",
       "source_text": "59.17",
       "value_type": "free_text.short",
-      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
-      "style_class": "style_building_ledger_item_23",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_status_row_2_area",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.23",
-        "csv_column": "building_ledger_item_23"
+        "json_path": "건축물현황_2행_면적",
+        "csv_column": "건축물현황_2행_면적"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000090"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_24",
-      "label": "건축물 현황 항목 24",
+      "field_id": "owner_registration_number_masked",
+      "label": "주민(법인)등록번호",
+      "bbox_label_id": "det_000091",
       "source_detection_id": "det_000091",
       "source_text": "110111–6******",
-      "value_type": "date.kr",
-      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
-      "style_class": "style_building_ledger_item_24",
+      "value_type": "free_text.short",
+      "generator": "pattern:######-*******",
+      "style_class": "style_owner_registration_number_masked",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.24",
-        "csv_column": "building_ledger_item_24"
+        "json_path": "주민(법인)등록번호",
+        "csv_column": "주민(법인)등록번호"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000091"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_25",
-      "label": "건축물 현황 항목 25",
-      "source_detection_id": "det_000092",
-      "source_text": "103동1607호(용산동5가,파크타워)",
-      "value_type": "date.kr",
-      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
-      "style_class": "style_building_ledger_item_25",
-      "render_policy": {
-        "align": "left",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "building.ledger.item.25",
-        "csv_column": "building_ledger_item_25"
-      },
-      "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000092"
-    },
-    {
-      "field_id": "building_ledger_item_26",
-      "label": "건축물 현황 항목 26",
+      "field_id": "owner_change_reason",
+      "label": "변동원인",
+      "bbox_label_id": "det_000093",
       "source_detection_id": "det_000093",
       "source_text": "소유권이전",
-      "value_type": "date.kr",
-      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
-      "style_class": "style_building_ledger_item_26",
+      "value_type": "free_text.short",
+      "generator": "pool:owner_change_reasons",
+      "style_class": "style_owner_change_reason",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.26",
-        "csv_column": "building_ledger_item_26"
+        "json_path": "변동원인",
+        "csv_column": "변동원인"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000093"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_27",
-      "label": "건축물 현황 항목 27",
+      "field_id": "status_row_3_section",
+      "label": "건축물현황 3행 구분",
+      "bbox_label_id": "det_000094",
       "source_detection_id": "det_000094",
       "source_text": "주1",
       "value_type": "free_text.short",
-      "generator": "choice:주1|지1층|1층|2층|3층|5층",
-      "style_class": "style_building_ledger_item_27",
+      "generator": "pool:building_section_codes",
+      "style_class": "style_status_row_3_section",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.27",
-        "csv_column": "building_ledger_item_27"
+        "json_path": "건축물현황_3행_구분",
+        "csv_column": "건축물현황_3행_구분"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000094"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_28",
-      "label": "건축물 현황 항목 28",
+      "field_id": "status_row_3_floor",
+      "label": "건축물현황 3행 층별",
+      "bbox_label_id": "det_000095",
       "source_detection_id": "det_000095",
       "source_text": "2층",
       "value_type": "free_text.short",
-      "generator": "choice:주1|지1층|1층|2층|3층|5층",
-      "style_class": "style_building_ledger_item_28",
+      "generator": "pool:floor_labels",
+      "style_class": "style_status_row_3_floor",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.28",
-        "csv_column": "building_ledger_item_28"
+        "json_path": "건축물현황_3행_층별",
+        "csv_column": "건축물현황_3행_층별"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000095"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_29",
-      "label": "건축물 현황 항목 29",
+      "field_id": "status_row_3_structure",
+      "label": "건축물현황 3행 구조",
+      "bbox_label_id": "det_000096",
       "source_detection_id": "det_000096",
       "source_text": "일반철골구조",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_29",
+      "value_type": "free_text.short",
+      "generator": "pool:building_structures",
+      "style_class": "style_status_row_3_structure",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.29",
-        "csv_column": "building_ledger_item_29"
+        "json_path": "건축물현황_3행_구조",
+        "csv_column": "건축물현황_3행_구조"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000096"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_30",
-      "label": "건축물 현황 항목 30",
+      "field_id": "status_row_3_use",
+      "label": "건축물현황 3행 용도",
+      "bbox_label_id": "det_000097",
       "source_detection_id": "det_000097",
       "source_text": "제2종근린생활시설(학원)",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_30",
+      "value_type": "free_text.short",
+      "generator": "pool:building_uses",
+      "style_class": "style_status_row_3_use",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.30",
-        "csv_column": "building_ledger_item_30"
+        "json_path": "건축물현황_3행_용도",
+        "csv_column": "건축물현황_3행_용도"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000097"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_31",
-      "label": "건축물 현황 항목 31",
+      "field_id": "status_row_3_area",
+      "label": "건축물현황 3행 면적",
+      "bbox_label_id": "det_000098",
       "source_detection_id": "det_000098",
       "source_text": "114.11",
       "value_type": "free_text.short",
-      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
-      "style_class": "style_building_ledger_item_31",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_status_row_3_area",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.31",
-        "csv_column": "building_ledger_item_31"
+        "json_path": "건축물현황_3행_면적",
+        "csv_column": "건축물현황_3행_면적"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000098"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_32",
-      "label": "건축물 현황 항목 32",
+      "field_id": "status_row_4_section",
+      "label": "건축물현황 4행 구분",
+      "bbox_label_id": "det_000100",
       "source_detection_id": "det_000100",
       "source_text": "주1",
       "value_type": "free_text.short",
-      "generator": "choice:주1|지1층|1층|2층|3층|5층",
-      "style_class": "style_building_ledger_item_32",
+      "generator": "pool:building_section_codes",
+      "style_class": "style_status_row_4_section",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.32",
-        "csv_column": "building_ledger_item_32"
+        "json_path": "건축물현황_4행_구분",
+        "csv_column": "건축물현황_4행_구분"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000100"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_33",
-      "label": "건축물 현황 항목 33",
+      "field_id": "status_row_4_floor",
+      "label": "건축물현황 4행 층별",
+      "bbox_label_id": "det_000101",
       "source_detection_id": "det_000101",
       "source_text": "3층",
       "value_type": "free_text.short",
-      "generator": "choice:주1|지1층|1층|2층|3층|5층",
-      "style_class": "style_building_ledger_item_33",
+      "generator": "pool:floor_labels",
+      "style_class": "style_status_row_4_floor",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.33",
-        "csv_column": "building_ledger_item_33"
+        "json_path": "건축물현황_4행_층별",
+        "csv_column": "건축물현황_4행_층별"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000101"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_34",
-      "label": "건축물 현황 항목 34",
+      "field_id": "status_row_4_structure",
+      "label": "건축물현황 4행 구조",
+      "bbox_label_id": "det_000102",
       "source_detection_id": "det_000102",
       "source_text": "일반철골구조",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_34",
+      "value_type": "free_text.short",
+      "generator": "pool:building_structures",
+      "style_class": "style_status_row_4_structure",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.34",
-        "csv_column": "building_ledger_item_34"
+        "json_path": "건축물현황_4행_구조",
+        "csv_column": "건축물현황_4행_구조"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000102"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_35",
-      "label": "건축물 현황 항목 35",
+      "field_id": "status_row_4_use",
+      "label": "건축물현황 4행 용도",
+      "bbox_label_id": "det_000103",
       "source_detection_id": "det_000103",
       "source_text": "제2종근린생활시설(학원)",
-      "value_type": "money.krw",
-      "generator": "choice:철골조,철근콘크리트조|일반철골구조|제2종근린생활시설(학원)|제1종근린생활시설(소매점)|철골구조지붕",
-      "style_class": "style_building_ledger_item_35",
+      "value_type": "free_text.short",
+      "generator": "pool:building_uses",
+      "style_class": "style_status_row_4_use",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.35",
-        "csv_column": "building_ledger_item_35"
+        "json_path": "건축물현황_4행_용도",
+        "csv_column": "건축물현황_4행_용도"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000103"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_36",
-      "label": "건축물 현황 항목 36",
+      "field_id": "status_row_4_area",
+      "label": "건축물현황 4행 면적",
+      "bbox_label_id": "det_000104",
       "source_detection_id": "det_000104",
       "source_text": "114.11",
       "value_type": "free_text.short",
-      "generator": "choice:55.6%|194.96%|14.5m|107.69|59.17|114.11",
-      "style_class": "style_building_ledger_item_36",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_status_row_4_area",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.36",
-        "csv_column": "building_ledger_item_36"
+        "json_path": "건축물현황_4행_면적",
+        "csv_column": "건축물현황_4행_면적"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000104"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_37",
-      "label": "건축물 현황 항목 37",
+      "field_id": "certificate_issue_date",
+      "label": "발급일",
+      "bbox_label_id": "det_000107",
       "source_detection_id": "det_000107",
-      "source_text": "발급일:2026년06월29일",
+      "source_text": "2026년 06월 29일",
       "value_type": "date.kr",
-      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
-      "style_class": "style_building_ledger_item_37",
+      "generator": "date.kr",
+      "style_class": "style_certificate_issue_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.37",
-        "csv_column": "building_ledger_item_37"
+        "json_path": "발급일",
+        "csv_column": "발급일"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000107"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_38",
-      "label": "건축물 현황 항목 38",
+      "field_id": "clerk_name",
+      "label": "담당자",
+      "bbox_label_id": "det_000110",
       "source_detection_id": "det_000110",
-      "source_text": "담당자:오-케이민원센터",
-      "value_type": "date.kr",
-      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
-      "style_class": "style_building_ledger_item_38",
+      "source_text": "오-케이민원센터",
+      "value_type": "free_text.short",
+      "generator": "pool:public_office_names",
+      "style_class": "style_clerk_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.38",
-        "csv_column": "building_ledger_item_38"
+        "json_path": "담당자",
+        "csv_column": "담당자"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000110"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_39",
-      "label": "건축물 현황 항목 39",
+      "field_id": "clerk_phone",
+      "label": "전화",
+      "bbox_label_id": "det_000111",
       "source_detection_id": "det_000111",
-      "source_text": "전화:02-2155-6306",
-      "value_type": "date.kr",
-      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
-      "style_class": "style_building_ledger_item_39",
+      "source_text": "02-2155-6306",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
+      "style_class": "style_clerk_phone",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.39",
-        "csv_column": "building_ledger_item_39"
+        "json_path": "전화",
+        "csv_column": "전화"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000111"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
     },
     {
-      "field_id": "building_ledger_item_40",
-      "label": "건축물 현황 항목 40",
+      "field_id": "issuer",
+      "label": "발급기관장",
+      "bbox_label_id": "det_000113",
       "source_detection_id": "det_000113",
       "source_text": "서울특별시 서초구청장",
-      "value_type": "date.kr",
-      "generator": "choice:주식회사엠케이컨텐츠|서울특별시용산구서빙고로 67,|2021.10.20.|소유권이전|발급일:2026년06월29일|담당자:오-케이민원센터|전화:02-2155-6306|서울특별시 서초구청장",
-      "style_class": "style_building_ledger_item_40",
+      "value_type": "free_text.short",
+      "generator": "pool:public_office_titles",
+      "style_class": "style_issuer",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "building.ledger.item.40",
-        "csv_column": "building_ledger_item_40"
+        "json_path": "발급기관장",
+        "csv_column": "발급기관장"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정",
-      "bbox_label_id": "det_000113"
+      "notes": "filled_sample의 review use/value anchor 기반 초안"
+    },
+    {
+      "field_id": "landscaping_area",
+      "label": "조경면적",
+      "bbox_label_id": "manual_1783470434127",
+      "source_detection_id": "manual_1783470434127",
+      "source_text": "조경면적",
+      "value_type": "free_text.short",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_landscaping_area",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "조경면적",
+        "csv_column": "조경면적"
+      },
+      "required": false,
+      "notes": "리뷰에서 수동 value_region으로 확정된 빈 값 영역. 단위는 주변 ㎡ 라벨 근거로 m2로 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+    },
+    {
+      "field_id": "open_public_space_area",
+      "label": "공개 공지·공간면적",
+      "bbox_label_id": "manual_1783470430160",
+      "source_detection_id": "manual_1783470430160",
+      "source_text": "공개 공지·공간면적",
+      "value_type": "free_text.short",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_open_public_space_area",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "공개_공지·공간면적",
+        "csv_column": "공개_공지·공간면적"
+      },
+      "required": false,
+      "notes": "리뷰에서 수동 value_region으로 확정된 빈 값 영역. 지원 grammar의 숫자 패턴으로 면적값을 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+    },
+    {
+      "field_id": "building_line_setback_area",
+      "label": "건축선 후퇴면적",
+      "bbox_label_id": "manual_1783470425142",
+      "source_detection_id": "manual_1783470425142",
+      "source_text": "건축선 후퇴면적",
+      "value_type": "free_text.short",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "style_class": "style_building_line_setback_area",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "건축선_후퇴면적",
+        "csv_column": "건축선_후퇴면적"
+      },
+      "required": false,
+      "notes": "빈 값 영역이라 정밀 범위는 미확정. 단위 표기 OCR은 m²로 보이나 ASCII m2로 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+    },
+    {
+      "field_id": "building_line_setback_distance",
+      "label": "건축선후퇴거리",
+      "bbox_label_id": "manual_1783470593596",
+      "source_detection_id": "manual_1783470593596",
+      "source_text": "건축선후퇴거리",
+      "value_type": "free_text.short",
+      "generator": "template:{{pattern:##}}.{{pattern:##}}",
+      "style_class": "style_building_line_setback_distance",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "건축선후퇴거리",
+        "csv_column": "건축선후퇴거리"
+      },
+      "required": false,
+      "notes": "리뷰 수동 value_region. 거리 단위 m로 근사하며 실제 소수 자릿수는 미확정. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+    },
+    {
+      "field_id": "accessory_building_summary",
+      "label": "부속건축물",
+      "bbox_label_id": "manual_1783470492760",
+      "source_detection_id": "manual_1783470492760",
+      "source_text": "부속건축물",
+      "value_type": "free_text.short",
+      "generator": "choice:0 0|1 20|2 50",
+      "style_class": "style_accessory_building_summary",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "부속건축물",
+        "csv_column": "부속건축물"
+      },
+      "required": false,
+      "notes": "부속건축물 칸은 동수/면적 결합 표기로 보이나 현재 렌더러에 count/area 복합 rule이 없어 choice로 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
     }
   ],
   "groups": [],
-  "authoring_mode": "manual_20260702",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json"
-  }
+  "updated_at": "2026-07-08T01:31:01.160871+00:00"
 }

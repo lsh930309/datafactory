@@ -1,0 +1,4678 @@
+{
+  "schema_version": 2,
+  "doc_id": "MED-04",
+  "title": "진료비계산서·영수증",
+  "sample_kind": "blank_template",
+  "semantic_schema": {
+    "문서구분": {
+      "외래": "",
+      "입원": "",
+      "퇴원": "",
+      "중간": ""
+    },
+    "환자정보": {
+      "환자등록번호": "",
+      "환자성명": ""
+    },
+    "진료기간": {
+      "시작": {
+        "년": "",
+        "월": "",
+        "일": ""
+      },
+      "종료": {
+        "년": "",
+        "월": "",
+        "일": ""
+      }
+    },
+    "진료구분": {
+      "야간진료": "",
+      "공휴일진료": ""
+    },
+    "진료정보": {
+      "진료과목": "",
+      "질병군_DRG번호": "",
+      "병실": "",
+      "환자구분": ""
+    },
+    "영수증정보": {
+      "영수증번호": ""
+    },
+    "진료비항목": {
+      "진찰료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "입원료 1인실": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "입원료 2·3인실": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "입원료 4인실 이상": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "식대": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "투약및조제료 행위료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "투약및조제료 약품비": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "주사료 행위료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "주사료 약품비": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "마취료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "처치 및 수술료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "검사료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "영상진단료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "방사선치료료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "치료재료대": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "재활 및 물리치료료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "정신요법료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "전혈 및 혈액성분제제료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "CT 진단료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "MRI 진단료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "PET 진단료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "초음파 진단료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "보철·교정료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "제증명수수료": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "선별급여": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "65세 이상 등 정액": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "정액수가(요양병원)": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "정액수가(완화의료)": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "질병군 포괄수가": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      },
+      "기타": {
+        "일부 본인부담 본인부담금": "",
+        "일부 본인부담 공단부담금": "",
+        "전액 본인부담": "",
+        "비급여": ""
+      }
+    },
+    "금액산정내용": {
+      "진료비총액": "",
+      "공단부담총액": "",
+      "환자부담총액": "",
+      "이미납부한금액": "",
+      "납부할금액": ""
+    },
+    "납부정보": {
+      "납부한금액": {
+        "카드": "",
+        "현금영수증": "",
+        "현금": "",
+        "합계": ""
+      },
+      "납부하지않은금액": ""
+    },
+    "현금영수증": {
+      "구분": "",
+      "신분확인번호": "",
+      "승인번호": ""
+    },
+    "진료비합계": {
+      "일부본인부담_본인부담금": "",
+      "일부본인부담_공단부담금": "",
+      "전액본인부담": "",
+      "비급여": "",
+      "상한액초과금": ""
+    },
+    "요양기관": {
+      "종류": {
+        "의원급_보건기관": "",
+        "병원급": "",
+        "종합병원": "",
+        "상급종합병원": ""
+      },
+      "대표자": ""
+    },
+    "발행일": {
+      "년": "",
+      "월": "",
+      "일": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "doc_kind_outpatient",
+      "key": "외래 선택",
+      "semantic_path": "문서구분.외래",
+      "anchor_id": "manual_1783505672367",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": "SRC_LAW_001",
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          246,
+          60,
+          30,
+          30
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "doc_kind_inpatient",
+      "key": "입원 선택",
+      "semantic_path": "문서구분.입원",
+      "anchor_id": "manual_1783505676734",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": "SRC_LAW_001",
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          356,
+          60,
+          27,
+          30
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "doc_kind_discharge",
+      "key": "퇴원 선택",
+      "semantic_path": "문서구분.퇴원",
+      "anchor_id": "manual_1783505680184",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": "SRC_LAW_001",
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          474,
+          61,
+          27,
+          31
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "doc_kind_interim",
+      "key": "중간 선택",
+      "semantic_path": "문서구분.중간",
+      "anchor_id": "manual_1783505683217",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": "SRC_LAW_001",
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          570,
+          61,
+          27,
+          30
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "patient_registration_no",
+      "key": "환자등록번호",
+      "semantic_path": "환자정보.환자등록번호",
+      "anchor_id": "visual_0006",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:######",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          119,
+          124,
+          217,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "patient_name",
+      "key": "환자 성명",
+      "semantic_path": "환자정보.환자성명",
+      "anchor_id": "visual_0007",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000004"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          124,
+          291,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "treatment_start_year",
+      "key": "진료기간 시작 연",
+      "semantic_path": "진료기간.시작.년",
+      "anchor_id": "visual_0010",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "det_000007"
+      ],
+      "value_type": "date_part",
+      "generator": "date.year",
+      "style_class": "normal_text",
+      "unit_policy": "static_suffix_after_value",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          633,
+          124,
+          30,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "treatment_start_month",
+      "key": "진료기간 시작 월",
+      "semantic_path": "진료기간.시작.월",
+      "anchor_id": "manual_1783505602548",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "det_000007"
+      ],
+      "value_type": "date_part",
+      "generator": "date.month",
+      "style_class": "normal_text",
+      "unit_policy": "static_suffix_after_value",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          666,
+          124,
+          28,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "treatment_start_day",
+      "key": "진료기간 시작 일",
+      "semantic_path": "진료기간.시작.일",
+      "anchor_id": "manual_1783505610398",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "det_000007"
+      ],
+      "value_type": "date_part",
+      "generator": "date.day",
+      "style_class": "normal_text",
+      "unit_policy": "static_suffix_after_value",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          698,
+          122,
+          27,
+          23
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "treatment_end_year",
+      "key": "진료기간 종료 연",
+      "semantic_path": "진료기간.종료.년",
+      "anchor_id": "manual_1783505616552",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "det_000008"
+      ],
+      "value_type": "date_part",
+      "generator": "date.year",
+      "style_class": "normal_text",
+      "unit_policy": "static_suffix_after_value",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          768,
+          122,
+          32,
+          25
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "treatment_end_month",
+      "key": "진료기간 종료 월",
+      "semantic_path": "진료기간.종료.월",
+      "anchor_id": "manual_1783505620449",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "det_000008"
+      ],
+      "value_type": "date_part",
+      "generator": "date.month",
+      "style_class": "normal_text",
+      "unit_policy": "static_suffix_after_value",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          806,
+          123,
+          25,
+          23
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "treatment_end_day",
+      "key": "진료기간 종료 일",
+      "semantic_path": "진료기간.종료.일",
+      "anchor_id": "manual_1783505624033",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "det_000008"
+      ],
+      "value_type": "date_part",
+      "generator": "date.day",
+      "style_class": "normal_text",
+      "unit_policy": "static_suffix_after_value",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          837,
+          123,
+          24,
+          23
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "night_care_checked",
+      "key": "야간진료 선택",
+      "semantic_path": "진료구분.야간진료",
+      "anchor_id": "manual_1783505642965",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000006",
+        "det_000009"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          912,
+          129,
+          17,
+          16
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "holiday_care_checked",
+      "key": "공휴일진료 선택",
+      "semantic_path": "진료구분.공휴일진료",
+      "anchor_id": "manual_1783505639948",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000006",
+        "det_000009"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          991,
+          129,
+          19,
+          14
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "department",
+      "key": "진료과목",
+      "semantic_path": "진료정보.진료과목",
+      "anchor_id": "visual_0014",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000010"
+      ],
+      "value_type": "text",
+      "generator": "pool:departments",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          119,
+          174,
+          217,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "drg_number",
+      "key": "질병군(DRG)번호",
+      "semantic_path": "진료정보.질병군_DRG번호",
+      "anchor_id": "visual_0015",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000011"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:AA####",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          174,
+          289,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "ward_room",
+      "key": "병실",
+      "semantic_path": "진료정보.병실",
+      "anchor_id": "visual_0018",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000012"
+      ],
+      "value_type": "text",
+      "generator": "choice:일반병실|1인실|2인실|3인실",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          174,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "patient_category",
+      "key": "환자구분",
+      "semantic_path": "진료정보.환자구분",
+      "anchor_id": "visual_0019",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000013"
+      ],
+      "value_type": "text",
+      "generator": "pool:patient_categories",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          732,
+          174,
+          113,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "receipt_no",
+      "key": "영수증번호",
+      "semantic_path": "영수증정보.영수증번호",
+      "anchor_id": "visual_0021",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000014"
+      ],
+      "value_type": "identifier",
+      "generator": "template:{{date.year}}{{date.month}}-{{pattern:######}}",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          848,
+          174,
+          222,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "amount_consultation_partial_patient",
+      "key": "진찰료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.진찰료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0032",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          274,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_consultation_partial_insurer",
+      "key": "진찰료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.진찰료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0033",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          274,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_consultation_full_patient",
+      "key": "진찰료 전액 본인부담",
+      "semantic_path": "진료비항목.진찰료.전액 본인부담",
+      "anchor_id": "visual_0034",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          274,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_consultation_non_benefit",
+      "key": "진찰료 비급여",
+      "semantic_path": "진료비항목.진찰료.비급여",
+      "anchor_id": "visual_0035",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          274,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_1_partial_patient",
+      "key": "입원료 1인실 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.입원료 1인실.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0038",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          299,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_1_partial_insurer",
+      "key": "입원료 1인실 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.입원료 1인실.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0039",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          299,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_1_full_patient",
+      "key": "입원료 1인실 전액 본인부담",
+      "semantic_path": "진료비항목.입원료 1인실.전액 본인부담",
+      "anchor_id": "visual_0040",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          299,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_1_non_benefit",
+      "key": "입원료 1인실 비급여",
+      "semantic_path": "진료비항목.입원료 1인실.비급여",
+      "anchor_id": "visual_0041",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          299,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_2_3_partial_patient",
+      "key": "입원료 2·3인실 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.입원료 2·3인실.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0044",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          324,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_2_3_partial_insurer",
+      "key": "입원료 2·3인실 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.입원료 2·3인실.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0045",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          324,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_2_3_full_patient",
+      "key": "입원료 2·3인실 전액 본인부담",
+      "semantic_path": "진료비항목.입원료 2·3인실.전액 본인부담",
+      "anchor_id": "visual_0046",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          324,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_2_3_non_benefit",
+      "key": "입원료 2·3인실 비급여",
+      "semantic_path": "진료비항목.입원료 2·3인실.비급여",
+      "anchor_id": "visual_0047",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          324,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_4_plus_partial_patient",
+      "key": "입원료 4인실 이상 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.입원료 4인실 이상.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0050",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          349,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_4_plus_partial_insurer",
+      "key": "입원료 4인실 이상 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.입원료 4인실 이상.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0051",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          349,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_4_plus_full_patient",
+      "key": "입원료 4인실 이상 전액 본인부담",
+      "semantic_path": "진료비항목.입원료 4인실 이상.전액 본인부담",
+      "anchor_id": "visual_0052",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          349,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_room_4_plus_non_benefit",
+      "key": "입원료 4인실 이상 비급여",
+      "semantic_path": "진료비항목.입원료 4인실 이상.비급여",
+      "anchor_id": "visual_0053",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          349,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_meal_partial_patient",
+      "key": "식대 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.식대.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0056",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          374,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_meal_partial_insurer",
+      "key": "식대 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.식대.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0057",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          374,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_meal_full_patient",
+      "key": "식대 전액 본인부담",
+      "semantic_path": "진료비항목.식대.전액 본인부담",
+      "anchor_id": "visual_0058",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          374,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_meal_non_benefit",
+      "key": "식대 비급여",
+      "semantic_path": "진료비항목.식대.비급여",
+      "anchor_id": "visual_0059",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          374,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_medication_act_partial_patient",
+      "key": "투약및조제료 행위료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.투약및조제료 행위료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0063",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          399,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_medication_act_partial_insurer",
+      "key": "투약및조제료 행위료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.투약및조제료 행위료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0064",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          399,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_medication_act_full_patient",
+      "key": "투약및조제료 행위료 전액 본인부담",
+      "semantic_path": "진료비항목.투약및조제료 행위료.전액 본인부담",
+      "anchor_id": "visual_0065",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          399,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_medication_act_non_benefit",
+      "key": "투약및조제료 행위료 비급여",
+      "semantic_path": "진료비항목.투약및조제료 행위료.비급여",
+      "anchor_id": "visual_0066",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          399,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_medication_drug_partial_patient",
+      "key": "투약및조제료 약품비 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.투약및조제료 약품비.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0070",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          424,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_medication_drug_partial_insurer",
+      "key": "투약및조제료 약품비 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.투약및조제료 약품비.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0071",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          424,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_medication_drug_full_patient",
+      "key": "투약및조제료 약품비 전액 본인부담",
+      "semantic_path": "진료비항목.투약및조제료 약품비.전액 본인부담",
+      "anchor_id": "visual_0072",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          424,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_medication_drug_non_benefit",
+      "key": "투약및조제료 약품비 비급여",
+      "semantic_path": "진료비항목.투약및조제료 약품비.비급여",
+      "anchor_id": "visual_0073",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          424,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_injection_act_partial_patient",
+      "key": "주사료 행위료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.주사료 행위료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0075",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          449,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_injection_act_partial_insurer",
+      "key": "주사료 행위료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.주사료 행위료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0076",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          449,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_injection_act_full_patient",
+      "key": "주사료 행위료 전액 본인부담",
+      "semantic_path": "진료비항목.주사료 행위료.전액 본인부담",
+      "anchor_id": "visual_0077",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          449,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_injection_act_non_benefit",
+      "key": "주사료 행위료 비급여",
+      "semantic_path": "진료비항목.주사료 행위료.비급여",
+      "anchor_id": "visual_0078",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          449,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_injection_drug_partial_patient",
+      "key": "주사료 약품비 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.주사료 약품비.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0081",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          474,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_injection_drug_partial_insurer",
+      "key": "주사료 약품비 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.주사료 약품비.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0082",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          474,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_injection_drug_full_patient",
+      "key": "주사료 약품비 전액 본인부담",
+      "semantic_path": "진료비항목.주사료 약품비.전액 본인부담",
+      "anchor_id": "visual_0083",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          474,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_injection_drug_non_benefit",
+      "key": "주사료 약품비 비급여",
+      "semantic_path": "진료비항목.주사료 약품비.비급여",
+      "anchor_id": "visual_0084",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          474,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_anesthesia_partial_patient",
+      "key": "마취료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.마취료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0088",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          499,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_anesthesia_partial_insurer",
+      "key": "마취료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.마취료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0089",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          499,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_anesthesia_full_patient",
+      "key": "마취료 전액 본인부담",
+      "semantic_path": "진료비항목.마취료.전액 본인부담",
+      "anchor_id": "visual_0090",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          499,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_anesthesia_non_benefit",
+      "key": "마취료 비급여",
+      "semantic_path": "진료비항목.마취료.비급여",
+      "anchor_id": "visual_0091",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          499,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_procedure_surgery_partial_patient",
+      "key": "처치 및 수술료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.처치 및 수술료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0093",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          525,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_procedure_surgery_partial_insurer",
+      "key": "처치 및 수술료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.처치 및 수술료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0094",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          525,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_procedure_surgery_full_patient",
+      "key": "처치 및 수술료 전액 본인부담",
+      "semantic_path": "진료비항목.처치 및 수술료.전액 본인부담",
+      "anchor_id": "visual_0095",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          525,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_procedure_surgery_non_benefit",
+      "key": "처치 및 수술료 비급여",
+      "semantic_path": "진료비항목.처치 및 수술료.비급여",
+      "anchor_id": "visual_0096",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          525,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_test_partial_patient",
+      "key": "검사료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.검사료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0099",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          550,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_test_partial_insurer",
+      "key": "검사료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.검사료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0100",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          550,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_test_full_patient",
+      "key": "검사료 전액 본인부담",
+      "semantic_path": "진료비항목.검사료.전액 본인부담",
+      "anchor_id": "visual_0101",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          550,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_test_non_benefit",
+      "key": "검사료 비급여",
+      "semantic_path": "진료비항목.검사료.비급여",
+      "anchor_id": "visual_0102",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          550,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_imaging_partial_patient",
+      "key": "영상진단료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.영상진단료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0105",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          574,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_imaging_partial_insurer",
+      "key": "영상진단료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.영상진단료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0106",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          574,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_imaging_full_patient",
+      "key": "영상진단료 전액 본인부담",
+      "semantic_path": "진료비항목.영상진단료.전액 본인부담",
+      "anchor_id": "visual_0107",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          574,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_imaging_non_benefit",
+      "key": "영상진단료 비급여",
+      "semantic_path": "진료비항목.영상진단료.비급여",
+      "anchor_id": "visual_0108",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          574,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_radiation_partial_patient",
+      "key": "방사선치료료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.방사선치료료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0110",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          600,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_radiation_partial_insurer",
+      "key": "방사선치료료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.방사선치료료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0111",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          600,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_radiation_full_patient",
+      "key": "방사선치료료 전액 본인부담",
+      "semantic_path": "진료비항목.방사선치료료.전액 본인부담",
+      "anchor_id": "visual_0112",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          600,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_radiation_non_benefit",
+      "key": "방사선치료료 비급여",
+      "semantic_path": "진료비항목.방사선치료료.비급여",
+      "anchor_id": "visual_0113",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          600,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_materials_partial_patient",
+      "key": "치료재료대 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.치료재료대.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0115",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          625,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_materials_partial_insurer",
+      "key": "치료재료대 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.치료재료대.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0116",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          625,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_materials_full_patient",
+      "key": "치료재료대 전액 본인부담",
+      "semantic_path": "진료비항목.치료재료대.전액 본인부담",
+      "anchor_id": "visual_0117",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          625,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_materials_non_benefit",
+      "key": "치료재료대 비급여",
+      "semantic_path": "진료비항목.치료재료대.비급여",
+      "anchor_id": "visual_0118",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          625,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_rehab_partial_patient",
+      "key": "재활 및 물리치료료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.재활 및 물리치료료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0120",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          650,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_rehab_partial_insurer",
+      "key": "재활 및 물리치료료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.재활 및 물리치료료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0121",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          650,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_rehab_full_patient",
+      "key": "재활 및 물리치료료 전액 본인부담",
+      "semantic_path": "진료비항목.재활 및 물리치료료.전액 본인부담",
+      "anchor_id": "visual_0122",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          650,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_rehab_non_benefit",
+      "key": "재활 및 물리치료료 비급여",
+      "semantic_path": "진료비항목.재활 및 물리치료료.비급여",
+      "anchor_id": "visual_0123",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          650,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_psychotherapy_partial_patient",
+      "key": "정신요법료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.정신요법료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0125",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          675,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_psychotherapy_partial_insurer",
+      "key": "정신요법료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.정신요법료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0126",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          675,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_psychotherapy_full_patient",
+      "key": "정신요법료 전액 본인부담",
+      "semantic_path": "진료비항목.정신요법료.전액 본인부담",
+      "anchor_id": "visual_0127",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          675,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_psychotherapy_non_benefit",
+      "key": "정신요법료 비급여",
+      "semantic_path": "진료비항목.정신요법료.비급여",
+      "anchor_id": "visual_0128",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          675,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_blood_partial_patient",
+      "key": "전혈 및 혈액성분제제료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.전혈 및 혈액성분제제료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0130",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          700,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_blood_partial_insurer",
+      "key": "전혈 및 혈액성분제제료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.전혈 및 혈액성분제제료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0131",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          700,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_blood_full_patient",
+      "key": "전혈 및 혈액성분제제료 전액 본인부담",
+      "semantic_path": "진료비항목.전혈 및 혈액성분제제료.전액 본인부담",
+      "anchor_id": "visual_0132",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          700,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_blood_non_benefit",
+      "key": "전혈 및 혈액성분제제료 비급여",
+      "semantic_path": "진료비항목.전혈 및 혈액성분제제료.비급여",
+      "anchor_id": "visual_0133",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          700,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_ct_partial_patient",
+      "key": "CT 진단료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.CT 진단료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0137",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          725,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_ct_partial_insurer",
+      "key": "CT 진단료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.CT 진단료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0138",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          725,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_ct_full_patient",
+      "key": "CT 진단료 전액 본인부담",
+      "semantic_path": "진료비항목.CT 진단료.전액 본인부담",
+      "anchor_id": "visual_0139",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          725,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_ct_non_benefit",
+      "key": "CT 진단료 비급여",
+      "semantic_path": "진료비항목.CT 진단료.비급여",
+      "anchor_id": "visual_0140",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          725,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_mri_partial_patient",
+      "key": "MRI 진단료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.MRI 진단료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0144",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          750,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_mri_partial_insurer",
+      "key": "MRI 진단료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.MRI 진단료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0145",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          750,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_mri_full_patient",
+      "key": "MRI 진단료 전액 본인부담",
+      "semantic_path": "진료비항목.MRI 진단료.전액 본인부담",
+      "anchor_id": "visual_0146",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          750,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_mri_non_benefit",
+      "key": "MRI 진단료 비급여",
+      "semantic_path": "진료비항목.MRI 진단료.비급여",
+      "anchor_id": "visual_0147",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          750,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_pet_partial_patient",
+      "key": "PET 진단료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.PET 진단료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0151",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          775,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_pet_partial_insurer",
+      "key": "PET 진단료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.PET 진단료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0152",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          775,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_pet_full_patient",
+      "key": "PET 진단료 전액 본인부담",
+      "semantic_path": "진료비항목.PET 진단료.전액 본인부담",
+      "anchor_id": "visual_0153",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          775,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_pet_non_benefit",
+      "key": "PET 진단료 비급여",
+      "semantic_path": "진료비항목.PET 진단료.비급여",
+      "anchor_id": "visual_0154",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          775,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_ultrasound_partial_patient",
+      "key": "초음파 진단료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.초음파 진단료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0158",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          800,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_ultrasound_partial_insurer",
+      "key": "초음파 진단료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.초음파 진단료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0159",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          800,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_ultrasound_full_patient",
+      "key": "초음파 진단료 전액 본인부담",
+      "semantic_path": "진료비항목.초음파 진단료.전액 본인부담",
+      "anchor_id": "visual_0160",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          800,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_ultrasound_non_benefit",
+      "key": "초음파 진단료 비급여",
+      "semantic_path": "진료비항목.초음파 진단료.비급여",
+      "anchor_id": "visual_0161",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          800,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_partial_patient",
+      "key": "보철·교정료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.보철·교정료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0165",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          825,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_partial_insurer",
+      "key": "보철·교정료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.보철·교정료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0166",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          825,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_full_patient",
+      "key": "보철·교정료 전액 본인부담",
+      "semantic_path": "진료비항목.보철·교정료.전액 본인부담",
+      "anchor_id": "visual_0167",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          825,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_non_benefit",
+      "key": "보철·교정료 비급여",
+      "semantic_path": "진료비항목.보철·교정료.비급여",
+      "anchor_id": "visual_0168",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          825,
+          94,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_certificate_partial_patient",
+      "key": "제증명수수료 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.제증명수수료.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0172",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          850,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_certificate_partial_insurer",
+      "key": "제증명수수료 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.제증명수수료.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0173",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          850,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_certificate_full_patient",
+      "key": "제증명수수료 전액 본인부담",
+      "semantic_path": "진료비항목.제증명수수료.전액 본인부담",
+      "anchor_id": "visual_0174",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          850,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_certificate_non_benefit",
+      "key": "제증명수수료 비급여",
+      "semantic_path": "진료비항목.제증명수수료.비급여",
+      "anchor_id": "visual_0175",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          850,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_selective_benefit_partial_patient",
+      "key": "선별급여 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.선별급여.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0179",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          876,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_selective_benefit_partial_insurer",
+      "key": "선별급여 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.선별급여.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0180",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          876,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_selective_benefit_full_patient",
+      "key": "선별급여 전액 본인부담",
+      "semantic_path": "진료비항목.선별급여.전액 본인부담",
+      "anchor_id": "visual_0181",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          876,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_selective_benefit_non_benefit",
+      "key": "선별급여 비급여",
+      "semantic_path": "진료비항목.선별급여.비급여",
+      "anchor_id": "visual_0182",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          876,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_senior_flat_partial_patient",
+      "key": "65세 이상 등 정액 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.65세 이상 등 정액.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0186",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          900,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_senior_flat_partial_insurer",
+      "key": "65세 이상 등 정액 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.65세 이상 등 정액.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0187",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          900,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_senior_flat_full_patient",
+      "key": "65세 이상 등 정액 전액 본인부담",
+      "semantic_path": "진료비항목.65세 이상 등 정액.전액 본인부담",
+      "anchor_id": "visual_0188",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          900,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_senior_flat_non_benefit",
+      "key": "65세 이상 등 정액 비급여",
+      "semantic_path": "진료비항목.65세 이상 등 정액.비급여",
+      "anchor_id": "visual_0189",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          900,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_partial_patient",
+      "key": "정액수가(요양병원) 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.정액수가(요양병원).일부 본인부담 본인부담금",
+      "anchor_id": "visual_0193",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          926,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_partial_insurer",
+      "key": "정액수가(요양병원) 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.정액수가(요양병원).일부 본인부담 공단부담금",
+      "anchor_id": "visual_0194",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          926,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_full_patient",
+      "key": "정액수가(요양병원) 전액 본인부담",
+      "semantic_path": "진료비항목.정액수가(요양병원).전액 본인부담",
+      "anchor_id": "visual_0195",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          926,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_non_benefit",
+      "key": "정액수가(요양병원) 비급여",
+      "semantic_path": "진료비항목.정액수가(요양병원).비급여",
+      "anchor_id": "visual_0196",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          926,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_flat_hospice_partial_patient",
+      "key": "정액수가(완화의료) 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.정액수가(완화의료).일부 본인부담 본인부담금",
+      "anchor_id": "visual_0200",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          950,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_flat_hospice_partial_insurer",
+      "key": "정액수가(완화의료) 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.정액수가(완화의료).일부 본인부담 공단부담금",
+      "anchor_id": "visual_0201",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          950,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_flat_hospice_full_patient",
+      "key": "정액수가(완화의료) 전액 본인부담",
+      "semantic_path": "진료비항목.정액수가(완화의료).전액 본인부담",
+      "anchor_id": "visual_0202",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          950,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_flat_hospice_non_benefit",
+      "key": "정액수가(완화의료) 비급여",
+      "semantic_path": "진료비항목.정액수가(완화의료).비급여",
+      "anchor_id": "visual_0203",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          950,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_drg_bundle_partial_patient",
+      "key": "질병군 포괄수가 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.질병군 포괄수가.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0207",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          976,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_drg_bundle_partial_insurer",
+      "key": "질병군 포괄수가 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.질병군 포괄수가.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0208",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          976,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_drg_bundle_full_patient",
+      "key": "질병군 포괄수가 전액 본인부담",
+      "semantic_path": "진료비항목.질병군 포괄수가.전액 본인부담",
+      "anchor_id": "visual_0209",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          976,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_drg_bundle_non_benefit",
+      "key": "질병군 포괄수가 비급여",
+      "semantic_path": "진료비항목.질병군 포괄수가.비급여",
+      "anchor_id": "visual_0210",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          976,
+          94,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_other_partial_patient",
+      "key": "기타 일부 본인부담 본인부담금",
+      "semantic_path": "진료비항목.기타.일부 본인부담 본인부담금",
+      "anchor_id": "visual_0215",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          340,
+          1000,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_other_partial_insurer",
+      "key": "기타 일부 본인부담 공단부담금",
+      "semantic_path": "진료비항목.기타.일부 본인부담 공단부담금",
+      "anchor_id": "visual_0216",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          438,
+          1000,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_other_full_patient",
+      "key": "기타 전액 본인부담",
+      "semantic_path": "진료비항목.기타.전액 본인부담",
+      "anchor_id": "visual_0217",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          536,
+          1000,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_other_non_benefit",
+      "key": "기타 비급여",
+      "semantic_path": "진료비항목.기타.비급여",
+      "anchor_id": "visual_0218",
+      "value": "",
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          634,
+          1000,
+          94,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "total_medical_cost",
+      "key": "⑥ 진료비 총액",
+      "semantic_path": "금액산정내용.진료비총액",
+      "anchor_id": "visual_0030",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000021"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          224,
+          118,
+          46
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "insurer_total",
+      "key": "⑦ 공단부담 총액",
+      "semantic_path": "금액산정내용.공단부담총액",
+      "anchor_id": "visual_0043",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          274,
+          118,
+          46
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "patient_total",
+      "key": "⑧ 환자부담 총액",
+      "semantic_path": "금액산정내용.환자부담총액",
+      "anchor_id": "visual_0048",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000032"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          324,
+          118,
+          47
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "prepaid_amount",
+      "key": "⑨ 이미 납부한 금액",
+      "semantic_path": "금액산정내용.이미납부한금액",
+      "anchor_id": "visual_0062",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000036"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          374,
+          118,
+          48
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "amount_due",
+      "key": "⑩ 납부할 금액",
+      "semantic_path": "금액산정내용.납부할금액",
+      "anchor_id": "visual_0074",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000041"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          424,
+          118,
+          48
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "paid_card",
+      "key": "⑪ 납부한 금액 카드",
+      "semantic_path": "납부정보.납부한금액.카드",
+      "anchor_id": "visual_0086",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047",
+        "det_000049"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          474,
+          118,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "paid_cash_receipt",
+      "key": "⑪ 납부한 금액 현금영수증",
+      "semantic_path": "납부정보.납부한금액.현금영수증",
+      "anchor_id": "manual_1783505723000",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050",
+        "det_000049"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          953,
+          500,
+          118,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "paid_cash",
+      "key": "⑪ 납부한 금액 현금",
+      "semantic_path": "납부정보.납부한금액.현금",
+      "anchor_id": "visual_0097",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000053",
+        "det_000049"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          525,
+          118,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "paid_total",
+      "key": "⑪ 납부한 금액 합계",
+      "semantic_path": "납부정보.납부한금액.합계",
+      "anchor_id": "visual_0104",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000055",
+        "det_000049"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          550,
+          118,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "unpaid_amount",
+      "key": "납부하지 않은 금액",
+      "semantic_path": "납부정보.납부하지않은금액",
+      "anchor_id": "visual_0109",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000057"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          574,
+          118,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "cash_receipt_purpose",
+      "key": "현금영수증 구분",
+      "semantic_path": "현금영수증.구분",
+      "anchor_id": "manual_1783505733184",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000059",
+        "det_000060"
+      ],
+      "value_type": "text",
+      "generator": "choice:소득공제|지출증빙",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          923,
+          600,
+          31,
+          25
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "cash_receipt_identity_no",
+      "key": "신분확인번호",
+      "semantic_path": "현금영수증.신분확인번호",
+      "anchor_id": "visual_0119",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000062"
+      ],
+      "value_type": "text",
+      "generator": "pattern:#############",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          626,
+          118,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "cash_receipt_approval_no",
+      "key": "현금영수증 승인번호",
+      "semantic_path": "현금영수증.승인번호",
+      "anchor_id": "visual_0124",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000064"
+      ],
+      "value_type": "text",
+      "generator": "pattern:################",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          952,
+          650,
+          118,
+          21
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "total_partial_patient",
+      "key": "합계 ① 일부 본인부담 본인부담금",
+      "semantic_path": "진료비합계.일부본인부담_본인부담금",
+      "anchor_id": "manual_1783505533029",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000081"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          363,
+          1026,
+          73,
+          24
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "total_partial_insurer",
+      "key": "합계 ② 일부 본인부담 공단부담금",
+      "semantic_path": "진료비합계.일부본인부담_공단부담금",
+      "anchor_id": "manual_1783505536263",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000081"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          461,
+          1025,
+          74,
+          24
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "total_full_patient",
+      "key": "합계 ③ 전액 본인부담",
+      "semantic_path": "진료비합계.전액본인부담",
+      "anchor_id": "manual_1783505539431",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000081"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          559,
+          1025,
+          74,
+          26
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "total_non_benefit",
+      "key": "합계 ④ 비급여",
+      "semantic_path": "진료비합계.비급여",
+      "anchor_id": "manual_1783505542947",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000081"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          659,
+          1025,
+          73,
+          25
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "cap_excess_amount",
+      "key": "상한액초과금 ⑤",
+      "semantic_path": "진료비합계.상한액초과금",
+      "anchor_id": "manual_1783505550014",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000081"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "unit_policy": "no_unit_in_value_cell",
+      "research_evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          362,
+          1051,
+          73,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "institution_type_clinic",
+      "key": "요양기관 종류 의원급·보건기관",
+      "semantic_path": "요양기관.종류.의원급_보건기관",
+      "anchor_id": "manual_1783505505814",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000089"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          363,
+          1081,
+          16,
+          16
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "institution_type_hospital",
+      "key": "요양기관 종류 병원급",
+      "semantic_path": "요양기관.종류.병원급",
+      "anchor_id": "manual_1783505509630",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000089"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          562,
+          1081,
+          19,
+          14
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "institution_type_general",
+      "key": "요양기관 종류 종합병원",
+      "semantic_path": "요양기관.종류.종합병원",
+      "anchor_id": "manual_1783505519881",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000089"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          682,
+          1082,
+          19,
+          14
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "institution_type_tertiary",
+      "key": "요양기관 종류 상급종합병원",
+      "semantic_path": "요양기관.종류.상급종합병원",
+      "anchor_id": "manual_1783505522963",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000089"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "printed_checkbox",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          819,
+          1081,
+          16,
+          15
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "representative_name",
+      "key": "대표자",
+      "semantic_path": "요양기관.대표자",
+      "anchor_id": "manual_1783505775201",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000098"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "normal_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          877,
+          1127,
+          128,
+          23
+        ],
+        "bbox_format": "xywh",
+        "confidence": "medium"
+      }
+    },
+    {
+      "field_id": "issued_year",
+      "key": "발행일 년",
+      "semantic_path": "발행일.년",
+      "anchor_id": "manual_1783505759187",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000100"
+      ],
+      "value_type": "date_part",
+      "generator": "date.year",
+      "style_class": "normal_text",
+      "unit_policy": "static_suffix_after_value",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          377,
+          1153,
+          98,
+          20
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "issued_month",
+      "key": "발행일 월",
+      "semantic_path": "발행일.월",
+      "anchor_id": "manual_1783505764285",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000101"
+      ],
+      "value_type": "date_part",
+      "generator": "date.month",
+      "style_class": "normal_text",
+      "unit_policy": "static_suffix_after_value",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          512,
+          1151,
+          72,
+          23
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    },
+    {
+      "field_id": "issued_day",
+      "key": "발행일 일",
+      "semantic_path": "발행일.일",
+      "anchor_id": "manual_1783505770451",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000102"
+      ],
+      "value_type": "date_part",
+      "generator": "date.day",
+      "style_class": "normal_text",
+      "unit_policy": "static_suffix_after_value",
+      "research_evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+        "bbox": [
+          617,
+          1151,
+          71,
+          22
+        ],
+        "bbox_format": "xywh",
+        "confidence": "high"
+      }
+    }
+  ],
+  "unmapped_use_anchors": [],
+  "authoring_notes": [
+    "Full template image inspected as primary source of truth.",
+    "Static OCR labels are used only as label_anchor_ids on blank template.",
+    "All mapped anchor_id values refer to reviewed use anchors in anchor_map_draft.json."
+  ]
+}

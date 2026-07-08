@@ -1256,6 +1256,121 @@ def _payload_bool(value: Any) -> bool:
 def _visual_line_detection_requested(payload: dict[str, Any]) -> bool:
     return _payload_bool(payload.get("includeVisualLineDetection"))
 
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _ocr_detection_result_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    image_path = _resolve_workspace_path(str(payload.get("imagePath") or ""))
+    engine = str(payload.get("engine") or "paddleocr")
+    if engine not in {"paddleocr", "projection", "doctr"}:
+        raise ValueError("engine must be one of paddleocr, projection, doctr")
+    preset = normalize_paddleocr_preset(str(payload.get("preset") or "precise")) if engine == "paddleocr" else ""
+    doc_id = str(payload.get("docId") or "")
+    default_out_dir = workbench_subdir(doc_id, "ocr") if doc_id else Path("outputs/ocr_eval")
+    out_dir = _resolve_workspace_path(str(payload.get("outDir") or default_out_dir))
+    started_at = perf_counter()
+    print(f"Starting OCR detection engine={engine} preset={preset or '-'} image={image_path}", flush=True)
+    payload_result = _run_paddle_ocr_subprocess(image_path, preset=preset, out_dir=out_dir) if engine == "paddleocr" else run_ocr_eval(image_path, engine=engine, preset=preset, out_dir=out_dir)
+    elapsed_seconds = perf_counter() - started_at
+    summary = dict(payload_result["summary"])
+    paths = {name: Path(path) for name, path in dict(payload_result["paths"]).items()}
+    summary["elapsed_seconds"] = elapsed_seconds
+    if doc_id:
+        update_manifest_artifact(doc_id, "ocr", paths["detections"])
+    print(f"Finished OCR detection engine={engine} preset={preset or '-'} count={summary['detection_count']} elapsed={elapsed_seconds:.2f}s", flush=True)
+    return {
+        "docId": doc_id or None,
+        "summary": {
+            "engine": summary["engine"],
+            "preset": summary.get("preset"),
+            "source_image": _display_path(summary["source_image"], ROOT),
+            "image": summary["image"],
+            "detection_count": summary["detection_count"],
+            "elapsed_seconds": summary["elapsed_seconds"],
+        },
+        "paths": _paths_to_client(paths),
+        "overlayUrl": f"/api/file?path={_display_path(paths['overlay'], ROOT)}",
+    }
+
+
+def _ocr_job_path_from_payload(payload: dict[str, Any]) -> Path:
+    job_path_value = str(payload.get("jobPath") or "")
+    if job_path_value:
+        return _resolve_workspace_path(job_path_value)
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("jobPath or docId is required")
+    job_root = workbench_subdir(doc_id, "ocr") / "jobs"
+    job_paths = sorted(job_root.glob("*/job.json")) if job_root.exists() else []
+    if not job_paths:
+        raise FileNotFoundError(f"no OCR detection job for {doc_id}")
+    return job_paths[-1]
+
+
+def ocr_detection_status_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    job_path = _ocr_job_path_from_payload(payload)
+    return _agent_job_payload(job_path)
+
+
+def ocr_detection_start_payload(payload: dict[str, Any], *, async_run: bool = True) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    image_path = _resolve_workspace_path(str(payload.get("imagePath") or ""))
+    engine = str(payload.get("engine") or "paddleocr")
+    preset = normalize_paddleocr_preset(str(payload.get("preset") or "precise")) if engine == "paddleocr" else ""
+    run_dir = workbench_subdir(doc_id, "ocr") / "jobs" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    job_path = run_dir / "job.json"
+    job = {
+        "schema_version": 1,
+        "jobType": "ocr_detection",
+        "jobId": run_dir.name,
+        "docId": doc_id,
+        "status": "queued",
+        "createdAt": _utc_now(),
+        "startedAt": None,
+        "finishedAt": None,
+        "engine": engine,
+        "preset": preset or None,
+        "imagePath": _display_path(image_path, ROOT),
+        "request": {**payload, "imagePath": _display_path(image_path, ROOT)},
+        "result": None,
+        "error": None,
+    }
+    _write_agent_job(job_path, job)
+    update_manifest_artifact(doc_id, "ocr_detection_job", job_path)
+    if async_run:
+        thread = threading.Thread(target=_run_ocr_detection_job, args=(job_path,), daemon=True)
+        thread.start()
+        return _agent_job_payload(job_path)
+    _run_ocr_detection_job(job_path)
+    return _agent_job_payload(job_path)
+
+
+def _run_ocr_detection_job(job_path: Path) -> None:
+    job = _read_agent_job(job_path)
+    job["status"] = "running"
+    job["startedAt"] = _utc_now()
+    _write_agent_job(job_path, job)
+    try:
+        result = _ocr_detection_result_payload(dict(job.get("request") or {}))
+        job = _read_agent_job(job_path)
+        job["status"] = "completed"
+        job["finishedAt"] = _utc_now()
+        job["result"] = result
+        job["summary"] = result.get("summary")
+        job["paths"] = result.get("paths")
+        job["error"] = None
+    except Exception as exc:  # pragma: no cover - defensive for manual OCR runtime
+        job = _read_agent_job(job_path)
+        job["status"] = "failed"
+        job["finishedAt"] = _utc_now()
+        job["error"] = str(exc)
+    _write_agent_job(job_path, job)
+
+
 def _read_agent_job(job_path: Path) -> dict[str, Any]:
     return json.loads(job_path.read_text(encoding="utf-8"))
 
@@ -1935,6 +2050,15 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     payload["docId"] = unquote(query["docId"][0])
                 self._send_json(authoring_agent_run_status_payload(payload))
                 return
+            if parsed.path == "/api/ocr/detect/status":
+                query = parse_qs(parsed.query)
+                payload: dict[str, Any] = {}
+                if query.get("jobPath"):
+                    payload["jobPath"] = unquote(query["jobPath"][0])
+                if query.get("docId"):
+                    payload["docId"] = unquote(query["docId"][0])
+                self._send_json(ocr_detection_status_payload(payload))
+                return
             if parsed.path in {"/api/image", "/api/file"}:
                 file_path = _query_path(parsed.query)
                 self._send_file(file_path)
@@ -2023,39 +2147,10 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(delete_target_group(str(payload.get("id") or ""), registry=load_registry()))
                 return
             if parsed.path == "/api/ocr/detect":
-                image_path = _resolve_workspace_path(str(payload.get("imagePath") or ""))
-                engine = str(payload.get("engine") or "paddleocr")
-                if engine not in {"paddleocr", "projection", "doctr"}:
-                    raise ValueError("engine must be one of paddleocr, projection, doctr")
-                preset = normalize_paddleocr_preset(str(payload.get("preset") or "precise")) if engine == "paddleocr" else ""
-                doc_id = str(payload.get("docId") or "")
-                default_out_dir = workbench_subdir(doc_id, "ocr") if doc_id else Path("outputs/ocr_eval")
-                out_dir = _resolve_workspace_path(str(payload.get("outDir") or default_out_dir))
-                started_at = perf_counter()
-                print(f"Starting OCR detection engine={engine} preset={preset or '-'} image={image_path}", flush=True)
-                payload_result = _run_paddle_ocr_subprocess(image_path, preset=preset, out_dir=out_dir) if engine == "paddleocr" else run_ocr_eval(image_path, engine=engine, preset=preset, out_dir=out_dir)
-                elapsed_seconds = perf_counter() - started_at
-                summary = dict(payload_result["summary"])
-                paths = {name: Path(path) for name, path in dict(payload_result["paths"]).items()}
-                summary["elapsed_seconds"] = elapsed_seconds
-                if doc_id:
-                    update_manifest_artifact(doc_id, "ocr", paths["detections"])
-                print(f"Finished OCR detection engine={engine} preset={preset or '-'} count={summary['detection_count']} elapsed={elapsed_seconds:.2f}s", flush=True)
-                self._send_json(
-                    {
-                        "docId": doc_id or None,
-                        "summary": {
-                            "engine": summary["engine"],
-                            "preset": summary.get("preset"),
-                            "source_image": _display_path(summary["source_image"], ROOT),
-                            "image": summary["image"],
-                            "detection_count": summary["detection_count"],
-                            "elapsed_seconds": summary["elapsed_seconds"],
-                        },
-                        "paths": _paths_to_client(paths),
-                        "overlayUrl": f"/api/file?path={_display_path(paths['overlay'], ROOT)}",
-                    }
-                )
+                self._send_json(_ocr_detection_result_payload(payload))
+                return
+            if parsed.path == "/api/ocr/detect/start":
+                self._send_json(ocr_detection_start_payload(payload), status=HTTPStatus.ACCEPTED)
                 return
             if parsed.path == "/api/review/draft":
                 detections_path = _resolve_workspace_path(str(payload.get("detectionsPath") or ""))

@@ -99,13 +99,27 @@ const FALLBACK_FAKER_RULE_EXAMPLES = [
 ];
 
 async function apiJson(path, options = {}) {
-  const response = await fetch(path, {
-    ...options,
-    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
-  });
-  const payload = await response.json();
+  let response;
+  try {
+    response = await fetch(path, {
+      ...options,
+      headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+    });
+  } catch (err) {
+    throw new Error(`API 연결이 끊겼습니다. 장시간 작업은 백그라운드 작업 상태를 확인하세요. (${err.message || String(err)})`);
+  }
+  let payload;
+  try {
+    payload = await response.json();
+  } catch (err) {
+    throw new Error(`API 응답 JSON 파싱 실패: HTTP ${response.status}`);
+  }
   if (!response.ok || payload.error) throw new Error(payload.error || `HTTP ${response.status}`);
   return payload;
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function basename(path = '') {
@@ -1627,17 +1641,30 @@ function App() {
     setIntakeTab('importable');
   }
 
+  async function waitForOcrDetectionJob(jobPath) {
+    while (true) {
+      await delay(2000);
+      const status = await apiJson(`/api/ocr/detect/status?jobPath=${encodeURIComponent(jobPath)}`);
+      if (status.status === 'completed') return status.result || status;
+      if (status.status === 'failed') throw new Error(status.error || 'BBox 검출 작업 실패');
+      const started = status.startedAt ? ` · 시작 ${new Date(status.startedAt).toLocaleTimeString()}` : '';
+      setMessage(`BBox 검출 작업 진행 중: ${status.engine || 'paddleocr'} ${status.preset || ocrPreset}${started}`);
+    }
+  }
+
   async function runOcrDetect() {
     if (!selectedSample || !selectedDocId) return;
     setBusy('detect');
     setError('');
     const includeLineDetection = selectedIsBlankTemplate && blankTemplateLineDetectEnabled;
-    setMessage(includeLineDetection ? 'PaddleOCR 정밀 BBox 검출 후 선/그리드 후보를 추가 생성합니다.' : 'PaddleOCR 정밀 BBox 검출 중입니다. 문서당 1회 고정밀 검출을 기본으로 사용합니다.');
+    setMessage(includeLineDetection ? 'PaddleOCR BBox 검출 작업을 백그라운드로 시작합니다. 완료 후 선/그리드 후보를 추가 생성합니다.' : 'PaddleOCR BBox 검출 작업을 백그라운드로 시작합니다.');
     try {
-      const payload = await apiJson('/api/ocr/detect', {
+      const job = await apiJson('/api/ocr/detect/start', {
         method: 'POST',
         body: JSON.stringify({ docId: selectedDocId, imagePath: selectedSample, engine: 'paddleocr', preset: ocrPreset, sampleKind: selectedSampleKind }),
       });
+      setMessage(`BBox 검출 작업 시작: ${job.jobPath || job.jobId}`);
+      const payload = await waitForOcrDetectionJob(job.jobPath);
       setDetectionResult(payload);
       setMessage(`BBox 검출 완료: ${payload.summary.detection_count}개 · ${payload.summary.preset || ocrPreset} · ${payload.summary.elapsed_seconds.toFixed(1)}초`);
       await createDraft(payload.paths.detections, { silentBusy: true });

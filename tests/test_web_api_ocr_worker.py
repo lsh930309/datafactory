@@ -82,6 +82,44 @@ def test_paddle_ocr_worker_failure_reports_tail(tmp_path: Path, monkeypatch) -> 
         raise AssertionError("expected RuntimeError")
 
 
+
+def test_ocr_detection_start_payload_writes_pollable_job(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    monkeypatch.setattr(web_api, "update_manifest_artifact", lambda *args, **kwargs: None)
+    monkeypatch.setattr(web_api, "workbench_subdir", lambda doc_id, name: tmp_path / "workbench" / doc_id / name)
+    image = tmp_path / "source.png"
+    Image.new("RGB", (120, 80), (255, 255, 255)).save(image)
+
+    def fake_worker(image_path: Path, *, preset: str, out_dir: Path):  # noqa: ANN001
+        return {
+            "summary": {
+                "engine": "paddleocr",
+                "preset": preset,
+                "source_image": str(image_path),
+                "image": {"width": 120, "height": 80},
+                "detection_count": 2,
+                "elapsed_seconds": 0.1,
+            },
+            "paths": {
+                "detections": str(out_dir / "detections.json"),
+                "raw": str(out_dir / "raw.json"),
+                "overlay": str(out_dir / "overlay.png"),
+                "summary": str(out_dir / "summary.json"),
+            },
+        }
+
+    monkeypatch.setattr(web_api, "_run_paddle_ocr_subprocess", fake_worker)
+
+    job = web_api.ocr_detection_start_payload({"docId": "DOC-1", "imagePath": str(image), "engine": "paddleocr", "preset": "fast"}, async_run=False)
+
+    assert job["status"] == "completed"
+    assert job["result"]["summary"]["detection_count"] == 2
+    assert job["result"]["paths"]["detections"].endswith("detections.json")
+    status = web_api.ocr_detection_status_payload({"jobPath": job["jobPath"]})
+    assert status["jobId"] == job["jobId"]
+    assert status["status"] == "completed"
+
+
 def test_paddle_crop_worker_runs_in_subprocess_and_reads_candidates(tmp_path: Path, monkeypatch) -> None:
     manifest = tmp_path / "crop_manifest.json"
     manifest.write_text(json.dumps({"crops": []}), encoding="utf-8")

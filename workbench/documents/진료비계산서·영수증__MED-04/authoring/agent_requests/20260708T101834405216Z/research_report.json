@@ -1,0 +1,1311 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-04",
+  "search_date": "2026-07-08",
+  "queries": [
+    "진료비 계산서·영수증 별지 제6호서식 국민건강보험 요양급여의 기준에 관한 규칙",
+    "국민건강보험 요양급여의 기준에 관한 규칙 별지 제6호서식 진료비 계산서 영수증",
+    "건강보험심사평가원 진료비 계산서 영수증 세부내역 확인"
+  ],
+  "sources": [
+    {
+      "id": "SRC_LAW_001",
+      "url": "https://www.law.go.kr/법령/국민건강보험%20요양급여의%20기준에%20관한%20규칙",
+      "source_type": "official_law",
+      "summary": "국민건강보험 요양급여 기준에 관한 규칙의 별지 제6호서식이 진료비 계산서·영수증 공식 서식 근거이다. 템플릿 상단에도 같은 법령명과 별지 번호, 2024.7.18 개정 표기가 보인다."
+    },
+    {
+      "id": "SRC_FORM_001",
+      "url": "workbench/documents/진료비계산서·영수증__MED-04/samples/original/[별지_제6호서식]_[외래¸_입원(퇴원¸_중간)]_진료비_계산서ㆍ영수증(국민건강보험_요양급여의_기준에_관한_규칙)_page_001.jpg",
+      "source_type": "local_full_template_image",
+      "summary": "전체 템플릿 이미지에서 환자정보, 진료기간, 급여/비급여 금액표, 금액산정내용, 납부정보, 현금영수증, 요양기관 종류, 발행일 위치를 확인했다."
+    }
+  ],
+  "field_evidence": [
+    {
+      "field_id": "doc_kind_outpatient",
+      "evidence_ids": "SRC_LAW_001",
+      "anchor_id": "manual_1783505672367"
+    },
+    {
+      "field_id": "doc_kind_inpatient",
+      "evidence_ids": "SRC_LAW_001",
+      "anchor_id": "manual_1783505676734"
+    },
+    {
+      "field_id": "doc_kind_discharge",
+      "evidence_ids": "SRC_LAW_001",
+      "anchor_id": "manual_1783505680184"
+    },
+    {
+      "field_id": "doc_kind_interim",
+      "evidence_ids": "SRC_LAW_001",
+      "anchor_id": "manual_1783505683217"
+    },
+    {
+      "field_id": "patient_registration_no",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "visual_0006"
+    },
+    {
+      "field_id": "patient_name",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "visual_0007"
+    },
+    {
+      "field_id": "treatment_start_year",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "visual_0010"
+    },
+    {
+      "field_id": "treatment_start_month",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505602548"
+    },
+    {
+      "field_id": "treatment_start_day",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505610398"
+    },
+    {
+      "field_id": "treatment_end_year",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505616552"
+    },
+    {
+      "field_id": "treatment_end_month",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505620449"
+    },
+    {
+      "field_id": "treatment_end_day",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505624033"
+    },
+    {
+      "field_id": "night_care_checked",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505642965"
+    },
+    {
+      "field_id": "holiday_care_checked",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505639948"
+    },
+    {
+      "field_id": "department",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "visual_0014"
+    },
+    {
+      "field_id": "drg_number",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "visual_0015"
+    },
+    {
+      "field_id": "ward_room",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "visual_0018"
+    },
+    {
+      "field_id": "patient_category",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "visual_0019"
+    },
+    {
+      "field_id": "receipt_no",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "visual_0021"
+    },
+    {
+      "field_id": "amount_consultation_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0032"
+    },
+    {
+      "field_id": "amount_consultation_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0033"
+    },
+    {
+      "field_id": "amount_consultation_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0034"
+    },
+    {
+      "field_id": "amount_consultation_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0035"
+    },
+    {
+      "field_id": "amount_room_1_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0038"
+    },
+    {
+      "field_id": "amount_room_1_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0039"
+    },
+    {
+      "field_id": "amount_room_1_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0040"
+    },
+    {
+      "field_id": "amount_room_1_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0041"
+    },
+    {
+      "field_id": "amount_room_2_3_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0044"
+    },
+    {
+      "field_id": "amount_room_2_3_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0045"
+    },
+    {
+      "field_id": "amount_room_2_3_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0046"
+    },
+    {
+      "field_id": "amount_room_2_3_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0047"
+    },
+    {
+      "field_id": "amount_room_4_plus_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0050"
+    },
+    {
+      "field_id": "amount_room_4_plus_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0051"
+    },
+    {
+      "field_id": "amount_room_4_plus_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0052"
+    },
+    {
+      "field_id": "amount_room_4_plus_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0053"
+    },
+    {
+      "field_id": "amount_meal_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0056"
+    },
+    {
+      "field_id": "amount_meal_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0057"
+    },
+    {
+      "field_id": "amount_meal_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0058"
+    },
+    {
+      "field_id": "amount_meal_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0059"
+    },
+    {
+      "field_id": "amount_medication_act_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0063"
+    },
+    {
+      "field_id": "amount_medication_act_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0064"
+    },
+    {
+      "field_id": "amount_medication_act_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0065"
+    },
+    {
+      "field_id": "amount_medication_act_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0066"
+    },
+    {
+      "field_id": "amount_medication_drug_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0070"
+    },
+    {
+      "field_id": "amount_medication_drug_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0071"
+    },
+    {
+      "field_id": "amount_medication_drug_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0072"
+    },
+    {
+      "field_id": "amount_medication_drug_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0073"
+    },
+    {
+      "field_id": "amount_injection_act_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0075"
+    },
+    {
+      "field_id": "amount_injection_act_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0076"
+    },
+    {
+      "field_id": "amount_injection_act_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0077"
+    },
+    {
+      "field_id": "amount_injection_act_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0078"
+    },
+    {
+      "field_id": "amount_injection_drug_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0081"
+    },
+    {
+      "field_id": "amount_injection_drug_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0082"
+    },
+    {
+      "field_id": "amount_injection_drug_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0083"
+    },
+    {
+      "field_id": "amount_injection_drug_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0084"
+    },
+    {
+      "field_id": "amount_anesthesia_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0088"
+    },
+    {
+      "field_id": "amount_anesthesia_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0089"
+    },
+    {
+      "field_id": "amount_anesthesia_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0090"
+    },
+    {
+      "field_id": "amount_anesthesia_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0091"
+    },
+    {
+      "field_id": "amount_procedure_surgery_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0093"
+    },
+    {
+      "field_id": "amount_procedure_surgery_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0094"
+    },
+    {
+      "field_id": "amount_procedure_surgery_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0095"
+    },
+    {
+      "field_id": "amount_procedure_surgery_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0096"
+    },
+    {
+      "field_id": "amount_test_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0099"
+    },
+    {
+      "field_id": "amount_test_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0100"
+    },
+    {
+      "field_id": "amount_test_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0101"
+    },
+    {
+      "field_id": "amount_test_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0102"
+    },
+    {
+      "field_id": "amount_imaging_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0105"
+    },
+    {
+      "field_id": "amount_imaging_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0106"
+    },
+    {
+      "field_id": "amount_imaging_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0107"
+    },
+    {
+      "field_id": "amount_imaging_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0108"
+    },
+    {
+      "field_id": "amount_radiation_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0110"
+    },
+    {
+      "field_id": "amount_radiation_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0111"
+    },
+    {
+      "field_id": "amount_radiation_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0112"
+    },
+    {
+      "field_id": "amount_radiation_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0113"
+    },
+    {
+      "field_id": "amount_materials_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0115"
+    },
+    {
+      "field_id": "amount_materials_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0116"
+    },
+    {
+      "field_id": "amount_materials_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0117"
+    },
+    {
+      "field_id": "amount_materials_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0118"
+    },
+    {
+      "field_id": "amount_rehab_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0120"
+    },
+    {
+      "field_id": "amount_rehab_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0121"
+    },
+    {
+      "field_id": "amount_rehab_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0122"
+    },
+    {
+      "field_id": "amount_rehab_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0123"
+    },
+    {
+      "field_id": "amount_psychotherapy_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0125"
+    },
+    {
+      "field_id": "amount_psychotherapy_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0126"
+    },
+    {
+      "field_id": "amount_psychotherapy_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0127"
+    },
+    {
+      "field_id": "amount_psychotherapy_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0128"
+    },
+    {
+      "field_id": "amount_blood_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0130"
+    },
+    {
+      "field_id": "amount_blood_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0131"
+    },
+    {
+      "field_id": "amount_blood_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0132"
+    },
+    {
+      "field_id": "amount_blood_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0133"
+    },
+    {
+      "field_id": "amount_ct_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0137"
+    },
+    {
+      "field_id": "amount_ct_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0138"
+    },
+    {
+      "field_id": "amount_ct_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0139"
+    },
+    {
+      "field_id": "amount_ct_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0140"
+    },
+    {
+      "field_id": "amount_mri_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0144"
+    },
+    {
+      "field_id": "amount_mri_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0145"
+    },
+    {
+      "field_id": "amount_mri_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0146"
+    },
+    {
+      "field_id": "amount_mri_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0147"
+    },
+    {
+      "field_id": "amount_pet_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0151"
+    },
+    {
+      "field_id": "amount_pet_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0152"
+    },
+    {
+      "field_id": "amount_pet_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0153"
+    },
+    {
+      "field_id": "amount_pet_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0154"
+    },
+    {
+      "field_id": "amount_ultrasound_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0158"
+    },
+    {
+      "field_id": "amount_ultrasound_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0159"
+    },
+    {
+      "field_id": "amount_ultrasound_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0160"
+    },
+    {
+      "field_id": "amount_ultrasound_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0161"
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0165"
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0166"
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0167"
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0168"
+    },
+    {
+      "field_id": "amount_certificate_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0172"
+    },
+    {
+      "field_id": "amount_certificate_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0173"
+    },
+    {
+      "field_id": "amount_certificate_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0174"
+    },
+    {
+      "field_id": "amount_certificate_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0175"
+    },
+    {
+      "field_id": "amount_selective_benefit_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0179"
+    },
+    {
+      "field_id": "amount_selective_benefit_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0180"
+    },
+    {
+      "field_id": "amount_selective_benefit_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0181"
+    },
+    {
+      "field_id": "amount_selective_benefit_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0182"
+    },
+    {
+      "field_id": "amount_senior_flat_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0186"
+    },
+    {
+      "field_id": "amount_senior_flat_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0187"
+    },
+    {
+      "field_id": "amount_senior_flat_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0188"
+    },
+    {
+      "field_id": "amount_senior_flat_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0189"
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0193"
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0194"
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0195"
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0196"
+    },
+    {
+      "field_id": "amount_flat_hospice_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0200"
+    },
+    {
+      "field_id": "amount_flat_hospice_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0201"
+    },
+    {
+      "field_id": "amount_flat_hospice_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0202"
+    },
+    {
+      "field_id": "amount_flat_hospice_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0203"
+    },
+    {
+      "field_id": "amount_drg_bundle_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0207"
+    },
+    {
+      "field_id": "amount_drg_bundle_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0208"
+    },
+    {
+      "field_id": "amount_drg_bundle_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0209"
+    },
+    {
+      "field_id": "amount_drg_bundle_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0210"
+    },
+    {
+      "field_id": "amount_other_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0215"
+    },
+    {
+      "field_id": "amount_other_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0216"
+    },
+    {
+      "field_id": "amount_other_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0217"
+    },
+    {
+      "field_id": "amount_other_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0218"
+    },
+    {
+      "field_id": "total_medical_cost",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0030"
+    },
+    {
+      "field_id": "insurer_total",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0043"
+    },
+    {
+      "field_id": "patient_total",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0048"
+    },
+    {
+      "field_id": "prepaid_amount",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0062"
+    },
+    {
+      "field_id": "amount_due",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0074"
+    },
+    {
+      "field_id": "paid_card",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0086"
+    },
+    {
+      "field_id": "paid_cash_receipt",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "manual_1783505723000"
+    },
+    {
+      "field_id": "paid_cash",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0097"
+    },
+    {
+      "field_id": "paid_total",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0104"
+    },
+    {
+      "field_id": "unpaid_amount",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0109"
+    },
+    {
+      "field_id": "cash_receipt_purpose",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "manual_1783505733184"
+    },
+    {
+      "field_id": "cash_receipt_identity_no",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0119"
+    },
+    {
+      "field_id": "cash_receipt_approval_no",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "visual_0124"
+    },
+    {
+      "field_id": "total_partial_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "manual_1783505533029"
+    },
+    {
+      "field_id": "total_partial_insurer",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "manual_1783505536263"
+    },
+    {
+      "field_id": "total_full_patient",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "manual_1783505539431"
+    },
+    {
+      "field_id": "total_non_benefit",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "manual_1783505542947"
+    },
+    {
+      "field_id": "cap_excess_amount",
+      "evidence_ids": [
+        "SRC_LAW_001",
+        "SRC_FORM_001"
+      ],
+      "anchor_id": "manual_1783505550014"
+    },
+    {
+      "field_id": "institution_type_clinic",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505505814"
+    },
+    {
+      "field_id": "institution_type_hospital",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505509630"
+    },
+    {
+      "field_id": "institution_type_general",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505519881"
+    },
+    {
+      "field_id": "institution_type_tertiary",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505522963"
+    },
+    {
+      "field_id": "representative_name",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505775201"
+    },
+    {
+      "field_id": "issued_year",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505759187"
+    },
+    {
+      "field_id": "issued_month",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505764285"
+    },
+    {
+      "field_id": "issued_day",
+      "evidence_ids": [
+        "SRC_LAW_001"
+      ],
+      "anchor_id": "manual_1783505770451"
+    }
+  ]
+}

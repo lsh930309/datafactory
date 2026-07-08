@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "data_pools": [
+    {
+      "name": "collateral_types",
+      "values": [
+        "부동산",
+        "예금담보",
+        "신용보증서",
+        "기계기구"
+      ],
+      "usage": [
+        "collateral_type"
+      ],
+      "source_note": "합성 더미 후보. 실제 기관/개인 데이터 아님."
+    },
+    {
+      "name": "preservation_methods",
+      "values": [
+        "근저당권 설정",
+        "보증서 징구",
+        "질권 설정",
+        "연대보증"
+      ],
+      "usage": [
+        "collateral_preservation_method"
+      ],
+      "source_note": "합성 더미 후보. 실제 기관/개인 데이터 아님."
+    },
+    {
+      "name": "occupations",
+      "values": [
+        "회사원",
+        "자영업",
+        "전문직",
+        "임원"
+      ],
+      "usage": [
+        "guarantor_occupation"
+      ],
+      "source_note": "합성 더미 후보. 실제 기관/개인 데이터 아님."
+    },
+    {
+      "name": "borrower_relationships",
+      "values": [
+        "대표자",
+        "주주",
+        "배우자",
+        "관계회사 임원"
+      ],
+      "usage": [
+        "guarantor_relationship_to_borrower"
+      ],
+      "source_note": "합성 더미 후보. 실제 기관/개인 데이터 아님."
+    },
+    {
+      "name": "approval_marks",
+      "values": [
+        "확인",
+        "승인",
+        "검토"
+      ],
+      "usage": [],
+      "source_note": "합성 더미 후보. 실제 기관/개인 데이터 아님."
+    }
+  ],
+  "notes": [
+    "faker_profile_draft.json의 data_pools와 동일한 pool을 검토용으로 분리 기록했다."
+  ]
+}

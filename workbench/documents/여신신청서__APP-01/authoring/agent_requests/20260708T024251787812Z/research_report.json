@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "search_date": "2026-07-08",
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "queries": [
+    "여신신청서 작성 방법 대출 신청서 신청금액 자금용도 상환계획 담보",
+    "여신거래 신청서 양식 대출금액 자금용도 담보 보증인",
+    "은행여신거래기본약관 담보 보증인",
+    "대출거래약정서 대출금액 이자율 담보 보증인"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.law.go.kr/법령/은행법",
+      "source_type": "official_law_search_target",
+      "summary": "은행의 여신/대출 업무가 금융기관 업무 맥락에 속한다는 일반 배경 확인용. 템플릿에 없는 필드는 추가하지 않았다."
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.kfb.or.kr/",
+      "source_type": "industry_association_search_target",
+      "summary": "은행권 여신거래 관행과 약정/신청 문서 용어 확인을 위한 보조 출처로 사용. 신청구분, 대출과목, 금액, 기한, 이율 등은 템플릿 가시 라벨과 결합해 해석했다."
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.fss.or.kr/",
+      "source_type": "public_financial_supervisor_search_target",
+      "summary": "금융 문서의 확인/승인/설명 책임 맥락 보조. 결재/감사/서명 영역은 실제 템플릿 시각 근거와 사용자 지시를 우선했다."
+    },
+    {
+      "evidence_id": "R4",
+      "url": "https://www.smes.go.kr/",
+      "source_type": "public_business_support_search_target",
+      "summary": "기업 정보 항목(업체명, 대표자, 주소, 설립일자, 주생산품, 종업원수, 재무항목)의 일반 사업자/기업 개요 맥락 보조."
+    },
+    {
+      "evidence_id": "R5",
+      "url": "https://www.kodit.co.kr/",
+      "source_type": "public_credit_guarantee_institution_search_target",
+      "summary": "기업금융의 담보, 보증, 보전 방법 관련 용어 보조. 채권보전 표의 담보/보증인 항목 해석에만 제한적으로 반영했다."
+    }
+  ],
+  "field_evidence_links": {
+    "approval_role_title": [
+      "R3"
+    ],
+    "approval_deputy_general_manager_signature": [
+      "R3"
+    ],
+    "approval_office_manager_signature": [
+      "R3"
+    ],
+    "approval_middle_signature": [
+      "R3"
+    ],
+    "approval_executive_vp_signature": [
+      "R3"
+    ],
+    "approval_bank_president_signature": [
+      "R3"
+    ],
+    "request_type_single_transaction": [
+      "R2"
+    ],
+    "request_type_new": [
+      "R2"
+    ],
+    "request_type_increase": [
+      "R2"
+    ],
+    "request_type_credit_line": [
+      "R2"
+    ],
+    "request_type_term_renewal": [
+      "R2"
+    ],
+    "request_type_reduction": [
+      "R2"
+    ],
+    "application_date_year": [
+      "R2"
+    ],
+    "application_date_month": [
+      "R2"
+    ],
+    "application_date_day": [
+      "R2"
+    ],
+    "approval_document_number": [
+      "R2"
+    ],
+    "audit_confirmation": [
+      "R3"
+    ],
+    "company_name": [
+      "R1",
+      "R4"
+    ],
+    "representative_name": [
+      "R1",
+      "R4"
+    ],
+    "loan_subject": [
+      "R1",
+      "R2"
+    ],
+    "loan_amount": [
+      "R1",
+      "R2"
+    ],
+    "loan_interest_rate": [
+      "R1",
+      "R2"
+    ],
+    "fund_purpose": [
+      "R1",
+      "R2"
+    ],
+    "limit_type": [
+      "R1",
+      "R2"
+    ],
+    "loan_maturity": [
+      "R1",
+      "R2"
+    ],
+    "approval_conditions": [
+      "R1",
+      "R2"
+    ],
+    "company_address": [
+      "R4"
+    ],
+    "company_established_date": [
+      "R4"
+    ],
+    "main_product": [
+      "R4"
+    ],
+    "bank_credit_transaction_date": [
+      "R2",
+      "R4"
+    ],
+    "credit_rate_score_base_month": [
+      "R2"
+    ],
+    "credit_rate_score_base_day": [
+      "R2"
+    ],
+    "credit_review_score_base_month": [
+      "R2"
+    ],
+    "credit_review_score_base_day": [
+      "R2"
+    ],
+    "employee_count": [
+      "R4"
+    ],
+    "total_assets": [
+      "R4"
+    ],
+    "equity_capital": [
+      "R4"
+    ],
+    "paid_in_capital": [
+      "R4"
+    ],
+    "sales_amount": [
+      "R4"
+    ],
+    "net_income": [
+      "R4"
+    ],
+    "financial_statement_base_year": [
+      "R4"
+    ],
+    "financial_statement_base_month": [
+      "R4"
+    ],
+    "collateral_type": [
+      "R1",
+      "R5"
+    ],
+    "collateral_survey_price": [
+      "R1",
+      "R5"
+    ],
+    "collateral_assessed_price": [
+      "R1",
+      "R5"
+    ],
+    "collateral_provider": [
+      "R1",
+      "R5"
+    ],
+    "preservation_method": [
+      "R1",
+      "R5"
+    ],
+    "guarantor_name": [
+      "R1",
+      "R5"
+    ],
+    "guarantor_age": [
+      "R1",
+      "R5"
+    ],
+    "guarantor_occupation": [
+      "R1",
+      "R5"
+    ],
+    "guarantor_relationship_to_borrower": [
+      "R1",
+      "R5"
+    ],
+    "guarantor_note": [
+      "R1",
+      "R5"
+    ]
+  },
+  "research_limitations": [
+    "검색 결과 품질이 낮아 출처는 공식/공공/협회 대표 사이트 중심으로 보조 근거화했다.",
+    "리서치는 템플릿 가시 anchor의 의미 해석에만 사용했고, 대응 anchor가 없는 항목은 schema에 추가하지 않았다."
+  ],
+  "updated_at": "2026-07-08T02:49:46.701226+00:00"
+}

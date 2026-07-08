@@ -28,6 +28,9 @@ SUPPORTED_VALUE_TYPES = {
     "person.phone_kr",
     "person.rrn",
     "date.kr",
+    "date.year",
+    "date.month",
+    "date.day",
     "money.krw",
     "company.name_ko",
     "address.ko",
@@ -38,6 +41,9 @@ FAKER_RULE_EXAMPLES = [
     "person.phone_kr",
     "person.rrn",
     "date.kr",
+    "date.year",
+    "date.month",
+    "date.day",
     "money.krw",
     "company.name_ko",
     "address.ko",
@@ -61,7 +67,7 @@ DEFAULT_FAKER_PROFILE_TYPES = [
     {"id": "person", "label": "개인 정보", "rules": ["person.name_ko", "person.phone_kr", "person.rrn", "address.ko"]},
     {"id": "company", "label": "기업 정보", "rules": ["company.name_ko", "business_reg_no", "address.ko"]},
     {"id": "finance", "label": "금융/금액", "rules": ["money.krw", "bank", "account"]},
-    {"id": "date", "label": "날짜", "rules": ["date.kr"]},
+    {"id": "date", "label": "날짜", "rules": ["date.kr", "date.year", "date.month", "date.day"]},
     {"id": "choice", "label": "선택/체크", "rules": ["choice:...", "bool.checkbox", "pool:..."]},
     {"id": "free_text", "label": "짧은 자유 텍스트", "rules": ["free_text.short", "literal:...", "template:..."]},
 ]
@@ -1228,6 +1234,14 @@ def _generate_authoring_value(
         return _render_pattern(normalized.split(":", 1)[1], rng), None
     if normalized_lower == "free_text.short":
         return _safe_fallback_value(field_label, field_id), None
+    if normalized_lower == "date.year":
+        return str(rng.randint(2020, 2027)), None
+    if normalized_lower == "date.month":
+        return f"{rng.randint(1, 12):02d}", None
+    if normalized_lower == "date.day":
+        # 연/월/일이 분리된 bbox에 독립 생성될 때도 유효하지 않은 날짜가
+        # 되지 않도록 1~28일만 사용한다.
+        return f"{rng.randint(1, 28):02d}", None
 
     mapping = {
         "person.name_ko": "name",
@@ -1251,10 +1265,97 @@ def _normalize_generated_value_for_field(field: dict[str, Any], rule: str, value
             return "V"
         return ""
     text = str(value or "")
+    date_component = _date_component_for_field(field, rule)
+    if date_component:
+        return _normalize_date_component_value(date_component, text)
     if force_visible and not text.strip():
         label = str(field.get("label") or field.get("field_id") or "값").strip()
         return _preview_fallback_value(label)
     return _strip_guide_parenthetical(text).strip()
+
+
+def _date_component_for_field(field: dict[str, Any], rule: str) -> str | None:
+    normalized_rule = str(rule or "").strip().lower()
+    explicit = {
+        "date.year": "year",
+        "date.month": "month",
+        "date.day": "day",
+    }.get(normalized_rule)
+    if explicit:
+        return explicit
+
+    # 기존 agent 산출물이 pattern:## / pattern:####를 월/일/연도 placeholder에
+    # 사용하더라도 렌더링 단계에서 안전 범위로 보정한다. 단, 문서번호/나이/금액
+    # 같은 숫자 필드를 날짜로 오인하지 않도록 field 문맥을 함께 본다.
+    if not normalized_rule.startswith("pattern:"):
+        return None
+    context = _field_context_text(field)
+    if not context or _date_component_context_excluded(context):
+        return None
+    if re.search(r"(^|[_./\-\s])(year|yyyy|yr)([_./\-\s]|$)", context) or any(token in context for token in ("연도", "년도", "기준년", "년월", " 년")):
+        return "year"
+    if re.search(r"(^|[_./\-\s])(month|mm)([_./\-\s]|$)", context) or any(token in context for token in ("기준월", "월분", "월)")) or re.search(r"(^|[./\s])월($|[./\s])", context):
+        return "month"
+    if re.search(r"(^|[_./\-\s])(day|dd)([_./\-\s]|$)", context) or any(token in context for token in ("일자", "기준일", "작성일", "신청일")) or re.search(r"(^|[./\s])일($|[./\s])", context):
+        return "day"
+    return None
+
+
+def _field_context_text(field: dict[str, Any]) -> str:
+    parts: list[str] = []
+    for key in ("field_id", "label", "key", "semantic_path", "source_text"):
+        value = field.get(key)
+        if value is not None:
+            parts.append(str(value))
+    export = field.get("export")
+    if isinstance(export, dict):
+        for key in ("json_path", "csv_column"):
+            value = export.get(key)
+            if value is not None:
+                parts.append(str(value))
+    visual = field.get("visual_evidence")
+    if isinstance(visual, dict) and visual.get("note"):
+        parts.append(str(visual.get("note")))
+    return " ".join(parts).strip().lower()
+
+
+def _date_component_context_excluded(context: str) -> bool:
+    excluded_tokens = (
+        "age",
+        "나이",
+        "연령",
+        "number",
+        "no.",
+        "번호",
+        "문서번호",
+        "관리번호",
+        "승인번호",
+        "approval_document_number",
+        "amount",
+        "금액",
+        "price",
+        "count",
+        "수량",
+        "건수",
+        "인원",
+    )
+    return any(token in context for token in excluded_tokens)
+
+
+def _normalize_date_component_value(component: str, value: str) -> str:
+    digits = re.sub(r"\D", "", str(value or ""))
+    number = int(digits) if digits else 0
+    if component == "year":
+        if 2020 <= number <= 2027:
+            return str(number)
+        if 20 <= number <= 27:
+            return str(2000 + number)
+        return str(2020 + (number % 8))
+    if component == "month":
+        return f"{((number - 1) % 12) + 1:02d}"
+    if component == "day":
+        return f"{((number - 1) % 28) + 1:02d}"
+    return _strip_guide_parenthetical(str(value or "")).strip()
 
 
 def _field_is_checkbox(field: dict[str, Any], rule: str) -> bool:

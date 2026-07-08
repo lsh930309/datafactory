@@ -81,6 +81,9 @@ const FALLBACK_FAKER_RULE_EXAMPLES = [
   'person.phone_kr',
   'person.rrn',
   'date.kr',
+  'date.year',
+  'date.month',
+  'date.day',
   'money.krw',
   'company.name_ko',
   'address.ko',
@@ -3413,6 +3416,7 @@ function AuthoringEditor({
               </label>
               <div className="rule-help">
                 <span>preset: person.name_ko</span>
+                <span>date.year/month/day</span>
                 <span>choice:남|여</span>
                 <span>literal:고정값</span>
                 <span>bool.checkbox</span>

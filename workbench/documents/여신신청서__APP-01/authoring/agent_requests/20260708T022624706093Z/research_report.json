@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "search_date": "2026-07-08",
+  "queries": [
+    "여신신청서 대출금액 자금용도 담보 보증인",
+    "여신승인신청서 업체명 대표자 대출금액 자금용도",
+    "대출신청서 자금용도 담보 보증인",
+    "기업운전자금대출 대출준비서류 담보 보증인",
+    "SBA Form 1919 borrower information loan application purpose amount collateral"
+  ],
+  "sources": [
+    {
+      "id": "R1",
+      "url": "https://spot.wooribank.com/pot/Dream?withyou=POLON0040",
+      "source_type": "bank_guidance",
+      "title": "우리은행 기업운전자금대출 대출준비서류",
+      "summary": "기업대출 준비서류로 재무제표, 사업자등록증, 신용조사의뢰서, 담보물 감정 서류, 연대보증인 관련 서류 등을 안내한다. 업체개요/재무상황/담보/보증인 항목의 문맥 보조 근거로 사용했다."
+    },
+    {
+      "id": "R2",
+      "url": "https://image.kebhana.com/cont/customer/customer07/customer0701/customer070102/__icsFiles/afieldfile/2016/07/07/5160178_20160707.pdf",
+      "source_type": "bank_form_sample",
+      "title": "KEB하나은행 대출신청서(가계용)",
+      "summary": "대출신청서 샘플에서 신청구분 체크박스, 작성일자, 신청금액, 대출기간, 상환방법, 거래구분, 자금용도 같은 신청 필드가 확인된다. 본 템플릿의 신청구분 및 일자/번호 해석에 한해 보조 근거로 사용했다."
+    },
+    {
+      "id": "R3",
+      "url": "https://spot.wooribank.com/pot/Dream?withyou=POLON0017",
+      "source_type": "bank_guidance",
+      "title": "우리은행 대출거래시유의사항",
+      "summary": "여신거래 시 약정서와 담보 관련 계약서를 확인해야 하며 담보제공/연대보증 시 차주, 금액, 담보 또는 보증 기간과 책임 범위 등을 직접 기재해야 한다고 안내한다. 결재/감사/담보/보증 관련 필드 의미의 보조 근거로 사용했다."
+    },
+    {
+      "id": "R4",
+      "url": "https://www.sba.gov/document/sba-form-1919-borrower-information-form",
+      "source_type": "official_foreign_form_reference",
+      "title": "SBA Form 1919 Borrower Information Form",
+      "summary": "공식 소기업 대출 신청 양식으로 신청 사업자와 소유자, loan request, existing indebtedness 등을 수집하며 사업 주소, 직원 수, loan purpose 항목을 포함한다. 국내 여신신청서 해석에는 직접 근거가 아니라 보조적 비교 근거로만 사용했다."
+    }
+  ],
+  "field_evidence_links": {
+    "approval_deputy_general_manager": [
+      "R3"
+    ],
+    "approval_office_manager": [
+      "R3"
+    ],
+    "approval_executive_vp": [
+      "R3"
+    ],
+    "approval_bank_president": [
+      "R3"
+    ],
+    "request_type_single_transaction": [
+      "R2"
+    ],
+    "request_type_new": [
+      "R2"
+    ],
+    "request_type_increase": [
+      "R2"
+    ],
+    "request_type_credit_line": [
+      "R2"
+    ],
+    "request_type_term_renewal": [
+      "R2"
+    ],
+    "request_type_reduction": [
+      "R2"
+    ],
+    "application_date_year": [
+      "R2"
+    ],
+    "application_date_month": [
+      "R2"
+    ],
+    "application_date_day": [
+      "R2"
+    ],
+    "approval_document_number": [
+      "R2"
+    ],
+    "audit_confirmation": [
+      "R3"
+    ],
+    "company_address": [
+      "R1",
+      "R4"
+    ],
+    "company_established_date": [
+      "R1",
+      "R4"
+    ],
+    "credit_rate_score_base_month": [
+      "R1"
+    ],
+    "credit_rate_score_base_day": [
+      "R1"
+    ],
+    "credit_review_score_base_month": [
+      "R1"
+    ],
+    "credit_review_score_base_day": [
+      "R1"
+    ],
+    "financial_statement_base_year": [
+      "R1",
+      "R4"
+    ],
+    "financial_statement_base_month": [
+      "R1",
+      "R4"
+    ],
+    "collateral_type": [
+      "R3",
+      "R4"
+    ],
+    "collateral_appraised_market_price": [
+      "R3",
+      "R4"
+    ],
+    "collateral_assessed_price": [
+      "R3",
+      "R4"
+    ],
+    "collateral_provider": [
+      "R3",
+      "R4"
+    ],
+    "collateral_preservation_method": [
+      "R3"
+    ],
+    "guarantor_name": [
+      "R3",
+      "R4"
+    ],
+    "guarantor_age": [
+      "R3"
+    ],
+    "guarantor_occupation": [
+      "R3"
+    ],
+    "guarantor_relationship_to_borrower": [
+      "R3"
+    ],
+    "guarantor_note": [
+      "R3"
+    ]
+  },
+  "search_limitations": [
+    "원문명 \"여신승인신청서\"와 \"여신신청서\"의 동일 양식 원본은 공개 검색에서 확인하지 못했다.",
+    "웹 리서치는 템플릿에 보이는 anchor 의미 해석의 보조 근거로만 사용했고, 템플릿에 없거나 use anchor가 아닌 필드는 추가하지 않았다."
+  ]
+}

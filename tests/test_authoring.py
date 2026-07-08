@@ -669,6 +669,46 @@ def test_render_authoring_preview_supports_rule_strings_and_unknown_warning(tmp_
     assert any(warning["type"] == "unknown_faker_rule" for warning in validation["warnings"])
 
 
+def test_render_authoring_preview_normalizes_date_component_pattern_rules(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile)
+    base_field = loaded.payload["schema"]["fields"][0]
+    schema = loaded.payload["schema"]
+    schema["fields"] = [
+        dict(base_field, field_id="application_date_year", label="신청일자 연도"),
+        dict(base_field, field_id="application_date_month", label="신청일자 월"),
+        dict(base_field, field_id="application_date_day", label="신청일자 일"),
+        dict(base_field, field_id="guarantor_age", label="보증인 연령"),
+    ]
+    faker_profile = loaded.payload["faker_profile"]
+    faker_profile["field_generators"] = {
+        "application_date_year": "pattern:####",
+        "application_date_month": "pattern:##",
+        "application_date_day": "pattern:##",
+        "guarantor_age": "pattern:##",
+    }
+    save_authoring_bundle(
+        draft.schema,
+        draft.stylesheet,
+        draft.faker_profile,
+        schema=schema,
+        stylesheet=loaded.payload["stylesheet"],
+        faker_profile=faker_profile,
+    )
+
+    result = render_authoring_preview(draft.schema, draft.stylesheet, draft.faker_profile, out_dir=tmp_path / "authoring" / "render_date_components", seed=7)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    values = kv["values"]
+
+    assert 2020 <= int(values["application_date_year"]) <= 2027
+    assert len(values["application_date_month"]) == 2
+    assert 1 <= int(values["application_date_month"]) <= 12
+    assert len(values["application_date_day"]) == 2
+    assert 1 <= int(values["application_date_day"]) <= 28
+    assert len(values["guarantor_age"]) == 2
+
+
 def test_render_authoring_preview_uses_safe_placeholders_for_generic_or_missing_pool_rules(tmp_path: Path) -> None:
     review, base = _write_review(tmp_path)
     draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")

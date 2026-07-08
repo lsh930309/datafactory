@@ -5,7 +5,7 @@ import random
 import re
 import string
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -1352,8 +1352,12 @@ def _normalize_date_component_value(component: str, value: str) -> str:
             return str(2000 + number)
         return str(2020 + (number % 8))
     if component == "month":
+        if 1 <= number <= 12:
+            return f"{number:02d}"
         return f"{((number - 1) % 12) + 1:02d}"
     if component == "day":
+        if 1 <= number <= 31:
+            return f"{number:02d}"
         return f"{((number - 1) % 28) + 1:02d}"
     return _strip_guide_parenthetical(str(value or "")).strip()
 
@@ -1417,7 +1421,7 @@ def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[st
     for constraint in constraints:
         if not isinstance(constraint, dict):
             continue
-        ctype = str(constraint.get("type") or "").strip()
+        ctype = str(constraint.get("type") or "").strip().lower()
         if ctype == "pick_record":
             pool_name = str(constraint.get("pool") or "").strip()
             targets = constraint.get("targets")
@@ -1449,7 +1453,101 @@ def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[st
                         "constraint": constraint,
                     }
                 )
+        elif ctype == "exclusive_choice":
+            targets = _constraint_field_list(constraint.get("targets"))
+            if len(targets) < 2:
+                warnings.append({"type": "invalid_generation_constraint", "message": "exclusive_choice constraint requires at least two targets", "constraint": constraint})
+                continue
+            selected = rng.choice(targets)
+            for field_id in targets:
+                values[field_id] = "true" if field_id == selected else "false"
+        elif ctype == "date_group":
+            group = {
+                "year": str(constraint.get("year") or "").strip(),
+                "month": str(constraint.get("month") or "").strip(),
+                "day": str(constraint.get("day") or "").strip(),
+            }
+            if not all(group.values()):
+                warnings.append({"type": "invalid_generation_constraint", "message": "date_group constraint requires year/month/day field ids", "constraint": constraint})
+                continue
+            value = _random_constraint_date(rng, constraint)
+            _assign_date_group(values, group, value)
+        elif ctype == "date_order":
+            start_group = constraint.get("start")
+            end_group = constraint.get("end")
+            if not isinstance(start_group, dict) or not isinstance(end_group, dict) or not _date_group_complete(start_group) or not _date_group_complete(end_group):
+                warnings.append({"type": "invalid_generation_constraint", "message": "date_order constraint requires complete start/end year/month/day field ids", "constraint": constraint})
+                continue
+            start_date = _random_constraint_date(rng, constraint)
+            max_days = _constraint_int(constraint.get("max_days"), default=60, minimum=0, maximum=3650)
+            min_days = _constraint_int(constraint.get("min_days"), default=0, minimum=0, maximum=max_days)
+            end_date = start_date + timedelta(days=rng.randint(min_days, max_days))
+            max_year = _constraint_int(constraint.get("max_year"), default=2027, minimum=1900, maximum=2100)
+            if end_date.year > max_year:
+                end_date = date(max_year, 12, 28)
+                if start_date > end_date:
+                    start_date = end_date
+            _assign_date_group(values, start_group, start_date)
+            _assign_date_group(values, end_group, end_date)
+        elif ctype == "sum":
+            sources = _constraint_field_list(constraint.get("sources"))
+            target = str(constraint.get("target") or "").strip()
+            if not sources or not target:
+                warnings.append({"type": "invalid_generation_constraint", "message": "sum constraint requires sources and target", "constraint": constraint})
+                continue
+            missing = [field_id for field_id in sources if field_id not in values]
+            if missing:
+                warnings.append({"type": "invalid_generation_constraint", "message": "sum constraint references missing source values", "missing": missing, "constraint": constraint})
+                continue
+            total = sum(_parse_numeric_value(values.get(field_id, "")) for field_id in sources)
+            values[target] = _format_constraint_number(total, str(constraint.get("format") or "money.krw"))
     return warnings
+
+
+def _constraint_field_list(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    return [str(item).strip() for item in value if str(item).strip()]
+
+
+def _date_group_complete(group: dict[str, Any]) -> bool:
+    return all(str(group.get(part) or "").strip() for part in ("year", "month", "day"))
+
+
+def _assign_date_group(values: dict[str, str], group: dict[str, Any], value: date) -> None:
+    values[str(group["year"]).strip()] = f"{value.year:04d}"
+    values[str(group["month"]).strip()] = f"{value.month:02d}"
+    values[str(group["day"]).strip()] = f"{value.day:02d}"
+
+
+def _random_constraint_date(rng: random.Random, constraint: dict[str, Any]) -> date:
+    min_year = _constraint_int(constraint.get("min_year"), default=2020, minimum=1900, maximum=2100)
+    max_year = _constraint_int(constraint.get("max_year"), default=2027, minimum=min_year, maximum=2100)
+    start = date(min_year, 1, 1)
+    end = date(max_year, 12, 28)
+    return start + timedelta(days=rng.randint(0, max(0, (end - start).days)))
+
+
+def _constraint_int(value: Any, *, default: int, minimum: int, maximum: int) -> int:
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        number = default
+    return max(minimum, min(maximum, number))
+
+
+def _parse_numeric_value(value: str) -> int:
+    text = str(value or "")
+    sign = -1 if text.strip().startswith("-") else 1
+    digits = re.sub(r"\D", "", text)
+    return sign * int(digits or "0")
+
+
+def _format_constraint_number(value: int, fmt: str) -> str:
+    normalized = str(fmt or "").strip().lower()
+    if normalized in {"plain", "integer", "int", "number"}:
+        return str(value)
+    return f"{value:,}"
 
 
 def _safe_fallback_value(field_label: str | None, field_id: str | None = None) -> str:

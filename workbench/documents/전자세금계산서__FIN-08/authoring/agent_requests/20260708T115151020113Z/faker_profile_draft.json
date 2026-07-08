@@ -1,0 +1,812 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서",
+  "field_generators": {
+    "approval_number": "pattern:########################",
+    "supplier_registration_number": "pattern:###-##-#####",
+    "supplier_branch_number": "pattern:####",
+    "supplier_company_name": "company.name_ko",
+    "supplier_representative_name": "person.name_ko",
+    "supplier_address": "address.ko",
+    "supplier_business_type": "pool:business_types",
+    "supplier_business_item": "pool:business_items",
+    "supplier_email": "template:{{pattern:aaaaaa}}@example.com",
+    "recipient_registration_number": "pattern:###-##-#####",
+    "recipient_branch_number": "pattern:####",
+    "recipient_company_name": "company.name_ko",
+    "recipient_representative_name": "person.name_ko",
+    "recipient_address": "address.ko",
+    "recipient_business_type": "pool:business_types",
+    "recipient_business_item": "pool:business_items",
+    "recipient_email_1": "template:{{pattern:aaaaaa}}@example.com",
+    "recipient_email_2": "template:{{pattern:aaaaaa}}@example.com",
+    "issue_date": "date.kr",
+    "summary_supply_amount": "money.krw",
+    "summary_tax_amount": "money.krw",
+    "amendment_reason": "pool:amendment_reasons",
+    "summary_note": "free_text.short",
+    "line_1_month": "date.month",
+    "line_1_day": "date.day",
+    "line_1_item": "pool:item_names",
+    "line_1_spec": "pool:item_specs",
+    "line_1_quantity": "choice:1|2|3|5|10",
+    "line_1_unit_price": "money.krw",
+    "line_1_supply_amount": "money.krw",
+    "line_1_tax_amount": "money.krw",
+    "line_1_note": "free_text.short",
+    "line_2_month": "date.month",
+    "line_2_day": "date.day",
+    "line_2_item": "pool:item_names",
+    "line_2_spec": "pool:item_specs",
+    "line_2_quantity": "choice:1|2|3|5|10",
+    "line_2_unit_price": "money.krw",
+    "line_2_supply_amount": "money.krw",
+    "line_2_tax_amount": "money.krw",
+    "line_2_note": "free_text.short",
+    "line_3_month": "date.month",
+    "line_3_day": "date.day",
+    "line_3_item": "pool:item_names",
+    "line_3_spec": "pool:item_specs",
+    "line_3_quantity": "choice:1|2|3|5|10",
+    "line_3_unit_price": "money.krw",
+    "line_3_supply_amount": "money.krw",
+    "line_3_tax_amount": "money.krw",
+    "line_3_note": "free_text.short",
+    "line_4_month": "date.month",
+    "line_4_day": "date.day",
+    "line_4_item": "pool:item_names",
+    "line_4_spec": "pool:item_specs",
+    "line_4_quantity": "choice:1|2|3|5|10",
+    "line_4_unit_price": "money.krw",
+    "line_4_supply_amount": "money.krw",
+    "line_4_tax_amount": "money.krw",
+    "line_4_note": "free_text.short",
+    "total_amount": "money.krw",
+    "cash_amount": "money.krw",
+    "check_amount": "money.krw",
+    "note_amount": "money.krw",
+    "accounts_receivable_amount": "money.krw"
+  },
+  "data_pools": {
+    "business_types": [
+      "도매 및 소매업",
+      "전문, 과학 및 기술서비스업",
+      "정보통신업",
+      "제조업",
+      "서비스업"
+    ],
+    "business_items": [
+      "소프트웨어 개발 및 공급",
+      "경영컨설팅",
+      "회계감사 및 사업비정산",
+      "전자부품",
+      "사무용품"
+    ],
+    "item_names": [
+      "수수료",
+      "컨설팅 용역",
+      "소프트웨어 이용료",
+      "사무용품",
+      "유지보수료"
+    ],
+    "item_specs": [
+      "1식",
+      "월정액",
+      "EA",
+      "건",
+      "시간"
+    ],
+    "amendment_reasons": [
+      "",
+      "기재사항 착오정정",
+      "공급가액 변동",
+      "계약의 해제",
+      "환입"
+    ]
+  },
+  "constraints": [
+    {
+      "type": "copy",
+      "source": "issue_date",
+      "target": "line_1_month",
+      "note": "샘플에서는 작성일자 월과 1행 월이 같습니다. 렌더러 copy가 전체 날짜에서 월만 추출하지 못할 수 있어 uncertainty에 한계 기록.",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "summary_supply_amount",
+        "summary_tax_amount"
+      ],
+      "target": "total_amount",
+      "format": "money.krw",
+      "note": "합계금액은 공급가액과 세액 합계로 보입니다.",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "cash_amount",
+        "check_amount",
+        "note_amount",
+        "accounts_receivable_amount"
+      ],
+      "target": "total_amount",
+      "format": "money.krw",
+      "note": "결제수단 합계가 합계금액과 일치해야 합니다. 샘플은 결제수단이 공란입니다.",
+      "evidence_ids": [
+        "R1"
+      ]
+    }
+  ],
+  "field_rules": [
+    {
+      "field_id": "approval_number",
+      "semantic_path": "문서정보.승인번호",
+      "anchor_id": "visual_0002",
+      "generator": "pattern:########################",
+      "evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "supplier_registration_number",
+      "semantic_path": "공급자.등록번호",
+      "anchor_id": "det_000004",
+      "generator": "pattern:###-##-#####",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "supplier_branch_number",
+      "semantic_path": "공급자.종사업장번호",
+      "anchor_id": "manual_1783511142890",
+      "generator": "pattern:####",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "supplier_company_name",
+      "semantic_path": "공급자.상호_법인명",
+      "anchor_id": "det_000011",
+      "generator": "company.name_ko",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "supplier_representative_name",
+      "semantic_path": "공급자.성명",
+      "anchor_id": "det_000013",
+      "generator": "person.name_ko",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "supplier_address",
+      "semantic_path": "공급자.사업장주소",
+      "anchor_id": "det_000021",
+      "generator": "address.ko",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "supplier_business_type",
+      "semantic_path": "공급자.업태",
+      "anchor_id": "det_000027",
+      "generator": "pool:business_types",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "supplier_business_item",
+      "semantic_path": "공급자.종목",
+      "anchor_id": "det_000029",
+      "generator": "pool:business_items",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "supplier_email",
+      "semantic_path": "공급자.이메일",
+      "anchor_id": "visual_0018",
+      "generator": "template:{{pattern:aaaaaa}}@example.com",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "recipient_registration_number",
+      "semantic_path": "공급받는자.등록번호",
+      "anchor_id": "visual_0005",
+      "generator": "pattern:###-##-#####",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "recipient_branch_number",
+      "semantic_path": "공급받는자.종사업장번호",
+      "anchor_id": "visual_0006",
+      "generator": "pattern:####",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "recipient_company_name",
+      "semantic_path": "공급받는자.상호_법인명",
+      "anchor_id": "visual_0007",
+      "generator": "company.name_ko",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "recipient_representative_name",
+      "semantic_path": "공급받는자.성명",
+      "anchor_id": "visual_0008",
+      "generator": "person.name_ko",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "recipient_address",
+      "semantic_path": "공급받는자.사업장주소",
+      "anchor_id": "visual_0009",
+      "generator": "address.ko",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "recipient_business_type",
+      "semantic_path": "공급받는자.업태",
+      "anchor_id": "manual_1783510826259",
+      "generator": "pool:business_types",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "recipient_business_item",
+      "semantic_path": "공급받는자.종목",
+      "anchor_id": "visual_0013",
+      "generator": "pool:business_items",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "recipient_email_1",
+      "semantic_path": "공급받는자.이메일1",
+      "anchor_id": "visual_0015",
+      "generator": "template:{{pattern:aaaaaa}}@example.com",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "recipient_email_2",
+      "semantic_path": "공급받는자.이메일2",
+      "anchor_id": "visual_0019",
+      "generator": "template:{{pattern:aaaaaa}}@example.com",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "issue_date",
+      "semantic_path": "거래요약.작성일자",
+      "anchor_id": "det_000041",
+      "generator": "date.kr",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "summary_supply_amount",
+      "semantic_path": "거래요약.공급가액",
+      "anchor_id": "det_000042",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "summary_tax_amount",
+      "semantic_path": "거래요약.세액",
+      "anchor_id": "det_000043",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "amendment_reason",
+      "semantic_path": "거래요약.수정사유",
+      "anchor_id": "visual_0022",
+      "generator": "pool:amendment_reasons",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "summary_note",
+      "semantic_path": "거래요약.비고",
+      "anchor_id": "visual_0023",
+      "generator": "free_text.short",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_1_month",
+      "semantic_path": "품목명세.1행.월",
+      "anchor_id": "det_000053",
+      "generator": "date.month",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_1_day",
+      "semantic_path": "품목명세.1행.일",
+      "anchor_id": "det_000054",
+      "generator": "date.day",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_1_item",
+      "semantic_path": "품목명세.1행.품목",
+      "anchor_id": "det_000055",
+      "generator": "pool:item_names",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_1_spec",
+      "semantic_path": "품목명세.1행.규격",
+      "anchor_id": "manual_1783510901475",
+      "generator": "pool:item_specs",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_1_quantity",
+      "semantic_path": "품목명세.1행.수량",
+      "anchor_id": "manual_1783510909542",
+      "generator": "choice:1|2|3|5|10",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_1_unit_price",
+      "semantic_path": "품목명세.1행.단가",
+      "anchor_id": "manual_1783510914842",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_1_supply_amount",
+      "semantic_path": "품목명세.1행.공급가액",
+      "anchor_id": "det_000056",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_1_tax_amount",
+      "semantic_path": "품목명세.1행.세액",
+      "anchor_id": "det_000057",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_1_note",
+      "semantic_path": "품목명세.1행.비고",
+      "anchor_id": "manual_1783510924942",
+      "generator": "free_text.short",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_2_month",
+      "semantic_path": "품목명세.2행.월",
+      "anchor_id": "manual_1783510962924",
+      "generator": "date.month",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_2_day",
+      "semantic_path": "품목명세.2행.일",
+      "anchor_id": "manual_1783510968208",
+      "generator": "date.day",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_2_item",
+      "semantic_path": "품목명세.2행.품목",
+      "anchor_id": "manual_1783510994008",
+      "generator": "pool:item_names",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_2_spec",
+      "semantic_path": "품목명세.2행.규격",
+      "anchor_id": "manual_1783511010823",
+      "generator": "pool:item_specs",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_2_quantity",
+      "semantic_path": "품목명세.2행.수량",
+      "anchor_id": "manual_1783511024107",
+      "generator": "choice:1|2|3|5|10",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_2_unit_price",
+      "semantic_path": "품목명세.2행.단가",
+      "anchor_id": "manual_1783511036824",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_2_supply_amount",
+      "semantic_path": "품목명세.2행.공급가액",
+      "anchor_id": "manual_1783511041541",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_2_tax_amount",
+      "semantic_path": "품목명세.2행.세액",
+      "anchor_id": "manual_1783510945874",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_2_note",
+      "semantic_path": "품목명세.2행.비고",
+      "anchor_id": "manual_1783510928574",
+      "generator": "free_text.short",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_3_month",
+      "semantic_path": "품목명세.3행.월",
+      "anchor_id": "manual_1783510970773",
+      "generator": "date.month",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_3_day",
+      "semantic_path": "품목명세.3행.일",
+      "anchor_id": "manual_1783510973909",
+      "generator": "date.day",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_3_item",
+      "semantic_path": "품목명세.3행.품목",
+      "anchor_id": "manual_1783511000658",
+      "generator": "pool:item_names",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_3_spec",
+      "semantic_path": "품목명세.3행.규격",
+      "anchor_id": "manual_1783511014741",
+      "generator": "pool:item_specs",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_3_quantity",
+      "semantic_path": "품목명세.3행.수량",
+      "anchor_id": "manual_1783511030024",
+      "generator": "choice:1|2|3|5|10",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_3_unit_price",
+      "semantic_path": "품목명세.3행.단가",
+      "anchor_id": "manual_1783511045623",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_3_supply_amount",
+      "semantic_path": "품목명세.3행.공급가액",
+      "anchor_id": "manual_1783511050374",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_3_tax_amount",
+      "semantic_path": "품목명세.3행.세액",
+      "anchor_id": "manual_1783510950823",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_3_note",
+      "semantic_path": "품목명세.3행.비고",
+      "anchor_id": "manual_1783510935325",
+      "generator": "free_text.short",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_4_month",
+      "semantic_path": "품목명세.4행.월",
+      "anchor_id": "manual_1783510976657",
+      "generator": "date.month",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_4_day",
+      "semantic_path": "품목명세.4행.일",
+      "anchor_id": "manual_1783510978923",
+      "generator": "date.day",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_4_item",
+      "semantic_path": "품목명세.4행.품목",
+      "anchor_id": "manual_1783511005640",
+      "generator": "pool:item_names",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_4_spec",
+      "semantic_path": "품목명세.4행.규격",
+      "anchor_id": "manual_1783511019041",
+      "generator": "pool:item_specs",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_4_quantity",
+      "semantic_path": "품목명세.4행.수량",
+      "anchor_id": "manual_1783511032808",
+      "generator": "choice:1|2|3|5|10",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "line_4_unit_price",
+      "semantic_path": "품목명세.4행.단가",
+      "anchor_id": "manual_1783511057240",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_4_supply_amount",
+      "semantic_path": "품목명세.4행.공급가액",
+      "anchor_id": "manual_1783511053540",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_4_tax_amount",
+      "semantic_path": "품목명세.4행.세액",
+      "anchor_id": "manual_1783510957274",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "line_4_note",
+      "semantic_path": "품목명세.4행.비고",
+      "anchor_id": "manual_1783510939392",
+      "generator": "free_text.short",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "템플릿 라벨과 값 영역에 맞춘 보수적 더미 규칙입니다."
+    },
+    {
+      "field_id": "total_amount",
+      "semantic_path": "결제정보.합계금액",
+      "anchor_id": "det_000064",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "cash_amount",
+      "semantic_path": "결제정보.현금",
+      "anchor_id": "manual_1783511062690",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "check_amount",
+      "semantic_path": "결제정보.수표",
+      "anchor_id": "manual_1783511065606",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "note_amount",
+      "semantic_path": "결제정보.어음",
+      "anchor_id": "manual_1783511068557",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    },
+    {
+      "field_id": "accounts_receivable_amount",
+      "semantic_path": "결제정보.외상미수금",
+      "anchor_id": "manual_1783511072790",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "지원 faker 문법만 사용했습니다. 값 칸 주변에 별도 정적 단위가 없어 금액도 숫자형 더미만 생성하도록 지정했습니다."
+    }
+  ],
+  "privacy_note": "실제 샘플의 개인정보/사업자 정보를 재사용하지 않고 합성 더미 규칙만 사용합니다."
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서",
+  "pools": {
+    "business_types": {
+      "values": [
+        "도매 및 소매업",
+        "전문, 과학 및 기술서비스업",
+        "정보통신업",
+        "제조업",
+        "서비스업"
+      ],
+      "usage": [
+        "supplier_business_type",
+        "recipient_business_type"
+      ],
+      "source_note": "전자세금계산서 템플릿의 업태/종목/품목 칸에 넣기 위한 합성 후보값입니다."
+    },
+    "business_items": {
+      "values": [
+        "소프트웨어 개발 및 공급",
+        "경영컨설팅",
+        "회계감사 및 사업비정산",
+        "전자부품",
+        "사무용품"
+      ],
+      "usage": [
+        "supplier_business_item",
+        "recipient_business_item"
+      ],
+      "source_note": "전자세금계산서 템플릿의 업태/종목/품목 칸에 넣기 위한 합성 후보값입니다."
+    },
+    "item_names": {
+      "values": [
+        "수수료",
+        "컨설팅 용역",
+        "소프트웨어 이용료",
+        "사무용품",
+        "유지보수료"
+      ],
+      "usage": [
+        "line_1_item",
+        "line_2_item",
+        "line_3_item",
+        "line_4_item"
+      ],
+      "source_note": "전자세금계산서 템플릿의 업태/종목/품목 칸에 넣기 위한 합성 후보값입니다."
+    },
+    "item_specs": {
+      "values": [
+        "1식",
+        "월정액",
+        "EA",
+        "건",
+        "시간"
+      ],
+      "usage": [
+        "line_1_spec",
+        "line_2_spec",
+        "line_3_spec",
+        "line_4_spec"
+      ],
+      "source_note": "전자세금계산서 템플릿의 업태/종목/품목 칸에 넣기 위한 합성 후보값입니다."
+    },
+    "amendment_reasons": {
+      "values": [
+        "",
+        "기재사항 착오정정",
+        "공급가액 변동",
+        "계약의 해제",
+        "환입"
+      ],
+      "usage": [
+        "amendment_reason"
+      ],
+      "source_note": "전자세금계산서 템플릿의 업태/종목/품목 칸에 넣기 위한 합성 후보값입니다."
+    }
+  },
+  "notes": [
+    "모든 pool 값은 synthetic scalar입니다.",
+    "실제 거래처명, 실제 사업자번호, 실제 계좌정보는 포함하지 않았습니다."
+  ]
+}

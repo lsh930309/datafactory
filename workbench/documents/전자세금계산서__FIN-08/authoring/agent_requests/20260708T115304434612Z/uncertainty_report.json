@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서",
+  "unresolved_fields": [
+    {
+      "field_ids": [
+        "approval_number"
+      ],
+      "issue": "승인번호의 실제 자리수/하이픈 표기는 템플릿 값이 비어 있어 공식 출력 포맷을 확정하지 못했다.",
+      "current_handling": "24자리 숫자 pattern으로 근사.",
+      "decision_needed": "실제 승인번호 포맷을 renderer 테스트 샘플 또는 업무 규칙으로 확정."
+    },
+    {
+      "field_ids": [
+        "supplier_branch_number",
+        "recipient_branch_number"
+      ],
+      "issue": "종사업장번호가 빈 칸이며 미해당 사업자는 공란일 수 있다.",
+      "current_handling": "4자리 숫자 pattern으로 근사.",
+      "decision_needed": "공란 허용 여부 및 기본값 정책 확정."
+    },
+    {
+      "field_ids": [
+        "amendment_reason"
+      ],
+      "issue": "일반 발급 전자세금계산서에서는 공란 가능하나 수정세금계산서에는 사유가 필요하다.",
+      "current_handling": "빈 문자열을 포함한 pool 사용.",
+      "decision_needed": "FIN-08을 일반/수정 겸용으로 둘지, 일반 발급 전용이면 항상 공란 처리할지 결정."
+    },
+    {
+      "field_ids": [
+        "line2_supply_amount",
+        "line3_supply_amount",
+        "line4_supply_amount",
+        "line2_tax_amount",
+        "line3_tax_amount",
+        "line4_tax_amount"
+      ],
+      "issue": "빈 행을 field로 유지할지, 렌더링 시 선택적으로 생략할지 불명확하다.",
+      "current_handling": "템플릿 value target이 있으므로 schema에 포함하고 sum constraint에서 0 처리 필요성을 note로 기록.",
+      "decision_needed": "빈 행 생성 정책과 sum constraint의 빈값 처리 규칙 확정."
+    },
+    {
+      "field_ids": [
+        "summary_tax_amount",
+        "line1_tax_amount",
+        "line2_tax_amount",
+        "line3_tax_amount",
+        "line4_tax_amount"
+      ],
+      "issue": "세액은 보통 공급가액의 10%이나 지원 constraint grammar에 비율 계산이 없다.",
+      "current_handling": "money.krw generator와 별도 sum constraint만 사용.",
+      "decision_needed": "10% 세율 관계를 외부 후처리/렌더러 constraint로 지원할지 결정."
+    }
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    {
+      "rule": "template:{{pattern:aaaaaa}}@example.test",
+      "fields": [
+        "supplier_email",
+        "recipient_email_1",
+        "recipient_email_2"
+      ],
+      "reason": "지원 grammar에 email 전용 rule이 없어 template+pattern으로 합성 도메인을 근사했다."
+    },
+    {
+      "rule": "pool:amendment_reasons",
+      "fields": [
+        "amendment_reason"
+      ],
+      "reason": "수정사유 칸이 비어 있고 일반 발급 문서에서는 공란이 자연스러울 수 있다."
+    }
+  ],
+  "user_decisions_needed": [
+    "승인번호 정확 포맷과 자리수 확정",
+    "종사업장번호 공란 허용/기본값 정책 확정",
+    "빈 품목 행을 항상 채울지 일부만 채울지 결정",
+    "세액 10% 계산 관계를 renderer constraint로 추가할지 결정"
+  ]
+}

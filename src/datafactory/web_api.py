@@ -525,6 +525,12 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "faker_profile_rules": [
                 "schema key의 의미가 충분히 명확하고 문서 anchor 또는 리서치 근거와 연결될 때만 faker rule을 제안한다.",
                 "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안하되, 반드시 현재 DataFactory 렌더러가 지원하는 rule 문법만 사용한다.",
+                "서로 독립적으로 생성하면 문서 유효성이 깨지는 field들은 `faker_profile_draft.json.constraints`에 명시적으로 모델링한다. 예: 체크박스 택1, 시작/종료일 순서, 행/열 합계, 본인부담금/공단부담금/총액 관계.",
+                "지원 constraint 타입은 `pick_record`, `copy`, `exclusive_choice`, `date_group`, `date_order`, `sum`뿐이다. 지원하지 않는 수식 DSL이나 자연어 constraint는 쓰지 말고 uncertainty_report에 보류한다.",
+                "`exclusive_choice`는 `{type:'exclusive_choice', targets:[field_id...]}`로 작성하며 동일 그룹 체크박스 중 정확히 하나만 선택되어야 할 때 사용한다.",
+                "`date_group`은 `{type:'date_group', year:'field_id', month:'field_id', day:'field_id', min_year:2020, max_year:2027}`로 작성해 분리된 연/월/일 bbox가 항상 유효한 한 날짜가 되게 한다.",
+                "`date_order`는 `{type:'date_order', start:{year,month,day}, end:{year,month,day}, min_days:0, max_days:60}`로 작성해 종료일이 시작일보다 빠르지 않게 한다.",
+                "`sum`은 `{type:'sum', sources:[field_id...], target:'field_id', format:'money.krw'}`로 작성해 합계/소계/총액 bbox가 구성 항목의 합과 일치하게 한다.",
                 "연/월/일이 각각 다른 bbox로 분리된 날짜 placeholder에는 `date.year`, `date.month`, `date.day`를 우선 사용한다. 날짜의 월/일/연도에 `pattern:##` 또는 `pattern:####`를 쓰지 않는다.",
                 "문서 이미지/템플릿의 값 입력 위치 바로 옆/안에 `㎡`, `m²`, `m2`, `%`, `m`, `원`, `명`, `건`, `동`, `층` 같은 단위가 이미 정적 텍스트로 남아 있으면 faker 값에는 그 단위를 포함하지 않는다.",
                 "`호/가구/세대`처럼 라벨에만 단위 의미가 있고 값 위치에 별도 정적 단위가 없는 복합 값은 단위를 포함해 생성한다. 단위 포함/제외 근거를 field_rules 또는 uncertainty_report에 기록한다.",
@@ -537,6 +543,7 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "실제 개인정보, 실제 기업정보, 실제 계좌/식별번호처럼 오인 가능한 값은 만들지 않는다.",
                 "합성 더미 값 규칙 또는 승인된 value pool 참조만 사용한다.",
                 "faker_profile_draft의 각 rule은 관련 schema key, anchor, research_report 근거 ID를 추적 가능하게 남긴다. 추적용 상세 목록은 선택적으로 `field_rules`에 중복 기록할 수 있지만, 최종 적용 기준은 `field_generators`이다.",
+                "constraints의 각 항목도 관련 schema key, anchor, research_report 근거 ID를 `note`, `evidence_ids`, `field_rules` 중 하나에 추적 가능하게 남긴다.",
             ],
             "template_anchor_rules": [
                 "PDF/JPG는 visible text, OCR, bbox 위치, 주변 텍스트를 anchor 근거로 삼는다.",
@@ -1112,7 +1119,87 @@ def _validate_faker_profile_contract(faker_profile: dict[str, Any], fields: list
             pool = _faker_pool_values(faker_profile, pool_name)
             if not pool:
                 errors.append({"code": "faker_missing_pool", "field": str(field_id), "pool": pool_name, "message": "pool rule must define data_pools.<name> with scalar values"})
+    errors.extend(_validate_faker_constraints_contract(faker_profile, field_ids))
     return errors
+
+
+def _validate_faker_constraints_contract(faker_profile: dict[str, Any], field_ids: set[str]) -> list[dict[str, Any]]:
+    errors: list[dict[str, Any]] = []
+    constraints = faker_profile.get("constraints")
+    if constraints is None:
+        return errors
+    if not isinstance(constraints, list):
+        return [{"code": "faker_constraints_not_list", "message": "faker_profile_draft.json.constraints must be a list when present"}]
+    supported = {"pick_record", "copy", "exclusive_choice", "date_group", "date_order", "sum"}
+    for index, constraint in enumerate(constraints):
+        if not isinstance(constraint, dict):
+            errors.append({"code": "faker_constraint_not_object", "index": index, "message": "each constraint must be an object"})
+            continue
+        ctype = str(constraint.get("type") or "").strip().lower()
+        if ctype not in supported:
+            errors.append({"code": "faker_constraint_unsupported_type", "index": index, "type": ctype, "message": "constraint type is not supported by renderer"})
+            continue
+        if ctype == "pick_record":
+            pool_name = str(constraint.get("pool") or "").strip()
+            targets = constraint.get("targets")
+            if not pool_name or not isinstance(targets, dict) or not targets:
+                errors.append({"code": "faker_constraint_invalid_pick_record", "index": index, "message": "pick_record requires pool and non-empty targets mapping"})
+                continue
+            records = [item for item in _faker_pool_raw_values(faker_profile, pool_name) if isinstance(item, dict)]
+            if not records:
+                errors.append({"code": "faker_constraint_missing_record_pool", "index": index, "pool": pool_name, "message": "pick_record requires data_pools.<pool> object records"})
+            _validate_constraint_field_refs(errors, index, field_ids, targets.keys())
+        elif ctype == "copy":
+            _validate_constraint_field_refs(errors, index, field_ids, [constraint.get("source"), constraint.get("target")])
+        elif ctype == "exclusive_choice":
+            targets = _constraint_ref_list(constraint.get("targets"))
+            if len(targets) < 2:
+                errors.append({"code": "faker_constraint_invalid_exclusive_choice", "index": index, "message": "exclusive_choice requires at least two targets"})
+            _validate_constraint_field_refs(errors, index, field_ids, targets)
+        elif ctype == "date_group":
+            refs = [constraint.get("year"), constraint.get("month"), constraint.get("day")]
+            if not all(str(ref or "").strip() for ref in refs):
+                errors.append({"code": "faker_constraint_invalid_date_group", "index": index, "message": "date_group requires year/month/day"})
+            _validate_constraint_field_refs(errors, index, field_ids, refs)
+        elif ctype == "date_order":
+            refs: list[Any] = []
+            for key in ("start", "end"):
+                group = constraint.get(key)
+                if not isinstance(group, dict) or not all(str(group.get(part) or "").strip() for part in ("year", "month", "day")):
+                    errors.append({"code": "faker_constraint_invalid_date_order", "index": index, "message": "date_order requires complete start/end year/month/day groups"})
+                if isinstance(group, dict):
+                    refs.extend(group.get(part) for part in ("year", "month", "day"))
+            _validate_constraint_field_refs(errors, index, field_ids, refs)
+        elif ctype == "sum":
+            sources = _constraint_ref_list(constraint.get("sources"))
+            target = str(constraint.get("target") or "").strip()
+            if not sources or not target:
+                errors.append({"code": "faker_constraint_invalid_sum", "index": index, "message": "sum requires sources and target"})
+            _validate_constraint_field_refs(errors, index, field_ids, [*sources, target])
+    return errors
+
+
+def _constraint_ref_list(value: Any) -> list[str]:
+    return [str(item).strip() for item in value if str(item).strip()] if isinstance(value, list) else []
+
+
+def _validate_constraint_field_refs(errors: list[dict[str, Any]], index: int, field_ids: set[str], refs: Any) -> None:
+    for ref in refs:
+        field_id = str(ref or "").strip()
+        if field_id and field_ids and field_id not in field_ids:
+            errors.append({"code": "faker_constraint_unknown_field", "index": index, "field": field_id, "message": "constraint field reference must match schema binding field_id"})
+
+
+def _faker_pool_raw_values(faker_profile: dict[str, Any], pool_name: str) -> list[Any]:
+    pools = faker_profile.get("data_pools")
+    if isinstance(pools, dict):
+        value = pools.get(pool_name)
+        return value if isinstance(value, list) else []
+    if isinstance(pools, list):
+        for item in pools:
+            if isinstance(item, dict) and str(item.get("name") or "") == pool_name and isinstance(item.get("values"), list):
+                return item.get("values") or []
+    return []
 
 
 def _faker_rule_supported(rule: str) -> bool:

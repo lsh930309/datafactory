@@ -161,6 +161,44 @@ def test_paddle_crop_worker_runs_in_subprocess_and_reads_candidates(tmp_path: Pa
     assert str(web_api.ROOT / "src") in captured["env"]["PYTHONPATH"]
 
 
+
+
+def test_faker_profile_contract_validates_relational_constraints() -> None:
+    fields = [
+        {"field_id": "a"},
+        {"field_id": "b"},
+        {"field_id": "total"},
+        {"field_id": "start_y"},
+        {"field_id": "start_m"},
+        {"field_id": "start_d"},
+        {"field_id": "end_y"},
+        {"field_id": "end_m"},
+        {"field_id": "end_d"},
+    ]
+    valid_profile = {
+        "field_generators": {field["field_id"]: "free_text.short" for field in fields},
+        "constraints": [
+            {"type": "sum", "sources": ["a", "b"], "target": "total"},
+            {"type": "date_order", "start": {"year": "start_y", "month": "start_m", "day": "start_d"}, "end": {"year": "end_y", "month": "end_m", "day": "end_d"}},
+            {"type": "exclusive_choice", "targets": ["a", "b"]},
+        ],
+    }
+
+    assert web_api._validate_faker_profile_contract(valid_profile, fields) == []
+
+    invalid_profile = {
+        "field_generators": {field["field_id"]: "free_text.short" for field in fields},
+        "constraints": [
+            {"type": "formula", "expression": "total=a+b"},
+            {"type": "sum", "sources": ["a", "missing"], "target": "total"},
+        ],
+    }
+
+    errors = web_api._validate_faker_profile_contract(invalid_profile, fields)
+    assert any(error["code"] == "faker_constraint_unsupported_type" for error in errors)
+    assert any(error["code"] == "faker_constraint_unknown_field" and error["field"] == "missing" for error in errors)
+
+
 def test_recognize_review_crops_payload_creates_manifest_and_display_paths(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setattr(web_api, "ROOT", tmp_path)
     image_path = tmp_path / "source.png"

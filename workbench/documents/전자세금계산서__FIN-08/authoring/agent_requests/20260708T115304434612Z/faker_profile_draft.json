@@ -1,0 +1,884 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서",
+  "field_generators": {
+    "approval_number": "pattern:########################",
+    "supplier_business_registration_number": "pattern:###-##-#####",
+    "supplier_branch_number": "pattern:####",
+    "supplier_company_name": "company.name_ko",
+    "supplier_representative_name": "person.name_ko",
+    "supplier_business_address": "address.ko",
+    "supplier_business_type": "pool:business_types",
+    "supplier_business_item": "pool:business_items",
+    "supplier_email": "template:{{pattern:aaaaaa}}@example.test",
+    "recipient_business_registration_number": "pattern:###-##-#####",
+    "recipient_branch_number": "pattern:####",
+    "recipient_company_name": "company.name_ko",
+    "recipient_representative_name": "person.name_ko",
+    "recipient_business_address": "address.ko",
+    "recipient_business_type": "pool:business_types",
+    "recipient_business_item": "pool:business_items",
+    "recipient_email_1": "template:{{pattern:aaaaaa}}@example.test",
+    "recipient_email_2": "template:{{pattern:aaaaaa}}@example.test",
+    "issue_date": "date.kr",
+    "summary_supply_amount": "money.krw",
+    "summary_tax_amount": "money.krw",
+    "amendment_reason": "pool:amendment_reasons",
+    "summary_note": "free_text.short",
+    "line1_month": "date.month",
+    "line1_day": "date.day",
+    "line1_item_name": "pool:item_names",
+    "line1_specification": "pool:item_specs",
+    "line1_quantity": "choice:1|2|3|5|10",
+    "line1_unit_price": "money.krw",
+    "line1_supply_amount": "money.krw",
+    "line1_tax_amount": "money.krw",
+    "line1_remark": "free_text.short",
+    "line2_month": "date.month",
+    "line2_day": "date.day",
+    "line2_item_name": "pool:item_names",
+    "line2_specification": "pool:item_specs",
+    "line2_quantity": "choice:1|2|3|5|10",
+    "line2_unit_price": "money.krw",
+    "line2_supply_amount": "money.krw",
+    "line2_tax_amount": "money.krw",
+    "line2_remark": "free_text.short",
+    "line3_month": "date.month",
+    "line3_day": "date.day",
+    "line3_item_name": "pool:item_names",
+    "line3_specification": "pool:item_specs",
+    "line3_quantity": "choice:1|2|3|5|10",
+    "line3_unit_price": "money.krw",
+    "line3_supply_amount": "money.krw",
+    "line3_tax_amount": "money.krw",
+    "line3_remark": "free_text.short",
+    "line4_month": "date.month",
+    "line4_day": "date.day",
+    "line4_item_name": "pool:item_names",
+    "line4_specification": "pool:item_specs",
+    "line4_quantity": "choice:1|2|3|5|10",
+    "line4_unit_price": "money.krw",
+    "line4_supply_amount": "money.krw",
+    "line4_tax_amount": "money.krw",
+    "line4_remark": "free_text.short",
+    "total_amount": "money.krw",
+    "cash_amount": "money.krw",
+    "check_amount": "money.krw",
+    "promissory_note_amount": "money.krw",
+    "receivable_amount": "money.krw"
+  },
+  "data_pools": {
+    "business_types": [
+      "서비스업",
+      "도매 및 소매업",
+      "제조업",
+      "정보통신업",
+      "전문, 과학 및 기술서비스업"
+    ],
+    "business_items": [
+      "회계감사 및 사업비정산",
+      "소프트웨어 개발 및 공급",
+      "문구 및 사무용품",
+      "경영컨설팅",
+      "전자부품 도매"
+    ],
+    "item_names": [
+      "수수료",
+      "자문료",
+      "용역비",
+      "소프트웨어 이용료",
+      "사무용품"
+    ],
+    "item_specs": [
+      "1식",
+      "월정액",
+      "EA",
+      "SET",
+      "건"
+    ],
+    "amendment_reasons": [
+      "",
+      "기재사항 착오정정",
+      "공급가액 변동",
+      "계약의 해제"
+    ]
+  },
+  "constraints": [
+    {
+      "type": "sum",
+      "sources": [
+        "line1_supply_amount",
+        "line2_supply_amount",
+        "line3_supply_amount",
+        "line4_supply_amount"
+      ],
+      "target": "summary_supply_amount",
+      "format": "money.krw",
+      "note": "품목 공급가액 합계와 상단 공급가액을 맞춘다. 빈 행은 0으로 처리하는 렌더러 해석이 필요하다.",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "line1_tax_amount",
+        "line2_tax_amount",
+        "line3_tax_amount",
+        "line4_tax_amount"
+      ],
+      "target": "summary_tax_amount",
+      "format": "money.krw",
+      "note": "품목 세액 합계와 상단 세액을 맞춘다. 빈 행은 0으로 처리하는 렌더러 해석이 필요하다.",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "summary_supply_amount",
+        "summary_tax_amount"
+      ],
+      "target": "total_amount",
+      "format": "money.krw",
+      "note": "합계금액은 공급가액과 세액의 합으로 표시한다.",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    }
+  ],
+  "field_rules": [
+    {
+      "field_id": "approval_number",
+      "semantic_path": "승인번호",
+      "generator": "pattern:########################",
+      "anchor_id": "visual_0002",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "note": "Top-right blank region beside 승인번호 label; no printed prefix or unit in value cell."
+    },
+    {
+      "field_id": "supplier_business_registration_number",
+      "semantic_path": "공급자.등록번호",
+      "generator": "pattern:###-##-#####",
+      "anchor_id": "det_000004",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Red 공급자 block first value row; business registration number format visible."
+    },
+    {
+      "field_id": "supplier_branch_number",
+      "semantic_path": "공급자.종사업장번호",
+      "generator": "pattern:####",
+      "anchor_id": "manual_1783511142890",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Small supplier-side branch-number cell right of registration number label."
+    },
+    {
+      "field_id": "supplier_company_name",
+      "semantic_path": "공급자.상호",
+      "generator": "company.name_ko",
+      "anchor_id": "det_000011",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Supplier 상호/법인명 cell contains company name."
+    },
+    {
+      "field_id": "supplier_representative_name",
+      "semantic_path": "공급자.성명",
+      "generator": "person.name_ko",
+      "anchor_id": "det_000013",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Supplier 성명 cell contains representative name."
+    },
+    {
+      "field_id": "supplier_business_address",
+      "semantic_path": "공급자.사업장주소",
+      "generator": "address.ko",
+      "anchor_id": "det_000021",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Supplier address value spans the 사업장 주소 row."
+    },
+    {
+      "field_id": "supplier_business_type",
+      "semantic_path": "공급자.업태",
+      "generator": "pool:business_types",
+      "anchor_id": "det_000027",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Supplier 업태 cell; text is industry category, not seal despite auto_type."
+    },
+    {
+      "field_id": "supplier_business_item",
+      "semantic_path": "공급자.종목",
+      "generator": "pool:business_items",
+      "anchor_id": "det_000029",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Supplier 종목 cell to the right of 업태."
+    },
+    {
+      "field_id": "supplier_email",
+      "semantic_path": "공급자.이메일",
+      "generator": "template:{{pattern:aaaaaa}}@example.test",
+      "anchor_id": "visual_0018",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Blank supplier email value region; no static suffix in value cell."
+    },
+    {
+      "field_id": "recipient_business_registration_number",
+      "semantic_path": "공급받는자.등록번호",
+      "generator": "pattern:###-##-#####",
+      "anchor_id": "visual_0005",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Blue 공급받는자 block registration number value cell."
+    },
+    {
+      "field_id": "recipient_branch_number",
+      "semantic_path": "공급받는자.종사업장번호",
+      "generator": "pattern:####",
+      "anchor_id": "visual_0006",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Recipient-side branch-number cell beside registration number."
+    },
+    {
+      "field_id": "recipient_company_name",
+      "semantic_path": "공급받는자.상호",
+      "generator": "company.name_ko",
+      "anchor_id": "visual_0007",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Recipient 상호/법인명 blank cell."
+    },
+    {
+      "field_id": "recipient_representative_name",
+      "semantic_path": "공급받는자.성명",
+      "generator": "person.name_ko",
+      "anchor_id": "visual_0008",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Recipient 성명 blank cell."
+    },
+    {
+      "field_id": "recipient_business_address",
+      "semantic_path": "공급받는자.사업장주소",
+      "generator": "address.ko",
+      "anchor_id": "visual_0009",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Recipient business address row spans wide blank cell."
+    },
+    {
+      "field_id": "recipient_business_type",
+      "semantic_path": "공급받는자.업태",
+      "generator": "pool:business_types",
+      "anchor_id": "manual_1783510826259",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Recipient 업태 blank value cell."
+    },
+    {
+      "field_id": "recipient_business_item",
+      "semantic_path": "공급받는자.종목",
+      "generator": "pool:business_items",
+      "anchor_id": "visual_0013",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Recipient 종목 blank value cell."
+    },
+    {
+      "field_id": "recipient_email_1",
+      "semantic_path": "공급받는자.이메일1",
+      "generator": "template:{{pattern:aaaaaa}}@example.test",
+      "anchor_id": "visual_0015",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "First recipient email row blank value cell."
+    },
+    {
+      "field_id": "recipient_email_2",
+      "semantic_path": "공급받는자.이메일2",
+      "generator": "template:{{pattern:aaaaaa}}@example.test",
+      "anchor_id": "visual_0019",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Second recipient email row blank value cell."
+    },
+    {
+      "field_id": "issue_date",
+      "semantic_path": "거래요약.작성일자",
+      "generator": "date.kr",
+      "anchor_id": "det_000041",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "작성일자 value appears as YYYY-MM-DD; value cell has no static unit."
+    },
+    {
+      "field_id": "summary_supply_amount",
+      "semantic_path": "거래요약.공급가액",
+      "generator": "money.krw",
+      "anchor_id": "det_000042",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Summary supply amount cell contains comma-formatted amount; no printed 원 suffix."
+    },
+    {
+      "field_id": "summary_tax_amount",
+      "semantic_path": "거래요약.세액",
+      "generator": "money.krw",
+      "anchor_id": "det_000043",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Summary tax amount cell contains comma-formatted amount; no printed 원 suffix."
+    },
+    {
+      "field_id": "amendment_reason",
+      "semantic_path": "거래요약.수정사유",
+      "generator": "pool:amendment_reasons",
+      "anchor_id": "visual_0022",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "Blank 수정사유 cell; ordinary issuance may be empty, but pool supports 수정세금계산서 samples."
+    },
+    {
+      "field_id": "summary_note",
+      "semantic_path": "거래요약.비고",
+      "generator": "free_text.short",
+      "anchor_id": "visual_0023",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Wide blank 비고 cell in summary row."
+    },
+    {
+      "field_id": "line1_month",
+      "semantic_path": "품목내역.1행.월",
+      "generator": "date.month",
+      "anchor_id": "det_000053",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 1 month cell; label is 월 and value cell has no printed suffix."
+    },
+    {
+      "field_id": "line1_day",
+      "semantic_path": "품목내역.1행.일",
+      "generator": "date.day",
+      "anchor_id": "det_000054",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 1 day cell; label is 일 and value cell has no printed suffix."
+    },
+    {
+      "field_id": "line1_item_name",
+      "semantic_path": "품목내역.1행.품목",
+      "generator": "pool:item_names",
+      "anchor_id": "det_000055",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 1 품목 cell."
+    },
+    {
+      "field_id": "line1_specification",
+      "semantic_path": "품목내역.1행.규격",
+      "generator": "pool:item_specs",
+      "anchor_id": "manual_1783510901475",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 1 규격 cell."
+    },
+    {
+      "field_id": "line1_quantity",
+      "semantic_path": "품목내역.1행.수량",
+      "generator": "choice:1|2|3|5|10",
+      "anchor_id": "manual_1783510909542",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 1 수량 cell; no static unit at value position."
+    },
+    {
+      "field_id": "line1_unit_price",
+      "semantic_path": "품목내역.1행.단가",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783510914842",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 1 단가 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line1_supply_amount",
+      "semantic_path": "품목내역.1행.공급가액",
+      "generator": "money.krw",
+      "anchor_id": "det_000056",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Item row 1 공급가액 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line1_tax_amount",
+      "semantic_path": "품목내역.1행.세액",
+      "generator": "money.krw",
+      "anchor_id": "det_000057",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Item row 1 세액 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line1_remark",
+      "semantic_path": "품목내역.1행.비고",
+      "generator": "free_text.short",
+      "anchor_id": "manual_1783510924942",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 1 비고 cell."
+    },
+    {
+      "field_id": "line2_month",
+      "semantic_path": "품목내역.2행.월",
+      "generator": "date.month",
+      "anchor_id": "manual_1783510962924",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 2 month cell; label is 월 and value cell has no printed suffix."
+    },
+    {
+      "field_id": "line2_day",
+      "semantic_path": "품목내역.2행.일",
+      "generator": "date.day",
+      "anchor_id": "manual_1783510968208",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 2 day cell; label is 일 and value cell has no printed suffix."
+    },
+    {
+      "field_id": "line2_item_name",
+      "semantic_path": "품목내역.2행.품목",
+      "generator": "pool:item_names",
+      "anchor_id": "manual_1783510994008",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 2 품목 cell."
+    },
+    {
+      "field_id": "line2_specification",
+      "semantic_path": "품목내역.2행.규격",
+      "generator": "pool:item_specs",
+      "anchor_id": "manual_1783511010823",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 2 규격 cell."
+    },
+    {
+      "field_id": "line2_quantity",
+      "semantic_path": "품목내역.2행.수량",
+      "generator": "choice:1|2|3|5|10",
+      "anchor_id": "manual_1783511024107",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 2 수량 cell; no static unit at value position."
+    },
+    {
+      "field_id": "line2_unit_price",
+      "semantic_path": "품목내역.2행.단가",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511036824",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 2 단가 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line2_supply_amount",
+      "semantic_path": "품목내역.2행.공급가액",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511041541",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Item row 2 공급가액 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line2_tax_amount",
+      "semantic_path": "품목내역.2행.세액",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783510945874",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Item row 2 세액 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line2_remark",
+      "semantic_path": "품목내역.2행.비고",
+      "generator": "free_text.short",
+      "anchor_id": "manual_1783510928574",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 2 비고 cell."
+    },
+    {
+      "field_id": "line3_month",
+      "semantic_path": "품목내역.3행.월",
+      "generator": "date.month",
+      "anchor_id": "manual_1783510970773",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 3 month cell; label is 월 and value cell has no printed suffix."
+    },
+    {
+      "field_id": "line3_day",
+      "semantic_path": "품목내역.3행.일",
+      "generator": "date.day",
+      "anchor_id": "manual_1783510973909",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 3 day cell; label is 일 and value cell has no printed suffix."
+    },
+    {
+      "field_id": "line3_item_name",
+      "semantic_path": "품목내역.3행.품목",
+      "generator": "pool:item_names",
+      "anchor_id": "manual_1783511000658",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 3 품목 cell."
+    },
+    {
+      "field_id": "line3_specification",
+      "semantic_path": "품목내역.3행.규격",
+      "generator": "pool:item_specs",
+      "anchor_id": "manual_1783511014741",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 3 규격 cell."
+    },
+    {
+      "field_id": "line3_quantity",
+      "semantic_path": "품목내역.3행.수량",
+      "generator": "choice:1|2|3|5|10",
+      "anchor_id": "manual_1783511030024",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 3 수량 cell; no static unit at value position."
+    },
+    {
+      "field_id": "line3_unit_price",
+      "semantic_path": "품목내역.3행.단가",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511045623",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 3 단가 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line3_supply_amount",
+      "semantic_path": "품목내역.3행.공급가액",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511050374",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Item row 3 공급가액 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line3_tax_amount",
+      "semantic_path": "품목내역.3행.세액",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783510950823",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Item row 3 세액 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line3_remark",
+      "semantic_path": "품목내역.3행.비고",
+      "generator": "free_text.short",
+      "anchor_id": "manual_1783510935325",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 3 비고 cell."
+    },
+    {
+      "field_id": "line4_month",
+      "semantic_path": "품목내역.4행.월",
+      "generator": "date.month",
+      "anchor_id": "manual_1783510976657",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 4 month cell; label is 월 and value cell has no printed suffix."
+    },
+    {
+      "field_id": "line4_day",
+      "semantic_path": "품목내역.4행.일",
+      "generator": "date.day",
+      "anchor_id": "manual_1783510978923",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 4 day cell; label is 일 and value cell has no printed suffix."
+    },
+    {
+      "field_id": "line4_item_name",
+      "semantic_path": "품목내역.4행.품목",
+      "generator": "pool:item_names",
+      "anchor_id": "manual_1783511005640",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 4 품목 cell."
+    },
+    {
+      "field_id": "line4_specification",
+      "semantic_path": "품목내역.4행.규격",
+      "generator": "pool:item_specs",
+      "anchor_id": "manual_1783511019041",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 4 규격 cell."
+    },
+    {
+      "field_id": "line4_quantity",
+      "semantic_path": "품목내역.4행.수량",
+      "generator": "choice:1|2|3|5|10",
+      "anchor_id": "manual_1783511032808",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 4 수량 cell; no static unit at value position."
+    },
+    {
+      "field_id": "line4_unit_price",
+      "semantic_path": "품목내역.4행.단가",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511057240",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 4 단가 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line4_supply_amount",
+      "semantic_path": "품목내역.4행.공급가액",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511053540",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Item row 4 공급가액 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line4_tax_amount",
+      "semantic_path": "품목내역.4행.세액",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783510957274",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Item row 4 세액 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "line4_remark",
+      "semantic_path": "품목내역.4행.비고",
+      "generator": "free_text.short",
+      "anchor_id": "manual_1783510939392",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Item row 4 비고 cell."
+    },
+    {
+      "field_id": "total_amount",
+      "semantic_path": "결제.합계금액",
+      "generator": "money.krw",
+      "anchor_id": "det_000064",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "Bottom 합계금액 cell; no printed 원 suffix."
+    },
+    {
+      "field_id": "cash_amount",
+      "semantic_path": "결제.현금",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511062690",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Bottom 현금 cell; blank in sample."
+    },
+    {
+      "field_id": "check_amount",
+      "semantic_path": "결제.수표",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511065606",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Bottom 수표 cell; blank in sample."
+    },
+    {
+      "field_id": "promissory_note_amount",
+      "semantic_path": "결제.어음",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511068557",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Bottom 어음 cell; blank in sample."
+    },
+    {
+      "field_id": "receivable_amount",
+      "semantic_path": "결제.외상미수금",
+      "generator": "money.krw",
+      "anchor_id": "manual_1783511072790",
+      "unit_policy": "omit_static_unit",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "Bottom 외상미수금 cell; blank in sample."
+    }
+  ]
+}

@@ -533,3 +533,16 @@ BBox 검출
 4. GUI에 “Schema 초안 생성 → field_id/value_type 수정 → preview render” 화면을 붙인다.
 
 이 단위가 완성되면, 현재의 인페인팅 결과물이 처음으로 “값을 주입해서 GT와 함께 합성 이미지로 출력 가능한 템플릿”이 된다.
+
+### 2026-07-08 구현 메모: 제한형 relational constraints
+
+Agent authoring 산출물의 `faker_profile.json`은 기존 `field_generators` 문법을 그대로 유지하되, field 간 데이터 정합성은 `constraints` 배열로 별도 표현한다. 현재 렌더러가 실제 적용하고 draft validator가 허용하는 constraint 타입은 아래 6개로 제한한다.
+
+- `pick_record`: object record pool에서 한 레코드를 뽑아 여러 field에 일관 반영한다.
+- `copy`: 한 field 값을 다른 field로 복사한다.
+- `exclusive_choice`: 동일 그룹 체크박스 중 정확히 하나만 선택한다.
+- `date_group`: 분리된 `year/month/day` bbox가 하나의 유효 날짜를 이루게 한다.
+- `date_order`: 시작일/종료일처럼 두 날짜 그룹의 선후 관계를 보장한다.
+- `sum`: 소계/합계/총액 field가 source field들의 합과 일치하게 한다.
+
+MED-04 `진료비계산서·영수증`처럼 금액 행/열 합계, 본인부담/공단부담/총액, 진료기간 시작/종료일, 문서구분 체크박스 상호배타가 중요한 양식은 agent가 faker profile 작성 시 위 constraint를 반드시 검토해야 한다. 지원하지 않는 자연어 수식이나 임의 DSL은 사용하지 않고 `uncertainty_report.json`에 보류 사유를 남긴다.

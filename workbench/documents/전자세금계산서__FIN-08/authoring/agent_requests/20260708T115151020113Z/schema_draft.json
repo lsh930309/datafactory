@@ -1,0 +1,1980 @@
+{
+  "schema_version": 2,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서",
+  "sample_kind": "filled_sample",
+  "semantic_schema": {
+    "문서정보": {
+      "승인번호": ""
+    },
+    "공급자": {
+      "등록번호": "",
+      "종사업장번호": "",
+      "상호_법인명": "",
+      "성명": "",
+      "사업장주소": "",
+      "업태": "",
+      "종목": "",
+      "이메일": ""
+    },
+    "공급받는자": {
+      "등록번호": "",
+      "종사업장번호": "",
+      "상호_법인명": "",
+      "성명": "",
+      "사업장주소": "",
+      "업태": "",
+      "종목": "",
+      "이메일1": "",
+      "이메일2": ""
+    },
+    "거래요약": {
+      "작성일자": "",
+      "공급가액": "",
+      "세액": "",
+      "수정사유": "",
+      "비고": ""
+    },
+    "품목명세": {
+      "1행": {
+        "월": "",
+        "일": "",
+        "품목": "",
+        "규격": "",
+        "수량": "",
+        "단가": "",
+        "공급가액": "",
+        "세액": "",
+        "비고": ""
+      },
+      "2행": {
+        "월": "",
+        "일": "",
+        "품목": "",
+        "규격": "",
+        "수량": "",
+        "단가": "",
+        "공급가액": "",
+        "세액": "",
+        "비고": ""
+      },
+      "3행": {
+        "월": "",
+        "일": "",
+        "품목": "",
+        "규격": "",
+        "수량": "",
+        "단가": "",
+        "공급가액": "",
+        "세액": "",
+        "비고": ""
+      },
+      "4행": {
+        "월": "",
+        "일": "",
+        "품목": "",
+        "규격": "",
+        "수량": "",
+        "단가": "",
+        "공급가액": "",
+        "세액": "",
+        "비고": ""
+      }
+    },
+    "결제정보": {
+      "합계금액": "",
+      "현금": "",
+      "수표": "",
+      "어음": "",
+      "외상미수금": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "approval_number",
+      "key": "승인번호",
+      "semantic_path": "문서정보.승인번호",
+      "anchor_id": "visual_0002",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:########################",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible",
+      "research_evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          687,
+          14,
+          400,
+          44
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "supplier_registration_number",
+      "key": "공급자 등록번호",
+      "semantic_path": "공급자.등록번호",
+      "anchor_id": "det_000004",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:###-##-#####",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          149,
+          62,
+          186,
+          43
+        ],
+        "observed_text": "632-08-00201",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "supplier_branch_number",
+      "key": "공급자 종사업장번호",
+      "semantic_path": "공급자.종사업장번호",
+      "anchor_id": "manual_1783511142890",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:####",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          417,
+          63,
+          131,
+          41
+        ],
+        "observed_text": "",
+        "note": "공급자 등록번호 우측 빈 칸입니다. 실제 샘플은 공란입니다."
+      }
+    },
+    {
+      "field_id": "supplier_company_name",
+      "key": "공급자 상호(법인명)",
+      "semantic_path": "공급자.상호_법인명",
+      "anchor_id": "det_000011",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000015"
+      ],
+      "value_type": "company",
+      "generator": "company.name_ko",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          150,
+          105,
+          184,
+          44
+        ],
+        "observed_text": "한경세무회계",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "supplier_representative_name",
+      "key": "공급자 성명",
+      "semantic_path": "공급자.성명",
+      "anchor_id": "det_000013",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000012"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          416,
+          105,
+          131,
+          42
+        ],
+        "observed_text": "정영록",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "supplier_address",
+      "key": "공급자 사업장 주소",
+      "semantic_path": "공급자.사업장주소",
+      "anchor_id": "det_000021",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000020",
+        "det_000023"
+      ],
+      "value_type": "address",
+      "generator": "address.ko",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          149,
+          149,
+          399,
+          44
+        ],
+        "observed_text": "서울특별시 영등포구 선유동1로 32,301호(당산동3가,신 일빌딩)",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "supplier_business_type",
+      "key": "공급자 업태",
+      "semantic_path": "공급자.업태",
+      "anchor_id": "det_000027",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "value_type": "business_type",
+      "generator": "pool:business_types",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          149,
+          194,
+          105,
+          39
+        ],
+        "observed_text": "전문,과학 및 기술서비스업",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "supplier_business_item",
+      "key": "공급자 종목",
+      "semantic_path": "공급자.종목",
+      "anchor_id": "det_000029",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028"
+      ],
+      "value_type": "business_item",
+      "generator": "pool:business_items",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          337,
+          195,
+          211,
+          37
+        ],
+        "observed_text": "회계감사 및 사업비정산",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "supplier_email",
+      "key": "공급자 이메일",
+      "semantic_path": "공급자.이메일",
+      "anchor_id": "visual_0018",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000034"
+      ],
+      "value_type": "email",
+      "generator": "template:{{pattern:aaaaaa}}@example.com",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          149,
+          234,
+          399,
+          64
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "recipient_registration_number",
+      "key": "공급받는자 등록번호",
+      "semantic_path": "공급받는자.등록번호",
+      "anchor_id": "visual_0005",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000006"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:###-##-#####",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          688,
+          62,
+          185,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "recipient_branch_number",
+      "key": "공급받는자 종사업장번호",
+      "semantic_path": "공급받는자.종사업장번호",
+      "anchor_id": "visual_0006",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000007"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:####",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          957,
+          62,
+          131,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "recipient_company_name",
+      "key": "공급받는자 상호(법인명)",
+      "semantic_path": "공급받는자.상호_법인명",
+      "anchor_id": "visual_0007",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017"
+      ],
+      "value_type": "company",
+      "generator": "company.name_ko",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          688,
+          106,
+          185,
+          39
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "recipient_representative_name",
+      "key": "공급받는자 성명",
+      "semantic_path": "공급받는자.성명",
+      "anchor_id": "visual_0008",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000018"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          957,
+          106,
+          131,
+          39
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "recipient_address",
+      "key": "공급받는자 사업장 주소",
+      "semantic_path": "공급받는자.사업장주소",
+      "anchor_id": "visual_0009",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000022",
+        "det_000025"
+      ],
+      "value_type": "address",
+      "generator": "address.ko",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          688,
+          149,
+          399,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "recipient_business_type",
+      "key": "공급받는자 업태",
+      "semantic_path": "공급받는자.업태",
+      "anchor_id": "manual_1783510826259",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000030"
+      ],
+      "value_type": "business_type",
+      "generator": "pool:business_types",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          689,
+          195,
+          106,
+          37
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "recipient_business_item",
+      "key": "공급받는자 종목",
+      "semantic_path": "공급받는자.종목",
+      "anchor_id": "visual_0013",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000031"
+      ],
+      "value_type": "business_item",
+      "generator": "pool:business_items",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          875,
+          194,
+          213,
+          36
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "recipient_email_1",
+      "key": "공급받는자 이메일 1",
+      "semantic_path": "공급받는자.이메일1",
+      "anchor_id": "visual_0015",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000033"
+      ],
+      "value_type": "email",
+      "generator": "template:{{pattern:aaaaaa}}@example.com",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          688,
+          233,
+          399,
+          32
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "recipient_email_2",
+      "key": "공급받는자 이메일 2",
+      "semantic_path": "공급받는자.이메일2",
+      "anchor_id": "visual_0019",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000035"
+      ],
+      "value_type": "email",
+      "generator": "template:{{pattern:aaaaaa}}@example.com",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          689,
+          268,
+          400,
+          30
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "issue_date",
+      "key": "작성일자",
+      "semantic_path": "거래요약.작성일자",
+      "anchor_id": "det_000041",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000036"
+      ],
+      "value_type": "date",
+      "generator": "date.kr",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          15,
+          336,
+          132,
+          40
+        ],
+        "observed_text": "2023-01-03",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "summary_supply_amount",
+      "key": "공급가액",
+      "semantic_path": "거래요약.공급가액",
+      "anchor_id": "det_000042",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000037"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          151,
+          336,
+          198,
+          41
+        ],
+        "observed_text": "300,000",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "summary_tax_amount",
+      "key": "세액",
+      "semantic_path": "거래요약.세액",
+      "anchor_id": "det_000043",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000038"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          351,
+          336,
+          199,
+          41
+        ],
+        "observed_text": "30,000",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "amendment_reason",
+      "key": "수정사유",
+      "semantic_path": "거래요약.수정사유",
+      "anchor_id": "visual_0022",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039"
+      ],
+      "value_type": "text",
+      "generator": "pool:amendment_reasons",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          551,
+          335,
+          136,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "summary_note",
+      "key": "비고",
+      "semantic_path": "거래요약.비고",
+      "anchor_id": "visual_0023",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000040"
+      ],
+      "value_type": "text",
+      "generator": "free_text.short",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          689,
+          335,
+          399,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_1_month",
+      "key": "품목 1행 월",
+      "semantic_path": "품목명세.1행.월",
+      "anchor_id": "det_000053",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          15,
+          413,
+          36,
+          42
+        ],
+        "observed_text": "01",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_1_day",
+      "key": "품목 1행 일",
+      "semantic_path": "품목명세.1행.일",
+      "anchor_id": "det_000054",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          53,
+          413,
+          38,
+          42
+        ],
+        "observed_text": "03",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_1_item",
+      "key": "품목 1행 품목",
+      "semantic_path": "품목명세.1행.품목",
+      "anchor_id": "det_000055",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "value_type": "text",
+      "generator": "pool:item_names",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          93,
+          413,
+          270,
+          42
+        ],
+        "observed_text": "수수료",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_1_spec",
+      "key": "품목 1행 규격",
+      "semantic_path": "품목명세.1행.규격",
+      "anchor_id": "manual_1783510901475",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "value_type": "text",
+      "generator": "pool:item_specs",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          365,
+          413,
+          91,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_1_quantity",
+      "key": "품목 1행 수량",
+      "semantic_path": "품목명세.1행.수량",
+      "anchor_id": "manual_1783510909542",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000048"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3|5|10",
+      "style_class": "number_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          461,
+          412,
+          89,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_1_unit_price",
+      "key": "품목 1행 단가",
+      "semantic_path": "품목명세.1행.단가",
+      "anchor_id": "manual_1783510914842",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000049"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          553,
+          412,
+          132,
+          43
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_1_supply_amount",
+      "key": "품목 1행 공급가액",
+      "semantic_path": "품목명세.1행.공급가액",
+      "anchor_id": "det_000056",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          688,
+          411,
+          159,
+          43
+        ],
+        "observed_text": "300,000",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_1_tax_amount",
+      "key": "품목 1행 세액",
+      "semantic_path": "품목명세.1행.세액",
+      "anchor_id": "det_000057",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000051"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          849,
+          412,
+          132,
+          42
+        ],
+        "observed_text": "30,000",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_1_note",
+      "key": "품목 1행 비고",
+      "semantic_path": "품목명세.1행.비고",
+      "anchor_id": "manual_1783510924942",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000052"
+      ],
+      "value_type": "text",
+      "generator": "free_text.short",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          984,
+          413,
+          103,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_2_month",
+      "key": "품목 2행 월",
+      "semantic_path": "품목명세.2행.월",
+      "anchor_id": "manual_1783510962924",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          14,
+          455,
+          38,
+          42
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_2_day",
+      "key": "품목 2행 일",
+      "semantic_path": "품목명세.2행.일",
+      "anchor_id": "manual_1783510968208",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          54,
+          456,
+          40,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_2_item",
+      "key": "품목 2행 품목",
+      "semantic_path": "품목명세.2행.품목",
+      "anchor_id": "manual_1783510994008",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "value_type": "text",
+      "generator": "pool:item_names",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          96,
+          456,
+          267,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_2_spec",
+      "key": "품목 2행 규격",
+      "semantic_path": "품목명세.2행.규격",
+      "anchor_id": "manual_1783511010823",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "value_type": "text",
+      "generator": "pool:item_specs",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          363,
+          455,
+          93,
+          42
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_2_quantity",
+      "key": "품목 2행 수량",
+      "semantic_path": "품목명세.2행.수량",
+      "anchor_id": "manual_1783511024107",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000048"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3|5|10",
+      "style_class": "number_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          458,
+          453,
+          94,
+          45
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_2_unit_price",
+      "key": "품목 2행 단가",
+      "semantic_path": "품목명세.2행.단가",
+      "anchor_id": "manual_1783511036824",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000049"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          553,
+          456,
+          135,
+          42
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_2_supply_amount",
+      "key": "품목 2행 공급가액",
+      "semantic_path": "품목명세.2행.공급가액",
+      "anchor_id": "manual_1783511041541",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          687,
+          456,
+          161,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_2_tax_amount",
+      "key": "품목 2행 세액",
+      "semantic_path": "품목명세.2행.세액",
+      "anchor_id": "manual_1783510945874",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000051"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          850,
+          456,
+          132,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_2_note",
+      "key": "품목 2행 비고",
+      "semantic_path": "품목명세.2행.비고",
+      "anchor_id": "manual_1783510928574",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000052"
+      ],
+      "value_type": "text",
+      "generator": "free_text.short",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          983,
+          456,
+          106,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_3_month",
+      "key": "품목 3행 월",
+      "semantic_path": "품목명세.3행.월",
+      "anchor_id": "manual_1783510970773",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          13,
+          498,
+          38,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_3_day",
+      "key": "품목 3행 일",
+      "semantic_path": "품목명세.3행.일",
+      "anchor_id": "manual_1783510973909",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          54,
+          498,
+          38,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_3_item",
+      "key": "품목 3행 품목",
+      "semantic_path": "품목명세.3행.품목",
+      "anchor_id": "manual_1783511000658",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "value_type": "text",
+      "generator": "pool:item_names",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          92,
+          498,
+          271,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_3_spec",
+      "key": "품목 3행 규격",
+      "semantic_path": "품목명세.3행.규격",
+      "anchor_id": "manual_1783511014741",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "value_type": "text",
+      "generator": "pool:item_specs",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          363,
+          498,
+          94,
+          42
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_3_quantity",
+      "key": "품목 3행 수량",
+      "semantic_path": "품목명세.3행.수량",
+      "anchor_id": "manual_1783511030024",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000048"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3|5|10",
+      "style_class": "number_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          458,
+          499,
+          96,
+          42
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_3_unit_price",
+      "key": "품목 3행 단가",
+      "semantic_path": "품목명세.3행.단가",
+      "anchor_id": "manual_1783511045623",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000049"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          553,
+          498,
+          132,
+          42
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_3_supply_amount",
+      "key": "품목 3행 공급가액",
+      "semantic_path": "품목명세.3행.공급가액",
+      "anchor_id": "manual_1783511050374",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          686,
+          498,
+          162,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_3_tax_amount",
+      "key": "품목 3행 세액",
+      "semantic_path": "품목명세.3행.세액",
+      "anchor_id": "manual_1783510950823",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000051"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          850,
+          498,
+          131,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_3_note",
+      "key": "품목 3행 비고",
+      "semantic_path": "품목명세.3행.비고",
+      "anchor_id": "manual_1783510935325",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000052"
+      ],
+      "value_type": "text",
+      "generator": "free_text.short",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          984,
+          499,
+          103,
+          38
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_4_month",
+      "key": "품목 4행 월",
+      "semantic_path": "품목명세.4행.월",
+      "anchor_id": "manual_1783510976657",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          14,
+          541,
+          37,
+          38
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_4_day",
+      "key": "품목 4행 일",
+      "semantic_path": "품목명세.4행.일",
+      "anchor_id": "manual_1783510978923",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          55,
+          540,
+          37,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_4_item",
+      "key": "품목 4행 품목",
+      "semantic_path": "품목명세.4행.품목",
+      "anchor_id": "manual_1783511005640",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "value_type": "text",
+      "generator": "pool:item_names",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          93,
+          541,
+          271,
+          40
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_4_spec",
+      "key": "품목 4행 규격",
+      "semantic_path": "품목명세.4행.규격",
+      "anchor_id": "manual_1783511019041",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "value_type": "text",
+      "generator": "pool:item_specs",
+      "style_class": "text_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          362,
+          540,
+          96,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_4_quantity",
+      "key": "품목 4행 수량",
+      "semantic_path": "품목명세.4행.수량",
+      "anchor_id": "manual_1783511032808",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000048"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3|5|10",
+      "style_class": "number_center",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          460,
+          541,
+          93,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_4_unit_price",
+      "key": "품목 4행 단가",
+      "semantic_path": "품목명세.4행.단가",
+      "anchor_id": "manual_1783511057240",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000049"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          554,
+          542,
+          131,
+          38
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_4_supply_amount",
+      "key": "품목 4행 공급가액",
+      "semantic_path": "품목명세.4행.공급가액",
+      "anchor_id": "manual_1783511053540",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          686,
+          541,
+          162,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_4_tax_amount",
+      "key": "품목 4행 세액",
+      "semantic_path": "품목명세.4행.세액",
+      "anchor_id": "manual_1783510957274",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000051"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          850,
+          541,
+          131,
+          38
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "line_4_note",
+      "key": "품목 4행 비고",
+      "semantic_path": "품목명세.4행.비고",
+      "anchor_id": "manual_1783510939392",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000052"
+      ],
+      "value_type": "text",
+      "generator": "free_text.short",
+      "style_class": "text_left",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          984,
+          541,
+          104,
+          38
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "total_amount",
+      "key": "합계금액",
+      "semantic_path": "결제정보.합계금액",
+      "anchor_id": "det_000064",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000058"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          15,
+          615,
+          182,
+          42
+        ],
+        "observed_text": "330,000",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "cash_amount",
+      "key": "현금",
+      "semantic_path": "결제정보.현금",
+      "anchor_id": "manual_1783511062690",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000059"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          200,
+          617,
+          158,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "check_amount",
+      "key": "수표",
+      "semantic_path": "결제정보.수표",
+      "anchor_id": "manual_1783511065606",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000060"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          363,
+          617,
+          157,
+          39
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "note_amount",
+      "key": "어음",
+      "semantic_path": "결제정보.어음",
+      "anchor_id": "manual_1783511068557",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000061"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          523,
+          617,
+          160,
+          38
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    },
+    {
+      "field_id": "accounts_receivable_amount",
+      "key": "외상미수금",
+      "semantic_path": "결제정보.외상미수금",
+      "anchor_id": "manual_1783511072790",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000062"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money",
+      "unit_policy": "no_static_unit_visible_in_value_cell",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "visual_source": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+        "bbox": [
+          688,
+          617,
+          159,
+          41
+        ],
+        "observed_text": "",
+        "note": "전체 템플릿 이미지에서 확인한 값 영역입니다."
+      }
+    }
+  ],
+  "unmapped_use_anchors": [],
+  "authoring_notes": {
+    "source_request": "workbench/documents/전자세금계산서__FIN-08/authoring/agent_requests/20260708T115151020113Z/request.json",
+    "visual_source_of_truth": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+    "binding_policy": "모든 binding anchor_id는 anchor_map_draft.json의 status=use 값 영역을 가리킵니다.",
+    "created_at": "2026-07-08T11:56:29.635854+00:00"
+  }
+}

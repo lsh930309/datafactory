@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import random
+from datetime import datetime
 from pathlib import Path
 
 import pytest
@@ -17,6 +19,7 @@ from datafactory.authoring import (
     render_authoring_preview,
     save_authoring_bundle,
     update_authoring_source_inpainted,
+    _generate_values,
 )
 from datafactory.fonts import list_font_faces, load_font, resolve_font_path
 from datafactory.models import BBox, FieldSpec, TemplateSpec
@@ -811,6 +814,87 @@ def test_render_authoring_preview_supports_data_pools_and_pick_record_constraint
     assert values["tax_office_chief"] in {"삼성세무서장", "서초세무서장"}
     validation = json.loads(result.validation_report.read_text(encoding="utf-8"))
     assert validation["warning_count"] == 0
+
+
+
+
+def test_render_authoring_preview_applies_relational_constraints(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile)
+    schema = loaded.payload["schema"]
+    base_field = dict(schema["fields"][0])
+    field_ids = [
+        "outpatient",
+        "inpatient",
+        "start_year",
+        "start_month",
+        "start_day",
+        "end_year",
+        "end_month",
+        "end_day",
+        "amount_a",
+        "amount_b",
+        "amount_total",
+    ]
+    schema["fields"] = [dict(base_field, field_id=field_id, label=field_id) for field_id in field_ids]
+    faker_profile = loaded.payload["faker_profile"]
+    faker_profile["field_generators"] = {
+        "outpatient": "checkbox.bool",
+        "inpatient": "checkbox.bool",
+        "start_year": "date.year",
+        "start_month": "date.month",
+        "start_day": "date.day",
+        "end_year": "date.year",
+        "end_month": "date.month",
+        "end_day": "date.day",
+        "amount_a": "money.krw",
+        "amount_b": "money.krw",
+        "amount_total": "money.krw",
+    }
+    faker_profile["constraints"] = [
+        {"type": "exclusive_choice", "targets": ["outpatient", "inpatient"]},
+        {
+            "type": "date_order",
+            "start": {"year": "start_year", "month": "start_month", "day": "start_day"},
+            "end": {"year": "end_year", "month": "end_month", "day": "end_day"},
+            "min_year": 2024,
+            "max_year": 2024,
+            "min_days": 0,
+            "max_days": 30,
+        },
+        {"type": "sum", "sources": ["amount_a", "amount_b"], "target": "amount_total", "format": "money.krw"},
+    ]
+    save_authoring_bundle(
+        draft.schema,
+        draft.stylesheet,
+        draft.faker_profile,
+        schema=schema,
+        stylesheet=loaded.payload["stylesheet"],
+        faker_profile=faker_profile,
+    )
+
+    result = render_authoring_preview(draft.schema, draft.stylesheet, draft.faker_profile, out_dir=tmp_path / "authoring" / "relational", seed=11)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    values = kv["values"]
+
+    assert [values["outpatient"], values["inpatient"]].count("V") == 1
+    start = datetime(int(values["start_year"]), int(values["start_month"]), int(values["start_day"]))
+    end = datetime(int(values["end_year"]), int(values["end_month"]), int(values["end_day"]))
+    assert start <= end
+    assert (end - start).days <= 30
+    parse_amount = lambda value: int(str(value).replace(",", ""))
+    assert parse_amount(values["amount_total"]) == parse_amount(values["amount_a"]) + parse_amount(values["amount_b"])
+    validation = json.loads(result.validation_report.read_text(encoding="utf-8"))
+    assert validation["warning_count"] == 0
+
+    for seed in range(1, 80):
+        values, warnings = _generate_values(schema, faker_profile, random.Random(seed))
+        assert warnings == []
+        start = datetime(int(values["start_year"]), int(values["start_month"]), int(values["start_day"]))
+        end = datetime(int(values["end_year"]), int(values["end_month"]), int(values["end_day"]))
+        assert start <= end
+        assert (end - start).days <= 30
 
 
 def test_render_authoring_batch_writes_multiple_samples_and_summary(tmp_path: Path) -> None:

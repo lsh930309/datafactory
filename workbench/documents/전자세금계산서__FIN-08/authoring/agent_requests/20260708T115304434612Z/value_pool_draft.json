@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서",
+  "pools": {
+    "business_types": {
+      "values": [
+        "서비스업",
+        "도매 및 소매업",
+        "제조업",
+        "정보통신업",
+        "전문, 과학 및 기술서비스업"
+      ],
+      "usage": [
+        "supplier_business_type",
+        "recipient_business_type"
+      ],
+      "source_note": "전자세금계산서 업태 칸의 합성 업종 대분류."
+    },
+    "business_items": {
+      "values": [
+        "회계감사 및 사업비정산",
+        "소프트웨어 개발 및 공급",
+        "문구 및 사무용품",
+        "경영컨설팅",
+        "전자부품 도매"
+      ],
+      "usage": [
+        "supplier_business_item",
+        "recipient_business_item"
+      ],
+      "source_note": "전자세금계산서 종목 칸의 합성 업종/품목 설명."
+    },
+    "item_names": {
+      "values": [
+        "수수료",
+        "자문료",
+        "용역비",
+        "소프트웨어 이용료",
+        "사무용품"
+      ],
+      "usage": [
+        "line1_item_name",
+        "line2_item_name",
+        "line3_item_name",
+        "line4_item_name"
+      ],
+      "source_note": "품목 행에 들어갈 비개인 합성 거래 품목."
+    },
+    "item_specs": {
+      "values": [
+        "1식",
+        "월정액",
+        "EA",
+        "SET",
+        "건"
+      ],
+      "usage": [
+        "line1_specification",
+        "line2_specification",
+        "line3_specification",
+        "line4_specification"
+      ],
+      "source_note": "규격 칸용 간단 합성 값."
+    },
+    "amendment_reasons": {
+      "values": [
+        "",
+        "기재사항 착오정정",
+        "공급가액 변동",
+        "계약의 해제"
+      ],
+      "usage": [
+        "amendment_reason"
+      ],
+      "source_note": "일반 전자세금계산서는 공란 가능, 수정세금계산서 샘플에는 사유 입력 가능."
+    }
+  }
+}

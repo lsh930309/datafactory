@@ -1,0 +1,510 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서",
+  "search_date": "2026-07-08",
+  "queries": [
+    "전자세금계산서 작성 방법 공급자 공급받는자 공급가액 세액 승인번호 국세청",
+    "전자세금계산서 표준 양식 항목 공급자 공급받는자 작성일자 공급가액 세액 국세청",
+    "부가가치세법 세금계산서 필요적 기재사항 공급하는 사업자 공급받는 자 공급가액 세액 작성 연월일"
+  ],
+  "sources": [
+    {
+      "id": "R1",
+      "url": "https://www.law.go.kr/법령/부가가치세법/제32조",
+      "source_type": "official_law",
+      "summary": "부가가치세법 제32조 세금계산서 조항은 공급하는 사업자와 공급받는 자의 등록번호/성명 또는 명칭, 공급가액과 부가가치세액, 작성 연월일 등을 세금계산서 핵심 기재사항으로 다룬다. 전자세금계산서의 공급자/공급받는자/금액/작성일자 필드 의미 확인에 사용했다."
+    },
+    {
+      "id": "R2",
+      "url": "https://www.nts.go.kr/search/search.jsp?query=전자세금계산서%20공급가액%20세액%20승인번호",
+      "source_type": "official_tax_agency_search",
+      "summary": "국세청 통합검색 결과와 홈택스 상담/안내 스니펫에서 전자세금계산서 발급, 공급자/공급받는자 정보, 공급가액, 승인번호 조회, 수정발급 흐름이 함께 검색되는 것을 확인했다. 템플릿 하단의 홈택스 발급/전송 안내와도 일치한다."
+    },
+    {
+      "id": "R3",
+      "url": "https://blog.naver.com/ntscafe/221395140303",
+      "source_type": "national_tax_service_official_blog_search_result",
+      "summary": "국세청 공식 블로그 검색 결과 스니펫에서 수정세금계산서 발급 시 승인번호로 당초 발급분을 찾고, 작성일자와 공급가액 등을 올바르게 작성한다는 설명이 확인된다. 수정사유와 승인번호 필드의 의미 보조 근거로만 사용했다."
+    },
+    {
+      "id": "R4",
+      "url": "https://www.hometax.go.kr/",
+      "source_type": "official_service",
+      "summary": "템플릿 하단 문구가 국세청 홈택스에서 발급 또는 전송된 전자(세금)계산서이며 조회/발급 메뉴의 제3자 발급사실 조회를 안내한다. 문서 출처/승인번호 조회 맥락 근거로 사용했다."
+    }
+  ],
+  "field_evidence": {
+    "approval_number": {
+      "semantic_path": "승인번호",
+      "anchor_id": "visual_0002",
+      "evidence_ids": [
+        "R2",
+        "R3"
+      ]
+    },
+    "supplier_business_registration_number": {
+      "semantic_path": "공급자.등록번호",
+      "anchor_id": "det_000004",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "supplier_branch_number": {
+      "semantic_path": "공급자.종사업장번호",
+      "anchor_id": "manual_1783511142890",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "supplier_company_name": {
+      "semantic_path": "공급자.상호",
+      "anchor_id": "det_000011",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "supplier_representative_name": {
+      "semantic_path": "공급자.성명",
+      "anchor_id": "det_000013",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "supplier_business_address": {
+      "semantic_path": "공급자.사업장주소",
+      "anchor_id": "det_000021",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "supplier_business_type": {
+      "semantic_path": "공급자.업태",
+      "anchor_id": "det_000027",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "supplier_business_item": {
+      "semantic_path": "공급자.종목",
+      "anchor_id": "det_000029",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "supplier_email": {
+      "semantic_path": "공급자.이메일",
+      "anchor_id": "visual_0018",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "recipient_business_registration_number": {
+      "semantic_path": "공급받는자.등록번호",
+      "anchor_id": "visual_0005",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "recipient_branch_number": {
+      "semantic_path": "공급받는자.종사업장번호",
+      "anchor_id": "visual_0006",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "recipient_company_name": {
+      "semantic_path": "공급받는자.상호",
+      "anchor_id": "visual_0007",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "recipient_representative_name": {
+      "semantic_path": "공급받는자.성명",
+      "anchor_id": "visual_0008",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "recipient_business_address": {
+      "semantic_path": "공급받는자.사업장주소",
+      "anchor_id": "visual_0009",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "recipient_business_type": {
+      "semantic_path": "공급받는자.업태",
+      "anchor_id": "manual_1783510826259",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "recipient_business_item": {
+      "semantic_path": "공급받는자.종목",
+      "anchor_id": "visual_0013",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "recipient_email_1": {
+      "semantic_path": "공급받는자.이메일1",
+      "anchor_id": "visual_0015",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "recipient_email_2": {
+      "semantic_path": "공급받는자.이메일2",
+      "anchor_id": "visual_0019",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "issue_date": {
+      "semantic_path": "거래요약.작성일자",
+      "anchor_id": "det_000041",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "summary_supply_amount": {
+      "semantic_path": "거래요약.공급가액",
+      "anchor_id": "det_000042",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "summary_tax_amount": {
+      "semantic_path": "거래요약.세액",
+      "anchor_id": "det_000043",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "amendment_reason": {
+      "semantic_path": "거래요약.수정사유",
+      "anchor_id": "visual_0022",
+      "evidence_ids": [
+        "R3"
+      ]
+    },
+    "summary_note": {
+      "semantic_path": "거래요약.비고",
+      "anchor_id": "visual_0023",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line1_month": {
+      "semantic_path": "품목내역.1행.월",
+      "anchor_id": "det_000053",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line1_day": {
+      "semantic_path": "품목내역.1행.일",
+      "anchor_id": "det_000054",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line1_item_name": {
+      "semantic_path": "품목내역.1행.품목",
+      "anchor_id": "det_000055",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line1_specification": {
+      "semantic_path": "품목내역.1행.규격",
+      "anchor_id": "manual_1783510901475",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line1_quantity": {
+      "semantic_path": "품목내역.1행.수량",
+      "anchor_id": "manual_1783510909542",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line1_unit_price": {
+      "semantic_path": "품목내역.1행.단가",
+      "anchor_id": "manual_1783510914842",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line1_supply_amount": {
+      "semantic_path": "품목내역.1행.공급가액",
+      "anchor_id": "det_000056",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "line1_tax_amount": {
+      "semantic_path": "품목내역.1행.세액",
+      "anchor_id": "det_000057",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "line1_remark": {
+      "semantic_path": "품목내역.1행.비고",
+      "anchor_id": "manual_1783510924942",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line2_month": {
+      "semantic_path": "품목내역.2행.월",
+      "anchor_id": "manual_1783510962924",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line2_day": {
+      "semantic_path": "품목내역.2행.일",
+      "anchor_id": "manual_1783510968208",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line2_item_name": {
+      "semantic_path": "품목내역.2행.품목",
+      "anchor_id": "manual_1783510994008",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line2_specification": {
+      "semantic_path": "품목내역.2행.규격",
+      "anchor_id": "manual_1783511010823",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line2_quantity": {
+      "semantic_path": "품목내역.2행.수량",
+      "anchor_id": "manual_1783511024107",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line2_unit_price": {
+      "semantic_path": "품목내역.2행.단가",
+      "anchor_id": "manual_1783511036824",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line2_supply_amount": {
+      "semantic_path": "품목내역.2행.공급가액",
+      "anchor_id": "manual_1783511041541",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "line2_tax_amount": {
+      "semantic_path": "품목내역.2행.세액",
+      "anchor_id": "manual_1783510945874",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "line2_remark": {
+      "semantic_path": "품목내역.2행.비고",
+      "anchor_id": "manual_1783510928574",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line3_month": {
+      "semantic_path": "품목내역.3행.월",
+      "anchor_id": "manual_1783510970773",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line3_day": {
+      "semantic_path": "품목내역.3행.일",
+      "anchor_id": "manual_1783510973909",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line3_item_name": {
+      "semantic_path": "품목내역.3행.품목",
+      "anchor_id": "manual_1783511000658",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line3_specification": {
+      "semantic_path": "품목내역.3행.규격",
+      "anchor_id": "manual_1783511014741",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line3_quantity": {
+      "semantic_path": "품목내역.3행.수량",
+      "anchor_id": "manual_1783511030024",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line3_unit_price": {
+      "semantic_path": "품목내역.3행.단가",
+      "anchor_id": "manual_1783511045623",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line3_supply_amount": {
+      "semantic_path": "품목내역.3행.공급가액",
+      "anchor_id": "manual_1783511050374",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "line3_tax_amount": {
+      "semantic_path": "품목내역.3행.세액",
+      "anchor_id": "manual_1783510950823",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "line3_remark": {
+      "semantic_path": "품목내역.3행.비고",
+      "anchor_id": "manual_1783510935325",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line4_month": {
+      "semantic_path": "품목내역.4행.월",
+      "anchor_id": "manual_1783510976657",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line4_day": {
+      "semantic_path": "품목내역.4행.일",
+      "anchor_id": "manual_1783510978923",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line4_item_name": {
+      "semantic_path": "품목내역.4행.품목",
+      "anchor_id": "manual_1783511005640",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line4_specification": {
+      "semantic_path": "품목내역.4행.규격",
+      "anchor_id": "manual_1783511019041",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line4_quantity": {
+      "semantic_path": "품목내역.4행.수량",
+      "anchor_id": "manual_1783511032808",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line4_unit_price": {
+      "semantic_path": "품목내역.4행.단가",
+      "anchor_id": "manual_1783511057240",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "line4_supply_amount": {
+      "semantic_path": "품목내역.4행.공급가액",
+      "anchor_id": "manual_1783511053540",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "line4_tax_amount": {
+      "semantic_path": "품목내역.4행.세액",
+      "anchor_id": "manual_1783510957274",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "line4_remark": {
+      "semantic_path": "품목내역.4행.비고",
+      "anchor_id": "manual_1783510939392",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "total_amount": {
+      "semantic_path": "결제.합계금액",
+      "anchor_id": "det_000064",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "cash_amount": {
+      "semantic_path": "결제.현금",
+      "anchor_id": "manual_1783511062690",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "check_amount": {
+      "semantic_path": "결제.수표",
+      "anchor_id": "manual_1783511065606",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "promissory_note_amount": {
+      "semantic_path": "결제.어음",
+      "anchor_id": "manual_1783511068557",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    "receivable_amount": {
+      "semantic_path": "결제.외상미수금",
+      "anchor_id": "manual_1783511072790",
+      "evidence_ids": [
+        "R2"
+      ]
+    }
+  }
+}

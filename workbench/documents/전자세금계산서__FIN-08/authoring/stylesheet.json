@@ -1,0 +1,617 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서",
+  "image": {
+    "width": 1103,
+    "height": 736
+  },
+  "style_classes": [
+    {
+      "style_class": "body_default",
+      "font_family": "default_korean",
+      "font_path": "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+      "font_size": 28,
+      "fill": [
+        32,
+        32,
+        32
+      ],
+      "opacity": 1.0,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1.0,
+      "letter_spacing": 0.0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.2,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    }
+  ],
+  "field_style_hints": {
+    "approval_number": {
+      "style_class": "header_value",
+      "bbox": [
+        687,
+        14,
+        400,
+        44
+      ]
+    },
+    "supplier_business_registration_number": {
+      "style_class": "body_value",
+      "bbox": [
+        149,
+        62,
+        186,
+        43
+      ]
+    },
+    "supplier_branch_number": {
+      "style_class": "body_value",
+      "bbox": [
+        417,
+        63,
+        131,
+        41
+      ]
+    },
+    "supplier_company_name": {
+      "style_class": "body_value",
+      "bbox": [
+        150,
+        105,
+        184,
+        44
+      ]
+    },
+    "supplier_representative_name": {
+      "style_class": "body_value",
+      "bbox": [
+        416,
+        105,
+        131,
+        42
+      ]
+    },
+    "supplier_business_address": {
+      "style_class": "body_value",
+      "bbox": [
+        149,
+        149,
+        399,
+        44
+      ]
+    },
+    "supplier_business_type": {
+      "style_class": "body_value",
+      "bbox": [
+        149,
+        194,
+        105,
+        39
+      ]
+    },
+    "supplier_business_item": {
+      "style_class": "body_value",
+      "bbox": [
+        337,
+        195,
+        211,
+        37
+      ]
+    },
+    "supplier_email": {
+      "style_class": "body_value",
+      "bbox": [
+        149,
+        234,
+        399,
+        64
+      ]
+    },
+    "recipient_business_registration_number": {
+      "style_class": "body_value",
+      "bbox": [
+        688,
+        62,
+        185,
+        40
+      ]
+    },
+    "recipient_branch_number": {
+      "style_class": "body_value",
+      "bbox": [
+        957,
+        62,
+        131,
+        40
+      ]
+    },
+    "recipient_company_name": {
+      "style_class": "body_value",
+      "bbox": [
+        688,
+        106,
+        185,
+        39
+      ]
+    },
+    "recipient_representative_name": {
+      "style_class": "body_value",
+      "bbox": [
+        957,
+        106,
+        131,
+        39
+      ]
+    },
+    "recipient_business_address": {
+      "style_class": "body_value",
+      "bbox": [
+        688,
+        149,
+        399,
+        41
+      ]
+    },
+    "recipient_business_type": {
+      "style_class": "body_value",
+      "bbox": [
+        689,
+        195,
+        106,
+        37
+      ]
+    },
+    "recipient_business_item": {
+      "style_class": "body_value",
+      "bbox": [
+        875,
+        194,
+        213,
+        36
+      ]
+    },
+    "recipient_email_1": {
+      "style_class": "body_value",
+      "bbox": [
+        688,
+        233,
+        399,
+        32
+      ]
+    },
+    "recipient_email_2": {
+      "style_class": "body_value",
+      "bbox": [
+        689,
+        268,
+        400,
+        30
+      ]
+    },
+    "issue_date": {
+      "style_class": "date_value",
+      "bbox": [
+        15,
+        336,
+        132,
+        40
+      ]
+    },
+    "summary_supply_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        151,
+        336,
+        198,
+        41
+      ]
+    },
+    "summary_tax_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        351,
+        336,
+        199,
+        41
+      ]
+    },
+    "amendment_reason": {
+      "style_class": "body_value",
+      "bbox": [
+        551,
+        335,
+        136,
+        41
+      ]
+    },
+    "summary_note": {
+      "style_class": "body_value",
+      "bbox": [
+        689,
+        335,
+        399,
+        40
+      ]
+    },
+    "line1_month": {
+      "style_class": "table_value",
+      "bbox": [
+        15,
+        413,
+        36,
+        42
+      ]
+    },
+    "line1_day": {
+      "style_class": "table_value",
+      "bbox": [
+        53,
+        413,
+        38,
+        42
+      ]
+    },
+    "line1_item_name": {
+      "style_class": "table_value",
+      "bbox": [
+        93,
+        413,
+        270,
+        42
+      ]
+    },
+    "line1_specification": {
+      "style_class": "table_value",
+      "bbox": [
+        365,
+        413,
+        91,
+        40
+      ]
+    },
+    "line1_quantity": {
+      "style_class": "table_value",
+      "bbox": [
+        461,
+        412,
+        89,
+        41
+      ]
+    },
+    "line1_unit_price": {
+      "style_class": "money_value",
+      "bbox": [
+        553,
+        412,
+        132,
+        43
+      ]
+    },
+    "line1_supply_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        688,
+        411,
+        159,
+        43
+      ]
+    },
+    "line1_tax_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        849,
+        412,
+        132,
+        42
+      ]
+    },
+    "line1_remark": {
+      "style_class": "table_value",
+      "bbox": [
+        984,
+        413,
+        103,
+        41
+      ]
+    },
+    "line2_month": {
+      "style_class": "table_value",
+      "bbox": [
+        14,
+        455,
+        38,
+        42
+      ]
+    },
+    "line2_day": {
+      "style_class": "table_value",
+      "bbox": [
+        54,
+        456,
+        40,
+        40
+      ]
+    },
+    "line2_item_name": {
+      "style_class": "table_value",
+      "bbox": [
+        96,
+        456,
+        267,
+        40
+      ]
+    },
+    "line2_specification": {
+      "style_class": "table_value",
+      "bbox": [
+        363,
+        455,
+        93,
+        42
+      ]
+    },
+    "line2_quantity": {
+      "style_class": "table_value",
+      "bbox": [
+        458,
+        453,
+        94,
+        45
+      ]
+    },
+    "line2_unit_price": {
+      "style_class": "money_value",
+      "bbox": [
+        553,
+        456,
+        135,
+        42
+      ]
+    },
+    "line2_supply_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        687,
+        456,
+        161,
+        41
+      ]
+    },
+    "line2_tax_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        850,
+        456,
+        132,
+        40
+      ]
+    },
+    "line2_remark": {
+      "style_class": "table_value",
+      "bbox": [
+        983,
+        456,
+        106,
+        40
+      ]
+    },
+    "line3_month": {
+      "style_class": "table_value",
+      "bbox": [
+        13,
+        498,
+        38,
+        41
+      ]
+    },
+    "line3_day": {
+      "style_class": "table_value",
+      "bbox": [
+        54,
+        498,
+        38,
+        40
+      ]
+    },
+    "line3_item_name": {
+      "style_class": "table_value",
+      "bbox": [
+        92,
+        498,
+        271,
+        41
+      ]
+    },
+    "line3_specification": {
+      "style_class": "table_value",
+      "bbox": [
+        363,
+        498,
+        94,
+        42
+      ]
+    },
+    "line3_quantity": {
+      "style_class": "table_value",
+      "bbox": [
+        458,
+        499,
+        96,
+        42
+      ]
+    },
+    "line3_unit_price": {
+      "style_class": "money_value",
+      "bbox": [
+        553,
+        498,
+        132,
+        42
+      ]
+    },
+    "line3_supply_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        686,
+        498,
+        162,
+        41
+      ]
+    },
+    "line3_tax_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        850,
+        498,
+        131,
+        41
+      ]
+    },
+    "line3_remark": {
+      "style_class": "table_value",
+      "bbox": [
+        984,
+        499,
+        103,
+        38
+      ]
+    },
+    "line4_month": {
+      "style_class": "table_value",
+      "bbox": [
+        14,
+        541,
+        37,
+        38
+      ]
+    },
+    "line4_day": {
+      "style_class": "table_value",
+      "bbox": [
+        55,
+        540,
+        37,
+        40
+      ]
+    },
+    "line4_item_name": {
+      "style_class": "table_value",
+      "bbox": [
+        93,
+        541,
+        271,
+        40
+      ]
+    },
+    "line4_specification": {
+      "style_class": "table_value",
+      "bbox": [
+        362,
+        540,
+        96,
+        41
+      ]
+    },
+    "line4_quantity": {
+      "style_class": "table_value",
+      "bbox": [
+        460,
+        541,
+        93,
+        41
+      ]
+    },
+    "line4_unit_price": {
+      "style_class": "money_value",
+      "bbox": [
+        554,
+        542,
+        131,
+        38
+      ]
+    },
+    "line4_supply_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        686,
+        541,
+        162,
+        41
+      ]
+    },
+    "line4_tax_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        850,
+        541,
+        131,
+        38
+      ]
+    },
+    "line4_remark": {
+      "style_class": "table_value",
+      "bbox": [
+        984,
+        541,
+        104,
+        38
+      ]
+    },
+    "total_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        15,
+        615,
+        182,
+        42
+      ]
+    },
+    "cash_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        200,
+        617,
+        158,
+        41
+      ]
+    },
+    "check_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        363,
+        617,
+        157,
+        39
+      ]
+    },
+    "promissory_note_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        523,
+        617,
+        160,
+        38
+      ]
+    },
+    "receivable_amount": {
+      "style_class": "money_value",
+      "bbox": [
+        688,
+        617,
+        159,
+        41
+      ]
+    }
+  },
+  "notes": [
+    "Conservative defaults based on full template image; exact font metrics may need renderer-side QA."
+  ],
+  "updated_at": "2026-07-08T11:58:59.399492+00:00"
+}

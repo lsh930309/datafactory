@@ -455,7 +455,7 @@ def _aligned_x(bbox: BBox, text_width: int, align: str) -> int:
     if align == "right":
         return bbox.right - text_width
     if align == "center":
-        return bbox.x + max(0, (bbox.width - text_width) // 2)
+        return int(round((bbox.x + bbox.width / 2) - (text_width / 2)))
     return bbox.x
 
 

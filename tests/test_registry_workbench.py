@@ -683,6 +683,32 @@ def test_render_template_wraps_and_allows_overflow(tmp_path: Path) -> None:
     assert allowed.bbox.width > allowed.requested_bbox.width
 
 
+def test_render_template_center_align_keeps_overflow_text_on_bbox_center(tmp_path: Path) -> None:
+    image_path = tmp_path / "template_center_overflow.png"
+    Image.new("RGB", (500, 140), "white").save(image_path)
+    template = TemplateSpec(
+        template_id="center-overflow-test",
+        image_path=image_path,
+        fields=[
+            FieldSpec(
+                name="value",
+                bbox=BBox(220, 50, 40, 32),
+                font_size=24,
+                align="center",
+                overflow="allow",
+                include_gt=True,
+            ),
+        ],
+    )
+
+    _image, annotations = render_template(template, {"value": "LONGTEXT"}, render_scale=1)
+
+    actual = annotations[0].bbox
+    requested = annotations[0].requested_bbox
+    assert actual.width > requested.width
+    assert abs((actual.x + actual.width / 2) - (requested.x + requested.width / 2)) <= 2
+
+
 def test_render_template_applies_baseline_shift(tmp_path: Path) -> None:
     image_path = tmp_path / "template_baseline.png"
     Image.new("RGB", (220, 120), "white").save(image_path)

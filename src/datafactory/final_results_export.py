@@ -33,6 +33,12 @@ class FinalExportOptions:
     clean: bool = True
 
 
+@dataclass(frozen=True)
+class PipelineRenderResult:
+    samples: list[dict[str, Path]]
+    primary_schema: Path
+
+
 def export_final_results(
     *,
     count: int = 1,
@@ -40,17 +46,19 @@ def export_final_results(
     seed: int = 20260703,
     render_scale: int = 2,
     clean: bool = True,
+    scope_entries: Any | None = None,
     registry: RegistryData | None = None,
     root: Path = WORKBENCH_ROOT,
 ) -> dict[str, Any]:
-    """Generate final first-priority deliverables without mutating workbench data."""
+    """Generate final deliverables for a selected scope without mutating workbench data."""
 
     if count <= 0:
         raise ValueError("count must be positive")
     registry = registry or load_registry()
+    resolved_scope_entries = _resolve_scope_entries(scope_entries, registry=registry)
     out_dir = out_dir.resolve()
     run_id = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    backup_dir = _prepare_results_dir(out_dir, run_id=run_id, clean=clean)
+    backup_dir = _prepare_results_dir(out_dir, run_id=run_id, clean=False)
     items_by_doc_id = {str(item["docId"]): item for item in list_work_items(registry=registry, root=root)}
     assessments = _assessment_rows_by_key(registry=registry, root=root)
     source_hashes = _source_hashes(items_by_doc_id)
@@ -58,14 +66,14 @@ def export_final_results(
     rows: list[dict[str, Any]] = []
     generated_documents: list[dict[str, Any]] = []
     errors: list[dict[str, Any]] = []
-    rendered_cache: dict[str, list[dict[str, Any]]] = {}
+    rendered_cache: dict[str, PipelineRenderResult] = {}
     cleanroom_cache: dict[str, Path] = {}
 
-    for scope_index, (domain, doc_id) in enumerate(FIRST_PRIORITY_SCOPE_ENTRIES, start=1):
+    for scope_index, (domain, doc_id) in enumerate(resolved_scope_entries, start=1):
         doc = registry.documents.get(doc_id)
         item = items_by_doc_id.get(doc_id, {})
         title = doc.title if doc else str(item.get("title") or doc_id)
-        doc_dir = out_dir / _safe_component(domain) / f"{_safe_component(doc_id)}_{slugify_title(title)}"
+        doc_dir = out_dir / _safe_component(domain or "scope") / f"{_safe_component(doc_id)}_{slugify_title(title)}"
         assessment = assessments.get(f"{domain}::{doc_id}", {})
         row: dict[str, Any] = {
             "domain": domain,
@@ -86,6 +94,8 @@ def export_final_results(
         try:
             mode = _resolve_output_mode(item)
             row["outputMode"] = mode
+            if clean and doc_dir.exists():
+                backup_dir = _backup_scope_output_dir(doc_dir, backup_dir=backup_dir, run_id=run_id)
             doc_dir.mkdir(parents=True, exist_ok=True)
             if mode == "pipeline":
                 if doc_id not in rendered_cache:
@@ -99,7 +109,7 @@ def export_final_results(
                     )
                 _copy_pipeline_samples(rendered_cache[doc_id], doc_dir)
                 row["sampleCount"] = count
-                row["outputType"] = "jpg+json+bbox"
+                row["outputType"] = "jpg+json+bbox+schema"
             elif mode == "cleanroom":
                 if doc_id not in cleanroom_cache:
                     cleanroom_cache[doc_id] = _resolve_existing_path(item.get("latestCleanroomPdf"))
@@ -152,6 +162,34 @@ def export_final_results(
     }
 
 
+def _resolve_scope_entries(scope_entries: Any | None, *, registry: RegistryData) -> tuple[tuple[str, str], ...]:
+    if scope_entries is None:
+        return tuple(registry.first_priority_scope_entries or FIRST_PRIORITY_SCOPE_ENTRIES)
+    if not isinstance(scope_entries, list):
+        raise ValueError("scope_entries must be a list")
+    resolved: list[tuple[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for raw in scope_entries:
+        if isinstance(raw, str):
+            domain = ""
+            doc_id = raw.strip()
+        elif isinstance(raw, dict):
+            domain = str(raw.get("domain") or "").strip()
+            doc_id = str(raw.get("docId") or raw.get("doc_id") or "").strip()
+        else:
+            continue
+        if not doc_id or doc_id not in registry.documents:
+            continue
+        key = (domain, doc_id)
+        if key in seen:
+            continue
+        seen.add(key)
+        resolved.append(key)
+    if not resolved:
+        raise ValueError("scope_entries must contain at least one valid document")
+    return tuple(resolved)
+
+
 def _prepare_results_dir(out_dir: Path, *, run_id: str, clean: bool) -> Path | None:
     out_dir.parent.mkdir(parents=True, exist_ok=True)
     if not clean or not out_dir.exists():
@@ -164,6 +202,29 @@ def _prepare_results_dir(out_dir: Path, *, run_id: str, clean: bool) -> Path | N
         shutil.rmtree(target)
     shutil.move(str(out_dir), str(target))
     out_dir.mkdir(parents=True, exist_ok=True)
+    return backup_dir
+
+
+def _ensure_export_backup_dir(run_id: str) -> Path:
+    backup_dir = BACKUP_ROOT / f"final_results_export_run_{run_id}"
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    return backup_dir
+
+
+def _backup_scope_output_dir(doc_dir: Path, *, backup_dir: Path | None, run_id: str) -> Path:
+    backup_dir = backup_dir or _ensure_export_backup_dir(run_id)
+    try:
+        relative = doc_dir.relative_to(ROOT)
+    except ValueError:
+        relative = Path(_safe_component(doc_dir.name))
+    target = backup_dir / relative
+    if target.exists():
+        suffix = 2
+        while target.with_name(f"{target.name}_{suffix}").exists():
+            suffix += 1
+        target = target.with_name(f"{target.name}_{suffix}")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(doc_dir), str(target))
     return backup_dir
 
 
@@ -188,7 +249,7 @@ def _render_pipeline_document(
     seed: int,
     render_scale: int,
     work_dir: Path,
-) -> list[dict[str, Any]]:
+) -> PipelineRenderResult:
     doc_id = str(item["docId"])
     schema_path = _resolve_existing_path(item["latestAuthoringSchema"])
     stylesheet_path = _resolve_existing_path(item["latestAuthoringStylesheet"])
@@ -208,6 +269,10 @@ def _render_pipeline_document(
     fields = [field for field in schema.get("fields", []) if isinstance(field, dict)]
     semantic_schema = _load_semantic_schema(schema_path, title=title)
     field_paths = _field_semantic_paths(fields)
+    primary_schema_path = work_dir / "schema.json"
+    primary_schema_path.parent.mkdir(parents=True, exist_ok=True)
+    primary_schema = _primary_schema_payload(semantic_schema, field_paths)
+    primary_schema_path.write_text(json.dumps(primary_schema, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     samples: list[dict[str, Any]] = []
     for index, sample in enumerate(batch.samples):
         final_sample_id = f"sample_{index:03d}"
@@ -223,11 +288,12 @@ def _render_pipeline_document(
         normalized_bbox = _semantic_bbox_payload(semantic_schema, field_paths, bbox)
         bbox_path.write_text(json.dumps(normalized_bbox, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         samples.append({"image": image_path, "gt": gt_path, "bbox": bbox_path})
-    return samples
+    return PipelineRenderResult(samples=samples, primary_schema=primary_schema_path)
 
 
-def _copy_pipeline_samples(samples: list[dict[str, Path]], out_dir: Path) -> None:
-    for sample in samples:
+def _copy_pipeline_samples(result: PipelineRenderResult, out_dir: Path) -> None:
+    shutil.copy2(result.primary_schema, out_dir / "schema.json")
+    for sample in result.samples:
         for path in sample.values():
             shutil.copy2(path, out_dir / path.name)
 
@@ -317,6 +383,13 @@ def _semantic_values_payload(semantic_schema: dict[str, Any], field_paths: dict[
         if field_id not in values:
             continue
         _set_semantic_value(payload, path, str(values.get(field_id, "")))
+    return payload
+
+
+def _primary_schema_payload(semantic_schema: dict[str, Any], field_paths: dict[str, str]) -> dict[str, Any]:
+    payload = _schema_value_template(semantic_schema)
+    for path in field_paths.values():
+        _set_semantic_value(payload, path, "")
     return payload
 
 
@@ -776,7 +849,7 @@ def _summary(rows: list[dict[str, Any]], errors: list[dict[str, Any]]) -> dict[s
         "errorCount": len(errors),
         "pipelineScopeCount": len([row for row in ok_rows if row.get("outputMode") == "pipeline"]),
         "cleanroomScopeCount": len([row for row in ok_rows if row.get("outputMode") == "cleanroom"]),
-        "generatedFileCount": sum(3 * int(row["sampleCount"]) if row.get("outputMode") == "pipeline" else int(row["sampleCount"]) for row in ok_rows),
+        "generatedFileCount": sum((3 * int(row["sampleCount"]) + 1) if row.get("outputMode") == "pipeline" else int(row["sampleCount"]) for row in ok_rows),
         "generatedAt": _now(),
     }
 

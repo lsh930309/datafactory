@@ -13,7 +13,8 @@ from .models import BBox, FieldSpec, RenderedAnnotation, TemplateSpec
 
 DEFAULT_RENDER_SCALE = 2
 RENDERED_INK_BLUR_RADIUS = 0.35
-RENDERED_INK_OPACITY = 0.92
+RENDERED_INK_EDGE_OPACITY = 0.92
+RENDERED_INK_CORE_OPACITY = 0.98
 
 
 def render_template(template: TemplateSpec, values: dict[str, str], *, render_scale: int = DEFAULT_RENDER_SCALE) -> tuple[Image.Image, list[RenderedAnnotation]]:
@@ -97,10 +98,21 @@ def _darkened_delta_mask(scaled_base: Image.Image, rendered: Image.Image, change
 def _soften_rendered_ink(layer: Image.Image) -> Image.Image:
     if layer.getbbox() is None:
         return layer
+    original_alpha = layer.getchannel("A")
+
     softened = layer.filter(ImageFilter.GaussianBlur(RENDERED_INK_BLUR_RADIUS))
-    alpha = softened.getchannel("A").point(lambda value: int(round(value * RENDERED_INK_OPACITY)))
-    softened.putalpha(alpha)
-    return softened
+    edge_alpha = softened.getchannel("A").point(lambda value: int(round(value * RENDERED_INK_EDGE_OPACITY)))
+    softened.putalpha(edge_alpha)
+
+    # Blurring makes the rendered text blend better with scanned templates, but
+    # it also spreads alpha away from glyph centers and makes the strokes look
+    # under-inked.  Overlay most of the original glyph core back on top while
+    # keeping the blurred, lower-opacity edge.  This preserves density without
+    # reverting to overly crisp text.
+    core = layer.copy()
+    core_alpha = original_alpha.point(lambda value: int(round(value * RENDERED_INK_CORE_OPACITY)))
+    core.putalpha(core_alpha)
+    return Image.alpha_composite(softened, core)
 
 
 def _render_template_on_image(image: Image.Image, template: TemplateSpec, values: dict[str, str]) -> tuple[Image.Image, list[RenderedAnnotation]]:

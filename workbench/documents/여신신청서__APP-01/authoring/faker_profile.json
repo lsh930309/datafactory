@@ -19,7 +19,7 @@
     "application_date_year": "date.year",
     "application_date_month": "date.month",
     "application_date_day": "date.day",
-    "approval_document_number": "pattern:####",
+    "approval_document_number": "pattern:###",
     "audit_confirmation": "person.name_ko",
     "company_name": "company.name_ko",
     "representative_name": "person.name_ko",
@@ -29,7 +29,7 @@
     "fund_purpose": "pool:fund_purposes",
     "limit_type": "choice:건별|한도|기한연장",
     "loan_maturity": "date.kr",
-    "approval_conditions": "free_text.short",
+    "approval_conditions": "pool:loan_approval_conditions",
     "company_address": "address.ko",
     "company_established_date": "date.kr",
     "main_product": "pool:main_products",
@@ -39,23 +39,23 @@
     "credit_review_score_base_month": "date.month",
     "credit_review_score_base_day": "date.day",
     "employee_count": "pattern:###",
-    "total_assets": "money.krw",
-    "equity_capital": "money.krw",
-    "paid_in_capital": "money.krw",
-    "sales_amount": "money.krw",
-    "net_income": "money.krw",
+    "total_assets": "pool:company_balance_amounts_million_krw",
+    "equity_capital": "pool:company_balance_amounts_million_krw",
+    "paid_in_capital": "pool:company_capital_amounts_million_krw",
+    "sales_amount": "pool:company_sales_amounts_million_krw",
+    "net_income": "pool:company_profit_amounts_million_krw",
     "financial_statement_base_year": "date.year",
     "financial_statement_base_month": "date.month",
     "collateral_type": "pool:collateral_types",
-    "collateral_survey_price": "money.krw",
-    "collateral_assessed_price": "money.krw",
+    "collateral_survey_price": "pool:collateral_amounts_million_krw",
+    "collateral_assessed_price": "pool:collateral_amounts_million_krw",
     "collateral_provider": "person.name_ko",
     "preservation_method": "pool:preservation_methods",
     "guarantor_name": "person.name_ko",
     "guarantor_age": "pattern:##",
     "guarantor_occupation": "pool:occupations",
     "guarantor_relationship_to_borrower": "pool:borrower_relationships",
-    "guarantor_note": "free_text.short"
+    "guarantor_note": "pool:guarantor_notes"
   },
   "data_pools": {
     "approval_role_titles": [
@@ -103,6 +103,98 @@
       "주주",
       "배우자",
       "관계회사 임원"
+    ],
+    "loan_approval_conditions": [
+      "신용보증서 발급 후 실행",
+      "담보권 설정 완료 후 실행",
+      "약정서류 징구 후 실행",
+      "기존 여신 상환 조건",
+      "자금용도 확인자료 징구",
+      "대표자 연대보증 입보",
+      "보험가입 확인 후 실행",
+      "한도약정 체결 후 실행"
+    ],
+    "company_financial_amounts_million_krw": [
+      "850",
+      "1,250",
+      "2,480",
+      "3,750",
+      "5,200",
+      "7,860",
+      "12,400",
+      "18,900",
+      "25,300",
+      "41,700"
+    ],
+    "guarantor_notes": [
+      "대표자 입보",
+      "입보예정",
+      "보증한도 내",
+      "관계회사",
+      "실소유자",
+      "신보보증",
+      "면제 검토",
+      "서류확인"
+    ],
+    "company_balance_amounts_million_krw": [
+      "850",
+      "1,250",
+      "2,480",
+      "3,750",
+      "5,200",
+      "7,860",
+      "12,400",
+      "18,900",
+      "25,300",
+      "41,700"
+    ],
+    "company_capital_amounts_million_krw": [
+      "100",
+      "300",
+      "500",
+      "800",
+      "1,000",
+      "1,500",
+      "2,000",
+      "3,000",
+      "5,000",
+      "8,000"
+    ],
+    "company_sales_amounts_million_krw": [
+      "1,800",
+      "3,200",
+      "5,600",
+      "8,900",
+      "12,500",
+      "18,700",
+      "24,300",
+      "36,800",
+      "52,400",
+      "79,000"
+    ],
+    "company_profit_amounts_million_krw": [
+      "35",
+      "80",
+      "120",
+      "260",
+      "450",
+      "720",
+      "1,150",
+      "1,900",
+      "-45",
+      "-120"
+    ],
+    "collateral_amounts_million_krw": [
+      "300",
+      "500",
+      "750",
+      "1,000",
+      "1,500",
+      "2,200",
+      "3,000",
+      "4,800",
+      "7,500",
+      "12,000"
     ]
   },
   "field_rules": [
@@ -393,13 +485,13 @@
       "field_id": "approval_conditions",
       "semantic_path": "신청개요.승인조건",
       "anchor_id": "visual_0027",
-      "generator": "free_text.short",
+      "generator": "pool:loan_approval_conditions",
       "unit_policy": "none",
       "research_evidence_ids": [
         "R1",
         "R2"
       ],
-      "notes": "지원 grammar만 사용. 실제 개인정보/실기업/실계좌 값은 생성하지 않는다."
+      "notes": "승인조건은 실제 여신 승인서류에서 흔한 실행 전제/서류 징구/담보 설정 조건형 문구 pool로 생성한다."
     },
     {
       "field_id": "company_address",
@@ -505,56 +597,56 @@
       "field_id": "total_assets",
       "semantic_path": "업체개요.총자산",
       "anchor_id": "visual_0049",
-      "generator": "money.krw",
-      "unit_policy": "static_table_unit_omitted:백만원",
+      "generator": "pool:company_balance_amounts_million_krw",
+      "unit_policy": "template_printed_million_krw",
       "research_evidence_ids": [
         "R4"
       ],
-      "notes": "지원 grammar만 사용. 실제 개인정보/실기업/실계좌 값은 생성하지 않는다."
+      "notes": "업체개요 재무상황 표에는 단위(백만원)가 인쇄되어 있으므로 단위 없는 백만원 숫자만 렌더링한다."
     },
     {
       "field_id": "equity_capital",
       "semantic_path": "업체개요.자기자본",
       "anchor_id": "visual_0050",
-      "generator": "money.krw",
-      "unit_policy": "static_table_unit_omitted:백만원",
+      "generator": "pool:company_balance_amounts_million_krw",
+      "unit_policy": "template_printed_million_krw",
       "research_evidence_ids": [
         "R4"
       ],
-      "notes": "지원 grammar만 사용. 실제 개인정보/실기업/실계좌 값은 생성하지 않는다."
+      "notes": "업체개요 재무상황 표에는 단위(백만원)가 인쇄되어 있으므로 단위 없는 백만원 숫자만 렌더링한다."
     },
     {
       "field_id": "paid_in_capital",
       "semantic_path": "업체개요.납입자본",
       "anchor_id": "visual_0051",
-      "generator": "money.krw",
-      "unit_policy": "static_table_unit_omitted:백만원",
+      "generator": "pool:company_capital_amounts_million_krw",
+      "unit_policy": "template_printed_million_krw",
       "research_evidence_ids": [
         "R4"
       ],
-      "notes": "지원 grammar만 사용. 실제 개인정보/실기업/실계좌 값은 생성하지 않는다."
+      "notes": "업체개요 재무상황 표에는 단위(백만원)가 인쇄되어 있으므로 단위 없는 백만원 숫자만 렌더링한다."
     },
     {
       "field_id": "sales_amount",
       "semantic_path": "업체개요.매출액",
       "anchor_id": "visual_0053",
-      "generator": "money.krw",
-      "unit_policy": "static_table_unit_omitted:백만원",
+      "generator": "pool:company_sales_amounts_million_krw",
+      "unit_policy": "template_printed_million_krw",
       "research_evidence_ids": [
         "R4"
       ],
-      "notes": "지원 grammar만 사용. 실제 개인정보/실기업/실계좌 값은 생성하지 않는다."
+      "notes": "업체개요 재무상황 표에는 단위(백만원)가 인쇄되어 있으므로 단위 없는 백만원 숫자만 렌더링한다."
     },
     {
       "field_id": "net_income",
       "semantic_path": "업체개요.당기순이익",
       "anchor_id": "visual_0055",
-      "generator": "money.krw",
-      "unit_policy": "static_table_unit_omitted:백만원",
+      "generator": "pool:company_profit_amounts_million_krw",
+      "unit_policy": "template_printed_million_krw",
       "research_evidence_ids": [
         "R4"
       ],
-      "notes": "지원 grammar만 사용. 실제 개인정보/실기업/실계좌 값은 생성하지 않는다. 당기순이익 anchor가 별도 분리되지 않고 visual_0055가 우측 금액 영역을 넓게 포함함. 적용 전 bbox 분할 검토 필요."
+      "notes": "업체개요 재무상황 표에는 단위(백만원)가 인쇄되어 있으므로 단위 없는 백만원 숫자만 렌더링한다."
     },
     {
       "field_id": "financial_statement_base_year",
@@ -594,25 +686,25 @@
       "field_id": "collateral_survey_price",
       "semantic_path": "채권보전.담보.가격조사가격",
       "anchor_id": "visual_0062",
-      "generator": "money.krw",
-      "unit_policy": "static_table_unit_omitted:백만원",
+      "generator": "pool:collateral_amounts_million_krw",
+      "unit_policy": "template_printed_million_krw",
       "research_evidence_ids": [
         "R1",
         "R5"
       ],
-      "notes": "지원 grammar만 사용. 실제 개인정보/실기업/실계좌 값은 생성하지 않는다."
+      "notes": "채권보전 담보 표에는 단위(백만원)가 인쇄되어 있으므로 단위 없는 백만원 숫자만 렌더링한다."
     },
     {
       "field_id": "collateral_assessed_price",
       "semantic_path": "채권보전.담보.담보사정가격",
       "anchor_id": "visual_0063",
-      "generator": "money.krw",
-      "unit_policy": "static_table_unit_omitted:백만원",
+      "generator": "pool:collateral_amounts_million_krw",
+      "unit_policy": "template_printed_million_krw",
       "research_evidence_ids": [
         "R1",
         "R5"
       ],
-      "notes": "지원 grammar만 사용. 실제 개인정보/실기업/실계좌 값은 생성하지 않는다."
+      "notes": "채권보전 담보 표에는 단위(백만원)가 인쇄되어 있으므로 단위 없는 백만원 숫자만 렌더링한다."
     },
     {
       "field_id": "collateral_provider",
@@ -690,19 +782,19 @@
       "field_id": "guarantor_note",
       "semantic_path": "채권보전.보증인.비고",
       "anchor_id": "visual_0074",
-      "generator": "free_text.short",
+      "generator": "pool:guarantor_notes",
       "unit_policy": "none",
       "research_evidence_ids": [
         "R1",
         "R5"
       ],
-      "notes": "지원 grammar만 사용. 실제 개인정보/실기업/실계좌 값은 생성하지 않는다."
+      "notes": "비고는 보증인/채권보전 상태를 짧게 표기한다. fallback처럼 보이는 일반 문구 대신 입보/보증/서류확인 상태를 사용한다."
     }
   ],
   "limitations": [
     "금리/평점/금액의 정확한 은행 내부 범위는 템플릿만으로 확정할 수 없어 지원 grammar의 pattern/money.krw로 근사했다.",
     "상단 서명은 실제 필기 서명 시뮬레이션 전 단계로 한국인 이름 생성만 연결했다."
   ],
-  "updated_at": "2026-07-08T02:51:15.653516+00:00",
+  "updated_at": "2026-07-08T06:41:39.969863+00:00",
   "constraints": []
 }

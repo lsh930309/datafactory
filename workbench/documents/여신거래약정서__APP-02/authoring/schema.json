@@ -57,9 +57,9 @@
       "source_text": "20**",
       "value_type": "date.year",
       "generator": "date.year",
-      "style_class": "inline_date_year",
+      "style_class": "style_agreement_date_year",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
@@ -70,7 +70,8 @@
         "csv_column": "약정일 연"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "agreement_date_month",
@@ -83,9 +84,9 @@
       "source_text": "*",
       "value_type": "date.month",
       "generator": "date.month",
-      "style_class": "inline_date_month",
+      "style_class": "style_agreement_date_month",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
@@ -96,7 +97,8 @@
         "csv_column": "약정일 월"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "agreement_date_day",
@@ -109,9 +111,9 @@
       "source_text": "*",
       "value_type": "date.day",
       "generator": "date.day",
-      "style_class": "inline_date_day",
+      "style_class": "style_agreement_date_day",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
@@ -122,7 +124,8 @@
         "csv_column": "약정일 일"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "credit_subject",
@@ -135,12 +138,12 @@
       "source_text": "여신 과목",
       "value_type": "free_text.short",
       "generator": "pool:credit_products",
-      "style_class": "inline_text",
+      "style_class": "style_credit_subject",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -148,7 +151,8 @@
         "csv_column": "여신 과목"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "credit_limit_amount",
@@ -161,12 +165,12 @@
       "source_text": "일금*****원정(￦*****)",
       "value_type": "free_text.short",
       "generator": "pool:credit_limit_texts",
-      "style_class": "inline_money",
+      "style_class": "style_credit_limit_amount",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -174,7 +178,8 @@
         "csv_column": "여신한도액"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "borrower_name",
@@ -187,9 +192,9 @@
       "source_text": "∗∗∗∗",
       "value_type": "person.name_ko",
       "generator": "person.name_ko",
-      "style_class": "inline_name",
+      "style_class": "style_borrower_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
@@ -200,7 +205,8 @@
         "csv_column": "여신자명"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "borrower_address",
@@ -213,7 +219,7 @@
       "source_text": "서울특별시 강남구 삼성동000",
       "value_type": "address.ko",
       "generator": "address.ko",
-      "style_class": "inline_address",
+      "style_class": "style_borrower_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
@@ -226,7 +232,8 @@
         "csv_column": "주소"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "financial_institution_name",
@@ -239,12 +246,12 @@
       "source_text": "금융기관 ****(이하 “갑\"이라 칭한다)와 상기 여신자(이하 “을”이라 칭한다)는 다음과 같이 여신거래 약정을 체결한다.",
       "value_type": "free_text.short",
       "generator": "template:금융기관 {{pool:financial_institutions}}(이하 “갑\"이라 칭한다)와 상기 여신자(이하 “을”이라 칭한다)는 다음과 같이 여신거래 약정을 체결한다.",
-      "style_class": "paragraph_clause",
+      "style_class": "style_financial_institution_name",
       "render_policy": {
         "align": "left",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "valign": "top",
+        "fit": "wrap",
+        "overflow": "wrap",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -252,7 +259,8 @@
         "csv_column": "금융기관명"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "term_end_year",
@@ -265,12 +273,12 @@
       "source_text": "20**",
       "value_type": "date.year",
       "generator": "date.year",
-      "style_class": "inline_date_year",
+      "style_class": "style_term_end_year",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -278,7 +286,8 @@
         "csv_column": "여신기간 만료일 연"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "term_end_month",
@@ -291,12 +300,12 @@
       "source_text": "∗",
       "value_type": "date.month",
       "generator": "date.month",
-      "style_class": "inline_date_month",
+      "style_class": "style_term_end_month",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -304,7 +313,8 @@
         "csv_column": "여신기간 만료일 월"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "term_end_day",
@@ -317,12 +327,12 @@
       "source_text": "*",
       "value_type": "date.day",
       "generator": "date.day",
-      "style_class": "inline_date_day",
+      "style_class": "style_term_end_day",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -330,7 +340,8 @@
         "csv_column": "여신기간 만료일 일"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "interest_rate",
@@ -343,12 +354,12 @@
       "source_text": "연** %",
       "value_type": "free_text.short",
       "generator": "pool:annual_rates",
-      "style_class": "inline_rate",
+      "style_class": "style_interest_rate",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -356,7 +367,8 @@
         "csv_column": "이율"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "overdue_interest_rate",
@@ -369,12 +381,12 @@
       "source_text": "연 **%",
       "value_type": "free_text.short",
       "generator": "pool:annual_rates",
-      "style_class": "inline_rate",
+      "style_class": "style_overdue_interest_rate",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -382,7 +394,8 @@
         "csv_column": "연체배상금률"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     },
     {
       "field_id": "interest_payment_day",
@@ -395,12 +408,12 @@
       "source_text": "*",
       "value_type": "date.day",
       "generator": "date.day",
-      "style_class": "inline_date_day",
+      "style_class": "style_interest_payment_day",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -408,9 +421,10 @@
         "csv_column": "이자 지급일"
       },
       "required": true,
-      "notes": ""
+      "notes": "",
+      "bbox_status": "use"
     }
   ],
   "groups": [],
-  "updated_at": "2026-07-08T04:28:31.317495+00:00"
+  "updated_at": "2026-07-08T06:02:50.130049+00:00"
 }

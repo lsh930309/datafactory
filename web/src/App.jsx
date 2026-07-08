@@ -543,12 +543,42 @@ function App() {
   const targetGroupItems = useMemo(() => (
     targetGroupAllItems.filter((item) => matchesSampleAvailabilityFilter(item, sampleAvailabilityFilters))
   ), [targetGroupAllItems, sampleAvailabilityFilters]);
-  const targetGroupAuthoringReadyItems = useMemo(() => (
-    targetGroupItems.filter((item) => item.latestAuthoringSchema && item.latestAuthoringStylesheet && item.latestAuthoringFakerProfile)
+  const targetGroupFinalExportReadyItems = useMemo(() => (
+    targetGroupItems.filter((item) => (
+      (item.latestAuthoringSchema && item.latestAuthoringStylesheet && item.latestAuthoringFakerProfile)
+      || item.latestCleanroomPdf
+    ))
   ), [targetGroupItems]);
-  const targetGroupAuthoringMissingItems = useMemo(() => (
-    targetGroupItems.filter((item) => !(item.latestAuthoringSchema && item.latestAuthoringStylesheet && item.latestAuthoringFakerProfile))
+  const targetGroupFinalExportMissingItems = useMemo(() => (
+    targetGroupItems.filter((item) => !(
+      (item.latestAuthoringSchema && item.latestAuthoringStylesheet && item.latestAuthoringFakerProfile)
+      || item.latestCleanroomPdf
+    ))
   ), [targetGroupItems]);
+  const targetGroupFinalExportScopeEntries = useMemo(() => {
+    const displayedDocIds = new Set(targetGroupItems.map((item) => item.docId));
+    const seen = new Set();
+    const entries = [];
+    for (const entry of activeTargetGroup.scopeEntries || []) {
+      const docId = entry?.docId || entry?.doc_id || '';
+      if (!displayedDocIds.has(docId)) continue;
+      const domain = entry?.domain || '';
+      const key = `${domain}::${docId}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      entries.push({ domain, docId, title: entry?.title || '' });
+    }
+    if (entries.length) return entries;
+    for (const item of targetGroupItems) {
+      const doc = item.registry || {};
+      const domain = doc.poDomains?.[0] || doc.firstPriorityDomains?.[0] || doc.domains?.[0] || '';
+      const key = `${domain}::${item.docId}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      entries.push({ domain, docId: item.docId, title: item.title });
+    }
+    return entries;
+  }, [activeTargetGroup, targetGroupItems]);
   const visibleTargetGroupItems = targetGroupListExpanded ? targetGroupItems : targetGroupItems.slice(0, 3);
   const selectedManualCleanupItems = useMemo(() => (
     (manualCleanupAudit?.items || []).filter((item) => item.docId === selectedDocId)
@@ -1090,10 +1120,15 @@ function App() {
 
   async function exportFinalResults() {
     const count = Math.max(1, Math.min(100, Number(finalExportCount) || 1));
+    const scopeEntries = targetGroupFinalExportScopeEntries;
+    if (!scopeEntries.length) {
+      setMessage('현재 선택한 목표 그룹에 최종 산출물로 생성할 문서가 없습니다.');
+      return;
+    }
     setFinalExportCount(count);
     setBusy('finalResultsExport');
     setError('');
-    setMessage(`최종 산출물 생성 중입니다. 작업 가능 문서는 각 ${count}장씩 렌더링합니다.`);
+    setMessage(`${activeTargetGroup.label} ${targetGroupItems.length}종(${scopeEntries.length} scope)을 각 ${count}장씩 outputs/results에 최종 산출물로 생성 중입니다.`);
     try {
       const payload = await apiJson('/api/results/final-export', {
         method: 'POST',
@@ -1103,10 +1138,11 @@ function App() {
           seed: 20260703,
           renderScale: 2,
           clean: true,
+          scopeEntries,
         }),
       });
       setFinalExportResult(payload);
-      setMessage(`최종 산출물 생성 완료: OK ${payload.summary.okCount}건 · 오류 ${payload.summary.errorCount}건 · ${payload.paths.outDir}`);
+      setMessage(`${activeTargetGroup.label} 최종 산출물 생성 완료: OK ${payload.summary.okCount}건 · 오류 ${payload.summary.errorCount}건 · ${payload.paths.outDir}`);
     } finally {
       setBusy('');
     }
@@ -2575,7 +2611,7 @@ function App() {
               <span className="priority">{activeTargetGroup.label} · 표시 {targetGroupItems.length}종 / 전체 {targetGroupAllItems.length}종 · scope {(activeTargetGroup.scopeEntries || []).length || targetGroupAllItems.length}건</span>
             </div>
             <p className="muted">좌클릭: 문서 선택 · 우클릭: 생성 가능성 판정. 사용자 정의 목표 그룹은 `workbench/target_groups.json`에 저장됩니다.</p>
-            {sampleAvailabilityFilters.length > 0 && <p className="muted mini-help">샘플/합성 필터 적용 중: {sampleAvailabilityFilters.map((id) => SAMPLE_AVAILABILITY_LABELS[id]).join(', ')}. 목표 그룹 목록과 batch 대상에도 동일하게 적용됩니다.</p>}
+            {sampleAvailabilityFilters.length > 0 && <p className="muted mini-help">샘플/합성 필터 적용 중: {sampleAvailabilityFilters.map((id) => SAMPLE_AVAILABILITY_LABELS[id]).join(', ')}. 목표 그룹 목록과 최종 산출물 생성 대상에도 동일하게 적용됩니다.</p>}
             <div className="button-row compact-buttons three-actions">
               <button className="primary" onClick={createTargetGroupDraft} disabled={isBusy}>새 그룹</button>
               <button onClick={() => editTargetGroup(activeTargetGroup)} disabled={!activeTargetGroup.id || isBusy}>{activeTargetGroup.protected ? '복사 편집' : '그룹 수정'}</button>
@@ -2613,27 +2649,14 @@ function App() {
                 </div>
               </div>
             )}
-            <div className="final-export-card group-authoring-card">
-              <div className="final-export-head">
-                <b>목표 그룹 Authoring Batch</b>
-                <span>준비 {targetGroupAuthoringReadyItems.length} · 미준비 {targetGroupAuthoringMissingItems.length}</span>
-              </div>
-              <button
-                className="primary"
-                onClick={() => run(() => renderAuthoringBatch({ all: true, docIds: targetGroupAuthoringReadyItems.map((item) => item.docId), label: activeTargetGroup.label }))}
-                disabled={!targetGroupAuthoringReadyItems.length || isBusy}
-              >
-                {busy === 'authoringBatchGroup' ? '그룹 배치 생성 중...' : `${activeTargetGroup.label} ${targetGroupAuthoringReadyItems.length}종 × 5장`}
-              </button>
-              {targetGroupAuthoringMissingItems.length > 0 && <p className="muted">미준비: {targetGroupAuthoringMissingItems.slice(0, 3).map((item) => item.title).join(', ')}{targetGroupAuthoringMissingItems.length > 3 ? ` 외 ${targetGroupAuthoringMissingItems.length - 3}종` : ''}</p>}
-            </div>
             <div className="final-export-card">
               <div className="final-export-head">
-                <b>최종 산출물 Export</b>
-                <span>{finalExportResult?.summary ? `OK ${finalExportResult.summary.okCount} · 오류 ${finalExportResult.summary.errorCount}` : 'outputs/results'}</span>
+                <b>최종 산출물 생성</b>
+                <span>{finalExportResult?.summary ? `OK ${finalExportResult.summary.okCount} · 오류 ${finalExportResult.summary.errorCount}` : `${activeTargetGroup.label} · ${targetGroupFinalExportScopeEntries.length} scope`}</span>
               </div>
+              <p className="muted mini-help">현재 선택 그룹 기준으로 `outputs/results`에 생성합니다. 출력 가능 {targetGroupFinalExportReadyItems.length}종 · 미준비 {targetGroupFinalExportMissingItems.length}종</p>
               <div className="final-export-controls">
-                <label>작업 가능 문서별 샘플 수
+                <label>문서별 생성 매수
                   <input
                     type="number"
                     min="1"
@@ -2642,10 +2665,11 @@ function App() {
                     onChange={(event) => setFinalExportCount(event.target.value)}
                   />
                 </label>
-                <button className="primary" onClick={() => run(exportFinalResults)} disabled={isBusy}>
+                <button className="primary" onClick={() => run(exportFinalResults)} disabled={!targetGroupFinalExportScopeEntries.length || isBusy}>
                   {busy === 'finalResultsExport' ? '생성 중...' : '최종 산출물 생성'}
                 </button>
               </div>
+              {targetGroupFinalExportMissingItems.length > 0 && <p className="muted">미준비: {targetGroupFinalExportMissingItems.slice(0, 3).map((item) => item.title).join(', ')}{targetGroupFinalExportMissingItems.length > 3 ? ` 외 ${targetGroupFinalExportMissingItems.length - 3}종` : ''}</p>}
               {finalExportResult?.paths?.manifest && (
                 <div className="final-export-links">
                   <a className="result-link compact" href={finalExportResult.urls?.manifest || fileUrl(finalExportResult.paths.manifest)} target="_blank" rel="noreferrer">Manifest XLSX 열기</a>

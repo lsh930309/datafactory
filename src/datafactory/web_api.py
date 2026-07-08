@@ -2115,6 +2115,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     seed=seed,
                     render_scale=render_scale,
                     clean=bool(payload.get("clean", True)),
+                    scope_entries=payload.get("scopeEntries") if "scopeEntries" in payload else None,
                     registry=load_registry(),
                 )
                 manifest_path = _resolve_workspace_path(result["paths"]["manifest"])

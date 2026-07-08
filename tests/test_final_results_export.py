@@ -4,11 +4,52 @@ import json
 import zipfile
 from pathlib import Path
 
+from datafactory import final_results_export as fre
 from datafactory.final_results_export import (
+    _primary_schema_payload,
+    _resolve_scope_entries,
     _semantic_bbox_payload,
     _semantic_values_payload,
+    _summary,
     _write_manifest_xlsx,
 )
+from datafactory.registry import RegistryData, RegistryDocument
+
+
+def test_resolve_scope_entries_defaults_to_registry_first_priority() -> None:
+    registry = RegistryData(
+        documents={"DOC-1": RegistryDocument(doc_id="DOC-1", title="테스트문서")},
+        workflows={},
+        bindings=[],
+        source_path=Path("registry.xlsx"),
+        first_priority_scope_entries=(("금융", "DOC-1"),),
+    )
+
+    assert _resolve_scope_entries(None, registry=registry) == (("금융", "DOC-1"),)
+
+
+def test_resolve_scope_entries_accepts_selected_group_scope_and_deduplicates() -> None:
+    registry = RegistryData(
+        documents={
+            "DOC-1": RegistryDocument(doc_id="DOC-1", title="테스트문서"),
+            "DOC-2": RegistryDocument(doc_id="DOC-2", title="다른문서"),
+        },
+        workflows={},
+        bindings=[],
+        source_path=Path("registry.xlsx"),
+    )
+
+    result = _resolve_scope_entries(
+        [
+            {"domain": "금융", "docId": "DOC-1"},
+            {"domain": "금융", "docId": "DOC-1"},
+            {"domain": "제조", "doc_id": "DOC-2"},
+            {"domain": "금융", "docId": "MISSING"},
+        ],
+        registry=registry,
+    )
+
+    assert result == (("금융", "DOC-1"), ("제조", "DOC-2"))
 
 
 def test_semantic_values_payload_clones_schema_without_metadata() -> None:
@@ -33,6 +74,53 @@ def test_semantic_values_payload_clones_schema_without_metadata() -> None:
         "주주명[0]": "홍길동",
         "주주명[1]": "김철수",
     }
+
+
+def test_primary_schema_payload_matches_export_keys_with_empty_leaves() -> None:
+    semantic_schema = {
+        "회사이름": "",
+        "담보": {"종류": ""},
+    }
+    field_paths = {
+        "account_name": "회사이름",
+        "owner": "대표자명",
+        "collateral_type": "담보.종류",
+    }
+
+    assert _primary_schema_payload(semantic_schema, field_paths) == {
+        "회사이름": "",
+        "담보": {"종류": ""},
+        "대표자명": "",
+    }
+
+
+def test_summary_counts_primary_schema_once_per_pipeline_scope() -> None:
+    rows = [
+        {"docId": "DOC-1", "status": "OK", "outputMode": "pipeline", "sampleCount": 5},
+        {"docId": "DOC-2", "status": "OK", "outputMode": "cleanroom", "sampleCount": 1},
+    ]
+
+    assert _summary(rows, [])["generatedFileCount"] == 17
+
+
+def test_scope_cleanup_backs_up_only_target_doc_dir(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(fre, "ROOT", tmp_path)
+    monkeypatch.setattr(fre, "BACKUP_ROOT", tmp_path / ".bin" / "backups")
+    out_dir = tmp_path / "outputs" / "results"
+    doc_dir = out_dir / "금융" / "DOC-1_테스트문서"
+    other_dir = out_dir / "제조" / "DOC-2_다른문서"
+    doc_dir.mkdir(parents=True)
+    other_dir.mkdir(parents=True)
+    (doc_dir / "sample_999.jpg").write_text("stale", encoding="utf-8")
+    (other_dir / "sample_000.jpg").write_text("keep", encoding="utf-8")
+
+    backup_dir = fre._prepare_results_dir(out_dir, run_id="20260708_000000", clean=False)
+    backup_dir = fre._backup_scope_output_dir(doc_dir, backup_dir=backup_dir, run_id="20260708_000000")
+
+    assert not doc_dir.exists()
+    assert other_dir.exists()
+    assert (other_dir / "sample_000.jpg").read_text(encoding="utf-8") == "keep"
+    assert (backup_dir / "outputs" / "results" / "금융" / "DOC-1_테스트문서" / "sample_999.jpg").read_text(encoding="utf-8") == "stale"
 
 
 def test_semantic_bbox_payload_rounds_to_four_decimals_and_has_only_ltrb() -> None:

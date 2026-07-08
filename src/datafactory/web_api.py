@@ -1212,7 +1212,9 @@ def _blank_template_anchor_is_value_target(anchor: dict[str, Any]) -> bool:
     provenance_text = json.dumps(provenance, ensure_ascii=False).lower() if isinstance(provenance, (dict, list)) else str(provenance or "").lower()
     if status in {"keep", "ignore"} or role in {"static_label", "label", "header", "instruction_text"} or auto_type in {"static_label", "header_footer", "long_paragraph"}:
         return False
-    if status == "use":
+    if status != "use":
+        return False
+    if role in {"value", "value_region", "field_target", "input", "checkbox"}:
         return True
     return any(token in f"{role} {auto_type} {source} {provenance_text}" for token in ("value", "checkbox", "table_cell", "manual", "visual_line_detect", "opencv_grid", "grid"))
 

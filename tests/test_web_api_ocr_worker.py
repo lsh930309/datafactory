@@ -453,3 +453,44 @@ def test_blank_template_agent_validation_rejects_static_label_field_anchor(tmp_p
     assert validation["ready"] is False
     assert validation["summary"]["contractErrors"] >= 1
     assert any(error["code"] == "blank_template_static_label_as_field_anchor" for error in validation["contractErrors"])
+
+
+def test_blank_template_agent_validation_requires_confirmed_use_value_anchor(tmp_path: Path) -> None:
+    request_dir = tmp_path / "request"
+    request_dir.mkdir()
+    (request_dir / "request.json").write_text(
+        json.dumps({"contract": {"sample_kind": "blank_template"}, "inputs": {"sampleKind": "blank_template"}}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    payloads = {
+        "schema_draft.json": {
+            "schema_version": 1,
+            "semantic_schema": {"환자성명": ""},
+            "fields": [{"field_id": "patient_name", "key": "환자성명", "semantic_path": ["환자성명"], "anchor_id": "visual_0001", "value": ""}],
+        },
+        "anchor_map_draft.json": {
+            "schema_version": 1,
+            "anchors": [{"anchor_id": "visual_0001", "status": "keep", "role": "value_region", "auto_type": "table_cell", "text_source": "visual_line_detect"}],
+        },
+        "stylesheet_draft.json": {"schema_version": 1},
+        "faker_profile_draft.json": {"schema_version": 1, "field_generators": {"patient_name": "person.name_ko"}},
+        "value_pool_draft.json": {"schema_version": 1},
+        "research_report.json": {"schema_version": 1, "sources": []},
+        "uncertainty_report.json": {"schema_version": 1},
+    }
+    for name, payload in payloads.items():
+        (request_dir / name).write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    (request_dir / "application_notes.md").write_text("notes", encoding="utf-8")
+
+    validation = web_api._validate_authoring_agent_outputs(request_dir)
+
+    assert validation["ready"] is False
+    assert any(error["code"] == "blank_template_no_value_anchors" for error in validation["contractErrors"])
+    assert any(error["code"] == "blank_template_static_label_as_field_anchor" for error in validation["contractErrors"])
+
+    payloads["anchor_map_draft.json"]["anchors"][0]["status"] = "use"
+    (request_dir / "anchor_map_draft.json").write_text(json.dumps(payloads["anchor_map_draft.json"], ensure_ascii=False), encoding="utf-8")
+
+    validation = web_api._validate_authoring_agent_outputs(request_dir)
+
+    assert validation["ready"] is True

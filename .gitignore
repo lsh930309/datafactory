@@ -31,8 +31,9 @@ workbench/**/inpaint/
 workbench/**/inpaint/**
 workbench/**/cleanup/
 workbench/**/cleanup/**
-workbench/**/authoring/render_preview/
-workbench/**/authoring/render_preview/**
+# Generated authoring previews / preview-like verification runs
+workbench/**/authoring/render_preview*/
+workbench/**/authoring/render_preview*/**
 workbench/**/*.png
 workbench/**/*.jpg
 workbench/**/*.jpeg
@@ -66,6 +67,8 @@ workbench/**/ocr_recrop/**
 workbench/**/authoring/live_preview/**
 # Local authoring backups are preserved on disk but not committed.
 workbench/**/authoring/backups/**
+# Agent request visual sidecars are regenerable and may be large/source-derived.
+workbench/**/authoring/agent_requests/**/visual_evidence/**
 # Agent run execution logs may contain local prompt/runtime context; keep job.json only.
 workbench/**/authoring/agent_runs/**/stdout.log
 workbench/**/authoring/agent_runs/**/stderr.log

@@ -64,6 +64,10 @@ const SAMPLE_AVAILABILITY_FILTERS = [
   ['finalized', '대체/완료'],
 ];
 const SAMPLE_AVAILABILITY_LABELS = Object.fromEntries(SAMPLE_AVAILABILITY_FILTERS);
+const WRITING_METHOD_LABELS = {
+  인쇄: '인쇄',
+  수기: '수기',
+};
 
 const DOCUMENT_TYPE_LABELS = {
   unknown: '미지정',
@@ -338,6 +342,16 @@ function workItemTone(item) {
   if (workItemStageState(item, 'authoring')) return 'authoring-ready';
   return item.status || 'missing';
 }
+function writingMethodLabel(itemOrDoc) {
+  const method = String(itemOrDoc?.registry?.writingMethod || itemOrDoc?.writingMethod || '').trim();
+  return WRITING_METHOD_LABELS[method] || '작성방식 미지정';
+}
+function writingMethodTone(itemOrDoc) {
+  const method = String(itemOrDoc?.registry?.writingMethod || itemOrDoc?.writingMethod || '').trim();
+  if (method === '수기') return 'handwriting';
+  if (method === '인쇄') return 'printed';
+  return 'unknown';
+}
 function cleanroomArtifact(item) {
   const cleanroom = item?.manifest?.artifacts?.cleanroom || {};
   return {
@@ -464,6 +478,8 @@ function App() {
   const [authoringAgentRun, setAuthoringAgentRun] = useState(null);
   const [authoringLibrary, setAuthoringLibrary] = useState(null);
   const [authoringApprovalResult, setAuthoringApprovalResult] = useState(null);
+  const [docxPipelineResult, setDocxPipelineResult] = useState(null);
+  const [docxGenerateCount, setDocxGenerateCount] = useState(1);
   const [busy, setBusy] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -1052,6 +1068,75 @@ function App() {
     }
   }
 
+  async function analyzeDocxTemplate() {
+    if (!selectedDocId) return;
+    setBusy('docxAnalyze');
+    setError('');
+    try {
+      const payload = await apiJson('/api/docx/analyze', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId }),
+      });
+      setDocxPipelineResult(payload);
+      setMessage(`DOCX 구조 분석 완료: table ${payload.summary?.tableCount || 0}개 · anchor ${payload.summary?.anchorCount || 0}개`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function draftDocxAuthoring() {
+    if (!selectedDocId) return;
+    setBusy('docxDraft');
+    setError('');
+    try {
+      const payload = await apiJson('/api/docx/draft-authoring', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId }),
+      });
+      setDocxPipelineResult(payload);
+      setAuthoringBundle({
+        schema: payload.schema,
+        stylesheet: payload.stylesheet,
+        faker_profile: payload.faker_profile || payload.fakerProfile,
+        summary: { field_count: payload.summary?.fieldCount || 0 },
+      });
+      setAuthoringDirty(false);
+      setAuthoringResult(null);
+      setAuthoringVersion((value) => value + 1);
+      setMessage(`DOCX anchor 기반 Authoring 초안 생성: field ${payload.summary?.fieldCount || 0}개`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function generateDocxSamples() {
+    if (!selectedDocId) return;
+    const count = Math.max(1, Math.min(100, Number(docxGenerateCount) || 1));
+    setDocxGenerateCount(count);
+    setBusy('docxGenerate');
+    setError('');
+    try {
+      const payload = await apiJson('/api/docx/generate', {
+        method: 'POST',
+        body: JSON.stringify({
+          docId: selectedDocId,
+          count,
+          seed: 20260708,
+          schemaPath: authoringPaths.schema || selectedItem?.latestAuthoringSchema || '',
+          fakerProfilePath: authoringPaths.faker_profile || selectedItem?.latestAuthoringFakerProfile || '',
+        }),
+      });
+      setDocxPipelineResult(payload);
+      const rendererNote = payload.summary?.rendererAvailable ? '' : ' · LibreOffice 없음: PDF 렌더 대기';
+      setMessage(`DOCX 값 주입 파이프라인 완료: ${payload.summary?.sampleCount || 0}건 · ${payload.summary?.status || 'unknown'}${rendererNote}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
   function assessmentValue(row, field) {
     return assessmentEdits[row.key]?.[field] ?? row[field] ?? '';
   }
@@ -1268,6 +1353,7 @@ function App() {
     setAuthoringLivePreviewVersion(0);
     setAuthoringViewMode('template');
     setAuthoringPreviewStale(false);
+    setDocxPipelineResult(null);
     setCanvasMode('review');
     setBboxEditMode('select');
     setReviewDirty(false);
@@ -2410,6 +2496,7 @@ function App() {
 
   useEffect(() => {
     if (!selectedDocId || !authoringBundle || selectedWorkflowLocked) return undefined;
+    if (authoringBundle?.schema?.generation_path === 'editable-office-template') return undefined;
     const handle = window.setTimeout(() => {
       renderAuthoringLivePreview({ silent: true });
     }, 350);
@@ -2418,8 +2505,9 @@ function App() {
 
   const authoringPaths = resolveAuthoringPaths();
   const authoringAllFields = authoringBundle?.schema?.fields || [];
-  const authoringFields = authoringAllFields.filter(hasRenderableAuthoringBbox);
-  const missingAuthoringFields = authoringAllFields.filter((field) => !hasRenderableAuthoringBbox(field));
+  const isDocxAuthoringBundle = authoringBundle?.schema?.generation_path === 'editable-office-template';
+  const authoringFields = isDocxAuthoringBundle ? authoringAllFields : authoringAllFields.filter(hasRenderableAuthoringBbox);
+  const missingAuthoringFields = isDocxAuthoringBundle ? [] : authoringAllFields.filter((field) => !hasRenderableAuthoringBbox(field));
   const selectedAuthoringFields = selectedAuthoringFieldIds.map((id) => authoringFields.find((field) => field.field_id === id)).filter(Boolean);
   const selectedAuthoringField = authoringFields.find((field) => field.field_id === selectedAuthoringFieldId) || selectedAuthoringFields[0] || authoringFields[0] || null;
   const authoringStyles = authoringBundle?.stylesheet?.style_classes || [];
@@ -2689,6 +2777,7 @@ function App() {
                   <strong>{item.title}</strong>
                   <WorkItemProgress item={item} compact />
                   <span className="priority-doc-meta">
+                    <span className={`writing-method ${writingMethodTone(item)}`}>{writingMethodLabel(item)}</span>
                     {(item.registry?.firstPriorityDomains || []).length > 0 && <span className="priority-domain">{item.registry.firstPriorityDomains.join('·')}</span>}
                     <span className={workItemIsComplete(item) ? 'next-action complete' : 'next-action'}>{workItemNextAction(item)}</span>
                     <span>{item.statusLabel}</span>
@@ -2761,6 +2850,7 @@ function App() {
                 <WorkItemProgress item={item} />
                 <div className="doc-card-meta">
                   {item.registry?.isFirstPriority && <span className="priority">1차</span>}
+                  <span className={`writing-method ${writingMethodTone(item)}`}>{writingMethodLabel(item)}</span>
                   <span className={workItemIsComplete(item) ? 'next-action complete' : 'next-action'}>{workItemNextAction(item)}</span>
                   {item.hasPendingSeed && <span className="seed-ready">seed 발견</span>}
                   {item.needsSynthesis && <span className="need-collect">합성 필요</span>}
@@ -2884,8 +2974,25 @@ function App() {
             {selectedItem?.hasEditableOfficeTemplate && (
               <div className="audit-box office-render-box">
                 <b>편집 가능한 Office 템플릿</b>
-                <span>{selectedItem.officeRender?.backend || 'office-com'} · {selectedItem.officeRender?.status || 'external_render_required'}</span>
-                <small>DOCX 원본 → 채워진 DOCX → PDF/page image → bbox/label/GT lineage는 manifest 기준으로 추적합니다.</small>
+                <span>{selectedItem.officeRender?.backend || 'libreoffice-cli'} · {selectedItem.officeRender?.status || 'external_render_required'}</span>
+                <small>DOCX 경로는 LibreOffice+폰트 정규화 고도화 전까지 실험/보류 기능입니다. 외부 GUI 앱 자동화 렌더러는 사용하지 않습니다.</small>
+                {selectedItem.latestDocxAnalysis && <small>analysis: {selectedItem.latestDocxAnalysis}</small>}
+                {selectedItem.latestDocxRunManifest && <small>latest run: {selectedItem.latestDocxRunManifest}</small>}
+                <div className="button-row compact-buttons">
+                  <button onClick={() => run(analyzeDocxTemplate)} disabled={isBusy}>
+                    {busy === 'docxAnalyze' ? '분석 중...' : 'DOCX 구조 분석'}
+                  </button>
+                  <button onClick={() => run(draftDocxAuthoring)} disabled={isBusy}>
+                    {busy === 'docxDraft' ? '초안 생성 중...' : 'DOCX Schema/Faker 초안'}
+                  </button>
+                </div>
+                <label>DOCX 생성 매수
+                  <input type="number" min="1" max="100" value={docxGenerateCount} onChange={(event) => setDocxGenerateCount(event.target.value)} />
+                </label>
+                <button className="primary" onClick={() => run(generateDocxSamples)} disabled={isBusy}>
+                  {busy === 'docxGenerate' ? 'DOCX 값 주입 중...' : 'DOCX 값 주입/선택적 PDF/GT 생성'}
+                </button>
+                {docxPipelineResult?.summary && <small>최근 결과: {docxPipelineResult.summary.status || 'analysis'} · sample {docxPipelineResult.summary.sampleCount ?? '-'} · warning {docxPipelineResult.summary.warningCount ?? 0}</small>}
               </div>
             )}
             {seedRevertPreview?.docId === selectedDocId && (
@@ -3126,9 +3233,10 @@ function App() {
               </details>
             )}
             <div className="authoring-step-label"><b>2. Render</b><span>live preview와 샘플 생성</span></div>
-            <button onClick={() => run(() => renderAuthoringLivePreview({ silent: false }))} disabled={!authoringBundle || isBusy}>
+            <button onClick={() => run(() => renderAuthoringLivePreview({ silent: false }))} disabled={!authoringBundle || isDocxAuthoringBundle || isBusy}>
               {busy === 'authoringLivePreview' ? 'Live preview 갱신 중...' : 'Live preview 새로고침'}
             </button>
+            {isDocxAuthoringBundle && <p className="muted">DOCX 템플릿은 이미지 텍스트 렌더 preview 대신 DOCX 값 주입 경로를 사용합니다. PDF 렌더는 LibreOffice 기반 실험 기능이며 외부 GUI 앱 자동화 렌더러는 사용하지 않습니다.</p>}
             <div className="button-row single-action-row">
               <button onClick={() => run(() => renderAuthoringBatch({ all: false }))} disabled={!canLoadAuthoring || isBusy}>
                 {busy === 'authoringBatch' ? '5장 생성 중...' : '선택 문서 5장 생성'}
@@ -3138,7 +3246,14 @@ function App() {
             {selectedItem?.hasEditableOfficeTemplate && (
               <div className="batch-result-box compact office-render-box">
                 <div className="batch-result-head"><b>DOCX 템플릿 렌더 lineage</b><span>{selectedItem.officeRender?.status || 'external_render_required'}</span></div>
-                <p className="muted">채워진 DOCX와 PDF 변환 결과가 manifest에 연결되면 bbox/label/GT 근거 파일을 여기서 함께 추적합니다.</p>
+                <p className="muted">DOCX 셀 anchor와 faker value set을 source of truth로 삼아 채워진 DOCX와 GT를 추적합니다. PDF/page image는 LibreOffice 기반 선택 산출물이며 bbox 자동화는 보류합니다.</p>
+                <div className="result-link-row">
+                  {selectedItem.latestDocxAnalysis && <a className="result-link compact" href={fileUrl(selectedItem.latestDocxAnalysis)} target="_blank" rel="noreferrer">Analysis</a>}
+                  {selectedItem.latestDocxAnchorMap && <a className="result-link compact" href={fileUrl(selectedItem.latestDocxAnchorMap)} target="_blank" rel="noreferrer">Anchor map</a>}
+                  {selectedItem.latestDocxRunManifest && <a className="result-link compact" href={fileUrl(selectedItem.latestDocxRunManifest)} target="_blank" rel="noreferrer">Run manifest</a>}
+                  {selectedItem.latestDocxGt && <a className="result-link compact" href={fileUrl(selectedItem.latestDocxGt)} target="_blank" rel="noreferrer">GT dir</a>}
+                  {selectedItem.latestDocxBbox && <a className="result-link compact" href={fileUrl(selectedItem.latestDocxBbox)} target="_blank" rel="noreferrer">BBox dir</a>}
+                </div>
               </div>
             )}
             {(authoringPreviewPath || authoringOverlayHref || batchSummaryHref || batchFirstImageHref) && (

@@ -840,4 +840,65 @@ def test_import_seed_folder_accepts_docx_as_editable_office_template(tmp_path: P
     assert manifest["office_render"]["status"] == "external_render_required"
     item = next(item for item in list_work_items(registry=registry, root=workbench_root) if item["docId"] == "RPT-01")
     assert item["hasEditableOfficeTemplate"] is True
-    assert item["officeRender"]["backend"] == "office-com"
+    assert item["officeRender"]["backend"] == "libreoffice-cli"
+
+
+
+def _write_minimal_docx(path: Path) -> None:
+    import zipfile
+
+    document_xml = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>
+  <w:tbl>
+    <w:tr>
+      <w:tc><w:tcPr><w:tcW w:w="1400" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>상호</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="3000" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="1400" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>사업자등록번호</w:t></w:r></w:p></w:tc>
+      <w:tc><w:tcPr><w:tcW w:w="3000" w:type="dxa"/></w:tcPr><w:p/></w:tc>
+    </w:tr>
+  </w:tbl>
+</w:body></w:document>"""
+    with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("[Content_Types].xml", "<Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\"><Default Extension=\"xml\" ContentType=\"application/xml\"/><Default Extension=\"rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/><Override PartName=\"/word/document.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml\"/></Types>")
+        zf.writestr("_rels/.rels", "<Relationships xmlns=\"http://schemas.openxmlformats.org/package/2006/relationships\"><Relationship Id=\"rId1\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument\" Target=\"word/document.xml\"/></Relationships>")
+        zf.writestr("word/document.xml", document_xml)
+
+
+def test_docx_pipeline_analyze_draft_and_generate_without_renderer(tmp_path: Path, monkeypatch) -> None:
+    from datafactory import docx_pipeline
+    from datafactory.docx_pipeline import analyze_docx_template, draft_docx_authoring, generate_docx_outputs
+
+    registry = load_registry()
+    doc = registry.documents["FIN-07"]
+    workbench_root = tmp_path / "workbench" / "documents"
+    doc_root = workbench_root / f"{slugify_title(doc.title)}__{doc.doc_id}"
+    original_dir = doc_root / "samples" / "original"
+    original_dir.mkdir(parents=True)
+    source = original_dir / "거래실적증명서.docx"
+    _write_minimal_docx(source)
+    manifest = {
+        "schema_version": 1,
+        "doc_id": doc.doc_id,
+        "title": doc.title,
+        "folder": str(doc_root),
+        "samples": [{"path": str(source), "format": "docx", "generation_path": "editable-office-template"}],
+        "sample_generation_paths": ["editable-office-template"],
+        "office_render": {"required": True, "backend": "libreoffice-cli", "status": "external_render_required"},
+        "artifacts": {},
+    }
+    (doc_root / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(docx_pipeline, "document_dir", lambda _doc: doc_root)
+    monkeypatch.setattr(docx_pipeline, "_find_soffice", lambda: "")
+
+    analysis = analyze_docx_template("FIN-07", registry=registry)
+    assert analysis["summary"]["anchorCount"] == 2
+    draft = draft_docx_authoring("FIN-07", registry=registry)
+    assert draft["summary"]["fieldCount"] == 2
+    result = generate_docx_outputs("FIN-07", count=1, registry=registry)
+
+    assert result["summary"]["status"] == "renderer_missing"
+    filled_docx = tmp_path / result["samples"][0]["filledDocx"] if not Path(result["samples"][0]["filledDocx"]).is_absolute() else Path(result["samples"][0]["filledDocx"])
+    assert filled_docx.exists()
+    updated = json.loads((doc_root / "manifest.json").read_text(encoding="utf-8"))
+    assert updated["office_render"]["status"] == "renderer_missing"
+    assert updated["artifacts"]["docx_run_manifest"]

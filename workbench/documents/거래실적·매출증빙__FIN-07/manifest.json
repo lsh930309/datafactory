@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-07",
+  "title": "거래실적·매출증빙",
+  "folder": "workbench/documents/거래실적·매출증빙__FIN-07",
+  "registry": {
+    "docId": "FIN-07",
+    "title": "거래실적·매출증빙",
+    "issuer": "기업",
+    "genre": "증빙",
+    "structure": "표중심",
+    "modality": "전자PDF",
+    "sensitivity": "금융정보",
+    "fields": "거래처·거래액·기간",
+    "notes": "",
+    "hasPersonalInfo": "미포함",
+    "personalInfoDetail": "",
+    "validationRules": "",
+    "validationRuleCodes": "",
+    "writingMethod": "인쇄",
+    "aliases": [
+      "거래실적·매출증빙"
+    ],
+    "workflowIds": [],
+    "domains": [],
+    "workflowDomains": [],
+    "poDomains": [],
+    "isFirstPriority": false,
+    "firstPriorityDomains": [],
+    "firstPriorityScopeCount": 0
+  },
+  "source_seed_folders": [
+    "seed_samples/거래실적·매출증빙"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/거래실적·매출증빙__FIN-07/samples/original/거래실적증명서.docx",
+      "source": "seed_samples/거래실적·매출증빙/거래실적증명서.docx",
+      "format": "docx",
+      "generation_path": "editable-office-template",
+      "office_render": {
+        "backend": "libreoffice-cli",
+        "status": "external_render_required",
+        "message": "DOCX 템플릿 렌더링은 LibreOffice CLI 기반 실험 경로입니다. 폰트 재현 문제가 해결되기 전까지 주 합성 파이프라인으로 사용하지 않습니다."
+      },
+      "lineage": {
+        "original_template": "seed_samples/거래실적·매출증빙/거래실적증명서.docx",
+        "imported_template": "workbench/documents/거래실적·매출증빙__FIN-07/samples/original/거래실적증명서.docx",
+        "filled_docx": "",
+        "rendered_pdf": "",
+        "page_images": [],
+        "bbox_label_gt": []
+      }
+    }
+  ],
+  "sample_kind": "filled_sample",
+  "sample_generation_paths": [
+    "editable-office-template"
+  ],
+  "office_render": {
+    "required": true,
+    "backend": "libreoffice-cli",
+    "status": "bbox_gt_ready",
+    "template_count": 1,
+    "pending_count": 1,
+    "updated_at": "2026-07-08T08:40:04.669918+00:00",
+    "latest_run": {
+      "manifest": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/runs/20260708T084004606725Z/manifest.json",
+      "status": "filled_docx_ready",
+      "sample_count": 5
+    }
+  },
+  "status": "sample_imported",
+  "created_at": "2026-07-08T07:40:05.171799+00:00",
+  "updated_at": "2026-07-08T08:40:04.669949+00:00",
+  "artifacts": {
+    "ocr": null,
+    "review": null,
+    "inpaint": null,
+    "docx_analysis": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/docx_template_analysis.json",
+    "docx_anchor_map": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/docx_anchor_map.json",
+    "authoring": "workbench/documents/거래실적·매출증빙__FIN-07/authoring/schema.json",
+    "authoring_stylesheet": "workbench/documents/거래실적·매출증빙__FIN-07/authoring/stylesheet.json",
+    "authoring_faker_profile": "workbench/documents/거래실적·매출증빙__FIN-07/authoring/faker_profile.json",
+    "docx_run_manifest": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/runs/20260708T084004606725Z/manifest.json",
+    "docx_values": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/runs/20260708T084004606725Z/values",
+    "docx_gt": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/runs/20260708T084004606725Z/gt",
+    "docx_filled_docx": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/runs/20260708T084004606725Z/filled_docx",
+    "docx_rendered_pdf": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/runs/20260708T081027486905Z/rendered_pdf",
+    "docx_page_images": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/runs/20260708T081027486905Z/page_images",
+    "docx_bbox": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/runs/20260708T081027486905Z/bboxes",
+    "docx_labels": "workbench/documents/거래실적·매출증빙__FIN-07/docx_pipeline/runs/20260708T081027486905Z/labels"
+  }
+}

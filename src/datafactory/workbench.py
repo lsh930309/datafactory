@@ -630,7 +630,7 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "sampleKind": str(manifest.get("sample_kind") or "filled_sample"),
                 "sampleGenerationPaths": list(manifest.get("sample_generation_paths") or []),
                 "hasEditableOfficeTemplate": "editable-office-template" in set(manifest.get("sample_generation_paths") or []),
-                "officeRender": manifest.get("office_render") or {"required": False, "backend": "office-com", "status": "not_required"},
+                "officeRender": manifest.get("office_render") or {"required": False, "backend": "none", "status": "not_required"},
                 "hasOcr": artifact_flags["has_ocr"],
                 "hasReview": artifact_flags["has_review"],
                 "hasInpaint": artifact_flags["has_inpaint"],
@@ -656,6 +656,16 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "latestAuthoringAgentSchemaDraft": artifact_flags.get("latest_authoring_agent_schema_draft"),
                 "latestAuthoringAgentFakerProfileDraft": artifact_flags.get("latest_authoring_agent_faker_profile_draft"),
                 "latestAuthoringAgentResearchReport": artifact_flags.get("latest_authoring_agent_research_report"),
+                "latestDocxAnalysis": artifact_flags.get("latest_docx_analysis"),
+                "latestDocxAnchorMap": artifact_flags.get("latest_docx_anchor_map"),
+                "latestDocxRunManifest": artifact_flags.get("latest_docx_run_manifest"),
+                "latestDocxValues": artifact_flags.get("latest_docx_values"),
+                "latestDocxGt": artifact_flags.get("latest_docx_gt"),
+                "latestDocxFilledDocx": artifact_flags.get("latest_docx_filled_docx"),
+                "latestDocxRenderedPdf": artifact_flags.get("latest_docx_rendered_pdf"),
+                "latestDocxPageImages": artifact_flags.get("latest_docx_page_images"),
+                "latestDocxBbox": artifact_flags.get("latest_docx_bbox"),
+                "latestDocxLabels": artifact_flags.get("latest_docx_labels"),
                 "latestCleanroomPreview": artifact_flags.get("latest_cleanroom_preview"),
                 "latestCleanroomPdf": artifact_flags.get("latest_cleanroom_pdf"),
                 "latestCleanroomContactSheet": artifact_flags.get("latest_cleanroom_contact_sheet"),
@@ -759,7 +769,7 @@ def _base_manifest(doc: RegistryDocument, doc_root: Path, registry: RegistryData
         "samples": [],
         "sample_kind": "filled_sample",
         "sample_generation_paths": [],
-        "office_render": {"required": False, "backend": "office-com", "status": "not_required"},
+        "office_render": {"required": False, "backend": "none", "status": "not_required"},
         "status": "missing",
         "created_at": _now(),
         "updated_at": _now(),
@@ -796,9 +806,9 @@ def _sample_manifest_item(destination: Path, source: Path) -> dict[str, Any]:
     }
     if generation_path == "editable-office-template":
         item["office_render"] = {
-            "backend": "office-com",
+            "backend": "libreoffice-cli",
             "status": "external_render_required",
-            "message": "DOCX 템플릿은 Office COM/호환 렌더러에서 값을 채운 DOCX와 PDF/page image를 생성한 뒤 bbox/label/GT lineage를 확정합니다.",
+            "message": "DOCX 템플릿 렌더링은 LibreOffice CLI 기반 실험 경로입니다. 폰트 재현 문제가 해결되기 전까지 주 합성 파이프라인으로 사용하지 않습니다.",
         }
         item["lineage"] = {
             "original_template": _display_path(source),
@@ -813,11 +823,11 @@ def _sample_manifest_item(destination: Path, source: Path) -> dict[str, Any]:
 
 def _office_render_manifest_state(samples: list[dict[str, Any]]) -> dict[str, Any]:
     if not samples:
-        return {"required": False, "backend": "office-com", "status": "not_required"}
+        return {"required": False, "backend": "none", "status": "not_required"}
     pending = [sample for sample in samples if (sample.get("office_render") or {}).get("status") != "rendered"]
     return {
         "required": True,
-        "backend": "office-com",
+        "backend": "libreoffice-cli",
         "status": "external_render_required" if pending else "rendered",
         "template_count": len(samples),
         "pending_count": len(pending),
@@ -908,6 +918,16 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         "latest_authoring_agent_schema_draft": artifacts.get("authoring_agent_schema_draft"),
         "latest_authoring_agent_faker_profile_draft": artifacts.get("authoring_agent_faker_profile_draft"),
         "latest_authoring_agent_research_report": artifacts.get("authoring_agent_research_report"),
+        "latest_docx_analysis": artifacts.get("docx_analysis"),
+        "latest_docx_anchor_map": artifacts.get("docx_anchor_map"),
+        "latest_docx_run_manifest": artifacts.get("docx_run_manifest"),
+        "latest_docx_values": artifacts.get("docx_values"),
+        "latest_docx_gt": artifacts.get("docx_gt"),
+        "latest_docx_filled_docx": artifacts.get("docx_filled_docx"),
+        "latest_docx_rendered_pdf": artifacts.get("docx_rendered_pdf"),
+        "latest_docx_page_images": artifacts.get("docx_page_images"),
+        "latest_docx_bbox": artifacts.get("docx_bbox"),
+        "latest_docx_labels": artifacts.get("docx_labels"),
         **cleanroom,
     }
 

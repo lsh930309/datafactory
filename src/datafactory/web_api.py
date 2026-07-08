@@ -40,6 +40,7 @@ from .authoring import (
 from .first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
 from .fonts import default_font_id, list_font_faces
 from .final_results_export import export_final_results
+from .docx_pipeline import analyze_docx_template, draft_docx_authoring, generate_docx_outputs
 from .inpaint import InpaintConfig, InpaintResult, inpaint_from_review_policy, lama_inpaint, render_mask_overlay
 from .inpaint_export import write_inpaint_result
 from .manual_cleanup import load_manual_mask, save_manual_mask
@@ -152,7 +153,7 @@ def runtime_health() -> dict[str, Any]:
             "workbench": True,
             "authoring_1cycle": True,
             "editable_office_template": True,
-            "office_com_backend": "external_render_required",
+            "docx_renderer_backend": "libreoffice-cli-experimental",
             "ocr_recrop_review": True,
             "first_priority_assessment": True,
             "final_results_export": True,
@@ -457,6 +458,12 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
     item = next((candidate for candidate in list_work_items(registry=registry) if candidate.get("docId") == doc_id), None)
     samples = item.get("samples") if item and isinstance(item.get("samples"), list) else []
     sample_kind = str((item or {}).get("sampleKind") or "filled_sample")
+    docx_context: dict[str, Any] | None = None
+    if item and item.get("hasEditableOfficeTemplate"):
+        try:
+            docx_context = analyze_docx_template(doc_id, registry=registry)
+        except Exception as exc:
+            docx_context = {"error": str(exc)}
     created_at = datetime.now(timezone.utc).isoformat()
     request_dir = workbench_subdir(doc_id, "authoring") / "agent_requests" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     request_dir.mkdir(parents=True, exist_ok=True)
@@ -534,8 +541,11 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "template_anchor_rules": [
                 "PDF/JPG는 visible text, OCR, bbox 위치, 주변 텍스트를 anchor 근거로 삼는다.",
                 "DOCX는 visible text, content control, form field, table cell, bookmark, placeholder 등 편집 가능한 anchor를 근거로 삼는다.",
+                "DOCX 경로에서는 docx_template_analysis.json과 docx_anchor_map.json의 value_cell anchor를 schema field anchor_id/docx_anchor_id로 사용한다.",
+                "DOCX 경로의 stylesheet는 이미지 렌더링용이 아니라 lineage 호환용이다. 실제 값 삽입은 원본 DOCX 셀 서식을 유지한 채 DOCX XML에 값을 주입한다.",
+                "DOCX 경로의 GT는 PDF OCR 결과가 아니라 faker value set을 source of truth로 한다. 다만 현재 DOCX 경로는 LibreOffice 폰트 재현 품질 문제가 해결되기 전까지 실험/보류 기능이다.",
                 "숨은 메타데이터나 파일명만으로 schema key 또는 faker rule을 만들지 않는다.",
-                "DOCX 경로에서는 원본 템플릿, 채워진 DOCX, 렌더링 PDF, 페이지 이미지, bbox/label/GT lineage가 manifest에 남아야 한다.",
+                "DOCX 경로에서는 원본 템플릿, 채워진 DOCX, 선택적 LibreOffice 렌더링 결과, GT lineage가 manifest에 남아야 한다. 외부 GUI 앱 자동화 렌더러는 사용하지 않는다.",
                 "sample_kind가 blank_template이면 OCR/static label/keep bbox는 라벨 근거(label_anchor_ids)로만 쓰고 schema field의 anchor_id로 쓰지 않는다.",
                 "sample_kind가 blank_template이면 schema field의 anchor_id는 반드시 리뷰에서 use로 확정된 값 입력 후보, 체크박스, 표 셀, manual bbox, visual_line_detect bbox 중 하나여야 한다.",
                 "sample_kind가 blank_template이고 값 삽입 영역을 찾을 수 없으면 field를 만들지 말고 uncertainty_report에 남긴다.",
@@ -558,6 +568,14 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "schema": item.get("latestAuthoringSchema") if item else "",
                 "stylesheet": item.get("latestAuthoringStylesheet") if item else "",
                 "fakerProfile": item.get("latestAuthoringFakerProfile") if item else "",
+            },
+            "docx": {
+                "enabled": bool(item and item.get("hasEditableOfficeTemplate")),
+                "officeRender": item.get("officeRender") if item else {},
+                "analysis": (docx_context or {}).get("paths", {}).get("analysis", ""),
+                "anchorMap": (docx_context or {}).get("paths", {}).get("anchorMap", ""),
+                "summary": (docx_context or {}).get("summary", {}),
+                "error": (docx_context or {}).get("error", ""),
             },
         },
         "created_at": created_at,
@@ -2128,6 +2146,39 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                             "summary": f"/api/file?path={_display_path(summary_path, ROOT)}",
                         },
                     }
+                )
+                return
+            if parsed.path == "/api/docx/analyze":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                self._send_json(analyze_docx_template(doc_id, registry=load_registry()))
+                return
+            if parsed.path == "/api/docx/draft-authoring":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                self._send_json(draft_docx_authoring(doc_id, registry=load_registry()))
+                return
+            if parsed.path == "/api/docx/generate":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                count = max(1, min(100, int(payload.get("count") or 1)))
+                seed = int(payload.get("seed") or 20260708)
+                render_pdf = bool(payload.get("renderPdf", True))
+                schema_path = _resolve_workspace_path(str(payload.get("schemaPath") or "")) if payload.get("schemaPath") else None
+                faker_profile_path = _resolve_workspace_path(str(payload.get("fakerProfilePath") or "")) if payload.get("fakerProfilePath") else None
+                self._send_json(
+                    generate_docx_outputs(
+                        doc_id,
+                        count=count,
+                        seed=seed,
+                        render_pdf=render_pdf,
+                        schema_path=schema_path,
+                        faker_profile_path=faker_profile_path,
+                        registry=load_registry(),
+                    )
                 )
                 return
             if parsed.path == "/api/cleanup-mask":

@@ -1,0 +1,749 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "title": "토지대장·건축물대장",
+  "search_date": "2026-07-08",
+  "created_at": "2026-07-08T08:53:05+09:00",
+  "web_search_performed": true,
+  "queries": [
+    "정부24 건축물대장 토지대장 통합검색",
+    "정부24 토지대장 통합검색",
+    "건축물대장의 기재 및 관리 등에 관한 규칙 별지 제1호서식 일반건축물대장 갑",
+    "공간정보의 구축 및 관리 등에 관한 법률 시행규칙 토지대장 등록사항 지목 면적 소유자"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R-GOV24-SEARCH",
+      "query": "정부24 건축물대장 토지대장 통합검색",
+      "url": "https://plus.gov.kr/search/?srhQuery=%EA%B1%B4%EC%B6%95%EB%AC%BC%EB%8C%80%EC%9E%A5",
+      "source_type": "official_government_portal_search",
+      "summary": "정부24 통합검색/자주 찾는 서비스에서 건축물대장 및 토지(임야)대장이 민원 발급·열람 대상 서비스로 확인됨. 정부24 발급문서 진위확인 안내도 샘플 하단 문구와 일치한다."
+    },
+    {
+      "evidence_id": "R-GOV24-LAND-SEARCH",
+      "query": "정부24 토지대장 통합검색",
+      "url": "https://plus.gov.kr/search/?srhQuery=%ED%86%A0%EC%A7%80%EB%8C%80%EC%9E%A5",
+      "source_type": "official_government_portal_search",
+      "summary": "정부24 검색 화면의 자주 찾는 서비스에 토지(임야)대장이 표시되어 토지대장이 별도 민원 문서 유형임을 확인했다."
+    },
+    {
+      "evidence_id": "R-BUILDING-REGULATION",
+      "query": "건축물대장의 기재 및 관리 등에 관한 규칙 별지 제1호서식 일반건축물대장 갑",
+      "url": "https://www.law.go.kr/법령/건축물대장의기재및관리등에관한규칙",
+      "source_type": "official_law",
+      "summary": "건축물대장의 기재 및 관리 등에 관한 규칙 및 별지 서식이 일반건축물대장(갑)/(을) 양식의 법적 근거다. 샘플 상단의 규칙명·별지 제1호서식 표기와 대응된다."
+    },
+    {
+      "evidence_id": "R-LAND-CADASTRE",
+      "query": "공간정보의 구축 및 관리 등에 관한 법률 시행규칙 토지대장 등록사항 지목 면적 소유자",
+      "url": "https://www.law.go.kr/법령/공간정보의구축및관리등에관한법률시행규칙",
+      "source_type": "official_law",
+      "summary": "토지대장/임야대장 등 지적공부와 지번·지목·면적·소유자 등 토지 관련 등록사항 해석을 위한 법령 근거로 사용했다. 이번 샘플은 건축물대장이라 토지대장 고유 필드는 schema에 자동 추가하지 않았다."
+    }
+  ],
+  "field_level_evidence": [
+    {
+      "field_id": "document_confirmation_number",
+      "schema_key": "document.confirmation_number",
+      "anchor_id": "manual_1783467788626",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "print_date",
+      "schema_key": "print.date",
+      "anchor_id": "det_000004",
+      "label_anchor_ids": [],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "print_time",
+      "schema_key": "print.time",
+      "anchor_id": "det_000006",
+      "label_anchor_ids": [],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "page_number",
+      "schema_key": "page.number",
+      "anchor_id": "det_000009",
+      "label_anchor_ids": [],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "building_id",
+      "schema_key": "building.id",
+      "anchor_id": "det_000015",
+      "label_anchor_ids": [
+        "det_000011"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "building_management_number",
+      "schema_key": "building.management_number",
+      "anchor_id": "det_000013",
+      "label_anchor_ids": [
+        "det_000012"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "building_name",
+      "schema_key": "building.name",
+      "anchor_id": "det_000016",
+      "label_anchor_ids": [
+        "det_000014"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "unit_household_count",
+      "schema_key": "building.unit_household_count",
+      "anchor_id": "det_000018",
+      "label_anchor_ids": [
+        "det_000017"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "site_location",
+      "schema_key": "site.location",
+      "anchor_id": "det_000021",
+      "label_anchor_ids": [
+        "det_000019"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION",
+        "R-LAND-CADASTRE"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "lot_number",
+      "schema_key": "site.lot_number",
+      "anchor_id": "det_000022",
+      "label_anchor_ids": [
+        "det_000020"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION",
+        "R-LAND-CADASTRE"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "road_address",
+      "schema_key": "site.road_address",
+      "anchor_id": "det_000024",
+      "label_anchor_ids": [
+        "det_000023"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION",
+        "R-LAND-CADASTRE"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "site_area",
+      "schema_key": "site.area",
+      "anchor_id": "det_000030",
+      "label_anchor_ids": [
+        "det_000025"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "total_floor_area",
+      "schema_key": "building.total_floor_area",
+      "anchor_id": "det_000031",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "zoning_area",
+      "schema_key": "land_use.zoning_area",
+      "anchor_id": "det_000032",
+      "label_anchor_ids": [
+        "det_000027"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "restriction_zone",
+      "schema_key": "land_use.restriction_zone",
+      "anchor_id": "det_000033",
+      "label_anchor_ids": [
+        "det_000029"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "building_area",
+      "schema_key": "building.building_area",
+      "anchor_id": "det_000039",
+      "label_anchor_ids": [
+        "det_000034"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "floor_area_for_far",
+      "schema_key": "building.floor_area_for_far",
+      "anchor_id": "det_000040",
+      "label_anchor_ids": [
+        "det_000035"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "main_structure",
+      "schema_key": "building.main_structure",
+      "anchor_id": "det_000041",
+      "label_anchor_ids": [
+        "det_000036"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "main_use",
+      "schema_key": "building.main_use",
+      "anchor_id": "det_000042",
+      "label_anchor_ids": [
+        "det_000037"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "floor_count_summary",
+      "schema_key": "building.floor_count_summary",
+      "anchor_id": "det_000043",
+      "label_anchor_ids": [
+        "det_000038"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "building_coverage_ratio",
+      "schema_key": "building.coverage_ratio",
+      "anchor_id": "det_000049",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "floor_area_ratio",
+      "schema_key": "building.floor_area_ratio",
+      "anchor_id": "det_000050",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "height",
+      "schema_key": "building.height",
+      "anchor_id": "det_000051",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "roof",
+      "schema_key": "building.roof",
+      "anchor_id": "det_000052",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_1_section",
+      "schema_key": "building_status.rows[0].section",
+      "anchor_id": "det_000077",
+      "label_anchor_ids": [
+        "det_000067"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "schema_key": "building_status.rows[0].floor",
+      "anchor_id": "det_000078",
+      "label_anchor_ids": [
+        "det_000068"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_1_structure",
+      "schema_key": "building_status.rows[0].structure",
+      "anchor_id": "det_000079",
+      "label_anchor_ids": [
+        "det_000069"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_1_use",
+      "schema_key": "building_status.rows[0].use",
+      "anchor_id": "det_000080",
+      "label_anchor_ids": [
+        "det_000070"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_1_area",
+      "schema_key": "building_status.rows[0].area",
+      "anchor_id": "det_000081",
+      "label_anchor_ids": [
+        "det_000071"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "owner_name",
+      "schema_key": "owner.name_or_entity",
+      "anchor_id": "det_000082",
+      "label_anchor_ids": [
+        "det_000064"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "owner_address",
+      "schema_key": "owner.address",
+      "anchor_id": "det_000083",
+      "label_anchor_ids": [
+        "det_000073"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "owner_change_date",
+      "schema_key": "owner.change_date",
+      "anchor_id": "det_000084",
+      "label_anchor_ids": [
+        "det_000066"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "owner_share",
+      "schema_key": "owner.share",
+      "anchor_id": "det_000085",
+      "label_anchor_ids": [
+        "det_000065",
+        "det_000074"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_2_section",
+      "schema_key": "building_status.rows[1].section",
+      "anchor_id": "det_000086",
+      "label_anchor_ids": [
+        "det_000067"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_2_floor",
+      "schema_key": "building_status.rows[1].floor",
+      "anchor_id": "det_000087",
+      "label_anchor_ids": [
+        "det_000068"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_2_structure",
+      "schema_key": "building_status.rows[1].structure",
+      "anchor_id": "det_000088",
+      "label_anchor_ids": [
+        "det_000069"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_2_use",
+      "schema_key": "building_status.rows[1].use",
+      "anchor_id": "det_000089",
+      "label_anchor_ids": [
+        "det_000070"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_2_area",
+      "schema_key": "building_status.rows[1].area",
+      "anchor_id": "det_000090",
+      "label_anchor_ids": [
+        "det_000071"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "owner_registration_number_masked",
+      "schema_key": "owner.registration_number_masked",
+      "anchor_id": "det_000091",
+      "label_anchor_ids": [
+        "det_000072",
+        "det_000075"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "owner_change_reason",
+      "schema_key": "owner.change_reason",
+      "anchor_id": "det_000093",
+      "label_anchor_ids": [
+        "det_000076"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_3_section",
+      "schema_key": "building_status.rows[2].section",
+      "anchor_id": "det_000094",
+      "label_anchor_ids": [
+        "det_000067"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_3_floor",
+      "schema_key": "building_status.rows[2].floor",
+      "anchor_id": "det_000095",
+      "label_anchor_ids": [
+        "det_000068"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_3_structure",
+      "schema_key": "building_status.rows[2].structure",
+      "anchor_id": "det_000096",
+      "label_anchor_ids": [
+        "det_000069"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_3_use",
+      "schema_key": "building_status.rows[2].use",
+      "anchor_id": "det_000097",
+      "label_anchor_ids": [
+        "det_000070"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_3_area",
+      "schema_key": "building_status.rows[2].area",
+      "anchor_id": "det_000098",
+      "label_anchor_ids": [
+        "det_000071"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_4_section",
+      "schema_key": "building_status.rows[3].section",
+      "anchor_id": "det_000100",
+      "label_anchor_ids": [
+        "det_000067"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_4_floor",
+      "schema_key": "building_status.rows[3].floor",
+      "anchor_id": "det_000101",
+      "label_anchor_ids": [
+        "det_000068"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_4_structure",
+      "schema_key": "building_status.rows[3].structure",
+      "anchor_id": "det_000102",
+      "label_anchor_ids": [
+        "det_000069"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_4_use",
+      "schema_key": "building_status.rows[3].use",
+      "anchor_id": "det_000103",
+      "label_anchor_ids": [
+        "det_000070"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "status_row_4_area",
+      "schema_key": "building_status.rows[3].area",
+      "anchor_id": "det_000104",
+      "label_anchor_ids": [
+        "det_000071"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "certificate_issue_date",
+      "schema_key": "certificate.issue_date",
+      "anchor_id": "det_000107",
+      "label_anchor_ids": [
+        "manual_1783467905912"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "clerk_name",
+      "schema_key": "certificate.clerk_name",
+      "anchor_id": "det_000110",
+      "label_anchor_ids": [
+        "manual_1783467884595"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "clerk_phone",
+      "schema_key": "certificate.clerk_phone",
+      "anchor_id": "det_000111",
+      "label_anchor_ids": [
+        "manual_1783467893196"
+      ],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    },
+    {
+      "field_id": "issuer",
+      "schema_key": "certificate.issuer",
+      "anchor_id": "det_000113",
+      "label_anchor_ids": [],
+      "evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "how_used": "Visible template/review anchor determines field inclusion; web evidence only supports document semantics and faker type selection."
+    }
+  ],
+  "limitations": [
+    "Search engine results for some Korean queries returned irrelevant results, so official Government24 search pages and law.go.kr direct statute URLs were used as primary live web evidence.",
+    "Government24 individual service detail pages may require dynamic access; the report therefore records accessible official search/portal evidence rather than a completed service transaction."
+  ]
+}

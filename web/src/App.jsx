@@ -949,6 +949,25 @@ function App() {
     }
   }
 
+  function applySemanticSchemaRawJson(rawText) {
+    if (!authoringBundle) return;
+    try {
+      const parsed = JSON.parse(rawText);
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        throw new Error('semantic schema는 JSON object여야 합니다.');
+      }
+      setAuthoringBundle((current) => ({
+        ...current,
+        schema: syncSemanticSchemaToAuthoringFields(current.schema || {}, parsed),
+      }));
+      setAuthoringDirty(true);
+      if (authoringResult?.paths?.image || selectedItem?.latestAuthoringPreview) setAuthoringPreviewStale(true);
+      setMessage('Semantic schema primary JSON을 적용했고, full schema field binding의 semantic_path/export를 자동 연동했습니다.');
+    } catch (err) {
+      setError(`semantic schema JSON 파싱 실패: ${err.message || String(err)}`);
+    }
+  }
+
   async function loadAuthoringLibrary() {
     setBusy('authoringLibrary');
     setError('');
@@ -2280,10 +2299,10 @@ function App() {
     if (!latestAgentRunPolling) return undefined;
     const pollPath = latestAgentRunPath;
     const delayMs = latestAgentRunStatus === 'unknown' ? 500 : 3000;
-    const timer = window.setTimeout(() => {
+    const timer = window.setInterval(() => {
       refreshAuthoringAgentRunStatus(pollPath).catch((exc) => setError(exc.message || String(exc)));
     }, delayMs);
-    return () => window.clearTimeout(timer);
+    return () => window.clearInterval(timer);
   }, [latestAgentRunPath, latestAgentRunStatus, latestAgentRunPolling]);
 
   useEffect(() => {
@@ -3063,9 +3082,12 @@ function App() {
             )}
             {authoringBundle && (
               <details className="raw-json-section">
-                <summary>Schema / Style / Faker raw JSON 편집</summary>
-                <p className="muted">각 JSON은 blur 시 파싱해 draft 상태에만 적용합니다. 저장 버튼을 누르기 전까지 파일은 변경되지 않습니다.</p>
-                <label>Schema JSON
+                <summary>Semantic Schema / Full Schema / Style / Faker raw JSON 편집</summary>
+                <p className="muted">사용자 primary schema는 Semantic Schema입니다. Semantic Schema를 수정하면 기존 bbox binding은 leaf 순서와 기존 semantic_path 기준으로 full schema에 자동 연동됩니다. 저장 버튼을 누르기 전까지 파일은 변경되지 않습니다.</p>
+                <label>Semantic Schema JSON (Primary)
+                  <textarea key={`semantic-${authoringVersion}-${authoringDirty}`} rows="7" defaultValue={JSON.stringify(authoringBundle.schema?.semantic_schema || {}, null, 2)} onBlur={(event) => applySemanticSchemaRawJson(event.target.value)} />
+                </label>
+                <label>Full Schema JSON (Advanced / bbox binding 포함)
                   <textarea key={`schema-${authoringVersion}-${authoringDirty}`} rows="7" defaultValue={JSON.stringify(authoringBundle.schema, null, 2)} onBlur={(event) => applyAuthoringRawJson('schema', event.target.value)} />
                 </label>
                 <label>Stylesheet JSON
@@ -3132,6 +3154,63 @@ function isCheckboxRule(value) {
     || normalized.startsWith('checkbox:')
     || normalized.startsWith('boolean:')
     || normalized.startsWith('bool:');
+}
+
+function syncSemanticSchemaToAuthoringFields(schema, nextSemanticSchema) {
+  const oldLeaves = collectSemanticLeafPaths(schema?.semantic_schema || {});
+  const nextLeaves = collectSemanticLeafPaths(nextSemanticSchema || {});
+  const nextByKey = new Map(nextLeaves.map((path) => [semanticPathKey(path), path]));
+  const oldIndexByKey = new Map(oldLeaves.map((path, index) => [semanticPathKey(path), index]));
+  const fields = Array.isArray(schema?.fields) ? schema.fields : [];
+  const syncedFields = fields.map((field, index) => {
+    const currentPath = fieldSemanticPathParts(field);
+    const currentKey = semanticPathKey(currentPath);
+    let targetPath = nextByKey.get(currentKey) || null;
+    if (!targetPath && oldIndexByKey.has(currentKey)) {
+      targetPath = nextLeaves[oldIndexByKey.get(currentKey)] || null;
+    }
+    if (!targetPath) {
+      targetPath = nextLeaves[index] || null;
+    }
+    if (!targetPath) return null;
+    const jsonPath = semanticPathKey(targetPath);
+    return {
+      ...field,
+      label: targetPath[targetPath.length - 1] || field.label,
+      semantic_path: targetPath,
+      export: {
+        ...(field.export || {}),
+        json_path: jsonPath,
+        csv_column: jsonPath,
+      },
+    };
+  }).filter(Boolean);
+  return {
+    ...schema,
+    semantic_schema: nextSemanticSchema,
+    fields: syncedFields,
+  };
+}
+
+function collectSemanticLeafPaths(value, prefix = []) {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const entries = Object.entries(value);
+    if (!entries.length) return prefix.length ? [prefix] : [];
+    return entries.flatMap(([key, child]) => collectSemanticLeafPaths(child, [...prefix, key]));
+  }
+  return prefix.length ? [prefix] : [];
+}
+
+function fieldSemanticPathParts(field) {
+  if (Array.isArray(field?.semantic_path)) {
+    return field.semantic_path.map((part) => String(part).trim()).filter(Boolean);
+  }
+  const raw = field?.semantic_path || field?.key_path || field?.json_path || field?.export?.json_path || field?.key || field?.label || field?.field_id || '';
+  return String(raw).split('/').map((part) => part.trim()).filter(Boolean);
+}
+
+function semanticPathKey(path) {
+  return (Array.isArray(path) ? path : []).map((part) => String(part).trim()).filter(Boolean).join('/');
 }
 
 function hasRenderableAuthoringBbox(field) {

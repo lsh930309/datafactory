@@ -278,6 +278,9 @@ def _is_pure_semantic_path(path: str) -> bool:
 def _load_semantic_schema(schema_path: Path, *, title: str = "") -> dict[str, Any]:
     path = schema_path.with_name("semantic_schema.json")
     if not path.exists():
+        schema_payload = _read_json(schema_path)
+        if isinstance(schema_payload.get("semantic_schema"), dict):
+            return _strip_schema_metadata(schema_payload["semantic_schema"], title=title)
         return {}
     payload = _read_json(path)
     if not isinstance(payload, dict):

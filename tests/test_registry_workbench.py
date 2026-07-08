@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import unicodedata
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -516,7 +517,7 @@ def test_first_priority_assessment_exports_single_sheet_xlsx(tmp_path: Path) -> 
     assert "<tableStyles" in styles
 
 
-def test_workbench_prefers_manual_cleanup_inpainted_template(tmp_path: Path) -> None:
+def test_workbench_ignores_unpromoted_manual_cleanup_for_latest_template(tmp_path: Path) -> None:
     registry = load_registry()
     workbench_root = tmp_path / "workbench" / "documents"
     doc_root = workbench_root / "가족관계증명서__ID-05"
@@ -531,6 +532,10 @@ def test_workbench_prefers_manual_cleanup_inpainted_template(tmp_path: Path) -> 
     (cleanup_dir / "inpainted_lama.png").write_bytes(b"cleanup")
     (cleanup_dir / "comparison_lama.png").write_bytes(b"cleanup-comparison")
     (cleanup_dir / "manual_mask.png").write_bytes(b"mask")
+    os.utime(lama_dir / "inpainted_lama.png", (100, 100))
+    os.utime(lama_dir / "comparison_lama.png", (100, 100))
+    os.utime(cleanup_dir / "inpainted_lama.png", (200, 200))
+    os.utime(cleanup_dir / "comparison_lama.png", (200, 200))
     (doc_root / "manifest.json").write_text(
         json.dumps({"doc_id": "ID-05", "title": "가족관계증명서", "samples": [], "artifacts": {}}, ensure_ascii=False),
         encoding="utf-8",
@@ -540,8 +545,9 @@ def test_workbench_prefers_manual_cleanup_inpainted_template(tmp_path: Path) -> 
 
     assert item["hasInpaint"]
     assert item["hasInpaintCleanup"]
-    assert item["latestInpainted"].endswith("manual_cleanup/inpainted_lama.png")
-    assert item["latestInpaintComparison"].endswith("manual_cleanup/comparison_lama.png")
+    assert item["latestInpainted"].endswith("lama/inpainted_lama.png")
+    assert item["latestInpaintComparison"].endswith("lama/comparison_lama.png")
+    assert item["latestInpaintCleanupComparison"].endswith("manual_cleanup/comparison_lama.png")
 
 
 def test_workbench_exposes_cleanroom_final_artifacts(tmp_path: Path) -> None:

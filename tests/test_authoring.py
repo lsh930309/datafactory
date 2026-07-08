@@ -561,6 +561,43 @@ def test_save_authoring_bundle_normalizes_field_and_faker_profile(tmp_path: Path
     assert saved_faker["field_generators"] == {"field_001": "choice:홍길동|김민준"}
 
 
+def test_semantic_schema_to_authoring_schema_preserves_hierarchy_in_export(tmp_path: Path) -> None:
+    from datafactory.authoring import semantic_schema_to_authoring_schema
+
+    review, base = _write_review(tmp_path)
+    schema = semantic_schema_to_authoring_schema(
+        {
+            "doc_id": "DOC-1",
+            "title": "테스트",
+            "semantic_schema": {"소유자 현황": {"성명": ""}},
+            "fields": [
+                {
+                    "field_id": "det_name",
+                    "label": "성명",
+                    "key": "소유자 현황/성명",
+                    "anchor_id": "det_name",
+                    "value": "",
+                    "value_type": "person.name_ko",
+                }
+            ],
+        },
+        anchor_map={"source_review": str(review), "anchors": [{"anchor_id": "det_name", "bbox": [50, 50, 120, 32], "text": "홍길동"}], "image": {"width": 360, "height": 220}},
+        source_review=str(review),
+        source_image=str(base),
+        source_inpainted=str(base),
+    )
+    stylesheet = {"schema_version": 1, "style_classes": [{"style_class": "body_default", "font_size": 16}]}
+    faker_profile = {"schema_version": 1, "field_generators": {"det_name": "literal:홍길동"}}
+    saved = save_authoring_bundle(tmp_path / "schema.json", tmp_path / "stylesheet.json", tmp_path / "faker.json", schema=schema, stylesheet=stylesheet, faker_profile=faker_profile)
+
+    result = render_authoring_preview(saved.schema, saved.stylesheet, saved.faker_profile, out_dir=tmp_path / "render", seed=1)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+
+    assert json.loads(saved.schema.read_text(encoding="utf-8"))["semantic_schema"] == {"소유자 현황": {"성명": ""}}
+    assert kv["semantic_values"] == {"소유자 현황": {"성명": "홍길동"}}
+    assert kv["flat_values"] == {"소유자 현황/성명": "홍길동"}
+
+
 def test_save_authoring_bundle_preserves_explicit_export_keys(tmp_path: Path) -> None:
     review, base = _write_review(tmp_path)
     draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
@@ -625,9 +662,44 @@ def test_render_authoring_preview_supports_rule_strings_and_unknown_warning(tmp_
     faker_profile["field_generators"]["field_001"] = "unknown.custom.rule"
     save_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile, schema=schema, stylesheet=loaded.payload["stylesheet"], faker_profile=faker_profile)
     result = render_authoring_preview(draft.schema, draft.stylesheet, draft.faker_profile, out_dir=tmp_path / "authoring" / "render_preview_unknown", seed=7)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
     validation = json.loads(result.validation_report.read_text(encoding="utf-8"))
+    assert kv["values"]["field_001"] == "전화번호"
     assert validation["warning_count"] >= 1
     assert any(warning["type"] == "unknown_faker_rule" for warning in validation["warnings"])
+
+
+def test_render_authoring_preview_uses_safe_placeholders_for_generic_or_missing_pool_rules(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile)
+    schema = loaded.payload["schema"]
+    first = dict(schema["fields"][0])
+    first["field_id"] = "generic_note"
+    first["label"] = "비고"
+    second = dict(first)
+    second["field_id"] = "missing_pool"
+    second["label"] = "구조"
+    schema["fields"] = [first, second]
+    faker_profile = loaded.payload["faker_profile"]
+    faker_profile["field_generators"] = {"generic_note": "free_text.short", "missing_pool": "pool:undefined_pool"}
+    save_authoring_bundle(
+        draft.schema,
+        draft.stylesheet,
+        draft.faker_profile,
+        schema=schema,
+        stylesheet=loaded.payload["stylesheet"],
+        faker_profile=faker_profile,
+    )
+
+    result = render_authoring_preview(draft.schema, draft.stylesheet, draft.faker_profile, out_dir=tmp_path / "authoring" / "render_safe_fallback", seed=7)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    validation = json.loads(result.validation_report.read_text(encoding="utf-8"))
+
+    assert kv["values"]["generic_note"] == "비고"
+    assert kv["values"]["missing_pool"] == "구조"
+    assert not {"확인함", "해당없음", "정상", "발급완료"} & set(kv["values"].values())
+    assert any(warning["rule"] == "pool:undefined_pool" for warning in validation["warnings"])
 
 
 def test_render_authoring_preview_supports_data_pools_and_pick_record_constraints(tmp_path: Path) -> None:

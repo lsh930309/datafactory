@@ -191,5 +191,8 @@ def test_cleanup_paint_payload_draws_template_and_updates_manifest(tmp_path: Pat
     assert painted.exists()
     assert Image.open(painted).convert("RGB").getpixel((10, 10)) == (255, 0, 0)
     manifest = json.loads((doc_root / "manifest.json").read_text(encoding="utf-8"))
-    assert manifest["artifacts"]["inpaint_cleanup_inpainted"].endswith("painted_template.png")
-    assert manifest["artifacts"]["inpaint_cleanup_mask"].endswith("paint.json")
+    assert manifest["artifacts"]["inpaint"].endswith("lama/comparison_lama.png")
+    assert "inpaint_cleanup_inpainted" not in manifest["artifacts"]
+    assert "inpaint_cleanup_mask" not in manifest["artifacts"]
+    assert result["paths"]["inpainted"].endswith("lama/inpainted_lama.png")
+    assert not (doc_root / "inpaint" / "base" / "manual_cleanup").exists()

@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "created_at": "2026-07-08T01:20:49.312761+00:00",
+  "sample_kind": "filled_sample",
+  "unresolved_fields": [
+    {
+      "field_id": "landscaping_area",
+      "anchor_id": "manual_1783470434127",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "open_public_space_area",
+      "anchor_id": "manual_1783470430160",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "building_line_setback_area",
+      "anchor_id": "manual_1783470425142",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "building_line_setback_distance",
+      "anchor_id": "manual_1783470593596",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "accessory_building_summary",
+      "anchor_id": "manual_1783470492760",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "anchor_id": "det_000078",
+      "issue": "OCR 텍스트가 z1층으로 인식되어 실제 지1층 가능성이 있음",
+      "current_decision": "pool:floor_labels 사용",
+      "user_decision_needed": "원본 이미지에서 층별 표기 확인",
+      "confidence": 0.55
+    },
+    {
+      "field_id": "clerk_name",
+      "anchor_id": "det_000110",
+      "issue": "담당자 칸에 개인명 대신 민원센터/부서명이 표시됨",
+      "current_decision": "public_office_names pool 사용",
+      "user_decision_needed": "담당자 필드를 부서명으로 유지할지 확인",
+      "confidence": 0.6
+    },
+    {
+      "field_id": "owner_registration_number_masked",
+      "anchor_id": "det_000091",
+      "issue": "마스킹 문자와 하이픈 OCR이 실제 렌더러 패턴과 다를 수 있음",
+      "current_decision": "pattern:######-******* 사용",
+      "user_decision_needed": "마스킹 기호와 자리수 확인",
+      "confidence": 0.64
+    },
+    {
+      "field_id": "document_scope",
+      "anchor_id": null,
+      "issue": "문서군 title은 토지대장·건축물대장이지만 현재 입력 샘플은 건축물대장 1쪽임",
+      "current_decision": "현재 샘플 anchor 없는 토지대장 전용 필드는 schema에 추가하지 않음",
+      "user_decision_needed": "토지대장 샘플이 별도 제공되면 별도 authoring 필요",
+      "confidence": 0.8
+    }
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "landscaping_area",
+      "anchor_id": "manual_1783470434127",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "open_public_space_area",
+      "anchor_id": "manual_1783470430160",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "building_line_setback_area",
+      "anchor_id": "manual_1783470425142",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "building_line_setback_distance",
+      "anchor_id": "manual_1783470593596",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "accessory_building_summary",
+      "anchor_id": "manual_1783470492760",
+      "issue": "수동 확정된 빈 value_region이라 실제 값 샘플이 없음",
+      "current_decision": "schema에는 포함하되 generator는 지원 grammar로 보수 근사",
+      "user_decision_needed": "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+      "confidence": 0.58
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "anchor_id": "det_000078",
+      "issue": "OCR 텍스트가 z1층으로 인식되어 실제 지1층 가능성이 있음",
+      "current_decision": "pool:floor_labels 사용",
+      "user_decision_needed": "원본 이미지에서 층별 표기 확인",
+      "confidence": 0.55
+    },
+    {
+      "field_id": "clerk_name",
+      "anchor_id": "det_000110",
+      "issue": "담당자 칸에 개인명 대신 민원센터/부서명이 표시됨",
+      "current_decision": "public_office_names pool 사용",
+      "user_decision_needed": "담당자 필드를 부서명으로 유지할지 확인",
+      "confidence": 0.6
+    },
+    {
+      "field_id": "owner_registration_number_masked",
+      "anchor_id": "det_000091",
+      "issue": "마스킹 문자와 하이픈 OCR이 실제 렌더러 패턴과 다를 수 있음",
+      "current_decision": "pattern:######-******* 사용",
+      "user_decision_needed": "마스킹 기호와 자리수 확인",
+      "confidence": 0.64
+    }
+  ],
+  "user_decisions_needed": [
+    "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+    "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+    "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+    "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+    "UI 검토에서 필드 유지 여부와 단위/소수 자릿수 확정 필요",
+    "원본 이미지에서 층별 표기 확인",
+    "담당자 필드를 부서명으로 유지할지 확인",
+    "마스킹 기호와 자리수 확인",
+    "토지대장 샘플이 별도 제공되면 별도 authoring 필요"
+  ]
+}

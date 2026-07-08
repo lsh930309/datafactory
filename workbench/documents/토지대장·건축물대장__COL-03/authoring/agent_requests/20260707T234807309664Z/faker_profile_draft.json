@@ -1,0 +1,846 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "locale": "ko_KR",
+  "created_at": "2026-07-08T08:53:05+09:00",
+  "field_rules": [
+    {
+      "field_id": "document_confirmation_number",
+      "schema_key": "document.confirmation_number",
+      "label": "문서확인번호",
+      "anchor_id": "manual_1783467788626",
+      "value_type": "identifier.document_confirmation",
+      "rule": "pattern:####-####-####-#####",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "print_date",
+      "schema_key": "print.date",
+      "label": "출력일자",
+      "anchor_id": "det_000004",
+      "value_type": "date.ymd_slash",
+      "rule": "date_between:-365d:+0d|format:%Y/%m/%d",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "print_time",
+      "schema_key": "print.time",
+      "label": "출력시각",
+      "anchor_id": "det_000006",
+      "value_type": "time.hms",
+      "rule": "time|format:%H:%M:%S",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "page_number",
+      "schema_key": "page.number",
+      "label": "페이지 표기",
+      "anchor_id": "det_000009",
+      "value_type": "page_count_label",
+      "rule": "template:({total}쪽 중 제{page}쪽)|page=1,total=2..3",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "building_id",
+      "schema_key": "building.id",
+      "label": "건물ID",
+      "anchor_id": "det_000015",
+      "value_type": "identifier.building_id",
+      "rule": "pattern:################",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "building_management_number",
+      "schema_key": "building.management_number",
+      "label": "고유번호",
+      "anchor_id": "det_000013",
+      "value_type": "identifier.building_management_number",
+      "rule": "pattern:##########-#-########",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "building_name",
+      "schema_key": "building.name",
+      "label": "명칭",
+      "anchor_id": "det_000016",
+      "value_type": "text.short",
+      "rule": "pool:synthetic_building_names_ko",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "unit_household_count",
+      "schema_key": "building.unit_household_count",
+      "label": "호수/가구수/세대수",
+      "anchor_id": "det_000018",
+      "value_type": "count_triplet",
+      "rule": "template:{units}호/{households}가구/{families}세대|units=0..80,households=0..80,families=0..120",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "site_location",
+      "schema_key": "site.location",
+      "label": "대지위치",
+      "anchor_id": "det_000021",
+      "value_type": "address.ko_compact",
+      "rule": "pool:synthetic_ko_addresses",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION",
+        "R-LAND-CADASTRE"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "lot_number",
+      "schema_key": "site.lot_number",
+      "label": "지번",
+      "anchor_id": "det_000022",
+      "value_type": "lot_number",
+      "rule": "pattern:###-#",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION",
+        "R-LAND-CADASTRE"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "road_address",
+      "schema_key": "site.road_address",
+      "label": "도로명주소",
+      "anchor_id": "det_000024",
+      "value_type": "address.ko_road",
+      "rule": "pool:synthetic_ko_addresses",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION",
+        "R-LAND-CADASTRE"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "site_area",
+      "schema_key": "site.area",
+      "label": "대지면적",
+      "anchor_id": "det_000030",
+      "value_type": "area.square_meter",
+      "rule": "decimal_range:10.00..9999.99|unit:m²|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "total_floor_area",
+      "schema_key": "building.total_floor_area",
+      "label": "연면적",
+      "anchor_id": "det_000031",
+      "value_type": "area.square_meter",
+      "rule": "decimal_range:10.00..9999.99|unit:m²|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "zoning_area",
+      "schema_key": "land_use.zoning_area",
+      "label": "지역",
+      "anchor_id": "det_000032",
+      "value_type": "land_use.zoning",
+      "rule": "pool:zoning_area_types",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "restriction_zone",
+      "schema_key": "land_use.restriction_zone",
+      "label": "구역",
+      "anchor_id": "det_000033",
+      "value_type": "land_use.restriction_zone",
+      "rule": "pool:restriction_zone_types",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "building_area",
+      "schema_key": "building.building_area",
+      "label": "건축면적",
+      "anchor_id": "det_000039",
+      "value_type": "area.square_meter",
+      "rule": "decimal_range:10.00..9999.99|unit:m²|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "floor_area_for_far",
+      "schema_key": "building.floor_area_for_far",
+      "label": "용적률 산정용 연면적",
+      "anchor_id": "det_000040",
+      "value_type": "area.square_meter",
+      "rule": "decimal_range:10.00..9999.99|unit:m²|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.55,
+      "notes": "OCR text uses apostrophe-like unit; visible image reads square meter."
+    },
+    {
+      "field_id": "main_structure",
+      "schema_key": "building.main_structure",
+      "label": "주구조",
+      "anchor_id": "det_000041",
+      "value_type": "building.structure",
+      "rule": "pool:building_structures",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "main_use",
+      "schema_key": "building.main_use",
+      "label": "주용도",
+      "anchor_id": "det_000042",
+      "value_type": "building.use",
+      "rule": "pool:building_uses",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "floor_count_summary",
+      "schema_key": "building.floor_count_summary",
+      "label": "층수",
+      "anchor_id": "det_000043",
+      "value_type": "floor_count_summary",
+      "rule": "template:지하:{basement}층, 지상:{ground}층|basement=0..5,ground=1..30",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "building_coverage_ratio",
+      "schema_key": "building.coverage_ratio",
+      "label": "건폐율",
+      "anchor_id": "det_000049",
+      "value_type": "ratio.percent",
+      "rule": "decimal_range:0.00..900.00|suffix:%|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "floor_area_ratio",
+      "schema_key": "building.floor_area_ratio",
+      "label": "용적률",
+      "anchor_id": "det_000050",
+      "value_type": "ratio.percent",
+      "rule": "decimal_range:0.00..900.00|suffix:%|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "height",
+      "schema_key": "building.height",
+      "label": "높이",
+      "anchor_id": "det_000051",
+      "value_type": "length.meter",
+      "rule": "decimal_range:1.0..120.0|unit:m|precision:1",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "roof",
+      "schema_key": "building.roof",
+      "label": "지붕",
+      "anchor_id": "det_000052",
+      "value_type": "building.roof",
+      "rule": "choice:철골구조지붕|철근콘크리트지붕|슬라브지붕",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_1_section",
+      "schema_key": "building_status.rows[0].section",
+      "label": "건축물현황 1행 구분",
+      "anchor_id": "det_000077",
+      "value_type": "building.section_code",
+      "rule": "choice:주1|주2|부1",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "schema_key": "building_status.rows[0].floor",
+      "label": "건축물현황 1행 층별",
+      "anchor_id": "det_000078",
+      "value_type": "floor.label",
+      "rule": "pool:floor_labels",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.55,
+      "notes": "OCR text is z1층; visible image appears 지1층."
+    },
+    {
+      "field_id": "status_row_1_structure",
+      "schema_key": "building_status.rows[0].structure",
+      "label": "건축물현황 1행 구조",
+      "anchor_id": "det_000079",
+      "value_type": "building.structure",
+      "rule": "pool:building_structures",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_1_use",
+      "schema_key": "building_status.rows[0].use",
+      "label": "건축물현황 1행 용도",
+      "anchor_id": "det_000080",
+      "value_type": "building.use",
+      "rule": "pool:building_uses",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_1_area",
+      "schema_key": "building_status.rows[0].area",
+      "label": "건축물현황 1행 면적",
+      "anchor_id": "det_000081",
+      "value_type": "number.decimal_square_meter",
+      "rule": "decimal_range:10.00..9999.99|unit:m²|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "owner_name",
+      "schema_key": "owner.name_or_entity",
+      "label": "소유자 성명(명칭)",
+      "anchor_id": "det_000082",
+      "value_type": "entity.synthetic_name",
+      "rule": "company.ko_synthetic|no_real_entity",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.7,
+      "notes": ""
+    },
+    {
+      "field_id": "owner_address",
+      "schema_key": "owner.address",
+      "label": "소유자 주소",
+      "anchor_id": "det_000083",
+      "value_type": "address.ko_synthetic",
+      "rule": "pool:synthetic_ko_addresses",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.7,
+      "notes": ""
+    },
+    {
+      "field_id": "owner_change_date",
+      "schema_key": "owner.change_date",
+      "label": "소유자 변동일",
+      "anchor_id": "det_000084",
+      "value_type": "date.ymd_dot",
+      "rule": "date_between:-15y:+0d|format:%Y.%m.%d.",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "owner_share",
+      "schema_key": "owner.share",
+      "label": "소유권 지분",
+      "anchor_id": "det_000085",
+      "value_type": "fraction",
+      "rule": "choice:1/1|1/2|2/3",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_2_section",
+      "schema_key": "building_status.rows[1].section",
+      "label": "건축물현황 2행 구분",
+      "anchor_id": "det_000086",
+      "value_type": "building.section_code",
+      "rule": "choice:주1|주2|부1",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_2_floor",
+      "schema_key": "building_status.rows[1].floor",
+      "label": "건축물현황 2행 층별",
+      "anchor_id": "det_000087",
+      "value_type": "floor.label",
+      "rule": "pool:floor_labels",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_2_structure",
+      "schema_key": "building_status.rows[1].structure",
+      "label": "건축물현황 2행 구조",
+      "anchor_id": "det_000088",
+      "value_type": "building.structure",
+      "rule": "pool:building_structures",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_2_use",
+      "schema_key": "building_status.rows[1].use",
+      "label": "건축물현황 2행 용도",
+      "anchor_id": "det_000089",
+      "value_type": "building.use",
+      "rule": "pool:building_uses",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_2_area",
+      "schema_key": "building_status.rows[1].area",
+      "label": "건축물현황 2행 면적",
+      "anchor_id": "det_000090",
+      "value_type": "number.decimal_square_meter",
+      "rule": "decimal_range:10.00..9999.99|unit:m²|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "owner_registration_number_masked",
+      "schema_key": "owner.registration_number_masked",
+      "label": "주민(법인)등록번호",
+      "anchor_id": "det_000091",
+      "value_type": "identifier.masked_registration_number",
+      "rule": "pattern:######-*******|masked_only",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.7,
+      "notes": ""
+    },
+    {
+      "field_id": "owner_change_reason",
+      "schema_key": "owner.change_reason",
+      "label": "변동원인",
+      "anchor_id": "det_000093",
+      "value_type": "owner_change_reason",
+      "rule": "pool:owner_change_reasons",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_3_section",
+      "schema_key": "building_status.rows[2].section",
+      "label": "건축물현황 3행 구분",
+      "anchor_id": "det_000094",
+      "value_type": "building.section_code",
+      "rule": "choice:주1|주2|부1",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_3_floor",
+      "schema_key": "building_status.rows[2].floor",
+      "label": "건축물현황 3행 층별",
+      "anchor_id": "det_000095",
+      "value_type": "floor.label",
+      "rule": "pool:floor_labels",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_3_structure",
+      "schema_key": "building_status.rows[2].structure",
+      "label": "건축물현황 3행 구조",
+      "anchor_id": "det_000096",
+      "value_type": "building.structure",
+      "rule": "pool:building_structures",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_3_use",
+      "schema_key": "building_status.rows[2].use",
+      "label": "건축물현황 3행 용도",
+      "anchor_id": "det_000097",
+      "value_type": "building.use",
+      "rule": "pool:building_uses",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_3_area",
+      "schema_key": "building_status.rows[2].area",
+      "label": "건축물현황 3행 면적",
+      "anchor_id": "det_000098",
+      "value_type": "number.decimal_square_meter",
+      "rule": "decimal_range:10.00..9999.99|unit:m²|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_4_section",
+      "schema_key": "building_status.rows[3].section",
+      "label": "건축물현황 4행 구분",
+      "anchor_id": "det_000100",
+      "value_type": "building.section_code",
+      "rule": "choice:주1|주2|부1",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_4_floor",
+      "schema_key": "building_status.rows[3].floor",
+      "label": "건축물현황 4행 층별",
+      "anchor_id": "det_000101",
+      "value_type": "floor.label",
+      "rule": "pool:floor_labels",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_4_structure",
+      "schema_key": "building_status.rows[3].structure",
+      "label": "건축물현황 4행 구조",
+      "anchor_id": "det_000102",
+      "value_type": "building.structure",
+      "rule": "pool:building_structures",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_4_use",
+      "schema_key": "building_status.rows[3].use",
+      "label": "건축물현황 4행 용도",
+      "anchor_id": "det_000103",
+      "value_type": "building.use",
+      "rule": "pool:building_uses",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "status_row_4_area",
+      "schema_key": "building_status.rows[3].area",
+      "label": "건축물현황 4행 면적",
+      "anchor_id": "det_000104",
+      "value_type": "number.decimal_square_meter",
+      "rule": "decimal_range:10.00..9999.99|unit:m²|precision:2",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "certificate_issue_date",
+      "schema_key": "certificate.issue_date",
+      "label": "발급일",
+      "anchor_id": "det_000107",
+      "value_type": "date.korean_ymd",
+      "rule": "date_between:-365d:+0d|format:%Y년 %m월 %d일",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "clerk_name",
+      "schema_key": "certificate.clerk_name",
+      "label": "담당자",
+      "anchor_id": "det_000110",
+      "value_type": "person_or_office_name.synthetic",
+      "rule": "person.ko_synthetic_or_office_name|no_real_person",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "clerk_phone",
+      "schema_key": "certificate.clerk_phone",
+      "label": "전화",
+      "anchor_id": "det_000111",
+      "value_type": "phone.kr_public_office",
+      "rule": "phone.kr_public_office_synthetic",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    },
+    {
+      "field_id": "issuer",
+      "schema_key": "certificate.issuer",
+      "label": "발급기관장",
+      "anchor_id": "det_000113",
+      "value_type": "government_office_title",
+      "rule": "pool:public_office_titles",
+      "research_evidence_ids": [
+        "R-GOV24-SEARCH",
+        "R-BUILDING-REGULATION"
+      ],
+      "privacy_guardrail": "synthetic_only; never copy real sample personal/company/address/registration data",
+      "confidence": 0.76,
+      "notes": ""
+    }
+  ],
+  "data_pools": [
+    "synthetic_building_names_ko",
+    "synthetic_ko_addresses",
+    "building_structures",
+    "building_uses",
+    "zoning_area_types",
+    "restriction_zone_types",
+    "floor_labels",
+    "owner_change_reasons",
+    "public_office_titles"
+  ],
+  "constraints": [
+    {
+      "constraint_id": "no_real_owner_data",
+      "description": "소유자명, 주소, 주민/법인등록번호는 샘플 값을 재사용하지 않고 합성/마스킹 규칙만 사용한다."
+    },
+    {
+      "constraint_id": "visible_anchor_only",
+      "description": "schema_draft 필드는 review에서 use로 확인된 page 1 value anchor에만 연결했다."
+    },
+    {
+      "constraint_id": "empty_schema_values",
+      "description": "schema_draft.fields[].value는 모두 빈 문자열이다."
+    }
+  ]
+}

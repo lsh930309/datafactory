@@ -1,0 +1,1146 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "title": "토지대장·건축물대장",
+  "sample_kind": "filled_sample",
+  "created_at": "2026-07-08T08:53:05+09:00",
+  "source_request": "workbench/documents/토지대장·건축물대장__COL-03/authoring/agent_requests/20260707T234807309664Z/request.json",
+  "source_review": "workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json",
+  "source_sample": "workbench/documents/토지대장·건축물대장__COL-03/samples/original/건축물대장.pdf",
+  "notes": "Draft generated for UI approval only. Values are intentionally empty strings.",
+  "fields": [
+    {
+      "field_id": "document_confirmation_number",
+      "key": "document.confirmation_number",
+      "label": "문서확인번호",
+      "anchor_id": "manual_1783467788626",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "value_type": "identifier.document_confirmation",
+      "group": "문서정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9
+    },
+    {
+      "field_id": "print_date",
+      "key": "print.date",
+      "label": "출력일자",
+      "anchor_id": "det_000004",
+      "label_anchor_ids": [],
+      "value_type": "date.ymd_slash",
+      "group": "문서정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9998
+    },
+    {
+      "field_id": "print_time",
+      "key": "print.time",
+      "label": "출력시각",
+      "anchor_id": "det_000006",
+      "label_anchor_ids": [],
+      "value_type": "time.hms",
+      "group": "문서정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9977
+    },
+    {
+      "field_id": "page_number",
+      "key": "page.number",
+      "label": "페이지 표기",
+      "anchor_id": "det_000009",
+      "label_anchor_ids": [],
+      "value_type": "page_count_label",
+      "group": "문서정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9303
+    },
+    {
+      "field_id": "building_id",
+      "key": "building.id",
+      "label": "건물ID",
+      "anchor_id": "det_000015",
+      "label_anchor_ids": [
+        "det_000011"
+      ],
+      "value_type": "identifier.building_id",
+      "group": "기본정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9997
+    },
+    {
+      "field_id": "building_management_number",
+      "key": "building.management_number",
+      "label": "고유번호",
+      "anchor_id": "det_000013",
+      "label_anchor_ids": [
+        "det_000012"
+      ],
+      "value_type": "identifier.building_management_number",
+      "group": "기본정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9918
+    },
+    {
+      "field_id": "building_name",
+      "key": "building.name",
+      "label": "명칭",
+      "anchor_id": "det_000016",
+      "label_anchor_ids": [
+        "det_000014"
+      ],
+      "value_type": "text.short",
+      "group": "기본정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9711
+    },
+    {
+      "field_id": "unit_household_count",
+      "key": "building.unit_household_count",
+      "label": "호수/가구수/세대수",
+      "anchor_id": "det_000018",
+      "label_anchor_ids": [
+        "det_000017"
+      ],
+      "value_type": "count_triplet",
+      "group": "기본정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9812
+    },
+    {
+      "field_id": "site_location",
+      "key": "site.location",
+      "label": "대지위치",
+      "anchor_id": "det_000021",
+      "label_anchor_ids": [
+        "det_000019"
+      ],
+      "value_type": "address.ko_compact",
+      "group": "소재지",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION",
+          "R-LAND-CADASTRE"
+        ]
+      },
+      "confidence": 0.9956
+    },
+    {
+      "field_id": "lot_number",
+      "key": "site.lot_number",
+      "label": "지번",
+      "anchor_id": "det_000022",
+      "label_anchor_ids": [
+        "det_000020"
+      ],
+      "value_type": "lot_number",
+      "group": "소재지",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION",
+          "R-LAND-CADASTRE"
+        ]
+      },
+      "confidence": 0.9955
+    },
+    {
+      "field_id": "road_address",
+      "key": "site.road_address",
+      "label": "도로명주소",
+      "anchor_id": "det_000024",
+      "label_anchor_ids": [
+        "det_000023"
+      ],
+      "value_type": "address.ko_road",
+      "group": "소재지",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION",
+          "R-LAND-CADASTRE"
+        ]
+      },
+      "confidence": 0.9602
+    },
+    {
+      "field_id": "site_area",
+      "key": "site.area",
+      "label": "대지면적",
+      "anchor_id": "det_000030",
+      "label_anchor_ids": [
+        "det_000025"
+      ],
+      "value_type": "area.square_meter",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9979
+    },
+    {
+      "field_id": "total_floor_area",
+      "key": "building.total_floor_area",
+      "label": "연면적",
+      "anchor_id": "det_000031",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "value_type": "area.square_meter",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.8555
+    },
+    {
+      "field_id": "zoning_area",
+      "key": "land_use.zoning_area",
+      "label": "지역",
+      "anchor_id": "det_000032",
+      "label_anchor_ids": [
+        "det_000027"
+      ],
+      "value_type": "land_use.zoning",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9534
+    },
+    {
+      "field_id": "restriction_zone",
+      "key": "land_use.restriction_zone",
+      "label": "구역",
+      "anchor_id": "det_000033",
+      "label_anchor_ids": [
+        "det_000029"
+      ],
+      "value_type": "land_use.restriction_zone",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.997
+    },
+    {
+      "field_id": "building_area",
+      "key": "building.building_area",
+      "label": "건축면적",
+      "anchor_id": "det_000039",
+      "label_anchor_ids": [
+        "det_000034"
+      ],
+      "value_type": "area.square_meter",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9226
+    },
+    {
+      "field_id": "floor_area_for_far",
+      "key": "building.floor_area_for_far",
+      "label": "용적률 산정용 연면적",
+      "anchor_id": "det_000040",
+      "label_anchor_ids": [
+        "det_000035"
+      ],
+      "value_type": "area.square_meter",
+      "group": "대지/건축개요",
+      "uncertainty": "OCR text uses apostrophe-like unit; visible image reads square meter.",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.72
+    },
+    {
+      "field_id": "main_structure",
+      "key": "building.main_structure",
+      "label": "주구조",
+      "anchor_id": "det_000041",
+      "label_anchor_ids": [
+        "det_000036"
+      ],
+      "value_type": "building.structure",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9259
+    },
+    {
+      "field_id": "main_use",
+      "key": "building.main_use",
+      "label": "주용도",
+      "anchor_id": "det_000042",
+      "label_anchor_ids": [
+        "det_000037"
+      ],
+      "value_type": "building.use",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9526
+    },
+    {
+      "field_id": "floor_count_summary",
+      "key": "building.floor_count_summary",
+      "label": "층수",
+      "anchor_id": "det_000043",
+      "label_anchor_ids": [
+        "det_000038"
+      ],
+      "value_type": "floor_count_summary",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9603
+    },
+    {
+      "field_id": "building_coverage_ratio",
+      "key": "building.coverage_ratio",
+      "label": "건폐율",
+      "anchor_id": "det_000049",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "ratio.percent",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9993
+    },
+    {
+      "field_id": "floor_area_ratio",
+      "key": "building.floor_area_ratio",
+      "label": "용적률",
+      "anchor_id": "det_000050",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "value_type": "ratio.percent",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9989
+    },
+    {
+      "field_id": "height",
+      "key": "building.height",
+      "label": "높이",
+      "anchor_id": "det_000051",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "value_type": "length.meter",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9993
+    },
+    {
+      "field_id": "roof",
+      "key": "building.roof",
+      "label": "지붕",
+      "anchor_id": "det_000052",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "value_type": "building.roof",
+      "group": "대지/건축개요",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9968
+    },
+    {
+      "field_id": "status_row_1_section",
+      "key": "building_status.rows[0].section",
+      "label": "건축물현황 1행 구분",
+      "anchor_id": "det_000077",
+      "label_anchor_ids": [
+        "det_000067"
+      ],
+      "value_type": "building.section_code",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9984
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "key": "building_status.rows[0].floor",
+      "label": "건축물현황 1행 층별",
+      "anchor_id": "det_000078",
+      "label_anchor_ids": [
+        "det_000068"
+      ],
+      "value_type": "floor.label",
+      "group": "건축물현황",
+      "uncertainty": "OCR text is z1층; visible image appears 지1층.",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.72
+    },
+    {
+      "field_id": "status_row_1_structure",
+      "key": "building_status.rows[0].structure",
+      "label": "건축물현황 1행 구조",
+      "anchor_id": "det_000079",
+      "label_anchor_ids": [
+        "det_000069"
+      ],
+      "value_type": "building.structure",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9987
+    },
+    {
+      "field_id": "status_row_1_use",
+      "key": "building_status.rows[0].use",
+      "label": "건축물현황 1행 용도",
+      "anchor_id": "det_000080",
+      "label_anchor_ids": [
+        "det_000070"
+      ],
+      "value_type": "building.use",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9914
+    },
+    {
+      "field_id": "status_row_1_area",
+      "key": "building_status.rows[0].area",
+      "label": "건축물현황 1행 면적",
+      "anchor_id": "det_000081",
+      "label_anchor_ids": [
+        "det_000071"
+      ],
+      "value_type": "number.decimal_square_meter",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9995
+    },
+    {
+      "field_id": "owner_name",
+      "key": "owner.name_or_entity",
+      "label": "소유자 성명(명칭)",
+      "anchor_id": "det_000082",
+      "label_anchor_ids": [
+        "det_000064"
+      ],
+      "value_type": "entity.synthetic_name",
+      "group": "소유자현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9992
+    },
+    {
+      "field_id": "owner_address",
+      "key": "owner.address",
+      "label": "소유자 주소",
+      "anchor_id": "det_000083",
+      "label_anchor_ids": [
+        "det_000073"
+      ],
+      "value_type": "address.ko_synthetic",
+      "group": "소유자현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9591
+    },
+    {
+      "field_id": "owner_change_date",
+      "key": "owner.change_date",
+      "label": "소유자 변동일",
+      "anchor_id": "det_000084",
+      "label_anchor_ids": [
+        "det_000066"
+      ],
+      "value_type": "date.ymd_dot",
+      "group": "소유자현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9942
+    },
+    {
+      "field_id": "owner_share",
+      "key": "owner.share",
+      "label": "소유권 지분",
+      "anchor_id": "det_000085",
+      "label_anchor_ids": [
+        "det_000065",
+        "det_000074"
+      ],
+      "value_type": "fraction",
+      "group": "소유자현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9991
+    },
+    {
+      "field_id": "status_row_2_section",
+      "key": "building_status.rows[1].section",
+      "label": "건축물현황 2행 구분",
+      "anchor_id": "det_000086",
+      "label_anchor_ids": [
+        "det_000067"
+      ],
+      "value_type": "building.section_code",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9989
+    },
+    {
+      "field_id": "status_row_2_floor",
+      "key": "building_status.rows[1].floor",
+      "label": "건축물현황 2행 층별",
+      "anchor_id": "det_000087",
+      "label_anchor_ids": [
+        "det_000068"
+      ],
+      "value_type": "floor.label",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9997
+    },
+    {
+      "field_id": "status_row_2_structure",
+      "key": "building_status.rows[1].structure",
+      "label": "건축물현황 2행 구조",
+      "anchor_id": "det_000088",
+      "label_anchor_ids": [
+        "det_000069"
+      ],
+      "value_type": "building.structure",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9971
+    },
+    {
+      "field_id": "status_row_2_use",
+      "key": "building_status.rows[1].use",
+      "label": "건축물현황 2행 용도",
+      "anchor_id": "det_000089",
+      "label_anchor_ids": [
+        "det_000070"
+      ],
+      "value_type": "building.use",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9801
+    },
+    {
+      "field_id": "status_row_2_area",
+      "key": "building_status.rows[1].area",
+      "label": "건축물현황 2행 면적",
+      "anchor_id": "det_000090",
+      "label_anchor_ids": [
+        "det_000071"
+      ],
+      "value_type": "number.decimal_square_meter",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9994
+    },
+    {
+      "field_id": "owner_registration_number_masked",
+      "key": "owner.registration_number_masked",
+      "label": "주민(법인)등록번호",
+      "anchor_id": "det_000091",
+      "label_anchor_ids": [
+        "det_000072",
+        "det_000075"
+      ],
+      "value_type": "identifier.masked_registration_number",
+      "group": "소유자현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9605
+    },
+    {
+      "field_id": "owner_change_reason",
+      "key": "owner.change_reason",
+      "label": "변동원인",
+      "anchor_id": "det_000093",
+      "label_anchor_ids": [
+        "det_000076"
+      ],
+      "value_type": "owner_change_reason",
+      "group": "소유자현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9929
+    },
+    {
+      "field_id": "status_row_3_section",
+      "key": "building_status.rows[2].section",
+      "label": "건축물현황 3행 구분",
+      "anchor_id": "det_000094",
+      "label_anchor_ids": [
+        "det_000067"
+      ],
+      "value_type": "building.section_code",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9987
+    },
+    {
+      "field_id": "status_row_3_floor",
+      "key": "building_status.rows[2].floor",
+      "label": "건축물현황 3행 층별",
+      "anchor_id": "det_000095",
+      "label_anchor_ids": [
+        "det_000068"
+      ],
+      "value_type": "floor.label",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9997
+    },
+    {
+      "field_id": "status_row_3_structure",
+      "key": "building_status.rows[2].structure",
+      "label": "건축물현황 3행 구조",
+      "anchor_id": "det_000096",
+      "label_anchor_ids": [
+        "det_000069"
+      ],
+      "value_type": "building.structure",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9965
+    },
+    {
+      "field_id": "status_row_3_use",
+      "key": "building_status.rows[2].use",
+      "label": "건축물현황 3행 용도",
+      "anchor_id": "det_000097",
+      "label_anchor_ids": [
+        "det_000070"
+      ],
+      "value_type": "building.use",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9806
+    },
+    {
+      "field_id": "status_row_3_area",
+      "key": "building_status.rows[2].area",
+      "label": "건축물현황 3행 면적",
+      "anchor_id": "det_000098",
+      "label_anchor_ids": [
+        "det_000071"
+      ],
+      "value_type": "number.decimal_square_meter",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9995
+    },
+    {
+      "field_id": "status_row_4_section",
+      "key": "building_status.rows[3].section",
+      "label": "건축물현황 4행 구분",
+      "anchor_id": "det_000100",
+      "label_anchor_ids": [
+        "det_000067"
+      ],
+      "value_type": "building.section_code",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9978
+    },
+    {
+      "field_id": "status_row_4_floor",
+      "key": "building_status.rows[3].floor",
+      "label": "건축물현황 4행 층별",
+      "anchor_id": "det_000101",
+      "label_anchor_ids": [
+        "det_000068"
+      ],
+      "value_type": "floor.label",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.999
+    },
+    {
+      "field_id": "status_row_4_structure",
+      "key": "building_status.rows[3].structure",
+      "label": "건축물현황 4행 구조",
+      "anchor_id": "det_000102",
+      "label_anchor_ids": [
+        "det_000069"
+      ],
+      "value_type": "building.structure",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9975
+    },
+    {
+      "field_id": "status_row_4_use",
+      "key": "building_status.rows[3].use",
+      "label": "건축물현황 4행 용도",
+      "anchor_id": "det_000103",
+      "label_anchor_ids": [
+        "det_000070"
+      ],
+      "value_type": "building.use",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9798
+    },
+    {
+      "field_id": "status_row_4_area",
+      "key": "building_status.rows[3].area",
+      "label": "건축물현황 4행 면적",
+      "anchor_id": "det_000104",
+      "label_anchor_ids": [
+        "det_000071"
+      ],
+      "value_type": "number.decimal_square_meter",
+      "group": "건축물현황",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9995
+    },
+    {
+      "field_id": "certificate_issue_date",
+      "key": "certificate.issue_date",
+      "label": "발급일",
+      "anchor_id": "det_000107",
+      "label_anchor_ids": [
+        "manual_1783467905912"
+      ],
+      "value_type": "date.korean_ymd",
+      "group": "증명/발급정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9282
+    },
+    {
+      "field_id": "clerk_name",
+      "key": "certificate.clerk_name",
+      "label": "담당자",
+      "anchor_id": "det_000110",
+      "label_anchor_ids": [
+        "manual_1783467884595"
+      ],
+      "value_type": "person_or_office_name.synthetic",
+      "group": "증명/발급정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.992
+    },
+    {
+      "field_id": "clerk_phone",
+      "key": "certificate.clerk_phone",
+      "label": "전화",
+      "anchor_id": "det_000111",
+      "label_anchor_ids": [
+        "manual_1783467893196"
+      ],
+      "value_type": "phone.kr_public_office",
+      "group": "증명/발급정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.9692
+    },
+    {
+      "field_id": "issuer",
+      "key": "certificate.issuer",
+      "label": "발급기관장",
+      "anchor_id": "det_000113",
+      "label_anchor_ids": [],
+      "value_type": "government_office_title",
+      "group": "증명/발급정보",
+      "value": "",
+      "source_page": 1,
+      "evidence": {
+        "anchor_source": "bbox_review",
+        "research_evidence_ids": [
+          "R-GOV24-SEARCH",
+          "R-BUILDING-REGULATION"
+        ]
+      },
+      "confidence": 0.96
+    }
+  ]
+}

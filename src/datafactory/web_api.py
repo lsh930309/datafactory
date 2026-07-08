@@ -79,6 +79,23 @@ AUTHORING_AGENT_REQUIRED_OUTPUTS = [
     "application_notes.md",
 ]
 AUTHORING_AGENT_JSON_OUTPUTS = {name for name in AUTHORING_AGENT_REQUIRED_OUTPUTS if name.endswith(".json")}
+AUTHORING_AGENT_SUPPORTED_FAKER_RULES = [
+    "literal:<고정 더미 문자열>",
+    "choice:<값1>|<값2>|<값3>",
+    "pool:<data_pools 이름>",
+    "same_as:<다른 field_id>",
+    "pattern:<# 숫자, A 대문자, a 소문자, * 영문대문자/숫자 패턴>",
+    "template:<문자열과 {{지원 rule}} 조합>",
+    "person.name_ko",
+    "person.phone_kr",
+    "person.rrn",
+    "date.kr",
+    "money.krw",
+    "company.name_ko",
+    "address.ko",
+    "free_text.short",
+    "checkbox.bool",
+]
 
 
 def runtime_health() -> dict[str, Any]:
@@ -398,8 +415,17 @@ def _authoring_agent_prompt_markdown(request: dict[str, Any]) -> str:
         "## Schema 규칙",
         *[f"- {rule}" for rule in contract["schema_rules"]],
         "",
+        "## 시각 근거 우선 규칙",
+        *[f"- {rule}" for rule in contract["visual_source_of_truth_rules"]],
+        "",
         "## Faker profile 규칙",
         *[f"- {rule}" for rule in contract["faker_profile_rules"]],
+        "",
+        "## 지원 Faker rule 문법",
+        "faker_profile_draft.json.field_generators 값은 아래 형식만 사용한다.",
+        *[f"- `{rule}`" for rule in AUTHORING_AGENT_SUPPORTED_FAKER_RULES],
+        "",
+        "금지 예시: `date_between:-365d:+0d|format:%Y/%m/%d`, `time|format:%H:%M:%S`, `decimal_range:10..99`, `identifier.document_confirmation`, `area.square_meter`, `land_use.zoning`, `building.structure`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`.",
         "",
         "## DOCX/빈 템플릿 anchor 규칙",
         *[f"- {rule}" for rule in contract["template_anchor_rules"]],
@@ -411,6 +437,7 @@ def _authoring_agent_prompt_markdown(request: dict[str, Any]) -> str:
         f"- sample: {request['inputs'].get('sample') or '-'}",
         f"- latestReview: {request['inputs'].get('latestReview') or '-'}",
         f"- latestInpainted: {request['inputs'].get('latestInpainted') or '-'}",
+        f"- visualEvidenceManifest: {(request.get('generated_sidecars') or {}).get('visualEvidenceManifest') or '-'}",
         "",
     ]
     return "\n".join(lines) + "\n"
@@ -467,19 +494,38 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "출처 간 내용이 다르거나 실제 템플릿 anchor와 연결되지 않으면 faker rule을 확정하지 않고 uncertainty_report에 남긴다.",
             ],
             "schema_rules": [
-                "KIE 관점의 key-value hierarchy만 작성한다.",
-                "모든 value는 빈 문자열로 둔다.",
+                "`schema_draft.json`은 constrained full authoring draft이다. Agent가 의미 판단과 bbox mapping을 함께 수행하되, 시스템이 deterministic하게 분할할 수 있는 JSON만 작성한다.",
+                "`schema_draft.json.semantic_schema`는 사용자와 GT가 보는 primary schema이다. 메타데이터 없이 KIE 관점의 key-value hierarchy만 작성하고 모든 leaf value는 빈 문자열로 둔다.",
+                "`schema_draft.json.fields` 또는 `schema_draft.json.field_bindings`는 semantic_schema leaf와 bbox anchor를 연결하기 위한 binding layer로만 사용한다.",
+                "각 binding은 `field_id`, 한국어 `key` 또는 `label`, `semantic_path`, `anchor_id`, 빈 `value`, 선택적 `label_anchor_ids`, `value_type`, `faker_rule`/`generator`, `style_class`, `unit_policy`, `research_evidence_ids`, `visual_evidence`를 포함한다.",
+                "각 binding의 `semantic_path`는 반드시 `semantic_schema`의 leaf path와 정확히 일치해야 한다.",
+                "각 binding의 `anchor_id`는 anchor_map_draft에 존재해야 하며, 값 target인 `use` anchor여야 한다. 라벨 bbox는 `label_anchor_ids`에만 둔다.",
                 "key는 실제 문서에 보이는 라벨, 표제, placeholder, 주변 텍스트, 편집 가능한 anchor 기반 한국어 자연어를 우선한다.",
                 "문서에 보이지 않는 추상 키, 업무 추론만으로 만든 키, downstream 편의용 임의 구조체를 만들지 않는다.",
                 "웹 리서치로 발견한 일반 항목이라도 대응 anchor가 없으면 schema_draft에 자동 추가하지 않는다.",
+                "`use` anchor 중 schema field로 매핑하지 않는 anchor가 있으면 `unmapped_use_anchors`에 anchor_id와 제외 사유를 기록한다.",
+            ],
+            "visual_source_of_truth_rules": [
+                "전체 템플릿 이미지가 최상위 source of truth이다. 웹 리서치, 문서명, 라벨 텍스트, 관행보다 실제 전체 문서 이미지에서 보이는 레이아웃/라벨/값 위치 관계가 우선한다.",
+                "agent_requests의 visual_evidence_manifest.json은 전체 템플릿 이미지 경로와 bbox 위치 인덱스이다. 먼저 전체 이미지를 보고 문맥을 판단하고, crops/*.png는 작은 글자나 경계가 애매할 때만 확대 보조 자료로 확인한다.",
+                "값 위치 바로 옆/안에 정적 단위나 prefix/suffix가 실제로 인쇄되어 있는지는 전체 이미지의 문맥에서 판단하고, 필요한 경우 해당 crop으로 확대 확인한다.",
+                "라벨에만 단위 의미가 있고 값 위치에는 별도 정적 단위가 없으면, 그 단위가 자연스러운 값 표기의 일부인지 판단해 포함할 수 있다. 예: 호수/가구수/세대수 값은 `0호/0가구/0세대`처럼 생성한다.",
+                "전체 이미지에서 보이는 시각 근거와 OCR/리서치가 충돌하면 전체 이미지 근거를 따르고, 결정 근거를 faker_profile_draft.json.field_rules 또는 uncertainty_report.json에 기록한다.",
             ],
             "faker_profile_rules": [
                 "schema key의 의미가 충분히 명확하고 문서 anchor 또는 리서치 근거와 연결될 때만 faker rule을 제안한다.",
-                "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안한다.",
+                "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안하되, 반드시 현재 DataFactory 렌더러가 지원하는 rule 문법만 사용한다.",
+                "문서 이미지/템플릿의 값 입력 위치 바로 옆/안에 `㎡`, `m²`, `m2`, `%`, `m`, `원`, `명`, `건`, `동`, `층` 같은 단위가 이미 정적 텍스트로 남아 있으면 faker 값에는 그 단위를 포함하지 않는다.",
+                "`호/가구/세대`처럼 라벨에만 단위 의미가 있고 값 위치에 별도 정적 단위가 없는 복합 값은 단위를 포함해 생성한다. 단위 포함/제외 근거를 field_rules 또는 uncertainty_report에 기록한다.",
+                "faker_profile_draft.json에는 렌더러가 직접 읽는 `field_generators` 객체를 반드시 포함하고, key는 schema_draft.fields[].field_id, value는 지원 rule 문자열이어야 한다.",
+                f"지원 rule 문법: {', '.join(AUTHORING_AGENT_SUPPORTED_FAKER_RULES)}.",
+                "`pool:<name>`을 쓰는 경우 faker_profile_draft.json의 `data_pools.<name>`에 반드시 실제 scalar 합성 값 배열을 함께 정의한다. data_pools에 없는 pool 이름은 절대 쓰지 않는다.",
+                "`date_between:`, `time|format:`, `decimal_range:`, `identifier.*`, `area.*`, `land_use.*`, `building.*`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`처럼 현재 렌더러가 모르는 custom rule/type 이름은 field_generators 값으로 쓰지 않는다.",
+                "지원 문법만으로 정밀 형식을 표현하기 어렵다면 `pattern:`, `choice:`, `pool:`, `template:` 중 하나로 근사하고, 근사 사유와 원래 의도는 field_rules 또는 uncertainty_report에 기록한다.",
                 "의미가 불확실한 key는 literal:, choice:, pool: 등을 임의 생성하지 말고 보류 사유를 기록한다.",
                 "실제 개인정보, 실제 기업정보, 실제 계좌/식별번호처럼 오인 가능한 값은 만들지 않는다.",
                 "합성 더미 값 규칙 또는 승인된 value pool 참조만 사용한다.",
-                "faker_profile_draft의 각 rule은 관련 schema key, anchor, research_report 근거 ID를 추적 가능하게 남긴다.",
+                "faker_profile_draft의 각 rule은 관련 schema key, anchor, research_report 근거 ID를 추적 가능하게 남긴다. 추적용 상세 목록은 선택적으로 `field_rules`에 중복 기록할 수 있지만, 최종 적용 기준은 `field_generators`이다.",
             ],
             "template_anchor_rules": [
                 "PDF/JPG는 visible text, OCR, bbox 위치, 주변 텍스트를 anchor 근거로 삼는다.",
@@ -523,6 +569,16 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             generated_sidecars["anchorMapDraft"] = _display_path(anchor_map_path, ROOT)
         except Exception as exc:
             generated_sidecars["anchorMapError"] = str(exc)
+        try:
+            visual_manifest_path = _write_authoring_visual_evidence_manifest(
+                doc_id=doc_id,
+                review_path=_resolve_workspace_path(latest_review),
+                request_dir=request_dir,
+                visual_source_path=_resolve_workspace_path(str(request["inputs"].get("latestInpainted") or "")) if request["inputs"].get("latestInpainted") else None,
+            )
+            generated_sidecars["visualEvidenceManifest"] = _display_path(visual_manifest_path, ROOT)
+        except Exception as exc:
+            generated_sidecars["visualEvidenceError"] = str(exc)
     request["generated_sidecars"] = generated_sidecars
     path.write_text(json.dumps(request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     prompt_path.write_text(_authoring_agent_prompt_markdown(request), encoding="utf-8")
@@ -536,6 +592,67 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "paths": {"request": _display_path(path, ROOT), "prompt": _display_path(prompt_path, ROOT)},
         "request": request,
     }
+
+
+def _write_authoring_visual_evidence_manifest(
+    *,
+    doc_id: str,
+    review_path: Path,
+    request_dir: Path,
+    visual_source_path: Path | None = None,
+    padding: int = 64,
+) -> Path:
+    policy = load_review_policy(review_path)
+    visual_source = visual_source_path if visual_source_path and visual_source_path.exists() else policy.source_image
+    visual_source = visual_source.resolve()
+    crop_dir = request_dir / "visual_evidence" / "crops"
+    crop_dir.mkdir(parents=True, exist_ok=True)
+    entries: list[dict[str, Any]] = []
+    with Image.open(visual_source) as image:
+        source_image = image.convert("RGB")
+        for index, label in enumerate(policy.labels, start=1):
+            if label.status != "use":
+                continue
+            padded = label.bbox.padded(padding).clipped(policy.image_width, policy.image_height)
+            crop_path = crop_dir / f"crop_{index:04d}_{_safe_name(label.id)}.png"
+            source_image.crop((padded.x, padded.y, padded.right, padded.bottom)).save(crop_path)
+            entries.append(
+                {
+                    "anchor_id": label.id,
+                    "status": label.status,
+                    "auto_type": label.auto_type,
+                    "text": label.text,
+                    "text_source": label.text_source,
+                    "confidence": label.confidence,
+                    "bbox": label.bbox.to_list(),
+                    "padded_bbox": padded.to_list(),
+                    "bbox_format": "xywh",
+                    "crop_path": _display_path(crop_path, ROOT),
+                    "visual_checklist": [
+                        "Use this crop only as a zoom aid after checking the full template image context.",
+                        "If static unit/prefix/suffix is visible at the value position, omit it from the generated value.",
+                        "If unit words appear only in the label and not beside the value position, keep them when they are part of the natural value notation.",
+                    ],
+                }
+            )
+    manifest = {
+        "schema_version": 1,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "doc_id": doc_id,
+        "source_review": _display_path(review_path, ROOT),
+        "visual_source": _display_path(visual_source, ROOT),
+        "source_image": _display_path(policy.source_image, ROOT),
+        "image": {"width": policy.image_width, "height": policy.image_height},
+        "padding": padding,
+        "source_of_truth_policy": [
+            "The full template image is the primary visual source of truth; crops are zoom aids, not replacements for full-page context.",
+            "Unit/prefix/suffix decisions must be made from value-position visual evidence, not from label text alone.",
+        ],
+        "crops": entries,
+    }
+    manifest_path = request_dir / "visual_evidence_manifest.json"
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return manifest_path
 
 
 def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = True) -> dict[str, Any]:
@@ -676,6 +793,8 @@ You are running as a local Codex subprocess for the DataFactory workbench.
 ## Required behavior
 - Read the request package: `{_display_path(request_path, ROOT)}`.
 - Read every input file referenced by the request when it exists.
+- Treat `generated_sidecars.visualEvidenceManifest` as the visual index for the full template image and bbox locations when present.
+- Inspect the full template image as the primary visual source of truth for field targets, static labels, prefix/suffix, and unit handling. Use crop images only as optional zoom aids for ambiguous or small regions. Do not infer unit inclusion/exclusion from label text alone.
 - Use live web search for the document type research required by the request contract.
 - Follow `contract.sample_kind` strictly. If it is `blank_template`, treat OCR text bboxes as static label evidence unless review status/role proves they are value regions.
 - Generate the full draft outputs listed below.
@@ -689,15 +808,26 @@ You are running as a local Codex subprocess for the DataFactory workbench.
 {chr(10).join(f"- `{name}`" for name in AUTHORING_AGENT_REQUIRED_OUTPUTS)}
 
 ## Output contracts
-- `schema_draft.json`: semantic draft with `schema_version`, `doc_id`, `title`, `fields`; each field should include `field_id`, `key` or `label`, `anchor_id`, `value` as an empty string, and optional `value_type`.
+- `schema_draft.json`: constrained full authoring draft with `schema_version`, `doc_id`, `title`, primary `semantic_schema`, and binding layer `fields` or `field_bindings`. `semantic_schema` must be a metadata-free KIE key-value hierarchy whose leaf values are empty strings. The binding layer is only the bridge from semantic leaf to bbox target; each binding must include `field_id`, `key` or `label`, `semantic_path`, `anchor_id`, `value` as an empty string, and optional `label_anchor_ids`, `value_type`, `faker_rule`/`generator`, `style_class`, `unit_policy`, `research_evidence_ids`, and `visual_evidence`.
+- Every binding `semantic_path` must point to an existing `semantic_schema` leaf. Every binding `anchor_id` must exist in `anchor_map_draft.json` and target a `use` value-region anchor. If a `use` anchor is intentionally not mapped, list it in `schema_draft.json.unmapped_use_anchors` with a reason.
 - `stylesheet_draft.json`: draft render style classes or field style hints; keep conservative defaults if visual style is uncertain.
-- `faker_profile_draft.json`: field-level faker rules with traceable references to schema keys, anchors, and research evidence. Do not use real personal/company/account data.
+- `faker_profile_draft.json`: must include `field_generators` as the renderer-compatible source of truth. It may also include `field_rules` for traceability, but every `field_generators` value must use only the supported rule grammar below. Do not use real personal/company/account data.
 - `value_pool_draft.json`: reusable value pools proposed by the agent, with source/usage notes.
 - `research_report.json`: search date, queries, source URLs, source type, summaries, and field-level evidence links.
 - `uncertainty_report.json`: unresolved fields, conflicting evidence, low-confidence faker rules, and user decisions needed.
 - `anchor_map_draft.json`: preserve or improve the anchor map from the request package.
 - For `blank_template`, `anchor_map_draft.json` must distinguish value targets from labels using `status`, `auto_type`, `role`, `text_source`, or `provenance`. Static labels may be listed, but schema field targets must point to value targets only.
 - `application_notes.md`: concise Korean notes explaining what was generated, what remains uncertain, and how to approve/apply.
+
+## Supported faker rule grammar
+Use only these forms in `faker_profile_draft.json.field_generators`.
+{chr(10).join(f"- `{rule}`" for rule in AUTHORING_AGENT_SUPPORTED_FAKER_RULES)}
+
+Do not put unsupported semantic type names in `field_generators`.
+Before adding or removing a unit suffix in any generated value, inspect the full template image around the target bbox; use the crop only as a zoom aid if needed. If the unit remains as static text at the value position, omit the unit from the faker value. If the unit appears only in the label, such as 호/가구/세대, keep the unit in the generated value when it is part of the natural value notation.
+If you use `pool:<name>`, define `data_pools.<name>` as a non-empty array of scalar synthetic values in the same `faker_profile_draft.json`; never reference an undefined pool.
+Examples of forbidden generator values: `date_between:-365d:+0d|format:%Y/%m/%d`, `time|format:%H:%M:%S`, `decimal_range:10..99`, `identifier.document_confirmation`, `area.square_meter`, `land_use.zoning`, `building.structure`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`.
+If precision would require an unsupported rule, approximate with `pattern:`, `choice:`, `pool:`, or `template:` and record the limitation in `uncertainty_report.json`.
 
 ## Completion criteria
 Before finishing, verify all required files exist and all JSON files parse.
@@ -726,6 +856,10 @@ def _run_authoring_agent_job(
         "--search",
         "--ask-for-approval",
         "never",
+        "-c",
+        'model_reasoning_effort="medium"',
+        "--disable",
+        "fast_mode",
         "exec",
         "--cd",
         str(ROOT),
@@ -801,8 +935,9 @@ def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
                 parsed_json[name] = json.loads(path.read_text(encoding="utf-8"))
             except Exception as exc:
                 invalid_json.append({"name": name, "error": str(exc)})
-    contract_errors: list[dict[str, str]] = []
+    contract_errors: list[dict[str, Any]] = []
     if not invalid_json:
+        contract_errors.extend(_validate_schema_draft_contract(parsed_json))
         contract_errors.extend(_validate_blank_template_agent_contract(request_dir, parsed_json))
     return {
         "ready": not missing and not invalid_json and not contract_errors,
@@ -818,6 +953,208 @@ def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
             "contractErrors": len(contract_errors),
         },
     }
+
+
+def _validate_schema_draft_contract(parsed_json: dict[str, Any]) -> list[dict[str, Any]]:
+    schema = parsed_json.get("schema_draft.json") if isinstance(parsed_json.get("schema_draft.json"), dict) else {}
+    anchor_map = parsed_json.get("anchor_map_draft.json") if isinstance(parsed_json.get("anchor_map_draft.json"), dict) else {}
+    faker_profile = parsed_json.get("faker_profile_draft.json") if isinstance(parsed_json.get("faker_profile_draft.json"), dict) else {}
+    research_report = parsed_json.get("research_report.json") if isinstance(parsed_json.get("research_report.json"), dict) else {}
+    errors: list[dict[str, Any]] = []
+    semantic_leaf_paths: set[str] = set()
+    semantic_schema = schema.get("semantic_schema")
+    if not isinstance(semantic_schema, dict):
+        errors.append({"code": "schema_missing_semantic_schema", "message": "schema_draft.json must include metadata-free semantic_schema object"})
+    else:
+        for path, value in _iter_semantic_leaf_values(semantic_schema):
+            if path:
+                semantic_leaf_paths.add(path)
+            if value != "":
+                errors.append({"code": "schema_semantic_value_not_empty", "path": path, "message": "semantic_schema leaf values must be empty strings"})
+    fields = _schema_draft_bindings(schema)
+    if not isinstance(fields, list):
+        errors.append({"code": "schema_fields_missing", "message": "schema_draft.json must include fields or field_bindings binding list"})
+        return errors
+    anchors = _anchor_map_by_id(anchor_map)
+    mapped_anchor_ids: set[str] = set()
+    research_source_ids = _research_source_ids(research_report)
+    for field in fields:
+        if not isinstance(field, dict):
+            continue
+        field_id = str(field.get("field_id") or field.get("key") or field.get("label") or "")
+        if "value" in field and field.get("value") != "":
+            errors.append({"code": "schema_field_value_not_empty", "field": field_id, "message": "schema_draft.fields[].value must remain an empty string"})
+        semantic_path = _binding_semantic_path(field)
+        if not semantic_path:
+            errors.append({"code": "schema_field_missing_semantic_path", "field": field_id, "message": "schema binding must define semantic_path/key/json_path"})
+        elif semantic_leaf_paths and semantic_path not in semantic_leaf_paths:
+            errors.append({"code": "schema_field_semantic_path_missing", "field": field_id, "semantic_path": semantic_path, "message": "binding semantic_path must point to an existing semantic_schema leaf"})
+        anchor_id = str(field.get("anchor_id") or field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+        if not anchor_id:
+            errors.append({"code": "schema_field_missing_anchor", "field": field_id, "message": "schema binding must define anchor_id"})
+        elif anchors:
+            anchor = anchors.get(anchor_id)
+            if anchor is None:
+                errors.append({"code": "schema_field_anchor_missing", "field": field_id, "anchor_id": anchor_id, "message": "binding anchor_id must exist in anchor_map_draft"})
+            else:
+                mapped_anchor_ids.add(anchor_id)
+                status = str(anchor.get("status") or "").strip().lower()
+                role = str(anchor.get("role") or anchor.get("anchor_role") or "").strip().lower()
+                if status and status != "use":
+                    errors.append({"code": "schema_field_anchor_not_use", "field": field_id, "anchor_id": anchor_id, "status": status, "message": "binding anchor_id must target a use value anchor"})
+                if role and role in {"static_label", "label", "keep"}:
+                    errors.append({"code": "schema_field_anchor_is_label", "field": field_id, "anchor_id": anchor_id, "role": role, "message": "label/static anchors must be label_anchor_ids, not field targets"})
+        for evidence_id in _binding_research_evidence_ids(field):
+            if research_source_ids and evidence_id not in research_source_ids:
+                errors.append({"code": "schema_field_unknown_research_evidence", "field": field_id, "research_evidence_id": evidence_id, "message": "research_evidence_ids must refer to research_report.sources[].id"})
+    errors.extend(_validate_faker_profile_contract(faker_profile, fields))
+    if anchors:
+        use_anchor_ids = {anchor_id for anchor_id, anchor in anchors.items() if str(anchor.get("status") or "").strip().lower() == "use"}
+        acknowledged_unmapped = _unmapped_use_anchor_ids(schema)
+        unmapped = sorted(use_anchor_ids - mapped_anchor_ids - acknowledged_unmapped)
+        if unmapped:
+            errors.append({"code": "schema_unmapped_use_anchors", "anchor_ids": unmapped[:20], "count": len(unmapped), "message": "every use anchor must be mapped or listed in unmapped_use_anchors with a reason"})
+    return errors
+
+
+def _schema_draft_bindings(schema: dict[str, Any]) -> list[Any] | None:
+    if isinstance(schema.get("fields"), list):
+        return schema.get("fields")
+    if isinstance(schema.get("field_bindings"), list):
+        return schema.get("field_bindings")
+    return None
+
+
+def _binding_semantic_path(field: dict[str, Any]) -> str:
+    raw_path = field.get("semantic_path") or field.get("key_path")
+    if isinstance(raw_path, list):
+        return "/".join(str(part).strip() for part in raw_path if str(part).strip())
+    for key in ("semantic_path", "json_path", "key"):
+        value = field.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip().replace(".", "/") if "/" not in value and "." in value else value.strip()
+    export = field.get("export") if isinstance(field.get("export"), dict) else {}
+    value = export.get("json_path")
+    if isinstance(value, str) and value.strip():
+        return value.strip()
+    label = str(field.get("label") or "").strip()
+    return label
+
+
+def _anchor_map_by_id(anchor_map: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    anchors: dict[str, dict[str, Any]] = {}
+    for anchor in anchor_map.get("anchors", []) if isinstance(anchor_map.get("anchors"), list) else []:
+        if not isinstance(anchor, dict):
+            continue
+        anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "").strip()
+        if anchor_id:
+            anchors[anchor_id] = anchor
+    return anchors
+
+
+def _research_source_ids(research_report: dict[str, Any]) -> set[str]:
+    return {
+        str(source.get("id")).strip()
+        for source in research_report.get("sources", [])
+        if isinstance(source, dict) and str(source.get("id") or "").strip()
+    }
+
+
+def _binding_research_evidence_ids(field: dict[str, Any]) -> list[str]:
+    values: list[Any] = []
+    for key in ("research_evidence_ids", "source_ids"):
+        if isinstance(field.get(key), list):
+            values.extend(field.get(key) or [])
+    evidence = field.get("evidence") if isinstance(field.get("evidence"), dict) else {}
+    for key in ("research_evidence_ids", "source_ids"):
+        if isinstance(evidence.get(key), list):
+            values.extend(evidence.get(key) or [])
+    return [str(value).strip() for value in values if str(value).strip()]
+
+
+def _validate_faker_profile_contract(faker_profile: dict[str, Any], fields: list[Any]) -> list[dict[str, Any]]:
+    errors: list[dict[str, Any]] = []
+    generators = faker_profile.get("field_generators")
+    if not isinstance(generators, dict):
+        errors.append({"code": "faker_missing_field_generators", "message": "faker_profile_draft.json must include field_generators object"})
+        return errors
+    field_ids = {str(field.get("field_id") or "").strip() for field in fields if isinstance(field, dict) and str(field.get("field_id") or "").strip()}
+    for field_id, rule_value in generators.items():
+        rule = str(rule_value or "").strip()
+        if field_ids and str(field_id) not in field_ids:
+            errors.append({"code": "faker_unknown_field", "field": str(field_id), "message": "field_generators key must match a schema binding field_id"})
+        if not _faker_rule_supported(rule):
+            errors.append({"code": "faker_unsupported_rule", "field": str(field_id), "rule": rule, "message": "faker rule is outside renderer-supported grammar"})
+        if rule.lower().startswith("pool:"):
+            pool_name = rule.split(":", 1)[1].strip()
+            pool = _faker_pool_values(faker_profile, pool_name)
+            if not pool:
+                errors.append({"code": "faker_missing_pool", "field": str(field_id), "pool": pool_name, "message": "pool rule must define data_pools.<name> with scalar values"})
+    return errors
+
+
+def _faker_rule_supported(rule: str) -> bool:
+    normalized = str(rule or "").strip()
+    lower = normalized.lower()
+    if not normalized:
+        return False
+    if lower.startswith(("literal:", "choice:", "pool:", "same_as:", "pattern:", "template:")):
+        return True
+    return lower in {
+        "person.name_ko",
+        "person.phone_kr",
+        "person.rrn",
+        "date.kr",
+        "money.krw",
+        "company.name_ko",
+        "address.ko",
+        "free_text.short",
+        "checkbox.bool",
+        "bool.checkbox",
+    }
+
+
+def _faker_pool_values(faker_profile: dict[str, Any], pool_name: str) -> list[Any]:
+    pools = faker_profile.get("data_pools")
+    if isinstance(pools, dict):
+        value = pools.get(pool_name)
+        return [item for item in value if not isinstance(item, dict) and str(item).strip()] if isinstance(value, list) else []
+    if isinstance(pools, list):
+        for item in pools:
+            if isinstance(item, dict) and str(item.get("name") or "") == pool_name and isinstance(item.get("values"), list):
+                return [value for value in item.get("values", []) if not isinstance(value, dict) and str(value).strip()]
+    return []
+
+
+def _unmapped_use_anchor_ids(schema: dict[str, Any]) -> set[str]:
+    items = schema.get("unmapped_use_anchors")
+    if not isinstance(items, list):
+        return set()
+    anchor_ids: set[str] = set()
+    for item in items:
+        if isinstance(item, dict):
+            anchor_id = str(item.get("anchor_id") or item.get("id") or "").strip()
+        else:
+            anchor_id = str(item or "").strip()
+        if anchor_id:
+            anchor_ids.add(anchor_id)
+    return anchor_ids
+
+
+def _iter_semantic_leaf_values(value: Any, prefix: str = "") -> list[tuple[str, Any]]:
+    if isinstance(value, dict):
+        leaves: list[tuple[str, Any]] = []
+        for key, child in value.items():
+            child_prefix = f"{prefix}/{key}" if prefix else str(key)
+            leaves.extend(_iter_semantic_leaf_values(child, child_prefix))
+        return leaves
+    if isinstance(value, list):
+        leaves = []
+        for index, child in enumerate(value):
+            child_prefix = f"{prefix}[{index}]"
+            leaves.extend(_iter_semantic_leaf_values(child, child_prefix))
+        return leaves
+    return [(prefix, value)]
 
 
 def _validate_blank_template_agent_contract(request_dir: Path, parsed_json: dict[str, Any]) -> list[dict[str, str]]:
@@ -843,7 +1180,7 @@ def _validate_blank_template_agent_contract(request_dir: Path, parsed_json: dict
     if not value_anchor_ids:
         errors.append({"code": "blank_template_no_value_anchors", "message": "blank_template requires at least one value-region/use/manual/visual-line-detect anchor"})
     seen_targets: dict[str, str] = {}
-    fields = schema.get("fields", []) if isinstance(schema.get("fields"), list) else []
+    fields = _schema_draft_bindings(schema) or []
     for field in fields:
         if not isinstance(field, dict):
             continue
@@ -911,7 +1248,7 @@ def _clear_manifest_artifacts(doc_id: str, artifact_keys: list[str]) -> None:
     doc = registry.documents.get(doc_id)
     if doc is None:
         return
-    manifest_path = document_dir(doc) / "manifest.json"
+    manifest_path = document_dir(doc, ROOT / "workbench" / "documents") / "manifest.json"
     if not manifest_path.exists():
         return
     try:
@@ -1076,7 +1413,6 @@ def save_cleanup_mask_payload(payload: dict[str, Any]) -> dict[str, Any]:
     policy = load_review_policy(review_path)
     cleanup_dir = _cleanup_dir(doc_id, policy)
     mask_payload, paths = save_manual_mask(payload.get("mask"), directory=cleanup_dir, size=(policy.image_width, policy.image_height))
-    update_manifest_artifact(doc_id, "inpaint_cleanup_mask", paths.manual_mask)
     client_paths = _paths_to_client(paths.as_dict())
     return {
         "docId": doc_id,
@@ -1107,13 +1443,13 @@ def run_cleanup_inpaint_payload(payload: dict[str, Any]) -> dict[str, Any]:
         detection_count=len(mask_payload.get("strokes") or []),
     )
     elapsed_seconds = perf_counter() - started_at
+    backup = _backup_existing_inpaint_outputs(doc_id, cleanup_dir)
     paths = write_inpaint_result(result, cleanup_dir)
     paths["mask_json"] = mask_paths.mask_json
     paths["manual_mask"] = mask_paths.manual_mask
     _augment_cleanup_summary(paths["summary"], paths=paths, elapsed_seconds=elapsed_seconds)
-    update_manifest_artifact(doc_id, "inpaint_cleanup", paths["comparison"])
-    update_manifest_artifact(doc_id, "inpaint_cleanup_inpainted", paths["inpainted"])
-    update_manifest_artifact(doc_id, "inpaint_cleanup_mask", mask_paths.manual_mask)
+    update_manifest_artifact(doc_id, "inpaint", paths["comparison"])
+    _clear_manifest_artifacts(doc_id, ["inpaint_cleanup", "inpaint_cleanup_inpainted", "inpaint_cleanup_mask"])
     synced_authoring = _sync_authoring_source_inpainted_for_doc(doc_id, source_image=policy.source_image, inpainted_path=paths["inpainted"])
     print(f"Finished manual cleanup postprocess doc={doc_id} elapsed={elapsed_seconds:.2f}s", flush=True)
     client_paths = _paths_to_client(paths)
@@ -1126,11 +1462,33 @@ def run_cleanup_inpaint_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "comparisonUrl": f"/api/file?path={client_paths['comparison']}",
         "manualMaskUrl": f"/api/file?path={client_paths['manual_mask']}",
         "syncedAuthoringTemplates": synced_authoring,
+        "backup": _display_path(backup, ROOT) if backup else "",
     }
 
 
 def _cleanup_dir(doc_id: str, policy: ReviewPolicy) -> Path:
-    return _resolve_workspace_path(workbench_subdir(doc_id, "inpaint") / _safe_template_id(policy.source_image) / "manual_cleanup")
+    return _resolve_workspace_path(workbench_subdir(doc_id, "inpaint") / _safe_template_id(policy.source_image) / "lama")
+
+
+def _backup_existing_inpaint_outputs(doc_id: str, inpaint_dir: Path) -> Path | None:
+    existing = [
+        path
+        for path in (
+            inpaint_dir / "inpainted_lama.png",
+            inpaint_dir / "comparison_lama.png",
+            inpaint_dir / "summary.json",
+            inpaint_dir / "paint.json",
+        )
+        if path.exists()
+    ]
+    if not existing:
+        return None
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    backup_dir = ROOT / "workbench" / ".trash" / "inpaint_overwrite" / f"{timestamp}_{_safe_name(doc_id)}_{_safe_name(inpaint_dir.parent.name)}"
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    for path in existing:
+        shutil.copy2(path, backup_dir / path.name)
+    return backup_dir
 
 
 
@@ -1229,9 +1587,9 @@ def _render_cleanup_paint(base_image_path: Path, payload: dict[str, Any]) -> Ima
 def _cleanup_paint_paths(cleanup_dir: Path) -> dict[str, Path]:
     return {
         "paint_json": cleanup_dir / "paint.json",
-        "inpainted": cleanup_dir / "painted_template.png",
-        "comparison": cleanup_dir / "comparison_paint.png",
-        "summary": cleanup_dir / "paint_summary.json",
+        "inpainted": cleanup_dir / "inpainted_lama.png",
+        "comparison": cleanup_dir / "comparison_lama.png",
+        "summary": cleanup_dir / "summary.json",
     }
 
 
@@ -1240,7 +1598,7 @@ def load_cleanup_paint_payload(*, doc_id: str, review_path: Path, base_image_pat
     cleanup_dir = _cleanup_dir(doc_id, policy)
     base_path = base_image_path or _resolve_workspace_path(policy.source_image)
     if base_image_path is None:
-        existing = cleanup_dir / "painted_template.png"
+        existing = _cleanup_paint_paths(cleanup_dir)["inpainted"]
         if existing.exists():
             base_path = existing
     with Image.open(base_path) as base:
@@ -1289,6 +1647,7 @@ def save_cleanup_paint_payload(payload: dict[str, Any]) -> dict[str, Any]:
     paint["base_image_path"] = _display_path(base_image_path, ROOT)
     rendered = _render_cleanup_paint(base_image_path, paint)
     paths = _cleanup_paint_paths(cleanup_dir)
+    backup = _backup_existing_inpaint_outputs(doc_id, cleanup_dir)
     paths["paint_json"].write_text(json.dumps(paint, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     rendered.save(paths["inpainted"])
     diff = ImageChops.difference(base, rendered)
@@ -1312,9 +1671,8 @@ def save_cleanup_paint_payload(payload: dict[str, Any]) -> dict[str, Any]:
         + "\n",
         encoding="utf-8",
     )
-    update_manifest_artifact(doc_id, "inpaint_cleanup", paths["comparison"])
-    update_manifest_artifact(doc_id, "inpaint_cleanup_inpainted", paths["inpainted"])
-    update_manifest_artifact(doc_id, "inpaint_cleanup_mask", paths["paint_json"])
+    update_manifest_artifact(doc_id, "inpaint", paths["comparison"])
+    _clear_manifest_artifacts(doc_id, ["inpaint_cleanup", "inpaint_cleanup_inpainted", "inpaint_cleanup_mask"])
     synced_authoring = _sync_authoring_source_inpainted_for_doc(doc_id, source_image=policy.source_image, inpainted_path=paths["inpainted"])
     client_paths = _paths_to_client(paths)
     return {
@@ -1327,6 +1685,7 @@ def save_cleanup_paint_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "imageUrl": f"/api/file?path={client_paths['inpainted']}",
         "comparisonUrl": f"/api/file?path={client_paths['comparison']}",
         "syncedAuthoringTemplates": synced_authoring,
+        "backup": _display_path(backup, ROOT) if backup else "",
     }
 
 

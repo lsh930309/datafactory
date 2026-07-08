@@ -1,0 +1,741 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "title": "토지대장·건축물대장",
+  "search_date": "2026-07-08",
+  "created_at": "2026-07-08T09:19:11+09:00",
+  "queries": [
+    "정부24 건축물대장 등본 발급 열람 신청",
+    "정부24 토지(임야)대장 등본 발급 열람 신청",
+    "건축물대장의 기재 및 관리 등에 관한 규칙 별지 제1호서식 일반건축물대장 갑",
+    "토지대장 지목 면적 소유자 등록사항"
+  ],
+  "sources": [
+    {
+      "source_id": "R-GOV24-SERVICE",
+      "url": "https://www.gov.kr/portal/service/serviceInfo/131000000015",
+      "source_type": "official_government_portal",
+      "summary": "정부24 공식 전자정부 포털 접근 결과. 개별 서비스 페이지는 미등록/접속 제한 상태였지만 정부24 민원 문의 분류에 주민등록표, 건축물대장, 토지대장이 함께 제시되어 발급/민원 서비스 문맥 확인에 사용.",
+      "used_for": [
+        "문서확인번호",
+        "발급일",
+        "발급기관장",
+        "건축물대장/토지대장 공공 발급 문맥"
+      ]
+    },
+    {
+      "source_id": "R-BUILDING-REGISTER-RULE",
+      "url": "https://www.law.go.kr/법령/건축물대장의기재및관리등에관한규칙",
+      "source_type": "official_law",
+      "summary": "건축물대장의 기재 및 관리 등에 관한 규칙 원문. 샘플 상단의 별지 제1호서식 및 일반건축물대장(갑) 표기와 연결되며 건축물대장 서식 필드 해석의 공식 근거로 사용.",
+      "used_for": [
+        "고유번호",
+        "건물ID",
+        "명칭",
+        "대지위치",
+        "지번",
+        "도로명주소",
+        "대지면적",
+        "연면적",
+        "건축면적",
+        "주구조",
+        "주용도",
+        "층수",
+        "건폐율",
+        "용적률",
+        "건축물현황",
+        "소유자현황"
+      ]
+    },
+    {
+      "source_id": "R-LAND-CADASTRE-LAW",
+      "url": "https://www.law.go.kr/법령/공간정보의구축및관리등에관한법률",
+      "source_type": "official_law",
+      "summary": "토지대장/임야대장 및 지번, 지목, 면적 등 토지 등록사항의 법적 문맥 확인용 공식 법령. 현재 샘플은 건축물대장 1쪽이므로 토지대장 고유 필드는 anchor가 있을 때만 schema에 반영.",
+      "used_for": [
+        "대지위치",
+        "지번",
+        "대지면적",
+        "지역/구역 해석 보조",
+        "토지대장 alias 검토"
+      ]
+    },
+    {
+      "source_id": "R-VISIBLE-SAMPLE",
+      "url": "local:workbench/documents/토지대장·건축물대장__COL-03/samples/original/건축물대장.pdf",
+      "source_type": "local_sample_pdf_ocr_review",
+      "summary": "요청 패키지가 참조한 filled sample, OCR detections, bbox review, anchor_map_draft. schema 필드 추가 여부의 1차 근거.",
+      "used_for": [
+        "모든 schema_draft 필드 anchor 및 source_text"
+      ]
+    }
+  ],
+  "field_evidence": [
+    {
+      "field_id": "document_confirmation_number",
+      "anchor_id": "manual_1783467788626",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "1782-7058-1373-03440"
+    },
+    {
+      "field_id": "print_date",
+      "anchor_id": "det_000004",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "2026/06/29"
+    },
+    {
+      "field_id": "print_time",
+      "anchor_id": "det_000006",
+      "label_anchor_ids": [
+        "det_000007"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "13:03:34"
+    },
+    {
+      "field_id": "page_number",
+      "anchor_id": "det_000009",
+      "label_anchor_ids": [
+        "det_000008"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "(2쪽 중 제1쪽)"
+    },
+    {
+      "field_id": "building_id",
+      "anchor_id": "det_000015",
+      "label_anchor_ids": [
+        "det_000011"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "2120171230000250"
+    },
+    {
+      "field_id": "building_management_number",
+      "anchor_id": "det_000013",
+      "label_anchor_ids": [
+        "det_000012"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "1165010700-1-07090007"
+    },
+    {
+      "field_id": "building_name",
+      "anchor_id": "det_000016",
+      "label_anchor_ids": [
+        "det_000014"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "르헤브빌딩"
+    },
+    {
+      "field_id": "unit_household_count",
+      "anchor_id": "det_000018",
+      "label_anchor_ids": [
+        "det_000017"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "0호/0가구/0세대"
+    },
+    {
+      "field_id": "site_location",
+      "anchor_id": "det_000021",
+      "label_anchor_ids": [
+        "det_000019"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "서울특별시서초구반포동"
+    },
+    {
+      "field_id": "lot_number",
+      "anchor_id": "det_000022",
+      "label_anchor_ids": [
+        "det_000020"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "709-7"
+    },
+    {
+      "field_id": "road_address",
+      "anchor_id": "det_000024",
+      "label_anchor_ids": [
+        "det_000023"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "서울특별시 서초구 강남대로89길30(반포동)"
+    },
+    {
+      "field_id": "site_area",
+      "anchor_id": "det_000030",
+      "label_anchor_ids": [
+        "det_000025"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "220.2m"
+    },
+    {
+      "field_id": "total_floor_area",
+      "anchor_id": "det_000031",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "537m2"
+    },
+    {
+      "field_id": "zoning_area",
+      "anchor_id": "det_000032",
+      "label_anchor_ids": [
+        "det_000027"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "제2종일반주거지역 외1"
+    },
+    {
+      "field_id": "restriction_zone",
+      "anchor_id": "det_000033",
+      "label_anchor_ids": [
+        "det_000029"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "가축사육제한구역"
+    },
+    {
+      "field_id": "building_area",
+      "anchor_id": "det_000039",
+      "label_anchor_ids": [
+        "det_000034"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "122.44m2"
+    },
+    {
+      "field_id": "floor_area_for_far",
+      "anchor_id": "det_000040",
+      "label_anchor_ids": [
+        "det_000035"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "429.31m'"
+    },
+    {
+      "field_id": "main_structure",
+      "anchor_id": "det_000041",
+      "label_anchor_ids": [
+        "det_000036"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "철골조,철근콘크리트조"
+    },
+    {
+      "field_id": "main_use",
+      "anchor_id": "det_000042",
+      "label_anchor_ids": [
+        "det_000037"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "제2종근린생활시설(학원)"
+    },
+    {
+      "field_id": "floor_count_summary",
+      "anchor_id": "det_000043",
+      "label_anchor_ids": [
+        "det_000038"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "지하:1층,지상:5층"
+    },
+    {
+      "field_id": "building_coverage_ratio",
+      "anchor_id": "det_000049",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "55.6%"
+    },
+    {
+      "field_id": "floor_area_ratio",
+      "anchor_id": "det_000050",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "194.96%"
+    },
+    {
+      "field_id": "height",
+      "anchor_id": "det_000051",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "14.5m"
+    },
+    {
+      "field_id": "roof",
+      "anchor_id": "det_000052",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "철골구조지붕"
+    },
+    {
+      "field_id": "status_row_1_section",
+      "anchor_id": "det_000077",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000067"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "주1"
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "anchor_id": "det_000078",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000068"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "z1층"
+    },
+    {
+      "field_id": "status_row_1_structure",
+      "anchor_id": "det_000079",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000069"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "철근콘크리트구조"
+    },
+    {
+      "field_id": "status_row_1_use",
+      "anchor_id": "det_000080",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000070"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "제2종근린생활시설(사진관)"
+    },
+    {
+      "field_id": "status_row_1_area",
+      "anchor_id": "det_000081",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "107.69"
+    },
+    {
+      "field_id": "owner_name",
+      "anchor_id": "det_000082",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000064"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "주식회사엠케이컨텐츠"
+    },
+    {
+      "field_id": "owner_address",
+      "anchor_id": "det_000083",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000073"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "서울특별시 용산구서빙고로 67, 103동1607호(용산동5가,파크타워)"
+    },
+    {
+      "field_id": "owner_change_date",
+      "anchor_id": "det_000084",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000066"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "2021.10.20."
+    },
+    {
+      "field_id": "owner_share",
+      "anchor_id": "det_000085",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000074"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "1/1"
+    },
+    {
+      "field_id": "status_row_2_section",
+      "anchor_id": "det_000086",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000067"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "주1"
+    },
+    {
+      "field_id": "status_row_2_floor",
+      "anchor_id": "det_000087",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000068"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "1층"
+    },
+    {
+      "field_id": "status_row_2_structure",
+      "anchor_id": "det_000088",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000069"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "일반철골구조"
+    },
+    {
+      "field_id": "status_row_2_use",
+      "anchor_id": "det_000089",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000070"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "제1종근린생활시설(소매점)"
+    },
+    {
+      "field_id": "status_row_2_area",
+      "anchor_id": "det_000090",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "59.17"
+    },
+    {
+      "field_id": "owner_registration_number_masked",
+      "anchor_id": "det_000091",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000072",
+        "det_000075"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "110111–6******"
+    },
+    {
+      "field_id": "owner_change_reason",
+      "anchor_id": "det_000093",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000076"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "소유권이전"
+    },
+    {
+      "field_id": "status_row_3_section",
+      "anchor_id": "det_000094",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000067"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "주1"
+    },
+    {
+      "field_id": "status_row_3_floor",
+      "anchor_id": "det_000095",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000068"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "2층"
+    },
+    {
+      "field_id": "status_row_3_structure",
+      "anchor_id": "det_000096",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000069"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "일반철골구조"
+    },
+    {
+      "field_id": "status_row_3_use",
+      "anchor_id": "det_000097",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000070"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "제2종근린생활시설(학원)"
+    },
+    {
+      "field_id": "status_row_3_area",
+      "anchor_id": "det_000098",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "114.11"
+    },
+    {
+      "field_id": "status_row_4_section",
+      "anchor_id": "det_000100",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000067"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "주1"
+    },
+    {
+      "field_id": "status_row_4_floor",
+      "anchor_id": "det_000101",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000068"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "3층"
+    },
+    {
+      "field_id": "status_row_4_structure",
+      "anchor_id": "det_000102",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000069"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "일반철골구조"
+    },
+    {
+      "field_id": "status_row_4_use",
+      "anchor_id": "det_000103",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000070"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "제2종근린생활시설(학원)"
+    },
+    {
+      "field_id": "status_row_4_area",
+      "anchor_id": "det_000104",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "114.11"
+    },
+    {
+      "field_id": "certificate_issue_date",
+      "anchor_id": "det_000107",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "2026년 06월 29일"
+    },
+    {
+      "field_id": "clerk_name",
+      "anchor_id": "det_000110",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "오-케이민원센터"
+    },
+    {
+      "field_id": "clerk_phone",
+      "anchor_id": "det_000111",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "02-2155-6306"
+    },
+    {
+      "field_id": "issuer",
+      "anchor_id": "det_000113",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-VISIBLE-SAMPLE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "notes": "서울특별시 서초구청장"
+    }
+  ],
+  "limitations": "정부24 개별 서비스 상세 페이지는 검색/접속 제한으로 완전한 본문 추출이 어려웠고, 공식 법령 URL과 로컬 visible sample/review를 우선 근거로 사용."
+}

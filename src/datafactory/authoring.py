@@ -1170,7 +1170,8 @@ def _generate_values(
     for field in schema.get("fields", []):
         field_id = str(field["field_id"])
         rule = str(generators.get(field_id) or field.get("generator") or field.get("value_type") or "free_text.short")
-        value, warning = _generate_authoring_value(rule, rng, field_id=field_id, faker_profile=faker_profile, values=values)
+        field_label = str(field.get("label") or field.get("key") or field_id)
+        value, warning = _generate_authoring_value(rule, rng, field_id=field_id, field_label=field_label, faker_profile=faker_profile, values=values)
         value = _normalize_generated_value_for_field(field, rule, value, force_visible=force_visible)
         values[field_id] = value
         if warning:
@@ -1193,6 +1194,7 @@ def _generate_authoring_value(
     rng: random.Random,
     *,
     field_id: str | None = None,
+    field_label: str | None = None,
     faker_profile: dict[str, Any] | None = None,
     values: dict[str, str] | None = None,
 ) -> tuple[str, dict[str, Any] | None]:
@@ -1202,7 +1204,7 @@ def _generate_authoring_value(
         choices = [item.strip() for item in normalized.split(":", 1)[1].split("|") if item.strip()]
         if choices:
             return rng.choice(choices), None
-        return _fallback_with_warning(field_id, rule, rng, "choice rule has no choices")
+        return _fallback_with_warning(field_id, rule, "choice rule has no choices", field_label=field_label)
     if _is_checkbox_rule(normalized):
         return ("true" if rng.random() < 0.65 else "false"), None
     if normalized_lower.startswith("pool:"):
@@ -1211,12 +1213,12 @@ def _generate_authoring_value(
         string_values = [str(item) for item in pool if not isinstance(item, dict) and str(item).strip()]
         if string_values:
             return rng.choice(string_values), None
-        return _fallback_with_warning(field_id, rule, rng, f"pool not found or has no scalar values: {pool_name}")
+        return _fallback_with_warning(field_id, rule, f"pool not found or has no scalar values: {pool_name}", field_label=field_label)
     if normalized_lower.startswith("same_as:"):
         source_field = normalized.split(":", 1)[1].strip()
         if values and source_field in values:
             return values[source_field], None
-        return _fallback_with_warning(field_id, rule, rng, f"same_as source is not available yet: {source_field}")
+        return _fallback_with_warning(field_id, rule, f"same_as source is not available yet: {source_field}", field_label=field_label)
     if normalized_lower.startswith("literal:"):
         return normalized.split(":", 1)[1], None
     if normalized_lower.startswith("template:"):
@@ -1224,6 +1226,8 @@ def _generate_authoring_value(
         return _render_rule_template(template, rng, faker_profile=faker_profile, values=values), None
     if normalized_lower.startswith("pattern:"):
         return _render_pattern(normalized.split(":", 1)[1], rng), None
+    if normalized_lower == "free_text.short":
+        return _safe_fallback_value(field_label, field_id), None
 
     mapping = {
         "person.name_ko": "name",
@@ -1233,11 +1237,10 @@ def _generate_authoring_value(
         "money.krw": "amount",
         "company.name_ko": "company",
         "address.ko": "address",
-        "free_text.short": "text",
     }
     if normalized_lower in mapping:
         return generate_value(mapping[normalized_lower], rng), None
-    return _fallback_with_warning(field_id, rule, rng, "unknown faker rule")
+    return _fallback_with_warning(field_id, rule, "unknown faker rule", field_label=field_label)
 
 
 def _normalize_generated_value_for_field(field: dict[str, Any], rule: str, value: str, *, force_visible: bool = False) -> str:
@@ -1348,13 +1351,19 @@ def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[st
     return warnings
 
 
-def _fallback_with_warning(field_id: str | None, rule: str, rng: random.Random, message: str) -> tuple[str, dict[str, Any]]:
-    return generate_value("text", rng), {
+def _safe_fallback_value(field_label: str | None, field_id: str | None = None) -> str:
+    return _preview_fallback_value(field_label or field_id or "샘플값") or "샘플값"
+
+
+def _fallback_with_warning(field_id: str | None, rule: str, message: str, *, field_label: str | None = None) -> tuple[str, dict[str, Any]]:
+    value = _safe_fallback_value(field_label, field_id)
+    return value, {
         "field_id": field_id,
         "type": "unknown_faker_rule",
         "message": message,
         "rule": rule,
         "fallback": "free_text.short",
+        "fallback_value": value,
     }
 
 
@@ -1418,11 +1427,13 @@ def _validate_render(schema: dict[str, Any], annotations: list[RenderedAnnotatio
 
 def _kv_payload(sample_id: str, schema: dict[str, Any], values: dict[str, str]) -> dict[str, Any]:
     export_values = _export_values(schema, values)
+    semantic_values = _export_values_nested(schema, values)
     return {
         "sample_id": sample_id,
         "doc_id": schema.get("doc_id"),
         "schema_version": schema.get("schema_version"),
         "values": values,
+        "semantic_values": semantic_values,
         "export_values": export_values,
         "flat_values": export_values,
     }
@@ -1437,6 +1448,61 @@ def _export_values(schema: dict[str, Any], values: dict[str, str]) -> dict[str, 
         if field_id in values:
             exported[key] = values[field_id]
     return exported
+
+
+def _export_values_nested(schema: dict[str, Any], values: dict[str, str]) -> dict[str, Any]:
+    root: dict[str, Any] = {}
+    used_flat: dict[str, int] = {}
+    for field in schema.get("fields", []):
+        if not isinstance(field, dict):
+            continue
+        field_id = str(field.get("field_id") or "")
+        if field_id not in values:
+            continue
+        path = _semantic_path_from_field(field)
+        if not path:
+            continue
+        _set_semantic_value(root, path, values[field_id], used_flat)
+    return root
+
+
+def _semantic_path_from_field(field: dict[str, Any]) -> list[str]:
+    raw_path = field.get("semantic_path")
+    if isinstance(raw_path, list):
+        return [str(part).strip() for part in raw_path if str(part).strip()]
+    export = field.get("export") if isinstance(field.get("export"), dict) else {}
+    path_value = str(field.get("json_path") or export.get("json_path") or field.get("label") or field.get("field_id") or "").strip()
+    if not path_value:
+        return []
+    if "/" in path_value:
+        return [part.strip() for part in path_value.split("/") if part.strip()]
+    if "." in path_value:
+        return [part.strip() for part in path_value.split(".") if part.strip()]
+    return [path_value]
+
+
+def _set_semantic_value(root: dict[str, Any], path: list[str], value: str, used_flat: dict[str, int]) -> None:
+    if len(path) == 1:
+        key_base = path[0]
+        count = used_flat.get(key_base, 0) + 1
+        used_flat[key_base] = count
+        key = key_base if count == 1 else f"{key_base}__{count}"
+        root[key] = value
+        return
+    current = root
+    for part in path[:-1]:
+        child = current.get(part)
+        if not isinstance(child, dict):
+            child = {}
+            current[part] = child
+        current = child
+    leaf = path[-1]
+    if leaf in current:
+        suffix = 2
+        while f"{leaf}__{suffix}" in current:
+            suffix += 1
+        leaf = f"{leaf}__{suffix}"
+    current[leaf] = value
 
 
 def _bbox_payload(sample_id: str, schema: dict[str, Any], image_path: Path, overlay_path: Path, annotations: list[RenderedAnnotation]) -> dict[str, Any]:
@@ -1569,6 +1635,8 @@ def semantic_schema_to_authoring_schema(
     title: str | None = None,
 ) -> dict[str, Any]:
     fields = semantic_schema.get("fields") if isinstance(semantic_schema.get("fields"), list) else []
+    if not fields and isinstance(semantic_schema.get("field_bindings"), list):
+        fields = semantic_schema.get("field_bindings") or []
     anchors = {str(anchor.get("anchor_id") or ""): anchor for anchor in (anchor_map or {}).get("anchors", []) if isinstance(anchor, dict)}
     output_fields: list[dict[str, Any]] = []
     for index, raw in enumerate(fields, start=1):
@@ -1577,23 +1645,29 @@ def semantic_schema_to_authoring_schema(
         field_id = str(raw.get("field_id") or raw.get("id") or f"field_{index:03d}").strip()
         label = str(raw.get("label") or raw.get("key") or raw.get("name") or field_id).strip()
         anchor_id = str(raw.get("anchor_id") or raw.get("bbox_label_id") or raw.get("source_detection_id") or "").strip()
+        semantic_path = _raw_semantic_path(raw, label)
+        json_path = "/".join(semantic_path) if semantic_path else label
         anchor = anchors.get(anchor_id, {})
         output_fields.append(
             {
                 "field_id": field_id,
                 "label": label,
+                "semantic_path": semantic_path,
                 "bbox_label_id": anchor_id or field_id,
                 "source_detection_id": anchor_id or field_id,
                 "source_text": str(anchor.get("text") or raw.get("source_text") or label),
                 "value_type": str(raw.get("value_type") or "free_text.short"),
-                "generator": str(raw.get("generator") or raw.get("value_type") or "free_text.short"),
+                "generator": str(raw.get("faker_rule") or raw.get("generator") or raw.get("value_type") or "free_text.short"),
                 "style_class": str(raw.get("style_class") or DEFAULT_STYLE_CLASS),
                 "render_policy": _normalize_render_policy(raw.get("render_policy")),
-                "export": {"json_path": str(raw.get("json_path") or field_id), "csv_column": str(raw.get("csv_column") or raw.get("json_path") or field_id)},
+                "export": {"json_path": json_path, "csv_column": str(raw.get("csv_column") or json_path)},
                 "required": bool(raw.get("required", True)),
                 "notes": str(raw.get("notes") or ""),
             }
         )
+    semantic_tree = semantic_schema.get("semantic_schema")
+    if not isinstance(semantic_tree, dict):
+        semantic_tree = _empty_semantic_schema_from_fields(fields)
     return {
         "schema_version": AUTHORING_SCHEMA_VERSION,
         "created_at": _now(),
@@ -1605,9 +1679,41 @@ def semantic_schema_to_authoring_schema(
         "image": (anchor_map or {}).get("image") or semantic_schema.get("image") or {},
         "bbox_source": {"canonical": "review", "review_path": source_review or semantic_schema.get("source_review")},
         "anchor_map_ref": (anchor_map or {}).get("source_review"),
+        "semantic_schema": semantic_tree,
         "fields": output_fields,
         "groups": semantic_schema.get("groups") if isinstance(semantic_schema.get("groups"), list) else [],
     }
+
+
+def _raw_semantic_path(raw: dict[str, Any], label: str) -> list[str]:
+    raw_path = raw.get("semantic_path") or raw.get("key_path")
+    if isinstance(raw_path, list):
+        parts = [str(part).strip() for part in raw_path if str(part).strip()]
+        if parts:
+            return parts
+    for key in ("json_path", "key"):
+        value = str(raw.get(key) or "").strip()
+        if not value:
+            continue
+        if "/" in value:
+            return [part.strip() for part in value.split("/") if part.strip()]
+        if "." in value:
+            return [part.strip() for part in value.split(".") if part.strip()]
+        return [value]
+    return [label] if label else []
+
+
+def _empty_semantic_schema_from_fields(fields: list[Any]) -> dict[str, Any]:
+    root: dict[str, Any] = {}
+    used_flat: dict[str, int] = {}
+    for raw in fields:
+        if not isinstance(raw, dict):
+            continue
+        label = str(raw.get("label") or raw.get("key") or raw.get("name") or raw.get("field_id") or "").strip()
+        path = _raw_semantic_path(raw, label)
+        if path:
+            _set_semantic_value(root, path, "", used_flat)
+    return root
 
 
 def authoring_library_payload(library_root: Path) -> dict[str, Any]:

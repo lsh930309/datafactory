@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "created_at": "2026-07-08T01:20:49.312729+00:00",
+  "data_pools": {
+    "synthetic_building_names_ko": {
+      "values": [
+        "하나빌딩",
+        "세움타워",
+        "누리빌딩",
+        "가온프라자"
+      ],
+      "source": "agent_synthetic",
+      "usage": [
+        "building_name"
+      ],
+      "notes": "실제 상호가 아닌 합성 건물명"
+    },
+    "zoning_area_types": {
+      "values": [
+        "제1종일반주거지역",
+        "제2종일반주거지역",
+        "준주거지역",
+        "일반상업지역",
+        "자연녹지지역"
+      ],
+      "source": "법령/양식 용도지역 일반값 기반 합성 pool",
+      "usage": [
+        "zoning_area"
+      ]
+    },
+    "restriction_zone_types": {
+      "values": [
+        "가축사육제한구역",
+        "상대보호구역",
+        "절대보호구역",
+        "도시지역",
+        "지구단위계획구역"
+      ],
+      "source": "양식 주변 항목과 공적장부 표기 관행 기반 합성 pool",
+      "usage": [
+        "restriction_zone"
+      ]
+    },
+    "building_structures": {
+      "values": [
+        "철근콘크리트구조",
+        "일반철골구조",
+        "철골철근콘크리트구조",
+        "벽돌구조",
+        "경량철골구조"
+      ],
+      "source": "건축물대장 구조 표기 관행 기반 합성 pool",
+      "usage": [
+        "main_structure",
+        "status_row_*_structure"
+      ]
+    },
+    "building_uses": {
+      "values": [
+        "단독주택",
+        "공동주택",
+        "제1종근린생활시설",
+        "제2종근린생활시설(학원)",
+        "업무시설"
+      ],
+      "source": "건축물대장 용도 표기 관행 기반 합성 pool",
+      "usage": [
+        "main_use",
+        "status_row_*_use"
+      ]
+    },
+    "roof_types": {
+      "values": [
+        "철근콘크리트지붕",
+        "철골구조지붕",
+        "슬래브지붕",
+        "기와지붕"
+      ],
+      "source": "양식 anchor와 일반 지붕 표기 기반 합성 pool",
+      "usage": [
+        "roof"
+      ]
+    },
+    "building_section_codes": {
+      "values": [
+        "주1",
+        "주2",
+        "부1",
+        "부2"
+      ],
+      "source": "건축물현황 구분 칸 표기 기반 합성 pool",
+      "usage": [
+        "status_row_*_section"
+      ]
+    },
+    "floor_labels": {
+      "values": [
+        "지1층",
+        "1층",
+        "2층",
+        "3층",
+        "옥탑1층"
+      ],
+      "source": "건축물현황 층별 표기 기반 합성 pool",
+      "usage": [
+        "status_row_*_floor"
+      ]
+    },
+    "owner_change_reasons": {
+      "values": [
+        "소유권이전",
+        "매매",
+        "증여",
+        "상속",
+        "신축"
+      ],
+      "source": "소유자현황 변동원인 표기 관행 기반 합성 pool",
+      "usage": [
+        "owner_change_reason"
+      ]
+    },
+    "public_office_names": {
+      "values": [
+        "민원여권과",
+        "종합민원실",
+        "오케이민원센터",
+        "건축과"
+      ],
+      "source": "공공 발급 담당 부서명 합성 pool",
+      "usage": [
+        "clerk_name"
+      ]
+    },
+    "public_office_titles": {
+      "values": [
+        "서울특별시 서초구청장",
+        "서울특별시 강남구청장",
+        "부산광역시 해운대구청장",
+        "대전광역시 유성구청장"
+      ],
+      "source": "공공기관장 직함 합성 pool",
+      "usage": [
+        "issuer"
+      ]
+    }
+  },
+  "privacy_notes": "실제 개인정보/실제 기업 식별값을 재사용하지 않고 합성값 또는 문법 rule만 제안함."
+}

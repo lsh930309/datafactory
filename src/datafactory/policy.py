@@ -273,13 +273,14 @@ def policy_from_edited_rows(base: ReviewPolicy, rows: list[dict[str, Any]]) -> R
     labels: list[ReviewLabel] = []
     for label in base.labels:
         row = by_id.get(label.id, {})
+        bbox = _bbox_from_edited_row(row, label.bbox, base.image_width, base.image_height)
         labels.append(
             ReviewLabel(
                 id=label.id,
                 text=label.text,
                 confidence=label.confidence,
-                bbox=label.bbox,
-                polygon=label.polygon,
+                bbox=bbox,
+                polygon=_polygon_from_bbox(bbox) if bbox.to_list() != label.bbox.to_list() else label.polygon,
                 status=_review_status(row.get("status", label.status)),
                 auto_type=_auto_type(row.get("auto_type", label.auto_type)),
                 reason=str(row.get("reason", label.reason)),
@@ -305,6 +306,29 @@ def policy_from_edited_rows(base: ReviewPolicy, rows: list[dict[str, Any]]) -> R
         source_engine=base.source_engine,
         created_at=base.created_at,
     )
+
+
+def _bbox_from_edited_row(row: dict[str, Any], fallback: BBox, image_width: int, image_height: int) -> BBox:
+    if isinstance(row.get("bbox"), list):
+        try:
+            return BBox.from_list(row["bbox"]).clipped(image_width, image_height)
+        except Exception:
+            return fallback
+    if all(key in row for key in ("x", "y", "w", "h")):
+        try:
+            return BBox(
+                int(round(float(row["x"]))),
+                int(round(float(row["y"]))),
+                int(round(float(row["w"]))),
+                int(round(float(row["h"]))),
+            ).clipped(image_width, image_height)
+        except Exception:
+            return fallback
+    return fallback
+
+
+def _polygon_from_bbox(bbox: BBox) -> list[list[int]]:
+    return [[bbox.x, bbox.y], [bbox.right, bbox.y], [bbox.right, bbox.bottom], [bbox.x, bbox.bottom]]
 
 
 def review_rows(policy: ReviewPolicy) -> list[dict[str, Any]]:

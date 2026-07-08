@@ -842,15 +842,19 @@ def _sample_files(doc_root: Path) -> list[Path]:
 def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     ocr_paths = _mtime_sorted((doc_root / "ocr").glob("**/detections.json")) if (doc_root / "ocr").exists() else []
     review_paths = _mtime_sorted((doc_root / "review").glob("**/review.json")) if (doc_root / "review").exists() else []
-    inpaint_paths = sorted((doc_root / "inpaint").glob("**/comparison_*.png")) if (doc_root / "inpaint").exists() else []
-    inpainted_paths = sorted((doc_root / "inpaint").glob("**/inpainted_*.png")) if (doc_root / "inpaint").exists() else []
-    cleanup_comparison_paths = sorted(
+    inpaint_paths = _mtime_sorted(
+        path for path in (doc_root / "inpaint").glob("**/comparison_*.png") if "manual_cleanup" not in path.parts
+    ) if (doc_root / "inpaint").exists() else []
+    inpainted_paths = _mtime_sorted(
+        path for path in (doc_root / "inpaint").glob("**/inpainted_*.png") if "manual_cleanup" not in path.parts
+    ) if (doc_root / "inpaint").exists() else []
+    cleanup_comparison_paths = _mtime_sorted(
         {*((doc_root / "inpaint").glob("**/manual_cleanup/comparison_*.png")), *((doc_root / "inpaint").glob("**/manual_cleanup/comparison_paint.png"))}
     ) if (doc_root / "inpaint").exists() else []
-    cleanup_inpainted_paths = sorted(
+    cleanup_inpainted_paths = _mtime_sorted(
         {*((doc_root / "inpaint").glob("**/manual_cleanup/inpainted_*.png")), *((doc_root / "inpaint").glob("**/manual_cleanup/painted_template.png"))}
     ) if (doc_root / "inpaint").exists() else []
-    cleanup_mask_paths = sorted(
+    cleanup_mask_paths = _mtime_sorted(
         {*((doc_root / "inpaint").glob("**/manual_cleanup/manual_mask.png")), *((doc_root / "inpaint").glob("**/manual_cleanup/paint.json"))}
     ) if (doc_root / "inpaint").exists() else []
     authoring_schema_paths = sorted((doc_root / "authoring").glob("schema.json")) if (doc_root / "authoring").exists() else []
@@ -871,8 +875,12 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     manifest_ocr = _existing_display_path(artifacts.get("ocr"))
     manifest_review = _existing_display_path(artifacts.get("review"))
     cleanroom = _cleanroom_artifact_flags(artifacts.get("cleanroom"))
-    cleanup_comparison = _display_path(cleanup_comparison_paths[-1]) if cleanup_comparison_paths else artifacts.get("inpaint_cleanup")
-    cleanup_inpainted = _display_path(cleanup_inpainted_paths[-1]) if cleanup_inpainted_paths else artifacts.get("inpaint_cleanup_inpainted")
+    latest_inpaint_comparison_path = inpaint_paths[-1] if inpaint_paths else None
+    latest_inpainted_path = inpainted_paths[-1] if inpainted_paths else None
+    latest_cleanup_comparison_path = cleanup_comparison_paths[-1] if cleanup_comparison_paths else None
+    latest_cleanup_inpainted_path = cleanup_inpainted_paths[-1] if cleanup_inpainted_paths else None
+    cleanup_comparison = _display_path(latest_cleanup_comparison_path) if latest_cleanup_comparison_path else artifacts.get("inpaint_cleanup")
+    cleanup_inpainted = _display_path(latest_cleanup_inpainted_path) if latest_cleanup_inpainted_path else artifacts.get("inpaint_cleanup_inpainted")
     cleanup_mask = _display_path(cleanup_mask_paths[-1]) if cleanup_mask_paths else artifacts.get("inpaint_cleanup_mask")
     return {
         "has_ocr": bool(ocr_paths or artifacts.get("ocr")),
@@ -883,8 +891,8 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         "has_authoring_preview": bool(authoring_preview_paths or artifacts.get("authoring_preview")),
         "latest_detections": manifest_ocr or (_display_path(ocr_paths[-1]) if ocr_paths else artifacts.get("ocr")),
         "latest_review": manifest_review or (_display_path(review_paths[-1]) if review_paths else artifacts.get("review")),
-        "latest_inpaint_comparison": cleanup_comparison or (_display_path(inpaint_paths[-1]) if inpaint_paths else artifacts.get("inpaint")),
-        "latest_inpainted": cleanup_inpainted or (_display_path(inpainted_paths[-1]) if inpainted_paths else _inpainted_from_comparison(artifacts.get("inpaint"))),
+        "latest_inpaint_comparison": _display_path(latest_inpaint_comparison_path) if latest_inpaint_comparison_path else artifacts.get("inpaint"),
+        "latest_inpainted": _display_path(latest_inpainted_path) if latest_inpainted_path else _inpainted_from_comparison(artifacts.get("inpaint")),
         "latest_inpaint_cleanup_comparison": cleanup_comparison,
         "latest_inpaint_cleanup_mask": cleanup_mask,
         "latest_authoring_schema": _display_path(authoring_schema_paths[-1]) if authoring_schema_paths else artifacts.get("authoring"),

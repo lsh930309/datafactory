@@ -1,0 +1,784 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "search_date": "2026-07-08",
+  "queries": [
+    "정부24 건축물대장 발급 열람 신청 민원서비스",
+    "정부24 토지(임야)대장 열람 등본발급 신청 민원서비스",
+    "건축물대장의 기재 및 관리 등에 관한 규칙 별지 제1호서식 일반건축물대장",
+    "공간정보의 구축 및 관리 등에 관한 법률 시행규칙 토지대장 등록사항"
+  ],
+  "search_method": "live_web_search_plus_direct_official_url_open; search index returned sparse/noisy results, so report records official direct URLs used for document-type grounding.",
+  "sources": [
+    {
+      "id": "R-GOV24-BUILDING",
+      "url": "https://www.gov.kr/portal/service/serviceInfo/131000000060",
+      "source_type": "government_service",
+      "summary": "정부24의 건축물대장 등·초본 발급/열람 민원 서비스. 샘플의 정부24 발급 문서, 문서확인번호, 발급일/담당자/전화/기관장 표기 해석에 사용."
+    },
+    {
+      "id": "R-GOV24-LAND",
+      "url": "https://www.gov.kr/portal/service/serviceInfo/131000000026",
+      "source_type": "government_service",
+      "summary": "정부24의 토지(임야)대장 열람/등본발급 민원 서비스. COL-03 문서군의 토지대장 별칭 및 지목·면적·소유자 등 registry 의미 확인에 사용."
+    },
+    {
+      "id": "R-BUILDING-REGISTER-FORM",
+      "url": "https://www.law.go.kr/법령/건축물대장의%20기재%20및%20관리%20등에%20관한%20규칙",
+      "source_type": "law/form",
+      "summary": "건축물대장의 기재 및 관리 등에 관한 규칙 및 별지 서식 계열. 일반건축물대장(갑) 양식의 대지위치, 지번, 도로명주소, 면적, 구조, 용도, 소유자현황 등 anchor 명칭 확인에 사용."
+    },
+    {
+      "id": "R-LAND-CADASTRE-LAW",
+      "url": "https://www.law.go.kr/법령/공간정보의%20구축%20및%20관리%20등에%20관한%20법률%20시행규칙",
+      "source_type": "law",
+      "summary": "토지대장 등 지적공부 등록·관리 제도 해석 보조. COL-03 registry의 토지정보 항목을 문서군 수준 근거로만 사용하고, 현재 샘플에 없는 필드는 schema에 추가하지 않음."
+    }
+  ],
+  "field_level_evidence": [
+    {
+      "field_id": "document_confirmation_number",
+      "anchor_id": "manual_1783467788626",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "print_date",
+      "anchor_id": "det_000004",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "print_time",
+      "anchor_id": "det_000006",
+      "label_anchor_ids": [
+        "det_000007"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "building_id",
+      "anchor_id": "det_000015",
+      "label_anchor_ids": [
+        "det_000011"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "building_management_number",
+      "anchor_id": "det_000013",
+      "label_anchor_ids": [
+        "det_000012"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "building_name",
+      "anchor_id": "det_000016",
+      "label_anchor_ids": [
+        "det_000014"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "unit_household_count",
+      "anchor_id": "det_000018",
+      "label_anchor_ids": [
+        "det_000017"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "site_location",
+      "anchor_id": "det_000021",
+      "label_anchor_ids": [
+        "det_000019"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE",
+        "R-LAND-CADASTRE-LAW"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "lot_number",
+      "anchor_id": "det_000022",
+      "label_anchor_ids": [
+        "det_000020"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE",
+        "R-LAND-CADASTRE-LAW"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "road_address",
+      "anchor_id": "det_000024",
+      "label_anchor_ids": [
+        "det_000023"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "site_area",
+      "anchor_id": "det_000030",
+      "label_anchor_ids": [
+        "det_000025"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE",
+        "R-LAND-CADASTRE-LAW"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "total_floor_area",
+      "anchor_id": "det_000031",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "zoning_area",
+      "anchor_id": "det_000032",
+      "label_anchor_ids": [
+        "det_000027"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE",
+        "R-LAND-CADASTRE-LAW"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "restriction_zone",
+      "anchor_id": "det_000033",
+      "label_anchor_ids": [
+        "det_000029"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE",
+        "R-LAND-CADASTRE-LAW"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "building_area",
+      "anchor_id": "det_000039",
+      "label_anchor_ids": [
+        "det_000034"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "floor_area_for_far",
+      "anchor_id": "det_000040",
+      "label_anchor_ids": [
+        "det_000035"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "main_structure",
+      "anchor_id": "det_000041",
+      "label_anchor_ids": [
+        "det_000036"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "main_use",
+      "anchor_id": "det_000042",
+      "label_anchor_ids": [
+        "det_000037"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "floor_count_summary",
+      "anchor_id": "det_000043",
+      "label_anchor_ids": [
+        "det_000038"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "building_coverage_ratio",
+      "anchor_id": "det_000049",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "floor_area_ratio",
+      "anchor_id": "det_000050",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "height",
+      "anchor_id": "det_000051",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "roof",
+      "anchor_id": "det_000052",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_1_section",
+      "anchor_id": "det_000077",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000067"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_1_floor",
+      "anchor_id": "det_000078",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000068"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_1_structure",
+      "anchor_id": "det_000079",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000069"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_1_use",
+      "anchor_id": "det_000080",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000070"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_1_area",
+      "anchor_id": "det_000081",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "owner_name",
+      "anchor_id": "det_000082",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000064"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "owner_address",
+      "anchor_id": "det_000083",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000073"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "owner_change_date",
+      "anchor_id": "det_000084",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000066"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_2_section",
+      "anchor_id": "det_000086",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000067"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_2_floor",
+      "anchor_id": "det_000087",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000068"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_2_structure",
+      "anchor_id": "det_000088",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000069"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_2_use",
+      "anchor_id": "det_000089",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000070"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_2_area",
+      "anchor_id": "det_000090",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "owner_registration_number_masked",
+      "anchor_id": "det_000091",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000072",
+        "det_000075"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "owner_change_reason",
+      "anchor_id": "det_000093",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000076"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_3_section",
+      "anchor_id": "det_000094",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000067"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_3_floor",
+      "anchor_id": "det_000095",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000068"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_3_structure",
+      "anchor_id": "det_000096",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000069"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_3_use",
+      "anchor_id": "det_000097",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000070"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_3_area",
+      "anchor_id": "det_000098",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_4_section",
+      "anchor_id": "det_000100",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000067"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_4_floor",
+      "anchor_id": "det_000101",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000068"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_4_structure",
+      "anchor_id": "det_000102",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000069"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_4_use",
+      "anchor_id": "det_000103",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000070"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "status_row_4_area",
+      "anchor_id": "det_000104",
+      "label_anchor_ids": [
+        "det_000062",
+        "det_000071"
+      ],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "certificate_issue_date",
+      "anchor_id": "det_000107",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "clerk_name",
+      "anchor_id": "det_000110",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "clerk_phone",
+      "anchor_id": "det_000111",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "issuer",
+      "anchor_id": "det_000113",
+      "label_anchor_ids": [],
+      "source_ids": [
+        "R-GOV24-SERVICE",
+        "R-BUILDING-REGISTER-RULE"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "landscaping_area",
+      "anchor_id": "manual_1783470434127",
+      "label_anchor_ids": [
+        "det_000054",
+        "manual_1783470558629"
+      ],
+      "source_ids": [
+        "R-BUILDING-REGISTER-FORM"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "open_public_space_area",
+      "anchor_id": "manual_1783470430160",
+      "label_anchor_ids": [
+        "det_000055",
+        "manual_1783470576895"
+      ],
+      "source_ids": [
+        "R-BUILDING-REGISTER-FORM"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "building_line_setback_area",
+      "anchor_id": "manual_1783470425142",
+      "label_anchor_ids": [
+        "det_000056",
+        "det_000060"
+      ],
+      "source_ids": [
+        "R-BUILDING-REGISTER-FORM"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "building_line_setback_distance",
+      "anchor_id": "manual_1783470593596",
+      "label_anchor_ids": [
+        "det_000057",
+        "det_000061"
+      ],
+      "source_ids": [
+        "R-BUILDING-REGISTER-FORM"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    },
+    {
+      "field_id": "accessory_building_summary",
+      "anchor_id": "manual_1783470492760",
+      "label_anchor_ids": [
+        "det_000048",
+        "det_000053"
+      ],
+      "source_ids": [
+        "R-BUILDING-REGISTER-FORM"
+      ],
+      "evidence_note": "현재 샘플 anchor와 공식/법령 양식 설명을 연결한 초안 근거"
+    }
+  ],
+  "local_input_evidence": {
+    "request": "workbench/documents/토지대장·건축물대장__COL-03/authoring/agent_requests/20260708T011640860135Z/request.json",
+    "review": "workbench/documents/토지대장·건축물대장__COL-03/review/original_건축물대장_page_001/review.json",
+    "detections": "workbench/documents/토지대장·건축물대장__COL-03/ocr/paddleocr/precise/original_건축물대장_page_001/detections.json",
+    "anchor_map_sidecar": "workbench/documents/토지대장·건축물대장__COL-03/authoring/agent_requests/20260708T011640860135Z/anchor_map_draft.json",
+    "pdf_meta": {
+      "path": "workbench/documents/토지대장·건축물대장__COL-03/samples/original/건축물대장.pdf",
+      "page_count": 3,
+      "pages": [
+        {
+          "page_index": 0,
+          "rect": [
+            792.0,
+            612.0
+          ],
+          "text_excerpt": "",
+          "has_embedded_text": false
+        },
+        {
+          "page_index": 1,
+          "rect": [
+            792.0,
+            612.0
+          ],
+          "text_excerpt": "",
+          "has_embedded_text": false
+        },
+        {
+          "page_index": 2,
+          "rect": [
+            792.0,
+            612.0
+          ],
+          "text_excerpt": "",
+          "has_embedded_text": false
+        }
+      ]
+    }
+  }
+}

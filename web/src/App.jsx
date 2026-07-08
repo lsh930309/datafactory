@@ -332,6 +332,12 @@ function workItemNextAction(item) {
   if (item.status === 'approved') return '완료: 검수 완료';
   if (item.status === 'cleanroom_sample_ready') return '완료: 클린룸 검수 완료';
   if (item.status === 'collection_done') return '완료: 실문서 수집 완료';
+  if (isHandwritingItem(item)) {
+    if (Number(item.handwritingAcceptedCount || 0) > 0) return `완료: 수기 스캔 ${item.handwritingAcceptedCount}건 매칭`;
+    if (item.hasHandwritingPrintPack) return '다음: 수기 스캔 intake';
+    if (item.hasAuthoring) return '다음: 수기 print pack 생성';
+    return '다음: schema/faker';
+  }
   if (item.isNonPipeline) return '합성 제외: 최종 샘플 준비 필요';
   if (item.hasPendingSeed) return '다음: seed 적재';
   if (item.needsSynthesis) return '다음: 합성 필요 여부 검토';
@@ -345,7 +351,7 @@ function workItemNextAction(item) {
   return item.hasAuthoringPreview ? '완료: 합성 preview 있음' : '다음: preview 생성';
 }
 function workItemIsComplete(item) {
-  return Boolean(item && (COMPLETED_WORK_STATUSES.has(item.status) || item.hasAuthoringPreview));
+  return Boolean(item && (COMPLETED_WORK_STATUSES.has(item.status) || handwritingReady(item) || item.hasAuthoringPreview));
 }
 function workItemTone(item) {
   if (!item) return 'missing';
@@ -366,6 +372,17 @@ function writingMethodTone(itemOrDoc) {
   if (method === '인쇄') return 'printed';
   return 'unknown';
 }
+function isHandwritingItem(itemOrDoc) {
+  return String(itemOrDoc?.registry?.writingMethod || itemOrDoc?.writingMethod || '').trim() === '수기';
+}
+function handwritingReady(item) {
+  return isHandwritingItem(item) && Number(item?.handwritingAcceptedCount || 0) > 0;
+}
+function finalExportReady(item) {
+  return handwritingReady(item)
+    || Boolean(item?.latestCleanroomPdf)
+    || Boolean(item?.latestAuthoringSchema && item?.latestAuthoringStylesheet && item?.latestAuthoringFakerProfile);
+}
 function cleanroomArtifact(item) {
   const cleanroom = item?.manifest?.artifacts?.cleanroom || {};
   return {
@@ -377,7 +394,11 @@ function cleanroomArtifact(item) {
   };
 }
 function finalOutputForItem(item, isNonPipeline, selectedSample = '') {
-  if (!item || (!isNonPipeline && !COMPLETED_WORK_STATUSES.has(item.status))) return null;
+  if (!item) return null;
+  if (handwritingReady(item)) {
+    return { locked: true, kind: 'handwriting', label: '수기 스캔 최종 샘플', previewPath: item.latestHandwritingAcceptedImage || '', pdfPath: '', contactSheet: '', notes: item.latestHandwritingMatchedGt || '', quality: `accepted ${item.handwritingAcceptedCount}` };
+  }
+  if (!isNonPipeline && !COMPLETED_WORK_STATUSES.has(item.status)) return null;
   const cleanroom = cleanroomArtifact(item);
   if (cleanroom.previewPath || cleanroom.pdfPath) {
     return { locked: true, kind: 'cleanroom', label: '클린룸 최종 샘플', ...cleanroom };
@@ -494,6 +515,10 @@ function App() {
   const [authoringApprovalResult, setAuthoringApprovalResult] = useState(null);
   const [docxPipelineResult, setDocxPipelineResult] = useState(null);
   const [docxGenerateCount, setDocxGenerateCount] = useState(1);
+  const [handwritingPrintPackResult, setHandwritingPrintPackResult] = useState(null);
+  const [handwritingPackCount, setHandwritingPackCount] = useState(5);
+  const [handwritingScanDir, setHandwritingScanDir] = useState('');
+  const [handwritingScanIntakeResult, setHandwritingScanIntakeResult] = useState(null);
   const [busy, setBusy] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -539,6 +564,7 @@ function App() {
     () => selectedAssessmentRows.some((row) => row.feasibility === 'impossible'),
     [selectedAssessmentRows],
   );
+  const selectedIsHandwriting = isHandwritingItem(selectedItem || selectedDoc);
 
   const enrichedItems = useMemo(() => items.map((item) => {
     const seeds = seedFolders.filter((folder) => folder.matchedDocId === item.docId);
@@ -574,16 +600,10 @@ function App() {
     targetGroupAllItems.filter((item) => matchesSampleAvailabilityFilter(item, sampleAvailabilityFilters))
   ), [targetGroupAllItems, sampleAvailabilityFilters]);
   const targetGroupFinalExportReadyItems = useMemo(() => (
-    targetGroupItems.filter((item) => (
-      (item.latestAuthoringSchema && item.latestAuthoringStylesheet && item.latestAuthoringFakerProfile)
-      || item.latestCleanroomPdf
-    ))
+    targetGroupItems.filter(finalExportReady)
   ), [targetGroupItems]);
   const targetGroupFinalExportMissingItems = useMemo(() => (
-    targetGroupItems.filter((item) => !(
-      (item.latestAuthoringSchema && item.latestAuthoringStylesheet && item.latestAuthoringFakerProfile)
-      || item.latestCleanroomPdf
-    ))
+    targetGroupItems.filter((item) => !finalExportReady(item))
   ), [targetGroupItems]);
   const targetGroupFinalExportScopeEntries = useMemo(() => {
     const displayedDocIds = new Set(targetGroupItems.map((item) => item.docId));
@@ -1145,6 +1165,46 @@ function App() {
       setDocxPipelineResult(payload);
       const rendererNote = payload.summary?.rendererAvailable ? '' : ' · LibreOffice 없음: PDF 렌더 대기';
       setMessage(`DOCX 값 주입 파이프라인 완료: ${payload.summary?.sampleCount || 0}건 · ${payload.summary?.status || 'unknown'}${rendererNote}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function createHandwritingPrintPack() {
+    if (!selectedDocId) return;
+    const count = Math.max(1, Math.min(100, Number(handwritingPackCount) || 5));
+    setHandwritingPackCount(count);
+    setBusy('handwritingPrintPack');
+    setError('');
+    try {
+      const payload = await apiJson('/api/handwriting/print-pack', {
+        method: 'POST',
+        body: JSON.stringify({ docId: selectedDocId, count, seed: 20260708 }),
+      });
+      setHandwritingPrintPackResult(payload);
+      setMessage(`수기 print pack 생성 완료: ${payload.summary?.sampleCount || count}건 · ${payload.paths?.runDir}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  async function runHandwritingScanIntake() {
+    if (!selectedDocId) return;
+    setBusy('handwritingScanIntake');
+    setError('');
+    try {
+      const payload = await apiJson('/api/handwriting/scan-intake', {
+        method: 'POST',
+        body: JSON.stringify({
+          docId: selectedDocId,
+          scanDir: handwritingScanDir,
+          printPackManifest: selectedItem?.latestHandwritingPrintPack || '',
+        }),
+      });
+      setHandwritingScanIntakeResult(payload);
+      setMessage(`수기 스캔 intake 완료: accepted ${payload.summary?.acceptedCount || 0}건 · review ${payload.summary?.reviewRequiredCount || 0}건`);
       await refreshAll({ preserveSelection: true });
     } finally {
       setBusy('');
@@ -3022,6 +3082,30 @@ function App() {
                 {docxPipelineResult?.summary && <small>최근 결과: {docxPipelineResult.summary.status || 'analysis'} · sample {docxPipelineResult.summary.sampleCount ?? '-'} · warning {docxPipelineResult.summary.warningCount ?? 0}</small>}
               </div>
             )}
+            {selectedIsHandwriting && (
+              <div className="audit-box handwriting-pipeline-box">
+                <b>수기체 데이터 생성</b>
+                <span>print pack → 인쇄/작성/스캔 → QR/barcode intake → accepted-only export</span>
+                <small>수기 문서는 최종 이미지에 텍스트 렌더링을 하지 않습니다. schema/faker/GT만 사전 생성하고 실제 글씨는 작업자 스캔본을 사용합니다.</small>
+                <small>최근 print pack: {selectedItem?.latestHandwritingPrintPack || '없음'}</small>
+                <small>최근 intake: {selectedItem?.latestHandwritingScanIntake || '없음'} · accepted {selectedItem?.handwritingAcceptedCount || 0} · review {selectedItem?.handwritingReviewRequiredCount || 0}</small>
+                <label>Print pack 샘플 수
+                  <input type="number" min="1" max="100" value={handwritingPackCount} onChange={(event) => setHandwritingPackCount(event.target.value)} />
+                </label>
+                <button className="primary" onClick={() => run(createHandwritingPrintPack)} disabled={!selectedItem?.hasAuthoring || isBusy}>
+                  {busy === 'handwritingPrintPack' ? '생성 중...' : '수기 Print pack 생성'}
+                </button>
+                {!selectedItem?.hasAuthoring && <small className="warning-text">먼저 schema/faker authoring을 확정해야 print pack을 만들 수 있습니다.</small>}
+                <label>스캔본 폴더 또는 파일 경로
+                  <input value={handwritingScanDir} onChange={(event) => setHandwritingScanDir(event.target.value)} placeholder="workbench/documents/.../handwriting_pipeline/scans_inbox" />
+                </label>
+                <button onClick={() => run(runHandwritingScanIntake)} disabled={!selectedItem?.latestHandwritingPrintPack || !handwritingScanDir.trim() || isBusy}>
+                  {busy === 'handwritingScanIntake' ? '매칭 중...' : '스캔 intake / GT 매칭'}
+                </button>
+                {handwritingPrintPackResult?.paths?.manifest && <small>생성 manifest: {handwritingPrintPackResult.paths.manifest}</small>}
+                {handwritingScanIntakeResult?.paths?.manifest && <small>intake manifest: {handwritingScanIntakeResult.paths.manifest}</small>}
+              </div>
+            )}
             {seedRevertPreview?.docId === selectedDocId && (
               <div className="audit-box">
                 <b>되돌리기 미리보기</b>
@@ -3260,13 +3344,14 @@ function App() {
               </details>
             )}
             <div className="authoring-step-label"><b>2. Render</b><span>live preview와 샘플 생성</span></div>
-            <button onClick={() => run(() => renderAuthoringLivePreview({ silent: false }))} disabled={!authoringBundle || isDocxAuthoringBundle || isBusy}>
+            <button onClick={() => run(() => renderAuthoringLivePreview({ silent: false }))} disabled={!authoringBundle || isDocxAuthoringBundle || selectedIsHandwriting || isBusy}>
               {busy === 'authoringLivePreview' ? 'Live preview 갱신 중...' : 'Live preview 새로고침'}
             </button>
             {isDocxAuthoringBundle && <p className="muted">DOCX 템플릿은 이미지 텍스트 렌더 preview 대신 DOCX 값 주입 경로를 사용합니다. PDF 렌더는 LibreOffice 기반 실험 기능이며 외부 GUI 앱 자동화 렌더러는 사용하지 않습니다.</p>}
+            {selectedIsHandwriting && <p className="muted">수기 문서는 최종 텍스트 렌더링을 금지합니다. Render 단계 대신 오른쪽의 수기 Print pack / scan intake 흐름을 사용하세요.</p>}
             <div className="button-row single-action-row">
-              <button onClick={() => run(() => renderAuthoringBatch({ all: false }))} disabled={!canLoadAuthoring || isBusy}>
-                {busy === 'authoringBatch' ? '5장 생성 중...' : '선택 문서 5장 생성'}
+              <button onClick={() => run(() => renderAuthoringBatch({ all: false }))} disabled={!canLoadAuthoring || selectedIsHandwriting || isBusy}>
+                {busy === 'authoringBatch' ? '5장 생성 중...' : selectedIsHandwriting ? '수기 문서는 렌더 생성 불가' : '선택 문서 5장 생성'}
               </button>
             </div>
             {authoringPaths.schema && <p className="mini-path">{authoringPaths.schema}{authoringDirty ? ' · 수정됨' : ''}</p>}

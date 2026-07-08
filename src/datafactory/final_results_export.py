@@ -16,6 +16,7 @@ from PIL import Image
 
 from .authoring import render_authoring_batch
 from .first_priority_assessment import DOCUMENT_TYPES, FEASIBILITY_STATUSES, list_first_priority_assessments
+from .handwriting import latest_accepted_handwriting_samples
 from .registry import FIRST_PRIORITY_SCOPE_ENTRIES, RegistryData, load_registry, slugify_title
 from .workbench import WORKBENCH_ROOT, list_work_items
 
@@ -110,12 +111,19 @@ def export_final_results(
                 _copy_pipeline_samples(rendered_cache[doc_id], doc_dir)
                 row["sampleCount"] = count
                 row["outputType"] = "jpg+json+bbox+schema"
+                row["generatedFileCount"] = 3 * count + 1
             elif mode == "cleanroom":
                 if doc_id not in cleanroom_cache:
                     cleanroom_cache[doc_id] = _resolve_existing_path(item.get("latestCleanroomPdf"))
                 shutil.copy2(cleanroom_cache[doc_id], doc_dir / "sample_000.pdf")
                 row["sampleCount"] = 1
                 row["outputType"] = "pdf"
+                row["generatedFileCount"] = 1
+            elif mode == "handwriting":
+                copied = _copy_handwriting_samples(item, doc_dir, count=count)
+                row["sampleCount"] = copied["sampleCount"]
+                row["outputType"] = "handwritten-scan+json+bbox+schema"
+                row["generatedFileCount"] = copied["generatedFileCount"]
             else:  # pragma: no cover - _resolve_output_mode currently raises.
                 raise ValueError(f"unsupported output mode: {mode}")
             row["status"] = "OK"
@@ -234,11 +242,16 @@ def _assessment_rows_by_key(*, registry: RegistryData, root: Path) -> dict[str, 
 
 
 def _resolve_output_mode(item: dict[str, Any]) -> str:
+    writing_method = str((item.get("registry") or {}).get("writingMethod") or item.get("writingMethod") or "").strip()
+    if writing_method == "수기":
+        if latest_accepted_handwriting_samples(item):
+            return "handwriting"
+        raise ValueError("no accepted handwriting scans found; create a handwriting print pack and run scan intake first")
     if item.get("latestAuthoringSchema") and item.get("latestAuthoringStylesheet") and item.get("latestAuthoringFakerProfile"):
         return "pipeline"
     if item.get("latestCleanroomPdf"):
         return "cleanroom"
-    raise ValueError("no authoring bundle or cleanroom PDF found")
+    raise ValueError("no authoring bundle, cleanroom PDF, or accepted handwriting scan found")
 
 
 def _render_pipeline_document(
@@ -296,6 +309,40 @@ def _copy_pipeline_samples(result: PipelineRenderResult, out_dir: Path) -> None:
     for sample in result.samples:
         for path in sample.values():
             shutil.copy2(path, out_dir / path.name)
+
+
+def _copy_handwriting_samples(item: dict[str, Any], out_dir: Path, *, count: int) -> dict[str, int]:
+    samples = latest_accepted_handwriting_samples(item)
+    if not samples:
+        raise ValueError("no accepted handwriting scans found")
+    generated = 0
+    schema_path = _handwriting_primary_schema_path(item)
+    if schema_path and schema_path.exists():
+        shutil.copy2(schema_path, out_dir / "schema.json")
+        generated += 1
+    copied_count = min(count, len(samples))
+    for index, sample in enumerate(samples[:copied_count]):
+        stem = f"sample_{index:03d}"
+        image_target = out_dir / f"{stem}.jpg"
+        _write_jpg(sample.image, image_target)
+        shutil.copy2(sample.gt, out_dir / f"{stem}.json")
+        generated += 2
+        if sample.bbox and sample.bbox.exists():
+            shutil.copy2(sample.bbox, out_dir / f"{stem}-bbox.json")
+            generated += 1
+    return {"sampleCount": copied_count, "generatedFileCount": generated}
+
+
+def _handwriting_primary_schema_path(item: dict[str, Any]) -> Path | None:
+    manifest_value = item.get("latestHandwritingPrintPack") or (item.get("manifest", {}).get("artifacts", {}) if isinstance(item.get("manifest"), dict) else {}).get("handwriting_print_pack")
+    if not manifest_value:
+        return None
+    manifest_path = _resolve_existing_path(manifest_value)
+    payload = _read_json(manifest_path)
+    schema_value = payload.get("schema") if isinstance(payload, dict) else None
+    if not schema_value:
+        return None
+    return _resolve_existing_path(schema_value)
 
 
 def _field_labels(fields: list[dict[str, Any]]) -> dict[str, str]:
@@ -849,7 +896,8 @@ def _summary(rows: list[dict[str, Any]], errors: list[dict[str, Any]]) -> dict[s
         "errorCount": len(errors),
         "pipelineScopeCount": len([row for row in ok_rows if row.get("outputMode") == "pipeline"]),
         "cleanroomScopeCount": len([row for row in ok_rows if row.get("outputMode") == "cleanroom"]),
-        "generatedFileCount": sum((3 * int(row["sampleCount"]) + 1) if row.get("outputMode") == "pipeline" else int(row["sampleCount"]) for row in ok_rows),
+        "handwritingScopeCount": len([row for row in ok_rows if row.get("outputMode") == "handwriting"]),
+        "generatedFileCount": sum(int(row.get("generatedFileCount") or ((3 * int(row["sampleCount"]) + 1) if row.get("outputMode") == "pipeline" else int(row["sampleCount"]))) for row in ok_rows),
         "generatedAt": _now(),
     }
 
@@ -859,7 +907,7 @@ def _write_manifest_xlsx(path: Path, rows: list[dict[str, Any]], summary: dict[s
         ["1차 목표 최종 산출물 매니페스트"],
         [
             f"생성: {summary['generatedAt']} · scope {summary['scopeEntryCount']}건 / 고유 {summary['uniqueDocumentCount']}종 · "
-            f"pipeline {summary['pipelineScopeCount']}건 · cleanroom {summary['cleanroomScopeCount']}건 · 오류 {summary['errorCount']}건"
+            f"pipeline {summary['pipelineScopeCount']}건 · cleanroom {summary['cleanroomScopeCount']}건 · handwriting {summary.get('handwritingScopeCount', 0)}건 · 오류 {summary['errorCount']}건"
         ],
         [],
         ["분야", "순번", "문서ID", "문서명", "문서 속성", "저장된 작업판정", "최종 출력모드", "샘플 수", "산출물 형식", "상태", "출력 폴더", "오류/경고"],
@@ -873,7 +921,7 @@ def _write_manifest_xlsx(path: Path, rows: list[dict[str, Any]], summary: dict[s
                 row.get("title", ""),
                 row.get("documentTypeLabel", ""),
                 row.get("storedFeasibilityLabel", ""),
-                {"pipeline": "작업 가능: pipeline", "cleanroom": "작업 불가: cleanroom"}.get(str(row.get("outputMode")), "오류"),
+                {"pipeline": "작업 가능: pipeline", "cleanroom": "작업 불가: cleanroom", "handwriting": "수기: scan+GT"}.get(str(row.get("outputMode")), "오류"),
                 row.get("sampleCount", 0),
                 row.get("outputType", ""),
                 row.get("status", ""),

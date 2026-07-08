@@ -98,9 +98,13 @@ def test_summary_counts_primary_schema_once_per_pipeline_scope() -> None:
     rows = [
         {"docId": "DOC-1", "status": "OK", "outputMode": "pipeline", "sampleCount": 5},
         {"docId": "DOC-2", "status": "OK", "outputMode": "cleanroom", "sampleCount": 1},
+        {"docId": "DOC-3", "status": "OK", "outputMode": "handwriting", "sampleCount": 2, "generatedFileCount": 7},
     ]
 
-    assert _summary(rows, [])["generatedFileCount"] == 17
+    summary = _summary(rows, [])
+
+    assert summary["generatedFileCount"] == 24
+    assert summary["handwritingScopeCount"] == 1
 
 
 def test_scope_cleanup_backs_up_only_target_doc_dir(tmp_path: Path, monkeypatch) -> None:

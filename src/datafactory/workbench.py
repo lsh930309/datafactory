@@ -670,6 +670,14 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "latestCleanroomPdf": artifact_flags.get("latest_cleanroom_pdf"),
                 "latestCleanroomContactSheet": artifact_flags.get("latest_cleanroom_contact_sheet"),
                 "latestCleanroomNotes": artifact_flags.get("latest_cleanroom_notes"),
+                "hasHandwritingPrintPack": artifact_flags.get("has_handwriting_print_pack"),
+                "hasHandwritingScanIntake": artifact_flags.get("has_handwriting_scan_intake"),
+                "handwritingAcceptedCount": artifact_flags.get("handwriting_accepted_count", 0),
+                "handwritingReviewRequiredCount": artifact_flags.get("handwriting_review_required_count", 0),
+                "latestHandwritingPrintPack": artifact_flags.get("latest_handwriting_print_pack"),
+                "latestHandwritingScanIntake": artifact_flags.get("latest_handwriting_scan_intake"),
+                "latestHandwritingAcceptedImage": artifact_flags.get("latest_handwriting_accepted_image"),
+                "latestHandwritingMatchedGt": artifact_flags.get("latest_handwriting_matched_gt"),
                 "manifest": manifest,
                 "registry": doc.to_dict(),
             }
@@ -885,6 +893,7 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     manifest_ocr = _existing_display_path(artifacts.get("ocr"))
     manifest_review = _existing_display_path(artifacts.get("review"))
     cleanroom = _cleanroom_artifact_flags(artifacts.get("cleanroom"))
+    handwriting = _handwriting_artifact_flags(doc_root, artifacts)
     latest_inpaint_comparison_path = inpaint_paths[-1] if inpaint_paths else None
     latest_inpainted_path = inpainted_paths[-1] if inpainted_paths else None
     latest_cleanup_comparison_path = cleanup_comparison_paths[-1] if cleanup_comparison_paths else None
@@ -929,6 +938,42 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         "latest_docx_bbox": artifacts.get("docx_bbox"),
         "latest_docx_labels": artifacts.get("docx_labels"),
         **cleanroom,
+        **handwriting,
+    }
+
+
+def _handwriting_artifact_flags(doc_root: Path, artifacts: dict[str, Any]) -> dict[str, Any]:
+    print_pack_root = doc_root / "handwriting_pipeline" / "print_packs"
+    intake_root = doc_root / "handwriting_pipeline" / "scanned_intake"
+    print_pack_paths = _mtime_sorted(print_pack_root.glob("*/manifest.json")) if print_pack_root.exists() else []
+    intake_paths = _mtime_sorted(intake_root.glob("*/manifest.json")) if intake_root.exists() else []
+    latest_print_pack = _display_path(print_pack_paths[-1]) if print_pack_paths else _existing_display_path(artifacts.get("handwriting_print_pack"))
+    latest_intake = _display_path(intake_paths[-1]) if intake_paths else _existing_display_path(artifacts.get("handwriting_scan_intake"))
+    accepted_count = 0
+    review_required_count = 0
+    accepted_image = ""
+    matched_gt = ""
+    if latest_intake:
+        path = ROOT / latest_intake if not Path(latest_intake).is_absolute() else Path(latest_intake)
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            payload = {}
+        accepted_count = int(payload.get("accepted_count") or 0) if isinstance(payload, dict) else 0
+        review_required_count = int(payload.get("review_required_count") or 0) if isinstance(payload, dict) else 0
+        samples = payload.get("accepted_samples") if isinstance(payload.get("accepted_samples"), list) else []
+        if samples and isinstance(samples[0], dict):
+            accepted_image = _existing_display_path(samples[0].get("image"))
+            matched_gt = _existing_display_path(samples[0].get("gt"))
+    return {
+        "has_handwriting_print_pack": bool(latest_print_pack),
+        "has_handwriting_scan_intake": bool(latest_intake),
+        "handwriting_accepted_count": accepted_count,
+        "handwriting_review_required_count": review_required_count,
+        "latest_handwriting_print_pack": latest_print_pack,
+        "latest_handwriting_scan_intake": latest_intake,
+        "latest_handwriting_accepted_image": accepted_image,
+        "latest_handwriting_matched_gt": matched_gt,
     }
 
 

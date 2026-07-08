@@ -40,6 +40,7 @@ from .authoring import (
 from .first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
 from .fonts import default_font_id, list_font_faces
 from .final_results_export import export_final_results
+from .handwriting import BARCODE_FORMAT, create_handwriting_print_pack, intake_handwriting_scans
 from .docx_pipeline import analyze_docx_template, draft_docx_authoring, generate_docx_outputs
 from .inpaint import InpaintConfig, InpaintResult, inpaint_from_review_policy, lama_inpaint, render_mask_overlay
 from .inpaint_export import write_inpaint_result
@@ -157,6 +158,8 @@ def runtime_health() -> dict[str, Any]:
             "ocr_recrop_review": True,
             "first_priority_assessment": True,
             "final_results_export": True,
+            "handwriting_pipeline": True,
+            "handwriting_barcode": BARCODE_FORMAT,
             "manual_template_cleanup": True,
             "font_registry": True,
             "ocr_presets": list(PADDLEOCR_PRESETS),
@@ -2329,6 +2332,38 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                         },
                     }
                 )
+                return
+            if parsed.path == "/api/handwriting/print-pack":
+                doc_id = str(payload.get("docId") or "")
+                if not doc_id:
+                    raise ValueError("docId is required")
+                count = max(1, min(100, int(payload.get("count") or 5)))
+                seed = int(payload.get("seed") or 20260708)
+                qr_bbox = payload.get("qrBbox") if isinstance(payload.get("qrBbox"), list) else None
+                result = create_handwriting_print_pack(
+                    doc_id,
+                    count=count,
+                    seed=seed,
+                    qr_bbox=qr_bbox,
+                    run_id=str(payload.get("runId") or "") or None,
+                    allow_printed=bool(payload.get("allowPrinted", False)),
+                    registry=load_registry(),
+                )
+                manifest_path = _resolve_workspace_path(result["paths"]["manifest"])
+                self._send_json({**result, "urls": {"manifest": f"/api/file?path={_display_path(manifest_path, ROOT)}"}})
+                return
+            if parsed.path == "/api/handwriting/scan-intake":
+                scan_paths = payload.get("scanPaths") if isinstance(payload.get("scanPaths"), list) else None
+                result = intake_handwriting_scans(
+                    doc_id=str(payload.get("docId") or "") or None,
+                    scan_paths=scan_paths,
+                    scan_dir=str(payload.get("scanDir") or "") or None,
+                    print_pack_manifest=str(payload.get("printPackManifest") or "") or None,
+                    run_id=str(payload.get("runId") or "") or None,
+                    registry=load_registry(),
+                )
+                manifest_path = _resolve_workspace_path(result["paths"]["manifest"])
+                self._send_json({**result, "urls": {"manifest": f"/api/file?path={_display_path(manifest_path, ROOT)}"}})
                 return
             if parsed.path == "/api/docx/analyze":
                 doc_id = str(payload.get("docId") or "")

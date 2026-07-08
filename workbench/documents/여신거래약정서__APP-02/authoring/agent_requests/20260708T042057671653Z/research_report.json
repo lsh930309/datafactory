@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-02",
+  "title": "여신거래약정서",
+  "search_date": "2026-07-08",
+  "queries": [
+    {
+      "query": "여신거래약정서 여신한도액 이자율 연체배상금",
+      "result": "검색 API 결과 품질이 낮아 직접 공식/공공 사이트 확인으로 보완"
+    },
+    {
+      "query": "여신거래약정서 양식 약정일 여신과목 여신한도액 거래기간 이자율",
+      "result": "직접 문서명 검색은 안정적인 원문 샘플을 찾지 못함"
+    },
+    {
+      "query": "은행여신거래기본약관 PDF / 은행여신거래기본약관 연체 이자",
+      "result": "은행·공공기관 맥락 확인용으로 사용"
+    }
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.law.go.kr/법령/은행법",
+      "source_type": "법령/공공",
+      "summary": "은행업 및 금융기관 맥락 확인용 공식 법령 페이지. 템플릿의 금융기관-여신자 간 여신거래 약정 구조를 해석하는 보조 근거로만 사용했다."
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.fsc.go.kr/in090301",
+      "source_type": "정부기관 금융용어/자료실",
+      "summary": "금융위원회 공식 금융용어설명 페이지. 금융 분야 용어와 관련 기관/법령 자료 경로 확인용 보조 근거로 사용했다."
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.crefia.or.kr/portal/main/main.xx",
+      "source_type": "금융협회/기관",
+      "summary": "여신금융협회 공식 페이지. 여신금융 업권 및 대출성 금융상품 관련 공신력 있는 기관 맥락 확인용으로 사용했다."
+    },
+    {
+      "evidence_id": "R4",
+      "url": "https://www.fsc.go.kr/index",
+      "source_type": "정부기관",
+      "summary": "금융위원회 공식 전자정부 누리집. 금융정책·법령정보·금융용어 자료 경로의 공식성을 확인했다."
+    }
+  ],
+  "field_evidence_links": [
+    {
+      "field_ids": [
+        "agreement_date_year",
+        "agreement_date_month",
+        "agreement_date_day",
+        "term_end_year",
+        "term_end_month",
+        "term_end_day",
+        "interest_payment_day"
+      ],
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "약정일, 거래기간, 지급일은 계약 문서의 일반 날짜 항목으로 해석하되 실제 분할/단위는 템플릿 이미지 근거를 우선했다."
+    },
+    {
+      "field_ids": [
+        "credit_subject",
+        "credit_limit_amount"
+      ],
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "note": "여신과목과 여신한도액은 금융기관의 여신거래 조건 항목으로 해석했다."
+    },
+    {
+      "field_ids": [
+        "borrower_name",
+        "borrower_address",
+        "financial_institution_name"
+      ],
+      "evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "note": "금융기관과 여신자 당사자 정보 항목으로 해석했다."
+    },
+    {
+      "field_ids": [
+        "interest_rate",
+        "overdue_interest_rate"
+      ],
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "note": "이자율 및 연체배상금률은 템플릿 제2조 문구와 금융거래 약정 맥락에 따라 연 이율 값으로 해석했다."
+    }
+  ],
+  "research_limits": [
+    "검색 결과가 문서명 정확 샘플보다 일반 금융기관/법령 페이지에 치우쳤으므로, 템플릿에 보이지 않는 필드는 추가하지 않았다."
+  ]
+}

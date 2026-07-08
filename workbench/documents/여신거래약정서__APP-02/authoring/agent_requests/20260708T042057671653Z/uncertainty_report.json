@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-02",
+  "title": "여신거래약정서",
+  "unresolved_fields": [
+    {
+      "field_id": "credit_subject",
+      "issue": "여신 과목의 허용 선택지 목록이 템플릿에 고정되어 있지 않다.",
+      "current_handling": "합성 pool로 일반 대출 과목 후보만 제안",
+      "user_decision_needed": "실제 업무에서 허용되는 여신 과목 목록 승인 또는 교체"
+    },
+    {
+      "field_id": "credit_limit_amount",
+      "issue": "한글 금액과 숫자 금액을 동기화하는 전용 faker 문법이 없다.",
+      "current_handling": "정합성이 맞는 합성 문자열 pool 사용",
+      "user_decision_needed": "금액 범위와 표기 방식 승인"
+    },
+    {
+      "field_id": "financial_institution_name",
+      "issue": "앵커는 문장 전체 bbox이고 의미 leaf는 금융기관명이다.",
+      "current_handling": "사용자 지시대로 문장 전체를 template rule로 생성하고 금융기관명만 pool 치환",
+      "user_decision_needed": "렌더러가 긴 bbox 전체 재삽입을 의도대로 처리하는지 UI 미리보기 확인"
+    },
+    {
+      "field_id": "interest_rate",
+      "issue": "정밀 소수 범위 생성 문법이 지원되지 않는다.",
+      "current_handling": "연 n.nn % 합성 pool 사용",
+      "user_decision_needed": "업무상 허용 이율 범위가 있으면 pool 교체"
+    },
+    {
+      "field_id": "overdue_interest_rate",
+      "issue": "정밀 소수 범위 생성 문법이 지원되지 않는다.",
+      "current_handling": "이율과 같은 annual_rates pool 사용",
+      "user_decision_needed": "연체배상금률 전용 범위가 있으면 별도 pool로 분리"
+    }
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    "credit_subject",
+    "credit_limit_amount",
+    "interest_rate",
+    "overdue_interest_rate"
+  ],
+  "scope_notes": [
+    "원본 PDF는 2페이지이나 request package의 OCR/review/visual evidence는 1페이지 앵커만 포함한다.",
+    "2페이지의 자기자본비율, 약속어음 매수, 작성일, 갑/을 상호/주소/대표이사 서명란은 reviewed use anchor가 없어 이번 schema_draft에 추가하지 않았다.",
+    "PDF 텍스트 추출은 PyMuPDF로 확인했고, 최종 시각 기준은 page 1 원본/인페인트 이미지와 review anchor이다."
+  ],
+  "user_decisions_needed": [
+    "여신과목 후보 pool 승인",
+    "금액 pool 범위 승인",
+    "이자율/연체배상금률 pool 범위 승인",
+    "2페이지 서명란까지 authoring 대상이면 별도 리뷰 앵커 생성 필요"
+  ]
+}

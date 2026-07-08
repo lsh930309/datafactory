@@ -1,0 +1,1072 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "sample_kind": "blank_template",
+  "source_request": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/request.json",
+  "semantic_schema": {
+    "결재": {
+      "차장": "",
+      "실장": "",
+      "담당부행장": "",
+      "은행장": ""
+    },
+    "신청구분": {
+      "건별거래": "",
+      "신규": "",
+      "증대": "",
+      "한도거래": "",
+      "기한갱신": "",
+      "감액": ""
+    },
+    "문서정보": {
+      "신청일자": {
+        "년": "",
+        "월": "",
+        "일": ""
+      },
+      "문서번호": ""
+    },
+    "감사": {
+      "감사확인": ""
+    },
+    "업체개요": {
+      "주소": "",
+      "설립일자": "",
+      "여신금리평점": {
+        "기준월": "",
+        "기준일": ""
+      },
+      "여신심사평점": {
+        "기준월": "",
+        "기준일": ""
+      },
+      "재무상황기준": {
+        "년": "",
+        "월": ""
+      }
+    },
+    "채권보전": {
+      "담보": {
+        "종류": "",
+        "가격조사가격": "",
+        "담보사정가격": "",
+        "담보제공자": "",
+        "보전방법": ""
+      },
+      "보증인": {
+        "성명": "",
+        "연령": "",
+        "직업": "",
+        "차주와관계": "",
+        "비고": ""
+      }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "approval_deputy_general_manager",
+      "key": "차장 결재",
+      "semantic_path": "결재.차장",
+      "anchor_id": "visual_0004",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000001"
+      ],
+      "value_type": "signature_or_approval",
+      "generator": "free_text.short",
+      "style_class": "approval_stamp_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          124,
+          232,
+          168,
+          61
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0065_visual_0004.png",
+        "note": "상단 결재란 차장 하단 빈 칸"
+      }
+    },
+    {
+      "field_id": "approval_office_manager",
+      "key": "실장 결재",
+      "semantic_path": "결재.실장",
+      "anchor_id": "visual_0005",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "value_type": "signature_or_approval",
+      "generator": "free_text.short",
+      "style_class": "approval_stamp_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          298,
+          232,
+          162,
+          61
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0066_visual_0005.png",
+        "note": "상단 결재란 실장 하단 빈 칸"
+      }
+    },
+    {
+      "field_id": "approval_executive_vp",
+      "key": "담당부행장 결재",
+      "semantic_path": "결재.담당부행장",
+      "anchor_id": "visual_0009",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005"
+      ],
+      "value_type": "signature_or_approval",
+      "generator": "free_text.short",
+      "style_class": "approval_stamp_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          634,
+          232,
+          162,
+          61
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0068_visual_0009.png",
+        "note": "상단 결재란 담당부행장 하단 빈 칸"
+      }
+    },
+    {
+      "field_id": "approval_bank_president",
+      "key": "은행장 결재",
+      "semantic_path": "결재.은행장",
+      "anchor_id": "visual_0010",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000006"
+      ],
+      "value_type": "signature_or_approval",
+      "generator": "free_text.short",
+      "style_class": "approval_stamp_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          801,
+          232,
+          168,
+          61
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0069_visual_0010.png",
+        "note": "상단 결재란 은행장 하단 빈 칸"
+      }
+    },
+    {
+      "field_id": "request_type_single_transaction",
+      "key": "건별거래",
+      "semantic_path": "신청구분.건별거래",
+      "anchor_id": "manual_1783476995549",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000009"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          150,
+          336,
+          15,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0103_manual_1783476995549.png",
+        "note": "좌측 신청구분 체크박스 첫 번째"
+      }
+    },
+    {
+      "field_id": "request_type_new",
+      "key": "신규",
+      "semantic_path": "신청구분.신규",
+      "anchor_id": "manual_1783476999516",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000013"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          150,
+          355,
+          14,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0104_manual_1783476999516.png",
+        "note": "좌측 신청구분 체크박스 두 번째"
+      }
+    },
+    {
+      "field_id": "request_type_increase",
+      "key": "증대",
+      "semantic_path": "신청구분.증대",
+      "anchor_id": "manual_1783477003801",
+      "value": "",
+      "label_anchor_ids": [
+        "manual_1783476990121"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          149,
+          374,
+          15,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0105_manual_1783477003801.png",
+        "note": "좌측 신청구분 체크박스 세 번째"
+      }
+    },
+    {
+      "field_id": "request_type_credit_line",
+      "key": "한도거래",
+      "semantic_path": "신청구분.한도거래",
+      "anchor_id": "manual_1783477006999",
+      "value": "",
+      "label_anchor_ids": [
+        "manual_1783476976067"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          150,
+          395,
+          12,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0106_manual_1783477006999.png",
+        "note": "좌측 신청구분 체크박스 네 번째"
+      }
+    },
+    {
+      "field_id": "request_type_term_renewal",
+      "key": "기한갱신",
+      "semantic_path": "신청구분.기한갱신",
+      "anchor_id": "manual_1783477009882",
+      "value": "",
+      "label_anchor_ids": [
+        "manual_1783476969048"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          149,
+          416,
+          15,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0107_manual_1783477009882.png",
+        "note": "좌측 신청구분 체크박스 다섯 번째"
+      }
+    },
+    {
+      "field_id": "request_type_reduction",
+      "key": "감액",
+      "semantic_path": "신청구분.감액",
+      "anchor_id": "manual_1783477012333",
+      "value": "",
+      "label_anchor_ids": [
+        "manual_1783476963582"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          149,
+          436,
+          16,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0108_manual_1783477012333.png",
+        "note": "좌측 신청구분 체크박스 여섯 번째"
+      }
+    },
+    {
+      "field_id": "application_date_year",
+      "key": "신청일자 년",
+      "semantic_path": "문서정보.신청일자.년",
+      "anchor_id": "manual_1783477023233",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000018"
+      ],
+      "value_type": "year",
+      "generator": "pattern:####",
+      "style_class": "date_component",
+      "unit_policy": "static_suffix_omitted:년",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          414,
+          460,
+          36,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0109_manual_1783477023233.png",
+        "note": "제목 아래 괄호 안 년 입력 위치"
+      }
+    },
+    {
+      "field_id": "application_date_month",
+      "key": "신청일자 월",
+      "semantic_path": "문서정보.신청일자.월",
+      "anchor_id": "manual_1783477052083",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000019"
+      ],
+      "value_type": "month",
+      "generator": "pattern:##",
+      "style_class": "date_component",
+      "unit_policy": "static_suffix_omitted:월",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          473,
+          458,
+          39,
+          31
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0112_manual_1783477052083.png",
+        "note": "제목 아래 괄호 안 월 입력 위치"
+      }
+    },
+    {
+      "field_id": "application_date_day",
+      "key": "신청일자 일",
+      "semantic_path": "문서정보.신청일자.일",
+      "anchor_id": "manual_1783477048933",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000020"
+      ],
+      "value_type": "day",
+      "generator": "pattern:##",
+      "style_class": "date_component",
+      "unit_policy": "static_suffix_omitted:일",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          541,
+          458,
+          35,
+          30
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0111_manual_1783477048933.png",
+        "note": "제목 아래 괄호 안 일 입력 위치"
+      }
+    },
+    {
+      "field_id": "approval_document_number",
+      "key": "제 호 문서번호",
+      "semantic_path": "문서정보.문서번호",
+      "anchor_id": "manual_1783477044404",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000021",
+        "det_000022"
+      ],
+      "value_type": "document_number",
+      "generator": "pattern:####",
+      "style_class": "short_code",
+      "unit_policy": "static_prefix_suffix_omitted:제/호",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          736,
+          460,
+          31,
+          29
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0110_manual_1783477044404.png",
+        "note": "제  호 사이 입력 위치"
+      }
+    },
+    {
+      "field_id": "audit_confirmation",
+      "key": "감사 확인",
+      "semantic_path": "감사.감사확인",
+      "anchor_id": "manual_1783476877030",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000011"
+      ],
+      "value_type": "audit_stamp_or_signature",
+      "generator": "free_text.short",
+      "style_class": "audit_box",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          800,
+          361,
+          169,
+          152
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0098_manual_1783476877030.png",
+        "note": "우측 감사 박스 내부 빈 영역"
+      }
+    },
+    {
+      "field_id": "company_address",
+      "key": "주소",
+      "semantic_path": "업체개요.주소",
+      "anchor_id": "visual_0038",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000037"
+      ],
+      "value_type": "address",
+      "generator": "address.ko",
+      "style_class": "wide_table_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          259,
+          860,
+          710,
+          28
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0079_visual_0038.png",
+        "note": "2. 업체개요 첫 행 주소 입력 칸"
+      }
+    },
+    {
+      "field_id": "company_established_date",
+      "key": "설립일자",
+      "semantic_path": "업체개요.설립일자",
+      "anchor_id": "manual_1783477177886",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039"
+      ],
+      "value_type": "date",
+      "generator": "date.kr",
+      "style_class": "date_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          258,
+          892,
+          110,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0113_manual_1783477177886.png",
+        "note": "설립일자 라벨 우측 입력 칸"
+      }
+    },
+    {
+      "field_id": "credit_rate_score_base_month",
+      "key": "여신금리평점 기준월",
+      "semantic_path": "업체개요.여신금리평점.기준월",
+      "anchor_id": "manual_1783477291621",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000042",
+        "det_000043"
+      ],
+      "value_type": "month",
+      "generator": "pattern:##",
+      "style_class": "date_component_small",
+      "unit_policy": "static_context_omitted:점/기준",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          322,
+          926,
+          20,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0116_manual_1783477291621.png",
+        "note": "여신금리평점 기준일 괄호 첫 입력 칸"
+      }
+    },
+    {
+      "field_id": "credit_rate_score_base_day",
+      "key": "여신금리평점 기준일",
+      "semantic_path": "업체개요.여신금리평점.기준일",
+      "anchor_id": "manual_1783477294671",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000042",
+        "det_000043"
+      ],
+      "value_type": "day",
+      "generator": "pattern:##",
+      "style_class": "date_component_small",
+      "unit_policy": "static_context_omitted:점/기준",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          349,
+          926,
+          27,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0117_manual_1783477294671.png",
+        "note": "여신금리평점 기준일 괄호 두 번째 입력 칸"
+      }
+    },
+    {
+      "field_id": "credit_review_score_base_month",
+      "key": "여신심사평점 기준월",
+      "semantic_path": "업체개요.여신심사평점.기준월",
+      "anchor_id": "manual_1783477298521",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047",
+        "det_000048"
+      ],
+      "value_type": "month",
+      "generator": "pattern:##",
+      "style_class": "date_component_small",
+      "unit_policy": "static_context_omitted:점/기준",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          322,
+          957,
+          19,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0118_manual_1783477298521.png",
+        "note": "여신심사평점 기준일 괄호 첫 입력 칸"
+      }
+    },
+    {
+      "field_id": "credit_review_score_base_day",
+      "key": "여신심사평점 기준일",
+      "semantic_path": "업체개요.여신심사평점.기준일",
+      "anchor_id": "manual_1783477300488",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047",
+        "det_000048"
+      ],
+      "value_type": "day",
+      "generator": "pattern:##",
+      "style_class": "date_component_small",
+      "unit_policy": "static_context_omitted:점/기준",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          349,
+          956,
+          26,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0119_manual_1783477300488.png",
+        "note": "여신심사평점 기준일 괄호 두 번째 입력 칸"
+      }
+    },
+    {
+      "field_id": "financial_statement_base_year",
+      "key": "재무상황 기준 년",
+      "semantic_path": "업체개요.재무상황기준.년",
+      "anchor_id": "manual_1783477312754",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000055",
+        "det_000056"
+      ],
+      "value_type": "year",
+      "generator": "pattern:####",
+      "style_class": "date_component",
+      "unit_policy": "static_suffix_omitted:년",
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          248,
+          1051,
+          43,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0120_manual_1783477312754.png",
+        "note": "재무상황 기준 년 입력 위치"
+      }
+    },
+    {
+      "field_id": "financial_statement_base_month",
+      "key": "재무상황 기준 월",
+      "semantic_path": "업체개요.재무상황기준.월",
+      "anchor_id": "manual_1783477318605",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000055",
+        "det_000057"
+      ],
+      "value_type": "month",
+      "generator": "pattern:##",
+      "style_class": "date_component",
+      "unit_policy": "static_suffix_omitted:월기준",
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          320,
+          1051,
+          40,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0121_manual_1783477318605.png",
+        "note": "재무상황 기준 월 입력 위치"
+      }
+    },
+    {
+      "field_id": "collateral_type",
+      "key": "담보 종류",
+      "semantic_path": "채권보전.담보.종류",
+      "anchor_id": "visual_0061",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000060",
+        "det_000061"
+      ],
+      "value_type": "text",
+      "generator": "pool:collateral_types",
+      "style_class": "collateral_table_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          165,
+          1173,
+          161,
+          47
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0088_visual_0061.png",
+        "note": "3. 채권보전 담보 행 종류 칸"
+      }
+    },
+    {
+      "field_id": "collateral_appraised_market_price",
+      "key": "가격조사가격",
+      "semantic_path": "채권보전.담보.가격조사가격",
+      "anchor_id": "visual_0062",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000063",
+        "det_000059"
+      ],
+      "value_type": "amount_million_krw",
+      "generator": "pattern:###",
+      "style_class": "amount_table_cell",
+      "unit_policy": "omit_unit_static_header:백만원",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          331,
+          1173,
+          178,
+          47
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0089_visual_0062.png",
+        "note": "단위 백만원 표의 가격조사가격 칸"
+      }
+    },
+    {
+      "field_id": "collateral_assessed_price",
+      "key": "담보사정가격",
+      "semantic_path": "채권보전.담보.담보사정가격",
+      "anchor_id": "visual_0063",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000064",
+        "det_000059",
+        "det_000077",
+        "det_000078"
+      ],
+      "value_type": "amount_million_krw",
+      "generator": "pattern:###",
+      "style_class": "amount_table_cell",
+      "unit_policy": "omit_unit_static_header:백만원",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          513,
+          1173,
+          173,
+          47
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0090_visual_0063.png",
+        "note": "단위 백만원 표의 담보사정가격 칸"
+      }
+    },
+    {
+      "field_id": "collateral_provider",
+      "key": "담보제공자",
+      "semantic_path": "채권보전.담보.담보제공자",
+      "anchor_id": "visual_0066",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000065"
+      ],
+      "value_type": "person_or_company_name",
+      "generator": "person.name_ko",
+      "style_class": "collateral_table_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          689,
+          1173,
+          145,
+          47
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0091_visual_0066.png",
+        "note": "담보제공자 입력 칸"
+      }
+    },
+    {
+      "field_id": "collateral_preservation_method",
+      "key": "보전방법",
+      "semantic_path": "채권보전.담보.보전방법",
+      "anchor_id": "visual_0067",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000066"
+      ],
+      "value_type": "text",
+      "generator": "pool:preservation_methods",
+      "style_class": "collateral_table_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          838,
+          1173,
+          127,
+          47
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0092_visual_0067.png",
+        "note": "보전방법 입력 칸"
+      }
+    },
+    {
+      "field_id": "guarantor_name",
+      "key": "보증인 성명",
+      "semantic_path": "채권보전.보증인.성명",
+      "anchor_id": "visual_0068",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000067",
+        "det_000068"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "guarantor_table_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          165,
+          1255,
+          161,
+          64
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0093_visual_0068.png",
+        "note": "보증인 행 성명 입력 칸"
+      }
+    },
+    {
+      "field_id": "guarantor_age",
+      "key": "보증인 연령",
+      "semantic_path": "채권보전.보증인.연령",
+      "anchor_id": "visual_0069",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000067",
+        "det_000070"
+      ],
+      "value_type": "age",
+      "generator": "pattern:##",
+      "style_class": "guarantor_table_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          330,
+          1256,
+          179,
+          64
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0094_visual_0069.png",
+        "note": "보증인 행 연령 입력 칸"
+      }
+    },
+    {
+      "field_id": "guarantor_occupation",
+      "key": "보증인 직업",
+      "semantic_path": "채권보전.보증인.직업",
+      "anchor_id": "visual_0070",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000067",
+        "det_000072"
+      ],
+      "value_type": "text",
+      "generator": "pool:occupations",
+      "style_class": "guarantor_table_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          512,
+          1256,
+          173,
+          64
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0095_visual_0070.png",
+        "note": "보증인 행 직업 입력 칸"
+      }
+    },
+    {
+      "field_id": "guarantor_relationship_to_borrower",
+      "key": "차주와 관계",
+      "semantic_path": "채권보전.보증인.차주와관계",
+      "anchor_id": "visual_0073",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000067",
+        "det_000074"
+      ],
+      "value_type": "text",
+      "generator": "pool:borrower_relationships",
+      "style_class": "guarantor_table_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          689,
+          1256,
+          144,
+          64
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0096_visual_0073.png",
+        "note": "보증인 행 차주와 관계 입력 칸"
+      }
+    },
+    {
+      "field_id": "guarantor_note",
+      "key": "비고",
+      "semantic_path": "채권보전.보증인.비고",
+      "anchor_id": "visual_0074",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000067",
+        "det_000075"
+      ],
+      "value_type": "note",
+      "generator": "free_text.short",
+      "style_class": "guarantor_table_cell",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "bbox": [
+          837,
+          1256,
+          127,
+          64
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0097_visual_0074.png",
+        "note": "보증인 행 비고 입력 칸"
+      }
+    }
+  ],
+  "unmapped_use_anchors": [
+    {
+      "anchor_id": "visual_0002",
+      "reason": "상단 결재표의 헤더/값 관계가 불명확한 빈 셀이다. blank_template 계약상 의미가 확정되지 않은 칸을 임의 필드로 만들지 않았다.",
+      "visual_evidence": {
+        "bbox": [
+          466,
+          200,
+          162,
+          28
+        ],
+        "source_image": "workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+        "crop_path": "workbench/documents/여신신청서__APP-01/authoring/agent_requests/20260708T022624706093Z/visual_evidence/crops/crop_0064_visual_0002.png"
+      }
+    }
+  ],
+  "authoring_notes": [
+    "OCR/static label/keep bbox는 label_anchor_ids로만 사용했다.",
+    "field anchor_id는 anchor_map_draft.json의 status=use, role=value_region anchor만 사용했다.",
+    "신청개요의 업체명/대출금액 등 보이는 칸은 review status가 keep인 table_cell이므로 이번 draft field target에서 제외했다."
+  ]
+}

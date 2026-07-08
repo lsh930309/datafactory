@@ -5,13 +5,15 @@ from math import ceil, floor
 from statistics import median
 from typing import Iterable
 
-from PIL import Image, ImageChops, ImageDraw, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 from .fonts import load_font
 from .models import BBox, FieldSpec, RenderedAnnotation, TemplateSpec
 
 
 DEFAULT_RENDER_SCALE = 2
+RENDERED_INK_BLUR_RADIUS = 0.35
+RENDERED_INK_OPACITY = 0.92
 
 
 def render_template(template: TemplateSpec, values: dict[str, str], *, render_scale: int = DEFAULT_RENDER_SCALE) -> tuple[Image.Image, list[RenderedAnnotation]]:
@@ -22,12 +24,83 @@ def render_template(template: TemplateSpec, values: dict[str, str], *, render_sc
 
     original_size = image.size
     scaled_size = (image.width * scale, image.height * scale)
-    scaled_image = image.resize(scaled_size, _resampling_lanczos())
+    scaled_base = image.resize(scaled_size, _resampling_lanczos())
+    scaled_image = scaled_base.copy()
     scaled_template = replace(template, fields=[_scale_field(field, scale) for field in template.fields])
     rendered, annotations = _render_template_on_image(scaled_image, scaled_template, values)
-    final_image = rendered.resize(original_size, _resampling_lanczos())
+    final_image = _composite_scaled_render_delta(
+        original=image,
+        scaled_base=scaled_base,
+        rendered=rendered,
+        preserve_lightened_delta=any(field.clear_background for field in template.fields),
+    )
     final_annotations = [_unscale_annotation(annotation, scale, original_size) for annotation in annotations]
     return final_image, final_annotations
+
+
+def _composite_scaled_render_delta(
+    *,
+    original: Image.Image,
+    scaled_base: Image.Image,
+    rendered: Image.Image,
+    preserve_lightened_delta: bool,
+) -> Image.Image:
+    """Downsample only rendered deltas, keeping untouched template pixels intact.
+
+    Supersampling the full page and resizing it back changes every background
+    pixel, which is especially visible on scanned templates as pale halos or
+    washed-out table lines.  The renderer only needs the supersampled antialiasing
+    for newly drawn ink, so isolate the difference from the scaled base image,
+    downsample that transparent layer, and composite it back onto the original
+    template without resampling the template itself.
+    """
+
+    diff = ImageChops.difference(rendered.convert("RGB"), scaled_base.convert("RGB")).convert("L")
+    mask = diff.point(lambda value: 255 if value > 1 else 0)
+    if mask.getbbox() is None:
+        return original.copy()
+
+    ink_mask = _darkened_delta_mask(scaled_base, rendered, mask)
+    non_ink_mask = ImageChops.subtract(mask, ink_mask)
+
+    result = original.convert("RGBA")
+    if preserve_lightened_delta and non_ink_mask.getbbox() is not None:
+        non_ink_layer = rendered.convert("RGBA")
+        non_ink_layer.putalpha(non_ink_mask)
+        non_ink_layer = non_ink_layer.resize(original.size, _resampling_lanczos())
+        result = Image.alpha_composite(result, non_ink_layer)
+    if ink_mask.getbbox() is not None:
+        ink_layer = rendered.convert("RGBA")
+        ink_layer.putalpha(ink_mask)
+        ink_layer = ink_layer.resize(original.size, _resampling_lanczos())
+        ink_layer = _soften_rendered_ink(ink_layer)
+        result = _alpha_composite_darken(result, ink_layer)
+    return result.convert("RGB")
+
+
+def _alpha_composite_darken(base: Image.Image, layer: Image.Image) -> Image.Image:
+    """Composite rendered ink without ever making the template lighter."""
+
+    base_rgba = base.convert("RGBA")
+    composited = Image.alpha_composite(base_rgba, layer)
+    darkened_rgb = ImageChops.darker(base_rgba.convert("RGB"), composited.convert("RGB"))
+    return darkened_rgb.convert("RGBA")
+
+
+def _darkened_delta_mask(scaled_base: Image.Image, rendered: Image.Image, change_mask: Image.Image) -> Image.Image:
+    base_luma = scaled_base.convert("L")
+    rendered_luma = rendered.convert("L")
+    darkened = ImageChops.subtract(base_luma, rendered_luma).point(lambda value: 255 if value > 1 else 0)
+    return ImageChops.multiply(change_mask, darkened)
+
+
+def _soften_rendered_ink(layer: Image.Image) -> Image.Image:
+    if layer.getbbox() is None:
+        return layer
+    softened = layer.filter(ImageFilter.GaussianBlur(RENDERED_INK_BLUR_RADIUS))
+    alpha = softened.getchannel("A").point(lambda value: int(round(value * RENDERED_INK_OPACITY)))
+    softened.putalpha(alpha)
+    return softened
 
 
 def _render_template_on_image(image: Image.Image, template: TemplateSpec, values: dict[str, str]) -> tuple[Image.Image, list[RenderedAnnotation]]:
@@ -74,7 +147,7 @@ def _render_template_on_image(image: Image.Image, template: TemplateSpec, values
             draw_target = ImageDraw.Draw(layer)
             target_image = layer
         fill = field.color if field.opacity >= 0.999 else (*field.color, max(0, min(255, int(round(255 * field.opacity)))))
-        _draw_multiline_text(draw_target, x, y, lines, font, fill, field)
+        _draw_multiline_text(draw_target, target_image, x, y, lines, font, fill, field)
         if target_image is not image:
             if field.overflow == "clip":
                 mask = Image.new("L", image.size, 0)
@@ -265,7 +338,14 @@ def _fit_font(draw: ImageDraw.ImageDraw, text: str, field: FieldSpec, template_f
         return font
 
     while size > 6:
-        tb = _text_bbox(draw, text, font, field.letter_spacing, stroke_width=_font_stroke_width(field, font))
+        tb = _text_bbox(
+            draw,
+            text,
+            font,
+            field.letter_spacing,
+            stroke_width=_font_stroke_width(field, font),
+            synthetic_bold_offset=_synthetic_bold_offset(field, font),
+        )
         if tb.width <= bbox.width and tb.height <= bbox.height:
             return font
         size -= 1
@@ -273,10 +353,19 @@ def _fit_font(draw: ImageDraw.ImageDraw, text: str, field: FieldSpec, template_f
     return font
 
 
-def _text_bbox(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont, letter_spacing: float = 0.0, *, stroke_width: int = 0) -> BBox:
+def _text_bbox(
+    draw: ImageDraw.ImageDraw,
+    text: str,
+    font: ImageFont.ImageFont,
+    letter_spacing: float = 0.0,
+    *,
+    stroke_width: int = 0,
+    synthetic_bold_offset: int = 0,
+) -> BBox:
+    synthetic_bold_offset = max(0, int(synthetic_bold_offset))
     if abs(letter_spacing) < 0.01:
         left, top, right, bottom = draw.textbbox((0, 0), text, font=font, stroke_width=max(0, int(stroke_width)))
-        return BBox(left, top, max(1, right - left), max(1, bottom - top))
+        return BBox(left, top, max(1, right - left + synthetic_bold_offset), max(1, bottom - top))
 
     cursor = 0.0
     min_left = 0.0
@@ -286,6 +375,7 @@ def _text_bbox(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont, 
     seen = False
     for char in text:
         left, top, right, bottom = draw.textbbox((int(round(cursor)), 0), char, font=font, stroke_width=max(0, int(stroke_width)))
+        right += synthetic_bold_offset
         if not seen:
             min_left, min_top, max_right, max_bottom = left, top, right, bottom
             seen = True
@@ -308,7 +398,14 @@ def _wrap_lines(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont,
     current = ""
     for token in tokens:
         candidate = token if not current else current + token
-        if current and _text_bbox(draw, candidate, font, field.letter_spacing, stroke_width=_font_stroke_width(field, font)).width > bbox.width:
+        if current and _text_bbox(
+            draw,
+            candidate,
+            font,
+            field.letter_spacing,
+            stroke_width=_font_stroke_width(field, font),
+            synthetic_bold_offset=_synthetic_bold_offset(field, font),
+        ).width > bbox.width:
             lines.append(current.rstrip())
             current = token.lstrip()
         else:
@@ -340,7 +437,18 @@ def _wrap_tokens(text: str) -> list[str]:
 
 def _multiline_text_bbox(draw: ImageDraw.ImageDraw, lines: list[str], font: ImageFont.ImageFont, field: FieldSpec) -> BBox:
     stroke_width = _font_stroke_width(field, font)
-    boxes = [_text_bbox(draw, line or " ", font, field.letter_spacing, stroke_width=stroke_width) for line in lines]
+    synthetic_bold_offset = _synthetic_bold_offset(field, font)
+    boxes = [
+        _text_bbox(
+            draw,
+            line or " ",
+            font,
+            field.letter_spacing,
+            stroke_width=stroke_width,
+            synthetic_bold_offset=synthetic_bold_offset,
+        )
+        for line in lines
+    ]
     width = max((box.width for box in boxes), default=1)
     line_height = max((box.height for box in boxes), default=1)
     height = _multiline_height(line_height, len(lines), field.line_spacing)
@@ -349,6 +457,7 @@ def _multiline_text_bbox(draw: ImageDraw.ImageDraw, lines: list[str], font: Imag
 
 def _draw_multiline_text(
     draw: ImageDraw.ImageDraw,
+    target_image: Image.Image,
     x: int,
     y: int,
     lines: list[str],
@@ -357,35 +466,93 @@ def _draw_multiline_text(
     field: FieldSpec,
 ) -> None:
     stroke_width = _font_stroke_width(field, font)
-    line_height = max(_text_bbox(draw, line or " ", font, field.letter_spacing, stroke_width=stroke_width).height for line in lines)
+    synthetic_bold_offset = _synthetic_bold_offset(field, font)
+    line_height = max(
+        _text_bbox(
+            draw,
+            line or " ",
+            font,
+            field.letter_spacing,
+            stroke_width=stroke_width,
+            synthetic_bold_offset=synthetic_bold_offset,
+        ).height
+        for line in lines
+    )
     step = max(1, int(round(line_height * field.line_spacing)))
     block = _multiline_text_bbox(draw, lines, font, field)
     for idx, line in enumerate(lines):
-        line_box = _text_bbox(draw, line or " ", font, field.letter_spacing, stroke_width=stroke_width)
+        line_box = _text_bbox(
+            draw,
+            line or " ",
+            font,
+            field.letter_spacing,
+            stroke_width=stroke_width,
+            synthetic_bold_offset=synthetic_bold_offset,
+        )
         line_x = x
         if field.align == "right":
             line_x = x + max(0, block.width - line_box.width)
         elif field.align == "center":
             line_x = x + max(0, (block.width - line_box.width) // 2)
-        _draw_text(draw, line_x, y + idx * step, line, font, fill, field.letter_spacing, stroke_width=stroke_width)
+        _draw_text(
+            draw,
+            line_x,
+            y + idx * step,
+            line,
+            font,
+            fill,
+            field.letter_spacing,
+            stroke_width=stroke_width,
+            synthetic_bold_offset=synthetic_bold_offset,
+            target_image=target_image,
+        )
 
 
 def _actual_multiline_bbox(draw: ImageDraw.ImageDraw, lines: list[str], font: ImageFont.ImageFont, x: int, y: int, field: FieldSpec) -> BBox:
     if not lines:
         return BBox(x, y, 1, 1)
     stroke_width = _font_stroke_width(field, font)
-    line_height = max(_text_bbox(draw, line or " ", font, field.letter_spacing, stroke_width=stroke_width).height for line in lines)
+    synthetic_bold_offset = _synthetic_bold_offset(field, font)
+    line_height = max(
+        _text_bbox(
+            draw,
+            line or " ",
+            font,
+            field.letter_spacing,
+            stroke_width=stroke_width,
+            synthetic_bold_offset=synthetic_bold_offset,
+        ).height
+        for line in lines
+    )
     step = max(1, int(round(line_height * field.line_spacing)))
     boxes=[]
     block = _multiline_text_bbox(draw, lines, font, field)
     for idx, line in enumerate(lines):
-        line_box = _text_bbox(draw, line or " ", font, field.letter_spacing, stroke_width=stroke_width)
+        line_box = _text_bbox(
+            draw,
+            line or " ",
+            font,
+            field.letter_spacing,
+            stroke_width=stroke_width,
+            synthetic_bold_offset=synthetic_bold_offset,
+        )
         line_x = x
         if field.align == "right":
             line_x = x + max(0, block.width - line_box.width)
         elif field.align == "center":
             line_x = x + max(0, (block.width - line_box.width) // 2)
-        boxes.append(_actual_bbox(draw, line, font, line_x, y + idx * step, field.letter_spacing, stroke_width=stroke_width))
+        boxes.append(
+            _actual_bbox(
+                draw,
+                line,
+                font,
+                line_x,
+                y + idx * step,
+                field.letter_spacing,
+                stroke_width=stroke_width,
+                synthetic_bold_offset=synthetic_bold_offset,
+            )
+        )
     left = min(box.x for box in boxes)
     top = min(box.y for box in boxes)
     right = max(box.right for box in boxes)
@@ -408,8 +575,30 @@ def _draw_text(
     fill: tuple[int, int, int] | tuple[int, int, int, int],
     letter_spacing: float = 0.0,
     stroke_width: int = 0,
+    synthetic_bold_offset: int = 0,
+    target_image: Image.Image | None = None,
 ) -> None:
     stroke_width = max(0, int(stroke_width))
+    synthetic_bold_offset = max(0, int(synthetic_bold_offset))
+    if synthetic_bold_offset:
+        if target_image is None:
+            # Fallback for legacy direct draw call sites such as checkbox V
+            # marks. They normally do not request synthetic bold; this keeps
+            # the helper safe if they ever do.
+            draw.text((x, y), text, font=font, fill=fill, stroke_width=stroke_width, stroke_fill=fill)
+            return
+        _draw_synthetic_bold_text_mask(
+            target_image,
+            x,
+            y,
+            text,
+            font,
+            fill,
+            letter_spacing,
+            stroke_width=stroke_width,
+            synthetic_bold_offset=synthetic_bold_offset,
+        )
+        return
     if abs(letter_spacing) < 0.01:
         draw.text((x, y), text, font=font, fill=fill, stroke_width=stroke_width, stroke_fill=fill)
         return
@@ -419,22 +608,122 @@ def _draw_text(
         cursor += float(draw.textlength(char, font=font)) + letter_spacing
 
 
-def _actual_bbox(draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont, x: int, y: int, letter_spacing: float = 0.0, *, stroke_width: int = 0) -> BBox:
+def _draw_synthetic_bold_text_mask(
+    target_image: Image.Image,
+    x: int,
+    y: int,
+    text: str,
+    font: ImageFont.ImageFont,
+    fill: tuple[int, int, int] | tuple[int, int, int, int],
+    letter_spacing: float,
+    *,
+    stroke_width: int,
+    synthetic_bold_offset: int,
+) -> None:
+    """Render synthetic bold from an alpha mask instead of glyph strokes.
+
+    Pillow's text stroke expands both outer and inner Hangul contours and caused
+    visible "ㅇ" halo/blotch artifacts in scanned document composites.  This
+    fallback keeps the requested font face, draws its regular glyph mask once,
+    then adds a low-opacity directional mask on the right side.  It preserves
+    the glyph interior better than stroke-based bold and avoids painting any
+    background/light pixels into the template.
+    """
+
+    if not text:
+        return
+    base_bbox = _text_bbox(
+        ImageDraw.Draw(Image.new("L", (1, 1), 0)),
+        text,
+        font,
+        letter_spacing,
+        stroke_width=stroke_width,
+        synthetic_bold_offset=0,
+    )
+    padding = max(2, int(synthetic_bold_offset) + 2)
+    mask_width = max(1, base_bbox.width + synthetic_bold_offset + padding * 2)
+    mask_height = max(1, base_bbox.height + padding * 2)
+    mask = Image.new("L", (mask_width, mask_height), 0)
+    mask_draw = ImageDraw.Draw(mask)
+    origin_x = -base_bbox.x + padding
+    origin_y = -base_bbox.y + padding
+    if abs(letter_spacing) < 0.01:
+        mask_draw.text((origin_x, origin_y), text, font=font, fill=255, stroke_width=stroke_width, stroke_fill=255)
+    else:
+        cursor = float(origin_x)
+        for char in text:
+            mask_draw.text((int(round(cursor)), origin_y), char, font=font, fill=255, stroke_width=stroke_width, stroke_fill=255)
+            cursor += float(mask_draw.textlength(char, font=font)) + letter_spacing
+
+    mask = _embolden_alpha_mask(mask, synthetic_bold_offset)
+    layer = Image.new("RGBA", target_image.size, (0, 0, 0, 0))
+    layer_draw = ImageDraw.Draw(layer)
+    paste_xy = (x + base_bbox.x - padding, y + base_bbox.y - padding)
+    layer_draw.bitmap(paste_xy, mask, fill=_rgba_fill(fill))
+
+    if target_image.mode == "RGBA":
+        target_image.alpha_composite(layer)
+        return
+    composited = Image.alpha_composite(target_image.convert("RGBA"), layer).convert(target_image.mode)
+    target_image.paste(composited)
+
+
+def _embolden_alpha_mask(mask: Image.Image, offset: int) -> Image.Image:
+    offset = max(0, int(offset))
+    if offset <= 0:
+        return mask
+    result = mask.copy()
+    width, height = mask.size
+    for step in range(1, offset + 1):
+        shifted = ImageChops.offset(mask, step, 0)
+        ImageDraw.Draw(shifted).rectangle([0, 0, min(step, width) - 1, height], fill=0)
+        strength = max(0.25, 0.58 - (step - 1) * 0.18)
+        shifted = shifted.point(lambda value, strength=strength: int(round(value * strength)))
+        result = ImageChops.lighter(result, shifted)
+    return result
+
+
+def _rgba_fill(fill: tuple[int, int, int] | tuple[int, int, int, int]) -> tuple[int, int, int, int]:
+    if len(fill) >= 4:
+        return (int(fill[0]), int(fill[1]), int(fill[2]), int(fill[3]))
+    return (int(fill[0]), int(fill[1]), int(fill[2]), 255)
+
+
+def _actual_bbox(
+    draw: ImageDraw.ImageDraw,
+    text: str,
+    font: ImageFont.ImageFont,
+    x: int,
+    y: int,
+    letter_spacing: float = 0.0,
+    *,
+    stroke_width: int = 0,
+    synthetic_bold_offset: int = 0,
+) -> BBox:
+    synthetic_bold_offset = max(0, int(synthetic_bold_offset))
     if abs(letter_spacing) >= 0.01:
-        measured = _text_bbox(draw, text, font, letter_spacing, stroke_width=stroke_width)
+        measured = _text_bbox(draw, text, font, letter_spacing, stroke_width=stroke_width, synthetic_bold_offset=synthetic_bold_offset)
         return BBox(x + measured.x, y + measured.y, measured.width, measured.height)
     left, top, right, bottom = draw.textbbox((x, y), text, font=font, stroke_width=max(0, int(stroke_width)))
-    return BBox(left, top, max(1, right - left), max(1, bottom - top))
+    return BBox(left, top, max(1, right - left + synthetic_bold_offset), max(1, bottom - top))
 
 
 def _font_stroke_width(field: FieldSpec, font: ImageFont.ImageFont | None = None) -> int:
+    # Avoid Pillow's stroke-based synthetic bold for Hangul.  Stroke expands both
+    # the outer and inner contours of glyphs like "ㅇ", which produces visible
+    # ring/halo artifacts after scan-quality degradation.  Synthetic bold is
+    # handled through an alpha-mask embolden pass instead.
+    return 0
+
+
+def _synthetic_bold_offset(field: FieldSpec, font: ImageFont.ImageFont | None = None) -> int:
     weight = str(getattr(field, "font_weight", "normal") or "normal").lower()
     if font is not None and _font_already_has_requested_weight(font, weight):
         return 0
     if weight == "black":
-        return max(1, int(round(field.font_size * 0.045)))
+        return max(1, int(round(field.font_size * 0.035)))
     if weight == "bold":
-        return max(1, int(round(field.font_size * 0.028)))
+        return max(1, int(round(field.font_size * 0.018)))
     return 0
 
 

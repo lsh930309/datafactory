@@ -21,7 +21,7 @@ from datafactory.authoring import (
 from datafactory.fonts import list_font_faces, load_font, resolve_font_path
 from datafactory.models import BBox, FieldSpec, TemplateSpec
 from datafactory.policy import load_review_policy
-from datafactory.render import render_template
+from datafactory.render import _font_stroke_width, _synthetic_bold_offset, render_template
 
 
 def _write_review(tmp_path: Path) -> tuple[Path, Path]:
@@ -336,6 +336,22 @@ def test_render_template_forces_bold_weight_even_with_regular_font_face(tmp_path
     normal_dark = sum(1 for pixel in normal_image.getdata() if pixel != (255, 255, 255))
     bold_dark = sum(1 for pixel in bold_image.getdata() if pixel != (255, 255, 255))
     assert bold_dark > normal_dark * 1.15
+
+
+def test_regular_font_synthetic_bold_avoids_stroke_contours(tmp_path: Path) -> None:
+    source = tmp_path / "synthetic_bold_base.png"
+    Image.new("RGB", (260, 90), "white").save(source)
+    field = FieldSpec(
+        name="value",
+        bbox=BBox(20, 12, 220, 60),
+        font_size=34,
+        clear_background=False,
+        font_weight="bold",
+    )
+    font = load_font(field.font_size, field.font_path, field.font_index)
+
+    assert _font_stroke_width(field, font) == 0
+    assert _synthetic_bold_offset(field, font) >= 1
 
 
 def test_checkbox_rules_render_v_for_true_and_blank_for_false(tmp_path: Path) -> None:

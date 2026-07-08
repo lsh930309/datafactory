@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-02",
+  "title": "여신거래약정서",
+  "value_pools": [
+    {
+      "name": "credit_products",
+      "values": [
+        "일반자금대출",
+        "운전자금대출",
+        "기업일반대출",
+        "시설자금대출"
+      ],
+      "source": "template label 여신 과목 and loan agreement context",
+      "usage": "credit_subject"
+    },
+    {
+      "name": "credit_limit_texts",
+      "values": [
+        "일금오천만원정(￦50,000,000)",
+        "일금일억원정(￦100,000,000)",
+        "일금이억원정(￦200,000,000)",
+        "일금삼천만원정(￦30,000,000)"
+      ],
+      "source": "template value format 일금...원정(￦...)",
+      "usage": "credit_limit_amount"
+    },
+    {
+      "name": "financial_institutions",
+      "values": [
+        "한국상생은행",
+        "대한미래은행",
+        "한빛신용금고",
+        "새길저축은행"
+      ],
+      "source": "user instruction to replace **** in 금융기관 clause",
+      "usage": "financial_institution_name"
+    },
+    {
+      "name": "annual_rates",
+      "values": [
+        "연 4.80 %",
+        "연 5.20 %",
+        "연 6.50 %",
+        "연 7.10 %"
+      ],
+      "source": "template value format 연 ** % / 연 **%",
+      "usage": "interest_rate, overdue_interest_rate"
+    }
+  ],
+  "notes": [
+    "모든 값은 합성 더미이며 실제 금융기관/고객/계좌 정보를 사용하지 않는다."
+  ]
+}

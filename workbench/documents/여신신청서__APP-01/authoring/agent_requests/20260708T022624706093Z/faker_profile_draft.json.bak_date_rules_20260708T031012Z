@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "field_generators": {
+    "approval_deputy_general_manager": "free_text.short",
+    "approval_office_manager": "free_text.short",
+    "approval_executive_vp": "free_text.short",
+    "approval_bank_president": "free_text.short",
+    "request_type_single_transaction": "checkbox.bool",
+    "request_type_new": "checkbox.bool",
+    "request_type_increase": "checkbox.bool",
+    "request_type_credit_line": "checkbox.bool",
+    "request_type_term_renewal": "checkbox.bool",
+    "request_type_reduction": "checkbox.bool",
+    "application_date_year": "pattern:####",
+    "application_date_month": "pattern:##",
+    "application_date_day": "pattern:##",
+    "approval_document_number": "pattern:####",
+    "audit_confirmation": "free_text.short",
+    "company_address": "address.ko",
+    "company_established_date": "date.kr",
+    "credit_rate_score_base_month": "pattern:##",
+    "credit_rate_score_base_day": "pattern:##",
+    "credit_review_score_base_month": "pattern:##",
+    "credit_review_score_base_day": "pattern:##",
+    "financial_statement_base_year": "pattern:####",
+    "financial_statement_base_month": "pattern:##",
+    "collateral_type": "pool:collateral_types",
+    "collateral_appraised_market_price": "pattern:###",
+    "collateral_assessed_price": "pattern:###",
+    "collateral_provider": "person.name_ko",
+    "collateral_preservation_method": "pool:preservation_methods",
+    "guarantor_name": "person.name_ko",
+    "guarantor_age": "pattern:##",
+    "guarantor_occupation": "pool:occupations",
+    "guarantor_relationship_to_borrower": "pool:borrower_relationships",
+    "guarantor_note": "free_text.short",
+    "approval_intermediate_role_title": "pool:approval_marks"
+  },
+  "data_pools": {
+    "collateral_types": [
+      "부동산",
+      "예금담보",
+      "신용보증서",
+      "기계기구"
+    ],
+    "preservation_methods": [
+      "근저당권 설정",
+      "보증서 징구",
+      "질권 설정",
+      "연대보증"
+    ],
+    "occupations": [
+      "회사원",
+      "자영업",
+      "전문직",
+      "임원"
+    ],
+    "borrower_relationships": [
+      "대표자",
+      "주주",
+      "배우자",
+      "관계회사 임원"
+    ],
+    "approval_marks": [
+      "확인",
+      "승인",
+      "검토"
+    ]
+  },
+  "field_rules": [
+    {
+      "field_id": "approval_deputy_general_manager",
+      "semantic_path": "결재.차장",
+      "generator": "free_text.short",
+      "anchor_id": "visual_0004",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "approval_office_manager",
+      "semantic_path": "결재.실장",
+      "generator": "free_text.short",
+      "anchor_id": "visual_0005",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "approval_executive_vp",
+      "semantic_path": "결재.담당부행장",
+      "generator": "free_text.short",
+      "anchor_id": "visual_0009",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "approval_bank_president",
+      "semantic_path": "결재.은행장",
+      "generator": "free_text.short",
+      "anchor_id": "visual_0010",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "request_type_single_transaction",
+      "semantic_path": "신청구분.건별거래",
+      "generator": "checkbox.bool",
+      "anchor_id": "manual_1783476995549",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "request_type_new",
+      "semantic_path": "신청구분.신규",
+      "generator": "checkbox.bool",
+      "anchor_id": "manual_1783476999516",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "request_type_increase",
+      "semantic_path": "신청구분.증대",
+      "generator": "checkbox.bool",
+      "anchor_id": "manual_1783477003801",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "request_type_credit_line",
+      "semantic_path": "신청구분.한도거래",
+      "generator": "checkbox.bool",
+      "anchor_id": "manual_1783477006999",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "request_type_term_renewal",
+      "semantic_path": "신청구분.기한갱신",
+      "generator": "checkbox.bool",
+      "anchor_id": "manual_1783477009882",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "request_type_reduction",
+      "semantic_path": "신청구분.감액",
+      "generator": "checkbox.bool",
+      "anchor_id": "manual_1783477012333",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "application_date_year",
+      "semantic_path": "문서정보.신청일자.년",
+      "generator": "pattern:####",
+      "anchor_id": "manual_1783477023233",
+      "unit_policy": "static_suffix_omitted:년",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "application_date_month",
+      "semantic_path": "문서정보.신청일자.월",
+      "generator": "pattern:##",
+      "anchor_id": "manual_1783477052083",
+      "unit_policy": "static_suffix_omitted:월",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "application_date_day",
+      "semantic_path": "문서정보.신청일자.일",
+      "generator": "pattern:##",
+      "anchor_id": "manual_1783477048933",
+      "unit_policy": "static_suffix_omitted:일",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "approval_document_number",
+      "semantic_path": "문서정보.문서번호",
+      "generator": "pattern:####",
+      "anchor_id": "manual_1783477044404",
+      "unit_policy": "static_prefix_suffix_omitted:제/호",
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "audit_confirmation",
+      "semantic_path": "감사.감사확인",
+      "generator": "free_text.short",
+      "anchor_id": "manual_1783476877030",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "company_address",
+      "semantic_path": "업체개요.주소",
+      "generator": "address.ko",
+      "anchor_id": "visual_0038",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "company_established_date",
+      "semantic_path": "업체개요.설립일자",
+      "generator": "date.kr",
+      "anchor_id": "manual_1783477177886",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "credit_rate_score_base_month",
+      "semantic_path": "업체개요.여신금리평점.기준월",
+      "generator": "pattern:##",
+      "anchor_id": "manual_1783477291621",
+      "unit_policy": "static_context_omitted:점/기준",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "credit_rate_score_base_day",
+      "semantic_path": "업체개요.여신금리평점.기준일",
+      "generator": "pattern:##",
+      "anchor_id": "manual_1783477294671",
+      "unit_policy": "static_context_omitted:점/기준",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "credit_review_score_base_month",
+      "semantic_path": "업체개요.여신심사평점.기준월",
+      "generator": "pattern:##",
+      "anchor_id": "manual_1783477298521",
+      "unit_policy": "static_context_omitted:점/기준",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "credit_review_score_base_day",
+      "semantic_path": "업체개요.여신심사평점.기준일",
+      "generator": "pattern:##",
+      "anchor_id": "manual_1783477300488",
+      "unit_policy": "static_context_omitted:점/기준",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "financial_statement_base_year",
+      "semantic_path": "업체개요.재무상황기준.년",
+      "generator": "pattern:####",
+      "anchor_id": "manual_1783477312754",
+      "unit_policy": "static_suffix_omitted:년",
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "financial_statement_base_month",
+      "semantic_path": "업체개요.재무상황기준.월",
+      "generator": "pattern:##",
+      "anchor_id": "manual_1783477318605",
+      "unit_policy": "static_suffix_omitted:월기준",
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "collateral_type",
+      "semantic_path": "채권보전.담보.종류",
+      "generator": "pool:collateral_types",
+      "anchor_id": "visual_0061",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "collateral_appraised_market_price",
+      "semantic_path": "채권보전.담보.가격조사가격",
+      "generator": "pattern:###",
+      "anchor_id": "visual_0062",
+      "unit_policy": "omit_unit_static_header:백만원",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "collateral_assessed_price",
+      "semantic_path": "채권보전.담보.담보사정가격",
+      "generator": "pattern:###",
+      "anchor_id": "visual_0063",
+      "unit_policy": "omit_unit_static_header:백만원",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "collateral_provider",
+      "semantic_path": "채권보전.담보.담보제공자",
+      "generator": "person.name_ko",
+      "anchor_id": "visual_0066",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "collateral_preservation_method",
+      "semantic_path": "채권보전.담보.보전방법",
+      "generator": "pool:preservation_methods",
+      "anchor_id": "visual_0067",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "guarantor_name",
+      "semantic_path": "채권보전.보증인.성명",
+      "generator": "person.name_ko",
+      "anchor_id": "visual_0068",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "guarantor_age",
+      "semantic_path": "채권보전.보증인.연령",
+      "generator": "pattern:##",
+      "anchor_id": "visual_0069",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "guarantor_occupation",
+      "semantic_path": "채권보전.보증인.직업",
+      "generator": "pool:occupations",
+      "anchor_id": "visual_0070",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "guarantor_relationship_to_borrower",
+      "semantic_path": "채권보전.보증인.차주와관계",
+      "generator": "pool:borrower_relationships",
+      "anchor_id": "visual_0073",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "guarantor_note",
+      "semantic_path": "채권보전.보증인.비고",
+      "generator": "free_text.short",
+      "anchor_id": "visual_0074",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "notes": "지원 faker grammar 안에서 보수적으로 근사. 실제 개인정보/실기업/실계좌 값은 사용하지 않음."
+    },
+    {
+      "field_id": "approval_intermediate_role_title",
+      "rule": "pool:approval_marks",
+      "reason": "상단 결재표의 라벨 없는 추가 결재 칸에 합성 직책/결재 표시를 넣기 위한 사용자 확정 field"
+    }
+  ],
+  "limitations": [
+    "백만원 단위 표는 값 위치에 정적 단위가 없고 표제에만 단위가 있으므로 generator에는 단위를 넣지 않고 숫자 패턴으로 근사했다.",
+    "결재/감사 칸은 실제 서명 또는 날인 이미지가 필요할 수 있으나 현재 지원 grammar에서는 free_text.short로만 근사했다."
+  ]
+}

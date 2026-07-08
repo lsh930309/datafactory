@@ -28,8 +28,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -37,7 +37,8 @@
         "csv_column": "문서확인번호"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "print_date",
@@ -60,7 +61,8 @@
         "csv_column": "출력일자"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "print_time",
@@ -83,7 +85,8 @@
         "csv_column": "출력시각"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "building_id",
@@ -97,8 +100,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -106,7 +109,8 @@
         "csv_column": "건물ID"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "building_management_number",
@@ -118,10 +122,10 @@
       "generator": "pattern:##########-#-########",
       "style_class": "style_building_management_number",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -129,7 +133,8 @@
         "csv_column": "고유번호"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "building_name",
@@ -143,8 +148,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -152,7 +157,8 @@
         "csv_column": "명칭"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "unit_household_count",
@@ -166,8 +172,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -175,7 +181,8 @@
         "csv_column": "호수/가구수/세대수"
       },
       "required": true,
-      "notes": "호/가구/세대는 값 자체의 복합 단위 표기이며 값 위치에 별도 정적 단위가 없으므로 생성값에 포함한다."
+      "notes": "호/가구/세대는 값 자체의 복합 단위 표기이며 값 위치에 별도 정적 단위가 없으므로 생성값에 포함한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "site_location",
@@ -187,10 +194,10 @@
       "generator": "address.ko",
       "style_class": "style_site_location",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -198,7 +205,8 @@
         "csv_column": "대지위치"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "lot_number",
@@ -210,10 +218,10 @@
       "generator": "pattern:###-#",
       "style_class": "style_lot_number",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -221,7 +229,8 @@
         "csv_column": "지번"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "road_address",
@@ -233,10 +242,10 @@
       "generator": "address.ko",
       "style_class": "style_road_address",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -244,7 +253,8 @@
         "csv_column": "도로명주소"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "site_area",
@@ -256,10 +266,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:#}}",
       "style_class": "style_site_area",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -267,7 +277,8 @@
         "csv_column": "대지면적"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "total_floor_area",
@@ -279,10 +290,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_total_floor_area",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -290,7 +301,8 @@
         "csv_column": "연면적"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "zoning_area",
@@ -302,10 +314,10 @@
       "generator": "pool:zoning_area_types",
       "style_class": "style_zoning_area",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -313,7 +325,8 @@
         "csv_column": "지역"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "restriction_zone",
@@ -325,10 +338,10 @@
       "generator": "pool:restriction_zone_types",
       "style_class": "style_restriction_zone",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -336,7 +349,8 @@
         "csv_column": "구역"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "building_area",
@@ -348,10 +362,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_building_area",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -359,7 +373,8 @@
         "csv_column": "건축면적"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "floor_area_for_far",
@@ -371,10 +386,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_floor_area_for_far",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -382,7 +397,8 @@
         "csv_column": "용적률_산정용_연면적"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "main_structure",
@@ -394,10 +410,10 @@
       "generator": "pool:building_structures",
       "style_class": "style_main_structure",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -405,7 +421,8 @@
         "csv_column": "주구조"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "main_use",
@@ -417,10 +434,10 @@
       "generator": "pool:building_uses",
       "style_class": "style_main_use",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -428,7 +445,8 @@
         "csv_column": "주용도"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "floor_count_summary",
@@ -440,10 +458,10 @@
       "generator": "choice:지하:1,지상:5|지하:0,지상:3|지하:2,지상:10",
       "style_class": "style_floor_count_summary",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -451,7 +469,8 @@
         "csv_column": "층수"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "building_coverage_ratio",
@@ -463,10 +482,10 @@
       "generator": "template:{{pattern:##}}.{{pattern:#}}",
       "style_class": "style_building_coverage_ratio",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -474,7 +493,8 @@
         "csv_column": "건폐율"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "floor_area_ratio",
@@ -486,10 +506,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_floor_area_ratio",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -497,7 +517,8 @@
         "csv_column": "용적률"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "height",
@@ -509,10 +530,10 @@
       "generator": "template:{{pattern:##}}.{{pattern:#}}",
       "style_class": "style_height",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -520,7 +541,8 @@
         "csv_column": "높이"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "filled_sample의 review use/value anchor 기반 초안 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "roof",
@@ -532,10 +554,10 @@
       "generator": "pool:roof_types",
       "style_class": "style_roof",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -543,7 +565,8 @@
         "csv_column": "지붕"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_1_section",
@@ -555,10 +578,10 @@
       "generator": "pool:building_section_codes",
       "style_class": "style_status_row_1_section",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -566,7 +589,8 @@
         "csv_column": "건축물현황_1행_구분"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_1_floor",
@@ -578,10 +602,10 @@
       "generator": "pool:floor_labels",
       "style_class": "style_status_row_1_floor",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -589,7 +613,8 @@
         "csv_column": "건축물현황_1행_층별"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_1_structure",
@@ -601,10 +626,10 @@
       "generator": "pool:building_structures",
       "style_class": "style_status_row_1_structure",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -612,7 +637,8 @@
         "csv_column": "건축물현황_1행_구조"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_1_use",
@@ -624,10 +650,10 @@
       "generator": "pool:building_uses",
       "style_class": "style_status_row_1_use",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -635,7 +661,8 @@
         "csv_column": "건축물현황_1행_용도"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_1_area",
@@ -647,10 +674,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_status_row_1_area",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -658,7 +685,8 @@
         "csv_column": "건축물현황_1행_면적"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "owner_name",
@@ -670,10 +698,10 @@
       "generator": "company.name_ko",
       "style_class": "style_owner_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -681,7 +709,8 @@
         "csv_column": "소유자_성명(명칭)"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "owner_address",
@@ -695,8 +724,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "wrap",
+        "overflow": "wrap",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -704,7 +733,8 @@
         "csv_column": "소유자_주소"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "owner_change_date",
@@ -718,8 +748,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -727,7 +757,8 @@
         "csv_column": "소유자_변동일"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_2_section",
@@ -739,10 +770,10 @@
       "generator": "pool:building_section_codes",
       "style_class": "style_status_row_2_section",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -750,7 +781,8 @@
         "csv_column": "건축물현황_2행_구분"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_2_floor",
@@ -762,10 +794,10 @@
       "generator": "pool:floor_labels",
       "style_class": "style_status_row_2_floor",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -773,7 +805,8 @@
         "csv_column": "건축물현황_2행_층별"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_2_structure",
@@ -785,10 +818,10 @@
       "generator": "pool:building_structures",
       "style_class": "style_status_row_2_structure",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -796,7 +829,8 @@
         "csv_column": "건축물현황_2행_구조"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_2_use",
@@ -808,10 +842,10 @@
       "generator": "pool:building_uses",
       "style_class": "style_status_row_2_use",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -819,7 +853,8 @@
         "csv_column": "건축물현황_2행_용도"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_2_area",
@@ -831,10 +866,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_status_row_2_area",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -842,7 +877,8 @@
         "csv_column": "건축물현황_2행_면적"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "owner_registration_number_masked",
@@ -854,10 +890,10 @@
       "generator": "pattern:######-*******",
       "style_class": "style_owner_registration_number_masked",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -865,7 +901,8 @@
         "csv_column": "주민(법인)등록번호"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "owner_change_reason",
@@ -879,8 +916,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -888,7 +925,8 @@
         "csv_column": "변동원인"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_3_section",
@@ -900,10 +938,10 @@
       "generator": "pool:building_section_codes",
       "style_class": "style_status_row_3_section",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -911,7 +949,8 @@
         "csv_column": "건축물현황_3행_구분"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_3_floor",
@@ -923,10 +962,10 @@
       "generator": "pool:floor_labels",
       "style_class": "style_status_row_3_floor",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -934,7 +973,8 @@
         "csv_column": "건축물현황_3행_층별"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_3_structure",
@@ -946,10 +986,10 @@
       "generator": "pool:building_structures",
       "style_class": "style_status_row_3_structure",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -957,7 +997,8 @@
         "csv_column": "건축물현황_3행_구조"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_3_use",
@@ -969,10 +1010,10 @@
       "generator": "pool:building_uses",
       "style_class": "style_status_row_3_use",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -980,7 +1021,8 @@
         "csv_column": "건축물현황_3행_용도"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_3_area",
@@ -992,10 +1034,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_status_row_3_area",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1003,7 +1045,8 @@
         "csv_column": "건축물현황_3행_면적"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_4_section",
@@ -1015,10 +1058,10 @@
       "generator": "pool:building_section_codes",
       "style_class": "style_status_row_4_section",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1026,7 +1069,8 @@
         "csv_column": "건축물현황_4행_구분"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_4_floor",
@@ -1038,10 +1082,10 @@
       "generator": "pool:floor_labels",
       "style_class": "style_status_row_4_floor",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1049,7 +1093,8 @@
         "csv_column": "건축물현황_4행_층별"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_4_structure",
@@ -1061,10 +1106,10 @@
       "generator": "pool:building_structures",
       "style_class": "style_status_row_4_structure",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1072,7 +1117,8 @@
         "csv_column": "건축물현황_4행_구조"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_4_use",
@@ -1084,10 +1130,10 @@
       "generator": "pool:building_uses",
       "style_class": "style_status_row_4_use",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1095,7 +1141,8 @@
         "csv_column": "건축물현황_4행_용도"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "status_row_4_area",
@@ -1107,10 +1154,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_status_row_4_area",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1118,7 +1165,8 @@
         "csv_column": "건축물현황_4행_면적"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "certificate_issue_date",
@@ -1132,8 +1180,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1141,7 +1189,8 @@
         "csv_column": "발급일"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "clerk_name",
@@ -1155,8 +1204,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1164,7 +1213,8 @@
         "csv_column": "담당자"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "clerk_phone",
@@ -1178,8 +1228,8 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1187,7 +1237,8 @@
         "csv_column": "전화"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "issuer",
@@ -1199,10 +1250,10 @@
       "generator": "pool:public_office_titles",
       "style_class": "style_issuer",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1210,7 +1261,8 @@
         "csv_column": "발급기관장"
       },
       "required": true,
-      "notes": "filled_sample의 review use/value anchor 기반 초안"
+      "notes": "filled_sample의 review use/value anchor 기반 초안",
+      "bbox_status": "use"
     },
     {
       "field_id": "landscaping_area",
@@ -1222,10 +1274,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_landscaping_area",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1233,7 +1285,8 @@
         "csv_column": "조경면적"
       },
       "required": false,
-      "notes": "리뷰에서 수동 value_region으로 확정된 빈 값 영역. 단위는 주변 ㎡ 라벨 근거로 m2로 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "리뷰에서 수동 value_region으로 확정된 빈 값 영역. 단위는 주변 ㎡ 라벨 근거로 m2로 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "open_public_space_area",
@@ -1245,10 +1298,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_open_public_space_area",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1256,7 +1309,8 @@
         "csv_column": "공개_공지·공간면적"
       },
       "required": false,
-      "notes": "리뷰에서 수동 value_region으로 확정된 빈 값 영역. 지원 grammar의 숫자 패턴으로 면적값을 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "리뷰에서 수동 value_region으로 확정된 빈 값 영역. 지원 grammar의 숫자 패턴으로 면적값을 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "building_line_setback_area",
@@ -1268,10 +1322,10 @@
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "style_class": "style_building_line_setback_area",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1279,7 +1333,8 @@
         "csv_column": "건축선_후퇴면적"
       },
       "required": false,
-      "notes": "빈 값 영역이라 정밀 범위는 미확정. 단위 표기 OCR은 m²로 보이나 ASCII m2로 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "빈 값 영역이라 정밀 범위는 미확정. 단위 표기 OCR은 m²로 보이나 ASCII m2로 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "building_line_setback_distance",
@@ -1291,10 +1346,10 @@
       "generator": "template:{{pattern:##}}.{{pattern:##}}",
       "style_class": "style_building_line_setback_distance",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1302,7 +1357,8 @@
         "csv_column": "건축선후퇴거리"
       },
       "required": false,
-      "notes": "리뷰 수동 value_region. 거리 단위 m로 근사하며 실제 소수 자릿수는 미확정. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "리뷰 수동 value_region. 거리 단위 m로 근사하며 실제 소수 자릿수는 미확정. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     },
     {
       "field_id": "accessory_building_summary",
@@ -1314,10 +1370,10 @@
       "generator": "choice:0 0|1 20|2 50",
       "style_class": "style_accessory_building_summary",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -1325,9 +1381,10 @@
         "csv_column": "부속건축물"
       },
       "required": false,
-      "notes": "부속건축물 칸은 동수/면적 결합 표기로 보이나 현재 렌더러에 count/area 복합 rule이 없어 choice로 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다."
+      "notes": "부속건축물 칸은 동수/면적 결합 표기로 보이나 현재 렌더러에 count/area 복합 rule이 없어 choice로 근사. 단위는 템플릿에 정적으로 남아 있으므로 생성값에서는 단위를 제외한다.",
+      "bbox_status": "use"
     }
   ],
   "groups": [],
-  "updated_at": "2026-07-08T01:31:01.160871+00:00"
+  "updated_at": "2026-07-08T05:35:37.323064+00:00"
 }

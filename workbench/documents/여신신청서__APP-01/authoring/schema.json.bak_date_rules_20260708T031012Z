@@ -1,0 +1,1525 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-08T02:51:15.641341+00:00",
+  "doc_id": "APP-01",
+  "title": "여신신청서",
+  "source_review": "workbench/documents/여신신청서__APP-01/review/original_여신승인신청서_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/여신신청서__APP-01/samples/original/여신승인신청서_page_001.jpg",
+  "image": {
+    "width": 1191,
+    "height": 1684
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "workbench/documents/여신신청서__APP-01/review/original_여신승인신청서_page_001/review.json"
+  },
+  "anchor_map_ref": "/Users/lsh930309/projects/dataFatory/workbench/documents/여신신청서__APP-01/review/original_여신승인신청서_page_001/review.json",
+  "semantic_schema": {
+    "결재": {
+      "직책명": "",
+      "차장 서명": "",
+      "실장 서명": "",
+      "중간 결재자 서명": "",
+      "담당부행장 서명": "",
+      "은행장 서명": ""
+    },
+    "신청구분": {
+      "건별거래": "",
+      "신규": "",
+      "증대": "",
+      "한도거래": "",
+      "기한갱신": "",
+      "감액": ""
+    },
+    "문서정보": {
+      "신청일자": {
+        "년": "",
+        "월": "",
+        "일": ""
+      },
+      "문서번호": ""
+    },
+    "감사": {
+      "감사확인": ""
+    },
+    "신청개요": {
+      "업체명": "",
+      "대표자": "",
+      "대출과목": "",
+      "대출금액": "",
+      "대출이율": "",
+      "자금용도": "",
+      "한도구분": "",
+      "대출기한": "",
+      "승인조건": ""
+    },
+    "업체개요": {
+      "주소": "",
+      "설립일자": "",
+      "주생산품": "",
+      "당행여신거래일": "",
+      "여신금리평점": {
+        "기준월": "",
+        "기준일": ""
+      },
+      "여신심사평점": {
+        "기준월": "",
+        "기준일": ""
+      },
+      "종업원수": "",
+      "총자산": "",
+      "자기자본": "",
+      "납입자본": "",
+      "매출액": "",
+      "당기순이익": "",
+      "재무상황기준": {
+        "년": "",
+        "월": ""
+      }
+    },
+    "채권보전": {
+      "담보": {
+        "종류": "",
+        "가격조사가격": "",
+        "담보사정가격": "",
+        "담보제공자": "",
+        "보전방법": ""
+      },
+      "보증인": {
+        "성명": "",
+        "연령": "",
+        "직업": "",
+        "차주와관계": "",
+        "비고": ""
+      }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "approval_role_title",
+      "label": "결재 직책명",
+      "semantic_path": [
+        "결재",
+        "직책명"
+      ],
+      "bbox_label_id": "visual_0002",
+      "source_detection_id": "visual_0002",
+      "source_text": "결재 직책명",
+      "value_type": "free_text.short",
+      "generator": "pool:approval_role_titles",
+      "style_class": "approval_header_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "결재/직책명",
+        "csv_column": "결재/직책명"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "approval_deputy_general_manager_signature",
+      "label": "차장 서명",
+      "semantic_path": [
+        "결재",
+        "차장 서명"
+      ],
+      "bbox_label_id": "visual_0004",
+      "source_detection_id": "visual_0004",
+      "source_text": "차장 서명",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "approval_signature_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "결재/차장 서명",
+        "csv_column": "결재/차장 서명"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "approval_office_manager_signature",
+      "label": "실장 서명",
+      "semantic_path": [
+        "결재",
+        "실장 서명"
+      ],
+      "bbox_label_id": "visual_0005",
+      "source_detection_id": "visual_0005",
+      "source_text": "실장 서명",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "approval_signature_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "결재/실장 서명",
+        "csv_column": "결재/실장 서명"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "approval_middle_signature",
+      "label": "중간 결재자 서명",
+      "semantic_path": [
+        "결재",
+        "중간 결재자 서명"
+      ],
+      "bbox_label_id": "visual_0006",
+      "source_detection_id": "visual_0006",
+      "source_text": "중간 결재자 서명",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "approval_signature_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "결재/중간 결재자 서명",
+        "csv_column": "결재/중간 결재자 서명"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "approval_executive_vp_signature",
+      "label": "담당부행장 서명",
+      "semantic_path": [
+        "결재",
+        "담당부행장 서명"
+      ],
+      "bbox_label_id": "visual_0009",
+      "source_detection_id": "visual_0009",
+      "source_text": "담당부행장 서명",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "approval_signature_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "결재/담당부행장 서명",
+        "csv_column": "결재/담당부행장 서명"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "approval_bank_president_signature",
+      "label": "은행장 서명",
+      "semantic_path": [
+        "결재",
+        "은행장 서명"
+      ],
+      "bbox_label_id": "visual_0010",
+      "source_detection_id": "visual_0010",
+      "source_text": "은행장 서명",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "approval_signature_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "결재/은행장 서명",
+        "csv_column": "결재/은행장 서명"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "request_type_single_transaction",
+      "label": "건별거래",
+      "semantic_path": [
+        "신청구분",
+        "건별거래"
+      ],
+      "bbox_label_id": "manual_1783476995549",
+      "source_detection_id": "manual_1783476995549",
+      "source_text": "건별거래",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청구분/건별거래",
+        "csv_column": "신청구분/건별거래"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "request_type_new",
+      "label": "신규",
+      "semantic_path": [
+        "신청구분",
+        "신규"
+      ],
+      "bbox_label_id": "manual_1783476999516",
+      "source_detection_id": "manual_1783476999516",
+      "source_text": "신규",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청구분/신규",
+        "csv_column": "신청구분/신규"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "request_type_increase",
+      "label": "증대",
+      "semantic_path": [
+        "신청구분",
+        "증대"
+      ],
+      "bbox_label_id": "manual_1783477003801",
+      "source_detection_id": "manual_1783477003801",
+      "source_text": "증대",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청구분/증대",
+        "csv_column": "신청구분/증대"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "request_type_credit_line",
+      "label": "한도거래",
+      "semantic_path": [
+        "신청구분",
+        "한도거래"
+      ],
+      "bbox_label_id": "manual_1783477006999",
+      "source_detection_id": "manual_1783477006999",
+      "source_text": "한도거래",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청구분/한도거래",
+        "csv_column": "신청구분/한도거래"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "request_type_term_renewal",
+      "label": "기한갱신",
+      "semantic_path": [
+        "신청구분",
+        "기한갱신"
+      ],
+      "bbox_label_id": "manual_1783477009882",
+      "source_detection_id": "manual_1783477009882",
+      "source_text": "기한갱신",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청구분/기한갱신",
+        "csv_column": "신청구분/기한갱신"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "request_type_reduction",
+      "label": "감액",
+      "semantic_path": [
+        "신청구분",
+        "감액"
+      ],
+      "bbox_label_id": "manual_1783477012333",
+      "source_detection_id": "manual_1783477012333",
+      "source_text": "감액",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청구분/감액",
+        "csv_column": "신청구분/감액"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "application_date_year",
+      "label": "신청일자 년",
+      "semantic_path": [
+        "문서정보",
+        "신청일자",
+        "년"
+      ],
+      "bbox_label_id": "manual_1783477023233",
+      "source_detection_id": "manual_1783477023233",
+      "source_text": "신청일자 년",
+      "value_type": "free_text.short",
+      "generator": "pattern:####",
+      "style_class": "date_component",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "문서정보/신청일자/년",
+        "csv_column": "문서정보/신청일자/년"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "application_date_month",
+      "label": "신청일자 월",
+      "semantic_path": [
+        "문서정보",
+        "신청일자",
+        "월"
+      ],
+      "bbox_label_id": "manual_1783477052083",
+      "source_detection_id": "manual_1783477052083",
+      "source_text": "신청일자 월",
+      "value_type": "free_text.short",
+      "generator": "pattern:##",
+      "style_class": "date_component",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "문서정보/신청일자/월",
+        "csv_column": "문서정보/신청일자/월"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "application_date_day",
+      "label": "신청일자 일",
+      "semantic_path": [
+        "문서정보",
+        "신청일자",
+        "일"
+      ],
+      "bbox_label_id": "manual_1783477048933",
+      "source_detection_id": "manual_1783477048933",
+      "source_text": "신청일자 일",
+      "value_type": "free_text.short",
+      "generator": "pattern:##",
+      "style_class": "date_component",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "문서정보/신청일자/일",
+        "csv_column": "문서정보/신청일자/일"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "approval_document_number",
+      "label": "문서번호",
+      "semantic_path": [
+        "문서정보",
+        "문서번호"
+      ],
+      "bbox_label_id": "manual_1783477044404",
+      "source_detection_id": "manual_1783477044404",
+      "source_text": "문서번호",
+      "value_type": "free_text.short",
+      "generator": "pattern:####",
+      "style_class": "short_code",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "문서정보/문서번호",
+        "csv_column": "문서정보/문서번호"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "audit_confirmation",
+      "label": "감사확인",
+      "semantic_path": [
+        "감사",
+        "감사확인"
+      ],
+      "bbox_label_id": "manual_1783476877030",
+      "source_detection_id": "manual_1783476877030",
+      "source_text": "감사확인",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "audit_box",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "감사/감사확인",
+        "csv_column": "감사/감사확인"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "company_name",
+      "label": "업체명",
+      "semantic_path": [
+        "신청개요",
+        "업체명"
+      ],
+      "bbox_label_id": "visual_0011",
+      "source_detection_id": "visual_0011",
+      "source_text": "업체명",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청개요/업체명",
+        "csv_column": "신청개요/업체명"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "representative_name",
+      "label": "대표자",
+      "semantic_path": [
+        "신청개요",
+        "대표자"
+      ],
+      "bbox_label_id": "visual_0013",
+      "source_detection_id": "visual_0013",
+      "source_text": "대표자",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청개요/대표자",
+        "csv_column": "신청개요/대표자"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "loan_subject",
+      "label": "대출과목",
+      "semantic_path": [
+        "신청개요",
+        "대출과목"
+      ],
+      "bbox_label_id": "visual_0015",
+      "source_detection_id": "visual_0015",
+      "source_text": "대출과목",
+      "value_type": "free_text.short",
+      "generator": "pool:loan_subjects",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청개요/대출과목",
+        "csv_column": "신청개요/대출과목"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "loan_amount",
+      "label": "대출금액",
+      "semantic_path": [
+        "신청개요",
+        "대출금액"
+      ],
+      "bbox_label_id": "visual_0017",
+      "source_detection_id": "visual_0017",
+      "source_text": "대출금액",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청개요/대출금액",
+        "csv_column": "신청개요/대출금액"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "loan_interest_rate",
+      "label": "대출이율",
+      "semantic_path": [
+        "신청개요",
+        "대출이율"
+      ],
+      "bbox_label_id": "visual_0019",
+      "source_detection_id": "visual_0019",
+      "source_text": "대출이율",
+      "value_type": "free_text.short",
+      "generator": "template:{{pattern:##}}.{{pattern:##}}%",
+      "style_class": "number_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청개요/대출이율",
+        "csv_column": "신청개요/대출이율"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "fund_purpose",
+      "label": "자금용도",
+      "semantic_path": [
+        "신청개요",
+        "자금용도"
+      ],
+      "bbox_label_id": "visual_0021",
+      "source_detection_id": "visual_0021",
+      "source_text": "자금용도",
+      "value_type": "free_text.short",
+      "generator": "pool:fund_purposes",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청개요/자금용도",
+        "csv_column": "신청개요/자금용도"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "limit_type",
+      "label": "한도구분",
+      "semantic_path": [
+        "신청개요",
+        "한도구분"
+      ],
+      "bbox_label_id": "visual_0023",
+      "source_detection_id": "visual_0023",
+      "source_text": "한도구분",
+      "value_type": "free_text.short",
+      "generator": "choice:건별|한도|기한연장",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청개요/한도구분",
+        "csv_column": "신청개요/한도구분"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "loan_maturity",
+      "label": "대출기한",
+      "semantic_path": [
+        "신청개요",
+        "대출기한"
+      ],
+      "bbox_label_id": "visual_0025",
+      "source_detection_id": "visual_0025",
+      "source_text": "대출기한",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청개요/대출기한",
+        "csv_column": "신청개요/대출기한"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "approval_conditions",
+      "label": "승인조건",
+      "semantic_path": [
+        "신청개요",
+        "승인조건"
+      ],
+      "bbox_label_id": "visual_0027",
+      "source_detection_id": "visual_0027",
+      "source_text": "승인조건",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "wide_table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "신청개요/승인조건",
+        "csv_column": "신청개요/승인조건"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "company_address",
+      "label": "주소",
+      "semantic_path": [
+        "업체개요",
+        "주소"
+      ],
+      "bbox_label_id": "visual_0038",
+      "source_detection_id": "visual_0038",
+      "source_text": "주소",
+      "value_type": "address.ko",
+      "generator": "address.ko",
+      "style_class": "wide_table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/주소",
+        "csv_column": "업체개요/주소"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "company_established_date",
+      "label": "설립일자",
+      "semantic_path": [
+        "업체개요",
+        "설립일자"
+      ],
+      "bbox_label_id": "manual_1783477177886",
+      "source_detection_id": "manual_1783477177886",
+      "source_text": "설립일자",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/설립일자",
+        "csv_column": "업체개요/설립일자"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "main_product",
+      "label": "주생산품",
+      "semantic_path": [
+        "업체개요",
+        "주생산품"
+      ],
+      "bbox_label_id": "visual_0045",
+      "source_detection_id": "visual_0045",
+      "source_text": "주생산품",
+      "value_type": "free_text.short",
+      "generator": "pool:main_products",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/주생산품",
+        "csv_column": "업체개요/주생산품"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "bank_credit_transaction_date",
+      "label": "당행여신거래일",
+      "semantic_path": [
+        "업체개요",
+        "당행여신거래일"
+      ],
+      "bbox_label_id": "visual_0046",
+      "source_detection_id": "visual_0046",
+      "source_text": "당행여신거래일",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/당행여신거래일",
+        "csv_column": "업체개요/당행여신거래일"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "credit_rate_score_base_month",
+      "label": "여신금리평점 기준월",
+      "semantic_path": [
+        "업체개요",
+        "여신금리평점",
+        "기준월"
+      ],
+      "bbox_label_id": "manual_1783477291621",
+      "source_detection_id": "manual_1783477291621",
+      "source_text": "여신금리평점 기준월",
+      "value_type": "free_text.short",
+      "generator": "pattern:##",
+      "style_class": "date_component_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/여신금리평점/기준월",
+        "csv_column": "업체개요/여신금리평점/기준월"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "credit_rate_score_base_day",
+      "label": "여신금리평점 기준일",
+      "semantic_path": [
+        "업체개요",
+        "여신금리평점",
+        "기준일"
+      ],
+      "bbox_label_id": "manual_1783477294671",
+      "source_detection_id": "manual_1783477294671",
+      "source_text": "여신금리평점 기준일",
+      "value_type": "free_text.short",
+      "generator": "pattern:##",
+      "style_class": "date_component_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/여신금리평점/기준일",
+        "csv_column": "업체개요/여신금리평점/기준일"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "credit_review_score_base_month",
+      "label": "여신심사평점 기준월",
+      "semantic_path": [
+        "업체개요",
+        "여신심사평점",
+        "기준월"
+      ],
+      "bbox_label_id": "manual_1783477298521",
+      "source_detection_id": "manual_1783477298521",
+      "source_text": "여신심사평점 기준월",
+      "value_type": "free_text.short",
+      "generator": "pattern:##",
+      "style_class": "date_component_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/여신심사평점/기준월",
+        "csv_column": "업체개요/여신심사평점/기준월"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "credit_review_score_base_day",
+      "label": "여신심사평점 기준일",
+      "semantic_path": [
+        "업체개요",
+        "여신심사평점",
+        "기준일"
+      ],
+      "bbox_label_id": "manual_1783477300488",
+      "source_detection_id": "manual_1783477300488",
+      "source_text": "여신심사평점 기준일",
+      "value_type": "free_text.short",
+      "generator": "pattern:##",
+      "style_class": "date_component_small",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/여신심사평점/기준일",
+        "csv_column": "업체개요/여신심사평점/기준일"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "employee_count",
+      "label": "종업원수",
+      "semantic_path": [
+        "업체개요",
+        "종업원수"
+      ],
+      "bbox_label_id": "visual_0047",
+      "source_detection_id": "visual_0047",
+      "source_text": "종업원수",
+      "value_type": "free_text.short",
+      "generator": "pattern:###",
+      "style_class": "number_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/종업원수",
+        "csv_column": "업체개요/종업원수"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "total_assets",
+      "label": "총자산",
+      "semantic_path": [
+        "업체개요",
+        "총자산"
+      ],
+      "bbox_label_id": "visual_0049",
+      "source_detection_id": "visual_0049",
+      "source_text": "총자산",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/총자산",
+        "csv_column": "업체개요/총자산"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "equity_capital",
+      "label": "자기자본",
+      "semantic_path": [
+        "업체개요",
+        "자기자본"
+      ],
+      "bbox_label_id": "visual_0050",
+      "source_detection_id": "visual_0050",
+      "source_text": "자기자본",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/자기자본",
+        "csv_column": "업체개요/자기자본"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "paid_in_capital",
+      "label": "납입자본",
+      "semantic_path": [
+        "업체개요",
+        "납입자본"
+      ],
+      "bbox_label_id": "visual_0051",
+      "source_detection_id": "visual_0051",
+      "source_text": "납입자본",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/납입자본",
+        "csv_column": "업체개요/납입자본"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "sales_amount",
+      "label": "매출액",
+      "semantic_path": [
+        "업체개요",
+        "매출액"
+      ],
+      "bbox_label_id": "visual_0053",
+      "source_detection_id": "visual_0053",
+      "source_text": "매출액",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/매출액",
+        "csv_column": "업체개요/매출액"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "net_income",
+      "label": "당기순이익",
+      "semantic_path": [
+        "업체개요",
+        "당기순이익"
+      ],
+      "bbox_label_id": "visual_0055",
+      "source_detection_id": "visual_0055",
+      "source_text": "당기순이익",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/당기순이익",
+        "csv_column": "업체개요/당기순이익"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "financial_statement_base_year",
+      "label": "재무상황 기준 년",
+      "semantic_path": [
+        "업체개요",
+        "재무상황기준",
+        "년"
+      ],
+      "bbox_label_id": "manual_1783477312754",
+      "source_detection_id": "manual_1783477312754",
+      "source_text": "재무상황 기준 년",
+      "value_type": "free_text.short",
+      "generator": "pattern:####",
+      "style_class": "date_component",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/재무상황기준/년",
+        "csv_column": "업체개요/재무상황기준/년"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "financial_statement_base_month",
+      "label": "재무상황 기준 월",
+      "semantic_path": [
+        "업체개요",
+        "재무상황기준",
+        "월"
+      ],
+      "bbox_label_id": "manual_1783477318605",
+      "source_detection_id": "manual_1783477318605",
+      "source_text": "재무상황 기준 월",
+      "value_type": "free_text.short",
+      "generator": "pattern:##",
+      "style_class": "date_component",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "업체개요/재무상황기준/월",
+        "csv_column": "업체개요/재무상황기준/월"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "collateral_type",
+      "label": "담보 종류",
+      "semantic_path": [
+        "채권보전",
+        "담보",
+        "종류"
+      ],
+      "bbox_label_id": "visual_0061",
+      "source_detection_id": "visual_0061",
+      "source_text": "담보 종류",
+      "value_type": "free_text.short",
+      "generator": "pool:collateral_types",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/담보/종류",
+        "csv_column": "채권보전/담보/종류"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "collateral_survey_price",
+      "label": "가격조사가격",
+      "semantic_path": [
+        "채권보전",
+        "담보",
+        "가격조사가격"
+      ],
+      "bbox_label_id": "visual_0062",
+      "source_detection_id": "visual_0062",
+      "source_text": "가격조사가격",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/담보/가격조사가격",
+        "csv_column": "채권보전/담보/가격조사가격"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "collateral_assessed_price",
+      "label": "담보사정가격",
+      "semantic_path": [
+        "채권보전",
+        "담보",
+        "담보사정가격"
+      ],
+      "bbox_label_id": "visual_0063",
+      "source_detection_id": "visual_0063",
+      "source_text": "담보사정가격",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/담보/담보사정가격",
+        "csv_column": "채권보전/담보/담보사정가격"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "collateral_provider",
+      "label": "담보제공자",
+      "semantic_path": [
+        "채권보전",
+        "담보",
+        "담보제공자"
+      ],
+      "bbox_label_id": "visual_0066",
+      "source_detection_id": "visual_0066",
+      "source_text": "담보제공자",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/담보/담보제공자",
+        "csv_column": "채권보전/담보/담보제공자"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "preservation_method",
+      "label": "보전방법",
+      "semantic_path": [
+        "채권보전",
+        "담보",
+        "보전방법"
+      ],
+      "bbox_label_id": "visual_0067",
+      "source_detection_id": "visual_0067",
+      "source_text": "보전방법",
+      "value_type": "free_text.short",
+      "generator": "pool:preservation_methods",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/담보/보전방법",
+        "csv_column": "채권보전/담보/보전방법"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "guarantor_name",
+      "label": "보증인 성명",
+      "semantic_path": [
+        "채권보전",
+        "보증인",
+        "성명"
+      ],
+      "bbox_label_id": "visual_0068",
+      "source_detection_id": "visual_0068",
+      "source_text": "보증인 성명",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/보증인/성명",
+        "csv_column": "채권보전/보증인/성명"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "guarantor_age",
+      "label": "보증인 연령",
+      "semantic_path": [
+        "채권보전",
+        "보증인",
+        "연령"
+      ],
+      "bbox_label_id": "visual_0069",
+      "source_detection_id": "visual_0069",
+      "source_text": "보증인 연령",
+      "value_type": "free_text.short",
+      "generator": "pattern:##",
+      "style_class": "number_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/보증인/연령",
+        "csv_column": "채권보전/보증인/연령"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "guarantor_occupation",
+      "label": "보증인 직업",
+      "semantic_path": [
+        "채권보전",
+        "보증인",
+        "직업"
+      ],
+      "bbox_label_id": "visual_0070",
+      "source_detection_id": "visual_0070",
+      "source_text": "보증인 직업",
+      "value_type": "free_text.short",
+      "generator": "pool:occupations",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/보증인/직업",
+        "csv_column": "채권보전/보증인/직업"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "guarantor_relationship_to_borrower",
+      "label": "차주와 관계",
+      "semantic_path": [
+        "채권보전",
+        "보증인",
+        "차주와관계"
+      ],
+      "bbox_label_id": "visual_0073",
+      "source_detection_id": "visual_0073",
+      "source_text": "차주와 관계",
+      "value_type": "free_text.short",
+      "generator": "pool:borrower_relationships",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/보증인/차주와관계",
+        "csv_column": "채권보전/보증인/차주와관계"
+      },
+      "required": true,
+      "notes": ""
+    },
+    {
+      "field_id": "guarantor_note",
+      "label": "비고",
+      "semantic_path": [
+        "채권보전",
+        "보증인",
+        "비고"
+      ],
+      "bbox_label_id": "visual_0074",
+      "source_detection_id": "visual_0074",
+      "source_text": "비고",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "json_path": "채권보전/보증인/비고",
+        "csv_column": "채권보전/보증인/비고"
+      },
+      "required": true,
+      "notes": ""
+    }
+  ],
+  "groups": [],
+  "updated_at": "2026-07-08T02:51:15.653178+00:00"
+}

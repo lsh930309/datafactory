@@ -6,7 +6,7 @@ import unicodedata
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from datafactory.registry import FIRST_PRIORITY_DOC_IDS, FIRST_PRIORITY_SCOPE_ENTRIES, load_registry, normalize_title, slugify_title
 from datafactory.workbench import (
@@ -660,6 +660,61 @@ def test_render_template_supersampling_preserves_output_size_and_bbox_space(tmp_
     assert annotations[0].requested_bbox.to_list() == [30, 40, 120, 32]
     assert 0 <= annotations[0].bbox.x < 240
     assert 0 <= annotations[0].bbox.y < 120
+
+
+def test_render_template_supersampling_preserves_untouched_template_pixels(tmp_path: Path) -> None:
+    image_path = tmp_path / "template_supersample_background.png"
+    image = Image.new("RGB", (96, 64), "white")
+    pixels = image.load()
+    for y in range(image.height):
+        for x in range(image.width):
+            pixels[x, y] = (
+                210 + ((x * 7 + y * 3) % 31),
+                210 + ((x * 5 + y * 11) % 31),
+                210 + ((x * 13 + y * 2) % 31),
+            )
+    image.save(image_path)
+    template = TemplateSpec(
+        template_id="supersample-background-test",
+        image_path=image_path,
+        fields=[
+            FieldSpec(name="value", bbox=BBox(8, 8, 52, 24), font_size=18, clear_background=False),
+        ],
+    )
+
+    rendered, _annotations = render_template(template, {"value": "ABC"}, render_scale=2)
+
+    original_pixels = image.load()
+    rendered_pixels = rendered.load()
+    for point in ((82, 12), (70, 48), (16, 54)):
+        assert rendered_pixels[point] == original_pixels[point]
+
+
+def test_render_template_softened_ink_does_not_whiten_existing_lines(tmp_path: Path) -> None:
+    image_path = tmp_path / "template_line_guard.png"
+    image = Image.new("RGB", (180, 80), "white")
+    draw = ImageDraw.Draw(image)
+    draw.line((0, 42, 180, 42), fill=(0, 0, 0), width=2)
+    image.save(image_path)
+    template = TemplateSpec(
+        template_id="line-guard-test",
+        image_path=image_path,
+        fields=[
+            FieldSpec(
+                name="value",
+                bbox=BBox(12, 20, 150, 40),
+                font_size=28,
+                color=(110, 110, 110),
+                clear_background=False,
+            ),
+        ],
+    )
+
+    rendered, _annotations = render_template(template, {"value": "3층 1층"}, render_scale=2)
+
+    pixels = rendered.load()
+    for x in range(0, 180):
+        assert pixels[x, 42] == (0, 0, 0)
 
 
 def test_render_template_wraps_and_allows_overflow(tmp_path: Path) -> None:

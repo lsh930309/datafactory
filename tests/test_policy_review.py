@@ -64,6 +64,7 @@ def test_draft_review_policy_prelabels_and_roundtrips(tmp_path: Path) -> None:
     assert paths["overlay"].exists()
     loaded = load_review_policy(paths["review"])
     assert len(loaded.labels) == 3
+    assert all(label.render_mode == "handwriting" for label in loaded.labels)
 
 
 def test_blank_template_augmentation_adds_visual_value_region_candidates(tmp_path: Path) -> None:
@@ -152,6 +153,7 @@ def test_review_policy_roundtrips_manual_edited_bbox(tmp_path: Path) -> None:
     assert payload["labels"][0]["polygon"] == [[30, 40], [110, 40], [110, 60], [30, 60]]
     assert payload["labels"][0]["text_source"] == "manual_bbox"
     assert payload["labels"][0]["rec_confidence"] == 0.88
+    assert payload["labels"][0]["render_mode"] == "handwriting"
 
 
 def test_policy_from_edited_rows_updates_bbox_coordinates(tmp_path: Path) -> None:
@@ -172,9 +174,10 @@ def test_policy_from_edited_rows_updates_bbox_coordinates(tmp_path: Path) -> Non
     )
     policy = draft_review_policy(detections_path)
 
-    edited = policy_from_edited_rows(policy, [{**review_rows(policy)[0], "x": 90, "y": 30, "w": 50, "h": 20, "status": "use"}])
+    edited = policy_from_edited_rows(policy, [{**review_rows(policy)[0], "x": 90, "y": 30, "w": 50, "h": 20, "status": "use", "render_mode": "printed"}])
 
     assert edited.labels[0].bbox.to_list() == [90, 30, 50, 20]
+    assert edited.labels[0].render_mode == "printed"
     assert edited.labels[0].polygon == [[90, 30], [140, 30], [140, 50], [90, 50]]
 
 

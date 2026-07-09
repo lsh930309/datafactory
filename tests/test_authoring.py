@@ -1056,3 +1056,27 @@ def test_authoring_library_approval_records_missing_and_copied_drafts(tmp_path: 
     assert "anchor_map_draft.json" in result["approval"]["missing"]
     assert library["summary"]["approvalCount"] == 1
     assert library["summary"]["valuePoolCount"] >= 1
+
+
+def test_authoring_email_faker_uses_realistic_domains() -> None:
+    schema = {
+        "fields": [
+            {"field_id": "email_a", "label": "이메일", "value_type": "email"},
+            {"field_id": "email_b", "label": "회사 이메일", "value_type": "company.email"},
+            {"field_id": "email_c", "label": "개인 이메일", "value_type": "person.email"},
+        ]
+    }
+    faker_profile = {
+        "field_generators": {
+            "email_a": "email",
+            "email_b": "company.email",
+            "email_c": "person.email",
+        }
+    }
+
+    values, warnings = _generate_values(schema, faker_profile, random.Random(7))
+
+    assert warnings == []
+    assert all("@" in value for value in values.values())
+    assert not any("example" in value for value in values.values())
+    assert len({value.split("@", 1)[1] for value in values.values()}) >= 2

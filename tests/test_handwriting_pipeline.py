@@ -46,7 +46,7 @@ def _prepare_authoring(tmp_path: Path) -> tuple[RegistryData, Path]:
     draw = ImageDraw.Draw(image)
     draw.rectangle([30, 30, 610, 390], outline="black", width=2)
     draw.text((60, 80), "성명", fill="black")
-    draw.text((160, 80), "홍길동", fill="black")
+    draw.text((60, 130), "코드", fill="black")
     image.save(image_path)
 
     detections_path = tmp_path / "detections.json"
@@ -59,6 +59,8 @@ def _prepare_authoring(tmp_path: Path) -> tuple[RegistryData, Path]:
                 "detections": [
                     _detection("label_name", "성명", [60, 80, 50, 22]),
                     _detection("value_name", "홍길동", [160, 80, 90, 24]),
+                    _detection("label_code", "코드", [60, 130, 50, 22]),
+                    _detection("value_code", "P-000", [160, 130, 120, 24]),
                 ],
             },
             ensure_ascii=False,
@@ -67,6 +69,11 @@ def _prepare_authoring(tmp_path: Path) -> tuple[RegistryData, Path]:
     )
     policy = draft_review_policy(detections_path)
     review_path = write_review_policy(policy, doc_root / "review")['review']
+    review_payload = json.loads(review_path.read_text(encoding="utf-8"))
+    for label in review_payload.get("labels", []):
+        if label.get("id") == "value_code":
+            label["render_mode"] = "printed"
+    review_path.write_text(json.dumps(review_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     schema = {
         "schema_version": 2,
@@ -76,7 +83,7 @@ def _prepare_authoring(tmp_path: Path) -> tuple[RegistryData, Path]:
         "source_inpainted": str(image_path),
         "source_review": str(review_path),
         "image": {"width": 640, "height": 420},
-        "semantic_schema": {"성명": ""},
+        "semantic_schema": {"성명": "", "코드": ""},
         "fields": [
             {
                 "field_id": "name",
@@ -85,12 +92,42 @@ def _prepare_authoring(tmp_path: Path) -> tuple[RegistryData, Path]:
                 "bbox_label_id": "value_name",
                 "semantic_path": ["성명"],
                 "export": {"json_path": "성명"},
-            }
+            },
+            {
+                "field_id": "code",
+                "label": "코드",
+                "value_type": "literal:P-123",
+                "bbox_label_id": "value_code",
+                "semantic_path": ["코드"],
+                "style_class": "body_default",
+                "export": {"json_path": "코드"},
+            },
         ],
     }
     (authoring_dir / "schema.json").write_text(json.dumps(schema, ensure_ascii=False, indent=2), encoding="utf-8")
+    (authoring_dir / "stylesheet.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 2,
+                "style_classes": [
+                    {
+                        "style_class": "body_default",
+                        "font_size": 22,
+                        "fill": [0, 0, 0],
+                        "opacity": 1.0,
+                        "align": "left",
+                        "valign": "middle",
+                        "overflow": "shrink",
+                    }
+                ],
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
     (authoring_dir / "faker_profile.json").write_text(
-        json.dumps({"schema_version": 1, "field_generators": {"name": "literal:김수기"}}, ensure_ascii=False, indent=2),
+        json.dumps({"schema_version": 1, "field_generators": {"name": "literal:김수기", "code": "literal:P-123"}}, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
     return registry, root
@@ -108,6 +145,11 @@ def test_handwriting_print_pack_and_scan_intake_roundtrip(tmp_path: Path) -> Non
         decoded = decode_barcode_image(crop)
     assert decoded["doc_id"] == "HW-01"
     assert decoded["sample_id"] == "sample_000"
+    assert sample["handwriting_field_count"] == 1
+    assert sample["printed_field_count"] == 1
+    with Image.open(template_path).convert("L") as rendered_template:
+        printed_crop = rendered_template.crop((160, 130, 280, 154))
+        assert sum(1 for pixel in printed_crop.getdata() if pixel < 200) > 10
 
     scan_dir = tmp_path / "scans"
     scan_dir.mkdir()
@@ -118,7 +160,7 @@ def test_handwriting_print_pack_and_scan_intake_roundtrip(tmp_path: Path) -> Non
     assert intake["summary"]["acceptedCount"] == 1
     accepted = intake["manifest"]["accepted_samples"][0]
     assert Path(accepted["image"]).exists()
-    assert json.loads(Path(accepted["gt"]).read_text(encoding="utf-8")) == {"성명": "김수기"}
+    assert json.loads(Path(accepted["gt"]).read_text(encoding="utf-8")) == {"성명": "김수기", "코드": "P-123"}
 
     item = {"latestHandwritingScanIntake": intake["paths"]["manifest"]}
     samples = latest_accepted_handwriting_samples(item)

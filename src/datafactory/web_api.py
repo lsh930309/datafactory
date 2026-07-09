@@ -101,6 +101,18 @@ AUTHORING_AGENT_SUPPORTED_FAKER_RULES = [
     "free_text.short",
     "checkbox.bool",
 ]
+AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES = [
+    "`pick_record`은 field 간 값 짝을 같은 레코드에서 뽑아야 할 때만 사용한다. 형식은 반드시 `{type:'pick_record', pool:'record_pool_name', targets:{field_id:'record_key', other_field_id:'other_record_key'}}`이다.",
+    "`pick_record`의 `targets`는 반드시 `schema_draft.fields[].field_id -> data_pools.<pool>[] 객체의 key` 방향이다. `{record_key: field_id}` 방향으로 쓰지 않는다.",
+    "`pick_record`의 레코드 목록은 constraint 내부 `records`에 넣지 않는다. 반드시 `faker_profile_draft.json.data_pools.<pool>`에 object 배열로 둔다. 예: `data_pools.diagnosis_records=[{name:'급성 기관지염', code:'J20.9'}]`.",
+    "`pick_record`로 연결되는 field라도 `field_generators`에는 렌더러가 지원하는 안전한 기본 rule을 둔다. 다만 최종 값은 constraint가 같은 record에서 덮어쓴다.",
+    "`copy`는 `{type:'copy', source:'source_field_id', target:'target_field_id'}`로 작성한다. source/target은 모두 schema binding field_id여야 한다.",
+    "`exclusive_choice`는 `{type:'exclusive_choice', targets:[field_id...]}`로 작성하며 동일 그룹 체크박스 중 정확히 하나만 선택되어야 할 때 사용한다.",
+    "`date_group`은 `{type:'date_group', year:'field_id', month:'field_id', day:'field_id', min_year:2020, max_year:2027}`로 작성해 분리된 연/월/일 bbox가 항상 유효한 한 날짜가 되게 한다.",
+    "`date_order`는 `{type:'date_order', start:{year,month,day}, end:{year,month,day}, min_days:0, max_days:60}`로 작성해 종료일이 시작일보다 빠르지 않게 한다. start/end의 year/month/day는 각각 field_id 문자열이어야 한다.",
+    "`sum`은 `{type:'sum', sources:[field_id...], target:'field_id', format:'money.krw'}`로 작성해 합계/소계/총액 bbox가 구성 항목의 합과 일치하게 한다.",
+    "지원하지 않는 관계, 단일 문자열 내부의 복잡한 날짜 순서, 조건부 선택/복합 수식은 자연어 constraint로 쓰지 말고 uncertainty_report에 보류 사유와 필요한 bbox/schema 조정을 기록한다.",
+]
 
 
 def runtime_health() -> dict[str, Any]:
@@ -428,6 +440,9 @@ def _authoring_agent_prompt_markdown(request: dict[str, Any]) -> str:
         "## Faker profile 규칙",
         *[f"- {rule}" for rule in contract["faker_profile_rules"]],
         "",
+        "## 지원 Faker relationship constraint 문법",
+        *[f"- {rule}" for rule in contract.get("constraint_rules", [])],
+        "",
         "## 지원 Faker rule 문법",
         "faker_profile_draft.json.field_generators 값은 아래 형식만 사용한다.",
         *[f"- `{rule}`" for rule in AUTHORING_AGENT_SUPPORTED_FAKER_RULES],
@@ -530,10 +545,6 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안하되, 반드시 현재 DataFactory 렌더러가 지원하는 rule 문법만 사용한다.",
                 "서로 독립적으로 생성하면 문서 유효성이 깨지는 field들은 `faker_profile_draft.json.constraints`에 명시적으로 모델링한다. 예: 체크박스 택1, 시작/종료일 순서, 행/열 합계, 본인부담금/공단부담금/총액 관계.",
                 "지원 constraint 타입은 `pick_record`, `copy`, `exclusive_choice`, `date_group`, `date_order`, `sum`뿐이다. 지원하지 않는 수식 DSL이나 자연어 constraint는 쓰지 말고 uncertainty_report에 보류한다.",
-                "`exclusive_choice`는 `{type:'exclusive_choice', targets:[field_id...]}`로 작성하며 동일 그룹 체크박스 중 정확히 하나만 선택되어야 할 때 사용한다.",
-                "`date_group`은 `{type:'date_group', year:'field_id', month:'field_id', day:'field_id', min_year:2020, max_year:2027}`로 작성해 분리된 연/월/일 bbox가 항상 유효한 한 날짜가 되게 한다.",
-                "`date_order`는 `{type:'date_order', start:{year,month,day}, end:{year,month,day}, min_days:0, max_days:60}`로 작성해 종료일이 시작일보다 빠르지 않게 한다.",
-                "`sum`은 `{type:'sum', sources:[field_id...], target:'field_id', format:'money.krw'}`로 작성해 합계/소계/총액 bbox가 구성 항목의 합과 일치하게 한다.",
                 "연/월/일이 각각 다른 bbox로 분리된 날짜 placeholder에는 `date.year`, `date.month`, `date.day`를 우선 사용한다. 날짜의 월/일/연도에 `pattern:##` 또는 `pattern:####`를 쓰지 않는다.",
                 "문서 이미지/템플릿의 값 입력 위치 바로 옆/안에 `㎡`, `m²`, `m2`, `%`, `m`, `원`, `명`, `건`, `동`, `층` 같은 단위가 이미 정적 텍스트로 남아 있으면 faker 값에는 그 단위를 포함하지 않는다.",
                 "`호/가구/세대`처럼 라벨에만 단위 의미가 있고 값 위치에 별도 정적 단위가 없는 복합 값은 단위를 포함해 생성한다. 단위 포함/제외 근거를 field_rules 또는 uncertainty_report에 기록한다.",
@@ -548,6 +559,7 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "faker_profile_draft의 각 rule은 관련 schema key, anchor, research_report 근거 ID를 추적 가능하게 남긴다. 추적용 상세 목록은 선택적으로 `field_rules`에 중복 기록할 수 있지만, 최종 적용 기준은 `field_generators`이다.",
                 "constraints의 각 항목도 관련 schema key, anchor, research_report 근거 ID를 `note`, `evidence_ids`, `field_rules` 중 하나에 추적 가능하게 남긴다.",
             ],
+            "constraint_rules": AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES,
             "template_anchor_rules": [
                 "PDF/JPG는 visible text, OCR, bbox 위치, 주변 텍스트를 anchor 근거로 삼는다.",
                 "DOCX는 visible text, content control, form field, table cell, bookmark, placeholder 등 편집 가능한 anchor를 근거로 삼는다.",
@@ -861,8 +873,12 @@ If you use `pool:<name>`, define `data_pools.<name>` as a non-empty array of sca
 Examples of forbidden generator values: `date_between:-365d:+0d|format:%Y/%m/%d`, `time|format:%H:%M:%S`, `decimal_range:10..99`, `identifier.document_confirmation`, `area.square_meter`, `land_use.zoning`, `building.structure`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`.
 If precision would require an unsupported rule, approximate with `pattern:`, `choice:`, `pool:`, or `template:` and record the limitation in `uncertainty_report.json`.
 
+## Supported faker relationship constraint grammar
+`faker_profile_draft.json.constraints` is optional, but if present every item must use exactly one supported renderer contract below.
+{chr(10).join(f"- {rule}" for rule in AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES)}
+
 ## Completion criteria
-Before finishing, verify all required files exist and all JSON files parse.
+Before finishing, verify all required files exist, all JSON files parse, every `field_generators` key matches a schema binding field_id, every pool reference exists, and every `constraints` item follows the exact supported relationship constraint grammar above.
 Return a short Korean final summary only after the files are written.
 
 ## Run directory

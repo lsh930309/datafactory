@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-05",
+  "title": "입퇴원확인서",
+  "source_image_size": {
+    "width": 1190,
+    "height": 1682
+  },
+  "style_classes": {
+    "handwriting_text": {
+      "font_family": "system-handwriting-or-default",
+      "font_size_px": 24,
+      "color": "#111111",
+      "align": "left",
+      "valign": "middle",
+      "padding_px": 8,
+      "line_height": 1.2
+    },
+    "handwriting_small": {
+      "font_family": "system-handwriting-or-default",
+      "font_size_px": 20,
+      "color": "#111111",
+      "align": "center",
+      "valign": "middle",
+      "padding_px": 2,
+      "line_height": 1.1
+    },
+    "handwriting_multiline": {
+      "font_family": "system-handwriting-or-default",
+      "font_size_px": 22,
+      "color": "#111111",
+      "align": "left",
+      "valign": "top",
+      "padding_px": 10,
+      "line_height": 1.35
+    }
+  },
+  "field_style_hints": {
+    "registration_number": {
+      "style_class": "handwriting_small",
+      "bbox": [
+        214,
+        253,
+        154,
+        35
+      ]
+    },
+    "serial_number": {
+      "style_class": "handwriting_small",
+      "bbox": [
+        215,
+        292,
+        153,
+        35
+      ]
+    },
+    "patient_name": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        314,
+        352,
+        290,
+        58
+      ]
+    },
+    "patient_rrn": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        757,
+        353,
+        201,
+        59
+      ]
+    },
+    "patient_age": {
+      "style_class": "handwriting_small",
+      "bbox": [
+        991,
+        368,
+        37,
+        29
+      ]
+    },
+    "patient_address": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        314,
+        414,
+        748,
+        58
+      ]
+    },
+    "diagnosis_1_name": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        316,
+        527,
+        287,
+        61
+      ]
+    },
+    "diagnosis_1_code": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        608,
+        526,
+        455,
+        61
+      ]
+    },
+    "diagnosis_2_name": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        316,
+        591,
+        287,
+        69
+      ]
+    },
+    "diagnosis_2_code": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        608,
+        590,
+        454,
+        71
+      ]
+    },
+    "diagnosis_3_name": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        314,
+        663,
+        291,
+        59
+      ]
+    },
+    "diagnosis_3_code": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        608,
+        661,
+        456,
+        65
+      ]
+    },
+    "onset_date": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        314,
+        726,
+        290,
+        44
+      ]
+    },
+    "admission_discharge_type": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        758,
+        727,
+        305,
+        45
+      ]
+    },
+    "admission_discharge_period": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        314,
+        774,
+        748,
+        120
+      ]
+    },
+    "doctor_opinion": {
+      "style_class": "handwriting_multiline",
+      "bbox": [
+        314,
+        895,
+        749,
+        121
+      ]
+    },
+    "remarks": {
+      "style_class": "handwriting_multiline",
+      "bbox": [
+        314,
+        1018,
+        749,
+        122
+      ]
+    },
+    "purpose": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        314,
+        1141,
+        749,
+        55
+      ]
+    },
+    "issue_year": {
+      "style_class": "handwriting_small",
+      "bbox": [
+        800,
+        1292,
+        73,
+        26
+      ]
+    },
+    "issue_month": {
+      "style_class": "handwriting_small",
+      "bbox": [
+        904,
+        1291,
+        35,
+        23
+      ]
+    },
+    "issue_day": {
+      "style_class": "handwriting_small",
+      "bbox": [
+        964,
+        1292,
+        38,
+        23
+      ]
+    },
+    "medical_institution_name": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        316,
+        1344,
+        444,
+        26
+      ]
+    },
+    "medical_institution_address": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        318,
+        1397,
+        444,
+        62
+      ]
+    },
+    "doctor_license_number": {
+      "style_class": "handwriting_small",
+      "bbox": [
+        930,
+        1452,
+        107,
+        24
+      ]
+    },
+    "doctor_name": {
+      "style_class": "handwriting_text",
+      "bbox": [
+        633,
+        1503,
+        198,
+        28
+      ]
+    }
+  },
+  "static_header_suggestions": [
+    {
+      "anchor_id": "visual_0012",
+      "text": "병명",
+      "reason": "질병분류기호와 같은 행의 좌측 빈 헤더이며 아래 좌측 3행 값 영역이 병명으로 쓰이는 구조"
+    }
+  ],
+  "render_policy": {
+    "preserve_static_text": true,
+    "omit_units_when_static_text_present": true,
+    "do_not_fill_label_anchors": true
+  }
+}

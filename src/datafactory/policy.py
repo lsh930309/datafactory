@@ -13,6 +13,7 @@ from PIL import Image
 from .models import BBox
 
 ReviewStatus = Literal["use", "keep", "ignore"]
+ReviewRenderMode = Literal["handwriting", "printed"]
 AutoType = Literal[
     "field_value",
     "static_label",
@@ -25,6 +26,7 @@ AutoType = Literal[
 ]
 
 REVIEW_STATUSES: tuple[ReviewStatus, ...] = ("use", "keep", "ignore")
+REVIEW_RENDER_MODES: tuple[ReviewRenderMode, ...] = ("handwriting", "printed")
 AUTO_TYPES: tuple[AutoType, ...] = (
     "field_value",
     "static_label",
@@ -93,6 +95,7 @@ class ReviewLabel:
     rec_confidence: float | None = None
     rec_engine: str = ""
     rec_updated_at: str = ""
+    render_mode: ReviewRenderMode = "handwriting"
 
     @classmethod
     def from_dict(cls, raw: dict[str, Any]) -> "ReviewLabel":
@@ -119,6 +122,7 @@ class ReviewLabel:
             rec_confidence=float(raw["rec_confidence"]) if raw.get("rec_confidence") is not None else None,
             rec_engine=str(raw.get("rec_engine", "")),
             rec_updated_at=str(raw.get("rec_updated_at", "")),
+            render_mode=_render_mode(raw.get("render_mode", "handwriting")),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -142,6 +146,7 @@ class ReviewLabel:
             "rec_confidence": self.rec_confidence,
             "rec_engine": self.rec_engine,
             "rec_updated_at": self.rec_updated_at,
+            "render_mode": self.render_mode,
         }
 
 
@@ -294,6 +299,7 @@ def policy_from_edited_rows(base: ReviewPolicy, rows: list[dict[str, Any]]) -> R
                 rec_confidence=label.rec_confidence,
                 rec_engine=label.rec_engine,
                 rec_updated_at=label.rec_updated_at,
+                render_mode=_render_mode(row.get("render_mode", label.render_mode)),
             )
         )
     return ReviewPolicy(
@@ -357,6 +363,7 @@ def review_rows(policy: ReviewPolicy) -> list[dict[str, Any]]:
                 "rec_confidence": label.rec_confidence,
                 "rec_engine": label.rec_engine,
                 "rec_updated_at": label.rec_updated_at,
+                "render_mode": label.render_mode,
             }
         )
     return rows
@@ -589,6 +596,12 @@ def _red_ratio(image: Image.Image, bbox: BBox) -> float:
     blue = arr[:, :, 2]
     red_pixels = (red > 120) & (red > green * 1.25) & (red > blue * 1.25)
     return float(np.count_nonzero(red_pixels) / red_pixels.size)
+
+
+def _render_mode(value: Any) -> ReviewRenderMode:
+    if value in REVIEW_RENDER_MODES:
+        return value  # type: ignore[return-value]
+    return "handwriting"
 
 
 def _review_status(value: Any) -> ReviewStatus:

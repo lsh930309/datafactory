@@ -1,0 +1,385 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-05",
+  "title": "입퇴원확인서",
+  "field_generators": {
+    "registration_number": "pattern:######",
+    "serial_number": "pattern:######",
+    "patient_name": "person.name_ko",
+    "patient_rrn": "person.rrn",
+    "patient_age": "pattern:##",
+    "patient_address": "address.ko",
+    "diagnosis_1_name": "pool:diagnosis_names",
+    "diagnosis_1_code": "pool:diagnosis_codes",
+    "diagnosis_2_name": "pool:diagnosis_names",
+    "diagnosis_2_code": "pool:diagnosis_codes",
+    "diagnosis_3_name": "pool:diagnosis_names",
+    "diagnosis_3_code": "pool:diagnosis_codes",
+    "onset_date": "date.kr",
+    "admission_discharge_type": "choice:입원|퇴원",
+    "admission_discharge_period": "template:{{date.kr}} ~ {{date.kr}}",
+    "doctor_opinion": "free_text.short",
+    "remarks": "free_text.short",
+    "purpose": "choice:보험회사 제출용|회사 제출용|학교 제출용|관공서 제출용",
+    "issue_year": "date.year",
+    "issue_month": "date.month",
+    "issue_day": "date.day",
+    "medical_institution_name": "company.name_ko",
+    "medical_institution_address": "address.ko",
+    "doctor_license_number": "pattern:######",
+    "doctor_name": "person.name_ko"
+  },
+  "data_pools": {
+    "diagnosis_names": [
+      "급성 기관지염",
+      "요추 염좌",
+      "상세불명의 위장염",
+      "무릎 관절염",
+      "폐렴"
+    ],
+    "diagnosis_codes": [
+      "J20.9",
+      "S33.5",
+      "A09.9",
+      "M17.9",
+      "J18.9"
+    ],
+    "purpose_values": [
+      "보험회사 제출용",
+      "회사 제출용",
+      "학교 제출용",
+      "관공서 제출용"
+    ],
+    "diagnosis_records": [
+      {
+        "name": "급성 기관지염",
+        "code": "J20.9"
+      },
+      {
+        "name": "요추 염좌",
+        "code": "S33.5"
+      },
+      {
+        "name": "상세불명의 위장염",
+        "code": "A09.9"
+      },
+      {
+        "name": "무릎 관절염",
+        "code": "M17.9"
+      },
+      {
+        "name": "폐렴",
+        "code": "J18.9"
+      }
+    ]
+  },
+  "field_rules": [
+    {
+      "field_id": "registration_number",
+      "semantic_path": "문서관리.등록번호",
+      "generator": "pattern:######",
+      "anchor_id": "visual_0001",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "serial_number",
+      "semantic_path": "문서관리.연번호",
+      "generator": "pattern:######",
+      "anchor_id": "visual_0003",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "patient_name",
+      "semantic_path": "환자.성명",
+      "generator": "person.name_ko",
+      "anchor_id": "visual_0008",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "patient_rrn",
+      "semantic_path": "환자.주민등록번호",
+      "generator": "person.rrn",
+      "anchor_id": "manual_1783555808485",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "patient_age",
+      "semantic_path": "환자.나이",
+      "generator": "pattern:##",
+      "anchor_id": "manual_1783555828470",
+      "unit_policy": "omit_static_suffix: 만( )세 is printed on template",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "patient_address",
+      "semantic_path": "환자.주소",
+      "generator": "address.ko",
+      "anchor_id": "visual_0009",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "diagnosis_1_name",
+      "semantic_path": "진료내용.진단내역.1.병명",
+      "generator": "pool:diagnosis_names",
+      "anchor_id": "manual_1783555842269",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "field_id": "diagnosis_1_code",
+      "semantic_path": "진료내용.진단내역.1.질병분류기호",
+      "generator": "pool:diagnosis_codes",
+      "anchor_id": "manual_1783555847070",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "field_id": "diagnosis_2_name",
+      "semantic_path": "진료내용.진단내역.2.병명",
+      "generator": "pool:diagnosis_names",
+      "anchor_id": "manual_1783556053407",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "field_id": "diagnosis_2_code",
+      "semantic_path": "진료내용.진단내역.2.질병분류기호",
+      "generator": "pool:diagnosis_codes",
+      "anchor_id": "manual_1783556059258",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "field_id": "diagnosis_3_name",
+      "semantic_path": "진료내용.진단내역.3.병명",
+      "generator": "pool:diagnosis_names",
+      "anchor_id": "manual_1783556063857",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "field_id": "diagnosis_3_code",
+      "semantic_path": "진료내용.진단내역.3.질병분류기호",
+      "generator": "pool:diagnosis_codes",
+      "anchor_id": "manual_1783556069641",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "field_id": "onset_date",
+      "semantic_path": "진료내용.발병연월일",
+      "generator": "date.kr",
+      "anchor_id": "visual_0013",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "admission_discharge_type",
+      "semantic_path": "진료내용.입원퇴원구분",
+      "generator": "choice:입원|퇴원",
+      "anchor_id": "manual_1783555854753",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "admission_discharge_period",
+      "semantic_path": "진료내용.입원퇴원연월일",
+      "generator": "template:{{date.kr}} ~ {{date.kr}}",
+      "anchor_id": "manual_1783555859603",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "doctor_opinion",
+      "semantic_path": "진료내용.의사소견",
+      "generator": "free_text.short",
+      "anchor_id": "manual_1783555864171",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "remarks",
+      "semantic_path": "진료내용.비고",
+      "generator": "free_text.short",
+      "anchor_id": "manual_1783555874470",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "purpose",
+      "semantic_path": "진료내용.용도",
+      "generator": "choice:보험회사 제출용|회사 제출용|학교 제출용|관공서 제출용",
+      "anchor_id": "visual_0014",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "issue_year",
+      "semantic_path": "확인.발급일자.년",
+      "generator": "date.year",
+      "anchor_id": "manual_1783555879954",
+      "unit_policy": "omit_static_suffix: 년 is printed on template",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "issue_month",
+      "semantic_path": "확인.발급일자.월",
+      "generator": "date.month",
+      "anchor_id": "manual_1783555882770",
+      "unit_policy": "omit_static_suffix: 월 is printed on template",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "issue_day",
+      "semantic_path": "확인.발급일자.일",
+      "generator": "date.day",
+      "anchor_id": "manual_1783555885620",
+      "unit_policy": "omit_static_suffix: 일 is printed on template",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "medical_institution_name",
+      "semantic_path": "확인.의료기관.명칭",
+      "generator": "company.name_ko",
+      "anchor_id": "manual_1783555901787",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "medical_institution_address",
+      "semantic_path": "확인.의료기관.주소",
+      "generator": "address.ko",
+      "anchor_id": "manual_1783555905554",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "doctor_license_number",
+      "semantic_path": "확인.의사.면허번호",
+      "generator": "pattern:######",
+      "anchor_id": "manual_1783555891704",
+      "unit_policy": "omit_static_prefix_suffix: 면허번호 제 / 호 are printed on template",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "field_id": "doctor_name",
+      "semantic_path": "확인.의사.성명",
+      "generator": "person.name_ko",
+      "anchor_id": "manual_1783555895988",
+      "unit_policy": "none",
+      "evidence_ids": [
+        "R1"
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "diagnosis_records",
+      "targets": {
+        "diagnosis_1_name": "name",
+        "diagnosis_1_code": "code"
+      },
+      "note": "1행 병명과 질병분류기호는 data_pools.diagnosis_records의 같은 레코드에서 선택해야 함.",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    {
+      "type": "pick_record",
+      "pool": "diagnosis_records",
+      "targets": {
+        "diagnosis_2_name": "name",
+        "diagnosis_2_code": "code"
+      },
+      "note": "2행 병명과 질병분류기호는 data_pools.diagnosis_records의 같은 레코드에서 선택해야 함.",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    {
+      "type": "pick_record",
+      "pool": "diagnosis_records",
+      "targets": {
+        "diagnosis_3_name": "name",
+        "diagnosis_3_code": "code"
+      },
+      "note": "3행 병명과 질병분류기호는 data_pools.diagnosis_records의 같은 레코드에서 선택해야 함.",
+      "evidence_ids": [
+        "R2"
+      ]
+    },
+    {
+      "type": "date_group",
+      "year": "issue_year",
+      "month": "issue_month",
+      "day": "issue_day",
+      "min_year": 2020,
+      "max_year": 2027,
+      "note": "하단 발급일자는 연월일 분리 bbox가 하나의 유효 날짜를 이루어야 함.",
+      "evidence_ids": [
+        "R1"
+      ]
+    }
+  ],
+  "privacy_policy": "합성 값만 사용하며 실제 환자, 의료기관, 의사, 식별번호를 사용하지 않음."
+}

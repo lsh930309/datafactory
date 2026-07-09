@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-05",
+  "pools": {
+    "diagnosis_records": {
+      "values": [
+        {
+          "병명": "급성 기관지염",
+          "질병분류기호": "J20.9"
+        },
+        {
+          "병명": "요추 염좌",
+          "질병분류기호": "S33.5"
+        },
+        {
+          "병명": "상세불명의 위장염",
+          "질병분류기호": "A09.9"
+        },
+        {
+          "병명": "무릎 관절염",
+          "질병분류기호": "M17.9"
+        },
+        {
+          "병명": "폐렴",
+          "질병분류기호": "J18.9"
+        }
+      ],
+      "usage": "진단내역 1~3행의 병명/질병분류기호 쌍",
+      "source_note": "합성 더미 예시. 실제 환자 진단 정보가 아님."
+    },
+    "purpose_values": {
+      "values": [
+        "보험회사 제출용",
+        "회사 제출용",
+        "학교 제출용",
+        "관공서 제출용"
+      ],
+      "usage": "용도 필드 선택값",
+      "source_note": "일반적인 제출 용도 합성값."
+    },
+    "admission_discharge_type": {
+      "values": [
+        "입원",
+        "퇴원"
+      ],
+      "usage": "입원·퇴원구분 필드",
+      "source_note": "템플릿 라벨에서 직접 확인된 선택 의미."
+    },
+    "diagnosis_records_renderer": {
+      "values": [
+        {
+          "name": "급성 기관지염",
+          "code": "J20.9"
+        },
+        {
+          "name": "요추 염좌",
+          "code": "S33.5"
+        },
+        {
+          "name": "상세불명의 위장염",
+          "code": "A09.9"
+        },
+        {
+          "name": "무릎 관절염",
+          "code": "M17.9"
+        },
+        {
+          "name": "폐렴",
+          "code": "J18.9"
+        }
+      ],
+      "usage": "faker_profile_draft.constraints pick_record용 renderer-compatible 병명/질병분류기호 쌍",
+      "source_note": "합성 더미 예시. 실제 환자 진단 정보가 아님."
+    }
+  }
+}

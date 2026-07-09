@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-05",
+  "unresolved_fields": [
+    {
+      "field_or_anchor": "visual_0012",
+      "issue": "질병분류기호 좌측 빈 header가 실제 원본 별지에서 어떤 문구인지 공식 별지 원문으로 최종 확인하지 못함.",
+      "current_decision": "전체 이미지 구조와 사용자 지시에 따라 병명 헤더 후보로 처리하고 schema field로는 매핑하지 않음.",
+      "user_decision_needed": "정식 적용 시 이 헤더를 병명으로 채울지 승인 필요."
+    },
+    {
+      "field_or_anchor": "admission_discharge_period",
+      "issue": "입원일과 퇴원일이 하나의 큰 bbox로만 잡혀 있어 시작/종료일을 개별 semantic leaf로 안정적으로 분리하지 않음.",
+      "current_decision": "입원퇴원연월일 단일 문자열 기간으로 생성.",
+      "user_decision_needed": "렌더러에서 개별 날짜 정합성이 필요하면 하위 bbox를 추가해야 함."
+    },
+    {
+      "field_or_anchor": "doctor_opinion",
+      "issue": "OCR은 의사소건으로 인식했으나 전체 이미지 판독은 의사소견에 가까움.",
+      "current_decision": "의사소견으로 schema key 지정.",
+      "user_decision_needed": "원본 PDF/별지 확인 후 문구 확정 가능."
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "evidence": "웹 검색 스니펫은 입퇴원확인서가 자율서식이라고 설명하지만 현재 템플릿은 특정 고시 별지 제3호서식으로 보임.",
+      "resolution": "현재 작업에서는 전체 템플릿 이미지의 visible fields를 우선하고, 웹 근거는 의미 해석 보조로만 사용."
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "registration_number",
+      "rule": "pattern:######",
+      "reason": "등록번호의 자리수/기관별 형식을 공식 근거로 확정하지 못해 단순 숫자 패턴으로 근사."
+    },
+    {
+      "field_id": "serial_number",
+      "rule": "pattern:######",
+      "reason": "연번호 형식이 기관별로 다를 수 있어 단순 숫자 패턴으로 근사."
+    },
+    {
+      "field_id": "doctor_license_number",
+      "rule": "pattern:######",
+      "reason": "면허번호 자리수는 렌더러 지원 문법 안에서 보수적으로 숫자 6자리 근사."
+    }
+  ],
+  "user_decisions_needed": [
+    "visual_0012 빈 헤더를 병명으로 정적 적용할지 승인",
+    "입원·퇴원연월일을 단일 기간 문자열로 둘지, 입원일/퇴원일 별도 bbox를 추가할지 결정",
+    "진단내역 2~3행을 항상 채울지 또는 선택적으로 빈 값 허용할지 결정"
+  ]
+}

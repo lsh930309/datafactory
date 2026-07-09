@@ -363,9 +363,14 @@ def test_authoring_agent_request_includes_research_and_draft_contract(tmp_path: 
     assert any("literal:" in rule and "임의 생성" in rule for rule in request["contract"]["faker_profile_rules"])
     assert any("field_generators" in rule and "반드시 포함" in rule for rule in request["contract"]["faker_profile_rules"])
     assert any("date_between:" in rule and "쓰지 않는다" in rule for rule in request["contract"]["faker_profile_rules"])
+    assert any("field_id -> data_pools" in rule for rule in request["contract"]["constraint_rules"])
+    assert any("constraint 내부 `records`" in rule for rule in request["contract"]["constraint_rules"])
     assert any("전체 템플릿 이미지가 최상위 source of truth" in rule for rule in request["contract"]["visual_source_of_truth_rules"])
     assert "웹 리서치 필수 규칙" in prompt
     assert "시각 근거 우선 규칙" in prompt
+    assert "지원 Faker relationship constraint 문법" in prompt
+    assert "pick_record" in prompt
+    assert "constraint 내부 `records`" in prompt
     assert "지원 Faker rule 문법" in prompt
     assert "field_generators" in prompt
     assert "date_between:-365d:+0d" in prompt
@@ -434,6 +439,9 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
     assert "exec" in captured["cmd"]
     assert "--output-last-message" in captured["cmd"]
     assert "Required output files" in str(captured["input"])
+    assert "Supported faker relationship constraint grammar" in str(captured["input"])
+    assert "pick_record" in str(captured["input"])
+    assert "constraint 내부 `records`" in str(captured["input"])
     assert any(key == "authoring_agent_schema_draft" for _doc_id, key, _path in manifest_updates)
     status = web_api.authoring_agent_run_status_payload({"jobPath": payload["jobPath"]})
     assert status["status"] == "succeeded"

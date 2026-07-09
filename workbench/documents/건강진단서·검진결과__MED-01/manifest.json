@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-01",
+  "title": "건강진단서·검진결과",
+  "folder": "workbench/documents/건강진단서·검진결과__MED-01",
+  "registry": {
+    "docId": "MED-01",
+    "title": "건강진단서·검진결과",
+    "issuer": "의료기관",
+    "genre": "의무기록",
+    "structure": "표중심",
+    "modality": "스캔이미지",
+    "sensitivity": "의료정보",
+    "fields": "검사항목·결과수치·판정",
+    "notes": "",
+    "hasPersonalInfo": "포함",
+    "personalInfoDetail": "검진자, 검사결과, 민감정보",
+    "validationRules": "진료일, 의사 서명, 병원 도장, 민감정보 접근권한",
+    "validationRuleCodes": "VAL-002, VAL-008, VAL-009, VAL-015",
+    "writingMethod": "수기",
+    "aliases": [
+      "건강진단서·검진결과",
+      "건강검진결과지"
+    ],
+    "workflowIds": [
+      "HC-03",
+      "INS-01"
+    ],
+    "domains": [
+      "보험 (생명·손해)",
+      "의료·헬스케어"
+    ],
+    "workflowDomains": [
+      "보험 (생명·손해)",
+      "의료·헬스케어"
+    ],
+    "poDomains": [
+      "보험",
+      "의료"
+    ],
+    "isFirstPriority": false,
+    "firstPriorityDomains": [],
+    "firstPriorityScopeCount": 0
+  },
+  "source_seed_folders": [
+    "seed_samples/건강진단서·검진결과"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/건강진단서·검진결과__MED-01/samples/original/건강진단서.pdf",
+      "source": "seed_samples/건강진단서·검진결과/건강진단서.pdf",
+      "format": "pdf",
+      "generation_path": "image-template"
+    },
+    {
+      "path": "workbench/documents/건강진단서·검진결과__MED-01/samples/original/건강진단서_page_001.jpg",
+      "source": "seed_samples/건강진단서·검진결과/건강진단서_page_001.jpg",
+      "format": "jpg",
+      "generation_path": "image-template"
+    }
+  ],
+  "sample_kind": "filled_sample",
+  "sample_generation_paths": [
+    "image-template"
+  ],
+  "office_render": {
+    "required": false,
+    "backend": "none",
+    "status": "not_required"
+  },
+  "status": "sample_imported",
+  "created_at": "2026-07-08T23:05:25.116688+00:00",
+  "updated_at": "2026-07-08T23:05:25.117552+00:00",
+  "artifacts": {
+    "ocr": null,
+    "review": null,
+    "inpaint": null
+  }
+}

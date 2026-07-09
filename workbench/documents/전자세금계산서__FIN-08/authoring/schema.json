@@ -5,7 +5,7 @@
   "title": "전자세금계산서",
   "source_review": "workbench/documents/전자세금계산서__FIN-08/review/original_전자세금계산서/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
-  "source_inpainted": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
   "image": {
     "width": 1103,
     "height": 736
@@ -111,12 +111,12 @@
       "source_text": "승인번호",
       "value_type": "free_text.short",
       "generator": "pattern:########################",
-      "style_class": "header_value",
+      "style_class": "style_approval_number",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
@@ -131,23 +131,24 @@
       "field_id": "supplier_business_registration_number",
       "label": "공급자 등록번호",
       "semantic_path": [
-        "공급자 등록번호"
+        "공급자",
+        "등록번호"
       ],
       "bbox_label_id": "det_000004",
       "source_detection_id": "det_000004",
       "source_text": "632-08-00201",
       "value_type": "free_text.short",
       "generator": "pattern:###-##-#####",
-      "style_class": "body_value",
+      "style_class": "style_supplier_business_registration_number",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급자 등록번호",
+        "json_path": "공급자.등록번호",
         "csv_column": "공급자 등록번호"
       },
       "required": true,
@@ -158,23 +159,24 @@
       "field_id": "supplier_branch_number",
       "label": "공급자 종사업장번호",
       "semantic_path": [
-        "공급자 종사업장번호"
+        "공급자",
+        "종사업장번호"
       ],
       "bbox_label_id": "manual_1783511142890",
       "source_detection_id": "manual_1783511142890",
       "source_text": "공급자 종사업장번호",
       "value_type": "free_text.short",
       "generator": "pattern:####",
-      "style_class": "body_value",
+      "style_class": "style_supplier_branch_number",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급자 종사업장번호",
+        "json_path": "공급자.종사업장번호",
         "csv_column": "공급자 종사업장번호"
       },
       "required": true,
@@ -185,23 +187,24 @@
       "field_id": "supplier_company_name",
       "label": "공급자 상호(법인명)",
       "semantic_path": [
-        "공급자 상호(법인명)"
+        "공급자",
+        "상호"
       ],
       "bbox_label_id": "det_000011",
       "source_detection_id": "det_000011",
       "source_text": "한경세무회계",
       "value_type": "company.name_ko",
       "generator": "company.name_ko",
-      "style_class": "body_value",
+      "style_class": "style_supplier_company_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급자 상호(법인명)",
+        "json_path": "공급자.상호",
         "csv_column": "공급자 상호(법인명)"
       },
       "required": true,
@@ -212,23 +215,24 @@
       "field_id": "supplier_representative_name",
       "label": "공급자 성명",
       "semantic_path": [
-        "공급자 성명"
+        "공급자",
+        "성명"
       ],
       "bbox_label_id": "det_000013",
       "source_detection_id": "det_000013",
       "source_text": "정영록",
       "value_type": "person.name_ko",
       "generator": "person.name_ko",
-      "style_class": "body_value",
+      "style_class": "style_supplier_representative_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급자 성명",
+        "json_path": "공급자.성명",
         "csv_column": "공급자 성명"
       },
       "required": true,
@@ -239,23 +243,24 @@
       "field_id": "supplier_business_address",
       "label": "공급자 사업장 주소",
       "semantic_path": [
-        "공급자 사업장 주소"
+        "공급자",
+        "사업장주소"
       ],
       "bbox_label_id": "det_000021",
       "source_detection_id": "det_000021",
       "source_text": "서울특별시 영등포구 선유동1로 32,301호(당산동3가,신 일빌딩)",
       "value_type": "address.ko",
       "generator": "address.ko",
-      "style_class": "body_value",
+      "style_class": "style_supplier_business_address",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급자 사업장 주소",
+        "json_path": "공급자.사업장주소",
         "csv_column": "공급자 사업장 주소"
       },
       "required": true,
@@ -266,23 +271,24 @@
       "field_id": "supplier_business_type",
       "label": "공급자 업태",
       "semantic_path": [
-        "공급자 업태"
+        "공급자",
+        "업태"
       ],
       "bbox_label_id": "det_000027",
       "source_detection_id": "det_000027",
       "source_text": "전문,과학 및 기술서비스업",
       "value_type": "free_text.short",
       "generator": "pool:business_types",
-      "style_class": "body_value",
+      "style_class": "style_supplier_business_type",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급자 업태",
+        "json_path": "공급자.업태",
         "csv_column": "공급자 업태"
       },
       "required": true,
@@ -293,23 +299,24 @@
       "field_id": "supplier_business_item",
       "label": "공급자 종목",
       "semantic_path": [
-        "공급자 종목"
+        "공급자",
+        "종목"
       ],
       "bbox_label_id": "det_000029",
       "source_detection_id": "det_000029",
       "source_text": "회계감사 및 사업비정산",
       "value_type": "free_text.short",
       "generator": "pool:business_items",
-      "style_class": "body_value",
+      "style_class": "style_supplier_business_item",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급자 종목",
+        "json_path": "공급자.종목",
         "csv_column": "공급자 종목"
       },
       "required": true,
@@ -320,23 +327,24 @@
       "field_id": "supplier_email",
       "label": "공급자 이메일",
       "semantic_path": [
-        "공급자 이메일"
+        "공급자",
+        "이메일"
       ],
       "bbox_label_id": "visual_0018",
       "source_detection_id": "visual_0018",
       "source_text": "공급자 이메일",
-      "value_type": "free_text.short",
-      "generator": "template:{{pattern:aaaaaa}}@example.test",
-      "style_class": "body_value",
+      "value_type": "company.email",
+      "generator": "company.email",
+      "style_class": "style_supplier_email",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급자 이메일",
+        "json_path": "공급자.이메일",
         "csv_column": "공급자 이메일"
       },
       "required": true,
@@ -347,23 +355,24 @@
       "field_id": "recipient_business_registration_number",
       "label": "공급받는자 등록번호",
       "semantic_path": [
-        "공급받는자 등록번호"
+        "공급받는자",
+        "등록번호"
       ],
       "bbox_label_id": "visual_0005",
       "source_detection_id": "visual_0005",
       "source_text": "공급받는자 등록번호",
       "value_type": "free_text.short",
       "generator": "pattern:###-##-#####",
-      "style_class": "body_value",
+      "style_class": "style_recipient_business_registration_number",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급받는자 등록번호",
+        "json_path": "공급받는자.등록번호",
         "csv_column": "공급받는자 등록번호"
       },
       "required": true,
@@ -374,23 +383,24 @@
       "field_id": "recipient_branch_number",
       "label": "공급받는자 종사업장번호",
       "semantic_path": [
-        "공급받는자 종사업장번호"
+        "공급받는자",
+        "종사업장번호"
       ],
       "bbox_label_id": "visual_0006",
       "source_detection_id": "visual_0006",
       "source_text": "공급받는자 종사업장번호",
       "value_type": "free_text.short",
       "generator": "pattern:####",
-      "style_class": "body_value",
+      "style_class": "style_recipient_branch_number",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급받는자 종사업장번호",
+        "json_path": "공급받는자.종사업장번호",
         "csv_column": "공급받는자 종사업장번호"
       },
       "required": true,
@@ -401,23 +411,24 @@
       "field_id": "recipient_company_name",
       "label": "공급받는자 상호(법인명)",
       "semantic_path": [
-        "공급받는자 상호(법인명)"
+        "공급받는자",
+        "상호"
       ],
       "bbox_label_id": "visual_0007",
       "source_detection_id": "visual_0007",
       "source_text": "공급받는자 상호(법인명)",
       "value_type": "company.name_ko",
       "generator": "company.name_ko",
-      "style_class": "body_value",
+      "style_class": "style_recipient_company_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급받는자 상호(법인명)",
+        "json_path": "공급받는자.상호",
         "csv_column": "공급받는자 상호(법인명)"
       },
       "required": true,
@@ -428,23 +439,24 @@
       "field_id": "recipient_representative_name",
       "label": "공급받는자 성명",
       "semantic_path": [
-        "공급받는자 성명"
+        "공급받는자",
+        "성명"
       ],
       "bbox_label_id": "visual_0008",
       "source_detection_id": "visual_0008",
       "source_text": "공급받는자 성명",
       "value_type": "person.name_ko",
       "generator": "person.name_ko",
-      "style_class": "body_value",
+      "style_class": "style_recipient_representative_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급받는자 성명",
+        "json_path": "공급받는자.성명",
         "csv_column": "공급받는자 성명"
       },
       "required": true,
@@ -455,23 +467,24 @@
       "field_id": "recipient_business_address",
       "label": "공급받는자 사업장 주소",
       "semantic_path": [
-        "공급받는자 사업장 주소"
+        "공급받는자",
+        "사업장주소"
       ],
       "bbox_label_id": "visual_0009",
       "source_detection_id": "visual_0009",
       "source_text": "공급받는자 사업장 주소",
       "value_type": "address.ko",
       "generator": "address.ko",
-      "style_class": "body_value",
+      "style_class": "style_recipient_business_address",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급받는자 사업장 주소",
+        "json_path": "공급받는자.사업장주소",
         "csv_column": "공급받는자 사업장 주소"
       },
       "required": true,
@@ -482,23 +495,24 @@
       "field_id": "recipient_business_type",
       "label": "공급받는자 업태",
       "semantic_path": [
-        "공급받는자 업태"
+        "공급받는자",
+        "업태"
       ],
       "bbox_label_id": "manual_1783510826259",
       "source_detection_id": "manual_1783510826259",
       "source_text": "공급받는자 업태",
       "value_type": "free_text.short",
       "generator": "pool:business_types",
-      "style_class": "body_value",
+      "style_class": "style_recipient_business_type",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급받는자 업태",
+        "json_path": "공급받는자.업태",
         "csv_column": "공급받는자 업태"
       },
       "required": true,
@@ -509,23 +523,24 @@
       "field_id": "recipient_business_item",
       "label": "공급받는자 종목",
       "semantic_path": [
-        "공급받는자 종목"
+        "공급받는자",
+        "종목"
       ],
       "bbox_label_id": "visual_0013",
       "source_detection_id": "visual_0013",
       "source_text": "공급받는자 종목",
       "value_type": "free_text.short",
       "generator": "pool:business_items",
-      "style_class": "body_value",
+      "style_class": "style_recipient_business_item",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급받는자 종목",
+        "json_path": "공급받는자.종목",
         "csv_column": "공급받는자 종목"
       },
       "required": true,
@@ -536,23 +551,24 @@
       "field_id": "recipient_email_1",
       "label": "공급받는자 이메일 1",
       "semantic_path": [
-        "공급받는자 이메일 1"
+        "공급받는자",
+        "이메일1"
       ],
       "bbox_label_id": "visual_0015",
       "source_detection_id": "visual_0015",
       "source_text": "공급받는자 이메일 1",
-      "value_type": "free_text.short",
-      "generator": "template:{{pattern:aaaaaa}}@example.test",
-      "style_class": "body_value",
+      "value_type": "company.email",
+      "generator": "company.email",
+      "style_class": "style_recipient_email_1",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급받는자 이메일 1",
+        "json_path": "공급받는자.이메일1",
         "csv_column": "공급받는자 이메일 1"
       },
       "required": true,
@@ -563,23 +579,24 @@
       "field_id": "recipient_email_2",
       "label": "공급받는자 이메일 2",
       "semantic_path": [
-        "공급받는자 이메일 2"
+        "공급받는자",
+        "이메일2"
       ],
       "bbox_label_id": "visual_0019",
       "source_detection_id": "visual_0019",
       "source_text": "공급받는자 이메일 2",
-      "value_type": "free_text.short",
-      "generator": "template:{{pattern:aaaaaa}}@example.test",
-      "style_class": "body_value",
+      "value_type": "company.email",
+      "generator": "company.email",
+      "style_class": "style_recipient_email_2",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급받는자 이메일 2",
+        "json_path": "공급받는자.이메일2",
         "csv_column": "공급받는자 이메일 2"
       },
       "required": true,
@@ -590,6 +607,7 @@
       "field_id": "issue_date",
       "label": "작성일자",
       "semantic_path": [
+        "거래요약",
         "작성일자"
       ],
       "bbox_label_id": "det_000041",
@@ -597,16 +615,16 @@
       "source_text": "2023-01-03",
       "value_type": "date.kr",
       "generator": "date.kr",
-      "style_class": "date_value",
+      "style_class": "style_issue_date",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "작성일자",
+        "json_path": "거래요약.작성일자",
         "csv_column": "작성일자"
       },
       "required": true,
@@ -617,6 +635,7 @@
       "field_id": "summary_supply_amount",
       "label": "공급가액",
       "semantic_path": [
+        "거래요약",
         "공급가액"
       ],
       "bbox_label_id": "det_000042",
@@ -624,16 +643,16 @@
       "source_text": "300,000",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_summary_supply_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "공급가액",
+        "json_path": "거래요약.공급가액",
         "csv_column": "공급가액"
       },
       "required": true,
@@ -644,6 +663,7 @@
       "field_id": "summary_tax_amount",
       "label": "세액",
       "semantic_path": [
+        "거래요약",
         "세액"
       ],
       "bbox_label_id": "det_000043",
@@ -651,16 +671,16 @@
       "source_text": "30,000",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_summary_tax_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "세액",
+        "json_path": "거래요약.세액",
         "csv_column": "세액"
       },
       "required": true,
@@ -671,6 +691,7 @@
       "field_id": "amendment_reason",
       "label": "수정사유",
       "semantic_path": [
+        "거래요약",
         "수정사유"
       ],
       "bbox_label_id": "visual_0022",
@@ -678,16 +699,16 @@
       "source_text": "수정사유",
       "value_type": "free_text.short",
       "generator": "pool:amendment_reasons",
-      "style_class": "body_value",
+      "style_class": "style_amendment_reason",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "수정사유",
+        "json_path": "거래요약.수정사유",
         "csv_column": "수정사유"
       },
       "required": true,
@@ -698,23 +719,24 @@
       "field_id": "summary_note",
       "label": "비고",
       "semantic_path": [
+        "거래요약",
         "비고"
       ],
       "bbox_label_id": "visual_0023",
       "source_detection_id": "visual_0023",
       "source_text": "비고",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
-      "style_class": "body_value",
+      "generator": "pool:summary_notes",
+      "style_class": "style_summary_note",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "비고",
+        "json_path": "거래요약.비고",
         "csv_column": "비고"
       },
       "required": true,
@@ -725,23 +747,25 @@
       "field_id": "line1_month",
       "label": "1행 월",
       "semantic_path": [
-        "1행 월"
+        "품목내역",
+        "1행",
+        "월"
       ],
       "bbox_label_id": "det_000053",
       "source_detection_id": "det_000053",
       "source_text": "01",
       "value_type": "date.month",
       "generator": "date.month",
-      "style_class": "table_value",
+      "style_class": "style_line1_month",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "1행 월",
+        "json_path": "품목내역.1행.월",
         "csv_column": "1행 월"
       },
       "required": true,
@@ -752,23 +776,25 @@
       "field_id": "line1_day",
       "label": "1행 일",
       "semantic_path": [
-        "1행 일"
+        "품목내역",
+        "1행",
+        "일"
       ],
       "bbox_label_id": "det_000054",
       "source_detection_id": "det_000054",
       "source_text": "03",
       "value_type": "date.day",
       "generator": "date.day",
-      "style_class": "table_value",
+      "style_class": "style_line1_day",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "1행 일",
+        "json_path": "품목내역.1행.일",
         "csv_column": "1행 일"
       },
       "required": true,
@@ -779,23 +805,25 @@
       "field_id": "line1_item_name",
       "label": "1행 품목",
       "semantic_path": [
-        "1행 품목"
+        "품목내역",
+        "1행",
+        "품목"
       ],
       "bbox_label_id": "det_000055",
       "source_detection_id": "det_000055",
       "source_text": "수수료",
       "value_type": "free_text.short",
       "generator": "pool:item_names",
-      "style_class": "table_value",
+      "style_class": "style_line1_item_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "1행 품목",
+        "json_path": "품목내역.1행.품목",
         "csv_column": "1행 품목"
       },
       "required": true,
@@ -806,23 +834,25 @@
       "field_id": "line1_specification",
       "label": "1행 규격",
       "semantic_path": [
-        "1행 규격"
+        "품목내역",
+        "1행",
+        "규격"
       ],
       "bbox_label_id": "manual_1783510901475",
       "source_detection_id": "manual_1783510901475",
       "source_text": "1행 규격",
       "value_type": "free_text.short",
       "generator": "pool:item_specs",
-      "style_class": "table_value",
+      "style_class": "style_line1_specification",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "1행 규격",
+        "json_path": "품목내역.1행.규격",
         "csv_column": "1행 규격"
       },
       "required": true,
@@ -833,23 +863,25 @@
       "field_id": "line1_quantity",
       "label": "1행 수량",
       "semantic_path": [
-        "1행 수량"
+        "품목내역",
+        "1행",
+        "수량"
       ],
       "bbox_label_id": "manual_1783510909542",
       "source_detection_id": "manual_1783510909542",
       "source_text": "1행 수량",
       "value_type": "free_text.short",
       "generator": "choice:1|2|3|5|10",
-      "style_class": "table_value",
+      "style_class": "style_line1_quantity",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "1행 수량",
+        "json_path": "품목내역.1행.수량",
         "csv_column": "1행 수량"
       },
       "required": true,
@@ -860,23 +892,25 @@
       "field_id": "line1_unit_price",
       "label": "1행 단가",
       "semantic_path": [
-        "1행 단가"
+        "품목내역",
+        "1행",
+        "단가"
       ],
       "bbox_label_id": "manual_1783510914842",
       "source_detection_id": "manual_1783510914842",
       "source_text": "1행 단가",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line1_unit_price",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "1행 단가",
+        "json_path": "품목내역.1행.단가",
         "csv_column": "1행 단가"
       },
       "required": true,
@@ -887,23 +921,25 @@
       "field_id": "line1_supply_amount",
       "label": "1행 공급가액",
       "semantic_path": [
-        "1행 공급가액"
+        "품목내역",
+        "1행",
+        "공급가액"
       ],
       "bbox_label_id": "det_000056",
       "source_detection_id": "det_000056",
       "source_text": "300,000",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line1_supply_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "1행 공급가액",
+        "json_path": "품목내역.1행.공급가액",
         "csv_column": "1행 공급가액"
       },
       "required": true,
@@ -914,23 +950,25 @@
       "field_id": "line1_tax_amount",
       "label": "1행 세액",
       "semantic_path": [
-        "1행 세액"
+        "품목내역",
+        "1행",
+        "세액"
       ],
       "bbox_label_id": "det_000057",
       "source_detection_id": "det_000057",
       "source_text": "30,000",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line1_tax_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "1행 세액",
+        "json_path": "품목내역.1행.세액",
         "csv_column": "1행 세액"
       },
       "required": true,
@@ -941,23 +979,25 @@
       "field_id": "line1_remark",
       "label": "1행 비고",
       "semantic_path": [
-        "1행 비고"
+        "품목내역",
+        "1행",
+        "비고"
       ],
       "bbox_label_id": "manual_1783510924942",
       "source_detection_id": "manual_1783510924942",
       "source_text": "1행 비고",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
-      "style_class": "table_value",
+      "generator": "pool:line_remarks",
+      "style_class": "style_line1_remark",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "1행 비고",
+        "json_path": "품목내역.1행.비고",
         "csv_column": "1행 비고"
       },
       "required": true,
@@ -968,23 +1008,25 @@
       "field_id": "line2_month",
       "label": "2행 월",
       "semantic_path": [
-        "2행 월"
+        "품목내역",
+        "2행",
+        "월"
       ],
       "bbox_label_id": "manual_1783510962924",
       "source_detection_id": "manual_1783510962924",
       "source_text": "2행 월",
       "value_type": "date.month",
       "generator": "date.month",
-      "style_class": "table_value",
+      "style_class": "style_line2_month",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "2행 월",
+        "json_path": "품목내역.2행.월",
         "csv_column": "2행 월"
       },
       "required": true,
@@ -995,23 +1037,25 @@
       "field_id": "line2_day",
       "label": "2행 일",
       "semantic_path": [
-        "2행 일"
+        "품목내역",
+        "2행",
+        "일"
       ],
       "bbox_label_id": "manual_1783510968208",
       "source_detection_id": "manual_1783510968208",
       "source_text": "2행 일",
       "value_type": "date.day",
       "generator": "date.day",
-      "style_class": "table_value",
+      "style_class": "style_line2_day",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "2행 일",
+        "json_path": "품목내역.2행.일",
         "csv_column": "2행 일"
       },
       "required": true,
@@ -1022,23 +1066,25 @@
       "field_id": "line2_item_name",
       "label": "2행 품목",
       "semantic_path": [
-        "2행 품목"
+        "품목내역",
+        "2행",
+        "품목"
       ],
       "bbox_label_id": "manual_1783510994008",
       "source_detection_id": "manual_1783510994008",
       "source_text": "2행 품목",
       "value_type": "free_text.short",
       "generator": "pool:item_names",
-      "style_class": "table_value",
+      "style_class": "style_line2_item_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "2행 품목",
+        "json_path": "품목내역.2행.품목",
         "csv_column": "2행 품목"
       },
       "required": true,
@@ -1049,23 +1095,25 @@
       "field_id": "line2_specification",
       "label": "2행 규격",
       "semantic_path": [
-        "2행 규격"
+        "품목내역",
+        "2행",
+        "규격"
       ],
       "bbox_label_id": "manual_1783511010823",
       "source_detection_id": "manual_1783511010823",
       "source_text": "2행 규격",
       "value_type": "free_text.short",
       "generator": "pool:item_specs",
-      "style_class": "table_value",
+      "style_class": "style_line2_specification",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "2행 규격",
+        "json_path": "품목내역.2행.규격",
         "csv_column": "2행 규격"
       },
       "required": true,
@@ -1076,23 +1124,25 @@
       "field_id": "line2_quantity",
       "label": "2행 수량",
       "semantic_path": [
-        "2행 수량"
+        "품목내역",
+        "2행",
+        "수량"
       ],
       "bbox_label_id": "manual_1783511024107",
       "source_detection_id": "manual_1783511024107",
       "source_text": "2행 수량",
       "value_type": "free_text.short",
       "generator": "choice:1|2|3|5|10",
-      "style_class": "table_value",
+      "style_class": "style_line2_quantity",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "2행 수량",
+        "json_path": "품목내역.2행.수량",
         "csv_column": "2행 수량"
       },
       "required": true,
@@ -1103,23 +1153,25 @@
       "field_id": "line2_unit_price",
       "label": "2행 단가",
       "semantic_path": [
-        "2행 단가"
+        "품목내역",
+        "2행",
+        "단가"
       ],
       "bbox_label_id": "manual_1783511036824",
       "source_detection_id": "manual_1783511036824",
       "source_text": "2행 단가",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line2_unit_price",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "2행 단가",
+        "json_path": "품목내역.2행.단가",
         "csv_column": "2행 단가"
       },
       "required": true,
@@ -1130,23 +1182,25 @@
       "field_id": "line2_supply_amount",
       "label": "2행 공급가액",
       "semantic_path": [
-        "2행 공급가액"
+        "품목내역",
+        "2행",
+        "공급가액"
       ],
       "bbox_label_id": "manual_1783511041541",
       "source_detection_id": "manual_1783511041541",
       "source_text": "2행 공급가액",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line2_supply_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "2행 공급가액",
+        "json_path": "품목내역.2행.공급가액",
         "csv_column": "2행 공급가액"
       },
       "required": true,
@@ -1157,23 +1211,25 @@
       "field_id": "line2_tax_amount",
       "label": "2행 세액",
       "semantic_path": [
-        "2행 세액"
+        "품목내역",
+        "2행",
+        "세액"
       ],
       "bbox_label_id": "manual_1783510945874",
       "source_detection_id": "manual_1783510945874",
       "source_text": "2행 세액",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line2_tax_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "2행 세액",
+        "json_path": "품목내역.2행.세액",
         "csv_column": "2행 세액"
       },
       "required": true,
@@ -1184,23 +1240,25 @@
       "field_id": "line2_remark",
       "label": "2행 비고",
       "semantic_path": [
-        "2행 비고"
+        "품목내역",
+        "2행",
+        "비고"
       ],
       "bbox_label_id": "manual_1783510928574",
       "source_detection_id": "manual_1783510928574",
       "source_text": "2행 비고",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
-      "style_class": "table_value",
+      "generator": "pool:line_remarks",
+      "style_class": "style_line2_remark",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "2행 비고",
+        "json_path": "품목내역.2행.비고",
         "csv_column": "2행 비고"
       },
       "required": true,
@@ -1211,23 +1269,25 @@
       "field_id": "line3_month",
       "label": "3행 월",
       "semantic_path": [
-        "3행 월"
+        "품목내역",
+        "3행",
+        "월"
       ],
       "bbox_label_id": "manual_1783510970773",
       "source_detection_id": "manual_1783510970773",
       "source_text": "3행 월",
       "value_type": "date.month",
       "generator": "date.month",
-      "style_class": "table_value",
+      "style_class": "style_line3_month",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "3행 월",
+        "json_path": "품목내역.3행.월",
         "csv_column": "3행 월"
       },
       "required": true,
@@ -1238,23 +1298,25 @@
       "field_id": "line3_day",
       "label": "3행 일",
       "semantic_path": [
-        "3행 일"
+        "품목내역",
+        "3행",
+        "일"
       ],
       "bbox_label_id": "manual_1783510973909",
       "source_detection_id": "manual_1783510973909",
       "source_text": "3행 일",
       "value_type": "date.day",
       "generator": "date.day",
-      "style_class": "table_value",
+      "style_class": "style_line3_day",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "3행 일",
+        "json_path": "품목내역.3행.일",
         "csv_column": "3행 일"
       },
       "required": true,
@@ -1265,23 +1327,25 @@
       "field_id": "line3_item_name",
       "label": "3행 품목",
       "semantic_path": [
-        "3행 품목"
+        "품목내역",
+        "3행",
+        "품목"
       ],
       "bbox_label_id": "manual_1783511000658",
       "source_detection_id": "manual_1783511000658",
       "source_text": "3행 품목",
       "value_type": "free_text.short",
       "generator": "pool:item_names",
-      "style_class": "table_value",
+      "style_class": "style_line3_item_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "3행 품목",
+        "json_path": "품목내역.3행.품목",
         "csv_column": "3행 품목"
       },
       "required": true,
@@ -1292,23 +1356,25 @@
       "field_id": "line3_specification",
       "label": "3행 규격",
       "semantic_path": [
-        "3행 규격"
+        "품목내역",
+        "3행",
+        "규격"
       ],
       "bbox_label_id": "manual_1783511014741",
       "source_detection_id": "manual_1783511014741",
       "source_text": "3행 규격",
       "value_type": "free_text.short",
       "generator": "pool:item_specs",
-      "style_class": "table_value",
+      "style_class": "style_line3_specification",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "3행 규격",
+        "json_path": "품목내역.3행.규격",
         "csv_column": "3행 규격"
       },
       "required": true,
@@ -1319,23 +1385,25 @@
       "field_id": "line3_quantity",
       "label": "3행 수량",
       "semantic_path": [
-        "3행 수량"
+        "품목내역",
+        "3행",
+        "수량"
       ],
       "bbox_label_id": "manual_1783511030024",
       "source_detection_id": "manual_1783511030024",
       "source_text": "3행 수량",
       "value_type": "free_text.short",
       "generator": "choice:1|2|3|5|10",
-      "style_class": "table_value",
+      "style_class": "style_line3_quantity",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "3행 수량",
+        "json_path": "품목내역.3행.수량",
         "csv_column": "3행 수량"
       },
       "required": true,
@@ -1346,23 +1414,25 @@
       "field_id": "line3_unit_price",
       "label": "3행 단가",
       "semantic_path": [
-        "3행 단가"
+        "품목내역",
+        "3행",
+        "단가"
       ],
       "bbox_label_id": "manual_1783511045623",
       "source_detection_id": "manual_1783511045623",
       "source_text": "3행 단가",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line3_unit_price",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "3행 단가",
+        "json_path": "품목내역.3행.단가",
         "csv_column": "3행 단가"
       },
       "required": true,
@@ -1373,23 +1443,25 @@
       "field_id": "line3_supply_amount",
       "label": "3행 공급가액",
       "semantic_path": [
-        "3행 공급가액"
+        "품목내역",
+        "3행",
+        "공급가액"
       ],
       "bbox_label_id": "manual_1783511050374",
       "source_detection_id": "manual_1783511050374",
       "source_text": "3행 공급가액",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line3_supply_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "3행 공급가액",
+        "json_path": "품목내역.3행.공급가액",
         "csv_column": "3행 공급가액"
       },
       "required": true,
@@ -1400,23 +1472,25 @@
       "field_id": "line3_tax_amount",
       "label": "3행 세액",
       "semantic_path": [
-        "3행 세액"
+        "품목내역",
+        "3행",
+        "세액"
       ],
       "bbox_label_id": "manual_1783510950823",
       "source_detection_id": "manual_1783510950823",
       "source_text": "3행 세액",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line3_tax_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "3행 세액",
+        "json_path": "품목내역.3행.세액",
         "csv_column": "3행 세액"
       },
       "required": true,
@@ -1427,23 +1501,25 @@
       "field_id": "line3_remark",
       "label": "3행 비고",
       "semantic_path": [
-        "3행 비고"
+        "품목내역",
+        "3행",
+        "비고"
       ],
       "bbox_label_id": "manual_1783510935325",
       "source_detection_id": "manual_1783510935325",
       "source_text": "3행 비고",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
-      "style_class": "table_value",
+      "generator": "pool:line_remarks",
+      "style_class": "style_line3_remark",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "3행 비고",
+        "json_path": "품목내역.3행.비고",
         "csv_column": "3행 비고"
       },
       "required": true,
@@ -1454,23 +1530,25 @@
       "field_id": "line4_month",
       "label": "4행 월",
       "semantic_path": [
-        "4행 월"
+        "품목내역",
+        "4행",
+        "월"
       ],
       "bbox_label_id": "manual_1783510976657",
       "source_detection_id": "manual_1783510976657",
       "source_text": "4행 월",
       "value_type": "date.month",
       "generator": "date.month",
-      "style_class": "table_value",
+      "style_class": "style_line4_month",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "4행 월",
+        "json_path": "품목내역.4행.월",
         "csv_column": "4행 월"
       },
       "required": true,
@@ -1481,23 +1559,25 @@
       "field_id": "line4_day",
       "label": "4행 일",
       "semantic_path": [
-        "4행 일"
+        "품목내역",
+        "4행",
+        "일"
       ],
       "bbox_label_id": "manual_1783510978923",
       "source_detection_id": "manual_1783510978923",
       "source_text": "4행 일",
       "value_type": "date.day",
       "generator": "date.day",
-      "style_class": "table_value",
+      "style_class": "style_line4_day",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "4행 일",
+        "json_path": "품목내역.4행.일",
         "csv_column": "4행 일"
       },
       "required": true,
@@ -1508,23 +1588,25 @@
       "field_id": "line4_item_name",
       "label": "4행 품목",
       "semantic_path": [
-        "4행 품목"
+        "품목내역",
+        "4행",
+        "품목"
       ],
       "bbox_label_id": "manual_1783511005640",
       "source_detection_id": "manual_1783511005640",
       "source_text": "4행 품목",
       "value_type": "free_text.short",
       "generator": "pool:item_names",
-      "style_class": "table_value",
+      "style_class": "style_line4_item_name",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "4행 품목",
+        "json_path": "품목내역.4행.품목",
         "csv_column": "4행 품목"
       },
       "required": true,
@@ -1535,23 +1617,25 @@
       "field_id": "line4_specification",
       "label": "4행 규격",
       "semantic_path": [
-        "4행 규격"
+        "품목내역",
+        "4행",
+        "규격"
       ],
       "bbox_label_id": "manual_1783511019041",
       "source_detection_id": "manual_1783511019041",
       "source_text": "4행 규격",
       "value_type": "free_text.short",
       "generator": "pool:item_specs",
-      "style_class": "table_value",
+      "style_class": "style_line4_specification",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "4행 규격",
+        "json_path": "품목내역.4행.규격",
         "csv_column": "4행 규격"
       },
       "required": true,
@@ -1562,23 +1646,25 @@
       "field_id": "line4_quantity",
       "label": "4행 수량",
       "semantic_path": [
-        "4행 수량"
+        "품목내역",
+        "4행",
+        "수량"
       ],
       "bbox_label_id": "manual_1783511032808",
       "source_detection_id": "manual_1783511032808",
       "source_text": "4행 수량",
       "value_type": "free_text.short",
       "generator": "choice:1|2|3|5|10",
-      "style_class": "table_value",
+      "style_class": "style_line4_quantity",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "4행 수량",
+        "json_path": "품목내역.4행.수량",
         "csv_column": "4행 수량"
       },
       "required": true,
@@ -1589,23 +1675,25 @@
       "field_id": "line4_unit_price",
       "label": "4행 단가",
       "semantic_path": [
-        "4행 단가"
+        "품목내역",
+        "4행",
+        "단가"
       ],
       "bbox_label_id": "manual_1783511057240",
       "source_detection_id": "manual_1783511057240",
       "source_text": "4행 단가",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line4_unit_price",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "4행 단가",
+        "json_path": "품목내역.4행.단가",
         "csv_column": "4행 단가"
       },
       "required": true,
@@ -1616,23 +1704,25 @@
       "field_id": "line4_supply_amount",
       "label": "4행 공급가액",
       "semantic_path": [
-        "4행 공급가액"
+        "품목내역",
+        "4행",
+        "공급가액"
       ],
       "bbox_label_id": "manual_1783511053540",
       "source_detection_id": "manual_1783511053540",
       "source_text": "4행 공급가액",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line4_supply_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "4행 공급가액",
+        "json_path": "품목내역.4행.공급가액",
         "csv_column": "4행 공급가액"
       },
       "required": true,
@@ -1643,23 +1733,25 @@
       "field_id": "line4_tax_amount",
       "label": "4행 세액",
       "semantic_path": [
-        "4행 세액"
+        "품목내역",
+        "4행",
+        "세액"
       ],
       "bbox_label_id": "manual_1783510957274",
       "source_detection_id": "manual_1783510957274",
       "source_text": "4행 세액",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_line4_tax_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "4행 세액",
+        "json_path": "품목내역.4행.세액",
         "csv_column": "4행 세액"
       },
       "required": true,
@@ -1670,23 +1762,25 @@
       "field_id": "line4_remark",
       "label": "4행 비고",
       "semantic_path": [
-        "4행 비고"
+        "품목내역",
+        "4행",
+        "비고"
       ],
       "bbox_label_id": "manual_1783510939392",
       "source_detection_id": "manual_1783510939392",
       "source_text": "4행 비고",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
-      "style_class": "table_value",
+      "generator": "pool:line_remarks",
+      "style_class": "style_line4_remark",
       "render_policy": {
-        "align": "left",
+        "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "4행 비고",
+        "json_path": "품목내역.4행.비고",
         "csv_column": "4행 비고"
       },
       "required": true,
@@ -1697,6 +1791,7 @@
       "field_id": "total_amount",
       "label": "합계금액",
       "semantic_path": [
+        "결제",
         "합계금액"
       ],
       "bbox_label_id": "det_000064",
@@ -1704,16 +1799,16 @@
       "source_text": "330,000",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_total_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "합계금액",
+        "json_path": "결제.합계금액",
         "csv_column": "합계금액"
       },
       "required": true,
@@ -1724,6 +1819,7 @@
       "field_id": "cash_amount",
       "label": "현금",
       "semantic_path": [
+        "결제",
         "현금"
       ],
       "bbox_label_id": "manual_1783511062690",
@@ -1731,16 +1827,16 @@
       "source_text": "현금",
       "value_type": "money.krw",
       "generator": "money.krw",
-      "style_class": "money_value",
+      "style_class": "style_cash_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "현금",
+        "json_path": "결제.현금",
         "csv_column": "현금"
       },
       "required": true,
@@ -1751,23 +1847,24 @@
       "field_id": "check_amount",
       "label": "수표",
       "semantic_path": [
+        "결제",
         "수표"
       ],
       "bbox_label_id": "manual_1783511065606",
       "source_detection_id": "manual_1783511065606",
       "source_text": "수표",
       "value_type": "money.krw",
-      "generator": "money.krw",
-      "style_class": "money_value",
+      "generator": "literal:0",
+      "style_class": "style_check_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "수표",
+        "json_path": "결제.수표",
         "csv_column": "수표"
       },
       "required": true,
@@ -1778,23 +1875,24 @@
       "field_id": "promissory_note_amount",
       "label": "어음",
       "semantic_path": [
+        "결제",
         "어음"
       ],
       "bbox_label_id": "manual_1783511068557",
       "source_detection_id": "manual_1783511068557",
       "source_text": "어음",
       "value_type": "money.krw",
-      "generator": "money.krw",
-      "style_class": "money_value",
+      "generator": "literal:0",
+      "style_class": "style_promissory_note_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "어음",
+        "json_path": "결제.어음",
         "csv_column": "어음"
       },
       "required": true,
@@ -1805,23 +1903,24 @@
       "field_id": "receivable_amount",
       "label": "외상미수금",
       "semantic_path": [
+        "결제",
         "외상미수금"
       ],
       "bbox_label_id": "manual_1783511072790",
       "source_detection_id": "manual_1783511072790",
       "source_text": "외상미수금",
       "value_type": "money.krw",
-      "generator": "money.krw",
-      "style_class": "money_value",
+      "generator": "literal:0",
+      "style_class": "style_receivable_amount",
       "render_policy": {
-        "align": "left",
+        "align": "right",
         "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
+        "fit": "allow_overflow",
+        "overflow": "allow",
         "checkbox_style": "v_mark"
       },
       "export": {
-        "json_path": "외상미수금",
+        "json_path": "결제.외상미수금",
         "csv_column": "외상미수금"
       },
       "required": true,
@@ -1830,5 +1929,5 @@
     }
   ],
   "groups": [],
-  "updated_at": "2026-07-08T11:58:59.399481+00:00"
+  "updated_at": "2026-07-08T23:53:29.664585+00:00"
 }

@@ -11,7 +11,7 @@
     "supplier_business_address": "address.ko",
     "supplier_business_type": "pool:business_types",
     "supplier_business_item": "pool:business_items",
-    "supplier_email": "template:{{pattern:aaaaaa}}@example.test",
+    "supplier_email": "company.email",
     "recipient_business_registration_number": "pattern:###-##-#####",
     "recipient_branch_number": "pattern:####",
     "recipient_company_name": "company.name_ko",
@@ -19,13 +19,13 @@
     "recipient_business_address": "address.ko",
     "recipient_business_type": "pool:business_types",
     "recipient_business_item": "pool:business_items",
-    "recipient_email_1": "template:{{pattern:aaaaaa}}@example.test",
-    "recipient_email_2": "template:{{pattern:aaaaaa}}@example.test",
+    "recipient_email_1": "company.email",
+    "recipient_email_2": "company.email",
     "issue_date": "date.kr",
     "summary_supply_amount": "money.krw",
     "summary_tax_amount": "money.krw",
     "amendment_reason": "pool:amendment_reasons",
-    "summary_note": "free_text.short",
+    "summary_note": "pool:summary_notes",
     "line1_month": "date.month",
     "line1_day": "date.day",
     "line1_item_name": "pool:item_names",
@@ -34,7 +34,7 @@
     "line1_unit_price": "money.krw",
     "line1_supply_amount": "money.krw",
     "line1_tax_amount": "money.krw",
-    "line1_remark": "free_text.short",
+    "line1_remark": "pool:line_remarks",
     "line2_month": "date.month",
     "line2_day": "date.day",
     "line2_item_name": "pool:item_names",
@@ -43,7 +43,7 @@
     "line2_unit_price": "money.krw",
     "line2_supply_amount": "money.krw",
     "line2_tax_amount": "money.krw",
-    "line2_remark": "free_text.short",
+    "line2_remark": "pool:line_remarks",
     "line3_month": "date.month",
     "line3_day": "date.day",
     "line3_item_name": "pool:item_names",
@@ -52,7 +52,7 @@
     "line3_unit_price": "money.krw",
     "line3_supply_amount": "money.krw",
     "line3_tax_amount": "money.krw",
-    "line3_remark": "free_text.short",
+    "line3_remark": "pool:line_remarks",
     "line4_month": "date.month",
     "line4_day": "date.day",
     "line4_item_name": "pool:item_names",
@@ -61,12 +61,12 @@
     "line4_unit_price": "money.krw",
     "line4_supply_amount": "money.krw",
     "line4_tax_amount": "money.krw",
-    "line4_remark": "free_text.short",
+    "line4_remark": "pool:line_remarks",
     "total_amount": "money.krw",
     "cash_amount": "money.krw",
-    "check_amount": "money.krw",
-    "promissory_note_amount": "money.krw",
-    "receivable_amount": "money.krw"
+    "check_amount": "literal:0",
+    "promissory_note_amount": "literal:0",
+    "receivable_amount": "literal:0"
   },
   "data_pools": {
     "business_types": [
@@ -81,14 +81,16 @@
       "소프트웨어 개발 및 공급",
       "문구 및 사무용품",
       "경영컨설팅",
-      "전자부품 도매"
+      "전자부품 도매",
+      "시스템 통합 및 유지보수"
     ],
     "item_names": [
-      "수수료",
+      "라이선스 이용료",
+      "사무용품",
+      "소프트웨어 개발 용역",
+      "유지보수 용역",
       "자문료",
-      "용역비",
-      "소프트웨어 이용료",
-      "사무용품"
+      "전자부품"
     ],
     "item_specs": [
       "1식",
@@ -98,13 +100,312 @@
       "건"
     ],
     "amendment_reasons": [
-      "",
       "기재사항 착오정정",
       "공급가액 변동",
-      "계약의 해제"
+      "계약의 해제",
+      "환입"
+    ],
+    "line_remarks": [
+      "계약분",
+      "6월분",
+      "납품완료",
+      "프로젝트",
+      "정상공급",
+      "사용료"
+    ],
+    "summary_notes": [
+      "청구",
+      "영수",
+      "계약서 기준",
+      "월 마감분"
+    ],
+    "supplier_records": [
+      {
+        "business_registration_number": "120-81-47521",
+        "branch_number": "0000",
+        "company_name": "한빛솔루션",
+        "representative_name": "김민준",
+        "business_address": "서울특별시 강남구 테헤란로 152",
+        "business_type": "서비스업",
+        "business_item": "소프트웨어 개발 및 공급",
+        "email": "tax@hanbitsolution.co.kr"
+      },
+      {
+        "business_registration_number": "214-86-39210",
+        "branch_number": "0000",
+        "company_name": "미래테크",
+        "representative_name": "박서연",
+        "business_address": "경기도 성남시 분당구 판교역로 235",
+        "business_type": "정보통신업",
+        "business_item": "시스템 통합 및 유지보수",
+        "email": "invoice@miraetech.co.kr"
+      },
+      {
+        "business_registration_number": "105-87-64832",
+        "branch_number": "0001",
+        "company_name": "대한비즈파트너스",
+        "representative_name": "이도윤",
+        "business_address": "서울특별시 영등포구 국제금융로 10",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "경영컨설팅",
+        "email": "tax@daehanbiz.co.kr"
+      }
+    ],
+    "recipient_records": [
+      {
+        "business_registration_number": "220-88-91473",
+        "branch_number": "0000",
+        "company_name": "우리유통",
+        "representative_name": "최지우",
+        "business_address": "부산광역시 해운대구 센텀중앙로 79",
+        "business_type": "도매 및 소매업",
+        "business_item": "전자부품 도매",
+        "email_1": "ap@wooridist.co.kr",
+        "email_2": "tax@wooridist.co.kr"
+      },
+      {
+        "business_registration_number": "301-85-26744",
+        "branch_number": "0000",
+        "company_name": "새롬산업",
+        "representative_name": "정하준",
+        "business_address": "인천광역시 남동구 남동대로 239",
+        "business_type": "제조업",
+        "business_item": "산업용 기계 제조",
+        "email_1": "invoice@saeromind.co.kr",
+        "email_2": "finance@saeromind.co.kr"
+      },
+      {
+        "business_registration_number": "617-81-73025",
+        "branch_number": "0002",
+        "company_name": "제일상사",
+        "representative_name": "강서윤",
+        "business_address": "대구광역시 달서구 성서공단로 11",
+        "business_type": "도매 및 소매업",
+        "business_item": "문구 및 사무용품",
+        "email_1": "tax@jeiltrade.co.kr",
+        "email_2": "accounting@jeiltrade.co.kr"
+      }
+    ],
+    "tax_line_records": [
+      {
+        "month": "06",
+        "day": "03",
+        "item_name": "소프트웨어 개발 용역",
+        "specification": "1식",
+        "quantity": "1",
+        "unit_price": "2,400,000",
+        "supply_amount": "2,400,000",
+        "tax_amount": "240,000",
+        "remark": "계약분"
+      },
+      {
+        "month": "06",
+        "day": "10",
+        "item_name": "유지보수 용역",
+        "specification": "월정액",
+        "quantity": "1",
+        "unit_price": "850,000",
+        "supply_amount": "850,000",
+        "tax_amount": "85,000",
+        "remark": "6월분"
+      },
+      {
+        "month": "06",
+        "day": "15",
+        "item_name": "사무용품",
+        "specification": "SET",
+        "quantity": "3",
+        "unit_price": "120,000",
+        "supply_amount": "360,000",
+        "tax_amount": "36,000",
+        "remark": "납품완료"
+      },
+      {
+        "month": "06",
+        "day": "20",
+        "item_name": "자문료",
+        "specification": "건",
+        "quantity": "2",
+        "unit_price": "450,000",
+        "supply_amount": "900,000",
+        "tax_amount": "90,000",
+        "remark": "프로젝트"
+      },
+      {
+        "month": "07",
+        "day": "01",
+        "item_name": "전자부품",
+        "specification": "EA",
+        "quantity": "10",
+        "unit_price": "75,000",
+        "supply_amount": "750,000",
+        "tax_amount": "75,000",
+        "remark": "정상공급"
+      },
+      {
+        "month": "07",
+        "day": "05",
+        "item_name": "라이선스 이용료",
+        "specification": "월정액",
+        "quantity": "5",
+        "unit_price": "180,000",
+        "supply_amount": "900,000",
+        "tax_amount": "90,000",
+        "remark": "사용료"
+      }
+    ],
+    "transaction_date_sets": [
+      {
+        "issue_date": "2025-06-30",
+        "m1": "06",
+        "d1": "03",
+        "m2": "06",
+        "d2": "10",
+        "m3": "06",
+        "d3": "15",
+        "m4": "06",
+        "d4": "20"
+      },
+      {
+        "issue_date": "2025-07-31",
+        "m1": "07",
+        "d1": "01",
+        "m2": "07",
+        "d2": "05",
+        "m3": "07",
+        "d3": "12",
+        "m4": "07",
+        "d4": "25"
+      },
+      {
+        "issue_date": "2026-01-31",
+        "m1": "01",
+        "d1": "06",
+        "m2": "01",
+        "d2": "13",
+        "m3": "01",
+        "d3": "20",
+        "m4": "01",
+        "d4": "27"
+      }
+    ],
+    "email_domains": [
+      "naver.com",
+      "gmail.com",
+      "kakao.com",
+      "daum.net",
+      "hanmail.net",
+      "nate.com",
+      "outlook.com",
+      "company.co.kr",
+      "bizmail.co.kr",
+      "office.kr"
     ]
   },
   "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "supplier_records",
+      "targets": {
+        "supplier_business_registration_number": "business_registration_number",
+        "supplier_branch_number": "branch_number",
+        "supplier_company_name": "company_name",
+        "supplier_representative_name": "representative_name",
+        "supplier_business_address": "business_address",
+        "supplier_business_type": "business_type",
+        "supplier_business_item": "business_item",
+        "supplier_email": "email"
+      },
+      "note": "공급자 사업자번호/상호/대표/주소/업태/종목/이메일은 같은 사업자 레코드에서 함께 선택한다."
+    },
+    {
+      "type": "pick_record",
+      "pool": "recipient_records",
+      "targets": {
+        "recipient_business_registration_number": "business_registration_number",
+        "recipient_branch_number": "branch_number",
+        "recipient_company_name": "company_name",
+        "recipient_representative_name": "representative_name",
+        "recipient_business_address": "business_address",
+        "recipient_business_type": "business_type",
+        "recipient_business_item": "business_item",
+        "recipient_email_1": "email_1",
+        "recipient_email_2": "email_2"
+      },
+      "note": "공급받는자 정보도 단일 사업자 레코드에서 함께 선택한다."
+    },
+    {
+      "type": "pick_record",
+      "pool": "transaction_date_sets",
+      "targets": {
+        "issue_date": "issue_date",
+        "line1_month": "m1",
+        "line1_day": "d1",
+        "line2_month": "m2",
+        "line2_day": "d2",
+        "line3_month": "m3",
+        "line3_day": "d3",
+        "line4_month": "m4",
+        "line4_day": "d4"
+      },
+      "note": "품목 행의 월/일은 작성일자와 같은 과세기간 안에 들어가도록 날짜 세트를 함께 선택한다."
+    },
+    {
+      "type": "pick_record",
+      "pool": "tax_line_records",
+      "targets": {
+        "line1_item_name": "item_name",
+        "line1_specification": "specification",
+        "line1_quantity": "quantity",
+        "line1_unit_price": "unit_price",
+        "line1_supply_amount": "supply_amount",
+        "line1_tax_amount": "tax_amount",
+        "line1_remark": "remark"
+      },
+      "note": "1행 품목은 수량×단가=공급가액, 세액=공급가액×10%로 미리 계산된 레코드에서 함께 선택한다."
+    },
+    {
+      "type": "pick_record",
+      "pool": "tax_line_records",
+      "targets": {
+        "line2_item_name": "item_name",
+        "line2_specification": "specification",
+        "line2_quantity": "quantity",
+        "line2_unit_price": "unit_price",
+        "line2_supply_amount": "supply_amount",
+        "line2_tax_amount": "tax_amount",
+        "line2_remark": "remark"
+      },
+      "note": "2행 품목은 수량×단가=공급가액, 세액=공급가액×10%로 미리 계산된 레코드에서 함께 선택한다."
+    },
+    {
+      "type": "pick_record",
+      "pool": "tax_line_records",
+      "targets": {
+        "line3_item_name": "item_name",
+        "line3_specification": "specification",
+        "line3_quantity": "quantity",
+        "line3_unit_price": "unit_price",
+        "line3_supply_amount": "supply_amount",
+        "line3_tax_amount": "tax_amount",
+        "line3_remark": "remark"
+      },
+      "note": "3행 품목은 수량×단가=공급가액, 세액=공급가액×10%로 미리 계산된 레코드에서 함께 선택한다."
+    },
+    {
+      "type": "pick_record",
+      "pool": "tax_line_records",
+      "targets": {
+        "line4_item_name": "item_name",
+        "line4_specification": "specification",
+        "line4_quantity": "quantity",
+        "line4_unit_price": "unit_price",
+        "line4_supply_amount": "supply_amount",
+        "line4_tax_amount": "tax_amount",
+        "line4_remark": "remark"
+      },
+      "note": "4행 품목은 수량×단가=공급가액, 세액=공급가액×10%로 미리 계산된 레코드에서 함께 선택한다."
+    },
     {
       "type": "sum",
       "sources": [
@@ -115,11 +416,7 @@
       ],
       "target": "summary_supply_amount",
       "format": "money.krw",
-      "note": "품목 공급가액 합계와 상단 공급가액을 맞춘다. 빈 행은 0으로 처리하는 렌더러 해석이 필요하다.",
-      "evidence_ids": [
-        "R1",
-        "R2"
-      ]
+      "note": "상단 공급가액은 품목 1~4행 공급가액 합계다."
     },
     {
       "type": "sum",
@@ -131,11 +428,7 @@
       ],
       "target": "summary_tax_amount",
       "format": "money.krw",
-      "note": "품목 세액 합계와 상단 세액을 맞춘다. 빈 행은 0으로 처리하는 렌더러 해석이 필요하다.",
-      "evidence_ids": [
-        "R1",
-        "R2"
-      ]
+      "note": "상단 세액은 품목 1~4행 세액 합계다."
     },
     {
       "type": "sum",
@@ -145,11 +438,13 @@
       ],
       "target": "total_amount",
       "format": "money.krw",
-      "note": "합계금액은 공급가액과 세액의 합으로 표시한다.",
-      "evidence_ids": [
-        "R1",
-        "R2"
-      ]
+      "note": "합계금액은 공급가액+세액이다."
+    },
+    {
+      "type": "copy",
+      "source": "total_amount",
+      "target": "cash_amount",
+      "note": "기본 샘플은 전액 현금 결제 케이스로 합계금액을 현금 칸에 반영한다."
     }
   ],
   "field_rules": [
@@ -250,7 +545,7 @@
     {
       "field_id": "supplier_email",
       "semantic_path": "공급자.이메일",
-      "generator": "template:{{pattern:aaaaaa}}@example.test",
+      "generator": "company.email",
       "anchor_id": "visual_0018",
       "unit_policy": "none",
       "evidence_ids": [
@@ -343,7 +638,7 @@
     {
       "field_id": "recipient_email_1",
       "semantic_path": "공급받는자.이메일1",
-      "generator": "template:{{pattern:aaaaaa}}@example.test",
+      "generator": "company.email",
       "anchor_id": "visual_0015",
       "unit_policy": "none",
       "evidence_ids": [
@@ -354,7 +649,7 @@
     {
       "field_id": "recipient_email_2",
       "semantic_path": "공급받는자.이메일2",
-      "generator": "template:{{pattern:aaaaaa}}@example.test",
+      "generator": "company.email",
       "anchor_id": "visual_0019",
       "unit_policy": "none",
       "evidence_ids": [
@@ -881,5 +1176,19 @@
       "note": "Bottom 외상미수금 cell; blank in sample."
     }
   ],
-  "updated_at": "2026-07-08T11:58:59.399586+00:00"
+  "updated_at": "2026-07-08T23:53:29.664525+00:00",
+  "relationship_model": {
+    "version": 1,
+    "strategy": "renderer_supported_constraints_only",
+    "rules": [
+      "supplier_* fields are selected from one supplier_records object",
+      "recipient_* fields are selected from one recipient_records object",
+      "issue_date and lineN_month/day are selected from one transaction_date_sets object",
+      "line item amount records precompute quantity * unit_price = supply_amount and tax_amount = supply_amount * 10%",
+      "summary_supply_amount = sum(line1..line4 supply_amount)",
+      "summary_tax_amount = sum(line1..line4 tax_amount)",
+      "total_amount = summary_supply_amount + summary_tax_amount",
+      "cash_amount = total_amount, check/promissory_note/receivable amount cells are rendered as 0 by default"
+    ]
+  }
 }

@@ -12,6 +12,19 @@ CITIES = ["서울특별시", "부산광역시", "대구광역시", "인천광역
 DISTRICTS = ["중구", "서구", "동구", "남구", "북구", "강남구", "서초구", "마포구", "송파구", "영등포구"]
 ROADS = ["중앙로", "테헤란로", "세종대로", "충무로", "을지로", "한강대로", "삼성로", "월드컵북로"]
 BANKS = ["국민은행", "신한은행", "우리은행", "하나은행", "농협은행", "기업은행", "카카오뱅크"]
+EMAIL_LOCAL_PARTS = ["tax", "invoice", "accounting", "finance", "sales", "admin", "contact", "support", "billing", "order"]
+EMAIL_DOMAINS = [
+    "naver.com",
+    "gmail.com",
+    "kakao.com",
+    "daum.net",
+    "hanmail.net",
+    "nate.com",
+    "outlook.com",
+    "company.co.kr",
+    "bizmail.co.kr",
+    "office.kr",
+]
 COMPANY_SUFFIXES = ["상사", "산업", "테크", "유통", "건설", "파트너스", "솔루션", "에프앤비"]
 TEXT_SNIPPETS = ["샘플값", "예시값", "더미값", "테스트값"]
 
@@ -41,6 +54,8 @@ def generate_value(field_type: str, rng: random.Random, *, choices: list[str] | 
         return f"{rng.randint(700101, 991231)}-{rng.randint(1000000, 4999999)}"
     if normalized in {"phone", "mobile"}:
         return f"010-{rng.randint(1000, 9999)}-{rng.randint(1000, 9999)}"
+    if normalized in {"email", "person_email", "company_email", "business_email"}:
+        return _email(rng)
     return rng.choice(TEXT_SNIPPETS)
 
 
@@ -68,3 +83,12 @@ def _address(rng: random.Random) -> str:
 
 def _company(rng: random.Random) -> str:
     return f"{rng.choice(['한빛', '대한', '미래', '우리', '새롬', '제일', '금강'])}{rng.choice(COMPANY_SUFFIXES)}"
+
+
+def _email(rng: random.Random) -> str:
+    local = rng.choice(EMAIL_LOCAL_PARTS)
+    # 짧은 로컬파트만 반복되면 문서 묶음에서 너무 인위적으로 보이므로
+    # 업무용 alias 뒤에 2~4자리 숫자를 가끔 붙인다.
+    if rng.random() < 0.55:
+        local = f"{local}{rng.randint(10, 9999)}"
+    return f"{local}@{rng.choice(EMAIL_DOMAINS)}"

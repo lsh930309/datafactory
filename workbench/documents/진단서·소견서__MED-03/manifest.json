@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-03",
+  "title": "진단서·소견서",
+  "folder": "workbench/documents/진단서·소견서__MED-03",
+  "registry": {
+    "docId": "MED-03",
+    "title": "진단서·소견서",
+    "issuer": "의료기관",
+    "genre": "의무기록",
+    "structure": "반정형",
+    "modality": "스캔이미지",
+    "sensitivity": "의료정보",
+    "fields": "진단명·상병코드·치료기간·의사",
+    "notes": "",
+    "hasPersonalInfo": "포함",
+    "personalInfoDetail": "환자, 진단명, 질병코드, 진료내용, 의사소견",
+    "validationRules": "의사 서명, 병원 도장, 날짜 형식, S4 human-in-the-loop, 진료일, 민감정보 접근권한",
+    "validationRuleCodes": "VAL-002, VAL-008, VAL-009, VAL-015",
+    "writingMethod": "수기",
+    "aliases": [
+      "진단서·소견서",
+      "진단서",
+      "진단서(일반)",
+      "소견서"
+    ],
+    "workflowIds": [
+      "HC-01",
+      "INS-02",
+      "INS-03",
+      "INS-05"
+    ],
+    "domains": [
+      "보험 (생명·손해)",
+      "의료·헬스케어"
+    ],
+    "workflowDomains": [
+      "보험 (생명·손해)",
+      "의료·헬스케어"
+    ],
+    "poDomains": [
+      "보험",
+      "의료"
+    ],
+    "isFirstPriority": false,
+    "firstPriorityDomains": [],
+    "firstPriorityScopeCount": 0
+  },
+  "source_seed_folders": [
+    "seed_samples/진단서·소견서"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서.pdf",
+      "source": "seed_samples/진단서·소견서/진단서.pdf",
+      "format": "pdf",
+      "generation_path": "image-template"
+    },
+    {
+      "path": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+      "source": "seed_samples/진단서·소견서/진단서_page_001.jpg",
+      "format": "jpg",
+      "generation_path": "image-template"
+    }
+  ],
+  "sample_kind": "filled_sample",
+  "sample_generation_paths": [
+    "image-template"
+  ],
+  "office_render": {
+    "required": false,
+    "backend": "none",
+    "status": "not_required"
+  },
+  "status": "sample_imported",
+  "created_at": "2026-07-08T23:28:33.386735+00:00",
+  "updated_at": "2026-07-08T23:28:33.387664+00:00",
+  "artifacts": {
+    "ocr": null,
+    "review": null,
+    "inpaint": null
+  }
+}

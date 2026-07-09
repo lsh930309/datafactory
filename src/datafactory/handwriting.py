@@ -12,9 +12,10 @@ from typing import Any
 
 from PIL import Image, ImageDraw
 
-from .authoring import _generate_values
+from .authoring import _generate_values, _template_from_authoring
 from .fonts import load_font
 from .policy import load_review_policy
+from .render import render_template
 from .registry import RegistryData, load_registry, slugify_title
 from .workbench import WORKBENCH_ROOT, document_dir, render_pdf_pages, update_manifest_artifact
 
@@ -78,9 +79,16 @@ def create_handwriting_print_pack(
 
     schema = _read_json(schema_path)
     faker_profile = _read_json(faker_profile_path)
+    stylesheet_path = authoring_dir / "stylesheet.json"
+    stylesheet = _read_json(stylesheet_path) if stylesheet_path.exists() else {}
     fields = [field for field in schema.get("fields", []) if isinstance(field, dict)]
     semantic_schema = _semantic_schema(schema)
     field_paths = _field_semantic_paths(fields)
+    review_labels = _review_labels_by_id(schema)
+    handwriting_fields = _fields_for_render_mode(fields, review_labels, "handwriting")
+    printed_fields = _fields_for_render_mode(fields, review_labels, "printed")
+    if printed_fields and not stylesheet_path.exists():
+        raise FileNotFoundError(f"stylesheet required for printed handwriting bbox fields: {stylesheet_path}")
     template_path = _resolve_template_image(schema)
     template = Image.open(template_path).convert("RGB")
     bbox = _resolve_qr_bbox(qr_bbox, width=template.width, height=template.height)
@@ -126,6 +134,8 @@ def create_handwriting_print_pack(
             encoding="utf-8",
         )
 
+        printed_template = _render_printed_fields(template_path, schema=schema, stylesheet=stylesheet, fields=printed_fields, values=values)
+
         payload = {
             "project": "datafactory",
             "barcode_format": BARCODE_FORMAT,
@@ -137,7 +147,7 @@ def create_handwriting_print_pack(
         }
         barcode = encode_barcode_image(payload, pixel_size=bbox[2])
         barcode.save(barcode_path)
-        template_with_qr = template.copy()
+        template_with_qr = printed_template.copy()
         template_with_qr.paste(barcode.resize((bbox[2], bbox[3])), (bbox[0], bbox[1]))
         template_with_qr.save(template_png)
         template_with_qr.save(template_pdf, "PDF", resolution=200.0)
@@ -148,7 +158,7 @@ def create_handwriting_print_pack(
             sample_id=sample_id,
             run_id=resolved_run_id,
             values=values,
-            fields=fields,
+            fields=handwriting_fields,
             field_paths=field_paths,
         )
         Image.open(answer_png).convert("RGB").save(answer_pdf, "PDF", resolution=200.0)
@@ -172,6 +182,10 @@ def create_handwriting_print_pack(
                 "bbox": _display_path(bbox_path),
                 "status": "print_ready",
                 "generation_warning_count": len(warnings),
+                "handwriting_field_count": len(handwriting_fields),
+                "printed_field_count": len(printed_fields),
+                "handwriting_fields": [str(field.get("field_id") or "") for field in handwriting_fields],
+                "printed_fields": [str(field.get("field_id") or "") for field in printed_fields],
             }
         )
 
@@ -460,6 +474,40 @@ def _field_semantic_paths(fields: list[dict[str, Any]]) -> dict[str, str]:
         export = field.get("export") if isinstance(field.get("export"), dict) else {}
         paths[field_id] = str(export.get("json_path") or field.get("label") or field_id)
     return paths
+
+
+def _review_labels_by_id(schema: dict[str, Any]) -> dict[str, Any]:
+    review_path = _resolve_path(schema.get("source_review") or "")
+    if not review_path.exists():
+        return {}
+    policy = load_review_policy(review_path)
+    return {label.id: label for label in policy.labels}
+
+
+def _field_review_label(field: dict[str, Any], labels: dict[str, Any]) -> Any | None:
+    return labels.get(str(field.get("bbox_label_id") or field.get("source_detection_id") or ""))
+
+
+def _field_render_mode(field: dict[str, Any], labels: dict[str, Any]) -> str:
+    explicit = str(field.get("render_mode") or "").strip()
+    if explicit in {"handwriting", "printed"}:
+        return explicit
+    label = _field_review_label(field, labels)
+    return str(getattr(label, "render_mode", "handwriting") or "handwriting")
+
+
+def _fields_for_render_mode(fields: list[dict[str, Any]], labels: dict[str, Any], mode: str) -> list[dict[str, Any]]:
+    return [field for field in fields if _field_render_mode(field, labels) == mode]
+
+
+def _render_printed_fields(template_path: Path, *, schema: dict[str, Any], stylesheet: dict[str, Any], fields: list[dict[str, Any]], values: dict[str, str]) -> Image.Image:
+    if not fields:
+        return Image.open(template_path).convert("RGB")
+    filtered_schema = dict(schema)
+    filtered_schema["fields"] = fields
+    template_spec, _warnings = _template_from_authoring(filtered_schema, stylesheet, template_path)
+    image, _annotations = render_template(template_spec, values, render_scale=2)
+    return image.convert("RGB")
 
 
 def _semantic_values_payload(semantic_schema: dict[str, Any], field_paths: dict[str, str], values: dict[str, str]) -> dict[str, Any]:

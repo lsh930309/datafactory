@@ -8,6 +8,12 @@ const STATUS_DESCRIPTIONS = {
   keep: '양식/라벨처럼 합성 대상에서 제외하고 템플릿에 남길 영역',
   ignore: '기존 데이터 호환용 상태입니다. 새 지정은 삭제를 사용하세요.',
 };
+const BBOX_RENDER_MODES = ['handwriting', 'printed'];
+const BBOX_RENDER_MODE_LABELS = { handwriting: '필기체', printed: '인쇄체' };
+const BBOX_RENDER_MODE_DESCRIPTIONS = {
+  handwriting: '답안지에 값만 출력하고 작업자가 빈 템플릿에 손글씨로 작성합니다.',
+  printed: '수기 print pack 템플릿에 기존 스타일시트를 적용해 기계 렌더링합니다.',
+};
 const AUTO_TYPE_LABELS = {
   field_value: '값/개인정보',
   static_label: '고정 라벨',
@@ -281,6 +287,7 @@ function addPolicyLabel(policy, box) {
     rec_confidence: null,
     rec_engine: '',
     rec_updated_at: '',
+    render_mode: 'handwriting',
   };
   return { policy: { ...policy, labels: [...policy.labels, label] }, label };
 }
@@ -292,6 +299,10 @@ function summary(labels = []) {
 function relabel(policy, selectedIds, status) {
   const ids = new Set(selectedIds);
   return { ...policy, labels: policy.labels.map((label) => (ids.has(label.id) ? { ...label, status } : label)) };
+}
+function relabelRenderMode(policy, selectedIds, renderMode) {
+  const ids = new Set(selectedIds);
+  return { ...policy, labels: policy.labels.map((label) => (ids.has(label.id) ? { ...label, render_mode: renderMode } : label)) };
 }
 function staleRecognitionLabels(policy) {
   return (policy?.labels || []).filter((label) => label.ocr_text_stale);
@@ -545,6 +556,7 @@ function App() {
   const stats = useMemo(() => summary(policy?.labels || []), [policy]);
   const staleLabels = useMemo(() => staleRecognitionLabels(policy), [policy]);
   const selected = useMemo(() => new Set(selectedIds), [selectedIds]);
+  const selectedReviewLabels = useMemo(() => (policy?.labels || []).filter((label) => selected.has(label.id)), [policy, selected]);
   const canUseLama = Boolean(health?.lama?.available);
   const isBusy = Boolean(busy);
   const uploadOpen = uploadFiles.length > 0;
@@ -742,7 +754,7 @@ function App() {
     const ids = new Set(selectedIds);
     setEditedPolicy({ ...policy, labels: policy.labels.filter((label) => !ids.has(label.id)) });
     setSelectedIds([]);
-    setMessage(`선택 BBox ${ids.size}개를 삭제했습니다.`);
+    setMessage(`선택 BBox ${ids.size}개를 삭제했습니다. 실행 취소할 수 있습니다.`);
   }
 
   function editTargetGroup(group = activeTargetGroup) {
@@ -870,6 +882,12 @@ function App() {
     if (!policy || !selectedIds.length || !STATUS.includes(status)) return;
     setEditedPolicy(relabel(policy, selectedIds, status));
     setMessage(`선택 BBox ${selectedIds.length}개 → ${STATUS_LABELS[status]}`);
+  }
+
+  function setSelectedBboxRenderMode(renderMode) {
+    if (!selectedIsHandwriting || !policy || !selectedIds.length || !BBOX_RENDER_MODES.includes(renderMode)) return;
+    setEditedPolicy(relabelRenderMode(policy, selectedIds, renderMode));
+    setMessage(`선택 BBox ${selectedIds.length}개 → ${BBOX_RENDER_MODE_LABELS[renderMode]}`);
   }
 
   async function scanReviewLegacyIssues() {
@@ -2565,7 +2583,7 @@ function App() {
         setSelectedBboxStatus(numericStatus);
         return;
       }
-      if ((event.key === 'Delete' || event.key === 'Backspace') && canvasMode === 'review' && bboxEditMode === 'edit' && selectedIds.length && !isBusy && !isTextEditingTarget(event.target)) {
+      if ((event.key === 'Delete' || event.key === 'Backspace') && canvasMode === 'review' && selectedIds.length && !isBusy && !isTextEditingTarget(event.target)) {
         event.preventDefault();
         event.stopPropagation();
         deleteSelectedBboxes();
@@ -3041,7 +3059,7 @@ function App() {
             ) : showInpaintCanvas ? (
               <SamplePreview path={inpaintedPath} version={inpaintVersion} viewportMode={viewportMode} />
             ) : policy ? (
-              <DocumentCanvas policy={policy} setPolicy={setEditedPolicy} selectedIds={selected} setSelectedIds={setSelectedIds} editMode={bboxEditMode} viewportMode={viewportMode} />
+              <DocumentCanvas policy={policy} setPolicy={setEditedPolicy} selectedIds={selected} setSelectedIds={setSelectedIds} editMode={bboxEditMode} viewportMode={viewportMode} showRenderMode={selectedIsHandwriting} />
             ) : selectedSample ? (
               <SamplePreview path={selectedSample} viewportMode={viewportMode} />
             ) : <div className="empty">왼쪽 입고함에서 자동 적재하거나, 수집 필요 문서를 확인하세요.</div>}
@@ -3175,6 +3193,22 @@ function App() {
               {staleLabels.length ? ` · 재확인 ${staleLabels.length}` : ''}
             </div>
             <div className="status-buttons">{STATUS.map((status, index) => <button key={status} className={`status ${status}`} title={`${index + 1}: ${STATUS_DESCRIPTIONS[status]}`} disabled={!policy || selectedIds.length === 0 || isBusy} onClick={() => setSelectedBboxStatus(status)}><b>{index + 1}</b>{STATUS_LABELS[status]}</button>)}</div>
+            {selectedIsHandwriting && (
+              <div className="render-mode-control">
+                <div className="render-mode-title">수기 bbox 처리 방식</div>
+                <div className="render-mode-buttons">
+                  {BBOX_RENDER_MODES.map((mode) => {
+                    const activeCount = selectedReviewLabels.filter((label) => (label.render_mode || 'handwriting') === mode).length;
+                    return (
+                      <button key={mode} className={activeCount && activeCount === selectedReviewLabels.length ? 'active' : ''} title={BBOX_RENDER_MODE_DESCRIPTIONS[mode]} disabled={!policy || selectedIds.length === 0 || isBusy} onClick={() => setSelectedBboxRenderMode(mode)}>
+                        {BBOX_RENDER_MODE_LABELS[mode]}{activeCount ? ` ${activeCount}` : ''}
+                      </button>
+                    );
+                  })}
+                </div>
+                <small>필기체는 답안지 작성 대상, 인쇄체는 수기 템플릿에 스타일 적용 렌더 대상입니다.</small>
+              </div>
+            )}
             <button onClick={() => run(() => runCropRecognition({ mode: 'apply' }))} disabled={!policy || isBusy || (!selectedIds.length && !staleLabels.length)}>
               {busy === 'recognizeCrops'
                 ? '텍스트 재인식 중...'
@@ -3182,7 +3216,7 @@ function App() {
                   ? `선택 ${selectedIds.length}개 텍스트 재인식`
                   : `수정 ${staleLabels.length}개 텍스트 재인식`}
             </button>
-            <button className="danger" onClick={deleteSelectedBboxes} disabled={!policy || bboxEditMode !== 'edit' || selectedIds.length === 0 || isBusy}>선택 BBox 삭제</button>
+            <button className="danger" onClick={deleteSelectedBboxes} disabled={!policy || selectedIds.length === 0 || isBusy}>선택 BBox 삭제</button>
             <div className="button-row compact-buttons">
               <button onClick={() => run(scanReviewLegacyIssues)} disabled={isBusy}>{busy === 'reviewAudit' ? '스캔 중...' : 'ignore 전체 스캔'}</button>
               <button className="danger" onClick={() => run(removeCurrentIgnoreBboxes)} disabled={!policy || stats.byStatus.ignore <= 0 || isBusy}>
@@ -4346,7 +4380,7 @@ function CleanupCanvas({ imagePath, version = 0, image, mask, selectedId, setSel
   );
 }
 
-function DocumentCanvas({ policy, setPolicy, selectedIds, setSelectedIds, editMode, viewportMode }) {
+function DocumentCanvas({ policy, setPolicy, selectedIds, setSelectedIds, editMode, viewportMode, showRenderMode = false }) {
   const svgRef = useRef(null);
   const [drag, setDrag] = useState(null);
   const { width, height } = policy.image;
@@ -4478,14 +4512,14 @@ function DocumentCanvas({ policy, setPolicy, selectedIds, setSelectedIds, editMo
                 stroke={STATUS_COLORS[label.status] || '#888'}
                 strokeWidth={isSelected ? 1.5 : 1}
                 vectorEffect="non-scaling-stroke"
-                className={`${isSelected ? 'bbox selected' : 'bbox'}${editEnabled ? ' editable' : ''}${label.ocr_text_stale ? ' stale' : ''}`}
+                className={`${isSelected ? 'bbox selected' : 'bbox'}${editEnabled ? ' editable' : ''}${label.ocr_text_stale ? ' stale' : ''}${showRenderMode ? ` render-${label.render_mode || 'handwriting'}` : ''}`}
                 onPointerDown={(event) => {
                   if (editEnabled) beginMove(event, label);
                   else selectOnly(event, label);
                 }}
                 onContextMenu={preventContextMenu}
               >
-                <title>{`${label.id} · ${STATUS_LABELS[label.status]} · ${AUTO_TYPE_LABELS[label.auto_type] || label.auto_type}${label.ocr_text_stale ? ' · 텍스트 재확인 필요' : ''} · ${label.text}`}</title>
+                <title>{`${label.id} · ${STATUS_LABELS[label.status]}${showRenderMode ? ` · ${BBOX_RENDER_MODE_LABELS[label.render_mode || 'handwriting'] || label.render_mode || '필기체'}` : ''} · ${AUTO_TYPE_LABELS[label.auto_type] || label.auto_type}${label.ocr_text_stale ? ' · 텍스트 재확인 필요' : ''} · ${label.text}`}</title>
               </rect>
               {isSelected && <circle cx={box.cx} cy={box.cy} r="2" fill={STATUS_COLORS[label.status] || '#888'} opacity="0.72" vectorEffect="non-scaling-stroke" pointerEvents="none" />}
               {label.ocr_text_stale && <circle cx={Math.max(3, box.x + 4)} cy={Math.max(3, box.y + 4)} r="2.2" fill="#ff9800" vectorEffect="non-scaling-stroke" pointerEvents="none" />}

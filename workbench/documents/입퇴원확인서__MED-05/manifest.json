@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-05",
+  "title": "입퇴원확인서",
+  "folder": "workbench/documents/입퇴원확인서__MED-05",
+  "registry": {
+    "docId": "MED-05",
+    "title": "입퇴원확인서",
+    "issuer": "의료기관",
+    "genre": "의무기록",
+    "structure": "정형양식",
+    "modality": "스캔이미지",
+    "sensitivity": "의료정보",
+    "fields": "입원일·퇴원일·진단·병동",
+    "notes": "",
+    "hasPersonalInfo": "포함",
+    "personalInfoDetail": "환자, 입원기간, 병명 가능",
+    "validationRules": "진료일, 의사 서명, 병원 도장, 민감정보 접근권한",
+    "validationRuleCodes": "VAL-002, VAL-008, VAL-009, VAL-015",
+    "writingMethod": "인쇄",
+    "aliases": [
+      "입퇴원확인서"
+    ],
+    "workflowIds": [
+      "HC-01",
+      "INS-02"
+    ],
+    "domains": [
+      "보험 (생명·손해)",
+      "의료·헬스케어"
+    ],
+    "workflowDomains": [
+      "보험 (생명·손해)",
+      "의료·헬스케어"
+    ],
+    "poDomains": [
+      "보험",
+      "의료"
+    ],
+    "isFirstPriority": false,
+    "firstPriorityDomains": [],
+    "firstPriorityScopeCount": 0
+  },
+  "source_seed_folders": [
+    "seed_samples/입퇴원확인서"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/입퇴원확인서__MED-05/samples/original/입퇴원확인서.pdf",
+      "source": "seed_samples/입퇴원확인서/입퇴원확인서.pdf",
+      "format": "pdf",
+      "generation_path": "image-template"
+    },
+    {
+      "path": "workbench/documents/입퇴원확인서__MED-05/samples/original/입퇴원확인서_page_001.jpg",
+      "source": "seed_samples/입퇴원확인서/입퇴원확인서_page_001.jpg",
+      "format": "jpg",
+      "generation_path": "image-template"
+    }
+  ],
+  "sample_kind": "blank_template",
+  "sample_generation_paths": [
+    "image-template"
+  ],
+  "office_render": {
+    "required": false,
+    "backend": "none",
+    "status": "not_required"
+  },
+  "status": "sample_imported",
+  "created_at": "2026-07-08T23:06:06.030046+00:00",
+  "updated_at": "2026-07-09T00:22:50.296279+00:00",
+  "artifacts": {
+    "ocr": "workbench/documents/입퇴원확인서__MED-05/ocr/paddleocr/precise/original_입퇴원확인서_page_001/detections.json",
+    "review": "workbench/documents/입퇴원확인서__MED-05/review/original_입퇴원확인서_page_001/review.json",
+    "inpaint": null,
+    "ocr_detection_job": "workbench/documents/입퇴원확인서__MED-05/ocr/jobs/20260709T000758382901Z/job.json",
+    "authoring_stylesheet_draft": "workbench/documents/입퇴원확인서__MED-05/authoring/review_sidecars/original_입퇴원확인서_page_001/stylesheet_draft_from_review.json",
+    "authoring_anchor_map": "workbench/documents/입퇴원확인서__MED-05/authoring/review_sidecars/original_입퇴원확인서_page_001/anchor_map_draft.json",
+    "authoring_agent_request": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260709T001741992342Z/request.json",
+    "authoring_agent_prompt": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260709T001741992342Z/request.md",
+    "authoring_agent_anchor_map": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260709T001741992342Z/anchor_map_draft.json",
+    "authoring_agent_run": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260709T001742058236Z/job.json",
+    "authoring_agent_prompt_exec": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260709T001742058236Z/codex_exec_prompt.md"
+  }
+}

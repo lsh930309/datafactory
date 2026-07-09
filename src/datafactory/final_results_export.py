@@ -95,9 +95,6 @@ def export_final_results(
         try:
             mode = _resolve_output_mode(item)
             row["outputMode"] = mode
-            if clean and doc_dir.exists():
-                backup_dir = _backup_scope_output_dir(doc_dir, backup_dir=backup_dir, run_id=run_id)
-            doc_dir.mkdir(parents=True, exist_ok=True)
             if mode == "pipeline":
                 if doc_id not in rendered_cache:
                     rendered_cache[doc_id] = _render_pipeline_document(
@@ -108,6 +105,9 @@ def export_final_results(
                         render_scale=render_scale,
                         work_dir=ROOT / ".bin" / "final_results_work" / run_id / f"{_safe_component(doc_id)}_{slugify_title(title)}",
                     )
+                if clean and doc_dir.exists():
+                    backup_dir = _backup_scope_output_dir(doc_dir, backup_dir=backup_dir, run_id=run_id)
+                doc_dir.mkdir(parents=True, exist_ok=True)
                 _copy_pipeline_samples(rendered_cache[doc_id], doc_dir)
                 row["sampleCount"] = count
                 row["outputType"] = "jpg+json+bbox+schema"
@@ -115,12 +115,23 @@ def export_final_results(
             elif mode == "cleanroom":
                 if doc_id not in cleanroom_cache:
                     cleanroom_cache[doc_id] = _resolve_existing_path(item.get("latestCleanroomPdf"))
+                if clean and doc_dir.exists():
+                    backup_dir = _backup_scope_output_dir(doc_dir, backup_dir=backup_dir, run_id=run_id)
+                doc_dir.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(cleanroom_cache[doc_id], doc_dir / "sample_000.pdf")
                 row["sampleCount"] = 1
                 row["outputType"] = "pdf"
                 row["generatedFileCount"] = 1
             elif mode == "handwriting":
-                copied = _copy_handwriting_samples(item, doc_dir, count=count)
+                handwriting_work_dir = ROOT / ".bin" / "final_results_work" / run_id / f"{_safe_component(doc_id)}_{slugify_title(title)}_handwriting"
+                handwriting_work_dir.mkdir(parents=True, exist_ok=True)
+                copied = _copy_handwriting_samples(item, handwriting_work_dir, count=count)
+                if clean and doc_dir.exists():
+                    backup_dir = _backup_scope_output_dir(doc_dir, backup_dir=backup_dir, run_id=run_id)
+                doc_dir.mkdir(parents=True, exist_ok=True)
+                for path in handwriting_work_dir.iterdir():
+                    if path.is_file():
+                        shutil.copy2(path, doc_dir / path.name)
                 row["sampleCount"] = copied["sampleCount"]
                 row["outputType"] = "handwritten-scan+json+bbox+schema"
                 row["generatedFileCount"] = copied["generatedFileCount"]
@@ -281,7 +292,9 @@ def _render_pipeline_document(
     schema = _read_json(schema_path)
     fields = [field for field in schema.get("fields", []) if isinstance(field, dict)]
     semantic_schema = _load_semantic_schema(schema_path, title=title)
-    field_paths = _field_semantic_paths(fields)
+    if not semantic_schema:
+        raise ValueError(f"authoring schema has no primary semantic_schema: {schema_path}")
+    field_paths = _field_semantic_paths(fields, semantic_schema=semantic_schema)
     primary_schema_path = work_dir / "schema.json"
     primary_schema_path.parent.mkdir(parents=True, exist_ok=True)
     primary_schema = _primary_schema_payload(semantic_schema, field_paths)
@@ -295,8 +308,10 @@ def _render_pipeline_document(
         gt_path = work_dir / f"{final_sample_id}.json"
         bbox_path = work_dir / f"{final_sample_id}-bbox.json"
         _write_jpg(sample.image, image_path)
-        values = kv.get("values") if isinstance(kv.get("values"), dict) else {}
-        gt_payload = _semantic_values_payload(semantic_schema, field_paths, values)
+        rendered_semantic_values = kv.get("semantic_values") if isinstance(kv.get("semantic_values"), dict) else None
+        if rendered_semantic_values is None:
+            raise ValueError(f"rendered sample has no semantic_values; final GT cannot be generated without primary schema mapping: {sample.kv}")
+        gt_payload = _merge_schema_values(semantic_schema, rendered_semantic_values)
         gt_path.write_text(json.dumps(gt_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         normalized_bbox = _semantic_bbox_payload(semantic_schema, field_paths, bbox)
         bbox_path.write_text(json.dumps(normalized_bbox, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -354,25 +369,59 @@ def _field_labels(fields: list[dict[str, Any]]) -> dict[str, str]:
     return labels
 
 
-def _field_semantic_paths(fields: list[dict[str, Any]]) -> dict[str, str]:
+def _field_semantic_paths(fields: list[dict[str, Any]], *, semantic_schema: dict[str, Any]) -> dict[str, str]:
     """Return field_id -> pure semantic path used by GT/BBox exports."""
 
-    labels = _field_labels(fields)
-    seen: dict[str, int] = {}
+    schema_leaf_paths = _semantic_leaf_paths(semantic_schema)
+    if not schema_leaf_paths:
+        raise ValueError("primary semantic_schema must contain at least one leaf")
     paths: dict[str, str] = {}
+    path_owner: dict[str, str] = {}
     for field in fields:
         field_id = str(field.get("field_id") or "")
-        export = field.get("export") if isinstance(field.get("export"), dict) else {}
-        json_path = str(export.get("json_path") or "").strip()
-        # Migrated schemas store the pure Korean key in export.json_path.  If an
-        # older schema is encountered, fall back to deterministic Koreanization
-        # rather than leaking English/internal field identifiers to final GT.
-        if json_path and _is_pure_semantic_path(json_path):
-            key = json_path
-        else:
-            key = _dedupe_key(_korean_key_for_field(field_id, labels), seen)
-        paths[field_id] = key
+        if not _field_export_enabled(field):
+            continue
+        semantic_path = _semantic_path_from_field(field)
+        if semantic_path and _is_pure_semantic_path(semantic_path) and semantic_path in schema_leaf_paths:
+            previous = path_owner.get(semantic_path)
+            if previous:
+                raise ValueError(f"duplicate field semantic_path mapping: {previous}, {field_id} -> {semantic_path}")
+            path_owner[semantic_path] = field_id
+            paths[field_id] = semantic_path
+            continue
+        if semantic_path and semantic_path not in schema_leaf_paths:
+            raise ValueError(f"field semantic_path is not a primary schema leaf: {field_id} -> {semantic_path}")
+        raise ValueError(f"final export requires semantic_path for field: {field_id}")
+    unmapped = sorted(schema_leaf_paths - set(path_owner))
+    if unmapped:
+        raise ValueError(f"primary semantic_schema has unmapped leaves: {unmapped[:20]}")
     return paths
+
+
+def _semantic_leaf_paths(value: Any, prefix: str = "") -> set[str]:
+    if isinstance(value, dict):
+        paths: set[str] = set()
+        for key, child in value.items():
+            path = f"{prefix}/{key}" if prefix else str(key)
+            paths.update(_semantic_leaf_paths(child, path))
+        return paths
+    return {prefix} if prefix else set()
+
+
+def _field_export_enabled(field: dict[str, Any]) -> bool:
+    export = field.get("export") if isinstance(field.get("export"), dict) else {}
+    value = export.get("include") if "include" in export else True
+    return str(value).strip().lower() not in {"false", "0", "no", "off", "skip", "hidden"}
+
+
+def _semantic_path_from_field(field: dict[str, Any]) -> str:
+    raw_path = field.get("semantic_path") or field.get("key_path")
+    if isinstance(raw_path, list):
+        return "/".join(str(part).strip() for part in raw_path if str(part).strip())
+    if isinstance(raw_path, str) and raw_path.strip():
+        value = raw_path.strip()
+        return value.replace(".", "/") if "/" not in value and "." in value else value
+    return ""
 
 
 def _is_pure_semantic_path(path: str) -> bool:
@@ -424,20 +473,31 @@ def _strip_schema_metadata(payload: dict[str, Any], *, title: str = "") -> dict[
     return cleaned
 
 
-def _semantic_values_payload(semantic_schema: dict[str, Any], field_paths: dict[str, str], values: dict[str, Any]) -> dict[str, Any]:
+def _merge_schema_values(semantic_schema: dict[str, Any], semantic_values: dict[str, Any]) -> dict[str, Any]:
     payload = _schema_value_template(semantic_schema)
-    for field_id, path in field_paths.items():
-        if field_id not in values:
-            continue
-        _set_semantic_value(payload, path, str(values.get(field_id, "")))
+    allow_extra = not bool(semantic_schema)
+
+    def merge(target: dict[str, Any], source: dict[str, Any]) -> None:
+        for key, value in source.items():
+            if isinstance(value, dict):
+                child = target.get(key)
+                if not isinstance(child, dict) and (key in target or allow_extra):
+                    child = {}
+                    target[key] = child
+                if not isinstance(child, dict):
+                    continue
+                merge(child, value)
+            elif key in target or allow_extra:
+                target[key] = value
+
+    merge(payload, semantic_values)
     return payload
 
 
 def _primary_schema_payload(semantic_schema: dict[str, Any], field_paths: dict[str, str]) -> dict[str, Any]:
-    payload = _schema_value_template(semantic_schema)
-    for path in field_paths.values():
-        _set_semantic_value(payload, path, "")
-    return payload
+    if not semantic_schema:
+        raise ValueError("primary semantic_schema is required for final export")
+    return _schema_value_template(semantic_schema)
 
 
 def _semantic_bbox_payload(
@@ -460,6 +520,12 @@ def _semantic_bbox_payload(
         field_id = str(annotation.get("field") or "")
         path = field_paths.get(field_id)
         if not path:
+            continue
+        # Raw render annotations may still include fields whose resolved value is
+        # empty, especially unchecked checkbox/vector-symbol fields.  Final GT
+        # bbox must represent rendered value glyphs only; do not emit a location
+        # for an empty target.
+        if "text" in annotation and not str(annotation.get("text") or "").strip():
             continue
         bbox = annotation.get("bbox") if isinstance(annotation.get("bbox"), list) else [0, 0, 1, 1]
         x, y, w, h = [float(v) for v in bbox[:4]]
@@ -496,7 +562,8 @@ def _set_semantic_value(payload: dict[str, Any], path: str, value: Any) -> None:
     if path in payload:
         payload[path] = value
         return
-    parts = [part for part in str(path).split(".") if part]
+    separator = "/" if "/" in str(path) else "."
+    parts = [part for part in str(path).split(separator) if part]
     cursor: Any = payload
     for part in parts[:-1]:
         if not isinstance(cursor, dict):

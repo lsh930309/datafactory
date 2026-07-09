@@ -115,7 +115,7 @@ def list_first_priority_assessments(registry: RegistryData | None = None, root: 
     saved_entries = store.get("entries", {}) if isinstance(store.get("entries"), dict) else {}
     work_by_doc = {item["docId"]: item for item in list_work_items(registry=registry, root=root)}
     rows: list[dict[str, Any]] = []
-    for index, (domain, doc_id) in enumerate(registry.first_priority_scope_entries, start=1):
+    for index, (domain, doc_id, scope_kind) in enumerate(_assessment_scope_entries(registry), start=1):
         doc = registry.documents.get(doc_id)
         if doc is None:
             continue
@@ -138,6 +138,8 @@ def list_first_priority_assessments(registry: RegistryData | None = None, root: 
             "hasInpaint": bool(work.get("hasInpaint")),
             "hasAuthoring": bool(work.get("hasAuthoring")),
             "documentDir": str(work.get("documentDir") or ""),
+            "scopeKind": scope_kind,
+            "isFirstPriority": scope_kind == "first_priority",
         }
         rows.append(row)
     return {
@@ -183,11 +185,41 @@ def _entry_from_saved(domain: str, doc_id: str, saved: Any) -> AssessmentEntry:
     )
 
 
+def _assessment_scope_entries(registry: RegistryData) -> list[tuple[str, str, str]]:
+    entries: list[tuple[str, str, str]] = []
+    first_priority_doc_ids: set[str] = set()
+    seen: set[tuple[str, str]] = set()
+    for domain, doc_id in registry.first_priority_scope_entries:
+        if doc_id not in registry.documents:
+            continue
+        key = (domain, doc_id)
+        if key in seen:
+            continue
+        seen.add(key)
+        first_priority_doc_ids.add(doc_id)
+        entries.append((domain, doc_id, "first_priority"))
+    for doc in sorted(registry.documents.values(), key=lambda item: (item.title, item.doc_id)):
+        if doc.doc_id in first_priority_doc_ids:
+            continue
+        domain = _default_assessment_domain(doc)
+        key = (domain, doc.doc_id)
+        if key in seen:
+            continue
+        seen.add(key)
+        entries.append((domain, doc.doc_id, "all_documents"))
+    return entries
+
+
+def _default_assessment_domain(doc: Any) -> str:
+    domains = list(getattr(doc, "po_domains", ()) or ()) or list(getattr(doc, "first_priority_domains", ()) or ()) or list(getattr(doc, "domains", ()) or ())
+    return str(domains[0] if domains else "미분류")
+
+
 def _validate_scope(domain: str, doc_id: str, registry: RegistryData) -> None:
     if doc_id not in registry.documents:
         raise ValueError(f"unknown docId: {doc_id}")
-    if (domain, doc_id) not in set(registry.first_priority_scope_entries):
-        raise ValueError(f"not a first-priority scope entry: {domain}/{doc_id}")
+    if not str(domain or "").strip():
+        raise ValueError("domain is required")
 
 
 def _summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -218,7 +250,7 @@ def _write_xlsx(path: Path, rows: list[dict[str, Any]], summary: dict[str, Any])
     shared_string_index: dict[str, int] = {}
     sheet_xml = _sheet_xml(matrix, shared_strings, shared_string_index)
     workbook_xml = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><fileVersion appName="xl"/><workbookPr defaultThemeVersion="166925"/><bookViews><workbookView xWindow="0" yWindow="0" windowWidth="28800" windowHeight="17600"/></bookViews><sheets><sheet name="1차목표_판정" sheetId="1" r:id="rId1"/></sheets><calcPr calcId="191029"/></workbook>"""
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><fileVersion appName="xl"/><workbookPr defaultThemeVersion="166925"/><bookViews><workbookView xWindow="0" yWindow="0" windowWidth="28800" windowHeight="17600"/></bookViews><sheets><sheet name="문서판정" sheetId="1" r:id="rId1"/></sheets><calcPr calcId="191029"/></workbook>"""
     rels_xml = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>"""
     workbook_rels_xml = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -238,7 +270,7 @@ def _write_xlsx(path: Path, rows: list[dict[str, Any]], summary: dict[str, Any])
 
 def _xlsx_matrix(rows: list[dict[str, Any]], summary: dict[str, Any]) -> list[list[dict[str, Any]]]:
     cells: list[list[dict[str, Any]]] = []
-    cells.append([_cell("1차 목표 문서 생성 가능성 판정표", 1)])
+    cells.append([_cell("전체 문서 생성 가능성 판정표", 1)])
     cells.append([_cell(f"생성: {summary['generatedAt']} · 총 {summary['scopeEntryCount']}건 / 고유 {summary['uniqueDocumentCount']}종", 2)])
     cells.append([])
     cells.append([_cell("작업 가능", 3), _cell(summary["byFeasibility"].get("possible", 0), 10), _cell("작업 불가", 3), _cell(summary["byFeasibility"].get("impossible", 0), 10), _cell("미정", 3), _cell(summary["byFeasibility"].get("unknown", 0), 10), _cell("불가 사유 누락", 3), _cell(summary.get("missingRequiredReason", 0), 10)])
@@ -363,12 +395,12 @@ def _styles_xml() -> str:
 def _core_props_xml() -> str:
     now = _ooxml_now()
     return f"""<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>1차 목표 문서 생성 가능성 판정표</dc:title><dc:creator>DataFactory</dc:creator><cp:lastModifiedBy>DataFactory</cp:lastModifiedBy><dcterms:created xsi:type="dcterms:W3CDTF">{now}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">{now}</dcterms:modified></cp:coreProperties>"""
+<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>전체 문서 생성 가능성 판정표</dc:title><dc:creator>DataFactory</dc:creator><cp:lastModifiedBy>DataFactory</cp:lastModifiedBy><dcterms:created xsi:type="dcterms:W3CDTF">{now}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">{now}</dcterms:modified></cp:coreProperties>"""
 
 
 def _app_props_xml() -> str:
     return """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>DataFactory</Application><DocSecurity>0</DocSecurity><ScaleCrop>false</ScaleCrop><HeadingPairs><vt:vector size="2" baseType="variant"><vt:variant><vt:lpstr>Worksheets</vt:lpstr></vt:variant><vt:variant><vt:i4>1</vt:i4></vt:variant></vt:vector></HeadingPairs><TitlesOfParts><vt:vector size="1" baseType="lpstr"><vt:lpstr>1차목표_판정</vt:lpstr></vt:vector></TitlesOfParts><Company></Company><LinksUpToDate>false</LinksUpToDate><SharedDoc>false</SharedDoc><HyperlinksChanged>false</HyperlinksChanged><AppVersion>16.0300</AppVersion></Properties>"""
+<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes"><Application>DataFactory</Application><DocSecurity>0</DocSecurity><ScaleCrop>false</ScaleCrop><HeadingPairs><vt:vector size="2" baseType="variant"><vt:variant><vt:lpstr>Worksheets</vt:lpstr></vt:variant><vt:variant><vt:i4>1</vt:i4></vt:variant></vt:vector></HeadingPairs><TitlesOfParts><vt:vector size="1" baseType="lpstr"><vt:lpstr>문서판정</vt:lpstr></vt:vector></TitlesOfParts><Company></Company><LinksUpToDate>false</LinksUpToDate><SharedDoc>false</SharedDoc><HyperlinksChanged>false</HyperlinksChanged><AppVersion>16.0300</AppVersion></Properties>"""
 
 
 def _col_name(index: int) -> str:

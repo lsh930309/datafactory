@@ -475,6 +475,19 @@ def test_first_priority_assessment_save_requires_reason_for_impossible(tmp_path:
     assert row["feasibility"] == "impossible"
     assert payload["summary"]["byFeasibility"]["impossible"] == 1
 
+    payload = save_assessment_entry(
+        domain="금융",
+        doc_id="FIN-10",
+        document_type="structured_form",
+        feasibility="possible",
+        comment="1차 범위 외 문서도 생성 가능성 판정 가능",
+        registry=registry,
+        root=workbench_root,
+    )
+    non_priority_row = next(item for item in payload["rows"] if item["domain"] == "금융" and item["docId"] == "FIN-10")
+    assert non_priority_row["scopeKind"] == "all_documents"
+    assert non_priority_row["feasibility"] == "possible"
+
 
 def test_first_priority_assessment_exports_single_sheet_xlsx(tmp_path: Path) -> None:
     registry = load_registry()
@@ -490,8 +503,10 @@ def test_first_priority_assessment_exports_single_sheet_xlsx(tmp_path: Path) -> 
     )
 
     payload = list_first_priority_assessments(registry=registry, root=workbench_root)
-    assert payload["summary"]["scopeEntryCount"] == 30
-    assert payload["summary"]["uniqueDocumentCount"] == 28
+    assert payload["summary"]["scopeEntryCount"] == registry.to_dict()["summary"]["documentCount"] + 2
+    assert payload["summary"]["uniqueDocumentCount"] == registry.to_dict()["summary"]["documentCount"]
+    assert sum(1 for row in payload["rows"] if row["scopeKind"] == "first_priority") == 30
+    assert any(row["scopeKind"] == "all_documents" for row in payload["rows"])
 
     result = export_first_priority_assessment_xlsx(out_dir=tmp_path / "outputs", registry=registry, root=workbench_root)
     workbook_path = Path(result["path"])
@@ -508,7 +523,7 @@ def test_first_priority_assessment_exports_single_sheet_xlsx(tmp_path: Path) -> 
         sheet = archive.read("xl/worksheets/sheet1.xml").decode("utf-8")
         shared_strings = archive.read("xl/sharedStrings.xml").decode("utf-8")
         styles = archive.read("xl/styles.xml").decode("utf-8")
-    assert "1차 목표 문서 생성 가능성 판정표" in shared_strings
+        assert "전체 문서 생성 가능성 판정표" in shared_strings
     assert "TRD-07" in shared_strings
     assert sheet.find("<autoFilter") < sheet.find("<mergeCells")
     assert 't="inlineStr"' not in sheet

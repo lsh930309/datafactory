@@ -35,6 +35,7 @@ SUPPORTED_VALUE_TYPES = {
     "money.krw",
     "company.name_ko",
     "company.email",
+    "medical.institution_ko",
     "address.ko",
     "free_text.short",
 }
@@ -50,6 +51,7 @@ FAKER_RULE_EXAMPLES = [
     "money.krw",
     "company.name_ko",
     "company.email",
+    "medical.institution_ko",
     "address.ko",
     "free_text.short",
     "choice:남|여|기타",
@@ -70,6 +72,7 @@ DEFAULT_VALUE_POOLS = {
 DEFAULT_FAKER_PROFILE_TYPES = [
     {"id": "person", "label": "개인 정보", "rules": ["person.name_ko", "person.phone_kr", "person.rrn", "person.email", "address.ko"]},
     {"id": "company", "label": "기업 정보", "rules": ["company.name_ko", "company.email", "business_reg_no", "address.ko"]},
+    {"id": "medical", "label": "의료기관", "rules": ["medical.institution_ko", "address.ko", "person.phone_kr"]},
     {"id": "finance", "label": "금융/금액", "rules": ["money.krw", "bank", "account"]},
     {"id": "date", "label": "날짜", "rules": ["date.kr", "date.year", "date.month", "date.day"]},
     {"id": "choice", "label": "선택/체크", "rules": ["choice:...", "bool.checkbox", "pool:..."]},
@@ -939,11 +942,15 @@ def _normalize_render_policy(value: Any) -> dict[str, str]:
     if checkbox_style not in {"v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot"}:
         checkbox_style = "v_mark"
     fit_value = {"shrink": "shrink_to_fit", "clip": "clip", "allow": "allow_overflow", "wrap": "wrap"}[overflow]
-    return {"align": align, "valign": valign, "fit": fit_value, "overflow": overflow, "checkbox_style": checkbox_style}
+    render_value = str(raw.get("render") if "render" in raw else raw.get("visible") if "visible" in raw else "true").strip().lower()
+    render = "false" if render_value in {"false", "0", "no", "off", "skip", "hidden"} else "true"
+    return {"align": align, "valign": valign, "fit": fit_value, "overflow": overflow, "checkbox_style": checkbox_style, "render": render}
 
 
 def _normalize_export(value: Any, field_id: str, label: str, used_keys: dict[str, int]) -> dict[str, str]:
     raw = value if isinstance(value, dict) else {}
+    include_value = str(raw.get("include") if "include" in raw else "true").strip().lower()
+    include = "false" if include_value in {"false", "0", "no", "off", "skip", "hidden"} else "true"
     raw_key = str(raw.get("json_path") or raw.get("csv_column") or "").strip()
     is_default_key = raw_key == field_id or bool(re.fullmatch(r"field_\d+", raw_key))
     explicit_key = "" if is_default_key else raw_key
@@ -955,7 +962,22 @@ def _normalize_export(value: Any, field_id: str, label: str, used_keys: dict[str
     csv_column = raw_csv if explicit_key and raw_csv and not re.fullmatch(r"field_\d+", raw_csv) else key
     if count > 1 and csv_column == key_base:
         csv_column = key
-    return {"json_path": key, "csv_column": csv_column}
+    normalized = {"json_path": key, "csv_column": csv_column}
+    if include == "false":
+        normalized["include"] = "false"
+    return normalized
+
+
+def _field_render_enabled(field: dict[str, Any]) -> bool:
+    policy = field.get("render_policy") if isinstance(field.get("render_policy"), dict) else {}
+    value = str(policy.get("render") if "render" in policy else policy.get("visible") if "visible" in policy else "true").strip().lower()
+    return value not in {"false", "0", "no", "off", "skip", "hidden"}
+
+
+def _field_export_enabled(field: dict[str, Any]) -> bool:
+    export = field.get("export") if isinstance(field.get("export"), dict) else {}
+    value = str(export.get("include") if "include" in export else "true").strip().lower()
+    return value not in {"false", "0", "no", "off", "skip", "hidden"}
 
 
 def _export_key_from_label(label: str, fallback: str) -> str:
@@ -1090,6 +1112,8 @@ def _template_from_authoring(schema: dict[str, Any], stylesheet: dict[str, Any],
     warnings: list[dict[str, Any]] = []
     for raw in schema.get("fields", []):
         field_id = str(raw["field_id"])
+        if not _field_render_enabled(raw):
+            continue
         label_id = str(raw.get("bbox_label_id") or raw.get("source_detection_id") or "")
         label = label_by_id.get(label_id)
         if label is not None:
@@ -1257,6 +1281,7 @@ def _generate_authoring_value(
         "date.kr": "date",
         "money.krw": "amount",
         "company.name_ko": "company",
+        "medical.institution_ko": "medical_institution",
         "address.ko": "address",
     }
     if normalized_lower in mapping:
@@ -1496,6 +1521,49 @@ def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[st
                     start_date = end_date
             _assign_date_group(values, start_group, start_date)
             _assign_date_group(values, end_group, end_date)
+        elif ctype == "date_not_before":
+            source = constraint.get("source") or constraint.get("after")
+            target = constraint.get("target") or constraint.get("date")
+            source_date = _constraint_date_from_ref(values, source)
+            if source_date is None:
+                warnings.append({"type": "invalid_generation_constraint", "message": "date_not_before constraint could not parse source date", "constraint": constraint})
+                continue
+            min_days = _constraint_int(constraint.get("min_days"), default=0, minimum=0, maximum=3650)
+            max_days = _constraint_int(constraint.get("max_days"), default=90, minimum=min_days, maximum=3650)
+            target_date = source_date + timedelta(days=rng.randint(min_days, max_days))
+            max_year = _constraint_int(constraint.get("max_year"), default=2027, minimum=1900, maximum=2100)
+            if target_date.year > max_year:
+                target_date = date(max_year, 12, 28)
+                if target_date < source_date:
+                    warnings.append({"type": "invalid_generation_constraint", "message": "date_not_before source is later than max_year allows", "constraint": constraint})
+                    continue
+            if isinstance(target, dict) and _date_group_complete(target):
+                _assign_date_group(values, target, target_date)
+            else:
+                target_field = str(target or "").strip()
+                if not target_field:
+                    warnings.append({"type": "invalid_generation_constraint", "message": "date_not_before constraint requires target field or target date group", "constraint": constraint})
+                    continue
+                values[target_field] = target_date.isoformat()
+        elif ctype == "age_from_rrn":
+            rrn_field = str(constraint.get("rrn") or "").strip()
+            age_field = str(constraint.get("age") or "").strip()
+            issue_group = constraint.get("issue")
+            if not rrn_field or not age_field or not isinstance(issue_group, dict) or not _date_group_complete(issue_group):
+                warnings.append({"type": "invalid_generation_constraint", "message": "age_from_rrn constraint requires rrn, age, and complete issue year/month/day field ids", "constraint": constraint})
+                continue
+            if rrn_field not in values:
+                warnings.append({"type": "invalid_generation_constraint", "message": "age_from_rrn constraint references missing rrn value", "constraint": constraint})
+                continue
+            issue_date = _date_from_group_values(values, issue_group)
+            if issue_date is None:
+                warnings.append({"type": "invalid_generation_constraint", "message": "age_from_rrn constraint could not parse issue date group", "constraint": constraint})
+                continue
+            age = _age_from_rrn_at_issue(values[rrn_field], issue_date)
+            if age is None:
+                warnings.append({"type": "invalid_generation_constraint", "message": "age_from_rrn constraint could not parse rrn birth date", "constraint": constraint})
+                continue
+            values[age_field] = str(age)
         elif ctype == "sum":
             sources = _constraint_field_list(constraint.get("sources"))
             target = str(constraint.get("target") or "").strip()
@@ -1509,6 +1577,68 @@ def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[st
             total = sum(_parse_numeric_value(values.get(field_id, "")) for field_id in sources)
             values[target] = _format_constraint_number(total, str(constraint.get("format") or "money.krw"))
     return warnings
+
+
+def _date_from_group_values(values: dict[str, str], group: dict[str, Any]) -> date | None:
+    try:
+        year = int(re.sub(r"\D", "", values.get(str(group["year"]).strip(), "")))
+        month = int(re.sub(r"\D", "", values.get(str(group["month"]).strip(), "")))
+        day = int(re.sub(r"\D", "", values.get(str(group["day"]).strip(), "")))
+        return date(year, month, day)
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def _constraint_date_from_ref(values: dict[str, str], ref: Any) -> date | None:
+    if isinstance(ref, dict):
+        if not _date_group_complete(ref):
+            return None
+        return _date_from_group_values(values, ref)
+    field_id = str(ref or "").strip()
+    if not field_id:
+        return None
+    return _parse_constraint_date_value(values.get(field_id, ""))
+
+
+def _parse_constraint_date_value(value: str) -> date | None:
+    text = str(value or "").strip()
+    match = re.search(r"(\d{4})\D?(\d{1,2})\D?(\d{1,2})", text)
+    if not match:
+        return None
+    year, month, day = (int(part) for part in match.groups())
+    try:
+        return date(year, month, day)
+    except ValueError:
+        return None
+
+
+def _age_from_rrn_at_issue(rrn: str, issue_date: date) -> int | None:
+    match = re.search(r"(\d{2})(\d{2})(\d{2})\D*([0-9])", str(rrn or ""))
+    if not match:
+        return None
+    yy, mm, dd, century_digit = match.groups()
+    year_2 = int(yy)
+    century = {
+        "1": 1900,
+        "2": 1900,
+        "5": 1900,
+        "6": 1900,
+        "3": 2000,
+        "4": 2000,
+        "7": 2000,
+        "8": 2000,
+        "9": 1800,
+        "0": 1800,
+    }.get(century_digit)
+    if century is None:
+        century = 2000 if year_2 <= issue_date.year % 100 else 1900
+    try:
+        birth = date(century + year_2, int(mm), int(dd))
+    except ValueError:
+        return None
+    if birth > issue_date:
+        return None
+    return issue_date.year - birth.year - ((issue_date.month, issue_date.day) < (birth.month, birth.day))
 
 
 def _constraint_field_list(value: Any) -> list[str]:
@@ -1625,7 +1755,9 @@ def _validate_render(schema: dict[str, Any], annotations: list[RenderedAnnotatio
             )
         if annotation.field not in fields:
             warnings.append({"field_id": annotation.field, "type": "unknown_field", "message": "annotation has no schema field"})
-    for field_id in fields:
+    for field_id, field in fields.items():
+        if isinstance(field, dict) and not _field_render_enabled(field):
+            continue
         if field_id not in annotated_fields:
             warnings.append({"field_id": field_id, "type": "not_rendered", "message": "schema field was not rendered, usually because its reviewed bbox label is missing or disabled"})
     return {"ok": not warnings, "warning_count": len(warnings), "warnings": warnings}
@@ -1649,6 +1781,8 @@ def _export_values(schema: dict[str, Any], values: dict[str, str]) -> dict[str, 
     exported: dict[str, str] = {}
     for field in schema.get("fields", []):
         field_id = str(field.get("field_id") or "")
+        if isinstance(field, dict) and not _field_export_enabled(field):
+            continue
         export = field.get("export") if isinstance(field.get("export"), dict) else {}
         key = str(export.get("json_path") or export.get("csv_column") or field_id)
         if field_id in values:
@@ -1661,6 +1795,8 @@ def _export_values_nested(schema: dict[str, Any], values: dict[str, str]) -> dic
     used_flat: dict[str, int] = {}
     for field in schema.get("fields", []):
         if not isinstance(field, dict):
+            continue
+        if not _field_export_enabled(field):
             continue
         field_id = str(field.get("field_id") or "")
         if field_id not in values:
@@ -1854,6 +1990,8 @@ def semantic_schema_to_authoring_schema(
         semantic_path = _raw_semantic_path(raw, label)
         json_path = "/".join(semantic_path) if semantic_path else label
         anchor = anchors.get(anchor_id, {})
+        raw_export = raw.get("export") if isinstance(raw.get("export"), dict) else {}
+        export_include = raw_export.get("include") if "include" in raw_export else raw.get("export_include")
         output_fields.append(
             {
                 "field_id": field_id,
@@ -1866,7 +2004,11 @@ def semantic_schema_to_authoring_schema(
                 "generator": str(raw.get("faker_rule") or raw.get("generator") or raw.get("value_type") or "free_text.short"),
                 "style_class": str(raw.get("style_class") or DEFAULT_STYLE_CLASS),
                 "render_policy": _normalize_render_policy(raw.get("render_policy")),
-                "export": {"json_path": json_path, "csv_column": str(raw.get("csv_column") or json_path)},
+                "export": {
+                    "json_path": json_path,
+                    "csv_column": str(raw.get("csv_column") or raw_export.get("csv_column") or json_path),
+                    **({"include": export_include} if export_include is not None else {}),
+                },
                 "required": bool(raw.get("required", True)),
                 "notes": str(raw.get("notes") or ""),
             }

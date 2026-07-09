@@ -21,6 +21,7 @@ from datafactory.authoring import (
     update_authoring_source_inpainted,
     _generate_values,
 )
+from datafactory.fake_data import generate_value
 from datafactory.fonts import list_font_faces, load_font, resolve_font_path
 from datafactory.models import BBox, FieldSpec, TemplateSpec
 from datafactory.policy import load_review_policy
@@ -895,6 +896,122 @@ def test_render_authoring_preview_applies_relational_constraints(tmp_path: Path)
         end = datetime(int(values["end_year"]), int(values["end_month"]), int(values["end_day"]))
         assert start <= end
         assert (end - start).days <= 30
+
+
+def test_render_authoring_preview_supports_semantic_hidden_and_render_only_fields(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile)
+    base_field = dict(loaded.payload["schema"]["fields"][0])
+    fields = [
+        dict(base_field, field_id="admission_date", label="입원일", semantic_path=["입퇴원", "입원일"], generator="literal:2024-03-12", render_policy={"render": "false"}),
+        dict(base_field, field_id="discharge_date", label="퇴원일", semantic_path=["입퇴원", "퇴원일"], generator="literal:2024-03-18", render_policy={"render": "false"}),
+        dict(
+            base_field,
+            field_id="admission_discharge_period",
+            label="입원·퇴원연월일",
+            semantic_path=["입퇴원", "표시문구"],
+            generator="pool:period_labels",
+            export={"json_path": "입퇴원/표시문구", "include": False},
+        ),
+    ]
+    schema = loaded.payload["schema"]
+    schema["semantic_schema"] = {"입퇴원": {"입원일": "", "퇴원일": ""}}
+    schema["fields"] = fields
+    faker_profile = loaded.payload["faker_profile"]
+    faker_profile["field_generators"] = {
+        "admission_date": "literal:2024-03-12",
+        "discharge_date": "literal:2024-03-18",
+        "admission_discharge_period": "pool:period_labels",
+    }
+    faker_profile["data_pools"] = {"periods": [{"admission": "2024-03-12", "discharge": "2024-03-18", "label": "입원: 2024-03-12, 퇴원: 2024-03-18"}], "period_labels": ["입원: 2024-03-12, 퇴원: 2024-03-18"]}
+    faker_profile["constraints"] = [{"type": "pick_record", "pool": "periods", "targets": {"admission_date": "admission", "discharge_date": "discharge", "admission_discharge_period": "label"}}]
+    save_authoring_bundle(
+        draft.schema,
+        draft.stylesheet,
+        draft.faker_profile,
+        schema=schema,
+        stylesheet=loaded.payload["stylesheet"],
+        faker_profile=faker_profile,
+    )
+
+    result = render_authoring_preview(draft.schema, draft.stylesheet, draft.faker_profile, out_dir=tmp_path / "authoring" / "semantic_hidden", seed=7)
+    kv = json.loads(result.kv.read_text(encoding="utf-8"))
+    bbox = json.loads(result.bbox.read_text(encoding="utf-8"))
+    validation = json.loads(result.validation_report.read_text(encoding="utf-8"))
+
+    assert kv["semantic_values"] == {"입퇴원": {"입원일": "2024-03-12", "퇴원일": "2024-03-18"}}
+    assert "입퇴원/표시문구" not in kv["flat_values"]
+    assert [annotation["field"] for annotation in bbox["annotations"]] == ["admission_discharge_period"]
+    assert validation["warning_count"] == 0
+
+
+def test_age_from_rrn_constraint_uses_issue_date() -> None:
+    schema = {
+        "fields": [
+            {"field_id": "patient_rrn", "label": "주민등록번호", "generator": "literal:900715-1234567", "value_type": "person.rrn"},
+            {"field_id": "patient_age", "label": "나이", "generator": "pattern:##", "value_type": "free_text.short"},
+            {"field_id": "issue_year", "label": "발급일자 년", "generator": "literal:2024", "value_type": "date.year"},
+            {"field_id": "issue_month", "label": "발급일자 월", "generator": "literal:07", "value_type": "date.month"},
+            {"field_id": "issue_day", "label": "발급일자 일", "generator": "literal:14", "value_type": "date.day"},
+        ]
+    }
+    faker_profile = {
+        "field_generators": {field["field_id"]: field["generator"] for field in schema["fields"]},
+        "constraints": [
+            {
+                "type": "age_from_rrn",
+                "rrn": "patient_rrn",
+                "age": "patient_age",
+                "issue": {"year": "issue_year", "month": "issue_month", "day": "issue_day"},
+            }
+        ],
+    }
+
+    values, warnings = _generate_values(schema, faker_profile, random.Random(1))
+
+    assert warnings == []
+    assert values["patient_age"] == "33"
+
+
+def test_date_not_before_constraint_updates_target_group_after_source_date() -> None:
+    schema = {
+        "fields": [
+            {"field_id": "discharge_date", "label": "퇴원일", "generator": "literal:2024-03-18", "value_type": "date.kr"},
+            {"field_id": "issue_year", "label": "발급일자 년", "generator": "literal:2024", "value_type": "date.year"},
+            {"field_id": "issue_month", "label": "발급일자 월", "generator": "literal:01", "value_type": "date.month"},
+            {"field_id": "issue_day", "label": "발급일자 일", "generator": "literal:01", "value_type": "date.day"},
+        ]
+    }
+    faker_profile = {
+        "field_generators": {field["field_id"]: field["generator"] for field in schema["fields"]},
+        "constraints": [
+            {
+                "type": "date_not_before",
+                "source": "discharge_date",
+                "target": {"year": "issue_year", "month": "issue_month", "day": "issue_day"},
+                "min_days": 0,
+                "max_days": 0,
+            }
+        ],
+    }
+
+    values, warnings = _generate_values(schema, faker_profile, random.Random(1))
+
+    assert warnings == []
+    assert (values["issue_year"], values["issue_month"], values["issue_day"]) == ("2024", "03", "18")
+
+
+def test_common_faker_address_and_medical_institution_are_realistic() -> None:
+    address = generate_value("address", random.Random(3))
+    hospital = generate_value("medical_institution", random.Random(3))
+    rrn = generate_value("rrn", random.Random(3))
+
+    assert "호" in address
+    assert "(" not in address and ")" not in address
+    assert any(hospital.endswith(suffix) for suffix in ("병원", "의원", "요양병원", "메디컬센터", "종합병원"))
+    assert "-" in rrn
+    assert rrn.split("-", 1)[1][0] in {"1", "2", "3", "4"}
 
 
 def test_render_authoring_batch_writes_multiple_samples_and_summary(tmp_path: Path) -> None:

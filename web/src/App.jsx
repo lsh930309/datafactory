@@ -472,7 +472,6 @@ function App() {
   const [targetGroupDraft, setTargetGroupDraft] = useState({ id: '', label: '', description: '', scopeEntries: [] });
   const [targetGroupDocId, setTargetGroupDocId] = useState('');
   const [targetGroupEditing, setTargetGroupEditing] = useState(false);
-  const [targetGroupListExpanded, setTargetGroupListExpanded] = useState(false);
   const [policy, setPolicy] = useState(null);
   const [reviewPath, setReviewPath] = useState('');
   const [selectedIds, setSelectedIds] = useState([]);
@@ -641,7 +640,6 @@ function App() {
     }
     return entries;
   }, [activeTargetGroup, targetGroupItems]);
-  const visibleTargetGroupItems = targetGroupListExpanded ? targetGroupItems : targetGroupItems.slice(0, 3);
   const selectedManualCleanupItems = useMemo(() => (
     (manualCleanupAudit?.items || []).filter((item) => item.docId === selectedDocId)
   ), [manualCleanupAudit, selectedDocId]);
@@ -777,7 +775,6 @@ function App() {
     });
     setTargetGroupDocId(selectedDocId || documents[0]?.docId || '');
     setTargetGroupEditing(true);
-    setTargetGroupListExpanded(false);
   }
 
   function targetGroupScopeDomainsForItem(item) {
@@ -820,7 +817,6 @@ function App() {
     });
     setTargetGroupDocId(scopeEntries[0]?.docId || selectedDocId || documents[0]?.docId || '');
     setTargetGroupEditing(true);
-    setTargetGroupListExpanded(false);
     setMessage(`필터 결과 ${scopeEntries.length}개 scope를 목표 그룹 초안으로 불러왔습니다. 그룹명을 확인한 뒤 저장하세요.`);
   }
 
@@ -870,7 +866,6 @@ function App() {
       setRegistry((current) => ({ ...(current || {}), targetGroups: payload.groups }));
       setActiveTargetGroupId(payload.groups[0]?.id || '');
       setTargetGroupEditing(false);
-      setTargetGroupListExpanded(false);
       setMessage(activeTargetGroup.protected ? '기본 목표 그룹을 숨김 처리했습니다.' : '목표 그룹을 삭제했습니다.');
       await refreshAll({ preserveSelection: true });
     } finally {
@@ -2870,8 +2865,8 @@ function App() {
                 </div>
               )}
             </div>
-            <div className="first-priority-list">
-              {targetGroupItems.length === 0 ? <p className="muted">목표 그룹 문서가 없습니다.</p> : visibleTargetGroupItems.map((item) => (
+            <div className="first-priority-list" aria-label="목표 그룹 문서 목록">
+              {targetGroupItems.length === 0 ? <p className="muted">목표 그룹 문서가 없습니다.</p> : targetGroupItems.map((item) => (
                 <button
                   key={item.docId}
                   className={`${item.docId === selectedDocId ? 'priority-doc-card active' : 'priority-doc-card'} status-bg-${workItemTone(item)}`}
@@ -2897,11 +2892,6 @@ function App() {
                 </button>
               ))}
             </div>
-            {targetGroupItems.length > 3 && (
-              <button className="target-group-toggle" onClick={() => setTargetGroupListExpanded((current) => !current)}>
-                {targetGroupListExpanded ? '목표 문서 접기' : `목표 문서 ${targetGroupItems.length - visibleTargetGroupItems.length}개 더 보기`}
-              </button>
-            )}
           </section>
 
           <section className="panel-block compact doc-filter-block">
@@ -2950,7 +2940,13 @@ function App() {
 
           <section className="doc-list">
             {filteredItems.map((item) => (
-              <button key={item.docId} className={`${item.docId === selectedDocId ? 'doc-card active' : 'doc-card'} status-bg-${workItemTone(item)}`} onClick={() => selectDocument(item.docId)}>
+              <button
+                key={item.docId}
+                className={`${item.docId === selectedDocId ? 'doc-card active' : 'doc-card'} status-bg-${workItemTone(item)}`}
+                onClick={() => selectDocument(item.docId)}
+                onContextMenu={(event) => openAssessmentPopover(event, item)}
+                title="우클릭: 생성 가능성 판정 편집"
+              >
                 <div><strong>{item.title}</strong><small>{item.docId}</small></div>
                 <WorkItemProgress item={item} />
                 <div className="doc-card-meta">
@@ -4100,7 +4096,7 @@ function AssessmentPopover({
                 </div>
               </div>
             );
-          }) : <p className="muted">이 문서는 1차 목표 범위에 없습니다.</p>}
+          }) : <p className="muted">이 문서의 생성 가능성 판정 항목을 불러오지 못했습니다. 새로고침 후 다시 시도하세요.</p>}
         </div>
 
         <div className="assessment-popover-footer">

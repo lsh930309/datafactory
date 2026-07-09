@@ -31,7 +31,10 @@
       },
       "발병연월일": "",
       "입원퇴원구분": "",
-      "입원퇴원연월일": "",
+      "입원퇴원연월일": {
+        "입원일": "",
+        "퇴원일": ""
+      },
       "의사소견": "",
       "비고": "",
       "용도": ""
@@ -56,7 +59,7 @@
     {
       "field_id": "registration_number",
       "key": "등록번호",
-      "semantic_path": "문서관리.등록번호",
+      "semantic_path": "문서관리/등록번호",
       "anchor_id": "visual_0001",
       "value": "",
       "label_anchor_ids": [
@@ -78,12 +81,13 @@
           35
         ],
         "note": "좌측 상단 등록번호 라벨 오른쪽 빈 칸."
-      }
+      },
+      "faker_rule": "pattern:######"
     },
     {
       "field_id": "serial_number",
       "key": "연번호",
-      "semantic_path": "문서관리.연번호",
+      "semantic_path": "문서관리/연번호",
       "anchor_id": "visual_0003",
       "value": "",
       "label_anchor_ids": [
@@ -105,12 +109,13 @@
           35
         ],
         "note": "좌측 상단 연번호 라벨 오른쪽 빈 칸."
-      }
+      },
+      "faker_rule": "pattern:######"
     },
     {
       "field_id": "patient_name",
       "key": "환자의 성명",
-      "semantic_path": "환자.성명",
+      "semantic_path": "환자/성명",
       "anchor_id": "visual_0008",
       "value": "",
       "label_anchor_ids": [
@@ -132,12 +137,13 @@
           58
         ],
         "note": "환자의 성명 라벨 오른쪽 값 칸."
-      }
+      },
+      "faker_rule": "person.name_ko"
     },
     {
       "field_id": "patient_rrn",
       "key": "환자의 주민등록번호",
-      "semantic_path": "환자.주민등록번호",
+      "semantic_path": "환자/주민등록번호",
       "anchor_id": "manual_1783555808485",
       "value": "",
       "label_anchor_ids": [
@@ -160,12 +166,13 @@
           59
         ],
         "note": "주민등록번호 라벨 오른쪽, 만( )세 앞 빈 칸."
-      }
+      },
+      "faker_rule": "person.rrn"
     },
     {
       "field_id": "patient_age",
       "key": "나이",
-      "semantic_path": "환자.나이",
+      "semantic_path": "환자/나이",
       "anchor_id": "manual_1783555828470",
       "value": "",
       "label_anchor_ids": [
@@ -188,12 +195,13 @@
           29
         ],
         "note": "값 칸 주변에 정적 prefix/suffix 만(, )세가 인쇄되어 있어 숫자만 생성."
-      }
+      },
+      "faker_rule": "pattern:##"
     },
     {
       "field_id": "patient_address",
       "key": "환자의 주소",
-      "semantic_path": "환자.주소",
+      "semantic_path": "환자/주소",
       "anchor_id": "visual_0009",
       "value": "",
       "label_anchor_ids": [
@@ -215,12 +223,13 @@
           58
         ],
         "note": "환자의 주소 라벨 오른쪽 장문 값 칸."
-      }
+      },
+      "faker_rule": "address.ko"
     },
     {
       "field_id": "diagnosis_1_name",
       "key": "병명 1",
-      "semantic_path": "진료내용.진단내역.1.병명",
+      "semantic_path": "진료내용/진단내역/1/병명",
       "anchor_id": "manual_1783555842269",
       "value": "",
       "label_anchor_ids": [
@@ -244,12 +253,13 @@
           61
         ],
         "note": "병명 영역 3분할 중 1행 좌측 값 칸."
-      }
+      },
+      "faker_rule": "pool:diagnosis_names"
     },
     {
       "field_id": "diagnosis_1_code",
       "key": "질병분류기호 1",
-      "semantic_path": "진료내용.진단내역.1.질병분류기호",
+      "semantic_path": "진료내용/진단내역/1/질병분류기호",
       "anchor_id": "manual_1783555847070",
       "value": "",
       "label_anchor_ids": [
@@ -272,12 +282,13 @@
           61
         ],
         "note": "질병분류기호 헤더 아래 1행 우측 값 칸."
-      }
+      },
+      "faker_rule": "pool:diagnosis_codes"
     },
     {
       "field_id": "diagnosis_2_name",
       "key": "병명 2",
-      "semantic_path": "진료내용.진단내역.2.병명",
+      "semantic_path": "진료내용/진단내역/2/병명",
       "anchor_id": "manual_1783556053407",
       "value": "",
       "label_anchor_ids": [
@@ -301,12 +312,13 @@
           69
         ],
         "note": "병명 영역 3분할 중 2행 좌측 값 칸."
-      }
+      },
+      "faker_rule": "pool:diagnosis_names"
     },
     {
       "field_id": "diagnosis_2_code",
       "key": "질병분류기호 2",
-      "semantic_path": "진료내용.진단내역.2.질병분류기호",
+      "semantic_path": "진료내용/진단내역/2/질병분류기호",
       "anchor_id": "manual_1783556059258",
       "value": "",
       "label_anchor_ids": [
@@ -329,12 +341,13 @@
           71
         ],
         "note": "질병분류기호 헤더 아래 2행 우측 값 칸."
-      }
+      },
+      "faker_rule": "pool:diagnosis_codes"
     },
     {
       "field_id": "diagnosis_3_name",
       "key": "병명 3",
-      "semantic_path": "진료내용.진단내역.3.병명",
+      "semantic_path": "진료내용/진단내역/3/병명",
       "anchor_id": "manual_1783556063857",
       "value": "",
       "label_anchor_ids": [
@@ -358,12 +371,13 @@
           59
         ],
         "note": "병명 영역 3분할 중 3행 좌측 값 칸."
-      }
+      },
+      "faker_rule": "pool:diagnosis_names"
     },
     {
       "field_id": "diagnosis_3_code",
       "key": "질병분류기호 3",
-      "semantic_path": "진료내용.진단내역.3.질병분류기호",
+      "semantic_path": "진료내용/진단내역/3/질병분류기호",
       "anchor_id": "manual_1783556069641",
       "value": "",
       "label_anchor_ids": [
@@ -386,12 +400,13 @@
           65
         ],
         "note": "질병분류기호 헤더 아래 3행 우측 값 칸."
-      }
+      },
+      "faker_rule": "pool:diagnosis_codes"
     },
     {
       "field_id": "onset_date",
       "key": "발병연월일",
-      "semantic_path": "진료내용.발병연월일",
+      "semantic_path": "진료내용/발병연월일",
       "anchor_id": "visual_0013",
       "value": "",
       "label_anchor_ids": [
@@ -413,12 +428,13 @@
           44
         ],
         "note": "발병연월일 라벨 오른쪽 값 칸. 정적 년/월/일 단위 없음."
-      }
+      },
+      "faker_rule": "date.kr"
     },
     {
       "field_id": "admission_discharge_type",
       "key": "입원·퇴원구분",
-      "semantic_path": "진료내용.입원퇴원구분",
+      "semantic_path": "진료내용/입원퇴원구분",
       "anchor_id": "manual_1783555854753",
       "value": "",
       "label_anchor_ids": [
@@ -440,19 +456,20 @@
           45
         ],
         "note": "입원·퇴원구분 라벨 오른쪽 값 칸."
-      }
+      },
+      "faker_rule": "choice:입원|퇴원"
     },
     {
-      "field_id": "admission_discharge_period",
-      "key": "입원·퇴원연월일",
-      "semantic_path": "진료내용.입원퇴원연월일",
+      "field_id": "admission_date",
+      "key": "입원일",
+      "semantic_path": "진료내용/입원퇴원연월일/입원일",
       "anchor_id": "manual_1783555859603",
       "value": "",
       "label_anchor_ids": [
         "det_000014"
       ],
-      "value_type": "date_period",
-      "generator": "template:{{date.kr}} ~ {{date.kr}}",
+      "value_type": "date.kr",
+      "generator": "pool:admission_dates",
       "style_class": "handwriting_text",
       "unit_policy": "none",
       "research_evidence_ids": [
@@ -467,19 +484,98 @@
           120
         ],
         "note": "큰 단일 값 칸으로 시작/종료 날짜가 분리 bbox가 아니므로 문자열 기간으로 생성."
+      },
+      "label": "입원일",
+      "faker_rule": "pool:admission_dates",
+      "render_policy": {
+        "render": "false"
+      },
+      "export": {
+        "json_path": "진료내용/입원퇴원연월일/입원일",
+        "csv_column": "진료내용/입원퇴원연월일/입원일"
       }
+    },
+    {
+      "field_id": "discharge_date",
+      "key": "퇴원일",
+      "semantic_path": "진료내용/입원퇴원연월일/퇴원일",
+      "anchor_id": "manual_1783555859603",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000014"
+      ],
+      "value_type": "date.kr",
+      "generator": "pool:discharge_dates",
+      "style_class": "handwriting_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/입퇴원확인서__MED-05/samples/original/입퇴원확인서_page_001.jpg",
+        "bbox": [
+          314,
+          774,
+          748,
+          120
+        ],
+        "note": "큰 단일 값 칸으로 시작/종료 날짜가 분리 bbox가 아니므로 문자열 기간으로 생성."
+      },
+      "label": "퇴원일",
+      "faker_rule": "pool:discharge_dates",
+      "render_policy": {
+        "render": "false"
+      },
+      "export": {
+        "json_path": "진료내용/입원퇴원연월일/퇴원일",
+        "csv_column": "진료내용/입원퇴원연월일/퇴원일"
+      }
+    },
+    {
+      "field_id": "admission_discharge_period",
+      "key": "입원·퇴원연월일",
+      "semantic_path": "진료내용/입원퇴원연월일/표시문구",
+      "anchor_id": "manual_1783555859603",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000014"
+      ],
+      "value_type": "date_period",
+      "generator": "pool:admission_period_labels",
+      "style_class": "handwriting_text",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/입퇴원확인서__MED-05/samples/original/입퇴원확인서_page_001.jpg",
+        "bbox": [
+          314,
+          774,
+          748,
+          120
+        ],
+        "note": "큰 단일 값 칸으로 시작/종료 날짜가 분리 bbox가 아니므로 문자열 기간으로 생성."
+      },
+      "faker_rule": "pool:admission_period_labels",
+      "export": {
+        "json_path": "진료내용/입원퇴원연월일/표시문구",
+        "csv_column": "진료내용/입원퇴원연월일/표시문구",
+        "include": false
+      },
+      "notes": "primary semantic schema는 admission_date/discharge_date hidden fields로 분리 저장하고 이 field는 렌더링 전용 표시문구이다."
     },
     {
       "field_id": "doctor_opinion",
       "key": "의사소견",
-      "semantic_path": "진료내용.의사소견",
+      "semantic_path": "진료내용/의사소견",
       "anchor_id": "manual_1783555864171",
       "value": "",
       "label_anchor_ids": [
         "det_000015"
       ],
-      "value_type": "free_text",
-      "generator": "free_text.short",
+      "value_type": "free_text.short",
+      "generator": "pool:doctor_opinions",
       "style_class": "handwriting_multiline",
       "unit_policy": "none",
       "research_evidence_ids": [
@@ -494,19 +590,20 @@
           121
         ],
         "note": "OCR은 의사소건으로 오인식됐으나 전체 이미지상 의사소견 라벨."
-      }
+      },
+      "faker_rule": "pool:doctor_opinions"
     },
     {
       "field_id": "remarks",
       "key": "비고",
-      "semantic_path": "진료내용.비고",
+      "semantic_path": "진료내용/비고",
       "anchor_id": "manual_1783555874470",
       "value": "",
       "label_anchor_ids": [
         "det_000016"
       ],
-      "value_type": "free_text",
-      "generator": "free_text.short",
+      "value_type": "free_text.short",
+      "generator": "pool:remarks",
       "style_class": "handwriting_multiline",
       "unit_policy": "none",
       "research_evidence_ids": [
@@ -521,12 +618,13 @@
           122
         ],
         "note": "비고 라벨 오른쪽 장문 값 칸."
-      }
+      },
+      "faker_rule": "pool:remarks"
     },
     {
       "field_id": "purpose",
       "key": "용도",
-      "semantic_path": "진료내용.용도",
+      "semantic_path": "진료내용/용도",
       "anchor_id": "visual_0014",
       "value": "",
       "label_anchor_ids": [
@@ -548,12 +646,13 @@
           55
         ],
         "note": "용도 라벨 오른쪽 값 칸."
-      }
+      },
+      "faker_rule": "choice:보험회사 제출용|회사 제출용|학교 제출용|관공서 제출용"
     },
     {
       "field_id": "issue_year",
       "key": "발급일자 년",
-      "semantic_path": "확인.발급일자.년",
+      "semantic_path": "확인/발급일자/년",
       "anchor_id": "manual_1783555879954",
       "value": "",
       "label_anchor_ids": [
@@ -576,12 +675,13 @@
           26
         ],
         "note": "값 칸 오른쪽에 정적 년 표시가 있어 연도 숫자만 생성."
-      }
+      },
+      "faker_rule": "date.year"
     },
     {
       "field_id": "issue_month",
       "key": "발급일자 월",
-      "semantic_path": "확인.발급일자.월",
+      "semantic_path": "확인/발급일자/월",
       "anchor_id": "manual_1783555882770",
       "value": "",
       "label_anchor_ids": [
@@ -603,12 +703,13 @@
           23
         ],
         "note": "값 칸 오른쪽에 정적 월 표시가 있어 월 숫자만 생성."
-      }
+      },
+      "faker_rule": "date.month"
     },
     {
       "field_id": "issue_day",
       "key": "발급일자 일",
-      "semantic_path": "확인.발급일자.일",
+      "semantic_path": "확인/발급일자/일",
       "anchor_id": "manual_1783555885620",
       "value": "",
       "label_anchor_ids": [
@@ -630,19 +731,20 @@
           23
         ],
         "note": "값 칸 오른쪽에 정적 일 표시가 있어 일 숫자만 생성."
-      }
+      },
+      "faker_rule": "date.day"
     },
     {
       "field_id": "medical_institution_name",
       "key": "의료기관 명칭",
-      "semantic_path": "확인.의료기관.명칭",
+      "semantic_path": "확인/의료기관/명칭",
       "anchor_id": "manual_1783555901787",
       "value": "",
       "label_anchor_ids": [
         "det_000022"
       ],
-      "value_type": "company",
-      "generator": "company.name_ko",
+      "value_type": "medical.institution_ko",
+      "generator": "medical.institution_ko",
       "style_class": "handwriting_text",
       "unit_policy": "none",
       "research_evidence_ids": [
@@ -657,12 +759,13 @@
           26
         ],
         "note": "하단 의료기관 명칭: 오른쪽 값 선."
-      }
+      },
+      "faker_rule": "medical.institution_ko"
     },
     {
       "field_id": "medical_institution_address",
       "key": "의료기관 주소",
-      "semantic_path": "확인.의료기관.주소",
+      "semantic_path": "확인/의료기관/주소",
       "anchor_id": "manual_1783555905554",
       "value": "",
       "label_anchor_ids": [
@@ -684,12 +787,13 @@
           62
         ],
         "note": "하단 주소: 오른쪽 값 선."
-      }
+      },
+      "faker_rule": "address.ko"
     },
     {
       "field_id": "doctor_license_number",
       "key": "의사 면허번호",
-      "semantic_path": "확인.의사.면허번호",
+      "semantic_path": "확인/의사/면허번호",
       "anchor_id": "manual_1783555891704",
       "value": "",
       "label_anchor_ids": [
@@ -711,12 +815,13 @@
           24
         ],
         "note": "정적 면허번호 제, 호 사이 빈 값 칸이므로 번호만 생성."
-      }
+      },
+      "faker_rule": "pattern:######"
     },
     {
       "field_id": "doctor_name",
       "key": "의사 성명",
-      "semantic_path": "확인.의사.성명",
+      "semantic_path": "확인/의사/성명",
       "anchor_id": "manual_1783555895988",
       "value": "",
       "label_anchor_ids": [
@@ -738,12 +843,14 @@
           28
         ],
         "note": "하단 성명: 오른쪽 의사명 값 선."
-      }
+      },
+      "faker_rule": "person.name_ko"
     }
   ],
   "unmapped_use_anchors": [],
   "authoring_notes": {
     "blank_template_policy": "static OCR labels are used only as label_anchor_ids; field anchor_id values point to confirmed value-region anchors.",
     "disease_header_recommendation": "질병분류기호 좌측 빈 header는 아래 3개 병명 값 행의 열 제목으로 보이므로 병명으로 채우는 것을 권장."
-  }
+  },
+  "updated_at": "2026-07-09T01:28:51.932859+00:00"
 }

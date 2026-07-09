@@ -250,7 +250,7 @@ button.slim { padding: 7px 9px; font-size: 12px; white-space: nowrap; }
 .sample-ready.complete { background: #dcfce7 !important; color: #166534 !important; }
 .mini-help { font-size: 11px; line-height: 1.35; }
 .first-priority-block { max-height: none; overflow: visible; border-color: #f2d27b; background: #fffdf7; }
-.first-priority-list { display: grid; align-content: start; gap: 6px; min-height: auto; overflow: visible; padding-right: 2px; }
+.first-priority-list { display: grid; align-content: start; gap: 6px; max-height: 340px; overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }
 .target-group-select { display: grid; gap: 4px; font-size: 11px; font-weight: 800; color: #694100; }
 .target-group-select select { width: 100%; padding: 7px 8px; border-radius: 8px; border: 1px solid #e6c66f; background: #fff; color: #344054; }
 .target-group-editor { display: grid; gap: 7px; border: 1px dashed #e6c66f; border-radius: 12px; padding: 8px; background: #fffaf0; }
@@ -260,7 +260,6 @@ button.slim { padding: 7px 9px; font-size: 12px; white-space: nowrap; }
 .target-group-draft-list span { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; background: #fff2cc; color: #946200; padding: 3px 6px; font-size: 10px; font-weight: 800; }
 .target-group-draft-list button { padding: 0 4px; min-height: 18px; border-radius: 999px; }
 .button-row.three-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.target-group-toggle { width: 100%; padding: 7px 9px; font-size: 12px; font-weight: 850; background: #fffdf7; }
 .final-export-card { display: grid; gap: 7px; border: 1px solid #f2d27b; border-radius: 12px; background: #fffaf0; padding: 9px; }
 .group-authoring-card { background: #fff7df; }
 .final-export-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }

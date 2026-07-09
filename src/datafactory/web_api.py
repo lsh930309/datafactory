@@ -97,6 +97,7 @@ AUTHORING_AGENT_SUPPORTED_FAKER_RULES = [
     "date.day",
     "money.krw",
     "company.name_ko",
+    "medical.institution_ko",
     "address.ko",
     "free_text.short",
     "checkbox.bool",
@@ -110,7 +111,9 @@ AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES = [
     "`exclusive_choice`는 `{type:'exclusive_choice', targets:[field_id...]}`로 작성하며 동일 그룹 체크박스 중 정확히 하나만 선택되어야 할 때 사용한다.",
     "`date_group`은 `{type:'date_group', year:'field_id', month:'field_id', day:'field_id', min_year:2020, max_year:2027}`로 작성해 분리된 연/월/일 bbox가 항상 유효한 한 날짜가 되게 한다.",
     "`date_order`는 `{type:'date_order', start:{year,month,day}, end:{year,month,day}, min_days:0, max_days:60}`로 작성해 종료일이 시작일보다 빠르지 않게 한다. start/end의 year/month/day는 각각 field_id 문자열이어야 한다.",
+    "`date_not_before`는 `{type:'date_not_before', source:'source_date_field_id', target:{year:'field_id', month:'field_id', day:'field_id'}, min_days:0, max_days:90}`로 작성해 target 날짜가 source 날짜보다 과거가 되지 않게 한다. source/target은 단일 date.kr field 또는 year/month/day group을 사용할 수 있다.",
     "`sum`은 `{type:'sum', sources:[field_id...], target:'field_id', format:'money.krw'}`로 작성해 합계/소계/총액 bbox가 구성 항목의 합과 일치하게 한다.",
+    "`age_from_rrn`은 `{type:'age_from_rrn', rrn:'rrn_field_id', age:'age_field_id', issue:{year:'field_id', month:'field_id', day:'field_id'}}`로 작성해 발급일 기준 만 나이를 주민등록번호와 일치시킨다.",
     "지원하지 않는 관계, 단일 문자열 내부의 복잡한 날짜 순서, 조건부 선택/복합 수식은 자연어 constraint로 쓰지 말고 uncertainty_report에 보류 사유와 필요한 bbox/schema 조정을 기록한다.",
 ]
 
@@ -526,12 +529,13 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "`schema_draft.json.semantic_schema`는 사용자와 GT가 보는 primary schema이다. 메타데이터 없이 KIE 관점의 key-value hierarchy만 작성하고 모든 leaf value는 빈 문자열로 둔다.",
                 "`schema_draft.json.fields` 또는 `schema_draft.json.field_bindings`는 semantic_schema leaf와 bbox anchor를 연결하기 위한 binding layer로만 사용한다.",
                 "각 binding은 `field_id`, 한국어 `key` 또는 `label`, `semantic_path`, `anchor_id`, 빈 `value`, 선택적 `label_anchor_ids`, `value_type`, `faker_rule`/`generator`, `style_class`, `unit_policy`, `research_evidence_ids`, `visual_evidence`를 포함한다.",
-                "각 binding의 `semantic_path`는 반드시 `semantic_schema`의 leaf path와 정확히 일치해야 한다.",
+                "각 binding의 `semantic_path`는 반드시 `semantic_schema`의 leaf path와 정확히 일치해야 한다. 단, 화면 렌더링만을 위한 복합 표시 필드는 `export:{include:false}`를 명시하고 semantic_schema leaf 매핑에서 제외할 수 있다.",
                 "각 binding의 `anchor_id`는 anchor_map_draft에 존재해야 하며, 값 target인 `use` anchor여야 한다. 라벨 bbox는 `label_anchor_ids`에만 둔다.",
                 "key는 실제 문서에 보이는 라벨, 표제, placeholder, 주변 텍스트, 편집 가능한 anchor 기반 한국어 자연어를 우선한다.",
                 "문서에 보이지 않는 추상 키, 업무 추론만으로 만든 키, downstream 편의용 임의 구조체를 만들지 않는다.",
                 "웹 리서치로 발견한 일반 항목이라도 대응 anchor가 없으면 schema_draft에 자동 추가하지 않는다.",
                 "`use` anchor 중 schema field로 매핑하지 않는 anchor가 있으면 `unmapped_use_anchors`에 anchor_id와 제외 사유를 기록한다.",
+                "예: primary semantic schema에는 `입원일`, `퇴원일`을 분리 저장하되 문서에는 `입원: yyyy-mm-dd, 퇴원: yyyy-mm-dd` 한 줄로 찍어야 한다면, 분리 leaf field는 `render_policy:{render:false}`로 두고 복합 표시 field는 같은 anchor에 `export:{include:false}`로 둔다.",
             ],
             "visual_source_of_truth_rules": [
                 "전체 템플릿 이미지가 최상위 source of truth이다. 웹 리서치, 문서명, 라벨 텍스트, 관행보다 실제 전체 문서 이미지에서 보이는 레이아웃/라벨/값 위치 관계가 우선한다.",
@@ -544,7 +548,7 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "schema key의 의미가 충분히 명확하고 문서 anchor 또는 리서치 근거와 연결될 때만 faker rule을 제안한다.",
                 "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안하되, 반드시 현재 DataFactory 렌더러가 지원하는 rule 문법만 사용한다.",
                 "서로 독립적으로 생성하면 문서 유효성이 깨지는 field들은 `faker_profile_draft.json.constraints`에 명시적으로 모델링한다. 예: 체크박스 택1, 시작/종료일 순서, 행/열 합계, 본인부담금/공단부담금/총액 관계.",
-                "지원 constraint 타입은 `pick_record`, `copy`, `exclusive_choice`, `date_group`, `date_order`, `sum`뿐이다. 지원하지 않는 수식 DSL이나 자연어 constraint는 쓰지 말고 uncertainty_report에 보류한다.",
+                "지원 constraint 타입은 `pick_record`, `copy`, `exclusive_choice`, `date_group`, `date_order`, `date_not_before`, `sum`, `age_from_rrn`뿐이다. 지원하지 않는 수식 DSL이나 자연어 constraint는 쓰지 말고 uncertainty_report에 보류한다.",
                 "연/월/일이 각각 다른 bbox로 분리된 날짜 placeholder에는 `date.year`, `date.month`, `date.day`를 우선 사용한다. 날짜의 월/일/연도에 `pattern:##` 또는 `pattern:####`를 쓰지 않는다.",
                 "문서 이미지/템플릿의 값 입력 위치 바로 옆/안에 `㎡`, `m²`, `m2`, `%`, `m`, `원`, `명`, `건`, `동`, `층` 같은 단위가 이미 정적 텍스트로 남아 있으면 faker 값에는 그 단위를 포함하지 않는다.",
                 "`호/가구/세대`처럼 라벨에만 단위 의미가 있고 값 위치에 별도 정적 단위가 없는 복합 값은 단위를 포함해 생성한다. 단위 포함/제외 근거를 field_rules 또는 uncertainty_report에 기록한다.",
@@ -853,7 +857,8 @@ You are running as a local Codex subprocess for the DataFactory workbench.
 
 ## Output contracts
 - `schema_draft.json`: constrained full authoring draft with `schema_version`, `doc_id`, `title`, primary `semantic_schema`, and binding layer `fields` or `field_bindings`. `semantic_schema` must be a metadata-free KIE key-value hierarchy whose leaf values are empty strings. The binding layer is only the bridge from semantic leaf to bbox target; each binding must include `field_id`, `key` or `label`, `semantic_path`, `anchor_id`, `value` as an empty string, and optional `label_anchor_ids`, `value_type`, `faker_rule`/`generator`, `style_class`, `unit_policy`, `research_evidence_ids`, and `visual_evidence`.
-- Every binding `semantic_path` must point to an existing `semantic_schema` leaf. Every binding `anchor_id` must exist in `anchor_map_draft.json` and target a `use` value-region anchor. If a `use` anchor is intentionally not mapped, list it in `schema_draft.json.unmapped_use_anchors` with a reason.
+- Every binding `semantic_path` must point to an existing `semantic_schema` leaf. Exception: if a field is only a composite render string and should not enter the primary semantic schema, set `export:{{"include":false}}`; then its `semantic_path` may be a render-only path. Every binding `anchor_id` must exist in `anchor_map_draft.json` and target a `use` value-region anchor. If a `use` anchor is intentionally not mapped, list it in `schema_draft.json.unmapped_use_anchors` with a reason.
+- For split-primary/composite-render cases, keep the primary semantic fields as hidden render fields with `render_policy:{{"render":false}}` and create a separate visible composite field with `export:{{"include":false}}`. Example: store `입원일` and `퇴원일` separately, but render one visible string like `입원: yyyy-mm-dd, 퇴원: yyyy-mm-dd`.
 - `stylesheet_draft.json`: draft render style classes or field style hints; keep conservative defaults if visual style is uncertain.
 - `faker_profile_draft.json`: must include `field_generators` as the renderer-compatible source of truth. It may also include `field_rules` for traceability, but every `field_generators` value must use only the supported rule grammar below. Do not use real personal/company/account data.
 - `value_pool_draft.json`: reusable value pools proposed by the agent, with source/usage notes.
@@ -1033,9 +1038,10 @@ def _validate_schema_draft_contract(parsed_json: dict[str, Any]) -> list[dict[st
         if "value" in field and field.get("value") != "":
             errors.append({"code": "schema_field_value_not_empty", "field": field_id, "message": "schema_draft.fields[].value must remain an empty string"})
         semantic_path = _binding_semantic_path(field)
-        if not semantic_path:
+        export_only_render = not _binding_export_enabled(field)
+        if not semantic_path and not export_only_render:
             errors.append({"code": "schema_field_missing_semantic_path", "field": field_id, "message": "schema binding must define semantic_path/key/json_path"})
-        elif semantic_leaf_paths and semantic_path not in semantic_leaf_paths:
+        elif semantic_leaf_paths and semantic_path not in semantic_leaf_paths and not export_only_render:
             errors.append({"code": "schema_field_semantic_path_missing", "field": field_id, "semantic_path": semantic_path, "message": "binding semantic_path must point to an existing semantic_schema leaf"})
         anchor_id = str(field.get("anchor_id") or field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
         if not anchor_id:
@@ -1087,6 +1093,12 @@ def _binding_semantic_path(field: dict[str, Any]) -> str:
         return value.strip()
     label = str(field.get("label") or "").strip()
     return label
+
+
+def _binding_export_enabled(field: dict[str, Any]) -> bool:
+    export = field.get("export") if isinstance(field.get("export"), dict) else {}
+    value = export.get("include") if "include" in export else field.get("export_include") if "export_include" in field else True
+    return str(value).strip().lower() not in {"false", "0", "no", "off", "skip", "hidden"}
 
 
 def _anchor_map_by_id(anchor_map: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -1149,7 +1161,7 @@ def _validate_faker_constraints_contract(faker_profile: dict[str, Any], field_id
         return errors
     if not isinstance(constraints, list):
         return [{"code": "faker_constraints_not_list", "message": "faker_profile_draft.json.constraints must be a list when present"}]
-    supported = {"pick_record", "copy", "exclusive_choice", "date_group", "date_order", "sum"}
+    supported = {"pick_record", "copy", "exclusive_choice", "date_group", "date_order", "date_not_before", "sum", "age_from_rrn"}
     for index, constraint in enumerate(constraints):
         if not isinstance(constraint, dict):
             errors.append({"code": "faker_constraint_not_object", "index": index, "message": "each constraint must be an object"})
@@ -1189,17 +1201,50 @@ def _validate_faker_constraints_contract(faker_profile: dict[str, Any], field_id
                 if isinstance(group, dict):
                     refs.extend(group.get(part) for part in ("year", "month", "day"))
             _validate_constraint_field_refs(errors, index, field_ids, refs)
+        elif ctype == "date_not_before":
+            refs: list[Any] = []
+            source = constraint.get("source") or constraint.get("after")
+            target = constraint.get("target") or constraint.get("date")
+            if not _constraint_date_ref_complete(source):
+                errors.append({"code": "faker_constraint_invalid_date_not_before", "index": index, "message": "date_not_before requires source date field or complete source date group"})
+            refs.extend(_constraint_date_ref_fields(source))
+            if not _constraint_date_ref_complete(target):
+                errors.append({"code": "faker_constraint_invalid_date_not_before", "index": index, "message": "date_not_before requires target date field or complete target date group"})
+            refs.extend(_constraint_date_ref_fields(target))
+            _validate_constraint_field_refs(errors, index, field_ids, refs)
         elif ctype == "sum":
             sources = _constraint_ref_list(constraint.get("sources"))
             target = str(constraint.get("target") or "").strip()
             if not sources or not target:
                 errors.append({"code": "faker_constraint_invalid_sum", "index": index, "message": "sum requires sources and target"})
             _validate_constraint_field_refs(errors, index, field_ids, [*sources, target])
+        elif ctype == "age_from_rrn":
+            refs = [constraint.get("rrn"), constraint.get("age")]
+            issue = constraint.get("issue")
+            if not all(str(ref or "").strip() for ref in refs):
+                errors.append({"code": "faker_constraint_invalid_age_from_rrn", "index": index, "message": "age_from_rrn requires rrn and age field refs"})
+            if not isinstance(issue, dict) or not all(str(issue.get(part) or "").strip() for part in ("year", "month", "day")):
+                errors.append({"code": "faker_constraint_invalid_age_from_rrn", "index": index, "message": "age_from_rrn requires complete issue year/month/day group"})
+            if isinstance(issue, dict):
+                refs.extend(issue.get(part) for part in ("year", "month", "day"))
+            _validate_constraint_field_refs(errors, index, field_ids, refs)
     return errors
 
 
 def _constraint_ref_list(value: Any) -> list[str]:
     return [str(item).strip() for item in value if str(item).strip()] if isinstance(value, list) else []
+
+
+def _constraint_date_ref_complete(value: Any) -> bool:
+    if isinstance(value, dict):
+        return all(str(value.get(part) or "").strip() for part in ("year", "month", "day"))
+    return bool(str(value or "").strip())
+
+
+def _constraint_date_ref_fields(value: Any) -> list[Any]:
+    if isinstance(value, dict):
+        return [value.get(part) for part in ("year", "month", "day")]
+    return [value]
 
 
 def _validate_constraint_field_refs(errors: list[dict[str, Any]], index: int, field_ids: set[str], refs: Any) -> None:
@@ -1238,6 +1283,7 @@ def _faker_rule_supported(rule: str) -> bool:
         "date.day",
         "money.krw",
         "company.name_ko",
+        "medical.institution_ko",
         "address.ko",
         "free_text.short",
         "checkbox.bool",

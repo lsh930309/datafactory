@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-03",
+  "title": "선하증권(B/L)·항공운송장(AWB)",
+  "folder": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03",
+  "registry": {
+    "docId": "TRD-03",
+    "title": "선하증권(B/L)·항공운송장(AWB)",
+    "issuer": "기업",
+    "genre": "증빙",
+    "structure": "반정형",
+    "modality": "전자PDF",
+    "sensitivity": "공개",
+    "fields": "송하인·수하인·물품·운송조건",
+    "notes": "",
+    "hasPersonalInfo": "미포함",
+    "personalInfoDetail": "거래처, 운송정보",
+    "validationRules": "B/L 번호, 항구명, 날짜, 선적정보",
+    "validationRuleCodes": "VAL-002",
+    "writingMethod": "인쇄",
+    "aliases": [
+      "선하증권(B",
+      "L)·항공운송장(AWB)",
+      "선하증권"
+    ],
+    "workflowIds": [
+      "TRD-T2",
+      "TRD-T3"
+    ],
+    "domains": [
+      "무역·물류"
+    ],
+    "workflowDomains": [
+      "무역·물류"
+    ],
+    "poDomains": [
+      "무역"
+    ],
+    "isFirstPriority": false,
+    "firstPriorityDomains": [],
+    "firstPriorityScopeCount": 0
+  },
+  "source_seed_folders": [
+    "seed_samples/선하증권(B_L)·항공운송장(AWB)"
+  ],
+  "samples": [
+    {
+      "path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권.pdf",
+      "source": "seed_samples/선하증권(B_L)·항공운송장(AWB)/선하증권.pdf",
+      "format": "pdf",
+      "generation_path": "image-template"
+    },
+    {
+      "path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+      "source": "seed_samples/선하증권(B_L)·항공운송장(AWB)/선하증권_page_001.jpg",
+      "format": "jpg",
+      "generation_path": "image-template"
+    }
+  ],
+  "sample_kind": "filled_sample",
+  "sample_generation_paths": [
+    "image-template"
+  ],
+  "office_render": {
+    "required": false,
+    "backend": "none",
+    "status": "not_required"
+  },
+  "status": "sample_imported",
+  "created_at": "2026-07-09T01:42:31.639215+00:00",
+  "updated_at": "2026-07-09T01:42:31.639859+00:00",
+  "artifacts": {
+    "ocr": null,
+    "review": null,
+    "inpaint": null
+  }
+}

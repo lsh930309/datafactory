@@ -85,3 +85,35 @@ def test_final_results_bbox_only_points_to_rendered_nonempty_gt_values() -> None
 
     assert checked_bbox_leaves > 0, "no final result bbox leaves were checked"
     assert not violations, "invalid final-result bbox contract:\n" + "\n".join(violations[:80])
+
+
+def _result_schema_paths() -> list[Path]:
+    if not RESULTS_ROOT.exists():
+        return []
+    return sorted(RESULTS_ROOT.glob("*/*/schema.json"))
+
+
+def _contains_key(payload: Any, key: str) -> bool:
+    if isinstance(payload, dict):
+        return key in payload or any(_contains_key(child, key) for child in payload.values())
+    if isinstance(payload, list):
+        return any(_contains_key(child, key) for child in payload)
+    return False
+
+
+def test_final_results_do_not_embed_machine_metadata_keys() -> None:
+    """GT labels and primary schemas are semantic labels, not sample metadata."""
+
+    paths = [*_result_schema_paths(), *_sample_gt_paths()]
+    if not paths:
+        pytest.skip("outputs/results has no generated schema/sample JSON files")
+
+    forbidden = {"doc_id", "document_id", "document_name", "sample_id", "schema_version", "source_image", "source_inpainted"}
+    violations: list[str] = []
+    for path in paths:
+        payload = _json(path)
+        for key in forbidden:
+            if _contains_key(payload, key):
+                violations.append(f"{path.relative_to(ROOT)} contains metadata key {key!r}")
+
+    assert not violations, "metadata leaked into final GT/schema:\n" + "\n".join(violations[:80])

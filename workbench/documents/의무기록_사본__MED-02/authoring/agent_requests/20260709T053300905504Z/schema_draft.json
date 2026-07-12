@@ -1,0 +1,1366 @@
+{
+  "schema_version": 2,
+  "doc_id": "MED-02",
+  "title": "의무기록 사본",
+  "sample_kind": "filled_sample",
+  "semantic_schema": {
+    "발급정보": {
+      "발급번호": "",
+      "발급일": {
+        "연": "",
+        "월": "",
+        "일": ""
+      }
+    },
+    "환자인적사항": {
+      "성명": "",
+      "주민등록번호": "",
+      "주소": "",
+      "연락처": "",
+      "성별": "",
+      "연령": ""
+    },
+    "기록작성정보": {
+      "진료과": "",
+      "담당의": "",
+      "기록작성일": "",
+      "기록구분": ""
+    },
+    "의무기록내용": {
+      "진료일자": "",
+      "진료장소": "",
+      "주소": "",
+      "현병력": "",
+      "과거력": "",
+      "가족력": "",
+      "진찰소견": "",
+      "검사소견": {
+        "검사1": {
+          "검사명": "",
+          "결과": "",
+          "참고치": ""
+        },
+        "검사2": {
+          "검사명": "",
+          "결과": "",
+          "참고치": ""
+        }
+      },
+      "진단명": {
+        "질병분류코드": "",
+        "진단명": ""
+      },
+      "치료내용": {
+        "치료1": "",
+        "치료2": "",
+        "치료3": ""
+      },
+      "향후계획": "",
+      "비고": ""
+    },
+    "발급기관": {
+      "기관명": "",
+      "주소": "",
+      "전화": "",
+      "팩스": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "issue_number",
+      "key": "발급번호",
+      "semantic_path": "발급정보.발급번호",
+      "anchor_id": "manual_1783574260527",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000001"
+      ],
+      "value_type": "identifier",
+      "generator": "template:{{date.year}}-{{date.month}}-{{pattern:#######}}",
+      "style_class": "small_header_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "anchor_id": "manual_1783574260527",
+        "bbox": [
+          116,
+          45,
+          139,
+          20
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0074_manual_1783574260527.png",
+        "observed_text": "2025–06-0001234",
+        "confidence": 0.9388703107833862
+      },
+      "notes": "원본은 발급번호 라벨 오른쪽 한 줄 값으로 보임"
+    },
+    {
+      "field_id": "patient_name",
+      "key": "성명",
+      "semantic_path": "환자인적사항.성명",
+      "anchor_id": "det_000007",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "det_000006"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000007",
+        "bbox": [
+          325,
+          179,
+          208,
+          48
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0007_det_000007.png",
+        "observed_text": "김하늘",
+        "confidence": 0.9997022747993469
+      }
+    },
+    {
+      "field_id": "patient_rrn",
+      "key": "주민등록번호",
+      "semantic_path": "환자인적사항.주민등록번호",
+      "anchor_id": "det_000009",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000008"
+      ],
+      "value_type": "rrn",
+      "generator": "person.rrn",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000009",
+        "bbox": [
+          718,
+          180,
+          254,
+          48
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0009_det_000009.png",
+        "observed_text": "950101-2******",
+        "confidence": 0.9524025917053223
+      }
+    },
+    {
+      "field_id": "patient_address",
+      "key": "주소",
+      "semantic_path": "환자인적사항.주소",
+      "anchor_id": "det_000014",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000012",
+        "det_000013"
+      ],
+      "value_type": "address",
+      "generator": "address.ko",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000014",
+        "bbox": [
+          325,
+          227,
+          647,
+          45
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0014_det_000014.png",
+        "observed_text": "서울특별시 강남구 테헤란로 123, 101동 1001호",
+        "confidence": 0.9528456330299377
+      }
+    },
+    {
+      "field_id": "patient_phone",
+      "key": "연락처",
+      "semantic_path": "환자인적사항.연락처",
+      "anchor_id": "det_000016",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000015"
+      ],
+      "value_type": "phone",
+      "generator": "person.phone_kr",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000016",
+        "bbox": [
+          325,
+          273,
+          208,
+          46
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0016_det_000016.png",
+        "observed_text": "010-1234-5678",
+        "confidence": 0.9954825639724731
+      }
+    },
+    {
+      "field_id": "patient_gender",
+      "key": "성별",
+      "semantic_path": "환자인적사항.성별",
+      "anchor_id": "det_000018",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017"
+      ],
+      "value_type": "category",
+      "generator": "choice:남|여",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 칸 안에는 성별 뒤 슬래시가 정적 라벨이 아니라 성별/연령 복합 표기 구분자로 보임"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000018",
+        "bbox": [
+          718,
+          274,
+          36,
+          45
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0018_det_000018.png",
+        "observed_text": "여",
+        "confidence": 0.6573308706283569
+      }
+    },
+    {
+      "field_id": "patient_age",
+      "key": "연령",
+      "semantic_path": "환자인적사항.연령",
+      "anchor_id": "manual_1783574287062",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017"
+      ],
+      "value_type": "age",
+      "generator": "choice:18세|24세|31세|45세|62세",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "전체 이미지에서 성별/연령 값이 여 / 30세로 보이며 나이 값에는 세 단위가 자연 표기의 일부임"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "manual_1783574287062",
+        "bbox": [
+          767,
+          273,
+          204,
+          46
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0075_manual_1783574287062.png",
+        "observed_text": "30세",
+        "confidence": 0.9957144260406494
+      }
+    },
+    {
+      "field_id": "department",
+      "key": "진료과",
+      "semantic_path": "기록작성정보.진료과",
+      "anchor_id": "det_000021",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000020"
+      ],
+      "value_type": "department",
+      "generator": "pool:departments",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000021",
+        "bbox": [
+          325,
+          336,
+          207,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0021_det_000021.png",
+        "observed_text": "정형외과",
+        "confidence": 0.9984946250915527
+      }
+    },
+    {
+      "field_id": "doctor_name",
+      "key": "담당의",
+      "semantic_path": "기록작성정보.담당의",
+      "anchor_id": "det_000023",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000022"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000023",
+        "bbox": [
+          718,
+          336,
+          253,
+          41
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0023_det_000023.png",
+        "observed_text": "이재훈",
+        "confidence": 0.9967608451843262
+      }
+    },
+    {
+      "field_id": "record_created_date",
+      "key": "기록작성일",
+      "semantic_path": "기록작성정보.기록작성일",
+      "anchor_id": "det_000026",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000025"
+      ],
+      "value_type": "date",
+      "generator": "date.kr",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000026",
+        "bbox": [
+          325,
+          376,
+          209,
+          44
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0026_det_000026.png",
+        "observed_text": "2025-05-20",
+        "confidence": 0.9844174385070801
+      }
+    },
+    {
+      "field_id": "record_type",
+      "key": "기록구분",
+      "semantic_path": "기록작성정보.기록구분",
+      "anchor_id": "det_000028",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027"
+      ],
+      "value_type": "category",
+      "generator": "choice:외래기록|입원기록|응급기록|수술기록",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000028",
+        "bbox": [
+          718,
+          376,
+          253,
+          44
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0028_det_000028.png",
+        "observed_text": "외래기록",
+        "confidence": 0.9989467859268188
+      }
+    },
+    {
+      "field_id": "care_date",
+      "key": "진료일자",
+      "semantic_path": "의무기록내용.진료일자",
+      "anchor_id": "det_000031",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000030"
+      ],
+      "value_type": "date",
+      "generator": "date.kr",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000031",
+        "bbox": [
+          326,
+          473,
+          207,
+          45
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0031_det_000031.png",
+        "observed_text": "2025-05-20",
+        "confidence": 0.9501693844795227
+      }
+    },
+    {
+      "field_id": "care_place",
+      "key": "진료장소",
+      "semantic_path": "의무기록내용.진료장소",
+      "anchor_id": "det_000033",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000032"
+      ],
+      "value_type": "location",
+      "generator": "pool:care_places",
+      "style_class": "table_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000033",
+        "bbox": [
+          718,
+          472,
+          254,
+          47
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0033_det_000033.png",
+        "observed_text": "정형외과 외래",
+        "confidence": 0.9921469688415527
+      }
+    },
+    {
+      "field_id": "chief_complaint",
+      "key": "주소(Chief Complaint)",
+      "semantic_path": "의무기록내용.주소",
+      "anchor_id": "det_000035",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000034"
+      ],
+      "value_type": "clinical_text",
+      "generator": "pool:chief_complaints",
+      "style_class": "long_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000035",
+        "bbox": [
+          325,
+          519,
+          646,
+          50
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0035_det_000035.png",
+        "observed_text": "오른쪽 무릎 통증",
+        "confidence": 0.8472731113433838
+      },
+      "notes": "템플릿의 한글 라벨은 주 소로 OCR되었으나 괄호의 Chief Complaint와 샘플 값상 주호소로 해석"
+    },
+    {
+      "field_id": "history_present_illness",
+      "key": "현병력",
+      "semantic_path": "의무기록내용.현병력",
+      "anchor_id": "det_000037",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000036"
+      ],
+      "value_type": "clinical_text",
+      "generator": "free_text.short",
+      "style_class": "paragraph_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000037",
+        "bbox": [
+          325,
+          570,
+          646,
+          84
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0037_det_000037.png",
+        "observed_text": "내원 3일 전 계단을 내려오다 발을 헛디더 오른쪽 무릎이 꺾이면서 통증 발생. 이후 보행 시 통증 심해져 내원함.",
+        "confidence": 0.9000766277313232
+      }
+    },
+    {
+      "field_id": "past_history",
+      "key": "과거력",
+      "semantic_path": "의무기록내용.과거력",
+      "anchor_id": "det_000040",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039"
+      ],
+      "value_type": "clinical_text",
+      "generator": "choice:특이사항 없음.|고혈압으로 약물 복용 중.|당뇨병 과거력 있음.|이전 수술력 없음.",
+      "style_class": "paragraph_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000040",
+        "bbox": [
+          325,
+          654,
+          646,
+          54
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0039_det_000040.png",
+        "observed_text": "특이사항 없음.",
+        "confidence": 0.9018377065658569
+      }
+    },
+    {
+      "field_id": "family_history",
+      "key": "가족력",
+      "semantic_path": "의무기록내용.가족력",
+      "anchor_id": "det_000042",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000041"
+      ],
+      "value_type": "clinical_text",
+      "generator": "choice:특이사항 없음.|부친 고혈압 병력 있음.|모친 당뇨 병력 있음.|가족력 확인되지 않음.",
+      "style_class": "paragraph_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000042",
+        "bbox": [
+          325,
+          707,
+          646,
+          50
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0041_det_000042.png",
+        "observed_text": "특이사항 없음.",
+        "confidence": 0.9046481251716614
+      }
+    },
+    {
+      "field_id": "physical_exam",
+      "key": "진찰소견",
+      "semantic_path": "의무기록내용.진찰소견",
+      "anchor_id": "det_000044",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000043"
+      ],
+      "value_type": "clinical_text",
+      "generator": "free_text.short",
+      "style_class": "paragraph_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000044",
+        "bbox": [
+          325,
+          757,
+          647,
+          65
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0043_det_000044.png",
+        "observed_text": "오른쪽 무릎 관절 부종(+), 압통(+), 운동범위 제한(+). 맥머레이 검사 시 통증(+).",
+        "confidence": 0.9296407699584961
+      }
+    },
+    {
+      "field_id": "test1_name",
+      "key": "검사명 1",
+      "semantic_path": "의무기록내용.검사소견.검사1.검사명",
+      "anchor_id": "det_000049",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000046"
+      ],
+      "value_type": "test_name",
+      "generator": "choice:X-ray (Rt. Knee)|X-ray (Lt. Ankle)|Chest PA|Abdomen US",
+      "style_class": "test_cell_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000049",
+        "bbox": [
+          345,
+          876,
+          154,
+          37
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0048_det_000049.png",
+        "observed_text": "X-ray (Rt. Knee)",
+        "confidence": 0.9660167098045349
+      }
+    },
+    {
+      "field_id": "test1_result",
+      "key": "검사결과 1",
+      "semantic_path": "의무기록내용.검사소견.검사1.결과",
+      "anchor_id": "det_000050",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000047"
+      ],
+      "value_type": "clinical_text",
+      "generator": "free_text.short",
+      "style_class": "test_cell_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000050",
+        "bbox": [
+          498,
+          876,
+          281,
+          37
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0049_det_000050.png",
+        "observed_text": "골절 및 탈구 소건 없음",
+        "confidence": 0.8532878160476685
+      }
+    },
+    {
+      "field_id": "test1_reference",
+      "key": "참고치 1",
+      "semantic_path": "의무기록내용.검사소견.검사1.참고치",
+      "anchor_id": "det_000051",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000048"
+      ],
+      "value_type": "clinical_text",
+      "generator": "choice:-|정상범위 내|추적관찰",
+      "style_class": "test_cell_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000051",
+        "bbox": [
+          780,
+          876,
+          136,
+          38
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0050_det_000051.png",
+        "observed_text": "-",
+        "confidence": null
+      }
+    },
+    {
+      "field_id": "test2_name",
+      "key": "검사명 2",
+      "semantic_path": "의무기록내용.검사소견.검사2.검사명",
+      "anchor_id": "det_000052",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000046"
+      ],
+      "value_type": "test_name",
+      "generator": "choice:MRI (Rt. Knee)|MRI (L-spine)|CT (Brain)|혈액검사",
+      "style_class": "test_cell_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000052",
+        "bbox": [
+          345,
+          913,
+          153,
+          37
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0051_det_000052.png",
+        "observed_text": "MRI (Rt. Knee)",
+        "confidence": 0.9775971174240112
+      }
+    },
+    {
+      "field_id": "test2_result",
+      "key": "검사결과 2",
+      "semantic_path": "의무기록내용.검사소견.검사2.결과",
+      "anchor_id": "det_000053",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000047"
+      ],
+      "value_type": "clinical_text",
+      "generator": "free_text.short",
+      "style_class": "test_cell_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000053",
+        "bbox": [
+          498,
+          914,
+          281,
+          36
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0052_det_000053.png",
+        "observed_text": "내측 반월상연골 후각부 열상의심 소견",
+        "confidence": 0.8989936709403992
+      }
+    },
+    {
+      "field_id": "test2_reference",
+      "key": "참고치 2",
+      "semantic_path": "의무기록내용.검사소견.검사2.참고치",
+      "anchor_id": "det_000054",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000048"
+      ],
+      "value_type": "clinical_text",
+      "generator": "choice:-|정상범위 내|판독소견 참조",
+      "style_class": "test_cell_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000054",
+        "bbox": [
+          779,
+          914,
+          138,
+          36
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0053_det_000054.png",
+        "observed_text": "-",
+        "confidence": 0.7480049133300781
+      }
+    },
+    {
+      "field_id": "diagnosis_code",
+      "key": "질병분류코드",
+      "semantic_path": "의무기록내용.진단명.질병분류코드",
+      "anchor_id": "det_000056",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000055"
+      ],
+      "value_type": "diagnosis_code",
+      "generator": "pattern:A##.#",
+      "style_class": "diagnosis_code_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4",
+        "R5"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000056",
+        "bbox": [
+          326,
+          970,
+          85,
+          52
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0055_det_000056.png",
+        "observed_text": "S83.2",
+        "confidence": 0.9914420247077942
+      }
+    },
+    {
+      "field_id": "diagnosis_name",
+      "key": "진단명",
+      "semantic_path": "의무기록내용.진단명.진단명",
+      "anchor_id": "det_000057",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000055"
+      ],
+      "value_type": "diagnosis_name",
+      "generator": "pool:diagnosis_names",
+      "style_class": "long_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4",
+        "R5"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000057",
+        "bbox": [
+          411,
+          969,
+          560,
+          53
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0056_det_000057.png",
+        "observed_text": "오른쪽 무릎 내측 반월상연골 손상(의심)",
+        "confidence": 0.916541337966919
+      }
+    },
+    {
+      "field_id": "treatment_1",
+      "key": "치료내용 1",
+      "semantic_path": "의무기록내용.치료내용.치료1",
+      "anchor_id": "det_000059",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000058"
+      ],
+      "value_type": "clinical_text",
+      "generator": "free_text.short",
+      "style_class": "treatment_line_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000059",
+        "bbox": [
+          325,
+          1032,
+          646,
+          20
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0058_det_000059.png",
+        "observed_text": "1.약물치료: 소염진통제처방(에페린정50mg, 1일2회)",
+        "confidence": 0.9475257992744446
+      },
+      "notes": "사용자 지시에 따라 번호 1을 포함한 독립 라인으로 생성"
+    },
+    {
+      "field_id": "treatment_2",
+      "key": "치료내용 2",
+      "semantic_path": "의무기록내용.치료내용.치료2",
+      "anchor_id": "det_000060",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000058"
+      ],
+      "value_type": "clinical_text",
+      "generator": "free_text.short",
+      "style_class": "treatment_line_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000060",
+        "bbox": [
+          326,
+          1056,
+          645,
+          22
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0059_det_000060.png",
+        "observed_text": "2.보조기 착용 및 무릎 안정",
+        "confidence": 0.8961800932884216
+      },
+      "notes": "사용자 지시에 따라 번호 2를 포함한 독립 라인으로 생성"
+    },
+    {
+      "field_id": "treatment_3",
+      "key": "치료내용 3",
+      "semantic_path": "의무기록내용.치료내용.치료3",
+      "anchor_id": "det_000061",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000058"
+      ],
+      "value_type": "clinical_text",
+      "generator": "free_text.short",
+      "style_class": "treatment_line_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000061",
+        "bbox": [
+          326,
+          1083,
+          645,
+          20
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0060_det_000061.png",
+        "observed_text": "3.2주후 외래 경과관찰",
+        "confidence": 0.9313607811927795
+      },
+      "notes": "사용자 지시에 따라 번호 3을 포함한 독립 라인으로 생성"
+    },
+    {
+      "field_id": "plan",
+      "key": "향후계획",
+      "semantic_path": "의무기록내용.향후계획",
+      "anchor_id": "det_000063",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000062"
+      ],
+      "value_type": "clinical_text",
+      "generator": "free_text.short",
+      "style_class": "paragraph_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000063",
+        "bbox": [
+          325,
+          1118,
+          646,
+          50
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0062_det_000063.png",
+        "observed_text": "2주 후 재진 예약. 통증 악화 시 조기 내원 권고",
+        "confidence": 0.972567617893219
+      }
+    },
+    {
+      "field_id": "remarks",
+      "key": "비고",
+      "semantic_path": "의무기록내용.비고",
+      "anchor_id": "det_000065",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000064"
+      ],
+      "value_type": "clinical_text",
+      "generator": "choice:-|특이사항 없음.|추가 제출 서류 없음.",
+      "style_class": "paragraph_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000065",
+        "bbox": [
+          325,
+          1168,
+          646,
+          51
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0064_det_000065.png",
+        "observed_text": "-",
+        "confidence": 0.7993589639663696
+      }
+    },
+    {
+      "field_id": "issue_year",
+      "key": "발급일 연",
+      "semantic_path": "발급정보.발급일.연",
+      "anchor_id": "det_000067",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000066",
+        "manual_1783574334777"
+      ],
+      "value_type": "date_year",
+      "generator": "date.year",
+      "style_class": "issue_date_part",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 뒤의 년은 정적 텍스트로 분리되어 있음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000067",
+        "bbox": [
+          400,
+          1272,
+          41,
+          21
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0066_det_000067.png",
+        "observed_text": "2025",
+        "confidence": 0.9991788864135742
+      }
+    },
+    {
+      "field_id": "issue_month",
+      "key": "발급일 월",
+      "semantic_path": "발급정보.발급일.월",
+      "anchor_id": "manual_1783574337078",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000066",
+        "manual_1783574339727"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "style_class": "issue_date_part",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 뒤의 월은 정적 텍스트로 분리되어 있음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "anchor_id": "manual_1783574337078",
+        "bbox": [
+          459,
+          1271,
+          27,
+          22
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0077_manual_1783574337078.png",
+        "observed_text": "06",
+        "confidence": 0.9971617460250854
+      }
+    },
+    {
+      "field_id": "issue_day",
+      "key": "발급일 일",
+      "semantic_path": "발급정보.발급일.일",
+      "anchor_id": "manual_1783574342528",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000066",
+        "manual_1783574346177"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "style_class": "issue_date_part",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 뒤의 일은 정적 텍스트로 분리되어 있음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "anchor_id": "manual_1783574342528",
+        "bbox": [
+          502,
+          1271,
+          26,
+          24
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0079_manual_1783574342528.png",
+        "observed_text": "02",
+        "confidence": 0.999008297920227
+      }
+    },
+    {
+      "field_id": "institution_address",
+      "key": "발급기관 주소",
+      "semantic_path": "발급기관.주소",
+      "anchor_id": "det_000072",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000069"
+      ],
+      "value_type": "address",
+      "generator": "address.ko",
+      "style_class": "footer_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "anchor_id": "det_000072",
+        "bbox": [
+          322,
+          1331,
+          298,
+          20
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0068_det_000072.png",
+        "observed_text": "서울특별시 강남구 테해란로 456(역삼동)",
+        "confidence": 0.9446921944618225
+      }
+    },
+    {
+      "field_id": "institution_phone",
+      "key": "발급기관 전화",
+      "semantic_path": "발급기관.전화",
+      "anchor_id": "manual_1783574405161",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000073"
+      ],
+      "value_type": "phone",
+      "generator": "person.phone_kr",
+      "style_class": "footer_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "anchor_id": "manual_1783574405161",
+        "bbox": [
+          359,
+          1356,
+          104,
+          20
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0081_manual_1783574405161.png",
+        "observed_text": "02-123-4567",
+        "confidence": 0.9562896490097046
+      }
+    },
+    {
+      "field_id": "institution_fax",
+      "key": "발급기관 팩스",
+      "semantic_path": "발급기관.팩스",
+      "anchor_id": "manual_1783574410060",
+      "value": "",
+      "label_anchor_ids": [
+        "manual_1783574407343"
+      ],
+      "value_type": "phone",
+      "generator": "pattern:##-###-####",
+      "style_class": "footer_value",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "anchor_id": "manual_1783574410060",
+        "bbox": [
+          526,
+          1357,
+          103,
+          20
+        ],
+        "bbox_format": "xywh",
+        "source_image": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+        "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0083_manual_1783574410060.png",
+        "observed_text": "02-123–4568",
+        "confidence": 0.9510363936424255
+      }
+    }
+  ],
+  "unmapped_use_anchors": [],
+  "authoring_notes": [
+    "전체 템플릿 이미지(inpainted_lama.png)를 값 위치 source of truth로 사용했다.",
+    "sample_kind가 filled_sample이므로 review status=use 앵커를 값 target으로 매핑했다.",
+    "발급기관명은 원본 이미지에 보이나 값 제거 대상 use anchor가 아니므로 semantic_schema leaf만 남기고 binding은 만들지 않았다."
+  ]
+}

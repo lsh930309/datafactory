@@ -287,7 +287,7 @@ function addPolicyLabel(policy, box) {
     rec_confidence: null,
     rec_engine: '',
     rec_updated_at: '',
-    render_mode: 'handwriting',
+    render_mode: 'printed',
   };
   return { policy: { ...policy, labels: [...policy.labels, label] }, label };
 }
@@ -299,10 +299,6 @@ function summary(labels = []) {
 function relabel(policy, selectedIds, status) {
   const ids = new Set(selectedIds);
   return { ...policy, labels: policy.labels.map((label) => (ids.has(label.id) ? { ...label, status } : label)) };
-}
-function relabelRenderMode(policy, selectedIds, renderMode) {
-  const ids = new Set(selectedIds);
-  return { ...policy, labels: policy.labels.map((label) => (ids.has(label.id) ? { ...label, render_mode: renderMode } : label)) };
 }
 function staleRecognitionLabels(policy) {
   return (policy?.labels || []).filter((label) => label.ocr_text_stale);
@@ -389,10 +385,16 @@ function isHandwritingItem(itemOrDoc) {
 function handwritingReady(item) {
   return isHandwritingItem(item) && Number(item?.handwritingAcceptedCount || 0) > 0;
 }
-function finalExportReady(item) {
-  return handwritingReady(item)
-    || Boolean(item?.latestCleanroomPdf)
-    || Boolean(item?.latestAuthoringSchema && item?.latestAuthoringStylesheet && item?.latestAuthoringFakerProfile);
+function itemHasAuthoringBundle(item) {
+  return Boolean(item?.latestAuthoringSchema && item?.latestAuthoringStylesheet && item?.latestAuthoringFakerProfile);
+}
+function finalExportReady(item, options = {}) {
+  if (item?.latestCleanroomPdf) return true;
+  if (isHandwritingItem(item)) {
+    if (options.handwritingAsPrinted && itemHasAuthoringBundle(item)) return true;
+    return handwritingReady(item);
+  }
+  return Boolean(item?.latestCleanroomPdf) || itemHasAuthoringBundle(item);
 }
 function cleanroomArtifact(item) {
   const cleanroom = item?.manifest?.artifacts?.cleanroom || {};
@@ -406,11 +408,14 @@ function cleanroomArtifact(item) {
 }
 function finalOutputForItem(item, isNonPipeline, selectedSample = '') {
   if (!item) return null;
+  const cleanroom = cleanroomArtifact(item);
+  if (isNonPipeline && (cleanroom.previewPath || cleanroom.pdfPath)) {
+    return { locked: true, kind: 'cleanroom', label: '클린룸 최종 샘플', ...cleanroom };
+  }
   if (handwritingReady(item)) {
     return { locked: true, kind: 'handwriting', label: '수기 스캔 최종 샘플', previewPath: item.latestHandwritingAcceptedImage || '', pdfPath: '', contactSheet: '', notes: item.latestHandwritingMatchedGt || '', quality: `accepted ${item.handwritingAcceptedCount}` };
   }
   if (!isNonPipeline && !COMPLETED_WORK_STATUSES.has(item.status)) return null;
-  const cleanroom = cleanroomArtifact(item);
   if (cleanroom.previewPath || cleanroom.pdfPath) {
     return { locked: true, kind: 'cleanroom', label: '클린룸 최종 샘플', ...cleanroom };
   }
@@ -456,6 +461,7 @@ function App() {
   const [assessmentEdits, setAssessmentEdits] = useState({});
   const [assessmentExport, setAssessmentExport] = useState(null);
   const [finalExportCount, setFinalExportCount] = useState(1);
+  const [finalExportHandwritingAsPrinted, setFinalExportHandwritingAsPrinted] = useState(false);
   const [finalExportResult, setFinalExportResult] = useState(null);
   const [assessmentPopover, setAssessmentPopover] = useState(null);
   const [seedScan, setSeedScan] = useState({ summary: {}, folders: [] });
@@ -526,9 +532,13 @@ function App() {
   const [docxPipelineResult, setDocxPipelineResult] = useState(null);
   const [docxGenerateCount, setDocxGenerateCount] = useState(1);
   const [handwritingPrintPackResult, setHandwritingPrintPackResult] = useState(null);
-  const [handwritingPackCount, setHandwritingPackCount] = useState(5);
+  const [handwritingPackCount, setHandwritingPackCount] = useState(1);
   const [handwritingScanDir, setHandwritingScanDir] = useState('');
+  const [handwritingScanFiles, setHandwritingScanFiles] = useState([]);
+  const [handwritingScanWarnings, setHandwritingScanWarnings] = useState([]);
+  const [handwritingScanPopoverOpen, setHandwritingScanPopoverOpen] = useState(false);
   const [handwritingScanIntakeResult, setHandwritingScanIntakeResult] = useState(null);
+  const [authoringQrEditMode, setAuthoringQrEditMode] = useState(false);
   const [busy, setBusy] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -576,6 +586,7 @@ function App() {
     [selectedAssessmentRows],
   );
   const selectedIsHandwriting = isHandwritingItem(selectedItem || selectedDoc);
+  const authoringQrBox = authoringBundle?.schema?.handwriting?.qr_bbox || null;
 
   const enrichedItems = useMemo(() => items.map((item) => {
     const seeds = seedFolders.filter((folder) => folder.matchedDocId === item.docId);
@@ -611,18 +622,18 @@ function App() {
     targetGroupAllItems.filter((item) => matchesSampleAvailabilityFilter(item, sampleAvailabilityFilters))
   ), [targetGroupAllItems, sampleAvailabilityFilters]);
   const targetGroupFinalExportReadyItems = useMemo(() => (
-    targetGroupItems.filter(finalExportReady)
-  ), [targetGroupItems]);
+    targetGroupItems.filter((item) => finalExportReady(item, { handwritingAsPrinted: finalExportHandwritingAsPrinted }))
+  ), [targetGroupItems, finalExportHandwritingAsPrinted]);
   const targetGroupFinalExportMissingItems = useMemo(() => (
-    targetGroupItems.filter((item) => !finalExportReady(item))
-  ), [targetGroupItems]);
+    targetGroupItems.filter((item) => !finalExportReady(item, { handwritingAsPrinted: finalExportHandwritingAsPrinted }))
+  ), [targetGroupItems, finalExportHandwritingAsPrinted]);
   const targetGroupFinalExportScopeEntries = useMemo(() => {
-    const displayedDocIds = new Set(targetGroupItems.map((item) => item.docId));
+    const readyDocIds = new Set(targetGroupFinalExportReadyItems.map((item) => item.docId));
     const seen = new Set();
     const entries = [];
     for (const entry of activeTargetGroup.scopeEntries || []) {
       const docId = entry?.docId || entry?.doc_id || '';
-      if (!displayedDocIds.has(docId)) continue;
+      if (!readyDocIds.has(docId)) continue;
       const domain = entry?.domain || '';
       const key = `${domain}::${docId}`;
       if (seen.has(key)) continue;
@@ -630,7 +641,7 @@ function App() {
       entries.push({ domain, docId, title: entry?.title || '' });
     }
     if (entries.length) return entries;
-    for (const item of targetGroupItems) {
+    for (const item of targetGroupFinalExportReadyItems) {
       const doc = item.registry || {};
       const domain = doc.poDomains?.[0] || doc.firstPriorityDomains?.[0] || doc.domains?.[0] || '';
       const key = `${domain}::${item.docId}`;
@@ -639,7 +650,7 @@ function App() {
       entries.push({ domain, docId: item.docId, title: item.title });
     }
     return entries;
-  }, [activeTargetGroup, targetGroupItems]);
+  }, [activeTargetGroup, targetGroupFinalExportReadyItems]);
   const selectedManualCleanupItems = useMemo(() => (
     (manualCleanupAudit?.items || []).filter((item) => item.docId === selectedDocId)
   ), [manualCleanupAudit, selectedDocId]);
@@ -879,11 +890,6 @@ function App() {
     setMessage(`선택 BBox ${selectedIds.length}개 → ${STATUS_LABELS[status]}`);
   }
 
-  function setSelectedBboxRenderMode(renderMode) {
-    if (!selectedIsHandwriting || !policy || !selectedIds.length || !BBOX_RENDER_MODES.includes(renderMode)) return;
-    setEditedPolicy(relabelRenderMode(policy, selectedIds, renderMode));
-    setMessage(`선택 BBox ${selectedIds.length}개 → ${BBOX_RENDER_MODE_LABELS[renderMode]}`);
-  }
 
   async function scanReviewLegacyIssues() {
     setBusy('reviewAudit');
@@ -1186,17 +1192,67 @@ function App() {
 
   async function createHandwritingPrintPack() {
     if (!selectedDocId) return;
-    const count = Math.max(1, Math.min(100, Number(handwritingPackCount) || 5));
+    const count = Math.max(1, Math.min(100, Number(handwritingPackCount) || 1));
     setHandwritingPackCount(count);
     setBusy('handwritingPrintPack');
     setError('');
     try {
       const payload = await apiJson('/api/handwriting/print-pack', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, count, seed: 20260708 }),
+        body: JSON.stringify({ docId: selectedDocId, count, seed: 20260708, qrBbox: authoringQrBox || undefined }),
       });
       setHandwritingPrintPackResult(payload);
       setMessage(`수기 print pack 생성 완료: ${payload.summary?.sampleCount || count}건 · ${payload.paths?.runDir}`);
+      await refreshAll({ preserveSelection: true });
+    } finally {
+      setBusy('');
+    }
+  }
+
+  function openHandwritingScanPopover(files) {
+    const accepted = Array.from(files || []).filter((file) => /\.(pdf|png|jpe?g|tiff?|bmp|webp)$/i.test(file.name));
+    const rejected = Array.from(files || []).filter((file) => !accepted.includes(file));
+    if (!accepted.length) {
+      if ((files || []).length) setError('스캔 처리 지원 파일 형식은 PDF, PNG, JPG/JPEG, TIFF, BMP, WEBP입니다.');
+      setHandwritingScanPopoverOpen(true);
+      return;
+    }
+    setHandwritingScanFiles(accepted);
+    setHandwritingScanWarnings(rejected.map((file) => `${file.name}: 지원하지 않는 형식이라 제외됨`));
+    setHandwritingScanPopoverOpen(true);
+    setError('');
+  }
+
+  function closeHandwritingScanPopover() {
+    if (busy === 'handwritingScanUpload') return;
+    setHandwritingScanFiles([]);
+    setHandwritingScanWarnings([]);
+    setHandwritingScanPopoverOpen(false);
+  }
+
+  async function uploadHandwritingScansAndIntake() {
+    if (!handwritingScanFiles.length) return;
+    setBusy('handwritingScanUpload');
+    setError('');
+    try {
+      const files = await Promise.all(handwritingScanFiles.map(async (file) => ({
+        name: file.name,
+        contentType: file.type,
+        dataBase64: await readFileAsDataUrl(file),
+      })));
+      const payload = await apiJson('/api/handwriting/scan-upload-intake', {
+        method: 'POST',
+        body: JSON.stringify({
+          docId: selectedDocId || '',
+          files,
+          printPackManifest: selectedItem?.latestHandwritingPrintPack || '',
+        }),
+      });
+      setHandwritingScanFiles([]);
+      setHandwritingScanWarnings([]);
+      setHandwritingScanPopoverOpen(false);
+      setHandwritingScanIntakeResult(payload);
+      setMessage(`스캔 문서 처리 완료: accepted ${payload.summary?.acceptedCount || 0}건 · review ${payload.summary?.reviewRequiredCount || 0}건`);
       await refreshAll({ preserveSelection: true });
     } finally {
       setBusy('');
@@ -1300,7 +1356,7 @@ function App() {
     setFinalExportCount(count);
     setBusy('finalResultsExport');
     setError('');
-    setMessage(`${activeTargetGroup.label} ${targetGroupItems.length}종(${scopeEntries.length} scope)을 각 ${count}장씩 outputs/results에 최종 산출물로 생성 중입니다.`);
+    setMessage(`${activeTargetGroup.label} ${targetGroupItems.length}종(${scopeEntries.length} scope)을 각 ${count}장씩 outputs/results에 최종 산출물로 생성 중입니다.${finalExportHandwritingAsPrinted ? ' 수기 문서는 임시 인쇄체 렌더링 모드로 처리합니다.' : ''}`);
     try {
       const payload = await apiJson('/api/results/final-export', {
         method: 'POST',
@@ -1310,6 +1366,7 @@ function App() {
           seed: 20260703,
           renderScale: 2,
           clean: true,
+          renderHandwritingAsPrinted: finalExportHandwritingAsPrinted,
           scopeEntries,
         }),
       });
@@ -2392,6 +2449,59 @@ function App() {
     if (authoringResult?.paths?.image || selectedItem?.latestAuthoringPreview) setAuthoringPreviewStale(true);
   }
 
+  function updateAuthoringFieldRenderModes(fieldIds, renderMode) {
+    if (!authoringBundle || !BBOX_RENDER_MODES.includes(renderMode)) return;
+    const targetIds = new Set((Array.isArray(fieldIds) ? fieldIds : [fieldIds]).filter(Boolean));
+    if (!targetIds.size) return;
+    setAuthoringBundle((current) => ({
+      ...current,
+      schema: {
+        ...current.schema,
+        fields: (current.schema?.fields || []).map((field) => (
+          targetIds.has(field.field_id) ? { ...field, render_mode: renderMode } : field
+        )),
+      },
+    }));
+    setAuthoringDirty(true);
+    setAuthoringPreviewStale(true);
+    setMessage(`선택 Authoring field ${targetIds.size}개 → ${BBOX_RENDER_MODE_LABELS[renderMode]}`);
+  }
+
+  function updateAuthoringQrBox(box, options = {}) {
+    if (!authoringBundle || !box) return;
+    const imageWidthValue = Number(authoringBundle.schema?.image?.width || 0);
+    const imageHeightValue = Number(authoringBundle.schema?.image?.height || 0);
+    const imageWidth = Number.isFinite(imageWidthValue) && imageWidthValue > 0 ? Math.round(imageWidthValue) : Number.MAX_SAFE_INTEGER;
+    const imageHeight = Number.isFinite(imageHeightValue) && imageHeightValue > 0 ? Math.round(imageHeightValue) : Number.MAX_SAFE_INTEGER;
+    const rawWidth = Math.max(24, Math.round(Number(box.width ?? box[2] ?? 180)));
+    const rawHeight = Math.max(24, Math.round(Number(box.height ?? box[3] ?? box.width ?? box[2] ?? 180)));
+    let side = Math.max(rawWidth, rawHeight);
+    if (options.changedIndex === 2) side = rawWidth;
+    if (options.changedIndex === 3) side = rawHeight;
+    side = Math.max(24, Math.min(side, imageWidth, imageHeight));
+    const x = Math.round(Number(box.x ?? box[0] ?? 0));
+    const y = Math.round(Number(box.y ?? box[1] ?? 0));
+    const normalized = [
+      Math.max(0, Math.min(x, Math.max(0, imageWidth - side))),
+      Math.max(0, Math.min(y, Math.max(0, imageHeight - side))),
+      side,
+      side,
+    ];
+    setAuthoringBundle((current) => ({
+      ...current,
+      schema: {
+        ...current.schema,
+        handwriting: {
+          ...(current.schema?.handwriting || {}),
+          qr_bbox: normalized,
+        },
+      },
+    }));
+    setAuthoringDirty(true);
+    setAuthoringPreviewStale(true);
+    setMessage(`QR bbox 지정: [${normalized.join(', ')}]`);
+  }
+
   async function refreshFonts() {
     const payload = await apiJson('/api/fonts?refresh=1');
     setFontPayload(payload);
@@ -2413,6 +2523,8 @@ function App() {
           fakerProfile: authoringBundle.faker_profile,
           seed: 1234,
           renderScale: 2,
+          handwritingPreview: selectedIsHandwriting,
+          qrBbox: selectedIsHandwriting ? (authoringBundle.schema?.handwriting?.qr_bbox || null) : null,
         }),
       });
       if (seq !== authoringPreviewSeq.current) return null;
@@ -2698,6 +2810,16 @@ function App() {
           busy={busy === 'upload'}
         />
       )}
+      {handwritingScanPopoverOpen && (
+        <HandwritingScanPopover
+          files={handwritingScanFiles}
+          warnings={handwritingScanWarnings}
+          setFiles={(files) => openHandwritingScanPopover(files)}
+          busy={busy === 'handwritingScanUpload'}
+          onClose={closeHandwritingScanPopover}
+          onSubmit={() => run(uploadHandwritingScansAndIntake)}
+        />
+      )}
       {recognitionPopover && (
         <RecognitionPopover
           data={recognitionPopover}
@@ -2843,6 +2965,17 @@ function App() {
                 <span>{finalExportResult?.summary ? `OK ${finalExportResult.summary.okCount} · 오류 ${finalExportResult.summary.errorCount}` : `${activeTargetGroup.label} · ${targetGroupFinalExportScopeEntries.length} scope`}</span>
               </div>
               <p className="muted mini-help">현재 선택 그룹 기준으로 `outputs/results`에 생성합니다. 출력 가능 {targetGroupFinalExportReadyItems.length}종 · 미준비 {targetGroupFinalExportMissingItems.length}종</p>
+              <label className="toggle-row final-export-toggle">
+                <input
+                  type="checkbox"
+                  checked={finalExportHandwritingAsPrinted}
+                  onChange={(event) => setFinalExportHandwritingAsPrinted(event.target.checked)}
+                />
+                <span>
+                  <b>수기체 문건 임시 인쇄체 렌더링</b>
+                  <small>켜면 수기 문건도 authoring stylesheet/faker로 최종 샘플을 생성합니다. QR 코드는 자동 삽입하지 않습니다.</small>
+                </span>
+              </label>
               <div className="final-export-controls">
                 <label>문서별 생성 매수
                   <input
@@ -3036,6 +3169,9 @@ function App() {
                 selectedFieldIds={selectedAuthoringFieldIds}
                 setSelectedFieldIds={selectAuthoringFields}
                 viewportMode={viewportMode}
+                qrBox={selectedIsHandwriting ? authoringQrBox : null}
+                qrEditMode={selectedIsHandwriting && authoringQrEditMode}
+                onQrBoxChange={updateAuthoringQrBox}
               />
             ) : showCleanupCanvas ? (
               <CleanupCanvas
@@ -3055,7 +3191,7 @@ function App() {
             ) : showInpaintCanvas ? (
               <SamplePreview path={inpaintedPath} version={inpaintVersion} viewportMode={viewportMode} />
             ) : policy ? (
-              <DocumentCanvas policy={policy} setPolicy={setEditedPolicy} selectedIds={selected} setSelectedIds={setSelectedIds} editMode={bboxEditMode} viewportMode={viewportMode} showRenderMode={selectedIsHandwriting} />
+              <DocumentCanvas policy={policy} setPolicy={setEditedPolicy} selectedIds={selected} setSelectedIds={setSelectedIds} editMode={bboxEditMode} viewportMode={viewportMode} showRenderMode={false} />
             ) : selectedSample ? (
               <SamplePreview path={selectedSample} viewportMode={viewportMode} />
             ) : <div className="empty">왼쪽 입고함에서 자동 적재하거나, 수집 필요 문서를 확인하세요.</div>}
@@ -3115,6 +3251,9 @@ function App() {
                 </label>
                 <button onClick={() => run(runHandwritingScanIntake)} disabled={!selectedItem?.latestHandwritingPrintPack || !handwritingScanDir.trim() || isBusy}>
                   {busy === 'handwritingScanIntake' ? '매칭 중...' : '스캔 intake / GT 매칭'}
+                </button>
+                <button onClick={() => openHandwritingScanPopover([])} disabled={!selectedItem?.latestHandwritingPrintPack || isBusy}>
+                  scan 문서 처리하기
                 </button>
                 {handwritingPrintPackResult?.paths?.manifest && <small>생성 manifest: {handwritingPrintPackResult.paths.manifest}</small>}
                 {handwritingScanIntakeResult?.paths?.manifest && <small>intake manifest: {handwritingScanIntakeResult.paths.manifest}</small>}
@@ -3189,22 +3328,6 @@ function App() {
               {staleLabels.length ? ` · 재확인 ${staleLabels.length}` : ''}
             </div>
             <div className="status-buttons">{STATUS.map((status, index) => <button key={status} className={`status ${status}`} title={`${index + 1}: ${STATUS_DESCRIPTIONS[status]}`} disabled={!policy || selectedIds.length === 0 || isBusy} onClick={() => setSelectedBboxStatus(status)}><b>{index + 1}</b>{STATUS_LABELS[status]}</button>)}</div>
-            {selectedIsHandwriting && (
-              <div className="render-mode-control">
-                <div className="render-mode-title">수기 bbox 처리 방식</div>
-                <div className="render-mode-buttons">
-                  {BBOX_RENDER_MODES.map((mode) => {
-                    const activeCount = selectedReviewLabels.filter((label) => (label.render_mode || 'handwriting') === mode).length;
-                    return (
-                      <button key={mode} className={activeCount && activeCount === selectedReviewLabels.length ? 'active' : ''} title={BBOX_RENDER_MODE_DESCRIPTIONS[mode]} disabled={!policy || selectedIds.length === 0 || isBusy} onClick={() => setSelectedBboxRenderMode(mode)}>
-                        {BBOX_RENDER_MODE_LABELS[mode]}{activeCount ? ` ${activeCount}` : ''}
-                      </button>
-                    );
-                  })}
-                </div>
-                <small>필기체는 답안지 작성 대상, 인쇄체는 수기 템플릿에 스타일 적용 렌더 대상입니다.</small>
-              </div>
-            )}
             <button onClick={() => run(() => runCropRecognition({ mode: 'apply' }))} disabled={!policy || isBusy || (!selectedIds.length && !staleLabels.length)}>
               {busy === 'recognizeCrops'
                 ? '텍스트 재인식 중...'
@@ -3348,7 +3471,9 @@ function App() {
                 stylesheet={authoringBundle.stylesheet}
                 selectedStyle={selectedAuthoringStyle}
                 fontOptions={fontOptions}
+                isHandwritingDocument={selectedIsHandwriting}
                 onFieldChange={updateAuthoringField}
+                onRenderModeChange={updateAuthoringFieldRenderModes}
                 onStyleChange={updateAuthoringStyles}
                 onRenderPolicyChange={updateAuthoringRenderPolicies}
                 onRefreshFonts={() => run(refreshFonts)}
@@ -3374,11 +3499,36 @@ function App() {
               </details>
             )}
             <div className="authoring-step-label"><b>2. Render</b><span>live preview와 샘플 생성</span></div>
-            <button onClick={() => run(() => renderAuthoringLivePreview({ silent: false }))} disabled={!authoringBundle || isDocxAuthoringBundle || selectedIsHandwriting || isBusy}>
+            {selectedIsHandwriting && authoringBundle && (
+              <div className="authoring-edit-section handwriting-authoring-section">
+                <div className="section-mini-title"><b>수기 QR bbox</b><span>print pack / scan decode 위치</span></div>
+                <div className="button-row compact-buttons">
+                  <button className={authoringQrEditMode ? 'active' : ''} onClick={() => setAuthoringQrEditMode((current) => !current)} disabled={isBusy}>
+                    {authoringQrEditMode ? 'QR bbox 지정 모드 종료' : 'QR bbox 드래그 지정'}
+                  </button>
+                  <button onClick={() => run(() => renderAuthoringLivePreview({ silent: false }))} disabled={isBusy}>
+                    QR/인쇄체 live preview
+                  </button>
+                </div>
+                <div className="bbox-readonly-grid">
+                  {(authoringQrBox || [0, 0, 0, 0]).map((value, index) => (
+                    <label key={index}>{['x', 'y', 'w', 'h'][index]}
+                      <input type="number" value={value} onChange={(event) => {
+                        const next = [...(authoringQrBox || [0, 0, 180, 180])];
+                        next[index] = Number(event.target.value) || 0;
+                        updateAuthoringQrBox(next, { changedIndex: index });
+                      }} />
+                    </label>
+                  ))}
+                </div>
+                <p className="muted">QR bbox 지정 모드에서 문서 위를 드래그하면 정사각형 영역으로 저장됩니다. scan intake는 모든 print pack의 QR bbox crop을 순회해 decode합니다.</p>
+              </div>
+            )}
+            <button onClick={() => run(() => renderAuthoringLivePreview({ silent: false }))} disabled={!authoringBundle || isDocxAuthoringBundle || isBusy}>
               {busy === 'authoringLivePreview' ? 'Live preview 갱신 중...' : 'Live preview 새로고침'}
             </button>
             {isDocxAuthoringBundle && <p className="muted">DOCX 템플릿은 이미지 텍스트 렌더 preview 대신 DOCX 값 주입 경로를 사용합니다. PDF 렌더는 LibreOffice 기반 실험 기능이며 외부 GUI 앱 자동화 렌더러는 사용하지 않습니다.</p>}
-            {selectedIsHandwriting && <p className="muted">수기 문서는 최종 텍스트 렌더링을 금지합니다. Render 단계 대신 오른쪽의 수기 Print pack / scan intake 흐름을 사용하세요.</p>}
+            {selectedIsHandwriting && <p className="muted">수기 문서 live preview는 최종 제출용 렌더가 아니라, 인쇄체로 처리할 bbox와 QR 위치를 확인하는 용도입니다. 필기체 bbox 값은 답안지에만 출력됩니다.</p>}
             <div className="button-row single-action-row">
               <button onClick={() => run(() => renderAuthoringBatch({ all: false }))} disabled={!canLoadAuthoring || selectedIsHandwriting || isBusy}>
                 {busy === 'authoringBatch' ? '5장 생성 중...' : selectedIsHandwriting ? '수기 문서는 렌더 생성 불가' : '선택 문서 5장 생성'}
@@ -3501,7 +3651,7 @@ function hasRenderableAuthoringBbox(field) {
   return Array.isArray(field?.bbox) && field.bbox.length === 4 && field.bbox.every((value) => Number.isFinite(Number(value)));
 }
 
-function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldIds, setSelectedFieldIds, viewportMode }) {
+function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldIds, setSelectedFieldIds, viewportMode, qrBox = null, qrEditMode = false, onQrBoxChange = null }) {
   const width = image?.width || 1200;
   const height = image?.height || 1600;
   const svgRef = useRef(null);
@@ -3522,6 +3672,16 @@ function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldI
     const bottom = Math.max(start.y, end.y);
     return { x, y, width: right - x, height: bottom - y, right, bottom };
   }
+  function normalizedSquareDragBox(start, end) {
+    const dx = end.x - start.x;
+    const dy = end.y - start.y;
+    const side = Math.min(Math.max(Math.abs(dx), Math.abs(dy)), width, height);
+    const rawX = dx < 0 ? start.x - side : start.x;
+    const rawY = dy < 0 ? start.y - side : start.y;
+    const x = Math.max(0, Math.min(rawX, width - side));
+    const y = Math.max(0, Math.min(rawY, height - side));
+    return { x, y, width: side, height: side, right: x + side, bottom: y + side };
+  }
   function intersects(left, right) {
     return left.x <= right.right && left.right >= right.x && left.y <= right.bottom && left.bottom >= right.y;
   }
@@ -3533,6 +3693,12 @@ function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldI
   }
   function handlePointerDown(event) {
     if (!svgRef.current) return;
+    if (qrEditMode) {
+      const start = eventPoint(event);
+      setDragBox({ start, current: start, kind: 'qr' });
+      event.currentTarget.setPointerCapture?.(event.pointerId);
+      return;
+    }
     const fieldNode = event.target.closest?.('[data-authoring-field-id]');
     if (fieldNode) {
       const fieldId = fieldNode.getAttribute('data-authoring-field-id');
@@ -3550,7 +3716,15 @@ function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldI
   }
   function handlePointerUp(event) {
     if (!dragBox) return;
-    const box = normalizedDragBox(dragBox.start, eventPoint(event));
+    const box = dragBox.kind === 'qr'
+      ? normalizedSquareDragBox(dragBox.start, eventPoint(event))
+      : normalizedDragBox(dragBox.start, eventPoint(event));
+    if (dragBox.kind === 'qr') {
+      if (box.width >= 12 && box.height >= 12 && onQrBoxChange) onQrBoxChange(box);
+      setDragBox(null);
+      event.currentTarget.releasePointerCapture?.(event.pointerId);
+      return;
+    }
     const hits = box.width < 3 && box.height < 3
       ? []
       : fields.filter((field) => intersects(bboxOf(field), box)).map((field) => field.field_id);
@@ -3562,7 +3736,9 @@ function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldI
     setDragBox(null);
     event.currentTarget.releasePointerCapture?.(event.pointerId);
   }
-  const activeDragBox = dragBox ? normalizedDragBox(dragBox.start, dragBox.current) : null;
+  const activeDragBox = dragBox
+    ? (dragBox.kind === 'qr' ? normalizedSquareDragBox(dragBox.start, dragBox.current) : normalizedDragBox(dragBox.start, dragBox.current))
+    : null;
   return (
     <DocumentViewport width={width} height={height} mode={viewportMode}>
       <div className="svg-wrap authoring-canvas">
@@ -3596,6 +3772,23 @@ function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldI
               </g>
             );
           })}
+          {qrBox && Array.isArray(qrBox) && qrBox.length === 4 && (
+            <g className="authoring-qr-bbox-group">
+              <rect
+                x={Number(qrBox[0]) || 0}
+                y={Number(qrBox[1]) || 0}
+                width={Number(qrBox[2]) || 1}
+                height={Number(qrBox[3]) || 1}
+                fill="rgba(244, 63, 94, 0.10)"
+                stroke="#e11d48"
+                strokeWidth={2}
+                strokeDasharray="8 4"
+                vectorEffect="non-scaling-stroke"
+                pointerEvents="none"
+              />
+              <text x={(Number(qrBox[0]) || 0) + 4} y={(Number(qrBox[1]) || 0) + 14} fill="#e11d48" fontSize="14" fontWeight="800" pointerEvents="none">QR</text>
+            </g>
+          )}
           {activeDragBox && (
             <rect
               x={activeDragBox.x}
@@ -3622,7 +3815,9 @@ function AuthoringEditor({
   fakerProfile,
   selectedStyle,
   fontOptions,
+  isHandwritingDocument,
   onFieldChange,
+  onRenderModeChange,
   onStyleChange,
   onRenderPolicyChange,
   onRefreshFonts,
@@ -3638,6 +3833,8 @@ function AuthoringEditor({
   const hasCheckboxSelection = selectedCheckboxFields.length > 0;
   const checkboxStyles = [...new Set(selectedCheckboxFields.map((field) => field.render_policy?.checkbox_style || 'v_mark'))];
   const checkboxStyleValue = checkboxStyles.length === 1 ? checkboxStyles[0] : 'mixed';
+  const renderModes = [...new Set(selectedFields.map((field) => field.render_mode || 'printed'))];
+  const renderModeValue = renderModes.length === 1 ? renderModes[0] : 'mixed';
   function updateStyle(patch, options) {
     if (!activeIds.length) return;
     onStyleChange(activeIds, patch, options);
@@ -3708,6 +3905,16 @@ function AuthoringEditor({
           )}
           <div className="authoring-edit-section render-policy-section">
             <div className="section-mini-title"><b>Render Policy</b><span>정렬/초과/체크박스 표현</span></div>
+            {isHandwritingDocument && (
+              <label>수기 문건 처리 방식
+                <select value={renderModeValue} onChange={(event) => onRenderModeChange(activeIds, event.target.value)}>
+                  {renderModeValue === 'mixed' && <option value="mixed" disabled>혼합됨</option>}
+                  <option value="handwriting">필기체: 답안지에만 출력</option>
+                  <option value="printed">인쇄체: 템플릿에 렌더링</option>
+                </select>
+                <small>이 설정은 authoring field에만 저장되며, review 단계 render_mode는 더 이상 참조하지 않습니다.</small>
+              </label>
+            )}
             <div className="triple-grid">
             <label>가로
               <select value={renderPolicy.align || 'left'} onChange={(event) => updateRenderPolicy({ align: event.target.value })}>
@@ -3857,6 +4064,44 @@ function AuthoringEditor({
           </div>
         </div>
       ) : <p className="muted">편집할 필드가 없습니다.</p>}
+    </div>
+  );
+}
+
+function HandwritingScanPopover({ files, warnings, setFiles, onClose, onSubmit, busy }) {
+  function handleDrop(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    setFiles(event.dataTransfer?.files || []);
+  }
+  return (
+    <div className="upload-backdrop recognition-backdrop" role="dialog" aria-modal="true" onDragOver={(event) => event.preventDefault()} onDrop={handleDrop}>
+      <div className="upload-popover recognition-popover">
+        <div className="upload-header">
+          <div>
+            <p className="eyebrow dark">Handwriting Scan Intake</p>
+            <h2>scan 문서 처리하기</h2>
+            <p className="muted">여러 스캔본이 합쳐진 PDF 또는 이미지들을 여기에 드래그 앤 드롭하세요. 페이지 분할 후 현재 준비된 모든 QR bbox 후보를 crop/decode해 GT와 매칭합니다.</p>
+          </div>
+          <button onClick={onClose} disabled={busy}>닫기</button>
+        </div>
+        <div className="scan-drop-zone">
+          <b>PDF / PNG / JPG / TIFF / BMP / WEBP 드롭</b>
+          <small>기존 seed sample 드래그&드롭과 별도 popover 내부에서만 처리됩니다.</small>
+          <input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.tif,.tiff,.bmp,.webp" onChange={(event) => setFiles(event.target.files || [])} />
+        </div>
+        <div className="upload-files">
+          {files.map((file) => <span key={`${file.name}-${file.size}`}>{file.name} · {(file.size / 1024 / 1024).toFixed(2)}MB</span>)}
+          {warnings.map((warning) => <span className="warn" key={warning}>{warning}</span>)}
+          {!files.length && <span>아직 선택된 스캔 파일이 없습니다.</span>}
+        </div>
+        <div className="upload-footer">
+          <p className="muted">decode 엔진: WeChat QR 사용 가능 시 우선, 기존 DataFactory grid marker는 호환 fallback.</p>
+          <button className="primary" onClick={onSubmit} disabled={busy || !files.length}>
+            {busy ? '처리 중...' : '페이지 분할 / QR decode / GT 매칭'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -4508,14 +4753,14 @@ function DocumentCanvas({ policy, setPolicy, selectedIds, setSelectedIds, editMo
                 stroke={STATUS_COLORS[label.status] || '#888'}
                 strokeWidth={isSelected ? 1.5 : 1}
                 vectorEffect="non-scaling-stroke"
-                className={`${isSelected ? 'bbox selected' : 'bbox'}${editEnabled ? ' editable' : ''}${label.ocr_text_stale ? ' stale' : ''}${showRenderMode ? ` render-${label.render_mode || 'handwriting'}` : ''}`}
+                className={`${isSelected ? 'bbox selected' : 'bbox'}${editEnabled ? ' editable' : ''}${label.ocr_text_stale ? ' stale' : ''}${showRenderMode ? ` render-${label.render_mode || 'printed'}` : ''}`}
                 onPointerDown={(event) => {
                   if (editEnabled) beginMove(event, label);
                   else selectOnly(event, label);
                 }}
                 onContextMenu={preventContextMenu}
               >
-                <title>{`${label.id} · ${STATUS_LABELS[label.status]}${showRenderMode ? ` · ${BBOX_RENDER_MODE_LABELS[label.render_mode || 'handwriting'] || label.render_mode || '필기체'}` : ''} · ${AUTO_TYPE_LABELS[label.auto_type] || label.auto_type}${label.ocr_text_stale ? ' · 텍스트 재확인 필요' : ''} · ${label.text}`}</title>
+                <title>{`${label.id} · ${STATUS_LABELS[label.status]}${showRenderMode ? ` · ${BBOX_RENDER_MODE_LABELS[label.render_mode || 'printed'] || label.render_mode || '인쇄체'}` : ''} · ${AUTO_TYPE_LABELS[label.auto_type] || label.auto_type}${label.ocr_text_stale ? ' · 텍스트 재확인 필요' : ''} · ${label.text}`}</title>
               </rect>
               {isSelected && <circle cx={box.cx} cy={box.cy} r="2" fill={STATUS_COLORS[label.status] || '#888'} opacity="0.72" vectorEffect="non-scaling-stroke" pointerEvents="none" />}
               {label.ocr_text_stale && <circle cx={Math.max(3, box.x + 4)} cy={Math.max(3, box.y + 4)} r="2.2" fill="#ff9800" vectorEffect="non-scaling-stroke" pointerEvents="none" />}

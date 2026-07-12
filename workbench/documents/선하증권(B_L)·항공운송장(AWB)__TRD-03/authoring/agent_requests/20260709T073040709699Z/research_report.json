@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-03",
+  "title": "선하증권(B/L)·항공운송장(AWB)",
+  "search_date": "2026-07-09",
+  "queries": [
+    "bill of lading fields shipper consignee notify party port of loading discharge vessel packages gross weight measurement original bills of lading",
+    "항공운송장 AWB 작성 항목 shipper consignee airport departure destination pieces gross weight chargeable weight",
+    "선하증권 Bill of Lading 기재사항 선적인 수하인 통지처 선박 선적항 양륙항 화물명세",
+    "bill of lading required information shipper consignee port of loading port of discharge packages weight official",
+    "air waybill required information shipper consignee airport destination pieces gross weight official"
+  ],
+  "sources": [
+    {
+      "id": "R-BL-001",
+      "url": "https://en.wikipedia.org/wiki/Bill_of_lading",
+      "source_type": "reference/legal-logistics overview",
+      "summary": "B/L은 운송인이 화물 수령을 확인하는 문서이며 운송계약의 증거와 권리증권 기능을 갖는다. 화물의 nature, quantity, leading marks 등을 식별하는 문서라는 설명을 필드 의미 보조 근거로 사용했다."
+    },
+    {
+      "id": "R-AWB-001",
+      "url": "https://en.wikipedia.org/wiki/Air_waybill",
+      "source_type": "reference/air cargo overview",
+      "summary": "AWB는 국제 항공사가 발행하는 비유통성 운송증빙이며 공항 간 화물 운송계약/수령증 성격이 있다. 현재 템플릿은 B/L 이미지이므로 AWB 전용 필드는 schema에 추가하지 않는 판단 근거로 사용했다."
+    },
+    {
+      "id": "R-BL-003",
+      "url": "https://www.investopedia.com/ask/answers/030915/can-i-have-more-three-original-bills-lading.asp",
+      "source_type": "industry explainer",
+      "summary": "B/L에는 shipper, consignee, carrier, shipping date/reference, goods description, declared value 등이 일반적으로 포함되며 원본 부수는 문서에 표시되어야 한다는 설명을 필드명과 원본 발행 부수 해석에 사용했다."
+    }
+  ],
+  "field_evidence_links": [
+    {
+      "field_ids": [
+        "shipper_name",
+        "consignee_name",
+        "bl_number",
+        "package_description",
+        "goods_description",
+        "gross_weight",
+        "date_of_issue"
+      ],
+      "evidence_ids": [
+        "R-BL-001",
+        "R-BL-003"
+      ]
+    },
+    {
+      "field_ids": [
+        "number_of_originals"
+      ],
+      "evidence_ids": [
+        "R-BL-003"
+      ]
+    },
+    {
+      "field_ids": [],
+      "evidence_ids": [
+        "R-AWB-001"
+      ],
+      "note": "문서명상 AWB도 포함되지만 현 이미지가 B/L이어서 미적용"
+    }
+  ],
+  "visual_priority_note": "리서치로 발견한 일반 B/L/AWB 항목은 템플릿에 대응 anchor가 있을 때만 적용했다."
+}

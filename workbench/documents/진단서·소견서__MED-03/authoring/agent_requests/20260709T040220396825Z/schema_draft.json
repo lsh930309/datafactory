@@ -1,0 +1,1159 @@
+{
+  "schema_version": 2,
+  "doc_id": "MED-03",
+  "title": "진단서·소견서",
+  "sample_kind": "blank_template",
+  "semantic_schema": {
+    "문서관리": {
+      "등록번호": "",
+      "연번호": ""
+    },
+    "환자": {
+      "성명": "",
+      "주민등록번호": "",
+      "주소": "",
+      "전화번호": ""
+    },
+    "진단": {
+      "병명": {
+        "주질병부상": "",
+        "부질병부상": ""
+      },
+      "질병분류기호": {
+        "주질병부상": "",
+        "부질병부상": ""
+      },
+      "병명구분": {
+        "임상적추정": "",
+        "최종진단": ""
+      },
+      "발병연월일": {
+        "년": "",
+        "월": "",
+        "일": ""
+      },
+      "진단연월일": {
+        "년": "",
+        "월": "",
+        "일": ""
+      },
+      "치료내용및향후치료소견": ""
+    },
+    "입퇴원": {
+      "입원일": {
+        "년": "",
+        "월": "",
+        "일": ""
+      },
+      "퇴원일": {
+        "년": "",
+        "월": "",
+        "일": ""
+      }
+    },
+    "기타": {
+      "용도": "",
+      "비고": ""
+    },
+    "발급": {
+      "발급일": {
+        "년": "",
+        "월": "",
+        "일": ""
+      },
+      "의료기관": {
+        "명칭": "",
+        "주소": ""
+      },
+      "의료인": {
+        "면허자격": {
+          "의사": "",
+          "치과의사": "",
+          "한의사": ""
+        },
+        "면허번호": "",
+        "성명": ""
+      }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "registration_number",
+      "key": "등록번호",
+      "semantic_path": "문서관리/등록번호",
+      "anchor_id": "manual_1783569458667",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:######",
+      "faker_rule": "pattern:######",
+      "style_class": "handwriting_small",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          212,
+          230,
+          137,
+          45
+        ],
+        "note": "좌측 상단 등록번호 라벨 오른쪽 빈 칸."
+      }
+    },
+    {
+      "field_id": "serial_number",
+      "key": "연번호",
+      "semantic_path": "문서관리/연번호",
+      "anchor_id": "manual_1783569463517",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000004"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:######",
+      "faker_rule": "pattern:######",
+      "style_class": "handwriting_small",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          214,
+          278,
+          135,
+          40
+        ],
+        "note": "좌측 상단 연번호 라벨 오른쪽 빈 칸."
+      }
+    },
+    {
+      "field_id": "patient_name",
+      "key": "환자의 성명",
+      "semantic_path": "환자/성명",
+      "anchor_id": "manual_1783569471284",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000006"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          351,
+          332,
+          339,
+          62
+        ],
+        "note": "환자의 성명 라벨 오른쪽 넓은 빈 칸."
+      }
+    },
+    {
+      "field_id": "patient_rrn",
+      "key": "환자의 주민등록번호",
+      "semantic_path": "환자/주민등록번호",
+      "anchor_id": "manual_1783569474567",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "det_000007"
+      ],
+      "value_type": "rrn",
+      "generator": "person.rrn",
+      "faker_rule": "person.rrn",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          838,
+          332,
+          232,
+          62
+        ],
+        "note": "환자의 주민등록번호 라벨 오른쪽 빈 칸."
+      }
+    },
+    {
+      "field_id": "patient_address",
+      "key": "환자의 주소",
+      "semantic_path": "환자/주소",
+      "anchor_id": "manual_1783569487684",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000008"
+      ],
+      "value_type": "address",
+      "generator": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          351,
+          396,
+          360,
+          58
+        ],
+        "note": "환자의 주소 라벨 오른쪽 빈 칸."
+      }
+    },
+    {
+      "field_id": "patient_phone",
+      "key": "전화번호",
+      "semantic_path": "환자/전화번호",
+      "anchor_id": "manual_1783569492217",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000009",
+        "det_000010"
+      ],
+      "value_type": "phone",
+      "generator": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          806,
+          424,
+          241,
+          30
+        ],
+        "note": "주소 행 우측 괄호 안 전화번호 값 영역. 괄호와 전화번호: 라벨은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "primary_diagnosis_name",
+      "key": "주 질병·부상 병명",
+      "semantic_path": "진단/병명/주질병부상",
+      "anchor_id": "manual_1783569501200",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000011",
+        "det_000012"
+      ],
+      "value_type": "medical_diagnosis",
+      "generator": "pool:diagnosis_names",
+      "faker_rule": "pool:diagnosis_names",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          365,
+          497,
+          463,
+          30
+        ],
+        "note": "병명 행의 (주 질병·부상) 오른쪽 병명 값 영역."
+      }
+    },
+    {
+      "field_id": "secondary_diagnosis_name",
+      "key": "부 질병·부상 병명",
+      "semantic_path": "진단/병명/부질병부상",
+      "anchor_id": "manual_1783569506417",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000011",
+        "det_000016"
+      ],
+      "value_type": "medical_diagnosis",
+      "generator": "pool:diagnosis_names",
+      "faker_rule": "pool:diagnosis_names",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          365,
+          550,
+          465,
+          21
+        ],
+        "note": "병명 행의 (부 질병·부상) 오른쪽 병명 값 영역."
+      }
+    },
+    {
+      "field_id": "primary_diagnosis_code",
+      "key": "주 질병·부상 질병분류기호",
+      "semantic_path": "진단/질병분류기호/주질병부상",
+      "anchor_id": "manual_1783569519501",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000013"
+      ],
+      "value_type": "medical_code",
+      "generator": "pool:diagnosis_codes",
+      "faker_rule": "pool:diagnosis_codes",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          842,
+          496,
+          223,
+          31
+        ],
+        "note": "우측 질병분류기호 열의 주 질병·부상 코드 값 영역."
+      }
+    },
+    {
+      "field_id": "secondary_diagnosis_code",
+      "key": "부 질병·부상 질병분류기호",
+      "semantic_path": "진단/질병분류기호/부질병부상",
+      "anchor_id": "manual_1783569523834",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000013"
+      ],
+      "value_type": "medical_code",
+      "generator": "pool:diagnosis_codes",
+      "faker_rule": "pool:diagnosis_codes",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          844,
+          549,
+          223,
+          22
+        ],
+        "note": "우측 질병분류기호 열의 부 질병·부상 코드 값 영역."
+      }
+    },
+    {
+      "field_id": "diagnosis_basis_clinical_estimate",
+      "key": "임상적 추정 선택",
+      "semantic_path": "진단/병명구분/임상적추정",
+      "anchor_id": "manual_1783569535434",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000014"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          177,
+          501,
+          21,
+          23
+        ],
+        "note": "병명 좌측 [ ] 임상적 추정 체크박스."
+      }
+    },
+    {
+      "field_id": "diagnosis_basis_final",
+      "key": "최종진단 선택",
+      "semantic_path": "진단/병명구분/최종진단",
+      "anchor_id": "manual_1783569537966",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000015"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          177,
+          532,
+          22,
+          21
+        ],
+        "note": "병명 좌측 [ ] 최종진단 체크박스."
+      }
+    },
+    {
+      "field_id": "onset_year",
+      "key": "발병연월일 년",
+      "semantic_path": "진단/발병연월일/년",
+      "anchor_id": "manual_1783569540499",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000018"
+      ],
+      "value_type": "date_year",
+      "generator": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:년",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          396,
+          587,
+          86,
+          26
+        ],
+        "note": "발병연월일의 년 값 영역. 값 뒤의 년은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "onset_month",
+      "key": "발병연월일 월",
+      "semantic_path": "진단/발병연월일/월",
+      "anchor_id": "manual_1783569544967",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000019"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:월",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          511,
+          587,
+          29,
+          26
+        ],
+        "note": "발병연월일의 월 값 영역. 값 뒤의 월은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "onset_day",
+      "key": "발병연월일 일",
+      "semantic_path": "진단/발병연월일/일",
+      "anchor_id": "manual_1783569547199",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000020"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:일",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          564,
+          587,
+          31,
+          27
+        ],
+        "note": "발병연월일의 일 값 영역. 값 뒤의 일은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "diagnosis_year",
+      "key": "진단연월일 년",
+      "semantic_path": "진단/진단연월일/년",
+      "anchor_id": "manual_1783569551817",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000021",
+        "det_000022"
+      ],
+      "value_type": "date_year",
+      "generator": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:년",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          850,
+          588,
+          75,
+          26
+        ],
+        "note": "진단연월일의 년 값 영역. 값 뒤의 년은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "diagnosis_month",
+      "key": "진단연월일 월",
+      "semantic_path": "진단/진단연월일/월",
+      "anchor_id": "manual_1783569555350",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000021",
+        "det_000023"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:월",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          946,
+          587,
+          27,
+          25
+        ],
+        "note": "진단연월일의 월 값 영역. 값 뒤의 월은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "diagnosis_day",
+      "key": "진단연월일 일",
+      "semantic_path": "진단/진단연월일/일",
+      "anchor_id": "manual_1783569559667",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000021",
+        "det_000024"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:일",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          991,
+          586,
+          27,
+          28
+        ],
+        "note": "진단연월일의 일 값 영역. 값 뒤의 일은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "treatment_opinion",
+      "key": "치료 내용 및 향후 치료에 대한 소견",
+      "semantic_path": "진단/치료내용및향후치료소견",
+      "anchor_id": "manual_1783569567599",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000025",
+        "det_000026"
+      ],
+      "value_type": "free_text",
+      "generator": "pool:treatment_opinions",
+      "faker_rule": "pool:treatment_opinions",
+      "style_class": "handwriting_multiline",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          351,
+          633,
+          718,
+          145
+        ],
+        "note": "중앙의 큰 장문 입력 영역."
+      }
+    },
+    {
+      "field_id": "admission_year",
+      "key": "입원일 년",
+      "semantic_path": "입퇴원/입원일/년",
+      "anchor_id": "manual_1783569574250",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027",
+        "det_000028",
+        "det_000029"
+      ],
+      "value_type": "date_year",
+      "generator": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:년",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          457,
+          788,
+          70,
+          38
+        ],
+        "note": "입원일의 년 값 영역. 입원일: 및 년은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "admission_month",
+      "key": "입원일 월",
+      "semantic_path": "입퇴원/입원일/월",
+      "anchor_id": "manual_1783569577217",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027",
+        "det_000028",
+        "det_000030"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:월",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          547,
+          789,
+          32,
+          36
+        ],
+        "note": "입원일의 월 값 영역. 월은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "admission_day",
+      "key": "입원일 일",
+      "semantic_path": "입퇴원/입원일/일",
+      "anchor_id": "manual_1783569579734",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027",
+        "det_000028",
+        "det_000031"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:일부터",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          596,
+          788,
+          31,
+          41
+        ],
+        "note": "입원일의 일 값 영역. 일부터는 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "discharge_year",
+      "key": "퇴원일 년",
+      "semantic_path": "입퇴원/퇴원일/년",
+      "anchor_id": "manual_1783569584000",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027",
+        "det_000032",
+        "det_000033"
+      ],
+      "value_type": "date_year",
+      "generator": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:년",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          826,
+          790,
+          66,
+          38
+        ],
+        "note": "퇴원일의 년 값 영역. 년은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "discharge_month",
+      "key": "퇴원일 월",
+      "semantic_path": "입퇴원/퇴원일/월",
+      "anchor_id": "manual_1783569585950",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027",
+        "det_000032",
+        "det_000034"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:월",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          913,
+          791,
+          34,
+          35
+        ],
+        "note": "퇴원일의 월 값 영역. 월은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "discharge_day",
+      "key": "퇴원일 일",
+      "semantic_path": "입퇴원/퇴원일/일",
+      "anchor_id": "manual_1783569589499",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027",
+        "det_000032",
+        "det_000035"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:일",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          961,
+          787,
+          33,
+          39
+        ],
+        "note": "퇴원일의 일 값 영역. 일은 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "purpose",
+      "key": "용도",
+      "semantic_path": "기타/용도",
+      "anchor_id": "visual_0003",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000036"
+      ],
+      "value_type": "purpose",
+      "generator": "choice:보험회사 제출용|회사 제출용|학교 제출용|관공서 제출용",
+      "faker_rule": "choice:보험회사 제출용|회사 제출용|학교 제출용|관공서 제출용",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          352,
+          840,
+          717,
+          50
+        ],
+        "note": "용도 행의 넓은 빈 셀."
+      }
+    },
+    {
+      "field_id": "remarks",
+      "key": "비고",
+      "semantic_path": "기타/비고",
+      "anchor_id": "visual_0004",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000037"
+      ],
+      "value_type": "free_text",
+      "generator": "pool:remarks",
+      "faker_rule": "pool:remarks",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          352,
+          894,
+          717,
+          50
+        ],
+        "note": "비고 행의 넓은 빈 셀."
+      }
+    },
+    {
+      "field_id": "issue_year",
+      "key": "발급일 년",
+      "semantic_path": "발급/발급일/년",
+      "anchor_id": "manual_1783569601733",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000038",
+        "det_000039"
+      ],
+      "value_type": "date_year",
+      "generator": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:년",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          804,
+          1009,
+          91,
+          26
+        ],
+        "note": "진단 문구 아래 우측 발급일 년 값 영역."
+      }
+    },
+    {
+      "field_id": "issue_month",
+      "key": "발급일 월",
+      "semantic_path": "발급/발급일/월",
+      "anchor_id": "manual_1783569603817",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000038",
+        "det_000040"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:월",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          924,
+          1008,
+          30,
+          25
+        ],
+        "note": "발급일 월 값 영역."
+      }
+    },
+    {
+      "field_id": "issue_day",
+      "key": "발급일 일",
+      "semantic_path": "발급/발급일/일",
+      "anchor_id": "manual_1783569606266",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000038",
+        "det_000041"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "handwriting_date",
+      "unit_policy": "static_suffix:일",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          986,
+          1008,
+          35,
+          24
+        ],
+        "note": "발급일 일 값 영역."
+      }
+    },
+    {
+      "field_id": "medical_institution_name",
+      "key": "의료기관 명칭",
+      "semantic_path": "발급/의료기관/명칭",
+      "anchor_id": "manual_1783569612132",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000042"
+      ],
+      "value_type": "institution",
+      "generator": "medical.institution_ko",
+      "faker_rule": "medical.institution_ko",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          424,
+          1051,
+          427,
+          27
+        ],
+        "note": "의료기관 명칭: 오른쪽 빈 값 영역."
+      }
+    },
+    {
+      "field_id": "medical_institution_address",
+      "key": "의료기관 주소",
+      "semantic_path": "발급/의료기관/주소",
+      "anchor_id": "manual_1783569616616",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000043"
+      ],
+      "value_type": "address",
+      "generator": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          427,
+          1097,
+          586,
+          27
+        ],
+        "note": "주소: 오른쪽 빈 값 영역."
+      }
+    },
+    {
+      "field_id": "doctor_license_qualification_doctor",
+      "key": "의사 선택",
+      "semantic_path": "발급/의료인/면허자격/의사",
+      "anchor_id": "manual_1783569635699",
+      "value": "",
+      "label_anchor_ids": [
+        "manual_1783569632106"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          515,
+          1143,
+          19,
+          20
+        ],
+        "note": "[ ]의사 체크박스."
+      }
+    },
+    {
+      "field_id": "doctor_license_qualification_dentist",
+      "key": "치과의사 선택",
+      "semantic_path": "발급/의료인/면허자격/치과의사",
+      "anchor_id": "manual_1783569638149",
+      "value": "",
+      "label_anchor_ids": [
+        "manual_1783569628850"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          605,
+          1144,
+          18,
+          21
+        ],
+        "note": "[ ]치과의사 체크박스."
+      }
+    },
+    {
+      "field_id": "doctor_license_qualification_korean_medicine",
+      "key": "한의사 선택",
+      "semantic_path": "발급/의료인/면허자격/한의사",
+      "anchor_id": "manual_1783569643217",
+      "value": "",
+      "label_anchor_ids": [
+        "manual_1783569625883"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          735,
+          1143,
+          19,
+          22
+        ],
+        "note": "[ ]한의사 체크박스."
+      }
+    },
+    {
+      "field_id": "doctor_license_number",
+      "key": "면허번호",
+      "semantic_path": "발급/의료인/면허번호",
+      "anchor_id": "manual_1783569645849",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044",
+        "det_000045"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:######",
+      "faker_rule": "pattern:######",
+      "style_class": "handwriting_small",
+      "unit_policy": "static_prefix_suffix:면허번호 제/호",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          949,
+          1140,
+          84,
+          26
+        ],
+        "note": "면허번호 제 ____ 호 사이 값 영역. 제와 호는 정적 텍스트."
+      }
+    },
+    {
+      "field_id": "doctor_name",
+      "key": "성명",
+      "semantic_path": "발급/의료인/성명",
+      "anchor_id": "manual_1783569651367",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000046",
+        "det_000047"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "handwriting_regular",
+      "unit_policy": "none",
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+        "bbox": [
+          601,
+          1185,
+          326,
+          26
+        ],
+        "note": "성명: 오른쪽 값 영역. 서명 또는 인 문구는 정적 텍스트."
+      }
+    }
+  ],
+  "unmapped_use_anchors": [],
+  "notes": [
+    "OCR/static label/keep bboxes are not used as field anchor_id values because this is a blank_template request.",
+    "All 37 status=use value_region anchors are mapped to schema fields."
+  ]
+}

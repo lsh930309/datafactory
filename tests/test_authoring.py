@@ -90,6 +90,7 @@ def test_draft_authoring_bundle_uses_review_use_labels_only(tmp_path: Path) -> N
     assert [field["source_detection_id"] for field in schema["fields"]] == ["det_name"]
     assert schema["fields"][0]["field_id"] == "field_001"
     assert schema["fields"][0]["bbox_label_id"] == "det_name"
+    assert schema["fields"][0]["render_mode"] == "printed"
     assert "bbox" not in schema["fields"][0]
     assert stylesheet["style_classes"][0]["style_class"] == "body_default"
     assert faker_profile["field_generators"] == {"field_001": schema["fields"][0]["value_type"]}
@@ -553,6 +554,7 @@ def test_save_authoring_bundle_normalizes_field_and_faker_profile(tmp_path: Path
     faker_profile = loaded.payload["faker_profile"]
     schema["fields"][0]["label"] = "고객명"
     schema["fields"][0]["generator"] = "choice:홍길동|김민준"
+    schema["fields"][0].pop("render_mode", None)
     schema["fields"][0]["render_policy"] = {"align": "center", "valign": "middle", "overflow": "shrink"}
     faker_profile["field_generators"]["field_001"] = "choice:홍길동|김민준"
     stylesheet["style_classes"][0]["font_size"] = "24"
@@ -575,6 +577,7 @@ def test_save_authoring_bundle_normalizes_field_and_faker_profile(tmp_path: Path
     assert saved_schema["fields"][0]["generator"] == "choice:홍길동|김민준"
     assert "bbox" not in saved_schema["fields"][0]
     assert saved_schema["fields"][0]["bbox_label_id"] == "det_name"
+    assert saved_schema["fields"][0]["render_mode"] == "printed"
     assert saved_schema["fields"][0]["export"] == {"json_path": "고객명", "csv_column": "고객명"}
     assert saved_stylesheet["style_classes"][0]["font_size"] == 24
     assert saved_stylesheet["style_classes"][0]["fill"] == [12, 34, 56]
@@ -896,6 +899,74 @@ def test_render_authoring_preview_applies_relational_constraints(tmp_path: Path)
         end = datetime(int(values["end_year"]), int(values["end_month"]), int(values["end_day"]))
         assert start <= end
         assert (end - start).days <= 30
+
+
+def test_date_group_can_emit_two_digit_year_when_template_has_century_prefix(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile)
+    schema = loaded.payload["schema"]
+    base_field = dict(schema["fields"][0])
+    schema["fields"] = [
+        dict(base_field, field_id="issue_year", label="일자 년"),
+        dict(base_field, field_id="issue_month", label="일자 월"),
+        dict(base_field, field_id="issue_day", label="일자 일"),
+    ]
+    faker_profile = loaded.payload["faker_profile"]
+    faker_profile["field_generators"] = {
+        "issue_year": "date.year",
+        "issue_month": "date.month",
+        "issue_day": "date.day",
+    }
+    faker_profile["constraints"] = [
+        {"type": "date_group", "year": "issue_year", "month": "issue_month", "day": "issue_day", "min_year": 2024, "max_year": 2024, "year_format": "yy"}
+    ]
+
+    values, warnings = _generate_values(schema, faker_profile, random.Random(7))
+
+    assert warnings == []
+    assert values["issue_year"] == "24"
+    assert values["issue_month"].isdigit()
+    assert values["issue_day"].isdigit()
+
+
+def test_primary_secondary_group_marks_one_primary_and_remaining_secondary(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile)
+    schema = loaded.payload["schema"]
+    base_field = dict(schema["fields"][0])
+    field_ids = [
+        "op1_primary",
+        "op1_secondary",
+        "op2_primary",
+        "op2_secondary",
+        "op3_primary",
+        "op3_secondary",
+    ]
+    schema["fields"] = [dict(base_field, field_id=field_id, label=field_id, generator="checkbox.bool") for field_id in field_ids]
+    faker_profile = loaded.payload["faker_profile"]
+    faker_profile["field_generators"] = {field_id: "checkbox.bool" for field_id in field_ids}
+    faker_profile["constraints"] = [
+        {
+            "type": "primary_secondary_group",
+            "rows": [
+                {"primary": "op1_primary", "secondary": "op1_secondary"},
+                {"primary": "op2_primary", "secondary": "op2_secondary"},
+                {"primary": "op3_primary", "secondary": "op3_secondary"},
+            ],
+        }
+    ]
+
+    for seed in range(20):
+        values, warnings = _generate_values(schema, faker_profile, random.Random(seed))
+        assert warnings == []
+        primary_values = [values["op1_primary"], values["op2_primary"], values["op3_primary"]]
+        secondary_values = [values["op1_secondary"], values["op2_secondary"], values["op3_secondary"]]
+        assert primary_values.count("V") == 1
+        assert secondary_values.count("V") == 2
+        for primary, secondary in zip(primary_values, secondary_values):
+            assert {primary, secondary} == {"", "V"}
 
 
 def test_render_authoring_preview_supports_semantic_hidden_and_render_only_fields(tmp_path: Path) -> None:

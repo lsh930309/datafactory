@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-04",
+  "title": "신용장(L/C)",
+  "render_defaults": {
+    "font_family": "Arial",
+    "font_size_pt": 10,
+    "color": "#111827",
+    "line_height": 1.25,
+    "horizontal_align": "left",
+    "vertical_align": "top"
+  },
+  "style_classes": {
+    "lc_date": {
+      "font_family": "Arial",
+      "font_size_pt": 10,
+      "font_weight": "normal",
+      "text_transform": "uppercase"
+    },
+    "lc_identifier": {
+      "font_family": "Arial",
+      "font_size_pt": 10,
+      "letter_spacing": 0
+    },
+    "company_name": {
+      "font_family": "Arial",
+      "font_size_pt": 10
+    },
+    "multiline_value": {
+      "font_family": "Arial",
+      "font_size_pt": 10,
+      "line_height": 1.35,
+      "wrap": true
+    },
+    "short_value": {
+      "font_family": "Arial",
+      "font_size_pt": 10,
+      "wrap": false
+    },
+    "amount": {
+      "font_family": "Arial",
+      "font_size_pt": 10,
+      "horizontal_align": "left"
+    },
+    "long_text": {
+      "font_family": "Arial",
+      "font_size_pt": 10,
+      "line_height": 1.25,
+      "wrap": true
+    }
+  },
+  "field_styles": {
+    "issue_date_header": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000006"
+    },
+    "lc_number": {
+      "style_class": "lc_identifier",
+      "anchor_id": "det_000009"
+    },
+    "issuing_bank_header_address": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000010"
+    },
+    "application_number": {
+      "style_class": "lc_identifier",
+      "anchor_id": "det_000012"
+    },
+    "reference_contract_number": {
+      "style_class": "lc_identifier",
+      "anchor_id": "det_000015"
+    },
+    "reference_contract_date": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000016"
+    },
+    "applicant_name": {
+      "style_class": "company_name",
+      "anchor_id": "det_000020"
+    },
+    "applicant_address": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000022"
+    },
+    "issuing_bank_name": {
+      "style_class": "company_name",
+      "anchor_id": "det_000021"
+    },
+    "issuing_bank_address": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000023"
+    },
+    "issuing_bank_swift_header": {
+      "style_class": "lc_identifier",
+      "anchor_id": "manual_1783565051305"
+    },
+    "issuing_bank_swift": {
+      "style_class": "lc_identifier",
+      "anchor_id": "manual_1783565087472"
+    },
+    "beneficiary_name": {
+      "style_class": "company_name",
+      "anchor_id": "det_000030"
+    },
+    "beneficiary_address": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000032"
+    },
+    "available_with_by": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000031"
+    },
+    "expiry_date": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000041"
+    },
+    "expiry_place": {
+      "style_class": "short_value",
+      "anchor_id": "det_000044"
+    },
+    "date_of_issue": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000042"
+    },
+    "documentary_credit_form": {
+      "style_class": "short_value",
+      "anchor_id": "det_000043"
+    },
+    "currency_code": {
+      "style_class": "short_value",
+      "anchor_id": "det_000047"
+    },
+    "credit_amount": {
+      "style_class": "amount",
+      "anchor_id": "det_000048"
+    },
+    "maximum_currency_code": {
+      "style_class": "short_value",
+      "anchor_id": "det_000049"
+    },
+    "maximum_credit_amount": {
+      "style_class": "amount",
+      "anchor_id": "det_000050"
+    },
+    "amount_currency_name": {
+      "style_class": "short_value",
+      "anchor_id": "det_000051"
+    },
+    "amount_in_words": {
+      "style_class": "long_text",
+      "anchor_id": "manual_1783565130087"
+    },
+    "drafts_at": {
+      "style_class": "long_text",
+      "anchor_id": "det_000053"
+    },
+    "drawee_bank_name": {
+      "style_class": "company_name",
+      "anchor_id": "det_000055"
+    },
+    "drawee_bank_place": {
+      "style_class": "short_value",
+      "anchor_id": "manual_1783565166020"
+    },
+    "partial_shipments": {
+      "style_class": "short_value",
+      "anchor_id": "det_000059"
+    },
+    "transshipment": {
+      "style_class": "short_value",
+      "anchor_id": "det_000060"
+    },
+    "port_of_loading": {
+      "style_class": "short_value",
+      "anchor_id": "det_000061"
+    },
+    "port_of_discharge": {
+      "style_class": "short_value",
+      "anchor_id": "det_000064"
+    },
+    "latest_shipment_date": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000065"
+    },
+    "goods_description": {
+      "style_class": "long_text",
+      "anchor_id": "det_000067"
+    },
+    "hs_code": {
+      "style_class": "short_value",
+      "anchor_id": "manual_1783565189703"
+    },
+    "sales_contract_reference": {
+      "style_class": "long_text",
+      "anchor_id": "det_000069"
+    }
+  },
+  "notes": [
+    "원본은 흰 배경, 검은 표선, Arial 계열 영문 텍스트로 보이므로 보수적인 기본 스타일만 제안했다.",
+    "DOCX 경로는 request에서 비활성화되어 이미지 템플릿 렌더링 lineage 용도로 작성했다."
+  ]
+}

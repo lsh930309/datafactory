@@ -5,7 +5,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from datafactory.handwriting import create_handwriting_print_pack, decode_barcode_image, intake_handwriting_scans, latest_accepted_handwriting_samples
+from datafactory.handwriting import _resolve_qr_bbox, create_handwriting_print_pack, decode_barcode_image, intake_handwriting_scans, latest_accepted_handwriting_samples, render_handwriting_authoring_preview
 from datafactory.policy import draft_review_policy, write_review_policy
 from datafactory.registry import RegistryData, RegistryDocument
 from datafactory.workbench import document_dir
@@ -71,10 +71,9 @@ def _prepare_authoring(tmp_path: Path) -> tuple[RegistryData, Path]:
     review_path = write_review_policy(policy, doc_root / "review")['review']
     review_payload = json.loads(review_path.read_text(encoding="utf-8"))
     for label in review_payload.get("labels", []):
-        if label.get("id") == "value_code":
-            label["render_mode"] = "printed"
+        if label.get("id") in {"value_name", "value_code"}:
+            label["status"] = "use"
     review_path.write_text(json.dumps(review_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
     schema = {
         "schema_version": 2,
         "doc_id": "HW-01",
@@ -90,6 +89,7 @@ def _prepare_authoring(tmp_path: Path) -> tuple[RegistryData, Path]:
                 "label": "성명",
                 "value_type": "literal:김수기",
                 "bbox_label_id": "value_name",
+                "render_mode": "handwriting",
                 "semantic_path": ["성명"],
                 "export": {"json_path": "성명"},
             },
@@ -98,6 +98,7 @@ def _prepare_authoring(tmp_path: Path) -> tuple[RegistryData, Path]:
                 "label": "코드",
                 "value_type": "literal:P-123",
                 "bbox_label_id": "value_code",
+                "render_mode": "printed",
                 "semantic_path": ["코드"],
                 "style_class": "body_default",
                 "export": {"json_path": "코드"},
@@ -166,3 +167,64 @@ def test_handwriting_print_pack_and_scan_intake_roundtrip(tmp_path: Path) -> Non
     samples = latest_accepted_handwriting_samples(item)
     assert len(samples) == 1
     assert samples[0].gt.exists()
+
+
+def test_handwriting_qr_bbox_is_forced_to_square() -> None:
+    assert _resolve_qr_bbox([420, 40, 160, 90], width=640, height=420) == [420, 40, 160, 160]
+    assert _resolve_qr_bbox([600, 390, 160, 90], width=640, height=420) == [480, 260, 160, 160]
+
+
+def test_handwriting_authoring_preview_uses_schema_render_modes_and_qr_bbox(tmp_path: Path) -> None:
+    registry, root = _prepare_authoring(tmp_path)
+    doc_root = document_dir(registry.documents["HW-01"], root)
+    authoring_dir = doc_root / "authoring"
+    schema_path = authoring_dir / "schema.json"
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    for field in schema["fields"]:
+        field["render_mode"] = "printed" if field["field_id"] == "code" else "handwriting"
+    schema["handwriting"] = {"qr_bbox": [430, 30, 150, 150], "default_sample_count": 1}
+    stylesheet = json.loads((authoring_dir / "stylesheet.json").read_text(encoding="utf-8"))
+    faker = json.loads((authoring_dir / "faker_profile.json").read_text(encoding="utf-8"))
+
+    preview = render_handwriting_authoring_preview("HW-01", schema, stylesheet, faker, out_dir=tmp_path / "preview", seed=7)
+
+    assert preview["qr_bbox"] == [430, 30, 150, 150]
+    assert preview["printed_field_count"] == 1
+    assert preview["handwriting_field_count"] == 1
+    with Image.open(preview["image"]).convert("RGB") as image:
+        printed_crop = image.crop((160, 130, 280, 154)).convert("L")
+        assert sum(1 for pixel in printed_crop.getdata() if pixel < 200) > 10
+        handwriting_crop = image.crop((160, 80, 250, 104))
+        red_pixels = sum(1 for red, green, blue in handwriting_crop.getdata() if red > 150 and green < 80 and blue < 80)
+        assert red_pixels > 10
+        qr_crop = image.crop((430, 30, 580, 180)).convert("L")
+        assert sum(1 for pixel in qr_crop.getdata() if pixel < 64) > 100
+
+
+def test_handwriting_render_mode_does_not_fallback_to_review_policy(tmp_path: Path) -> None:
+    registry, root = _prepare_authoring(tmp_path)
+    doc_root = document_dir(registry.documents["HW-01"], root)
+    authoring_dir = doc_root / "authoring"
+    schema = json.loads((authoring_dir / "schema.json").read_text(encoding="utf-8"))
+    review_path = Path(schema["source_review"])
+    review_payload = json.loads(review_path.read_text(encoding="utf-8"))
+    for label in review_payload.get("labels", []):
+        if label.get("id") == "value_name":
+            label["render_mode"] = "printed"
+    review_path.write_text(json.dumps(review_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    for field in schema["fields"]:
+        if field["field_id"] == "name":
+            field["render_mode"] = "handwriting"
+        if field["field_id"] == "code":
+            field["render_mode"] = "printed"
+    stylesheet = json.loads((authoring_dir / "stylesheet.json").read_text(encoding="utf-8"))
+    faker = json.loads((authoring_dir / "faker_profile.json").read_text(encoding="utf-8"))
+
+    preview = render_handwriting_authoring_preview("HW-01", schema, stylesheet, faker, out_dir=tmp_path / "preview-no-fallback", seed=9)
+
+    assert preview["printed_field_count"] == 1
+    assert preview["handwriting_field_count"] == 1
+    with Image.open(preview["image"]).convert("RGB") as image:
+        handwriting_crop = image.crop((160, 80, 250, 104))
+        red_pixels = sum(1 for red, green, blue in handwriting_crop.getdata() if red > 150 and green < 80 and blue < 80)
+        assert red_pixels > 10

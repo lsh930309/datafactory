@@ -59,7 +59,7 @@
       "generation_path": "image-template"
     }
   ],
-  "sample_kind": "filled_sample",
+  "sample_kind": "blank_template",
   "sample_generation_paths": [
     "image-template"
   ],
@@ -68,12 +68,64 @@
     "backend": "none",
     "status": "not_required"
   },
-  "status": "sample_imported",
+  "status": "cleanroom_sample_ready",
   "created_at": "2026-07-08T23:05:25.116688+00:00",
-  "updated_at": "2026-07-08T23:05:25.117552+00:00",
+  "updated_at": "2026-07-09T08:07:51.838859+00:00",
   "artifacts": {
-    "ocr": null,
-    "review": null,
-    "inpaint": null
-  }
+    "ocr": "workbench/documents/건강진단서·검진결과__MED-01/ocr/paddleocr/precise/original_건강진단서_page_001/detections.json",
+    "review": "workbench/documents/건강진단서·검진결과__MED-01/review/original_건강진단서_page_001/review.json",
+    "inpaint": null,
+    "ocr_detection_job": "workbench/documents/건강진단서·검진결과__MED-01/ocr/jobs/20260709T032914806659Z/job.json",
+    "cleanroom": {
+      "pdf": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/cleanroom_health_certificate.pdf",
+      "contact_sheet": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/qa/contact_sheet.jpg",
+      "pages_dir": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/pages",
+      "rendered_pages_dir": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/qa/pdf_rendered_pages",
+      "notes": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/qa/source_vs_cleanroom_notes.md",
+      "trial_manifest": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/manifest.json",
+      "quality_judgement": "pending_user_review_cleanroom_reference"
+    }
+  },
+  "cleanroom_samples": [
+    {
+      "path": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/cleanroom_health_certificate.pdf",
+      "kind": "cleanroom_trial",
+      "source": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom"
+    },
+    {
+      "path": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/manifest.json",
+      "kind": "cleanroom_trial",
+      "source": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom"
+    },
+    {
+      "path": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/pages/page_001.png",
+      "kind": "cleanroom_trial",
+      "source": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom"
+    },
+    {
+      "path": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/qa/contact_sheet.jpg",
+      "kind": "cleanroom_trial",
+      "source": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom"
+    },
+    {
+      "path": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/qa/pdf_rendered_pages/rendered_001.png",
+      "kind": "cleanroom_trial",
+      "source": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom"
+    },
+    {
+      "path": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/qa/source_vs_cleanroom_notes.md",
+      "kind": "cleanroom_trial",
+      "source": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom"
+    },
+    {
+      "path": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/assets/imagegen_signature_alpha.png",
+      "kind": "cleanroom_trial",
+      "source": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom"
+    },
+    {
+      "path": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom/assets/imagegen_stamp_alpha.png",
+      "kind": "cleanroom_trial",
+      "source": "/Users/lsh930309/projects/dataFatory/workbench/documents/건강진단서·검진결과__MED-01/samples/cleanroom"
+    }
+  ]
 }

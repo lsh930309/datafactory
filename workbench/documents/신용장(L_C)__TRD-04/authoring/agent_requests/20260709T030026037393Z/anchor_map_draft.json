@@ -1,0 +1,1714 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-09T03:00:26.037393Z",
+  "doc_id": "TRD-04",
+  "title": "신용장(L/C)",
+  "sample_kind": "filled_sample",
+  "source_review": "workbench/documents/신용장(L_C)__TRD-04/review/original_신용증/review.json",
+  "source_image": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+  "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png",
+  "image": {
+    "width": 1024,
+    "height": 1536
+  },
+  "classification_policy": {
+    "filled_sample": "review status use anchors are treated as filled value targets unless role/header-footer context proves otherwise",
+    "labels": "review keep anchors are retained as label/static evidence for label_anchor_ids and visual context"
+  },
+  "anchors": [
+    {
+      "anchor_id": "det_000001",
+      "source": "bbox_review",
+      "text": "Global First Bank",
+      "bbox": [
+        103,
+        40,
+        259,
+        34
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "paddle_initial",
+      "role": "header_footer",
+      "confidence": 0.9942914247512817,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000002",
+      "source": "bbox_review",
+      "text": "LETTER OF CREDIT",
+      "bbox": [
+        558,
+        43,
+        310,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "paddle_initial",
+      "role": "header_footer",
+      "confidence": 0.9755454063415527,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000003",
+      "source": "bbox_review",
+      "text": "Corporate Banking Division",
+      "bbox": [
+        107,
+        98,
+        198,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9911933541297913,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000004",
+      "source": "bbox_review",
+      "text": "ISSUE DATE",
+      "bbox": [
+        556,
+        94,
+        94,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9666697382926941,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000006",
+      "source": "bbox_review",
+      "text": "07 MAY 2024",
+      "bbox": [
+        722,
+        94,
+        104,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9359143972396851,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0005_det_000006.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000008",
+      "source": "bbox_review",
+      "text": "LC NO.",
+      "bbox": [
+        556,
+        122,
+        57,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.96744704246521,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000009",
+      "source": "bbox_review",
+      "text": "GF24N0507001",
+      "bbox": [
+        724,
+        122,
+        122,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.999220609664917,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0007_det_000009.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000010",
+      "source": "bbox_review",
+      "text": "45, Teheran-ro, Gangnam-gu Seoul, 06164, Korea",
+      "bbox": [
+        104,
+        123,
+        220,
+        42
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9736356437206268,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0008_det_000010.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000011",
+      "source": "bbox_review",
+      "text": "APPLICATION NO. :",
+      "bbox": [
+        557,
+        149,
+        154,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9319761991500854,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000012",
+      "source": "bbox_review",
+      "text": "APP240507-001",
+      "bbox": [
+        723,
+        150,
+        116,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.999374508857727,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0010_det_000012.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000013",
+      "source": "bbox_review",
+      "text": "SWIFT",
+      "bbox": [
+        105,
+        171,
+        52,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_recrop",
+      "role": "static_label",
+      "confidence": 0.9992102384567261,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000014",
+      "source": "bbox_review",
+      "text": "REFERENCE NO.",
+      "bbox": [
+        558,
+        180,
+        126,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9712153673171997,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000015",
+      "source": "bbox_review",
+      "text": "SALE-CONTRACT NO. SC-2404-18",
+      "bbox": [
+        723,
+        180,
+        246,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "confidence": 0.9586876034736633,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0013_det_000015.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000016",
+      "source": "bbox_review",
+      "text": "DATED 18 APR 2024",
+      "bbox": [
+        726,
+        206,
+        149,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.955422580242157,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0014_det_000016.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000017",
+      "source": "bbox_review",
+      "text": "WE HEREBY ISSUE OUR IRREVOCABLE DOCUMENTARY CREDIT AS FOLLOWS:",
+      "bbox": [
+        43,
+        250,
+        549,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9688074588775635,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000018",
+      "source": "bbox_review",
+      "text": "31C APPLICANT",
+      "bbox": [
+        45,
+        284,
+        129,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9910221099853516,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000019",
+      "source": "bbox_review",
+      "text": "32B ISSUING BANK",
+      "bbox": [
+        518,
+        284,
+        149,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9572804570198059,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000020",
+      "source": "bbox_review",
+      "text": "MarineTech Solutions Co., Ltd.",
+      "bbox": [
+        85,
+        308,
+        210,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.97067791223526,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0018_det_000020.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000021",
+      "source": "bbox_review",
+      "text": "Global First Bank",
+      "bbox": [
+        554,
+        305,
+        122,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9920103549957275,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0019_det_000021.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000022",
+      "source": "bbox_review",
+      "text": "501, 12, Seolleung-ro 90-gil, Gangnam-gu, Seoul, 06159, Korea",
+      "bbox": [
+        83,
+        326,
+        304,
+        45
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9693516492843628,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0020_det_000022.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000023",
+      "source": "bbox_review",
+      "text": "45, Teheran-ro, Gangnam-gu, Seoul, 06164, Korea",
+      "bbox": [
+        554,
+        326,
+        288,
+        44
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9749996960163116,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0021_det_000023.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000026",
+      "source": "bbox_review",
+      "text": "SWIFT",
+      "bbox": [
+        555,
+        373,
+        51,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_recrop",
+      "role": "static_label",
+      "confidence": 0.9991860389709473,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000027",
+      "source": "bbox_review",
+      "text": "59",
+      "bbox": [
+        45,
+        412,
+        23,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "table_cell",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9994595050811768,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000028",
+      "source": "bbox_review",
+      "text": "BENEFICIARY",
+      "bbox": [
+        85,
+        413,
+        101,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9967857599258423,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000029",
+      "source": "bbox_review",
+      "text": "41A AVAILABLE WITH / BY",
+      "bbox": [
+        517,
+        412,
+        200,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9436684250831604,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000030",
+      "source": "bbox_review",
+      "text": "Oceanic Machinery Pte. Ltd.",
+      "bbox": [
+        85,
+        437,
+        195,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.988929033279419,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0026_det_000030.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000031",
+      "source": "bbox_review",
+      "text": "Any Bank by Negotiation in Singapore",
+      "bbox": [
+        554,
+        435,
+        289,
+        44
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9841155409812927,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0027_det_000031.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000032",
+      "source": "bbox_review",
+      "text": "18 Tuas Avenue 5 Singapore 639340",
+      "bbox": [
+        85,
+        458,
+        230,
+        44
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9850179553031921,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0028_det_000032.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000035",
+      "source": "bbox_review",
+      "text": "20",
+      "bbox": [
+        45,
+        525,
+        23,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "table_cell",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.999271035194397,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000036",
+      "source": "bbox_review",
+      "text": "DOCUMENTARY CREDIT NUMBER GF24N0507001",
+      "bbox": [
+        84,
+        525,
+        358,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9702102541923523,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000037",
+      "source": "bbox_review",
+      "text": "31D DATE AND PLACE OF EXPIRY",
+      "bbox": [
+        45,
+        562,
+        241,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9583294987678528,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000038",
+      "source": "bbox_review",
+      "text": "30",
+      "bbox": [
+        360,
+        561,
+        26,
+        21
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "table_cell",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9982526302337646,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000039",
+      "source": "bbox_review",
+      "text": "DATE OF ISSUE",
+      "bbox": [
+        399,
+        563,
+        112,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9692898392677307,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000040",
+      "source": "bbox_review",
+      "text": "40A FORM OF DOCUMENTARY CREDIT",
+      "bbox": [
+        663,
+        563,
+        277,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9818902611732483,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000041",
+      "source": "bbox_review",
+      "text": "07 AUG 2024",
+      "bbox": [
+        83,
+        589,
+        97,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.934378445148468,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0035_det_000041.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000042",
+      "source": "bbox_review",
+      "text": "07 MAY 2024",
+      "bbox": [
+        400,
+        589,
+        96,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9653709530830383,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0036_det_000042.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000043",
+      "source": "bbox_review",
+      "text": "IRREVOCABLE",
+      "bbox": [
+        702,
+        589,
+        108,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9975189566612244,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0037_det_000043.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000044",
+      "source": "bbox_review",
+      "text": "Seoul, Korea",
+      "bbox": [
+        83,
+        607,
+        92,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9873256683349609,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0038_det_000044.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000045",
+      "source": "bbox_review",
+      "text": "31A CURRENCY CODE, AMOUNT",
+      "bbox": [
+        45,
+        645,
+        238,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.95587557554245,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000046",
+      "source": "bbox_review",
+      "text": "39B MAXIMUM CREDIT AMOUNT",
+      "bbox": [
+        516,
+        644,
+        231,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9699239134788513,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000047",
+      "source": "bbox_review",
+      "text": "USD",
+      "bbox": [
+        82,
+        670,
+        38,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9907957911491394,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0041_det_000047.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000048",
+      "source": "bbox_review",
+      "text": "250,000.00",
+      "bbox": [
+        134,
+        671,
+        86,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9987543225288391,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0042_det_000048.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000049",
+      "source": "bbox_review",
+      "text": "USD",
+      "bbox": [
+        554,
+        670,
+        43,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.989378035068512,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0043_det_000049.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000050",
+      "source": "bbox_review",
+      "text": "250,000.00",
+      "bbox": [
+        602,
+        670,
+        87,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9985283017158508,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0044_det_000050.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000051",
+      "source": "bbox_review",
+      "text": "U.S. DOLLARS",
+      "bbox": [
+        84,
+        694,
+        106,
+        16
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.967641294002533,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0045_det_000051.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000052",
+      "source": "bbox_review",
+      "text": "42C  DRAFTS AT",
+      "bbox": [
+        45,
+        728,
+        123,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9299209713935852,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000053",
+      "source": "bbox_review",
+      "text": "SIGHT FOR 1OO% INVOICE VALUE",
+      "bbox": [
+        84,
+        754,
+        237,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9517397284507751,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0047_det_000053.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000054",
+      "source": "bbox_review",
+      "text": "42A DRAWEE",
+      "bbox": [
+        45,
+        790,
+        106,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9850391149520874,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000055",
+      "source": "bbox_review",
+      "text": "Global First Bank,",
+      "bbox": [
+        84,
+        812,
+        125,
+        22
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9707704186439514,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0049_det_000055.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000056",
+      "source": "bbox_review",
+      "text": "43P PARTIAL SHIPMENTS",
+      "bbox": [
+        45,
+        848,
+        190,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9804645776748657,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000057",
+      "source": "bbox_review",
+      "text": "43T TRANSSHIPMENT",
+      "bbox": [
+        361,
+        848,
+        167,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9758278131484985,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000058",
+      "source": "bbox_review",
+      "text": "44E PORT OF LOADING / AIRPORT OF DEPARTURE",
+      "bbox": [
+        617,
+        848,
+        357,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9459072351455688,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000059",
+      "source": "bbox_review",
+      "text": "ALLOWED",
+      "bbox": [
+        82,
+        874,
+        78,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "confidence": 0.9992197155952454,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0053_det_000059.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000060",
+      "source": "bbox_review",
+      "text": "ALLOWED",
+      "bbox": [
+        400,
+        873,
+        75,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9985355734825134,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0054_det_000060.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000061",
+      "source": "bbox_review",
+      "text": "Busan, Korea",
+      "bbox": [
+        656,
+        874,
+        94,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9783571362495422,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0055_det_000061.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000062",
+      "source": "bbox_review",
+      "text": "44F PORT OF DISCHARGE / AIRPORT OF DESTINATION",
+      "bbox": [
+        46,
+        915,
+        379,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9606238603591919,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000063",
+      "source": "bbox_review",
+      "text": "44C LATEST DATE OF SHIPMENT",
+      "bbox": [
+        515,
+        912,
+        244,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9705331325531006,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000064",
+      "source": "bbox_review",
+      "text": "Singapore",
+      "bbox": [
+        79,
+        937,
+        76,
+        23
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9994910359382629,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0058_det_000064.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000065",
+      "source": "bbox_review",
+      "text": "07 JUL 2024",
+      "bbox": [
+        560,
+        939,
+        93,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9449346661567688,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0059_det_000065.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000066",
+      "source": "bbox_review",
+      "text": "45A DESCRIPTION OF GOODS AND / OR SERVICES",
+      "bbox": [
+        45,
+        975,
+        359,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9591881036758423,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000067",
+      "source": "bbox_review",
+      "text": "Industrial Gear Pump Model GP-200",
+      "bbox": [
+        82,
+        995,
+        251,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "confidence": 0.9831064343452454,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0061_det_000067.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000068",
+      "source": "bbox_review",
+      "text": "HS Code",
+      "bbox": [
+        80,
+        1013,
+        70,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "static_label",
+      "confidence": 0.9717821478843689,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000069",
+      "source": "bbox_review",
+      "text": "As per Sales Contract No. SC-2404-18 Dated 18 APR 2024",
+      "bbox": [
+        83,
+        1035,
+        406,
+        16
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "confidence": 0.97197425365448,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0063_det_000069.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "det_000070",
+      "source": "bbox_review",
+      "text": "46A DOCUMENTS REQUIRED",
+      "bbox": [
+        45,
+        1064,
+        215,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9660015106201172,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000071",
+      "source": "bbox_review",
+      "text": "1. Signed Commercial Invoice in 3 originals and 1 copy.",
+      "bbox": [
+        82,
+        1084,
+        381,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9779835343360901,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000072",
+      "source": "bbox_review",
+      "text": "2. Full set of Clean on Board Ocean Bill of Lading made out to order and marked \"Freight Prepaid\"",
+      "bbox": [
+        81,
+        1102,
+        676,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9777965545654297,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000073",
+      "source": "bbox_review",
+      "text": "notify Applicant, showing LC No. and covering the goods as per clause 45A.",
+      "bbox": [
+        103,
+        1122,
+        529,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9755417108535767,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000074",
+      "source": "bbox_review",
+      "text": "3. Packing List in 3 originals and 1 copy.",
+      "bbox": [
+        81,
+        1140,
+        280,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9788141846656799,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000075",
+      "source": "bbox_review",
+      "text": "4. Certificate of Origin issued by Korea Chamber of Commerce & Industry in 1 original.",
+      "bbox": [
+        81,
+        1158,
+        592,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9736711382865906,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000076",
+      "source": "bbox_review",
+      "text": "5. Insurance Policy or Certificate in 1 original or 1 copy, covering 11o% of invoice value",
+      "bbox": [
+        83,
+        1178,
+        604,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9682459235191345,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000077",
+      "source": "bbox_review",
+      "text": "on Institute Cargo Clause (A), War and Strikes Clauses.",
+      "bbox": [
+        103,
+        1196,
+        390,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9811210632324219,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000078",
+      "source": "bbox_review",
+      "text": "6. Beneficiary's Certificate of Quality in 1 original.",
+      "bbox": [
+        83,
+        1216,
+        336,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9690491557121277,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000079",
+      "source": "bbox_review",
+      "text": "71B CHARGES",
+      "bbox": [
+        45,
+        1250,
+        115,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9674178957939148,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000080",
+      "source": "bbox_review",
+      "text": "ALL BANKING CHARGES OUTSIDE KOREA ARE FOR BENEFICIARY'S ACCOUNT",
+      "bbox": [
+        84,
+        1272,
+        556,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.970935583114624,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000081",
+      "source": "bbox_review",
+      "text": "ALL BANKING CHARGES IN KOREA ARE FOR APPLICANT'S ACCOUNT",
+      "bbox": [
+        84,
+        1291,
+        497,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9253695607185364,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000082",
+      "source": "bbox_review",
+      "text": "46D ADDITIONAL CONDITIONS",
+      "bbox": [
+        46,
+        1324,
+        228,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9921348094940186,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000083",
+      "source": "bbox_review",
+      "text": "THIS CREDIT IS SUBJECT TO THE UNIFORM CUSTOMS AND PRACTICE FOR DOCUMENTARY CREDITS",
+      "bbox": [
+        84,
+        1347,
+        723,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9624340534210205,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000084",
+      "source": "bbox_review",
+      "text": "(UCP 6OO), INTERNATIONAL CHAMBER OF COMMERCE, PARIS.",
+      "bbox": [
+        85,
+        1367,
+        445,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9642990827560425,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000085",
+      "source": "bbox_review",
+      "text": "Dowanel th",
+      "bbox": [
+        658,
+        1382,
+        175,
+        54
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.5011752843856812,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000086",
+      "source": "bbox_review",
+      "text": "Seoul",
+      "bbox": [
+        880,
+        1406,
+        46,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "paddle_initial",
+      "role": "static_label",
+      "confidence": 0.9989491701126099,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000087",
+      "source": "bbox_review",
+      "text": "Korea",
+      "bbox": [
+        878,
+        1424,
+        48,
+        21
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "paddle_initial",
+      "role": "header_footer",
+      "confidence": 0.9989748001098633,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000088",
+      "source": "bbox_review",
+      "text": "AUTHORIZED SIGNATURE",
+      "bbox": [
+        627,
+        1447,
+        183,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "paddle_initial",
+      "role": "header_footer",
+      "confidence": 0.9772640466690063,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000089",
+      "source": "bbox_review",
+      "text": "*",
+      "bbox": [
+        867,
+        1455,
+        10,
+        10
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "paddle_initial",
+      "role": "header_footer",
+      "confidence": 0.6517784595489502,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000090",
+      "source": "bbox_review",
+      "text": "*",
+      "bbox": [
+        926,
+        1454,
+        14,
+        12
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "paddle_initial",
+      "role": "header_footer",
+      "confidence": 0.6070751547813416,
+      "provenance": "review.json"
+    },
+    {
+      "anchor_id": "det_000091",
+      "source": "bbox_review",
+      "text": "GLOBAL FIRST BANK",
+      "bbox": [
+        638,
+        1470,
+        152,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "header_footer",
+      "text_source": "paddle_initial",
+      "role": "header_footer",
+      "confidence": 0.9884249567985535,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0085_det_000091.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "manual_1783565051305",
+      "source": "bbox_review",
+      "text": "GFBKKRSE",
+      "bbox": [
+        168,
+        172,
+        91,
+        21
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.994608998298645,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0086_manual_1783565051305.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "manual_1783565087472",
+      "source": "bbox_review",
+      "text": "GFBKKRSE",
+      "bbox": [
+        617,
+        373,
+        83,
+        23
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9964625239372253,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0087_manual_1783565087472.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "manual_1783565130087",
+      "source": "bbox_review",
+      "text": "TWO HUNDRED FIFTY THOUSAND ONLY",
+      "bbox": [
+        187,
+        693,
+        291,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9736775159835815,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0088_manual_1783565130087.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "manual_1783565166020",
+      "source": "bbox_review",
+      "text": "Seoul, Korea",
+      "bbox": [
+        210,
+        812,
+        95,
+        22
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9602079391479492,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0089_manual_1783565166020.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    },
+    {
+      "anchor_id": "manual_1783565189703",
+      "source": "bbox_review",
+      "text": "8413.60",
+      "bbox": [
+        156,
+        1014,
+        65,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "confidence": 0.9992155432701111,
+      "provenance": "review.json",
+      "crop_path": "workbench/documents/신용장(L_C)__TRD-04/authoring/agent_requests/20260709T030026037393Z/visual_evidence/crops/crop_0090_manual_1783565189703.png",
+      "visual_source": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png"
+    }
+  ]
+}

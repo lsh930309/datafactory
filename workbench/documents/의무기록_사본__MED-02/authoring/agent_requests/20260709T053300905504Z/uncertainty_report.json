@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-02",
+  "title": "의무기록 사본",
+  "unresolved_fields": [
+    {
+      "field": "발급기관.기관명",
+      "reason": "원본 이미지에 기관명은 고정 텍스트처럼 보이나 값 target use anchor가 없어 schema binding을 만들지 않음",
+      "needed_decision": "기관명을 faker로 바꿔야 하는지, 아니면 정적 인쇄 텍스트로 유지할지 결정 필요"
+    },
+    {
+      "field": "care_date vs record_created_date",
+      "reason": "샘플에서는 같은 날짜이나 실제로 다를 수 있음",
+      "needed_decision": "기록작성일과 진료일자를 항상 동일하게 copy할지 별도 날짜로 허용할지 결정 필요"
+    },
+    {
+      "field": "date_order constraint shape",
+      "reason": "지원 문법은 year/month/day 필드 문자열을 요구하지만 현재 기록작성일/진료일자는 단일 date.kr 앵커임",
+      "needed_decision": "렌더러가 단일 date.kr를 date_order의 year/month/day 슬롯에 허용하는지 확인 필요"
+    },
+    {
+      "field": "test reference values",
+      "reason": "샘플 참고치는 하이픈 위주이며 검사별 정상범위가 문서상 명확하지 않음",
+      "needed_decision": "참고치 칸을 대부분 하이픈으로 둘지, 정상범위/판독참조 문구를 허용할지 승인 필요"
+    },
+    {
+      "field": "hospital address/phone/fax",
+      "reason": "기관 정보가 실제 병원처럼 보이지 않도록 합성값 규칙을 적용했으나 기관명 앵커는 없음",
+      "needed_decision": "기관 정보 영역 전체를 정적 유지할지, 주소/전화/팩스만 렌더링할지 결정 필요"
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "field": "chief_complaint",
+      "conflict": "한글 OCR 라벨은 주 소로 보이나 괄호 영문은 Chief Complaint이고 값은 통증 주호소임",
+      "resolution": "semantic_path는 의무기록내용.주소로 두되 key에 주소(Chief Complaint)를 유지하고 notes에 주호소 해석을 기록"
+    },
+    {
+      "field": "test1_reference",
+      "conflict": "OCR det_000051이 1로 낮은 confidence 인식되었으나 전체 이미지에는 하이픈처럼 보임",
+      "resolution": "value pool에 하이픈을 기본 선택지로 둠"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "issue_number",
+      "rule": "template:{{date.year}}-{{date.month}}-{{pattern:#######}}",
+      "reason": "발급번호 포맷은 템플릿 샘플 기반 근사이며 기관별 포맷이 다를 수 있음"
+    },
+    {
+      "field_id": "diagnosis_code",
+      "rule": "pattern:A##.#",
+      "reason": "질병분류코드는 실제 KCD 유효성 검증 없이 패턴과 pick_record 합성 예시로 제한"
+    },
+    {
+      "field_id": "institution_fax",
+      "rule": "pattern:##-###-####",
+      "reason": "팩스 규칙은 전화번호 형식 근사"
+    }
+  ],
+  "unit_decisions": [
+    {
+      "field_id": "patient_age",
+      "decision": "세 포함",
+      "visual_reason": "전체 이미지 값 영역에 30세로 자연 표기되어 있고 세는 나이 표기의 일부"
+    },
+    {
+      "field_id": "issue_year",
+      "decision": "년 제외",
+      "visual_reason": "년은 별도 정적 텍스트 anchor로 분리됨"
+    },
+    {
+      "field_id": "issue_month",
+      "decision": "월 제외",
+      "visual_reason": "월은 별도 정적 텍스트 anchor로 분리됨"
+    },
+    {
+      "field_id": "issue_day",
+      "decision": "일 제외",
+      "visual_reason": "일은 별도 정적 텍스트 anchor로 분리됨"
+    }
+  ]
+}

@@ -1,0 +1,1065 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-06",
+  "field_generators": {
+    "receipt_number": "pattern:######-####",
+    "patient_name": "person.name_ko",
+    "dispensing_date": "date.kr",
+    "medication_days": "template:{{pattern:##}}일",
+    "night_dispensing": "checkbox.bool",
+    "holiday_dispensing": "checkbox.bool",
+    "drug_cost_partial_self": "money.krw",
+    "drug_cost_partial_nhis": "money.krw",
+    "drug_cost_full_self": "money.krw",
+    "drug_cost_noncovered": "money.krw",
+    "dispensing_basic_fee_partial_self": "money.krw",
+    "dispensing_basic_fee_partial_nhis": "money.krw",
+    "dispensing_basic_fee_full_self": "money.krw",
+    "dispensing_basic_fee_noncovered": "money.krw",
+    "medication_guidance_fee_partial_self": "money.krw",
+    "medication_guidance_fee_partial_nhis": "money.krw",
+    "medication_guidance_fee_full_self": "money.krw",
+    "medication_guidance_fee_noncovered": "money.krw",
+    "dispensing_fee_partial_self": "money.krw",
+    "dispensing_fee_partial_nhis": "money.krw",
+    "dispensing_fee_full_self": "money.krw",
+    "dispensing_fee_noncovered": "money.krw",
+    "management_fee_partial_self": "money.krw",
+    "management_fee_partial_nhis": "money.krw",
+    "management_fee_full_self": "money.krw",
+    "management_fee_noncovered": "money.krw",
+    "selective_benefit_partial_self": "money.krw",
+    "selective_benefit_partial_nhis": "money.krw",
+    "selective_benefit_full_self": "money.krw",
+    "selective_benefit_noncovered": "money.krw",
+    "senior_fixed_amount_partial_self": "money.krw",
+    "senior_fixed_amount_partial_nhis": "money.krw",
+    "senior_fixed_amount_full_self": "money.krw",
+    "senior_fixed_amount_noncovered": "money.krw",
+    "other_partial_self": "money.krw",
+    "other_partial_nhis": "money.krw",
+    "other_full_self": "money.krw",
+    "other_noncovered": "money.krw",
+    "sum_partial_self": "money.krw",
+    "sum_partial_nhis": "money.krw",
+    "sum_full_self": "money.krw",
+    "sum_noncovered": "money.krw",
+    "drug_cost_total": "money.krw",
+    "patient_burden_total": "money.krw",
+    "paid_card": "money.krw",
+    "paid_cash_receipt": "money.krw",
+    "paid_cash": "money.krw",
+    "paid_total": "money.krw",
+    "cash_receipt_issued": "checkbox.bool",
+    "cash_receipt_identity_number": "pattern:###########",
+    "cash_receipt_approval_number": "pattern:************",
+    "institution_clinic": "checkbox.bool",
+    "institution_hospital": "checkbox.bool",
+    "institution_general_hospital": "checkbox.bool",
+    "institution_tertiary_hospital": "checkbox.bool",
+    "business_registration_number": "pattern:###-##-#####",
+    "business_name": "medical.institution_ko",
+    "business_address": "address.ko",
+    "business_phone": "person.phone_kr",
+    "representative_name": "person.name_ko",
+    "issue_year": "date.year",
+    "issue_month": "date.month",
+    "issue_day": "date.day"
+  },
+  "data_pools": {
+    "synthetic_diagnosis_examples": [
+      "급성 기관지염",
+      "위염",
+      "알레르기 비염"
+    ],
+    "synthetic_institution_names": [
+      "하나샘약국",
+      "새빛약국",
+      "가온메디약국"
+    ],
+    "payment_note_values": [
+      "카드",
+      "현금",
+      "현금영수증"
+    ]
+  },
+  "constraints": [
+    {
+      "type": "sum",
+      "sources": [
+        "drug_cost_partial_self",
+        "dispensing_basic_fee_partial_self",
+        "medication_guidance_fee_partial_self",
+        "dispensing_fee_partial_self",
+        "management_fee_partial_self",
+        "selective_benefit_partial_self",
+        "senior_fixed_amount_partial_self",
+        "other_partial_self"
+      ],
+      "target": "sum_partial_self",
+      "format": "money.krw"
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "drug_cost_partial_nhis",
+        "dispensing_basic_fee_partial_nhis",
+        "medication_guidance_fee_partial_nhis",
+        "dispensing_fee_partial_nhis",
+        "management_fee_partial_nhis",
+        "selective_benefit_partial_nhis",
+        "senior_fixed_amount_partial_nhis",
+        "other_partial_nhis"
+      ],
+      "target": "sum_partial_nhis",
+      "format": "money.krw"
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "drug_cost_full_self",
+        "dispensing_basic_fee_full_self",
+        "medication_guidance_fee_full_self",
+        "dispensing_fee_full_self",
+        "management_fee_full_self",
+        "selective_benefit_full_self",
+        "senior_fixed_amount_full_self",
+        "other_full_self"
+      ],
+      "target": "sum_full_self",
+      "format": "money.krw"
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "drug_cost_noncovered",
+        "dispensing_basic_fee_noncovered",
+        "medication_guidance_fee_noncovered",
+        "dispensing_fee_noncovered",
+        "management_fee_noncovered",
+        "selective_benefit_noncovered",
+        "senior_fixed_amount_noncovered",
+        "other_noncovered"
+      ],
+      "target": "sum_noncovered",
+      "format": "money.krw"
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "sum_partial_self",
+        "sum_partial_nhis",
+        "sum_full_self",
+        "sum_noncovered"
+      ],
+      "target": "drug_cost_total",
+      "format": "money.krw"
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "sum_partial_self",
+        "sum_full_self",
+        "sum_noncovered"
+      ],
+      "target": "patient_burden_total",
+      "format": "money.krw"
+    },
+    {
+      "type": "sum",
+      "sources": [
+        "paid_card",
+        "paid_cash_receipt",
+        "paid_cash"
+      ],
+      "target": "paid_total",
+      "format": "money.krw"
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "institution_clinic",
+        "institution_hospital",
+        "institution_general_hospital",
+        "institution_tertiary_hospital"
+      ]
+    },
+    {
+      "type": "date_group",
+      "year": "issue_year",
+      "month": "issue_month",
+      "day": "issue_day",
+      "min_year": 2020,
+      "max_year": 2027
+    }
+  ],
+  "field_rules": {
+    "receipt_number": {
+      "key": "영수증번호(연월-일련번호)",
+      "semantic_path": "영수증.영수증번호",
+      "anchor_id": "visual_0004",
+      "generator": "pattern:######-####",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "patient_name": {
+      "key": "환자 성명",
+      "semantic_path": "환자.성명",
+      "anchor_id": "visual_0007",
+      "generator": "person.name_ko",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "dispensing_date": {
+      "key": "조제일",
+      "semantic_path": "조제.조제일",
+      "anchor_id": "visual_0008",
+      "generator": "date.kr",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "medication_days": {
+      "key": "투약일수",
+      "semantic_path": "조제.투약일수",
+      "anchor_id": "visual_0010",
+      "generator": "template:{{pattern:##}}일",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "night_dispensing": {
+      "key": "야간조제",
+      "semantic_path": "조제.야간조제",
+      "anchor_id": "manual_1783570338497",
+      "generator": "checkbox.bool",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "체크박스 값입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "holiday_dispensing": {
+      "key": "공휴일조제",
+      "semantic_path": "조제.공휴일조제",
+      "anchor_id": "manual_1783570333096",
+      "generator": "checkbox.bool",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "체크박스 값입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "drug_cost_partial_self": {
+      "key": "약품비 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.약품비.일부본인부담_본인부담금",
+      "anchor_id": "visual_0019",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "drug_cost_partial_nhis": {
+      "key": "약품비 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.약품비.일부본인부담_공단부담금",
+      "anchor_id": "visual_0020",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "drug_cost_full_self": {
+      "key": "약품비 급여 전액 본인부담",
+      "semantic_path": "비용.급여.약품비.전액본인부담",
+      "anchor_id": "visual_0022",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "drug_cost_noncovered": {
+      "key": "약품비 비급여",
+      "semantic_path": "비용.비급여.약품비",
+      "anchor_id": "visual_0023",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "dispensing_basic_fee_partial_self": {
+      "key": "조제기본료 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.조제기본료.일부본인부담_본인부담금",
+      "anchor_id": "visual_0024",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "dispensing_basic_fee_partial_nhis": {
+      "key": "조제기본료 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.조제기본료.일부본인부담_공단부담금",
+      "anchor_id": "visual_0025",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "dispensing_basic_fee_full_self": {
+      "key": "조제기본료 급여 전액 본인부담",
+      "semantic_path": "비용.급여.조제기본료.전액본인부담",
+      "anchor_id": "visual_0027",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "dispensing_basic_fee_noncovered": {
+      "key": "조제기본료 비급여",
+      "semantic_path": "비용.비급여.조제기본료",
+      "anchor_id": "visual_0028",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "medication_guidance_fee_partial_self": {
+      "key": "복약지도료 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.복약지도료.일부본인부담_본인부담금",
+      "anchor_id": "visual_0029",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "medication_guidance_fee_partial_nhis": {
+      "key": "복약지도료 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.복약지도료.일부본인부담_공단부담금",
+      "anchor_id": "visual_0030",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "medication_guidance_fee_full_self": {
+      "key": "복약지도료 급여 전액 본인부담",
+      "semantic_path": "비용.급여.복약지도료.전액본인부담",
+      "anchor_id": "visual_0032",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "medication_guidance_fee_noncovered": {
+      "key": "복약지도료 비급여",
+      "semantic_path": "비용.비급여.복약지도료",
+      "anchor_id": "visual_0033",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "dispensing_fee_partial_self": {
+      "key": "조제료 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.조제료.일부본인부담_본인부담금",
+      "anchor_id": "visual_0034",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "dispensing_fee_partial_nhis": {
+      "key": "조제료 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.조제료.일부본인부담_공단부담금",
+      "anchor_id": "visual_0035",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "dispensing_fee_full_self": {
+      "key": "조제료 급여 전액 본인부담",
+      "semantic_path": "비용.급여.조제료.전액본인부담",
+      "anchor_id": "visual_0037",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "dispensing_fee_noncovered": {
+      "key": "조제료 비급여",
+      "semantic_path": "비용.비급여.조제료",
+      "anchor_id": "visual_0038",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "management_fee_partial_self": {
+      "key": "관리료 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.관리료.일부본인부담_본인부담금",
+      "anchor_id": "visual_0039",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "management_fee_partial_nhis": {
+      "key": "관리료 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.관리료.일부본인부담_공단부담금",
+      "anchor_id": "visual_0040",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "management_fee_full_self": {
+      "key": "관리료 급여 전액 본인부담",
+      "semantic_path": "비용.급여.관리료.전액본인부담",
+      "anchor_id": "visual_0042",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "management_fee_noncovered": {
+      "key": "관리료 비급여",
+      "semantic_path": "비용.비급여.관리료",
+      "anchor_id": "visual_0043",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "selective_benefit_partial_self": {
+      "key": "선별급여 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.선별급여.일부본인부담_본인부담금",
+      "anchor_id": "visual_0044",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "selective_benefit_partial_nhis": {
+      "key": "선별급여 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.선별급여.일부본인부담_공단부담금",
+      "anchor_id": "visual_0045",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "selective_benefit_full_self": {
+      "key": "선별급여 급여 전액 본인부담",
+      "semantic_path": "비용.급여.선별급여.전액본인부담",
+      "anchor_id": "visual_0047",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "selective_benefit_noncovered": {
+      "key": "선별급여 비급여",
+      "semantic_path": "비용.비급여.선별급여",
+      "anchor_id": "visual_0048",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "senior_fixed_amount_partial_self": {
+      "key": "65세 이상 등 정액 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.65세 이상 등 정액.일부본인부담_본인부담금",
+      "anchor_id": "visual_0049",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "senior_fixed_amount_partial_nhis": {
+      "key": "65세 이상 등 정액 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.65세 이상 등 정액.일부본인부담_공단부담금",
+      "anchor_id": "visual_0050",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "senior_fixed_amount_full_self": {
+      "key": "65세 이상 등 정액 급여 전액 본인부담",
+      "semantic_path": "비용.급여.65세 이상 등 정액.전액본인부담",
+      "anchor_id": "visual_0052",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "senior_fixed_amount_noncovered": {
+      "key": "65세 이상 등 정액 비급여",
+      "semantic_path": "비용.비급여.65세 이상 등 정액",
+      "anchor_id": "visual_0053",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "other_partial_self": {
+      "key": "기타 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.기타.일부본인부담_본인부담금",
+      "anchor_id": "visual_0054",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "other_partial_nhis": {
+      "key": "기타 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.기타.일부본인부담_공단부담금",
+      "anchor_id": "visual_0055",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "other_full_self": {
+      "key": "기타 급여 전액 본인부담",
+      "semantic_path": "비용.급여.기타.전액본인부담",
+      "anchor_id": "visual_0057",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "other_noncovered": {
+      "key": "기타 비급여",
+      "semantic_path": "비용.비급여.기타",
+      "anchor_id": "visual_0058",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "sum_partial_self": {
+      "key": "합계 일부본인부담 본인부담금",
+      "semantic_path": "비용.합계.일부본인부담_본인부담금",
+      "anchor_id": "manual_1783570397197",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "sum_partial_nhis": {
+      "key": "합계 일부본인부담 공단부담금",
+      "semantic_path": "비용.합계.일부본인부담_공단부담금",
+      "anchor_id": "manual_1783570401607",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "sum_full_self": {
+      "key": "합계 전액 본인부담",
+      "semantic_path": "비용.합계.전액본인부담",
+      "anchor_id": "manual_1783570405663",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "sum_noncovered": {
+      "key": "합계 비급여",
+      "semantic_path": "비용.합계.비급여",
+      "anchor_id": "manual_1783570409162",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "drug_cost_total": {
+      "key": "⑤ 약제비 총액",
+      "semantic_path": "비용.약제비총액",
+      "anchor_id": "visual_0060",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "약제비 총액 입력칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "patient_burden_total": {
+      "key": "⑥ 환자부담 총액",
+      "semantic_path": "비용.환자부담총액",
+      "anchor_id": "visual_0070",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "환자부담 총액 입력칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "paid_card": {
+      "key": "납부한 금액 카드",
+      "semantic_path": "비용.납부한금액.카드",
+      "anchor_id": "visual_0063",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "카드 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "paid_cash_receipt": {
+      "key": "납부한 금액 현금영수증",
+      "semantic_path": "비용.납부한금액.현금영수증",
+      "anchor_id": "visual_0066",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "현금영수증 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "paid_cash": {
+      "key": "납부한 금액 현금",
+      "semantic_path": "비용.납부한금액.현금",
+      "anchor_id": "visual_0069",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "현금 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "paid_total": {
+      "key": "납부한 금액 합계",
+      "semantic_path": "비용.납부한금액.합계",
+      "anchor_id": "visual_0073",
+      "generator": "money.krw",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "납부 합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "cash_receipt_issued": {
+      "key": "현금영수증 발급여부",
+      "semantic_path": "현금영수증.발급여부",
+      "anchor_id": "manual_1783570416379",
+      "generator": "checkbox.bool",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "사용자 지시에 따라 현금영수증 우측 괄호 bbox를 체크박스로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "cash_receipt_identity_number": {
+      "key": "현금영수증 신분확인번호",
+      "semantic_path": "현금영수증.신분확인번호",
+      "anchor_id": "visual_0076",
+      "generator": "pattern:###########",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "cash_receipt_approval_number": {
+      "key": "현금영수증 승인번호",
+      "semantic_path": "현금영수증.승인번호",
+      "anchor_id": "visual_0081",
+      "generator": "pattern:************",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3"
+      ]
+    },
+    "institution_clinic": {
+      "key": "의원급·보건기관",
+      "semantic_path": "처방한요양기관.의원급_보건기관",
+      "anchor_id": "manual_1783570540712",
+      "generator": "checkbox.bool",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "요양기관 종별 체크박스입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "institution_hospital": {
+      "key": "병원급",
+      "semantic_path": "처방한요양기관.병원급",
+      "anchor_id": "manual_1783570531162",
+      "generator": "checkbox.bool",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "요양기관 종별 체크박스입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "institution_general_hospital": {
+      "key": "종합병원",
+      "semantic_path": "처방한요양기관.종합병원",
+      "anchor_id": "manual_1783570546612",
+      "generator": "checkbox.bool",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "요양기관 종별 체크박스입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "institution_tertiary_hospital": {
+      "key": "상급종합병원",
+      "semantic_path": "처방한요양기관.상급종합병원",
+      "anchor_id": "manual_1783570535246",
+      "generator": "checkbox.bool",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "요양기관 종별 체크박스입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "business_registration_number": {
+      "key": "사업자등록번호",
+      "semantic_path": "처방한요양기관.사업자등록번호",
+      "anchor_id": "visual_0087",
+      "generator": "pattern:###-##-#####",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "business_name": {
+      "key": "상호",
+      "semantic_path": "처방한요양기관.상호",
+      "anchor_id": "visual_0090",
+      "generator": "medical.institution_ko",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "business_address": {
+      "key": "사업장 소재지",
+      "semantic_path": "처방한요양기관.사업장소재지",
+      "anchor_id": "visual_0095",
+      "generator": "address.ko",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "business_phone": {
+      "key": "전화번호",
+      "semantic_path": "처방한요양기관.전화번호",
+      "anchor_id": "visual_0096",
+      "generator": "person.phone_kr",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "representative_name": {
+      "key": "대표자",
+      "semantic_path": "처방한요양기관.대표자",
+      "anchor_id": "manual_1783570459461",
+      "generator": "person.name_ko",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "issue_year": {
+      "key": "발행일자 년",
+      "semantic_path": "발행일자.년",
+      "anchor_id": "manual_1783570562665",
+      "generator": "date.year",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 오른쪽에 정적 단위 년이 인쇄되어 있어 generator에는 단위를 넣지 않습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "issue_month": {
+      "key": "발행일자 월",
+      "semantic_path": "발행일자.월",
+      "anchor_id": "manual_1783570568629",
+      "generator": "date.month",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 오른쪽에 정적 단위 월이 인쇄되어 있어 generator에는 단위를 넣지 않습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "issue_day": {
+      "key": "발행일자 일",
+      "semantic_path": "발행일자.일",
+      "anchor_id": "manual_1783570572294",
+      "generator": "date.day",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 오른쪽에 정적 단위 일이 인쇄되어 있어 generator에는 단위를 넣지 않습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ]
+    }
+  },
+  "notes": [
+    "모든 field_generators 값은 요청에 명시된 지원 문법만 사용했습니다.",
+    "금액 관계 중 환자부담총액과 납부합계의 상호 일치 검사는 지원 constraint만으로 완전 모델링하기 어려워 uncertainty_report에 남겼습니다."
+  ],
+  "constraint_notes": [
+    "항목별 금액 열 합계, ⑤ 약제비 총액, ⑥ 환자부담 총액, 납부수단 합계를 sum constraint로 모델링했습니다.",
+    "처방한 요양기관 종별은 exclusive_choice로 모델링했습니다.",
+    "발행일자 연월일은 date_group으로 모델링했습니다."
+  ]
+}

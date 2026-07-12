@@ -1,0 +1,773 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-08",
+  "title": "수술기록지",
+  "field_generators": {
+    "chart_no": "pattern:########",
+    "작성자": "person.name_ko",
+    "작성일_년": "date.year",
+    "작성일_월": "date.month",
+    "작성일_일": "date.day",
+    "진료과": "pool:departments",
+    "성명": "person.name_ko",
+    "병실": "pool:ward_rooms",
+    "등록번호": "pattern:########",
+    "나이": "pattern:##",
+    "수술일자": "date.kr",
+    "의사": "person.name_ko",
+    "성별": "choice:남|여",
+    "보호자": "person.name_ko",
+    "병명": "pool:diagnoses",
+    "가산항목": "pool:additional_items",
+    "수술1_수술코드": "pool:surgery_code_values",
+    "수술1_수술명": "pool:surgery_name_values",
+    "수술1_수량": "choice:1|2|3",
+    "수술1_주수술": "checkbox.bool",
+    "수술1_부수술": "checkbox.bool",
+    "수술2_수술코드": "pool:surgery_code_values",
+    "수술2_수술명": "pool:surgery_name_values",
+    "수술2_수량": "choice:1|2|3",
+    "수술2_주수술": "checkbox.bool",
+    "수술2_부수술": "checkbox.bool",
+    "수술3_수술코드": "pool:surgery_code_values",
+    "수술3_수술명": "pool:surgery_name_values",
+    "수술3_수량": "choice:1|2|3",
+    "수술3_주수술": "checkbox.bool",
+    "수술3_부수술": "checkbox.bool",
+    "재료처치1_재료": "pool:material_names",
+    "재료처치1_수량": "choice:1|2|3|4|5",
+    "재료처치2_재료": "pool:material_names",
+    "재료처치2_수량": "choice:1|2|3|4|5",
+    "재료처치3_재료": "pool:material_names",
+    "재료처치3_수량": "choice:1|2|3|4|5",
+    "재료처치4_재료": "pool:material_names",
+    "재료처치4_수량": "choice:1|2|3|4|5",
+    "재료처치5_재료": "pool:material_names",
+    "재료처치5_수량": "choice:1|2|3|4|5",
+    "마취시간": "pool:anesthesia_durations",
+    "마취방법_전신마취": "checkbox.bool",
+    "마취방법_척추마취": "checkbox.bool",
+    "마취방법_경막외마취": "checkbox.bool",
+    "마취방법_BPB": "checkbox.bool",
+    "전신마취제_Ethran": "checkbox.bool",
+    "전신마취제_Forane": "checkbox.bool",
+    "마취재료": "pool:anesthesia_materials",
+    "주사처방": "pool:injection_orders"
+  },
+  "data_pools": {
+    "departments": [
+      "외과",
+      "정형외과",
+      "산부인과",
+      "비뇨의학과",
+      "이비인후과"
+    ],
+    "ward_rooms": [
+      "51병동 1203호",
+      "32병동 805호",
+      "7병동 702호",
+      "본관 603호"
+    ],
+    "diagnoses": [
+      "급성 충수염",
+      "담낭 결석증",
+      "서혜부 탈장",
+      "무릎 반월상연골 파열",
+      "피부 양성 종양"
+    ],
+    "additional_items": [
+      "해당없음",
+      "야간",
+      "응급",
+      "소아가산"
+    ],
+    "surgery_records": [
+      {
+        "code": "N0471",
+        "name": "충수절제술"
+      },
+      {
+        "code": "Q2861",
+        "name": "복강경 담낭절제술"
+      },
+      {
+        "code": "N0601",
+        "name": "탈장교정술"
+      },
+      {
+        "code": "S4600",
+        "name": "관절경하 활막절제술"
+      },
+      {
+        "code": "M6650",
+        "name": "피부봉합술"
+      }
+    ],
+    "surgery_code_values": [
+      "N0471",
+      "Q2861",
+      "N0601",
+      "S4600",
+      "M6650"
+    ],
+    "surgery_name_values": [
+      "충수절제술",
+      "복강경 담낭절제술",
+      "탈장교정술",
+      "관절경하 활막절제술",
+      "피부봉합술"
+    ],
+    "material_names": [
+      "Vicryl 3-0",
+      "Vicryl 4-0",
+      "Nylon 4-0",
+      "Silk 2-0",
+      "Prolene 3-0",
+      "Surgicel",
+      "Gelfoam",
+      "Bone wax",
+      "Hemovac drain",
+      "JP drain",
+      "Penrose drain",
+      "Foley catheter 16Fr",
+      "Levin tube 16Fr",
+      "Tegaderm",
+      "Opsite",
+      "멸균거즈 4x4",
+      "압박드레싱",
+      "탄력붕대",
+      "스테리스트립",
+      "Skin stapler",
+      "Titanium clip",
+      "Endo clip",
+      "Trocar 5mm",
+      "Trocar 10mm",
+      "Mesh patch",
+      "Suction tip",
+      "Electrode pad",
+      "Bovie pencil",
+      "Ioban drape",
+      "Hemostatic gauze"
+    ],
+    "material_quantities": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "anesthesia_durations": [
+      "20분",
+      "25분",
+      "30분",
+      "35분",
+      "40분",
+      "45분",
+      "50분",
+      "55분",
+      "1시간",
+      "1시간 10분",
+      "1시간 20분",
+      "1시간 30분",
+      "1시간 45분",
+      "2시간",
+      "2시간 15분",
+      "2시간 30분",
+      "3시간"
+    ],
+    "anesthesia_materials": [
+      "ET tube 7.0",
+      "ET tube 7.5",
+      "LMA 3번",
+      "LMA 4번",
+      "Airway 90mm",
+      "마스크 4번",
+      "마취회로",
+      "BIS sensor",
+      "Spinal needle 25G",
+      "Epidural catheter",
+      "흡인카테터 12Fr",
+      "Syringe 10mL",
+      "IV catheter 18G",
+      "IV extension line",
+      "필터니들"
+    ],
+    "injection_orders": [
+      "Cefazolin 1g IV",
+      "Fentanyl 100mcg IV",
+      "Propofol 120mg IV",
+      "Rocuronium 50mg IV",
+      "Midazolam 2mg IV",
+      "Ondansetron 4mg IV",
+      "Ketorolac 30mg IV",
+      "Dexamethasone 5mg IV",
+      "Ephedrine 5mg IV prn",
+      "Phenylephrine 100mcg IV prn",
+      "N/S 500mL IV",
+      "Hartmann 1L IV",
+      "PCA 연결",
+      "Tramadol 50mg IV",
+      "Atropine 0.5mg IV prn"
+    ]
+  },
+  "constraints": [
+    {
+      "type": "date_group",
+      "year": "작성일_년",
+      "month": "작성일_월",
+      "day": "작성일_일",
+      "min_year": 2020,
+      "max_year": 2027,
+      "year_format": "yy"
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술1_수술코드": "code",
+        "수술1_수술명": "name"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술2_수술코드": "code",
+        "수술2_수술명": "name"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술3_수술코드": "code",
+        "수술3_수술명": "name"
+      }
+    },
+    {
+      "type": "primary_secondary_group",
+      "rows": [
+        {
+          "primary": "수술1_주수술",
+          "secondary": "수술1_부수술"
+        },
+        {
+          "primary": "수술2_주수술",
+          "secondary": "수술2_부수술"
+        },
+        {
+          "primary": "수술3_주수술",
+          "secondary": "수술3_부수술"
+        }
+      ],
+      "note": "수술 행이 모두 작성되는 템플릿 기준: 정확히 한 행은 주수술, 나머지 행은 부수술로 표시한다."
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "마취방법_전신마취",
+        "마취방법_척추마취",
+        "마취방법_경막외마취",
+        "마취방법_BPB"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "전신마취제_Ethran",
+        "전신마취제_Forane"
+      ]
+    }
+  ],
+  "field_rules": {
+    "chart_no": {
+      "semantic_path": "문서상단.차트No",
+      "anchor_id": "manual_1783577233204",
+      "rule": "pattern:########",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "작성자": {
+      "semantic_path": "문서상단.작성자",
+      "anchor_id": "manual_1783577237088",
+      "rule": "person.name_ko",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "작성일_년": {
+      "semantic_path": "문서상단.작성일.년",
+      "anchor_id": "manual_1783577258604",
+      "rule": "date.year",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "작성일_월": {
+      "semantic_path": "문서상단.작성일.월",
+      "anchor_id": "manual_1783577262021",
+      "rule": "date.month",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "작성일_일": {
+      "semantic_path": "문서상단.작성일.일",
+      "anchor_id": "manual_1783577264254",
+      "rule": "date.day",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "진료과": {
+      "semantic_path": "기본정보.진료과",
+      "anchor_id": "manual_1783576264783",
+      "rule": "pool:departments",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "성명": {
+      "semantic_path": "기본정보.성명",
+      "anchor_id": "manual_1783576269199",
+      "rule": "person.name_ko",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "병실": {
+      "semantic_path": "기본정보.병실",
+      "anchor_id": "manual_1783576272433",
+      "rule": "pool:ward_rooms",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "등록번호": {
+      "semantic_path": "기본정보.등록번호",
+      "anchor_id": "manual_1783576279216",
+      "rule": "pattern:########",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "나이": {
+      "semantic_path": "기본정보.나이",
+      "anchor_id": "manual_1783576284800",
+      "rule": "pattern:##",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "수술일자": {
+      "semantic_path": "기본정보.수술일자",
+      "anchor_id": "manual_1783576296215",
+      "rule": "date.kr",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "의사": {
+      "semantic_path": "기본정보.의사",
+      "anchor_id": "manual_1783576304682",
+      "rule": "person.name_ko",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "성별": {
+      "semantic_path": "기본정보.성별",
+      "anchor_id": "manual_1783576311533",
+      "rule": "choice:남|여",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "보호자": {
+      "semantic_path": "기본정보.보호자",
+      "anchor_id": "manual_1783576318583",
+      "rule": "person.name_ko",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "병명": {
+      "semantic_path": "진단및가산.병명",
+      "anchor_id": "manual_1783576324367",
+      "rule": "pool:diagnoses",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "가산항목": {
+      "semantic_path": "진단및가산.가산항목",
+      "anchor_id": "manual_1783576331166",
+      "rule": "pool:additional_items",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R1"
+      ]
+    },
+    "수술1_수술코드": {
+      "semantic_path": "수술목록.1행.수술코드",
+      "anchor_id": "manual_1783576339134",
+      "rule": "pool:surgery_code_values",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ]
+    },
+    "수술1_수술명": {
+      "semantic_path": "수술목록.1행.수술명",
+      "anchor_id": "manual_1783576345683",
+      "rule": "pool:surgery_name_values",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ]
+    },
+    "수술1_수량": {
+      "semantic_path": "수술목록.1행.수량",
+      "anchor_id": "manual_1783576351950",
+      "rule": "choice:1|2|3",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "수술1_주수술": {
+      "semantic_path": "수술목록.1행.주수술",
+      "anchor_id": "manual_1783576359717",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "수술1_부수술": {
+      "semantic_path": "수술목록.1행.부수술",
+      "anchor_id": "manual_1783576406718",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "수술2_수술코드": {
+      "semantic_path": "수술목록.2행.수술코드",
+      "anchor_id": "manual_1783576414701",
+      "rule": "pool:surgery_code_values",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ]
+    },
+    "수술2_수술명": {
+      "semantic_path": "수술목록.2행.수술명",
+      "anchor_id": "manual_1783576621635",
+      "rule": "pool:surgery_name_values",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ]
+    },
+    "수술2_수량": {
+      "semantic_path": "수술목록.2행.수량",
+      "anchor_id": "manual_1783576833183",
+      "rule": "choice:1|2|3",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "수술2_주수술": {
+      "semantic_path": "수술목록.2행.주수술",
+      "anchor_id": "manual_1783576837317",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "수술2_부수술": {
+      "semantic_path": "수술목록.2행.부수술",
+      "anchor_id": "manual_1783576722364",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "수술3_수술코드": {
+      "semantic_path": "수술목록.3행.수술코드",
+      "anchor_id": "manual_1783576425167",
+      "rule": "pool:surgery_code_values",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ]
+    },
+    "수술3_수술명": {
+      "semantic_path": "수술목록.3행.수술명",
+      "anchor_id": "manual_1783576630102",
+      "rule": "pool:surgery_name_values",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ]
+    },
+    "수술3_수량": {
+      "semantic_path": "수술목록.3행.수량",
+      "anchor_id": "manual_1783576840217",
+      "rule": "choice:1|2|3",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "수술3_주수술": {
+      "semantic_path": "수술목록.3행.주수술",
+      "anchor_id": "manual_1783576896551",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "수술3_부수술": {
+      "semantic_path": "수술목록.3행.부수술",
+      "anchor_id": "manual_1783576726598",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치1_재료": {
+      "semantic_path": "재료처치.1행.재료",
+      "anchor_id": "manual_1783577183603",
+      "rule": "pool:material_names",
+      "basis": "expanded synthetic surgical consumable pool; concise values to fit row bbox",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치1_수량": {
+      "semantic_path": "재료처치.1행.수량",
+      "anchor_id": "manual_1783577225121",
+      "rule": "choice:1|2|3|4|5",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치2_재료": {
+      "semantic_path": "재료처치.2행.재료",
+      "anchor_id": "manual_1783577183603",
+      "rule": "pool:material_names",
+      "basis": "expanded synthetic surgical consumable pool; concise values to fit row bbox",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치2_수량": {
+      "semantic_path": "재료처치.2행.수량",
+      "anchor_id": "manual_1783577225121",
+      "rule": "choice:1|2|3|4|5",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치3_재료": {
+      "semantic_path": "재료처치.3행.재료",
+      "anchor_id": "manual_1783577183603",
+      "rule": "pool:material_names",
+      "basis": "expanded synthetic surgical consumable pool; concise values to fit row bbox",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치3_수량": {
+      "semantic_path": "재료처치.3행.수량",
+      "anchor_id": "manual_1783577225121",
+      "rule": "choice:1|2|3|4|5",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치4_재료": {
+      "semantic_path": "재료처치.4행.재료",
+      "anchor_id": "manual_1783577183603",
+      "rule": "pool:material_names",
+      "basis": "expanded synthetic surgical consumable pool; concise values to fit row bbox",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치4_수량": {
+      "semantic_path": "재료처치.4행.수량",
+      "anchor_id": "manual_1783577225121",
+      "rule": "choice:1|2|3|4|5",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치5_재료": {
+      "semantic_path": "재료처치.5행.재료",
+      "anchor_id": "manual_1783577183603",
+      "rule": "pool:material_names",
+      "basis": "expanded synthetic surgical consumable pool; concise values to fit row bbox",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치5_수량": {
+      "semantic_path": "재료처치.5행.수량",
+      "anchor_id": "manual_1783577225121",
+      "rule": "choice:1|2|3|4|5",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치_재료_표시": {
+      "semantic_path": "렌더전용.재료처치.재료표시",
+      "anchor_id": "manual_1783577183603",
+      "rule": "pool:material_list_render",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "재료처치_수량_표시": {
+      "semantic_path": "렌더전용.재료처치.수량표시",
+      "anchor_id": "manual_1783577225121",
+      "rule": "pool:material_quantity_list_render",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R3"
+      ]
+    },
+    "마취시간": {
+      "semantic_path": "마취료.마취시간",
+      "anchor_id": "manual_1783577433556",
+      "rule": "pool:anesthesia_durations",
+      "basis": "template image plus surgery/anesthesia documentation research; synthetic pool constrained to concise form-fitting values",
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ]
+    },
+    "마취방법_전신마취": {
+      "semantic_path": "마취료.마취방법.General Anesthesis",
+      "anchor_id": "manual_1783577076303",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ]
+    },
+    "마취방법_척추마취": {
+      "semantic_path": "마취료.마취방법.Spinal Anesthesis",
+      "anchor_id": "manual_1783577079220",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ]
+    },
+    "마취방법_경막외마취": {
+      "semantic_path": "마취료.마취방법.Epidural Anesthesis",
+      "anchor_id": "manual_1783577082586",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ]
+    },
+    "마취방법_BPB": {
+      "semantic_path": "마취료.마취방법.BPB",
+      "anchor_id": "manual_1783577085752",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ]
+    },
+    "전신마취제_Ethran": {
+      "semantic_path": "마취료.전신마취제.Ethran",
+      "anchor_id": "manual_1783577153037",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ]
+    },
+    "전신마취제_Forane": {
+      "semantic_path": "마취료.전신마취제.Forane",
+      "anchor_id": "manual_1783577156204",
+      "rule": "checkbox.bool",
+      "basis": "full template image bbox plus static label anchors; web research used only as semantic support",
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ]
+    },
+    "마취재료": {
+      "semantic_path": "마취료.마취재료",
+      "anchor_id": "manual_1783577160286",
+      "rule": "pool:anesthesia_materials",
+      "basis": "template image plus surgery/anesthesia documentation research; synthetic pool constrained to concise form-fitting values",
+      "research_evidence_ids": [
+        "R4"
+      ]
+    },
+    "주사처방": {
+      "semantic_path": "마취료.주사처방",
+      "anchor_id": "manual_1783577166270",
+      "rule": "pool:injection_orders",
+      "basis": "template image plus surgery/anesthesia documentation research; synthetic pool constrained to concise form-fitting values",
+      "research_evidence_ids": [
+        "R4"
+      ]
+    }
+  },
+  "privacy": "synthetic dummy values only; no real patient, company, account, or institutional identifiers",
+  "quality_notes": [
+    "2026-07-09: 주수술/부수술은 체크박스형 행 역할 표시로 유지하되 primary_secondary_group constraint로 정확히 한 주수술만 생성. 재료처치/마취재료/주사처방/마취시간 pool을 확장."
+  ]
+}

@@ -1,0 +1,1678 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-09T05:33:00.906391+00:00",
+  "updated_by_agent_at": "2026-07-09",
+  "doc_id": "MED-02",
+  "title": "의무기록 사본",
+  "source_review": "workbench/documents/의무기록_사본__MED-02/review/original_의무기록/review.json",
+  "source_image": "workbench/documents/의무기록_사본__MED-02/samples/original/의무기록.png",
+  "visual_source": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+  "image": {
+    "width": 1024,
+    "height": 1536
+  },
+  "sample_kind": "filled_sample",
+  "policy": "filled_sample: status=use anchors are value targets; keep anchors are label/static evidence only.",
+  "anchors": [
+    {
+      "anchor_id": "det_000001",
+      "source": "bbox_review",
+      "text": "발급번호",
+      "bbox": [
+        48,
+        46,
+        63,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9955681562423706,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000002",
+      "source": "bbox_review",
+      "text": "1/1",
+      "bbox": [
+        929,
+        46,
+        47,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9974856972694397,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000003",
+      "source": "bbox_review",
+      "text": "의무기록 사본",
+      "bbox": [
+        361,
+        79,
+        309,
+        48
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9865514636039734,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000004",
+      "source": "bbox_review",
+      "text": "[의료법, 제21조 및 같은법 시행규칙 제13조에 따라 다음과 같이 발급합니다",
+      "bbox": [
+        237,
+        144,
+        550,
+        21
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "long_paragraph",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.8896920084953308,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000005",
+      "source": "bbox_review",
+      "text": "성",
+      "bbox": [
+        212,
+        192,
+        25,
+        24
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9991471767425537,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000006",
+      "source": "bbox_review",
+      "text": "명",
+      "bbox": [
+        269,
+        192,
+        24,
+        24
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9988095760345459,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000007",
+      "source": "bbox_review",
+      "text": "김하늘",
+      "bbox": [
+        325,
+        179,
+        208,
+        48
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "김하늘",
+      "confidence": 0.9997022747993469,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0007_det_000007.png"
+    },
+    {
+      "anchor_id": "det_000008",
+      "source": "bbox_review",
+      "text": "주민동록번호",
+      "bbox": [
+        567,
+        192,
+        114,
+        24
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9702015519142151,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000009",
+      "source": "bbox_review",
+      "text": "950101-2******",
+      "bbox": [
+        718,
+        180,
+        254,
+        48
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "950101-2******",
+      "confidence": 0.9524025917053223,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0009_det_000009.png"
+    },
+    {
+      "anchor_id": "det_000010",
+      "source": "bbox_review",
+      "text": "환자",
+      "bbox": [
+        93,
+        214,
+        45,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9961129426956177,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000011",
+      "source": "bbox_review",
+      "text": "인적사항",
+      "bbox": [
+        75,
+        240,
+        79,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9991601705551147,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000012",
+      "source": "bbox_review",
+      "text": "주",
+      "bbox": [
+        211,
+        236,
+        29,
+        25
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9990440011024475,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000013",
+      "source": "bbox_review",
+      "text": "소",
+      "bbox": [
+        267,
+        238,
+        27,
+        21
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9867074489593506,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000014",
+      "source": "bbox_review",
+      "text": "서울특별시 강남구 테헤란로 123, 101동 1001호",
+      "bbox": [
+        325,
+        227,
+        647,
+        45
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "서울특별시 강남구 테헤란로 123, 101동 1001호",
+      "confidence": 0.9528456330299377,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0014_det_000014.png"
+    },
+    {
+      "anchor_id": "det_000015",
+      "source": "bbox_review",
+      "text": "연락처",
+      "bbox": [
+        210,
+        281,
+        84,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9924209713935852,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000016",
+      "source": "bbox_review",
+      "text": "010-1234-5678",
+      "bbox": [
+        325,
+        273,
+        208,
+        46
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "010-1234-5678",
+      "confidence": 0.9954825639724731,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0016_det_000016.png"
+    },
+    {
+      "anchor_id": "det_000017",
+      "source": "bbox_review",
+      "text": "성별/연령",
+      "bbox": [
+        578,
+        283,
+        89,
+        25
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "static_label",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9973093271255493,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000018",
+      "source": "bbox_review",
+      "text": "여",
+      "bbox": [
+        718,
+        274,
+        36,
+        45
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "여",
+      "confidence": 0.6573308706283569,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0018_det_000018.png"
+    },
+    {
+      "anchor_id": "det_000019",
+      "source": "bbox_review",
+      "text": "기록",
+      "bbox": [
+        92,
+        345,
+        46,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9995396137237549,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000020",
+      "source": "bbox_review",
+      "text": "진료과",
+      "bbox": [
+        210,
+        341,
+        84,
+        25
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9080023169517517,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000021",
+      "source": "bbox_review",
+      "text": "정형외과",
+      "bbox": [
+        325,
+        336,
+        207,
+        40
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "정형외과",
+      "confidence": 0.9984946250915527,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0021_det_000021.png"
+    },
+    {
+      "anchor_id": "det_000022",
+      "source": "bbox_review",
+      "text": "담당의",
+      "bbox": [
+        576,
+        340,
+        87,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9926123023033142,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000023",
+      "source": "bbox_review",
+      "text": "이재훈",
+      "bbox": [
+        718,
+        336,
+        253,
+        41
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "이재훈",
+      "confidence": 0.9967608451843262,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0023_det_000023.png"
+    },
+    {
+      "anchor_id": "det_000024",
+      "source": "bbox_review",
+      "text": "작성정보",
+      "bbox": [
+        72,
+        372,
+        84,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9997142553329468,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000025",
+      "source": "bbox_review",
+      "text": "기록작성일",
+      "bbox": [
+        200,
+        381,
+        99,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9989393949508667,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000026",
+      "source": "bbox_review",
+      "text": "2025-05-20",
+      "bbox": [
+        325,
+        376,
+        209,
+        44
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "2025-05-20",
+      "confidence": 0.9844174385070801,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0026_det_000026.png"
+    },
+    {
+      "anchor_id": "det_000027",
+      "source": "bbox_review",
+      "text": "기록구분",
+      "bbox": [
+        575,
+        381,
+        90,
+        31
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "static_label",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9990344047546387,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000028",
+      "source": "bbox_review",
+      "text": "외래기록",
+      "bbox": [
+        718,
+        376,
+        253,
+        44
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "외래기록",
+      "confidence": 0.9989467859268188,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0028_det_000028.png"
+    },
+    {
+      "anchor_id": "det_000029",
+      "source": "bbox_review",
+      "text": "의무기록 내용",
+      "bbox": [
+        436,
+        438,
+        139,
+        24
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9802645444869995,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000030",
+      "source": "bbox_review",
+      "text": "진료일자",
+      "bbox": [
+        74,
+        480,
+        82,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9503495097160339,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000031",
+      "source": "bbox_review",
+      "text": "2025-05-20",
+      "bbox": [
+        326,
+        473,
+        207,
+        45
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "2025-05-20",
+      "confidence": 0.9501693844795227,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0031_det_000031.png"
+    },
+    {
+      "anchor_id": "det_000032",
+      "source": "bbox_review",
+      "text": "진료장소",
+      "bbox": [
+        573,
+        482,
+        82,
+        25
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.969189465045929,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000033",
+      "source": "bbox_review",
+      "text": "정형외과 외래",
+      "bbox": [
+        718,
+        472,
+        254,
+        47
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "정형외과 외래",
+      "confidence": 0.9921469688415527,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0033_det_000033.png"
+    },
+    {
+      "anchor_id": "det_000034",
+      "source": "bbox_review",
+      "text": "주 소(Chief Complaint)",
+      "bbox": [
+        73,
+        529,
+        194,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "static_label",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.94512939453125,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000035",
+      "source": "bbox_review",
+      "text": "오른쪽 무릎 통증",
+      "bbox": [
+        325,
+        519,
+        646,
+        50
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "오른쪽 무릎 통증",
+      "confidence": 0.8472731113433838,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0035_det_000035.png"
+    },
+    {
+      "anchor_id": "det_000036",
+      "source": "bbox_review",
+      "text": "현병력(History of Present Ilness)",
+      "bbox": [
+        75,
+        588,
+        241,
+        25
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.939540445804596,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000037",
+      "source": "bbox_review",
+      "text": "내원 3일 전 계단을 내려오다 발을 헛디더 오른쪽 무릎이 꺾이면서 통증 발생. 이후 보행 시 통증 심해져 내원함.",
+      "bbox": [
+        325,
+        570,
+        646,
+        84
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "long_paragraph",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "내원 3일 전 계단을 내려오다 발을 헛디더 오른쪽 무릎이 꺾이면서 통증 발생. 이후 보행 시 통증 심해져 내원함.",
+      "confidence": 0.9000766277313232,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0037_det_000037.png"
+    },
+    {
+      "anchor_id": "det_000039",
+      "source": "bbox_review",
+      "text": "과거력(Past History)",
+      "bbox": [
+        74,
+        665,
+        157,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9109020233154297,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000040",
+      "source": "bbox_review",
+      "text": "특이사항 없음.",
+      "bbox": [
+        325,
+        654,
+        646,
+        54
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "특이사항 없음.",
+      "confidence": 0.9018377065658569,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0039_det_000040.png"
+    },
+    {
+      "anchor_id": "det_000041",
+      "source": "bbox_review",
+      "text": "가족력(Family History)",
+      "bbox": [
+        75,
+        717,
+        170,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9750938415527344,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000042",
+      "source": "bbox_review",
+      "text": "특이사항 없음.",
+      "bbox": [
+        325,
+        707,
+        646,
+        50
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "특이사항 없음.",
+      "confidence": 0.9046481251716614,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0041_det_000042.png"
+    },
+    {
+      "anchor_id": "det_000043",
+      "source": "bbox_review",
+      "text": "진찰소견(Physical Examination)",
+      "bbox": [
+        75,
+        775,
+        229,
+        25
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.911858856678009,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000044",
+      "source": "bbox_review",
+      "text": "오른쪽 무릎 관절 부종(+), 압통(+), 운동범위 제한(+). 맥머레이 검사 시 통증(+).",
+      "bbox": [
+        325,
+        757,
+        647,
+        65
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "long_paragraph",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "오른쪽 무릎 관절 부종(+), 압통(+), 운동범위 제한(+). 맥머레이 검사 시 통증(+).",
+      "confidence": 0.9296407699584961,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0043_det_000044.png"
+    },
+    {
+      "anchor_id": "det_000045",
+      "source": "bbox_review",
+      "text": "검사소견(Test Findings)",
+      "bbox": [
+        75,
+        845,
+        180,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9683724641799927,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000046",
+      "source": "bbox_review",
+      "text": "검사명",
+      "bbox": [
+        396,
+        845,
+        50,
+        23
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9995396733283997,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000047",
+      "source": "bbox_review",
+      "text": "결과",
+      "bbox": [
+        615,
+        844,
+        38,
+        24
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9985646605491638,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000048",
+      "source": "bbox_review",
+      "text": "참고치",
+      "bbox": [
+        820,
+        843,
+        53,
+        26
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9985032081604004,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000049",
+      "source": "bbox_review",
+      "text": "X-ray (Rt. Knee)",
+      "bbox": [
+        345,
+        876,
+        154,
+        37
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "X-ray (Rt. Knee)",
+      "confidence": 0.9660167098045349,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0048_det_000049.png"
+    },
+    {
+      "anchor_id": "det_000050",
+      "source": "bbox_review",
+      "text": "골절 및 탈구 소건 없음",
+      "bbox": [
+        498,
+        876,
+        281,
+        37
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "골절 및 탈구 소건 없음",
+      "confidence": 0.8532878160476685,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0049_det_000050.png"
+    },
+    {
+      "anchor_id": "det_000051",
+      "source": "bbox_review",
+      "text": "-",
+      "bbox": [
+        780,
+        876,
+        136,
+        38
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "-",
+      "confidence": null,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0050_det_000051.png"
+    },
+    {
+      "anchor_id": "det_000052",
+      "source": "bbox_review",
+      "text": "MRI (Rt. Knee)",
+      "bbox": [
+        345,
+        913,
+        153,
+        37
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "MRI (Rt. Knee)",
+      "confidence": 0.9775971174240112,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0051_det_000052.png"
+    },
+    {
+      "anchor_id": "det_000053",
+      "source": "bbox_review",
+      "text": "내측 반월상연골 후각부 열상의심 소견",
+      "bbox": [
+        498,
+        914,
+        281,
+        36
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "내측 반월상연골 후각부 열상의심 소견",
+      "confidence": 0.8989936709403992,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0052_det_000053.png"
+    },
+    {
+      "anchor_id": "det_000054",
+      "source": "bbox_review",
+      "text": "-",
+      "bbox": [
+        779,
+        914,
+        138,
+        36
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "-",
+      "confidence": 0.7480049133300781,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0053_det_000054.png"
+    },
+    {
+      "anchor_id": "det_000055",
+      "source": "bbox_review",
+      "text": "진단명(Diagnosis)",
+      "bbox": [
+        74,
+        978,
+        142,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9880058169364929,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000056",
+      "source": "bbox_review",
+      "text": "S83.2",
+      "bbox": [
+        326,
+        970,
+        85,
+        52
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "S83.2",
+      "confidence": 0.9914420247077942,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0055_det_000056.png"
+    },
+    {
+      "anchor_id": "det_000057",
+      "source": "bbox_review",
+      "text": "오른쪽 무릎 내측 반월상연골 손상(의심)",
+      "bbox": [
+        411,
+        969,
+        560,
+        53
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "오른쪽 무릎 내측 반월상연골 손상(의심)",
+      "confidence": 0.916541337966919,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0056_det_000057.png"
+    },
+    {
+      "anchor_id": "det_000058",
+      "source": "bbox_review",
+      "text": "치료내용(Treatment)",
+      "bbox": [
+        75,
+        1034,
+        163,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9924649000167847,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000059",
+      "source": "bbox_review",
+      "text": "1.약물치료: 소염진통제처방(에페린정50mg, 1일2회)",
+      "bbox": [
+        325,
+        1032,
+        646,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "1.약물치료: 소염진통제처방(에페린정50mg, 1일2회)",
+      "confidence": 0.9475257992744446,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0058_det_000059.png"
+    },
+    {
+      "anchor_id": "det_000060",
+      "source": "bbox_review",
+      "text": "2.보조기 착용 및 무릎 안정",
+      "bbox": [
+        326,
+        1056,
+        645,
+        22
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "2.보조기 착용 및 무릎 안정",
+      "confidence": 0.8961800932884216,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0059_det_000060.png"
+    },
+    {
+      "anchor_id": "det_000061",
+      "source": "bbox_review",
+      "text": "3.2주후 외래 경과관찰",
+      "bbox": [
+        326,
+        1083,
+        645,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "3.2주후 외래 경과관찰",
+      "confidence": 0.9313607811927795,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0060_det_000061.png"
+    },
+    {
+      "anchor_id": "det_000062",
+      "source": "bbox_review",
+      "text": "향후계획(Plan)",
+      "bbox": [
+        73,
+        1126,
+        127,
+        29
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9331496357917786,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000063",
+      "source": "bbox_review",
+      "text": "2주 후 재진 예약. 통증 악화 시 조기 내원 권고",
+      "bbox": [
+        325,
+        1118,
+        646,
+        50
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "2주 후 재진 예약. 통증 악화 시 조기 내원 권고",
+      "confidence": 0.972567617893219,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0062_det_000063.png"
+    },
+    {
+      "anchor_id": "det_000064",
+      "source": "bbox_review",
+      "text": "비고",
+      "bbox": [
+        72,
+        1177,
+        64,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9573142528533936,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000065",
+      "source": "bbox_review",
+      "text": "-",
+      "bbox": [
+        325,
+        1168,
+        646,
+        51
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "-",
+      "confidence": 0.7993589639663696,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0064_det_000065.png"
+    },
+    {
+      "anchor_id": "det_000066",
+      "source": "bbox_review",
+      "text": "위와 같이 의무기록의 사본임을 확인합니다",
+      "bbox": [
+        317,
+        1233,
+        346,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "static_label",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9345549941062927,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000067",
+      "source": "bbox_review",
+      "text": "2025",
+      "bbox": [
+        400,
+        1272,
+        41,
+        21
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "2025",
+      "confidence": 0.9991788864135742,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0066_det_000067.png"
+    },
+    {
+      "anchor_id": "det_000069",
+      "source": "bbox_review",
+      "text": "미래정형외과병원",
+      "bbox": [
+        348,
+        1300,
+        239,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9991607666015625,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000072",
+      "source": "bbox_review",
+      "text": "서울특별시 강남구 테해란로 456(역삼동)",
+      "bbox": [
+        322,
+        1331,
+        298,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "unknown",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "서울특별시 강남구 테해란로 456(역삼동)",
+      "confidence": 0.9446921944618225,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0068_det_000072.png"
+    },
+    {
+      "anchor_id": "det_000073",
+      "source": "bbox_review",
+      "text": "전화",
+      "bbox": [
+        323,
+        1356,
+        30,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9733121395111084,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000074",
+      "source": "bbox_review",
+      "text": "1.이 사본은 원본과 동일함을 증명합니다",
+      "bbox": [
+        194,
+        1405,
+        271,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "static_label",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9202532172203064,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000075",
+      "source": "bbox_review",
+      "text": "유의사항",
+      "bbox": [
+        73,
+        1421,
+        81,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9988988637924194,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000076",
+      "source": "bbox_review",
+      "text": "2.이사본은의료법, 제21조 및 같은 법 시행규칙 제13조에 따라발급된 것입니다.",
+      "bbox": [
+        192,
+        1430,
+        548,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9055730104446411,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "det_000077",
+      "source": "bbox_review",
+      "text": "3.환자의 동의 없이 제3자에게 제공하거나 다른 용도로 사용할 수 없습니다",
+      "bbox": [
+        193,
+        1456,
+        492,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "header_footer",
+      "text_source": "review_label",
+      "role": "static_label",
+      "suggested_schema_key": null,
+      "confidence": 0.9173174500465393,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "manual_1783574260527",
+      "source": "bbox_review",
+      "text": "2025–06-0001234",
+      "bbox": [
+        116,
+        45,
+        139,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "2025–06-0001234",
+      "confidence": 0.9388703107833862,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0074_manual_1783574260527.png"
+    },
+    {
+      "anchor_id": "manual_1783574287062",
+      "source": "bbox_review",
+      "text": "30세",
+      "bbox": [
+        767,
+        273,
+        204,
+        46
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "30세",
+      "confidence": 0.9957144260406494,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0075_manual_1783574287062.png"
+    },
+    {
+      "anchor_id": "manual_1783574334777",
+      "source": "bbox_review",
+      "text": "년",
+      "bbox": [
+        439,
+        1270,
+        24,
+        24
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "static_unit_or_prefix",
+      "suggested_schema_key": null,
+      "confidence": 0.9704429507255554,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "manual_1783574337078",
+      "source": "bbox_review",
+      "text": "06",
+      "bbox": [
+        459,
+        1271,
+        27,
+        22
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "06",
+      "confidence": 0.9971617460250854,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0077_manual_1783574337078.png"
+    },
+    {
+      "anchor_id": "manual_1783574339727",
+      "source": "bbox_review",
+      "text": "월",
+      "bbox": [
+        482,
+        1272,
+        21,
+        23
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "static_unit_or_prefix",
+      "suggested_schema_key": null,
+      "confidence": 0.281582772731781,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "manual_1783574342528",
+      "source": "bbox_review",
+      "text": "02",
+      "bbox": [
+        502,
+        1271,
+        26,
+        24
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "02",
+      "confidence": 0.999008297920227,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0079_manual_1783574342528.png"
+    },
+    {
+      "anchor_id": "manual_1783574346177",
+      "source": "bbox_review",
+      "text": "일",
+      "bbox": [
+        526,
+        1270,
+        25,
+        25
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "static_unit_or_prefix",
+      "suggested_schema_key": null,
+      "confidence": null,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "manual_1783574405161",
+      "source": "bbox_review",
+      "text": "02-123-4567",
+      "bbox": [
+        359,
+        1356,
+        104,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "02-123-4567",
+      "confidence": 0.9562896490097046,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0081_manual_1783574405161.png"
+    },
+    {
+      "anchor_id": "manual_1783574407343",
+      "source": "bbox_review",
+      "text": "팩스",
+      "bbox": [
+        489,
+        1356,
+        33,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "keep",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "static_unit_or_prefix",
+      "suggested_schema_key": null,
+      "confidence": 0.9885215163230896,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": null
+    },
+    {
+      "anchor_id": "manual_1783574410060",
+      "source": "bbox_review",
+      "text": "02-123–4568",
+      "bbox": [
+        526,
+        1357,
+        103,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "review_label",
+      "role": "value_region",
+      "suggested_schema_key": "02-123–4568",
+      "confidence": 0.9510363936424255,
+      "provenance": "review/original_의무기록/review.json",
+      "crop_path": "workbench/documents/의무기록_사본__MED-02/authoring/agent_requests/20260709T053300905504Z/visual_evidence/crops/crop_0083_manual_1783574410060.png"
+    }
+  ]
+}

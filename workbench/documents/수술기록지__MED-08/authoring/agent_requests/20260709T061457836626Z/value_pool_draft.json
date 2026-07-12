@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-08",
+  "title": "수술기록지",
+  "pools": {
+    "departments": {
+      "values": [
+        "외과",
+        "정형외과",
+        "산부인과",
+        "비뇨의학과",
+        "이비인후과"
+      ],
+      "usage": "진료과",
+      "source": "synthetic medical departments"
+    },
+    "ward_rooms": {
+      "values": [
+        "51병동 1203호",
+        "32병동 805호",
+        "7병동 702호",
+        "본관 603호"
+      ],
+      "usage": "병실",
+      "source": "synthetic hospital room notation"
+    },
+    "diagnoses": {
+      "values": [
+        "급성 충수염",
+        "담낭 결석증",
+        "서혜부 탈장",
+        "무릎 반월상연골 파열",
+        "피부 양성 종양"
+      ],
+      "usage": "병명",
+      "source": "synthetic common surgery-adjacent diagnoses"
+    },
+    "additional_items": {
+      "values": [
+        "해당없음",
+        "야간",
+        "응급",
+        "소아가산"
+      ],
+      "usage": "가산항목",
+      "source": "template label only; needs domain confirmation"
+    },
+    "surgery_records": {
+      "values": [
+        {
+          "code": "N0471",
+          "name": "충수절제술"
+        },
+        {
+          "code": "Q2861",
+          "name": "복강경 담낭절제술"
+        },
+        {
+          "code": "N0601",
+          "name": "탈장교정술"
+        },
+        {
+          "code": "S4600",
+          "name": "관절경하 활막절제술"
+        },
+        {
+          "code": "M6650",
+          "name": "피부봉합술"
+        }
+      ],
+      "usage": "수술코드와 수술명 pair",
+      "source": "synthetic code/name pairs for renderer relationship testing"
+    },
+    "material_names": {
+      "values": [
+        "Vicryl 3-0",
+        "Vicryl 4-0",
+        "Nylon 4-0",
+        "Silk 2-0",
+        "Prolene 3-0",
+        "Surgicel",
+        "Gelfoam",
+        "Bone wax",
+        "Hemovac drain",
+        "JP drain",
+        "Penrose drain",
+        "Foley catheter 16Fr",
+        "Levin tube 16Fr",
+        "Tegaderm",
+        "Opsite",
+        "멸균거즈 4x4",
+        "압박드레싱",
+        "탄력붕대",
+        "스테리스트립",
+        "Skin stapler",
+        "Titanium clip",
+        "Endo clip",
+        "Trocar 5mm",
+        "Trocar 10mm",
+        "Mesh patch",
+        "Suction tip",
+        "Electrode pad",
+        "Bovie pencil",
+        "Ioban drape",
+        "Hemostatic gauze"
+      ],
+      "usage": "재료처치 재료명",
+      "source": "expanded synthetic surgical consumables based on template and perioperative context"
+    },
+    "anesthesia_durations": {
+      "values": [
+        "20분",
+        "25분",
+        "30분",
+        "35분",
+        "40분",
+        "45분",
+        "50분",
+        "55분",
+        "1시간",
+        "1시간 10분",
+        "1시간 20분",
+        "1시간 30분",
+        "1시간 45분",
+        "2시간",
+        "2시간 15분",
+        "2시간 30분",
+        "3시간"
+      ],
+      "usage": "마취료 마취시간: 시각이 아니라 duration",
+      "source": "template placement under 마취료 plus anesthesia/perioperative documentation research"
+    },
+    "anesthesia_materials": {
+      "values": [
+        "ET tube 7.0",
+        "ET tube 7.5",
+        "LMA 3번",
+        "LMA 4번",
+        "Airway 90mm",
+        "마스크 4번",
+        "마취회로",
+        "BIS sensor",
+        "Spinal needle 25G",
+        "Epidural catheter",
+        "흡인카테터 12Fr",
+        "Syringe 10mL",
+        "IV catheter 18G",
+        "IV extension line",
+        "필터니들"
+      ],
+      "usage": "마취재료",
+      "source": "synthetic airway/IV/anesthesia consumables"
+    },
+    "injection_orders": {
+      "values": [
+        "Cefazolin 1g IV",
+        "Fentanyl 100mcg IV",
+        "Propofol 120mg IV",
+        "Rocuronium 50mg IV",
+        "Midazolam 2mg IV",
+        "Ondansetron 4mg IV",
+        "Ketorolac 30mg IV",
+        "Dexamethasone 5mg IV",
+        "Ephedrine 5mg IV prn",
+        "Phenylephrine 100mcg IV prn",
+        "N/S 500mL IV",
+        "Hartmann 1L IV",
+        "PCA 연결",
+        "Tramadol 50mg IV",
+        "Atropine 0.5mg IV prn"
+      ],
+      "usage": "주사처방",
+      "source": "synthetic perioperative/anesthesia medication orders"
+    }
+  }
+}

@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-04",
+  "title": "신용장(L/C)",
+  "field_generators": {
+    "issue_date_header": "pool:english_date",
+    "lc_number": "pattern:AA##A#######",
+    "issuing_bank_header_address": "pool:trade_addresses",
+    "application_number": "pattern:AAA######-###",
+    "reference_contract_number": "template:SALE-CONTRACT NO. {{pattern:AA-####-##}}",
+    "reference_contract_date": "template:DATED {{pool:english_date}}",
+    "applicant_name": "pool:trade_company_names",
+    "applicant_address": "pool:trade_addresses",
+    "issuing_bank_name": "pool:bank_names",
+    "issuing_bank_address": "same_as:issuing_bank_header_address",
+    "issuing_bank_swift_header": "pattern:AAAAAAAA",
+    "issuing_bank_swift": "same_as:issuing_bank_swift_header",
+    "beneficiary_name": "pool:trade_company_names",
+    "beneficiary_address": "pool:trade_addresses",
+    "available_with_by": "pool:availability_terms",
+    "expiry_date": "pool:english_date",
+    "expiry_place": "pool:trade_places",
+    "date_of_issue": "same_as:issue_date_header",
+    "documentary_credit_form": "choice:IRREVOCABLE|TRANSFERABLE|CONFIRMED",
+    "currency_code": "choice:USD|EUR|JPY|KRW",
+    "credit_amount": "pool:amount_values",
+    "maximum_currency_code": "same_as:currency_code",
+    "maximum_credit_amount": "same_as:credit_amount",
+    "amount_currency_name": "choice:U.S. DOLLARS|EUROS|JAPANESE YEN|KOREAN WON",
+    "amount_in_words": "pool:amount_words",
+    "drafts_at": "choice:SIGHT FOR 100% INVOICE VALUE|AT 30 DAYS AFTER SIGHT|AT 60 DAYS AFTER BILL OF LADING DATE",
+    "drawee_bank_name": "pool:bank_names",
+    "drawee_bank_place": "pool:trade_places",
+    "partial_shipments": "choice:ALLOWED|NOT ALLOWED",
+    "transshipment": "choice:ALLOWED|NOT ALLOWED",
+    "port_of_loading": "pool:ports",
+    "port_of_discharge": "pool:ports",
+    "latest_shipment_date": "pool:english_date",
+    "goods_description": "pool:goods_descriptions",
+    "hs_code": "pattern:####.##",
+    "sales_contract_reference": "template:As per Sales Contract No. {{pattern:AA-####-##}} Dated {{pool:english_date}}"
+  },
+  "data_pools": {
+    "english_date": [
+      "07 MAY 2024",
+      "18 APR 2024",
+      "07 AUG 2024",
+      "07 JUL 2024",
+      "15 SEP 2024",
+      "02 OCT 2024"
+    ],
+    "trade_addresses": [
+      "45, Teheran-ro, Gangnam-gu, Seoul, 06164, Korea",
+      "501, 12, Seolleung-ro 90-gil, Gangnam-gu, Seoul, 06159, Korea",
+      "18 Tuas Avenue 5, Singapore 639340",
+      "88 Market Street, Singapore 048948",
+      "120 Queen Street, Melbourne VIC 3000, Australia"
+    ],
+    "trade_company_names": [
+      "MarineTech Solutions Co., Ltd.",
+      "Oceanic Machinery Pte. Ltd.",
+      "Han River Trading Co., Ltd.",
+      "Pacific Components Pte. Ltd.",
+      "Blue Harbor Equipment Ltd."
+    ],
+    "bank_names": [
+      "Global First Bank",
+      "Korea Trade Bank",
+      "Pacific International Bank",
+      "Seoul Commerce Bank",
+      "Singapore Merchant Bank"
+    ],
+    "availability_terms": [
+      "Any Bank by Negotiation in Singapore",
+      "Global First Bank by Payment in Seoul",
+      "Any Bank by Negotiation in Korea",
+      "Pacific International Bank by Acceptance"
+    ],
+    "trade_places": [
+      "Seoul, Korea",
+      "Singapore",
+      "Busan, Korea",
+      "Tokyo, Japan",
+      "Hong Kong"
+    ],
+    "amount_values": [
+      "250,000.00",
+      "125,000.00",
+      "480,500.00",
+      "75,300.00",
+      "1,200,000.00"
+    ],
+    "amount_words": [
+      "TWO HUNDRED FIFTY THOUSAND ONLY",
+      "ONE HUNDRED TWENTY FIVE THOUSAND ONLY",
+      "FOUR HUNDRED EIGHTY THOUSAND FIVE HUNDRED ONLY",
+      "SEVENTY FIVE THOUSAND THREE HUNDRED ONLY"
+    ],
+    "ports": [
+      "Busan, Korea",
+      "Singapore",
+      "Incheon, Korea",
+      "Shanghai, China",
+      "Port Klang, Malaysia"
+    ],
+    "goods_descriptions": [
+      "Industrial Gear Pump Model GP-200",
+      "Marine Engine Spare Parts Model MS-410",
+      "Precision Valve Assembly Type PV-80",
+      "Hydraulic Control Unit Model HC-55"
+    ]
+  },
+  "constraints": [
+    {
+      "type": "copy",
+      "source": "issue_date_header",
+      "target": "date_of_issue",
+      "note": "상단 ISSUE DATE와 30 DATE OF ISSUE는 샘플에서 같은 날짜로 표시됨",
+      "evidence_ids": [
+        "R3"
+      ]
+    },
+    {
+      "type": "copy",
+      "source": "currency_code",
+      "target": "maximum_currency_code",
+      "note": "31A와 39B 통화코드가 샘플에서 일치함",
+      "evidence_ids": [
+        "R3"
+      ]
+    },
+    {
+      "type": "copy",
+      "source": "credit_amount",
+      "target": "maximum_credit_amount",
+      "note": "31A 금액과 39B maximum credit amount가 샘플에서 일치함",
+      "evidence_ids": [
+        "R3"
+      ]
+    },
+    {
+      "type": "copy",
+      "source": "issuing_bank_swift_header",
+      "target": "issuing_bank_swift",
+      "note": "상단 SWIFT와 32B SWIFT가 샘플에서 일치함",
+      "evidence_ids": [
+        "R3"
+      ]
+    },
+    {
+      "type": "copy",
+      "source": "issuing_bank_header_address",
+      "target": "issuing_bank_address",
+      "note": "상단 은행 주소와 32B 개설은행 주소가 같은 은행 주소로 보임",
+      "evidence_ids": [
+        "R3"
+      ]
+    }
+  ],
+  "field_rules": {
+    "issue_date_header": {
+      "rule": "pool:english_date",
+      "semantic_path": "문서정보.발행일",
+      "anchor_id": "det_000006",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "static label ISSUE DATE; no printed unit/suffix at value position"
+    },
+    "lc_number": {
+      "rule": "pattern:AA##A#######",
+      "semantic_path": "문서정보.신용장번호",
+      "anchor_id": "det_000009",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "LC NO. value; no static prefix inside value bbox"
+    },
+    "issuing_bank_header_address": {
+      "rule": "pool:trade_addresses",
+      "semantic_path": "문서정보.발행은행_상단주소",
+      "anchor_id": "det_000010",
+      "evidence_ids": [
+        "R1"
+      ],
+      "note": "bank header address block; no unit"
+    },
+    "application_number": {
+      "rule": "pattern:AAA######-###",
+      "semantic_path": "문서정보.신청번호",
+      "anchor_id": "det_000012",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "APPLICATION NO. value"
+    },
+    "reference_contract_number": {
+      "rule": "template:SALE-CONTRACT NO. {{pattern:AA-####-##}}",
+      "semantic_path": "문서정보.참조계약번호",
+      "anchor_id": "det_000015",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "REFERENCE NO. first line includes sale contract prefix in value"
+    },
+    "reference_contract_date": {
+      "rule": "template:DATED {{pool:english_date}}",
+      "semantic_path": "문서정보.참조계약일자",
+      "anchor_id": "det_000016",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "DATED prefix is part of filled value line"
+    },
+    "applicant_name": {
+      "rule": "pool:trade_company_names",
+      "semantic_path": "당사자.신청인.상호",
+      "anchor_id": "det_000020",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "31C APPLICANT name line"
+    },
+    "applicant_address": {
+      "rule": "pool:trade_addresses",
+      "semantic_path": "당사자.신청인.주소",
+      "anchor_id": "det_000022",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "31C APPLICANT address block"
+    },
+    "issuing_bank_name": {
+      "rule": "pool:bank_names",
+      "semantic_path": "당사자.개설은행.은행명",
+      "anchor_id": "det_000021",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "32B ISSUING BANK name"
+    },
+    "issuing_bank_address": {
+      "rule": "same_as:issuing_bank_header_address",
+      "semantic_path": "당사자.개설은행.주소",
+      "anchor_id": "det_000023",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "32B address visually matches header bank address"
+    },
+    "issuing_bank_swift_header": {
+      "rule": "pattern:AAAAAAAA",
+      "semantic_path": "문서정보.발행은행_상단SWIFT",
+      "anchor_id": "manual_1783565051305",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "top SWIFT value manually reviewed"
+    },
+    "issuing_bank_swift": {
+      "rule": "same_as:issuing_bank_swift_header",
+      "semantic_path": "당사자.개설은행.SWIFT",
+      "anchor_id": "manual_1783565087472",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "32B SWIFT value manually reviewed"
+    },
+    "beneficiary_name": {
+      "rule": "pool:trade_company_names",
+      "semantic_path": "당사자.수익자.상호",
+      "anchor_id": "det_000030",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "59 BENEFICIARY name"
+    },
+    "beneficiary_address": {
+      "rule": "pool:trade_addresses",
+      "semantic_path": "당사자.수익자.주소",
+      "anchor_id": "det_000032",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "59 BENEFICIARY address"
+    },
+    "available_with_by": {
+      "rule": "pool:availability_terms",
+      "semantic_path": "당사자.사용가능은행_조건",
+      "anchor_id": "det_000031",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "41A AVAILABLE WITH / BY value"
+    },
+    "expiry_date": {
+      "rule": "pool:english_date",
+      "semantic_path": "신용장조건.만기일자",
+      "anchor_id": "det_000041",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "31D expiry date"
+    },
+    "expiry_place": {
+      "rule": "pool:trade_places",
+      "semantic_path": "신용장조건.만기장소",
+      "anchor_id": "det_000044",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "31D expiry place below date"
+    },
+    "date_of_issue": {
+      "rule": "same_as:issue_date_header",
+      "semantic_path": "신용장조건.발행일자",
+      "anchor_id": "det_000042",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "30 DATE OF ISSUE; duplicated with header issue date"
+    },
+    "documentary_credit_form": {
+      "rule": "choice:IRREVOCABLE|TRANSFERABLE|CONFIRMED",
+      "semantic_path": "신용장조건.신용장형태",
+      "anchor_id": "det_000043",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "40A form value"
+    },
+    "currency_code": {
+      "rule": "choice:USD|EUR|JPY|KRW",
+      "semantic_path": "신용장조건.통화코드",
+      "anchor_id": "det_000047",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "31A currency code; amount is separate adjacent bbox"
+    },
+    "credit_amount": {
+      "rule": "pool:amount_values",
+      "semantic_path": "신용장조건.금액",
+      "anchor_id": "det_000048",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "31A numeric amount; currency is separate static/value bbox"
+    },
+    "maximum_currency_code": {
+      "rule": "same_as:currency_code",
+      "semantic_path": "신용장조건.최대통화코드",
+      "anchor_id": "det_000049",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "39B currency code"
+    },
+    "maximum_credit_amount": {
+      "rule": "same_as:credit_amount",
+      "semantic_path": "신용장조건.최대금액",
+      "anchor_id": "det_000050",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "39B maximum amount mirrors 31A sample"
+    },
+    "amount_currency_name": {
+      "rule": "choice:U.S. DOLLARS|EUROS|JAPANESE YEN|KOREAN WON",
+      "semantic_path": "신용장조건.금액통화명",
+      "anchor_id": "det_000051",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "currency words printed before amount words"
+    },
+    "amount_in_words": {
+      "rule": "pool:amount_words",
+      "semantic_path": "신용장조건.금액영문표기",
+      "anchor_id": "manual_1783565130087",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "manual value is amount words excluding currency name"
+    },
+    "drafts_at": {
+      "rule": "choice:SIGHT FOR 100% INVOICE VALUE|AT 30 DAYS AFTER SIGHT|AT 60 DAYS AFTER BILL OF LADING DATE",
+      "semantic_path": "신용장조건.어음조건",
+      "anchor_id": "det_000053",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "42C drafts-at payment condition"
+    },
+    "drawee_bank_name": {
+      "rule": "pool:bank_names",
+      "semantic_path": "당사자.어음지급은행.은행명",
+      "anchor_id": "det_000055",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "42A drawee bank name; trailing comma included in sample but not generated"
+    },
+    "drawee_bank_place": {
+      "rule": "pool:trade_places",
+      "semantic_path": "당사자.어음지급은행.소재지",
+      "anchor_id": "manual_1783565166020",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "manual split of drawee location after comma"
+    },
+    "partial_shipments": {
+      "rule": "choice:ALLOWED|NOT ALLOWED",
+      "semantic_path": "선적조건.분할선적",
+      "anchor_id": "det_000059",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "43P option value"
+    },
+    "transshipment": {
+      "rule": "choice:ALLOWED|NOT ALLOWED",
+      "semantic_path": "선적조건.환적",
+      "anchor_id": "det_000060",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "43T option value"
+    },
+    "port_of_loading": {
+      "rule": "pool:ports",
+      "semantic_path": "선적조건.선적항",
+      "anchor_id": "det_000061",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "44E loading/departure port"
+    },
+    "port_of_discharge": {
+      "rule": "pool:ports",
+      "semantic_path": "선적조건.양륙항",
+      "anchor_id": "det_000064",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "44F discharge/destination port"
+    },
+    "latest_shipment_date": {
+      "rule": "pool:english_date",
+      "semantic_path": "선적조건.최종선적일",
+      "anchor_id": "det_000065",
+      "evidence_ids": [
+        "R3"
+      ],
+      "note": "44C latest shipment date"
+    },
+    "goods_description": {
+      "rule": "pool:goods_descriptions",
+      "semantic_path": "물품명세.물품명",
+      "anchor_id": "det_000067",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "45A goods/services first line"
+    },
+    "hs_code": {
+      "rule": "pattern:####.##",
+      "semantic_path": "물품명세.HS코드",
+      "anchor_id": "manual_1783565189703",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "HS Code value manually separated from label"
+    },
+    "sales_contract_reference": {
+      "rule": "template:As per Sales Contract No. {{pattern:AA-####-##}} Dated {{pool:english_date}}",
+      "semantic_path": "물품명세.계약참조문구",
+      "anchor_id": "det_000069",
+      "evidence_ids": [
+        "R2"
+      ],
+      "note": "45A contract reference line"
+    }
+  },
+  "notes": [
+    "영문 DD MON YYYY 날짜와 USD 금액/영문 금액의 엄밀한 동기화는 현재 지원 grammar만으로 제한되어 pool/template 근사로 작성했다.",
+    "실제 개인정보/실거래 계좌번호는 사용하지 않고 합성 회사명/주소/은행명 pool만 사용했다."
+  ]
+}

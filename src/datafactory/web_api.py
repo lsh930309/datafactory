@@ -40,7 +40,7 @@ from .authoring import (
 from .first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
 from .fonts import default_font_id, list_font_faces
 from .final_results_export import export_final_results
-from .handwriting import BARCODE_FORMAT, create_handwriting_print_pack, intake_handwriting_scans
+from .handwriting import BARCODE_FORMAT, DEFAULT_WECHAT_QR_MODEL_DIR, create_handwriting_print_pack, intake_handwriting_scans, render_handwriting_authoring_preview
 from .docx_pipeline import analyze_docx_template, draft_docx_authoring, generate_docx_outputs
 from .inpaint import InpaintConfig, InpaintResult, inpaint_from_review_policy, lama_inpaint, render_mask_overlay
 from .inpaint_export import write_inpaint_result
@@ -109,7 +109,8 @@ AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES = [
     "`pick_record`로 연결되는 field라도 `field_generators`에는 렌더러가 지원하는 안전한 기본 rule을 둔다. 다만 최종 값은 constraint가 같은 record에서 덮어쓴다.",
     "`copy`는 `{type:'copy', source:'source_field_id', target:'target_field_id'}`로 작성한다. source/target은 모두 schema binding field_id여야 한다.",
     "`exclusive_choice`는 `{type:'exclusive_choice', targets:[field_id...]}`로 작성하며 동일 그룹 체크박스 중 정확히 하나만 선택되어야 할 때 사용한다.",
-    "`date_group`은 `{type:'date_group', year:'field_id', month:'field_id', day:'field_id', min_year:2020, max_year:2027}`로 작성해 분리된 연/월/일 bbox가 항상 유효한 한 날짜가 되게 한다.",
+    "`primary_secondary_group`은 수술 행별 주수술/부수술 체크박스에만 사용한다. 형식은 `{type:'primary_secondary_group', rows:[{primary:'수술1_주수술', secondary:'수술1_부수술'}, ...]}`이며 정확히 한 행만 주수술=true, 나머지는 부수술=true가 된다.",
+    "`date_group`은 `{type:'date_group', year:'field_id', month:'field_id', day:'field_id', min_year:2020, max_year:2027}`로 작성해 분리된 연/월/일 bbox가 항상 유효한 한 날짜가 되게 한다. 템플릿에 `20` 같은 세기 prefix가 이미 인쇄되어 연도 bbox가 뒤 2자리만 받는 경우에만 `year_format:'yy'`를 추가한다.",
     "`date_order`는 `{type:'date_order', start:{year,month,day}, end:{year,month,day}, min_days:0, max_days:60}`로 작성해 종료일이 시작일보다 빠르지 않게 한다. start/end의 year/month/day는 각각 field_id 문자열이어야 한다.",
     "`date_not_before`는 `{type:'date_not_before', source:'source_date_field_id', target:{year:'field_id', month:'field_id', day:'field_id'}, min_days:0, max_days:90}`로 작성해 target 날짜가 source 날짜보다 과거가 되지 않게 한다. source/target은 단일 date.kr field 또는 year/month/day group을 사용할 수 있다.",
     "`sum`은 `{type:'sum', sources:[field_id...], target:'field_id', format:'money.krw'}`로 작성해 합계/소계/총액 bbox가 구성 항목의 합과 일치하게 한다.",
@@ -175,6 +176,8 @@ def runtime_health() -> dict[str, Any]:
             "final_results_export": True,
             "handwriting_pipeline": True,
             "handwriting_barcode": BARCODE_FORMAT,
+            "wechat_qr_model_dir": str(DEFAULT_WECHAT_QR_MODEL_DIR),
+            "wechat_qr_models_present": all((DEFAULT_WECHAT_QR_MODEL_DIR / name).exists() for name in ("detect.prototxt", "detect.caffemodel", "sr.prototxt", "sr.caffemodel")),
             "manual_template_cleanup": True,
             "font_registry": True,
             "ocr_presets": list(PADDLEOCR_PRESETS),
@@ -548,7 +551,7 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "schema key의 의미가 충분히 명확하고 문서 anchor 또는 리서치 근거와 연결될 때만 faker rule을 제안한다.",
                 "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안하되, 반드시 현재 DataFactory 렌더러가 지원하는 rule 문법만 사용한다.",
                 "서로 독립적으로 생성하면 문서 유효성이 깨지는 field들은 `faker_profile_draft.json.constraints`에 명시적으로 모델링한다. 예: 체크박스 택1, 시작/종료일 순서, 행/열 합계, 본인부담금/공단부담금/총액 관계.",
-                "지원 constraint 타입은 `pick_record`, `copy`, `exclusive_choice`, `date_group`, `date_order`, `date_not_before`, `sum`, `age_from_rrn`뿐이다. 지원하지 않는 수식 DSL이나 자연어 constraint는 쓰지 말고 uncertainty_report에 보류한다.",
+                "지원 constraint 타입은 `pick_record`, `copy`, `exclusive_choice`, `primary_secondary_group`, `date_group`, `date_order`, `date_not_before`, `sum`, `age_from_rrn`뿐이다. 지원하지 않는 수식 DSL이나 자연어 constraint는 쓰지 말고 uncertainty_report에 보류한다.",
                 "연/월/일이 각각 다른 bbox로 분리된 날짜 placeholder에는 `date.year`, `date.month`, `date.day`를 우선 사용한다. 날짜의 월/일/연도에 `pattern:##` 또는 `pattern:####`를 쓰지 않는다.",
                 "문서 이미지/템플릿의 값 입력 위치 바로 옆/안에 `㎡`, `m²`, `m2`, `%`, `m`, `원`, `명`, `건`, `동`, `층` 같은 단위가 이미 정적 텍스트로 남아 있으면 faker 값에는 그 단위를 포함하지 않는다.",
                 "`호/가구/세대`처럼 라벨에만 단위 의미가 있고 값 위치에 별도 정적 단위가 없는 복합 값은 단위를 포함해 생성한다. 단위 포함/제외 근거를 field_rules 또는 uncertainty_report에 기록한다.",
@@ -813,6 +816,18 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
         title=doc.title if doc else str(schema_draft.get("title") or ""),
     )
     authoring_dir = workbench_subdir(doc_id, "authoring")
+    applied_review_path: Path | None = None
+    if isinstance(anchor_map, dict) and isinstance(anchor_map.get("anchors"), list):
+        applied_review_path = _write_authoring_agent_anchor_review(
+            doc_id,
+            request_dir,
+            anchor_map,
+            source_review=source_review,
+            source_image=source_image,
+        )
+        schema["source_review"] = str(applied_review_path.resolve())
+        schema["bbox_source"] = {"canonical": "review", "review_path": str(applied_review_path.resolve())}
+        schema["anchor_map_ref"] = _display_path(anchor_map_path, ROOT)
     result = save_authoring_bundle(
         authoring_dir / "schema.json",
         authoring_dir / "stylesheet.json",
@@ -825,12 +840,109 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
     update_manifest_artifact(doc_id, "authoring_stylesheet", result.stylesheet)
     update_manifest_artifact(doc_id, "authoring_faker_profile", result.faker_profile)
     update_manifest_artifact(doc_id, "authoring_agent_applied_request", request_path)
+    if anchor_map_path.exists():
+        update_manifest_artifact(doc_id, "authoring_anchor_map", anchor_map_path)
+    if applied_review_path is not None:
+        update_manifest_artifact(doc_id, "authoring_agent_applied_review", applied_review_path)
     return {
         "docId": doc_id,
         "requestPath": _display_path(request_path, ROOT),
         "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
         **result.payload,
     }
+
+
+def _write_authoring_agent_anchor_review(
+    doc_id: str,
+    request_dir: Path,
+    anchor_map: dict[str, Any],
+    *,
+    source_review: str,
+    source_image: str,
+) -> Path:
+    """Materialize agent anchors as the runtime bbox review source.
+
+    Persisted authoring schemas store bbox label ids, not coordinates. The UI
+    and renderer resolve those ids from ``schema.source_review``. Therefore an
+    applied agent draft that adds/splits anchors must also publish a
+    review-policy shaped source file containing those anchors.
+    """
+
+    source_image_path = _resolve_workspace_path(str(anchor_map.get("source_image") or source_image or ""))
+    image_info = anchor_map.get("image") if isinstance(anchor_map.get("image"), dict) else {}
+    width = int(image_info.get("width") or 0)
+    height = int(image_info.get("height") or 0)
+    if (not width or not height) and source_image_path.exists():
+        with Image.open(source_image_path) as image:
+            width, height = image.size
+    source_review_path = _resolve_workspace_path(str(anchor_map.get("source_review") or source_review or request_dir / "anchor_map_draft.json"))
+    labels: list[dict[str, Any]] = []
+    for anchor in anchor_map.get("anchors") or []:
+        if not isinstance(anchor, dict):
+            continue
+        anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "").strip()
+        bbox = anchor.get("bbox")
+        if not anchor_id or not isinstance(bbox, list) or len(bbox) != 4:
+            continue
+        try:
+            x, y, box_width, box_height = [int(round(float(value))) for value in bbox]
+        except (TypeError, ValueError):
+            continue
+        if box_width <= 0 or box_height <= 0:
+            continue
+        status = str(anchor.get("status") or "keep").strip().lower()
+        if status not in {"use", "keep", "ignore"}:
+            status = "keep"
+        auto_type = str(anchor.get("auto_type") or anchor.get("type") or "unknown").strip()
+        if auto_type not in {"field_value", "static_label", "table_cell", "long_paragraph", "header_footer", "stamp_or_seal", "watermark", "unknown"}:
+            auto_type = "unknown"
+        render_mode = str(anchor.get("render_mode") or "handwriting").strip()
+        if render_mode not in {"handwriting", "printed"}:
+            render_mode = "handwriting"
+        text = str(anchor.get("text") or anchor.get("suggested_schema_key") or "")
+        labels.append(
+            {
+                "id": anchor_id,
+                "text": text,
+                "confidence": anchor.get("confidence"),
+                "bbox": [x, y, box_width, box_height],
+                "bbox_format": "xywh",
+                "polygon": [[x, y], [x + box_width, y], [x + box_width, y + box_height], [x, y + box_height]],
+                "status": status,
+                "auto_type": auto_type,
+                "reason": str(anchor.get("reason") or "materialized from authoring agent anchor map"),
+                "locked": bool(anchor.get("locked", False)),
+                "notes": str(anchor.get("notes") or ""),
+                "original_text": text,
+                "original_confidence": anchor.get("confidence"),
+                "text_source": str(anchor.get("text_source") or anchor.get("source") or "authoring_agent_anchor_map"),
+                "ocr_text_stale": False,
+                "rec_text": "",
+                "rec_confidence": None,
+                "rec_engine": "",
+                "rec_updated_at": "",
+                "render_mode": render_mode,
+            }
+        )
+    status_counts: dict[str, int] = {}
+    auto_type_counts: dict[str, int] = {}
+    for label in labels:
+        status_counts[str(label["status"])] = status_counts.get(str(label["status"]), 0) + 1
+        auto_type_counts[str(label["auto_type"])] = auto_type_counts.get(str(label["auto_type"]), 0) + 1
+    review_payload = {
+        "schema_version": 1,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "source_engine": "authoring_agent_anchor_map",
+        "source_detections": _display_path(source_review_path, ROOT),
+        "source_image": _display_path(source_image_path, ROOT),
+        "image": {"width": width, "height": height},
+        "summary": {"total": len(labels), "by_status": status_counts, "by_auto_type": auto_type_counts},
+        "labels": labels,
+    }
+    out_path = workbench_subdir(doc_id, "authoring") / "agent_applied_reviews" / request_dir.name / "review.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(review_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return out_path
 
 
 def _authoring_agent_exec_prompt(*, request_path: Path, request_dir: Path, run_dir: Path) -> str:
@@ -1161,7 +1273,7 @@ def _validate_faker_constraints_contract(faker_profile: dict[str, Any], field_id
         return errors
     if not isinstance(constraints, list):
         return [{"code": "faker_constraints_not_list", "message": "faker_profile_draft.json.constraints must be a list when present"}]
-    supported = {"pick_record", "copy", "exclusive_choice", "date_group", "date_order", "date_not_before", "sum", "age_from_rrn"}
+    supported = {"pick_record", "copy", "exclusive_choice", "primary_secondary_group", "date_group", "date_order", "date_not_before", "sum", "age_from_rrn"}
     for index, constraint in enumerate(constraints):
         if not isinstance(constraint, dict):
             errors.append({"code": "faker_constraint_not_object", "index": index, "message": "each constraint must be an object"})
@@ -1187,6 +1299,18 @@ def _validate_faker_constraints_contract(faker_profile: dict[str, Any], field_id
             if len(targets) < 2:
                 errors.append({"code": "faker_constraint_invalid_exclusive_choice", "index": index, "message": "exclusive_choice requires at least two targets"})
             _validate_constraint_field_refs(errors, index, field_ids, targets)
+        elif ctype == "primary_secondary_group":
+            rows = constraint.get("rows")
+            refs: list[Any] = []
+            if not isinstance(rows, list) or not rows:
+                errors.append({"code": "faker_constraint_invalid_primary_secondary_group", "index": index, "message": "primary_secondary_group requires non-empty rows"})
+            else:
+                for row in rows:
+                    if not isinstance(row, dict) or not str(row.get("primary") or "").strip() or not str(row.get("secondary") or "").strip():
+                        errors.append({"code": "faker_constraint_invalid_primary_secondary_group", "index": index, "message": "each primary_secondary_group row requires primary and secondary"})
+                        continue
+                    refs.extend([row.get("primary"), row.get("secondary")])
+            _validate_constraint_field_refs(errors, index, field_ids, refs)
         elif ctype == "date_group":
             refs = [constraint.get("year"), constraint.get("month"), constraint.get("day")]
             if not all(str(ref or "").strip() for ref in refs):
@@ -2380,6 +2504,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     seed=seed,
                     render_scale=render_scale,
                     clean=bool(payload.get("clean", True)),
+                    render_handwriting_as_printed=bool(payload.get("renderHandwritingAsPrinted", False)),
                     scope_entries=payload.get("scopeEntries") if "scopeEntries" in payload else None,
                     registry=load_registry(),
                 )
@@ -2413,6 +2538,38 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 )
                 manifest_path = _resolve_workspace_path(result["paths"]["manifest"])
                 self._send_json({**result, "urls": {"manifest": f"/api/file?path={_display_path(manifest_path, ROOT)}"}})
+                return
+            if parsed.path == "/api/handwriting/scan-upload-intake":
+                doc_id = str(payload.get("docId") or "") or None
+                raw_files = payload.get("files")
+                if not isinstance(raw_files, list) or not raw_files:
+                    raise ValueError("files must be a non-empty list")
+                run_id = str(payload.get("runId") or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
+                upload_dir = ROOT / "workbench" / "handwriting_scan_uploads" / run_id
+                upload_dir.mkdir(parents=True, exist_ok=True)
+                scan_paths: list[str] = []
+                for index, item in enumerate(raw_files):
+                    if not isinstance(item, dict):
+                        raise ValueError("each file must be an object")
+                    name = _safe_name(str(item.get("name") or f"scan_{index:03d}.pdf"))
+                    suffix = Path(name).suffix.lower() or ".pdf"
+                    data = str(item.get("dataBase64") or "")
+                    if "," in data and data.split(",", 1)[0].startswith("data:"):
+                        data = data.split(",", 1)[1]
+                    decoded = base64.b64decode(data, validate=True)
+                    out_path = upload_dir / f"{index:03d}_{Path(name).stem}{suffix}"
+                    out_path.write_bytes(decoded)
+                    scan_paths.append(str(out_path))
+                result = intake_handwriting_scans(
+                    doc_id=doc_id,
+                    scan_paths=scan_paths,
+                    scan_dir=None,
+                    print_pack_manifest=str(payload.get("printPackManifest") or "") or None,
+                    run_id=run_id,
+                    registry=load_registry(),
+                )
+                manifest_path = _resolve_workspace_path(result["paths"]["manifest"])
+                self._send_json({**result, "uploadDir": _display_path(upload_dir, ROOT), "urls": {"manifest": f"/api/file?path={_display_path(manifest_path, ROOT)}"}})
                 return
             if parsed.path == "/api/handwriting/scan-intake":
                 scan_paths = payload.get("scanPaths") if isinstance(payload.get("scanPaths"), list) else None
@@ -2599,31 +2756,52 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     raise ValueError("schema, stylesheet and fakerProfile are required")
                 seed = int(payload.get("seed") or 1234)
                 render_scale = int(payload.get("renderScale") or 2)
-                result = render_authoring_live_preview(
-                    raw_schema,
-                    raw_stylesheet,
-                    raw_faker_profile,
-                    out_dir=RENDER_OUTPUT_ROOT / "live_preview" / _safe_name(doc_id),
-                    seed=seed,
-                    sample_id="live_preview",
-                    render_scale=render_scale,
-                )
-                self._send_json(
-                    {
-                        "docId": doc_id,
-                        "summary": {"sample_id": result.sample_id, "field_count": result.field_count, "warning_count": result.warning_count},
-                        "paths": _paths_to_client(
-                            {
-                                "image": result.image,
-                                "kv": result.kv,
-                                "bbox": result.bbox,
-                                "overlay": result.overlay,
-                                "validation_report": result.validation_report,
-                            }
-                        ),
-                        "imageUrl": f"/api/file?path={_display_path(result.image, ROOT)}",
-                    }
-                )
+                if bool(payload.get("handwritingPreview")):
+                    result = render_handwriting_authoring_preview(
+                        doc_id,
+                        raw_schema,
+                        raw_stylesheet,
+                        raw_faker_profile,
+                        out_dir=RENDER_OUTPUT_ROOT / "live_preview" / _safe_name(doc_id),
+                        seed=seed,
+                        sample_id="live_preview",
+                        qr_bbox=payload.get("qrBbox") if isinstance(payload.get("qrBbox"), list) else None,
+                    )
+                    paths = {key: result[key] for key in ("image", "kv", "bbox", "overlay", "validation_report")}
+                    self._send_json(
+                        {
+                            "docId": doc_id,
+                            "summary": {"sample_id": result["sample_id"], "field_count": result["field_count"], "warning_count": result["warning_count"], "printed_field_count": result["printed_field_count"], "handwriting_field_count": result["handwriting_field_count"], "qr_bbox": result["qr_bbox"]},
+                            "paths": _paths_to_client(paths),
+                            "imageUrl": f"/api/file?path={_display_path(result['image'], ROOT)}",
+                        }
+                    )
+                else:
+                    result = render_authoring_live_preview(
+                        raw_schema,
+                        raw_stylesheet,
+                        raw_faker_profile,
+                        out_dir=RENDER_OUTPUT_ROOT / "live_preview" / _safe_name(doc_id),
+                        seed=seed,
+                        sample_id="live_preview",
+                        render_scale=render_scale,
+                    )
+                    self._send_json(
+                        {
+                            "docId": doc_id,
+                            "summary": {"sample_id": result.sample_id, "field_count": result.field_count, "warning_count": result.warning_count},
+                            "paths": _paths_to_client(
+                                {
+                                    "image": result.image,
+                                    "kv": result.kv,
+                                    "bbox": result.bbox,
+                                    "overlay": result.overlay,
+                                    "validation_report": result.validation_report,
+                                }
+                            ),
+                            "imageUrl": f"/api/file?path={_display_path(result.image, ROOT)}",
+                        }
+                    )
                 return
             if parsed.path == "/api/authoring/render-batch":
                 doc_ids = payload.get("docIds")

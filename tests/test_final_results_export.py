@@ -53,6 +53,44 @@ def test_resolve_scope_entries_accepts_selected_group_scope_and_deduplicates() -
     assert result == (("금융", "DOC-1"), ("제조", "DOC-2"))
 
 
+def test_resolve_output_mode_allows_handwriting_temporary_printed_export() -> None:
+    item = {
+        "writingMethod": "수기",
+        "latestAuthoringSchema": "schema.json",
+        "latestAuthoringStylesheet": "stylesheet.json",
+        "latestAuthoringFakerProfile": "faker_profile.json",
+    }
+
+    assert fre._resolve_output_mode(item, render_handwriting_as_printed=True) == "pipeline"
+    try:
+        fre._resolve_output_mode(item)
+    except ValueError as exc:
+        assert "no accepted handwriting scans" in str(exc)
+    else:
+        raise AssertionError("expected handwriting document without accepted scans to require scan intake")
+
+
+def test_resolve_output_mode_prefers_cleanroom_for_non_pipeline_scope() -> None:
+    item = {
+        "writingMethod": "수기",
+        "latestAuthoringSchema": "schema.json",
+        "latestAuthoringStylesheet": "stylesheet.json",
+        "latestAuthoringFakerProfile": "faker_profile.json",
+        "latestCleanroomPdf": "cleanroom.pdf",
+    }
+
+    assert fre._resolve_output_mode(item, render_handwriting_as_printed=True, prefer_cleanroom=True) == "cleanroom"
+
+
+def test_resolve_output_mode_uses_cleanroom_for_handwriting_without_authoring() -> None:
+    item = {
+        "registry": {"writingMethod": "수기"},
+        "latestCleanroomPdf": "cleanroom.pdf",
+    }
+
+    assert fre._resolve_output_mode(item, render_handwriting_as_printed=True) == "cleanroom"
+
+
 def test_primary_schema_payload_uses_only_primary_schema_leaves() -> None:
     semantic_schema = {
         "회사이름": "",

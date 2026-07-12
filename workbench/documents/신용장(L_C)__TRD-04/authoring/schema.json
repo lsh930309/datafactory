@@ -1,0 +1,1200 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-09T03:09:00.574924+00:00",
+  "doc_id": "TRD-04",
+  "title": "신용장(L/C)",
+  "source_review": "workbench/documents/신용장(L_C)__TRD-04/review/original_신용증/review.json",
+  "source_image": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+  "source_inpainted": "workbench/documents/신용장(L_C)__TRD-04/inpaint/original_신용증/lama/inpainted_lama.png",
+  "image": {
+    "width": 1024,
+    "height": 1536
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "workbench/documents/신용장(L_C)__TRD-04/review/original_신용증/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/신용장(L_C)__TRD-04/review/original_신용증/review.json",
+  "semantic_schema": {
+    "문서정보": {
+      "발행일": "",
+      "신용장번호": "",
+      "신청번호": "",
+      "참조계약번호": "",
+      "참조계약일자": "",
+      "발행은행_상단주소": "",
+      "발행은행_상단SWIFT": ""
+    },
+    "당사자": {
+      "신청인": {
+        "상호": "",
+        "주소": ""
+      },
+      "개설은행": {
+        "은행명": "",
+        "주소": "",
+        "SWIFT": ""
+      },
+      "수익자": {
+        "상호": "",
+        "주소": ""
+      },
+      "사용가능은행_조건": "",
+      "어음지급은행": {
+        "은행명": "",
+        "소재지": ""
+      }
+    },
+    "신용장조건": {
+      "만기일자": "",
+      "만기장소": "",
+      "발행일자": "",
+      "신용장형태": "",
+      "통화코드": "",
+      "금액": "",
+      "최대통화코드": "",
+      "최대금액": "",
+      "금액통화명": "",
+      "금액영문표기": "",
+      "어음조건": ""
+    },
+    "선적조건": {
+      "분할선적": "",
+      "환적": "",
+      "선적항": "",
+      "양륙항": "",
+      "최종선적일": ""
+    },
+    "물품명세": {
+      "물품명": "",
+      "HS코드": "",
+      "계약참조문구": ""
+    },
+    "발행확인": {
+      "서명은행명": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "issue_date_header",
+      "label": "발행일",
+      "semantic_path": [
+        "문서정보",
+        "발행일"
+      ],
+      "bbox_label_id": "det_000006",
+      "source_detection_id": "det_000006",
+      "source_text": "07 MAY 2024",
+      "value_type": "free_text.short",
+      "generator": "pool:english_date",
+      "style_class": "style_issue_date_header",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서정보/발행일",
+        "csv_column": "발행일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "lc_number",
+      "label": "신용장번호",
+      "semantic_path": [
+        "문서정보",
+        "신용장번호"
+      ],
+      "bbox_label_id": "det_000009",
+      "source_detection_id": "det_000009",
+      "source_text": "GF24N0507001",
+      "value_type": "free_text.short",
+      "generator": "pattern:AA##A#######",
+      "style_class": "style_lc_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서정보/신용장번호",
+        "csv_column": "신용장번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issuing_bank_header_address",
+      "label": "발행은행 상단 주소",
+      "semantic_path": [
+        "문서정보",
+        "발행은행_상단주소"
+      ],
+      "bbox_label_id": "det_000010",
+      "source_detection_id": "det_000010",
+      "source_text": "45, Teheran-ro, Gangnam-gu Seoul, 06164, Korea",
+      "value_type": "free_text.short",
+      "generator": "pool:trade_addresses",
+      "style_class": "style_issuing_bank_header_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "wrap",
+        "overflow": "wrap",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서정보/발행은행_상단주소",
+        "csv_column": "발행은행 상단 주소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "application_number",
+      "label": "신청번호",
+      "semantic_path": [
+        "문서정보",
+        "신청번호"
+      ],
+      "bbox_label_id": "det_000012",
+      "source_detection_id": "det_000012",
+      "source_text": "APP240507-001",
+      "value_type": "free_text.short",
+      "generator": "pattern:AAA######-###",
+      "style_class": "style_application_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서정보/신청번호",
+        "csv_column": "신청번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "reference_contract_number",
+      "label": "참조계약번호",
+      "semantic_path": [
+        "문서정보",
+        "참조계약번호"
+      ],
+      "bbox_label_id": "det_000015",
+      "source_detection_id": "det_000015",
+      "source_text": "SALE-CONTRACT NO. SC-2404-18",
+      "value_type": "free_text.short",
+      "generator": "template:SALE-CONTRACT NO. {{pattern:AA-####-##}}",
+      "style_class": "style_reference_contract_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서정보/참조계약번호",
+        "csv_column": "참조계약번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "reference_contract_date",
+      "label": "참조계약일자",
+      "semantic_path": [
+        "문서정보",
+        "참조계약일자"
+      ],
+      "bbox_label_id": "det_000016",
+      "source_detection_id": "det_000016",
+      "source_text": "DATED 18 APR 2024",
+      "value_type": "free_text.short",
+      "generator": "template:DATED {{pool:english_date}}",
+      "style_class": "style_reference_contract_date",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서정보/참조계약일자",
+        "csv_column": "참조계약일자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "applicant_name",
+      "label": "신청인 상호",
+      "semantic_path": [
+        "당사자",
+        "신청인",
+        "상호"
+      ],
+      "bbox_label_id": "det_000020",
+      "source_detection_id": "det_000020",
+      "source_text": "MarineTech Solutions Co., Ltd.",
+      "value_type": "free_text.short",
+      "generator": "pool:trade_company_names",
+      "style_class": "style_applicant_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/신청인/상호",
+        "csv_column": "신청인 상호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "applicant_address",
+      "label": "신청인 주소",
+      "semantic_path": [
+        "당사자",
+        "신청인",
+        "주소"
+      ],
+      "bbox_label_id": "det_000022",
+      "source_detection_id": "det_000022",
+      "source_text": "501, 12, Seolleung-ro 90-gil, Gangnam-gu, Seoul, 06159, Korea",
+      "value_type": "free_text.short",
+      "generator": "pool:trade_addresses",
+      "style_class": "style_applicant_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "wrap",
+        "overflow": "wrap",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/신청인/주소",
+        "csv_column": "신청인 주소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issuing_bank_name",
+      "label": "개설은행명",
+      "semantic_path": [
+        "당사자",
+        "개설은행",
+        "은행명"
+      ],
+      "bbox_label_id": "det_000021",
+      "source_detection_id": "det_000021",
+      "source_text": "Global First Bank",
+      "value_type": "free_text.short",
+      "generator": "pool:bank_names",
+      "style_class": "style_issuing_bank_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/개설은행/은행명",
+        "csv_column": "개설은행명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issuing_bank_address",
+      "label": "개설은행 주소",
+      "semantic_path": [
+        "당사자",
+        "개설은행",
+        "주소"
+      ],
+      "bbox_label_id": "det_000023",
+      "source_detection_id": "det_000023",
+      "source_text": "45, Teheran-ro, Gangnam-gu, Seoul, 06164, Korea",
+      "value_type": "free_text.short",
+      "generator": "same_as:issuing_bank_header_address",
+      "style_class": "style_issuing_bank_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "wrap",
+        "overflow": "wrap",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/개설은행/주소",
+        "csv_column": "개설은행 주소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issuing_bank_swift_header",
+      "label": "상단 발행은행 SWIFT",
+      "semantic_path": [
+        "문서정보",
+        "발행은행_상단SWIFT"
+      ],
+      "bbox_label_id": "manual_1783565051305",
+      "source_detection_id": "manual_1783565051305",
+      "source_text": "GFBKKRSE",
+      "value_type": "free_text.short",
+      "generator": "pattern:AAAAAAAA",
+      "style_class": "style_issuing_bank_swift_header",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서정보/발행은행_상단SWIFT",
+        "csv_column": "상단 발행은행 SWIFT"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issuing_bank_swift",
+      "label": "개설은행 SWIFT",
+      "semantic_path": [
+        "당사자",
+        "개설은행",
+        "SWIFT"
+      ],
+      "bbox_label_id": "manual_1783565087472",
+      "source_detection_id": "manual_1783565087472",
+      "source_text": "GFBKKRSE",
+      "value_type": "free_text.short",
+      "generator": "same_as:issuing_bank_swift_header",
+      "style_class": "lc_identifier",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/개설은행/SWIFT",
+        "csv_column": "개설은행 SWIFT"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "beneficiary_name",
+      "label": "수익자 상호",
+      "semantic_path": [
+        "당사자",
+        "수익자",
+        "상호"
+      ],
+      "bbox_label_id": "det_000030",
+      "source_detection_id": "det_000030",
+      "source_text": "Oceanic Machinery Pte. Ltd.",
+      "value_type": "free_text.short",
+      "generator": "pool:trade_company_names",
+      "style_class": "style_beneficiary_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/수익자/상호",
+        "csv_column": "수익자 상호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "beneficiary_address",
+      "label": "수익자 주소",
+      "semantic_path": [
+        "당사자",
+        "수익자",
+        "주소"
+      ],
+      "bbox_label_id": "det_000032",
+      "source_detection_id": "det_000032",
+      "source_text": "18 Tuas Avenue 5 Singapore 639340",
+      "value_type": "free_text.short",
+      "generator": "pool:trade_addresses",
+      "style_class": "style_beneficiary_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/수익자/주소",
+        "csv_column": "수익자 주소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "available_with_by",
+      "label": "사용가능은행/방법",
+      "semantic_path": [
+        "당사자",
+        "사용가능은행_조건"
+      ],
+      "bbox_label_id": "det_000031",
+      "source_detection_id": "det_000031",
+      "source_text": "Any Bank by Negotiation in Singapore",
+      "value_type": "free_text.short",
+      "generator": "pool:availability_terms",
+      "style_class": "multiline_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/사용가능은행_조건",
+        "csv_column": "사용가능은행/방법"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "expiry_date",
+      "label": "만기일자",
+      "semantic_path": [
+        "신용장조건",
+        "만기일자"
+      ],
+      "bbox_label_id": "det_000041",
+      "source_detection_id": "det_000041",
+      "source_text": "07 AUG 2024",
+      "value_type": "free_text.short",
+      "generator": "pool:english_date",
+      "style_class": "style_expiry_date",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/만기일자",
+        "csv_column": "만기일자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "expiry_place",
+      "label": "만기장소",
+      "semantic_path": [
+        "신용장조건",
+        "만기장소"
+      ],
+      "bbox_label_id": "det_000044",
+      "source_detection_id": "det_000044",
+      "source_text": "Seoul, Korea",
+      "value_type": "free_text.short",
+      "generator": "pool:trade_places",
+      "style_class": "style_expiry_place",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/만기장소",
+        "csv_column": "만기장소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "date_of_issue",
+      "label": "신용장 발행일자",
+      "semantic_path": [
+        "신용장조건",
+        "발행일자"
+      ],
+      "bbox_label_id": "det_000042",
+      "source_detection_id": "det_000042",
+      "source_text": "07 MAY 2024",
+      "value_type": "free_text.short",
+      "generator": "same_as:issue_date_header",
+      "style_class": "style_date_of_issue",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/발행일자",
+        "csv_column": "신용장 발행일자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "documentary_credit_form",
+      "label": "신용장형태",
+      "semantic_path": [
+        "신용장조건",
+        "신용장형태"
+      ],
+      "bbox_label_id": "det_000043",
+      "source_detection_id": "det_000043",
+      "source_text": "IRREVOCABLE",
+      "value_type": "free_text.short",
+      "generator": "choice:IRREVOCABLE|TRANSFERABLE|CONFIRMED",
+      "style_class": "style_documentary_credit_form",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/신용장형태",
+        "csv_column": "신용장형태"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "currency_code",
+      "label": "통화코드",
+      "semantic_path": [
+        "신용장조건",
+        "통화코드"
+      ],
+      "bbox_label_id": "det_000047",
+      "source_detection_id": "det_000047",
+      "source_text": "USD",
+      "value_type": "free_text.short",
+      "generator": "choice:USD|EUR|JPY|KRW",
+      "style_class": "style_currency_code",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/통화코드",
+        "csv_column": "통화코드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "credit_amount",
+      "label": "신용장금액",
+      "semantic_path": [
+        "신용장조건",
+        "금액"
+      ],
+      "bbox_label_id": "det_000048",
+      "source_detection_id": "det_000048",
+      "source_text": "250,000.00",
+      "value_type": "free_text.short",
+      "generator": "pool:amount_values",
+      "style_class": "style_credit_amount",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/금액",
+        "csv_column": "신용장금액"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "maximum_currency_code",
+      "label": "최대금액 통화코드",
+      "semantic_path": [
+        "신용장조건",
+        "최대통화코드"
+      ],
+      "bbox_label_id": "det_000049",
+      "source_detection_id": "det_000049",
+      "source_text": "USD",
+      "value_type": "free_text.short",
+      "generator": "same_as:currency_code",
+      "style_class": "style_maximum_currency_code",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/최대통화코드",
+        "csv_column": "최대금액 통화코드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "maximum_credit_amount",
+      "label": "최대신용장금액",
+      "semantic_path": [
+        "신용장조건",
+        "최대금액"
+      ],
+      "bbox_label_id": "det_000050",
+      "source_detection_id": "det_000050",
+      "source_text": "250,000.00",
+      "value_type": "free_text.short",
+      "generator": "same_as:credit_amount",
+      "style_class": "amount",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/최대금액",
+        "csv_column": "최대신용장금액"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "amount_currency_name",
+      "label": "금액 통화명",
+      "semantic_path": [
+        "신용장조건",
+        "금액통화명"
+      ],
+      "bbox_label_id": "det_000051",
+      "source_detection_id": "det_000051",
+      "source_text": "U.S. DOLLARS",
+      "value_type": "free_text.short",
+      "generator": "choice:U.S. DOLLARS|EUROS|JAPANESE YEN|KOREAN WON",
+      "style_class": "style_amount_currency_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/금액통화명",
+        "csv_column": "금액 통화명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "amount_in_words",
+      "label": "금액 영문표기",
+      "semantic_path": [
+        "신용장조건",
+        "금액영문표기"
+      ],
+      "bbox_label_id": "manual_1783565130087",
+      "source_detection_id": "manual_1783565130087",
+      "source_text": "TWO HUNDRED FIFTY THOUSAND ONLY",
+      "value_type": "free_text.short",
+      "generator": "pool:amount_words",
+      "style_class": "style_amount_in_words",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/금액영문표기",
+        "csv_column": "금액 영문표기"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "drafts_at",
+      "label": "어음조건",
+      "semantic_path": [
+        "신용장조건",
+        "어음조건"
+      ],
+      "bbox_label_id": "det_000053",
+      "source_detection_id": "det_000053",
+      "source_text": "SIGHT FOR 1OO% INVOICE VALUE",
+      "value_type": "free_text.short",
+      "generator": "choice:SIGHT FOR 100% INVOICE VALUE|AT 30 DAYS AFTER SIGHT|AT 60 DAYS AFTER BILL OF LADING DATE",
+      "style_class": "style_drafts_at",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신용장조건/어음조건",
+        "csv_column": "어음조건"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "drawee_bank_name",
+      "label": "어음지급은행명",
+      "semantic_path": [
+        "당사자",
+        "어음지급은행",
+        "은행명"
+      ],
+      "bbox_label_id": "det_000055",
+      "source_detection_id": "det_000055",
+      "source_text": "Global First Bank,",
+      "value_type": "free_text.short",
+      "generator": "pool:bank_names",
+      "style_class": "company_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/어음지급은행/은행명",
+        "csv_column": "어음지급은행명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "drawee_bank_place",
+      "label": "어음지급은행 소재지",
+      "semantic_path": [
+        "당사자",
+        "어음지급은행",
+        "소재지"
+      ],
+      "bbox_label_id": "manual_1783565166020",
+      "source_detection_id": "manual_1783565166020",
+      "source_text": "Seoul, Korea",
+      "value_type": "free_text.short",
+      "generator": "pool:trade_places",
+      "style_class": "style_drawee_bank_place",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "당사자/어음지급은행/소재지",
+        "csv_column": "어음지급은행 소재지"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "partial_shipments",
+      "label": "분할선적",
+      "semantic_path": [
+        "선적조건",
+        "분할선적"
+      ],
+      "bbox_label_id": "det_000059",
+      "source_detection_id": "det_000059",
+      "source_text": "ALLOWED",
+      "value_type": "free_text.short",
+      "generator": "choice:ALLOWED|NOT ALLOWED",
+      "style_class": "style_partial_shipments",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선적조건/분할선적",
+        "csv_column": "분할선적"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "transshipment",
+      "label": "환적",
+      "semantic_path": [
+        "선적조건",
+        "환적"
+      ],
+      "bbox_label_id": "det_000060",
+      "source_detection_id": "det_000060",
+      "source_text": "ALLOWED",
+      "value_type": "free_text.short",
+      "generator": "choice:ALLOWED|NOT ALLOWED",
+      "style_class": "style_transshipment",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선적조건/환적",
+        "csv_column": "환적"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "port_of_loading",
+      "label": "선적항",
+      "semantic_path": [
+        "선적조건",
+        "선적항"
+      ],
+      "bbox_label_id": "det_000061",
+      "source_detection_id": "det_000061",
+      "source_text": "Busan, Korea",
+      "value_type": "free_text.short",
+      "generator": "pool:ports",
+      "style_class": "style_port_of_loading",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선적조건/선적항",
+        "csv_column": "선적항"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "port_of_discharge",
+      "label": "양륙항",
+      "semantic_path": [
+        "선적조건",
+        "양륙항"
+      ],
+      "bbox_label_id": "det_000064",
+      "source_detection_id": "det_000064",
+      "source_text": "Singapore",
+      "value_type": "free_text.short",
+      "generator": "pool:ports",
+      "style_class": "style_port_of_discharge",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선적조건/양륙항",
+        "csv_column": "양륙항"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "latest_shipment_date",
+      "label": "최종선적일",
+      "semantic_path": [
+        "선적조건",
+        "최종선적일"
+      ],
+      "bbox_label_id": "det_000065",
+      "source_detection_id": "det_000065",
+      "source_text": "07 JUL 2024",
+      "value_type": "free_text.short",
+      "generator": "pool:english_date",
+      "style_class": "lc_date",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선적조건/최종선적일",
+        "csv_column": "최종선적일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "goods_description",
+      "label": "물품명",
+      "semantic_path": [
+        "물품명세",
+        "물품명"
+      ],
+      "bbox_label_id": "det_000067",
+      "source_detection_id": "det_000067",
+      "source_text": "Industrial Gear Pump Model GP-200",
+      "value_type": "free_text.short",
+      "generator": "pool:goods_descriptions",
+      "style_class": "style_goods_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "물품명세/물품명",
+        "csv_column": "물품명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "hs_code",
+      "label": "HS코드",
+      "semantic_path": [
+        "물품명세",
+        "HS코드"
+      ],
+      "bbox_label_id": "manual_1783565189703",
+      "source_detection_id": "manual_1783565189703",
+      "source_text": "8413.60",
+      "value_type": "free_text.short",
+      "generator": "pattern:####.##",
+      "style_class": "short_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "물품명세/HS코드",
+        "csv_column": "HS코드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sales_contract_reference",
+      "label": "계약참조문구",
+      "semantic_path": [
+        "물품명세",
+        "계약참조문구"
+      ],
+      "bbox_label_id": "det_000069",
+      "source_detection_id": "det_000069",
+      "source_text": "As per Sales Contract No. SC-2404-18 Dated 18 APR 2024",
+      "value_type": "free_text.short",
+      "generator": "template:As per Sales Contract No. {{pattern:AA-####-##}} Dated {{pool:english_date}}",
+      "style_class": "long_text",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "물품명세/계약참조문구",
+        "csv_column": "계약참조문구"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "authorized_signature_bank_name",
+      "label": "서명은행명",
+      "semantic_path": [
+        "발행확인",
+        "서명은행명"
+      ],
+      "bbox_label_id": "det_000091",
+      "source_detection_id": "det_000091",
+      "source_text": "GLOBAL FIRST BANK",
+      "value_type": "free_text.short",
+      "generator": "same_as:issuing_bank_name",
+      "style_class": "signature_bank_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발행확인/서명은행명",
+        "csv_column": "서명은행명"
+      },
+      "required": true,
+      "notes": "하단 AUTHORIZED SIGNATURE 아래 은행명. 시각상 개설은행명 반복값이므로 issuing_bank_name과 동기화.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    }
+  ],
+  "groups": [],
+  "updated_at": "2026-07-09T08:36:40.360098+00:00"
+}

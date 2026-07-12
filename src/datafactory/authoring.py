@@ -620,6 +620,7 @@ def _field_from_label(index: int, label: ReviewLabel) -> dict[str, Any]:
         "value_type": value_type,
         "generator": value_type,
         "style_class": DEFAULT_STYLE_CLASS,
+        "render_mode": "printed",
         "render_policy": {"align": "left", "valign": "middle", "fit": "shrink_to_fit", "overflow": "shrink"},
         "export": {"json_path": field_id, "csv_column": field_id},
         "required": True,
@@ -742,6 +743,8 @@ def _normalize_authoring_bundle(
         field["value_type"] = _base_value_type_from_rule(rule, str(field.get("value_type") or "free_text.short"))
         field["generator"] = rule
         field["style_class"] = str(field.get("style_class") or DEFAULT_STYLE_CLASS)
+        render_mode = str(field.get("render_mode") or "printed").strip().lower()
+        field["render_mode"] = render_mode if render_mode in {"handwriting", "printed"} else "printed"
         field["render_policy"] = _normalize_render_policy(field.get("render_policy"))
         field["export"] = _normalize_export(field.get("export"), field_id, str(field["label"]), used_export_keys)
         field["required"] = bool(field.get("required", True))
@@ -1212,6 +1215,7 @@ def _generate_values(
             warnings.append(warning)
     constraint_warnings = _apply_generation_constraints(values, faker_profile, rng)
     warnings.extend(constraint_warnings)
+    two_digit_year_fields = _date_group_two_digit_year_fields(faker_profile)
     for field in schema.get("fields", []):
         if not isinstance(field, dict):
             continue
@@ -1220,6 +1224,8 @@ def _generate_values(
             continue
         rule = str(generators.get(field_id) or field.get("generator") or field.get("value_type") or "free_text.short")
         values[field_id] = _normalize_generated_value_for_field(field, rule, values[field_id], force_visible=force_visible)
+        if field_id in two_digit_year_fields:
+            values[field_id] = _normalize_two_digit_year(values[field_id])
     return values, warnings
 
 
@@ -1394,6 +1400,29 @@ def _normalize_date_component_value(component: str, value: str) -> str:
     return _strip_guide_parenthetical(str(value or "")).strip()
 
 
+def _date_group_two_digit_year_fields(faker_profile: dict[str, Any]) -> set[str]:
+    fields: set[str] = set()
+    constraints = faker_profile.get("constraints")
+    if not isinstance(constraints, list):
+        return fields
+    for constraint in constraints:
+        if not isinstance(constraint, dict) or str(constraint.get("type") or "").strip().lower() != "date_group":
+            continue
+        year_format = str(constraint.get("year_format") or constraint.get("yearFormat") or "").strip().lower().replace("-", "_")
+        if year_format in {"yy", "2digit", "2_digit", "two_digit", "last_two_digits"}:
+            year_field = str(constraint.get("year") or "").strip()
+            if year_field:
+                fields.add(year_field)
+    return fields
+
+
+def _normalize_two_digit_year(value: str) -> str:
+    digits = re.sub(r"\D", "", str(value or ""))
+    if not digits:
+        return "20"
+    return f"{int(digits[-2:]):02d}"
+
+
 def _field_is_checkbox(field: dict[str, Any], rule: str) -> bool:
     return _is_checkbox_rule(rule) or _is_checkbox_value(str(field.get("value_type") or ""))
 
@@ -1493,6 +1522,26 @@ def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[st
             selected = rng.choice(targets)
             for field_id in targets:
                 values[field_id] = "true" if field_id == selected else "false"
+        elif ctype == "primary_secondary_group":
+            rows = constraint.get("rows")
+            if not isinstance(rows, list) or not rows:
+                warnings.append({"type": "invalid_generation_constraint", "message": "primary_secondary_group constraint requires rows", "constraint": constraint})
+                continue
+            normalized_rows: list[dict[str, str]] = []
+            for row in rows:
+                if not isinstance(row, dict):
+                    continue
+                primary = str(row.get("primary") or "").strip()
+                secondary = str(row.get("secondary") or "").strip()
+                if primary and secondary:
+                    normalized_rows.append({"primary": primary, "secondary": secondary})
+            if not normalized_rows:
+                warnings.append({"type": "invalid_generation_constraint", "message": "primary_secondary_group rows require primary/secondary field ids", "constraint": constraint})
+                continue
+            selected_index = rng.randrange(len(normalized_rows))
+            for index, row in enumerate(normalized_rows):
+                values[row["primary"]] = "true" if index == selected_index else "false"
+                values[row["secondary"]] = "false" if index == selected_index else "true"
         elif ctype == "date_group":
             group = {
                 "year": str(constraint.get("year") or "").strip(),
@@ -1503,7 +1552,7 @@ def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[st
                 warnings.append({"type": "invalid_generation_constraint", "message": "date_group constraint requires year/month/day field ids", "constraint": constraint})
                 continue
             value = _random_constraint_date(rng, constraint)
-            _assign_date_group(values, group, value)
+            _assign_date_group(values, group, value, year_format=constraint.get("year_format") or constraint.get("yearFormat"))
         elif ctype == "date_order":
             start_group = constraint.get("start")
             end_group = constraint.get("end")
@@ -1651,8 +1700,12 @@ def _date_group_complete(group: dict[str, Any]) -> bool:
     return all(str(group.get(part) or "").strip() for part in ("year", "month", "day"))
 
 
-def _assign_date_group(values: dict[str, str], group: dict[str, Any], value: date) -> None:
-    values[str(group["year"]).strip()] = f"{value.year:04d}"
+def _assign_date_group(values: dict[str, str], group: dict[str, Any], value: date, *, year_format: Any = None) -> None:
+    normalized_year_format = str(year_format or "").strip().lower().replace("-", "_")
+    if normalized_year_format in {"yy", "2digit", "2_digit", "two_digit", "last_two_digits"}:
+        values[str(group["year"]).strip()] = f"{value.year % 100:02d}"
+    else:
+        values[str(group["year"]).strip()] = f"{value.year:04d}"
     values[str(group["month"]).strip()] = f"{value.month:02d}"
     values[str(group["day"]).strip()] = f"{value.day:02d}"
 

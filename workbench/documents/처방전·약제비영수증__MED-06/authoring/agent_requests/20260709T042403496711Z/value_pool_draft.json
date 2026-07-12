@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-06",
+  "data_pools": {
+    "synthetic_diagnosis_examples": [
+      "급성 기관지염",
+      "위염",
+      "알레르기 비염"
+    ],
+    "synthetic_institution_names": [
+      "하나샘약국",
+      "새빛약국",
+      "가온메디약국"
+    ],
+    "payment_note_values": [
+      "카드",
+      "현금",
+      "현금영수증"
+    ]
+  },
+  "usage_notes": {
+    "synthetic_diagnosis_examples": "현재 템플릿에는 진단명 anchor가 없어 faker_profile field_generators에는 연결하지 않았습니다.",
+    "synthetic_institution_names": "상호/요양기관명 후보로 재사용할 수 있으나 현재 generator는 medical.institution_ko를 사용합니다.",
+    "payment_note_values": "납부수단 라벨 검수용 보조 값입니다."
+  },
+  "source": "agent_proposed_synthetic_values_only"
+}

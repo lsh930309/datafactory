@@ -1,0 +1,619 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-06",
+  "title": "처방전·약제비영수증 / 약제비 계산서·영수증",
+  "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+  "style_classes": {
+    "handwriting_default": {
+      "font_family": "Nanum Pen Script",
+      "font_size": 18,
+      "color": "#111111",
+      "align": "left",
+      "valign": "middle",
+      "padding_px": 2
+    },
+    "money_cell": {
+      "font_family": "Nanum Pen Script",
+      "font_size": 16,
+      "color": "#111111",
+      "align": "right",
+      "valign": "middle",
+      "padding_px": 3
+    },
+    "money_total": {
+      "font_family": "Nanum Pen Script",
+      "font_size": 16,
+      "color": "#111111",
+      "align": "right",
+      "valign": "middle",
+      "padding_px": 3,
+      "font_weight": "normal"
+    },
+    "checkbox_mark": {
+      "mark": "check",
+      "font_size": 14,
+      "align": "center",
+      "valign": "middle"
+    },
+    "date_cell": {
+      "font_family": "Nanum Pen Script",
+      "font_size": 17,
+      "color": "#111111",
+      "align": "center",
+      "valign": "middle",
+      "padding_px": 1
+    }
+  },
+  "field_style_hints": {
+    "receipt_number": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        480,
+        215,
+        564,
+        18
+      ]
+    },
+    "patient_name": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        148,
+        258,
+        171,
+        18
+      ]
+    },
+    "dispensing_date": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        323,
+        258,
+        155,
+        18
+      ]
+    },
+    "medication_days": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        478,
+        258,
+        149,
+        18
+      ]
+    },
+    "night_dispensing": {
+      "style_class": "checkbox_mark",
+      "bbox": [
+        637,
+        259,
+        14,
+        17
+      ]
+    },
+    "holiday_dispensing": {
+      "style_class": "checkbox_mark",
+      "bbox": [
+        717,
+        259,
+        13,
+        17
+      ]
+    },
+    "drug_cost_partial_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        323,
+        344,
+        104,
+        18
+      ]
+    },
+    "drug_cost_partial_nhis": {
+      "style_class": "money_cell",
+      "bbox": [
+        431,
+        344,
+        130,
+        18
+      ]
+    },
+    "drug_cost_full_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        564,
+        344,
+        118,
+        18
+      ]
+    },
+    "drug_cost_noncovered": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        344,
+        358,
+        18
+      ]
+    },
+    "dispensing_basic_fee_partial_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        323,
+        366,
+        104,
+        18
+      ]
+    },
+    "dispensing_basic_fee_partial_nhis": {
+      "style_class": "money_cell",
+      "bbox": [
+        431,
+        366,
+        130,
+        18
+      ]
+    },
+    "dispensing_basic_fee_full_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        564,
+        366,
+        118,
+        18
+      ]
+    },
+    "dispensing_basic_fee_noncovered": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        366,
+        358,
+        18
+      ]
+    },
+    "medication_guidance_fee_partial_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        323,
+        388,
+        104,
+        18
+      ]
+    },
+    "medication_guidance_fee_partial_nhis": {
+      "style_class": "money_cell",
+      "bbox": [
+        431,
+        388,
+        131,
+        18
+      ]
+    },
+    "medication_guidance_fee_full_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        564,
+        388,
+        118,
+        18
+      ]
+    },
+    "medication_guidance_fee_noncovered": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        388,
+        358,
+        18
+      ]
+    },
+    "dispensing_fee_partial_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        323,
+        410,
+        104,
+        18
+      ]
+    },
+    "dispensing_fee_partial_nhis": {
+      "style_class": "money_cell",
+      "bbox": [
+        431,
+        410,
+        130,
+        18
+      ]
+    },
+    "dispensing_fee_full_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        564,
+        410,
+        118,
+        18
+      ]
+    },
+    "dispensing_fee_noncovered": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        410,
+        358,
+        18
+      ]
+    },
+    "management_fee_partial_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        323,
+        432,
+        104,
+        18
+      ]
+    },
+    "management_fee_partial_nhis": {
+      "style_class": "money_cell",
+      "bbox": [
+        431,
+        432,
+        130,
+        18
+      ]
+    },
+    "management_fee_full_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        564,
+        432,
+        118,
+        18
+      ]
+    },
+    "management_fee_noncovered": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        432,
+        358,
+        18
+      ]
+    },
+    "selective_benefit_partial_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        323,
+        454,
+        104,
+        22
+      ]
+    },
+    "selective_benefit_partial_nhis": {
+      "style_class": "money_cell",
+      "bbox": [
+        431,
+        454,
+        130,
+        22
+      ]
+    },
+    "selective_benefit_full_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        564,
+        454,
+        118,
+        22
+      ]
+    },
+    "selective_benefit_noncovered": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        454,
+        358,
+        22
+      ]
+    },
+    "senior_fixed_amount_partial_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        323,
+        480,
+        104,
+        18
+      ]
+    },
+    "senior_fixed_amount_partial_nhis": {
+      "style_class": "money_cell",
+      "bbox": [
+        431,
+        480,
+        130,
+        18
+      ]
+    },
+    "senior_fixed_amount_full_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        564,
+        480,
+        118,
+        18
+      ]
+    },
+    "senior_fixed_amount_noncovered": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        480,
+        358,
+        18
+      ]
+    },
+    "other_partial_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        323,
+        502,
+        104,
+        17
+      ]
+    },
+    "other_partial_nhis": {
+      "style_class": "money_cell",
+      "bbox": [
+        431,
+        501,
+        130,
+        19
+      ]
+    },
+    "other_full_self": {
+      "style_class": "money_cell",
+      "bbox": [
+        564,
+        502,
+        118,
+        17
+      ]
+    },
+    "other_noncovered": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        502,
+        358,
+        17
+      ]
+    },
+    "sum_partial_self": {
+      "style_class": "money_total",
+      "bbox": [
+        346,
+        523,
+        82,
+        22
+      ]
+    },
+    "sum_partial_nhis": {
+      "style_class": "money_total",
+      "bbox": [
+        454,
+        523,
+        108,
+        22
+      ]
+    },
+    "sum_full_self": {
+      "style_class": "money_total",
+      "bbox": [
+        586,
+        524,
+        97,
+        20
+      ]
+    },
+    "sum_noncovered": {
+      "style_class": "money_total",
+      "bbox": [
+        710,
+        523,
+        336,
+        22
+      ]
+    },
+    "drug_cost_total": {
+      "style_class": "money_total",
+      "bbox": [
+        323,
+        546,
+        168,
+        46
+      ]
+    },
+    "patient_burden_total": {
+      "style_class": "money_total",
+      "bbox": [
+        322,
+        592,
+        168,
+        46
+      ]
+    },
+    "paid_card": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        546,
+        358,
+        20
+      ]
+    },
+    "paid_cash_receipt": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        570,
+        358,
+        20
+      ]
+    },
+    "paid_cash": {
+      "style_class": "money_cell",
+      "bbox": [
+        686,
+        594,
+        358,
+        19
+      ]
+    },
+    "paid_total": {
+      "style_class": "money_total",
+      "bbox": [
+        686,
+        617,
+        358,
+        19
+      ]
+    },
+    "cash_receipt_issued": {
+      "style_class": "checkbox_mark",
+      "bbox": [
+        368,
+        641,
+        53,
+        19
+      ]
+    },
+    "cash_receipt_identity_number": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        323,
+        662,
+        238,
+        20
+      ]
+    },
+    "cash_receipt_approval_number": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        323,
+        684,
+        237,
+        18
+      ]
+    },
+    "institution_clinic": {
+      "style_class": "checkbox_mark",
+      "bbox": [
+        335,
+        708,
+        19,
+        16
+      ]
+    },
+    "institution_hospital": {
+      "style_class": "checkbox_mark",
+      "bbox": [
+        529,
+        707,
+        15,
+        18
+      ]
+    },
+    "institution_general_hospital": {
+      "style_class": "checkbox_mark",
+      "bbox": [
+        336,
+        726,
+        18,
+        18
+      ]
+    },
+    "institution_tertiary_hospital": {
+      "style_class": "checkbox_mark",
+      "bbox": [
+        529,
+        725,
+        17,
+        19
+      ]
+    },
+    "business_registration_number": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        323,
+        746,
+        238,
+        20
+      ]
+    },
+    "business_name": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        661,
+        746,
+        384,
+        19
+      ]
+    },
+    "business_address": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        320,
+        767,
+        724,
+        18
+      ]
+    },
+    "business_phone": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        323,
+        788,
+        202,
+        21
+      ]
+    },
+    "representative_name": {
+      "style_class": "handwriting_default",
+      "bbox": [
+        647,
+        789,
+        108,
+        19
+      ]
+    },
+    "issue_year": {
+      "style_class": "date_cell",
+      "bbox": [
+        383,
+        810,
+        97,
+        21
+      ]
+    },
+    "issue_month": {
+      "style_class": "date_cell",
+      "bbox": [
+        505,
+        810,
+        69,
+        20
+      ]
+    },
+    "issue_day": {
+      "style_class": "date_cell",
+      "bbox": [
+        602,
+        810,
+        88,
+        21
+      ]
+    }
+  },
+  "notes": [
+    "원본 표선/정적 라벨은 보존하고 값 영역에만 보수적인 필기체 스타일을 적용하는 초안입니다."
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-08",
+  "title": "수술기록지",
+  "search_date": "2026-07-09",
+  "queries": [
+    "수술기록지 작성 항목 수술명 수술일자 집도의 마취방법 수술기록 의무기록",
+    "수술확인서 수술기록지 포함 정보 수술코드 수술명 수량 주수술 부수술",
+    "보건복지부 수술기록 의무기록 수술기록지 작성",
+    "operative report required elements procedure anesthesia surgeon diagnosis",
+    "WHO Surgical Safety Checklist procedure anesthesia sign out"
+  ],
+  "sources": [
+    {
+      "id": "R1",
+      "url": "local:workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+      "source_type": "template_image",
+      "summary": "Full template image contains static labels for chart number, author, date, patient identifiers, diagnosis, operation rows, material treatment, anesthesia fee/time/method/agents/materials/injection orders."
+    },
+    {
+      "id": "R2",
+      "url": "https://en.wikipedia.org/wiki/Operative_report",
+      "source_type": "reference_overview",
+      "summary": "Operative reports document surgery details in the medical record and commonly include diagnosis, procedure, surgeon/team, medications/anesthesia and postoperative context; used here only to support visible surgery/anesthesia field interpretation."
+    },
+    {
+      "id": "R3",
+      "url": "https://en.wikipedia.org/wiki/Current_Procedural_Terminology",
+      "source_type": "coding_reference_overview",
+      "summary": "Procedure coding systems group codes around surgery and anesthesia services; used only as support for code/name/quantity pairing, not as a source for real billable codes."
+    },
+    {
+      "id": "R4",
+      "url": "https://en.wikipedia.org/wiki/WHO_Surgical_Safety_Checklist",
+      "source_type": "surgical_safety_reference",
+      "summary": "Surgical safety documentation emphasizes patient/procedure confirmation, anesthesia-related checks, and procedure confirmation before leaving the operating room; used only as contextual support for anesthesia/procedure fields."
+    },
+    {
+      "id": "R5",
+      "url": "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources",
+      "source_type": "official_surgical_safety",
+      "summary": "WHO Surgical Safety Checklist resources identify pre-anesthesia, pre-incision and sign-out phases, and include anesthesia machine/medication checks and procedure confirmation, supporting checkbox-style completion/role markers and anesthesia-related fields."
+    },
+    {
+      "id": "R6",
+      "url": "https://en.wikipedia.org/wiki/General_anaesthesia",
+      "source_type": "clinical_reference_overview",
+      "summary": "General anesthesia commonly uses IV and inhalational agents, airway devices and monitoring; used to diversify anesthesia materials and injection-order synthetic pools."
+    },
+    {
+      "id": "R7",
+      "url": "https://en.wikipedia.org/wiki/Operative_report",
+      "source_type": "operative_report_reference",
+      "summary": "Operative reports commonly document procedure, diagnosis, anesthesia used, medications and surgeon orders; used to support procedure/material/anesthesia field semantics."
+    }
+  ],
+  "field_evidence": {
+    "문서상단": [
+      "R1"
+    ],
+    "기본정보": [
+      "R1",
+      "R2"
+    ],
+    "수술목록": [
+      "R1",
+      "R2",
+      "R3",
+      "R5",
+      "R7"
+    ],
+    "재료처치": [
+      "R1",
+      "R3",
+      "R5",
+      "R7"
+    ],
+    "마취료": [
+      "R1",
+      "R2",
+      "R4",
+      "R5",
+      "R6",
+      "R7"
+    ]
+  },
+  "limitations": [
+    "Korean official/public web search results were sparse in the available search surface; template image remained the binding source of truth."
+  ],
+  "conclusions": [
+    "주수술/부수술은 템플릿 컬럼 형태상 텍스트가 아니라 행별 역할 체크박스로 유지한다. 다만 생성 constraint는 정확히 한 행만 주수술이 되도록 primary_secondary_group을 사용한다.",
+    "마취시간은 마취료 섹션 내 단일 값 칸이므로 특정 시각보다 마취 소요시간(duration)으로 생성한다."
+  ]
+}

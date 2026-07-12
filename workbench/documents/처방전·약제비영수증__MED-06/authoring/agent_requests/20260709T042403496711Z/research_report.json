@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-06",
+  "search_date": "2026-07-09",
+  "queries": [
+    "약제비 계산서 영수증 별지 제10호서식 국민건강보험 요양급여의 기준에 관한 규칙 2024.7.18",
+    "국민건강보험 요양급여의 기준에 관한 규칙 별지 제10호서식 약제비 계산서 영수증",
+    "약제비 계산서 영수증 작성 방법 현금영수증 승인번호 소득세 의료비 공제",
+    "건강보험심사평가원 진료비 확인요청 비급여 전액본인부담 타당성 여부 1644-2000"
+  ],
+  "sources": [
+    {
+      "id": "R1",
+      "url": "https://www.law.go.kr/법령/국민건강보험요양급여의기준에관한규칙",
+      "source_type": "official_law_page",
+      "summary": "국가법령정보센터의 국민건강보험 요양급여의 기준에 관한 규칙 페이지입니다. 템플릿 상단의 별지 제10호서식 근거와 일치하며, 본 draft의 필드 추가 범위는 실제 이미지에 보이는 별지 서식 anchor로 제한했습니다."
+    },
+    {
+      "id": "R2",
+      "url": "template://workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+      "source_type": "primary_template_visual_evidence",
+      "summary": "전체 템플릿 이미지에 ⑤ 약제비 총액 (①+②+③+④), ⑥ 환자부담 총액 (⑤-②), 납부한 금액 카드/현금영수증/현금/합계 구조가 표시되어 있어 sum constraint 초안의 직접 근거로 사용했습니다."
+    },
+    {
+      "id": "R3",
+      "url": "template://workbench/documents/처방전·약제비영수증__MED-06/ocr/paddleocr/precise/original_약제비계산서_page_001/detections.json",
+      "source_type": "ocr_static_text_from_template",
+      "summary": "하단 안내문 OCR에 계산서·영수증이 의료비 공제신청 및 현금영수증 공제신청에 사용될 수 있고, 현금영수증 승인번호가 적힌 경우라는 안내가 확인되어 현금영수증 승인번호 필드 해석 근거로 사용했습니다."
+    }
+  ],
+  "field_evidence": {
+    "receipt_number": [
+      "R1",
+      "R2"
+    ],
+    "patient_name": [
+      "R1",
+      "R2"
+    ],
+    "dispensing_date": [
+      "R1",
+      "R2"
+    ],
+    "all_money_fields": [
+      "R1",
+      "R2"
+    ],
+    "cash_receipt_approval_number": [
+      "R2",
+      "R3"
+    ],
+    "institution_type_checkboxes": [
+      "R1",
+      "R2"
+    ],
+    "issue_date": [
+      "R1",
+      "R2"
+    ]
+  },
+  "limitations": [
+    "웹 검색 결과가 공식 법령 페이지 중심으로만 유의미하게 확인되어, 작성 관행보다 템플릿 이미지/OCR을 우선 근거로 삼았습니다."
+  ]
+}

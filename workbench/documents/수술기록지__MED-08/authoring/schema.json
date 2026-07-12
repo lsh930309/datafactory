@@ -1,0 +1,1651 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-09T06:39:31.491979+00:00",
+  "doc_id": "MED-08",
+  "title": "수술기록지",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/수술기록지__MED-08/authoring/agent_applied_reviews/20260709T061457836626Z/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+  "image": {
+    "width": 1190,
+    "height": 1684
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/수술기록지__MED-08/authoring/agent_applied_reviews/20260709T061457836626Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "문서상단": {
+      "차트No": "",
+      "작성자": "",
+      "작성일": {
+        "년": "",
+        "월": "",
+        "일": ""
+      }
+    },
+    "기본정보": {
+      "진료과": "",
+      "성명": "",
+      "병실": "",
+      "등록번호": "",
+      "나이": "",
+      "수술일자": "",
+      "의사": "",
+      "성별": "",
+      "보호자": ""
+    },
+    "진단및가산": {
+      "병명": "",
+      "가산항목": ""
+    },
+    "수술목록": {
+      "1행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "2행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "3행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      }
+    },
+    "재료처치": {
+      "1행": {
+        "재료": "",
+        "수량": ""
+      },
+      "2행": {
+        "재료": "",
+        "수량": ""
+      },
+      "3행": {
+        "재료": "",
+        "수량": ""
+      },
+      "4행": {
+        "재료": "",
+        "수량": ""
+      },
+      "5행": {
+        "재료": "",
+        "수량": ""
+      }
+    },
+    "마취료": {
+      "마취시간": "",
+      "마취방법": {
+        "General Anesthesis": "",
+        "Spinal Anesthesis": "",
+        "Epidural Anesthesis": "",
+        "BPB": ""
+      },
+      "전신마취제": {
+        "Ethran": "",
+        "Forane": ""
+      },
+      "마취재료": "",
+      "주사처방": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "chart_no",
+      "label": "차트 No",
+      "semantic_path": [
+        "문서상단",
+        "차트No"
+      ],
+      "bbox_label_id": "manual_1783577233204",
+      "source_detection_id": "manual_1783577233204",
+      "source_text": "차트 No",
+      "value_type": "free_text.short",
+      "generator": "pattern:########",
+      "style_class": "style_chart_no",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서상단/차트No",
+        "csv_column": "문서상단/차트No"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "작성자",
+      "label": "작성자",
+      "semantic_path": [
+        "문서상단",
+        "작성자"
+      ],
+      "bbox_label_id": "manual_1783577237088",
+      "source_detection_id": "manual_1783577237088",
+      "source_text": "작성자",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "style_작성자",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서상단/작성자",
+        "csv_column": "문서상단/작성자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "작성일_년",
+      "label": "일자 년",
+      "semantic_path": [
+        "문서상단",
+        "작성일",
+        "년"
+      ],
+      "bbox_label_id": "manual_1783577258604",
+      "source_detection_id": "manual_1783577258604",
+      "source_text": "일자 년",
+      "value_type": "date.year",
+      "generator": "date.year",
+      "style_class": "style_작성일_년",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서상단/작성일/년",
+        "csv_column": "문서상단/작성일/년"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "작성일_월",
+      "label": "일자 월",
+      "semantic_path": [
+        "문서상단",
+        "작성일",
+        "월"
+      ],
+      "bbox_label_id": "manual_1783577262021",
+      "source_detection_id": "manual_1783577262021",
+      "source_text": "일자 월",
+      "value_type": "date.month",
+      "generator": "date.month",
+      "style_class": "style_작성일_월",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서상단/작성일/월",
+        "csv_column": "문서상단/작성일/월"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "작성일_일",
+      "label": "일자 일",
+      "semantic_path": [
+        "문서상단",
+        "작성일",
+        "일"
+      ],
+      "bbox_label_id": "manual_1783577264254",
+      "source_detection_id": "manual_1783577264254",
+      "source_text": "일자 일",
+      "value_type": "date.day",
+      "generator": "date.day",
+      "style_class": "style_작성일_일",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서상단/작성일/일",
+        "csv_column": "문서상단/작성일/일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "진료과",
+      "label": "진료과",
+      "semantic_path": [
+        "기본정보",
+        "진료과"
+      ],
+      "bbox_label_id": "manual_1783576264783",
+      "source_detection_id": "manual_1783576264783",
+      "source_text": "진료과",
+      "value_type": "free_text.short",
+      "generator": "pool:departments",
+      "style_class": "style_진료과",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기본정보/진료과",
+        "csv_column": "기본정보/진료과"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "성명",
+      "label": "성명",
+      "semantic_path": [
+        "기본정보",
+        "성명"
+      ],
+      "bbox_label_id": "manual_1783576269199",
+      "source_detection_id": "manual_1783576269199",
+      "source_text": "성명",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "style_성명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기본정보/성명",
+        "csv_column": "기본정보/성명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "병실",
+      "label": "병실",
+      "semantic_path": [
+        "기본정보",
+        "병실"
+      ],
+      "bbox_label_id": "manual_1783576272433",
+      "source_detection_id": "manual_1783576272433",
+      "source_text": "병실",
+      "value_type": "free_text.short",
+      "generator": "pool:ward_rooms",
+      "style_class": "style_병실",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기본정보/병실",
+        "csv_column": "기본정보/병실"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "등록번호",
+      "label": "등록번호",
+      "semantic_path": [
+        "기본정보",
+        "등록번호"
+      ],
+      "bbox_label_id": "manual_1783576279216",
+      "source_detection_id": "manual_1783576279216",
+      "source_text": "등록번호",
+      "value_type": "free_text.short",
+      "generator": "pattern:########",
+      "style_class": "style_등록번호",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기본정보/등록번호",
+        "csv_column": "기본정보/등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "나이",
+      "label": "나이",
+      "semantic_path": [
+        "기본정보",
+        "나이"
+      ],
+      "bbox_label_id": "manual_1783576284800",
+      "source_detection_id": "manual_1783576284800",
+      "source_text": "나이",
+      "value_type": "free_text.short",
+      "generator": "pattern:##",
+      "style_class": "style_나이",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기본정보/나이",
+        "csv_column": "기본정보/나이"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술일자",
+      "label": "수술일자",
+      "semantic_path": [
+        "기본정보",
+        "수술일자"
+      ],
+      "bbox_label_id": "manual_1783576296215",
+      "source_detection_id": "manual_1783576296215",
+      "source_text": "수술일자",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "style_수술일자",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기본정보/수술일자",
+        "csv_column": "기본정보/수술일자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "의사",
+      "label": "의사",
+      "semantic_path": [
+        "기본정보",
+        "의사"
+      ],
+      "bbox_label_id": "manual_1783576304682",
+      "source_detection_id": "manual_1783576304682",
+      "source_text": "의사",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "style_의사",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기본정보/의사",
+        "csv_column": "기본정보/의사"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "성별",
+      "label": "성별",
+      "semantic_path": [
+        "기본정보",
+        "성별"
+      ],
+      "bbox_label_id": "manual_1783576311533",
+      "source_detection_id": "manual_1783576311533",
+      "source_text": "성별",
+      "value_type": "free_text.short",
+      "generator": "choice:남|여",
+      "style_class": "style_성별",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기본정보/성별",
+        "csv_column": "기본정보/성별"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "보호자",
+      "label": "보호자",
+      "semantic_path": [
+        "기본정보",
+        "보호자"
+      ],
+      "bbox_label_id": "manual_1783576318583",
+      "source_detection_id": "manual_1783576318583",
+      "source_text": "보호자",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "style_보호자",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기본정보/보호자",
+        "csv_column": "기본정보/보호자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "병명",
+      "label": "병명",
+      "semantic_path": [
+        "진단및가산",
+        "병명"
+      ],
+      "bbox_label_id": "manual_1783576324367",
+      "source_detection_id": "manual_1783576324367",
+      "source_text": "병명",
+      "value_type": "free_text.short",
+      "generator": "pool:diagnoses",
+      "style_class": "style_병명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "진단및가산/병명",
+        "csv_column": "진단및가산/병명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "가산항목",
+      "label": "가산항목",
+      "semantic_path": [
+        "진단및가산",
+        "가산항목"
+      ],
+      "bbox_label_id": "manual_1783576331166",
+      "source_detection_id": "manual_1783576331166",
+      "source_text": "가산항목",
+      "value_type": "free_text.short",
+      "generator": "pool:additional_items",
+      "style_class": "style_가산항목",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "진단및가산/가산항목",
+        "csv_column": "진단및가산/가산항목"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술1_수술코드",
+      "label": "수술코드 1",
+      "semantic_path": [
+        "수술목록",
+        "1행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576339134",
+      "source_detection_id": "manual_1783576339134",
+      "source_text": "수술코드 1",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술1_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/1행/수술코드",
+        "csv_column": "수술목록/1행/수술코드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술1_수술명",
+      "label": "수술명 1",
+      "semantic_path": [
+        "수술목록",
+        "1행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576345683",
+      "source_detection_id": "manual_1783576345683",
+      "source_text": "수술명 1",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술1_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/1행/수술명",
+        "csv_column": "수술목록/1행/수술명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술1_수량",
+      "label": "수량 1",
+      "semantic_path": [
+        "수술목록",
+        "1행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576351950",
+      "source_detection_id": "manual_1783576351950",
+      "source_text": "수량 1",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술1_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/1행/수량",
+        "csv_column": "수술목록/1행/수량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술1_주수술",
+      "label": "주수술 1",
+      "semantic_path": [
+        "수술목록",
+        "1행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576359717",
+      "source_detection_id": "manual_1783576359717",
+      "source_text": "주수술 1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술1_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/1행/주수술",
+        "csv_column": "수술목록/1행/주수술"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술1_부수술",
+      "label": "부수술 1",
+      "semantic_path": [
+        "수술목록",
+        "1행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576406718",
+      "source_detection_id": "manual_1783576406718",
+      "source_text": "부수술 1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술1_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/1행/부수술",
+        "csv_column": "수술목록/1행/부수술"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술2_수술코드",
+      "label": "수술코드 2",
+      "semantic_path": [
+        "수술목록",
+        "2행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576414701",
+      "source_detection_id": "manual_1783576414701",
+      "source_text": "수술코드 2",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술2_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/2행/수술코드",
+        "csv_column": "수술목록/2행/수술코드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술2_수술명",
+      "label": "수술명 2",
+      "semantic_path": [
+        "수술목록",
+        "2행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576621635",
+      "source_detection_id": "manual_1783576621635",
+      "source_text": "수술명 2",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술2_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/2행/수술명",
+        "csv_column": "수술목록/2행/수술명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술2_수량",
+      "label": "수량 2",
+      "semantic_path": [
+        "수술목록",
+        "2행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576833183",
+      "source_detection_id": "manual_1783576833183",
+      "source_text": "수량 2",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술2_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/2행/수량",
+        "csv_column": "수술목록/2행/수량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술2_주수술",
+      "label": "주수술 2",
+      "semantic_path": [
+        "수술목록",
+        "2행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576837317",
+      "source_detection_id": "manual_1783576837317",
+      "source_text": "주수술 2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술2_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/2행/주수술",
+        "csv_column": "수술목록/2행/주수술"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술2_부수술",
+      "label": "부수술 2",
+      "semantic_path": [
+        "수술목록",
+        "2행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576722364",
+      "source_detection_id": "manual_1783576722364",
+      "source_text": "부수술 2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술2_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/2행/부수술",
+        "csv_column": "수술목록/2행/부수술"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술3_수술코드",
+      "label": "수술코드 3",
+      "semantic_path": [
+        "수술목록",
+        "3행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576425167",
+      "source_detection_id": "manual_1783576425167",
+      "source_text": "수술코드 3",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술3_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/3행/수술코드",
+        "csv_column": "수술목록/3행/수술코드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술3_수술명",
+      "label": "수술명 3",
+      "semantic_path": [
+        "수술목록",
+        "3행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576630102",
+      "source_detection_id": "manual_1783576630102",
+      "source_text": "수술명 3",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술3_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/3행/수술명",
+        "csv_column": "수술목록/3행/수술명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술3_수량",
+      "label": "수량 3",
+      "semantic_path": [
+        "수술목록",
+        "3행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576840217",
+      "source_detection_id": "manual_1783576840217",
+      "source_text": "수량 3",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술3_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/3행/수량",
+        "csv_column": "수술목록/3행/수량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술3_주수술",
+      "label": "주수술 3",
+      "semantic_path": [
+        "수술목록",
+        "3행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576896551",
+      "source_detection_id": "manual_1783576896551",
+      "source_text": "주수술 3",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술3_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/3행/주수술",
+        "csv_column": "수술목록/3행/주수술"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술3_부수술",
+      "label": "부수술 3",
+      "semantic_path": [
+        "수술목록",
+        "3행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576726598",
+      "source_detection_id": "manual_1783576726598",
+      "source_text": "부수술 3",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술3_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/3행/부수술",
+        "csv_column": "수술목록/3행/부수술"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치1_재료",
+      "label": "재료처치 재료 1",
+      "semantic_path": [
+        "재료처치",
+        "1행",
+        "재료"
+      ],
+      "bbox_label_id": "manual_1783577183603_row01",
+      "source_detection_id": "manual_1783577183603_row01",
+      "source_text": "재료처치 재료 1",
+      "value_type": "free_text.short",
+      "generator": "pool:material_names",
+      "style_class": "style_재료처치1_재료",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/1행/재료",
+        "csv_column": "재료처치/1행/재료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치1_수량",
+      "label": "재료처치 수량 1",
+      "semantic_path": [
+        "재료처치",
+        "1행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783577225121_row01",
+      "source_detection_id": "manual_1783577225121_row01",
+      "source_text": "재료처치 수량 1",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "style_재료처치1_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/1행/수량",
+        "csv_column": "재료처치/1행/수량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치2_재료",
+      "label": "재료처치 재료 2",
+      "semantic_path": [
+        "재료처치",
+        "2행",
+        "재료"
+      ],
+      "bbox_label_id": "manual_1783577183603_row02",
+      "source_detection_id": "manual_1783577183603_row02",
+      "source_text": "재료처치 재료 2",
+      "value_type": "free_text.short",
+      "generator": "pool:material_names",
+      "style_class": "style_재료처치2_재료",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/2행/재료",
+        "csv_column": "재료처치/2행/재료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치2_수량",
+      "label": "재료처치 수량 2",
+      "semantic_path": [
+        "재료처치",
+        "2행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783577225121_row02",
+      "source_detection_id": "manual_1783577225121_row02",
+      "source_text": "재료처치 수량 2",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "style_재료처치2_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/2행/수량",
+        "csv_column": "재료처치/2행/수량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치3_재료",
+      "label": "재료처치 재료 3",
+      "semantic_path": [
+        "재료처치",
+        "3행",
+        "재료"
+      ],
+      "bbox_label_id": "manual_1783577183603_row03",
+      "source_detection_id": "manual_1783577183603_row03",
+      "source_text": "재료처치 재료 3",
+      "value_type": "free_text.short",
+      "generator": "pool:material_names",
+      "style_class": "style_재료처치3_재료",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/3행/재료",
+        "csv_column": "재료처치/3행/재료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치3_수량",
+      "label": "재료처치 수량 3",
+      "semantic_path": [
+        "재료처치",
+        "3행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783577225121_row03",
+      "source_detection_id": "manual_1783577225121_row03",
+      "source_text": "재료처치 수량 3",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "style_재료처치3_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/3행/수량",
+        "csv_column": "재료처치/3행/수량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치4_재료",
+      "label": "재료처치 재료 4",
+      "semantic_path": [
+        "재료처치",
+        "4행",
+        "재료"
+      ],
+      "bbox_label_id": "manual_1783577183603_row04",
+      "source_detection_id": "manual_1783577183603_row04",
+      "source_text": "재료처치 재료 4",
+      "value_type": "free_text.short",
+      "generator": "pool:material_names",
+      "style_class": "style_재료처치4_재료",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/4행/재료",
+        "csv_column": "재료처치/4행/재료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치4_수량",
+      "label": "재료처치 수량 4",
+      "semantic_path": [
+        "재료처치",
+        "4행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783577225121_row04",
+      "source_detection_id": "manual_1783577225121_row04",
+      "source_text": "재료처치 수량 4",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "style_재료처치4_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/4행/수량",
+        "csv_column": "재료처치/4행/수량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치5_재료",
+      "label": "재료처치 재료 5",
+      "semantic_path": [
+        "재료처치",
+        "5행",
+        "재료"
+      ],
+      "bbox_label_id": "manual_1783577183603_row05",
+      "source_detection_id": "manual_1783577183603_row05",
+      "source_text": "재료처치 재료 5",
+      "value_type": "free_text.short",
+      "generator": "pool:material_names",
+      "style_class": "style_재료처치5_재료",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/5행/재료",
+        "csv_column": "재료처치/5행/재료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "재료처치5_수량",
+      "label": "재료처치 수량 5",
+      "semantic_path": [
+        "재료처치",
+        "5행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783577225121_row05",
+      "source_detection_id": "manual_1783577225121_row05",
+      "source_text": "재료처치 수량 5",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "style_재료처치5_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "재료처치/5행/수량",
+        "csv_column": "재료처치/5행/수량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "마취시간",
+      "label": "마취시간",
+      "semantic_path": [
+        "마취료",
+        "마취시간"
+      ],
+      "bbox_label_id": "manual_1783577433556",
+      "source_detection_id": "manual_1783577433556",
+      "source_text": "마취시간",
+      "value_type": "free_text.short",
+      "generator": "pool:anesthesia_durations",
+      "style_class": "style_마취시간",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "마취료/마취시간",
+        "csv_column": "마취료/마취시간"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "마취방법_전신마취",
+      "label": "General Anesthesis",
+      "semantic_path": [
+        "마취료",
+        "마취방법",
+        "General Anesthesis"
+      ],
+      "bbox_label_id": "manual_1783577076303",
+      "source_detection_id": "manual_1783577076303",
+      "source_text": "General Anesthesis",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_마취방법_전신마취",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "마취료/마취방법/General Anesthesis",
+        "csv_column": "마취료/마취방법/General Anesthesis"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "마취방법_척추마취",
+      "label": "Spinal Anesthesis",
+      "semantic_path": [
+        "마취료",
+        "마취방법",
+        "Spinal Anesthesis"
+      ],
+      "bbox_label_id": "manual_1783577079220",
+      "source_detection_id": "manual_1783577079220",
+      "source_text": "Spinal Anesthesis",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_마취방법_척추마취",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "마취료/마취방법/Spinal Anesthesis",
+        "csv_column": "마취료/마취방법/Spinal Anesthesis"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "마취방법_경막외마취",
+      "label": "Epidural Anesthesis",
+      "semantic_path": [
+        "마취료",
+        "마취방법",
+        "Epidural Anesthesis"
+      ],
+      "bbox_label_id": "manual_1783577082586",
+      "source_detection_id": "manual_1783577082586",
+      "source_text": "Epidural Anesthesis",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_마취방법_경막외마취",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "마취료/마취방법/Epidural Anesthesis",
+        "csv_column": "마취료/마취방법/Epidural Anesthesis"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "마취방법_BPB",
+      "label": "BPB",
+      "semantic_path": [
+        "마취료",
+        "마취방법",
+        "BPB"
+      ],
+      "bbox_label_id": "manual_1783577085752",
+      "source_detection_id": "manual_1783577085752",
+      "source_text": "BPB",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_마취방법_BPB",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "마취료/마취방법/BPB",
+        "csv_column": "마취료/마취방법/BPB"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "전신마취제_Ethran",
+      "label": "Ethran",
+      "semantic_path": [
+        "마취료",
+        "전신마취제",
+        "Ethran"
+      ],
+      "bbox_label_id": "manual_1783577153037",
+      "source_detection_id": "manual_1783577153037",
+      "source_text": "Ethran",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_전신마취제_Ethran",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "마취료/전신마취제/Ethran",
+        "csv_column": "마취료/전신마취제/Ethran"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "전신마취제_Forane",
+      "label": "Forane",
+      "semantic_path": [
+        "마취료",
+        "전신마취제",
+        "Forane"
+      ],
+      "bbox_label_id": "manual_1783577156204",
+      "source_detection_id": "manual_1783577156204",
+      "source_text": "Forane",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_전신마취제_Forane",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "마취료/전신마취제/Forane",
+        "csv_column": "마취료/전신마취제/Forane"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "마취재료",
+      "label": "마취재료",
+      "semantic_path": [
+        "마취료",
+        "마취재료"
+      ],
+      "bbox_label_id": "manual_1783577160286",
+      "source_detection_id": "manual_1783577160286",
+      "source_text": "마취재료",
+      "value_type": "free_text.short",
+      "generator": "pool:anesthesia_materials",
+      "style_class": "style_마취재료",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "마취료/마취재료",
+        "csv_column": "마취료/마취재료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "주사처방",
+      "label": "주사처방",
+      "semantic_path": [
+        "마취료",
+        "주사처방"
+      ],
+      "bbox_label_id": "manual_1783577166270",
+      "source_detection_id": "manual_1783577166270",
+      "source_text": "주사처방",
+      "value_type": "free_text.short",
+      "generator": "pool:injection_orders",
+      "style_class": "style_주사처방",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "마취료/주사처방",
+        "csv_column": "마취료/주사처방"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    }
+  ],
+  "groups": [],
+  "updated_at": "2026-07-09T08:23:58.149772+00:00",
+  "handwriting": {
+    "qr_bbox": [
+      502,
+      52,
+      122,
+      118
+    ],
+    "default_sample_count": 1
+  }
+}

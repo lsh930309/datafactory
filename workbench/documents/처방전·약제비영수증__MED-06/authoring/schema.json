@@ -1,0 +1,2088 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-09T04:31:27.187788+00:00",
+  "doc_id": "MED-06",
+  "title": "처방전·약제비영수증",
+  "source_review": "workbench/documents/처방전·약제비영수증__MED-06/review/original_약제비계산서_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+  "image": {
+    "width": 1190,
+    "height": 1682
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "workbench/documents/처방전·약제비영수증__MED-06/review/original_약제비계산서_page_001/review.json"
+  },
+  "anchor_map_ref": "/Users/lsh930309/projects/dataFatory/workbench/documents/처방전·약제비영수증__MED-06/review/original_약제비계산서_page_001/review.json",
+  "semantic_schema": {
+    "영수증": {
+      "영수증번호": ""
+    },
+    "환자": {
+      "성명": ""
+    },
+    "조제": {
+      "조제일": "",
+      "투약일수": "",
+      "야간조제": "",
+      "공휴일조제": ""
+    },
+    "비용": {
+      "급여": {
+        "약품비": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "조제기본료": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "복약지도료": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "조제료": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "관리료": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "선별급여": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "65세 이상 등 정액": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "기타": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        }
+      },
+      "비급여": {
+        "약품비": "",
+        "조제기본료": "",
+        "복약지도료": "",
+        "조제료": "",
+        "관리료": "",
+        "선별급여": "",
+        "65세 이상 등 정액": "",
+        "기타": ""
+      },
+      "합계": {
+        "일부본인부담_본인부담금": "",
+        "일부본인부담_공단부담금": "",
+        "전액본인부담": "",
+        "비급여": ""
+      },
+      "약제비총액": "",
+      "환자부담총액": "",
+      "납부한금액": {
+        "카드": "",
+        "현금영수증": "",
+        "현금": "",
+        "합계": ""
+      }
+    },
+    "현금영수증": {
+      "발급여부": "",
+      "신분확인번호": "",
+      "승인번호": ""
+    },
+    "처방한요양기관": {
+      "의원급_보건기관": "",
+      "병원급": "",
+      "종합병원": "",
+      "상급종합병원": "",
+      "사업자등록번호": "",
+      "상호": "",
+      "사업장소재지": "",
+      "전화번호": "",
+      "대표자": ""
+    },
+    "발행일자": {
+      "년": "",
+      "월": "",
+      "일": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "receipt_number",
+      "label": "영수증번호(연월-일련번호)",
+      "semantic_path": [
+        "영수증",
+        "영수증번호"
+      ],
+      "bbox_label_id": "visual_0004",
+      "source_detection_id": "visual_0004",
+      "source_text": "영수증번호(연월-일련번호)",
+      "value_type": "free_text.short",
+      "generator": "pattern:######-####",
+      "style_class": "style_receipt_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "영수증/영수증번호",
+        "csv_column": "영수증/영수증번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "patient_name",
+      "label": "환자 성명",
+      "semantic_path": [
+        "환자",
+        "성명"
+      ],
+      "bbox_label_id": "visual_0007",
+      "source_detection_id": "visual_0007",
+      "source_text": "환자 성명",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "style_patient_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "환자/성명",
+        "csv_column": "환자/성명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "dispensing_date",
+      "label": "조제일",
+      "semantic_path": [
+        "조제",
+        "조제일"
+      ],
+      "bbox_label_id": "visual_0008",
+      "source_detection_id": "visual_0008",
+      "source_text": "조제일",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "style_dispensing_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "조제/조제일",
+        "csv_column": "조제/조제일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "medication_days",
+      "label": "투약일수",
+      "semantic_path": [
+        "조제",
+        "투약일수"
+      ],
+      "bbox_label_id": "visual_0010",
+      "source_detection_id": "visual_0010",
+      "source_text": "투약일수",
+      "value_type": "free_text.short",
+      "generator": "template:{{pattern:##}}일",
+      "style_class": "style_medication_days",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "조제/투약일수",
+        "csv_column": "조제/투약일수"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "night_dispensing",
+      "label": "야간조제",
+      "semantic_path": [
+        "조제",
+        "야간조제"
+      ],
+      "bbox_label_id": "manual_1783570338497",
+      "source_detection_id": "manual_1783570338497",
+      "source_text": "야간조제",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_night_dispensing",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "조제/야간조제",
+        "csv_column": "조제/야간조제"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "holiday_dispensing",
+      "label": "공휴일조제",
+      "semantic_path": [
+        "조제",
+        "공휴일조제"
+      ],
+      "bbox_label_id": "manual_1783570333096",
+      "source_detection_id": "manual_1783570333096",
+      "source_text": "공휴일조제",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_holiday_dispensing",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "조제/공휴일조제",
+        "csv_column": "조제/공휴일조제"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "drug_cost_partial_self",
+      "label": "약품비 급여 일부본인부담 본인부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "약품비",
+        "일부본인부담_본인부담금"
+      ],
+      "bbox_label_id": "visual_0019",
+      "source_detection_id": "visual_0019",
+      "source_text": "약품비 급여 일부본인부담 본인부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_drug_cost_partial_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/약품비/일부본인부담_본인부담금",
+        "csv_column": "비용/급여/약품비/일부본인부담_본인부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "drug_cost_partial_nhis",
+      "label": "약품비 급여 일부본인부담 공단부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "약품비",
+        "일부본인부담_공단부담금"
+      ],
+      "bbox_label_id": "visual_0020",
+      "source_detection_id": "visual_0020",
+      "source_text": "약품비 급여 일부본인부담 공단부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_drug_cost_partial_nhis",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/약품비/일부본인부담_공단부담금",
+        "csv_column": "비용/급여/약품비/일부본인부담_공단부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "drug_cost_full_self",
+      "label": "약품비 급여 전액 본인부담",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "약품비",
+        "전액본인부담"
+      ],
+      "bbox_label_id": "visual_0022",
+      "source_detection_id": "visual_0022",
+      "source_text": "약품비 급여 전액 본인부담",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_drug_cost_full_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/약품비/전액본인부담",
+        "csv_column": "비용/급여/약품비/전액본인부담"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "drug_cost_noncovered",
+      "label": "약품비 비급여",
+      "semantic_path": [
+        "비용",
+        "비급여",
+        "약품비"
+      ],
+      "bbox_label_id": "visual_0023",
+      "source_detection_id": "visual_0023",
+      "source_text": "약품비 비급여",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_drug_cost_noncovered",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/비급여/약품비",
+        "csv_column": "비용/비급여/약품비"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "dispensing_basic_fee_partial_self",
+      "label": "조제기본료 급여 일부본인부담 본인부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "조제기본료",
+        "일부본인부담_본인부담금"
+      ],
+      "bbox_label_id": "visual_0024",
+      "source_detection_id": "visual_0024",
+      "source_text": "조제기본료 급여 일부본인부담 본인부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_dispensing_basic_fee_partial_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/조제기본료/일부본인부담_본인부담금",
+        "csv_column": "비용/급여/조제기본료/일부본인부담_본인부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "dispensing_basic_fee_partial_nhis",
+      "label": "조제기본료 급여 일부본인부담 공단부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "조제기본료",
+        "일부본인부담_공단부담금"
+      ],
+      "bbox_label_id": "visual_0025",
+      "source_detection_id": "visual_0025",
+      "source_text": "조제기본료 급여 일부본인부담 공단부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_dispensing_basic_fee_partial_nhis",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/조제기본료/일부본인부담_공단부담금",
+        "csv_column": "비용/급여/조제기본료/일부본인부담_공단부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "dispensing_basic_fee_full_self",
+      "label": "조제기본료 급여 전액 본인부담",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "조제기본료",
+        "전액본인부담"
+      ],
+      "bbox_label_id": "visual_0027",
+      "source_detection_id": "visual_0027",
+      "source_text": "조제기본료 급여 전액 본인부담",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_dispensing_basic_fee_full_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/조제기본료/전액본인부담",
+        "csv_column": "비용/급여/조제기본료/전액본인부담"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "dispensing_basic_fee_noncovered",
+      "label": "조제기본료 비급여",
+      "semantic_path": [
+        "비용",
+        "비급여",
+        "조제기본료"
+      ],
+      "bbox_label_id": "visual_0028",
+      "source_detection_id": "visual_0028",
+      "source_text": "조제기본료 비급여",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_dispensing_basic_fee_noncovered",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/비급여/조제기본료",
+        "csv_column": "비용/비급여/조제기본료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "medication_guidance_fee_partial_self",
+      "label": "복약지도료 급여 일부본인부담 본인부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "복약지도료",
+        "일부본인부담_본인부담금"
+      ],
+      "bbox_label_id": "visual_0029",
+      "source_detection_id": "visual_0029",
+      "source_text": "복약지도료 급여 일부본인부담 본인부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_medication_guidance_fee_partial_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/복약지도료/일부본인부담_본인부담금",
+        "csv_column": "비용/급여/복약지도료/일부본인부담_본인부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "medication_guidance_fee_partial_nhis",
+      "label": "복약지도료 급여 일부본인부담 공단부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "복약지도료",
+        "일부본인부담_공단부담금"
+      ],
+      "bbox_label_id": "visual_0030",
+      "source_detection_id": "visual_0030",
+      "source_text": "복약지도료 급여 일부본인부담 공단부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_medication_guidance_fee_partial_nhis",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/복약지도료/일부본인부담_공단부담금",
+        "csv_column": "비용/급여/복약지도료/일부본인부담_공단부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "medication_guidance_fee_full_self",
+      "label": "복약지도료 급여 전액 본인부담",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "복약지도료",
+        "전액본인부담"
+      ],
+      "bbox_label_id": "visual_0032",
+      "source_detection_id": "visual_0032",
+      "source_text": "복약지도료 급여 전액 본인부담",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_medication_guidance_fee_full_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/복약지도료/전액본인부담",
+        "csv_column": "비용/급여/복약지도료/전액본인부담"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "medication_guidance_fee_noncovered",
+      "label": "복약지도료 비급여",
+      "semantic_path": [
+        "비용",
+        "비급여",
+        "복약지도료"
+      ],
+      "bbox_label_id": "visual_0033",
+      "source_detection_id": "visual_0033",
+      "source_text": "복약지도료 비급여",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_medication_guidance_fee_noncovered",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/비급여/복약지도료",
+        "csv_column": "비용/비급여/복약지도료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "dispensing_fee_partial_self",
+      "label": "조제료 급여 일부본인부담 본인부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "조제료",
+        "일부본인부담_본인부담금"
+      ],
+      "bbox_label_id": "visual_0034",
+      "source_detection_id": "visual_0034",
+      "source_text": "조제료 급여 일부본인부담 본인부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_dispensing_fee_partial_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/조제료/일부본인부담_본인부담금",
+        "csv_column": "비용/급여/조제료/일부본인부담_본인부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "dispensing_fee_partial_nhis",
+      "label": "조제료 급여 일부본인부담 공단부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "조제료",
+        "일부본인부담_공단부담금"
+      ],
+      "bbox_label_id": "visual_0035",
+      "source_detection_id": "visual_0035",
+      "source_text": "조제료 급여 일부본인부담 공단부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_dispensing_fee_partial_nhis",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/조제료/일부본인부담_공단부담금",
+        "csv_column": "비용/급여/조제료/일부본인부담_공단부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "dispensing_fee_full_self",
+      "label": "조제료 급여 전액 본인부담",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "조제료",
+        "전액본인부담"
+      ],
+      "bbox_label_id": "visual_0037",
+      "source_detection_id": "visual_0037",
+      "source_text": "조제료 급여 전액 본인부담",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_dispensing_fee_full_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/조제료/전액본인부담",
+        "csv_column": "비용/급여/조제료/전액본인부담"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "dispensing_fee_noncovered",
+      "label": "조제료 비급여",
+      "semantic_path": [
+        "비용",
+        "비급여",
+        "조제료"
+      ],
+      "bbox_label_id": "visual_0038",
+      "source_detection_id": "visual_0038",
+      "source_text": "조제료 비급여",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_dispensing_fee_noncovered",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/비급여/조제료",
+        "csv_column": "비용/비급여/조제료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "management_fee_partial_self",
+      "label": "관리료 급여 일부본인부담 본인부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "관리료",
+        "일부본인부담_본인부담금"
+      ],
+      "bbox_label_id": "visual_0039",
+      "source_detection_id": "visual_0039",
+      "source_text": "관리료 급여 일부본인부담 본인부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_management_fee_partial_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/관리료/일부본인부담_본인부담금",
+        "csv_column": "비용/급여/관리료/일부본인부담_본인부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "management_fee_partial_nhis",
+      "label": "관리료 급여 일부본인부담 공단부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "관리료",
+        "일부본인부담_공단부담금"
+      ],
+      "bbox_label_id": "visual_0040",
+      "source_detection_id": "visual_0040",
+      "source_text": "관리료 급여 일부본인부담 공단부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_management_fee_partial_nhis",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/관리료/일부본인부담_공단부담금",
+        "csv_column": "비용/급여/관리료/일부본인부담_공단부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "management_fee_full_self",
+      "label": "관리료 급여 전액 본인부담",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "관리료",
+        "전액본인부담"
+      ],
+      "bbox_label_id": "visual_0042",
+      "source_detection_id": "visual_0042",
+      "source_text": "관리료 급여 전액 본인부담",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_management_fee_full_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/관리료/전액본인부담",
+        "csv_column": "비용/급여/관리료/전액본인부담"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "management_fee_noncovered",
+      "label": "관리료 비급여",
+      "semantic_path": [
+        "비용",
+        "비급여",
+        "관리료"
+      ],
+      "bbox_label_id": "visual_0043",
+      "source_detection_id": "visual_0043",
+      "source_text": "관리료 비급여",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_management_fee_noncovered",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/비급여/관리료",
+        "csv_column": "비용/비급여/관리료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "selective_benefit_partial_self",
+      "label": "선별급여 급여 일부본인부담 본인부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "선별급여",
+        "일부본인부담_본인부담금"
+      ],
+      "bbox_label_id": "visual_0044",
+      "source_detection_id": "visual_0044",
+      "source_text": "선별급여 급여 일부본인부담 본인부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_selective_benefit_partial_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/선별급여/일부본인부담_본인부담금",
+        "csv_column": "비용/급여/선별급여/일부본인부담_본인부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "selective_benefit_partial_nhis",
+      "label": "선별급여 급여 일부본인부담 공단부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "선별급여",
+        "일부본인부담_공단부담금"
+      ],
+      "bbox_label_id": "visual_0045",
+      "source_detection_id": "visual_0045",
+      "source_text": "선별급여 급여 일부본인부담 공단부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_selective_benefit_partial_nhis",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/선별급여/일부본인부담_공단부담금",
+        "csv_column": "비용/급여/선별급여/일부본인부담_공단부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "selective_benefit_full_self",
+      "label": "선별급여 급여 전액 본인부담",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "선별급여",
+        "전액본인부담"
+      ],
+      "bbox_label_id": "visual_0047",
+      "source_detection_id": "visual_0047",
+      "source_text": "선별급여 급여 전액 본인부담",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_selective_benefit_full_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/선별급여/전액본인부담",
+        "csv_column": "비용/급여/선별급여/전액본인부담"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "selective_benefit_noncovered",
+      "label": "선별급여 비급여",
+      "semantic_path": [
+        "비용",
+        "비급여",
+        "선별급여"
+      ],
+      "bbox_label_id": "visual_0048",
+      "source_detection_id": "visual_0048",
+      "source_text": "선별급여 비급여",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_selective_benefit_noncovered",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/비급여/선별급여",
+        "csv_column": "비용/비급여/선별급여"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "senior_fixed_amount_partial_self",
+      "label": "65세 이상 등 정액 급여 일부본인부담 본인부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "65세 이상 등 정액",
+        "일부본인부담_본인부담금"
+      ],
+      "bbox_label_id": "visual_0049",
+      "source_detection_id": "visual_0049",
+      "source_text": "65세 이상 등 정액 급여 일부본인부담 본인부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_senior_fixed_amount_partial_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/65세 이상 등 정액/일부본인부담_본인부담금",
+        "csv_column": "비용/급여/65세 이상 등 정액/일부본인부담_본인부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "senior_fixed_amount_partial_nhis",
+      "label": "65세 이상 등 정액 급여 일부본인부담 공단부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "65세 이상 등 정액",
+        "일부본인부담_공단부담금"
+      ],
+      "bbox_label_id": "visual_0050",
+      "source_detection_id": "visual_0050",
+      "source_text": "65세 이상 등 정액 급여 일부본인부담 공단부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_senior_fixed_amount_partial_nhis",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/65세 이상 등 정액/일부본인부담_공단부담금",
+        "csv_column": "비용/급여/65세 이상 등 정액/일부본인부담_공단부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "senior_fixed_amount_full_self",
+      "label": "65세 이상 등 정액 급여 전액 본인부담",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "65세 이상 등 정액",
+        "전액본인부담"
+      ],
+      "bbox_label_id": "visual_0052",
+      "source_detection_id": "visual_0052",
+      "source_text": "65세 이상 등 정액 급여 전액 본인부담",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_senior_fixed_amount_full_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/65세 이상 등 정액/전액본인부담",
+        "csv_column": "비용/급여/65세 이상 등 정액/전액본인부담"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "senior_fixed_amount_noncovered",
+      "label": "65세 이상 등 정액 비급여",
+      "semantic_path": [
+        "비용",
+        "비급여",
+        "65세 이상 등 정액"
+      ],
+      "bbox_label_id": "visual_0053",
+      "source_detection_id": "visual_0053",
+      "source_text": "65세 이상 등 정액 비급여",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_senior_fixed_amount_noncovered",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/비급여/65세 이상 등 정액",
+        "csv_column": "비용/비급여/65세 이상 등 정액"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "other_partial_self",
+      "label": "기타 급여 일부본인부담 본인부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "기타",
+        "일부본인부담_본인부담금"
+      ],
+      "bbox_label_id": "visual_0054",
+      "source_detection_id": "visual_0054",
+      "source_text": "기타 급여 일부본인부담 본인부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_other_partial_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/기타/일부본인부담_본인부담금",
+        "csv_column": "비용/급여/기타/일부본인부담_본인부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "other_partial_nhis",
+      "label": "기타 급여 일부본인부담 공단부담금",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "기타",
+        "일부본인부담_공단부담금"
+      ],
+      "bbox_label_id": "visual_0055",
+      "source_detection_id": "visual_0055",
+      "source_text": "기타 급여 일부본인부담 공단부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_other_partial_nhis",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/기타/일부본인부담_공단부담금",
+        "csv_column": "비용/급여/기타/일부본인부담_공단부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "other_full_self",
+      "label": "기타 급여 전액 본인부담",
+      "semantic_path": [
+        "비용",
+        "급여",
+        "기타",
+        "전액본인부담"
+      ],
+      "bbox_label_id": "visual_0057",
+      "source_detection_id": "visual_0057",
+      "source_text": "기타 급여 전액 본인부담",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_other_full_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/급여/기타/전액본인부담",
+        "csv_column": "비용/급여/기타/전액본인부담"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "other_noncovered",
+      "label": "기타 비급여",
+      "semantic_path": [
+        "비용",
+        "비급여",
+        "기타"
+      ],
+      "bbox_label_id": "visual_0058",
+      "source_detection_id": "visual_0058",
+      "source_text": "기타 비급여",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_other_noncovered",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/비급여/기타",
+        "csv_column": "비용/비급여/기타"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sum_partial_self",
+      "label": "합계 일부본인부담 본인부담금",
+      "semantic_path": [
+        "비용",
+        "합계",
+        "일부본인부담_본인부담금"
+      ],
+      "bbox_label_id": "manual_1783570397197",
+      "source_detection_id": "manual_1783570397197",
+      "source_text": "합계 일부본인부담 본인부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_sum_partial_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/합계/일부본인부담_본인부담금",
+        "csv_column": "비용/합계/일부본인부담_본인부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sum_partial_nhis",
+      "label": "합계 일부본인부담 공단부담금",
+      "semantic_path": [
+        "비용",
+        "합계",
+        "일부본인부담_공단부담금"
+      ],
+      "bbox_label_id": "manual_1783570401607",
+      "source_detection_id": "manual_1783570401607",
+      "source_text": "합계 일부본인부담 공단부담금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_sum_partial_nhis",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/합계/일부본인부담_공단부담금",
+        "csv_column": "비용/합계/일부본인부담_공단부담금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sum_full_self",
+      "label": "합계 전액 본인부담",
+      "semantic_path": [
+        "비용",
+        "합계",
+        "전액본인부담"
+      ],
+      "bbox_label_id": "manual_1783570405663",
+      "source_detection_id": "manual_1783570405663",
+      "source_text": "합계 전액 본인부담",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_sum_full_self",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/합계/전액본인부담",
+        "csv_column": "비용/합계/전액본인부담"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "sum_noncovered",
+      "label": "합계 비급여",
+      "semantic_path": [
+        "비용",
+        "합계",
+        "비급여"
+      ],
+      "bbox_label_id": "manual_1783570409162",
+      "source_detection_id": "manual_1783570409162",
+      "source_text": "합계 비급여",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_sum_noncovered",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/합계/비급여",
+        "csv_column": "비용/합계/비급여"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "drug_cost_total",
+      "label": "⑤ 약제비 총액",
+      "semantic_path": [
+        "비용",
+        "약제비총액"
+      ],
+      "bbox_label_id": "visual_0060",
+      "source_detection_id": "visual_0060",
+      "source_text": "⑤ 약제비 총액",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_drug_cost_total",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/약제비총액",
+        "csv_column": "비용/약제비총액"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "patient_burden_total",
+      "label": "⑥ 환자부담 총액",
+      "semantic_path": [
+        "비용",
+        "환자부담총액"
+      ],
+      "bbox_label_id": "visual_0070",
+      "source_detection_id": "visual_0070",
+      "source_text": "⑥ 환자부담 총액",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_patient_burden_total",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/환자부담총액",
+        "csv_column": "비용/환자부담총액"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "paid_card",
+      "label": "납부한 금액 카드",
+      "semantic_path": [
+        "비용",
+        "납부한금액",
+        "카드"
+      ],
+      "bbox_label_id": "visual_0063",
+      "source_detection_id": "visual_0063",
+      "source_text": "납부한 금액 카드",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_paid_card",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/납부한금액/카드",
+        "csv_column": "비용/납부한금액/카드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "paid_cash_receipt",
+      "label": "납부한 금액 현금영수증",
+      "semantic_path": [
+        "비용",
+        "납부한금액",
+        "현금영수증"
+      ],
+      "bbox_label_id": "visual_0066",
+      "source_detection_id": "visual_0066",
+      "source_text": "납부한 금액 현금영수증",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_paid_cash_receipt",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/납부한금액/현금영수증",
+        "csv_column": "비용/납부한금액/현금영수증"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "paid_cash",
+      "label": "납부한 금액 현금",
+      "semantic_path": [
+        "비용",
+        "납부한금액",
+        "현금"
+      ],
+      "bbox_label_id": "visual_0069",
+      "source_detection_id": "visual_0069",
+      "source_text": "납부한 금액 현금",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_paid_cash",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/납부한금액/현금",
+        "csv_column": "비용/납부한금액/현금"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "paid_total",
+      "label": "납부한 금액 합계",
+      "semantic_path": [
+        "비용",
+        "납부한금액",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0073",
+      "source_detection_id": "visual_0073",
+      "source_text": "납부한 금액 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "style_paid_total",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비용/납부한금액/합계",
+        "csv_column": "비용/납부한금액/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "cash_receipt_issued",
+      "label": "현금영수증 발급여부",
+      "semantic_path": [
+        "현금영수증",
+        "발급여부"
+      ],
+      "bbox_label_id": "manual_1783570416379",
+      "source_detection_id": "manual_1783570416379",
+      "source_text": "현금영수증 발급여부",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_cash_receipt_issued",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "현금영수증/발급여부",
+        "csv_column": "현금영수증/발급여부"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "cash_receipt_identity_number",
+      "label": "현금영수증 신분확인번호",
+      "semantic_path": [
+        "현금영수증",
+        "신분확인번호"
+      ],
+      "bbox_label_id": "visual_0076",
+      "source_detection_id": "visual_0076",
+      "source_text": "현금영수증 신분확인번호",
+      "value_type": "free_text.short",
+      "generator": "pattern:###########",
+      "style_class": "style_cash_receipt_identity_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "현금영수증/신분확인번호",
+        "csv_column": "현금영수증/신분확인번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "cash_receipt_approval_number",
+      "label": "현금영수증 승인번호",
+      "semantic_path": [
+        "현금영수증",
+        "승인번호"
+      ],
+      "bbox_label_id": "visual_0081",
+      "source_detection_id": "visual_0081",
+      "source_text": "현금영수증 승인번호",
+      "value_type": "free_text.short",
+      "generator": "pattern:************",
+      "style_class": "style_cash_receipt_approval_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "현금영수증/승인번호",
+        "csv_column": "현금영수증/승인번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "institution_clinic",
+      "label": "의원급·보건기관",
+      "semantic_path": [
+        "처방한요양기관",
+        "의원급_보건기관"
+      ],
+      "bbox_label_id": "manual_1783570540712",
+      "source_detection_id": "manual_1783570540712",
+      "source_text": "[",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_institution_clinic",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "처방한요양기관/의원급_보건기관",
+        "csv_column": "처방한요양기관/의원급_보건기관"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "institution_hospital",
+      "label": "병원급",
+      "semantic_path": [
+        "처방한요양기관",
+        "병원급"
+      ],
+      "bbox_label_id": "manual_1783570531162",
+      "source_detection_id": "manual_1783570531162",
+      "source_text": "병원급",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_institution_hospital",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "처방한요양기관/병원급",
+        "csv_column": "처방한요양기관/병원급"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "institution_general_hospital",
+      "label": "종합병원",
+      "semantic_path": [
+        "처방한요양기관",
+        "종합병원"
+      ],
+      "bbox_label_id": "manual_1783570546612",
+      "source_detection_id": "manual_1783570546612",
+      "source_text": "종합병원",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_institution_general_hospital",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "처방한요양기관/종합병원",
+        "csv_column": "처방한요양기관/종합병원"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "institution_tertiary_hospital",
+      "label": "상급종합병원",
+      "semantic_path": [
+        "처방한요양기관",
+        "상급종합병원"
+      ],
+      "bbox_label_id": "manual_1783570535246",
+      "source_detection_id": "manual_1783570535246",
+      "source_text": "상급종합병원",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_institution_tertiary_hospital",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "처방한요양기관/상급종합병원",
+        "csv_column": "처방한요양기관/상급종합병원"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "business_registration_number",
+      "label": "사업자등록번호",
+      "semantic_path": [
+        "처방한요양기관",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0087",
+      "source_detection_id": "visual_0087",
+      "source_text": "사업자등록번호",
+      "value_type": "free_text.short",
+      "generator": "pattern:###-##-#####",
+      "style_class": "style_business_registration_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "처방한요양기관/사업자등록번호",
+        "csv_column": "처방한요양기관/사업자등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "business_name",
+      "label": "상호",
+      "semantic_path": [
+        "처방한요양기관",
+        "상호"
+      ],
+      "bbox_label_id": "visual_0090",
+      "source_detection_id": "visual_0090",
+      "source_text": "상호",
+      "value_type": "medical.institution_ko",
+      "generator": "medical.institution_ko",
+      "style_class": "style_business_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "처방한요양기관/상호",
+        "csv_column": "처방한요양기관/상호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "business_address",
+      "label": "사업장 소재지",
+      "semantic_path": [
+        "처방한요양기관",
+        "사업장소재지"
+      ],
+      "bbox_label_id": "visual_0095",
+      "source_detection_id": "visual_0095",
+      "source_text": "사업장 소재지",
+      "value_type": "address.ko",
+      "generator": "address.ko",
+      "style_class": "style_business_address",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "처방한요양기관/사업장소재지",
+        "csv_column": "처방한요양기관/사업장소재지"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "business_phone",
+      "label": "전화번호",
+      "semantic_path": [
+        "처방한요양기관",
+        "전화번호"
+      ],
+      "bbox_label_id": "visual_0096",
+      "source_detection_id": "visual_0096",
+      "source_text": "전화번호",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
+      "style_class": "style_business_phone",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "처방한요양기관/전화번호",
+        "csv_column": "처방한요양기관/전화번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "representative_name",
+      "label": "대표자",
+      "semantic_path": [
+        "처방한요양기관",
+        "대표자"
+      ],
+      "bbox_label_id": "manual_1783570459461",
+      "source_detection_id": "manual_1783570459461",
+      "source_text": "대표자",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "style_representative_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "처방한요양기관/대표자",
+        "csv_column": "처방한요양기관/대표자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issue_year",
+      "label": "발행일자 년",
+      "semantic_path": [
+        "발행일자",
+        "년"
+      ],
+      "bbox_label_id": "manual_1783570562665",
+      "source_detection_id": "manual_1783570562665",
+      "source_text": "발행일자 년",
+      "value_type": "date.year",
+      "generator": "date.year",
+      "style_class": "style_issue_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발행일자/년",
+        "csv_column": "발행일자/년"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issue_month",
+      "label": "발행일자 월",
+      "semantic_path": [
+        "발행일자",
+        "월"
+      ],
+      "bbox_label_id": "manual_1783570568629",
+      "source_detection_id": "manual_1783570568629",
+      "source_text": "발행일자 월",
+      "value_type": "date.month",
+      "generator": "date.month",
+      "style_class": "style_issue_month",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발행일자/월",
+        "csv_column": "발행일자/월"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issue_day",
+      "label": "발행일자 일",
+      "semantic_path": [
+        "발행일자",
+        "일"
+      ],
+      "bbox_label_id": "manual_1783570572294",
+      "source_detection_id": "manual_1783570572294",
+      "source_text": "발행일자 일",
+      "value_type": "date.day",
+      "generator": "date.day",
+      "style_class": "style_issue_day",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발행일자/일",
+        "csv_column": "발행일자/일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    }
+  ],
+  "groups": [],
+  "updated_at": "2026-07-09T08:43:52.675271+00:00",
+  "handwriting": {
+    "qr_bbox": [
+      881,
+      51,
+      112,
+      112
+    ],
+    "default_sample_count": 1
+  }
+}

@@ -270,6 +270,11 @@ button.slim { padding: 7px 9px; font-size: 12px; white-space: nowrap; }
 .final-export-controls input { padding: 7px 8px; }
 .final-export-controls button { white-space: nowrap; }
 .final-export-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.toggle-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; line-height: 1.35; }
+.toggle-row input { margin-top: 2px; }
+.toggle-row span { display: grid; gap: 2px; min-width: 0; }
+.toggle-row small { color: #667085; font-size: 11px; font-weight: 500; }
+.final-export-toggle { border: 1px dashed #f0c766; border-radius: 10px; background: #fffdf7; padding: 8px; }
 .priority-doc-card { display: grid; gap: 5px; width: 100%; text-align: left; border-radius: 12px; background: #fff; padding: 8px 9px; }
 .priority-doc-card.active { border-color: #1e66f5; box-shadow: 0 0 0 2px rgba(30, 102, 245, 0.15); }
 .priority-doc-card strong { font-size: 13px; line-height: 1.25; }
@@ -508,3 +513,8 @@ button.slim { padding: 7px 9px; font-size: 12px; white-space: nowrap; }
 .render-mode-buttons button { padding: 7px 6px; font-size: 12px; font-weight: 850; }
 .render-mode-buttons button.active { border-color: #1e66f5; background: #eaf1ff; color: #174ea6; }
 .render-mode-control small { color: #667085; font-size: 11px; line-height: 1.35; }
+.scan-drop-zone { display: grid; gap: 6px; border: 1px dashed #b8ccff; border-radius: 12px; background: #f8fbff; padding: 14px; text-align: center; }
+.scan-drop-zone b { color: #174ea6; }
+.scan-drop-zone small { color: #667085; }
+.scan-drop-zone input { margin: 6px auto 0; max-width: 100%; }
+.authoring-qr-bbox-group text { paint-order: stroke; stroke: #fff; stroke-width: 3px; }

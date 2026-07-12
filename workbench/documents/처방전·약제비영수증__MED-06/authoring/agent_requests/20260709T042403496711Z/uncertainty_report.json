@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-06",
+  "unresolved_fields": [
+    {
+      "field_id": "medication_days",
+      "issue": "투약일수 값에 일 단위를 포함할지 여부는 값 위치에 정적 단위가 없어 자연 표기로 포함했습니다. 렌더러/GT 정책상 숫자만 필요하면 generator를 pattern:##로 조정해야 합니다."
+    },
+    {
+      "field_id": "cash_receipt_identity_number",
+      "issue": "신분확인번호의 실제 길이는 개인 식별 수단에 따라 달라질 수 있어 pattern:###########로 근사했습니다."
+    },
+    {
+      "field_id": "cash_receipt_approval_number",
+      "issue": "현금영수증 승인번호의 자리수/형식은 발급 시스템에 따라 달라질 수 있어 pattern:************로 근사했습니다."
+    }
+  ],
+  "relationship_limitations": [
+    {
+      "fields": [
+        "patient_burden_total",
+        "paid_total"
+      ],
+      "issue": "환자부담 총액과 납부한 금액 합계는 업무상 같아야 할 가능성이 높지만, 동시에 세부 납부수단 합계와 ⑤-② 관계를 모두 강제하는 복합 equality/solver 순서는 지원 constraint만으로 확정하지 않았습니다."
+    },
+    {
+      "fields": [
+        "night_dispensing",
+        "holiday_dispensing"
+      ],
+      "issue": "야간과 공휴일 체크는 상호배타인지 동시 선택 가능한지 템플릿만으로 확정하지 않았습니다. exclusive_choice를 적용하지 않았습니다."
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "business_phone",
+      "generator": "person.phone_kr",
+      "issue": "기관 전화번호 전용 generator가 없어 지원 문법 내 전화번호 generator로 근사했습니다."
+    },
+    {
+      "field_id": "business_registration_number",
+      "generator": "pattern:###-##-#####",
+      "issue": "실제 사업자번호와 혼동되지 않는 합성 패턴만 생성해야 합니다."
+    }
+  ],
+  "user_decisions_needed": [
+    "투약일수 값을 숫자만 출력할지, 7일처럼 단위를 포함할지 승인 필요",
+    "환자부담총액과 납부합계를 동일하게 강제하는 추가 렌더러 정책이 필요한지 결정 필요",
+    "의원급/병원급/종합병원/상급종합병원 체크박스 중 정확히 하나만 선택하는 모델링 승인 필요"
+  ]
+}

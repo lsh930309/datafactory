@@ -1,0 +1,1222 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-09T05:40:05.979246+00:00",
+  "doc_id": "MED-02",
+  "title": "의무기록 사본",
+  "source_review": "workbench/documents/의무기록_사본__MED-02/review/original_의무기록/review.json",
+  "source_image": "workbench/documents/의무기록_사본__MED-02/samples/original/의무기록.png",
+  "source_inpainted": "workbench/documents/의무기록_사본__MED-02/inpaint/original_의무기록/lama/inpainted_lama.png",
+  "image": {
+    "width": 1024,
+    "height": 1536
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "workbench/documents/의무기록_사본__MED-02/review/original_의무기록/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/의무기록_사본__MED-02/review/original_의무기록/review.json",
+  "semantic_schema": {
+    "발급정보": {
+      "발급번호": "",
+      "발급일": {
+        "연": "",
+        "월": "",
+        "일": ""
+      }
+    },
+    "환자인적사항": {
+      "성명": "",
+      "주민등록번호": "",
+      "주소": "",
+      "연락처": "",
+      "성별": "",
+      "연령": ""
+    },
+    "기록작성정보": {
+      "진료과": "",
+      "담당의": "",
+      "기록작성일": "",
+      "기록구분": ""
+    },
+    "의무기록내용": {
+      "진료일자": "",
+      "진료장소": "",
+      "주소": "",
+      "현병력": "",
+      "과거력": "",
+      "가족력": "",
+      "진찰소견": "",
+      "검사소견": {
+        "검사1": {
+          "검사명": "",
+          "결과": "",
+          "참고치": ""
+        },
+        "검사2": {
+          "검사명": "",
+          "결과": "",
+          "참고치": ""
+        }
+      },
+      "진단명": {
+        "질병분류코드": "",
+        "진단명": ""
+      },
+      "치료내용": {
+        "치료1": "",
+        "치료2": "",
+        "치료3": ""
+      },
+      "향후계획": "",
+      "비고": ""
+    },
+    "발급기관": {
+      "주소": "",
+      "전화": "",
+      "팩스": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "issue_number",
+      "label": "발급번호",
+      "semantic_path": [
+        "발급정보",
+        "발급번호"
+      ],
+      "bbox_label_id": "manual_1783574260527",
+      "source_detection_id": "manual_1783574260527",
+      "source_text": "2025–06-0001234",
+      "value_type": "free_text.short",
+      "generator": "template:{{date.year}}-{{date.month}}-{{pattern:#######}}",
+      "style_class": "style_issue_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발급정보/발급번호",
+        "csv_column": "발급정보/발급번호"
+      },
+      "required": true,
+      "notes": "원본은 발급번호 라벨 오른쪽 한 줄 값으로 보임",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "patient_name",
+      "label": "성명",
+      "semantic_path": [
+        "환자인적사항",
+        "성명"
+      ],
+      "bbox_label_id": "det_000007",
+      "source_detection_id": "det_000007",
+      "source_text": "김하늘",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "style_patient_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "환자인적사항/성명",
+        "csv_column": "환자인적사항/성명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "patient_rrn",
+      "label": "주민등록번호",
+      "semantic_path": [
+        "환자인적사항",
+        "주민등록번호"
+      ],
+      "bbox_label_id": "det_000009",
+      "source_detection_id": "det_000009",
+      "source_text": "950101-2******",
+      "value_type": "person.rrn",
+      "generator": "person.rrn",
+      "style_class": "style_patient_rrn",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "환자인적사항/주민등록번호",
+        "csv_column": "환자인적사항/주민등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "patient_address",
+      "label": "주소",
+      "semantic_path": [
+        "환자인적사항",
+        "주소"
+      ],
+      "bbox_label_id": "det_000014",
+      "source_detection_id": "det_000014",
+      "source_text": "서울특별시 강남구 테헤란로 123, 101동 1001호",
+      "value_type": "address.ko",
+      "generator": "address.ko",
+      "style_class": "style_patient_address",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "환자인적사항/주소",
+        "csv_column": "환자인적사항/주소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "patient_phone",
+      "label": "연락처",
+      "semantic_path": [
+        "환자인적사항",
+        "연락처"
+      ],
+      "bbox_label_id": "det_000016",
+      "source_detection_id": "det_000016",
+      "source_text": "010-1234-5678",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
+      "style_class": "style_patient_phone",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "환자인적사항/연락처",
+        "csv_column": "환자인적사항/연락처"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "patient_gender",
+      "label": "성별",
+      "semantic_path": [
+        "환자인적사항",
+        "성별"
+      ],
+      "bbox_label_id": "det_000018",
+      "source_detection_id": "det_000018",
+      "source_text": "여",
+      "value_type": "free_text.short",
+      "generator": "choice:남|여",
+      "style_class": "style_patient_gender",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "환자인적사항/성별",
+        "csv_column": "환자인적사항/성별"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "patient_age",
+      "label": "연령",
+      "semantic_path": [
+        "환자인적사항",
+        "연령"
+      ],
+      "bbox_label_id": "manual_1783574287062",
+      "source_detection_id": "manual_1783574287062",
+      "source_text": "30세",
+      "value_type": "free_text.short",
+      "generator": "choice:18세|24세|31세|45세|62세",
+      "style_class": "style_patient_age",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "환자인적사항/연령",
+        "csv_column": "환자인적사항/연령"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "department",
+      "label": "진료과",
+      "semantic_path": [
+        "기록작성정보",
+        "진료과"
+      ],
+      "bbox_label_id": "det_000021",
+      "source_detection_id": "det_000021",
+      "source_text": "정형외과",
+      "value_type": "free_text.short",
+      "generator": "pool:departments",
+      "style_class": "style_department",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기록작성정보/진료과",
+        "csv_column": "기록작성정보/진료과"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "doctor_name",
+      "label": "담당의",
+      "semantic_path": [
+        "기록작성정보",
+        "담당의"
+      ],
+      "bbox_label_id": "det_000023",
+      "source_detection_id": "det_000023",
+      "source_text": "이재훈",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "style_doctor_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기록작성정보/담당의",
+        "csv_column": "기록작성정보/담당의"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "record_created_date",
+      "label": "기록작성일",
+      "semantic_path": [
+        "기록작성정보",
+        "기록작성일"
+      ],
+      "bbox_label_id": "det_000026",
+      "source_detection_id": "det_000026",
+      "source_text": "2025-05-20",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "style_record_created_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기록작성정보/기록작성일",
+        "csv_column": "기록작성정보/기록작성일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "record_type",
+      "label": "기록구분",
+      "semantic_path": [
+        "기록작성정보",
+        "기록구분"
+      ],
+      "bbox_label_id": "det_000028",
+      "source_detection_id": "det_000028",
+      "source_text": "외래기록",
+      "value_type": "free_text.short",
+      "generator": "choice:외래기록|입원기록|응급기록|수술기록",
+      "style_class": "style_record_type",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "기록작성정보/기록구분",
+        "csv_column": "기록작성정보/기록구분"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "care_date",
+      "label": "진료일자",
+      "semantic_path": [
+        "의무기록내용",
+        "진료일자"
+      ],
+      "bbox_label_id": "det_000031",
+      "source_detection_id": "det_000031",
+      "source_text": "2025-05-20",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "style_care_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/진료일자",
+        "csv_column": "의무기록내용/진료일자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "care_place",
+      "label": "진료장소",
+      "semantic_path": [
+        "의무기록내용",
+        "진료장소"
+      ],
+      "bbox_label_id": "det_000033",
+      "source_detection_id": "det_000033",
+      "source_text": "정형외과 외래",
+      "value_type": "free_text.short",
+      "generator": "pool:care_places",
+      "style_class": "style_care_place",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/진료장소",
+        "csv_column": "의무기록내용/진료장소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "chief_complaint",
+      "label": "주소(Chief Complaint)",
+      "semantic_path": [
+        "의무기록내용",
+        "주소"
+      ],
+      "bbox_label_id": "det_000035",
+      "source_detection_id": "det_000035",
+      "source_text": "오른쪽 무릎 통증",
+      "value_type": "free_text.short",
+      "generator": "pool:chief_complaints",
+      "style_class": "style_chief_complaint",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/주소",
+        "csv_column": "의무기록내용/주소"
+      },
+      "required": true,
+      "notes": "템플릿의 한글 라벨은 주 소로 OCR되었으나 괄호의 Chief Complaint와 샘플 값상 주호소로 해석",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "history_present_illness",
+      "label": "현병력",
+      "semantic_path": [
+        "의무기록내용",
+        "현병력"
+      ],
+      "bbox_label_id": "det_000037",
+      "source_detection_id": "det_000037",
+      "source_text": "내원 3일 전 계단을 내려오다 발을 헛디더 오른쪽 무릎이 꺾이면서 통증 발생. 이후 보행 시 통증 심해져 내원함.",
+      "value_type": "free_text.short",
+      "generator": "pool:hpi_texts",
+      "style_class": "style_history_present_illness",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/현병력",
+        "csv_column": "의무기록내용/현병력"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "past_history",
+      "label": "과거력",
+      "semantic_path": [
+        "의무기록내용",
+        "과거력"
+      ],
+      "bbox_label_id": "det_000040",
+      "source_detection_id": "det_000040",
+      "source_text": "특이사항 없음.",
+      "value_type": "free_text.short",
+      "generator": "choice:특이사항 없음.|고혈압으로 약물 복용 중.|당뇨병 과거력 있음.|이전 수술력 없음.",
+      "style_class": "style_past_history",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/과거력",
+        "csv_column": "의무기록내용/과거력"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "family_history",
+      "label": "가족력",
+      "semantic_path": [
+        "의무기록내용",
+        "가족력"
+      ],
+      "bbox_label_id": "det_000042",
+      "source_detection_id": "det_000042",
+      "source_text": "특이사항 없음.",
+      "value_type": "free_text.short",
+      "generator": "choice:특이사항 없음.|부친 고혈압 병력 있음.|모친 당뇨 병력 있음.|가족력 확인되지 않음.",
+      "style_class": "style_family_history",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/가족력",
+        "csv_column": "의무기록내용/가족력"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "physical_exam",
+      "label": "진찰소견",
+      "semantic_path": [
+        "의무기록내용",
+        "진찰소견"
+      ],
+      "bbox_label_id": "det_000044",
+      "source_detection_id": "det_000044",
+      "source_text": "오른쪽 무릎 관절 부종(+), 압통(+), 운동범위 제한(+). 맥머레이 검사 시 통증(+).",
+      "value_type": "free_text.short",
+      "generator": "pool:physical_exam_texts",
+      "style_class": "style_physical_exam",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/진찰소견",
+        "csv_column": "의무기록내용/진찰소견"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "test1_name",
+      "label": "검사명 1",
+      "semantic_path": [
+        "의무기록내용",
+        "검사소견",
+        "검사1",
+        "검사명"
+      ],
+      "bbox_label_id": "det_000049",
+      "source_detection_id": "det_000049",
+      "source_text": "X-ray (Rt. Knee)",
+      "value_type": "free_text.short",
+      "generator": "choice:X-ray (Rt. Knee)|X-ray (Lt. Ankle)|Chest PA|Abdomen US",
+      "style_class": "style_test1_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/검사소견/검사1/검사명",
+        "csv_column": "의무기록내용/검사소견/검사1/검사명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "test1_result",
+      "label": "검사결과 1",
+      "semantic_path": [
+        "의무기록내용",
+        "검사소견",
+        "검사1",
+        "결과"
+      ],
+      "bbox_label_id": "det_000050",
+      "source_detection_id": "det_000050",
+      "source_text": "골절 및 탈구 소건 없음",
+      "value_type": "free_text.short",
+      "generator": "pool:test_result_texts",
+      "style_class": "style_test1_result",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/검사소견/검사1/결과",
+        "csv_column": "의무기록내용/검사소견/검사1/결과"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "test1_reference",
+      "label": "참고치 1",
+      "semantic_path": [
+        "의무기록내용",
+        "검사소견",
+        "검사1",
+        "참고치"
+      ],
+      "bbox_label_id": "det_000051",
+      "source_detection_id": "det_000051",
+      "source_text": "-",
+      "value_type": "free_text.short",
+      "generator": "choice:-|정상범위 내|추적관찰",
+      "style_class": "style_test1_reference",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/검사소견/검사1/참고치",
+        "csv_column": "의무기록내용/검사소견/검사1/참고치"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "test2_name",
+      "label": "검사명 2",
+      "semantic_path": [
+        "의무기록내용",
+        "검사소견",
+        "검사2",
+        "검사명"
+      ],
+      "bbox_label_id": "det_000052",
+      "source_detection_id": "det_000052",
+      "source_text": "MRI (Rt. Knee)",
+      "value_type": "free_text.short",
+      "generator": "choice:MRI (Rt. Knee)|MRI (L-spine)|CT (Brain)|혈액검사",
+      "style_class": "style_test2_name",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/검사소견/검사2/검사명",
+        "csv_column": "의무기록내용/검사소견/검사2/검사명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "test2_result",
+      "label": "검사결과 2",
+      "semantic_path": [
+        "의무기록내용",
+        "검사소견",
+        "검사2",
+        "결과"
+      ],
+      "bbox_label_id": "det_000053",
+      "source_detection_id": "det_000053",
+      "source_text": "내측 반월상연골 후각부 열상의심 소견",
+      "value_type": "free_text.short",
+      "generator": "pool:test_result_texts",
+      "style_class": "style_test2_result",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/검사소견/검사2/결과",
+        "csv_column": "의무기록내용/검사소견/검사2/결과"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "test2_reference",
+      "label": "참고치 2",
+      "semantic_path": [
+        "의무기록내용",
+        "검사소견",
+        "검사2",
+        "참고치"
+      ],
+      "bbox_label_id": "det_000054",
+      "source_detection_id": "det_000054",
+      "source_text": "-",
+      "value_type": "free_text.short",
+      "generator": "choice:-|정상범위 내|판독소견 참조",
+      "style_class": "style_test2_reference",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/검사소견/검사2/참고치",
+        "csv_column": "의무기록내용/검사소견/검사2/참고치"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "diagnosis_code",
+      "label": "질병분류코드",
+      "semantic_path": [
+        "의무기록내용",
+        "진단명",
+        "질병분류코드"
+      ],
+      "bbox_label_id": "det_000056",
+      "source_detection_id": "det_000056",
+      "source_text": "S83.2",
+      "value_type": "free_text.short",
+      "generator": "pattern:A##.#",
+      "style_class": "style_diagnosis_code",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/진단명/질병분류코드",
+        "csv_column": "의무기록내용/진단명/질병분류코드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "diagnosis_name",
+      "label": "진단명",
+      "semantic_path": [
+        "의무기록내용",
+        "진단명",
+        "진단명"
+      ],
+      "bbox_label_id": "det_000057",
+      "source_detection_id": "det_000057",
+      "source_text": "오른쪽 무릎 내측 반월상연골 손상(의심)",
+      "value_type": "free_text.short",
+      "generator": "pool:diagnosis_names",
+      "style_class": "style_diagnosis_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/진단명/진단명",
+        "csv_column": "의무기록내용/진단명/진단명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "treatment_1",
+      "label": "치료내용 1",
+      "semantic_path": [
+        "의무기록내용",
+        "치료내용",
+        "치료1"
+      ],
+      "bbox_label_id": "det_000059",
+      "source_detection_id": "det_000059",
+      "source_text": "1.약물치료: 소염진통제처방(에페린정50mg, 1일2회)",
+      "value_type": "free_text.short",
+      "generator": "pool:treatment_line_1",
+      "style_class": "style_treatment_1",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/치료내용/치료1",
+        "csv_column": "의무기록내용/치료내용/치료1"
+      },
+      "required": true,
+      "notes": "사용자 지시에 따라 번호 1을 포함한 독립 라인으로 생성",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "treatment_2",
+      "label": "치료내용 2",
+      "semantic_path": [
+        "의무기록내용",
+        "치료내용",
+        "치료2"
+      ],
+      "bbox_label_id": "det_000060",
+      "source_detection_id": "det_000060",
+      "source_text": "2.보조기 착용 및 무릎 안정",
+      "value_type": "free_text.short",
+      "generator": "pool:treatment_line_2",
+      "style_class": "style_treatment_2",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/치료내용/치료2",
+        "csv_column": "의무기록내용/치료내용/치료2"
+      },
+      "required": true,
+      "notes": "사용자 지시에 따라 번호 2를 포함한 독립 라인으로 생성",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "treatment_3",
+      "label": "치료내용 3",
+      "semantic_path": [
+        "의무기록내용",
+        "치료내용",
+        "치료3"
+      ],
+      "bbox_label_id": "det_000061",
+      "source_detection_id": "det_000061",
+      "source_text": "3.2주후 외래 경과관찰",
+      "value_type": "free_text.short",
+      "generator": "pool:treatment_line_3",
+      "style_class": "style_treatment_3",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/치료내용/치료3",
+        "csv_column": "의무기록내용/치료내용/치료3"
+      },
+      "required": true,
+      "notes": "사용자 지시에 따라 번호 3을 포함한 독립 라인으로 생성",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "plan",
+      "label": "향후계획",
+      "semantic_path": [
+        "의무기록내용",
+        "향후계획"
+      ],
+      "bbox_label_id": "det_000063",
+      "source_detection_id": "det_000063",
+      "source_text": "2주 후 재진 예약. 통증 악화 시 조기 내원 권고",
+      "value_type": "free_text.short",
+      "generator": "pool:plan_texts",
+      "style_class": "style_plan",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/향후계획",
+        "csv_column": "의무기록내용/향후계획"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "remarks",
+      "label": "비고",
+      "semantic_path": [
+        "의무기록내용",
+        "비고"
+      ],
+      "bbox_label_id": "det_000065",
+      "source_detection_id": "det_000065",
+      "source_text": "-",
+      "value_type": "free_text.short",
+      "generator": "choice:-|특이사항 없음.|추가 제출 서류 없음.",
+      "style_class": "style_remarks",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "의무기록내용/비고",
+        "csv_column": "의무기록내용/비고"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issue_year",
+      "label": "발급일 연",
+      "semantic_path": [
+        "발급정보",
+        "발급일",
+        "연"
+      ],
+      "bbox_label_id": "det_000067",
+      "source_detection_id": "det_000067",
+      "source_text": "2025",
+      "value_type": "date.year",
+      "generator": "date.year",
+      "style_class": "style_issue_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발급정보/발급일/연",
+        "csv_column": "발급정보/발급일/연"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issue_month",
+      "label": "발급일 월",
+      "semantic_path": [
+        "발급정보",
+        "발급일",
+        "월"
+      ],
+      "bbox_label_id": "manual_1783574337078",
+      "source_detection_id": "manual_1783574337078",
+      "source_text": "06",
+      "value_type": "date.month",
+      "generator": "date.month",
+      "style_class": "style_issue_month",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발급정보/발급일/월",
+        "csv_column": "발급정보/발급일/월"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "issue_day",
+      "label": "발급일 일",
+      "semantic_path": [
+        "발급정보",
+        "발급일",
+        "일"
+      ],
+      "bbox_label_id": "manual_1783574342528",
+      "source_detection_id": "manual_1783574342528",
+      "source_text": "02",
+      "value_type": "date.day",
+      "generator": "date.day",
+      "style_class": "style_issue_day",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발급정보/발급일/일",
+        "csv_column": "발급정보/발급일/일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "institution_address",
+      "label": "발급기관 주소",
+      "semantic_path": [
+        "발급기관",
+        "주소"
+      ],
+      "bbox_label_id": "det_000072",
+      "source_detection_id": "det_000072",
+      "source_text": "서울특별시 강남구 테해란로 456(역삼동)",
+      "value_type": "address.ko",
+      "generator": "address.ko",
+      "style_class": "style_institution_address",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발급기관/주소",
+        "csv_column": "발급기관/주소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "institution_phone",
+      "label": "발급기관 전화",
+      "semantic_path": [
+        "발급기관",
+        "전화"
+      ],
+      "bbox_label_id": "manual_1783574405161",
+      "source_detection_id": "manual_1783574405161",
+      "source_text": "02-123-4567",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
+      "style_class": "style_institution_phone",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발급기관/전화",
+        "csv_column": "발급기관/전화"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "institution_fax",
+      "label": "발급기관 팩스",
+      "semantic_path": [
+        "발급기관",
+        "팩스"
+      ],
+      "bbox_label_id": "manual_1783574410060",
+      "source_detection_id": "manual_1783574410060",
+      "source_text": "02-123–4568",
+      "value_type": "free_text.short",
+      "generator": "pattern:##-###-####",
+      "style_class": "style_institution_fax",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "발급기관/팩스",
+        "csv_column": "발급기관/팩스"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    }
+  ],
+  "groups": [],
+  "updated_at": "2026-07-09T08:44:23.245066+00:00",
+  "handwriting": {
+    "qr_bbox": [
+      123,
+      1271,
+      82,
+      82
+    ],
+    "default_sample_count": 1
+  }
+}

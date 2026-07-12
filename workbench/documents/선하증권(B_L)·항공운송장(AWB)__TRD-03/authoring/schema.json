@@ -1,0 +1,1174 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-09T07:42:07.853839+00:00",
+  "doc_id": "TRD-03",
+  "title": "선하증권(B/L)·항공운송장(AWB)",
+  "source_review": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/review/original_선하증권_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/inpaint/original_선하증권_page_001/lama/inpainted_lama.png",
+  "image": {
+    "width": 1190,
+    "height": 1684
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_applied_reviews/20260709T073040709699Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260709T073040709699Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "선하증권": {
+      "문서정보": {
+        "선하증권번호": "",
+        "원본발행부수": ""
+      },
+      "당사자": {
+        "송하인": {
+          "상호": "",
+          "주소": ""
+        },
+        "수하인": {
+          "상호": "",
+          "주소": "",
+          "전화": ""
+        },
+        "통지처": {
+          "내용": ""
+        }
+      },
+      "운송정보": {
+        "선박항차": "",
+        "선적항": "",
+        "양륙항": "",
+        "최종목적지": "",
+        "운임지급지": "",
+        "수령지": "",
+        "인도지": ""
+      },
+      "화물정보": {
+        "화인번호": "",
+        "포장수량종류": "",
+        "화물설명": "",
+        "총중량": "",
+        "용적": "",
+        "총포장수문자": "",
+        "초과가액신고": "",
+        "비고": ""
+      },
+      "컨테이너": {
+        "컨테이너번호": "",
+        "봉인번호": "",
+        "유형": "",
+        "중량": "",
+        "용적": "",
+        "포장수": "",
+        "운송모드": ""
+      },
+      "거래조건": {
+        "인코텀즈": "",
+        "선하증권제출처": ""
+      },
+      "운임": {
+        "운임세부조건": ""
+      },
+      "발행정보": {
+        "발행장소": "",
+        "발행일": ""
+      }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "shipper_name",
+      "label": "송하인명",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "송하인",
+        "상호"
+      ],
+      "bbox_label_id": "det_000004",
+      "source_detection_id": "det_000004",
+      "source_text": "DEMO-SHIPPER ENGG COMPANY",
+      "value_type": "free_text.short",
+      "generator": "pool:trading_company_names",
+      "style_class": "style_shipper_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/송하인/상호",
+        "csv_column": "송하인명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "shipper_address",
+      "label": "송하인 주소",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "송하인",
+        "주소"
+      ],
+      "bbox_label_id": "manual_1783580879857",
+      "source_detection_id": "manual_1783580879857",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool:global_addresses",
+      "style_class": "style_shipper_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/송하인/주소",
+        "csv_column": "송하인 주소"
+      },
+      "required": true,
+      "notes": "송하인 주소 상세 영역. 값 bbox 내부에 정적 라벨 없음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "bl_number",
+      "label": "선하증권 번호",
+      "semantic_path": [
+        "선하증권",
+        "문서정보",
+        "선하증권번호"
+      ],
+      "bbox_label_id": "det_000005",
+      "source_detection_id": "det_000005",
+      "source_text": "NSAJED85630124277",
+      "value_type": "free_text.short",
+      "generator": "pattern:AAA**************",
+      "style_class": "style_bl_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/문서정보/선하증권번호",
+        "csv_column": "선하증권 번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "consignee_name",
+      "label": "수하인명",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "수하인",
+        "상호"
+      ],
+      "bbox_label_id": "det_000010",
+      "source_detection_id": "det_000010",
+      "source_text": "DEMO STEEL FACTORY CO. LTD.",
+      "value_type": "free_text.short",
+      "generator": "pool:trading_company_names",
+      "style_class": "style_consignee_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/수하인/상호",
+        "csv_column": "수하인명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "consignee_address",
+      "label": "수하인 주소",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "수하인",
+        "주소"
+      ],
+      "bbox_label_id": "det_000011",
+      "source_detection_id": "det_000011",
+      "source_text": "P.O BOX 11700, 8100 UNIT NO 2 JEDDAH SAUDI ARABIA SAUDI ARABIA21463",
+      "value_type": "free_text.short",
+      "generator": "pool:global_addresses",
+      "style_class": "style_consignee_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/수하인/주소",
+        "csv_column": "수하인 주소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "consignee_tel",
+      "label": "수하인 전화",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "수하인",
+        "전화"
+      ],
+      "bbox_label_id": "manual_1783580846324",
+      "source_detection_id": "manual_1783580846324",
+      "source_text": "+966",
+      "value_type": "free_text.short",
+      "generator": "pool:international_phone_short",
+      "style_class": "style_consignee_tel",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/수하인/전화",
+        "csv_column": "수하인 전화"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "notify_party",
+      "label": "통지처",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "통지처",
+        "내용"
+      ],
+      "bbox_label_id": "manual_1783580887356",
+      "source_detection_id": "manual_1783580887356",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool:notify_parties",
+      "style_class": "style_notify_party",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/통지처/내용",
+        "csv_column": "통지처"
+      },
+      "required": true,
+      "notes": "Notify Party 박스의 수동 활성 영역. 실제 B/L 관행상 수하인 또는 별도 통지처 상호/주소가 들어간다.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "vessel_voyage",
+      "label": "선박 및 항차",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "선박항차"
+      ],
+      "bbox_label_id": "det_000028",
+      "source_detection_id": "det_000028",
+      "source_text": "CAP SAN JUAN/310W",
+      "value_type": "free_text.short",
+      "generator": "pool:vessel_voyage",
+      "style_class": "style_vessel_voyage",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/선박항차",
+        "csv_column": "선박 및 항차"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "port_of_loading",
+      "label": "선적항",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "선적항"
+      ],
+      "bbox_label_id": "det_000029",
+      "source_detection_id": "det_000029",
+      "source_text": "NHAVA SHEVA, INDIA",
+      "value_type": "free_text.short",
+      "generator": "pool:ports",
+      "style_class": "style_port_of_loading",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/선적항",
+        "csv_column": "선적항"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "port_of_discharge",
+      "label": "양륙항",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "양륙항"
+      ],
+      "bbox_label_id": "det_000034",
+      "source_detection_id": "det_000034",
+      "source_text": "JEDDAH, SAUDI ARABIA",
+      "value_type": "free_text.short",
+      "generator": "pool:ports",
+      "style_class": "style_port_of_discharge",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/양륙항",
+        "csv_column": "양륙항"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "destination_on_carriage",
+      "label": "최종 목적지",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "최종목적지"
+      ],
+      "bbox_label_id": "det_000035",
+      "source_detection_id": "det_000035",
+      "source_text": "JEDDAH SAUDI ARABIA",
+      "value_type": "free_text.short",
+      "generator": "pool:ports",
+      "style_class": "style_destination_on_carriage",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/최종목적지",
+        "csv_column": "최종 목적지"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "freight_payable_at",
+      "label": "운임 지급지",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "운임지급지"
+      ],
+      "bbox_label_id": "det_000036",
+      "source_detection_id": "det_000036",
+      "source_text": "JEDDAH",
+      "value_type": "free_text.short",
+      "generator": "pool:ports",
+      "style_class": "style_freight_payable_at",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/운임지급지",
+        "csv_column": "운임 지급지"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "number_of_originals",
+      "label": "원본 발행 부수",
+      "semantic_path": [
+        "선하증권",
+        "문서정보",
+        "원본발행부수"
+      ],
+      "bbox_label_id": "det_000037",
+      "source_detection_id": "det_000037",
+      "source_text": "3(THREE)",
+      "value_type": "free_text.short",
+      "generator": "choice:3(THREE)|2(TWO)|1(ONE)",
+      "style_class": "style_number_of_originals",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/문서정보/원본발행부수",
+        "csv_column": "원본 발행 부수"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "excess_value_declaration",
+      "label": "초과가액신고",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "초과가액신고"
+      ],
+      "bbox_label_id": "manual_1783582955481",
+      "source_detection_id": "manual_1783582955481",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool:excess_value_declarations",
+      "style_class": "style_excess_value_declaration",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/초과가액신고",
+        "csv_column": "초과가액신고"
+      },
+      "required": true,
+      "notes": "Excess Value Declaration 값 영역. 상업 B/L에서는 공란, N.V.D. 또는 신고가액이 올 수 있으나 활성 bbox이므로 표시값을 생성.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "marks_and_numbers",
+      "label": "화인 및 번호",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "화인번호"
+      ],
+      "bbox_label_id": "manual_1783580998106",
+      "source_detection_id": "manual_1783580998106",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool:marks_numbers",
+      "style_class": "style_marks_and_numbers",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/화인번호",
+        "csv_column": "화인 및 번호"
+      },
+      "required": true,
+      "notes": "Marks and Numbers 칸. 선적 마크, PO/LOT 번호, 목적지 표시를 다중 행으로 생성.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "package_description",
+      "label": "포장 수량 및 종류",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "포장수량종류"
+      ],
+      "bbox_label_id": "det_000042",
+      "source_detection_id": "det_000042",
+      "source_text": "3 PACKAGES",
+      "value_type": "free_text.short",
+      "generator": "pool:package_descriptions",
+      "style_class": "style_package_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/포장수량종류",
+        "csv_column": "포장 수량 및 종류"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "goods_description",
+      "label": "화물 설명",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "화물설명"
+      ],
+      "bbox_label_id": "det_000044",
+      "source_detection_id": "det_000044",
+      "source_text": "GENERAL CARGO",
+      "value_type": "free_text.short",
+      "generator": "pool:goods_descriptions",
+      "style_class": "style_goods_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/화물설명",
+        "csv_column": "화물 설명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "gross_weight",
+      "label": "총중량",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "총중량"
+      ],
+      "bbox_label_id": "det_000043",
+      "source_detection_id": "det_000043",
+      "source_text": "22,700.000 KGS",
+      "value_type": "free_text.short",
+      "generator": "pool:weights_kgs",
+      "style_class": "style_gross_weight",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/총중량",
+        "csv_column": "총중량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "measurement_m3",
+      "label": "용적",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "용적"
+      ],
+      "bbox_label_id": "manual_1783580989557",
+      "source_detection_id": "manual_1783580989557",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool:measurements_m3",
+      "style_class": "style_measurement_m3",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/용적",
+        "csv_column": "용적"
+      },
+      "required": true,
+      "notes": "용적 값 영역. 단위 M3는 열 라벨에 있으나 원본 값 관행상 숫자와 M3를 함께 표시할 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "container_number",
+      "label": "컨테이너 번호",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "컨테이너번호"
+      ],
+      "bbox_label_id": "det_000052",
+      "source_detection_id": "det_000052",
+      "source_text": "TTNU0712894",
+      "value_type": "free_text.short",
+      "generator": "pattern:AAAA#######",
+      "style_class": "style_container_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/컨테이너번호",
+        "csv_column": "컨테이너 번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "seal_number",
+      "label": "봉인번호",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "봉인번호"
+      ],
+      "bbox_label_id": "manual_1783581006873",
+      "source_detection_id": "manual_1783581006873",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pattern:AA#######",
+      "style_class": "style_seal_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/봉인번호",
+        "csv_column": "봉인번호"
+      },
+      "required": true,
+      "notes": "봉인번호 값 영역. 값 bbox 내부에 정적 라벨 없음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "container_type",
+      "label": "컨테이너 유형",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "유형"
+      ],
+      "bbox_label_id": "det_000053",
+      "source_detection_id": "det_000053",
+      "source_text": "40' FLAT",
+      "value_type": "free_text.short",
+      "generator": "pool:container_types",
+      "style_class": "style_container_type",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/유형",
+        "csv_column": "컨테이너 유형"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "container_weight",
+      "label": "컨테이너 중량",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "중량"
+      ],
+      "bbox_label_id": "det_000054",
+      "source_detection_id": "det_000054",
+      "source_text": "22,700.000 KGS",
+      "value_type": "free_text.short",
+      "generator": "pool:weights_kgs",
+      "style_class": "style_container_weight",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/중량",
+        "csv_column": "컨테이너 중량"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "container_volume",
+      "label": "컨테이너 용적",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "용적"
+      ],
+      "bbox_label_id": "manual_1783581010773",
+      "source_detection_id": "manual_1783581010773",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool:measurements_m3",
+      "style_class": "style_container_volume",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/용적",
+        "csv_column": "컨테이너 용적"
+      },
+      "required": true,
+      "notes": "컨테이너 용적 값 영역.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "container_packages",
+      "label": "컨테이너 포장수",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "포장수"
+      ],
+      "bbox_label_id": "det_000055",
+      "source_detection_id": "det_000055",
+      "source_text": "3",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "style_container_packages",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/포장수",
+        "csv_column": "컨테이너 포장수"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "container_mode",
+      "label": "컨테이너 모드",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "운송모드"
+      ],
+      "bbox_label_id": "det_000056",
+      "source_detection_id": "det_000056",
+      "source_text": "FCL",
+      "value_type": "free_text.short",
+      "generator": "choice:FCL|LCL",
+      "style_class": "style_container_mode",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/운송모드",
+        "csv_column": "컨테이너 모드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "incoterm",
+      "label": "인코텀즈",
+      "semantic_path": [
+        "선하증권",
+        "거래조건",
+        "인코텀즈"
+      ],
+      "bbox_label_id": "det_000058",
+      "source_detection_id": "det_000058",
+      "source_text": "FOB",
+      "value_type": "free_text.short",
+      "generator": "choice:FOB|CIF|CFR|EXW|DAP",
+      "style_class": "style_incoterm",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/거래조건/인코텀즈",
+        "csv_column": "인코텀즈"
+      },
+      "required": true,
+      "notes": "INCO TERM 오른쪽 값 FOB. 실제 값이므로 keep에서 use로 보정.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "surrender_to",
+      "label": "선하증권제출처",
+      "semantic_path": [
+        "선하증권",
+        "거래조건",
+        "선하증권제출처"
+      ],
+      "bbox_label_id": "manual_1783583273356",
+      "source_detection_id": "manual_1783583273356",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool:surrender_to_parties",
+      "style_class": "style_surrender_to",
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/거래조건/선하증권제출처",
+        "csv_column": "선하증권제출처"
+      },
+      "required": true,
+      "notes": "Bill of Lading must be surrendered to: 아래 수동 활성 영역. 은행/수하인/운송사 지점 등 제출처를 생성.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "freight_details",
+      "label": "운임 세부 조건",
+      "semantic_path": [
+        "선하증권",
+        "운임",
+        "운임세부조건"
+      ],
+      "bbox_label_id": "det_000063",
+      "source_detection_id": "det_000063",
+      "source_text": "FREIGHT COLLECT",
+      "value_type": "free_text.short",
+      "generator": "choice:FREIGHT COLLECT|FREIGHT PREPAID|AS ARRANGED",
+      "style_class": "style_freight_details",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운임/운임세부조건",
+        "csv_column": "운임 세부 조건"
+      },
+      "required": true,
+      "notes": "Freight Details, Charges, etc 아래 값.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "place_of_issue",
+      "label": "발행장소",
+      "semantic_path": [
+        "선하증권",
+        "발행정보",
+        "발행장소"
+      ],
+      "bbox_label_id": "det_000065",
+      "source_detection_id": "det_000065",
+      "source_text": "MUMBAI",
+      "value_type": "free_text.short",
+      "generator": "pool:issue_places",
+      "style_class": "style_place_of_issue",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/발행정보/발행장소",
+        "csv_column": "발행장소"
+      },
+      "required": true,
+      "notes": "Place and Date of Issue 중 장소 값.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "date_of_issue",
+      "label": "발행일",
+      "semantic_path": [
+        "선하증권",
+        "발행정보",
+        "발행일"
+      ],
+      "bbox_label_id": "det_000066",
+      "source_detection_id": "det_000066",
+      "source_text": "17-MAY-23",
+      "value_type": "free_text.short",
+      "generator": "pool:date_dd_mmm_yy",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/발행정보/발행일",
+        "csv_column": "발행일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "place_of_receipt",
+      "label": "수령지",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "수령지"
+      ],
+      "bbox_label_id": "det_000070",
+      "source_detection_id": "det_000070",
+      "source_text": "NHAVA SHEVA, INDIA",
+      "value_type": "free_text.short",
+      "generator": "pool:ports",
+      "style_class": "style_place_of_receipt",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/수령지",
+        "csv_column": "수령지"
+      },
+      "required": true,
+      "notes": "Place of Receipt 값.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "place_of_delivery",
+      "label": "인도지",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "인도지"
+      ],
+      "bbox_label_id": "det_000071",
+      "source_detection_id": "det_000071",
+      "source_text": "JEDDAH, SAUDI ARABIA",
+      "value_type": "free_text.short",
+      "generator": "pool:ports",
+      "style_class": "style_place_of_delivery",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/인도지",
+        "csv_column": "인도지"
+      },
+      "required": true,
+      "notes": "Place of Delivery 값.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "total_packages_words",
+      "label": "총 포장수 문자",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "총포장수문자"
+      ],
+      "bbox_label_id": "det_000074",
+      "source_detection_id": "det_000074",
+      "source_text": "ONE CONTAINER",
+      "value_type": "free_text.short",
+      "generator": "choice:ONE CONTAINER|TWO CONTAINERS|THREE PACKAGES|FIVE CARTONS|TWELVE PALLETS",
+      "style_class": "style_total_packages_words",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/총포장수문자",
+        "csv_column": "총 포장수 문자"
+      },
+      "required": true,
+      "notes": "Total No. of Packages (in words) 값.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "cargo_note",
+      "label": "화물 비고",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "비고"
+      ],
+      "bbox_label_id": "manual_1783583287923",
+      "source_detection_id": "manual_1783583287923",
+      "source_text": "",
+      "value_type": "free_text.short",
+      "generator": "pool:cargo_notes",
+      "style_class": "style_cargo_note",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/비고",
+        "csv_column": "화물 비고"
+      },
+      "required": true,
+      "notes": "Note: 아래 수동 활성 영역. 화물 책임/상태 관련 짧은 비고를 생성.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    }
+  ],
+  "groups": [],
+  "updated_at": "2026-07-09T08:43:23.499281+00:00"
+}

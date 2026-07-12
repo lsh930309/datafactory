@@ -47,6 +47,7 @@ def export_final_results(
     seed: int = 20260703,
     render_scale: int = 2,
     clean: bool = True,
+    render_handwriting_as_printed: bool = False,
     scope_entries: Any | None = None,
     registry: RegistryData | None = None,
     root: Path = WORKBENCH_ROOT,
@@ -93,8 +94,13 @@ def export_final_results(
             "message": "",
         }
         try:
-            mode = _resolve_output_mode(item)
+            mode = _resolve_output_mode(
+                item,
+                render_handwriting_as_printed=render_handwriting_as_printed,
+                prefer_cleanroom=assessment.get("feasibility") == "impossible",
+            )
             row["outputMode"] = mode
+            row["temporaryPrintedHandwriting"] = bool(render_handwriting_as_printed and _is_handwriting_item(item) and mode == "pipeline")
             if mode == "pipeline":
                 if doc_id not in rendered_cache:
                     rendered_cache[doc_id] = _render_pipeline_document(
@@ -162,6 +168,7 @@ def export_final_results(
         "out_dir": _display_path(out_dir),
         "backup_dir": _display_path(backup_dir) if backup_dir else "",
         "manifest": _display_path(manifest_path),
+        "render_handwriting_as_printed": bool(render_handwriting_as_printed),
         "summary": summary,
         "documents": rows,
         "errors": errors,
@@ -252,13 +259,32 @@ def _assessment_rows_by_key(*, registry: RegistryData, root: Path) -> dict[str, 
     return {str(row.get("key")): row for row in payload.get("rows", []) if isinstance(row, dict)}
 
 
-def _resolve_output_mode(item: dict[str, Any]) -> str:
+def _is_handwriting_item(item: dict[str, Any]) -> bool:
     writing_method = str((item.get("registry") or {}).get("writingMethod") or item.get("writingMethod") or "").strip()
-    if writing_method == "수기":
+    return writing_method == "수기"
+
+
+def _has_authoring_bundle(item: dict[str, Any]) -> bool:
+    return bool(item.get("latestAuthoringSchema") and item.get("latestAuthoringStylesheet") and item.get("latestAuthoringFakerProfile"))
+
+
+def _resolve_output_mode(item: dict[str, Any], *, render_handwriting_as_printed: bool = False, prefer_cleanroom: bool = False) -> str:
+    if prefer_cleanroom and item.get("latestCleanroomPdf"):
+        return "cleanroom"
+    if _is_handwriting_item(item):
+        # Temporary printed-mode export for handwriting documents: use the normal
+        # authoring renderer only. Handwriting QR bbox metadata lives under
+        # schema.handwriting and is intentionally not rendered in this path.
+        if render_handwriting_as_printed and _has_authoring_bundle(item):
+            return "pipeline"
         if latest_accepted_handwriting_samples(item):
             return "handwriting"
+        if item.get("latestCleanroomPdf"):
+            return "cleanroom"
+        if render_handwriting_as_printed:
+            raise ValueError("no authoring bundle found for temporary printed handwriting export")
         raise ValueError("no accepted handwriting scans found; create a handwriting print pack and run scan intake first")
-    if item.get("latestAuthoringSchema") and item.get("latestAuthoringStylesheet") and item.get("latestAuthoringFakerProfile"):
+    if _has_authoring_bundle(item):
         return "pipeline"
     if item.get("latestCleanroomPdf"):
         return "cleanroom"

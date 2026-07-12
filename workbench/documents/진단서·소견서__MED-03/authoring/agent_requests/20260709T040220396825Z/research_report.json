@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-03",
+  "title": "진단서·소견서",
+  "search_date": "2026-07-09",
+  "queries": [
+    {
+      "id": "Q1",
+      "query": "의료법 시행규칙 별지 제5호의2서식 진단서 작성방법 진단서 PDF",
+      "method": "live web search"
+    },
+    {
+      "id": "Q2",
+      "query": "국가법령정보센터 의료법 시행규칙 별지 제5호의2서식 진단서",
+      "method": "live web search plus official law.go.kr direct lookup"
+    },
+    {
+      "id": "Q3",
+      "query": "진단서 소견서 기재사항 의료법 제17조 진단서 질병분류기호",
+      "method": "live web search plus official law.go.kr direct lookup"
+    }
+  ],
+  "sources": [
+    {
+      "id": "R1",
+      "url": "local:workbench/documents/진단서·소견서__MED-03/samples/original/진단서_page_001.jpg",
+      "source_type": "primary_template_image",
+      "summary": "전체 템플릿 이미지에서 모든 필드 라벨, 값 칸, 체크박스, 정적 prefix/suffix(년/월/일, 일부터, 전화번호 괄호, 면허번호 제/호)를 확인했다. 이 이미지가 field target의 최상위 근거다."
+    },
+    {
+      "id": "R2",
+      "url": "https://www.law.go.kr/법령/의료법/제17조",
+      "source_type": "official_law_direct_lookup",
+      "summary": "의료법 제17조는 직접 진찰하거나 검안한 의사·치과의사·한의사가 진단서 등을 작성·교부하는 원칙과 진단서 서식·기재사항을 보건복지부령으로 정한다는 근거를 둔다."
+    },
+    {
+      "id": "R3",
+      "url": "https://www.law.go.kr/법령/의료법시행규칙/제9조",
+      "source_type": "official_law_direct_lookup",
+      "summary": "의료법 시행규칙 제9조는 진단서가 별지 제5호의2서식에 따라 환자 인적사항, 병명 및 질병분류기호, 발병·진단 연월일, 치료 내용 및 향후 치료 소견, 입원·퇴원 연월일, 의료기관 및 의료인 정보를 적고 서명날인하도록 규정한다."
+    },
+    {
+      "id": "R4",
+      "url": "https://www.law.go.kr/LSW//lsSideInfoP.do?lsiSeq=286963&joNo=0009&joBrNo=00&docCls=jo&urlMode=lsScJoRltInfoR",
+      "source_type": "official_law_html_detail",
+      "summary": "공식 법령 상세 HTML에서 제9조의 항목 목록과 한국표준질병·사인 분류에 따른 병명 기재 규정을 확인했다."
+    },
+    {
+      "id": "R5",
+      "url": "https://www.law.go.kr/LSW//lsSideInfoP.do?lsiSeq=285327&joNo=0017&joBrNo=00&docCls=jo&urlMode=lsScJoRltInfoR",
+      "source_type": "official_law_html_detail",
+      "summary": "공식 법령 상세 HTML에서 제17조 진단서 등의 직접 진찰/검안 및 교부 원칙을 확인했다."
+    }
+  ],
+  "field_evidence": {
+    "registration_number": [
+      "R1"
+    ],
+    "serial_number": [
+      "R1"
+    ],
+    "patient_name": [
+      "R1"
+    ],
+    "patient_rrn": [
+      "R1"
+    ],
+    "patient_address": [
+      "R1"
+    ],
+    "patient_phone": [
+      "R1"
+    ],
+    "primary_diagnosis_name": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "secondary_diagnosis_name": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "primary_diagnosis_code": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "secondary_diagnosis_code": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "diagnosis_basis_clinical_estimate": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "diagnosis_basis_final": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "onset_year": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "onset_month": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "onset_day": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "diagnosis_year": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "diagnosis_month": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "diagnosis_day": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "treatment_opinion": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "admission_year": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "admission_month": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "admission_day": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "discharge_year": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "discharge_month": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "discharge_day": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "purpose": [
+      "R1"
+    ],
+    "remarks": [
+      "R1"
+    ],
+    "issue_year": [
+      "R1"
+    ],
+    "issue_month": [
+      "R1"
+    ],
+    "issue_day": [
+      "R1"
+    ],
+    "medical_institution_name": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "medical_institution_address": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "doctor_license_qualification_doctor": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "doctor_license_qualification_dentist": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "doctor_license_qualification_korean_medicine": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "doctor_license_number": [
+      "R1",
+      "R3",
+      "R4"
+    ],
+    "doctor_name": [
+      "R1",
+      "R3",
+      "R4"
+    ]
+  },
+  "conclusions": [
+    "템플릿 상단의 의료법 시행규칙 별지 제5호의2서식 진단서 형식과 공식 시행규칙 제9조의 기재사항이 일치한다.",
+    "웹/법령 근거는 필드 의미와 faker 범위의 보조 근거로만 사용하고, 템플릿에 보이지 않는 항목은 추가하지 않았다.",
+    "질병명과 질병분류기호는 별도 field로 두되 pick_record constraint로 같은 합성 진단 레코드에서 선택되도록 했다."
+  ]
+}

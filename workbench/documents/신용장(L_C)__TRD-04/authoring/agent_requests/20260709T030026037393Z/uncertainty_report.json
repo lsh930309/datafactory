@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-04",
+  "title": "신용장(L/C)",
+  "unresolved_fields": [
+    {
+      "field_id": "amount_in_words",
+      "issue": "numeric amount와 영문 금액 문구를 자동 일치시키는 지원 rule/constraint가 없음",
+      "current_handling": "pool:amount_words 사용",
+      "decision_needed": "렌더러에 amount-to-words 변환 또는 record pool 동기화가 필요한지 결정"
+    },
+    {
+      "field_id": "reference_contract_date",
+      "issue": "영문 DD MON YYYY 날짜 formatter가 지원 grammar에 없음",
+      "current_handling": "pool:english_date를 template 안에서 사용",
+      "decision_needed": "영문 날짜 전용 generator 지원 여부"
+    },
+    {
+      "field_id": "sales_contract_reference",
+      "issue": "계약번호와 계약일을 별도 semantic leaf로 엄밀히 분리하지 않고 표시 문자열로 유지",
+      "current_handling": "visible value anchor에 맞춘 template 사용",
+      "decision_needed": "다운스트림에서 계약번호/일자를 별도 추출해야 하는지"
+    },
+    {
+      "field_id": "drafts_at",
+      "issue": "샘플 OCR에 100이 1OO로 읽힌 부분이 있음",
+      "current_handling": "시각 확인 기준으로 100%로 정규화한 선택값 사용",
+      "decision_needed": "OCR 원문 보존 여부"
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "anchor_id": "det_000091",
+      "text": "GLOBAL FIRST BANK",
+      "issue": "review status는 use이나 전체 이미지상 하단 푸터/서명 은행명으로 보임",
+      "resolution": "schema field에서 제외하고 unmapped_use_anchors에 기록"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "credit_amount",
+      "rule": "pool:amount_values",
+      "reason": "USD 금액 표기이지만 지원 grammar에는 currency별 amount formatter가 없어 scalar pool로 근사"
+    },
+    {
+      "field_id": "maximum_credit_amount",
+      "rule": "same_as:credit_amount",
+      "reason": "샘플에서는 동일하지만 실제 L/C에서는 maximum amount가 다른 정책일 수 있음"
+    },
+    {
+      "field_id": "documentary_credit_form",
+      "rule": "choice:IRREVOCABLE|TRANSFERABLE|CONFIRMED",
+      "reason": "템플릿 visible sample은 IRREVOCABLE 하나뿐이며 다른 선택지는 일반 LC 유형 근거로만 제안"
+    }
+  ],
+  "user_decisions_needed": [
+    "46A DOCUMENTS REQUIRED, 71B CHARGES, 46D ADDITIONAL CONDITIONS는 review status가 keep인 정적 조항으로 유지할지, 향후 편집 가능한 long text value anchor를 수동 추가할지 결정 필요",
+    "영문 날짜/금액/amount words 동기화를 renderer 기능으로 확장할지, 현재처럼 pool 기반 합성값으로 승인할지 결정 필요"
+  ]
+}

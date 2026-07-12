@@ -1,0 +1,670 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-02",
+  "title": "의무기록 사본",
+  "field_generators": {
+    "issue_number": "template:{{date.year}}-{{date.month}}-{{pattern:#######}}",
+    "patient_name": "person.name_ko",
+    "patient_rrn": "person.rrn",
+    "patient_address": "address.ko",
+    "patient_phone": "person.phone_kr",
+    "patient_gender": "choice:남|여",
+    "patient_age": "choice:18세|24세|31세|45세|62세",
+    "department": "pool:departments",
+    "doctor_name": "person.name_ko",
+    "record_created_date": "date.kr",
+    "record_type": "choice:외래기록|입원기록|응급기록|수술기록",
+    "care_date": "date.kr",
+    "care_place": "pool:care_places",
+    "chief_complaint": "pool:chief_complaints",
+    "history_present_illness": "pool:hpi_texts",
+    "past_history": "choice:특이사항 없음.|고혈압으로 약물 복용 중.|당뇨병 과거력 있음.|이전 수술력 없음.",
+    "family_history": "choice:특이사항 없음.|부친 고혈압 병력 있음.|모친 당뇨 병력 있음.|가족력 확인되지 않음.",
+    "physical_exam": "pool:physical_exam_texts",
+    "test1_name": "choice:X-ray (Rt. Knee)|X-ray (Lt. Ankle)|Chest PA|Abdomen US",
+    "test1_result": "pool:test_result_texts",
+    "test1_reference": "choice:-|정상범위 내|추적관찰",
+    "test2_name": "choice:MRI (Rt. Knee)|MRI (L-spine)|CT (Brain)|혈액검사",
+    "test2_result": "pool:test_result_texts",
+    "test2_reference": "choice:-|정상범위 내|판독소견 참조",
+    "diagnosis_code": "pattern:A##.#",
+    "diagnosis_name": "pool:diagnosis_names",
+    "treatment_1": "pool:treatment_line_1",
+    "treatment_2": "pool:treatment_line_2",
+    "treatment_3": "pool:treatment_line_3",
+    "plan": "pool:plan_texts",
+    "remarks": "choice:-|특이사항 없음.|추가 제출 서류 없음.",
+    "issue_year": "date.year",
+    "issue_month": "date.month",
+    "issue_day": "date.day",
+    "institution_address": "address.ko",
+    "institution_phone": "person.phone_kr",
+    "institution_fax": "pattern:##-###-####"
+  },
+  "data_pools": {
+    "departments": [
+      "정형외과",
+      "내과",
+      "신경외과",
+      "재활의학과",
+      "이비인후과"
+    ],
+    "care_places": [
+      "정형외과 외래",
+      "내과 외래",
+      "응급실",
+      "재활치료실",
+      "수술 후 외래"
+    ],
+    "chief_complaints": [
+      "오른쪽 무릎 통증",
+      "허리 통증",
+      "어지럼증",
+      "좌측 발목 통증",
+      "기침 및 발열"
+    ],
+    "diagnosis_names": [
+      "오른쪽 무릎 내측 반월상연골 손상(의심)",
+      "요추 염좌",
+      "급성 기관지염",
+      "좌측 발목 염좌",
+      "어깨 회전근개 손상 의심"
+    ],
+    "hpi_texts": [
+      "내원 3일 전 계단을 내려오다 무릎을 삐끗한 뒤 통증이 지속되어 내원함.",
+      "운동 후 허리 통증이 발생했고 휴식 후에도 증상이 남아 외래 방문함.",
+      "기침과 미열이 4일간 지속되어 진료를 위해 내원함.",
+      "넘어진 이후 발목 부종과 보행 시 통증이 있어 검사 시행함."
+    ],
+    "physical_exam_texts": [
+      "압통(+), 부종(+), 관절운동 범위 제한(+). 신경학적 이상 소견 없음.",
+      "국소 압통(+), 열감(-), 보행 시 통증 호소. 말초순환 양호함.",
+      "청진상 거친 호흡음 관찰. 호흡곤란은 호소하지 않음.",
+      "운동범위 일부 제한되며 근력 저하는 뚜렷하지 않음."
+    ],
+    "test_result_texts": [
+      "급성 골절 소견 없음",
+      "연부조직 부종 의심 소견",
+      "퇴행성 변화 경미함",
+      "염증 소견 관찰됨",
+      "판독상 특이 이상 없음"
+    ],
+    "treatment_line_1": [
+      "1. 약물치료: 소염진통제 처방",
+      "1. 약물치료: 진해거담제 및 해열제 처방",
+      "1. 약물치료: 근이완제 및 진통제 처방"
+    ],
+    "treatment_line_2": [
+      "2. 보조기 착용 및 안정 권고",
+      "2. 물리치료 및 온열치료 시행",
+      "2. 충분한 수분 섭취 및 휴식 교육"
+    ],
+    "treatment_line_3": [
+      "3. 2주 후 외래 경과관찰",
+      "3. 증상 지속 시 추가 영상검사 예정",
+      "3. 악화 시 즉시 재내원 안내"
+    ],
+    "plan_texts": [
+      "2주 후 재진 예약. 증상 악화 시 조기 내원 권고.",
+      "1주 후 검사 결과 확인 및 치료 반응 평가 예정.",
+      "약물 복용 후 경과 관찰, 호전 없으면 추가 검사 예정.",
+      "보존적 치료 유지하며 통증 악화 시 재평가 예정."
+    ],
+    "diagnosis_records": [
+      {
+        "code": "S83.2",
+        "name": "오른쪽 무릎 내측 반월상연골 손상(의심)",
+        "department": "정형외과",
+        "complaint": "오른쪽 무릎 통증",
+        "test1": "X-ray (Rt. Knee)",
+        "test2": "MRI (Rt. Knee)"
+      },
+      {
+        "code": "S93.4",
+        "name": "좌측 발목 염좌",
+        "department": "정형외과",
+        "complaint": "좌측 발목 통증",
+        "test1": "X-ray (Lt. Ankle)",
+        "test2": "MRI (Lt. Ankle)"
+      },
+      {
+        "code": "M54.5",
+        "name": "요통",
+        "department": "신경외과",
+        "complaint": "허리 통증",
+        "test1": "X-ray (L-spine)",
+        "test2": "MRI (L-spine)"
+      },
+      {
+        "code": "J20.9",
+        "name": "급성 기관지염",
+        "department": "내과",
+        "complaint": "기침 및 발열",
+        "test1": "Chest PA",
+        "test2": "혈액검사"
+      }
+    ]
+  },
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "diagnosis_records",
+      "targets": {
+        "diagnosis_code": "code",
+        "diagnosis_name": "name",
+        "department": "department",
+        "chief_complaint": "complaint",
+        "test1_name": "test1",
+        "test2_name": "test2"
+      }
+    },
+    {
+      "type": "date_group",
+      "year": "issue_year",
+      "month": "issue_month",
+      "day": "issue_day",
+      "min_year": 2020,
+      "max_year": 2027
+    },
+    {
+      "type": "date_not_before",
+      "source": "record_created_date",
+      "target": {
+        "year": "issue_year",
+        "month": "issue_month",
+        "day": "issue_day"
+      },
+      "min_days": 0,
+      "max_days": 90
+    },
+    {
+      "type": "date_order",
+      "start": {
+        "year": "record_created_date",
+        "month": "record_created_date",
+        "day": "record_created_date"
+      },
+      "end": {
+        "year": "care_date",
+        "month": "care_date",
+        "day": "care_date"
+      },
+      "min_days": 0,
+      "max_days": 30
+    },
+    {
+      "type": "age_from_rrn",
+      "rrn": "patient_rrn",
+      "age": "patient_age",
+      "issue": {
+        "year": "issue_year",
+        "month": "issue_month",
+        "day": "issue_day"
+      }
+    }
+  ],
+  "field_rules": {
+    "issue_number": {
+      "semantic_path": "발급정보.발급번호",
+      "anchor_id": "manual_1783574260527",
+      "rule": "template:{{date.year}}-{{date.month}}-{{pattern:#######}}",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    "patient_name": {
+      "semantic_path": "환자인적사항.성명",
+      "anchor_id": "det_000007",
+      "rule": "person.name_ko",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "patient_rrn": {
+      "semantic_path": "환자인적사항.주민등록번호",
+      "anchor_id": "det_000009",
+      "rule": "person.rrn",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R3"
+      ]
+    },
+    "patient_address": {
+      "semantic_path": "환자인적사항.주소",
+      "anchor_id": "det_000014",
+      "rule": "address.ko",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "patient_phone": {
+      "semantic_path": "환자인적사항.연락처",
+      "anchor_id": "det_000016",
+      "rule": "person.phone_kr",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "patient_gender": {
+      "semantic_path": "환자인적사항.성별",
+      "anchor_id": "det_000018",
+      "rule": "choice:남|여",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 칸 안에는 성별 뒤 슬래시가 정적 라벨이 아니라 성별/연령 복합 표기 구분자로 보임"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "patient_age": {
+      "semantic_path": "환자인적사항.연령",
+      "anchor_id": "manual_1783574287062",
+      "rule": "choice:18세|24세|31세|45세|62세",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "전체 이미지에서 성별/연령 값이 여 / 30세로 보이며 나이 값에는 세 단위가 자연 표기의 일부임"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "department": {
+      "semantic_path": "기록작성정보.진료과",
+      "anchor_id": "det_000021",
+      "rule": "pool:departments",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "doctor_name": {
+      "semantic_path": "기록작성정보.담당의",
+      "anchor_id": "det_000023",
+      "rule": "person.name_ko",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "record_created_date": {
+      "semantic_path": "기록작성정보.기록작성일",
+      "anchor_id": "det_000026",
+      "rule": "date.kr",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "record_type": {
+      "semantic_path": "기록작성정보.기록구분",
+      "anchor_id": "det_000028",
+      "rule": "choice:외래기록|입원기록|응급기록|수술기록",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "care_date": {
+      "semantic_path": "의무기록내용.진료일자",
+      "anchor_id": "det_000031",
+      "rule": "date.kr",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "care_place": {
+      "semantic_path": "의무기록내용.진료장소",
+      "anchor_id": "det_000033",
+      "rule": "pool:care_places",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    "chief_complaint": {
+      "semantic_path": "의무기록내용.주소",
+      "anchor_id": "det_000035",
+      "rule": "pool:chief_complaints",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R3",
+        "R4"
+      ]
+    },
+    "history_present_illness": {
+      "semantic_path": "의무기록내용.현병력",
+      "anchor_id": "det_000037",
+      "rule": "pool:hpi_texts",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R3",
+        "R4"
+      ]
+    },
+    "past_history": {
+      "semantic_path": "의무기록내용.과거력",
+      "anchor_id": "det_000040",
+      "rule": "choice:특이사항 없음.|고혈압으로 약물 복용 중.|당뇨병 과거력 있음.|이전 수술력 없음.",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "family_history": {
+      "semantic_path": "의무기록내용.가족력",
+      "anchor_id": "det_000042",
+      "rule": "choice:특이사항 없음.|부친 고혈압 병력 있음.|모친 당뇨 병력 있음.|가족력 확인되지 않음.",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "physical_exam": {
+      "semantic_path": "의무기록내용.진찰소견",
+      "anchor_id": "det_000044",
+      "rule": "pool:physical_exam_texts",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "test1_name": {
+      "semantic_path": "의무기록내용.검사소견.검사1.검사명",
+      "anchor_id": "det_000049",
+      "rule": "choice:X-ray (Rt. Knee)|X-ray (Lt. Ankle)|Chest PA|Abdomen US",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "test1_result": {
+      "semantic_path": "의무기록내용.검사소견.검사1.결과",
+      "anchor_id": "det_000050",
+      "rule": "pool:test_result_texts",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "test1_reference": {
+      "semantic_path": "의무기록내용.검사소견.검사1.참고치",
+      "anchor_id": "det_000051",
+      "rule": "choice:-|정상범위 내|추적관찰",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "test2_name": {
+      "semantic_path": "의무기록내용.검사소견.검사2.검사명",
+      "anchor_id": "det_000052",
+      "rule": "choice:MRI (Rt. Knee)|MRI (L-spine)|CT (Brain)|혈액검사",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "test2_result": {
+      "semantic_path": "의무기록내용.검사소견.검사2.결과",
+      "anchor_id": "det_000053",
+      "rule": "pool:test_result_texts",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "test2_reference": {
+      "semantic_path": "의무기록내용.검사소견.검사2.참고치",
+      "anchor_id": "det_000054",
+      "rule": "choice:-|정상범위 내|판독소견 참조",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "diagnosis_code": {
+      "semantic_path": "의무기록내용.진단명.질병분류코드",
+      "anchor_id": "det_000056",
+      "rule": "pattern:A##.#",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4",
+        "R5"
+      ]
+    },
+    "diagnosis_name": {
+      "semantic_path": "의무기록내용.진단명.진단명",
+      "anchor_id": "det_000057",
+      "rule": "pool:diagnosis_names",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4",
+        "R5"
+      ]
+    },
+    "treatment_1": {
+      "semantic_path": "의무기록내용.치료내용.치료1",
+      "anchor_id": "det_000059",
+      "rule": "pool:treatment_line_1",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "treatment_2": {
+      "semantic_path": "의무기록내용.치료내용.치료2",
+      "anchor_id": "det_000060",
+      "rule": "pool:treatment_line_2",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "treatment_3": {
+      "semantic_path": "의무기록내용.치료내용.치료3",
+      "anchor_id": "det_000061",
+      "rule": "pool:treatment_line_3",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "plan": {
+      "semantic_path": "의무기록내용.향후계획",
+      "anchor_id": "det_000063",
+      "rule": "pool:plan_texts",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R4"
+      ]
+    },
+    "remarks": {
+      "semantic_path": "의무기록내용.비고",
+      "anchor_id": "det_000065",
+      "rule": "choice:-|특이사항 없음.|추가 제출 서류 없음.",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    "issue_year": {
+      "semantic_path": "발급정보.발급일.연",
+      "anchor_id": "det_000067",
+      "rule": "date.year",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 뒤의 년은 정적 텍스트로 분리되어 있음"
+      },
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    "issue_month": {
+      "semantic_path": "발급정보.발급일.월",
+      "anchor_id": "manual_1783574337078",
+      "rule": "date.month",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 뒤의 월은 정적 텍스트로 분리되어 있음"
+      },
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    "issue_day": {
+      "semantic_path": "발급정보.발급일.일",
+      "anchor_id": "manual_1783574342528",
+      "rule": "date.day",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 뒤의 일은 정적 텍스트로 분리되어 있음"
+      },
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    "institution_address": {
+      "semantic_path": "발급기관.주소",
+      "anchor_id": "det_000072",
+      "rule": "address.ko",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    "institution_phone": {
+      "semantic_path": "발급기관.전화",
+      "anchor_id": "manual_1783574405161",
+      "rule": "person.phone_kr",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    "institution_fax": {
+      "semantic_path": "발급기관.팩스",
+      "anchor_id": "manual_1783574410060",
+      "rule": "pattern:##-###-####",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 보이지 않음"
+      },
+      "evidence_ids": [
+        "R1"
+      ]
+    }
+  },
+  "privacy_note": "모든 값은 합성 더미 생성 규칙 또는 합성 value pool이며 실제 개인정보를 포함하지 않는다.",
+  "updated_at": "2026-07-09T08:44:23.246669+00:00"
+}

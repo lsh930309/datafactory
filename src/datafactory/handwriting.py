@@ -12,6 +12,8 @@ from typing import Any
 
 from PIL import Image, ImageDraw
 
+from .inpaint import lama_inpaint
+
 from .authoring import _generate_values, _template_from_authoring
 from .fonts import load_font
 from .policy import load_review_policy
@@ -22,15 +24,20 @@ from .workbench import WORKBENCH_ROOT, document_dir, render_pdf_pages, update_ma
 ROOT = Path(__file__).resolve().parents[2]
 HANDWRITING_DIR = "handwriting_pipeline"
 BARCODE_FORMAT = "datafactory-grid-v1"
+QR_FORMAT = "datafactory-qr-v1"
+DEFAULT_WECHAT_QR_MODEL_DIR = Path("/Users/lsh930309/projects/SamsungLife/models/wechat_qrcode")
 BARCODE_MODULES = 61
 BARCODE_QUIET_MODULES = 4
 BARCODE_TOTAL_MODULES = BARCODE_MODULES + BARCODE_QUIET_MODULES * 2
 BARCODE_DEFAULT_PIXEL_SIZE = 240
+HANDWRITING_PREVIEW_FILL = [220, 0, 0]
 SOURCE_KIND_PRINT_PACK = "handwriting_print_pack"
 SOURCE_KIND_SCANNED = "handwriting_scanned"
 SOURCE_KIND_QR_REMOVED = "handwriting_qr_removed"
 ACCEPTED_STATUS = "accepted"
 REVIEW_REQUIRED_STATUS = "review_required"
+_WECHAT_DETECTOR: Any | None = None
+_WECHAT_DETECTOR_ATTEMPTED = False
 
 
 @dataclass(frozen=True)
@@ -84,14 +91,13 @@ def create_handwriting_print_pack(
     fields = [field for field in schema.get("fields", []) if isinstance(field, dict)]
     semantic_schema = _semantic_schema(schema)
     field_paths = _field_semantic_paths(fields)
-    review_labels = _review_labels_by_id(schema)
-    handwriting_fields = _fields_for_render_mode(fields, review_labels, "handwriting")
-    printed_fields = _fields_for_render_mode(fields, review_labels, "printed")
+    handwriting_fields = _fields_for_render_mode(fields, "handwriting")
+    printed_fields = _fields_for_render_mode(fields, "printed")
     if printed_fields and not stylesheet_path.exists():
         raise FileNotFoundError(f"stylesheet required for printed handwriting bbox fields: {stylesheet_path}")
     template_path = _resolve_template_image(schema)
     template = Image.open(template_path).convert("RGB")
-    bbox = _resolve_qr_bbox(qr_bbox, width=template.width, height=template.height)
+    bbox = _resolve_qr_bbox(qr_bbox or _schema_qr_bbox(schema), width=template.width, height=template.height)
     resolved_run_id = run_id or _run_id()
     run_dir = doc_root / HANDWRITING_DIR / "print_packs" / resolved_run_id
     dirs = _ensure_dirs(run_dir, ["answer_sheets", "qr_templates", "barcodes", "values", "gt", "bbox"])
@@ -138,14 +144,14 @@ def create_handwriting_print_pack(
 
         payload = {
             "project": "datafactory",
-            "barcode_format": BARCODE_FORMAT,
+            "barcode_format": QR_FORMAT if _qrcode_available() else BARCODE_FORMAT,
             "doc_id": doc_id,
             "sample_id": sample_id,
             "run_id": resolved_run_id,
             "gt_path": _display_path(gt_path),
             "bbox_path": _display_path(bbox_path),
         }
-        barcode = encode_barcode_image(payload, pixel_size=bbox[2])
+        barcode = encode_marker_image(payload, pixel_size=bbox[2])
         barcode.save(barcode_path)
         template_with_qr = printed_template.copy()
         template_with_qr.paste(barcode.resize((bbox[2], bbox[3])), (bbox[0], bbox[1]))
@@ -198,7 +204,8 @@ def create_handwriting_print_pack(
         "created_at": _now(),
         "count": count,
         "seed": seed,
-        "barcode_format": BARCODE_FORMAT,
+        "barcode_format": QR_FORMAT if _qrcode_available() else BARCODE_FORMAT,
+        "fallback_barcode_format": BARCODE_FORMAT,
         "template": _display_path(template_path),
         "qr_bbox": bbox,
         "schema": _display_path(primary_schema_path),
@@ -281,6 +288,71 @@ def intake_handwriting_scans(
     return {"summary": {"docId": resolved_doc_id, "runId": resolved_run_id, "scanCount": len(records), "acceptedCount": len(accepted), "reviewRequiredCount": manifest["review_required_count"]}, "paths": {"runDir": _display_path(run_dir), "manifest": _display_path(manifest_path)}, "manifest": manifest}
 
 
+def render_handwriting_authoring_preview(
+    doc_id: str,
+    schema: dict[str, Any],
+    stylesheet: dict[str, Any],
+    faker_profile: dict[str, Any],
+    *,
+    out_dir: Path,
+    seed: int = 1234,
+    sample_id: str = "live_preview",
+    qr_bbox: list[int] | tuple[int, int, int, int] | None = None,
+) -> dict[str, Any]:
+    """Render handwriting authoring preview with printed fields and red handwriting placeholders."""
+
+    template_path = _resolve_template_image(schema)
+    template = Image.open(template_path).convert("RGB")
+    fields = [field for field in schema.get("fields", []) if isinstance(field, dict)]
+    printed_fields = _fields_for_render_mode(fields, "printed")
+    handwriting_fields = _fields_for_render_mode(fields, "handwriting")
+    values, warnings = _generate_values(schema, faker_profile, __import__("random").Random(seed), force_visible=True)
+    rendered = _render_handwriting_preview_fields(
+        template_path,
+        schema=schema,
+        stylesheet=stylesheet,
+        printed_fields=printed_fields,
+        handwriting_fields=handwriting_fields,
+        values=values,
+    )
+    bbox = _resolve_qr_bbox(qr_bbox or _schema_qr_bbox(schema), width=template.width, height=template.height)
+    payload = {
+        "project": "datafactory",
+        "barcode_format": QR_FORMAT if _qrcode_available() else BARCODE_FORMAT,
+        "doc_id": doc_id,
+        "sample_id": sample_id,
+        "run_id": "live_preview",
+        "gt_path": "",
+        "bbox_path": "",
+    }
+    marker = encode_marker_image(payload, pixel_size=bbox[2]).resize((bbox[2], bbox[3]), Image.Resampling.NEAREST)
+    rendered.paste(marker, (bbox[0], bbox[1]))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    image_path = out_dir / f"{sample_id}.png"
+    kv_path = out_dir / f"{sample_id}.kv.json"
+    bbox_path = out_dir / f"{sample_id}.bbox.json"
+    overlay_path = out_dir / f"{sample_id}.overlay.png"
+    validation_path = out_dir / f"{sample_id}.validation_report.json"
+    rendered.save(image_path)
+    rendered.save(overlay_path)
+    kv_path.write_text(json.dumps({"sample_id": sample_id, "doc_id": doc_id, "values": values}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    bbox_path.write_text(json.dumps({"sample_id": sample_id, "doc_id": doc_id, "qr_bbox": bbox}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    validation_path.write_text(json.dumps({"warnings": warnings, "qr_bbox": bbox, "printed_field_count": len(printed_fields), "handwriting_field_count": len(handwriting_fields)}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return {
+        "image": image_path,
+        "kv": kv_path,
+        "bbox": bbox_path,
+        "overlay": overlay_path,
+        "validation_report": validation_path,
+        "sample_id": sample_id,
+        "field_count": len(fields),
+        "warning_count": len(warnings),
+        "qr_bbox": bbox,
+        "printed_field_count": len(printed_fields),
+        "handwriting_field_count": len(handwriting_fields),
+    }
+
+
 def latest_accepted_handwriting_samples(item: dict[str, Any], *, root: Path = ROOT) -> list[HandwritingAcceptedSample]:
     manifest_value = item.get("latestHandwritingScanIntake") or (item.get("manifest", {}).get("artifacts", {}) if isinstance(item.get("manifest"), dict) else {}).get("handwriting_scan_intake")
     if not manifest_value:
@@ -300,6 +372,42 @@ def latest_accepted_handwriting_samples(item: dict[str, Any], *, root: Path = RO
         if image.exists() and gt.exists():
             samples.append(HandwritingAcceptedSample(str(raw.get("sample_id") or image.stem), image, gt, bbox if bbox and bbox.exists() else None, _resolve_path(raw.get("source_scan"), base=root) if raw.get("source_scan") else None))
     return samples
+
+
+def encode_marker_image(payload: dict[str, Any], *, pixel_size: int = BARCODE_DEFAULT_PIXEL_SIZE) -> Image.Image:
+    if str(payload.get("barcode_format") or "") == QR_FORMAT:
+        try:
+            return encode_qr_image(payload, pixel_size=pixel_size)
+        except Exception:
+            fallback = dict(payload)
+            fallback["barcode_format"] = BARCODE_FORMAT
+            return encode_barcode_image(fallback, pixel_size=pixel_size)
+    return encode_barcode_image(payload, pixel_size=pixel_size)
+
+
+def _qrcode_available() -> bool:
+    try:
+        import qrcode  # type: ignore  # noqa: F401
+        return True
+    except Exception:
+        return False
+
+
+def encode_qr_image(payload: dict[str, Any], *, pixel_size: int = BARCODE_DEFAULT_PIXEL_SIZE) -> Image.Image:
+    try:
+        import qrcode  # type: ignore
+    except Exception as exc:
+        raise RuntimeError("qrcode[pil] is required for standard QR marker generation") from exc
+    qr_payload = dict(payload)
+    qr_payload["barcode_format"] = QR_FORMAT
+    text = json.dumps(qr_payload, ensure_ascii=False, separators=(",", ":"))
+    qr = qrcode.QRCode(version=None, error_correction=qrcode.constants.ERROR_CORRECT_H, box_size=10, border=4)
+    qr.add_data(text)
+    qr.make(fit=True)
+    image = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+    if pixel_size > 0:
+        image = image.resize((int(pixel_size), int(pixel_size)), Image.Resampling.NEAREST)
+    return image
 
 
 def encode_barcode_image(payload: dict[str, Any], *, pixel_size: int = BARCODE_DEFAULT_PIXEL_SIZE) -> Image.Image:
@@ -328,6 +436,73 @@ def encode_barcode_image(payload: dict[str, Any], *, pixel_size: int = BARCODE_D
                 draw.rectangle([x0, y0, x0 + module - 1, y0 + module - 1], fill="black")
     draw.rectangle([0, 0, size - 1, size - 1], outline="black", width=max(1, module))
     return image
+
+
+def decode_marker_image(image: Image.Image, *, wechat_detector: Any | None = None) -> dict[str, Any]:
+    if wechat_detector is not None:
+        try:
+            payload = decode_qr_image(image, wechat_detector=wechat_detector)
+            if payload:
+                return payload
+        except Exception:
+            pass
+    return decode_barcode_image(image)
+
+
+def decode_qr_image(image: Image.Image, *, wechat_detector: Any | None = None) -> dict[str, Any]:
+    detector = wechat_detector or create_wechat_qr_detector()
+    try:
+        import numpy as np  # type: ignore
+    except Exception as exc:
+        raise RuntimeError("numpy is required for WeChat QR decoding") from exc
+    rgb = image.convert("RGB")
+    array = np.asarray(rgb)
+    decoded, _points = detector.detectAndDecode(array)
+    candidates = [decoded] if isinstance(decoded, str) else list(decoded or [])
+    for text in candidates:
+        if not text:
+            continue
+        payload = json.loads(str(text))
+        if isinstance(payload, dict) and payload.get("barcode_format") in {QR_FORMAT, BARCODE_FORMAT}:
+            return payload
+    raise ValueError("qr decode failed")
+
+
+def create_wechat_qr_detector(model_dir: str | Path | None = None) -> Any:
+    try:
+        import cv2  # type: ignore
+    except Exception as exc:
+        raise RuntimeError("OpenCV contrib is required for WeChat QR decoding") from exc
+    ctor = getattr(cv2, "wechat_qrcode_WeChatQRCode", None)
+    if ctor is None:
+        module = getattr(cv2, "wechat_qrcode", None)
+        ctor = getattr(module, "WeChatQRCode", None) if module is not None else None
+    if ctor is None:
+        raise RuntimeError("OpenCV WeChatQRCode API was not found. Install opencv-contrib-python-headless.")
+    return ctor(*resolve_wechat_model_paths(model_dir))
+
+
+def _wechat_detector_or_none() -> Any | None:
+    global _WECHAT_DETECTOR, _WECHAT_DETECTOR_ATTEMPTED
+    if _WECHAT_DETECTOR is not None:
+        return _WECHAT_DETECTOR
+    if _WECHAT_DETECTOR_ATTEMPTED:
+        return None
+    _WECHAT_DETECTOR_ATTEMPTED = True
+    try:
+        _WECHAT_DETECTOR = create_wechat_qr_detector()
+    except Exception:
+        _WECHAT_DETECTOR = None
+    return _WECHAT_DETECTOR
+
+
+def resolve_wechat_model_paths(model_dir: str | Path | None = None) -> tuple[str, str, str, str]:
+    root = Path(model_dir or DEFAULT_WECHAT_QR_MODEL_DIR)
+    files = ("detect.prototxt", "detect.caffemodel", "sr.prototxt", "sr.caffemodel")
+    paths = tuple(root / name for name in files)
+    if all(path.exists() for path in paths):
+        return tuple(str(path) for path in paths)  # type: ignore[return-value]
+    return ("", "", "", "")
 
 
 def decode_barcode_image(image: Image.Image) -> dict[str, Any]:
@@ -365,11 +540,11 @@ def _intake_single_scan(raw_path: Path, manifests: list[Path], *, dirs: dict[str
                 bbox = _scaled_bbox(sample.get("qr_bbox"), sample.get("template_size"), [image.width, image.height], pad_ratio=0.0)
                 crop = image.crop((bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]))
                 try:
-                    payload = decode_barcode_image(crop)
+                    payload = decode_marker_image(crop, wechat_detector=_wechat_detector_or_none())
                 except Exception:
                     padded = _scaled_bbox(sample.get("qr_bbox"), sample.get("template_size"), [image.width, image.height], pad_ratio=0.03)
                     padded_crop = image.crop((padded[0], padded[1], padded[0] + padded[2], padded[1] + padded[3]))
-                    payload = decode_barcode_image(padded_crop)
+                    payload = decode_marker_image(padded_crop, wechat_detector=_wechat_detector_or_none())
                     bbox = padded
                 if payload.get("sample_id") != sample.get("sample_id") or payload.get("doc_id") != sample.get("doc_id"):
                     raise ValueError("decoded payload does not match candidate sample")
@@ -395,10 +570,7 @@ def _accept_scan(raw_path: Path, image: Image.Image, bbox: list[int], payload: d
     matched_gt_path = dirs["matched_gt"] / f"{sample_id}.json"
     matched_bbox_path = dirs["matched_gt"] / f"{sample_id}-bbox.json"
     decoded_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    removed = image.copy()
-    draw = ImageDraw.Draw(removed)
-    pad = 2
-    draw.rectangle([bbox[0] - pad, bbox[1] - pad, bbox[0] + bbox[2] + pad, bbox[1] + bbox[3] + pad], fill="white")
+    removed, qr_remove_method = _remove_qr_marker(image, bbox)
     removed.save(qr_removed_path, "JPEG", quality=95)
     gt_source = _resolve_path(payload.get("gt_path"))
     if not gt_source.exists():
@@ -421,7 +593,22 @@ def _accept_scan(raw_path: Path, image: Image.Image, bbox: list[int], payload: d
         "matched_gt": _display_path(matched_gt_path),
         "matched_bbox": matched_bbox,
         "qr_bbox": bbox,
+        "qr_remove_method": qr_remove_method,
     }
+
+
+def _remove_qr_marker(image: Image.Image, bbox: list[int]) -> tuple[Image.Image, str]:
+    mask = Image.new("L", image.size, 0)
+    draw = ImageDraw.Draw(mask)
+    pad = 3
+    draw.rectangle([bbox[0] - pad, bbox[1] - pad, bbox[0] + bbox[2] + pad, bbox[1] + bbox[3] + pad], fill=255)
+    try:
+        return lama_inpaint(image.convert("RGB"), mask, max_side=1800), "lama"
+    except Exception:
+        removed = image.copy()
+        fallback_draw = ImageDraw.Draw(removed)
+        fallback_draw.rectangle([bbox[0] - pad, bbox[1] - pad, bbox[0] + bbox[2] + pad, bbox[1] + bbox[3] + pad], fill="white")
+        return removed, "white_fill_fallback"
 
 
 def _write_answer_sheet(path: Path, *, doc_title: str, doc_id: str, sample_id: str, run_id: str, values: dict[str, str], fields: list[dict[str, Any]], field_paths: dict[str, str]) -> None:
@@ -484,20 +671,44 @@ def _review_labels_by_id(schema: dict[str, Any]) -> dict[str, Any]:
     return {label.id: label for label in policy.labels}
 
 
-def _field_review_label(field: dict[str, Any], labels: dict[str, Any]) -> Any | None:
-    return labels.get(str(field.get("bbox_label_id") or field.get("source_detection_id") or ""))
-
-
-def _field_render_mode(field: dict[str, Any], labels: dict[str, Any]) -> str:
+def _field_render_mode(field: dict[str, Any]) -> str:
     explicit = str(field.get("render_mode") or "").strip()
     if explicit in {"handwriting", "printed"}:
         return explicit
-    label = _field_review_label(field, labels)
-    return str(getattr(label, "render_mode", "handwriting") or "handwriting")
+    return "printed"
 
 
-def _fields_for_render_mode(fields: list[dict[str, Any]], labels: dict[str, Any], mode: str) -> list[dict[str, Any]]:
-    return [field for field in fields if _field_render_mode(field, labels) == mode]
+def _fields_for_render_mode(fields: list[dict[str, Any]], mode: str) -> list[dict[str, Any]]:
+    return [field for field in fields if _field_render_mode(field) == mode]
+
+
+def _render_handwriting_preview_fields(
+    template_path: Path,
+    *,
+    schema: dict[str, Any],
+    stylesheet: dict[str, Any],
+    printed_fields: list[dict[str, Any]],
+    handwriting_fields: list[dict[str, Any]],
+    values: dict[str, str],
+) -> Image.Image:
+    fields = [dict(field) for field in printed_fields]
+    styles = [dict(style) for style in stylesheet.get("style_classes", []) if isinstance(style, dict)]
+    styles_by_id = {str(style.get("style_class") or ""): style for style in styles}
+    for field in handwriting_fields:
+        preview_field = dict(field)
+        original_style_class = str(preview_field.get("style_class") or "body_default")
+        base_style = dict(styles_by_id.get(original_style_class) or styles_by_id.get("body_default") or {"style_class": "body_default"})
+        preview_style_class = f"__handwriting_preview_{preview_field.get('field_id') or len(fields)}"
+        base_style["style_class"] = preview_style_class
+        base_style["fill"] = HANDWRITING_PREVIEW_FILL
+        styles.append(base_style)
+        preview_field["style_class"] = preview_style_class
+        fields.append(preview_field)
+    if not fields:
+        return Image.open(template_path).convert("RGB")
+    preview_stylesheet = dict(stylesheet)
+    preview_stylesheet["style_classes"] = styles
+    return _render_printed_fields(template_path, schema=schema, stylesheet=preview_stylesheet, fields=fields, values=values)
 
 
 def _render_printed_fields(template_path: Path, *, schema: dict[str, Any], stylesheet: dict[str, Any], fields: list[dict[str, Any]], values: dict[str, str]) -> Image.Image:
@@ -580,15 +791,22 @@ def _resolve_template_image(schema: dict[str, Any]) -> Path:
     raise FileNotFoundError("schema.source_inpainted/source_image does not exist")
 
 
+def _schema_qr_bbox(schema: dict[str, Any]) -> Any:
+    handwriting = schema.get("handwriting") if isinstance(schema.get("handwriting"), dict) else {}
+    value = handwriting.get("qr_bbox") or schema.get("qr_bbox")
+    if isinstance(value, dict):
+        return [value.get("x"), value.get("y"), value.get("width"), value.get("height")]
+    return value
+
+
 def _resolve_qr_bbox(value: list[int] | tuple[int, int, int, int] | None, *, width: int, height: int) -> list[int]:
     if value and len(value) == 4:
         x, y, w, h = [int(round(float(item))) for item in value]
         if w > 20 and h > 20:
-            left = min(max(0, x), max(0, width - 1))
-            top = min(max(0, y), max(0, height - 1))
-            right = min(width, left + max(1, w))
-            bottom = min(height, top + max(1, h))
-            return [left, top, max(1, right - left), max(1, bottom - top)]
+            side = min(max(w, h), max(1, width), max(1, height))
+            left = min(max(0, x), max(0, width - side))
+            top = min(max(0, y), max(0, height - side))
+            return [left, top, side, side]
     size = min(BARCODE_DEFAULT_PIXEL_SIZE, max(96, int(min(width, height) * 0.16)))
     return [max(0, width - size - 24), 24, size, size]
 
@@ -693,4 +911,3 @@ def _display_path(path: Path | str) -> str:
         return str(path.resolve().relative_to(ROOT))
     except ValueError:
         return str(path)
-

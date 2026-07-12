@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-02",
+  "title": "의무기록 사본",
+  "search_date": "2026-07-09",
+  "queries": [
+    "의무기록 사본 발급 진단명 경과 처치 투약 포함 정보",
+    "의무기록 사본 발급 동의서 의료법 의무기록 열람 사본 내용",
+    "Medical Service Act Korea Article 21 medical records",
+    "medical record clinical notes diagnosis treatment test results"
+  ],
+  "sources": [
+    {
+      "id": "R1",
+      "url": "https://www.law.go.kr/법령/의료법/제21조",
+      "source_type": "official_law",
+      "summary": "의료법 제21조는 환자에 관한 기록 열람·사본 교부의 법적 근거로, 템플릿 상단 및 유의사항의 법령 문구 해석에 사용했다."
+    },
+    {
+      "id": "R2",
+      "url": "https://www.law.go.kr/법령/의료법시행규칙/제13조",
+      "source_type": "official_law",
+      "summary": "의료법 시행규칙 제13조는 기록 열람·사본 발급 절차와 관련된 하위 규정 근거로 템플릿의 발급 문구를 뒷받침한다."
+    },
+    {
+      "id": "R3",
+      "url": "https://en.wikipedia.org/wiki/Medical_record",
+      "source_type": "general_reference",
+      "summary": "의료기록은 환자 식별정보, 병력, 진단, 검사, 치료, 처방, 경과 등 진료 과정 정보를 포함한다는 일반적 구성 근거로만 사용했다."
+    },
+    {
+      "id": "R4",
+      "url": "https://www.verywellhealth.com/your-rights-to-your-medical-records-under-hipaa-1719157",
+      "source_type": "general_patient_access_reference",
+      "summary": "환자가 의료기록 사본에 접근할 수 있고 검사결과·임상노트·약물목록 등이 기록 범주에 포함될 수 있다는 보조 근거로만 사용했다."
+    },
+    {
+      "id": "R5",
+      "url": "https://www.koicd.kr/kcd/kcd.do",
+      "source_type": "classification_reference",
+      "summary": "질병분류코드와 진단명의 짝을 관리해야 하는 필드 의미 해석을 위한 참조 URL로 기록했다. 실제 코드/진단 조합은 합성 예시이며 임상 확정값이 아니다."
+    }
+  ],
+  "field_evidence": {
+    "patient_rrn": [
+      "R1",
+      "R2"
+    ],
+    "record_created_date": [
+      "R1",
+      "R2"
+    ],
+    "care_date": [
+      "R3",
+      "R4"
+    ],
+    "chief_complaint": [
+      "R3",
+      "R4"
+    ],
+    "history_present_illness": [
+      "R3",
+      "R4"
+    ],
+    "test_findings": [
+      "R3",
+      "R4"
+    ],
+    "diagnosis_code": [
+      "R5"
+    ],
+    "diagnosis_name": [
+      "R3",
+      "R5"
+    ],
+    "treatment_lines": [
+      "R3",
+      "R4"
+    ],
+    "issue_date": [
+      "R1",
+      "R2"
+    ]
+  },
+  "visual_priority_note": "웹 리서치는 필드 의미와 faker 정밀화의 보조 근거로만 사용했고, 템플릿에 보이지 않는 필드는 추가하지 않았다."
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-04",
+  "title": "신용장(L/C)",
+  "search_date": "2026-07-09",
+  "queries": [
+    "letter of credit document fields applicant beneficiary issuing bank expiry date latest date of shipment UCP 600",
+    "documentary credit MT700 fields 31C 32B 41A 44E 44F 46A 71B",
+    "International Chamber of Commerce UCP 600 documentary credits letter of credit",
+    "letter of credit applicant beneficiary issuing bank nominated bank documents required charges"
+  ],
+  "sources": [
+    {
+      "id": "R1",
+      "url": "https://www.tradefinanceglobal.com/letters-of-credit/",
+      "source_type": "industry guide",
+      "summary": "Letter of credit is a bank-issued payment guarantee for trade; LCs are regulated by UCP 600 and transmitted through SWIFT MT700 messages; key features include irrevocability, documentary nature, compliance, payment mechanism, and autonomy."
+    },
+    {
+      "id": "R2",
+      "url": "https://en.wikipedia.org/wiki/Letter_of_credit",
+      "source_type": "encyclopedic reference",
+      "summary": "Defines roles such as applicant, beneficiary, issuing bank, nominated/advising bank and explains document presentation, expiry/last shipment timing, required documents, and charges concepts."
+    },
+    {
+      "id": "R3",
+      "url": "https://en.wikipedia.org/wiki/Uniform_Customs_and_Practice_for_Documentary_Credits",
+      "source_type": "encyclopedic reference for ICC rules",
+      "summary": "UCP is the ICC-standardized rule set for documentary credits; current UCP 600 took effect in 2007 and is used internationally for letter-of-credit practice."
+    }
+  ],
+  "field_evidence": [
+    {
+      "evidence_id": "R1",
+      "field_ids": [
+        "issue_date_header",
+        "lc_number",
+        "application_number",
+        "reference_contract_number",
+        "reference_contract_date"
+      ],
+      "rationale": "LCs are formal bank-issued documentary credits commonly transmitted as structured SWIFT MT700-style messages."
+    },
+    {
+      "evidence_id": "R2",
+      "field_ids": [
+        "applicant_name",
+        "applicant_address",
+        "beneficiary_name",
+        "beneficiary_address",
+        "issuing_bank_name",
+        "issuing_bank_address",
+        "available_with_by",
+        "drawee_bank_name",
+        "drawee_bank_place"
+      ],
+      "rationale": "Source describes applicant, beneficiary, issuing bank and nominated/advising bank roles."
+    },
+    {
+      "evidence_id": "R3",
+      "field_ids": [
+        "expiry_date",
+        "expiry_place",
+        "date_of_issue",
+        "documentary_credit_form",
+        "currency_code",
+        "credit_amount",
+        "maximum_credit_amount",
+        "partial_shipments",
+        "transshipment",
+        "port_of_loading",
+        "port_of_discharge",
+        "latest_shipment_date",
+        "goods_description",
+        "hs_code",
+        "sales_contract_reference"
+      ],
+      "rationale": "UCP/MT700-style documentary credit practice supports mapping visible numbered clauses to expiry, amount, shipment, goods, documents and conditions."
+    }
+  ],
+  "limitations": [
+    "웹 검색은 문서 의미와 faker 근사에만 사용했고, 템플릿에 보이지 않는 필드는 추가하지 않았다.",
+    "SWIFT field-code 세부 공식 사양은 공개 검색 결과 접근성이 제한되어 전체 이미지의 visible field code와 일반 LC/UCP 근거를 함께 사용했다."
+  ]
+}

@@ -1,0 +1,2285 @@
+{
+  "schema_version": 2,
+  "doc_id": "MED-06",
+  "title": "처방전·약제비영수증 / 약제비 계산서·영수증",
+  "sample_kind": "blank_template",
+  "source_files": {
+    "request": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/request.json",
+    "sample": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서.pdf",
+    "latest_detections": "workbench/documents/처방전·약제비영수증__MED-06/ocr/paddleocr/precise/original_약제비계산서_page_001/detections.json",
+    "latest_review": "workbench/documents/처방전·약제비영수증__MED-06/review/original_약제비계산서_page_001/review.json",
+    "visual_evidence_manifest": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence_manifest.json"
+  },
+  "semantic_schema": {
+    "영수증": {
+      "영수증번호": ""
+    },
+    "환자": {
+      "성명": ""
+    },
+    "조제": {
+      "조제일": "",
+      "투약일수": "",
+      "야간조제": "",
+      "공휴일조제": ""
+    },
+    "비용": {
+      "급여": {
+        "약품비": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "조제기본료": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "복약지도료": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "조제료": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "관리료": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "선별급여": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "65세 이상 등 정액": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        },
+        "기타": {
+          "일부본인부담_본인부담금": "",
+          "일부본인부담_공단부담금": "",
+          "전액본인부담": ""
+        }
+      },
+      "비급여": {
+        "약품비": "",
+        "조제기본료": "",
+        "복약지도료": "",
+        "조제료": "",
+        "관리료": "",
+        "선별급여": "",
+        "65세 이상 등 정액": "",
+        "기타": ""
+      },
+      "합계": {
+        "일부본인부담_본인부담금": "",
+        "일부본인부담_공단부담금": "",
+        "전액본인부담": "",
+        "비급여": ""
+      },
+      "약제비총액": "",
+      "환자부담총액": "",
+      "납부한금액": {
+        "카드": "",
+        "현금영수증": "",
+        "현금": "",
+        "합계": ""
+      }
+    },
+    "현금영수증": {
+      "발급여부": "",
+      "신분확인번호": "",
+      "승인번호": ""
+    },
+    "처방한요양기관": {
+      "의원급_보건기관": "",
+      "병원급": "",
+      "종합병원": "",
+      "상급종합병원": "",
+      "사업자등록번호": "",
+      "상호": "",
+      "사업장소재지": "",
+      "전화번호": "",
+      "대표자": ""
+    },
+    "발행일자": {
+      "년": "",
+      "월": "",
+      "일": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "receipt_number",
+      "key": "영수증번호(연월-일련번호)",
+      "semantic_path": "영수증.영수증번호",
+      "anchor_id": "visual_0004",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:######-####",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          480,
+          215,
+          564,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0085_visual_0004.png",
+        "note": "상단 영수증번호 라벨 오른쪽 긴 입력칸입니다."
+      }
+    },
+    {
+      "field_id": "patient_name",
+      "key": "환자 성명",
+      "semantic_path": "환자.성명",
+      "anchor_id": "visual_0007",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000004"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          148,
+          258,
+          171,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0086_visual_0007.png",
+        "note": "환자성명 라벨 아래/오른쪽 입력칸입니다."
+      }
+    },
+    {
+      "field_id": "dispensing_date",
+      "key": "조제일",
+      "semantic_path": "조제.조제일",
+      "anchor_id": "visual_0008",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005"
+      ],
+      "value_type": "date",
+      "generator": "date.kr",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          258,
+          155,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0087_visual_0008.png",
+        "note": "조제일 라벨의 값 입력칸입니다."
+      }
+    },
+    {
+      "field_id": "medication_days",
+      "key": "투약일수",
+      "semantic_path": "조제.투약일수",
+      "anchor_id": "visual_0010",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000006"
+      ],
+      "value_type": "duration_days",
+      "generator": "template:{{pattern:##}}일",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          478,
+          258,
+          149,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0088_visual_0010.png",
+        "note": "투약일수 값 위치에는 별도 정적 일 단위가 없어 자연 표기 단위를 값에 포함합니다."
+      }
+    },
+    {
+      "field_id": "night_dispensing",
+      "key": "야간조제",
+      "semantic_path": "조제.야간조제",
+      "anchor_id": "manual_1783570338497",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000007",
+        "manual_1783570324047"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "체크박스 값입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          637,
+          259,
+          14,
+          17
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0135_manual_1783570338497.png",
+        "note": "야간 라벨 왼쪽의 작은 체크박스입니다."
+      }
+    },
+    {
+      "field_id": "holiday_dispensing",
+      "key": "공휴일조제",
+      "semantic_path": "조제.공휴일조제",
+      "anchor_id": "manual_1783570333096",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000007",
+        "det_000008"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "체크박스 값입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          717,
+          259,
+          13,
+          17
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0134_manual_1783570333096.png",
+        "note": "공휴일 라벨 왼쪽의 작은 체크박스입니다."
+      }
+    },
+    {
+      "field_id": "drug_cost_partial_self",
+      "key": "약품비 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.약품비.일부본인부담_본인부담금",
+      "anchor_id": "visual_0019",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000009",
+        "det_000011",
+        "det_000014"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          344,
+          104,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0089_visual_0019.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "drug_cost_partial_nhis",
+      "key": "약품비 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.약품비.일부본인부담_공단부담금",
+      "anchor_id": "visual_0020",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000009",
+        "det_000011",
+        "det_000015"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          431,
+          344,
+          130,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0090_visual_0020.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "drug_cost_full_self",
+      "key": "약품비 급여 전액 본인부담",
+      "semantic_path": "비용.급여.약품비.전액본인부담",
+      "anchor_id": "visual_0022",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000009",
+        "det_000012",
+        "det_000016"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          564,
+          344,
+          118,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0091_visual_0022.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "drug_cost_noncovered",
+      "key": "약품비 비급여",
+      "semantic_path": "비용.비급여.약품비",
+      "anchor_id": "visual_0023",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000013"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          344,
+          358,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0092_visual_0023.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "dispensing_basic_fee_partial_self",
+      "key": "조제기본료 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.조제기본료.일부본인부담_본인부담금",
+      "anchor_id": "visual_0024",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000018",
+        "det_000009",
+        "det_000011",
+        "det_000014"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          366,
+          104,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0093_visual_0024.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "dispensing_basic_fee_partial_nhis",
+      "key": "조제기본료 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.조제기본료.일부본인부담_공단부담금",
+      "anchor_id": "visual_0025",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000018",
+        "det_000009",
+        "det_000011",
+        "det_000015"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          431,
+          366,
+          130,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0094_visual_0025.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "dispensing_basic_fee_full_self",
+      "key": "조제기본료 급여 전액 본인부담",
+      "semantic_path": "비용.급여.조제기본료.전액본인부담",
+      "anchor_id": "visual_0027",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000018",
+        "det_000009",
+        "det_000012",
+        "det_000016"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          564,
+          366,
+          118,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0095_visual_0027.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "dispensing_basic_fee_noncovered",
+      "key": "조제기본료 비급여",
+      "semantic_path": "비용.비급여.조제기본료",
+      "anchor_id": "visual_0028",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000018",
+        "det_000013"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          366,
+          358,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0096_visual_0028.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "medication_guidance_fee_partial_self",
+      "key": "복약지도료 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.복약지도료.일부본인부담_본인부담금",
+      "anchor_id": "visual_0029",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000019",
+        "det_000009",
+        "det_000011",
+        "det_000014"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          388,
+          104,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0097_visual_0029.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "medication_guidance_fee_partial_nhis",
+      "key": "복약지도료 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.복약지도료.일부본인부담_공단부담금",
+      "anchor_id": "visual_0030",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000019",
+        "det_000009",
+        "det_000011",
+        "det_000015"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          431,
+          388,
+          131,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0098_visual_0030.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "medication_guidance_fee_full_self",
+      "key": "복약지도료 급여 전액 본인부담",
+      "semantic_path": "비용.급여.복약지도료.전액본인부담",
+      "anchor_id": "visual_0032",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000019",
+        "det_000009",
+        "det_000012",
+        "det_000016"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          564,
+          388,
+          118,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0099_visual_0032.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "medication_guidance_fee_noncovered",
+      "key": "복약지도료 비급여",
+      "semantic_path": "비용.비급여.복약지도료",
+      "anchor_id": "visual_0033",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000019",
+        "det_000013"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          388,
+          358,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0100_visual_0033.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "dispensing_fee_partial_self",
+      "key": "조제료 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.조제료.일부본인부담_본인부담금",
+      "anchor_id": "visual_0034",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000020",
+        "det_000009",
+        "det_000011",
+        "det_000014"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          410,
+          104,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0101_visual_0034.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "dispensing_fee_partial_nhis",
+      "key": "조제료 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.조제료.일부본인부담_공단부담금",
+      "anchor_id": "visual_0035",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000020",
+        "det_000009",
+        "det_000011",
+        "det_000015"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          431,
+          410,
+          130,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0102_visual_0035.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "dispensing_fee_full_self",
+      "key": "조제료 급여 전액 본인부담",
+      "semantic_path": "비용.급여.조제료.전액본인부담",
+      "anchor_id": "visual_0037",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000020",
+        "det_000009",
+        "det_000012",
+        "det_000016"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          564,
+          410,
+          118,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0103_visual_0037.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "dispensing_fee_noncovered",
+      "key": "조제료 비급여",
+      "semantic_path": "비용.비급여.조제료",
+      "anchor_id": "visual_0038",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000020",
+        "det_000013"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          410,
+          358,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0104_visual_0038.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "management_fee_partial_self",
+      "key": "관리료 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.관리료.일부본인부담_본인부담금",
+      "anchor_id": "visual_0039",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000021",
+        "det_000009",
+        "det_000011",
+        "det_000014"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          432,
+          104,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0105_visual_0039.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "management_fee_partial_nhis",
+      "key": "관리료 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.관리료.일부본인부담_공단부담금",
+      "anchor_id": "visual_0040",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000021",
+        "det_000009",
+        "det_000011",
+        "det_000015"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          431,
+          432,
+          130,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0106_visual_0040.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "management_fee_full_self",
+      "key": "관리료 급여 전액 본인부담",
+      "semantic_path": "비용.급여.관리료.전액본인부담",
+      "anchor_id": "visual_0042",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000021",
+        "det_000009",
+        "det_000012",
+        "det_000016"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          564,
+          432,
+          118,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0107_visual_0042.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "management_fee_noncovered",
+      "key": "관리료 비급여",
+      "semantic_path": "비용.비급여.관리료",
+      "anchor_id": "visual_0043",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000021",
+        "det_000013"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          432,
+          358,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0108_visual_0043.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "selective_benefit_partial_self",
+      "key": "선별급여 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.선별급여.일부본인부담_본인부담금",
+      "anchor_id": "visual_0044",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000022",
+        "det_000009",
+        "det_000011",
+        "det_000014"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          454,
+          104,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0109_visual_0044.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "selective_benefit_partial_nhis",
+      "key": "선별급여 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.선별급여.일부본인부담_공단부담금",
+      "anchor_id": "visual_0045",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000022",
+        "det_000009",
+        "det_000011",
+        "det_000015"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          431,
+          454,
+          130,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0110_visual_0045.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "selective_benefit_full_self",
+      "key": "선별급여 급여 전액 본인부담",
+      "semantic_path": "비용.급여.선별급여.전액본인부담",
+      "anchor_id": "visual_0047",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000022",
+        "det_000009",
+        "det_000012",
+        "det_000016"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          564,
+          454,
+          118,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0111_visual_0047.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "selective_benefit_noncovered",
+      "key": "선별급여 비급여",
+      "semantic_path": "비용.비급여.선별급여",
+      "anchor_id": "visual_0048",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000022",
+        "det_000013"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          454,
+          358,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0112_visual_0048.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "senior_fixed_amount_partial_self",
+      "key": "65세 이상 등 정액 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.65세 이상 등 정액.일부본인부담_본인부담금",
+      "anchor_id": "visual_0049",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000023",
+        "det_000009",
+        "det_000011",
+        "det_000014"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          480,
+          104,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0113_visual_0049.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "senior_fixed_amount_partial_nhis",
+      "key": "65세 이상 등 정액 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.65세 이상 등 정액.일부본인부담_공단부담금",
+      "anchor_id": "visual_0050",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000023",
+        "det_000009",
+        "det_000011",
+        "det_000015"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          431,
+          480,
+          130,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0114_visual_0050.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "senior_fixed_amount_full_self",
+      "key": "65세 이상 등 정액 급여 전액 본인부담",
+      "semantic_path": "비용.급여.65세 이상 등 정액.전액본인부담",
+      "anchor_id": "visual_0052",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000023",
+        "det_000009",
+        "det_000012",
+        "det_000016"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          564,
+          480,
+          118,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0115_visual_0052.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "senior_fixed_amount_noncovered",
+      "key": "65세 이상 등 정액 비급여",
+      "semantic_path": "비용.비급여.65세 이상 등 정액",
+      "anchor_id": "visual_0053",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000023",
+        "det_000013"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          480,
+          358,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0116_visual_0053.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "other_partial_self",
+      "key": "기타 급여 일부본인부담 본인부담금",
+      "semantic_path": "비용.급여.기타.일부본인부담_본인부담금",
+      "anchor_id": "visual_0054",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000024",
+        "det_000009",
+        "det_000011",
+        "det_000014"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          502,
+          104,
+          17
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0117_visual_0054.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "other_partial_nhis",
+      "key": "기타 급여 일부본인부담 공단부담금",
+      "semantic_path": "비용.급여.기타.일부본인부담_공단부담금",
+      "anchor_id": "visual_0055",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000024",
+        "det_000009",
+        "det_000011",
+        "det_000015"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          431,
+          501,
+          130,
+          19
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0118_visual_0055.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "other_full_self",
+      "key": "기타 급여 전액 본인부담",
+      "semantic_path": "비용.급여.기타.전액본인부담",
+      "anchor_id": "visual_0057",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000024",
+        "det_000009",
+        "det_000012",
+        "det_000016"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          564,
+          502,
+          118,
+          17
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0119_visual_0057.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "other_noncovered",
+      "key": "기타 비급여",
+      "semantic_path": "비용.비급여.기타",
+      "anchor_id": "visual_0058",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000024",
+        "det_000013"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "금액 칸 주변에 정적 원 단위가 없어 금액 generator 값을 그대로 사용합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          502,
+          358,
+          17
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0120_visual_0058.png",
+        "note": "항목별 금액 표의 빈 셀입니다."
+      }
+    },
+    {
+      "field_id": "sum_partial_self",
+      "key": "합계 일부본인부담 본인부담금",
+      "semantic_path": "비용.합계.일부본인부담_본인부담금",
+      "anchor_id": "manual_1783570397197",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000025",
+        "det_000026",
+        "det_000014"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_total",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          346,
+          523,
+          82,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0136_manual_1783570397197.png",
+        "note": "합계 행의 수동 확정 금액 bbox입니다."
+      }
+    },
+    {
+      "field_id": "sum_partial_nhis",
+      "key": "합계 일부본인부담 공단부담금",
+      "semantic_path": "비용.합계.일부본인부담_공단부담금",
+      "anchor_id": "manual_1783570401607",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000025",
+        "det_000027",
+        "det_000015"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_total",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          454,
+          523,
+          108,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0137_manual_1783570401607.png",
+        "note": "합계 행의 수동 확정 금액 bbox입니다."
+      }
+    },
+    {
+      "field_id": "sum_full_self",
+      "key": "합계 전액 본인부담",
+      "semantic_path": "비용.합계.전액본인부담",
+      "anchor_id": "manual_1783570405663",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000025",
+        "det_000028",
+        "det_000016"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_total",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          586,
+          524,
+          97,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0138_manual_1783570405663.png",
+        "note": "합계 행의 수동 확정 금액 bbox입니다."
+      }
+    },
+    {
+      "field_id": "sum_noncovered",
+      "key": "합계 비급여",
+      "semantic_path": "비용.합계.비급여",
+      "anchor_id": "manual_1783570409162",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000025",
+        "det_000029",
+        "det_000013"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_total",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          710,
+          523,
+          336,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0139_manual_1783570409162.png",
+        "note": "합계 행의 수동 확정 금액 bbox입니다."
+      }
+    },
+    {
+      "field_id": "drug_cost_total",
+      "key": "⑤ 약제비 총액",
+      "semantic_path": "비용.약제비총액",
+      "anchor_id": "visual_0060",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000030",
+        "det_000032"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_total",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "약제비 총액 입력칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          546,
+          168,
+          46
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0121_visual_0060.png",
+        "note": "⑤ 약제비 총액 입력 영역입니다."
+      }
+    },
+    {
+      "field_id": "patient_burden_total",
+      "key": "⑥ 환자부담 총액",
+      "semantic_path": "비용.환자부담총액",
+      "anchor_id": "visual_0070",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000035",
+        "det_000038"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_total",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "환자부담 총액 입력칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          322,
+          592,
+          168,
+          46
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0125_visual_0070.png",
+        "note": "⑥ 환자부담 총액 입력 영역입니다."
+      }
+    },
+    {
+      "field_id": "paid_card",
+      "key": "납부한 금액 카드",
+      "semantic_path": "비용.납부한금액.카드",
+      "anchor_id": "visual_0063",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000031",
+        "det_000033",
+        "det_000036"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "카드 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          546,
+          358,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0122_visual_0063.png",
+        "note": "납부한 금액 중 카드 금액 입력칸입니다."
+      }
+    },
+    {
+      "field_id": "paid_cash_receipt",
+      "key": "납부한 금액 현금영수증",
+      "semantic_path": "비용.납부한금액.현금영수증",
+      "anchor_id": "visual_0066",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000034",
+        "det_000033",
+        "det_000036"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "현금영수증 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          570,
+          358,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0123_visual_0066.png",
+        "note": "납부한 금액 중 현금영수증 금액 입력칸입니다."
+      }
+    },
+    {
+      "field_id": "paid_cash",
+      "key": "납부한 금액 현금",
+      "semantic_path": "비용.납부한금액.현금",
+      "anchor_id": "visual_0069",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000037",
+        "det_000033",
+        "det_000036"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_cell",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "현금 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          594,
+          358,
+          19
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0124_visual_0069.png",
+        "note": "납부한 금액 중 현금 금액 입력칸입니다."
+      }
+    },
+    {
+      "field_id": "paid_total",
+      "key": "납부한 금액 합계",
+      "semantic_path": "비용.납부한금액.합계",
+      "anchor_id": "visual_0073",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000033",
+        "det_000036"
+      ],
+      "value_type": "money",
+      "generator": "money.krw",
+      "style_class": "money_total",
+      "unit_policy": {
+        "unit_in_value": true,
+        "reason": "납부 합계 금액 칸에 정적 원 단위가 없습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          686,
+          617,
+          358,
+          19
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0126_visual_0073.png",
+        "note": "납부한 금액의 합계 입력칸입니다."
+      }
+    },
+    {
+      "field_id": "cash_receipt_issued",
+      "key": "현금영수증 발급여부",
+      "semantic_path": "현금영수증.발급여부",
+      "anchor_id": "manual_1783570416379",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000040",
+        "det_000041"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "사용자 지시에 따라 현금영수증 우측 괄호 bbox를 체크박스로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          368,
+          641,
+          53,
+          19
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0140_manual_1783570416379.png",
+        "note": "현금영수증 괄호 안 수동 bbox입니다."
+      }
+    },
+    {
+      "field_id": "cash_receipt_identity_number",
+      "key": "현금영수증 신분확인번호",
+      "semantic_path": "현금영수증.신분확인번호",
+      "anchor_id": "visual_0076",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000043"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:###########",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          662,
+          238,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0127_visual_0076.png",
+        "note": "신분확인번호 값 입력칸입니다."
+      }
+    },
+    {
+      "field_id": "cash_receipt_approval_number",
+      "key": "현금영수증 승인번호",
+      "semantic_path": "현금영수증.승인번호",
+      "anchor_id": "visual_0081",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:************",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          684,
+          237,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0128_visual_0081.png",
+        "note": "현금영수증 승인번호 값 입력칸입니다."
+      }
+    },
+    {
+      "field_id": "institution_clinic",
+      "key": "의원급·보건기관",
+      "semantic_path": "처방한요양기관.의원급_보건기관",
+      "anchor_id": "manual_1783570540712",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000046"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "요양기관 종별 체크박스입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          335,
+          708,
+          19,
+          16
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0144_manual_1783570540712.png",
+        "note": "처방한 요양기관 종별 체크박스입니다."
+      }
+    },
+    {
+      "field_id": "institution_hospital",
+      "key": "병원급",
+      "semantic_path": "처방한요양기관.병원급",
+      "anchor_id": "manual_1783570531162",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000047"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "요양기관 종별 체크박스입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          529,
+          707,
+          15,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0142_manual_1783570531162.png",
+        "note": "처방한 요양기관 종별 체크박스입니다."
+      }
+    },
+    {
+      "field_id": "institution_general_hospital",
+      "key": "종합병원",
+      "semantic_path": "처방한요양기관.종합병원",
+      "anchor_id": "manual_1783570546612",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000048"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "요양기관 종별 체크박스입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          336,
+          726,
+          18,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0145_manual_1783570546612.png",
+        "note": "처방한 요양기관 종별 체크박스입니다."
+      }
+    },
+    {
+      "field_id": "institution_tertiary_hospital",
+      "key": "상급종합병원",
+      "semantic_path": "처방한요양기관.상급종합병원",
+      "anchor_id": "manual_1783570535246",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045",
+        "det_000049"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "요양기관 종별 체크박스입니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          529,
+          725,
+          17,
+          19
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0143_manual_1783570535246.png",
+        "note": "처방한 요양기관 종별 체크박스입니다."
+      }
+    },
+    {
+      "field_id": "business_registration_number",
+      "key": "사업자등록번호",
+      "semantic_path": "처방한요양기관.사업자등록번호",
+      "anchor_id": "visual_0087",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:###-##-#####",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          746,
+          238,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0129_visual_0087.png",
+        "note": "전체 템플릿 이미지에서 값 입력 영역으로 확인된 bbox입니다."
+      }
+    },
+    {
+      "field_id": "business_name",
+      "key": "상호",
+      "semantic_path": "처방한요양기관.상호",
+      "anchor_id": "visual_0090",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000051"
+      ],
+      "value_type": "institution_name",
+      "generator": "medical.institution_ko",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          661,
+          746,
+          384,
+          19
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0130_visual_0090.png",
+        "note": "전체 템플릿 이미지에서 값 입력 영역으로 확인된 bbox입니다."
+      }
+    },
+    {
+      "field_id": "business_address",
+      "key": "사업장 소재지",
+      "semantic_path": "처방한요양기관.사업장소재지",
+      "anchor_id": "visual_0095",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000052"
+      ],
+      "value_type": "address",
+      "generator": "address.ko",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          320,
+          767,
+          724,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0131_visual_0095.png",
+        "note": "전체 템플릿 이미지에서 값 입력 영역으로 확인된 bbox입니다."
+      }
+    },
+    {
+      "field_id": "business_phone",
+      "key": "전화번호",
+      "semantic_path": "처방한요양기관.전화번호",
+      "anchor_id": "visual_0096",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000053"
+      ],
+      "value_type": "phone",
+      "generator": "person.phone_kr",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          323,
+          788,
+          202,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0132_visual_0096.png",
+        "note": "전체 템플릿 이미지에서 값 입력 영역으로 확인된 bbox입니다."
+      }
+    },
+    {
+      "field_id": "representative_name",
+      "key": "대표자",
+      "semantic_path": "처방한요양기관.대표자",
+      "anchor_id": "manual_1783570459461",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000054",
+        "det_000055"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "handwriting_default",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 위치 주변에 별도 정적 단위가 확인되지 않았거나 값 자체 형식으로 처리합니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          647,
+          789,
+          108,
+          19
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0141_manual_1783570459461.png",
+        "note": "전체 템플릿 이미지에서 값 입력 영역으로 확인된 bbox입니다."
+      }
+    },
+    {
+      "field_id": "issue_year",
+      "key": "발행일자 년",
+      "semantic_path": "발행일자.년",
+      "anchor_id": "manual_1783570562665",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000056"
+      ],
+      "value_type": "date_year",
+      "generator": "date.year",
+      "style_class": "date_cell",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 오른쪽에 정적 단위 년이 인쇄되어 있어 generator에는 단위를 넣지 않습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          383,
+          810,
+          97,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0146_manual_1783570562665.png",
+        "note": "전체 템플릿 이미지에서 값 입력 영역으로 확인된 bbox입니다."
+      }
+    },
+    {
+      "field_id": "issue_month",
+      "key": "발행일자 월",
+      "semantic_path": "발행일자.월",
+      "anchor_id": "manual_1783570568629",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000057"
+      ],
+      "value_type": "date_month",
+      "generator": "date.month",
+      "style_class": "date_cell",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 오른쪽에 정적 단위 월이 인쇄되어 있어 generator에는 단위를 넣지 않습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          505,
+          810,
+          69,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0147_manual_1783570568629.png",
+        "note": "전체 템플릿 이미지에서 값 입력 영역으로 확인된 bbox입니다."
+      }
+    },
+    {
+      "field_id": "issue_day",
+      "key": "발행일자 일",
+      "semantic_path": "발행일자.일",
+      "anchor_id": "manual_1783570572294",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000058"
+      ],
+      "value_type": "date_day",
+      "generator": "date.day",
+      "style_class": "date_cell",
+      "unit_policy": {
+        "unit_in_value": false,
+        "reason": "값 오른쪽에 정적 단위 일이 인쇄되어 있어 generator에는 단위를 넣지 않습니다."
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/처방전·약제비영수증__MED-06/samples/original/약제비계산서_page_001.jpg",
+        "bbox": [
+          602,
+          810,
+          88,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/처방전·약제비영수증__MED-06/authoring/agent_requests/20260709T042403496711Z/visual_evidence/crops/crop_0148_manual_1783570572294.png",
+        "note": "전체 템플릿 이미지에서 값 입력 영역으로 확인된 bbox입니다."
+      }
+    }
+  ],
+  "unmapped_use_anchors": [],
+  "authoring_notes": [
+    "blank_template이므로 OCR/static label/keep bbox는 label_anchor_ids로만 사용했습니다.",
+    "모든 field anchor_id는 anchor_map_draft.json의 status=use, role=value_region anchor입니다.",
+    "금액 합계 관계는 지원되는 sum constraint로 가능한 범위까지 모델링했습니다."
+  ]
+}

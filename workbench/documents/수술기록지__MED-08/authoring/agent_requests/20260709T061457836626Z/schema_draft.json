@@ -1,0 +1,2161 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-08",
+  "title": "수술기록지",
+  "sample_kind": "blank_template",
+  "semantic_schema": {
+    "문서상단": {
+      "차트No": "",
+      "작성자": "",
+      "작성일": {
+        "년": "",
+        "월": "",
+        "일": ""
+      }
+    },
+    "기본정보": {
+      "진료과": "",
+      "성명": "",
+      "병실": "",
+      "등록번호": "",
+      "나이": "",
+      "수술일자": "",
+      "의사": "",
+      "성별": "",
+      "보호자": ""
+    },
+    "진단및가산": {
+      "병명": "",
+      "가산항목": ""
+    },
+    "수술목록": {
+      "1행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "2행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "3행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      }
+    },
+    "재료처치": {
+      "1행": {
+        "재료": "",
+        "수량": ""
+      },
+      "2행": {
+        "재료": "",
+        "수량": ""
+      },
+      "3행": {
+        "재료": "",
+        "수량": ""
+      },
+      "4행": {
+        "재료": "",
+        "수량": ""
+      },
+      "5행": {
+        "재료": "",
+        "수량": ""
+      }
+    },
+    "마취료": {
+      "마취시간": "",
+      "마취방법": {
+        "General Anesthesis": "",
+        "Spinal Anesthesis": "",
+        "Epidural Anesthesis": "",
+        "BPB": ""
+      },
+      "전신마취제": {
+        "Ethran": "",
+        "Forane": ""
+      },
+      "마취재료": "",
+      "주사처방": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "chart_no",
+      "key": "차트 No",
+      "semantic_path": "문서상단.차트No",
+      "anchor_id": "manual_1783577233204",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000001"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:########",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          909,
+          123,
+          135,
+          24
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0107_manual_1783577233204.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "작성자",
+      "key": "작성자",
+      "semantic_path": "문서상단.작성자",
+      "anchor_id": "manual_1783577237088",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          908,
+          158,
+          137,
+          22
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0108_manual_1783577237088.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "작성일_년",
+      "key": "일자 년",
+      "semantic_path": "문서상단.작성일.년",
+      "anchor_id": "manual_1783577258604",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "manual_1783577245537",
+        "manual_1783577249971"
+      ],
+      "value_type": "date_part",
+      "generator": "date.year",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "static_suffix_present",
+        "static_text": "년",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          930,
+          194,
+          21,
+          26
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0113_manual_1783577258604.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "작성일_월",
+      "key": "일자 월",
+      "semantic_path": "문서상단.작성일.월",
+      "anchor_id": "manual_1783577262021",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "manual_1783577252104"
+      ],
+      "value_type": "date_part",
+      "generator": "date.month",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "static_suffix_present",
+        "static_text": "월",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          966,
+          194,
+          22,
+          26
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0114_manual_1783577262021.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "작성일_일",
+      "key": "일자 일",
+      "semantic_path": "문서상단.작성일.일",
+      "anchor_id": "manual_1783577264254",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "manual_1783577254420"
+      ],
+      "value_type": "date_part",
+      "generator": "date.day",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "static_suffix_present",
+        "static_text": "일",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          1005,
+          194,
+          18,
+          27
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0115_manual_1783577264254.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "진료과",
+      "key": "진료과",
+      "semantic_path": "기본정보.진료과",
+      "anchor_id": "manual_1783576264783",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000006"
+      ],
+      "value_type": "text",
+      "generator": "pool:departments",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          296,
+          273,
+          150,
+          38
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0036_manual_1783576264783.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "성명",
+      "key": "성명",
+      "semantic_path": "기본정보.성명",
+      "anchor_id": "manual_1783576269199",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000010"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          296,
+          312,
+          150,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0037_manual_1783576269199.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "병실",
+      "key": "병실",
+      "semantic_path": "기본정보.병실",
+      "anchor_id": "manual_1783576272433",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000016"
+      ],
+      "value_type": "text",
+      "generator": "pool:ward_rooms",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          296,
+          353,
+          151,
+          38
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0038_manual_1783576272433.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "등록번호",
+      "key": "등록번호",
+      "semantic_path": "기본정보.등록번호",
+      "anchor_id": "manual_1783576279216",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000007"
+      ],
+      "value_type": "identifier",
+      "generator": "pattern:########",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          597,
+          273,
+          149,
+          39
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0039_manual_1783576279216.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "나이",
+      "key": "나이",
+      "semantic_path": "기본정보.나이",
+      "anchor_id": "manual_1783576284800",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000012"
+      ],
+      "value_type": "number",
+      "generator": "pattern:##",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible_age_unit_uncertain",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          597,
+          312,
+          149,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0040_manual_1783576284800.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술일자",
+      "key": "수술일자",
+      "semantic_path": "기본정보.수술일자",
+      "anchor_id": "manual_1783576296215",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000018"
+      ],
+      "value_type": "date",
+      "generator": "date.kr",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          597,
+          353,
+          150,
+          41
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0041_manual_1783576296215.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "의사",
+      "key": "의사",
+      "semantic_path": "기본정보.의사",
+      "anchor_id": "manual_1783576304682",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000008"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          897,
+          270,
+          149,
+          41
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0042_manual_1783576304682.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "성별",
+      "key": "성별",
+      "semantic_path": "기본정보.성별",
+      "anchor_id": "manual_1783576311533",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000014"
+      ],
+      "value_type": "text",
+      "generator": "choice:남|여",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          897,
+          313,
+          150,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0043_manual_1783576311533.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "보호자",
+      "key": "보호자",
+      "semantic_path": "기본정보.보호자",
+      "anchor_id": "manual_1783576318583",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000019"
+      ],
+      "value_type": "person_name",
+      "generator": "person.name_ko",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          897,
+          354,
+          150,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0044_manual_1783576318583.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "병명",
+      "key": "병명",
+      "semantic_path": "진단및가산.병명",
+      "anchor_id": "manual_1783576324367",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000020"
+      ],
+      "value_type": "text",
+      "generator": "pool:diagnoses",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          263,
+          393,
+          784,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0045_manual_1783576324367.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "가산항목",
+      "key": "가산항목",
+      "semantic_path": "진단및가산.가산항목",
+      "anchor_id": "manual_1783576331166",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000022"
+      ],
+      "value_type": "text",
+      "generator": "pool:additional_items",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          262,
+          434,
+          785,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0046_manual_1783576331166.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술1_수술코드",
+      "key": "수술코드 1",
+      "semantic_path": "수술목록.1행.수술코드",
+      "anchor_id": "manual_1783576339134",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000023"
+      ],
+      "value_type": "text",
+      "generator": "pool:surgery_code_values",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          145,
+          516,
+          117,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0047_manual_1783576339134.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술1_수술명",
+      "key": "수술명 1",
+      "semantic_path": "수술목록.1행.수술명",
+      "anchor_id": "manual_1783576345683",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000024"
+      ],
+      "value_type": "text",
+      "generator": "pool:surgery_name_values",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          262,
+          516,
+          485,
+          39
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0048_manual_1783576345683.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술1_수량",
+      "key": "수량 1",
+      "semantic_path": "수술목록.1행.수량",
+      "anchor_id": "manual_1783576351950",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000025"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          748,
+          515,
+          98,
+          39
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0049_manual_1783576351950.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술1_주수술",
+      "key": "주수술 1",
+      "semantic_path": "수술목록.1행.주수술",
+      "anchor_id": "manual_1783576359717",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          847,
+          515,
+          99,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0050_manual_1783576359717.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술1_부수술",
+      "key": "부수술 1",
+      "semantic_path": "수술목록.1행.부수술",
+      "anchor_id": "manual_1783576406718",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          946,
+          515,
+          102,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0051_manual_1783576406718.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술2_수술코드",
+      "key": "수술코드 2",
+      "semantic_path": "수술목록.2행.수술코드",
+      "anchor_id": "manual_1783576414701",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000023"
+      ],
+      "value_type": "text",
+      "generator": "pool:surgery_code_values",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          145,
+          556,
+          117,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0052_manual_1783576414701.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술2_수술명",
+      "key": "수술명 2",
+      "semantic_path": "수술목록.2행.수술명",
+      "anchor_id": "manual_1783576621635",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000024"
+      ],
+      "value_type": "text",
+      "generator": "pool:surgery_name_values",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          262,
+          556,
+          483,
+          39
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0061_manual_1783576621635.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술2_수량",
+      "key": "수량 2",
+      "semantic_path": "수술목록.2행.수량",
+      "anchor_id": "manual_1783576833183",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000025"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          746,
+          555,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0079_manual_1783576833183.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술2_주수술",
+      "key": "주수술 2",
+      "semantic_path": "수술목록.2행.주수술",
+      "anchor_id": "manual_1783576837317",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          847,
+          555,
+          100,
+          41
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0080_manual_1783576837317.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술2_부수술",
+      "key": "부수술 2",
+      "semantic_path": "수술목록.2행.부수술",
+      "anchor_id": "manual_1783576722364",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          948,
+          555,
+          99,
+          42
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0070_manual_1783576722364.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술3_수술코드",
+      "key": "수술코드 3",
+      "semantic_path": "수술목록.3행.수술코드",
+      "anchor_id": "manual_1783576425167",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000023"
+      ],
+      "value_type": "text",
+      "generator": "pool:surgery_code_values",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          144,
+          596,
+          118,
+          41
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0053_manual_1783576425167.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술3_수술명",
+      "key": "수술명 3",
+      "semantic_path": "수술목록.3행.수술명",
+      "anchor_id": "manual_1783576630102",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000024"
+      ],
+      "value_type": "text",
+      "generator": "pool:surgery_name_values",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          262,
+          595,
+          486,
+          42
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0062_manual_1783576630102.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술3_수량",
+      "key": "수량 3",
+      "semantic_path": "수술목록.3행.수량",
+      "anchor_id": "manual_1783576840217",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000025"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          748,
+          597,
+          99,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0081_manual_1783576840217.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술3_주수술",
+      "key": "주수술 3",
+      "semantic_path": "수술목록.3행.주수술",
+      "anchor_id": "manual_1783576896551",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          848,
+          596,
+          96,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0090_manual_1783576896551.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "수술3_부수술",
+      "key": "부수술 3",
+      "semantic_path": "수술목록.3행.부수술",
+      "anchor_id": "manual_1783576726598",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000027"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          948,
+          597,
+          98,
+          41
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0071_manual_1783576726598.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "재료처치1_재료",
+      "key": "재료처치 재료 1",
+      "semantic_path": "재료처치.1행.재료",
+      "anchor_id": "manual_1783577183603_row01",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000030"
+      ],
+      "value_type": "text",
+      "generator": "pool:material_names",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          148,
+          1003,
+          400,
+          113
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577183603_row01.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 재료 1행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "재료처치1_수량",
+      "key": "재료처치 수량 1",
+      "semantic_path": "재료처치.1행.수량",
+      "anchor_id": "manual_1783577225121_row01",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000032"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          549,
+          1004,
+          82,
+          113
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577225121_row01.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 수량 1행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "재료처치2_재료",
+      "key": "재료처치 재료 2",
+      "semantic_path": "재료처치.2행.재료",
+      "anchor_id": "manual_1783577183603_row02",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000030"
+      ],
+      "value_type": "text",
+      "generator": "pool:material_names",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          148,
+          1116,
+          400,
+          113
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577183603_row02.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 재료 2행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "재료처치2_수량",
+      "key": "재료처치 수량 2",
+      "semantic_path": "재료처치.2행.수량",
+      "anchor_id": "manual_1783577225121_row02",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000032"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          549,
+          1117,
+          82,
+          113
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577225121_row02.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 수량 2행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "재료처치3_재료",
+      "key": "재료처치 재료 3",
+      "semantic_path": "재료처치.3행.재료",
+      "anchor_id": "manual_1783577183603_row03",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000030"
+      ],
+      "value_type": "text",
+      "generator": "pool:material_names",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          148,
+          1229,
+          400,
+          113
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577183603_row03.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 재료 3행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "재료처치3_수량",
+      "key": "재료처치 수량 3",
+      "semantic_path": "재료처치.3행.수량",
+      "anchor_id": "manual_1783577225121_row03",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000032"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          549,
+          1230,
+          82,
+          113
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577225121_row03.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 수량 3행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "재료처치4_재료",
+      "key": "재료처치 재료 4",
+      "semantic_path": "재료처치.4행.재료",
+      "anchor_id": "manual_1783577183603_row04",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000030"
+      ],
+      "value_type": "text",
+      "generator": "pool:material_names",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          148,
+          1342,
+          400,
+          113
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577183603_row04.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 재료 4행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "재료처치4_수량",
+      "key": "재료처치 수량 4",
+      "semantic_path": "재료처치.4행.수량",
+      "anchor_id": "manual_1783577225121_row04",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000032"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          549,
+          1343,
+          82,
+          113
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577225121_row04.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 수량 4행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "재료처치5_재료",
+      "key": "재료처치 재료 5",
+      "semantic_path": "재료처치.5행.재료",
+      "anchor_id": "manual_1783577183603_row05",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000030"
+      ],
+      "value_type": "text",
+      "generator": "pool:material_names",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          148,
+          1455,
+          400,
+          113
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577183603_row05.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 재료 5행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "재료처치5_수량",
+      "key": "재료처치 수량 5",
+      "semantic_path": "재료처치.5행.수량",
+      "anchor_id": "manual_1783577225121_row05",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000032"
+      ],
+      "value_type": "number",
+      "generator": "choice:1|2|3|4|5",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          549,
+          1456,
+          82,
+          114
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_manual_1783577225121_row05.png",
+        "crop_usage": "zoom_aid_only",
+        "note": "MED-08 special-case virtual-grid split: 수량 5행 target derived from parent anchor."
+      }
+    },
+    {
+      "field_id": "마취시간",
+      "key": "마취시간",
+      "semantic_path": "마취료.마취시간",
+      "anchor_id": "manual_1783577433556",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000029",
+        "det_000033"
+      ],
+      "value_type": "text",
+      "generator": "choice:30분|45분|1시간|1시간 30분|2시간",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible_natural_duration",
+        "value_includes_unit": true
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          748,
+          962,
+          298,
+          40
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0116_manual_1783577433556.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "마취방법_전신마취",
+      "key": "General Anesthesis",
+      "semantic_path": "마취료.마취방법.General Anesthesis",
+      "anchor_id": "manual_1783577076303",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000029",
+        "det_000036",
+        "det_000034"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          758,
+          1015,
+          13,
+          15
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0097_manual_1783577076303.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "마취방법_척추마취",
+      "key": "Spinal Anesthesis",
+      "semantic_path": "마취료.마취방법.Spinal Anesthesis",
+      "anchor_id": "manual_1783577079220",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000029",
+        "det_000036",
+        "det_000035"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          759,
+          1057,
+          12,
+          13
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0098_manual_1783577079220.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "마취방법_경막외마취",
+      "key": "Epidural Anesthesis",
+      "semantic_path": "마취료.마취방법.Epidural Anesthesis",
+      "anchor_id": "manual_1783577082586",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000029",
+        "det_000036",
+        "det_000037"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          759,
+          1096,
+          12,
+          12
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0099_manual_1783577082586.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "마취방법_BPB",
+      "key": "BPB",
+      "semantic_path": "마취료.마취방법.BPB",
+      "anchor_id": "manual_1783577085752",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000029",
+        "det_000036",
+        "det_000038"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          759,
+          1137,
+          12,
+          13
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0100_manual_1783577085752.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "전신마취제_Ethran",
+      "key": "Ethran",
+      "semantic_path": "마취료.전신마취제.Ethran",
+      "anchor_id": "manual_1783577153037",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000029",
+        "det_000040",
+        "det_000039"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          758,
+          1178,
+          14,
+          12
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0101_manual_1783577153037.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "전신마취제_Forane",
+      "key": "Forane",
+      "semantic_path": "마취료.전신마취제.Forane",
+      "anchor_id": "manual_1783577156204",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000029",
+        "det_000040",
+        "det_000041"
+      ],
+      "value_type": "checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "checkbox_mark",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          759,
+          1217,
+          13,
+          14
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0102_manual_1783577156204.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "마취재료",
+      "key": "마취재료",
+      "semantic_path": "마취료.마취재료",
+      "anchor_id": "manual_1783577160286",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000029",
+        "det_000042"
+      ],
+      "value_type": "text",
+      "generator": "free_text.short",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          748,
+          1246,
+          296,
+          119
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0103_manual_1783577160286.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    },
+    {
+      "field_id": "주사처방",
+      "key": "주사처방",
+      "semantic_path": "마취료.주사처방",
+      "anchor_id": "manual_1783577166270",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000029",
+        "det_000043"
+      ],
+      "value_type": "text",
+      "generator": "free_text.short",
+      "style_class": "handwriting_text",
+      "unit_policy": {
+        "mode": "no_static_unit_visible",
+        "value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수술기록지__MED-08/samples/original/수술기록지_page_001.jpg",
+        "bbox": [
+          747,
+          1364,
+          294,
+          204
+        ],
+        "bbox_format": "xywh",
+        "source_of_truth": "full_template_image",
+        "crop_path": "workbench/documents/수술기록지__MED-08/authoring/agent_requests/20260709T061457836626Z/visual_evidence/crops/crop_0104_manual_1783577166270.png",
+        "crop_usage": "zoom_aid_only"
+      }
+    }
+  ],
+  "unmapped_use_anchors": [
+    {
+      "anchor_id": "manual_1783576431217",
+      "bbox": [
+        145,
+        636,
+        118,
+        42
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576436050",
+      "bbox": [
+        144,
+        677,
+        119,
+        41
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576442351",
+      "bbox": [
+        144,
+        718,
+        118,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576572717",
+      "bbox": [
+        143,
+        759,
+        120,
+        41
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576579268",
+      "bbox": [
+        142,
+        799,
+        120,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576584452",
+      "bbox": [
+        143,
+        840,
+        120,
+        42
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576588751",
+      "bbox": [
+        144,
+        882,
+        120,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576638601",
+      "bbox": [
+        263,
+        639,
+        483,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576652952",
+      "bbox": [
+        264,
+        679,
+        484,
+        39
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576660951",
+      "bbox": [
+        263,
+        717,
+        484,
+        42
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576669774",
+      "bbox": [
+        263,
+        760,
+        483,
+        38
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576693546",
+      "bbox": [
+        263,
+        800,
+        484,
+        41
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576697764",
+      "bbox": [
+        265,
+        841,
+        483,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576702130",
+      "bbox": [
+        264,
+        881,
+        484,
+        42
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576740399",
+      "bbox": [
+        947,
+        638,
+        98,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576746849",
+      "bbox": [
+        948,
+        677,
+        97,
+        41
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576753881",
+      "bbox": [
+        948,
+        717,
+        97,
+        42
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576757164",
+      "bbox": [
+        947,
+        760,
+        99,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576762198",
+      "bbox": [
+        946,
+        799,
+        101,
+        41
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576768315",
+      "bbox": [
+        948,
+        842,
+        98,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576772832",
+      "bbox": [
+        947,
+        881,
+        101,
+        41
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576846267",
+      "bbox": [
+        746,
+        638,
+        101,
+        39
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576849484",
+      "bbox": [
+        748,
+        678,
+        99,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576852400",
+      "bbox": [
+        748,
+        719,
+        99,
+        42
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576859117",
+      "bbox": [
+        747,
+        760,
+        101,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576862217",
+      "bbox": [
+        747,
+        800,
+        100,
+        41
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576865483",
+      "bbox": [
+        748,
+        840,
+        100,
+        42
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576868967",
+      "bbox": [
+        749,
+        882,
+        99,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576875250",
+      "bbox": [
+        848,
+        879,
+        101,
+        41
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576901383",
+      "bbox": [
+        849,
+        637,
+        97,
+        39
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576907500",
+      "bbox": [
+        848,
+        678,
+        97,
+        38
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576913851",
+      "bbox": [
+        849,
+        718,
+        97,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576922267",
+      "bbox": [
+        850,
+        759,
+        96,
+        39
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576926866",
+      "bbox": [
+        848,
+        799,
+        97,
+        40
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    },
+    {
+      "anchor_id": "manual_1783576931967",
+      "bbox": [
+        848,
+        838,
+        98,
+        39
+      ],
+      "reason": "수술 목록 여분 행 anchor; 현재 계약은 최대 3행 우선 생성"
+    }
+  ],
+  "authoring_notes": [
+    "OCR/static keep anchors are used only as label_anchor_ids because this is a blank_template request.",
+    "Surgery code/name/quantity/primary/secondary rows are limited to three rows per user instruction.",
+    "Material treatment has single large material and quantity bboxes; primary row values are hidden and composite render fields are export=false.",
+    "MED-08 특수 보정: 재료처치 재료/수량 큰 단일 bbox를 점선/가상 그리드 기준 5행으로 분할했고, 렌더전용 composite field는 제거했다. 전역 계약은 변경하지 않았다."
+  ]
+}

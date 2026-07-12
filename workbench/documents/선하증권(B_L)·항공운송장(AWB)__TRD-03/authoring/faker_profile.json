@@ -1,0 +1,579 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-03",
+  "title": "선하증권(B/L)·항공운송장(AWB)",
+  "field_generators": {
+    "shipper_name": "pool:trading_company_names",
+    "shipper_address": "pool:global_addresses",
+    "bl_number": "pattern:AAA**************",
+    "consignee_name": "pool:trading_company_names",
+    "consignee_address": "pool:global_addresses",
+    "consignee_tel": "pool:international_phone_short",
+    "notify_party": "pool:notify_parties",
+    "vessel_voyage": "pool:vessel_voyage",
+    "port_of_loading": "pool:ports",
+    "port_of_discharge": "pool:ports",
+    "destination_on_carriage": "pool:ports",
+    "freight_payable_at": "pool:ports",
+    "number_of_originals": "choice:3(THREE)|2(TWO)|1(ONE)",
+    "excess_value_declaration": "pool:excess_value_declarations",
+    "marks_and_numbers": "pool:marks_numbers",
+    "package_description": "pool:package_descriptions",
+    "goods_description": "pool:goods_descriptions",
+    "gross_weight": "pool:weights_kgs",
+    "measurement_m3": "pool:measurements_m3",
+    "container_number": "pattern:AAAA#######",
+    "seal_number": "pattern:AA#######",
+    "container_type": "pool:container_types",
+    "container_weight": "pool:weights_kgs",
+    "container_volume": "pool:measurements_m3",
+    "container_packages": "choice:1|2|3|4|5",
+    "container_mode": "choice:FCL|LCL",
+    "incoterm": "choice:FOB|CIF|CFR|EXW|DAP",
+    "surrender_to": "pool:surrender_to_parties",
+    "freight_details": "choice:FREIGHT COLLECT|FREIGHT PREPAID|AS ARRANGED",
+    "place_of_issue": "pool:issue_places",
+    "date_of_issue": "pool:date_dd_mmm_yy",
+    "place_of_receipt": "pool:ports",
+    "place_of_delivery": "pool:ports",
+    "total_packages_words": "choice:ONE CONTAINER|TWO CONTAINERS|THREE PACKAGES|FIVE CARTONS|TWELVE PALLETS",
+    "cargo_note": "pool:cargo_notes"
+  },
+  "data_pools": {
+    "trading_company_names": [
+      "DEMO PACIFIC TRADING CO. LTD.",
+      "SAMPLE GLOBAL STEEL INC.",
+      "HAN RIVER EXPORTS CO. LTD.",
+      "BLUE PORT LOGISTICS LLC"
+    ],
+    "global_addresses": [
+      "P.O BOX 12045, INDUSTRIAL AREA, DUBAI UNITED ARAB EMIRATES",
+      "12 TRADE CENTER ROAD, BUSAN, REPUBLIC OF KOREA",
+      "UNIT 8, PORT ESTATE, JEDDAH SAUDI ARABIA",
+      "45 OCEAN AVENUE, SINGAPORE 018960"
+    ],
+    "international_phone_short": [
+      "+966 12 345 6789",
+      "+82 51 555 1200",
+      "+971 4 555 2030",
+      "+65 6222 1020"
+    ],
+    "vessel_voyage": [
+      "CAP SAN JUAN/310W",
+      "OCEAN BRIDGE/124E",
+      "PACIFIC STAR/082W",
+      "ASIA HORIZON/451E"
+    ],
+    "ports": [
+      "NHAVA SHEVA, INDIA",
+      "JEDDAH, SAUDI ARABIA",
+      "BUSAN, KOREA",
+      "SINGAPORE",
+      "MUMBAI, INDIA",
+      "DUBAI, UNITED ARAB EMIRATES"
+    ],
+    "package_descriptions": [
+      "3 PACKAGES",
+      "5 CARTONS",
+      "1 CONTAINER",
+      "12 PALLETS"
+    ],
+    "goods_descriptions": [
+      "GENERAL CARGO",
+      "STEEL PARTS FOR INDUSTRIAL USE",
+      "MACHINERY SPARE PARTS",
+      "TEXTILE SAMPLES",
+      "AUTOMOTIVE COMPONENTS"
+    ],
+    "weights_kgs": [
+      "22,700.000 KGS",
+      "18,450.000 KGS",
+      "9,820.000 KGS",
+      "1,250.500 KGS"
+    ],
+    "measurements_m3": [
+      "28.500 M3",
+      "42.000 M3",
+      "12.750 M3",
+      "3.250 M3"
+    ],
+    "container_types": [
+      "40' FLAT",
+      "20' DRY",
+      "40' HC",
+      "20' OPEN TOP"
+    ],
+    "date_dd_mmm_yy": [
+      "17-MAY-26",
+      "12-JUN-26",
+      "03-APR-26",
+      "25-JUL-26"
+    ],
+    "notify_parties": [
+      "SAME AS CONSIGNEE",
+      "DEMO STEEL FACTORY CO. LTD. / P.O BOX 11700 JEDDAH SAUDI ARABIA",
+      "AL SAFA LOGISTICS LLC / JEDDAH, SAUDI ARABIA",
+      "GLOBAL TRADE SERVICES LTD. / DUBAI UNITED ARAB EMIRATES"
+    ],
+    "marks_numbers": [
+      "N/M / JEDDAH / C/NO. 1-3",
+      "PO NO. PO-240518 / MADE IN KOREA / DEST: JEDDAH",
+      "LOT NO. BL-2407 / 3 PKGS / NHAVA SHEVA",
+      "BLUE PORT / CARTON NO. 1-5 / SAUDI ARABIA"
+    ],
+    "package_records": [
+      {
+        "package_description": "3 PACKAGES",
+        "container_packages": "3",
+        "total_packages_words": "THREE PACKAGES"
+      },
+      {
+        "package_description": "1 CONTAINER",
+        "container_packages": "1",
+        "total_packages_words": "ONE CONTAINER"
+      },
+      {
+        "package_description": "5 CARTONS",
+        "container_packages": "5",
+        "total_packages_words": "FIVE CARTONS"
+      },
+      {
+        "package_description": "12 PALLETS",
+        "container_packages": "12",
+        "total_packages_words": "TWELVE PALLETS"
+      }
+    ],
+    "excess_value_declarations": [
+      "N.V.D.",
+      "NO VALUE DECLARED",
+      "USD 25,000.00",
+      "AS PER COMMERCIAL INVOICE"
+    ],
+    "surrender_to_parties": [
+      "TO ORDER OF SHIPPER",
+      "TO ORDER OF KOREA TRADE BANK",
+      "DEMO STEEL FACTORY CO. LTD.",
+      "FRESA SHIPPING LINE JEDDAH OFFICE"
+    ],
+    "cargo_notes": [
+      "SHIPPER LOAD, STOW AND COUNT",
+      "SAID TO CONTAIN",
+      "CLEAN ON BOARD",
+      "FREIGHT COLLECT AS ARRANGED"
+    ],
+    "issue_places": [
+      "MUMBAI",
+      "NHAVA SHEVA",
+      "BUSAN",
+      "SINGAPORE",
+      "DUBAI"
+    ],
+    "freight_terms": [
+      "FREIGHT COLLECT",
+      "FREIGHT PREPAID",
+      "AS ARRANGED"
+    ]
+  },
+  "constraints": [
+    {
+      "type": "copy",
+      "source": "gross_weight",
+      "target": "container_weight",
+      "note": "컨테이너 단일 행이 총중량과 동일한 샘플 구조"
+    },
+    {
+      "type": "pick_record",
+      "pool": "package_records",
+      "targets": {
+        "package_description": "package_description",
+        "container_packages": "container_packages",
+        "total_packages_words": "total_packages_words"
+      },
+      "note": "포장 수량, 컨테이너 포장수, 문자 포장수는 동일 레코드에서 선택"
+    },
+    {
+      "type": "copy",
+      "source": "measurement_m3",
+      "target": "container_volume",
+      "note": "컨테이너 단일 행이 총용적과 동일한 샘플 구조"
+    },
+    {
+      "type": "copy",
+      "source": "port_of_loading",
+      "target": "place_of_receipt",
+      "note": "수령지가 선적항과 같은 샘플/일반 케이스"
+    },
+    {
+      "type": "copy",
+      "source": "port_of_discharge",
+      "target": "destination_on_carriage",
+      "note": "최종목적지가 양륙항과 같은 샘플/일반 케이스"
+    },
+    {
+      "type": "copy",
+      "source": "port_of_discharge",
+      "target": "freight_payable_at",
+      "note": "운임 지급지를 양륙항과 동기화"
+    },
+    {
+      "type": "copy",
+      "source": "port_of_discharge",
+      "target": "place_of_delivery",
+      "note": "인도지를 양륙항과 동기화"
+    }
+  ],
+  "field_rules": [
+    {
+      "field_id": "shipper_name",
+      "rule": "pool:trading_company_names",
+      "anchor_id": "det_000004",
+      "reason": "송하인 구역 첫 값 행",
+      "evidence_ids": [
+        "R-BL-003"
+      ],
+      "semantic_path": "선하증권/당사자/송하인/상호"
+    },
+    {
+      "field_id": "shipper_address",
+      "rule": "pool:global_addresses",
+      "anchor_id": "manual_1783580879857",
+      "reason": "송하인 박스 내 빈 상세주소 영역",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/당사자/송하인/주소"
+    },
+    {
+      "field_id": "bl_number",
+      "rule": "pattern:AAA**************",
+      "anchor_id": "det_000005",
+      "reason": "오른쪽 상단 Bill/Lading Number 값",
+      "evidence_ids": [
+        "R-BL-001",
+        "R-BL-003"
+      ],
+      "semantic_path": "선하증권/문서정보/선하증권번호"
+    },
+    {
+      "field_id": "consignee_name",
+      "rule": "pool:trading_company_names",
+      "anchor_id": "det_000010",
+      "reason": "Consignee 박스 첫 줄",
+      "evidence_ids": [
+        "R-BL-003"
+      ],
+      "semantic_path": "선하증권/당사자/수하인/상호"
+    },
+    {
+      "field_id": "consignee_address",
+      "rule": "pool:global_addresses",
+      "anchor_id": "det_000011",
+      "reason": "Consignee 박스 주소 행",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/당사자/수하인/주소"
+    },
+    {
+      "field_id": "consignee_tel",
+      "rule": "pool:international_phone_short",
+      "anchor_id": "manual_1783580846324",
+      "reason": "TEL: 뒤 값 영역",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/당사자/수하인/전화"
+    },
+    {
+      "field_id": "notify_party",
+      "rule": "pool:notify_parties",
+      "anchor_id": "manual_1783580887356",
+      "reason": "Notify party 박스 빈 값 영역",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/당사자/통지처/내용"
+    },
+    {
+      "field_id": "vessel_voyage",
+      "rule": "pool:vessel_voyage",
+      "anchor_id": "det_000028",
+      "reason": "Vessel 라벨 아래 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/운송정보/선박항차"
+    },
+    {
+      "field_id": "port_of_loading",
+      "rule": "pool:ports",
+      "anchor_id": "det_000029",
+      "reason": "Port of Loading 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/운송정보/선적항"
+    },
+    {
+      "field_id": "port_of_discharge",
+      "rule": "pool:ports",
+      "anchor_id": "det_000034",
+      "reason": "Port of Discharge 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/운송정보/양륙항"
+    },
+    {
+      "field_id": "destination_on_carriage",
+      "rule": "pool:ports",
+      "anchor_id": "det_000035",
+      "reason": "Destination 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/운송정보/최종목적지"
+    },
+    {
+      "field_id": "freight_payable_at",
+      "rule": "pool:ports",
+      "anchor_id": "det_000036",
+      "reason": "Freight Payable at 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/운송정보/운임지급지"
+    },
+    {
+      "field_id": "number_of_originals",
+      "rule": "choice:3(THREE)|2(TWO)|1(ONE)",
+      "anchor_id": "det_000037",
+      "reason": "No. of Originals 값",
+      "evidence_ids": [
+        "R-BL-001",
+        "R-BL-003"
+      ],
+      "semantic_path": "선하증권/문서정보/원본발행부수"
+    },
+    {
+      "field_id": "excess_value_declaration",
+      "rule": "pool:excess_value_declarations",
+      "anchor_id": "manual_1783582955481",
+      "semantic_path": "선하증권/화물정보/초과가액신고",
+      "reason": "Excess Value Declaration 값 영역. 상업 B/L에서는 공란, N.V.D. 또는 신고가액이 올 수 있으나 활성 bbox이므로 표시값을 생성."
+    },
+    {
+      "field_id": "marks_and_numbers",
+      "rule": "pool:marks_numbers",
+      "anchor_id": "manual_1783580998106",
+      "reason": "Marks and Numbers 아래 빈 값 영역",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/화물정보/화인번호"
+    },
+    {
+      "field_id": "package_description",
+      "rule": "pool:package_descriptions",
+      "anchor_id": "det_000042",
+      "reason": "Number and Kind of Packages 값",
+      "evidence_ids": [
+        "R-BL-001",
+        "R-BL-003"
+      ],
+      "semantic_path": "선하증권/화물정보/포장수량종류"
+    },
+    {
+      "field_id": "goods_description",
+      "rule": "pool:goods_descriptions",
+      "anchor_id": "det_000044",
+      "reason": "Description of Goods 값",
+      "evidence_ids": [
+        "R-BL-001",
+        "R-BL-003"
+      ],
+      "semantic_path": "선하증권/화물정보/화물설명"
+    },
+    {
+      "field_id": "gross_weight",
+      "rule": "pool:weights_kgs",
+      "anchor_id": "det_000043",
+      "reason": "Gross Weight Kgs. 값; 값 위치에 KGS가 포함되어 있어 생성값에도 포함",
+      "evidence_ids": [
+        "R-BL-001",
+        "R-BL-003"
+      ],
+      "semantic_path": "선하증권/화물정보/총중량"
+    },
+    {
+      "field_id": "measurement_m3",
+      "rule": "pool:measurements_m3",
+      "anchor_id": "manual_1783580989557",
+      "reason": "Measurement M3 열의 값 영역; 단위 M3는 라벨에만 보이고 값 위치는 빈 영역",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/화물정보/용적"
+    },
+    {
+      "field_id": "container_number",
+      "rule": "pattern:AAAA#######",
+      "anchor_id": "det_000052",
+      "reason": "Container 열 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/컨테이너/컨테이너번호"
+    },
+    {
+      "field_id": "seal_number",
+      "rule": "pattern:AA#######",
+      "anchor_id": "manual_1783581006873",
+      "reason": "Seals 열의 빈 값 영역",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/컨테이너/봉인번호"
+    },
+    {
+      "field_id": "container_type",
+      "rule": "pool:container_types",
+      "anchor_id": "det_000053",
+      "reason": "Type 열 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/컨테이너/유형"
+    },
+    {
+      "field_id": "container_weight",
+      "rule": "pool:weights_kgs",
+      "anchor_id": "det_000054",
+      "reason": "Weight 열 값; 총중량과 같은 값 관계 후보",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/컨테이너/중량"
+    },
+    {
+      "field_id": "container_volume",
+      "rule": "pool:measurements_m3",
+      "anchor_id": "manual_1783581010773",
+      "reason": "Volume 열의 빈 값 영역",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/컨테이너/용적"
+    },
+    {
+      "field_id": "container_packages",
+      "rule": "choice:1|2|3|4|5",
+      "anchor_id": "det_000055",
+      "reason": "Packages 열 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/컨테이너/포장수"
+    },
+    {
+      "field_id": "container_mode",
+      "rule": "choice:FCL|LCL",
+      "anchor_id": "det_000056",
+      "reason": "Mode 열 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/컨테이너/운송모드"
+    },
+    {
+      "field_id": "incoterm",
+      "rule": "choice:FOB|CIF|CFR|EXW|DAP",
+      "anchor_id": "det_000058",
+      "reason": "INCO TERM 오른쪽 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/거래조건/인코텀즈"
+    },
+    {
+      "field_id": "surrender_to",
+      "rule": "pool:surrender_to_parties",
+      "anchor_id": "manual_1783583273356",
+      "semantic_path": "선하증권/거래조건/선하증권제출처",
+      "reason": "Bill of Lading must be surrendered to: 아래 수동 활성 영역. 은행/수하인/운송사 지점 등 제출처를 생성."
+    },
+    {
+      "field_id": "freight_details",
+      "rule": "choice:FREIGHT COLLECT|FREIGHT PREPAID|AS ARRANGED",
+      "anchor_id": "det_000063",
+      "reason": "Freight Details, Charges, etc 아래 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/운임/운임세부조건"
+    },
+    {
+      "field_id": "place_of_issue",
+      "rule": "pool:issue_places",
+      "anchor_id": "det_000065",
+      "reason": "Place and Date of Issue 아래 왼쪽 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/발행정보/발행장소"
+    },
+    {
+      "field_id": "date_of_issue",
+      "rule": "pool:date_dd_mmm_yy",
+      "anchor_id": "det_000066",
+      "reason": "발행일 값은 DD-MMM-YY 형식이나 지원 date formatter가 없어 pool로 근사",
+      "evidence_ids": [
+        "R-BL-003"
+      ],
+      "semantic_path": "선하증권/발행정보/발행일"
+    },
+    {
+      "field_id": "place_of_receipt",
+      "rule": "pool:ports",
+      "anchor_id": "det_000070",
+      "reason": "Place of Receipt 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/운송정보/수령지"
+    },
+    {
+      "field_id": "place_of_delivery",
+      "rule": "pool:ports",
+      "anchor_id": "det_000071",
+      "reason": "Place of Delivery 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/운송정보/인도지"
+    },
+    {
+      "field_id": "total_packages_words",
+      "rule": "choice:ONE CONTAINER|TWO CONTAINERS|THREE PACKAGES|FIVE CARTONS|TWELVE PALLETS",
+      "anchor_id": "det_000074",
+      "reason": "Total No. of Packages (in words) 값",
+      "evidence_ids": [
+        "R-BL-001"
+      ],
+      "semantic_path": "선하증권/화물정보/총포장수문자"
+    },
+    {
+      "field_id": "cargo_note",
+      "rule": "pool:cargo_notes",
+      "anchor_id": "manual_1783583287923",
+      "semantic_path": "선하증권/화물정보/비고",
+      "reason": "Note: 아래 수동 활성 영역. 화물 책임/상태 관련 짧은 비고를 생성."
+    }
+  ],
+  "limitations": [
+    "DD-MMM-YY 날짜 형식은 지원 rule grammar에 직접 formatter가 없어 pool:date_dd_mmm_yy로 근사했다.",
+    "영문 회사명/주소 전용 generator가 없어 synthetic pool을 사용했다.",
+    "중량과 용적은 값 위치에 단위가 함께 들어가는 양식으로 보여 단위를 포함한 pool 값을 사용했다."
+  ],
+  "updated_at": "2026-07-09T08:27:21.909178+00:00"
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-08",
+  "title": "수술기록지",
+  "unresolved_fields": [
+    {
+      "field_id": "가산항목",
+      "issue": "정확한 병원/보험 가산 항목 코드 체계가 템플릿에 보이지 않음",
+      "draft_handling": "synthetic pool with 해당없음/야간/응급/소아가산",
+      "needed_decision": "기관별 허용 값 목록 승인 필요"
+    },
+    {
+      "field_id": "나이",
+      "issue": "값 칸 옆에 세 suffix가 인쇄되어 있지 않음",
+      "draft_handling": "숫자만 생성(pattern:##)",
+      "needed_decision": "렌더 값에 세를 포함할지 확인 필요"
+    },
+    {
+      "field_id": "수술*_수술코드",
+      "issue": "템플릿은 수술코드 형식만 요구하나 실제 병원/청구 코드 체계는 확인되지 않음",
+      "draft_handling": "synthetic surgery_records로 code/name pair 유지",
+      "needed_decision": "실제 코드 체계 또는 synthetic-only 유지 여부"
+    },
+    {
+      "field_id": "마취방법/전신마취제",
+      "issue": "전신마취제가 전신마취 선택 시에만 체크되어야 하는 조건부 관계는 지원 constraint에 없음",
+      "draft_handling": "마취방법 4개 택1, 전신마취제 2개 택1로만 제한",
+      "needed_decision": "조건부 체크 관계 지원 추가 또는 수동 승인 필요"
+    }
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    "가산항목",
+    "수술*_수술코드",
+    "마취재료",
+    "주사처방"
+  ],
+  "user_decisions_needed": [
+    "나이 값 단위 포함 여부",
+    "가산항목 및 수술코드 synthetic pool 승인"
+  ],
+  "unmapped_anchor_summary": {
+    "count": 35,
+    "reason": "Mostly extra surgery table rows beyond the requested first three rows"
+  },
+  "resolved_notes": [
+    {
+      "field_id": "재료처치*_재료/수량",
+      "resolution": "큰 단일 재료/수량 bbox를 MED-08 전용 5행 가상 그리드 bbox로 수동 분할하여 각 semantic field가 고유 anchor_id를 갖도록 수정함. composite render field는 제거함.",
+      "parent_anchor_ids": [
+        "manual_1783577183603",
+        "manual_1783577225121"
+      ],
+      "new_anchor_ids": [
+        "manual_1783577183603_row01",
+        "manual_1783577183603_row02",
+        "manual_1783577183603_row03",
+        "manual_1783577183603_row04",
+        "manual_1783577183603_row05",
+        "manual_1783577225121_row01",
+        "manual_1783577225121_row02",
+        "manual_1783577225121_row03",
+        "manual_1783577225121_row04",
+        "manual_1783577225121_row05"
+      ]
+    }
+  ]
+}

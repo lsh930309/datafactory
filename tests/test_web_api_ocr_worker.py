@@ -478,7 +478,16 @@ def test_apply_authoring_agent_drafts_writes_final_authoring_bundle(tmp_path: Pa
     (request_dir / "stylesheet_draft.json").write_text(json.dumps({"schema_version": 1, "style_classes": [{"style_class": "body_default", "font_size": 18}]}), encoding="utf-8")
     (request_dir / "faker_profile_draft.json").write_text(json.dumps({"schema_version": 1, "field_generators": {"patient_name": "person.name_ko"}, "constraints": []}), encoding="utf-8")
     (request_dir / "anchor_map_draft.json").write_text(
-        json.dumps({"schema_version": 1, "source_review": "review.json", "source_image": "source.png", "image": {"width": 100, "height": 60}, "anchors": [{"anchor_id": "det_name", "text": "홍길동"}]}, ensure_ascii=False),
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_review": "review.json",
+                "source_image": "source.png",
+                "image": {"width": 100, "height": 60},
+                "anchors": [{"anchor_id": "det_name", "text": "홍길동", "bbox": [10, 12, 30, 14], "status": "use", "auto_type": "field_value"}],
+            },
+            ensure_ascii=False,
+        ),
         encoding="utf-8",
     )
 
@@ -502,7 +511,11 @@ def test_apply_authoring_agent_drafts_writes_final_authoring_bundle(tmp_path: Pa
     saved_schema = json.loads((tmp_path / payload["paths"]["schema"]).read_text(encoding="utf-8"))
     assert saved_schema["fields"][0]["bbox_label_id"] == "det_name"
     assert saved_schema["fields"][0]["label"] == "환자 성명"
+    assert saved_schema["source_review"].endswith("/authoring/agent_applied_reviews/run1/review.json")
+    assert payload["schema"]["fields"][0]["bbox"] == [10, 12, 30, 14]
     assert any(key == "authoring_agent_applied_request" for _doc_id, key, _path in manifest_updates)
+    assert any(key == "authoring_anchor_map" for _doc_id, key, _path in manifest_updates)
+    assert any(key == "authoring_agent_applied_review" for _doc_id, key, _path in manifest_updates)
 
 
 def test_blank_template_agent_validation_rejects_static_label_field_anchor(tmp_path: Path) -> None:

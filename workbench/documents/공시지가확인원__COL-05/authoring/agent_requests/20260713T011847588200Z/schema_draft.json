@@ -1,0 +1,2393 @@
+{
+  "schema_version": 2,
+  "doc_id": "COL-05",
+  "title": "개별공시지가 확인서",
+  "pass": {
+    "current": 1,
+    "total": 2,
+    "name": "schema_and_evidence_freeze",
+    "field_id_contract": "immutable_for_pass_2"
+  },
+  "semantic_schema": {
+    "문서정보": {
+      "문서확인번호": ""
+    },
+    "접수정보": {
+      "접수번호": "",
+      "접수일": ""
+    },
+    "신청인": {
+      "성명(법인)": "",
+      "생년월일(사업자등록번호)": "",
+      "주소": "",
+      "용도": ""
+    },
+    "신청대상토지": {
+      "토지 1": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      },
+      "토지 2": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      },
+      "토지 3": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      },
+      "토지 4": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      },
+      "토지 5": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      },
+      "토지 6": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      },
+      "토지 7": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      },
+      "토지 8": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      },
+      "토지 9": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      },
+      "토지 10": {
+        "가격기준연도": "",
+        "토지소재지": "",
+        "지번": "",
+        "개별공시지가": "",
+        "기준일자": "",
+        "공시일자": "",
+        "비고": ""
+      }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "p1_document_verification_number",
+      "key": "문서확인번호",
+      "semantic_path": "문서정보/문서확인번호",
+      "anchor_id": "manual_col05_pipeline_ready_20260702",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####-####-####",
+      "style_class": "style_top_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          363,
+          42,
+          285,
+          32
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "문서확인번호",
+        "confidence": 0.96
+      }
+    },
+    {
+      "field_id": "p1_receipt_number",
+      "key": "접수번호",
+      "semantic_path": "접수정보/접수번호",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_2",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-AA-#####-########",
+      "style_class": "style_p1_receipt_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          185,
+          289,
+          380,
+          38
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "접수번호",
+        "confidence": 0.96
+      }
+    },
+    {
+      "field_id": "p1_receipt_date",
+      "key": "접수일",
+      "semantic_path": "접수정보/접수일",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_3",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_header_value",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          715,
+          289,
+          170,
+          38
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "접수일",
+        "confidence": 0.96
+      }
+    },
+    {
+      "field_id": "p1_applicant_name",
+      "key": "성명(법인)",
+      "semantic_path": "신청인/성명(법인)",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_4",
+      "value": "",
+      "value_type": "person_or_company",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_body_value",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          330,
+          336,
+          285,
+          48
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "성명",
+        "confidence": 0.96
+      }
+    },
+    {
+      "field_id": "p1_birth_or_business_number",
+      "key": "생년월일(사업자등록번호)",
+      "semantic_path": "신청인/생년월일(사업자등록번호)",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_5",
+      "value": "",
+      "value_type": "birth_date_or_business_reg_no",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_birth_or_business_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          820,
+          336,
+          250,
+          48
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "생년월일",
+        "confidence": 0.82
+      },
+      "review_required": true
+    },
+    {
+      "field_id": "p1_applicant_address",
+      "key": "주소",
+      "semantic_path": "신청인/주소",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_6",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_body_value",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          334,
+          395,
+          445,
+          45
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "주소",
+        "confidence": 0.96
+      }
+    },
+    {
+      "field_id": "p1_purpose",
+      "key": "용도",
+      "semantic_path": "신청인/용도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_7",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_body_value",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          334,
+          449,
+          750,
+          46
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "용도",
+        "confidence": 0.96
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 1/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_8",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_1_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          618,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 1",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 1/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_9",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_1_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          618,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 1",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 1/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_10",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_1_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          618,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 1",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 1/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_11",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_1_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          618,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 1",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 1/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_12",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_1_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          618,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 1",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 1/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_13",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_1_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          618,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 1",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 1/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_14",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_1_note",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          618,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 1",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 2/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_15",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_2_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          664,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 2",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 2/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_16",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_2_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          664,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 2",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 2/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_17",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_2_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          664,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 2",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 2/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_18",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_2_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          664,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 2",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 2/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_19",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_2_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          664,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 2",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 2/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_20",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_2_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          664,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 2",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 2/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_21",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_2_note",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          664,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 2",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 3/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_22",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_3_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          709,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 3",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 3/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_23",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_3_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          709,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 3",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 3/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_24",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_3_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          709,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 3",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 3/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_25",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_3_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          709,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 3",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 3/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_26",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_3_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          709,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 3",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 3/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_27",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_3_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          709,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 3",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 3/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_28",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_3_note",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          709,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 3",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 4/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_29",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_4_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          755,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 4",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 4/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_30",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_4_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          755,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 4",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 4/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_31",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_4_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          755,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 4",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 4/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_32",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_4_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          755,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 4",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 4/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_33",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_4_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          755,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 4",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 4/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_34",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_4_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          755,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 4",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 4/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_35",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_4_note",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          755,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 4",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 5/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_36",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_5_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          800,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 5",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 5/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_37",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_5_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          800,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 5",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 5/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_38",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_5_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          800,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 5",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 5/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_39",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_5_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          800,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 5",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 5/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_40",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_5_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          800,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 5",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 5/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_41",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_5_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          800,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 5",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 5/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_42",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_5_note",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          800,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 5",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 6/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_43",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_6_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          846,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 6",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 6/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_44",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_6_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          846,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 6",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 6/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_45",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_6_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          846,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 6",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 6/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_46",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_6_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          846,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 6",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 6/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_47",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_6_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          846,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 6",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 6/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_48",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_6_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          846,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 6",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 6/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_49",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_6_note",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          846,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 6",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 7/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_50",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_7_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          891,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 7",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 7/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_51",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_7_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          891,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 7",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 7/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_52",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_7_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          891,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 7",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 7/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_53",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_7_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          891,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 7",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 7/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_54",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_7_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          891,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 7",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 7/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_55",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_7_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          891,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 7",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 7/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_56",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_7_note",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          891,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 7",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 8/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_57",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_8_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          936,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 8",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 8/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_58",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_8_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          936,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 8",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 8/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_59",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_8_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          936,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 8",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 8/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_60",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_8_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          936,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 8",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 8/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_61",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_8_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          936,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 8",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 8/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_62",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_8_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          936,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 8",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 8/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_63",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_8_note",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          936,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 8",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 9/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_64",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_9_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          982,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 9",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 9/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_65",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_9_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          982,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 9",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 9/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_66",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_9_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          982,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 9",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 9/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_67",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_9_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          982,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 9",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 9/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_68",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_9_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          982,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 9",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 9/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_69",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_9_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          982,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 9",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 9/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_70",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_9_note",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          982,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 9",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_year",
+      "key": "가격기준연도",
+      "semantic_path": "신청대상토지/토지 10/가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_71",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_10_year",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          99,
+          1027,
+          126,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시지가 기준년도 10",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_location",
+      "key": "토지소재지",
+      "semantic_path": "신청대상토지/토지 10/토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_72",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_10_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          242,
+          1027,
+          268,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "토지소재지 10",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_lot_number",
+      "key": "지번",
+      "semantic_path": "신청대상토지/토지 10/지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_73",
+      "value": "",
+      "value_type": "lot_number",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_10_lot_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          523,
+          1027,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "지번 10",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_price",
+      "key": "개별공시지가",
+      "semantic_path": "신청대상토지/토지 10/개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_74",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_10_price",
+      "unit_policy": {
+        "mode": "static_unit",
+        "static_text": "원/㎡",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          637,
+          1027,
+          124,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "개별공시지가 10",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_base_date",
+      "key": "기준일자",
+      "semantic_path": "신청대상토지/토지 10/기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_75",
+      "value": "",
+      "value_type": "base_date_text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_10_base_date",
+      "unit_policy": {
+        "mode": "value_notation",
+        "include_in_value": true,
+        "example": "1월 1일 기준"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          773,
+          1027,
+          102,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "기준일자 10",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_announced_date",
+      "key": "공시일자",
+      "semantic_path": "신청대상토지/토지 10/공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_76",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_10_announced_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          886,
+          1027,
+          103,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "공시일자 10",
+        "confidence": 0.97
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_note",
+      "key": "비고",
+      "semantic_path": "신청대상토지/토지 10/비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_77",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_table_value",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+        "bbox": [
+          1000,
+          1027,
+          108,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_label": "비고 10",
+        "confidence": 0.97
+      }
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 77,
+    "bound_use_anchor_count": 77,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  }
+}

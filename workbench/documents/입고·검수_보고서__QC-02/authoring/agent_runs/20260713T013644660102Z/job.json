@@ -1,0 +1,534 @@
+{
+  "schema_version": 1,
+  "jobId": "20260713T013644660102Z",
+  "docId": "QC-02",
+  "status": "failed",
+  "createdAt": "2026-07-13T01:36:44.660474+00:00",
+  "startedAt": "2026-07-13T01:36:44.682113+00:00",
+  "finishedAt": "2026-07-13T01:45:46.475696+00:00",
+  "requestPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/request.json",
+  "requestDir": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z",
+  "runDir": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z",
+  "promptPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_exec_prompt.md",
+  "lastMessagePath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_last_message.md",
+  "stdoutPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/stdout.log",
+  "stderrPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/stderr.log",
+  "requiredOutputs": [
+    "schema_draft.json",
+    "stylesheet_draft.json",
+    "faker_profile_draft.json",
+    "value_pool_draft.json",
+    "research_report.json",
+    "uncertainty_report.json",
+    "anchor_map_draft.json",
+    "application_notes.md"
+  ],
+  "outputs": {
+    "schema_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/schema_draft.json",
+    "stylesheet_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/stylesheet_draft.json",
+    "faker_profile_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/faker_profile_draft.json",
+    "value_pool_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/value_pool_draft.json",
+    "research_report.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/research_report.json",
+    "uncertainty_report.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/uncertainty_report.json",
+    "anchor_map_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/anchor_map_draft.json",
+    "application_notes.md": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/application_notes.md"
+  },
+  "validation": {
+    "ready": false,
+    "missing": [],
+    "invalidJson": [],
+    "contractErrors": [
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_1_number",
+        "semantic_path": "검수내역/0/번호",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_1_item_name",
+        "semantic_path": "검수내역/0/품명",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_1_specification",
+        "semantic_path": "검수내역/0/규격",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_1_received_quantity",
+        "semantic_path": "검수내역/0/검수결과/수량",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_1_quality_result",
+        "semantic_path": "검수내역/0/검수결과/품질",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_1_other_result",
+        "semantic_path": "검수내역/0/검수결과/기타",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_1_remark",
+        "semantic_path": "검수내역/0/비고",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_2_number",
+        "semantic_path": "검수내역/1/번호",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_2_item_name",
+        "semantic_path": "검수내역/1/품명",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_2_specification",
+        "semantic_path": "검수내역/1/규격",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_2_received_quantity",
+        "semantic_path": "검수내역/1/검수결과/수량",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_2_quality_result",
+        "semantic_path": "검수내역/1/검수결과/품질",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_2_other_result",
+        "semantic_path": "검수내역/1/검수결과/기타",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_2_remark",
+        "semantic_path": "검수내역/1/비고",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_3_number",
+        "semantic_path": "검수내역/2/번호",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_3_item_name",
+        "semantic_path": "검수내역/2/품명",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_3_specification",
+        "semantic_path": "검수내역/2/규격",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_3_received_quantity",
+        "semantic_path": "검수내역/2/검수결과/수량",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_3_quality_result",
+        "semantic_path": "검수내역/2/검수결과/품질",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_3_other_result",
+        "semantic_path": "검수내역/2/검수결과/기타",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_3_remark",
+        "semantic_path": "검수내역/2/비고",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_4_number",
+        "semantic_path": "검수내역/3/번호",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_4_item_name",
+        "semantic_path": "검수내역/3/품명",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_4_specification",
+        "semantic_path": "검수내역/3/규격",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_4_received_quantity",
+        "semantic_path": "검수내역/3/검수결과/수량",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_4_quality_result",
+        "semantic_path": "검수내역/3/검수결과/품질",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_4_other_result",
+        "semantic_path": "검수내역/3/검수결과/기타",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_4_remark",
+        "semantic_path": "검수내역/3/비고",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_5_number",
+        "semantic_path": "검수내역/4/번호",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_5_item_name",
+        "semantic_path": "검수내역/4/품명",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_5_specification",
+        "semantic_path": "검수내역/4/규격",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_5_received_quantity",
+        "semantic_path": "검수내역/4/검수결과/수량",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_5_quality_result",
+        "semantic_path": "검수내역/4/검수결과/품질",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_5_other_result",
+        "semantic_path": "검수내역/4/검수결과/기타",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_5_remark",
+        "semantic_path": "검수내역/4/비고",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_6_number",
+        "semantic_path": "검수내역/5/번호",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_6_item_name",
+        "semantic_path": "검수내역/5/품명",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_6_specification",
+        "semantic_path": "검수내역/5/규격",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_6_received_quantity",
+        "semantic_path": "검수내역/5/검수결과/수량",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_6_quality_result",
+        "semantic_path": "검수내역/5/검수결과/품질",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_6_other_result",
+        "semantic_path": "검수내역/5/검수결과/기타",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_6_remark",
+        "semantic_path": "검수내역/5/비고",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_7_number",
+        "semantic_path": "검수내역/6/번호",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_7_item_name",
+        "semantic_path": "검수내역/6/품명",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_7_specification",
+        "semantic_path": "검수내역/6/규격",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_7_received_quantity",
+        "semantic_path": "검수내역/6/검수결과/수량",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_7_quality_result",
+        "semantic_path": "검수내역/6/검수결과/품질",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_7_other_result",
+        "semantic_path": "검수내역/6/검수결과/기타",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_7_remark",
+        "semantic_path": "검수내역/6/비고",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_8_number",
+        "semantic_path": "검수내역/7/번호",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_8_item_name",
+        "semantic_path": "검수내역/7/품명",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_8_specification",
+        "semantic_path": "검수내역/7/규격",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_8_received_quantity",
+        "semantic_path": "검수내역/7/검수결과/수량",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_8_quality_result",
+        "semantic_path": "검수내역/7/검수결과/품질",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_8_other_result",
+        "semantic_path": "검수내역/7/검수결과/기타",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      },
+      {
+        "code": "schema_field_semantic_path_missing",
+        "field": "line_8_remark",
+        "semantic_path": "검수내역/7/비고",
+        "message": "binding semantic_path must point to an existing semantic_schema leaf"
+      }
+    ],
+    "outputs": {
+      "schema_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/schema_draft.json",
+      "stylesheet_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/stylesheet_draft.json",
+      "faker_profile_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/faker_profile_draft.json",
+      "value_pool_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/value_pool_draft.json",
+      "research_report.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/research_report.json",
+      "uncertainty_report.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/uncertainty_report.json",
+      "anchor_map_draft.json": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/anchor_map_draft.json",
+      "application_notes.md": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T013644573188Z/application_notes.md"
+    },
+    "repairSummary": {
+      "materializedUseAnchors": [],
+      "materializedCount": 0,
+      "removedUnmappedDeclaration": false
+    },
+    "summary": {
+      "required": 8,
+      "present": 8,
+      "missing": 0,
+      "invalidJson": 0,
+      "contractErrors": 56
+    }
+  },
+  "options": {
+    "reasoningEffort": "medium",
+    "fastMode": false,
+    "minPoolSize": 20,
+    "scalarPoolMinSize": 20,
+    "recordPoolMinSize": 12,
+    "asOfDate": "2026-07-13",
+    "mode": "authoring"
+  },
+  "passState": {
+    "current": "failed",
+    "completed": [
+      "schema",
+      "faker",
+      "validation_repair"
+    ],
+    "planned": [
+      "schema",
+      "faker",
+      "validation_repair"
+    ]
+  },
+  "stages": [
+    {
+      "stage": "schema",
+      "returnCode": 0,
+      "promptPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_schema_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_schema_pass_last_message.md",
+      "stdoutPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/schema_pass_stdout.log",
+      "stderrPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/schema_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_schema_pass_last_message.md",
+        "-"
+      ],
+      "attemptCount": 1
+    },
+    {
+      "stage": "faker",
+      "returnCode": 0,
+      "promptPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_faker_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_faker_pass_last_message.md",
+      "stdoutPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/faker_pass_stdout.log",
+      "stderrPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/faker_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_faker_pass_last_message.md",
+        "-"
+      ],
+      "attemptCount": 1
+    },
+    {
+      "stage": "validation_repair",
+      "returnCode": 0,
+      "promptPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_validation_repair_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_validation_repair_pass_last_message.md",
+      "stdoutPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/validation_repair_pass_stdout.log",
+      "stderrPath": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/validation_repair_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_validation_repair_pass_last_message.md",
+        "-"
+      ],
+      "attemptCount": 1,
+      "frozenArtifactViolations": [
+        "schema_draft.json"
+      ]
+    }
+  ],
+  "returnCode": 0,
+  "command": [
+    "codex",
+    "--search",
+    "--ask-for-approval",
+    "never",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "--disable",
+    "fast_mode",
+    "exec",
+    "--cd",
+    "/Users/lsh930309/projects/dataFatory",
+    "--sandbox",
+    "workspace-write",
+    "--output-last-message",
+    "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/authoring/agent_runs/20260713T013644660102Z/codex_validation_repair_pass_last_message.md",
+    "-"
+  ],
+  "repairSummary": {
+    "materializedUseAnchors": [],
+    "materializedCount": 0,
+    "removedUnmappedDeclaration": false
+  },
+  "error": "codex exec finished but required draft outputs are missing or invalid"
+}

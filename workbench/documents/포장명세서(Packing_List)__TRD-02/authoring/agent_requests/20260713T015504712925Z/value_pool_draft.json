@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-02",
+  "as_of_date": "2026-07-13",
+  "source_profile": "faker_profile_draft.json",
+  "proposed_pools": {
+    "trd02_packing_list_records": {
+      "kind": "record_pool",
+      "record_count": 12,
+      "usage": "pick_record 제약으로 57개 고정 바인딩의 값을 동일 선적 레코드에서 선택",
+      "source_note": "기존 authoring 합성 레코드를 2차 패스의 렌더러 호환 풀로 승격했다. 원본 샘플의 레이아웃과 표기 관행을 따르되 실제 개인·계좌·사업자등록 데이터는 포함하지 않는다.",
+      "relationship_coverage": [
+        "송하인과 발행회사/연락처 일치",
+        "대표 품명과 두 포장행 품명 일치",
+        "품목코드·수량·카톤 구성의 동시 선택",
+        "행별 순중량·총중량·용적과 합계의 동시 선택",
+        "선적항·도착지·운송인·출항일의 동시 선택",
+        "포장 요약·한정 문구·컨테이너/봉인번호·원산지 문구의 동시 선택"
+      ]
+    }
+  },
+  "closed_choice_sets": {
+    "weight_units": {
+      "values": ["KGS", "KG"],
+      "usage": ["net_weight_unit", "gross_weight_unit"],
+      "policy": {
+        "closed_set": true,
+        "exception_kind": "legal_or_form_closed_set",
+        "evidence": "전체 템플릿의 순중량·총중량 단위 행과 열 제목 (KGS)"
+      }
+    },
+    "volume_units": {
+      "values": ["CBM", "M3"],
+      "usage": ["volume_unit"],
+      "policy": {
+        "closed_set": true,
+        "exception_kind": "legal_or_form_closed_set",
+        "evidence": "전체 템플릿의 VOLUME (CBM) 열 제목. 원본 단위 앵커 OCR은 KGS로 충돌하여 승인 전 후보만 제시"
+      }
+    }
+  },
+  "notes": [
+    "열린 scalar pool은 사용하지 않는다. 모든 개방형 값은 12개 객체의 상관 record pool 또는 지원 내장 generator로 공급한다.",
+    "field_generators에서 pool:<name> 참조를 사용하지 않으므로 scalarPoolMinSize=20 검증 대상은 없다.",
+    "record pool 최소 크기 12를 충족한다."
+  ]
+}

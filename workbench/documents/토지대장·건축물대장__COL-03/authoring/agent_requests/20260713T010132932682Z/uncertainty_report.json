@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "generated_at": "2026-07-13T00:00:00+09:00",
+  "unresolved_fields": [
+    {
+      "field_id": "accessory_building_summary",
+      "issue": "동수와 면적이 한 bbox에 결합되고 단위는 정적 인쇄된다. 지원 grammar에 두 수치의 독립 범위 관계가 없어 제한된 choice로 근사했다.",
+      "decision_needed": "복합 bbox를 동수/면적 두 bbox로 분리할지 검토"
+    },
+    {
+      "field_id": "owner_registration_number_masked",
+      "issue": "라벨은 주민 또는 법인 등록번호를 모두 허용하지만 표본은 법인형 마스킹이다. literal 별표를 보존하는 template 근사만 적용했다.",
+      "decision_needed": "개인/법인 유형 분리 bbox 또는 유형 필드 추가 여부 검토"
+    },
+    {
+      "field_id": "print_time",
+      "issue": "지원 grammar에 시간 유효성 제약이 없어 pattern 생성 시 29:99:99 같은 값이 가능하다.",
+      "decision_needed": "시간 전용 생성기/constraint 지원 전까지 renderer 후처리 또는 폐쇄형 풀 사용 여부 검토"
+    },
+    {
+      "field_id": "document_confirmation_number",
+      "issue": "표시 형식은 확인했으나 체크섬/검증 알고리즘은 공개 근거와 renderer 지원이 없어 패턴만 적용했다.",
+      "decision_needed": "검증 알고리즘이 있으면 전용 지원 rule 추가"
+    },
+    {
+      "field_id": "building_id",
+      "issue": "16자리 형태는 확인했으나 내부 코드 구성·검증 관계는 지원 constraint로 표현할 수 없다.",
+      "decision_needed": "건물ID 전용 생성기 도입 여부 검토"
+    }
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    "print_time",
+    "document_confirmation_number",
+    "building_id",
+    "building_management_number",
+    "accessory_building_summary",
+    "owner_registration_number_masked"
+  ],
+  "relationship_limits": [
+    "건폐율=건축면적/대지면적, 용적률=용적률산정용연면적/대지면적 산식은 지원 constraint에 나눗셈이 없어 보류했다.",
+    "현황 행 면적 합과 연면적은 현재 페이지가 2쪽 중 1쪽이며 추가 현황이 존재할 수 있어 sum constraint를 적용하지 않았다.",
+    "출력일자와 발급일은 동일 사례가 많지만 항상 동일하다는 공식 근거가 없어 copy constraint를 적용하지 않았다."
+  ],
+  "page_scope_limit": "현재 샘플은 2쪽 중 1쪽이다. 이번 pass는 현재 페이지의 고정 schema/binding만 다루며 후속 페이지 완결성은 확장하지 않았다.",
+  "user_decisions_needed": [
+    "복합 부속건축물 bbox 분할 여부",
+    "시간 전용 생성기 지원 여부",
+    "식별번호 체크섬 생성기 지원 여부"
+  ]
+}

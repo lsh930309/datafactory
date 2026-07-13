@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-04",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:law.go.kr 국민건강보험 요양급여의 기준에 관한 규칙 별지 제6호서식 진료비 계산서 영수증",
+    "site:nhis.or.kr 진료비 계산서 영수증 본인부담 공단부담 비급여 설명",
+    "site:hira.or.kr 진료비 계산서 영수증 항목 설명"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://law.go.kr/LSW/nwRvsLsInfoR.do?lsiSeq=116223",
+      "source_type": "official_law_form",
+      "publisher": "국가법령정보센터",
+      "summary": "별지 제6호서식의 외래·입원(퇴원·중간) 문서 구분과 진료비 계산서·영수증 표제를 확인했다.",
+      "supports": [
+        "문서구분",
+        "환자정보",
+        "진료기간",
+        "진료비항목",
+        "요양기관",
+        "발행일"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.nhis.or.kr/nbinfo/htmc_under.do",
+      "source_type": "official_public_guidance",
+      "publisher": "국민건강보험공단",
+      "summary": "급여는 공단부담금과 법정 본인부담금으로 구성되고 비급여는 건강보험 미적용 환자 부담 항목임을 확인했다.",
+      "supports": [
+        "진료비항목/일부 본인부담",
+        "진료비항목/공단부담금",
+        "진료비항목/비급여",
+        "금액산정내용"
+      ]
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.hira.or.kr/dummy.do?cmsurl=%2Fcms%2Fpopup%2F02%2F03%2F1341836_26943.html&isNewWindow=Y&isPopupYn=Y&pgmid=HIRAA010002080000&subject=%ED%99%95%EC%9D%B8+%EC%9A%94%EC%B2%AD%EB%B2%94%EC%9C%84+%EB%B3%B4%EA%B8%B0",
+      "source_type": "official_public_guidance",
+      "publisher": "건강보험심사평가원",
+      "summary": "진료비 확인 신청 시 의료기관 직인이 있는 최종 진료비계산서·영수증을 사용하는 절차를 확인했다.",
+      "supports": [
+        "요양기관",
+        "발행일",
+        "문서구분/중간"
+      ]
+    },
+    {
+      "evidence_id": "R4",
+      "url": "https://www.hira.or.kr/rb/npay/index.do?pgmid=HIRAA0300091",
+      "source_type": "official_public_guidance",
+      "publisher": "건강보험심사평가원",
+      "summary": "영수증의 전액본인부담·비급여 금액 및 환자구분의 활용 맥락을 확인했다.",
+      "supports": [
+        "진료비항목/전액 본인부담",
+        "진료비항목/비급여",
+        "진료정보/환자구분"
+      ]
+    }
+  ],
+  "field_evidence": [
+    {
+      "semantic_prefix": "문서구분",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "semantic_prefix": "진료비항목",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R4"
+      ]
+    },
+    {
+      "semantic_prefix": "금액산정내용",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "semantic_prefix": "요양기관",
+      "evidence_ids": [
+        "R1",
+        "R3"
+      ]
+    }
+  ],
+  "research_scope_note": "웹 근거는 템플릿에 실제로 존재하는 앵커의 의미 확인에만 사용했으며 템플릿 밖 필드는 추가하지 않았다."
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-01",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:trade.gov commercial invoice required information invoice number date seller consignee country of origin terms of sale",
+    "site:ups.com commercial invoice guide shipper consignee invoice number country of origin quantity unit value total value",
+    "site:fedex.com commercial invoice fields country of origin incoterms quantity unit value"
+  ],
+  "sources": [
+    {"evidence_id":"RES-TRADE-COMMERCIAL","url":"https://www.trade.gov/commercial-invoice","source_type":"미국 국제무역청 공식 안내","summary":"상업송장은 수출입 통관과 관세·세금 산정에 쓰이며 국가별 요구사항을 확인해야 한다."},
+    {"evidence_id":"RES-TRADE-SAMPLE","url":"https://beta.trade.gov/article?id=Commercial-Invoice","source_type":"미국 국제무역청 공식 샘플/작성 안내","summary":"판매자·구매자, 송장번호, 거래·결제조건, 운송방식, 수량, 품명, 포장 화인 등의 의미를 설명한다."},
+    {"evidence_id":"RES-UPS-GUIDE","url":"https://www.ups.com/assets/resources/media/invoice_2.pdf","source_type":"UPS 공식 작성 가이드 PDF","summary":"송장번호·작성일·원산국·Incoterms·수량 단위·단가·행 합계의 작성 의미를 제시한다."},
+    {"evidence_id":"RES-UPS-CLEARANCE","url":"https://www.ups.com/us/en/supplychain/logistics-solutions/customs-brokerage/customs-clearance-guide","source_type":"UPS 공식 통관 안내","summary":"상업송장에는 송하인·수하인 상세, 참조번호, 일자, 품명·수량·가액, 원산국과 서명이 일반적으로 포함된다."},
+    {"evidence_id":"RES-FEDEX-BASICS","url":"https://images.fedex.com/content/dam/fedex/us-united-states/International/upload/Global_Commercial_Invoice_Basics.pdf","source_type":"FedEx 공식 규제 안내 PDF","summary":"송하인·수하인, 품명, 단가·행 금액·총액, 통화, 원산국, 수량, 결제조건, Incoterms, 송장번호·일자를 핵심 항목으로 든다."},
+    {"evidence_id":"RES-FEDEX-DOCS","url":"https://www.fedex.com/en-ca/shipping-services/international/regulatory/docs-required.html","source_type":"FedEx 공식 서류 요건","summary":"품목별 상세 설명, 수량, 단가, 총 운송가액, 제조국과 경우에 따른 송하인 서명 요구를 설명한다."},
+    {"evidence_id":"RES-TRADE-MAURITANIA","url":"https://www.trade.gov/country-commercial-guides/mauritania-import-requirements-and-documentations","source_type":"미국 국제무역청 국가별 공식 안내","summary":"판매자·구매자 이름과 주소, 작성 장소·일자, 운송방법, 수량·품명·가격, 인도·결제조건을 상업송장 항목으로 제시한다."},
+    {"evidence_id":"RES-TRADE-ARGENTINA","url":"https://www.trade.gov/country-commercial-guides/argentina-import-requirements-and-documentation","source_type":"미국 국제무역청 국가별 공식 안내","summary":"송장번호·일자, 수출자·수하인, 수량과 단위, 품명, 단가·총액·통화, 결제·인도조건, 원산지·수출항·운송수단·도착항을 열거한다."},
+    {"evidence_id":"RES-TRADE-KUWAIT","url":"https://www.trade.gov/country-commercial-guides/kuwait-import-requirements-and-documentation","source_type":"미국 국제무역청 국가별 공식 안내","summary":"정확한 품명, 화인과 번호, 수량·단위·총액·원산국, 항구와 선박/운송수단 정보를 요구한다."},
+    {"evidence_id":"RES-TRADE-SPAIN","url":"https://www.trade.gov/country-commercial-guides/spain-customs-regulations","source_type":"미국 국제무역청 국가별 공식 안내","summary":"품명 설명은 제품이 무엇인지, 용도, 재질을 명확히 해야 한다고 안내한다."}
+  ],
+  "field_evidence": [
+    {"semantic_paths":["송장정보/송장번호 및 작성일","송장정보/신용장번호 및 일자"],"evidence_ids":["RES-UPS-GUIDE","RES-FEDEX-BASICS","RES-TRADE-MAURITANIA"]},
+    {"semantic_paths":["송하인/상호","송하인/주소","송하인/국가","수하인/상호","수하인/주소 1","수하인/주소 2","수하인/국가","구매자/구매자 표시"],"evidence_ids":["RES-UPS-CLEARANCE","RES-FEDEX-BASICS"]},
+    {"semantic_paths":["운송정보/출발일","운송정보/선박 또는 항공편","운송정보/출발지","운송정보/도착지"],"evidence_ids":["RES-TRADE-MAURITANIA","RES-TRADE-ARGENTINA","RES-TRADE-KUWAIT"]},
+    {"semantic_paths":["거래조건/인도조건","거래조건/결제조건"],"evidence_ids":["RES-UPS-GUIDE","RES-FEDEX-BASICS"]},
+    {"semantic_paths":["품목내역/품명","품목내역/수량","품목내역/단가","품목내역/금액","품목내역/재질 구성"],"evidence_ids":["RES-UPS-GUIDE","RES-FEDEX-DOCS","RES-FEDEX-BASICS","RES-TRADE-SPAIN"]},
+    {"semantic_paths":["기타참조/원산국","화인/화인 코드","화인/목적지","화인/로트 표시","화인/카톤 번호 범위","화인/원산지 표시","서명/서명자"],"evidence_ids":["RES-TRADE-SAMPLE","RES-UPS-CLEARANCE","RES-FEDEX-DOCS"]}
+  ],
+  "scope_note": "웹 근거는 템플릿에 실제로 존재하는 28개 use 앵커의 의미 확인에만 사용했으며, 템플릿에 없는 일반 상업송장 필드는 추가하지 않았다."
+}

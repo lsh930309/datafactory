@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "doc_id": "SEC-01",
+  "title": "투자설명서·증권신고서",
+  "semantic_schema": {
+    "투자위험정보": {
+      "투자위험등급 표기": "",
+      "투자위험등급": ""
+    },
+    "집합투자기구 기본정보": {
+      "집합투자기구 명칭": "",
+      "집합투자업자 명칭": "",
+      "판매회사·공시 참조 안내": ""
+    },
+    "신고 및 모집정보": {
+      "작성기준일": "",
+      "증권신고서 효력발생일": "",
+      "모집(매출) 증권의 종류": "",
+      "모집(매출) 총액": "",
+      "모집(매출) 기간": ""
+    }
+  },
+  "fields": [
+    {"field_id":"investment_risk_grade_label","key":"투자위험등급 표기","semantic_path":"투자위험정보/투자위험등급 표기","anchor_id":"det_000001","value":"","value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_investment_risk_grade_label","unit_policy":{"mode":"included_in_value","reason":"표제와 등급값이 같은 색상 블록의 가변 텍스트 영역으로 보임"},"research_evidence_ids":["RISK-GRADE-01"],"visual_evidence":{"source":"full_template_image","bbox":[178,62,136,20],"confidence":0.96}},
+    {"field_id":"investment_risk_grade","key":"투자위험등급","semantic_path":"투자위험정보/투자위험등급","anchor_id":"det_000003","value":"","value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_investment_risk_grade","unit_policy":{"mode":"included_in_value","reason":"등급 숫자와 위험 명칭이 하나의 값 문자열로 인쇄됨"},"research_evidence_ids":["RISK-GRADE-01"],"visual_evidence":{"source":"full_template_image","bbox":[168,84,154,25],"confidence":0.99}},
+    {"field_id":"fund_name","key":"집합투자기구 명칭","semantic_path":"집합투자기구 기본정보/집합투자기구 명칭","anchor_id":"det_000032","value":"","value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_fund_name","unit_policy":{"mode":"none"},"research_evidence_ids":["DART-FUND-01"],"visual_evidence":{"source":"full_template_image","bbox":[414,432,520,28],"confidence":0.99}},
+    {"field_id":"asset_manager_name","key":"집합투자업자 명칭","semantic_path":"집합투자기구 기본정보/집합투자업자 명칭","anchor_id":"det_000034","value":"","value_type":"company.name_ko","faker_rule":"company.name_ko","style_class":"style_asset_manager_name","unit_policy":{"mode":"none"},"research_evidence_ids":["DART-FUND-01"],"visual_evidence":{"source":"full_template_image","bbox":[414,481,220,28],"confidence":0.99}},
+    {"field_id":"disclosure_reference_text","key":"판매회사·공시 참조 안내","semantic_path":"집합투자기구 기본정보/판매회사·공시 참조 안내","anchor_id":"det_000036","value":"","value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_disclosure_reference_text","unit_policy":{"mode":"none"},"research_evidence_ids":["DART-FUND-01"],"visual_evidence":{"source":"full_template_image","bbox":[413,537,650,47],"confidence":0.98}},
+    {"field_id":"prospectus_preparation_date","key":"작성기준일","semantic_path":"신고 및 모집정보/작성기준일","anchor_id":"det_000039","value":"","value_type":"date.kr","faker_rule":"date.kr","style_class":"style_prospectus_preparation_date","unit_policy":{"mode":"none","date_format":"YYYY. M. D"},"research_evidence_ids":["CAPITAL-MARKETS-ACT-01"],"visual_evidence":{"source":"full_template_image","bbox":[411,645,108,26],"confidence":0.99}},
+    {"field_id":"securities_registration_effective_date","key":"증권신고서 효력발생일","semantic_path":"신고 및 모집정보/증권신고서 효력발생일","anchor_id":"manual_1782795434153","value":"","value_type":"date.kr","faker_rule":"date.kr","style_class":"style_securities_registration_effective_date","unit_policy":{"mode":"none","date_format":"YYYY. M. D"},"research_evidence_ids":["CAPITAL-MARKETS-ACT-01","DART-FUND-01"],"visual_evidence":{"source":"full_template_image","bbox":[410,702,108,25],"confidence":0.99}},
+    {"field_id":"offered_security_type","key":"모집(매출) 증권의 종류","semantic_path":"신고 및 모집정보/모집(매출) 증권의 종류","anchor_id":"manual_1782795478965","value":"","value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_offered_security_type","unit_policy":{"mode":"none"},"research_evidence_ids":["DART-FUND-01"],"visual_evidence":{"source":"full_template_image","bbox":[465,750,181,27],"confidence":0.98}},
+    {"field_id":"offering_total_amount","key":"모집(매출) 총액","semantic_path":"신고 및 모집정보/모집(매출) 총액","anchor_id":"det_000042","value":"","value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_offering_total_amount","unit_policy":{"mode":"included_in_value","reason":"앵커가 '[모집(매출) 총액 : 10조좌]' 전체를 덮어 라벨·금액·좌 단위가 모두 렌더 대상임"},"research_evidence_ids":["DART-FUND-01"],"visual_evidence":{"source":"full_template_image","bbox":[155,792,285,22],"confidence":0.99}},
+    {"field_id":"offering_period_description","key":"모집(매출) 기간","semantic_path":"신고 및 모집정보/모집(매출) 기간","anchor_id":"det_000044","value":"","value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_offering_period_description","unit_policy":{"mode":"none"},"research_evidence_ids":["CAPITAL-MARKETS-ACT-01","DART-FUND-01"],"visual_evidence":{"source":"full_template_image","bbox":[468,835,560,70],"confidence":0.99}}
+  ],
+  "coverage": {"use_anchor_count":10,"bound_use_anchor_count":10,"coverage_percent":100,"unmapped_use_anchors":[]},
+  "field_id_contract": {"status":"frozen_for_pass_2","immutable":true}
+}

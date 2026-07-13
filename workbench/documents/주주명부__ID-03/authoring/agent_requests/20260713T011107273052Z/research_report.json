@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "doc_id": "ID-03",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:law.go.kr 상법 주주명부 기재사항 제352조",
+    "site:law.go.kr 주주명부 주주의 성명 주소 주식 종류 수",
+    "주주명부 기준일 현재 증명 법인명 소재지 대표이사 양식"
+  ],
+  "sources": [
+    {"evidence_id":"R1","url":"https://www.law.go.kr/LSW/joStmdInfoP.do?joBrNo=00&joNo=0352&lsiSeq=61292","source_type":"공식 법령 조문체계도","title":"상법 제352조 주주명부의 기재사항","summary":"주주명부의 법정 기재사항을 확인하는 1차 근거다. 현재 템플릿에서 시각적으로 확인되는 주주명과 주식 종류·수의 의미를 지지한다."},
+    {"evidence_id":"R2","url":"https://www.law.go.kr/LSW/precInfoP.do?precSeq=197897","source_type":"공식 판례","title":"주주명부열람등사 판례","summary":"상법상 주주명부 기재사항을 주주의 성명·주소, 주식의 종류·수, 주권 번호, 취득연월일로 설명한다. 템플릿의 이름·주식종류·주식수 해석에 사용하되, 보이지 않는 주소·취득일은 스키마에 추가하지 않았다."},
+    {"evidence_id":"R3","url":"https://m-img.cafe24.com/images/event/2022/02/stockholders%20list.pdf","source_type":"기관 배포 실제 양식 PDF","title":"주주명부 또는 출자자명부","summary":"주주명, 주식 종류·수, 1주당 금액, 대조 증명 문구, 법인명과 대표이사 날인 구조를 포함하는 실제 양식으로 현재 원본 하단 증명 영역과 합계 필드 해석을 보조한다."},
+    {"evidence_id":"R4","url":"https://www.olta.re.kr/explainInfo/authoInterpretationDetail.do?num=60085653","source_type":"공공기관 법령 해석 정보","title":"주주명부 기준일과 권리자 확정 관련 해석","summary":"특정 기준일 현재 주주명부에 기재된 주주를 권리 행사 주주로 정할 수 있음을 설명해 원본 상단의 '현재' 날짜가 기준일임을 보조한다."}
+  ],
+  "field_evidence": [
+    {"semantic_paths":["기준일/연도","기준일/월일_현재"],"evidence_ids":["R4"],"application":"상단 날짜를 작성일이 아닌 주주명부 기준일로 해석"},
+    {"semantic_paths":["주주내역/주주_1/주주명","주주내역/주주_1/소유주식수","주주내역/주주_1/주식종류","주주내역/주주_2/주주명_첫째줄","주주내역/주주_2/주주명_둘째줄","주주내역/주주_2/소유주식수","주주내역/주주_2/주식종류","주주내역/주주_3/주주명_첫째줄","주주내역/주주_3/주주명_둘째줄","주주내역/주주_3/소유주식수","주주내역/주주_3/주식종류"],"evidence_ids":["R1","R2"],"application":"주주별 이름과 보유 주식 종류·수의 반복 행 구조 확정"},
+    {"semantic_paths":["합계/총주식수","합계/1주당금액","증명/증명일","증명/법인명","증명/소재지_첫째구간","증명/소재지_둘째구간","증명/대표이사"],"evidence_ids":["R3"],"application":"합계 및 법인 증명 블록 의미 확인"}
+  ],
+  "scope_note":"웹 근거는 원본 이미지에 보이는 anchor의 의미 해석에만 사용했으며, 법령에 있으나 현재 템플릿에 보이지 않는 주주 주소·취득연월일 등은 추가하지 않았다."
+}

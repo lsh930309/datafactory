@@ -1,0 +1,15 @@
+{
+  "schema_version": 2,
+  "doc_id": "TRD-04",
+  "source": "faker_profile_draft.json.data_pools",
+  "pools": [
+    {"name":"english_dates","kind":"scalar","count":24,"usage":"발행일·선적일·만기일 fallback","source_note":"템플릿의 DD MON YYYY 표기와 기준일 제한을 반영한 합성 날짜"},
+    {"name":"availability_terms","kind":"scalar","count":20,"usage":"41A AVAILABLE WITH / BY","source_note":"ICC/SWIFT 문서신용장 용어를 바탕으로 만든 합성 조건"},
+    {"name":"trade_places","kind":"scalar","count":20,"usage":"만기장소·어음지급은행 소재지","source_note":"국제 무역 거점의 합성 표기"},
+    {"name":"bank_records","kind":"record","count":12,"usage":"은행명·주소·SWIFT·서명은행 동기화","source_note":"실재 기관으로 오인되지 않도록 만든 합성 은행 레코드"},
+    {"name":"trade_party_records","kind":"record","count":12,"usage":"신청인/수익자 상호·주소 동기화","source_note":"실재 기업정보가 아닌 합성 무역 당사자 레코드"},
+    {"name":"currency_amount_records","kind":"record","count":12,"usage":"통화코드·통화명·숫자금액·영문금액 동기화","source_note":"통화별 표기 일관성을 보장하는 합성 금액 레코드"},
+    {"name":"contract_records","kind":"record","count":12,"usage":"계약번호·계약일·45A 참조문구 동기화","source_note":"템플릿 prefix를 포함한 합성 계약 레코드"},
+    {"name":"shipment_records","kind":"record","count":12,"usage":"물품명·HS코드·선적항·양륙항 동기화","source_note":"산업재 중심의 합성 무역 레코드; HS 적합성은 승인 전 표본 검토 필요"}
+  ]
+}

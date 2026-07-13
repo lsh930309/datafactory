@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-05",
+  "title": "입퇴원확인서",
+  "search_date": "2026-07-13",
+  "as_of_date": "2026-07-13",
+  "scope": "pass_1_schema_and_evidence_freeze",
+  "queries": [
+    "site:law.go.kr 휴·폐업 의료기관의 진료기록 이관 및 진료기록보관시스템 운영에 관한 고시 입·퇴원확인서",
+    "site:mohw.go.kr 입·퇴원확인서 별지 제3호서식",
+    "site:law.go.kr 의료법 제40조의3 제6항 진료기록부 사본"
+  ],
+  "sources": [
+    {
+      "evidence_id": "RES-001",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=200203&flNm=%5B%EB%B3%84%EC%A7%80+3%5D+%EC%9E%85%C2%B7%ED%87%B4%EC%9B%90%ED%99%95%EC%9D%B8%EC%84%9C&flSeq=149709939",
+      "source_type": "official_form_original",
+      "publisher": "국가법령정보센터",
+      "title": "휴·폐업 의료기관의 진료기록 이관 및 진료기록보관시스템 운영에 관한 고시 별지 제3호서식 입·퇴원확인서",
+      "summary": "2025년 7월 1일 신설된 공식 서식 원문이다. 등록번호, 연번호, 환자 성명·주민등록번호·만 나이·주소, 병명·질병분류기호, 발병연월일, 입원·퇴원구분, 입원·퇴원연월일, 의사소견, 비고, 용도, 발급일, 의료기관 명칭·주소, 의사 면허번호·성명을 포함한다.",
+      "used_for": [
+        "문서관리/*",
+        "환자/*",
+        "진료내용/*",
+        "확인/*"
+      ]
+    },
+    {
+      "evidence_id": "RES-002",
+      "url": "https://law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000256058",
+      "source_type": "official_administrative_rule",
+      "publisher": "국가법령정보센터",
+      "title": "휴·폐업 의료기관의 진료기록 이관 및 진료기록보관시스템 운영에 관한 고시",
+      "summary": "보건복지부고시 제2025-45호는 2025년 7월 1일부터 시행된다. 제4조제2항제10호가 진료기록보관시스템에서 발급 가능한 사본으로 별지 제3호서식 입퇴원확인서를 명시한다.",
+      "used_for": [
+        "문서 성격",
+        "발급 근거",
+        "확인/*"
+      ]
+    },
+    {
+      "evidence_id": "RES-003",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=202930",
+      "source_type": "official_law",
+      "publisher": "국가법령정보센터",
+      "title": "의료법",
+      "summary": "진료기록 열람·사본 교부와 의료정보 비밀 보호의 법적 맥락을 확인했다. 본 초안에서는 시각적으로 존재하는 필드만 채택하고 민감정보 여부를 연구 근거로만 기록했다.",
+      "used_for": [
+        "환자/주민등록번호",
+        "진료내용/진단내역"
+      ]
+    }
+  ],
+  "field_evidence": [
+    {
+      "semantic_path_prefix": "문서관리",
+      "evidence_ids": ["RES-001"],
+      "visual_basis": "전체 템플릿 좌상단 2행 표"
+    },
+    {
+      "semantic_path_prefix": "환자",
+      "evidence_ids": ["RES-001", "RES-003"],
+      "visual_basis": "전체 템플릿 상단 환자 인적사항 표"
+    },
+    {
+      "semantic_path_prefix": "진료내용",
+      "evidence_ids": ["RES-001", "RES-002"],
+      "visual_basis": "전체 템플릿 중앙 진료내용 표"
+    },
+    {
+      "semantic_path_prefix": "확인",
+      "evidence_ids": ["RES-001", "RES-002"],
+      "visual_basis": "전체 템플릿 하단 발급 확인 영역"
+    }
+  ],
+  "research_boundary": "웹 근거는 템플릿에 보이는 앵커의 의미 확인에만 사용했으며, 템플릿에 없는 일반 필드는 추가하지 않았다."
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "doc_id": "ID-03",
+  "unresolved_fields": [
+    {"field_ids":["shareholder_2_name_line_1","shareholder_2_name_line_2","shareholder_3_name_line_1","shareholder_3_name_line_2"],"issue":"두 줄 bbox는 한 주주명 문자열을 시각적으로 분할한 구조이나 현재 고정 schema에는 합성 렌더 필드가 없다.","handling":"12개 record pool에서 앞·뒤 구간을 같은 레코드로 선택해 의미 일관성을 유지했다.","decision_needed":"향후 schema 변경 pass에서 단일 primary 주주명+두 줄 render-only 필드 구조 채택 여부 검토"},
+    {"field_ids":["as_of_year","as_of_month_day_current","certification_date"],"issue":"기준일은 연도와 '월 일 현재' 두 bbox로 분리되고 증명일은 단일 bbox라 date_group/date_order 문법으로 직접 연결할 수 없다.","handling":"pick_record에서 동일 날짜 문자열 세트를 선택하고 certification_date에 date_not_after(as_of_date)를 적용했다.","decision_needed":"렌더러가 as_of_year+as_of_month_day_current를 단일 날짜 group으로 해석하는 별도 계약 지원 여부"},
+    {"field_ids":["total_share_count"],"issue":"지원 sum constraint는 format=money.krw만 허용되어 '주' 단위 주식수 합계를 직접 계산할 수 없다.","handling":"각 record에서 세 주주 수의 산술 합과 총주식수를 미리 일치시켰다.","decision_needed":"주식수 합계를 위한 numeric sum format 지원 여부"},
+    {"field_ids":["certifying_company_address_line_1","certifying_company_address_line_2"],"issue":"주소가 OCR/bbox 기준으로 중간 분리되어 일반 address.ko 단일 생성기로 두 구간을 독립 생성하면 부자연스럽다.","handling":"record pool의 동일 주소 앞·뒤 구간으로 동시 선택했다.","decision_needed":"향후 단일 primary 주소+분할 render-only field 구조 채택 여부"}
+  ],
+  "conflicting_evidence": [
+    {"issue":"visualEvidenceManifest.visual_source는 별지 제32호서식 인페인트 이미지지만 pass 1 anchor와 값 bbox는 source_image 18-1.jpg의 별도 3열 주주명부를 가리킨다.","resolution":"request의 sample_kind=filled_sample 및 manifest의 source_image·bbox 좌표와 일치하는 18-1.jpg를 필드 값/단위 판단의 주 시각 근거로 사용했다. 인페인트 이미지는 고정 pass 1 바인딩과 불일치하므로 faker 관계 확장에는 사용하지 않았다."}
+  ],
+  "low_confidence_rules": [],
+  "scope_limitations": ["현재 한 페이지와 고정된 20개 binding만 대상으로 하며, 빈 행 추가·다중 페이지 확장은 하지 않았다.","주주별 주소·취득일 등 법정 일반 항목은 현재 템플릿 anchor가 없어 추가하지 않았다."],
+  "user_decisions_needed": ["두 줄 주주명 및 두 구간 주소를 다음 schema pass에서 primary 단일값+render-only 분할 구조로 바꿀지 여부", "주식수 전용 sum constraint 형식을 렌더러에 추가할지 여부"]
+}

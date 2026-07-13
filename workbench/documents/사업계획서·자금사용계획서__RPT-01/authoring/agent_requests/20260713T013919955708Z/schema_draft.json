@@ -1,0 +1,131 @@
+{
+  "schema_version": 2,
+  "doc_id": "RPT-01",
+  "title": "자산형성지원사업 자금사용계획서",
+  "semantic_schema": {
+    "사용용도 계획": {
+      "주택 구입·임대": { "기타 사용내용": "" },
+      "본인·자녀의 고등교육·기술훈련": { "기타 사용내용": "" },
+      "창업·운영자금": { "기타 사용내용": "" },
+      "의료비": { "기타 사용내용": "" },
+      "금융자산형성": { "기타 사용내용": "" },
+      "자녀양육·보육비": { "기타 사용내용": "" },
+      "결혼자금": { "기타 사용내용": "" },
+      "그 밖의 자립·자활": { "기타 사용내용": "" }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "housing_other_text",
+      "key": "주택 구입·임대 기타 사용내용",
+      "semantic_path": "사용용도 계획/주택 구입·임대/기타 사용내용",
+      "anchor_id": "det_000026",
+      "value": "",
+      "label_anchor_ids": ["det_000022", "det_000025"],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_housing_other_text",
+      "unit_policy": {"mode": "none", "reason": "괄호 안 자유기재 영역이며 정적 단위가 없음"},
+      "research_evidence_ids": ["RES-01", "RES-02"],
+      "visual_evidence": {"source": "full_template_image", "page": 2, "confidence": 0.98}
+    },
+    {
+      "field_id": "education_other_text",
+      "key": "본인·자녀의 고등교육·기술훈련 기타 사용내용",
+      "semantic_path": "사용용도 계획/본인·자녀의 고등교육·기술훈련/기타 사용내용",
+      "anchor_id": "det_000034",
+      "value": "",
+      "label_anchor_ids": ["det_000028", "det_000031", "det_000033"],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_education_other_text",
+      "unit_policy": {"mode": "none", "reason": "괄호 안 자유기재 영역이며 정적 단위가 없음"},
+      "research_evidence_ids": ["RES-01", "RES-02"],
+      "visual_evidence": {"source": "full_template_image", "page": 2, "confidence": 0.99}
+    },
+    {
+      "field_id": "startup_other_text",
+      "key": "창업·운영자금 기타 사용내용",
+      "semantic_path": "사용용도 계획/창업·운영자금/기타 사용내용",
+      "anchor_id": "det_000038",
+      "value": "",
+      "label_anchor_ids": ["det_000035", "det_000037"],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_startup_other_text",
+      "unit_policy": {"mode": "none", "reason": "괄호 안 자유기재 영역이며 정적 단위가 없음"},
+      "research_evidence_ids": ["RES-01", "RES-02"],
+      "visual_evidence": {"source": "full_template_image", "page": 2, "confidence": 0.99}
+    },
+    {
+      "field_id": "medical_other_text",
+      "key": "의료비 기타 사용내용",
+      "semantic_path": "사용용도 계획/의료비/기타 사용내용",
+      "anchor_id": "det_000044",
+      "value": "",
+      "label_anchor_ids": ["det_000040", "det_000043"],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_medical_other_text",
+      "unit_policy": {"mode": "none", "reason": "괄호 안 자유기재 영역이며 정적 단위가 없음"},
+      "research_evidence_ids": ["RES-01", "RES-02"],
+      "visual_evidence": {"source": "full_template_image", "page": 2, "confidence": 0.99}
+    },
+    {
+      "field_id": "finance_other_text",
+      "key": "금융자산형성 기타 사용내용",
+      "semantic_path": "사용용도 계획/금융자산형성/기타 사용내용",
+      "anchor_id": "det_000049",
+      "value": "",
+      "label_anchor_ids": ["det_000046"],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_finance_other_text",
+      "unit_policy": {"mode": "none", "reason": "괄호 안 자유기재 영역이며 정적 단위가 없음"},
+      "research_evidence_ids": ["RES-01", "RES-02"],
+      "visual_evidence": {"source": "full_template_image", "page": 2, "confidence": 0.98}
+    },
+    {
+      "field_id": "childcare_other_text",
+      "key": "자녀양육·보육비 기타 사용내용",
+      "semantic_path": "사용용도 계획/자녀양육·보육비/기타 사용내용",
+      "anchor_id": "det_000052",
+      "value": "",
+      "label_anchor_ids": ["det_000050", "det_000051"],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_childcare_other_text",
+      "unit_policy": {"mode": "none", "reason": "괄호 안 자유기재 영역이며 정적 단위가 없음"},
+      "research_evidence_ids": ["RES-01", "RES-02"],
+      "visual_evidence": {"source": "full_template_image", "page": 2, "confidence": 0.99}
+    },
+    {
+      "field_id": "marriage_other_text",
+      "key": "결혼자금 기타 사용내용",
+      "semantic_path": "사용용도 계획/결혼자금/기타 사용내용",
+      "anchor_id": "det_000055",
+      "value": "",
+      "label_anchor_ids": ["det_000053", "det_000054"],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_marriage_other_text",
+      "unit_policy": {"mode": "none", "reason": "괄호 안 자유기재 영역이며 정적 단위가 없음"},
+      "research_evidence_ids": ["RES-01", "RES-02"],
+      "visual_evidence": {"source": "full_template_image", "page": 2, "confidence": 0.99}
+    },
+    {
+      "field_id": "self_reliance_other_text",
+      "key": "그 밖의 자립·자활 기타 사용내용",
+      "semantic_path": "사용용도 계획/그 밖의 자립·자활/기타 사용내용",
+      "anchor_id": "det_000058",
+      "value": "",
+      "label_anchor_ids": ["det_000056", "det_000057"],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_self_reliance_other_text",
+      "unit_policy": {"mode": "none", "reason": "괄호 안 자유기재 영역이며 정적 단위가 없음"},
+      "research_evidence_ids": ["RES-01", "RES-02"],
+      "visual_evidence": {"source": "full_template_image", "page": 2, "confidence": 0.99}
+    }
+  ]
+}

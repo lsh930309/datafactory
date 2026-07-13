@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "doc_id": "CRD-02",
+  "proposed_pools": {
+    "credit_certificate_records": {
+      "kind": "record_pool",
+      "size": 12,
+      "usage": "15개 필드를 한 레코드에서 선택해 기업명·대표자·등록번호·주소·날짜·등급 설명의 일관성을 유지",
+      "source": "전체 템플릿 VIS-01 및 research_report WEB-02~04를 바탕으로 만든 완전 합성 데이터",
+      "location": "faker_profile_draft.json.data_pools.credit_certificate_records"
+    }
+  },
+  "closed_sets": {
+    "recipient_suffix": {"values":["귀중"],"reason":"전체 템플릿에서 독립 값 영역에 고정된 수신 접미어"},
+    "submission_purpose": {"values":["공공기관 제출용","조달청 입찰 제출용","계약심사 제출용","협력업체 평가용","납품업체 평가용"],"reason":"템플릿과 공공 조달 사용 맥락을 반영한 제한적 합성 선택지"},
+    "credit_rating": {"values":["AAA","AA+","AA0","AA-","A+","A0","A-","BBB+","BBB0","BBB-","BB+","BB0","BB-","B+","B0","B-","CCC+"],"reason":"공공 평가기준의 회사채 준용 기업신용평가등급 기호"}
+  },
+  "privacy_note": "실제 기업·개인·계정 데이터가 아닌 합성 명칭과 합성 식별번호만 사용했다."
+}

@@ -1,695 +1,884 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-30T11:49:12.318967+00:00",
-  "updated_at": "2026-07-02T23:48:38.043229+00:00",
+  "created_at": "2026-07-13T02:02:56.885168+00:00",
   "doc_id": "TRD-01",
   "title": "상업송장(Commercial Invoice)",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/상업송장(Commercial_Invoice)__TRD-01/review/original_상업송장/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/상업송장(Commercial_Invoice)__TRD-01/authoring/agent_applied_reviews/20260713T015411707890Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/상업송장(Commercial_Invoice)__TRD-01/samples/original/상업송장.png",
   "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/상업송장(Commercial_Invoice)__TRD-01/inpaint/original_상업송장/lama/inpainted_lama.png",
   "image": {
     "width": 966,
     "height": 1364
   },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/상업송장(Commercial_Invoice)__TRD-01/authoring/agent_applied_reviews/20260713T015411707890Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/상업송장(Commercial_Invoice)__TRD-01/authoring/agent_requests/20260713T015411707890Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "송장정보": {
+      "송장번호 및 작성일": "",
+      "신용장번호 및 일자": ""
+    },
+    "송하인": {
+      "상호": "",
+      "주소": "",
+      "국가": ""
+    },
+    "수하인": {
+      "상호": "",
+      "주소 1": "",
+      "주소 2": "",
+      "국가": ""
+    },
+    "구매자": {
+      "구매자 표시": ""
+    },
+    "기타참조": {
+      "원산국": ""
+    },
+    "운송정보": {
+      "출발일": "",
+      "선박 또는 항공편": "",
+      "출발지": "",
+      "도착지": ""
+    },
+    "거래조건": {
+      "인도조건": "",
+      "결제조건": ""
+    },
+    "품목내역": {
+      "품명": "",
+      "수량": "",
+      "단가": "",
+      "금액": "",
+      "재질 구성": ""
+    },
+    "화인": {
+      "화인 코드": "",
+      "목적지": "",
+      "로트 표시": "",
+      "카톤 번호 범위": "",
+      "원산지 표시": ""
+    },
+    "서명": {
+      "서명자": ""
+    }
+  },
   "fields": [
     {
       "field_id": "invoice_number_date",
-      "label": "송장번호일자",
+      "label": "송장번호 및 작성일",
+      "semantic_path": [
+        "송장정보",
+        "송장번호 및 작성일"
+      ],
+      "bbox_label_id": "manual_trd_01_001",
       "source_detection_id": "manual_trd_01_001",
       "source_text": "MK20211214, DEC 14. 2021",
-      "value_type": "date.kr",
-      "generator": "literal:",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
       "style_class": "style_invoice_number_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "송장번호일자",
-        "csv_column": "송장번호일자"
+        "json_path": "송장정보/송장번호 및 작성일",
+        "csv_column": "송장정보/송장번호 및 작성일"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_001",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipper_name",
-      "label": "송하인명",
+      "label": "송하인 상호",
+      "semantic_path": [
+        "송하인",
+        "상호"
+      ],
+      "bbox_label_id": "manual_trd_01_002",
       "source_detection_id": "manual_trd_01_002",
       "source_text": "MK GLOBAL CO., LTD.",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_shipper_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "송하인명",
-        "csv_column": "송하인명"
+        "json_path": "송하인/상호",
+        "csv_column": "송하인/상호"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_002",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipper_address",
-      "label": "송하인주소",
+      "label": "송하인 주소",
+      "semantic_path": [
+        "송하인",
+        "주소"
+      ],
+      "bbox_label_id": "manual_trd_01_003",
       "source_detection_id": "manual_trd_01_003",
       "source_text": "HWASEONG-SI, GYEONGGI-DO,",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "address.ko",
+      "generator": "address.ko",
       "style_class": "style_shipper_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "송하인주소",
-        "csv_column": "송하인주소"
+        "json_path": "송하인/주소",
+        "csv_column": "송하인/주소"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_003",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipper_country",
-      "label": "송하인국가",
+      "label": "송하인 국가",
+      "semantic_path": [
+        "송하인",
+        "국가"
+      ],
+      "bbox_label_id": "manual_trd_01_004",
       "source_detection_id": "manual_trd_01_004",
       "source_text": "REPUBLIC OF KOREA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_shipper_country",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "송하인국가",
-        "csv_column": "송하인국가"
+        "json_path": "송하인/국가",
+        "csv_column": "송하인/국가"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_004",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "lc_number_date",
-      "label": "신용장번호일자",
+      "label": "신용장번호 및 일자",
+      "semantic_path": [
+        "송장정보",
+        "신용장번호 및 일자"
+      ],
+      "bbox_label_id": "manual_trd_01_005",
       "source_detection_id": "manual_trd_01_005",
       "source_text": "M42JH912NS27501, DEC 16. 2021",
-      "value_type": "date.kr",
-      "generator": "literal:",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
       "style_class": "style_lc_number_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신용장번호일자",
-        "csv_column": "신용장번호일자"
+        "json_path": "송장정보/신용장번호 및 일자",
+        "csv_column": "송장정보/신용장번호 및 일자"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_005",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "buyer_reference",
-      "label": "구매자참조번호",
+      "label": "구매자 표시",
+      "semantic_path": [
+        "구매자",
+        "구매자 표시"
+      ],
+      "bbox_label_id": "manual_trd_01_006",
       "source_detection_id": "manual_trd_01_006",
       "source_text": "SAME AS CONSIGNEE",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_buyer_reference",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구매자참조번호",
-        "csv_column": "구매자참조번호"
+        "json_path": "구매자/구매자 표시",
+        "csv_column": "구매자/구매자 표시"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_006",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "consignee_name",
-      "label": "수하인명",
+      "label": "수하인 상호",
+      "semantic_path": [
+        "수하인",
+        "상호"
+      ],
+      "bbox_label_id": "manual_trd_01_007",
       "source_detection_id": "manual_trd_01_007",
       "source_text": "GOSINARA CO., LTD.",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_consignee_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수하인명",
-        "csv_column": "수하인명"
+        "json_path": "수하인/상호",
+        "csv_column": "수하인/상호"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_007",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "consignee_address_line1",
-      "label": "수하인주소주소행1",
+      "label": "수하인 주소 1",
+      "semantic_path": [
+        "수하인",
+        "주소 1"
+      ],
+      "bbox_label_id": "manual_trd_01_008",
       "source_detection_id": "manual_trd_01_008",
       "source_text": "14524 YUAN LAOSHAN QU,",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "address.ko",
+      "generator": "address.ko",
       "style_class": "style_consignee_address_line1",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수하인주소주소행1",
-        "csv_column": "수하인주소주소행1"
+        "json_path": "수하인/주소 1",
+        "csv_column": "수하인/주소 1"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_008",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "consignee_address_line2",
-      "label": "수하인주소주소행2",
+      "label": "수하인 주소 2",
+      "semantic_path": [
+        "수하인",
+        "주소 2"
+      ],
+      "bbox_label_id": "manual_trd_01_009",
       "source_detection_id": "manual_trd_01_009",
       "source_text": "QINGDAO SHI, SHANDONG SHENG,",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "address.ko",
+      "generator": "address.ko",
       "style_class": "style_consignee_address_line2",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수하인주소주소행2",
-        "csv_column": "수하인주소주소행2"
+        "json_path": "수하인/주소 2",
+        "csv_column": "수하인/주소 2"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_009",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "consignee_country",
-      "label": "수하인국가",
+      "label": "수하인 국가",
+      "semantic_path": [
+        "수하인",
+        "국가"
+      ],
+      "bbox_label_id": "manual_trd_01_010",
       "source_detection_id": "manual_trd_01_010",
       "source_text": "CHINA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_consignee_country",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수하인국가",
-        "csv_column": "수하인국가"
+        "json_path": "수하인/국가",
+        "csv_column": "수하인/국가"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_010",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "country_of_origin",
-      "label": "국가원산지",
+      "label": "원산국",
+      "semantic_path": [
+        "기타참조",
+        "원산국"
+      ],
+      "bbox_label_id": "manual_trd_01_011",
       "source_detection_id": "manual_trd_01_011",
       "source_text": "REPUBLIC OF KOREA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_country_of_origin",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "국가원산지",
-        "csv_column": "국가원산지"
+        "json_path": "기타참조/원산국",
+        "csv_column": "기타참조/원산국"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_011",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "departure_date",
-      "label": "출발일일자",
+      "label": "출발일",
+      "semantic_path": [
+        "운송정보",
+        "출발일"
+      ],
+      "bbox_label_id": "manual_trd_01_012",
       "source_detection_id": "manual_trd_01_012",
       "source_text": "DEC 16. 2021",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_departure_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "출발일일자",
-        "csv_column": "출발일일자"
+        "json_path": "운송정보/출발일",
+        "csv_column": "운송정보/출발일"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_012",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "vessel_flight",
-      "label": "선박항공편",
+      "label": "선박 또는 항공편",
+      "semantic_path": [
+        "운송정보",
+        "선박 또는 항공편"
+      ],
+      "bbox_label_id": "manual_trd_01_013",
       "source_detection_id": "manual_trd_01_013",
       "source_text": "QCY123",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_vessel_flight",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선박항공편",
-        "csv_column": "선박항공편"
+        "json_path": "운송정보/선박 또는 항공편",
+        "csv_column": "운송정보/선박 또는 항공편"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_013",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "loading_port",
-      "label": "선적항구",
+      "label": "출발지",
+      "semantic_path": [
+        "운송정보",
+        "출발지"
+      ],
+      "bbox_label_id": "manual_trd_01_014",
       "source_detection_id": "manual_trd_01_014",
       "source_text": "INCHEON, KOREA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_loading_port",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선적항구",
-        "csv_column": "선적항구"
+        "json_path": "운송정보/출발지",
+        "csv_column": "운송정보/출발지"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_014",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "terms_of_delivery",
-      "label": "조건인도",
+      "label": "인도조건",
+      "semantic_path": [
+        "거래조건",
+        "인도조건"
+      ],
+      "bbox_label_id": "manual_trd_01_015",
       "source_detection_id": "manual_trd_01_015",
       "source_text": "F.O.B INCHEON",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_terms_of_delivery",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "조건인도",
-        "csv_column": "조건인도"
+        "json_path": "거래조건/인도조건",
+        "csv_column": "거래조건/인도조건"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_015",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "payment_terms",
       "label": "결제조건",
+      "semantic_path": [
+        "거래조건",
+        "결제조건"
+      ],
+      "bbox_label_id": "manual_trd_01_016",
       "source_detection_id": "manual_trd_01_016",
       "source_text": "L/C AT SIGHT",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_payment_terms",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제조건",
-        "csv_column": "결제조건"
+        "json_path": "거래조건/결제조건",
+        "csv_column": "거래조건/결제조건"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_016",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "destination_port",
-      "label": "도착지항구",
+      "label": "도착지",
+      "semantic_path": [
+        "운송정보",
+        "도착지"
+      ],
+      "bbox_label_id": "manual_trd_01_017",
       "source_detection_id": "manual_trd_01_017",
       "source_text": "QINGDAO, CHINA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_destination_port",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "도착지항구",
-        "csv_column": "도착지항구"
+        "json_path": "운송정보/도착지",
+        "csv_column": "운송정보/도착지"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_017",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "goods_description",
-      "label": "물품품명",
+      "label": "품명",
+      "semantic_path": [
+        "품목내역",
+        "품명"
+      ],
+      "bbox_label_id": "manual_trd_01_018",
       "source_detection_id": "manual_trd_01_018",
       "source_text": "GIRL'S SHIRTS",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_goods_description",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "물품품명",
-        "csv_column": "물품품명"
+        "json_path": "품목내역/품명",
+        "csv_column": "품목내역/품명"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_018",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "quantity",
       "label": "수량",
+      "semantic_path": [
+        "품목내역",
+        "수량"
+      ],
+      "bbox_label_id": "manual_trd_01_019",
       "source_detection_id": "manual_trd_01_019",
       "source_text": "10,000 PC",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_quantity",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량",
-        "csv_column": "수량"
+        "json_path": "품목내역/수량",
+        "csv_column": "품목내역/수량"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_019",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "unit_price",
-      "label": "단위단가",
+      "label": "단가",
+      "semantic_path": [
+        "품목내역",
+        "단가"
+      ],
+      "bbox_label_id": "manual_trd_01_020",
       "source_detection_id": "manual_trd_01_020",
       "source_text": "US$1.00/PC",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_unit_price",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "단위단가",
-        "csv_column": "단위단가"
+        "json_path": "품목내역/단가",
+        "csv_column": "품목내역/단가"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_020",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "amount",
       "label": "금액",
+      "semantic_path": [
+        "품목내역",
+        "금액"
+      ],
+      "bbox_label_id": "manual_trd_01_021",
       "source_detection_id": "manual_trd_01_021",
       "source_text": "US$10,000",
-      "value_type": "money.krw",
-      "generator": "literal:",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
       "style_class": "style_amount",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액",
-        "csv_column": "금액"
+        "json_path": "품목내역/금액",
+        "csv_column": "품목내역/금액"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_021",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipping_mark_code",
-      "label": "화인마크코드",
+      "label": "화인 코드",
+      "semantic_path": [
+        "화인",
+        "화인 코드"
+      ],
+      "bbox_label_id": "manual_trd_01_022",
       "source_detection_id": "manual_trd_01_022",
       "source_text": "CN-275",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_shipping_mark_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "화인마크코드",
-        "csv_column": "화인마크코드"
+        "json_path": "화인/화인 코드",
+        "csv_column": "화인/화인 코드"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_022",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "material_composition",
-      "label": "재질구성",
+      "label": "재질 구성",
+      "semantic_path": [
+        "품목내역",
+        "재질 구성"
+      ],
+      "bbox_label_id": "manual_trd_01_023",
       "source_detection_id": "manual_trd_01_023",
       "source_text": "(Cotton 40%, Nylon 30%, Rayon 30%)",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_material_composition",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "재질구성",
-        "csv_column": "재질구성"
+        "json_path": "품목내역/재질 구성",
+        "csv_column": "품목내역/재질 구성"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_023",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipping_mark_destination",
-      "label": "화인마크도착지",
+      "label": "화인 목적지",
+      "semantic_path": [
+        "화인",
+        "목적지"
+      ],
+      "bbox_label_id": "manual_trd_01_024",
       "source_detection_id": "manual_trd_01_024",
       "source_text": "QINGDAO",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_shipping_mark_destination",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "화인마크도착지",
-        "csv_column": "화인마크도착지"
+        "json_path": "화인/목적지",
+        "csv_column": "화인/목적지"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_024",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "lot_number",
-      "label": "로트번호",
+      "label": "로트 표시",
+      "semantic_path": [
+        "화인",
+        "로트 표시"
+      ],
+      "bbox_label_id": "manual_trd_01_025",
       "source_detection_id": "manual_trd_01_025",
       "source_text": "LOT NO",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_lot_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "로트번호",
-        "csv_column": "로트번호"
+        "json_path": "화인/로트 표시",
+        "csv_column": "화인/로트 표시"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_025",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "carton_range",
-      "label": "카톤범위",
+      "label": "카톤 번호 범위",
+      "semantic_path": [
+        "화인",
+        "카톤 번호 범위"
+      ],
+      "bbox_label_id": "manual_trd_01_026",
       "source_detection_id": "manual_trd_01_026",
       "source_text": "C/NO.1-25",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_carton_range",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "카톤범위",
-        "csv_column": "카톤범위"
+        "json_path": "화인/카톤 번호 범위",
+        "csv_column": "화인/카톤 번호 범위"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_026",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "origin_mark",
-      "label": "원산지마크",
+      "label": "원산지 표시",
+      "semantic_path": [
+        "화인",
+        "원산지 표시"
+      ],
+      "bbox_label_id": "manual_trd_01_027",
       "source_detection_id": "manual_trd_01_027",
       "source_text": "MADE IN KOREA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_origin_mark",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "원산지마크",
-        "csv_column": "원산지마크"
+        "json_path": "화인/원산지 표시",
+        "csv_column": "화인/원산지 표시"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_027",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "signed_by",
       "label": "서명자",
+      "semantic_path": [
+        "서명",
+        "서명자"
+      ],
+      "bbox_label_id": "manual_trd_01_028",
       "source_detection_id": "manual_trd_01_028",
       "source_text": "Signed by",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_signed_by",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "서명자",
-        "csv_column": "서명자"
+        "json_path": "서명/서명자",
+        "csv_column": "서명/서명자"
       },
       "required": true,
-      "notes": "TRD-01 Commercial Invoice 생산용 보정 필드. 영문 거래처/항목/수량/단가/금액을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_01_028",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "authoring_mode": "trd01_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/상업송장(Commercial_Invoice)__TRD-01/review/original_상업송장/review.json"
-  }
+  "updated_at": "2026-07-13T02:03:15.530205+00:00"
 }

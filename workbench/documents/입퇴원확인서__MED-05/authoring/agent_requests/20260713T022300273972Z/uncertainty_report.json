@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "doc_id": "MED-05",
+  "pass": 2,
+  "status": "faker_and_relationship_expanded_with_review_items",
+  "unresolved_fields": [
+    {"uncertainty_id":"UNC-001","field_ids":["admission_discharge_type"],"issue":"공식 서식의 단일 값 셀은 입원·퇴원구분의 표현 형식을 강제하지 않는다.","current_decision":"지원되는 choice:입원|퇴원을 기본값으로 두되 hospitalization record와 함께 선택한다.","review_required":true},
+    {"uncertainty_id":"UNC-002","field_ids":["admission_date","discharge_date","admission_discharge_period"],"issue":"한 셀의 복합 표시 문자열에 대한 공식 예시가 없다.","current_decision":"primary 날짜는 고정 schema대로 분리하고 표시 필드는 '입원 YYYY-MM-DD / 퇴원 YYYY-MM-DD' 합성 문자열로 덮어쓴다.","review_required":true},
+    {"uncertainty_id":"UNC-003","field_ids":["patient_rrn"],"issue":"지원 rule person.rrn이 뒷자리 마스킹까지 보장하는지는 이 요청 입력만으로 확인되지 않는다.","current_decision":"지원 rule을 유지하고 age_from_rrn 관계를 적용한다. 적용 전 renderer의 마스킹 동작을 확인해야 한다.","review_required":true}
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    {"field_id":"admission_discharge_type","rule":"choice:입원|퇴원","reason":"서식은 허용 표현의 폐쇄 집합을 명시하지 않음"},
+    {"field_id":"admission_discharge_period","rule":"free_text.short","reason":"실제 값은 pick_record가 덮어쓰며 지원 template 문법만으로 다른 필드 참조 조합을 보장할 수 없음"},
+    {"field_id":"patient_rrn","rule":"person.rrn","reason":"마스킹 세부 동작은 renderer 검증 필요"}
+  ],
+  "unit_decisions": [
+    {"field_id":"patient_age","decision":"숫자만 생성","visual_evidence":"값 위치에 정적 만( 및 )세가 존재"},
+    {"field_ids":["issue_year","issue_month","issue_day"],"decision":"단위 없이 숫자만 생성","visual_evidence":"각 값 뒤에 정적 년·월·일이 존재"},
+    {"field_id":"doctor_license_number","decision":"번호만 생성","visual_evidence":"값 앞뒤에 정적 제·호가 존재"}
+  ],
+  "relationship_limitations": ["지원 constraint에는 서로 다른 진단 행의 중복 방지 규칙이 없어 동일 진단이 여러 행에 선택될 수 있다.","발급일은 퇴원일 이후 90일 이내이면서 기준일 이전이어야 하므로 기준일 직전 퇴원 사례에서 가능한 범위가 좁아질 수 있다."],
+  "user_decisions_needed": ["입원·퇴원구분을 입원/퇴원 단일 선택으로 승인할지 확인","복합 표시 문자열 형식 승인","person.rrn renderer의 뒷자리 마스킹 동작 확인"],
+  "page_limitations": "현재 입력은 1페이지 단일 서식이며 다른 문서의 다중 페이지 완결성은 확장하지 않았다."
+}

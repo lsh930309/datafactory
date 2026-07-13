@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "doc_id": "SEC-01",
+  "source_profile": "faker_profile_draft.json",
+  "pools": [
+    {
+      "name": "fund_cover_records",
+      "kind": "record",
+      "size": 20,
+      "usage": "펀드명, 운용사, 공시 안내, 위험등급, 증권종류, 모집총액, 모집기간을 한 레코드에서 선택",
+      "source_note": "전체 표지의 값 경계와 DART·금융투자협회·자본시장법 근거를 바탕으로 만든 비실재 합성 데이터이며, 운용사 URL에는 example.invalid 예약 도메인을 사용함",
+      "fields": ["risk_grade","fund_name","asset_manager","disclosure_reference","security_type","offering_total","offering_period"],
+      "relationship": "faker_profile_draft.json constraints의 pick_record가 schema field_id에서 record key 방향으로 연결"
+    }
+  ],
+  "closed_sets": [
+    {
+      "field_id": "investment_risk_grade",
+      "values": ["1등급(매우높은위험)","2등급(높은위험)","3등급(다소높은위험)","4등급(보통위험)","5등급(낮은위험)","6등급(매우낮은위험)"],
+      "evidence_id": "RISK-GRADE-01",
+      "note": "금융투자협회 기준의 최소 6단계 체계를 보수적으로 적용"
+    },
+    {
+      "field_id": "offered_security_type",
+      "values": ["투자신탁 수익증권","투자회사 주식","투자유한회사 지분증권","투자합자회사 지분증권"],
+      "evidence_id": "DART-FUND-01",
+      "note": "지원 choice 문법의 안전한 fallback이며 현재 record pool은 표지 형태와 일치하는 투자신탁 수익증권을 사용"
+    }
+  ],
+  "safety": {
+    "synthetic_only": true,
+    "real_personal_data": false,
+    "real_account_data": false,
+    "real_company_data": false
+  }
+}

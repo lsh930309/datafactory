@@ -1,0 +1,1839 @@
+{
+  "schema_version": 2,
+  "doc_id": "TRD-02",
+  "title": "포장명세서(Packing List)",
+  "semantic_schema": {
+    "거래당사자": {
+      "송하인·수출자": {
+        "회사명": "",
+        "주소 1행": "",
+        "주소 2행": "",
+        "전화번호": "",
+        "팩스번호": ""
+      },
+      "구매자·수입자·신청인": {
+        "회사명": "",
+        "주소 1행": "",
+        "주소 2행": "",
+        "전화번호": ""
+      },
+      "통지처": {
+        "명칭": ""
+      },
+      "수하인": {
+        "명칭": ""
+      }
+    },
+    "문서정보": {
+      "포장명세서 번호 및 일자": ""
+    },
+    "결제·인도조건": {
+      "운임 조건": "",
+      "HS 코드 문구": "",
+      "선하증권 번호 문구": ""
+    },
+    "운송정보": {
+      "선적항": {
+        "도시": "",
+        "국가": ""
+      },
+      "최종도착지": {
+        "도시": "",
+        "국가": ""
+      },
+      "운송인·선박": "",
+      "출항일": ""
+    },
+    "화인·번호": {
+      "구매자 표기": "",
+      "도착지 표기": "",
+      "카톤 번호 범위": "",
+      "품목번호 표제": ""
+    },
+    "물품명세": {
+      "대표 품명": "",
+      "포장 1": {
+        "품명": "",
+        "순중량": "",
+        "총중량": "",
+        "용적": "",
+        "포장 규격": "",
+        "품목코드": "",
+        "수량": "",
+        "카톤 구성": ""
+      },
+      "포장 2": {
+        "품명": "",
+        "순중량": "",
+        "총중량": "",
+        "용적": "",
+        "포장 규격": "",
+        "품목코드": "",
+        "수량": "",
+        "카톤 구성": ""
+      }
+    },
+    "합계·요약": {
+      "무역조건": "",
+      "순중량": "",
+      "총중량": "",
+      "용적": "",
+      "순중량 단위": "",
+      "총중량 단위": "",
+      "용적 단위": "",
+      "포장 요약": ""
+    },
+    "부가명세": {
+      "포장수량 한정 문구": "",
+      "컨테이너 및 봉인번호": "",
+      "원산지 문구": ""
+    },
+    "발행·서명": {
+      "발행회사명": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "서명자 및 직책": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "shipper_exporter_name",
+      "key": "송하인·수출자 회사명",
+      "semantic_path": "거래당사자/송하인·수출자/회사명",
+      "anchor_id": "manual_trd_02_001",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_shipper_exporter_name",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          40,
+          85,
+          160,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0035_manual_trd_02_001.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "packing_list_number_date",
+      "key": "포장명세서 번호 및 일자",
+      "semantic_path": "문서정보/포장명세서 번호 및 일자",
+      "anchor_id": "manual_trd_02_002",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_packing_list_number_date",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          346,
+          85,
+          210,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0036_manual_trd_02_002.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "shipper_address_line1",
+      "key": "송하인·수출자 주소 1행",
+      "semantic_path": "거래당사자/송하인·수출자/주소 1행",
+      "anchor_id": "manual_trd_02_003",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_shipper_address_line1",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          40,
+          99,
+          230,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0037_manual_trd_02_003.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "shipper_address_line2",
+      "key": "송하인·수출자 주소 2행",
+      "semantic_path": "거래당사자/송하인·수출자/주소 2행",
+      "anchor_id": "manual_trd_02_004",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_shipper_address_line2",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          39,
+          113,
+          150,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0038_manual_trd_02_004.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "shipper_tel",
+      "key": "송하인·수출자 전화번호",
+      "semantic_path": "거래당사자/송하인·수출자/전화번호",
+      "anchor_id": "manual_trd_02_005",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_shipper_tel",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          69,
+          128,
+          78,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0039_manual_trd_02_005.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "shipper_fax",
+      "key": "송하인·수출자 팩스번호",
+      "semantic_path": "거래당사자/송하인·수출자/팩스번호",
+      "anchor_id": "manual_trd_02_006",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_shipper_fax",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          189,
+          128,
+          111,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0040_manual_trd_02_006.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "buyer_importer_name",
+      "key": "구매자·수입자·신청인 회사명",
+      "semantic_path": "거래당사자/구매자·수입자·신청인/회사명",
+      "anchor_id": "manual_trd_02_007",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_buyer_importer_name",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          39,
+          156,
+          160,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0041_manual_trd_02_007.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "buyer_address_line1",
+      "key": "구매자·수입자·신청인 주소 1행",
+      "semantic_path": "거래당사자/구매자·수입자·신청인/주소 1행",
+      "anchor_id": "manual_trd_02_008",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_buyer_address_line1",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          38,
+          169,
+          140,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0042_manual_trd_02_008.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "notify_party",
+      "key": "통지처 명칭",
+      "semantic_path": "거래당사자/통지처/명칭",
+      "anchor_id": "manual_trd_02_009",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_notify_party",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          349,
+          170,
+          180,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0043_manual_trd_02_009.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "buyer_address_line2",
+      "key": "구매자·수입자·신청인 주소 2행",
+      "semantic_path": "거래당사자/구매자·수입자·신청인/주소 2행",
+      "anchor_id": "manual_trd_02_010",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_buyer_address_line2",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          37,
+          183,
+          140,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0044_manual_trd_02_010.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "buyer_tel",
+      "key": "구매자·수입자·신청인 전화번호",
+      "semantic_path": "거래당사자/구매자·수입자·신청인/전화번호",
+      "anchor_id": "manual_trd_02_011",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_buyer_tel",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          68,
+          198,
+          110,
+          16
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0045_manual_trd_02_011.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "consignee_name",
+      "key": "수하인 명칭",
+      "semantic_path": "거래당사자/수하인/명칭",
+      "anchor_id": "manual_trd_02_012",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_consignee_name",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          39,
+          234,
+          120,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0046_manual_trd_02_012.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "payment_delivery_1",
+      "key": "운임 조건",
+      "semantic_path": "결제·인도조건/운임 조건",
+      "anchor_id": "manual_trd_02_013",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_payment_delivery_1",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          349,
+          228,
+          190,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0047_manual_trd_02_013.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "payment_delivery_2",
+      "key": "HS 코드 문구",
+      "semantic_path": "결제·인도조건/HS 코드 문구",
+      "anchor_id": "manual_trd_02_014",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_payment_delivery_2",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          348,
+          242,
+          205,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0048_manual_trd_02_014.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "payment_delivery_3",
+      "key": "선하증권 번호 문구",
+      "semantic_path": "결제·인도조건/선하증권 번호 문구",
+      "anchor_id": "manual_trd_02_015",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_payment_delivery_3",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          349,
+          256,
+          240,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0049_manual_trd_02_015.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "port_loading_city",
+      "key": "선적항 도시",
+      "semantic_path": "운송정보/선적항/도시",
+      "anchor_id": "manual_trd_02_016",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_port_loading_city",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          69,
+          269,
+          60,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0050_manual_trd_02_016.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "final_destination_city",
+      "key": "최종도착지 도시",
+      "semantic_path": "운송정보/최종도착지/도시",
+      "anchor_id": "manual_trd_02_017",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_final_destination_city",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          210,
+          269,
+          80,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0051_manual_trd_02_017.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "port_loading_country",
+      "key": "선적항 국가",
+      "semantic_path": "운송정보/선적항/국가",
+      "anchor_id": "manual_trd_02_018",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_port_loading_country",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          52,
+          284,
+          95,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0052_manual_trd_02_018.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "final_destination_country",
+      "key": "최종도착지 국가",
+      "semantic_path": "운송정보/최종도착지/국가",
+      "anchor_id": "manual_trd_02_019",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_final_destination_country",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          223,
+          284,
+          55,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0053_manual_trd_02_019.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "carrier_vessel",
+      "key": "운송인·선박",
+      "semantic_path": "운송정보/운송인·선박",
+      "anchor_id": "manual_trd_02_020",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_carrier_vessel",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          32,
+          312,
+          121,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0054_manual_trd_02_020.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "sailing_date",
+      "key": "출항일",
+      "semantic_path": "운송정보/출항일",
+      "anchor_id": "manual_trd_02_021",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_sailing_date",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          206,
+          311,
+          85,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0055_manual_trd_02_021.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "shipping_mark_buyer",
+      "key": "화인 구매자 표기",
+      "semantic_path": "화인·번호/구매자 표기",
+      "anchor_id": "manual_trd_02_022",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_shipping_mark_buyer",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          37,
+          354,
+          85,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0056_manual_trd_02_022.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "shipping_mark_destination",
+      "key": "화인 도착지 표기",
+      "semantic_path": "화인·번호/도착지 표기",
+      "anchor_id": "manual_trd_02_023",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_shipping_mark_destination",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          37,
+          371,
+          80,
+          11
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0057_manual_trd_02_023.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "description_goods_header",
+      "key": "대표 품명",
+      "semantic_path": "물품명세/대표 품명",
+      "anchor_id": "manual_trd_02_024",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_description_goods_header",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          156,
+          371,
+          135,
+          10
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0058_manual_trd_02_024.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "shipping_mark_carton_range",
+      "key": "카톤 번호 범위",
+      "semantic_path": "화인·번호/카톤 번호 범위",
+      "anchor_id": "manual_trd_02_025",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_shipping_mark_carton_range",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          35,
+          383,
+          80,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0059_manual_trd_02_025.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "shipping_mark_item_no",
+      "key": "품목번호 표제",
+      "semantic_path": "화인·번호/품목번호 표제",
+      "anchor_id": "manual_trd_02_026",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_shipping_mark_item_no",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          35,
+          397,
+          70,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0060_manual_trd_02_026.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_1_title",
+      "key": "품명",
+      "semantic_path": "물품명세/포장 1/품명",
+      "anchor_id": "manual_trd_02_027",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_1_title",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          158,
+          428,
+          142,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0061_manual_trd_02_027.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_1_net_weight",
+      "key": "순중량",
+      "semantic_path": "물품명세/포장 1/순중량",
+      "anchor_id": "manual_trd_02_028",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_1_net_weight",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          525,
+          426,
+          45,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0062_manual_trd_02_028.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_1_gross_weight",
+      "key": "총중량",
+      "semantic_path": "물품명세/포장 1/총중량",
+      "anchor_id": "manual_trd_02_029",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_1_gross_weight",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          582,
+          426,
+          45,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0063_manual_trd_02_029.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_1_volume",
+      "key": "용적",
+      "semantic_path": "물품명세/포장 1/용적",
+      "anchor_id": "manual_trd_02_030",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_1_volume",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          643,
+          427,
+          35,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0064_manual_trd_02_030.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_1_dimensions",
+      "key": "포장 규격",
+      "semantic_path": "물품명세/포장 1/포장 규격",
+      "anchor_id": "manual_trd_02_031",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_1_dimensions",
+      "unit_policy": {
+        "mode": "value_contains_unit",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          542,
+          441,
+          128,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0065_manual_trd_02_031.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_1_item_code",
+      "key": "품목코드",
+      "semantic_path": "물품명세/포장 1/품목코드",
+      "anchor_id": "manual_trd_02_032",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_1_item_code",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          155,
+          456,
+          70,
+          11
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0066_manual_trd_02_032.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_1_quantity",
+      "key": "수량",
+      "semantic_path": "물품명세/포장 1/수량",
+      "anchor_id": "manual_trd_02_033",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_1_quantity",
+      "unit_policy": {
+        "mode": "value_contains_unit",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          230,
+          456,
+          80,
+          11
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0067_manual_trd_02_033.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_1_carton_breakdown",
+      "key": "카톤 구성",
+      "semantic_path": "물품명세/포장 1/카톤 구성",
+      "anchor_id": "manual_trd_02_034",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_1_carton_breakdown",
+      "unit_policy": {
+        "mode": "value_contains_unit",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          330,
+          455,
+          130,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0068_manual_trd_02_034.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_2_title",
+      "key": "품명",
+      "semantic_path": "물품명세/포장 2/품명",
+      "anchor_id": "manual_trd_02_035",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_2_title",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          158,
+          471,
+          142,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0069_manual_trd_02_035.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_2_net_weight",
+      "key": "순중량",
+      "semantic_path": "물품명세/포장 2/순중량",
+      "anchor_id": "manual_trd_02_036",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_2_net_weight",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          525,
+          469,
+          45,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0070_manual_trd_02_036.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_2_gross_weight",
+      "key": "총중량",
+      "semantic_path": "물품명세/포장 2/총중량",
+      "anchor_id": "manual_trd_02_037",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_2_gross_weight",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          583,
+          471,
+          45,
+          11
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0071_manual_trd_02_037.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_2_volume",
+      "key": "용적",
+      "semantic_path": "물품명세/포장 2/용적",
+      "anchor_id": "manual_trd_02_038",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_2_volume",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          642,
+          469,
+          35,
+          15
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0072_manual_trd_02_038.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_2_dimensions",
+      "key": "포장 규격",
+      "semantic_path": "물품명세/포장 2/포장 규격",
+      "anchor_id": "manual_trd_02_039",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_2_dimensions",
+      "unit_policy": {
+        "mode": "value_contains_unit",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          543,
+          483,
+          128,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0073_manual_trd_02_039.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_2_item_code",
+      "key": "품목코드",
+      "semantic_path": "물품명세/포장 2/품목코드",
+      "anchor_id": "manual_trd_02_040",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_2_item_code",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          156,
+          498,
+          70,
+          11
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0074_manual_trd_02_040.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_2_quantity",
+      "key": "수량",
+      "semantic_path": "물품명세/포장 2/수량",
+      "anchor_id": "manual_trd_02_041",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_2_quantity",
+      "unit_policy": {
+        "mode": "value_contains_unit",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          230,
+          498,
+          80,
+          11
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0075_manual_trd_02_041.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "box_2_carton_breakdown",
+      "key": "카톤 구성",
+      "semantic_path": "물품명세/포장 2/카톤 구성",
+      "anchor_id": "manual_trd_02_042",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_box_2_carton_breakdown",
+      "unit_policy": {
+        "mode": "value_contains_unit",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          330,
+          497,
+          130,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0076_manual_trd_02_042.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "total_trade_terms",
+      "key": "합계행 무역조건",
+      "semantic_path": "합계·요약/무역조건",
+      "anchor_id": "manual_trd_02_043",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_total_trade_terms",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          200,
+          513,
+          150,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0077_manual_trd_02_043.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "total_net_weight",
+      "key": "총 순중량",
+      "semantic_path": "합계·요약/순중량",
+      "anchor_id": "manual_trd_02_044",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_total_net_weight",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          526,
+          513,
+          45,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0078_manual_trd_02_044.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "total_gross_weight",
+      "key": "총 총중량",
+      "semantic_path": "합계·요약/총중량",
+      "anchor_id": "manual_trd_02_045",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_total_gross_weight",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          579,
+          513,
+          50,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0079_manual_trd_02_045.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "total_volume",
+      "key": "총 용적",
+      "semantic_path": "합계·요약/용적",
+      "anchor_id": "manual_trd_02_046",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_total_volume",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          643,
+          512,
+          35,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0080_manual_trd_02_046.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "net_weight_unit",
+      "key": "순중량 단위",
+      "semantic_path": "합계·요약/순중량 단위",
+      "anchor_id": "manual_trd_02_047",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:KGS|KG",
+      "style_class": "style_net_weight_unit",
+      "unit_policy": {
+        "mode": "value_contains_unit",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          531,
+          527,
+          26,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0081_manual_trd_02_047.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "gross_weight_unit",
+      "key": "총중량 단위",
+      "semantic_path": "합계·요약/총중량 단위",
+      "anchor_id": "manual_trd_02_048",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:KGS|KG",
+      "style_class": "style_gross_weight_unit",
+      "unit_policy": {
+        "mode": "value_contains_unit",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          588,
+          527,
+          26,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0082_manual_trd_02_048.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "volume_unit",
+      "key": "용적 단위",
+      "semantic_path": "합계·요약/용적 단위",
+      "anchor_id": "manual_trd_02_049",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:CBM|M3",
+      "style_class": "style_volume_unit",
+      "unit_policy": {
+        "mode": "value_contains_unit",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          644,
+          527,
+          25,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0083_manual_trd_02_049.png"
+      },
+      "confidence": 0.72,
+      "review_required": true
+    },
+    {
+      "field_id": "package_summary",
+      "key": "포장 요약",
+      "semantic_path": "합계·요약/포장 요약",
+      "anchor_id": "manual_trd_02_050",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_package_summary",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          311,
+          554,
+          230,
+          13
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0084_manual_trd_02_050.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "say_package_only",
+      "key": "포장수량 한정 문구",
+      "semantic_path": "부가명세/포장수량 한정 문구",
+      "anchor_id": "manual_trd_02_051",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_say_package_only",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          154,
+          571,
+          180,
+          9
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0085_manual_trd_02_051.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "container_seal_no",
+      "key": "컨테이너 및 봉인번호",
+      "semantic_path": "부가명세/컨테이너 및 봉인번호",
+      "anchor_id": "manual_trd_02_052",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_container_seal_no",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          156,
+          581,
+          270,
+          12
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0086_manual_trd_02_052.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "origin_country_statement",
+      "key": "원산지 문구",
+      "semantic_path": "부가명세/원산지 문구",
+      "anchor_id": "manual_trd_02_053",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_origin_country_statement",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          155,
+          594,
+          300,
+          16
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0087_manual_trd_02_053.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "footer_company_name",
+      "key": "발행회사명",
+      "semantic_path": "발행·서명/발행회사명",
+      "anchor_id": "manual_trd_02_054",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_footer_company_name",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          466,
+          738,
+          190,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0088_manual_trd_02_054.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "footer_tel",
+      "key": "발행회사 전화번호",
+      "semantic_path": "발행·서명/전화번호",
+      "anchor_id": "manual_trd_02_055",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_footer_tel",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          100,
+          765,
+          95,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0089_manual_trd_02_055.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "footer_fax",
+      "key": "발행회사 팩스번호",
+      "semantic_path": "발행·서명/팩스번호",
+      "anchor_id": "manual_trd_02_056",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_footer_fax",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          100,
+          781,
+          95,
+          14
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0090_manual_trd_02_056.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "signed_by_name",
+      "key": "서명자 및 직책",
+      "semantic_path": "발행·서명/서명자 및 직책",
+      "anchor_id": "manual_trd_02_057",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_signed_by_name",
+      "unit_policy": {
+        "mode": "no_static_unit_at_value_bbox",
+        "visual_basis": "full_template_image"
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
+        "bbox": [
+          470,
+          831,
+          214,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/visual_evidence/crops/crop_0091_manual_trd_02_057.png"
+      },
+      "confidence": 0.92,
+      "review_required": false
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 57,
+    "bound_use_anchor_count": 57,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  },
+  "field_id_contract": {
+    "pass": 1,
+    "immutable_for_pass_2": true
+  }
+}

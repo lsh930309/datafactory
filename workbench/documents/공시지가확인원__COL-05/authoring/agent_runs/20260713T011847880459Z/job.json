@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "jobId": "20260713T011847880459Z",
+  "docId": "COL-05",
+  "status": "failed",
+  "createdAt": "2026-07-13T01:18:47.881099+00:00",
+  "startedAt": "2026-07-13T01:18:47.913797+00:00",
+  "finishedAt": "2026-07-13T01:29:06.224561+00:00",
+  "requestPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/request.json",
+  "requestDir": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z",
+  "runDir": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z",
+  "promptPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/codex_exec_prompt.md",
+  "lastMessagePath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/codex_last_message.md",
+  "stdoutPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/stdout.log",
+  "stderrPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/stderr.log",
+  "requiredOutputs": [
+    "schema_draft.json",
+    "stylesheet_draft.json",
+    "faker_profile_draft.json",
+    "value_pool_draft.json",
+    "research_report.json",
+    "uncertainty_report.json",
+    "anchor_map_draft.json",
+    "application_notes.md"
+  ],
+  "outputs": {
+    "schema_draft.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/schema_draft.json",
+    "stylesheet_draft.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/stylesheet_draft.json",
+    "research_report.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/research_report.json",
+    "uncertainty_report.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/uncertainty_report.json",
+    "anchor_map_draft.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/anchor_map_draft.json"
+  },
+  "validation": {
+    "ready": false,
+    "missing": [
+      "faker_profile_draft.json",
+      "value_pool_draft.json",
+      "application_notes.md"
+    ],
+    "invalidJson": [],
+    "contractErrors": [
+      {
+        "code": "faker_missing_field_generators",
+        "message": "faker_profile_draft.json must include field_generators object"
+      }
+    ],
+    "outputs": {
+      "schema_draft.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/schema_draft.json",
+      "stylesheet_draft.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/stylesheet_draft.json",
+      "research_report.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/research_report.json",
+      "uncertainty_report.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/uncertainty_report.json",
+      "anchor_map_draft.json": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/anchor_map_draft.json"
+    },
+    "repairSummary": {
+      "materializedUseAnchors": [],
+      "materializedCount": 0,
+      "removedUnmappedDeclaration": false
+    },
+    "summary": {
+      "required": 8,
+      "present": 5,
+      "missing": 3,
+      "invalidJson": 0,
+      "contractErrors": 1
+    }
+  },
+  "options": {
+    "reasoningEffort": "medium",
+    "fastMode": false,
+    "minPoolSize": 20,
+    "scalarPoolMinSize": 20,
+    "recordPoolMinSize": 12,
+    "asOfDate": "2026-07-13",
+    "mode": "authoring"
+  },
+  "passState": {
+    "current": "failed",
+    "completed": [
+      "schema"
+    ],
+    "planned": [
+      "schema",
+      "faker",
+      "validation_repair"
+    ]
+  },
+  "stages": [
+    {
+      "stage": "schema",
+      "returnCode": 0,
+      "promptPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/codex_schema_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/codex_schema_pass_last_message.md",
+      "stdoutPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/schema_pass_stdout.log",
+      "stderrPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/schema_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/codex_schema_pass_last_message.md",
+        "-"
+      ]
+    },
+    {
+      "stage": "faker",
+      "returnCode": -15,
+      "promptPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/codex_faker_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/codex_faker_pass_last_message.md",
+      "stdoutPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/faker_pass_stdout.log",
+      "stderrPath": "workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/faker_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/codex_faker_pass_last_message.md",
+        "-"
+      ]
+    }
+  ],
+  "returnCode": -15,
+  "command": [
+    "codex",
+    "--search",
+    "--ask-for-approval",
+    "never",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "--disable",
+    "fast_mode",
+    "exec",
+    "--cd",
+    "/Users/lsh930309/projects/dataFatory",
+    "--sandbox",
+    "workspace-write",
+    "--output-last-message",
+    "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/authoring/agent_runs/20260713T011847880459Z/codex_faker_pass_last_message.md",
+    "-"
+  ],
+  "repairSummary": {
+    "materializedUseAnchors": [],
+    "materializedCount": 0,
+    "removedUnmappedDeclaration": false
+  },
+  "error": "codex exec failed with exit code -15"
+}

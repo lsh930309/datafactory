@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-03",
+  "status": "draft",
+  "source_of_truth": "faker_profile_draft.json.data_pools",
+  "pools": {
+    "trading_company_names": {"kind":"scalar","count":20,"usage":["shipper_name","consignee_name"],"note":"실재 업체로 오인되지 않도록 SAMPLE/DEMO/TEST 접두어를 사용한 영문 합성 상호"},
+    "global_addresses": {"kind":"scalar","count":20,"usage":["shipper_address","consignee_address"],"note":"실제 도시명과 합성 도로·건물 표현을 조합한 국제 주소"},
+    "ports": {"kind":"scalar","count":20,"usage":["route fields","place_of_issue fallback"],"note":"일반적인 국제 항만/도시 표기"},
+    "date_dd_mmm_yy": {"kind":"scalar","count":20,"usage":["date_of_issue"],"note":"템플릿 형식 DD-MMM-YY, 모두 2026-07-13 이하"},
+    "route_records": {"kind":"record","count":12,"usage":["port_of_loading","port_of_discharge","destination_on_carriage","freight_payable_at","place_of_receipt","place_of_delivery","place_of_issue"],"note":"출발·도착·발행지 조합을 동일 레코드에서 선택"},
+    "cargo_records": {"kind":"record","count":12,"usage":["package_description","container_packages","total_packages_words","goods_description","gross_weight","measurement_m3","container_volume"],"note":"포장 수량, 문자 수량, 화물명, 중량, 용적을 동일 레코드에서 선택"}
+  },
+  "privacy_note": "모든 회사명·주소·식별값은 합성 데이터이며 실제 개인·계좌·기업 식별정보를 포함하지 않는다."
+}

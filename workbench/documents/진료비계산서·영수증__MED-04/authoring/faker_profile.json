@@ -1,11 +1,12 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "doc_id": "MED-04",
+  "as_of_date": "2026-07-13",
   "field_generators": {
-    "doc_kind_outpatient": "literal:false",
-    "doc_kind_inpatient": "literal:false",
-    "doc_kind_discharge": "literal:false",
-    "doc_kind_interim": "literal:false",
+    "doc_kind_outpatient": "checkbox.bool",
+    "doc_kind_inpatient": "checkbox.bool",
+    "doc_kind_discharge": "checkbox.bool",
+    "doc_kind_interim": "checkbox.bool",
     "patient_registration_no": "pattern:######",
     "patient_name": "person.name_ko",
     "treatment_start_year": "date.year",
@@ -14,160 +15,160 @@
     "treatment_end_year": "date.year",
     "treatment_end_month": "date.month",
     "treatment_end_day": "date.day",
-    "night_care_checked": "literal:false",
-    "holiday_care_checked": "literal:false",
+    "night_care_checked": "checkbox.bool",
+    "holiday_care_checked": "checkbox.bool",
     "department": "pool:departments",
     "drg_number": "pattern:AA####",
-    "ward_room": "choice:일반병실|1인실|2인실|3인실",
-    "patient_category": "pool:patient_categories",
+    "ward_room": "choice:일반병실|1인실|2인실|3인실|4인실 이상",
+    "patient_category": "choice:건강보험|의료급여|산업재해|자동차보험|일반",
     "receipt_no": "template:{{date.year}}{{date.month}}-{{pattern:######}}",
-    "amount_consultation_partial_patient": "literal:0",
-    "amount_consultation_partial_insurer": "literal:0",
-    "amount_consultation_full_patient": "literal:0",
-    "amount_consultation_non_benefit": "literal:0",
-    "amount_room_1_partial_patient": "literal:0",
-    "amount_room_1_partial_insurer": "literal:0",
-    "amount_room_1_full_patient": "literal:0",
-    "amount_room_1_non_benefit": "literal:0",
-    "amount_room_2_3_partial_patient": "literal:0",
-    "amount_room_2_3_partial_insurer": "literal:0",
-    "amount_room_2_3_full_patient": "literal:0",
-    "amount_room_2_3_non_benefit": "literal:0",
-    "amount_room_4_plus_partial_patient": "literal:0",
-    "amount_room_4_plus_partial_insurer": "literal:0",
-    "amount_room_4_plus_full_patient": "literal:0",
-    "amount_room_4_plus_non_benefit": "literal:0",
-    "amount_meal_partial_patient": "literal:0",
-    "amount_meal_partial_insurer": "literal:0",
-    "amount_meal_full_patient": "literal:0",
-    "amount_meal_non_benefit": "literal:0",
-    "amount_medication_act_partial_patient": "literal:0",
-    "amount_medication_act_partial_insurer": "literal:0",
-    "amount_medication_act_full_patient": "literal:0",
-    "amount_medication_act_non_benefit": "literal:0",
-    "amount_medication_drug_partial_patient": "literal:0",
-    "amount_medication_drug_partial_insurer": "literal:0",
-    "amount_medication_drug_full_patient": "literal:0",
-    "amount_medication_drug_non_benefit": "literal:0",
-    "amount_injection_act_partial_patient": "literal:0",
-    "amount_injection_act_partial_insurer": "literal:0",
-    "amount_injection_act_full_patient": "literal:0",
-    "amount_injection_act_non_benefit": "literal:0",
-    "amount_injection_drug_partial_patient": "literal:0",
-    "amount_injection_drug_partial_insurer": "literal:0",
-    "amount_injection_drug_full_patient": "literal:0",
-    "amount_injection_drug_non_benefit": "literal:0",
-    "amount_anesthesia_partial_patient": "literal:0",
-    "amount_anesthesia_partial_insurer": "literal:0",
-    "amount_anesthesia_full_patient": "literal:0",
-    "amount_anesthesia_non_benefit": "literal:0",
-    "amount_procedure_surgery_partial_patient": "literal:0",
-    "amount_procedure_surgery_partial_insurer": "literal:0",
-    "amount_procedure_surgery_full_patient": "literal:0",
-    "amount_procedure_surgery_non_benefit": "literal:0",
-    "amount_test_partial_patient": "literal:0",
-    "amount_test_partial_insurer": "literal:0",
-    "amount_test_full_patient": "literal:0",
-    "amount_test_non_benefit": "literal:0",
-    "amount_imaging_partial_patient": "literal:0",
-    "amount_imaging_partial_insurer": "literal:0",
-    "amount_imaging_full_patient": "literal:0",
-    "amount_imaging_non_benefit": "literal:0",
-    "amount_radiation_partial_patient": "literal:0",
-    "amount_radiation_partial_insurer": "literal:0",
-    "amount_radiation_full_patient": "literal:0",
-    "amount_radiation_non_benefit": "literal:0",
-    "amount_materials_partial_patient": "literal:0",
-    "amount_materials_partial_insurer": "literal:0",
-    "amount_materials_full_patient": "literal:0",
-    "amount_materials_non_benefit": "literal:0",
-    "amount_rehab_partial_patient": "literal:0",
-    "amount_rehab_partial_insurer": "literal:0",
-    "amount_rehab_full_patient": "literal:0",
-    "amount_rehab_non_benefit": "literal:0",
-    "amount_psychotherapy_partial_patient": "literal:0",
-    "amount_psychotherapy_partial_insurer": "literal:0",
-    "amount_psychotherapy_full_patient": "literal:0",
-    "amount_psychotherapy_non_benefit": "literal:0",
-    "amount_blood_partial_patient": "literal:0",
-    "amount_blood_partial_insurer": "literal:0",
-    "amount_blood_full_patient": "literal:0",
-    "amount_blood_non_benefit": "literal:0",
-    "amount_ct_partial_patient": "literal:0",
-    "amount_ct_partial_insurer": "literal:0",
-    "amount_ct_full_patient": "literal:0",
-    "amount_ct_non_benefit": "literal:0",
-    "amount_mri_partial_patient": "literal:0",
-    "amount_mri_partial_insurer": "literal:0",
-    "amount_mri_full_patient": "literal:0",
-    "amount_mri_non_benefit": "literal:0",
-    "amount_pet_partial_patient": "literal:0",
-    "amount_pet_partial_insurer": "literal:0",
-    "amount_pet_full_patient": "literal:0",
-    "amount_pet_non_benefit": "literal:0",
-    "amount_ultrasound_partial_patient": "literal:0",
-    "amount_ultrasound_partial_insurer": "literal:0",
-    "amount_ultrasound_full_patient": "literal:0",
-    "amount_ultrasound_non_benefit": "literal:0",
-    "amount_prosthetic_orthodontic_partial_patient": "literal:0",
-    "amount_prosthetic_orthodontic_partial_insurer": "literal:0",
-    "amount_prosthetic_orthodontic_full_patient": "literal:0",
-    "amount_prosthetic_orthodontic_non_benefit": "literal:0",
-    "amount_certificate_partial_patient": "literal:0",
-    "amount_certificate_partial_insurer": "literal:0",
-    "amount_certificate_full_patient": "literal:0",
-    "amount_certificate_non_benefit": "literal:0",
-    "amount_selective_benefit_partial_patient": "literal:0",
-    "amount_selective_benefit_partial_insurer": "literal:0",
-    "amount_selective_benefit_full_patient": "literal:0",
-    "amount_selective_benefit_non_benefit": "literal:0",
-    "amount_senior_flat_partial_patient": "literal:0",
-    "amount_senior_flat_partial_insurer": "literal:0",
-    "amount_senior_flat_full_patient": "literal:0",
-    "amount_senior_flat_non_benefit": "literal:0",
-    "amount_flat_nursing_hospital_partial_patient": "literal:0",
-    "amount_flat_nursing_hospital_partial_insurer": "literal:0",
-    "amount_flat_nursing_hospital_full_patient": "literal:0",
-    "amount_flat_nursing_hospital_non_benefit": "literal:0",
-    "amount_flat_hospice_partial_patient": "literal:0",
-    "amount_flat_hospice_partial_insurer": "literal:0",
-    "amount_flat_hospice_full_patient": "literal:0",
-    "amount_flat_hospice_non_benefit": "literal:0",
-    "amount_drg_bundle_partial_patient": "literal:0",
-    "amount_drg_bundle_partial_insurer": "literal:0",
-    "amount_drg_bundle_full_patient": "literal:0",
-    "amount_drg_bundle_non_benefit": "literal:0",
-    "amount_other_partial_patient": "literal:0",
-    "amount_other_partial_insurer": "literal:0",
-    "amount_other_full_patient": "literal:0",
-    "amount_other_non_benefit": "literal:0",
-    "total_medical_cost": "literal:0",
-    "insurer_total": "literal:0",
-    "patient_total": "literal:0",
-    "prepaid_amount": "literal:0",
-    "amount_due": "literal:0",
-    "paid_card": "literal:0",
-    "paid_cash_receipt": "literal:0",
-    "paid_cash": "literal:0",
-    "paid_total": "literal:0",
-    "unpaid_amount": "literal:0",
-    "cash_receipt_purpose": "literal:true",
+    "amount_consultation_partial_patient": "money.krw",
+    "amount_consultation_partial_insurer": "money.krw",
+    "amount_consultation_full_patient": "money.krw",
+    "amount_consultation_non_benefit": "money.krw",
+    "amount_room_1_partial_patient": "money.krw",
+    "amount_room_1_partial_insurer": "money.krw",
+    "amount_room_1_full_patient": "money.krw",
+    "amount_room_1_non_benefit": "money.krw",
+    "amount_room_2_3_partial_patient": "money.krw",
+    "amount_room_2_3_partial_insurer": "money.krw",
+    "amount_room_2_3_full_patient": "money.krw",
+    "amount_room_2_3_non_benefit": "money.krw",
+    "amount_room_4_plus_partial_patient": "money.krw",
+    "amount_room_4_plus_partial_insurer": "money.krw",
+    "amount_room_4_plus_full_patient": "money.krw",
+    "amount_room_4_plus_non_benefit": "money.krw",
+    "amount_meal_partial_patient": "money.krw",
+    "amount_meal_partial_insurer": "money.krw",
+    "amount_meal_full_patient": "money.krw",
+    "amount_meal_non_benefit": "money.krw",
+    "amount_medication_act_partial_patient": "money.krw",
+    "amount_medication_act_partial_insurer": "money.krw",
+    "amount_medication_act_full_patient": "money.krw",
+    "amount_medication_act_non_benefit": "money.krw",
+    "amount_medication_drug_partial_patient": "money.krw",
+    "amount_medication_drug_partial_insurer": "money.krw",
+    "amount_medication_drug_full_patient": "money.krw",
+    "amount_medication_drug_non_benefit": "money.krw",
+    "amount_injection_act_partial_patient": "money.krw",
+    "amount_injection_act_partial_insurer": "money.krw",
+    "amount_injection_act_full_patient": "money.krw",
+    "amount_injection_act_non_benefit": "money.krw",
+    "amount_injection_drug_partial_patient": "money.krw",
+    "amount_injection_drug_partial_insurer": "money.krw",
+    "amount_injection_drug_full_patient": "money.krw",
+    "amount_injection_drug_non_benefit": "money.krw",
+    "amount_anesthesia_partial_patient": "money.krw",
+    "amount_anesthesia_partial_insurer": "money.krw",
+    "amount_anesthesia_full_patient": "money.krw",
+    "amount_anesthesia_non_benefit": "money.krw",
+    "amount_procedure_surgery_partial_patient": "money.krw",
+    "amount_procedure_surgery_partial_insurer": "money.krw",
+    "amount_procedure_surgery_full_patient": "money.krw",
+    "amount_procedure_surgery_non_benefit": "money.krw",
+    "amount_test_partial_patient": "money.krw",
+    "amount_test_partial_insurer": "money.krw",
+    "amount_test_full_patient": "money.krw",
+    "amount_test_non_benefit": "money.krw",
+    "amount_imaging_partial_patient": "money.krw",
+    "amount_imaging_partial_insurer": "money.krw",
+    "amount_imaging_full_patient": "money.krw",
+    "amount_imaging_non_benefit": "money.krw",
+    "amount_radiation_partial_patient": "money.krw",
+    "amount_radiation_partial_insurer": "money.krw",
+    "amount_radiation_full_patient": "money.krw",
+    "amount_radiation_non_benefit": "money.krw",
+    "amount_materials_partial_patient": "money.krw",
+    "amount_materials_partial_insurer": "money.krw",
+    "amount_materials_full_patient": "money.krw",
+    "amount_materials_non_benefit": "money.krw",
+    "amount_rehab_partial_patient": "money.krw",
+    "amount_rehab_partial_insurer": "money.krw",
+    "amount_rehab_full_patient": "money.krw",
+    "amount_rehab_non_benefit": "money.krw",
+    "amount_psychotherapy_partial_patient": "money.krw",
+    "amount_psychotherapy_partial_insurer": "money.krw",
+    "amount_psychotherapy_full_patient": "money.krw",
+    "amount_psychotherapy_non_benefit": "money.krw",
+    "amount_blood_partial_patient": "money.krw",
+    "amount_blood_partial_insurer": "money.krw",
+    "amount_blood_full_patient": "money.krw",
+    "amount_blood_non_benefit": "money.krw",
+    "amount_ct_partial_patient": "money.krw",
+    "amount_ct_partial_insurer": "money.krw",
+    "amount_ct_full_patient": "money.krw",
+    "amount_ct_non_benefit": "money.krw",
+    "amount_mri_partial_patient": "money.krw",
+    "amount_mri_partial_insurer": "money.krw",
+    "amount_mri_full_patient": "money.krw",
+    "amount_mri_non_benefit": "money.krw",
+    "amount_pet_partial_patient": "money.krw",
+    "amount_pet_partial_insurer": "money.krw",
+    "amount_pet_full_patient": "money.krw",
+    "amount_pet_non_benefit": "money.krw",
+    "amount_ultrasound_partial_patient": "money.krw",
+    "amount_ultrasound_partial_insurer": "money.krw",
+    "amount_ultrasound_full_patient": "money.krw",
+    "amount_ultrasound_non_benefit": "money.krw",
+    "amount_prosthetic_orthodontic_partial_patient": "money.krw",
+    "amount_prosthetic_orthodontic_partial_insurer": "money.krw",
+    "amount_prosthetic_orthodontic_full_patient": "money.krw",
+    "amount_prosthetic_orthodontic_non_benefit": "money.krw",
+    "amount_certificate_partial_patient": "money.krw",
+    "amount_certificate_partial_insurer": "money.krw",
+    "amount_certificate_full_patient": "money.krw",
+    "amount_certificate_non_benefit": "money.krw",
+    "amount_selective_benefit_partial_patient": "money.krw",
+    "amount_selective_benefit_partial_insurer": "money.krw",
+    "amount_selective_benefit_full_patient": "money.krw",
+    "amount_selective_benefit_non_benefit": "money.krw",
+    "amount_senior_flat_partial_patient": "money.krw",
+    "amount_senior_flat_partial_insurer": "money.krw",
+    "amount_senior_flat_full_patient": "money.krw",
+    "amount_senior_flat_non_benefit": "money.krw",
+    "amount_flat_nursing_hospital_partial_patient": "money.krw",
+    "amount_flat_nursing_hospital_partial_insurer": "money.krw",
+    "amount_flat_nursing_hospital_full_patient": "money.krw",
+    "amount_flat_nursing_hospital_non_benefit": "money.krw",
+    "amount_flat_hospice_partial_patient": "money.krw",
+    "amount_flat_hospice_partial_insurer": "money.krw",
+    "amount_flat_hospice_full_patient": "money.krw",
+    "amount_flat_hospice_non_benefit": "money.krw",
+    "amount_drg_bundle_partial_patient": "money.krw",
+    "amount_drg_bundle_partial_insurer": "money.krw",
+    "amount_drg_bundle_full_patient": "money.krw",
+    "amount_drg_bundle_non_benefit": "money.krw",
+    "amount_other_partial_patient": "money.krw",
+    "amount_other_partial_insurer": "money.krw",
+    "amount_other_full_patient": "money.krw",
+    "amount_other_non_benefit": "money.krw",
+    "total_medical_cost": "money.krw",
+    "insurer_total": "money.krw",
+    "patient_total": "money.krw",
+    "prepaid_amount": "money.krw",
+    "amount_due": "money.krw",
+    "paid_card": "money.krw",
+    "paid_cash_receipt": "money.krw",
+    "paid_cash": "money.krw",
+    "paid_total": "money.krw",
+    "unpaid_amount": "money.krw",
+    "cash_receipt_purpose": "checkbox.bool",
     "cash_receipt_identity_no": "pattern:#############",
     "cash_receipt_approval_no": "pattern:################",
-    "total_partial_patient": "literal:0",
-    "total_partial_insurer": "literal:0",
-    "total_full_patient": "literal:0",
-    "total_non_benefit": "literal:0",
-    "cap_excess_amount": "literal:0",
-    "institution_type_clinic": "literal:false",
-    "institution_type_hospital": "literal:false",
-    "institution_type_general": "literal:false",
-    "institution_type_tertiary": "literal:false",
-    "provider_business_registration_number": "pool:med04_provider_business_registration_numbers",
-    "provider_name": "pool:med04_provider_names",
-    "provider_phone": "pool:med04_provider_phones",
-    "provider_address": "pool:med04_provider_addresses",
-    "representative_name": "pool:med04_provider_representatives",
+    "total_partial_patient": "money.krw",
+    "total_partial_insurer": "money.krw",
+    "total_full_patient": "money.krw",
+    "total_non_benefit": "money.krw",
+    "cap_excess_amount": "money.krw",
+    "institution_type_clinic": "checkbox.bool",
+    "institution_type_hospital": "checkbox.bool",
+    "institution_type_general": "checkbox.bool",
+    "institution_type_tertiary": "checkbox.bool",
+    "provider_business_registration_number": "business_reg_no",
+    "provider_name": "medical.institution_ko",
+    "provider_phone": "person.phone_kr",
+    "provider_address": "address.ko",
+    "representative_name": "person.name_ko",
     "issued_year": "date.year",
     "issued_month": "date.month",
     "issued_day": "date.day"
@@ -175,1892 +176,221 @@
   "data_pools": {
     "departments": [
       "내과",
+      "외과",
       "정형외과",
+      "신경외과",
+      "신경과",
       "소아청소년과",
+      "산부인과",
       "이비인후과",
-      "영상의학과"
+      "안과",
+      "피부과",
+      "비뇨의학과",
+      "정신건강의학과",
+      "재활의학과",
+      "마취통증의학과",
+      "영상의학과",
+      "진단검사의학과",
+      "응급의학과",
+      "가정의학과",
+      "치과",
+      "흉부외과",
+      "성형외과",
+      "핵의학과",
+      "방사선종양학과",
+      "직업환경의학과"
     ],
-    "patient_categories": [
-      "건강보험",
-      "의료급여 1종",
-      "의료급여 2종",
-      "일반",
-      "산재"
-    ],
-    "med_amount_zero": [
-      "0"
-    ],
-    "med_amount_low_patient": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "1,000",
-      "1,500",
-      "2,000",
-      "3,000",
-      "4,500",
-      "6,000",
-      "8,000",
-      "12,000",
-      "15,000",
-      "20,000"
-    ],
-    "med_amount_low_insurer": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "8,000",
-      "12,000",
-      "18,000",
-      "24,000",
-      "32,000",
-      "45,000",
-      "60,000"
-    ],
-    "med_amount_low_full": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "3,000",
-      "5,000",
-      "8,000",
-      "10,000",
-      "20,000",
-      "30,000"
-    ],
-    "med_amount_low_non_benefit": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "3,000",
-      "5,000",
-      "10,000",
-      "15,000",
-      "30,000"
-    ],
-    "med_amount_mid_patient": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "5,000",
-      "8,000",
-      "12,000",
-      "18,000",
-      "25,000",
-      "35,000",
-      "50,000",
-      "75,000",
-      "100,000"
-    ],
-    "med_amount_mid_insurer": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "20,000",
-      "35,000",
-      "50,000",
-      "80,000",
-      "120,000",
-      "180,000",
-      "250,000"
-    ],
-    "med_amount_mid_full": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "10,000",
-      "20,000",
-      "35,000",
-      "50,000",
-      "80,000",
-      "120,000"
-    ],
-    "med_amount_mid_non_benefit": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "10,000",
-      "20,000",
-      "50,000",
-      "80,000",
-      "120,000",
-      "180,000"
-    ],
-    "med_amount_high_patient": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "15,000",
-      "30,000",
-      "50,000",
-      "80,000",
-      "120,000",
-      "180,000",
-      "250,000",
-      "350,000"
-    ],
-    "med_amount_high_insurer": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "60,000",
-      "120,000",
-      "200,000",
-      "350,000",
-      "500,000",
-      "750,000",
-      "1,000,000"
-    ],
-    "med_amount_high_full": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "20,000",
-      "50,000",
-      "100,000",
-      "180,000",
-      "300,000",
-      "500,000"
-    ],
-    "med_amount_high_non_benefit": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "30,000",
-      "80,000",
-      "150,000",
-      "250,000",
-      "400,000",
-      "700,000"
-    ],
-    "med04_receipt_scenarios": [
+    "provider_records": [
       {
-        "scenario_name": "외래_감기_기본처방",
-        "doc_kind_outpatient": "true",
-        "doc_kind_inpatient": "false",
-        "doc_kind_discharge": "false",
-        "doc_kind_interim": "false",
-        "night_care_checked": "false",
-        "holiday_care_checked": "false",
-        "institution_type_clinic": "true",
-        "institution_type_hospital": "false",
-        "institution_type_general": "false",
-        "institution_type_tertiary": "false",
-        "department": "내과",
-        "ward_room": "-",
-        "patient_category": "건강보험",
-        "amount_consultation_partial_patient": "6,000",
-        "amount_consultation_partial_insurer": "18,000",
-        "amount_medication_act_partial_patient": "2,000",
-        "amount_medication_act_partial_insurer": "7,000",
-        "amount_medication_drug_partial_patient": "4,500",
-        "amount_medication_drug_partial_insurer": "13,500",
-        "amount_injection_act_partial_patient": "3,000",
-        "amount_injection_act_partial_insurer": "9,000",
-        "provider_business_registration_number": "123-45-67890",
-        "provider_name": "한빛내과의원",
-        "provider_phone": "02-3478-1122",
-        "provider_address": "서울특별시 서초구 반포대로 120",
-        "representative_name": "김도현"
+        "business_no": "101-01-00019",
+        "name": "더미01의료원",
+        "phone": "02-0000-1000",
+        "address": "가상시 테스트구 합성로 10",
+        "representative": "가상대표01"
       },
       {
-        "scenario_name": "외래_검사_CT_포함",
-        "doc_kind_outpatient": "true",
-        "doc_kind_inpatient": "false",
-        "doc_kind_discharge": "false",
-        "doc_kind_interim": "false",
-        "night_care_checked": "true",
-        "holiday_care_checked": "false",
-        "institution_type_clinic": "false",
-        "institution_type_hospital": "true",
-        "institution_type_general": "false",
-        "institution_type_tertiary": "false",
-        "department": "정형외과",
-        "ward_room": "-",
-        "patient_category": "건강보험",
-        "amount_consultation_partial_patient": "9,000",
-        "amount_consultation_partial_insurer": "21,000",
-        "amount_test_partial_patient": "18,000",
-        "amount_test_partial_insurer": "54,000",
-        "amount_imaging_partial_patient": "12,000",
-        "amount_imaging_partial_insurer": "36,000",
-        "amount_ct_partial_patient": "75,000",
-        "amount_ct_partial_insurer": "175,000",
-        "amount_ultrasound_non_benefit": "80,000",
-        "provider_business_registration_number": "214-90-13579",
-        "provider_name": "새봄정형외과의원",
-        "provider_phone": "031-778-2345",
-        "provider_address": "경기도 성남시 분당구 중앙공원로 45",
-        "representative_name": "박민지"
+        "business_no": "101-01-79205",
+        "name": "더미02의료원",
+        "phone": "02-0001-1001",
+        "address": "새봄시 테스트구 합성로 11",
+        "representative": "가상대표02"
       },
       {
-        "scenario_name": "입원_단기_3일",
-        "doc_kind_outpatient": "false",
-        "doc_kind_inpatient": "true",
-        "doc_kind_discharge": "true",
-        "doc_kind_interim": "false",
-        "night_care_checked": "false",
-        "holiday_care_checked": "false",
-        "institution_type_clinic": "false",
-        "institution_type_hospital": "false",
-        "institution_type_general": "true",
-        "institution_type_tertiary": "false",
-        "department": "내과",
-        "ward_room": "4인실 이상",
-        "patient_category": "건강보험",
-        "amount_room_4_plus_partial_patient": "90,000",
-        "amount_room_4_plus_partial_insurer": "360,000",
-        "amount_meal_partial_patient": "35,000",
-        "amount_meal_partial_insurer": "35,000",
-        "amount_medication_drug_partial_patient": "28,000",
-        "amount_medication_drug_partial_insurer": "84,000",
-        "amount_injection_drug_partial_patient": "18,000",
-        "amount_injection_drug_partial_insurer": "54,000",
-        "amount_test_partial_patient": "42,000",
-        "amount_test_partial_insurer": "126,000",
-        "provider_business_registration_number": "120-82-24680",
-        "provider_name": "강남하나병원",
-        "provider_phone": "02-555-9030",
-        "provider_address": "서울특별시 강남구 테헤란로 312",
-        "representative_name": "이준호"
+        "business_no": "101-02-58390",
+        "name": "더미03의료원",
+        "phone": "02-0002-1002",
+        "address": "한빛시 테스트구 합성로 12",
+        "representative": "가상대표03"
       },
       {
-        "scenario_name": "입원_수술_재료대포함",
-        "doc_kind_outpatient": "false",
-        "doc_kind_inpatient": "true",
-        "doc_kind_discharge": "true",
-        "doc_kind_interim": "false",
-        "night_care_checked": "false",
-        "holiday_care_checked": "false",
-        "institution_type_clinic": "false",
-        "institution_type_hospital": "false",
-        "institution_type_general": "true",
-        "institution_type_tertiary": "false",
-        "department": "외과",
-        "ward_room": "2인실",
-        "patient_category": "건강보험",
-        "amount_room_2_3_partial_patient": "150,000",
-        "amount_room_2_3_partial_insurer": "450,000",
-        "amount_meal_partial_patient": "42,000",
-        "amount_meal_partial_insurer": "42,000",
-        "amount_anesthesia_partial_patient": "90,000",
-        "amount_anesthesia_partial_insurer": "270,000",
-        "amount_procedure_surgery_partial_patient": "280,000",
-        "amount_procedure_surgery_partial_insurer": "840,000",
-        "amount_materials_partial_patient": "70,000",
-        "amount_materials_partial_insurer": "210,000",
-        "amount_materials_non_benefit": "120,000",
-        "provider_business_registration_number": "110-82-33445",
-        "provider_name": "서울중앙종합병원",
-        "provider_phone": "02-2200-7000",
-        "provider_address": "서울특별시 중구 을지로 95",
-        "representative_name": "정서연"
+        "business_no": "101-03-37586",
+        "name": "더미04의료원",
+        "phone": "02-0003-1003",
+        "address": "푸른시 테스트구 합성로 13",
+        "representative": "가상대표04"
       },
       {
-        "scenario_name": "외래_MRI_비급여포함",
-        "doc_kind_outpatient": "true",
-        "doc_kind_inpatient": "false",
-        "doc_kind_discharge": "false",
-        "doc_kind_interim": "false",
-        "night_care_checked": "false",
-        "holiday_care_checked": "false",
-        "institution_type_clinic": "false",
-        "institution_type_hospital": "true",
-        "institution_type_general": "false",
-        "institution_type_tertiary": "false",
-        "department": "신경외과",
-        "ward_room": "-",
-        "patient_category": "건강보험",
-        "amount_consultation_partial_patient": "12,000",
-        "amount_consultation_partial_insurer": "28,000",
-        "amount_test_partial_patient": "15,000",
-        "amount_test_partial_insurer": "45,000",
-        "amount_mri_partial_patient": "110,000",
-        "amount_mri_partial_insurer": "330,000",
-        "amount_mri_non_benefit": "450,000",
-        "amount_certificate_non_benefit": "10,000",
-        "provider_business_registration_number": "301-82-77891",
-        "provider_name": "대한대학교병원",
-        "provider_phone": "02-958-8114",
-        "provider_address": "서울특별시 동대문구 경희대로 24",
-        "representative_name": "최윤재"
+        "business_no": "101-04-16773",
+        "name": "더미05의료원",
+        "phone": "02-0004-1004",
+        "address": "누리시 테스트구 합성로 14",
+        "representative": "가상대표05"
       },
       {
-        "scenario_name": "입원_포괄수가_중간계산",
-        "doc_kind_outpatient": "false",
-        "doc_kind_inpatient": "true",
-        "doc_kind_discharge": "false",
-        "doc_kind_interim": "true",
-        "night_care_checked": "false",
-        "holiday_care_checked": "true",
-        "institution_type_clinic": "false",
-        "institution_type_hospital": "false",
-        "institution_type_general": "false",
-        "institution_type_tertiary": "true",
-        "department": "산부인과",
-        "ward_room": "3인실",
-        "patient_category": "건강보험",
-        "amount_drg_bundle_partial_patient": "360,000",
-        "amount_drg_bundle_partial_insurer": "1,440,000",
-        "amount_room_2_3_partial_patient": "180,000",
-        "amount_room_2_3_partial_insurer": "420,000",
-        "amount_meal_partial_patient": "55,000",
-        "amount_meal_partial_insurer": "55,000",
-        "amount_other_non_benefit": "90,000",
-        "provider_business_registration_number": "305-82-64012",
-        "provider_name": "누리재활병원",
-        "provider_phone": "042-620-5000",
-        "provider_address": "대전광역시 서구 둔산중로 74",
-        "representative_name": "오지훈"
+        "business_no": "101-04-95962",
+        "name": "더미06의료원",
+        "phone": "02-0005-1005",
+        "address": "가상시 테스트구 합성로 15",
+        "representative": "가상대표06"
+      },
+      {
+        "business_no": "101-05-75158",
+        "name": "더미07의료원",
+        "phone": "02-0006-1006",
+        "address": "새봄시 테스트구 합성로 16",
+        "representative": "가상대표07"
+      },
+      {
+        "business_no": "101-06-54344",
+        "name": "더미08의료원",
+        "phone": "02-0007-1007",
+        "address": "한빛시 테스트구 합성로 17",
+        "representative": "가상대표08"
+      },
+      {
+        "business_no": "101-07-33531",
+        "name": "더미09의료원",
+        "phone": "02-0008-1008",
+        "address": "푸른시 테스트구 합성로 18",
+        "representative": "가상대표09"
+      },
+      {
+        "business_no": "101-08-12727",
+        "name": "더미10의료원",
+        "phone": "02-0009-1009",
+        "address": "누리시 테스트구 합성로 19",
+        "representative": "가상대표10"
+      },
+      {
+        "business_no": "101-08-91917",
+        "name": "더미11의료원",
+        "phone": "02-0000-1010",
+        "address": "가상시 테스트구 합성로 20",
+        "representative": "가상대표11"
+      },
+      {
+        "business_no": "101-09-71102",
+        "name": "더미12의료원",
+        "phone": "02-0001-1011",
+        "address": "새봄시 테스트구 합성로 21",
+        "representative": "가상대표12"
+      },
+      {
+        "business_no": "101-10-50296",
+        "name": "더미13의료원",
+        "phone": "02-0002-1012",
+        "address": "한빛시 테스트구 합성로 22",
+        "representative": "가상대표13"
+      },
+      {
+        "business_no": "101-11-29489",
+        "name": "더미14의료원",
+        "phone": "02-0003-1013",
+        "address": "푸른시 테스트구 합성로 23",
+        "representative": "가상대표14"
+      },
+      {
+        "business_no": "101-12-08676",
+        "name": "더미15의료원",
+        "phone": "02-0004-1014",
+        "address": "누리시 테스트구 합성로 24",
+        "representative": "가상대표15"
+      },
+      {
+        "business_no": "101-12-87865",
+        "name": "더미16의료원",
+        "phone": "02-0005-1015",
+        "address": "가상시 테스트구 합성로 25",
+        "representative": "가상대표16"
+      },
+      {
+        "business_no": "101-13-67051",
+        "name": "더미17의료원",
+        "phone": "02-0006-1016",
+        "address": "새봄시 테스트구 합성로 26",
+        "representative": "가상대표17"
+      },
+      {
+        "business_no": "101-14-46247",
+        "name": "더미18의료원",
+        "phone": "02-0007-1017",
+        "address": "한빛시 테스트구 합성로 27",
+        "representative": "가상대표18"
+      },
+      {
+        "business_no": "101-15-25434",
+        "name": "더미19의료원",
+        "phone": "02-0008-1018",
+        "address": "푸른시 테스트구 합성로 28",
+        "representative": "가상대표19"
+      },
+      {
+        "business_no": "101-16-04620",
+        "name": "더미20의료원",
+        "phone": "02-0009-1019",
+        "address": "누리시 테스트구 합성로 29",
+        "representative": "가상대표20"
       }
-    ],
-    "med04_provider_business_registration_numbers": [
-      "123-45-67890",
-      "214-90-13579",
-      "120-82-24680",
-      "110-82-33445",
-      "301-82-77891",
-      "305-82-64012"
-    ],
-    "med04_provider_names": [
-      "한빛내과의원",
-      "새봄정형외과의원",
-      "강남하나병원",
-      "서울중앙종합병원",
-      "대한대학교병원",
-      "누리재활병원"
-    ],
-    "med04_provider_phones": [
-      "02-3478-1122",
-      "031-778-2345",
-      "02-555-9030",
-      "02-2200-7000",
-      "02-958-8114",
-      "042-620-5000"
-    ],
-    "med04_provider_addresses": [
-      "서울특별시 서초구 반포대로 120",
-      "경기도 성남시 분당구 중앙공원로 45",
-      "서울특별시 강남구 테헤란로 312",
-      "서울특별시 중구 을지로 95",
-      "서울특별시 동대문구 경희대로 24",
-      "대전광역시 서구 둔산중로 74"
-    ],
-    "med04_provider_representatives": [
-      "김도현",
-      "박민지",
-      "이준호",
-      "정서연",
-      "최윤재",
-      "오지훈"
     ]
   },
-  "field_rules": [
-    {
-      "field_id": "doc_kind_outpatient",
-      "semantic_path": "문서구분.외래",
-      "anchor_id": "manual_1783505672367",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "doc_kind_inpatient",
-      "semantic_path": "문서구분.입원",
-      "anchor_id": "manual_1783505676734",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "doc_kind_discharge",
-      "semantic_path": "문서구분.퇴원",
-      "anchor_id": "manual_1783505680184",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "doc_kind_interim",
-      "semantic_path": "문서구분.중간",
-      "anchor_id": "manual_1783505683217",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "patient_registration_no",
-      "semantic_path": "환자정보.환자등록번호",
-      "anchor_id": "visual_0006",
-      "rule": "pattern:######",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "patient_name",
-      "semantic_path": "환자정보.환자성명",
-      "anchor_id": "visual_0007",
-      "rule": "person.name_ko",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "treatment_start_year",
-      "semantic_path": "진료기간.시작.년",
-      "anchor_id": "visual_0010",
-      "rule": "date.year",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "treatment_start_month",
-      "semantic_path": "진료기간.시작.월",
-      "anchor_id": "manual_1783505602548",
-      "rule": "date.month",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "treatment_start_day",
-      "semantic_path": "진료기간.시작.일",
-      "anchor_id": "manual_1783505610398",
-      "rule": "date.day",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "treatment_end_year",
-      "semantic_path": "진료기간.종료.년",
-      "anchor_id": "manual_1783505616552",
-      "rule": "date.year",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "treatment_end_month",
-      "semantic_path": "진료기간.종료.월",
-      "anchor_id": "manual_1783505620449",
-      "rule": "date.month",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "treatment_end_day",
-      "semantic_path": "진료기간.종료.일",
-      "anchor_id": "manual_1783505624033",
-      "rule": "date.day",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "night_care_checked",
-      "semantic_path": "진료구분.야간진료",
-      "anchor_id": "manual_1783505642965",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "holiday_care_checked",
-      "semantic_path": "진료구분.공휴일진료",
-      "anchor_id": "manual_1783505639948",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "department",
-      "semantic_path": "진료정보.진료과목",
-      "anchor_id": "visual_0014",
-      "rule": "pool:departments",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "drg_number",
-      "semantic_path": "진료정보.질병군_DRG번호",
-      "anchor_id": "visual_0015",
-      "rule": "pattern:AA####",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "ward_room",
-      "semantic_path": "진료정보.병실",
-      "anchor_id": "visual_0018",
-      "rule": "choice:일반병실|1인실|2인실|3인실",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "patient_category",
-      "semantic_path": "진료정보.환자구분",
-      "anchor_id": "visual_0019",
-      "rule": "pool:patient_categories",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "receipt_no",
-      "semantic_path": "영수증정보.영수증번호",
-      "anchor_id": "visual_0021",
-      "rule": "template:{{date.year}}{{date.month}}-{{pattern:######}}",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "amount_consultation_partial_patient",
-      "semantic_path": "진료비항목.진찰료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0032",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_consultation_partial_insurer",
-      "semantic_path": "진료비항목.진찰료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0033",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_consultation_full_patient",
-      "semantic_path": "진료비항목.진찰료.전액 본인부담",
-      "anchor_id": "visual_0034",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_consultation_non_benefit",
-      "semantic_path": "진료비항목.진찰료.비급여",
-      "anchor_id": "visual_0035",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_1_partial_patient",
-      "semantic_path": "진료비항목.입원료 1인실.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0038",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_1_partial_insurer",
-      "semantic_path": "진료비항목.입원료 1인실.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0039",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_1_full_patient",
-      "semantic_path": "진료비항목.입원료 1인실.전액 본인부담",
-      "anchor_id": "visual_0040",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_1_non_benefit",
-      "semantic_path": "진료비항목.입원료 1인실.비급여",
-      "anchor_id": "visual_0041",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_2_3_partial_patient",
-      "semantic_path": "진료비항목.입원료 2·3인실.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0044",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_2_3_partial_insurer",
-      "semantic_path": "진료비항목.입원료 2·3인실.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0045",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_2_3_full_patient",
-      "semantic_path": "진료비항목.입원료 2·3인실.전액 본인부담",
-      "anchor_id": "visual_0046",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_2_3_non_benefit",
-      "semantic_path": "진료비항목.입원료 2·3인실.비급여",
-      "anchor_id": "visual_0047",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_4_plus_partial_patient",
-      "semantic_path": "진료비항목.입원료 4인실 이상.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0050",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_4_plus_partial_insurer",
-      "semantic_path": "진료비항목.입원료 4인실 이상.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0051",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_4_plus_full_patient",
-      "semantic_path": "진료비항목.입원료 4인실 이상.전액 본인부담",
-      "anchor_id": "visual_0052",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_room_4_plus_non_benefit",
-      "semantic_path": "진료비항목.입원료 4인실 이상.비급여",
-      "anchor_id": "visual_0053",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_meal_partial_patient",
-      "semantic_path": "진료비항목.식대.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0056",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_meal_partial_insurer",
-      "semantic_path": "진료비항목.식대.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0057",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_meal_full_patient",
-      "semantic_path": "진료비항목.식대.전액 본인부담",
-      "anchor_id": "visual_0058",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_meal_non_benefit",
-      "semantic_path": "진료비항목.식대.비급여",
-      "anchor_id": "visual_0059",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_medication_act_partial_patient",
-      "semantic_path": "진료비항목.투약및조제료 행위료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0063",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_medication_act_partial_insurer",
-      "semantic_path": "진료비항목.투약및조제료 행위료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0064",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_medication_act_full_patient",
-      "semantic_path": "진료비항목.투약및조제료 행위료.전액 본인부담",
-      "anchor_id": "visual_0065",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_medication_act_non_benefit",
-      "semantic_path": "진료비항목.투약및조제료 행위료.비급여",
-      "anchor_id": "visual_0066",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_medication_drug_partial_patient",
-      "semantic_path": "진료비항목.투약및조제료 약품비.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0070",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_medication_drug_partial_insurer",
-      "semantic_path": "진료비항목.투약및조제료 약품비.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0071",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_medication_drug_full_patient",
-      "semantic_path": "진료비항목.투약및조제료 약품비.전액 본인부담",
-      "anchor_id": "visual_0072",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_medication_drug_non_benefit",
-      "semantic_path": "진료비항목.투약및조제료 약품비.비급여",
-      "anchor_id": "visual_0073",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_injection_act_partial_patient",
-      "semantic_path": "진료비항목.주사료 행위료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0075",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_injection_act_partial_insurer",
-      "semantic_path": "진료비항목.주사료 행위료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0076",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_injection_act_full_patient",
-      "semantic_path": "진료비항목.주사료 행위료.전액 본인부담",
-      "anchor_id": "visual_0077",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_injection_act_non_benefit",
-      "semantic_path": "진료비항목.주사료 행위료.비급여",
-      "anchor_id": "visual_0078",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_injection_drug_partial_patient",
-      "semantic_path": "진료비항목.주사료 약품비.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0081",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_injection_drug_partial_insurer",
-      "semantic_path": "진료비항목.주사료 약품비.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0082",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_injection_drug_full_patient",
-      "semantic_path": "진료비항목.주사료 약품비.전액 본인부담",
-      "anchor_id": "visual_0083",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_injection_drug_non_benefit",
-      "semantic_path": "진료비항목.주사료 약품비.비급여",
-      "anchor_id": "visual_0084",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_anesthesia_partial_patient",
-      "semantic_path": "진료비항목.마취료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0088",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_anesthesia_partial_insurer",
-      "semantic_path": "진료비항목.마취료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0089",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_anesthesia_full_patient",
-      "semantic_path": "진료비항목.마취료.전액 본인부담",
-      "anchor_id": "visual_0090",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_anesthesia_non_benefit",
-      "semantic_path": "진료비항목.마취료.비급여",
-      "anchor_id": "visual_0091",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_procedure_surgery_partial_patient",
-      "semantic_path": "진료비항목.처치 및 수술료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0093",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_procedure_surgery_partial_insurer",
-      "semantic_path": "진료비항목.처치 및 수술료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0094",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_procedure_surgery_full_patient",
-      "semantic_path": "진료비항목.처치 및 수술료.전액 본인부담",
-      "anchor_id": "visual_0095",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_procedure_surgery_non_benefit",
-      "semantic_path": "진료비항목.처치 및 수술료.비급여",
-      "anchor_id": "visual_0096",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_test_partial_patient",
-      "semantic_path": "진료비항목.검사료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0099",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_test_partial_insurer",
-      "semantic_path": "진료비항목.검사료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0100",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_test_full_patient",
-      "semantic_path": "진료비항목.검사료.전액 본인부담",
-      "anchor_id": "visual_0101",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_test_non_benefit",
-      "semantic_path": "진료비항목.검사료.비급여",
-      "anchor_id": "visual_0102",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_imaging_partial_patient",
-      "semantic_path": "진료비항목.영상진단료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0105",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_imaging_partial_insurer",
-      "semantic_path": "진료비항목.영상진단료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0106",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_imaging_full_patient",
-      "semantic_path": "진료비항목.영상진단료.전액 본인부담",
-      "anchor_id": "visual_0107",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_imaging_non_benefit",
-      "semantic_path": "진료비항목.영상진단료.비급여",
-      "anchor_id": "visual_0108",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_radiation_partial_patient",
-      "semantic_path": "진료비항목.방사선치료료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0110",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_radiation_partial_insurer",
-      "semantic_path": "진료비항목.방사선치료료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0111",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_radiation_full_patient",
-      "semantic_path": "진료비항목.방사선치료료.전액 본인부담",
-      "anchor_id": "visual_0112",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_radiation_non_benefit",
-      "semantic_path": "진료비항목.방사선치료료.비급여",
-      "anchor_id": "visual_0113",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_materials_partial_patient",
-      "semantic_path": "진료비항목.치료재료대.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0115",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_materials_partial_insurer",
-      "semantic_path": "진료비항목.치료재료대.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0116",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_materials_full_patient",
-      "semantic_path": "진료비항목.치료재료대.전액 본인부담",
-      "anchor_id": "visual_0117",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_materials_non_benefit",
-      "semantic_path": "진료비항목.치료재료대.비급여",
-      "anchor_id": "visual_0118",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_rehab_partial_patient",
-      "semantic_path": "진료비항목.재활 및 물리치료료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0120",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_rehab_partial_insurer",
-      "semantic_path": "진료비항목.재활 및 물리치료료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0121",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_rehab_full_patient",
-      "semantic_path": "진료비항목.재활 및 물리치료료.전액 본인부담",
-      "anchor_id": "visual_0122",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_rehab_non_benefit",
-      "semantic_path": "진료비항목.재활 및 물리치료료.비급여",
-      "anchor_id": "visual_0123",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_psychotherapy_partial_patient",
-      "semantic_path": "진료비항목.정신요법료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0125",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_psychotherapy_partial_insurer",
-      "semantic_path": "진료비항목.정신요법료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0126",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_psychotherapy_full_patient",
-      "semantic_path": "진료비항목.정신요법료.전액 본인부담",
-      "anchor_id": "visual_0127",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_psychotherapy_non_benefit",
-      "semantic_path": "진료비항목.정신요법료.비급여",
-      "anchor_id": "visual_0128",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_blood_partial_patient",
-      "semantic_path": "진료비항목.전혈 및 혈액성분제제료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0130",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_blood_partial_insurer",
-      "semantic_path": "진료비항목.전혈 및 혈액성분제제료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0131",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_blood_full_patient",
-      "semantic_path": "진료비항목.전혈 및 혈액성분제제료.전액 본인부담",
-      "anchor_id": "visual_0132",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_blood_non_benefit",
-      "semantic_path": "진료비항목.전혈 및 혈액성분제제료.비급여",
-      "anchor_id": "visual_0133",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_ct_partial_patient",
-      "semantic_path": "진료비항목.CT 진단료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0137",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_ct_partial_insurer",
-      "semantic_path": "진료비항목.CT 진단료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0138",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_ct_full_patient",
-      "semantic_path": "진료비항목.CT 진단료.전액 본인부담",
-      "anchor_id": "visual_0139",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_ct_non_benefit",
-      "semantic_path": "진료비항목.CT 진단료.비급여",
-      "anchor_id": "visual_0140",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_mri_partial_patient",
-      "semantic_path": "진료비항목.MRI 진단료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0144",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_mri_partial_insurer",
-      "semantic_path": "진료비항목.MRI 진단료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0145",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_mri_full_patient",
-      "semantic_path": "진료비항목.MRI 진단료.전액 본인부담",
-      "anchor_id": "visual_0146",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_mri_non_benefit",
-      "semantic_path": "진료비항목.MRI 진단료.비급여",
-      "anchor_id": "visual_0147",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_pet_partial_patient",
-      "semantic_path": "진료비항목.PET 진단료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0151",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_pet_partial_insurer",
-      "semantic_path": "진료비항목.PET 진단료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0152",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_pet_full_patient",
-      "semantic_path": "진료비항목.PET 진단료.전액 본인부담",
-      "anchor_id": "visual_0153",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_pet_non_benefit",
-      "semantic_path": "진료비항목.PET 진단료.비급여",
-      "anchor_id": "visual_0154",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_ultrasound_partial_patient",
-      "semantic_path": "진료비항목.초음파 진단료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0158",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_ultrasound_partial_insurer",
-      "semantic_path": "진료비항목.초음파 진단료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0159",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_ultrasound_full_patient",
-      "semantic_path": "진료비항목.초음파 진단료.전액 본인부담",
-      "anchor_id": "visual_0160",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_ultrasound_non_benefit",
-      "semantic_path": "진료비항목.초음파 진단료.비급여",
-      "anchor_id": "visual_0161",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_prosthetic_orthodontic_partial_patient",
-      "semantic_path": "진료비항목.보철·교정료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0165",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_prosthetic_orthodontic_partial_insurer",
-      "semantic_path": "진료비항목.보철·교정료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0166",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_prosthetic_orthodontic_full_patient",
-      "semantic_path": "진료비항목.보철·교정료.전액 본인부담",
-      "anchor_id": "visual_0167",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_prosthetic_orthodontic_non_benefit",
-      "semantic_path": "진료비항목.보철·교정료.비급여",
-      "anchor_id": "visual_0168",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_certificate_partial_patient",
-      "semantic_path": "진료비항목.제증명수수료.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0172",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_certificate_partial_insurer",
-      "semantic_path": "진료비항목.제증명수수료.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0173",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_certificate_full_patient",
-      "semantic_path": "진료비항목.제증명수수료.전액 본인부담",
-      "anchor_id": "visual_0174",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_certificate_non_benefit",
-      "semantic_path": "진료비항목.제증명수수료.비급여",
-      "anchor_id": "visual_0175",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_selective_benefit_partial_patient",
-      "semantic_path": "진료비항목.선별급여.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0179",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_selective_benefit_partial_insurer",
-      "semantic_path": "진료비항목.선별급여.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0180",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_selective_benefit_full_patient",
-      "semantic_path": "진료비항목.선별급여.전액 본인부담",
-      "anchor_id": "visual_0181",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_selective_benefit_non_benefit",
-      "semantic_path": "진료비항목.선별급여.비급여",
-      "anchor_id": "visual_0182",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_senior_flat_partial_patient",
-      "semantic_path": "진료비항목.65세 이상 등 정액.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0186",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_senior_flat_partial_insurer",
-      "semantic_path": "진료비항목.65세 이상 등 정액.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0187",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_senior_flat_full_patient",
-      "semantic_path": "진료비항목.65세 이상 등 정액.전액 본인부담",
-      "anchor_id": "visual_0188",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_senior_flat_non_benefit",
-      "semantic_path": "진료비항목.65세 이상 등 정액.비급여",
-      "anchor_id": "visual_0189",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_flat_nursing_hospital_partial_patient",
-      "semantic_path": "진료비항목.정액수가(요양병원).일부 본인부담 본인부담금",
-      "anchor_id": "visual_0193",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_flat_nursing_hospital_partial_insurer",
-      "semantic_path": "진료비항목.정액수가(요양병원).일부 본인부담 공단부담금",
-      "anchor_id": "visual_0194",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_flat_nursing_hospital_full_patient",
-      "semantic_path": "진료비항목.정액수가(요양병원).전액 본인부담",
-      "anchor_id": "visual_0195",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_flat_nursing_hospital_non_benefit",
-      "semantic_path": "진료비항목.정액수가(요양병원).비급여",
-      "anchor_id": "visual_0196",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_flat_hospice_partial_patient",
-      "semantic_path": "진료비항목.정액수가(완화의료).일부 본인부담 본인부담금",
-      "anchor_id": "visual_0200",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_flat_hospice_partial_insurer",
-      "semantic_path": "진료비항목.정액수가(완화의료).일부 본인부담 공단부담금",
-      "anchor_id": "visual_0201",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_flat_hospice_full_patient",
-      "semantic_path": "진료비항목.정액수가(완화의료).전액 본인부담",
-      "anchor_id": "visual_0202",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_flat_hospice_non_benefit",
-      "semantic_path": "진료비항목.정액수가(완화의료).비급여",
-      "anchor_id": "visual_0203",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_drg_bundle_partial_patient",
-      "semantic_path": "진료비항목.질병군 포괄수가.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0207",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_drg_bundle_partial_insurer",
-      "semantic_path": "진료비항목.질병군 포괄수가.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0208",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_drg_bundle_full_patient",
-      "semantic_path": "진료비항목.질병군 포괄수가.전액 본인부담",
-      "anchor_id": "visual_0209",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_drg_bundle_non_benefit",
-      "semantic_path": "진료비항목.질병군 포괄수가.비급여",
-      "anchor_id": "visual_0210",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_other_partial_patient",
-      "semantic_path": "진료비항목.기타.일부 본인부담 본인부담금",
-      "anchor_id": "visual_0215",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_other_partial_insurer",
-      "semantic_path": "진료비항목.기타.일부 본인부담 공단부담금",
-      "anchor_id": "visual_0216",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_other_full_patient",
-      "semantic_path": "진료비항목.기타.전액 본인부담",
-      "anchor_id": "visual_0217",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_other_non_benefit",
-      "semantic_path": "진료비항목.기타.비급여",
-      "anchor_id": "visual_0218",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "total_medical_cost",
-      "semantic_path": "금액산정내용.진료비총액",
-      "anchor_id": "visual_0030",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "insurer_total",
-      "semantic_path": "금액산정내용.공단부담총액",
-      "anchor_id": "visual_0043",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "patient_total",
-      "semantic_path": "금액산정내용.환자부담총액",
-      "anchor_id": "visual_0048",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "prepaid_amount",
-      "semantic_path": "금액산정내용.이미납부한금액",
-      "anchor_id": "visual_0062",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "amount_due",
-      "semantic_path": "금액산정내용.납부할금액",
-      "anchor_id": "visual_0074",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "paid_card",
-      "semantic_path": "납부정보.납부한금액.카드",
-      "anchor_id": "visual_0086",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "paid_cash_receipt",
-      "semantic_path": "납부정보.납부한금액.현금영수증",
-      "anchor_id": "manual_1783505723000",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "paid_cash",
-      "semantic_path": "납부정보.납부한금액.현금",
-      "anchor_id": "visual_0097",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "paid_total",
-      "semantic_path": "납부정보.납부한금액.합계",
-      "anchor_id": "visual_0104",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "unpaid_amount",
-      "semantic_path": "납부정보.납부하지않은금액",
-      "anchor_id": "visual_0109",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "cash_receipt_purpose",
-      "semantic_path": "현금영수증.구분",
-      "anchor_id": "manual_1783505733184",
-      "rule": "choice:소득공제|지출증빙",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "cash_receipt_identity_no",
-      "semantic_path": "현금영수증.신분확인번호",
-      "anchor_id": "visual_0119",
-      "rule": "pattern:#############",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "cash_receipt_approval_no",
-      "semantic_path": "현금영수증.승인번호",
-      "anchor_id": "visual_0124",
-      "rule": "pattern:################",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "total_partial_patient",
-      "semantic_path": "진료비합계.일부본인부담_본인부담금",
-      "anchor_id": "manual_1783505533029",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "total_partial_insurer",
-      "semantic_path": "진료비합계.일부본인부담_공단부담금",
-      "anchor_id": "manual_1783505536263",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "total_full_patient",
-      "semantic_path": "진료비합계.전액본인부담",
-      "anchor_id": "manual_1783505539431",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "total_non_benefit",
-      "semantic_path": "진료비합계.비급여",
-      "anchor_id": "manual_1783505542947",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "cap_excess_amount",
-      "semantic_path": "진료비합계.상한액초과금",
-      "anchor_id": "manual_1783505550014",
-      "rule": "money.krw",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "institution_type_clinic",
-      "semantic_path": "요양기관.종류.의원급_보건기관",
-      "anchor_id": "manual_1783505505814",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "institution_type_hospital",
-      "semantic_path": "요양기관.종류.병원급",
-      "anchor_id": "manual_1783505509630",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "institution_type_general",
-      "semantic_path": "요양기관.종류.종합병원",
-      "anchor_id": "manual_1783505519881",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "institution_type_tertiary",
-      "semantic_path": "요양기관.종류.상급종합병원",
-      "anchor_id": "manual_1783505522963",
-      "rule": "checkbox.bool",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "representative_name",
-      "semantic_path": "요양기관.대표자",
-      "anchor_id": "manual_1783505775201",
-      "rule": "person.name_ko",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "medium"
-    },
-    {
-      "field_id": "issued_year",
-      "semantic_path": "발행일.년",
-      "anchor_id": "manual_1783505759187",
-      "rule": "date.year",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "issued_month",
-      "semantic_path": "발행일.월",
-      "anchor_id": "manual_1783505764285",
-      "rule": "date.month",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    },
-    {
-      "field_id": "issued_day",
-      "semantic_path": "발행일.일",
-      "anchor_id": "manual_1783505770451",
-      "rule": "date.day",
-      "basis": "full_template_image + reviewed use anchor + official-form research",
-      "confidence": "high"
-    }
-  ],
-  "safety_notes": [
-    "All values are synthetic. No real patient, institution, or receipt data is included.",
-    "Money fields use renderer-supported money.krw; arithmetic consistency should be validated after rendering.",
-    "MED-04 relational pass: 금액 필드는 현실적 소액/중간/고액 pool을 사용하고, 합계/납부액은 constraints로 계산한다.",
-    "상한액초과금/이미 납부한 금액/미납액은 현재 렌더러가 subtract constraint를 지원하지 않으므로 0으로 고정하여 공식 산식과 납부 상태를 일관화한다.",
-    "MED-04 sparse scenario pass: 모든 항목 금액은 기본 0이며 med04_receipt_scenarios에서 선택된 실제성 있는 진료 시나리오의 일부 항목만 채운다."
-  ],
-  "updated_at": "2026-07-08T11:32:44.871873+00:00",
+  "pool_policies": {},
   "constraints": [
     {
-      "type": "pick_record",
-      "pool": "med04_receipt_scenarios",
-      "targets": {
-        "doc_kind_outpatient": "doc_kind_outpatient",
-        "doc_kind_inpatient": "doc_kind_inpatient",
-        "doc_kind_discharge": "doc_kind_discharge",
-        "doc_kind_interim": "doc_kind_interim",
-        "night_care_checked": "night_care_checked",
-        "holiday_care_checked": "holiday_care_checked",
-        "institution_type_clinic": "institution_type_clinic",
-        "institution_type_hospital": "institution_type_hospital",
-        "institution_type_general": "institution_type_general",
-        "institution_type_tertiary": "institution_type_tertiary",
-        "department": "department",
-        "ward_room": "ward_room",
-        "patient_category": "patient_category",
-        "amount_anesthesia_full_patient": "amount_anesthesia_full_patient",
-        "amount_anesthesia_non_benefit": "amount_anesthesia_non_benefit",
-        "amount_anesthesia_partial_insurer": "amount_anesthesia_partial_insurer",
-        "amount_anesthesia_partial_patient": "amount_anesthesia_partial_patient",
-        "amount_blood_full_patient": "amount_blood_full_patient",
-        "amount_blood_non_benefit": "amount_blood_non_benefit",
-        "amount_blood_partial_insurer": "amount_blood_partial_insurer",
-        "amount_blood_partial_patient": "amount_blood_partial_patient",
-        "amount_certificate_full_patient": "amount_certificate_full_patient",
-        "amount_certificate_non_benefit": "amount_certificate_non_benefit",
-        "amount_certificate_partial_insurer": "amount_certificate_partial_insurer",
-        "amount_certificate_partial_patient": "amount_certificate_partial_patient",
-        "amount_consultation_full_patient": "amount_consultation_full_patient",
-        "amount_consultation_non_benefit": "amount_consultation_non_benefit",
-        "amount_consultation_partial_insurer": "amount_consultation_partial_insurer",
-        "amount_consultation_partial_patient": "amount_consultation_partial_patient",
-        "amount_ct_full_patient": "amount_ct_full_patient",
-        "amount_ct_non_benefit": "amount_ct_non_benefit",
-        "amount_ct_partial_insurer": "amount_ct_partial_insurer",
-        "amount_ct_partial_patient": "amount_ct_partial_patient",
-        "amount_drg_bundle_full_patient": "amount_drg_bundle_full_patient",
-        "amount_drg_bundle_non_benefit": "amount_drg_bundle_non_benefit",
-        "amount_drg_bundle_partial_insurer": "amount_drg_bundle_partial_insurer",
-        "amount_drg_bundle_partial_patient": "amount_drg_bundle_partial_patient",
-        "amount_flat_hospice_full_patient": "amount_flat_hospice_full_patient",
-        "amount_flat_hospice_non_benefit": "amount_flat_hospice_non_benefit",
-        "amount_flat_hospice_partial_insurer": "amount_flat_hospice_partial_insurer",
-        "amount_flat_hospice_partial_patient": "amount_flat_hospice_partial_patient",
-        "amount_flat_nursing_hospital_full_patient": "amount_flat_nursing_hospital_full_patient",
-        "amount_flat_nursing_hospital_non_benefit": "amount_flat_nursing_hospital_non_benefit",
-        "amount_flat_nursing_hospital_partial_insurer": "amount_flat_nursing_hospital_partial_insurer",
-        "amount_flat_nursing_hospital_partial_patient": "amount_flat_nursing_hospital_partial_patient",
-        "amount_imaging_full_patient": "amount_imaging_full_patient",
-        "amount_imaging_non_benefit": "amount_imaging_non_benefit",
-        "amount_imaging_partial_insurer": "amount_imaging_partial_insurer",
-        "amount_imaging_partial_patient": "amount_imaging_partial_patient",
-        "amount_injection_act_full_patient": "amount_injection_act_full_patient",
-        "amount_injection_act_non_benefit": "amount_injection_act_non_benefit",
-        "amount_injection_act_partial_insurer": "amount_injection_act_partial_insurer",
-        "amount_injection_act_partial_patient": "amount_injection_act_partial_patient",
-        "amount_injection_drug_full_patient": "amount_injection_drug_full_patient",
-        "amount_injection_drug_non_benefit": "amount_injection_drug_non_benefit",
-        "amount_injection_drug_partial_insurer": "amount_injection_drug_partial_insurer",
-        "amount_injection_drug_partial_patient": "amount_injection_drug_partial_patient",
-        "amount_materials_full_patient": "amount_materials_full_patient",
-        "amount_materials_non_benefit": "amount_materials_non_benefit",
-        "amount_materials_partial_insurer": "amount_materials_partial_insurer",
-        "amount_materials_partial_patient": "amount_materials_partial_patient",
-        "amount_meal_full_patient": "amount_meal_full_patient",
-        "amount_meal_non_benefit": "amount_meal_non_benefit",
-        "amount_meal_partial_insurer": "amount_meal_partial_insurer",
-        "amount_meal_partial_patient": "amount_meal_partial_patient",
-        "amount_medication_act_full_patient": "amount_medication_act_full_patient",
-        "amount_medication_act_non_benefit": "amount_medication_act_non_benefit",
-        "amount_medication_act_partial_insurer": "amount_medication_act_partial_insurer",
-        "amount_medication_act_partial_patient": "amount_medication_act_partial_patient",
-        "amount_medication_drug_full_patient": "amount_medication_drug_full_patient",
-        "amount_medication_drug_non_benefit": "amount_medication_drug_non_benefit",
-        "amount_medication_drug_partial_insurer": "amount_medication_drug_partial_insurer",
-        "amount_medication_drug_partial_patient": "amount_medication_drug_partial_patient",
-        "amount_mri_full_patient": "amount_mri_full_patient",
-        "amount_mri_non_benefit": "amount_mri_non_benefit",
-        "amount_mri_partial_insurer": "amount_mri_partial_insurer",
-        "amount_mri_partial_patient": "amount_mri_partial_patient",
-        "amount_other_full_patient": "amount_other_full_patient",
-        "amount_other_non_benefit": "amount_other_non_benefit",
-        "amount_other_partial_insurer": "amount_other_partial_insurer",
-        "amount_other_partial_patient": "amount_other_partial_patient",
-        "amount_pet_full_patient": "amount_pet_full_patient",
-        "amount_pet_non_benefit": "amount_pet_non_benefit",
-        "amount_pet_partial_insurer": "amount_pet_partial_insurer",
-        "amount_pet_partial_patient": "amount_pet_partial_patient",
-        "amount_procedure_surgery_full_patient": "amount_procedure_surgery_full_patient",
-        "amount_procedure_surgery_non_benefit": "amount_procedure_surgery_non_benefit",
-        "amount_procedure_surgery_partial_insurer": "amount_procedure_surgery_partial_insurer",
-        "amount_procedure_surgery_partial_patient": "amount_procedure_surgery_partial_patient",
-        "amount_prosthetic_orthodontic_full_patient": "amount_prosthetic_orthodontic_full_patient",
-        "amount_prosthetic_orthodontic_non_benefit": "amount_prosthetic_orthodontic_non_benefit",
-        "amount_prosthetic_orthodontic_partial_insurer": "amount_prosthetic_orthodontic_partial_insurer",
-        "amount_prosthetic_orthodontic_partial_patient": "amount_prosthetic_orthodontic_partial_patient",
-        "amount_psychotherapy_full_patient": "amount_psychotherapy_full_patient",
-        "amount_psychotherapy_non_benefit": "amount_psychotherapy_non_benefit",
-        "amount_psychotherapy_partial_insurer": "amount_psychotherapy_partial_insurer",
-        "amount_psychotherapy_partial_patient": "amount_psychotherapy_partial_patient",
-        "amount_radiation_full_patient": "amount_radiation_full_patient",
-        "amount_radiation_non_benefit": "amount_radiation_non_benefit",
-        "amount_radiation_partial_insurer": "amount_radiation_partial_insurer",
-        "amount_radiation_partial_patient": "amount_radiation_partial_patient",
-        "amount_rehab_full_patient": "amount_rehab_full_patient",
-        "amount_rehab_non_benefit": "amount_rehab_non_benefit",
-        "amount_rehab_partial_insurer": "amount_rehab_partial_insurer",
-        "amount_rehab_partial_patient": "amount_rehab_partial_patient",
-        "amount_room_1_full_patient": "amount_room_1_full_patient",
-        "amount_room_1_non_benefit": "amount_room_1_non_benefit",
-        "amount_room_1_partial_insurer": "amount_room_1_partial_insurer",
-        "amount_room_1_partial_patient": "amount_room_1_partial_patient",
-        "amount_room_2_3_full_patient": "amount_room_2_3_full_patient",
-        "amount_room_2_3_non_benefit": "amount_room_2_3_non_benefit",
-        "amount_room_2_3_partial_insurer": "amount_room_2_3_partial_insurer",
-        "amount_room_2_3_partial_patient": "amount_room_2_3_partial_patient",
-        "amount_room_4_plus_full_patient": "amount_room_4_plus_full_patient",
-        "amount_room_4_plus_non_benefit": "amount_room_4_plus_non_benefit",
-        "amount_room_4_plus_partial_insurer": "amount_room_4_plus_partial_insurer",
-        "amount_room_4_plus_partial_patient": "amount_room_4_plus_partial_patient",
-        "amount_selective_benefit_full_patient": "amount_selective_benefit_full_patient",
-        "amount_selective_benefit_non_benefit": "amount_selective_benefit_non_benefit",
-        "amount_selective_benefit_partial_insurer": "amount_selective_benefit_partial_insurer",
-        "amount_selective_benefit_partial_patient": "amount_selective_benefit_partial_patient",
-        "amount_senior_flat_full_patient": "amount_senior_flat_full_patient",
-        "amount_senior_flat_non_benefit": "amount_senior_flat_non_benefit",
-        "amount_senior_flat_partial_insurer": "amount_senior_flat_partial_insurer",
-        "amount_senior_flat_partial_patient": "amount_senior_flat_partial_patient",
-        "amount_test_full_patient": "amount_test_full_patient",
-        "amount_test_non_benefit": "amount_test_non_benefit",
-        "amount_test_partial_insurer": "amount_test_partial_insurer",
-        "amount_test_partial_patient": "amount_test_partial_patient",
-        "amount_ultrasound_full_patient": "amount_ultrasound_full_patient",
-        "amount_ultrasound_non_benefit": "amount_ultrasound_non_benefit",
-        "amount_ultrasound_partial_insurer": "amount_ultrasound_partial_insurer",
-        "amount_ultrasound_partial_patient": "amount_ultrasound_partial_patient",
-        "provider_business_registration_number": "provider_business_registration_number",
-        "provider_name": "provider_name",
-        "provider_phone": "provider_phone",
-        "provider_address": "provider_address",
-        "representative_name": "representative_name"
-      },
-      "note": "MED-04는 독립 금액 난수 대신 실제 영수증에 가까운 sparse 진료 시나리오 1개를 선택해 문서구분/기관종류/항목 금액을 일관 주입한다."
+      "type": "exclusive_choice",
+      "targets": [
+        "doc_kind_outpatient",
+        "doc_kind_inpatient"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "doc_kind_discharge",
+        "doc_kind_interim"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "institution_type_clinic",
+        "institution_type_hospital",
+        "institution_type_general",
+        "institution_type_tertiary"
+      ]
+    },
+    {
+      "type": "date_group",
+      "year": "treatment_start_year",
+      "month": "treatment_start_month",
+      "day": "treatment_start_day",
+      "min_year": 2020,
+      "max_year": 2026
+    },
+    {
+      "type": "date_group",
+      "year": "treatment_end_year",
+      "month": "treatment_end_month",
+      "day": "treatment_end_day",
+      "min_year": 2020,
+      "max_year": 2026
+    },
+    {
+      "type": "date_group",
+      "year": "issued_year",
+      "month": "issued_month",
+      "day": "issued_day",
+      "min_year": 2020,
+      "max_year": 2026
     },
     {
       "type": "date_order",
@@ -2074,172 +404,191 @@
         "month": "treatment_end_month",
         "day": "treatment_end_day"
       },
-      "min_year": 2024,
-      "max_year": 2026,
       "min_days": 0,
-      "max_days": 21,
-      "note": "진료기간 종료일은 시작일보다 빠르지 않고 0~21일 범위다."
+      "max_days": 60
     },
     {
-      "type": "date_group",
-      "year": "issued_year",
-      "month": "issued_month",
-      "day": "issued_day",
-      "min_year": 2024,
-      "max_year": 2026,
-      "note": "발행일은 유효 날짜다."
+      "type": "date_not_before",
+      "source": {
+        "year": "treatment_end_year",
+        "month": "treatment_end_month",
+        "day": "treatment_end_day"
+      },
+      "target": {
+        "year": "issued_year",
+        "month": "issued_month",
+        "day": "issued_day"
+      },
+      "min_days": 0,
+      "max_days": 90
+    },
+    {
+      "type": "date_not_after",
+      "target": {
+        "year": "issued_year",
+        "month": "issued_month",
+        "day": "issued_day"
+      },
+      "max": "as_of_date"
+    },
+    {
+      "type": "pick_record",
+      "pool": "provider_records",
+      "targets": {
+        "provider_business_registration_number": "business_no",
+        "provider_name": "name",
+        "provider_phone": "phone",
+        "provider_address": "address",
+        "representative_name": "representative"
+      }
     },
     {
       "type": "sum",
       "sources": [
-        "amount_anesthesia_partial_patient",
-        "amount_blood_partial_patient",
-        "amount_certificate_partial_patient",
         "amount_consultation_partial_patient",
-        "amount_ct_partial_patient",
-        "amount_drg_bundle_partial_patient",
-        "amount_flat_hospice_partial_patient",
-        "amount_flat_nursing_hospital_partial_patient",
-        "amount_imaging_partial_patient",
-        "amount_injection_act_partial_patient",
-        "amount_injection_drug_partial_patient",
-        "amount_materials_partial_patient",
-        "amount_meal_partial_patient",
-        "amount_medication_act_partial_patient",
-        "amount_medication_drug_partial_patient",
-        "amount_mri_partial_patient",
-        "amount_other_partial_patient",
-        "amount_pet_partial_patient",
-        "amount_procedure_surgery_partial_patient",
-        "amount_prosthetic_orthodontic_partial_patient",
-        "amount_psychotherapy_partial_patient",
-        "amount_radiation_partial_patient",
-        "amount_rehab_partial_patient",
         "amount_room_1_partial_patient",
         "amount_room_2_3_partial_patient",
         "amount_room_4_plus_partial_patient",
+        "amount_meal_partial_patient",
+        "amount_medication_act_partial_patient",
+        "amount_medication_drug_partial_patient",
+        "amount_injection_act_partial_patient",
+        "amount_injection_drug_partial_patient",
+        "amount_anesthesia_partial_patient",
+        "amount_procedure_surgery_partial_patient",
+        "amount_test_partial_patient",
+        "amount_imaging_partial_patient",
+        "amount_radiation_partial_patient",
+        "amount_materials_partial_patient",
+        "amount_rehab_partial_patient",
+        "amount_psychotherapy_partial_patient",
+        "amount_blood_partial_patient",
+        "amount_ct_partial_patient",
+        "amount_mri_partial_patient",
+        "amount_pet_partial_patient",
+        "amount_ultrasound_partial_patient",
+        "amount_prosthetic_orthodontic_partial_patient",
+        "amount_certificate_partial_patient",
         "amount_selective_benefit_partial_patient",
         "amount_senior_flat_partial_patient",
-        "amount_test_partial_patient",
-        "amount_ultrasound_partial_patient"
+        "amount_flat_nursing_hospital_partial_patient",
+        "amount_flat_hospice_partial_patient",
+        "amount_drg_bundle_partial_patient",
+        "amount_other_partial_patient"
       ],
       "target": "total_partial_patient",
-      "format": "money.krw",
-      "note": "① 일부 본인부담 본인부담금 합계"
+      "format": "money.krw"
     },
     {
       "type": "sum",
       "sources": [
-        "amount_anesthesia_partial_insurer",
-        "amount_blood_partial_insurer",
-        "amount_certificate_partial_insurer",
         "amount_consultation_partial_insurer",
-        "amount_ct_partial_insurer",
-        "amount_drg_bundle_partial_insurer",
-        "amount_flat_hospice_partial_insurer",
-        "amount_flat_nursing_hospital_partial_insurer",
-        "amount_imaging_partial_insurer",
-        "amount_injection_act_partial_insurer",
-        "amount_injection_drug_partial_insurer",
-        "amount_materials_partial_insurer",
-        "amount_meal_partial_insurer",
-        "amount_medication_act_partial_insurer",
-        "amount_medication_drug_partial_insurer",
-        "amount_mri_partial_insurer",
-        "amount_other_partial_insurer",
-        "amount_pet_partial_insurer",
-        "amount_procedure_surgery_partial_insurer",
-        "amount_prosthetic_orthodontic_partial_insurer",
-        "amount_psychotherapy_partial_insurer",
-        "amount_radiation_partial_insurer",
-        "amount_rehab_partial_insurer",
         "amount_room_1_partial_insurer",
         "amount_room_2_3_partial_insurer",
         "amount_room_4_plus_partial_insurer",
+        "amount_meal_partial_insurer",
+        "amount_medication_act_partial_insurer",
+        "amount_medication_drug_partial_insurer",
+        "amount_injection_act_partial_insurer",
+        "amount_injection_drug_partial_insurer",
+        "amount_anesthesia_partial_insurer",
+        "amount_procedure_surgery_partial_insurer",
+        "amount_test_partial_insurer",
+        "amount_imaging_partial_insurer",
+        "amount_radiation_partial_insurer",
+        "amount_materials_partial_insurer",
+        "amount_rehab_partial_insurer",
+        "amount_psychotherapy_partial_insurer",
+        "amount_blood_partial_insurer",
+        "amount_ct_partial_insurer",
+        "amount_mri_partial_insurer",
+        "amount_pet_partial_insurer",
+        "amount_ultrasound_partial_insurer",
+        "amount_prosthetic_orthodontic_partial_insurer",
+        "amount_certificate_partial_insurer",
         "amount_selective_benefit_partial_insurer",
         "amount_senior_flat_partial_insurer",
-        "amount_test_partial_insurer",
-        "amount_ultrasound_partial_insurer"
+        "amount_flat_nursing_hospital_partial_insurer",
+        "amount_flat_hospice_partial_insurer",
+        "amount_drg_bundle_partial_insurer",
+        "amount_other_partial_insurer"
       ],
       "target": "total_partial_insurer",
-      "format": "money.krw",
-      "note": "② 일부 본인부담 공단부담금 합계"
+      "format": "money.krw"
     },
     {
       "type": "sum",
       "sources": [
-        "amount_anesthesia_full_patient",
-        "amount_blood_full_patient",
-        "amount_certificate_full_patient",
         "amount_consultation_full_patient",
-        "amount_ct_full_patient",
-        "amount_drg_bundle_full_patient",
-        "amount_flat_hospice_full_patient",
-        "amount_flat_nursing_hospital_full_patient",
-        "amount_imaging_full_patient",
-        "amount_injection_act_full_patient",
-        "amount_injection_drug_full_patient",
-        "amount_materials_full_patient",
-        "amount_meal_full_patient",
-        "amount_medication_act_full_patient",
-        "amount_medication_drug_full_patient",
-        "amount_mri_full_patient",
-        "amount_other_full_patient",
-        "amount_pet_full_patient",
-        "amount_procedure_surgery_full_patient",
-        "amount_prosthetic_orthodontic_full_patient",
-        "amount_psychotherapy_full_patient",
-        "amount_radiation_full_patient",
-        "amount_rehab_full_patient",
         "amount_room_1_full_patient",
         "amount_room_2_3_full_patient",
         "amount_room_4_plus_full_patient",
+        "amount_meal_full_patient",
+        "amount_medication_act_full_patient",
+        "amount_medication_drug_full_patient",
+        "amount_injection_act_full_patient",
+        "amount_injection_drug_full_patient",
+        "amount_anesthesia_full_patient",
+        "amount_procedure_surgery_full_patient",
+        "amount_test_full_patient",
+        "amount_imaging_full_patient",
+        "amount_radiation_full_patient",
+        "amount_materials_full_patient",
+        "amount_rehab_full_patient",
+        "amount_psychotherapy_full_patient",
+        "amount_blood_full_patient",
+        "amount_ct_full_patient",
+        "amount_mri_full_patient",
+        "amount_pet_full_patient",
+        "amount_ultrasound_full_patient",
+        "amount_prosthetic_orthodontic_full_patient",
+        "amount_certificate_full_patient",
         "amount_selective_benefit_full_patient",
         "amount_senior_flat_full_patient",
-        "amount_test_full_patient",
-        "amount_ultrasound_full_patient"
+        "amount_flat_nursing_hospital_full_patient",
+        "amount_flat_hospice_full_patient",
+        "amount_drg_bundle_full_patient",
+        "amount_other_full_patient"
       ],
       "target": "total_full_patient",
-      "format": "money.krw",
-      "note": "③ 전액 본인부담 합계"
+      "format": "money.krw"
     },
     {
       "type": "sum",
       "sources": [
-        "amount_anesthesia_non_benefit",
-        "amount_blood_non_benefit",
-        "amount_certificate_non_benefit",
         "amount_consultation_non_benefit",
-        "amount_ct_non_benefit",
-        "amount_drg_bundle_non_benefit",
-        "amount_flat_hospice_non_benefit",
-        "amount_flat_nursing_hospital_non_benefit",
-        "amount_imaging_non_benefit",
-        "amount_injection_act_non_benefit",
-        "amount_injection_drug_non_benefit",
-        "amount_materials_non_benefit",
-        "amount_meal_non_benefit",
-        "amount_medication_act_non_benefit",
-        "amount_medication_drug_non_benefit",
-        "amount_mri_non_benefit",
-        "amount_other_non_benefit",
-        "amount_pet_non_benefit",
-        "amount_procedure_surgery_non_benefit",
-        "amount_prosthetic_orthodontic_non_benefit",
-        "amount_psychotherapy_non_benefit",
-        "amount_radiation_non_benefit",
-        "amount_rehab_non_benefit",
         "amount_room_1_non_benefit",
         "amount_room_2_3_non_benefit",
         "amount_room_4_plus_non_benefit",
+        "amount_meal_non_benefit",
+        "amount_medication_act_non_benefit",
+        "amount_medication_drug_non_benefit",
+        "amount_injection_act_non_benefit",
+        "amount_injection_drug_non_benefit",
+        "amount_anesthesia_non_benefit",
+        "amount_procedure_surgery_non_benefit",
+        "amount_test_non_benefit",
+        "amount_imaging_non_benefit",
+        "amount_radiation_non_benefit",
+        "amount_materials_non_benefit",
+        "amount_rehab_non_benefit",
+        "amount_psychotherapy_non_benefit",
+        "amount_blood_non_benefit",
+        "amount_ct_non_benefit",
+        "amount_mri_non_benefit",
+        "amount_pet_non_benefit",
+        "amount_ultrasound_non_benefit",
+        "amount_prosthetic_orthodontic_non_benefit",
+        "amount_certificate_non_benefit",
         "amount_selective_benefit_non_benefit",
         "amount_senior_flat_non_benefit",
-        "amount_test_non_benefit",
-        "amount_ultrasound_non_benefit"
+        "amount_flat_nursing_hospital_non_benefit",
+        "amount_flat_hospice_non_benefit",
+        "amount_drg_bundle_non_benefit",
+        "amount_other_non_benefit"
       ],
       "target": "total_non_benefit",
-      "format": "money.krw",
-      "note": "④ 비급여 합계"
+      "format": "money.krw"
     },
     {
       "type": "sum",
@@ -2250,8 +599,7 @@
         "total_non_benefit"
       ],
       "target": "total_medical_cost",
-      "format": "money.krw",
-      "note": "⑥=①+②+③+④"
+      "format": "money.krw"
     },
     {
       "type": "sum",
@@ -2260,31 +608,7 @@
         "cap_excess_amount"
       ],
       "target": "insurer_total",
-      "format": "money.krw",
-      "note": "⑦=②+⑤; ⑤는 0 고정"
-    },
-    {
-      "type": "sum",
-      "sources": [
-        "total_partial_patient",
-        "total_full_patient",
-        "total_non_benefit"
-      ],
-      "target": "patient_total",
-      "format": "money.krw",
-      "note": "⑧=(①-⑤)+③+④; ⑤는 0 고정"
-    },
-    {
-      "type": "copy",
-      "source": "patient_total",
-      "target": "amount_due",
-      "note": "⑩=⑧-⑨; ⑨는 0 고정"
-    },
-    {
-      "type": "copy",
-      "source": "amount_due",
-      "target": "paid_cash_receipt",
-      "note": "현금영수증 체크가 활성화된 샘플에서는 ⑩ 납부할 금액 전액을 현금영수증 금액으로 수납한다."
+      "format": "money.krw"
     },
     {
       "type": "sum",
@@ -2294,8 +618,2353 @@
         "paid_cash"
       ],
       "target": "paid_total",
-      "format": "money.krw",
-      "note": "⑪ 납부한 금액 합계=카드+현금영수증+현금"
+      "format": "money.krw"
+    },
+    {
+      "type": "numeric_compare",
+      "left": "prepaid_amount",
+      "operator": "<=",
+      "right": "patient_total"
+    },
+    {
+      "type": "numeric_compare",
+      "left": "paid_total",
+      "operator": "<=",
+      "right": "amount_due"
     }
-  ]
+  ],
+  "field_rules": [
+    {
+      "field_id": "doc_kind_outpatient",
+      "semantic_path": [
+        "문서구분",
+        "외래"
+      ],
+      "anchor_id": "manual_1783505672367",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "doc_kind_inpatient",
+      "semantic_path": [
+        "문서구분",
+        "입원"
+      ],
+      "anchor_id": "manual_1783505676734",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "doc_kind_discharge",
+      "semantic_path": [
+        "문서구분",
+        "퇴원"
+      ],
+      "anchor_id": "manual_1783505680184",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "doc_kind_interim",
+      "semantic_path": [
+        "문서구분",
+        "중간"
+      ],
+      "anchor_id": "manual_1783505683217",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "patient_registration_no",
+      "semantic_path": [
+        "환자정보",
+        "환자등록번호"
+      ],
+      "anchor_id": "visual_0006",
+      "generator": "pattern:######",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "patient_name",
+      "semantic_path": [
+        "환자정보",
+        "환자성명"
+      ],
+      "anchor_id": "visual_0007",
+      "generator": "person.name_ko",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "treatment_start_year",
+      "semantic_path": [
+        "진료기간",
+        "시작",
+        "년"
+      ],
+      "anchor_id": "visual_0010",
+      "generator": "date.year",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "treatment_start_month",
+      "semantic_path": [
+        "진료기간",
+        "시작",
+        "월"
+      ],
+      "anchor_id": "manual_1783505602548",
+      "generator": "date.month",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "treatment_start_day",
+      "semantic_path": [
+        "진료기간",
+        "시작",
+        "일"
+      ],
+      "anchor_id": "manual_1783505610398",
+      "generator": "date.day",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "treatment_end_year",
+      "semantic_path": [
+        "진료기간",
+        "종료",
+        "년"
+      ],
+      "anchor_id": "manual_1783505616552",
+      "generator": "date.year",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "treatment_end_month",
+      "semantic_path": [
+        "진료기간",
+        "종료",
+        "월"
+      ],
+      "anchor_id": "manual_1783505620449",
+      "generator": "date.month",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "treatment_end_day",
+      "semantic_path": [
+        "진료기간",
+        "종료",
+        "일"
+      ],
+      "anchor_id": "manual_1783505624033",
+      "generator": "date.day",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "night_care_checked",
+      "semantic_path": [
+        "진료구분",
+        "야간진료"
+      ],
+      "anchor_id": "manual_1783505642965",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "holiday_care_checked",
+      "semantic_path": [
+        "진료구분",
+        "공휴일진료"
+      ],
+      "anchor_id": "manual_1783505639948",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "department",
+      "semantic_path": [
+        "진료정보",
+        "진료과목"
+      ],
+      "anchor_id": "visual_0014",
+      "generator": "pool:departments",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "drg_number",
+      "semantic_path": [
+        "진료정보",
+        "질병군_DRG번호"
+      ],
+      "anchor_id": "visual_0015",
+      "generator": "pattern:AA####",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "ward_room",
+      "semantic_path": [
+        "진료정보",
+        "병실"
+      ],
+      "anchor_id": "visual_0018",
+      "generator": "choice:일반병실|1인실|2인실|3인실|4인실 이상",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "patient_category",
+      "semantic_path": [
+        "진료정보",
+        "환자구분"
+      ],
+      "anchor_id": "visual_0019",
+      "generator": "choice:건강보험|의료급여|산업재해|자동차보험|일반",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "receipt_no",
+      "semantic_path": [
+        "영수증정보",
+        "영수증번호"
+      ],
+      "anchor_id": "visual_0021",
+      "generator": "template:{{date.year}}{{date.month}}-{{pattern:######}}",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_consultation_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "진찰료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0032",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_consultation_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "진찰료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0033",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_consultation_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "진찰료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0034",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_consultation_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "진찰료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0035",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_1_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 1인실",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0038",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_1_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 1인실",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0039",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_1_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 1인실",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0040",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_1_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 1인실",
+        "비급여"
+      ],
+      "anchor_id": "visual_0041",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_2_3_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 2·3인실",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0044",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_2_3_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 2·3인실",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0045",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_2_3_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 2·3인실",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0046",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_2_3_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 2·3인실",
+        "비급여"
+      ],
+      "anchor_id": "visual_0047",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_4_plus_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 4인실 이상",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0050",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_4_plus_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 4인실 이상",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0051",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_4_plus_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 4인실 이상",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0052",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_room_4_plus_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "입원료 4인실 이상",
+        "비급여"
+      ],
+      "anchor_id": "visual_0053",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_meal_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "식대",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0056",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_meal_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "식대",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0057",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_meal_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "식대",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0058",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_meal_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "식대",
+        "비급여"
+      ],
+      "anchor_id": "visual_0059",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_medication_act_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "투약및조제료 행위료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0063",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_medication_act_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "투약및조제료 행위료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0064",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_medication_act_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "투약및조제료 행위료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0065",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_medication_act_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "투약및조제료 행위료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0066",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_medication_drug_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "투약및조제료 약품비",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0070",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_medication_drug_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "투약및조제료 약품비",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0071",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_medication_drug_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "투약및조제료 약품비",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0072",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_medication_drug_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "투약및조제료 약품비",
+        "비급여"
+      ],
+      "anchor_id": "visual_0073",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_injection_act_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "주사료 행위료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0075",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_injection_act_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "주사료 행위료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0076",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_injection_act_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "주사료 행위료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0077",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_injection_act_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "주사료 행위료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0078",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_injection_drug_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "주사료 약품비",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0081",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_injection_drug_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "주사료 약품비",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0082",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_injection_drug_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "주사료 약품비",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0083",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_injection_drug_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "주사료 약품비",
+        "비급여"
+      ],
+      "anchor_id": "visual_0084",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_anesthesia_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "마취료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0088",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_anesthesia_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "마취료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0089",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_anesthesia_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "마취료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0090",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_anesthesia_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "마취료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0091",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_procedure_surgery_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "처치 및 수술료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0093",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_procedure_surgery_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "처치 및 수술료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0094",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_procedure_surgery_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "처치 및 수술료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0095",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_procedure_surgery_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "처치 및 수술료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0096",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_test_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "검사료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0099",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_test_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "검사료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0100",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_test_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "검사료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0101",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_test_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "검사료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0102",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_imaging_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "영상진단료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0105",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_imaging_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "영상진단료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0106",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_imaging_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "영상진단료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0107",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_imaging_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "영상진단료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0108",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_radiation_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "방사선치료료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0110",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_radiation_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "방사선치료료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0111",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_radiation_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "방사선치료료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0112",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_radiation_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "방사선치료료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0113",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_materials_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "치료재료대",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0115",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_materials_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "치료재료대",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0116",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_materials_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "치료재료대",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0117",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_materials_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "치료재료대",
+        "비급여"
+      ],
+      "anchor_id": "visual_0118",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_rehab_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "재활 및 물리치료료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0120",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_rehab_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "재활 및 물리치료료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0121",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_rehab_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "재활 및 물리치료료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0122",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_rehab_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "재활 및 물리치료료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0123",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_psychotherapy_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "정신요법료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0125",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_psychotherapy_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "정신요법료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0126",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_psychotherapy_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "정신요법료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0127",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_psychotherapy_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "정신요법료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0128",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_blood_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "전혈 및 혈액성분제제료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0130",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_blood_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "전혈 및 혈액성분제제료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0131",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_blood_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "전혈 및 혈액성분제제료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0132",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_blood_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "전혈 및 혈액성분제제료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0133",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_ct_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "CT 진단료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0137",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_ct_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "CT 진단료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0138",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_ct_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "CT 진단료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0139",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_ct_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "CT 진단료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0140",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_mri_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "MRI 진단료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0144",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_mri_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "MRI 진단료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0145",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_mri_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "MRI 진단료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0146",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_mri_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "MRI 진단료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0147",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_pet_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "PET 진단료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0151",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_pet_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "PET 진단료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0152",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_pet_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "PET 진단료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0153",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_pet_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "PET 진단료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0154",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_ultrasound_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "초음파 진단료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0158",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_ultrasound_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "초음파 진단료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0159",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_ultrasound_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "초음파 진단료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0160",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_ultrasound_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "초음파 진단료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0161",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "보철·교정료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0165",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "보철·교정료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0166",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "보철·교정료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0167",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_prosthetic_orthodontic_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "보철·교정료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0168",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_certificate_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "제증명수수료",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0172",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_certificate_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "제증명수수료",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0173",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_certificate_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "제증명수수료",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0174",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_certificate_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "제증명수수료",
+        "비급여"
+      ],
+      "anchor_id": "visual_0175",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_selective_benefit_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "선별급여",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0179",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_selective_benefit_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "선별급여",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0180",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_selective_benefit_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "선별급여",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0181",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_selective_benefit_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "선별급여",
+        "비급여"
+      ],
+      "anchor_id": "visual_0182",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_senior_flat_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "65세 이상 등 정액",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0186",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_senior_flat_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "65세 이상 등 정액",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0187",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_senior_flat_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "65세 이상 등 정액",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0188",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_senior_flat_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "65세 이상 등 정액",
+        "비급여"
+      ],
+      "anchor_id": "visual_0189",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "정액수가(요양병원)",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0193",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "정액수가(요양병원)",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0194",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "정액수가(요양병원)",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0195",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_flat_nursing_hospital_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "정액수가(요양병원)",
+        "비급여"
+      ],
+      "anchor_id": "visual_0196",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_flat_hospice_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "정액수가(완화의료)",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0200",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_flat_hospice_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "정액수가(완화의료)",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0201",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_flat_hospice_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "정액수가(완화의료)",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0202",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_flat_hospice_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "정액수가(완화의료)",
+        "비급여"
+      ],
+      "anchor_id": "visual_0203",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_drg_bundle_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "질병군 포괄수가",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0207",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_drg_bundle_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "질병군 포괄수가",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0208",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_drg_bundle_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "질병군 포괄수가",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0209",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_drg_bundle_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "질병군 포괄수가",
+        "비급여"
+      ],
+      "anchor_id": "visual_0210",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_other_partial_patient",
+      "semantic_path": [
+        "진료비항목",
+        "기타",
+        "일부 본인부담 본인부담금"
+      ],
+      "anchor_id": "visual_0215",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_other_partial_insurer",
+      "semantic_path": [
+        "진료비항목",
+        "기타",
+        "일부 본인부담 공단부담금"
+      ],
+      "anchor_id": "visual_0216",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_other_full_patient",
+      "semantic_path": [
+        "진료비항목",
+        "기타",
+        "전액 본인부담"
+      ],
+      "anchor_id": "visual_0217",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_other_non_benefit",
+      "semantic_path": [
+        "진료비항목",
+        "기타",
+        "비급여"
+      ],
+      "anchor_id": "visual_0218",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "total_medical_cost",
+      "semantic_path": [
+        "금액산정내용",
+        "진료비총액"
+      ],
+      "anchor_id": "visual_0030",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "insurer_total",
+      "semantic_path": [
+        "금액산정내용",
+        "공단부담총액"
+      ],
+      "anchor_id": "visual_0043",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "patient_total",
+      "semantic_path": [
+        "금액산정내용",
+        "환자부담총액"
+      ],
+      "anchor_id": "visual_0048",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "prepaid_amount",
+      "semantic_path": [
+        "금액산정내용",
+        "이미납부한금액"
+      ],
+      "anchor_id": "visual_0062",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "amount_due",
+      "semantic_path": [
+        "금액산정내용",
+        "납부할금액"
+      ],
+      "anchor_id": "visual_0074",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "paid_card",
+      "semantic_path": [
+        "납부정보",
+        "납부한금액",
+        "카드"
+      ],
+      "anchor_id": "visual_0086",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "paid_cash_receipt",
+      "semantic_path": [
+        "납부정보",
+        "납부한금액",
+        "현금영수증"
+      ],
+      "anchor_id": "manual_1783505723000",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "paid_cash",
+      "semantic_path": [
+        "납부정보",
+        "납부한금액",
+        "현금"
+      ],
+      "anchor_id": "visual_0097",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "paid_total",
+      "semantic_path": [
+        "납부정보",
+        "납부한금액",
+        "합계"
+      ],
+      "anchor_id": "visual_0104",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "unpaid_amount",
+      "semantic_path": [
+        "납부정보",
+        "납부하지않은금액"
+      ],
+      "anchor_id": "visual_0109",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "cash_receipt_purpose",
+      "semantic_path": [
+        "현금영수증",
+        "발급체크"
+      ],
+      "anchor_id": "manual_1783505733184",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "cash_receipt_identity_no",
+      "semantic_path": [
+        "현금영수증",
+        "신분확인번호"
+      ],
+      "anchor_id": "visual_0119",
+      "generator": "pattern:#############",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "cash_receipt_approval_no",
+      "semantic_path": [
+        "현금영수증",
+        "승인번호"
+      ],
+      "anchor_id": "visual_0124",
+      "generator": "pattern:################",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "total_partial_patient",
+      "semantic_path": [
+        "진료비합계",
+        "일부본인부담_본인부담금"
+      ],
+      "anchor_id": "manual_1783505533029",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "total_partial_insurer",
+      "semantic_path": [
+        "진료비합계",
+        "일부본인부담_공단부담금"
+      ],
+      "anchor_id": "manual_1783505536263",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "total_full_patient",
+      "semantic_path": [
+        "진료비합계",
+        "전액본인부담"
+      ],
+      "anchor_id": "manual_1783505539431",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "total_non_benefit",
+      "semantic_path": [
+        "진료비합계",
+        "비급여"
+      ],
+      "anchor_id": "manual_1783505542947",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "cap_excess_amount",
+      "semantic_path": [
+        "진료비합계",
+        "상한액초과금"
+      ],
+      "anchor_id": "manual_1783505550014",
+      "generator": "money.krw",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "institution_type_clinic",
+      "semantic_path": [
+        "요양기관",
+        "종류",
+        "의원급_보건기관"
+      ],
+      "anchor_id": "manual_1783505505814",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "institution_type_hospital",
+      "semantic_path": [
+        "요양기관",
+        "종류",
+        "병원급"
+      ],
+      "anchor_id": "manual_1783505509630",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "institution_type_general",
+      "semantic_path": [
+        "요양기관",
+        "종류",
+        "종합병원"
+      ],
+      "anchor_id": "manual_1783505519881",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "institution_type_tertiary",
+      "semantic_path": [
+        "요양기관",
+        "종류",
+        "상급종합병원"
+      ],
+      "anchor_id": "manual_1783505522963",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "provider_business_registration_number",
+      "semantic_path": [
+        "요양기관",
+        "사업자등록번호"
+      ],
+      "anchor_id": "visual_0232",
+      "generator": "business_reg_no",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "provider_name",
+      "semantic_path": [
+        "요양기관",
+        "상호"
+      ],
+      "anchor_id": "visual_0235",
+      "generator": "medical.institution_ko",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "provider_phone",
+      "semantic_path": [
+        "요양기관",
+        "전화번호"
+      ],
+      "anchor_id": "visual_0236",
+      "generator": "person.phone_kr",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "provider_address",
+      "semantic_path": [
+        "요양기관",
+        "소재지"
+      ],
+      "anchor_id": "visual_0237",
+      "generator": "address.ko",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "representative_name",
+      "semantic_path": [
+        "요양기관",
+        "대표자"
+      ],
+      "anchor_id": "manual_1783505775201",
+      "generator": "person.name_ko",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "issued_year",
+      "semantic_path": [
+        "발행일",
+        "년"
+      ],
+      "anchor_id": "manual_1783505759187",
+      "generator": "date.year",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "issued_month",
+      "semantic_path": [
+        "발행일",
+        "월"
+      ],
+      "anchor_id": "manual_1783505764285",
+      "generator": "date.month",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    },
+    {
+      "field_id": "issued_day",
+      "semantic_path": [
+        "발행일",
+        "일"
+      ],
+      "anchor_id": "manual_1783505770451",
+      "generator": "date.day",
+      "evidence_ids": [
+        "WEB-01",
+        "VIS-01"
+      ]
+    }
+  ],
+  "updated_at": "2026-07-13T01:55:42.609437+00:00"
 }

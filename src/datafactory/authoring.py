@@ -203,6 +203,7 @@ def render_authoring_preview(
     seed: int = 1234,
     sample_id: str = "preview_000001",
     render_scale: int = 2,
+    as_of_date: date | None = None,
 ) -> AuthoringRenderResult:
     schema = _read_json(schema_path)
     stylesheet = _read_json(stylesheet_path)
@@ -213,7 +214,7 @@ def render_authoring_preview(
 
     out_dir.mkdir(parents=True, exist_ok=True)
     rng = random.Random(seed)
-    values, generation_warnings = _generate_values(schema, faker_profile, rng)
+    values, generation_warnings = _generate_values(schema, faker_profile, rng, as_of_date=as_of_date)
     template, template_warnings = _template_from_authoring(schema, stylesheet, base_image)
     image, annotations = render_template(template, values, render_scale=render_scale)
     validation = _validate_render(schema, annotations, [*(generation_warnings or []), *template_warnings])
@@ -267,6 +268,7 @@ def render_authoring_live_preview(
     seed: int = 1234,
     sample_id: str = "live_preview",
     render_scale: int = 2,
+    as_of_date: date | None = None,
 ) -> AuthoringRenderResult:
     """Render an unsaved authoring payload through the final Pillow renderer.
 
@@ -281,7 +283,7 @@ def render_authoring_live_preview(
 
     out_dir.mkdir(parents=True, exist_ok=True)
     rng = random.Random(seed)
-    values, generation_warnings = _generate_values(schema, faker_profile, rng, force_visible=True)
+    values, generation_warnings = _generate_values(schema, faker_profile, rng, force_visible=True, as_of_date=as_of_date)
     template, template_warnings = _template_from_authoring(schema, stylesheet, base_image)
     image, annotations = render_template(template, values, render_scale=render_scale)
     validation = _validate_render(schema, annotations, [*(generation_warnings or []), *template_warnings])
@@ -322,6 +324,7 @@ def render_authoring_batch(
     sample_prefix: str = "sample",
     clean: bool = True,
     render_scale: int = 2,
+    as_of_date: date | None = None,
 ) -> AuthoringBatchResult:
     if count <= 0:
         raise ValueError("count must be positive")
@@ -345,6 +348,7 @@ def render_authoring_batch(
                 seed=seed + index - 1,
                 sample_id=sample_id,
                 render_scale=render_scale,
+                as_of_date=as_of_date,
             )
         )
 
@@ -1111,6 +1115,13 @@ def _guess_value_type(label: ReviewLabel) -> str:
 def _template_from_authoring(schema: dict[str, Any], stylesheet: dict[str, Any], base_image: Path) -> tuple[TemplateSpec, list[dict[str, Any]]]:
     style_by_id = {style["style_class"]: style for style in stylesheet.get("style_classes", []) if isinstance(style, dict)}
     label_by_id = _review_labels_by_id(schema)
+    with Image.open(base_image) as source_image:
+        base_width, base_height = source_image.size
+    schema_image = schema.get("image") if isinstance(schema.get("image"), dict) else {}
+    schema_width = int(schema_image.get("width") or base_width)
+    schema_height = int(schema_image.get("height") or base_height)
+    bbox_scale_x = base_width / max(1, schema_width)
+    bbox_scale_y = base_height / max(1, schema_height)
     fields: list[FieldSpec] = []
     warnings: list[dict[str, Any]] = []
     for raw in schema.get("fields", []):
@@ -1151,6 +1162,22 @@ def _template_from_authoring(schema: dict[str, Any], stylesheet: dict[str, Any],
                 }
             )
             continue
+        if bbox_scale_x != 1.0 or bbox_scale_y != 1.0:
+            bbox = BBox.from_list(
+                [
+                    bbox.x * bbox_scale_x,
+                    bbox.y * bbox_scale_y,
+                    bbox.width * bbox_scale_x,
+                    bbox.height * bbox_scale_y,
+                ]
+            ).clipped(base_width, base_height)
+            warnings.append(
+                {
+                    "field_id": field_id,
+                    "type": "bbox_scaled_to_template",
+                    "message": f"bbox coordinates scaled from {schema_width}x{schema_height} to {base_width}x{base_height}",
+                }
+            )
         style = style_by_id.get(raw.get("style_class"), style_by_id.get(DEFAULT_STYLE_CLASS, {}))
         render_policy = raw.get("render_policy", {}) if isinstance(raw.get("render_policy"), dict) else {}
         fields.append(
@@ -1200,6 +1227,7 @@ def _generate_values(
     rng: random.Random,
     *,
     force_visible: bool = False,
+    as_of_date: date | None = None,
 ) -> tuple[dict[str, str], list[dict[str, Any]]]:
     generators = faker_profile.get("field_generators", {}) if isinstance(faker_profile.get("field_generators"), dict) else {}
     values: dict[str, str] = {}
@@ -1208,12 +1236,20 @@ def _generate_values(
         field_id = str(field["field_id"])
         rule = str(generators.get(field_id) or field.get("generator") or field.get("value_type") or "free_text.short")
         field_label = str(field.get("label") or field.get("key") or field_id)
-        value, warning = _generate_authoring_value(rule, rng, field_id=field_id, field_label=field_label, faker_profile=faker_profile, values=values)
+        value, warning = _generate_authoring_value(
+            rule,
+            rng,
+            field_id=field_id,
+            field_label=field_label,
+            faker_profile=faker_profile,
+            values=values,
+            as_of_date=as_of_date,
+        )
         value = _normalize_generated_value_for_field(field, rule, value, force_visible=force_visible)
         values[field_id] = value
         if warning:
             warnings.append(warning)
-    constraint_warnings = _apply_generation_constraints(values, faker_profile, rng)
+    constraint_warnings = _apply_generation_constraints(values, faker_profile, rng, as_of_date=as_of_date)
     warnings.extend(constraint_warnings)
     sparse_warnings = _apply_sparse_row_generation_policy(values, faker_profile, rng)
     warnings.extend(sparse_warnings)
@@ -1300,6 +1336,7 @@ def _generate_authoring_value(
     field_label: str | None = None,
     faker_profile: dict[str, Any] | None = None,
     values: dict[str, str] | None = None,
+    as_of_date: date | None = None,
 ) -> tuple[str, dict[str, Any] | None]:
     normalized = rule.strip()
     normalized_lower = normalized.lower()
@@ -1326,13 +1363,13 @@ def _generate_authoring_value(
         return normalized.split(":", 1)[1], None
     if normalized_lower.startswith("template:"):
         template = normalized.split(":", 1)[1]
-        return _render_rule_template(template, rng, faker_profile=faker_profile, values=values), None
+        return _render_rule_template(template, rng, faker_profile=faker_profile, values=values, as_of_date=as_of_date), None
     if normalized_lower.startswith("pattern:"):
         return _render_pattern(normalized.split(":", 1)[1], rng), None
     if normalized_lower == "free_text.short":
         return _safe_fallback_value(field_label, field_id), None
     if normalized_lower == "date.year":
-        return str(rng.randint(2020, 2027)), None
+        return str(rng.randint(2020, (as_of_date or date.today()).year)), None
     if normalized_lower == "date.month":
         return f"{rng.randint(1, 12):02d}", None
     if normalized_lower == "date.day":
@@ -1350,11 +1387,12 @@ def _generate_authoring_value(
         "date.kr": "date",
         "money.krw": "amount",
         "company.name_ko": "company",
+        "business_reg_no": "business_reg_no",
         "medical.institution_ko": "medical_institution",
         "address.ko": "address",
     }
     if normalized_lower in mapping:
-        return generate_value(mapping[normalized_lower], rng), None
+        return generate_value(mapping[normalized_lower], rng, as_of_date=as_of_date), None
     return _fallback_with_warning(field_id, rule, "unknown faker rule", field_label=field_label)
 
 
@@ -1537,7 +1575,13 @@ def _pool_values(faker_profile: dict[str, Any] | None, pool_name: str) -> list[A
     return []
 
 
-def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[str, Any], rng: random.Random) -> list[dict[str, Any]]:
+def _apply_generation_constraints(
+    values: dict[str, str],
+    faker_profile: dict[str, Any],
+    rng: random.Random,
+    *,
+    as_of_date: date | None = None,
+) -> list[dict[str, Any]]:
     constraints = faker_profile.get("constraints")
     if not isinstance(constraints, list):
         return []
@@ -1614,25 +1658,25 @@ def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[st
             if not all(group.values()):
                 warnings.append({"type": "invalid_generation_constraint", "message": "date_group constraint requires year/month/day field ids", "constraint": constraint})
                 continue
-            value = _random_constraint_date(rng, constraint)
+            value = _random_constraint_date(rng, constraint, as_of_date=as_of_date)
             _assign_date_group(values, group, value, year_format=constraint.get("year_format") or constraint.get("yearFormat"))
         elif ctype == "date_order":
-            start_group = constraint.get("start")
-            end_group = constraint.get("end")
-            if not isinstance(start_group, dict) or not isinstance(end_group, dict) or not _date_group_complete(start_group) or not _date_group_complete(end_group):
-                warnings.append({"type": "invalid_generation_constraint", "message": "date_order constraint requires complete start/end year/month/day field ids", "constraint": constraint})
+            start_ref = constraint.get("start")
+            end_ref = constraint.get("end")
+            if not _constraint_date_ref_complete(start_ref) or not _constraint_date_ref_complete(end_ref):
+                warnings.append({"type": "invalid_generation_constraint", "message": "date_order constraint requires start/end date fields or complete year/month/day groups", "constraint": constraint})
                 continue
-            start_date = _random_constraint_date(rng, constraint)
+            start_date = _random_constraint_date(rng, constraint, as_of_date=as_of_date)
             max_days = _constraint_int(constraint.get("max_days"), default=60, minimum=0, maximum=3650)
             min_days = _constraint_int(constraint.get("min_days"), default=0, minimum=0, maximum=max_days)
             end_date = start_date + timedelta(days=rng.randint(min_days, max_days))
-            max_year = _constraint_int(constraint.get("max_year"), default=2027, minimum=1900, maximum=2100)
-            if end_date.year > max_year:
-                end_date = date(max_year, 12, 28)
+            max_date = _constraint_max_date(constraint, as_of_date=as_of_date)
+            if end_date > max_date:
+                end_date = max_date
                 if start_date > end_date:
                     start_date = end_date
-            _assign_date_group(values, start_group, start_date)
-            _assign_date_group(values, end_group, end_date)
+            _assign_constraint_date_ref(values, start_ref, start_date)
+            _assign_constraint_date_ref(values, end_ref, end_date)
         elif ctype == "date_not_before":
             source = constraint.get("source") or constraint.get("after")
             target = constraint.get("target") or constraint.get("date")
@@ -1643,20 +1687,60 @@ def _apply_generation_constraints(values: dict[str, str], faker_profile: dict[st
             min_days = _constraint_int(constraint.get("min_days"), default=0, minimum=0, maximum=3650)
             max_days = _constraint_int(constraint.get("max_days"), default=90, minimum=min_days, maximum=3650)
             target_date = source_date + timedelta(days=rng.randint(min_days, max_days))
-            max_year = _constraint_int(constraint.get("max_year"), default=2027, minimum=1900, maximum=2100)
-            if target_date.year > max_year:
-                target_date = date(max_year, 12, 28)
+            max_date = _constraint_max_date(constraint, as_of_date=as_of_date)
+            if target_date > max_date:
+                target_date = max_date
                 if target_date < source_date:
-                    warnings.append({"type": "invalid_generation_constraint", "message": "date_not_before source is later than max_year allows", "constraint": constraint})
+                    warnings.append({"type": "invalid_generation_constraint", "message": "date_not_before source is later than the allowed maximum date", "constraint": constraint})
                     continue
-            if isinstance(target, dict) and _date_group_complete(target):
-                _assign_date_group(values, target, target_date)
+            _assign_constraint_date_ref(values, target, target_date)
+        elif ctype == "date_not_after":
+            target = constraint.get("target") or constraint.get("date")
+            target_date = _constraint_date_from_ref(values, target)
+            if target_date is None:
+                warnings.append({"type": "invalid_generation_constraint", "message": "date_not_after could not parse target date", "constraint": constraint})
+                continue
+            max_ref = constraint.get("max") or constraint.get("not_after") or "as_of_date"
+            if str(max_ref).strip().lower() in {"as_of_date", "today"}:
+                maximum = as_of_date or date.today()
             else:
-                target_field = str(target or "").strip()
-                if not target_field:
-                    warnings.append({"type": "invalid_generation_constraint", "message": "date_not_before constraint requires target field or target date group", "constraint": constraint})
-                    continue
-                values[target_field] = target_date.isoformat()
+                maximum = _constraint_date_from_ref(values, max_ref)
+            if maximum is None:
+                warnings.append({"type": "invalid_generation_constraint", "message": "date_not_after could not parse maximum date", "constraint": constraint})
+                continue
+            if target_date > maximum:
+                _assign_constraint_date_ref(values, target, maximum)
+        elif ctype == "numeric_range":
+            target = str(constraint.get("target") or "").strip()
+            if not target or target not in values:
+                warnings.append({"type": "invalid_generation_constraint", "message": "numeric_range requires an existing target field", "constraint": constraint})
+                continue
+            minimum = _constraint_float(constraint.get("min"), default=0.0)
+            maximum = _constraint_float(constraint.get("max"), default=minimum)
+            if maximum < minimum:
+                minimum, maximum = maximum, minimum
+            decimals = _constraint_int(constraint.get("decimals"), default=0, minimum=0, maximum=4)
+            generated = rng.uniform(minimum, maximum)
+            rendered = _format_constraint_decimal(generated, decimals=decimals, fmt=str(constraint.get("format") or "plain"))
+            values[target] = f"{rendered}{str(constraint.get('suffix') or '')}"
+        elif ctype == "numeric_compare":
+            left = str(constraint.get("left") or "").strip()
+            right = str(constraint.get("right") or "").strip()
+            operator = str(constraint.get("operator") or "lte").strip().lower()
+            operator = {"<=": "lte", "<": "lt", ">=": "gte", ">": "gt"}.get(operator, operator)
+            if left not in values or right not in values or operator not in {"lte", "lt", "gte", "gt"}:
+                warnings.append({"type": "invalid_generation_constraint", "message": "numeric_compare requires left/right fields and lte/lt/gte/gt operator", "constraint": constraint})
+                continue
+            left_value = _parse_decimal_value(values[left])
+            right_value = _parse_decimal_value(values[right])
+            valid = {
+                "lte": left_value <= right_value,
+                "lt": left_value < right_value,
+                "gte": left_value >= right_value,
+                "gt": left_value > right_value,
+            }[operator]
+            if not valid:
+                values[left], values[right] = values[right], values[left]
         elif ctype == "age_from_rrn":
             rrn_field = str(constraint.get("rrn") or "").strip()
             age_field = str(constraint.get("age") or "").strip()
@@ -1763,6 +1847,12 @@ def _date_group_complete(group: dict[str, Any]) -> bool:
     return all(str(group.get(part) or "").strip() for part in ("year", "month", "day"))
 
 
+def _constraint_date_ref_complete(value: Any) -> bool:
+    if isinstance(value, dict):
+        return _date_group_complete(value)
+    return bool(str(value or "").strip())
+
+
 def _assign_date_group(values: dict[str, str], group: dict[str, Any], value: date, *, year_format: Any = None) -> None:
     normalized_year_format = str(year_format or "").strip().lower().replace("-", "_")
     if normalized_year_format in {"yy", "2digit", "2_digit", "two_digit", "last_two_digits"}:
@@ -1773,11 +1863,32 @@ def _assign_date_group(values: dict[str, str], group: dict[str, Any], value: dat
     values[str(group["day"]).strip()] = f"{value.day:02d}"
 
 
-def _random_constraint_date(rng: random.Random, constraint: dict[str, Any]) -> date:
+def _assign_constraint_date_ref(values: dict[str, str], ref: Any, value: date) -> None:
+    if isinstance(ref, dict) and _date_group_complete(ref):
+        _assign_date_group(values, ref, value, year_format=ref.get("year_format") or ref.get("yearFormat"))
+        return
+    field_id = str(ref or "").strip()
+    if field_id:
+        values[field_id] = value.isoformat()
+
+
+def _constraint_max_date(constraint: dict[str, Any], *, as_of_date: date | None = None) -> date:
+    max_date_value = str(constraint.get("max_date") or constraint.get("maxDate") or "").strip().lower()
+    if max_date_value in {"as_of_date", "today"}:
+        return as_of_date or date.today()
+    parsed = _parse_constraint_date_value(max_date_value)
+    if parsed is not None:
+        return parsed
+    max_year = _constraint_int(constraint.get("max_year"), default=(as_of_date or date.today()).year, minimum=1900, maximum=2100)
+    return date(max_year, 12, 28)
+
+
+def _random_constraint_date(rng: random.Random, constraint: dict[str, Any], *, as_of_date: date | None = None) -> date:
     min_year = _constraint_int(constraint.get("min_year"), default=2020, minimum=1900, maximum=2100)
-    max_year = _constraint_int(constraint.get("max_year"), default=2027, minimum=min_year, maximum=2100)
     start = date(min_year, 1, 1)
-    end = date(max_year, 12, 28)
+    end = _constraint_max_date(constraint, as_of_date=as_of_date)
+    if end < start:
+        end = start
     return start + timedelta(days=rng.randint(0, max(0, (end - start).days)))
 
 
@@ -1787,6 +1898,28 @@ def _constraint_int(value: Any, *, default: int, minimum: int, maximum: int) -> 
     except (TypeError, ValueError):
         number = default
     return max(minimum, min(maximum, number))
+
+
+def _constraint_float(value: Any, *, default: float) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _parse_decimal_value(value: str) -> float:
+    text = str(value or "").strip().replace(",", "")
+    match = re.search(r"-?\d+(?:\.\d+)?", text)
+    return float(match.group(0)) if match else 0.0
+
+
+def _format_constraint_decimal(value: float, *, decimals: int, fmt: str) -> str:
+    normalized = str(fmt or "").strip().lower()
+    if normalized in {"percent", "rate.percent", "percentage"}:
+        return f"{value:.{decimals}f}%"
+    if normalized in {"money.krw", "money", "comma"}:
+        return f"{value:,.{decimals}f}" if decimals else f"{round(value):,}"
+    return f"{value:.{decimals}f}" if decimals else str(round(value))
 
 
 def _parse_numeric_value(value: str) -> int:
@@ -1825,10 +1958,11 @@ def _render_rule_template(
     *,
     faker_profile: dict[str, Any] | None = None,
     values: dict[str, str] | None = None,
+    as_of_date: date | None = None,
 ) -> str:
     def replace(match: re.Match[str]) -> str:
         inner_rule = match.group(1).strip()
-        value, _warning = _generate_authoring_value(inner_rule, rng, faker_profile=faker_profile, values=values)
+        value, _warning = _generate_authoring_value(inner_rule, rng, faker_profile=faker_profile, values=values, as_of_date=as_of_date)
         return value
 
     return re.sub(r"\{\{([^{}]+)\}\}", replace, template)
@@ -2155,6 +2289,10 @@ def _raw_semantic_path(raw: dict[str, Any], label: str) -> list[str]:
         parts = [str(part).strip() for part in raw_path if str(part).strip()]
         if parts:
             return parts
+    if isinstance(raw_path, str) and raw_path.strip():
+        value = raw_path.strip()
+        separator = "/" if "/" in value else "." if "." in value else None
+        return [part.strip() for part in value.split(separator) if part.strip()] if separator else [value]
     for key in ("json_path", "key"):
         value = str(raw.get(key) or "").strip()
         if not value:

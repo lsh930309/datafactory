@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-01",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:nts.go.kr 표준재무제표증명 발급 표준재무상태표 표준손익계산서",
+    "site:hometax.go.kr 표준재무제표증명",
+    "site:law.go.kr 표준재무제표증명 민원증명"
+  ],
+  "sources": [
+    {"evidence_id":"official_form_13","url":"https://www.law.go.kr/LSW/flDownload.do?bylClsCd=200203&flNm=%5B%EB%B3%84%EC%A7%80+13%5D+%ED%91%9C%EC%A4%80%EC%9E%AC%EB%AC%B4%EC%A0%9C%ED%91%9C%EC%A6%9D%EB%AA%85%28%EA%B5%AD%EB%AC%B8%29&flSeq=140436515","source_type":"국가법령정보센터 공식 서식","summary":"국세청민원사무처리규정 별지 제13호 국문 표준재무제표증명 서식. 발급번호, 개인/법인, 사업자 정보, 사업연도, 첨부서류, 신고구분·신고일, 접수번호, 담당부서·담당자·연락처, 세무서장 구조를 확인했다."},
+    {"evidence_id":"hometax_rule","url":"https://law.go.kr/admRulLsInfoP.do?admRulSeq=2100000197049&chrClsCd=","source_type":"국가법령정보센터 행정규칙","summary":"홈택스에서 개인·법인 표준재무제표증명을 전자발급할 수 있고 출력물이 공문서로 사용되는 제도적 맥락을 확인했다."},
+    {"evidence_id":"nts_standard_forms","url":"https://www.nts.go.kr/nts/na/ntt/selectNttInfo.do?mi=2240&nttSn=1002331","source_type":"국세청 공식 주요서식","summary":"표준재무상태표와 표준손익계산서가 별도 첨부 재무제표 서식임을 확인했다."},
+    {"evidence_id":"visual_page_1","url":"workbench/documents/재무제표(재무상태표·손익계산서)__FIN-01/samples/original/표준재무제표증명원＿지엘-1_page_001.jpg","source_type":"로컬 전체 템플릿 이미지","summary":"현재 페이지는 1/4 표지이며 20개 use bbox의 실제 값, 주변 라벨, 체크박스, 정적 물결표, 날짜 표기를 직접 확인했다."}
+  ],
+  "field_evidence": [
+    {"fields":["document_confirmation_number","applicant_type_individual_checkbox","applicant_type_corporate_checkbox","company_name","business_registration_number","representative_name","corporate_registration_number_masked","business_type","business_item","company_address"],"evidence_ids":["official_form_13","visual_page_1"]},
+    {"fields":["fiscal_period_start","fiscal_period_end","filing_type","filing_date"],"evidence_ids":["official_form_13","visual_page_1"]},
+    {"fields":["certificate_issue_date","receipt_number","service_counter","tax_office_chief","tax_office_phone"],"evidence_ids":["official_form_13","visual_page_1"]},
+    {"fields":["page_number"],"evidence_ids":["visual_page_1"]}
+  ],
+  "conclusion": "공식 서식과 원본 페이지 구조가 일치한다. 이 pass에서는 현재 1쪽의 증명 표지 필드만 스키마화하며, 첨부 재무제표 본문의 계정과목·금액은 bbox가 없는 현재 페이지에 추가하지 않는다."
+}

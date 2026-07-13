@@ -1,8 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "doc_id": "COL-03",
-  "locale": "ko_KR",
-  "created_at": "2026-07-08T01:20:49.312727+00:00",
+  "title": "일반건축물대장(갑)",
+  "as_of_date": "2026-07-13",
   "field_generators": {
     "document_confirmation_number": "pattern:####-####-####-#####",
     "print_date": "date.kr",
@@ -40,7 +40,7 @@
     "status_row_2_structure": "pool:building_structures",
     "status_row_2_use": "pool:building_uses",
     "status_row_2_area": "template:{{pattern:###}}.{{pattern:##}}",
-    "owner_registration_number_masked": "pattern:######-*******",
+    "owner_registration_number_masked": "template:{{pattern:######}}-*******",
     "owner_change_reason": "pool:owner_change_reasons",
     "status_row_3_section": "pool:building_section_codes",
     "status_row_3_floor": "pool:floor_labels",
@@ -53,1122 +53,1522 @@
     "status_row_4_use": "pool:building_uses",
     "status_row_4_area": "template:{{pattern:###}}.{{pattern:##}}",
     "certificate_issue_date": "date.kr",
-    "clerk_name": "pool:public_office_names",
+    "clerk_name": "free_text.short",
     "clerk_phone": "person.phone_kr",
-    "issuer": "pool:public_office_titles",
+    "issuer": "free_text.short",
     "landscaping_area": "template:{{pattern:###}}.{{pattern:##}}",
     "open_public_space_area": "template:{{pattern:###}}.{{pattern:##}}",
     "building_line_setback_area": "template:{{pattern:###}}.{{pattern:##}}",
     "building_line_setback_distance": "template:{{pattern:##}}.{{pattern:##}}",
-    "accessory_building_summary": "choice:0 0|1 20|2 50"
+    "accessory_building_summary": "choice:0 0|1 20|2 50|3 75|4 120"
   },
   "field_rules": [
     {
       "field_id": "document_confirmation_number",
-      "schema_key": "문서확인번호",
-      "label": "문서확인번호",
-      "anchor_id": "manual_1783467788626",
-      "label_anchor_ids": [
-        "det_000003"
-      ],
-      "source_text": "1782-7058-1373-03440",
       "generator": "pattern:####-####-####-#####",
+      "anchor_id": "manual_1783467788626",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R2_SERVICE"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "print_date",
-      "schema_key": "출력일자",
-      "label": "출력일자",
-      "anchor_id": "det_000004",
-      "label_anchor_ids": [],
-      "source_text": "2026/06/29",
       "generator": "date.kr",
+      "anchor_id": "det_000004",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R2_SERVICE"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "print_time",
-      "schema_key": "출력시각",
-      "label": "출력시각",
-      "anchor_id": "det_000006",
-      "label_anchor_ids": [
-        "det_000007"
-      ],
-      "source_text": "13:03:34",
       "generator": "pattern:##:##:##",
+      "anchor_id": "det_000006",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R2_SERVICE"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
-    },
-    {
-      "field_id": "page_number",
-      "schema_key": "페이지_표기",
-      "label": "페이지 표기",
-      "anchor_id": "det_000009",
-      "label_anchor_ids": [
-        "det_000008"
-      ],
-      "source_text": "(2쪽 중 제1쪽)",
-      "generator": "choice:(2쪽 중 제1쪽)|(2쪽 중 제2쪽)|(3쪽 중 제1쪽)",
-      "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
-      ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "building_id",
-      "schema_key": "건물ID",
-      "label": "건물ID",
-      "anchor_id": "det_000015",
-      "label_anchor_ids": [
-        "det_000011"
-      ],
-      "source_text": "2120171230000250",
       "generator": "pattern:################",
+      "anchor_id": "det_000015",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "building_management_number",
-      "schema_key": "고유번호",
-      "label": "고유번호",
-      "anchor_id": "det_000013",
-      "label_anchor_ids": [
-        "det_000012"
-      ],
-      "source_text": "1165010700-1-07090007",
       "generator": "pattern:##########-#-########",
+      "anchor_id": "det_000013",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "building_name",
-      "schema_key": "명칭",
-      "label": "명칭",
-      "anchor_id": "det_000016",
-      "label_anchor_ids": [
-        "det_000014"
-      ],
-      "source_text": "르헤브빌딩",
       "generator": "pool:synthetic_building_names_ko",
+      "anchor_id": "det_000016",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "unit_household_count",
-      "schema_key": "호수/가구수/세대수",
-      "label": "호수/가구수/세대수",
-      "anchor_id": "det_000018",
-      "label_anchor_ids": [
-        "det_000017"
-      ],
-      "source_text": "0호/0가구/0세대",
       "generator": "choice:0호/0가구/0세대|1호/1가구/1세대|5호/5가구/5세대",
+      "anchor_id": "det_000018",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "include_natural_notation",
+        "unit": "호·가구·세대",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "site_location",
-      "schema_key": "대지위치",
-      "label": "대지위치",
-      "anchor_id": "det_000021",
-      "label_anchor_ids": [
-        "det_000019"
-      ],
-      "source_text": "서울특별시서초구반포동",
       "generator": "address.ko",
+      "anchor_id": "det_000021",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE",
-        "R-LAND-CADASTRE-LAW"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "lot_number",
-      "schema_key": "지번",
-      "label": "지번",
-      "anchor_id": "det_000022",
-      "label_anchor_ids": [
-        "det_000020"
-      ],
-      "source_text": "709-7",
       "generator": "pattern:###-#",
+      "anchor_id": "det_000022",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE",
-        "R-LAND-CADASTRE-LAW"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "road_address",
-      "schema_key": "도로명주소",
-      "label": "도로명주소",
-      "anchor_id": "det_000024",
-      "label_anchor_ids": [
-        "det_000023"
-      ],
-      "source_text": "서울특별시 서초구 강남대로89길30(반포동)",
       "generator": "address.ko",
+      "anchor_id": "det_000024",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "site_area",
-      "schema_key": "대지면적",
-      "label": "대지면적",
+      "generator": "template:{{pattern:###}}.{{pattern:#}}",
       "anchor_id": "det_000030",
-      "label_anchor_ids": [
-        "det_000025"
-      ],
-      "source_text": "220.2m",
-      "generator": "template:{{pattern:###}}.{{pattern:#}}m2",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE",
-        "R-LAND-CADASTRE-LAW"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "㎡",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "total_floor_area",
-      "schema_key": "연면적",
-      "label": "연면적",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "anchor_id": "det_000031",
-      "label_anchor_ids": [
-        "det_000026"
-      ],
-      "source_text": "537m2",
-      "generator": "template:{{pattern:###}}.{{pattern:##}}m2",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "㎡",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "zoning_area",
-      "schema_key": "지역",
-      "label": "지역",
-      "anchor_id": "det_000032",
-      "label_anchor_ids": [
-        "det_000027"
-      ],
-      "source_text": "제2종일반주거지역 외1",
       "generator": "pool:zoning_area_types",
+      "anchor_id": "det_000032",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE",
-        "R-LAND-CADASTRE-LAW"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "restriction_zone",
-      "schema_key": "구역",
-      "label": "구역",
-      "anchor_id": "det_000033",
-      "label_anchor_ids": [
-        "det_000029"
-      ],
-      "source_text": "가축사육제한구역",
       "generator": "pool:restriction_zone_types",
+      "anchor_id": "det_000033",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE",
-        "R-LAND-CADASTRE-LAW"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "building_area",
-      "schema_key": "건축면적",
-      "label": "건축면적",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "anchor_id": "det_000039",
-      "label_anchor_ids": [
-        "det_000034"
-      ],
-      "source_text": "122.44m2",
-      "generator": "template:{{pattern:###}}.{{pattern:##}}m2",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "㎡",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "floor_area_for_far",
-      "schema_key": "용적률_산정용_연면적",
-      "label": "용적률 산정용 연면적",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "anchor_id": "det_000040",
-      "label_anchor_ids": [
-        "det_000035"
-      ],
-      "source_text": "429.31m'",
-      "generator": "template:{{pattern:###}}.{{pattern:##}}m2",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.55,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "㎡",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "main_structure",
-      "schema_key": "주구조",
-      "label": "주구조",
-      "anchor_id": "det_000041",
-      "label_anchor_ids": [
-        "det_000036"
-      ],
-      "source_text": "철골조,철근콘크리트조",
       "generator": "pool:building_structures",
+      "anchor_id": "det_000041",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "main_use",
-      "schema_key": "주용도",
-      "label": "주용도",
-      "anchor_id": "det_000042",
-      "label_anchor_ids": [
-        "det_000037"
-      ],
-      "source_text": "제2종근린생활시설(학원)",
       "generator": "pool:building_uses",
+      "anchor_id": "det_000042",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "floor_count_summary",
-      "schema_key": "층수",
-      "label": "층수",
+      "generator": "choice:지하:1,지상:5|지하:0,지상:3|지하:2,지상:10",
       "anchor_id": "det_000043",
-      "label_anchor_ids": [
-        "det_000038"
-      ],
-      "source_text": "지하:1층,지상:5층",
-      "generator": "choice:지하:1층,지상:5층|지하:0층,지상:3층|지하:2층,지상:10층",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "building_coverage_ratio",
-      "schema_key": "건폐율",
-      "label": "건폐율",
+      "generator": "template:{{pattern:##}}.{{pattern:#}}",
       "anchor_id": "det_000049",
-      "label_anchor_ids": [
-        "det_000044"
-      ],
-      "source_text": "55.6%",
-      "generator": "template:{{pattern:##}}.{{pattern:#}}%",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "%",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "floor_area_ratio",
-      "schema_key": "용적률",
-      "label": "용적률",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "anchor_id": "det_000050",
-      "label_anchor_ids": [
-        "det_000045"
-      ],
-      "source_text": "194.96%",
-      "generator": "template:{{pattern:###}}.{{pattern:##}}%",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "%",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "height",
-      "schema_key": "높이",
-      "label": "높이",
+      "generator": "template:{{pattern:##}}.{{pattern:#}}",
       "anchor_id": "det_000051",
-      "label_anchor_ids": [
-        "det_000046"
-      ],
-      "source_text": "14.5m",
-      "generator": "template:{{pattern:##}}.{{pattern:#}}m",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "m",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "roof",
-      "schema_key": "지붕",
-      "label": "지붕",
-      "anchor_id": "det_000052",
-      "label_anchor_ids": [
-        "det_000047"
-      ],
-      "source_text": "철골구조지붕",
       "generator": "pool:roof_types",
+      "anchor_id": "det_000052",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_1_section",
-      "schema_key": "건축물현황_1행_구분",
-      "label": "건축물현황 1행 구분",
-      "anchor_id": "det_000077",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000067"
-      ],
-      "source_text": "주1",
       "generator": "pool:building_section_codes",
+      "anchor_id": "det_000077",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_1_floor",
-      "schema_key": "건축물현황_1행_층별",
-      "label": "건축물현황 1행 층별",
-      "anchor_id": "det_000078",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000068"
-      ],
-      "source_text": "z1층",
       "generator": "pool:floor_labels",
+      "anchor_id": "det_000078",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.55,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_1_structure",
-      "schema_key": "건축물현황_1행_구조",
-      "label": "건축물현황 1행 구조",
-      "anchor_id": "det_000079",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000069"
-      ],
-      "source_text": "철근콘크리트구조",
       "generator": "pool:building_structures",
+      "anchor_id": "det_000079",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_1_use",
-      "schema_key": "건축물현황_1행_용도",
-      "label": "건축물현황 1행 용도",
-      "anchor_id": "det_000080",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000070"
-      ],
-      "source_text": "제2종근린생활시설(사진관)",
       "generator": "pool:building_uses",
+      "anchor_id": "det_000080",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_1_area",
-      "schema_key": "건축물현황_1행_면적",
-      "label": "건축물현황 1행 면적",
-      "anchor_id": "det_000081",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000071"
-      ],
-      "source_text": "107.69",
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "anchor_id": "det_000081",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "owner_name",
-      "schema_key": "소유자_성명(명칭)",
-      "label": "소유자 성명(명칭)",
-      "anchor_id": "det_000082",
-      "label_anchor_ids": [
-        "det_000063",
-        "det_000064"
-      ],
-      "source_text": "주식회사엠케이컨텐츠",
       "generator": "company.name_ko",
+      "anchor_id": "det_000082",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "owner_address",
-      "schema_key": "소유자_주소",
-      "label": "소유자 주소",
-      "anchor_id": "det_000083",
-      "label_anchor_ids": [
-        "det_000063",
-        "det_000073"
-      ],
-      "source_text": "서울특별시 용산구서빙고로 67, 103동1607호(용산동5가,파크타워)",
       "generator": "address.ko",
+      "anchor_id": "det_000083",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "owner_change_date",
-      "schema_key": "소유자_변동일",
-      "label": "소유자 변동일",
-      "anchor_id": "det_000084",
-      "label_anchor_ids": [
-        "det_000063",
-        "det_000066"
-      ],
-      "source_text": "2021.10.20.",
       "generator": "date.kr",
+      "anchor_id": "det_000084",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
-    },
-    {
-      "field_id": "owner_share",
-      "schema_key": "소유권_지분",
-      "label": "소유권 지분",
-      "anchor_id": "det_000085",
-      "label_anchor_ids": [
-        "det_000063",
-        "det_000074"
-      ],
-      "source_text": "1/1",
-      "generator": "choice:1/1|1/2|2/3|3/4",
-      "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
-      ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_2_section",
-      "schema_key": "건축물현황_2행_구분",
-      "label": "건축물현황 2행 구분",
-      "anchor_id": "det_000086",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000067"
-      ],
-      "source_text": "주1",
       "generator": "pool:building_section_codes",
+      "anchor_id": "det_000086",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_2_floor",
-      "schema_key": "건축물현황_2행_층별",
-      "label": "건축물현황 2행 층별",
-      "anchor_id": "det_000087",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000068"
-      ],
-      "source_text": "1층",
       "generator": "pool:floor_labels",
+      "anchor_id": "det_000087",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_2_structure",
-      "schema_key": "건축물현황_2행_구조",
-      "label": "건축물현황 2행 구조",
-      "anchor_id": "det_000088",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000069"
-      ],
-      "source_text": "일반철골구조",
       "generator": "pool:building_structures",
+      "anchor_id": "det_000088",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_2_use",
-      "schema_key": "건축물현황_2행_용도",
-      "label": "건축물현황 2행 용도",
-      "anchor_id": "det_000089",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000070"
-      ],
-      "source_text": "제1종근린생활시설(소매점)",
       "generator": "pool:building_uses",
+      "anchor_id": "det_000089",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_2_area",
-      "schema_key": "건축물현황_2행_면적",
-      "label": "건축물현황 2행 면적",
-      "anchor_id": "det_000090",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000071"
-      ],
-      "source_text": "59.17",
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "anchor_id": "det_000090",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "owner_registration_number_masked",
-      "schema_key": "주민(법인)등록번호",
-      "label": "주민(법인)등록번호",
+      "generator": "template:{{pattern:######}}-*******",
       "anchor_id": "det_000091",
-      "label_anchor_ids": [
-        "det_000063",
-        "det_000072",
-        "det_000075"
-      ],
-      "source_text": "110111–6******",
-      "generator": "pattern:######-*******",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "owner_change_reason",
-      "schema_key": "변동원인",
-      "label": "변동원인",
-      "anchor_id": "det_000093",
-      "label_anchor_ids": [
-        "det_000063",
-        "det_000076"
-      ],
-      "source_text": "소유권이전",
       "generator": "pool:owner_change_reasons",
+      "anchor_id": "det_000093",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_3_section",
-      "schema_key": "건축물현황_3행_구분",
-      "label": "건축물현황 3행 구분",
-      "anchor_id": "det_000094",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000067"
-      ],
-      "source_text": "주1",
       "generator": "pool:building_section_codes",
+      "anchor_id": "det_000094",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_3_floor",
-      "schema_key": "건축물현황_3행_층별",
-      "label": "건축물현황 3행 층별",
-      "anchor_id": "det_000095",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000068"
-      ],
-      "source_text": "2층",
       "generator": "pool:floor_labels",
+      "anchor_id": "det_000095",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_3_structure",
-      "schema_key": "건축물현황_3행_구조",
-      "label": "건축물현황 3행 구조",
-      "anchor_id": "det_000096",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000069"
-      ],
-      "source_text": "일반철골구조",
       "generator": "pool:building_structures",
+      "anchor_id": "det_000096",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_3_use",
-      "schema_key": "건축물현황_3행_용도",
-      "label": "건축물현황 3행 용도",
-      "anchor_id": "det_000097",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000070"
-      ],
-      "source_text": "제2종근린생활시설(학원)",
       "generator": "pool:building_uses",
+      "anchor_id": "det_000097",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_3_area",
-      "schema_key": "건축물현황_3행_면적",
-      "label": "건축물현황 3행 면적",
-      "anchor_id": "det_000098",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000071"
-      ],
-      "source_text": "114.11",
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "anchor_id": "det_000098",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_4_section",
-      "schema_key": "건축물현황_4행_구분",
-      "label": "건축물현황 4행 구분",
-      "anchor_id": "det_000100",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000067"
-      ],
-      "source_text": "주1",
       "generator": "pool:building_section_codes",
+      "anchor_id": "det_000100",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_4_floor",
-      "schema_key": "건축물현황_4행_층별",
-      "label": "건축물현황 4행 층별",
-      "anchor_id": "det_000101",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000068"
-      ],
-      "source_text": "3층",
       "generator": "pool:floor_labels",
+      "anchor_id": "det_000101",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_4_structure",
-      "schema_key": "건축물현황_4행_구조",
-      "label": "건축물현황 4행 구조",
-      "anchor_id": "det_000102",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000069"
-      ],
-      "source_text": "일반철골구조",
       "generator": "pool:building_structures",
+      "anchor_id": "det_000102",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_4_use",
-      "schema_key": "건축물현황_4행_용도",
-      "label": "건축물현황 4행 용도",
-      "anchor_id": "det_000103",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000070"
-      ],
-      "source_text": "제2종근린생활시설(학원)",
       "generator": "pool:building_uses",
+      "anchor_id": "det_000103",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "status_row_4_area",
-      "schema_key": "건축물현황_4행_면적",
-      "label": "건축물현황 4행 면적",
-      "anchor_id": "det_000104",
-      "label_anchor_ids": [
-        "det_000062",
-        "det_000071"
-      ],
-      "source_text": "114.11",
       "generator": "template:{{pattern:###}}.{{pattern:##}}",
+      "anchor_id": "det_000104",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": "지원 grammar로 근사"
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "certificate_issue_date",
-      "schema_key": "발급일",
-      "label": "발급일",
-      "anchor_id": "det_000107",
-      "label_anchor_ids": [],
-      "source_text": "2026년 06월 29일",
       "generator": "date.kr",
+      "anchor_id": "det_000107",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "clerk_name",
-      "schema_key": "담당자",
-      "label": "담당자",
+      "generator": "free_text.short",
       "anchor_id": "det_000110",
-      "label_anchor_ids": [],
-      "source_text": "오-케이민원센터",
-      "generator": "pool:public_office_names",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "clerk_phone",
-      "schema_key": "전화",
-      "label": "전화",
-      "anchor_id": "det_000111",
-      "label_anchor_ids": [],
-      "source_text": "02-2155-6306",
       "generator": "person.phone_kr",
+      "anchor_id": "det_000111",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "issuer",
-      "schema_key": "발급기관장",
-      "label": "발급기관장",
+      "generator": "free_text.short",
       "anchor_id": "det_000113",
-      "label_anchor_ids": [],
-      "source_text": "서울특별시 서초구청장",
-      "generator": "pool:public_office_titles",
       "research_evidence_ids": [
-        "R-GOV24-SERVICE",
-        "R-BUILDING-REGISTER-RULE"
+        "R1_FORM"
       ],
-      "confidence": 0.72,
-      "notes": ""
+      "unit_policy": {
+        "policy": "no_static_unit_observed"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "landscaping_area",
-      "schema_key": "조경면적",
-      "label": "조경면적",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "anchor_id": "manual_1783470434127",
-      "label_anchor_ids": [
-        "det_000054",
-        "manual_1783470558629"
-      ],
-      "source_text": "",
-      "generator": "template:{{pattern:###}}.{{pattern:##}}m2",
       "research_evidence_ids": [
-        "R-BUILDING-REGISTER-FORM"
+        "R1_FORM"
       ],
-      "confidence": 0.58,
-      "notes": "리뷰에서 수동 value_region으로 확정된 빈 값 영역. 단위는 주변 ㎡ 라벨 근거로 m2로 근사."
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "㎡",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "open_public_space_area",
-      "schema_key": "공개 공지·공간면적",
-      "label": "공개 공지·공간면적",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "anchor_id": "manual_1783470430160",
-      "label_anchor_ids": [
-        "det_000055",
-        "manual_1783470576895"
-      ],
-      "source_text": "",
-      "generator": "template:{{pattern:###}}.{{pattern:##}}m2",
       "research_evidence_ids": [
-        "R-BUILDING-REGISTER-FORM"
+        "R1_FORM"
       ],
-      "confidence": 0.58,
-      "notes": "리뷰에서 수동 value_region으로 확정된 빈 값 영역. 지원 grammar의 숫자 패턴으로 면적값을 근사."
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "㎡",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "building_line_setback_area",
-      "schema_key": "건축선 후퇴면적",
-      "label": "건축선 후퇴면적",
+      "generator": "template:{{pattern:###}}.{{pattern:##}}",
       "anchor_id": "manual_1783470425142",
-      "label_anchor_ids": [
-        "det_000056",
-        "det_000060"
-      ],
-      "source_text": "",
-      "generator": "template:{{pattern:###}}.{{pattern:##}}m2",
       "research_evidence_ids": [
-        "R-BUILDING-REGISTER-FORM"
+        "R1_FORM"
       ],
-      "confidence": 0.58,
-      "notes": "빈 값 영역이라 정밀 범위는 미확정. 단위 표기 OCR은 m²로 보이나 ASCII m2로 근사."
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "㎡",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "building_line_setback_distance",
-      "schema_key": "건축선후퇴거리",
-      "label": "건축선후퇴거리",
+      "generator": "template:{{pattern:##}}.{{pattern:##}}",
       "anchor_id": "manual_1783470593596",
-      "label_anchor_ids": [
-        "det_000057",
-        "det_000061"
-      ],
-      "source_text": "",
-      "generator": "template:{{pattern:##}}.{{pattern:##}}m",
       "research_evidence_ids": [
-        "R-BUILDING-REGISTER-FORM"
+        "R1_FORM"
       ],
-      "confidence": 0.58,
-      "notes": "리뷰 수동 value_region. 거리 단위 m로 근사하며 실제 소수 자릿수는 미확정."
+      "unit_policy": {
+        "policy": "exclude_static_suffix",
+        "unit": "m",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     },
     {
       "field_id": "accessory_building_summary",
-      "schema_key": "부속건축물",
-      "label": "부속건축물",
+      "generator": "choice:0 0|1 20|2 50|3 75|4 120",
       "anchor_id": "manual_1783470492760",
-      "label_anchor_ids": [
-        "det_000048",
-        "det_000053"
-      ],
-      "source_text": "",
-      "generator": "choice:0동 0m2|1동 20m2|2동 50m2",
       "research_evidence_ids": [
-        "R-BUILDING-REGISTER-FORM"
+        "R1_FORM"
       ],
-      "confidence": 0.58,
-      "notes": "부속건축물 칸은 동수/면적 결합 표기로 보이나 현재 렌더러에 count/area 복합 rule이 없어 choice로 근사."
+      "unit_policy": {
+        "policy": "include_value_components",
+        "unit": "동·㎡",
+        "basis": "full_template_visual_inspection"
+      },
+      "note": "전체 템플릿과 고정 binding을 기준으로 한 지원 grammar 생성기"
     }
   ],
   "data_pools": {
     "synthetic_building_names_ko": [
-      "한빛빌딩",
-      "해오름빌라",
-      "미래타워",
-      "청솔주택",
-      "가온빌딩"
+      "한빛누리빌딩",
+      "새봄타워",
+      "푸른마루빌딩",
+      "가온누리센터",
+      "해솔프라자",
+      "다온비즈센터",
+      "솔빛빌딩",
+      "마루타워",
+      "누리온빌딩",
+      "예담프라자",
+      "이든비즈센터",
+      "라온스퀘어",
+      "온새미빌딩",
+      "한결타워",
+      "늘품센터",
+      "아라누리빌딩",
+      "채움프라자",
+      "도담타워",
+      "바른마루빌딩",
+      "봄내비즈센터"
     ],
     "zoning_area_types": [
+      "제1종전용주거지역",
+      "제2종전용주거지역",
       "제1종일반주거지역",
       "제2종일반주거지역",
+      "제3종일반주거지역",
       "준주거지역",
+      "중심상업지역",
       "일반상업지역",
-      "자연녹지지역"
+      "근린상업지역",
+      "유통상업지역",
+      "전용공업지역",
+      "일반공업지역",
+      "준공업지역",
+      "보전녹지지역",
+      "생산녹지지역",
+      "자연녹지지역",
+      "보전관리지역",
+      "생산관리지역",
+      "계획관리지역",
+      "농림지역"
     ],
     "restriction_zone_types": [
       "지구단위계획구역",
       "방화지구",
       "고도지구",
-      "문화재보호구역"
+      "경관지구",
+      "보호지구",
+      "취락지구",
+      "개발진흥지구",
+      "복합용도지구",
+      "가축사육제한구역",
+      "문화재보호구역",
+      "교육환경보호구역",
+      "도시자연공원구역",
+      "개발제한구역",
+      "수산자원보호구역",
+      "정비구역",
+      "재정비촉진지구",
+      "택지개발지구",
+      "도시개발구역",
+      "산업단지",
+      "상대보호구역"
     ],
     "building_structures": [
       "철근콘크리트구조",
-      "일반철골구조",
-      "벽돌구조",
       "철골철근콘크리트구조",
-      "경량철골구조"
+      "일반철골구조",
+      "경량철골구조",
+      "벽돌구조",
+      "블록구조",
+      "석구조",
+      "목구조",
+      "통나무구조",
+      "프리케스트콘크리트구조",
+      "철골콘크리트구조",
+      "철골조",
+      "강파이프구조",
+      "기타강구조",
+      "조적구조",
+      "보강콘크리트블록조",
+      "철근콘크리트벽식구조",
+      "라멘구조",
+      "스틸하우스조",
+      "기타구조"
     ],
     "building_uses": [
       "단독주택",
+      "다가구주택",
       "공동주택",
-      "제1종근린생활시설",
-      "제2종근린생활시설",
+      "제1종근린생활시설(소매점)",
+      "제1종근린생활시설(의원)",
+      "제2종근린생활시설(사무소)",
+      "제2종근린생활시설(학원)",
+      "제2종근린생활시설(사진관)",
+      "문화및집회시설",
+      "종교시설",
+      "판매시설",
+      "운수시설",
+      "의료시설",
+      "교육연구시설",
+      "노유자시설",
+      "수련시설",
+      "운동시설",
       "업무시설",
+      "숙박시설",
       "창고시설"
     ],
     "roof_types": [
-      "슬래브지붕",
       "철근콘크리트지붕",
-      "경사지붕",
+      "슬래브지붕",
       "평지붕",
-      "기와지붕"
+      "경사지붕",
+      "기와지붕",
+      "아스팔트싱글지붕",
+      "금속기와지붕",
+      "샌드위치패널지붕",
+      "철골구조지붕",
+      "징크판넬지붕",
+      "박공지붕",
+      "우진각지붕",
+      "합각지붕",
+      "돔지붕",
+      "톱날지붕",
+      "천막지붕",
+      "목조지붕",
+      "경량철골지붕",
+      "철판지붕",
+      "기타지붕"
     ],
     "building_section_codes": [
-      "주1동",
-      "부1동",
-      "부속건축물",
-      "지하층",
-      "옥탑층"
+      "주1",
+      "주2",
+      "주3",
+      "주4",
+      "주5",
+      "주6",
+      "주7",
+      "주8",
+      "주9",
+      "주10",
+      "부1",
+      "부2",
+      "부3",
+      "부4",
+      "부5",
+      "부6",
+      "부7",
+      "부8",
+      "부9",
+      "부10"
     ],
     "floor_labels": [
+      "지하3층",
+      "지하2층",
       "지하1층",
       "1층",
       "2층",
       "3층",
-      "옥탑1층"
+      "4층",
+      "5층",
+      "6층",
+      "7층",
+      "8층",
+      "9층",
+      "10층",
+      "11층",
+      "12층",
+      "13층",
+      "14층",
+      "15층",
+      "옥탑1층",
+      "옥탑2층"
     ],
     "owner_change_reasons": [
       "소유권이전",
       "신축",
       "증축",
+      "개축",
+      "재축",
+      "대수선",
+      "용도변경",
       "표시변경",
-      "대지권변경"
+      "합병",
+      "분할",
+      "지번변경",
+      "도로명주소변경",
+      "대지권변경",
+      "상속",
+      "증여",
+      "매매",
+      "경매",
+      "공매",
+      "법인합병",
+      "정정"
     ],
-    "public_office_names": [
-      "김민준",
-      "이서연",
-      "박도윤",
-      "최지우",
-      "정하준"
+    "location_records": [
+      {
+        "site_location": "서울특별시 가람구 푸른동",
+        "lot_number": "101-1",
+        "road_address": "서울특별시 가람구 새길1로 20 (푸른동)"
+      },
+      {
+        "site_location": "부산광역시 해솔구 누리동",
+        "lot_number": "108-2",
+        "road_address": "부산광역시 해솔구 새길2로 21 (누리동)"
+      },
+      {
+        "site_location": "대구광역시 다온구 새봄동",
+        "lot_number": "115-3",
+        "road_address": "대구광역시 다온구 새길3로 22 (새봄동)"
+      },
+      {
+        "site_location": "인천광역시 한빛구 마루동",
+        "lot_number": "122-4",
+        "road_address": "인천광역시 한빛구 새길4로 23 (마루동)"
+      },
+      {
+        "site_location": "광주광역시 온새미구 도담동",
+        "lot_number": "129-5",
+        "road_address": "광주광역시 온새미구 새길5로 24 (도담동)"
+      },
+      {
+        "site_location": "서울특별시 가람구 푸른동",
+        "lot_number": "136-6",
+        "road_address": "서울특별시 가람구 새길6로 25 (푸른동)"
+      },
+      {
+        "site_location": "부산광역시 해솔구 누리동",
+        "lot_number": "143-7",
+        "road_address": "부산광역시 해솔구 새길7로 26 (누리동)"
+      },
+      {
+        "site_location": "대구광역시 다온구 새봄동",
+        "lot_number": "150-8",
+        "road_address": "대구광역시 다온구 새길8로 27 (새봄동)"
+      },
+      {
+        "site_location": "인천광역시 한빛구 마루동",
+        "lot_number": "157-9",
+        "road_address": "인천광역시 한빛구 새길9로 28 (마루동)"
+      },
+      {
+        "site_location": "광주광역시 온새미구 도담동",
+        "lot_number": "164-1",
+        "road_address": "광주광역시 온새미구 새길10로 29 (도담동)"
+      },
+      {
+        "site_location": "서울특별시 가람구 푸른동",
+        "lot_number": "171-2",
+        "road_address": "서울특별시 가람구 새길11로 30 (푸른동)"
+      },
+      {
+        "site_location": "부산광역시 해솔구 누리동",
+        "lot_number": "178-3",
+        "road_address": "부산광역시 해솔구 새길12로 31 (누리동)"
+      },
+      {
+        "site_location": "대구광역시 다온구 새봄동",
+        "lot_number": "185-4",
+        "road_address": "대구광역시 다온구 새길13로 32 (새봄동)"
+      },
+      {
+        "site_location": "인천광역시 한빛구 마루동",
+        "lot_number": "192-5",
+        "road_address": "인천광역시 한빛구 새길14로 33 (마루동)"
+      },
+      {
+        "site_location": "광주광역시 온새미구 도담동",
+        "lot_number": "199-6",
+        "road_address": "광주광역시 온새미구 새길15로 34 (도담동)"
+      },
+      {
+        "site_location": "서울특별시 가람구 푸른동",
+        "lot_number": "206-7",
+        "road_address": "서울특별시 가람구 새길16로 35 (푸른동)"
+      },
+      {
+        "site_location": "부산광역시 해솔구 누리동",
+        "lot_number": "213-8",
+        "road_address": "부산광역시 해솔구 새길17로 36 (누리동)"
+      },
+      {
+        "site_location": "대구광역시 다온구 새봄동",
+        "lot_number": "220-9",
+        "road_address": "대구광역시 다온구 새길18로 37 (새봄동)"
+      },
+      {
+        "site_location": "인천광역시 한빛구 마루동",
+        "lot_number": "227-1",
+        "road_address": "인천광역시 한빛구 새길19로 38 (마루동)"
+      },
+      {
+        "site_location": "광주광역시 온새미구 도담동",
+        "lot_number": "234-2",
+        "road_address": "광주광역시 온새미구 새길20로 39 (도담동)"
+      }
     ],
-    "public_office_titles": [
-      "서울특별시 강남구청장",
-      "서울특별시 서초구청장",
-      "부산광역시 해운대구청장",
-      "경기도 성남시장",
-      "인천광역시 남동구청장"
+    "building_status_records": [
+      {
+        "section": "주1",
+        "floor": "지하3층",
+        "structure": "철근콘크리트구조",
+        "use": "단독주택",
+        "area": "45.00"
+      },
+      {
+        "section": "주2",
+        "floor": "지하2층",
+        "structure": "철골철근콘크리트구조",
+        "use": "다가구주택",
+        "area": "52.13"
+      },
+      {
+        "section": "주3",
+        "floor": "지하1층",
+        "structure": "일반철골구조",
+        "use": "공동주택",
+        "area": "59.26"
+      },
+      {
+        "section": "주4",
+        "floor": "1층",
+        "structure": "경량철골구조",
+        "use": "제1종근린생활시설(소매점)",
+        "area": "66.39"
+      },
+      {
+        "section": "주5",
+        "floor": "2층",
+        "structure": "벽돌구조",
+        "use": "제1종근린생활시설(의원)",
+        "area": "73.52"
+      },
+      {
+        "section": "주6",
+        "floor": "3층",
+        "structure": "블록구조",
+        "use": "제2종근린생활시설(사무소)",
+        "area": "80.65"
+      },
+      {
+        "section": "주7",
+        "floor": "4층",
+        "structure": "석구조",
+        "use": "제2종근린생활시설(학원)",
+        "area": "87.78"
+      },
+      {
+        "section": "주8",
+        "floor": "5층",
+        "structure": "목구조",
+        "use": "제2종근린생활시설(사진관)",
+        "area": "94.91"
+      },
+      {
+        "section": "주9",
+        "floor": "6층",
+        "structure": "통나무구조",
+        "use": "문화및집회시설",
+        "area": "101.04"
+      },
+      {
+        "section": "주10",
+        "floor": "7층",
+        "structure": "프리케스트콘크리트구조",
+        "use": "종교시설",
+        "area": "108.17"
+      },
+      {
+        "section": "부1",
+        "floor": "8층",
+        "structure": "철골콘크리트구조",
+        "use": "판매시설",
+        "area": "115.30"
+      },
+      {
+        "section": "부2",
+        "floor": "9층",
+        "structure": "철골조",
+        "use": "운수시설",
+        "area": "122.43"
+      },
+      {
+        "section": "부3",
+        "floor": "10층",
+        "structure": "강파이프구조",
+        "use": "의료시설",
+        "area": "129.56"
+      },
+      {
+        "section": "부4",
+        "floor": "11층",
+        "structure": "기타강구조",
+        "use": "교육연구시설",
+        "area": "136.69"
+      },
+      {
+        "section": "부5",
+        "floor": "12층",
+        "structure": "조적구조",
+        "use": "노유자시설",
+        "area": "143.82"
+      },
+      {
+        "section": "부6",
+        "floor": "13층",
+        "structure": "보강콘크리트블록조",
+        "use": "수련시설",
+        "area": "150.95"
+      },
+      {
+        "section": "부7",
+        "floor": "14층",
+        "structure": "철근콘크리트벽식구조",
+        "use": "운동시설",
+        "area": "157.08"
+      },
+      {
+        "section": "부8",
+        "floor": "15층",
+        "structure": "라멘구조",
+        "use": "업무시설",
+        "area": "164.21"
+      },
+      {
+        "section": "부9",
+        "floor": "옥탑1층",
+        "structure": "스틸하우스조",
+        "use": "숙박시설",
+        "area": "171.34"
+      },
+      {
+        "section": "부10",
+        "floor": "옥탑2층",
+        "structure": "기타구조",
+        "use": "창고시설",
+        "area": "178.47"
+      }
+    ],
+    "building_overview_records": [
+      {
+        "name": "한빛누리빌딩",
+        "structure": "철근콘크리트구조",
+        "use": "단독주택",
+        "roof": "철근콘크리트지붕",
+        "floors": "지하:0층,지상:2층"
+      },
+      {
+        "name": "새봄타워",
+        "structure": "철골철근콘크리트구조",
+        "use": "다가구주택",
+        "roof": "슬래브지붕",
+        "floors": "지하:1층,지상:3층"
+      },
+      {
+        "name": "푸른마루빌딩",
+        "structure": "일반철골구조",
+        "use": "공동주택",
+        "roof": "평지붕",
+        "floors": "지하:2층,지상:4층"
+      },
+      {
+        "name": "가온누리센터",
+        "structure": "경량철골구조",
+        "use": "제1종근린생활시설(소매점)",
+        "roof": "경사지붕",
+        "floors": "지하:0층,지상:5층"
+      },
+      {
+        "name": "해솔프라자",
+        "structure": "벽돌구조",
+        "use": "제1종근린생활시설(의원)",
+        "roof": "기와지붕",
+        "floors": "지하:1층,지상:6층"
+      },
+      {
+        "name": "다온비즈센터",
+        "structure": "블록구조",
+        "use": "제2종근린생활시설(사무소)",
+        "roof": "아스팔트싱글지붕",
+        "floors": "지하:2층,지상:7층"
+      },
+      {
+        "name": "솔빛빌딩",
+        "structure": "석구조",
+        "use": "제2종근린생활시설(학원)",
+        "roof": "금속기와지붕",
+        "floors": "지하:0층,지상:8층"
+      },
+      {
+        "name": "마루타워",
+        "structure": "목구조",
+        "use": "제2종근린생활시설(사진관)",
+        "roof": "샌드위치패널지붕",
+        "floors": "지하:1층,지상:9층"
+      },
+      {
+        "name": "누리온빌딩",
+        "structure": "통나무구조",
+        "use": "문화및집회시설",
+        "roof": "철골구조지붕",
+        "floors": "지하:2층,지상:10층"
+      },
+      {
+        "name": "예담프라자",
+        "structure": "프리케스트콘크리트구조",
+        "use": "종교시설",
+        "roof": "징크판넬지붕",
+        "floors": "지하:0층,지상:11층"
+      },
+      {
+        "name": "이든비즈센터",
+        "structure": "철골콘크리트구조",
+        "use": "판매시설",
+        "roof": "박공지붕",
+        "floors": "지하:1층,지상:12층"
+      },
+      {
+        "name": "라온스퀘어",
+        "structure": "철골조",
+        "use": "운수시설",
+        "roof": "우진각지붕",
+        "floors": "지하:2층,지상:13층"
+      },
+      {
+        "name": "온새미빌딩",
+        "structure": "강파이프구조",
+        "use": "의료시설",
+        "roof": "합각지붕",
+        "floors": "지하:0층,지상:2층"
+      },
+      {
+        "name": "한결타워",
+        "structure": "기타강구조",
+        "use": "교육연구시설",
+        "roof": "돔지붕",
+        "floors": "지하:1층,지상:3층"
+      },
+      {
+        "name": "늘품센터",
+        "structure": "조적구조",
+        "use": "노유자시설",
+        "roof": "톱날지붕",
+        "floors": "지하:2층,지상:4층"
+      },
+      {
+        "name": "아라누리빌딩",
+        "structure": "보강콘크리트블록조",
+        "use": "수련시설",
+        "roof": "천막지붕",
+        "floors": "지하:0층,지상:5층"
+      },
+      {
+        "name": "채움프라자",
+        "structure": "철근콘크리트벽식구조",
+        "use": "운동시설",
+        "roof": "목조지붕",
+        "floors": "지하:1층,지상:6층"
+      },
+      {
+        "name": "도담타워",
+        "structure": "라멘구조",
+        "use": "업무시설",
+        "roof": "경량철골지붕",
+        "floors": "지하:2층,지상:7층"
+      },
+      {
+        "name": "바른마루빌딩",
+        "structure": "스틸하우스조",
+        "use": "숙박시설",
+        "roof": "철판지붕",
+        "floors": "지하:0층,지상:8층"
+      },
+      {
+        "name": "봄내비즈센터",
+        "structure": "기타구조",
+        "use": "창고시설",
+        "roof": "기타지붕",
+        "floors": "지하:1층,지상:9층"
+      }
+    ],
+    "public_office_records": [
+      {
+        "clerk": "민원담당-01",
+        "phone": "02-3100-4200",
+        "issuer": "서울특별시 가람구청장"
+      },
+      {
+        "clerk": "민원담당-02",
+        "phone": "02-3101-4201",
+        "issuer": "부산광역시 해솔구청장"
+      },
+      {
+        "clerk": "민원담당-03",
+        "phone": "02-3102-4202",
+        "issuer": "대구광역시 다온구청장"
+      },
+      {
+        "clerk": "민원담당-04",
+        "phone": "02-3103-4203",
+        "issuer": "인천광역시 한빛구청장"
+      },
+      {
+        "clerk": "민원담당-05",
+        "phone": "02-3104-4204",
+        "issuer": "광주광역시 온새미구청장"
+      },
+      {
+        "clerk": "민원담당-06",
+        "phone": "02-3105-4205",
+        "issuer": "서울특별시 가람구청장"
+      },
+      {
+        "clerk": "민원담당-07",
+        "phone": "02-3106-4206",
+        "issuer": "부산광역시 해솔구청장"
+      },
+      {
+        "clerk": "민원담당-08",
+        "phone": "02-3107-4207",
+        "issuer": "대구광역시 다온구청장"
+      },
+      {
+        "clerk": "민원담당-09",
+        "phone": "02-3108-4208",
+        "issuer": "인천광역시 한빛구청장"
+      },
+      {
+        "clerk": "민원담당-10",
+        "phone": "02-3109-4209",
+        "issuer": "광주광역시 온새미구청장"
+      },
+      {
+        "clerk": "민원담당-11",
+        "phone": "02-3110-4210",
+        "issuer": "서울특별시 가람구청장"
+      },
+      {
+        "clerk": "민원담당-12",
+        "phone": "02-3111-4211",
+        "issuer": "부산광역시 해솔구청장"
+      },
+      {
+        "clerk": "민원담당-13",
+        "phone": "02-3112-4212",
+        "issuer": "대구광역시 다온구청장"
+      },
+      {
+        "clerk": "민원담당-14",
+        "phone": "02-3113-4213",
+        "issuer": "인천광역시 한빛구청장"
+      },
+      {
+        "clerk": "민원담당-15",
+        "phone": "02-3114-4214",
+        "issuer": "광주광역시 온새미구청장"
+      },
+      {
+        "clerk": "민원담당-16",
+        "phone": "02-3115-4215",
+        "issuer": "서울특별시 가람구청장"
+      },
+      {
+        "clerk": "민원담당-17",
+        "phone": "02-3116-4216",
+        "issuer": "부산광역시 해솔구청장"
+      },
+      {
+        "clerk": "민원담당-18",
+        "phone": "02-3117-4217",
+        "issuer": "대구광역시 다온구청장"
+      },
+      {
+        "clerk": "민원담당-19",
+        "phone": "02-3118-4218",
+        "issuer": "인천광역시 한빛구청장"
+      },
+      {
+        "clerk": "민원담당-20",
+        "phone": "02-3119-4219",
+        "issuer": "광주광역시 온새미구청장"
+      }
     ]
   },
-  "notes": "field_generators contains only renderer-supported rule grammar. Numeric area/distance fields use template/pattern approximations.\nUndefined pool references were materialized as scalar synthetic data_pools to avoid renderer fallback placeholders.\nCOL-03 fields omit only units that remain as static text at the value position in the template; compound values such as 호/가구/세대 keep their units when no separate static unit exists.",
-  "updated_at": "2026-07-08T05:35:37.325119+00:00",
-  "constraints": []
+  "pool_policies": {},
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "location_records",
+      "targets": {
+        "site_location": "site_location",
+        "lot_number": "lot_number",
+        "road_address": "road_address"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "building_overview_records",
+      "targets": {
+        "building_name": "name",
+        "main_structure": "structure",
+        "main_use": "use",
+        "roof": "roof",
+        "floor_count_summary": "floors"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "public_office_records",
+      "targets": {
+        "clerk_name": "clerk",
+        "clerk_phone": "phone",
+        "issuer": "issuer"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "building_status_records",
+      "targets": {
+        "status_row_1_section": "section",
+        "status_row_1_floor": "floor",
+        "status_row_1_structure": "structure",
+        "status_row_1_use": "use",
+        "status_row_1_area": "area"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "building_status_records",
+      "targets": {
+        "status_row_2_section": "section",
+        "status_row_2_floor": "floor",
+        "status_row_2_structure": "structure",
+        "status_row_2_use": "use",
+        "status_row_2_area": "area"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "building_status_records",
+      "targets": {
+        "status_row_3_section": "section",
+        "status_row_3_floor": "floor",
+        "status_row_3_structure": "structure",
+        "status_row_3_use": "use",
+        "status_row_3_area": "area"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "building_status_records",
+      "targets": {
+        "status_row_4_section": "section",
+        "status_row_4_floor": "floor",
+        "status_row_4_structure": "structure",
+        "status_row_4_use": "use",
+        "status_row_4_area": "area"
+      }
+    },
+    {
+      "type": "date_not_after",
+      "target": "print_date",
+      "max": "as_of_date"
+    },
+    {
+      "type": "date_not_after",
+      "target": "certificate_issue_date",
+      "max": "as_of_date"
+    },
+    {
+      "type": "date_not_after",
+      "target": "owner_change_date",
+      "max": "certificate_issue_date"
+    },
+    {
+      "type": "numeric_compare",
+      "left": "building_area",
+      "operator": "<=",
+      "right": "site_area"
+    },
+    {
+      "type": "numeric_compare",
+      "left": "floor_area_for_far",
+      "operator": "<=",
+      "right": "total_floor_area"
+    }
+  ],
+  "notes": [
+    "모든 field_generators는 지원 grammar만 사용한다.",
+    "면적·비율·높이·후퇴거리의 단위는 전체 이미지에서 값 칸에 정적 인쇄되어 있어 생성값에서 제외한다.",
+    "pick_record는 소재지 3종, 건축물 개요, 현황 4개 행, 발급기관 정보를 같은 레코드로 묶는다."
+  ],
+  "updated_at": "2026-07-13T01:10:03.420355+00:00"
 }

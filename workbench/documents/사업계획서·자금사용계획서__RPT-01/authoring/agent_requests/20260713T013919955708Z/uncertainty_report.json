@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "doc_id": "RPT-01",
+  "unresolved_fields": [],
+  "conflicting_evidence": [
+    {
+      "id": "UNC-01",
+      "subject": "use anchor OCR text와 실제 값 영역",
+      "detail": "8개 use anchor의 OCR text는 닫는 괄호 ')'이고 원래 bbox도 괄호 자체만 포함하지만, review는 table_cell/use로 확정했다. 전체 이미지에서 이들은 각 행의 '기타('와 ')' 사이 자유기재 영역의 우측 경계임이 명확하여 anchor_map_draft의 bbox를 괄호 내부 전체 값 영역으로 확장했다.",
+      "resolution": "1차 pass의 visual_source_of_truth 결정을 그대로 유지",
+      "user_decision_needed": false
+    }
+  ],
+  "low_confidence_faker_rules": [],
+  "relationship_limitations": [
+    {
+      "id": "UNC-03",
+      "detail": "고정된 8개 binding은 각 용도 행의 독립적인 기타 자유기재 문자열뿐이다. 금액·체크박스·총합·날짜 binding이 이번 pass에 없으므로 sum, exclusive_choice, date 계열 constraint를 안전하게 연결할 field_id가 없다.",
+      "resolution": "근거 없는 자연어 또는 미지원 관계를 만들지 않고 constraints를 빈 배열로 유지",
+      "repair_needed": "후속 bbox review에서 금액·체크박스·날짜 값 영역을 use anchor로 확정하고 새 schema pass를 수행한 뒤 관계를 추가",
+      "user_decision_needed": false
+    }
+  ],
+  "page_limitations": [
+    {
+      "id": "UNC-02",
+      "detail": "request의 latestDetections는 1페이지를, latestReview와 visual manifest는 2페이지를 가리킨다. 이번 pass의 100% coverage는 latestReview에서 use로 확정된 2페이지 8개 anchor 기준이다. 1페이지 및 2페이지의 나머지 인적사항·체크박스·금액·날짜는 현재 anchor map에 use target이 없어 immutable field ID 계약에 포함하지 않았다.",
+      "repair_needed": "후속 bbox review에서 나머지 실제 값 영역을 use anchor로 확정한 뒤 별도 schema 확장 필요",
+      "user_decision_needed": false
+    }
+  ],
+  "research_refresh": {
+    "search_date": "2026-07-13",
+    "status": "confirmed",
+    "note": "실시간 공식 웹 검색에서 자금사용계획서가 적립 지원금의 지원목적별 사용예정 금액을 기입하는 서류이며 희망저축계좌Ⅱ·청년내일저축계좌 지급 요건임을 재확인했다. 1차 research_report의 RES-01과 RES-02가 현재도 유효하다."
+  },
+  "pass_boundary": "2/2 faker and relationship expansion complete. schema_draft.json, anchor_map_draft.json, research_report.json, stylesheet_draft.json은 고정 입력으로 변경하지 않았다."
+}

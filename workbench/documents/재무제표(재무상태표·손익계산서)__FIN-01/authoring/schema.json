@@ -1,252 +1,353 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-30T11:49:12.318967+00:00",
-  "updated_at": "2026-07-02T05:55:49.767797+00:00",
+  "created_at": "2026-07-13T01:20:43.820666+00:00",
   "doc_id": "FIN-01",
   "title": "재무제표(재무상태표·손익계산서)",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/재무제표(재무상태표·손익계산서)__FIN-01/review/original_표준재무제표증명원＿지엘-1_page_001/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/재무제표(재무상태표·손익계산서)__FIN-01/authoring/agent_applied_reviews/20260713T011107261480Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/재무제표(재무상태표·손익계산서)__FIN-01/samples/original/표준재무제표증명원＿지엘-1_page_001.jpg",
   "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/재무제표(재무상태표·손익계산서)__FIN-01/inpaint/original_표준재무제표증명원＿지엘-1_page_001/lama/inpainted_lama.png",
   "image": {
     "width": 1191,
     "height": 1685
   },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/재무제표(재무상태표·손익계산서)__FIN-01/authoring/agent_applied_reviews/20260713T011107261480Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/재무제표(재무상태표·손익계산서)__FIN-01/authoring/agent_requests/20260713T011107261480Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "문서정보": {
+      "페이지": "",
+      "발급번호": ""
+    },
+    "신청인구분": {
+      "개인": "",
+      "법인": ""
+    },
+    "사업자정보": {
+      "상호(법인명)": "",
+      "사업자등록번호": "",
+      "성명(대표자)": "",
+      "주민(법인)등록번호": "",
+      "업태": "",
+      "종목": "",
+      "주소(본점)": ""
+    },
+    "신고정보": {
+      "사업연도": {
+        "시작일": "",
+        "종료일": ""
+      },
+      "신고구분": "",
+      "신고일": ""
+    },
+    "발급정보": {
+      "증명발급일": "",
+      "접수번호": "",
+      "담당부서": "",
+      "세무서장": "",
+      "연락처": ""
+    }
+  },
   "fields": [
     {
       "field_id": "page_number",
       "label": "페이지",
+      "semantic_path": [
+        "문서정보",
+        "페이지"
+      ],
+      "bbox_label_id": "det_000003",
       "source_detection_id": "det_000003",
       "source_text": "( 1 / 4 )",
       "value_type": "free_text.short",
-      "generator": "literal:(  1  /  4  )",
+      "generator": "literal:( 1 / 4 )",
       "style_class": "style_page_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "페이지",
-        "csv_column": "페이지"
+        "json_path": "문서정보/페이지",
+        "csv_column": "문서정보/페이지"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 page1 기준 pipeline 보강: 페이지 번호를 원본과 동일하게 고정. 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000003",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "document_confirmation_number",
-      "label": "문서확인번호",
+      "label": "발급번호",
+      "semantic_path": [
+        "문서정보",
+        "발급번호"
+      ],
+      "bbox_label_id": "det_000007",
       "source_detection_id": "det_000007",
       "source_text": "5367-578-1853-764",
       "value_type": "free_text.short",
       "generator": "pattern:####-###-####-###",
       "style_class": "style_document_confirmation_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "문서확인번호",
-        "csv_column": "문서확인번호"
+        "json_path": "문서정보/발급번호",
+        "csv_column": "문서정보/발급번호"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000007",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "applicant_type_individual_checkbox",
-      "label": "개인 체크박스",
+      "label": "개인",
+      "semantic_path": [
+        "신청인구분",
+        "개인"
+      ],
+      "bbox_label_id": "det_000008",
       "source_detection_id": "det_000008",
       "source_text": "☐",
       "value_type": "bool.checkbox",
-      "generator": "literal:false",
+      "generator": "checkbox.bool",
       "style_class": "style_applicant_type_individual_checkbox",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "symbol_box"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인 체크박스",
-        "csv_column": "개인 체크박스"
+        "json_path": "신청인구분/개인",
+        "csv_column": "신청인구분/개인"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000008",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "applicant_type_corporate_checkbox",
-      "label": "법인 체크박스",
+      "label": "법인",
+      "semantic_path": [
+        "신청인구분",
+        "법인"
+      ],
+      "bbox_label_id": "det_000012",
       "source_detection_id": "det_000012",
       "source_text": "☑",
       "value_type": "bool.checkbox",
-      "generator": "literal:true",
+      "generator": "checkbox.bool",
       "style_class": "style_applicant_type_corporate_checkbox",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "symbol_box"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "법인 체크박스",
-        "csv_column": "법인 체크박스"
+        "json_path": "신청인구분/법인",
+        "csv_column": "신청인구분/법인"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000012",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "company_name",
-      "label": "상호",
+      "label": "상호(법인명)",
+      "semantic_path": [
+        "사업자정보",
+        "상호(법인명)"
+      ],
+      "bbox_label_id": "det_000014",
       "source_detection_id": "det_000014",
       "source_text": "(주) 지엘어소시에이츠",
-      "value_type": "free_text.short",
-      "generator": "pool:fin01_company_names",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_company_name",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "상호",
-        "csv_column": "상호"
+        "json_path": "사업자정보/상호(법인명)",
+        "csv_column": "사업자정보/상호(법인명)"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000014",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "business_registration_number",
       "label": "사업자등록번호",
+      "semantic_path": [
+        "사업자정보",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "det_000016",
       "source_detection_id": "det_000016",
       "source_text": "211-86-49553",
       "value_type": "free_text.short",
       "generator": "pattern:###-##-#####",
       "style_class": "style_business_registration_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "사업자등록번호",
-        "csv_column": "사업자등록번호"
+        "json_path": "사업자정보/사업자등록번호",
+        "csv_column": "사업자정보/사업자등록번호"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000016",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "representative_name",
-      "label": "대표자",
+      "label": "성명(대표자)",
+      "semantic_path": [
+        "사업자정보",
+        "성명(대표자)"
+      ],
+      "bbox_label_id": "det_000018",
       "source_detection_id": "det_000018",
       "source_text": "이용렬",
       "value_type": "person.name_ko",
       "generator": "person.name_ko",
       "style_class": "style_representative_name",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "대표자",
-        "csv_column": "대표자"
+        "json_path": "사업자정보/성명(대표자)",
+        "csv_column": "사업자정보/성명(대표자)"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000018",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "corporate_registration_number_masked",
-      "label": "법인등록번호",
+      "label": "주민(법인)등록번호",
+      "semantic_path": [
+        "사업자정보",
+        "주민(법인)등록번호"
+      ],
+      "bbox_label_id": "det_000020",
       "source_detection_id": "det_000020",
       "source_text": "110111-*******",
       "value_type": "free_text.short",
-      "generator": "pattern:######-#######",
+      "generator": "template:{{pattern:######}}-*******",
       "style_class": "style_corporate_registration_number_masked",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "법인등록번호",
-        "csv_column": "법인등록번호"
+        "json_path": "사업자정보/주민(법인)등록번호",
+        "csv_column": "사업자정보/주민(법인)등록번호"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000020",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "business_type",
       "label": "업태",
+      "semantic_path": [
+        "사업자정보",
+        "업태"
+      ],
+      "bbox_label_id": "det_000023",
       "source_detection_id": "det_000023",
       "source_text": "건설업",
       "value_type": "free_text.short",
-      "generator": "pool:fin01_business_types",
+      "generator": "choice:제조업|건설업|정보통신업|도매 및 소매업|전문, 과학 및 기술서비스업|운수 및 창고업|음식료품 제조업|전기장비 제조업",
       "style_class": "style_business_type",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "업태",
-        "csv_column": "업태"
+        "json_path": "사업자정보/업태",
+        "csv_column": "사업자정보/업태"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000023",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "business_item",
       "label": "종목",
+      "semantic_path": [
+        "사업자정보",
+        "종목"
+      ],
+      "bbox_label_id": "det_000026",
       "source_detection_id": "det_000026",
       "source_text": "환경연출설치,전시물제작,금속구조물및창호공사",
       "value_type": "free_text.short",
-      "generator": "pool:fin01_business_items",
+      "generator": "free_text.short",
       "style_class": "style_business_item",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "종목",
-        "csv_column": "종목"
+        "json_path": "사업자정보/종목",
+        "csv_column": "사업자정보/종목"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000026",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "company_address",
-      "label": "사업장 주소",
+      "label": "주소(본점)",
+      "semantic_path": [
+        "사업자정보",
+        "주소(본점)"
+      ],
+      "bbox_label_id": "det_000028",
       "source_detection_id": "det_000028",
       "source_text": "서울특별시강남구 봉은사로449(삼성동,밤부타워",
       "value_type": "address.ko",
@@ -256,135 +357,173 @@
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "사업장 주소",
-        "csv_column": "사업장 주소"
+        "json_path": "사업자정보/주소(본점)",
+        "csv_column": "사업자정보/주소(본점)"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000028",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "fiscal_period_start",
-      "label": "과세기간 시작일",
+      "label": "사업연도 시작일",
+      "semantic_path": [
+        "신고정보",
+        "사업연도",
+        "시작일"
+      ],
+      "bbox_label_id": "det_000029",
       "source_detection_id": "det_000029",
       "source_text": "2022.01.01",
-      "value_type": "free_text.short",
-      "generator": "pool:fin01_period_starts",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_fiscal_period_start",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "과세기간 시작일",
-        "csv_column": "과세기간 시작일"
+        "json_path": "신고정보/사업연도/시작일",
+        "csv_column": "신고정보/사업연도/시작일"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000029",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "fiscal_period_end",
-      "label": "과세기간 종료일",
+      "label": "사업연도 종료일",
+      "semantic_path": [
+        "신고정보",
+        "사업연도",
+        "종료일"
+      ],
+      "bbox_label_id": "det_000036",
       "source_detection_id": "det_000036",
       "source_text": "2022.12.31",
-      "value_type": "free_text.short",
-      "generator": "pool:fin01_period_ends",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_fiscal_period_end",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "과세기간 종료일",
-        "csv_column": "과세기간 종료일"
+        "json_path": "신고정보/사업연도/종료일",
+        "csv_column": "신고정보/사업연도/종료일"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000036",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "filing_type",
       "label": "신고구분",
+      "semantic_path": [
+        "신고정보",
+        "신고구분"
+      ],
+      "bbox_label_id": "det_000039",
       "source_detection_id": "det_000039",
       "source_text": "정기 신고",
       "value_type": "free_text.short",
-      "generator": "choice:정 기 신 고|수 정 신 고|기 한 후 신 고",
+      "generator": "choice:정기 신고|수정 신고|기한후 신고",
       "style_class": "style_filing_type",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고구분",
-        "csv_column": "신고구분"
+        "json_path": "신고정보/신고구분",
+        "csv_column": "신고정보/신고구분"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000039",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "filing_date",
       "label": "신고일",
+      "semantic_path": [
+        "신고정보",
+        "신고일"
+      ],
+      "bbox_label_id": "det_000045",
       "source_detection_id": "det_000045",
       "source_text": "2023. 03. 30",
-      "value_type": "free_text.short",
-      "generator": "choice:2023. 03. 31|2024. 03. 31|2025. 03. 31",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_filing_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고일",
-        "csv_column": "신고일"
+        "json_path": "신고정보/신고일",
+        "csv_column": "신고정보/신고일"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000045",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "certificate_issue_date",
-      "label": "증명 발급일",
+      "label": "증명발급일",
+      "semantic_path": [
+        "발급정보",
+        "증명발급일"
+      ],
+      "bbox_label_id": "det_000051",
       "source_detection_id": "det_000051",
       "source_text": "2024년2월 5일",
       "value_type": "date.kr",
-      "generator": "choice:2024년 4월 5일|2025년 4월 11일|2026년 4월 7일",
+      "generator": "date.kr",
       "style_class": "style_certificate_issue_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "증명 발급일",
-        "csv_column": "증명 발급일"
+        "json_path": "발급정보/증명발급일",
+        "csv_column": "발급정보/증명발급일"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000051",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "receipt_number",
       "label": "접수번호",
+      "semantic_path": [
+        "발급정보",
+        "접수번호"
+      ],
+      "bbox_label_id": "det_000054",
       "source_detection_id": "det_000054",
       "source_text": "503782124921",
       "value_type": "free_text.short",
@@ -393,93 +532,107 @@
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "접수번호",
-        "csv_column": "접수번호"
+        "json_path": "발급정보/접수번호",
+        "csv_column": "발급정보/접수번호"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000054",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "service_counter",
-      "label": "민원창구",
+      "label": "담당부서",
+      "semantic_path": [
+        "발급정보",
+        "담당부서"
+      ],
+      "bbox_label_id": "det_000057",
       "source_detection_id": "det_000057",
       "source_text": "민원봉사실",
       "value_type": "free_text.short",
-      "generator": "pool:fin01_service_counters",
+      "generator": "choice:민원봉사실|세무민원실|통합민원실",
       "style_class": "style_service_counter",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "민원창구",
-        "csv_column": "민원창구"
+        "json_path": "발급정보/담당부서",
+        "csv_column": "발급정보/담당부서"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000057",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "tax_office_chief",
       "label": "세무서장",
+      "semantic_path": [
+        "발급정보",
+        "세무서장"
+      ],
+      "bbox_label_id": "det_000058",
       "source_detection_id": "det_000058",
       "source_text": "삼성세무서장",
       "value_type": "free_text.short",
-      "generator": "pool:fin01_tax_office_chiefs",
+      "generator": "free_text.short",
       "style_class": "style_tax_office_chief",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "세무서장",
-        "csv_column": "세무서장"
+        "json_path": "발급정보/세무서장",
+        "csv_column": "발급정보/세무서장"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000058",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "tax_office_phone",
-      "label": "문의전화",
+      "label": "연락처",
+      "semantic_path": [
+        "발급정보",
+        "연락처"
+      ],
+      "bbox_label_id": "det_000062",
       "source_detection_id": "det_000062",
       "source_text": "02-3011-7556",
-      "value_type": "free_text.short",
-      "generator": "pool:fin01_tax_office_phones",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_tax_office_phone",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "문의전화",
-        "csv_column": "문의전화"
+        "json_path": "발급정보/연락처",
+        "csv_column": "발급정보/연락처"
       },
       "required": true,
-      "notes": "2026-07-02 수동 authoring: 원본/review/inpaint 시각 검수 기반으로 의미 key와 faker rule 지정 2차 bbox/schema 보정: 원본 page 1 시각 위치 기준으로 bbox/정렬을 재조정.",
-      "bbox_label_id": "det_000062",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "authoring_mode": "fin01_page1_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_page1_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/재무제표(재무상태표·손익계산서)__FIN-01/review/original_표준재무제표증명원＿지엘-1_page_001/review.json"
-  }
+  "updated_at": "2026-07-13T02:03:38.927427+00:00"
 }

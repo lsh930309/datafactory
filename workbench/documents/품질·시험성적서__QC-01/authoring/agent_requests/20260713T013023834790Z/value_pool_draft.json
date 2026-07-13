@@ -1,0 +1,15 @@
+{
+  "schema_version": 2,
+  "doc_id": "QC-01",
+  "generated_at": "2026-07-13",
+  "pools": {
+    "coupler_samples": {"kind": "scalar", "count": 20, "usage": ["sample_name_country"], "source_note": "원본의 철근 커플러 명칭과 D19~D32 규격 문맥을 바탕으로 만든 비실재 합성 품명"},
+    "inventory_quantities": {"kind": "scalar", "count": 20, "usage": ["inventory_quantity"], "source_note": "값 위치에 정적 단위가 없으므로 자연 표기인 개 단위를 포함한 합성 재고량"},
+    "dimension_values_mm": {"kind": "scalar", "count": 24, "usage": ["시험·검사결과의 모든 치수 field"], "source_note": "전체 이미지에서 mm가 측정값과 함께 인쇄된 것을 확인하여 단위를 포함한 합성 소수 1자리 값"}
+  },
+  "relationship_notes": [
+    "규격별 내경, 외경, 길이는 numeric_range와 numeric_compare가 최종 현실 범위와 내경 < 외경 < 길이 관계를 보장한다.",
+    "두 시험군의 책임기술인·시험검사자는 copy 제약으로 동일 인물 및 동일 서명 관계를 유지한다.",
+    "채취일, 접수일, 발행일은 date_order 및 date_not_after 제약으로 순서와 기준일 상한을 유지한다."
+  ]
+}

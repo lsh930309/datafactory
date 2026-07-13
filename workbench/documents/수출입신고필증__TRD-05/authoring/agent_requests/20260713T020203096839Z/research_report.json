@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-05",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:customs.go.kr 수출신고필증 작성 수출신고서 항목",
+    "site:law.go.kr 관세법 수출신고 제241조 적재의무기한",
+    "site:unipass.customs.go.kr 수출신고필증 출력",
+    "site:customs.go.kr 수출신고필증 진위 확인"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.customs.go.kr/kcs/ad/tr/trTermView.do?mi=2902&termId=1738",
+      "source_type": "관세청 공식 용어사전",
+      "summary": "수출신고필증은 세관이 수출자에게 물품의 수출을 증명하는 서류이며 선적, 수출용 원자재 사후관리 및 관세 환급에 사용된다."
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000270440",
+      "source_type": "국가법령정보센터 행정규칙",
+      "summary": "수출 및 반송통관 고시는 관세법 제241조에 따른 수출물품 신고·검사·통관 절차를 규정하며 정식 및 간이 수출신고와 적재지검사의 의미를 제공한다."
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://law.go.kr/flDownload.do?bylClsCd=200203&flNm=%5B%EB%B3%84%EC%A7%80+1%5D+%EC%88%98%EC%B6%9C%EC%8B%A0%EA%B3%A0%EC%84%9C&flSeq=141818557",
+      "source_type": "국가법령정보센터 공식 서식",
+      "summary": "공식 수출신고서 서식에서 수출자·구매자·품명·규격·수량·가격·운송·적재의무기한 등 본 이미지와 같은 핵심 항목을 확인했다."
+    },
+    {
+      "evidence_id": "R4",
+      "url": "https://customs.go.kr/download/UNIPASS_FAQ_221031.pdf",
+      "source_type": "관세청 UNI-PASS 공식 FAQ",
+      "summary": "수출신고필증 출력과 선적 완료 후 선적일자 표시 등 전자 발급·출력 맥락을 확인했다."
+    }
+  ],
+  "field_evidence": [
+    {
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "semantic_sections": [
+        "신고 기본정보",
+        "수리 및 기한"
+      ],
+      "note": "신고·수리·적재 관련 필드의 문서 역할 근거"
+    },
+    {
+      "evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "semantic_sections": [
+        "거래 및 운송",
+        "수출자 및 화주",
+        "검사 및 물품소재지",
+        "제조자",
+        "구매자 및 환급"
+      ],
+      "note": "신고 주체와 운송·검사·거래 항목의 제도 및 서식 근거"
+    },
+    {
+      "evidence_ids": [
+        "R3"
+      ],
+      "semantic_sections": [
+        "품목",
+        "수출요건 및 포장",
+        "가격 및 결제"
+      ],
+      "note": "품명·규격·수량·세번·중량·가격·포장 항목의 공식 서식 근거"
+    }
+  ],
+  "scope_note": "웹 근거는 이미지 앵커 의미 확인에만 사용했으며 템플릿에 없는 필드는 추가하지 않았다."
+}

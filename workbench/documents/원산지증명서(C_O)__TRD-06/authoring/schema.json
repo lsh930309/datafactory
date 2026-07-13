@@ -1,911 +1,1170 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-30T11:49:12.318967+00:00",
-  "updated_at": "2026-07-02T23:20:14.994424+00:00",
+  "created_at": "2026-07-13T02:11:56.930873+00:00",
   "doc_id": "TRD-06",
   "title": "원산지증명서(C/O)",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/원산지증명서(C_O)__TRD-06/review/original_원산지증명서_page_001/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_applied_reviews/20260713T020257102500Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/원산지증명서(C_O)__TRD-06/samples/original/원산지증명서_page_001.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+  "source_inpainted": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
   "image": {
     "width": 1191,
     "height": 1684
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_applied_reviews/20260713T020257102500Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "수출자": {
+      "명칭": "",
+      "이메일": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "주소": ""
+    },
+    "포괄기간": {
+      "시작일": "",
+      "종료일": ""
+    },
+    "생산자": {
+      "명칭": "",
+      "이메일": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "주소": ""
+    },
+    "수입자": {
+      "명칭": "",
+      "이메일": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "주소": ""
+    },
+    "원산지증명대상품목": {
+      "1행": {
+        "일련번호": "",
+        "품명": "",
+        "수량 및 단위": "",
+        "HS 번호": "",
+        "특혜 원산지 기준": "",
+        "원산지 국가": ""
+      },
+      "2행": {
+        "일련번호": "",
+        "품명": "",
+        "수량 및 단위": "",
+        "HS 번호": "",
+        "특혜 원산지 기준": "",
+        "원산지 국가": ""
+      },
+      "3행": {
+        "일련번호": "",
+        "품명": "",
+        "수량 및 단위": "",
+        "HS 번호": "",
+        "특혜 원산지 기준": "",
+        "원산지 국가": ""
+      }
+    },
+    "인증": {
+      "증명일": "",
+      "권한자 성명 또는 서명": ""
+    }
   },
   "fields": [
     {
       "field_id": "exporter_name",
       "label": "수출자명",
+      "semantic_path": [
+        "수출자",
+        "명칭"
+      ],
+      "bbox_label_id": "manual_trd_06_001",
       "source_detection_id": "manual_trd_06_001",
       "source_text": "YesForm Co., Ltd.",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_exporter_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출자명",
-        "csv_column": "수출자명"
+        "json_path": "수출자/명칭",
+        "csv_column": "수출자/명칭"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_001",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_email",
-      "label": "수출자이메일",
+      "label": "수출자 이메일",
+      "semantic_path": [
+        "수출자",
+        "이메일"
+      ],
+      "bbox_label_id": "manual_trd_06_002",
       "source_detection_id": "manual_trd_06_002",
       "source_text": "export@yesform.co.kr",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "template:trade{{pattern:###}}@example.com",
       "style_class": "style_exporter_email",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출자이메일",
-        "csv_column": "수출자이메일"
+        "json_path": "수출자/이메일",
+        "csv_column": "수출자/이메일"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_002",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_telephone",
-      "label": "수출자전화번호",
+      "label": "수출자 전화번호",
+      "semantic_path": [
+        "수출자",
+        "전화번호"
+      ],
+      "bbox_label_id": "manual_trd_06_003",
       "source_detection_id": "manual_trd_06_003",
       "source_text": "+82-2-123-4567",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_exporter_telephone",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출자전화번호",
-        "csv_column": "수출자전화번호"
+        "json_path": "수출자/전화번호",
+        "csv_column": "수출자/전화번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_003",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_fax",
-      "label": "수출자팩스",
+      "label": "수출자 팩스번호",
+      "semantic_path": [
+        "수출자",
+        "팩스번호"
+      ],
+      "bbox_label_id": "manual_trd_06_004",
       "source_detection_id": "manual_trd_06_004",
       "source_text": "+82-2-123-4568",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_exporter_fax",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출자팩스",
-        "csv_column": "수출자팩스"
+        "json_path": "수출자/팩스번호",
+        "csv_column": "수출자/팩스번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_004",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_address",
-      "label": "수출자주소",
+      "label": "수출자 주소",
+      "semantic_path": [
+        "수출자",
+        "주소"
+      ],
+      "bbox_label_id": "manual_trd_06_005",
       "source_detection_id": "manual_trd_06_005",
       "source_text": "123 Yes Street, Yes-gu, Yes, Republic of Korea",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "address.ko",
+      "generator": "address.ko",
       "style_class": "style_exporter_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출자주소",
-        "csv_column": "수출자주소"
+        "json_path": "수출자/주소",
+        "csv_column": "수출자/주소"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_005",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "blanket_period_from",
-      "label": "포괄기간시작",
+      "label": "포괄기간 시작일",
+      "semantic_path": [
+        "포괄기간",
+        "시작일"
+      ],
+      "bbox_label_id": "manual_trd_06_006",
       "source_detection_id": "manual_trd_06_006",
       "source_text": "____/__/__",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_blanket_period_from",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포괄기간시작",
-        "csv_column": "포괄기간시작"
+        "json_path": "포괄기간/시작일",
+        "csv_column": "포괄기간/시작일"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_006",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "blanket_period_to",
-      "label": "포괄기간종료",
+      "label": "포괄기간 종료일",
+      "semantic_path": [
+        "포괄기간",
+        "종료일"
+      ],
+      "bbox_label_id": "manual_trd_06_007",
       "source_detection_id": "manual_trd_06_007",
       "source_text": "____/__/__",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_blanket_period_to",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포괄기간종료",
-        "csv_column": "포괄기간종료"
+        "json_path": "포괄기간/종료일",
+        "csv_column": "포괄기간/종료일"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_007",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "producer_name",
       "label": "생산자명",
+      "semantic_path": [
+        "생산자",
+        "명칭"
+      ],
+      "bbox_label_id": "manual_trd_06_008",
       "source_detection_id": "manual_trd_06_008",
       "source_text": "Yes Manufacturing Co.",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_producer_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "생산자명",
-        "csv_column": "생산자명"
+        "json_path": "생산자/명칭",
+        "csv_column": "생산자/명칭"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_008",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "producer_email",
-      "label": "생산자이메일",
+      "label": "생산자 이메일",
+      "semantic_path": [
+        "생산자",
+        "이메일"
+      ],
+      "bbox_label_id": "manual_trd_06_009",
       "source_detection_id": "manual_trd_06_009",
       "source_text": "producer@yesmfg.co.kr",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "template:origin{{pattern:###}}@example.com",
       "style_class": "style_producer_email",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "생산자이메일",
-        "csv_column": "생산자이메일"
+        "json_path": "생산자/이메일",
+        "csv_column": "생산자/이메일"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_009",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "producer_telephone",
-      "label": "생산자전화번호",
+      "label": "생산자 전화번호",
+      "semantic_path": [
+        "생산자",
+        "전화번호"
+      ],
+      "bbox_label_id": "manual_trd_06_010",
       "source_detection_id": "manual_trd_06_010",
       "source_text": "+82-32-456-7890",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_producer_telephone",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "생산자전화번호",
-        "csv_column": "생산자전화번호"
+        "json_path": "생산자/전화번호",
+        "csv_column": "생산자/전화번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_010",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "producer_fax",
-      "label": "생산자팩스",
+      "label": "생산자 팩스번호",
+      "semantic_path": [
+        "생산자",
+        "팩스번호"
+      ],
+      "bbox_label_id": "manual_trd_06_011",
       "source_detection_id": "manual_trd_06_011",
       "source_text": "+82-32-456-7891",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_producer_fax",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "생산자팩스",
-        "csv_column": "생산자팩스"
+        "json_path": "생산자/팩스번호",
+        "csv_column": "생산자/팩스번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_011",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "producer_address",
-      "label": "생산자주소",
+      "label": "생산자 주소",
+      "semantic_path": [
+        "생산자",
+        "주소"
+      ],
+      "bbox_label_id": "manual_trd_06_012",
       "source_detection_id": "manual_trd_06_012",
       "source_text": "456 Yes Industrial Park, Yes, Republic of Korea",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "address.ko",
+      "generator": "address.ko",
       "style_class": "style_producer_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "생산자주소",
-        "csv_column": "생산자주소"
+        "json_path": "생산자/주소",
+        "csv_column": "생산자/주소"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_012",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "importer_name",
       "label": "수입자명",
+      "semantic_path": [
+        "수입자",
+        "명칭"
+      ],
+      "bbox_label_id": "manual_trd_06_013",
       "source_detection_id": "manual_trd_06_013",
       "source_text": "Nono Wholesale Inc.",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_importer_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수입자명",
-        "csv_column": "수입자명"
+        "json_path": "수입자/명칭",
+        "csv_column": "수입자/명칭"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_013",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "importer_email",
-      "label": "수입자이메일",
+      "label": "수입자 이메일",
+      "semantic_path": [
+        "수입자",
+        "이메일"
+      ],
+      "bbox_label_id": "manual_trd_06_014",
       "source_detection_id": "manual_trd_06_014",
       "source_text": "imports@nonowholesale.com",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "template:imports{{pattern:###}}@example.com",
       "style_class": "style_importer_email",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수입자이메일",
-        "csv_column": "수입자이메일"
+        "json_path": "수입자/이메일",
+        "csv_column": "수입자/이메일"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_014",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "importer_telephone",
-      "label": "수입자전화번호",
+      "label": "수입자 전화번호",
+      "semantic_path": [
+        "수입자",
+        "전화번호"
+      ],
+      "bbox_label_id": "manual_trd_06_015",
       "source_detection_id": "manual_trd_06_015",
       "source_text": "+1-213-987-6543",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###-###-####",
       "style_class": "style_importer_telephone",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수입자전화번호",
-        "csv_column": "수입자전화번호"
+        "json_path": "수입자/전화번호",
+        "csv_column": "수입자/전화번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_015",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "importer_fax",
-      "label": "수입자팩스",
+      "label": "수입자 팩스번호",
+      "semantic_path": [
+        "수입자",
+        "팩스번호"
+      ],
+      "bbox_label_id": "manual_trd_06_016",
       "source_detection_id": "manual_trd_06_016",
       "source_text": "+1-213-987-6544",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###-###-####",
       "style_class": "style_importer_fax",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수입자팩스",
-        "csv_column": "수입자팩스"
+        "json_path": "수입자/팩스번호",
+        "csv_column": "수입자/팩스번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_016",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "importer_address",
-      "label": "수입자주소",
+      "label": "수입자 주소",
+      "semantic_path": [
+        "수입자",
+        "주소"
+      ],
+      "bbox_label_id": "manual_trd_06_017",
       "source_detection_id": "manual_trd_06_017",
       "source_text": "789 Trade Ave, Nono city, Nono, USA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_importer_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수입자주소",
-        "csv_column": "수입자주소"
+        "json_path": "수입자/주소",
+        "csv_column": "수입자/주소"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_017",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_1_serial_no",
-      "label": "일련번호[0]",
+      "label": "1행 일련번호",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "1행",
+        "일련번호"
+      ],
+      "bbox_label_id": "manual_trd_06_018",
       "source_detection_id": "manual_trd_06_018",
       "source_text": "0123",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####",
       "style_class": "style_item_1_serial_no",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "일련번호[0]",
-        "csv_column": "일련번호[0]"
+        "json_path": "원산지증명대상품목/1행/일련번호",
+        "csv_column": "원산지증명대상품목/1행/일련번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_018",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_1_description",
-      "label": "품명[0]",
+      "label": "1행 품명",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "1행",
+        "품명"
+      ],
+      "bbox_label_id": "manual_trd_06_019",
       "source_detection_id": "manual_trd_06_019",
       "source_text": "Plastic Office Supplies",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_item_1_description",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[0]",
-        "csv_column": "품명[0]"
+        "json_path": "원산지증명대상품목/1행/품명",
+        "csv_column": "원산지증명대상품목/1행/품명"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_019",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_1_quantity_unit",
-      "label": "수량단위[0]",
+      "label": "1행 수량 및 단위",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "1행",
+        "수량 및 단위"
+      ],
+      "bbox_label_id": "manual_trd_06_020",
       "source_detection_id": "manual_trd_06_020",
       "source_text": "5,000 pcs",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:500 pcs|1,000 pcs|250 units|80 sets|1,500 m",
       "style_class": "style_item_1_quantity_unit",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량단위[0]",
-        "csv_column": "수량단위[0]"
+        "json_path": "원산지증명대상품목/1행/수량 및 단위",
+        "csv_column": "원산지증명대상품목/1행/수량 및 단위"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_020",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_1_hs_no",
-      "label": "HS번호[0]",
+      "label": "1행 HS 번호",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "1행",
+        "HS 번호"
+      ],
+      "bbox_label_id": "manual_trd_06_021",
       "source_detection_id": "manual_trd_06_021",
       "source_text": "3926.90",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####.##",
       "style_class": "style_item_1_hs_no",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "HS번호[0]",
-        "csv_column": "HS번호[0]"
+        "json_path": "원산지증명대상품목/1행/HS 번호",
+        "csv_column": "원산지증명대상품목/1행/HS 번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_021",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_1_preference_criterion",
-      "label": "특혜기준[0]",
+      "label": "1행 특혜 원산지 기준",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "1행",
+        "특혜 원산지 기준"
+      ],
+      "bbox_label_id": "manual_trd_06_022",
       "source_detection_id": "manual_trd_06_022",
       "source_text": "CTC",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:CTC|RVC|WO|PE",
       "style_class": "style_item_1_preference_criterion",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "특혜기준[0]",
-        "csv_column": "특혜기준[0]"
+        "json_path": "원산지증명대상품목/1행/특혜 원산지 기준",
+        "csv_column": "원산지증명대상품목/1행/특혜 원산지 기준"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_022",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_1_country_of_origin",
-      "label": "국가원산지[0]",
+      "label": "1행 원산지 국가",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "1행",
+        "원산지 국가"
+      ],
+      "bbox_label_id": "manual_trd_06_023",
       "source_detection_id": "manual_trd_06_023",
       "source_text": "Republic of Korea",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:Republic of Korea|United States",
       "style_class": "style_item_1_country_of_origin",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "국가원산지[0]",
-        "csv_column": "국가원산지[0]"
+        "json_path": "원산지증명대상품목/1행/원산지 국가",
+        "csv_column": "원산지증명대상품목/1행/원산지 국가"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_023",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_2_serial_no",
-      "label": "일련번호[1]",
+      "label": "2행 일련번호",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "2행",
+        "일련번호"
+      ],
+      "bbox_label_id": "manual_trd_06_024",
       "source_detection_id": "manual_trd_06_024",
       "source_text": "0123",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####",
       "style_class": "style_item_2_serial_no",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "일련번호[1]",
-        "csv_column": "일련번호[1]"
+        "json_path": "원산지증명대상품목/2행/일련번호",
+        "csv_column": "원산지증명대상품목/2행/일련번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_024",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_2_description",
-      "label": "품명[1]",
+      "label": "2행 품명",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "2행",
+        "품명"
+      ],
+      "bbox_label_id": "manual_trd_06_025",
       "source_detection_id": "manual_trd_06_025",
       "source_text": "Plastic Office Supplies",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_item_2_description",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[1]",
-        "csv_column": "품명[1]"
+        "json_path": "원산지증명대상품목/2행/품명",
+        "csv_column": "원산지증명대상품목/2행/품명"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_025",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_2_quantity_unit",
-      "label": "수량단위[1]",
+      "label": "2행 수량 및 단위",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "2행",
+        "수량 및 단위"
+      ],
+      "bbox_label_id": "manual_trd_06_026",
       "source_detection_id": "manual_trd_06_026",
-      "source_text": "5,000 pcs",
+      "source_text": "200 units",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:500 pcs|1,000 pcs|250 units|80 sets|1,500 m",
       "style_class": "style_item_2_quantity_unit",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량단위[1]",
-        "csv_column": "수량단위[1]"
+        "json_path": "원산지증명대상품목/2행/수량 및 단위",
+        "csv_column": "원산지증명대상품목/2행/수량 및 단위"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_026",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_2_hs_no",
-      "label": "HS번호[1]",
+      "label": "2행 HS 번호",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "2행",
+        "HS 번호"
+      ],
+      "bbox_label_id": "manual_trd_06_027",
       "source_detection_id": "manual_trd_06_027",
       "source_text": "3926.90",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####.##",
       "style_class": "style_item_2_hs_no",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "HS번호[1]",
-        "csv_column": "HS번호[1]"
+        "json_path": "원산지증명대상품목/2행/HS 번호",
+        "csv_column": "원산지증명대상품목/2행/HS 번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_027",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_2_preference_criterion",
-      "label": "특혜기준[1]",
+      "label": "2행 특혜 원산지 기준",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "2행",
+        "특혜 원산지 기준"
+      ],
+      "bbox_label_id": "manual_trd_06_028",
       "source_detection_id": "manual_trd_06_028",
       "source_text": "CTC",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:CTC|RVC|WO|PE",
       "style_class": "style_item_2_preference_criterion",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "특혜기준[1]",
-        "csv_column": "특혜기준[1]"
+        "json_path": "원산지증명대상품목/2행/특혜 원산지 기준",
+        "csv_column": "원산지증명대상품목/2행/특혜 원산지 기준"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_028",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_2_country_of_origin",
-      "label": "국가원산지[1]",
+      "label": "2행 원산지 국가",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "2행",
+        "원산지 국가"
+      ],
+      "bbox_label_id": "manual_trd_06_029",
       "source_detection_id": "manual_trd_06_029",
       "source_text": "Republic of Korea",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:Republic of Korea|United States",
       "style_class": "style_item_2_country_of_origin",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "국가원산지[1]",
-        "csv_column": "국가원산지[1]"
+        "json_path": "원산지증명대상품목/2행/원산지 국가",
+        "csv_column": "원산지증명대상품목/2행/원산지 국가"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_029",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_3_serial_no",
-      "label": "일련번호[2]",
+      "label": "3행 일련번호",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "3행",
+        "일련번호"
+      ],
+      "bbox_label_id": "manual_trd_06_030",
       "source_detection_id": "manual_trd_06_030",
       "source_text": "0123",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####",
       "style_class": "style_item_3_serial_no",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "일련번호[2]",
-        "csv_column": "일련번호[2]"
+        "json_path": "원산지증명대상품목/3행/일련번호",
+        "csv_column": "원산지증명대상품목/3행/일련번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_030",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_3_description",
-      "label": "품명[2]",
+      "label": "3행 품명",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "3행",
+        "품명"
+      ],
+      "bbox_label_id": "manual_trd_06_031",
       "source_detection_id": "manual_trd_06_031",
       "source_text": "Plastic Office Supplies",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_item_3_description",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[2]",
-        "csv_column": "품명[2]"
+        "json_path": "원산지증명대상품목/3행/품명",
+        "csv_column": "원산지증명대상품목/3행/품명"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_031",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_3_quantity_unit",
-      "label": "수량단위[2]",
+      "label": "3행 수량 및 단위",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "3행",
+        "수량 및 단위"
+      ],
+      "bbox_label_id": "manual_trd_06_032",
       "source_detection_id": "manual_trd_06_032",
-      "source_text": "5,000 pcs",
+      "source_text": "3,000 pcs",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:500 pcs|1,000 pcs|250 units|80 sets|1,500 m",
       "style_class": "style_item_3_quantity_unit",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량단위[2]",
-        "csv_column": "수량단위[2]"
+        "json_path": "원산지증명대상품목/3행/수량 및 단위",
+        "csv_column": "원산지증명대상품목/3행/수량 및 단위"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_032",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_3_hs_no",
-      "label": "HS번호[2]",
+      "label": "3행 HS 번호",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "3행",
+        "HS 번호"
+      ],
+      "bbox_label_id": "manual_trd_06_033",
       "source_detection_id": "manual_trd_06_033",
       "source_text": "3926.90",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####.##",
       "style_class": "style_item_3_hs_no",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "HS번호[2]",
-        "csv_column": "HS번호[2]"
+        "json_path": "원산지증명대상품목/3행/HS 번호",
+        "csv_column": "원산지증명대상품목/3행/HS 번호"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_033",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_3_preference_criterion",
-      "label": "특혜기준[2]",
+      "label": "3행 특혜 원산지 기준",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "3행",
+        "특혜 원산지 기준"
+      ],
+      "bbox_label_id": "manual_trd_06_034",
       "source_detection_id": "manual_trd_06_034",
       "source_text": "CTC",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:CTC|RVC|WO|PE",
       "style_class": "style_item_3_preference_criterion",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "특혜기준[2]",
-        "csv_column": "특혜기준[2]"
+        "json_path": "원산지증명대상품목/3행/특혜 원산지 기준",
+        "csv_column": "원산지증명대상품목/3행/특혜 원산지 기준"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_034",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_3_country_of_origin",
-      "label": "국가원산지[2]",
+      "label": "3행 원산지 국가",
+      "semantic_path": [
+        "원산지증명대상품목",
+        "3행",
+        "원산지 국가"
+      ],
+      "bbox_label_id": "manual_trd_06_035",
       "source_detection_id": "manual_trd_06_035",
       "source_text": "Republic of Korea",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:Republic of Korea|United States",
       "style_class": "style_item_3_country_of_origin",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "국가원산지[2]",
-        "csv_column": "국가원산지[2]"
+        "json_path": "원산지증명대상품목/3행/원산지 국가",
+        "csv_column": "원산지증명대상품목/3행/원산지 국가"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_035",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "certification_date",
-      "label": "증명일자",
+      "label": "증명일",
+      "semantic_path": [
+        "인증",
+        "증명일"
+      ],
+      "bbox_label_id": "manual_trd_06_036",
       "source_detection_id": "manual_trd_06_036",
       "source_text": "Certification date",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_certification_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "증명일자",
-        "csv_column": "증명일자"
+        "json_path": "인증/증명일",
+        "csv_column": "인증/증명일"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_036",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "authorized_name",
-      "label": "권한자명",
+      "label": "권한자 성명 또는 서명",
+      "semantic_path": [
+        "인증",
+        "권한자 성명 또는 서명"
+      ],
+      "bbox_label_id": "manual_trd_06_037",
       "source_detection_id": "manual_trd_06_037",
       "source_text": "Authorized name/signature",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_authorized_name",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "권한자명",
-        "csv_column": "권한자명"
+        "json_path": "인증/권한자 성명 또는 서명",
+        "csv_column": "인증/권한자 성명 또는 서명"
       },
       "required": true,
-      "notes": "TRD-06 원산지증명서 생산용 보정 필드. exporter/producer/importer/items/certification 정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_06_037",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "authoring_mode": "trd06_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/원산지증명서(C_O)__TRD-06/review/original_원산지증명서_page_001/review.json"
-  }
+  "updated_at": "2026-07-13T02:11:56.954029+00:00"
 }

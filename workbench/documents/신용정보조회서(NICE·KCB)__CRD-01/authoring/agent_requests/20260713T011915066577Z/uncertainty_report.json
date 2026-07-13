@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "doc_id": "CRD-01",
+  "pass": 2,
+  "unresolved_fields": [
+    {
+      "id": "U1",
+      "fields": ["p1_issued_at"],
+      "issue": "지원 grammar에는 단일 datetime 전용 규칙이 없다.",
+      "current_decision": "template 안에서 date.kr과 20개 유효 시각 pool을 결합했다. date.kr은 고정 as_of_date를 적용하므로 미래 날짜를 만들지 않는다.",
+      "severity": "low",
+      "user_decision_needed": false
+    },
+    {
+      "id": "U2",
+      "fields": ["p1_issue_number"],
+      "issue": "발급번호의 체크섬 또는 내부 발번 규칙을 공개 근거에서 확인하지 못했다.",
+      "current_decision": "원본 시각 형식인 7-5-5 숫자 패턴만 유지한다.",
+      "severity": "low",
+      "user_decision_needed": false
+    },
+    {
+      "id": "U3",
+      "fields": ["p1_resident_registration_number"],
+      "issue": "마스킹된 번호에는 전체 주민등록번호 체크섬을 검증할 수 없다.",
+      "current_decision": "유효한 생년월일과 세기·성별 구분 숫자를 가진 20개 합성 pool을 사용하고 뒤 6자리를 별표 처리했다.",
+      "severity": "low",
+      "user_decision_needed": false
+    },
+    {
+      "id": "U4",
+      "fields": ["p1_loan_1_amount", "p1_loan_2_amount", "p1_loan_3_amount", "p1_loan_4_amount", "p1_loan_5_amount", "p1_loan_6_amount", "p1_loan_7_amount", "p1_loan_8_amount"],
+      "issue": "현재 페이지의 '금액'이 최초 대출액인지 현재 잔액인지 이미지와 공개 설명만으로 확정되지 않는다.",
+      "current_decision": "semantic key를 '금액'으로 유지하고 천원 단위의 보수적 합성 값만 생성한다.",
+      "severity": "medium",
+      "user_decision_needed": false
+    }
+  ],
+  "relationship_limitations": [
+    {
+      "id": "RL1",
+      "issue": "발급일시가 개설·대출 등록일보다 늦어야 하는 관계는 발급일시가 지원되는 단일 date.kr 필드가 아니어서 date_not_before/date_order로 표현할 수 없다.",
+      "required_change": "발급일시와 각 등록일의 직접 비교가 필요하면 datetime/date 혼합 비교 constraint를 렌더러에 추가"
+    },
+    {
+      "id": "RL2",
+      "issue": "8개 대출 행의 정렬순서, 중복 방지, 상품별 금액 범위는 현재 지원 constraint로 조건부 표현할 수 없다.",
+      "required_change": "행 단위 record pool에 날짜·금액까지 포함하고 전체 행 집합을 선택하는 renderer contract 추가"
+    }
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": ["p1_issue_number"],
+  "scope_limits": [
+    {
+      "id": "S1",
+      "issue": "visual manifest와 fixed schema가 현재 1페이지만 다룬다.",
+      "resolution": "이번 pass에서는 1페이지 53개 binding의 faker와 관계만 완성했으며 후속 페이지 완결성은 확장하지 않았다."
+    }
+  ],
+  "user_decisions_needed": []
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-06",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:cbp.gov Korea Free Trade Agreement certificate of origin data elements blanket period",
+    "site:ustr.gov KORUS certificate of origin Article 6.15 blanket period",
+    "site:customs.go.kr 한미 FTA 원산지증명서 포괄기간 작성방법"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://customs.go.kr/ftaportalkor/cm/cntnts/cntntsView.do?cntntsId=997&mi=3318",
+      "source_type": "대한민국 관세청 FTA 포털 공식 안내",
+      "summary": "한미 FTA 원산지증명은 정해진 양식은 없지만 증명인, 수입자, 수출자, 생산자, HS 품목분류와 품명, 원산지 상품 증명정보, 증명일, 포괄증명의 유효기간을 포함해야 하며 포괄증명은 12개월 범위이다.",
+      "field_links": [
+        "수출자/*",
+        "생산자/*",
+        "수입자/*",
+        "포괄기간/*",
+        "원산지증명대상품목/*",
+        "인증/*"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.cbp.gov/sites/default/files/documents/Attachment%20A%20Korea%20%20Data%20Elements%20for%20the%20Certificate%20of%20Origin.pdf",
+      "source_type": "미국 CBP 공식 KORUS 원산지증명 데이터 요소 및 권고 양식",
+      "summary": "KORUS 원산지증명의 권고 데이터 요소와 인증문구가 수록된 공식 첨부자료이며, 로컬 템플릿의 당사자·품목·HS·원산지·증명 구조와 대응한다.",
+      "field_links": [
+        "원산지증명대상품목/*",
+        "인증/*"
+      ]
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.customs.go.kr/ftaportalkor/cm/cntnts/cntntsView.do?cntntsId=1060&mi=3400",
+      "source_type": "대한민국 관세청 FTA 포털 공식 절차 안내",
+      "summary": "자율발급은 서명권자 지정, 증명서 작성과 서명, 발급대장 관리를 거치며 적용 협정, 원산지와 결정기준, 수출자 연락정보, 서명 및 서명일자가 핵심이다.",
+      "field_links": [
+        "수출자/*",
+        "원산지증명대상품목/*/특혜 원산지 기준",
+        "인증/*"
+      ]
+    }
+  ],
+  "evidence_application": [
+    {
+      "decision": "primary hierarchy",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "result": "시각적으로 존재하는 37개 값 영역만 수출자, 포괄기간, 생산자, 수입자, 품목 3행, 인증 계층에 배치함"
+    },
+    {
+      "decision": "blanket period meaning",
+      "evidence_ids": [
+        "R1"
+      ],
+      "result": "시작일과 종료일을 별도 primary leaf로 고정하고 12개월 제한은 pass 2 관계 제약 대상으로 이관함"
+    },
+    {
+      "decision": "preference criterion",
+      "evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "result": "원산지 상품임을 증명하는 정보 및 결정기준에 해당하는 필드로 해석함"
+    }
+  ],
+  "limitations": [
+    "웹 리서치는 템플릿에 없는 항목을 추가하는 데 사용하지 않았음",
+    "CBP PDF 본문은 검색 인덱스와 공식 URL로 확인했으며 이 실행의 웹 도구에서 PDF 본문 열기는 실패함"
+  ]
+}

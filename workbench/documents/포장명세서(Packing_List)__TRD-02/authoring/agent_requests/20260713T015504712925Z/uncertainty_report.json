@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-02",
+  "as_of_date": "2026-07-13",
+  "unresolved_fields": [
+    {
+      "field_id": "volume_unit",
+      "anchor_id": "manual_trd_02_049",
+      "semantic_path": "합계·요약/용적 단위",
+      "issue": "전체 이미지의 열 제목은 VOLUME (CBM)이지만 값 앵커 OCR 및 기존 anchor text는 KGS이다.",
+      "current_decision": "고정 바인딩과 review_required 상태를 유지하고 generator 후보를 choice:CBM|M3로 제한했다.",
+      "user_decision_needed": "원본 의도 단위를 CBM으로 확정할지 승인 필요",
+      "confidence": 0.72
+    },
+    {
+      "field_id": "packing_list_number_date",
+      "anchor_id": "manual_trd_02_002",
+      "issue": "문서번호와 영문 일자가 하나의 bbox에 결합되어 지원 date_order/date_not_after 제약을 적용할 수 없다.",
+      "current_decision": "pick_record 안의 기준일 이전 합성 문자열을 사용하고 기본 generator는 free_text.short로 유지했다.",
+      "user_decision_needed": "번호와 일자의 별도 검증이 필요하면 bbox/schema 분리 필요",
+      "confidence": 0.9
+    },
+    {
+      "field_id": "payment_delivery_2",
+      "anchor_id": "manual_trd_02_014",
+      "issue": "HS 코드가 설명 prefix와 결합된 단일 bbox라 코드만을 위한 pattern 규칙을 안전하게 적용할 수 없다.",
+      "current_decision": "상관 record pool의 완성 문구를 사용하고 기본 generator는 free_text.short로 유지했다.",
+      "user_decision_needed": "정규화 HS 코드가 필요하면 bbox/schema 분리 필요",
+      "confidence": 0.9
+    },
+    {
+      "field_id": "packing_totals_relationship",
+      "issue": "지원 sum constraint는 format:money.krw만 허용되어 소수 3자리 중량·용적 합계에는 부적합하다.",
+      "current_decision": "개별 행과 합계를 동일 pick_record에서 공급하고 순중량<=총중량만 numeric_compare로 추가했다.",
+      "user_decision_needed": "중량/용적 전용 sum format이 렌더러에 추가되면 명시적 합계 제약으로 전환 가능",
+      "confidence": 0.95
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "anchor_id": "manual_trd_02_049",
+      "visual_label": "VOLUME (CBM)",
+      "ocr_or_anchor_text": "KGS",
+      "resolution": "전체 이미지 문맥을 우선하되 검토필요 상태로 보존"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "volume_unit",
+      "generator": "choice:CBM|M3",
+      "reason": "원본 단위 앵커 OCR 충돌",
+      "confidence": 0.72
+    }
+  ],
+  "unsupported_relationships": [
+    {
+      "relationship": "포장명세서 번호 내부 일자 <= 기준일",
+      "reason": "단일 복합 문자열 내부의 날짜 관계는 지원 constraint grammar에 없음"
+    },
+    {
+      "relationship": "행별 중량·용적의 소수 3자리 합계",
+      "reason": "지원 sum 형식이 money.krw로 고정되어 있음",
+      "fallback": "12개 상관 record pool에서 이미 계산된 일관된 행/합계를 함께 선택"
+    }
+  ],
+  "pass_boundary_notes": [
+    "pass 1의 schema_draft.json, anchor_map_draft.json, research_report.json, stylesheet_draft.json은 변경하지 않았다.",
+    "고정 field_id 57개 모두에 정확히 하나의 renderer-compatible field_generators 항목을 만들었다.",
+    "현재 단일 페이지 범위만 다룬다."
+  ],
+  "page_scope": "현재 단일 페이지에 한정했다."
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "jobId": "20260713T012037272437Z",
+  "docId": "QC-01",
+  "status": "running",
+  "createdAt": "2026-07-13T01:20:37.272849+00:00",
+  "startedAt": "2026-07-13T01:20:37.294660+00:00",
+  "finishedAt": null,
+  "requestPath": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/request.json",
+  "requestDir": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z",
+  "runDir": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z",
+  "promptPath": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z/codex_exec_prompt.md",
+  "lastMessagePath": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z/codex_last_message.md",
+  "stdoutPath": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z/stdout.log",
+  "stderrPath": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z/stderr.log",
+  "requiredOutputs": [
+    "schema_draft.json",
+    "stylesheet_draft.json",
+    "faker_profile_draft.json",
+    "value_pool_draft.json",
+    "research_report.json",
+    "uncertainty_report.json",
+    "anchor_map_draft.json",
+    "application_notes.md"
+  ],
+  "outputs": {},
+  "validation": {
+    "missing": [
+      "schema_draft.json",
+      "stylesheet_draft.json",
+      "faker_profile_draft.json",
+      "value_pool_draft.json",
+      "research_report.json",
+      "uncertainty_report.json",
+      "anchor_map_draft.json",
+      "application_notes.md"
+    ],
+    "invalidJson": [],
+    "ready": false
+  },
+  "options": {
+    "reasoningEffort": "medium",
+    "fastMode": false,
+    "minPoolSize": 20,
+    "scalarPoolMinSize": 20,
+    "recordPoolMinSize": 12,
+    "mode": "authoring"
+  },
+  "passState": {
+    "current": "faker",
+    "completed": [
+      "schema"
+    ],
+    "planned": [
+      "schema",
+      "faker",
+      "validation_repair"
+    ]
+  },
+  "stages": [
+    {
+      "stage": "schema",
+      "returnCode": 0,
+      "promptPath": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z/codex_schema_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z/codex_schema_pass_last_message.md",
+      "stdoutPath": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z/schema_pass_stdout.log",
+      "stderrPath": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z/schema_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/품질·시험성적서__QC-01/authoring/agent_runs/20260713T012037272437Z/codex_schema_pass_last_message.md",
+        "-"
+      ]
+    }
+  ]
+}

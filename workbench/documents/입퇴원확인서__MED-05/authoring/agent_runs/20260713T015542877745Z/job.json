@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "jobId": "20260713T015542877745Z",
+  "docId": "MED-05",
+  "status": "failed",
+  "createdAt": "2026-07-13T01:55:42.878064+00:00",
+  "startedAt": "2026-07-13T01:55:42.899429+00:00",
+  "finishedAt": "2026-07-13T02:07:29.273401+00:00",
+  "requestPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/request.json",
+  "requestDir": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z",
+  "runDir": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z",
+  "promptPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_exec_prompt.md",
+  "lastMessagePath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_last_message.md",
+  "stdoutPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/stdout.log",
+  "stderrPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/stderr.log",
+  "requiredOutputs": [
+    "schema_draft.json",
+    "stylesheet_draft.json",
+    "faker_profile_draft.json",
+    "value_pool_draft.json",
+    "research_report.json",
+    "uncertainty_report.json",
+    "anchor_map_draft.json",
+    "application_notes.md"
+  ],
+  "outputs": {
+    "schema_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/schema_draft.json",
+    "stylesheet_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/stylesheet_draft.json",
+    "faker_profile_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/faker_profile_draft.json",
+    "value_pool_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/value_pool_draft.json",
+    "research_report.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/research_report.json",
+    "uncertainty_report.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/uncertainty_report.json",
+    "anchor_map_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/anchor_map_draft.json",
+    "application_notes.md": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/application_notes.md"
+  },
+  "validation": {
+    "ready": false,
+    "missing": [],
+    "invalidJson": [],
+    "contractErrors": [
+      {
+        "code": "blank_template_duplicate_field_anchor",
+        "field": "discharge_date",
+        "anchor_id": "manual_1783555859603",
+        "message": "anchor already used by admission_date"
+      },
+      {
+        "code": "blank_template_duplicate_field_anchor",
+        "field": "admission_discharge_period",
+        "anchor_id": "manual_1783555859603",
+        "message": "anchor already used by admission_date"
+      }
+    ],
+    "outputs": {
+      "schema_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/schema_draft.json",
+      "stylesheet_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/stylesheet_draft.json",
+      "faker_profile_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/faker_profile_draft.json",
+      "value_pool_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/value_pool_draft.json",
+      "research_report.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/research_report.json",
+      "uncertainty_report.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/uncertainty_report.json",
+      "anchor_map_draft.json": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/anchor_map_draft.json",
+      "application_notes.md": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T015542812635Z/application_notes.md"
+    },
+    "repairSummary": {
+      "materializedUseAnchors": [],
+      "materializedCount": 0,
+      "removedUnmappedDeclaration": false
+    },
+    "summary": {
+      "required": 8,
+      "present": 8,
+      "missing": 0,
+      "invalidJson": 0,
+      "contractErrors": 2
+    }
+  },
+  "options": {
+    "reasoningEffort": "medium",
+    "fastMode": false,
+    "minPoolSize": 20,
+    "scalarPoolMinSize": 20,
+    "recordPoolMinSize": 12,
+    "asOfDate": "2026-07-13",
+    "mode": "authoring"
+  },
+  "passState": {
+    "current": "failed",
+    "completed": [
+      "schema",
+      "faker",
+      "validation_repair"
+    ],
+    "planned": [
+      "schema",
+      "faker",
+      "validation_repair"
+    ]
+  },
+  "stages": [
+    {
+      "stage": "schema",
+      "returnCode": 0,
+      "promptPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_schema_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_schema_pass_last_message.md",
+      "stdoutPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/schema_pass_stdout.log",
+      "stderrPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/schema_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_schema_pass_last_message.md",
+        "-"
+      ],
+      "attemptCount": 1
+    },
+    {
+      "stage": "faker",
+      "returnCode": 0,
+      "promptPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_faker_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_faker_pass_last_message.md",
+      "stdoutPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/faker_pass_stdout.log",
+      "stderrPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/faker_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_faker_pass_last_message.md",
+        "-"
+      ],
+      "attemptCount": 1
+    },
+    {
+      "stage": "validation_repair",
+      "returnCode": 0,
+      "promptPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_validation_repair_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_validation_repair_pass_last_message.md",
+      "stdoutPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/validation_repair_pass_stdout.log",
+      "stderrPath": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/validation_repair_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_validation_repair_pass_last_message.md",
+        "-"
+      ],
+      "attemptCount": 1,
+      "frozenArtifactViolations": [
+        "schema_draft.json",
+        "anchor_map_draft.json"
+      ]
+    }
+  ],
+  "returnCode": 0,
+  "command": [
+    "codex",
+    "--search",
+    "--ask-for-approval",
+    "never",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "--disable",
+    "fast_mode",
+    "exec",
+    "--cd",
+    "/Users/lsh930309/projects/dataFatory",
+    "--sandbox",
+    "workspace-write",
+    "--output-last-message",
+    "/Users/lsh930309/projects/dataFatory/workbench/documents/입퇴원확인서__MED-05/authoring/agent_runs/20260713T015542877745Z/codex_validation_repair_pass_last_message.md",
+    "-"
+  ],
+  "repairSummary": {
+    "materializedUseAnchors": [],
+    "materializedCount": 0,
+    "removedUnmappedDeclaration": false
+  },
+  "error": "codex exec finished but required draft outputs are missing or invalid"
+}

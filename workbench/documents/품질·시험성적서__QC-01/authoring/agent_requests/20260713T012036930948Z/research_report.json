@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "doc_id": "QC-01",
+  "title": "품질·시험성적서",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:law.go.kr 건설기술진흥법 시행규칙 품질검사 성적서 제56조",
+    "site:calspia.go.kr 건설공사 품질시험 검사 성적서",
+    "site:kicq.co.kr 품질검사 성적서 시험 검사"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&chrClsCd=010202&efYd=20250618&lsiSeq=272419&urlMode=lsEfInfoR&viewCls=lsRvsDocInfoR",
+      "source_type": "official_law",
+      "summary": "건설기술 진흥법 시행규칙 제56조는 품질검사 종목·기준·목적과 의뢰자·시료 채취자·발주자 등의 확인 정보를 품질검사 대행 의뢰 맥락의 핵심 정보로 규정한다.",
+      "field_links": [
+        "의뢰정보/*",
+        "시험결과/*"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.calspia.go.kr/cpermit/cap/infor/inf101_3v.jsp?permit_cd=Q010",
+      "source_type": "official_public_portal",
+      "summary": "건설CALS는 품질검사를 설계도서에 명시된 자재 규격·품질 적합성 확인 절차로 설명하고, 의뢰서 작성→접수→검사→성과서 작성 흐름을 제시한다.",
+      "field_links": [
+        "의뢰정보/*",
+        "시험결과/*",
+        "발행정보/발행일"
+      ]
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.calspia.go.kr/io/openapi/gid/selectOpenApiSvcListView.do",
+      "source_type": "official_open_data_catalog",
+      "summary": "건설CALS 공개 API 목록에 품질검사성적서 등록 목록과 상세정보 현황이 별도 데이터 대상으로 존재해 성적서 단위 구조를 뒷받침한다.",
+      "field_links": [
+        "시험결과/*",
+        "발행정보/*"
+      ]
+    }
+  ],
+  "application_summary": "웹 근거는 템플릿에 실제로 보이는 의뢰·시험·발행 정보의 의미 확인에만 사용했으며, 대응 anchor가 없는 일반 필드는 추가하지 않았다."
+}

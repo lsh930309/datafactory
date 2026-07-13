@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "doc_id": "FIN-08",
   "title": "전자세금계산서",
   "image": {
@@ -2275,7 +2275,11 @@
     }
   },
   "notes": [
-    "Conservative defaults based on full template image; exact font metrics may need renderer-side QA."
+    "기존 필드별 Dotum/gulim.ttc 스타일과 위치 보정값을 보존했다.",
+    "전체 원본 이미지에서 별도 단위 접미사가 확인되지 않아 단위 중복 방지용 스타일 변경은 하지 않았다.",
+    "최종 적용 전 실제 렌더 결과의 글자 넘침과 baseline을 확인해야 한다."
   ],
-  "updated_at": "2026-07-08T23:49:37.608087+00:00"
+  "updated_at": "2026-07-13T01:47:27.083762+00:00",
+  "status": "pass1_frozen_draft",
+  "source": "기존 stylesheet.json의 검증된 폰트/정렬/크기 보존"
 }

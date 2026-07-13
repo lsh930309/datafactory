@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "doc_id": "QC-02",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:g2b.go.kr 물품 검수 검수조서 납품 검사 검수",
+    "site:law.go.kr 물품 검사 검수 납품 계약",
+    "site:go.kr 물품 검수 보고서 검수일자 검수방법 수량 품질"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000271470",
+      "source_type": "공식 행정규칙",
+      "title": "물품구매(제조)계약 특수조건",
+      "summary": "검수는 검사 합격 물품의 손상·훼손 여부와 계약서 또는 납품서류상 수량대로 납품되었는지 확인하는 절차로 정의된다.",
+      "field_links": [
+        "검수내역/*/검수결과/수량",
+        "검수내역/*/검수결과/품질",
+        "검수내역/*/검수결과/기타"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110202&flSeq=25839677&gubun=",
+      "source_type": "공식 별지 서식",
+      "title": "납품 및 검수 관련 별지 제5호서식",
+      "summary": "공식 서식에도 계약·납품요구 정보, 검수 요청·완료일, 품명·규격·수량과 담당자 날인란이 함께 배치된다.",
+      "field_links": [
+        "입고정보/발주번호",
+        "입고정보/발주일자",
+        "입고정보/입고일자",
+        "입고정보/검수담당자",
+        "검수내역"
+      ]
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2000000020397",
+      "source_type": "공식 행정규칙",
+      "title": "물품구매계약 품질관리 특수조건",
+      "summary": "조달청 검사는 표본 또는 전수 관능검사와 시험 결과를 이용해 적합 여부를 판정할 수 있어 템플릿의 검수방법·품질·기타 결과 열 해석을 보조한다.",
+      "field_links": [
+        "입고정보/검수방법",
+        "검수내역/*/검수결과/품질",
+        "검수내역/*/검수결과/기타"
+      ]
+    }
+  ],
+  "visual_precedence": "웹 근거는 필드 의미 해석만 보조하며, 실제 필드 존재·위치·단위는 전체 템플릿 이미지와 리뷰 use bbox를 우선했다."
+}

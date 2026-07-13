@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-01",
+  "generated_at": "2026-07-13",
+  "unresolved_fields": [
+    {
+      "field_ids": [
+        "invoice_number_date",
+        "lc_number_date",
+        "quantity",
+        "unit_price",
+        "amount",
+        "material_composition",
+        "lot_number",
+        "carton_range"
+      ],
+      "severity": "low",
+      "issue": "필드가 번호+날짜 또는 숫자+단위 등 단일 문자열 bbox라 세부 요소별 constraint를 직접 적용할 수 없음.",
+      "current_handling": "20개 record를 사전 계산해 날짜 순서·금액 계산·표기 형식을 보장.",
+      "decision_needed": "향후 세부 관계를 런타임 계산하려면 schema/bbox를 원자 필드로 분리해야 함."
+    },
+    {
+      "field_ids": [
+        "buyer_reference"
+      ],
+      "severity": "low",
+      "issue": "SAME AS CONSIGNEE와 별도 구매자 상호가 모두 가능한 선택적 의미.",
+      "current_handling": "record별로 두 경우를 현실적으로 혼합했으나 조건부 copy constraint는 지원되지 않아 record가 일관성을 보장."
+    },
+    {
+      "field_ids": [
+        "vessel_flight"
+      ],
+      "severity": "low",
+      "issue": "하나의 bbox가 선박명과 항공편명을 모두 허용하며 운송수단 전용 필드가 없음.",
+      "current_handling": "합성 선박/항공편 형식의 짧은 값 사용."
+    }
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [],
+  "document_scope_limits": [
+    "현재 단일 페이지에 보이는 28개 use anchor만 다룬다.",
+    "템플릿에 없는 HS code, 중량, 세금, 보험료 등은 추가하지 않았다."
+  ],
+  "user_decisions_needed": [
+    "원자 단위 날짜·수량·단가·금액 계산이 필요하면 다음 schema pass에서 bbox/semantic 구조 분리 승인 필요"
+  ]
+}

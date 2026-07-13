@@ -1,0 +1,14 @@
+{
+  "schema_version": 2,
+  "doc_id": "RPT-07",
+  "source_profile": "faker_profile_draft.json",
+  "pools": {
+    "departments": {"kind": "scalar", "count": 20, "usage": ["department"], "note": "실재 조직을 지칭하지 않는 합성 부서명"},
+    "job_titles": {"kind": "scalar", "count": 20, "usage": ["submitter_role", "approver_role"], "note": "일반적인 내부 결재 직급·직책"},
+    "expense_purposes": {"kind": "scalar", "count": 20, "usage": ["expense_1_purpose"], "note": "개인경비 지출결의에서 사용할 수 있는 합성 비용 용도"},
+    "project_names": {"kind": "scalar", "count": 20, "usage": ["expense_1_project"], "note": "실제 사업을 지칭하지 않는 합성 프로젝트명"},
+    "receipt_types": {"kind": "scalar_closed_set", "count": 4, "usage": ["expense_1_receipt_type"], "note": "서식·법령 근거의 폐쇄형 증빙 선택지; faker_profile의 pool_policies 적용"},
+    "expense_records": {"kind": "record", "count": 12, "usage": ["pick_record"], "note": "기안자·결재자·일자·비용·첨부 문구를 한 번에 정합하게 선택하는 완전 합성 레코드"}
+  },
+  "privacy": {"real_personal_data": false, "real_company_data": false, "note": "이름·계좌·기관·파일명은 테스트 전용 합성 값이다."}
+}

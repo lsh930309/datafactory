@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "doc_id": "SEC-01",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:law.go.kr 자본시장법 투자설명서 증권신고서 효력발생일",
+    "site:fss.or.kr 투자설명서 집합투자증권 기재사항",
+    "site:dart.fss.or.kr 투자설명서 집합투자기구 모집 매출 총액",
+    "site:kofia.or.kr 집합투자기구 투자위험등급 1등급 6등급"
+  ],
+  "sources": [
+    {"evidence_id":"CAPITAL-MARKETS-ACT-01","url":"https://www.law.go.kr/법령/자본시장과금융투자업에관한법률","source_type":"official_law","summary":"자본시장법상 증권신고와 투자설명서의 법적 관계 및 효력 발생 후 투자설명서 사용 원칙을 확인했다.","applies_to":["prospectus_preparation_date","securities_registration_effective_date","offering_period_description"]},
+    {"evidence_id":"RISK-GRADE-01","url":"https://law.kofia.or.kr/service/law/detailArticlePrint.do?contentSeq=305503&historySeq=1787&seq=149","source_type":"official_industry_rule","summary":"금융투자상품 위험등급은 최소 6단계이며 1등급이 가장 높은 위험이고 숫자가 커질수록 위험도가 낮아진다.","applies_to":["investment_risk_grade_label","investment_risk_grade"]},
+    {"evidence_id":"DART-FUND-01","url":"https://dart.fss.or.kr/dsac001/mainF.do","source_type":"official_disclosure_system","summary":"DART가 집합투자증권 투자설명서와 효력발생안내를 펀드공시로 제공함을 확인했다. 템플릿 표지의 명칭·업자·증권종류·모집정보 해석을 보조한다.","applies_to":["fund_name","asset_manager_name","disclosure_reference_text","securities_registration_effective_date","offered_security_type","offering_total_amount","offering_period_description"]}
+  ],
+  "evidence_policy":"웹 근거는 의미 해석 보조로만 사용했고, 필드 존재와 단위/문자열 경계는 전체 템플릿 이미지를 우선했다.",
+  "page_scope":{"current_page":1,"source_pdf_pages":67,"expanded_multi_page_schema":false}
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "doc_id": "CRD-02",
+  "locale": "ko_KR",
+  "as_of_date": "2026-07-13",
+  "field_generators": {
+    "certificate_serial_number": "pattern:AAA-####-#-#####-A",
+    "issue_number": "pattern:AAAA-########-###",
+    "recipient_company_name": "company.name_ko",
+    "recipient_suffix": "literal:귀중",
+    "evaluated_company_name": "company.name_ko",
+    "representative_name": "person.name_ko",
+    "corporate_registration_number": "pattern:######-#######",
+    "business_registration_number": "pattern:###-##-#####",
+    "headquarters_address": "address.ko",
+    "fiscal_year_end": "date.kr",
+    "rating_evaluation_date": "date.kr",
+    "rating_valid_until": "date.kr",
+    "submission_purpose": "choice:공공기관 제출용|조달청 입찰 제출용|계약심사 제출용|협력업체 평가용|납품업체 평가용",
+    "credit_rating": "choice:AAA|AA+|AA0|AA-|A+|A0|A-|BBB+|BBB0|BBB-|BB+|BB0|BB-|B+|B0|B-|CCC+",
+    "rating_description": "free_text.short"
+  },
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "credit_certificate_records",
+      "targets": {
+        "certificate_serial_number": "certificate_serial_number",
+        "issue_number": "issue_number",
+        "recipient_company_name": "recipient_company_name",
+        "recipient_suffix": "recipient_suffix",
+        "evaluated_company_name": "evaluated_company_name",
+        "representative_name": "representative_name",
+        "corporate_registration_number": "corporate_registration_number",
+        "business_registration_number": "business_registration_number",
+        "headquarters_address": "headquarters_address",
+        "fiscal_year_end": "fiscal_year_end",
+        "rating_evaluation_date": "rating_evaluation_date",
+        "rating_valid_until": "rating_valid_until",
+        "submission_purpose": "submission_purpose",
+        "credit_rating": "credit_rating",
+        "rating_description": "rating_description"
+      }
+    },
+    {"type": "date_not_after", "target": "fiscal_year_end", "max": "as_of_date"},
+    {"type": "date_not_after", "target": "rating_evaluation_date", "max": "as_of_date"},
+    {"type": "date_not_after", "target": "rating_valid_until", "max": "as_of_date"}
+  ],
+  "data_pools": {
+    "credit_certificate_records": [
+      {"certificate_serial_number":"PPR-2024-1-21299-U","issue_number":"SCRI-20240315-009","recipient_company_name":"가온데이터","recipient_suffix":"귀중","evaluated_company_name":"가온데이터","representative_name":"김도윤","corporate_registration_number":"110111-8534191","business_registration_number":"114-81-47958","headquarters_address":"서울특별시 영등포구 국제금융로 21, 8층","fiscal_year_end":"2023년 12월 31일","rating_evaluation_date":"2024년 04월 10일","rating_valid_until":"2025년 04월 09일","submission_purpose":"공공기관 제출용","credit_rating":"AA+","rating_description":"상기등급은 회사채에 대한\n신용평가등급 AA+에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2024-2-21436-U","issue_number":"SCRI-20240520-010","recipient_company_name":"청명금속","recipient_suffix":"귀중","evaluated_company_name":"청명금속","representative_name":"박서준","corporate_registration_number":"110112-8541502","business_registration_number":"115-82-48151","headquarters_address":"전북특별자치도 전주시 덕진구 팔복로 59","fiscal_year_end":"2023년 12월 31일","rating_evaluation_date":"2024년 05월 14일","rating_valid_until":"2025년 05월 13일","submission_purpose":"조달청 입찰 제출용","credit_rating":"AA-","rating_description":"상기등급은 회사채에 대한\n신용평가등급 AA-에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2024-3-21573-U","issue_number":"SCRI-20240718-011","recipient_company_name":"한빛정밀","recipient_suffix":"귀중","evaluated_company_name":"한빛정밀","representative_name":"이하준","corporate_registration_number":"110113-8548813","business_registration_number":"116-83-48340","headquarters_address":"경기도 안산시 단원구 별망로 141","fiscal_year_end":"2023년 12월 31일","rating_evaluation_date":"2024년 07월 18일","rating_valid_until":"2025년 07월 17일","submission_purpose":"협력업체 평가용","credit_rating":"A+","rating_description":"상기등급은 회사채에 대한\n신용평가등급 A+에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2024-4-21710-U","issue_number":"SCRI-20240922-012","recipient_company_name":"대한소재","recipient_suffix":"귀중","evaluated_company_name":"대한소재","representative_name":"최민지","corporate_registration_number":"110114-8556124","business_registration_number":"117-84-48530","headquarters_address":"충청남도 천안시 서북구 직산읍 공단로 82","fiscal_year_end":"2023년 12월 31일","rating_evaluation_date":"2024년 09월 22일","rating_valid_until":"2025년 09월 21일","submission_purpose":"납품업체 평가용","credit_rating":"A0","rating_description":"상기등급은 회사채에 대한\n신용평가등급 A0에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2024-5-21847-U","issue_number":"SCRI-20241126-013","recipient_company_name":"새론패션","recipient_suffix":"귀중","evaluated_company_name":"새론패션","representative_name":"정서연","corporate_registration_number":"110115-8563435","business_registration_number":"118-85-48734","headquarters_address":"서울특별시 성동구 아차산로 103","fiscal_year_end":"2023년 12월 31일","rating_evaluation_date":"2024년 11월 26일","rating_valid_until":"2025년 11월 25일","submission_purpose":"계약심사 제출용","credit_rating":"BBB+","rating_description":"상기등급은 회사채에 대한\n신용평가등급 BBB+에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2025-6-21984-U","issue_number":"SCRI-20250212-014","recipient_company_name":"미래모빌리티","recipient_suffix":"귀중","evaluated_company_name":"미래모빌리티","representative_name":"윤하준","corporate_registration_number":"110116-8570746","business_registration_number":"119-86-48923","headquarters_address":"대구광역시 달서구 성서공단로 11","fiscal_year_end":"2024년 12월 31일","rating_evaluation_date":"2025년 02월 12일","rating_valid_until":"2026년 02월 11일","submission_purpose":"공공기관 제출용","credit_rating":"AA0","rating_description":"상기등급은 회사채에 대한\n신용평가등급 AA0에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2025-7-22121-U","issue_number":"SCRI-20250416-015","recipient_company_name":"세종바이오","recipient_suffix":"귀중","evaluated_company_name":"세종바이오","representative_name":"강지아","corporate_registration_number":"110117-8578057","business_registration_number":"120-87-49119","headquarters_address":"대전광역시 유성구 테크노중앙로 50","fiscal_year_end":"2024년 12월 31일","rating_evaluation_date":"2025년 04월 16일","rating_valid_until":"2026년 04월 15일","submission_purpose":"조달청 입찰 제출용","credit_rating":"A-","rating_description":"상기등급은 회사채에 대한\n신용평가등급 A-에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2025-8-22258-U","issue_number":"SCRI-20250620-016","recipient_company_name":"아라전자","recipient_suffix":"귀중","evaluated_company_name":"아라전자","representative_name":"오도현","corporate_registration_number":"110118-8585368","business_registration_number":"121-88-49308","headquarters_address":"부산광역시 해운대구 센텀중앙로 79","fiscal_year_end":"2024년 12월 31일","rating_evaluation_date":"2025년 06월 20일","rating_valid_until":"2026년 06월 19일","submission_purpose":"협력업체 평가용","credit_rating":"BBB0","rating_description":"상기등급은 회사채에 대한\n신용평가등급 BBB0에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2025-9-22395-U","issue_number":"SCRI-20250824-017","recipient_company_name":"누리패키징","recipient_suffix":"귀중","evaluated_company_name":"누리패키징","representative_name":"조서윤","corporate_registration_number":"110119-8592679","business_registration_number":"122-89-49502","headquarters_address":"광주광역시 북구 첨단과기로 123","fiscal_year_end":"2024년 12월 31일","rating_evaluation_date":"2025년 08월 24일","rating_valid_until":"2026년 07월 12일","submission_purpose":"납품업체 평가용","credit_rating":"BB+","rating_description":"상기등급은 회사채에 대한\n신용평가등급 BB+에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2025-1-22532-U","issue_number":"SCRI-20251028-018","recipient_company_name":"동원테크놀로지","recipient_suffix":"귀중","evaluated_company_name":"동원테크놀로지","representative_name":"한현우","corporate_registration_number":"110120-8599980","business_registration_number":"123-00-49698","headquarters_address":"경상남도 창원시 성산구 완암로 50","fiscal_year_end":"2024년 12월 31일","rating_evaluation_date":"2025년 10월 28일","rating_valid_until":"2026년 07월 13일","submission_purpose":"계약심사 제출용","credit_rating":"A+","rating_description":"상기등급은 회사채에 대한\n신용평가등급 A+에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2026-2-22669-U","issue_number":"SCRI-20260205-019","recipient_company_name":"온새미로건설","recipient_suffix":"귀중","evaluated_company_name":"온새미로건설","representative_name":"문예준","corporate_registration_number":"110121-8607291","business_registration_number":"124-81-49889","headquarters_address":"인천광역시 연수구 송도과학로 32, 12층","fiscal_year_end":"2025년 12월 31일","rating_evaluation_date":"2026년 02월 05일","rating_valid_until":"2026년 07월 10일","submission_purpose":"공공기관 제출용","credit_rating":"BBB-","rating_description":"상기등급은 회사채에 대한\n신용평가등급 BBB-에 준하는 등급임"},
+      {"certificate_serial_number":"PPR-2026-3-22806-U","issue_number":"SCRI-20260409-020","recipient_company_name":"다온에너지","recipient_suffix":"귀중","evaluated_company_name":"다온에너지","representative_name":"배수아","corporate_registration_number":"110122-8614502","business_registration_number":"125-82-50071","headquarters_address":"울산광역시 남구 산업로 88","fiscal_year_end":"2025년 12월 31일","rating_evaluation_date":"2026년 04월 09일","rating_valid_until":"2026년 07월 11일","submission_purpose":"조달청 입찰 제출용","credit_rating":"B+","rating_description":"상기등급은 회사채에 대한\n신용평가등급 B+에 준하는 등급임"}
+    ]
+  },
+  "field_rules": [
+    {"fields":["recipient_company_name","evaluated_company_name"],"rule":"pick_record 동일 기업명","evidence_ids":["VIS-01","WEB-03"]},
+    {"fields":["business_registration_number"],"rule":"record pool의 10자리 번호는 국세청 가중치 checksum을 만족","evidence_ids":["VIS-01"]},
+    {"fields":["fiscal_year_end","rating_evaluation_date","rating_valid_until"],"rule":"모든 날짜는 2026-07-13 이하이며 결산일 <= 평가일 <= 유효기한","evidence_ids":["VIS-01","WEB-02"]},
+    {"fields":["credit_rating","rating_description"],"rule":"동일 record에서 등급 기호를 설명 문장에 반영","evidence_ids":["VIS-01","WEB-04"]}
+  ]
+}

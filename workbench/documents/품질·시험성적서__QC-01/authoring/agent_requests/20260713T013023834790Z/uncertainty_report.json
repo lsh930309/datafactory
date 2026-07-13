@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "doc_id": "QC-01",
+  "pass": "faker_and_relationship_expansion_2_of_2",
+  "unresolved_fields": [
+    {"field_ids": ["section_1_test_method", "section_2_test_method"], "severity": "medium", "issue": "원본은 의뢰인제시방법이나 실제 시험방법은 제품·의뢰 조건에 따라 달라진다.", "decision_needed": "현재 제한 선택지를 유지할지 실제 승인된 시험방법 목록으로 교체할지 검토"},
+    {"field_ids": ["national_critical_facility_status"], "severity": "medium", "issue": "서식 주석은 해당 시 시설명을 적도록 안내하지만 조건부 문자열 조합은 지원 constraint로 표현할 수 없다.", "decision_needed": "시설명 별도 bbox/schema가 확보되기 전에는 두 문자열 선택지로 근사"},
+    {"field_ids": ["page_indicator"], "severity": "high", "issue": "원본은 총2페이지중 1페이지이나 현재 요청은 1페이지만 포함한다.", "decision_needed": "2페이지 템플릿과 anchor가 확보될 때까지 고정 literal 유지"}
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    {"field_ids": ["project_name"], "rule": "free_text.short", "reason": "원본 값이 하이픈이라 구체 형식을 시각 근거로 확정할 수 없음"},
+    {"field_ids": ["ordering_client", "contractor_name", "observer_name", "inventory_quantity"], "reason": "원본 값이 하이픈이므로 문서 의미에 맞는 보수적 합성 generator를 적용했으나 필수/선택 여부는 확정할 수 없음"},
+    {"field_ids": ["section_1_responsible_cert_number", "section_2_responsible_cert_number"], "rule": "pattern:############", "reason": "지원 문법으로 자격종목별 자격번호 검증을 표현할 수 없어 12자리 숫자로 근사"},
+    {"field_ids": ["receipt_number"], "rule": "template:{{pattern:######}}-{{pattern:###}}", "reason": "원본 형식만 반영했으며 발급기관별 접수번호 규칙은 다를 수 있음"},
+    {"field_ids": ["office_fax"], "rule": "person.phone_kr", "reason": "지원 문법에 팩스 전용 생성기가 없어 한국 전화번호 형식으로 근사"}
+  ],
+  "relationship_limitations": [
+    {"fields": ["sample_name_country", "section_1_d19_inner_diameter", "section_1_d22_inner_diameter", "section_1_d25_inner_diameter", "section_2_d29_inner_diameter", "section_2_d32_inner_diameter"], "issue": "품명에 선택된 규격 집합과 표의 D19~D32 열 구성을 조건부로 동기화하는 관계는 지원 constraint에 없음.", "required_repair": "제품 규격을 별도 field와 record pool로 구조화하고 조건부 열 렌더링을 지원해야 함"},
+    {"fields": ["receipt_date_text", "sampling_date_text", "issue_date_text"], "issue": "date.kr의 화면 출력 구두점이 원본의 점 표기 및 년월일 표기와 완전히 같다는 보장이 없음.", "required_repair": "단일 날짜 field에 출력 포맷 옵션을 지원하거나 연월일 bbox를 분리"},
+    {"fields": ["office_phone", "office_fax"], "issue": "전화와 팩스가 서로 다른 번호가 되도록 강제하는 부등 관계 constraint가 없음.", "required_repair": "distinct 제약 지원 필요"}
+  ],
+  "page_scope_limitation": "요청 지침에 따라 QC-01 다중 페이지 완결성은 확장하지 않았으며 현재 1페이지 KIE와 값 품질만 다룬다.",
+  "research_note": "2026-07-13 live search에서 건설기술진흥법 및 시행규칙의 품질시험·검사, 대행 의뢰, 성적서 관리 맥락을 재확인했으나 고정 스키마에는 새 필드를 추가하지 않았다."
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "created_at": "2026-07-09T01:07:53.049442+00:00",
+  "created_at": "2026-07-13T02:37:44.829612+00:00",
   "doc_id": "MED-05",
   "title": "입퇴원확인서",
-  "source_review": "workbench/documents/입퇴원확인서__MED-05/review/original_입퇴원확인서_page_001/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/입퇴원확인서__MED-05/authoring/agent_applied_reviews/20260713T022300273972Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/입퇴원확인서__MED-05/samples/original/입퇴원확인서_page_001.jpg",
   "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/입퇴원확인서__MED-05/samples/original/입퇴원확인서_page_001.jpg",
   "image": {
@@ -12,9 +12,9 @@
   },
   "bbox_source": {
     "canonical": "review",
-    "review_path": "workbench/documents/입퇴원확인서__MED-05/review/original_입퇴원확인서_page_001/review.json"
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/입퇴원확인서__MED-05/authoring/agent_applied_reviews/20260713T022300273972Z/review.json"
   },
-  "anchor_map_ref": "/Users/lsh930309/projects/dataFatory/workbench/documents/입퇴원확인서__MED-05/review/original_입퇴원확인서_page_001/review.json",
+  "anchor_map_ref": "workbench/documents/입퇴원확인서__MED-05/authoring/agent_requests/20260713T022300273972Z/anchor_map_draft.json",
   "semantic_schema": {
     "문서관리": {
       "등록번호": "",
@@ -86,15 +86,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록번호",
+        "json_path": "문서관리/등록번호",
         "csv_column": "등록번호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "serial_number",
@@ -114,15 +115,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "연번호",
+        "json_path": "문서관리/연번호",
         "csv_column": "연번호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "patient_name",
@@ -142,15 +144,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "환자의 성명",
+        "json_path": "환자/성명",
         "csv_column": "환자의 성명"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "patient_rrn",
@@ -170,15 +173,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "환자의 주민등록번호",
+        "json_path": "환자/주민등록번호",
         "csv_column": "환자의 주민등록번호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "patient_age",
@@ -198,15 +202,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "나이",
+        "json_path": "환자/나이",
         "csv_column": "나이"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "patient_address",
@@ -226,15 +231,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "환자의 주소",
+        "json_path": "환자/주소",
         "csv_column": "환자의 주소"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "diagnosis_1_name",
@@ -249,22 +255,23 @@
       "source_detection_id": "manual_1783555842269",
       "source_text": "병명 1",
       "value_type": "free_text.short",
-      "generator": "pool:diagnosis_names",
+      "generator": "free_text.short",
       "style_class": "style_diagnosis_1_name",
       "render_policy": {
         "align": "left",
         "valign": "top",
         "fit": "wrap",
         "overflow": "wrap",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "병명 1",
+        "json_path": "진료내용/진단내역/1/병명",
         "csv_column": "병명 1"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "diagnosis_1_code",
@@ -279,22 +286,23 @@
       "source_detection_id": "manual_1783555847070",
       "source_text": "질병분류기호 1",
       "value_type": "free_text.short",
-      "generator": "pool:diagnosis_codes",
+      "generator": "pattern:A##.#",
       "style_class": "style_diagnosis_1_code",
       "render_policy": {
         "align": "left",
         "valign": "top",
         "fit": "wrap",
         "overflow": "wrap",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "질병분류기호 1",
+        "json_path": "진료내용/진단내역/1/질병분류기호",
         "csv_column": "질병분류기호 1"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "diagnosis_2_name",
@@ -309,22 +317,23 @@
       "source_detection_id": "manual_1783556053407",
       "source_text": "병명 2",
       "value_type": "free_text.short",
-      "generator": "pool:diagnosis_names",
+      "generator": "free_text.short",
       "style_class": "style_diagnosis_2_name",
       "render_policy": {
         "align": "left",
         "valign": "top",
         "fit": "wrap",
         "overflow": "wrap",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "병명 2",
+        "json_path": "진료내용/진단내역/2/병명",
         "csv_column": "병명 2"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "diagnosis_2_code",
@@ -339,22 +348,23 @@
       "source_detection_id": "manual_1783556059258",
       "source_text": "질병분류기호 2",
       "value_type": "free_text.short",
-      "generator": "pool:diagnosis_codes",
+      "generator": "pattern:A##.#",
       "style_class": "style_diagnosis_2_code",
       "render_policy": {
         "align": "left",
         "valign": "top",
         "fit": "wrap",
         "overflow": "wrap",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "질병분류기호 2",
+        "json_path": "진료내용/진단내역/2/질병분류기호",
         "csv_column": "질병분류기호 2"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "diagnosis_3_name",
@@ -369,22 +379,23 @@
       "source_detection_id": "manual_1783556063857",
       "source_text": "병명 3",
       "value_type": "free_text.short",
-      "generator": "pool:diagnosis_names",
+      "generator": "free_text.short",
       "style_class": "style_diagnosis_3_name",
       "render_policy": {
         "align": "left",
         "valign": "top",
         "fit": "wrap",
         "overflow": "wrap",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "병명 3",
+        "json_path": "진료내용/진단내역/3/병명",
         "csv_column": "병명 3"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "diagnosis_3_code",
@@ -399,22 +410,23 @@
       "source_detection_id": "manual_1783556069641",
       "source_text": "질병분류기호 3",
       "value_type": "free_text.short",
-      "generator": "pool:diagnosis_codes",
+      "generator": "pattern:A##.#",
       "style_class": "style_diagnosis_3_code",
       "render_policy": {
         "align": "left",
         "valign": "top",
         "fit": "wrap",
         "overflow": "wrap",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "질병분류기호 3",
+        "json_path": "진료내용/진단내역/3/질병분류기호",
         "csv_column": "질병분류기호 3"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "onset_date",
@@ -434,15 +446,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발병연월일",
+        "json_path": "진료내용/발병연월일",
         "csv_column": "발병연월일"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "admission_discharge_type",
@@ -462,15 +475,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "입원·퇴원구분",
+        "json_path": "진료내용/입원퇴원구분",
         "csv_column": "입원·퇴원구분"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "admission_date",
@@ -484,7 +498,7 @@
       "source_detection_id": "manual_1783555859603",
       "source_text": "입원·퇴원연월일",
       "value_type": "date.kr",
-      "generator": "pool:admission_dates",
+      "generator": "date.kr",
       "style_class": "style_admission_discharge_period",
       "render_policy": {
         "align": "left",
@@ -500,10 +514,7 @@
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use",
-      "key": "입원일",
-      "faker_rule": "pool:admission_dates",
-      "value": ""
+      "render_mode": "printed"
     },
     {
       "field_id": "discharge_date",
@@ -517,7 +528,7 @@
       "source_detection_id": "manual_1783555859603",
       "source_text": "입원·퇴원연월일",
       "value_type": "date.kr",
-      "generator": "pool:discharge_dates",
+      "generator": "date.kr",
       "style_class": "style_admission_discharge_period",
       "render_policy": {
         "align": "left",
@@ -533,10 +544,7 @@
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use",
-      "key": "퇴원일",
-      "faker_rule": "pool:discharge_dates",
-      "value": ""
+      "render_mode": "printed"
     },
     {
       "field_id": "admission_discharge_period",
@@ -550,23 +558,24 @@
       "source_detection_id": "manual_1783555859603",
       "source_text": "입원·퇴원연월일",
       "value_type": "free_text.short",
-      "generator": "pool:admission_period_labels",
+      "generator": "free_text.short",
       "style_class": "style_admission_discharge_period",
       "render_policy": {
         "align": "left",
         "valign": "top",
         "fit": "wrap",
         "overflow": "wrap",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
         "json_path": "진료내용/입원퇴원연월일/표시문구",
         "csv_column": "진료내용/입원퇴원연월일/표시문구",
-        "include": false
+        "include": "false"
       },
       "required": true,
       "notes": "primary semantic schema는 admission_date/discharge_date hidden fields로 분리 저장하고 이 field는 렌더링 전용 표시문구이다.",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "doctor_opinion",
@@ -586,15 +595,16 @@
         "valign": "top",
         "fit": "wrap",
         "overflow": "wrap",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "의사소견",
+        "json_path": "진료내용/의사소견",
         "csv_column": "의사소견"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "remarks",
@@ -614,15 +624,16 @@
         "valign": "top",
         "fit": "wrap",
         "overflow": "wrap",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고",
+        "json_path": "진료내용/비고",
         "csv_column": "비고"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "purpose",
@@ -642,15 +653,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "용도",
+        "json_path": "진료내용/용도",
         "csv_column": "용도"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "issue_year",
@@ -671,15 +683,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발급일자 년",
+        "json_path": "확인/발급일자/년",
         "csv_column": "발급일자 년"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "issue_month",
@@ -700,15 +713,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발급일자 월",
+        "json_path": "확인/발급일자/월",
         "csv_column": "발급일자 월"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "issue_day",
@@ -729,15 +743,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발급일자 일",
+        "json_path": "확인/발급일자/일",
         "csv_column": "발급일자 일"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "medical_institution_name",
@@ -758,15 +773,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "의료기관 명칭",
+        "json_path": "확인/의료기관/명칭",
         "csv_column": "의료기관 명칭"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "medical_institution_address",
@@ -787,15 +803,16 @@
         "valign": "top",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "의료기관 주소",
+        "json_path": "확인/의료기관/주소",
         "csv_column": "의료기관 주소"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "doctor_license_number",
@@ -816,15 +833,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "의사 면허번호",
+        "json_path": "확인/의사/면허번호",
         "csv_column": "의사 면허번호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "doctor_name",
@@ -845,17 +863,18 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "의사 성명",
+        "json_path": "확인/의사/성명",
         "csv_column": "의사 성명"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "updated_at": "2026-07-09T01:28:51.933734+00:00"
+  "updated_at": "2026-07-13T02:37:44.853199+00:00"
 }

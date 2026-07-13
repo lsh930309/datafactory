@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-07",
+  "pass": "2/2 faker_and_relationship_expansion",
+  "unresolved_fields": [
+    {
+      "field_id": "line_2_quantity",
+      "anchor_id": "det_000071",
+      "issue": "원본은 '-'처럼 보이지만 같은 행 단가와 금액이 60,000으로 같아 수량 1이 산술적으로 자연스럽다.",
+      "resolution_in_draft": "품목 record pool에서는 양의 정수 수량만 사용하고 amount=quantity*unit_price를 보장했다.",
+      "user_decision_needed": "원본 기호 '-'도 허용해야 하는지 승인 필요",
+      "severity": "medium"
+    },
+    {
+      "field_id": "line_2_remark",
+      "anchor_id": "det_000075",
+      "issue": "세로 병합 셀이라 field_id 명칭과 달리 품목 2 전용이 아닌 4개 행 공통 비고로 보인다.",
+      "resolution_in_draft": "고정 semantic_path와 field_id는 유지하고 공통 제조 발주 비고 pool을 적용했다.",
+      "user_decision_needed": "공통 비고 해석 승인 필요",
+      "severity": "medium"
+    },
+    {
+      "field_id": "prepared_date, reviewed_date, approved_date",
+      "issue": "원본 결재일은 연도 없는 M/D이며 supported date_group/date_order는 분리 연월일 또는 단일 date.kr 필드를 전제로 한다.",
+      "resolution_in_draft": "MM/DD 레코드 20개로 표시 폭과 작성<=검토<=승인 관계를 보장했다. 자연어/비지원 constraint는 추가하지 않았다.",
+      "user_decision_needed": "연도 없는 MM/DD 렌더링 승인 필요",
+      "severity": "medium"
+    },
+    {
+      "field_id": "line_1_due_date, line_2_due_date, line_3_due_date, line_4_due_date",
+      "issue": "납기 셀은 실제 날짜와 ASAP·협의 같은 상태 문자열을 함께 수용한다. 단일 지원 규칙으로 작업일 대비 날짜 순서를 강제할 수 없다.",
+      "resolution_in_draft": "20개 scalar 기본 pool과 검산된 item record pool을 사용했으며 복잡한 조건부 날짜 constraint는 보류했다.",
+      "user_decision_needed": "향후 납기를 날짜/상태로 분리할지 결정 필요",
+      "severity": "low"
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "topic": "품목2 수량",
+      "visual_evidence": "det_000071 값이 '-'처럼 보임",
+      "relationship_evidence": "동일 행 단가 60,000, 금액 60,000은 수량 1과 일치",
+      "draft_decision": "산술 일관성을 우선해 합성값은 양의 정수로 제한"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "fields": ["prepared_date", "reviewed_date", "approved_date"],
+      "rule": "pool:approval_dates_mmdd + pick_record:approval_date_records",
+      "limitation": "연도가 보이지 않아 기준일 이전 여부는 2026년으로 해석한 레코드 설계에 의존"
+    },
+    {
+      "fields": ["line_1_due_date", "line_2_due_date", "line_3_due_date", "line_4_due_date"],
+      "rule": "pool:due_date_terms + pick_record:item_records",
+      "limitation": "날짜와 상태 문자열의 조건부 의미를 renderer constraint로 표현하지 못함"
+    }
+  ],
+  "user_decisions_needed": [
+    "품목2 수량 '-' 허용 여부",
+    "병합 비고 셀의 공통 비고 해석 승인",
+    "결재일 MM/DD 형식 승인",
+    "납기 날짜와 상태 문자열의 장기 schema 분리 여부"
+  ],
+  "scope_limitations": [
+    "현재 단일 페이지 KIE와 값 품질만 확장했으며 다중 페이지 완결성은 다루지 않았다.",
+    "사업자등록번호·승인번호 bbox가 고정 schema에 없어 generator나 checksum 관계를 추가하지 않았다.",
+    "수량×단가=금액은 지원 산술 constraint가 없어 item_records에서 사전 검산하고, 공급가합계만 지원 sum constraint로 계산한다."
+  ],
+  "coverage": {
+    "use_anchor_count": 46,
+    "bound_use_anchor_count": 46,
+    "coverage_percent": 100,
+    "binding_count": 46,
+    "field_generator_count": 46,
+    "unmapped_use_anchors": [],
+    "missing_field_generators": [],
+    "extra_field_generators": []
+  }
+}

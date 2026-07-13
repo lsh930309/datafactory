@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import json
 import mimetypes
 import os
@@ -10,11 +11,11 @@ import subprocess
 import sys
 import tempfile
 import threading
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from time import perf_counter
+from time import perf_counter, sleep
 from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
 
@@ -81,7 +82,8 @@ AUTHORING_AGENT_REQUIRED_OUTPUTS = [
     "application_notes.md",
 ]
 AUTHORING_AGENT_JSON_OUTPUTS = {name for name in AUTHORING_AGENT_REQUIRED_OUTPUTS if name.endswith(".json")}
-DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE = 12
+DEFAULT_AUTHORING_AGENT_SCALAR_POOL_MIN_SIZE = 20
+DEFAULT_AUTHORING_AGENT_RECORD_POOL_MIN_SIZE = 12
 AUTHORING_AGENT_REASONING_EFFORTS = {"low", "medium", "high"}
 AUTHORING_AGENT_SUPPORTED_FAKER_RULES = [
     "literal:<고정 더미 문자열>",
@@ -98,6 +100,7 @@ AUTHORING_AGENT_SUPPORTED_FAKER_RULES = [
     "date.month",
     "date.day",
     "money.krw",
+    "business_reg_no",
     "company.name_ko",
     "medical.institution_ko",
     "address.ko",
@@ -113,9 +116,12 @@ AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES = [
     "`exclusive_choice`는 `{type:'exclusive_choice', targets:[field_id...]}`로 작성하며 동일 그룹 체크박스 중 정확히 하나만 선택되어야 할 때 사용한다.",
     "`primary_secondary_group`은 수술 행별 주수술/부수술 체크박스에만 사용한다. 형식은 `{type:'primary_secondary_group', rows:[{primary:'수술1_주수술', secondary:'수술1_부수술'}, ...]}`이며 정확히 한 행만 주수술=true, 나머지는 부수술=true가 된다.",
     "`date_group`은 `{type:'date_group', year:'field_id', month:'field_id', day:'field_id', min_year:2020, max_year:2027}`로 작성해 분리된 연/월/일 bbox가 항상 유효한 한 날짜가 되게 한다. 템플릿에 `20` 같은 세기 prefix가 이미 인쇄되어 연도 bbox가 뒤 2자리만 받는 경우에만 `year_format:'yy'`를 추가한다.",
-    "`date_order`는 `{type:'date_order', start:{year,month,day}, end:{year,month,day}, min_days:0, max_days:60}`로 작성해 종료일이 시작일보다 빠르지 않게 한다. start/end의 year/month/day는 각각 field_id 문자열이어야 한다.",
+    "`date_order`는 `{type:'date_order', start:{year,month,day}, end:{year,month,day}, min_days:0, max_days:60}` 또는 start/end가 각각 단일 `date.kr` field_id인 형태로 작성해 종료일이 시작일보다 빠르지 않게 한다.",
     "`date_not_before`는 `{type:'date_not_before', source:'source_date_field_id', target:{year:'field_id', month:'field_id', day:'field_id'}, min_days:0, max_days:90}`로 작성해 target 날짜가 source 날짜보다 과거가 되지 않게 한다. source/target은 단일 date.kr field 또는 year/month/day group을 사용할 수 있다.",
+    "`date_not_after`는 `{type:'date_not_after', target:'date_field_id', max:'as_of_date'}`로 작성해 target 날짜가 작업일보다 미래가 되지 않게 한다. target은 단일 date.kr field 또는 year/month/day group을 사용할 수 있고, max는 `as_of_date` 또는 다른 날짜 field/group이다.",
     "`sum`은 `{type:'sum', sources:[field_id...], target:'field_id', format:'money.krw'}`로 작성해 합계/소계/총액 bbox가 구성 항목의 합과 일치하게 한다.",
+    "`numeric_range`는 `{type:'numeric_range', target:'field_id', min:0, max:20, decimals:2, suffix:'%'}`로 작성해 금리, 비율, 수량, 금액 등의 현실 범위를 제한한다.",
+    "`numeric_compare`는 `{type:'numeric_compare', left:'equity_field_id', operator:'<=', right:'assets_field_id'}`로 작성해 두 숫자 field 사이의 대소 관계를 보장한다. operator는 `<`, `<=`, `>`, `>=`만 허용한다.",
     "`age_from_rrn`은 `{type:'age_from_rrn', rrn:'rrn_field_id', age:'age_field_id', issue:{year:'field_id', month:'field_id', day:'field_id'}}`로 작성해 발급일 기준 만 나이를 주민등록번호와 일치시킨다.",
     "지원하지 않는 관계, 단일 문자열 내부의 복잡한 날짜 순서, 조건부 선택/복합 수식은 자연어 constraint로 쓰지 말고 uncertainty_report에 보류 사유와 필요한 bbox/schema 조정을 기록한다.",
 ]
@@ -480,14 +486,38 @@ def _authoring_agent_options(payload: dict[str, Any]) -> dict[str, Any]:
         reasoning = "medium"
     fast_mode = bool(raw_options.get("fastMode", False))
     try:
-        min_pool_size = int(raw_options.get("minPoolSize") or raw_options.get("fakerMinPoolSize") or DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE)
+        scalar_pool_min_size = int(raw_options.get("scalarPoolMinSize") or raw_options.get("minPoolSize") or raw_options.get("fakerMinPoolSize") or DEFAULT_AUTHORING_AGENT_SCALAR_POOL_MIN_SIZE)
     except (TypeError, ValueError):
-        min_pool_size = DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE
-    min_pool_size = max(1, min(100, min_pool_size))
+        scalar_pool_min_size = DEFAULT_AUTHORING_AGENT_SCALAR_POOL_MIN_SIZE
+    try:
+        record_pool_min_size = int(raw_options.get("recordPoolMinSize") or DEFAULT_AUTHORING_AGENT_RECORD_POOL_MIN_SIZE)
+    except (TypeError, ValueError):
+        record_pool_min_size = DEFAULT_AUTHORING_AGENT_RECORD_POOL_MIN_SIZE
+    scalar_pool_min_size = max(1, min(100, scalar_pool_min_size))
+    record_pool_min_size = max(1, min(100, record_pool_min_size))
     mode = str(raw_options.get("mode") or "authoring").strip().lower()
     if mode not in {"authoring", "bbox_correction"}:
         mode = "authoring"
-    return {"reasoningEffort": reasoning, "fastMode": fast_mode, "minPoolSize": min_pool_size, "mode": mode}
+    as_of_date = _parse_as_of_date(raw_options.get("asOfDate"))
+    return {
+        "reasoningEffort": reasoning,
+        "fastMode": fast_mode,
+        "minPoolSize": scalar_pool_min_size,
+        "scalarPoolMinSize": scalar_pool_min_size,
+        "recordPoolMinSize": record_pool_min_size,
+        "asOfDate": as_of_date.isoformat(),
+        "mode": mode,
+    }
+
+
+def _parse_as_of_date(value: Any) -> date:
+    raw = str(value or "").strip()
+    if not raw:
+        return date.today()
+    try:
+        return date.fromisoformat(raw)
+    except ValueError as exc:
+        raise ValueError("asOfDate must use YYYY-MM-DD format") from exc
 
 
 def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
@@ -531,6 +561,13 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "contract": {
             "mode": "agentic_bbox_correction" if options["mode"] == "bbox_correction" else "agentic_authoring_a_to_z",
             "inference_options": options,
+            "pipeline": {
+                "stages": ["schema_pass", "faker_pass", "validation_repair_pass"],
+                "primary_schema": "schema_draft.json.semantic_schema",
+                "binding_layer": "schema_draft.json.fields|field_bindings",
+                "runtime_faker": "faker_profile_draft.json.field_generators+data_pools+constraints",
+                "missing_use_anchor_policy": "materialize_under_검토필요_and_report_repair",
+            },
             "sample_kind": sample_kind,
             "input_formats": ["pdf", "jpg", "jpeg", "png", "docx"],
             "generation_paths": ["image-template", "editable-office-template"],
@@ -553,6 +590,7 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "schema_rules": [
                 "`schema_draft.json`은 constrained full authoring draft이다. Agent가 의미 판단과 bbox mapping을 함께 수행하되, 시스템이 deterministic하게 분할할 수 있는 JSON만 작성한다.",
                 "`schema_draft.json.semantic_schema`는 사용자와 GT가 보는 primary schema이다. 메타데이터 없이 KIE 관점의 key-value hierarchy만 작성하고 모든 leaf value는 빈 문자열로 둔다.",
+                "현재 primary schema 런타임은 JSON object hierarchy만 지원한다. 배열/list를 사용하지 말고 반복 행은 `검수내역/행1/...`, `검수내역/행2/...`처럼 명시적 object key로 구조화한다.",
                 "`schema_draft.json.fields` 또는 `schema_draft.json.field_bindings`는 semantic_schema leaf와 bbox anchor를 연결하기 위한 binding layer로만 사용한다.",
                 "각 binding은 `field_id`, 한국어 `key` 또는 `label`, `semantic_path`, `anchor_id`, 빈 `value`, 선택적 `label_anchor_ids`, `value_type`, `faker_rule`/`generator`, `style_class`, `unit_policy`, `research_evidence_ids`, `visual_evidence`를 포함한다.",
                 "각 binding의 `semantic_path`는 반드시 `semantic_schema`의 leaf path와 정확히 일치해야 한다. 단, 화면 렌더링만을 위한 복합 표시 필드는 `export:{include:false}`를 명시하고 semantic_schema leaf 매핑에서 제외할 수 있다.",
@@ -574,14 +612,16 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "faker_profile_rules": [
                 "schema key의 의미가 충분히 명확하고 문서 anchor 또는 리서치 근거와 연결될 때만 faker rule을 제안한다.",
                 "문서 필드의 의미와 실제 작성 관행을 근거로 타입, 형식, 값 범위, 선택지, 단위, 날짜/금액/식별번호 규칙을 제안하되, 반드시 현재 DataFactory 렌더러가 지원하는 rule 문법만 사용한다.",
+                f"날짜와 연령 관계는 요청의 고정 기준일 `{options['asOfDate']}`을 기준으로 설계한다. 미래 날짜를 만들지 말고 실행 시각에 따라 결과가 달라지는 암묵적 today를 전제로 하지 않는다.",
                 "서로 독립적으로 생성하면 문서 유효성이 깨지는 field들은 `faker_profile_draft.json.constraints`에 명시적으로 모델링한다. 예: 체크박스 택1, 시작/종료일 순서, 행/열 합계, 본인부담금/공단부담금/총액 관계.",
-                "지원 constraint 타입은 `pick_record`, `copy`, `exclusive_choice`, `primary_secondary_group`, `date_group`, `date_order`, `date_not_before`, `sum`, `age_from_rrn`뿐이다. 지원하지 않는 수식 DSL이나 자연어 constraint는 쓰지 말고 uncertainty_report에 보류한다.",
+                "지원 constraint 타입은 `pick_record`, `copy`, `exclusive_choice`, `primary_secondary_group`, `date_group`, `date_order`, `date_not_before`, `date_not_after`, `sum`, `numeric_range`, `numeric_compare`, `age_from_rrn`뿐이다. 지원하지 않는 수식 DSL이나 자연어 constraint는 쓰지 말고 uncertainty_report에 보류한다.",
                 "연/월/일이 각각 다른 bbox로 분리된 날짜 placeholder에는 `date.year`, `date.month`, `date.day`를 우선 사용한다. 날짜의 월/일/연도에 `pattern:##` 또는 `pattern:####`를 쓰지 않는다.",
                 "문서 이미지/템플릿의 값 입력 위치 바로 옆/안에 `㎡`, `m²`, `m2`, `%`, `m`, `원`, `명`, `건`, `동`, `층` 같은 단위가 이미 정적 텍스트로 남아 있으면 faker 값에는 그 단위를 포함하지 않는다.",
                 "`호/가구/세대`처럼 라벨에만 단위 의미가 있고 값 위치에 별도 정적 단위가 없는 복합 값은 단위를 포함해 생성한다. 단위 포함/제외 근거를 field_rules 또는 uncertainty_report에 기록한다.",
                 "faker_profile_draft.json에는 렌더러가 직접 읽는 `field_generators` 객체를 반드시 포함하고, key는 schema_draft.fields[].field_id, value는 지원 rule 문자열이어야 한다.",
                 f"지원 rule 문법: {', '.join(AUTHORING_AGENT_SUPPORTED_FAKER_RULES)}.",
-                f"`pool:<name>`을 쓰는 경우 faker_profile_draft.json의 `data_pools.<name>`에 반드시 실제 scalar 합성 값 배열을 함께 정의한다. pool은 최소 {options['minPoolSize']}개 이상의 다양하고 현실적인 scalar 값을 포함해야 하며, data_pools에 없는 pool 이름은 절대 쓰지 않는다.",
+                f"`pool:<name>`을 쓰는 경우 faker_profile_draft.json의 `data_pools.<name>`에 반드시 실제 scalar 합성 값 배열을 함께 정의한다. 열린 scalar pool은 최소 {options['scalarPoolMinSize']}개, `pick_record`용 상관관계 record pool은 최소 {options['recordPoolMinSize']}개의 다양하고 현실적인 값을 포함해야 하며, data_pools에 없는 pool 이름은 절대 쓰지 않는다.",
+                "법령/서식상 선택지가 고정된 작은 폐쇄형 pool만 `pool_policies.<name>={closed_set:true, exception_kind:'legal_or_form_closed_set', evidence:'...'}`와 근거를 명시해 최소 크기 예외로 인정한다. 단순히 자료를 충분히 만들지 못한 pool이나 현실의 개방형 record pool에는 이 예외를 사용하지 않는다.",
                 "`date_between:`, `time|format:`, `decimal_range:`, `identifier.*`, `area.*`, `land_use.*`, `building.*`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`처럼 현재 렌더러가 모르는 custom rule/type 이름은 field_generators 값으로 쓰지 않는다.",
                 "지원 문법만으로 정밀 형식을 표현하기 어렵다면 `pattern:`, `choice:`, `pool:`, `template:` 중 하나로 근사하고, 근사 사유와 원래 의도는 field_rules 또는 uncertainty_report에 기록한다.",
                 "의미가 불확실한 key는 literal:, choice:, pool: 등을 임의 생성하지 말고 보류 사유를 기록한다.",
@@ -614,7 +654,9 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "use_anchor_coverage_required": True,
             "unknown_use_anchor_policy": "create primary semantic leaf under 검토필요 and mark review_required",
             "faker_profile_workflow": "internal_two_pass_schema_then_pool_expansion",
-            "min_pool_size": options["minPoolSize"],
+            "scalar_pool_min_size": options["scalarPoolMinSize"],
+            "record_pool_min_size": options["recordPoolMinSize"],
+            "as_of_date": options["asOfDate"],
         },
         "inputs": {
             "registry": doc.to_dict(),
@@ -930,9 +972,9 @@ def _write_authoring_agent_anchor_review(
         auto_type = str(anchor.get("auto_type") or anchor.get("type") or "unknown").strip()
         if auto_type not in {"field_value", "static_label", "table_cell", "long_paragraph", "header_footer", "stamp_or_seal", "watermark", "unknown"}:
             auto_type = "unknown"
-        render_mode = str(anchor.get("render_mode") or "handwriting").strip()
+        render_mode = str(anchor.get("render_mode") or "printed").strip()
         if render_mode not in {"handwriting", "printed"}:
-            render_mode = "handwriting"
+            render_mode = "printed"
         text = str(anchor.get("text") or anchor.get("suggested_schema_key") or "")
         labels.append(
             {
@@ -979,8 +1021,29 @@ def _write_authoring_agent_anchor_review(
     return out_path
 
 
-def _authoring_agent_exec_prompt(*, request_path: Path, request_dir: Path, run_dir: Path) -> str:
+def _authoring_agent_exec_prompt(*, request_path: Path, request_dir: Path, run_dir: Path, stage: str = "full") -> str:
+    stage_instruction = {
+        "schema": """## Current pass: 1/2 schema and evidence freeze
+- Produce or replace only schema_draft.json, stylesheet_draft.json, research_report.json, uncertainty_report.json, and anchor_map_draft.json.
+- Do not author faker_profile_draft.json or value_pool_draft.json in this pass.
+- Freeze a complete primary semantic hierarchy and 100% use-anchor binding coverage. Field IDs written here are the immutable contract for pass 2.
+""",
+        "faker": """## Current pass: 2/2 faker and relationship expansion
+- Treat the existing schema_draft.json, anchor_map_draft.json, research_report.json, and stylesheet_draft.json from pass 1 as fixed inputs.
+- Do not rename field_id, change semantic_path, drop bindings, or restructure semantic_schema in this pass.
+- Produce or replace faker_profile_draft.json, value_pool_draft.json, uncertainty_report.json, and application_notes.md.
+- Expand realistic pools and supported relationships, then validate every fixed binding has exactly one supported field generator.
+""",
+        "validation_repair": """## Current pass: validation repair
+- Read the current draft files and the appended machine validation errors.
+- Make the smallest changes needed to satisfy the contract. Preserve the pass-1 semantic hierarchy, field IDs, semantic paths, anchors, and validated stylesheet unless a reported error explicitly requires changing them.
+- Never silence an error by dropping a use anchor, semantic leaf, generator, pool relationship, or research evidence.
+- Re-run JSON/coverage/pool/constraint checks before finishing.
+""",
+    }.get(stage, "## Current pass: full draft generation\n")
     return f"""# Codex authoring inference job
+
+{stage_instruction}
 
 You are running as a local Codex subprocess for the DataFactory workbench.
 
@@ -995,7 +1058,7 @@ You are running as a local Codex subprocess for the DataFactory workbench.
 - Write outputs only inside this request directory: `{_display_path(request_dir, ROOT)}`.
 - Do not overwrite final `schema.json`, `stylesheet.json`, or `faker_profile.json`.
 - Do not edit source code, registry files, workbench manifests, or samples.
-- Run the work as an internal two-pass process: first finalize primary semantic_schema plus bbox bindings for every use anchor, then expand faker_profile/value pools/constraints against those fixed field_ids.
+- Respect the current pass boundary. The outer job runner invokes separate Codex processes for schema/evidence and faker/relationship work.
 - If a use anchor is uncertain, do not omit it. Create a `검토필요/<anchor_id or visible label>` primary schema leaf, bind the anchor, set `review_required:true`, use a conservative supported faker rule such as `free_text.short`, and record the uncertainty.
 - For blank templates, never use a static label/keep bbox as `schema_draft.fields[].anchor_id`. Use `label_anchor_ids` for label evidence and use only a confirmed value-region/checkbox/table-cell/manual/visual-line-detect anchor as the field target.
 
@@ -1021,7 +1084,7 @@ Use only these forms in `faker_profile_draft.json.field_generators`.
 
 Do not put unsupported semantic type names in `field_generators`.
 Before adding or removing a unit suffix in any generated value, inspect the full template image around the target bbox; use the crop only as a zoom aid if needed. If the unit remains as static text at the value position, omit the unit from the faker value. If the unit appears only in the label, such as 호/가구/세대, keep the unit in the generated value when it is part of the natural value notation.
-If you use `pool:<name>`, define `data_pools.<name>` as an array of scalar synthetic values in the same `faker_profile_draft.json`; never reference an undefined pool. The minimum pool size is declared in request.options.minPoolSize and must be met unless the field is a small closed legal/visual choice set.
+If you use `pool:<name>`, define `data_pools.<name>` as an array of scalar synthetic values in the same `faker_profile_draft.json`; never reference an undefined pool. Open scalar pools must meet request.options.scalarPoolMinSize and `pick_record` object pools must meet request.options.recordPoolMinSize. Only a genuinely fixed legal/form scalar choice set may be smaller, and then its policy must include `closed_set:true`, `exception_kind:'legal_or_form_closed_set'`, and a non-empty evidence note. Record pools never receive this exception.
 Examples of forbidden generator values: `date_between:-365d:+0d|format:%Y/%m/%d`, `time|format:%H:%M:%S`, `decimal_range:10..99`, `identifier.document_confirmation`, `area.square_meter`, `land_use.zoning`, `building.structure`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`.
 If precision would require an unsupported rule, approximate with `pattern:`, `choice:`, `pool:`, or `template:` and record the limitation in `uncertainty_report.json`.
 
@@ -1030,7 +1093,7 @@ If precision would require an unsupported rule, approximate with `pattern:`, `ch
 {chr(10).join(f"- {rule}" for rule in AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES)}
 
 ## Completion criteria
-Before finishing, verify all required files exist, all JSON files parse, every use anchor has a schema binding, every binding has a matching `field_generators` entry, every `field_generators` key matches a schema binding field_id, every pool reference exists and meets minPoolSize, and every `constraints` item follows the exact supported relationship constraint grammar above.
+Before finishing, verify all required files exist, all JSON files parse, every use anchor has a schema binding, every binding has a matching `field_generators` entry, every `field_generators` key matches a schema binding field_id, every pool reference exists and meets its scalar/record minimum or has a valid closed-set policy, and every `constraints` item follows the exact supported relationship constraint grammar above.
 Return a short Korean final summary only after the files are written.
 
 ## Run directory
@@ -1049,54 +1112,183 @@ def _run_authoring_agent_job(
     stderr_path: Path,
 ) -> None:
     job = _read_agent_job(job_path)
-    job.update({"status": "running", "startedAt": datetime.now(timezone.utc).isoformat()})
+    job.update({
+        "status": "running",
+        "startedAt": datetime.now(timezone.utc).isoformat(),
+        "passState": {"current": "schema", "completed": [], "planned": ["schema", "faker", "validation_repair"]},
+    })
     _write_agent_job(job_path, job)
     options = job.get("options") if isinstance(job.get("options"), dict) else {}
     reasoning_effort = str(options.get("reasoningEffort") or "medium").strip().lower()
     if reasoning_effort not in AUTHORING_AGENT_REASONING_EFFORTS:
         reasoning_effort = "medium"
-    command = [
-        "codex",
-        "--search",
-        "--ask-for-approval",
-        "never",
-        "-c",
-        f'model_reasoning_effort="{reasoning_effort}"',
-    ]
-    if not bool(options.get("fastMode", False)):
-        command.extend(["--disable", "fast_mode"])
-    command.extend([
-        "exec",
-        "--cd",
-        str(ROOT),
-        "--sandbox",
-        "workspace-write",
-        "--output-last-message",
-        str(last_message_path),
-        "-",
-    ])
+    def command_for(message_path: Path) -> list[str]:
+        command = [
+            "codex",
+            "--search",
+            "--ask-for-approval",
+            "never",
+            "-c",
+            f'model_reasoning_effort="{reasoning_effort}"',
+        ]
+        if not bool(options.get("fastMode", False)):
+            command.extend(["--disable", "fast_mode"])
+        command.extend([
+            "exec",
+            "--cd",
+            str(ROOT),
+            "--sandbox",
+            "workspace-write",
+            "--output-last-message",
+            str(message_path),
+            "-",
+        ])
+        return command
+    def run_codex(command: list[str], stage_prompt: str) -> tuple[subprocess.CompletedProcess[str], int]:
+        completed: subprocess.CompletedProcess[str] | None = None
+        for attempt in range(1, 4):
+            completed = subprocess.run(
+                command,
+                input=stage_prompt,
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                timeout=60 * 30,
+                check=False,
+            )
+            combined = f"{completed.stdout or ''}\n{completed.stderr or ''}".lower()
+            transient = "selected model is at capacity" in combined or "network error" in combined
+            if completed.returncode == 0 or not transient or attempt == 3:
+                return completed, attempt
+            sleep(5 * attempt)
+        assert completed is not None
+        return completed, 3
     try:
-        completed = subprocess.run(
-            command,
-            input=prompt_path.read_text(encoding="utf-8"),
-            cwd=ROOT,
-            text=True,
-            capture_output=True,
-            timeout=60 * 30,
-            check=False,
-        )
-        stdout_path.write_text(completed.stdout or "", encoding="utf-8")
-        stderr_path.write_text(completed.stderr or "", encoding="utf-8")
+        stage_results: list[dict[str, Any]] = []
+        frozen_artifacts: dict[str, tuple[str, Path]] = {}
+        def restore_frozen_artifacts() -> list[str]:
+            violations: list[str] = []
+            for name, (expected_hash, frozen_copy) in frozen_artifacts.items():
+                source = request_dir / name
+                actual_hash = hashlib.sha256(source.read_bytes()).hexdigest() if source.exists() else "missing"
+                if actual_hash != expected_hash:
+                    violations.append(name)
+                    shutil.copy2(frozen_copy, source)
+            return violations
+
+        completed = None
+        for stage in ("schema", "faker"):
+            stage_prompt_path = run_dir / f"codex_{stage}_pass_prompt.md"
+            stage_message_path = run_dir / f"codex_{stage}_pass_last_message.md"
+            stage_stdout_path = run_dir / f"{stage}_pass_stdout.log"
+            stage_stderr_path = run_dir / f"{stage}_pass_stderr.log"
+            stage_prompt = _authoring_agent_exec_prompt(
+                request_path=request_path,
+                request_dir=request_dir,
+                run_dir=run_dir,
+                stage=stage,
+            )
+            stage_prompt_path.write_text(stage_prompt, encoding="utf-8")
+            command = command_for(stage_message_path)
+            completed, attempt_count = run_codex(command, stage_prompt)
+            stage_stdout_path.write_text(completed.stdout or "", encoding="utf-8")
+            stage_stderr_path.write_text(completed.stderr or "", encoding="utf-8")
+            stage_results.append(
+                {
+                    "stage": stage,
+                    "returnCode": completed.returncode,
+                    "promptPath": _display_path(stage_prompt_path, ROOT),
+                    "lastMessagePath": _display_path(stage_message_path, ROOT),
+                    "stdoutPath": _display_path(stage_stdout_path, ROOT),
+                    "stderrPath": _display_path(stage_stderr_path, ROOT),
+                    "command": command,
+                    "attemptCount": attempt_count,
+                }
+            )
+            if stage == "schema" and completed.returncode == 0:
+                for name in ("schema_draft.json", "stylesheet_draft.json", "anchor_map_draft.json", "research_report.json"):
+                    source = request_dir / name
+                    if not source.exists():
+                        continue
+                    frozen_copy = run_dir / f"frozen_{name}"
+                    shutil.copy2(source, frozen_copy)
+                    frozen_artifacts[name] = (hashlib.sha256(source.read_bytes()).hexdigest(), frozen_copy)
+            elif stage == "faker" and completed.returncode == 0:
+                violations = restore_frozen_artifacts()
+                if violations:
+                    stage_results[-1]["frozenArtifactViolations"] = violations
+            live_job = _read_agent_job(job_path)
+            completed_stages = [item["stage"] for item in stage_results if item["returnCode"] == 0]
+            live_job["passState"] = {
+                "current": "faker" if stage == "schema" and completed.returncode == 0 else "validation_repair" if stage == "faker" and completed.returncode == 0 else stage,
+                "completed": completed_stages,
+                "planned": ["schema", "faker", "validation_repair"],
+            }
+            live_job["stages"] = stage_results
+            _write_agent_job(job_path, live_job)
+            if completed.returncode != 0:
+                break
+        assert completed is not None
+        stdout_path.write_text("\n".join((run_dir / f"{stage['stage']}_pass_stdout.log").read_text(encoding="utf-8") for stage in stage_results), encoding="utf-8")
+        stderr_path.write_text("\n".join((run_dir / f"{stage['stage']}_pass_stderr.log").read_text(encoding="utf-8") for stage in stage_results), encoding="utf-8")
+        final_message = run_dir / f"codex_{stage_results[-1]['stage']}_pass_last_message.md"
+        if final_message.exists():
+            shutil.copy2(final_message, last_message_path)
         validation = _validate_authoring_agent_outputs(request_dir)
+        if completed.returncode == 0 and not validation["ready"]:
+            stage = "validation_repair"
+            stage_prompt_path = run_dir / "codex_validation_repair_pass_prompt.md"
+            stage_message_path = run_dir / "codex_validation_repair_pass_last_message.md"
+            stage_stdout_path = run_dir / "validation_repair_pass_stdout.log"
+            stage_stderr_path = run_dir / "validation_repair_pass_stderr.log"
+            stage_prompt = _authoring_agent_exec_prompt(
+                request_path=request_path,
+                request_dir=request_dir,
+                run_dir=run_dir,
+                stage=stage,
+            ) + "\n## Machine validation result to repair\n```json\n" + json.dumps(validation, ensure_ascii=False, indent=2) + "\n```\n"
+            stage_prompt_path.write_text(stage_prompt, encoding="utf-8")
+            command = command_for(stage_message_path)
+            completed, attempt_count = run_codex(command, stage_prompt)
+            stage_stdout_path.write_text(completed.stdout or "", encoding="utf-8")
+            stage_stderr_path.write_text(completed.stderr or "", encoding="utf-8")
+            stage_results.append(
+                {
+                    "stage": stage,
+                    "returnCode": completed.returncode,
+                    "promptPath": _display_path(stage_prompt_path, ROOT),
+                    "lastMessagePath": _display_path(stage_message_path, ROOT),
+                    "stdoutPath": _display_path(stage_stdout_path, ROOT),
+                    "stderrPath": _display_path(stage_stderr_path, ROOT),
+                    "command": command,
+                    "attemptCount": attempt_count,
+                }
+            )
+            violations = restore_frozen_artifacts()
+            if violations:
+                stage_results[-1]["frozenArtifactViolations"] = violations
+            validation = _validate_authoring_agent_outputs(request_dir)
+        stdout_path.write_text("\n".join((run_dir / f"{stage['stage']}_pass_stdout.log").read_text(encoding="utf-8") for stage in stage_results), encoding="utf-8")
+        stderr_path.write_text("\n".join((run_dir / f"{stage['stage']}_pass_stderr.log").read_text(encoding="utf-8") for stage in stage_results), encoding="utf-8")
+        final_message = run_dir / f"codex_{stage_results[-1]['stage']}_pass_last_message.md"
+        if final_message.exists():
+            shutil.copy2(final_message, last_message_path)
         job = _read_agent_job(job_path)
         job.update(
             {
                 "status": "succeeded" if completed.returncode == 0 and validation["ready"] else "failed",
                 "finishedAt": datetime.now(timezone.utc).isoformat(),
                 "returnCode": completed.returncode,
-                "command": command,
+                "command": stage_results[-1]["command"],
+                "stages": stage_results,
                 "outputs": validation["outputs"],
                 "validation": validation,
+                "repairSummary": validation.get("repairSummary") or {},
+                "passState": {
+                    "current": "completed" if completed.returncode == 0 and validation["ready"] else "failed",
+                    "completed": list(dict.fromkeys([*[item["stage"] for item in stage_results if item["returnCode"] == 0], *(["validation_repair"] if validation["ready"] else [])])),
+                    "planned": ["schema", "faker", "validation_repair"],
+                },
             }
         )
         if completed.returncode != 0:
@@ -1126,17 +1318,27 @@ def _run_authoring_agent_job(
 
 
 
-def _request_min_pool_size(request_dir: Path) -> int:
+def _request_pool_min_sizes(request_dir: Path) -> tuple[int, int]:
     request_path = request_dir / "request.json"
     try:
         request = json.loads(request_path.read_text(encoding="utf-8"))
     except Exception:
-        return DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE
+        return DEFAULT_AUTHORING_AGENT_SCALAR_POOL_MIN_SIZE, DEFAULT_AUTHORING_AGENT_RECORD_POOL_MIN_SIZE
     options = request.get("options") if isinstance(request.get("options"), dict) else {}
     try:
-        return max(1, min(100, int(options.get("minPoolSize") or DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE)))
+        scalar_min = max(1, min(100, int(options.get("scalarPoolMinSize") or options.get("minPoolSize") or DEFAULT_AUTHORING_AGENT_SCALAR_POOL_MIN_SIZE)))
     except (TypeError, ValueError):
-        return DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE
+        scalar_min = DEFAULT_AUTHORING_AGENT_SCALAR_POOL_MIN_SIZE
+    try:
+        record_min = max(1, min(100, int(options.get("recordPoolMinSize") or DEFAULT_AUTHORING_AGENT_RECORD_POOL_MIN_SIZE)))
+    except (TypeError, ValueError):
+        record_min = DEFAULT_AUTHORING_AGENT_RECORD_POOL_MIN_SIZE
+    return scalar_min, record_min
+
+
+def _request_min_pool_size(request_dir: Path) -> int:
+    """Backward-compatible scalar pool minimum accessor."""
+    return _request_pool_min_sizes(request_dir)[0]
 
 
 def _semantic_schema_set_leaf(root: dict[str, Any], path: list[str], value: str = "") -> None:
@@ -1167,7 +1369,7 @@ def _unique_semantic_path(root: dict[str, Any], anchor_id: str, label: str = "")
         index += 1
 
 
-def _ensure_use_anchor_placeholders(parsed_json: dict[str, Any], request_dir: Path) -> None:
+def _ensure_use_anchor_placeholders(parsed_json: dict[str, Any], request_dir: Path) -> dict[str, Any]:
     """Guarantee draft coverage for every use anchor before contract validation.
 
     Agent omission is hard to control perfectly.  Rather than accepting missing
@@ -1179,7 +1381,7 @@ def _ensure_use_anchor_placeholders(parsed_json: dict[str, Any], request_dir: Pa
     anchor_map = parsed_json.get("anchor_map_draft.json") if isinstance(parsed_json.get("anchor_map_draft.json"), dict) else None
     faker_profile = parsed_json.get("faker_profile_draft.json") if isinstance(parsed_json.get("faker_profile_draft.json"), dict) else None
     if not isinstance(schema, dict) or not isinstance(anchor_map, dict) or not isinstance(faker_profile, dict):
-        return
+        return {"materializedUseAnchors": [], "materializedCount": 0, "removedUnmappedDeclaration": False}
     semantic_schema = schema.get("semantic_schema")
     if not isinstance(semantic_schema, dict):
         semantic_schema = {}
@@ -1200,6 +1402,7 @@ def _ensure_use_anchor_placeholders(parsed_json: dict[str, Any], request_dir: Pa
         if isinstance(field, dict)
     }
     changed = False
+    materialized: list[str] = []
     for anchor_id in use_anchor_ids:
         if anchor_id in mapped_anchor_ids:
             continue
@@ -1230,12 +1433,19 @@ def _ensure_use_anchor_placeholders(parsed_json: dict[str, Any], request_dir: Pa
             }
         )
         generators[field_id] = "free_text.short"
+        materialized.append(anchor_id)
         changed = True
-    if schema.pop("unmapped_use_anchors", None) is not None:
+    removed_unmapped_declaration = schema.pop("unmapped_use_anchors", None) is not None
+    if removed_unmapped_declaration:
         changed = True
     if changed:
         (request_dir / "schema_draft.json").write_text(json.dumps(schema, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         (request_dir / "faker_profile_draft.json").write_text(json.dumps(faker_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return {
+        "materializedUseAnchors": materialized,
+        "materializedCount": len(materialized),
+        "removedUnmappedDeclaration": removed_unmapped_declaration,
+    }
 
 
 def _authoring_bundle_consistency(schema: dict[str, Any], faker_profile: dict[str, Any], *, strict_review_coverage: bool = True, min_pool_size: int = 1) -> dict[str, Any]:
@@ -1243,6 +1453,8 @@ def _authoring_bundle_consistency(schema: dict[str, Any], faker_profile: dict[st
     warnings: list[dict[str, Any]] = []
     semantic_schema = schema.get("semantic_schema") if isinstance(schema.get("semantic_schema"), dict) else {}
     semantic_leaf_paths = {path for path, value in _iter_semantic_leaf_values(semantic_schema) if path}
+    if not semantic_leaf_paths:
+        errors.append({"code": "authoring_missing_semantic_schema", "message": "primary semantic_schema must contain at least one KIE leaf"})
     fields = schema.get("fields") if isinstance(schema.get("fields"), list) else []
     field_ids: set[str] = set()
     exported_paths: list[str] = []
@@ -1314,10 +1526,17 @@ def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
             except Exception as exc:
                 invalid_json.append({"name": name, "error": str(exc)})
     contract_errors: list[dict[str, Any]] = []
-    min_pool_size = _request_min_pool_size(request_dir)
+    min_pool_size, min_record_pool_size = _request_pool_min_sizes(request_dir)
+    repair_summary = {"materializedUseAnchors": [], "materializedCount": 0, "removedUnmappedDeclaration": False}
     if not invalid_json:
-        _ensure_use_anchor_placeholders(parsed_json, request_dir)
-        contract_errors.extend(_validate_schema_draft_contract(parsed_json, min_pool_size=min_pool_size))
+        repair_summary = _ensure_use_anchor_placeholders(parsed_json, request_dir)
+        contract_errors.extend(
+            _validate_schema_draft_contract(
+                parsed_json,
+                min_pool_size=min_pool_size,
+                min_record_pool_size=min_record_pool_size,
+            )
+        )
         contract_errors.extend(_validate_blank_template_agent_contract(request_dir, parsed_json))
     return {
         "ready": not missing and not invalid_json and not contract_errors,
@@ -1325,6 +1544,7 @@ def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
         "invalidJson": invalid_json,
         "contractErrors": contract_errors,
         "outputs": outputs,
+        "repairSummary": repair_summary,
         "summary": {
             "required": len(AUTHORING_AGENT_REQUIRED_OUTPUTS),
             "present": len(outputs),
@@ -1335,7 +1555,12 @@ def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
     }
 
 
-def _validate_schema_draft_contract(parsed_json: dict[str, Any], *, min_pool_size: int = 1) -> list[dict[str, Any]]:
+def _validate_schema_draft_contract(
+    parsed_json: dict[str, Any],
+    *,
+    min_pool_size: int = 1,
+    min_record_pool_size: int = 1,
+) -> list[dict[str, Any]]:
     schema = parsed_json.get("schema_draft.json") if isinstance(parsed_json.get("schema_draft.json"), dict) else {}
     anchor_map = parsed_json.get("anchor_map_draft.json") if isinstance(parsed_json.get("anchor_map_draft.json"), dict) else {}
     faker_profile = parsed_json.get("faker_profile_draft.json") if isinstance(parsed_json.get("faker_profile_draft.json"), dict) else {}
@@ -1351,6 +1576,8 @@ def _validate_schema_draft_contract(parsed_json: dict[str, Any], *, min_pool_siz
                 semantic_leaf_paths.add(path)
             if value != "":
                 errors.append({"code": "schema_semantic_value_not_empty", "path": path, "message": "semantic_schema leaf values must be empty strings"})
+        if not semantic_leaf_paths:
+            errors.append({"code": "schema_empty_semantic_schema", "message": "semantic_schema must contain at least one KIE leaf"})
     fields = _schema_draft_bindings(schema)
     if not isinstance(fields, list):
         errors.append({"code": "schema_fields_missing", "message": "schema_draft.json must include fields or field_bindings binding list"})
@@ -1388,7 +1615,14 @@ def _validate_schema_draft_contract(parsed_json: dict[str, Any], *, min_pool_siz
         for evidence_id in _binding_research_evidence_ids(field):
             if research_source_ids and evidence_id not in research_source_ids:
                 errors.append({"code": "schema_field_unknown_research_evidence", "field": field_id, "research_evidence_id": evidence_id, "message": "research_evidence_ids must refer to research_report.sources[].id"})
-    errors.extend(_validate_faker_profile_contract(faker_profile, fields, min_pool_size=min_pool_size))
+    errors.extend(
+        _validate_faker_profile_contract(
+            faker_profile,
+            fields,
+            min_pool_size=min_pool_size,
+            min_record_pool_size=min_record_pool_size,
+        )
+    )
     if anchors:
         use_anchor_ids = {anchor_id for anchor_id, anchor in anchors.items() if str(anchor.get("status") or "").strip().lower() == "use"}
         prohibited_unmapped = _unmapped_use_anchor_ids(schema)
@@ -1461,7 +1695,13 @@ def _binding_research_evidence_ids(field: dict[str, Any]) -> list[str]:
     return [str(value).strip() for value in values if str(value).strip()]
 
 
-def _validate_faker_profile_contract(faker_profile: dict[str, Any], fields: list[Any], *, min_pool_size: int = 1) -> list[dict[str, Any]]:
+def _validate_faker_profile_contract(
+    faker_profile: dict[str, Any],
+    fields: list[Any],
+    *,
+    min_pool_size: int = 1,
+    min_record_pool_size: int = 1,
+) -> list[dict[str, Any]]:
     errors: list[dict[str, Any]] = []
     generators = faker_profile.get("field_generators")
     if not isinstance(generators, dict):
@@ -1481,20 +1721,25 @@ def _validate_faker_profile_contract(faker_profile: dict[str, Any], fields: list
             pool = _faker_pool_values(faker_profile, pool_name)
             if not pool:
                 errors.append({"code": "faker_missing_pool", "field": str(field_id), "pool": pool_name, "message": "pool rule must define data_pools.<name> with scalar values"})
-            elif len(pool) < max(1, min_pool_size):
+            elif len(pool) < max(1, min_pool_size) and not _faker_pool_is_closed_set(faker_profile, pool_name):
                 errors.append({"code": "faker_pool_too_small", "field": str(field_id), "pool": pool_name, "count": len(pool), "min": max(1, min_pool_size), "message": "pool rule must meet the configured minimum scalar value count"})
-    errors.extend(_validate_faker_constraints_contract(faker_profile, field_ids))
+    errors.extend(_validate_faker_constraints_contract(faker_profile, field_ids, min_record_pool_size=min_record_pool_size))
     return errors
 
 
-def _validate_faker_constraints_contract(faker_profile: dict[str, Any], field_ids: set[str]) -> list[dict[str, Any]]:
+def _validate_faker_constraints_contract(
+    faker_profile: dict[str, Any],
+    field_ids: set[str],
+    *,
+    min_record_pool_size: int = 1,
+) -> list[dict[str, Any]]:
     errors: list[dict[str, Any]] = []
     constraints = faker_profile.get("constraints")
     if constraints is None:
         return errors
     if not isinstance(constraints, list):
         return [{"code": "faker_constraints_not_list", "message": "faker_profile_draft.json.constraints must be a list when present"}]
-    supported = {"pick_record", "copy", "exclusive_choice", "primary_secondary_group", "date_group", "date_order", "date_not_before", "sum", "age_from_rrn"}
+    supported = {"pick_record", "copy", "exclusive_choice", "primary_secondary_group", "date_group", "date_order", "date_not_before", "date_not_after", "sum", "numeric_range", "numeric_compare", "age_from_rrn"}
     for index, constraint in enumerate(constraints):
         if not isinstance(constraint, dict):
             errors.append({"code": "faker_constraint_not_object", "index": index, "message": "each constraint must be an object"})
@@ -1512,6 +1757,8 @@ def _validate_faker_constraints_contract(faker_profile: dict[str, Any], field_id
             records = [item for item in _faker_pool_raw_values(faker_profile, pool_name) if isinstance(item, dict)]
             if not records:
                 errors.append({"code": "faker_constraint_missing_record_pool", "index": index, "pool": pool_name, "message": "pick_record requires data_pools.<pool> object records"})
+            elif len(records) < max(1, min_record_pool_size):
+                errors.append({"code": "faker_record_pool_too_small", "index": index, "pool": pool_name, "count": len(records), "min": max(1, min_record_pool_size), "message": "pick_record pool must meet the configured minimum record count"})
             _validate_constraint_field_refs(errors, index, field_ids, targets.keys())
         elif ctype == "copy":
             _validate_constraint_field_refs(errors, index, field_ids, [constraint.get("source"), constraint.get("target")])
@@ -1541,21 +1788,32 @@ def _validate_faker_constraints_contract(faker_profile: dict[str, Any], field_id
             refs: list[Any] = []
             for key in ("start", "end"):
                 group = constraint.get(key)
-                if not isinstance(group, dict) or not all(str(group.get(part) or "").strip() for part in ("year", "month", "day")):
-                    errors.append({"code": "faker_constraint_invalid_date_order", "index": index, "message": "date_order requires complete start/end year/month/day groups"})
-                if isinstance(group, dict):
-                    refs.extend(group.get(part) for part in ("year", "month", "day"))
+                if not _constraint_date_ref_complete(group):
+                    errors.append({"code": "faker_constraint_invalid_date_order", "index": index, "message": "date_order requires start/end date fields or complete year/month/day groups"})
+                refs.extend(_constraint_date_ref_fields(group))
             _validate_constraint_field_refs(errors, index, field_ids, refs)
         elif ctype == "date_not_before":
             refs: list[Any] = []
             source = constraint.get("source") or constraint.get("after")
             target = constraint.get("target") or constraint.get("date")
             if not _constraint_date_ref_complete(source):
-                errors.append({"code": "faker_constraint_invalid_date_not_before", "index": index, "message": "date_not_before requires source date field or complete source date group"})
+                errors.append({"code": f"faker_constraint_invalid_{ctype}", "index": index, "message": f"{ctype} requires source date field or complete source date group"})
             refs.extend(_constraint_date_ref_fields(source))
             if not _constraint_date_ref_complete(target):
-                errors.append({"code": "faker_constraint_invalid_date_not_before", "index": index, "message": "date_not_before requires target date field or complete target date group"})
+                errors.append({"code": f"faker_constraint_invalid_{ctype}", "index": index, "message": f"{ctype} requires target date field or complete target date group"})
             refs.extend(_constraint_date_ref_fields(target))
+            _validate_constraint_field_refs(errors, index, field_ids, refs)
+        elif ctype == "date_not_after":
+            target = constraint.get("target") or constraint.get("date")
+            maximum = constraint.get("max") or constraint.get("not_after") or "as_of_date"
+            refs: list[Any] = []
+            if not _constraint_date_ref_complete(target):
+                errors.append({"code": "faker_constraint_invalid_date_not_after", "index": index, "message": "date_not_after requires target date field or complete target date group"})
+            refs.extend(_constraint_date_ref_fields(target))
+            if str(maximum).strip().lower() not in {"as_of_date", "today"}:
+                if not _constraint_date_ref_complete(maximum):
+                    errors.append({"code": "faker_constraint_invalid_date_not_after", "index": index, "message": "date_not_after max must be as_of_date or a date field/group"})
+                refs.extend(_constraint_date_ref_fields(maximum))
             _validate_constraint_field_refs(errors, index, field_ids, refs)
         elif ctype == "sum":
             sources = _constraint_ref_list(constraint.get("sources"))
@@ -1563,6 +1821,20 @@ def _validate_faker_constraints_contract(faker_profile: dict[str, Any], field_id
             if not sources or not target:
                 errors.append({"code": "faker_constraint_invalid_sum", "index": index, "message": "sum requires sources and target"})
             _validate_constraint_field_refs(errors, index, field_ids, [*sources, target])
+        elif ctype == "numeric_range":
+            target = str(constraint.get("target") or "").strip()
+            minimum = constraint.get("min")
+            maximum = constraint.get("max")
+            if not target or not isinstance(minimum, (int, float)) or not isinstance(maximum, (int, float)) or float(minimum) > float(maximum):
+                errors.append({"code": "faker_constraint_invalid_numeric_range", "index": index, "message": "numeric_range requires target and numeric min <= max"})
+            _validate_constraint_field_refs(errors, index, field_ids, [target])
+        elif ctype == "numeric_compare":
+            left = str(constraint.get("left") or "").strip()
+            right = str(constraint.get("right") or "").strip()
+            operator = str(constraint.get("operator") or "").strip()
+            if not left or not right or operator not in {"<", "<=", ">", ">=", "lt", "lte", "gt", "gte"}:
+                errors.append({"code": "faker_constraint_invalid_numeric_compare", "index": index, "message": "numeric_compare requires left/right and a supported comparison operator"})
+            _validate_constraint_field_refs(errors, index, field_ids, [left, right])
         elif ctype == "age_from_rrn":
             refs = [constraint.get("rrn"), constraint.get("age")]
             issue = constraint.get("issue")
@@ -1611,6 +1883,19 @@ def _faker_pool_raw_values(faker_profile: dict[str, Any], pool_name: str) -> lis
     return []
 
 
+def _faker_pool_is_closed_set(faker_profile: dict[str, Any], pool_name: str) -> bool:
+    policies = faker_profile.get("pool_policies")
+    if not isinstance(policies, dict):
+        return False
+    policy = policies.get(pool_name)
+    return (
+        isinstance(policy, dict)
+        and policy.get("closed_set") is True
+        and str(policy.get("exception_kind") or "").strip() == "legal_or_form_closed_set"
+        and bool(str(policy.get("evidence") or "").strip())
+    )
+
+
 def _faker_rule_supported(rule: str) -> bool:
     normalized = str(rule or "").strip()
     lower = normalized.lower()
@@ -1627,6 +1912,7 @@ def _faker_rule_supported(rule: str) -> bool:
         "date.month",
         "date.day",
         "money.krw",
+        "business_reg_no",
         "company.name_ko",
         "medical.institution_ko",
         "address.ko",
@@ -1701,7 +1987,7 @@ def _validate_blank_template_agent_contract(request_dir: Path, parsed_json: dict
     value_anchor_ids = {anchor_id for anchor_id, anchor in anchors.items() if _blank_template_anchor_is_value_target(anchor)}
     if not value_anchor_ids:
         errors.append({"code": "blank_template_no_value_anchors", "message": "blank_template requires at least one value-region/use/manual/visual-line-detect anchor"})
-    seen_targets: dict[str, str] = {}
+    seen_targets: dict[str, list[tuple[str, bool]]] = {}
     fields = _schema_draft_bindings(schema) or []
     for field in fields:
         if not isinstance(field, dict):
@@ -1717,11 +2003,13 @@ def _validate_blank_template_agent_contract(request_dir: Path, parsed_json: dict
             continue
         if not _blank_template_anchor_is_value_target(anchor):
             errors.append({"code": "blank_template_static_label_as_field_anchor", "field": field_id, "anchor_id": anchor_id, "message": "static label/keep anchor cannot be used as schema field target"})
-        previous = seen_targets.get(anchor_id)
-        if previous:
-            errors.append({"code": "blank_template_duplicate_field_anchor", "field": field_id, "anchor_id": anchor_id, "message": f"anchor already used by {previous}"})
-        else:
-            seen_targets[anchor_id] = field_id
+        render_policy = field.get("render_policy") if isinstance(field.get("render_policy"), dict) else {}
+        seen_targets.setdefault(anchor_id, []).append((field_id, render_policy.get("render") is not False))
+    for anchor_id, target_fields in seen_targets.items():
+        rendered_fields = [field_id for field_id, rendered in target_fields if rendered]
+        if len(rendered_fields) > 1:
+            for field_id in rendered_fields[1:]:
+                errors.append({"code": "blank_template_duplicate_field_anchor", "field": field_id, "anchor_id": anchor_id, "message": f"anchor already has rendered field {rendered_fields[0]}"})
     return errors
 
 
@@ -2726,6 +3014,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     out_dir=out_dir,
                     seed=seed,
                     render_scale=render_scale,
+                    as_of_date=_parse_as_of_date(payload.get("asOfDate")),
                     clean=bool(payload.get("clean", True)),
                     render_handwriting_as_printed=bool(payload.get("renderHandwritingAsPrinted", False)),
                     scope_entries=payload.get("scopeEntries") if "scopeEntries" in payload else None,
@@ -2946,6 +3235,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     out_dir=authoring_dir / "render_preview",
                     seed=seed,
                     render_scale=render_scale,
+                    as_of_date=_parse_as_of_date(payload.get("asOfDate")),
                 )
                 update_manifest_artifact(doc_id, "authoring_preview", result.image)
                 update_manifest_artifact(doc_id, "authoring_overlay", result.overlay)
@@ -2979,6 +3269,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     raise ValueError("schema, stylesheet and fakerProfile are required")
                 seed = int(payload.get("seed") or 1234)
                 render_scale = int(payload.get("renderScale") or 2)
+                as_of_date = _parse_as_of_date(payload.get("asOfDate"))
                 consistency = _raise_if_authoring_inconsistent(raw_schema, raw_faker_profile, strict_review_coverage=False)
                 if bool(payload.get("handwritingPreview")):
                     result = render_handwriting_authoring_preview(
@@ -3010,6 +3301,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                         seed=seed,
                         sample_id="live_preview",
                         render_scale=render_scale,
+                        as_of_date=as_of_date,
                     )
                     self._send_json(
                         {
@@ -3043,6 +3335,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     seed=seed,
                     out_dir=out_dir,
                     render_scale=render_scale,
+                    as_of_date=_parse_as_of_date(payload.get("asOfDate")),
                 )
                 self._send_json(result)
                 return
@@ -3195,6 +3488,7 @@ def render_authoring_batch_for_work_items(
     seed: int,
     out_dir: Path,
     render_scale: int = 2,
+    as_of_date: date | None = None,
 ) -> dict[str, Any]:
     registry = load_registry()
     items = list_work_items(registry=registry)
@@ -3228,6 +3522,7 @@ def render_authoring_batch_for_work_items(
             seed=seed + (doc_index - 1) * 1000,
             clean=True,
             render_scale=render_scale,
+            as_of_date=as_of_date,
         )
         update_manifest_artifact(doc_id, "authoring_batch", batch.summary, registry=registry)
         doc_payload = {

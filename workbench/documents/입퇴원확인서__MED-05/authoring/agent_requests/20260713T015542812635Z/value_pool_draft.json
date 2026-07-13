@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-05",
+  "generated_at": "2026-07-13",
+  "pools": [
+    {
+      "name": "diagnosis_records",
+      "kind": "record",
+      "size": 20,
+      "usage": ["diagnosis_1_name", "diagnosis_1_code", "diagnosis_2_name", "diagnosis_2_code", "diagnosis_3_name", "diagnosis_3_code"],
+      "source_note": "공식 서식의 병명-질병분류기호 열 구조와 공개 KCD 표기 관행을 참고해 만든 합성 예시이며, 실제 환자 기록이 아니다.",
+      "runtime_location": "faker_profile_draft.json.data_pools.diagnosis_records"
+    },
+    {
+      "name": "hospitalization_records",
+      "kind": "record",
+      "size": 20,
+      "usage": ["onset_date", "admission_discharge_type", "admission_date", "discharge_date", "admission_discharge_period"],
+      "source_note": "기준일 이전의 합성 날짜로 구성했으며 발병일 <= 입원일 <= 퇴원일을 만족한다.",
+      "runtime_location": "faker_profile_draft.json.data_pools.hospitalization_records"
+    },
+    {
+      "name": "doctor_opinions",
+      "kind": "scalar",
+      "size": 20,
+      "usage": ["doctor_opinion"],
+      "source_note": "개인 식별정보 없이 입원 치료 경과와 퇴원 후 권고를 표현한 합성 문장이다.",
+      "runtime_location": "faker_profile_draft.json.data_pools.doctor_opinions"
+    },
+    {
+      "name": "remarks",
+      "kind": "scalar",
+      "size": 20,
+      "usage": ["remarks"],
+      "source_note": "제출 목적, 기록 근거, 문의 안내를 다양화한 합성 문장이다.",
+      "runtime_location": "faker_profile_draft.json.data_pools.remarks"
+    }
+  ],
+  "closed_sets": [
+    {
+      "field_id": "admission_discharge_type",
+      "values": ["입원", "퇴원"],
+      "policy": {"closed_set": true, "exception_kind": "legal_or_form_closed_set", "evidence": "공식 별지 제3호서식의 '입원·퇴원구분' 필드가 두 구분을 명시한다."}
+    }
+  ],
+  "notes": "실제 적용 기준 pool은 faker_profile_draft.json.data_pools이며 이 파일은 검토용 목록이다."
+}

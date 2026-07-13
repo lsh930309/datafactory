@@ -1,0 +1,563 @@
+{
+  "schema_version": 2,
+  "doc_id": "QC-02",
+  "locale": "ko_KR",
+  "as_of_date": "2026-07-13",
+  "field_generators": {
+    "approval_owner_name": "person.name_ko",
+    "approval_reviewer_name": "person.name_ko",
+    "approval_manager_name": "person.name_ko",
+    "supplier_company_name": "company.name_ko",
+    "purchase_order_number": "pattern:PO-########",
+    "purchase_order_year": "date.year",
+    "purchase_order_month": "date.month",
+    "purchase_order_day": "date.day",
+    "receiving_year": "date.year",
+    "receiving_month": "date.month",
+    "receiving_day": "date.day",
+    "inspection_manager_name": "person.name_ko",
+    "receiving_location": "pool:receiving_locations",
+    "inspection_method": "pool:inspection_methods",
+    "line_1_number": "literal:1",
+    "line_1_item_name": "pool:item_names",
+    "line_1_specification": "pool:item_specifications",
+    "line_1_received_quantity": "pattern:###",
+    "line_1_quality_result": "choice:적합|조건부적합|부적합",
+    "line_1_other_result": "pool:inspection_details",
+    "line_1_remark": "choice:정상입고|선별사용|교환요청|반품예정",
+    "line_2_number": "literal:2",
+    "line_2_item_name": "pool:item_names",
+    "line_2_specification": "pool:item_specifications",
+    "line_2_received_quantity": "pattern:###",
+    "line_2_quality_result": "choice:적합|조건부적합|부적합",
+    "line_2_other_result": "pool:inspection_details",
+    "line_2_remark": "choice:정상입고|선별사용|교환요청|반품예정",
+    "line_3_number": "literal:3",
+    "line_3_item_name": "pool:item_names",
+    "line_3_specification": "pool:item_specifications",
+    "line_3_received_quantity": "pattern:###",
+    "line_3_quality_result": "choice:적합|조건부적합|부적합",
+    "line_3_other_result": "pool:inspection_details",
+    "line_3_remark": "choice:정상입고|선별사용|교환요청|반품예정",
+    "line_4_number": "literal:4",
+    "line_4_item_name": "pool:item_names",
+    "line_4_specification": "pool:item_specifications",
+    "line_4_received_quantity": "pattern:###",
+    "line_4_quality_result": "choice:적합|조건부적합|부적합",
+    "line_4_other_result": "pool:inspection_details",
+    "line_4_remark": "choice:정상입고|선별사용|교환요청|반품예정",
+    "line_5_number": "literal:5",
+    "line_5_item_name": "pool:item_names",
+    "line_5_specification": "pool:item_specifications",
+    "line_5_received_quantity": "pattern:###",
+    "line_5_quality_result": "choice:적합|조건부적합|부적합",
+    "line_5_other_result": "pool:inspection_details",
+    "line_5_remark": "choice:정상입고|선별사용|교환요청|반품예정",
+    "line_6_number": "literal:6",
+    "line_6_item_name": "pool:item_names",
+    "line_6_specification": "pool:item_specifications",
+    "line_6_received_quantity": "pattern:###",
+    "line_6_quality_result": "choice:적합|조건부적합|부적합",
+    "line_6_other_result": "pool:inspection_details",
+    "line_6_remark": "choice:정상입고|선별사용|교환요청|반품예정",
+    "line_7_number": "literal:7",
+    "line_7_item_name": "pool:item_names",
+    "line_7_specification": "pool:item_specifications",
+    "line_7_received_quantity": "pattern:###",
+    "line_7_quality_result": "choice:적합|조건부적합|부적합",
+    "line_7_other_result": "pool:inspection_details",
+    "line_7_remark": "choice:정상입고|선별사용|교환요청|반품예정",
+    "line_8_number": "literal:8",
+    "line_8_item_name": "pool:item_names",
+    "line_8_specification": "pool:item_specifications",
+    "line_8_received_quantity": "pattern:###",
+    "line_8_quality_result": "choice:적합|조건부적합|부적합",
+    "line_8_other_result": "pool:inspection_details",
+    "line_8_remark": "choice:정상입고|선별사용|교환요청|반품예정",
+    "inspector_opinion": "pool:inspector_opinions",
+    "department_head_confirmation": "person.name_ko"
+  },
+  "data_pools": {
+    "receiving_locations": [
+      "본사 1층 입고장",
+      "A동 자재창고",
+      "B동 수입검사실",
+      "제1공장 검수구역",
+      "제2공장 입고대기장",
+      "중앙 물류센터 검수장",
+      "생산기술동 검사구역",
+      "품질보증실 앞 입고장",
+      "조립동 자재인수장",
+      "가공동 수입검사대",
+      "부품창고 1구역",
+      "부품창고 2구역",
+      "완제품동 하역장",
+      "연구동 시제품 검사실",
+      "외주품 전용 검수장",
+      "물류센터 1층 입고장",
+      "물류센터 2층 검수장",
+      "서부공장 자재창고",
+      "동부공장 입고장",
+      "남부공장 품질검사실"
+    ],
+    "inspection_methods": [
+      "전수 수량검사 및 육안검사",
+      "발주서 대조 및 외관검사",
+      "샘플링 치수검사",
+      "검사성적서 대조 및 외관확인",
+      "포장상태 및 수량 대조",
+      "치수측정 및 기능검사",
+      "전수 외관검사",
+      "규격서 대조 및 샘플검사",
+      "수량 계수 및 손상 확인",
+      "성적서 확인 후 표본검사",
+      "입고표 대조 및 치수확인",
+      "포장 개봉 후 외관검사",
+      "기능시험 및 수량검사",
+      "한도견본 대조검사",
+      "도면 대조 및 주요치수 측정",
+      "납품서 대조 및 전수검사",
+      "표본 외관검사 및 작동확인",
+      "재질증명서 확인 및 치수검사",
+      "라벨·로트 확인 및 수량검사",
+      "검사기준서에 따른 수입검사"
+    ],
+    "inspector_opinions": [
+      "발주 수량과 일치하고 외관 상태가 양호하여 입고 승인함.",
+      "규격 및 주요 치수가 기준에 적합하여 정상 입고 처리함.",
+      "검사성적서와 실물 표시가 일치하여 사용 가능함.",
+      "표본검사 결과 이상이 없어 전체 수량을 입고함.",
+      "포장과 제품에 손상이 없고 수량이 일치함.",
+      "경미한 포장 눌림이 있으나 제품 품질에는 이상 없음.",
+      "치수 및 기능 확인 결과 기준을 충족함.",
+      "로트 표시와 납품서가 일치하여 입고 승인함.",
+      "외관, 규격, 수량 확인 결과 모두 적합함.",
+      "일부 품목은 재검 후 적합 판정하여 입고함.",
+      "부적합 수량을 격리하고 적합 수량만 입고함.",
+      "교환 대상품을 별도 표시하고 공급사에 통보함.",
+      "성적서 확인과 현품 검사를 완료하여 승인함.",
+      "검수 기준서에 따라 검사한 결과 사용 가능함.",
+      "수량 차이 없이 납품되었고 품질 상태가 양호함.",
+      "포장 개봉 검사 결과 오염과 파손이 없음.",
+      "주요 조립 치수 확인 결과 도면 기준에 적합함.",
+      "재질 및 가공 상태가 구매 규격을 만족함.",
+      "검수 완료 후 지정 창고로 이동하도록 승인함.",
+      "조건부 적합품은 선별 후 사용하도록 의견을 남김."
+    ],
+    "item_names": [
+      "육각볼트",
+      "평와셔",
+      "가이드 핀",
+      "브래킷 LH",
+      "브래킷 RH",
+      "알루미늄 플레이트",
+      "스페이서 링",
+      "베어링 하우징",
+      "모터 샤프트",
+      "금형 인서트",
+      "센서 브래킷",
+      "냉각 플레이트",
+      "우레탄 패드",
+      "커넥터 하우징",
+      "제어반 브래킷",
+      "패킹 가이드",
+      "인덱스 플레이트",
+      "커버 플레이트",
+      "클램프 블록",
+      "리니어 부시",
+      "타이밍 풀리",
+      "실린더 마운트",
+      "케이블 글랜드",
+      "방진 고무"
+    ],
+    "item_specifications": [
+      "M8×30, SCM435",
+      "M8, SUS304",
+      "Ø10×80, SKD11",
+      "2.0T, SPCC",
+      "2.0T, SPCC",
+      "120×80×15T, AL6061",
+      "Ø45, SUS304",
+      "BH-6204, AL6061",
+      "Ø18×240, SCM440",
+      "A형, SKD61",
+      "SB-24, SUS304",
+      "CP-180, AL6061",
+      "80×50×10T",
+      "CH-16P, PA66",
+      "CB-02, SECC",
+      "PG-15, POM",
+      "IP-12, S45C",
+      "CP-220, AL5052",
+      "CB-40, S45C",
+      "LM20UU",
+      "20T, HTD5M",
+      "CM-32, SS400",
+      "M20, IP68",
+      "Ø30×20, NBR"
+    ],
+    "inspection_details": [
+      "육안 및 치수 적합",
+      "외관 및 규격 적합",
+      "치수 측정 적합",
+      "도장 및 형상 적합",
+      "도장 및 형상 적합",
+      "표면 및 치수 적합",
+      "내경 및 외경 적합",
+      "가공면 및 조립성 적합",
+      "경도 및 진직도 적합",
+      "열처리 성적서 적합",
+      "형상 및 홀 위치 적합",
+      "누설 및 평탄도 적합",
+      "경도 및 외관 적합",
+      "핀 배열 및 외관 적합",
+      "절곡 및 도금 적합",
+      "치수 및 표면 적합",
+      "홀 간격 및 평면도 적합",
+      "스크래치 및 치수 적합",
+      "나사산 및 치수 적합",
+      "작동 및 외관 적합",
+      "치형 및 보어 적합",
+      "용접 및 치수 적합",
+      "나사 및 방수부 적합",
+      "경도 및 균열 없음"
+    ],
+    "inspection_item_records": [
+      {
+        "item_name": "육각볼트",
+        "specification": "M8×30, SCM435",
+        "other_result": "육안 및 치수 적합"
+      },
+      {
+        "item_name": "평와셔",
+        "specification": "M8, SUS304",
+        "other_result": "외관 및 규격 적합"
+      },
+      {
+        "item_name": "가이드 핀",
+        "specification": "Ø10×80, SKD11",
+        "other_result": "치수 측정 적합"
+      },
+      {
+        "item_name": "브래킷 LH",
+        "specification": "2.0T, SPCC",
+        "other_result": "도장 및 형상 적합"
+      },
+      {
+        "item_name": "브래킷 RH",
+        "specification": "2.0T, SPCC",
+        "other_result": "도장 및 형상 적합"
+      },
+      {
+        "item_name": "알루미늄 플레이트",
+        "specification": "120×80×15T, AL6061",
+        "other_result": "표면 및 치수 적합"
+      },
+      {
+        "item_name": "스페이서 링",
+        "specification": "Ø45, SUS304",
+        "other_result": "내경 및 외경 적합"
+      },
+      {
+        "item_name": "베어링 하우징",
+        "specification": "BH-6204, AL6061",
+        "other_result": "가공면 및 조립성 적합"
+      },
+      {
+        "item_name": "모터 샤프트",
+        "specification": "Ø18×240, SCM440",
+        "other_result": "경도 및 진직도 적합"
+      },
+      {
+        "item_name": "금형 인서트",
+        "specification": "A형, SKD61",
+        "other_result": "열처리 성적서 적합"
+      },
+      {
+        "item_name": "센서 브래킷",
+        "specification": "SB-24, SUS304",
+        "other_result": "형상 및 홀 위치 적합"
+      },
+      {
+        "item_name": "냉각 플레이트",
+        "specification": "CP-180, AL6061",
+        "other_result": "누설 및 평탄도 적합"
+      },
+      {
+        "item_name": "우레탄 패드",
+        "specification": "80×50×10T",
+        "other_result": "경도 및 외관 적합"
+      },
+      {
+        "item_name": "커넥터 하우징",
+        "specification": "CH-16P, PA66",
+        "other_result": "핀 배열 및 외관 적합"
+      },
+      {
+        "item_name": "제어반 브래킷",
+        "specification": "CB-02, SECC",
+        "other_result": "절곡 및 도금 적합"
+      },
+      {
+        "item_name": "패킹 가이드",
+        "specification": "PG-15, POM",
+        "other_result": "치수 및 표면 적합"
+      },
+      {
+        "item_name": "인덱스 플레이트",
+        "specification": "IP-12, S45C",
+        "other_result": "홀 간격 및 평면도 적합"
+      },
+      {
+        "item_name": "커버 플레이트",
+        "specification": "CP-220, AL5052",
+        "other_result": "스크래치 및 치수 적합"
+      },
+      {
+        "item_name": "클램프 블록",
+        "specification": "CB-40, S45C",
+        "other_result": "나사산 및 치수 적합"
+      },
+      {
+        "item_name": "리니어 부시",
+        "specification": "LM20UU",
+        "other_result": "작동 및 외관 적합"
+      },
+      {
+        "item_name": "타이밍 풀리",
+        "specification": "20T, HTD5M",
+        "other_result": "치형 및 보어 적합"
+      },
+      {
+        "item_name": "실린더 마운트",
+        "specification": "CM-32, SS400",
+        "other_result": "용접 및 치수 적합"
+      },
+      {
+        "item_name": "케이블 글랜드",
+        "specification": "M20, IP68",
+        "other_result": "나사 및 방수부 적합"
+      },
+      {
+        "item_name": "방진 고무",
+        "specification": "Ø30×20, NBR",
+        "other_result": "경도 및 균열 없음"
+      }
+    ]
+  },
+  "constraints": [
+    {
+      "type": "date_group",
+      "year": "purchase_order_year",
+      "month": "purchase_order_month",
+      "day": "purchase_order_day",
+      "min_year": 2020,
+      "max_year": 2026
+    },
+    {
+      "type": "date_group",
+      "year": "receiving_year",
+      "month": "receiving_month",
+      "day": "receiving_day",
+      "min_year": 2020,
+      "max_year": 2026
+    },
+    {
+      "type": "date_order",
+      "start": {
+        "year": "purchase_order_year",
+        "month": "purchase_order_month",
+        "day": "purchase_order_day"
+      },
+      "end": {
+        "year": "receiving_year",
+        "month": "receiving_month",
+        "day": "receiving_day"
+      },
+      "min_days": 0,
+      "max_days": 60
+    },
+    {
+      "type": "date_not_after",
+      "target": {
+        "year": "receiving_year",
+        "month": "receiving_month",
+        "day": "receiving_day"
+      },
+      "max": "as_of_date"
+    },
+    {
+      "type": "pick_record",
+      "pool": "inspection_item_records",
+      "targets": {
+        "line_1_item_name": "item_name",
+        "line_1_specification": "specification",
+        "line_1_other_result": "other_result"
+      }
+    },
+    {
+      "type": "numeric_range",
+      "target": "line_1_received_quantity",
+      "min": 1,
+      "max": 999,
+      "decimals": 0,
+      "suffix": ""
+    },
+    {
+      "type": "pick_record",
+      "pool": "inspection_item_records",
+      "targets": {
+        "line_2_item_name": "item_name",
+        "line_2_specification": "specification",
+        "line_2_other_result": "other_result"
+      }
+    },
+    {
+      "type": "numeric_range",
+      "target": "line_2_received_quantity",
+      "min": 1,
+      "max": 999,
+      "decimals": 0,
+      "suffix": ""
+    },
+    {
+      "type": "pick_record",
+      "pool": "inspection_item_records",
+      "targets": {
+        "line_3_item_name": "item_name",
+        "line_3_specification": "specification",
+        "line_3_other_result": "other_result"
+      }
+    },
+    {
+      "type": "numeric_range",
+      "target": "line_3_received_quantity",
+      "min": 1,
+      "max": 999,
+      "decimals": 0,
+      "suffix": ""
+    },
+    {
+      "type": "pick_record",
+      "pool": "inspection_item_records",
+      "targets": {
+        "line_4_item_name": "item_name",
+        "line_4_specification": "specification",
+        "line_4_other_result": "other_result"
+      }
+    },
+    {
+      "type": "numeric_range",
+      "target": "line_4_received_quantity",
+      "min": 1,
+      "max": 999,
+      "decimals": 0,
+      "suffix": ""
+    },
+    {
+      "type": "pick_record",
+      "pool": "inspection_item_records",
+      "targets": {
+        "line_5_item_name": "item_name",
+        "line_5_specification": "specification",
+        "line_5_other_result": "other_result"
+      }
+    },
+    {
+      "type": "numeric_range",
+      "target": "line_5_received_quantity",
+      "min": 1,
+      "max": 999,
+      "decimals": 0,
+      "suffix": ""
+    },
+    {
+      "type": "pick_record",
+      "pool": "inspection_item_records",
+      "targets": {
+        "line_6_item_name": "item_name",
+        "line_6_specification": "specification",
+        "line_6_other_result": "other_result"
+      }
+    },
+    {
+      "type": "numeric_range",
+      "target": "line_6_received_quantity",
+      "min": 1,
+      "max": 999,
+      "decimals": 0,
+      "suffix": ""
+    },
+    {
+      "type": "pick_record",
+      "pool": "inspection_item_records",
+      "targets": {
+        "line_7_item_name": "item_name",
+        "line_7_specification": "specification",
+        "line_7_other_result": "other_result"
+      }
+    },
+    {
+      "type": "numeric_range",
+      "target": "line_7_received_quantity",
+      "min": 1,
+      "max": 999,
+      "decimals": 0,
+      "suffix": ""
+    },
+    {
+      "type": "pick_record",
+      "pool": "inspection_item_records",
+      "targets": {
+        "line_8_item_name": "item_name",
+        "line_8_specification": "specification",
+        "line_8_other_result": "other_result"
+      }
+    },
+    {
+      "type": "numeric_range",
+      "target": "line_8_received_quantity",
+      "min": 1,
+      "max": 999,
+      "decimals": 0,
+      "suffix": ""
+    }
+  ],
+  "field_rules": [
+    {
+      "scope": "purchase_order_date,receiving_date",
+      "rule": "인페인트 전체 이미지에서 20이 제거되어 연도 bbox는 4자리로 생성하며 입고일은 발주일 이후 60일 이내, 기준일 이후 금지",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": [
+        "manual_qc_02_006",
+        "manual_qc_02_009"
+      ]
+    },
+    {
+      "scope": "inspection_lines",
+      "rule": "품명·규격·기타검사내용은 동일 레코드에서 선택하고 수량은 정적 단위 없이 1~999로 제한",
+      "evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "visual_evidence": [
+        "manual_qc_02_016",
+        "manual_qc_02_017",
+        "manual_qc_02_018",
+        "manual_qc_02_020"
+      ]
+    },
+    {
+      "scope": "inspection_quality_and_remark",
+      "rule": "결과와 비고의 조건부 상관관계는 현 지원 constraint로 표현할 수 없어 독립 안전 기본값을 두고 uncertainty에 보류",
+      "evidence_ids": [
+        "R1",
+        "R3"
+      ]
+    }
+  ],
+  "notes": "2차 faker/relationship pass. 1차 schema, anchor map, stylesheet, research report는 변경하지 않음."
+}

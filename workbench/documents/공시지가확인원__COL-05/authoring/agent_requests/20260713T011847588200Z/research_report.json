@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-05",
+  "title": "개별공시지가 확인서 리서치 보고서",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:law.go.kr 개별공시지가 확인서 서식 가격기준연도 기준일자 공시일자",
+    "site:gov.kr 개별공시지가 확인서 발급 민원",
+    "site:realtyprice.kr 개별공시지가 기준일 공시일"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://law.go.kr/flDownload.do?flNm=%5B%EB%B3%84%EC%A7%80+%EC%A0%9C7%ED%98%B8%EC%84%9D%5D+%EA%B0%9C%EB%B3%84%EA%B3%B5%EC%8B%9C%EC%A7%80%EA%B0%80+%ED%99%95%EC%9D%B8%EC%84%9C%0A&flSeq=98969361",
+      "source_type": "국가법령정보센터 공식 서식",
+      "summary": "별지 제7호서식은 신청인 성명·생년월일(법인·사업자등록번호)·주소·용도와 신청대상 토지의 가격기준연도, 토지소재지, 지번, 개별공시지가(원/㎡), 기준일자, 공시일자, 비고를 규정한다.",
+      "field_links": [
+        "신청인/*",
+        "신청대상토지/*"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.realtyprice.kr/notice/m/support/faq.do",
+      "source_type": "국토교통부 부동산공시가격알리미 공식 FAQ",
+      "summary": "개별공시지가는 시장·군수·구청장이 결정·공시하며 공시일은 이의신청 기산점이 된다. 템플릿의 기준일자와 공시일자를 별도 필드로 유지할 근거다.",
+      "field_links": [
+        "신청대상토지/*/기준일자",
+        "신청대상토지/*/공시일자"
+      ]
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110202&flSeq=98900335&gubun=",
+      "source_type": "국가법령정보센터 공식 서식",
+      "summary": "공식 서식의 처리기간은 즉시이며 확인서 표제와 신청인·신청대상토지·확인내용 구조를 재확인한다.",
+      "field_links": [
+        "접수정보/*",
+        "신청인/*",
+        "신청대상토지/*"
+      ]
+    }
+  ],
+  "visual_evidence": {
+    "primary_full_template": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+    "inpainted_template": "workbench/documents/공시지가확인원__COL-05/inpaint/original_공시지가확인원_page_001/lama/inpainted_lama.png",
+    "manifest": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011847588200Z/visual_evidence_manifest.json",
+    "findings": [
+      "전체 이미지에서 상단 7개 값 영역과 토지 표 10행 7열의 값 영역을 확인했다.",
+      "개별공시지가 단위 원/㎡는 열 머리글에 정적으로 인쇄되어 값에는 포함하지 않는다.",
+      "기준일자 값은 채움 샘플에서 '1월 1일 기준'으로 렌더되므로 자연어 표기 전체가 값이다.",
+      "문서는 1/2로 표시되지만 제공된 앵커와 현재 패스는 1쪽만 다룬다."
+    ]
+  },
+  "field_level_evidence": [
+    {
+      "semantic_path_pattern": "신청인/*",
+      "evidence_ids": [
+        "R1",
+        "R3"
+      ]
+    },
+    {
+      "semantic_path_pattern": "신청대상토지/*/가격기준연도",
+      "evidence_ids": [
+        "R1"
+      ]
+    },
+    {
+      "semantic_path_pattern": "신청대상토지/*/개별공시지가",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "semantic_path_pattern": "신청대상토지/*/기준일자",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "semantic_path_pattern": "신청대상토지/*/공시일자",
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ]
+    }
+  ]
+}

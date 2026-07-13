@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-05",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:gov.kr 개별공시지가 확인서 발급 공시지가 확인원",
+    "site:law.go.kr 개별공시지가 기준일 1월 1일 공시",
+    "site:realtyprice.kr 개별공시지가 조사 산정 기준일",
+    "site:easylaw.go.kr 개별공시지가 확인서"
+  ],
+  "sources": [
+    {
+      "evidence_id": "LAW-FORM-001",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110202&flSeq=114417107&gubun=",
+      "source_type": "국가법령정보센터 공식 서식",
+      "title": "부동산 가격공시에 관한 법률 시행규칙 별지 제6호서식",
+      "summary": "현행 공식 서식은 접수번호, 접수일, 신청인 성명(법인명), 주소, 전화번호, 용도와 가격기준연도, 토지소재지, 지번, 개별공시지가(원/㎡), 기준일, 공시일, 비고를 포함한다.",
+      "field_links": [
+        "민원접수.*",
+        "신청인.*",
+        "확인내용.개별공시지가 내역.*"
+      ]
+    },
+    {
+      "evidence_id": "LAW-SYSTEM-001",
+      "url": "https://www.realtyprice.kr/notice/support/faq.htm",
+      "source_type": "국토교통부 부동산공시가격알리미",
+      "title": "개별공시지가 제도 설명",
+      "summary": "개별공시지가는 표준지공시지가를 기준으로 산정하고 시·군·구 심의를 거쳐 공시하는 개별토지의 단위면적당 가격이며 통상 1월 1일 기준으로 설명된다.",
+      "field_links": [
+        "확인내용.개별공시지가 내역.*.가격기준연도",
+        "확인내용.개별공시지가 내역.*.개별공시지가",
+        "확인내용.개별공시지가 내역.*.기준일자",
+        "확인내용.개별공시지가 내역.*.공시일자"
+      ]
+    },
+    {
+      "evidence_id": "GOV-SERVICE-001",
+      "url": "https://www.gov.kr/portal/ntcItm/115629",
+      "source_type": "정부24 공식 공지",
+      "title": "개별공시지가 확인 서비스",
+      "summary": "정부24가 개별공시지가 확인을 별도 민원 서비스로 운영하며 국토교통부 부동산공시가격산정시스템과 연계함을 확인했다.",
+      "field_links": [
+        "문서확인번호",
+        "민원접수.*"
+      ]
+    },
+    {
+      "evidence_id": "VIS-001",
+      "url": null,
+      "source_type": "로컬 전체 템플릿 이미지",
+      "title": "공시지가확인원 page 1 전체 이미지",
+      "summary": "전체 이미지에서 77개 값 영역, 10개 공시지가 행, 신청인 헤더 구조와 개별공시지가 열의 정적 단위 원/㎡를 확인했다.",
+      "local_path": "workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
+      "field_links": [
+        "*"
+      ]
+    }
+  ],
+  "conclusions": [
+    "문서 제목은 이미지의 개별공시지가 확인서 표기를 primary title로 채택했다.",
+    "확인내용은 10개 반복 행으로 모델링하고 각 행의 7개 열을 독립 semantic leaf로 고정했다.",
+    "템플릿에 없는 처리기간 즉시는 정적 인쇄 영역이므로 semantic field로 추가하지 않았다."
+  ]
+}

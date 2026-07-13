@@ -1,1622 +1,649 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-30T11:49:12.318967+00:00",
-  "updated_at": "2026-07-02T06:09:27.376382+00:00",
+  "created_at": "2026-07-13T01:24:56.797064+00:00",
   "doc_id": "ID-03",
   "title": "주주명부",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/주주명부__ID-03/review/original_4_page_001/review.json",
-  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/주주명부__ID-03/samples/original/4_page_001.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/주주명부__ID-03/inpaint/original_4_page_001/lama/inpainted_lama.png",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/주주명부__ID-03/authoring/agent_applied_reviews/20260713T011107273052Z/review.json",
+  "source_image": "workbench/documents/주주명부__ID-03/samples/original/18-1.jpg",
+  "source_inpainted": "workbench/documents/주주명부__ID-03/inpaint/original_4_page_001/lama/inpainted_lama.png",
   "image": {
-    "width": 1191,
-    "height": 1685
+    "width": 4953,
+    "height": 7005
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/주주명부__ID-03/authoring/agent_applied_reviews/20260713T011107273052Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/주주명부__ID-03/authoring/agent_requests/20260713T011107273052Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "기준일": {
+      "연도": "",
+      "월일_현재": ""
+    },
+    "주주내역": {
+      "주주_1": {
+        "주주명": "",
+        "소유주식수": "",
+        "주식종류": ""
+      },
+      "주주_2": {
+        "주주명_첫째줄": "",
+        "주주명_둘째줄": "",
+        "소유주식수": "",
+        "주식종류": ""
+      },
+      "주주_3": {
+        "주주명_첫째줄": "",
+        "주주명_둘째줄": "",
+        "소유주식수": "",
+        "주식종류": ""
+      }
+    },
+    "합계": {
+      "총주식수": "",
+      "1주당금액": ""
+    },
+    "증명": {
+      "증명일": "",
+      "법인명": "",
+      "소재지_첫째구간": "",
+      "소재지_둘째구간": "",
+      "대표이사": ""
+    }
   },
   "fields": [
     {
-      "field_id": "shareholder_list_date",
-      "label": "주주명부 기준일",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주명부 기준일",
-      "value_type": "date.kr",
-      "generator": "literal:",
+      "field_id": "as_of_year",
+      "label": "기준일 연도",
+      "semantic_path": [
+        "기준일",
+        "연도"
+      ],
+      "bbox_label_id": "det_000003",
+      "source_detection_id": "det_000003",
+      "source_text": "2025년",
+      "value_type": "free_text.short",
+      "generator": "template:{{date.year}}년",
       "style_class": "style_header_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "주주명부 기준일",
-        "csv_column": "주주명부 기준일"
+        "json_path": "기준일/연도",
+        "csv_column": "기준일/연도"
       },
       "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "shareholder_list_date_suffix",
-      "label": "기준일 접미어",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "기준일 접미어",
+      "field_id": "as_of_month_day_current",
+      "label": "기준일 월일 현재",
+      "semantic_path": [
+        "기준일",
+        "월일_현재"
+      ],
+      "bbox_label_id": "det_000004",
+      "source_detection_id": "det_000004",
+      "source_text": "9월19일 현재",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:month_day_current_values",
       "style_class": "style_header_suffix",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일 접미어",
-        "csv_column": "기준일 접미어"
+        "json_path": "기준일/월일_현재",
+        "csv_column": "기준일/월일_현재"
       },
       "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_2",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shareholder_1_name",
-      "label": "주주명[0]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 1 주주명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "label": "주주명",
+      "semantic_path": [
+        "주주내역",
+        "주주_1",
+        "주주명"
+      ],
+      "bbox_label_id": "det_000008",
+      "source_detection_id": "det_000008",
+      "source_text": "김지현",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_shareholder_1_name",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "주주명[0]",
-        "csv_column": "주주명[0]"
+        "json_path": "주주내역/주주_1/주주명",
+        "csv_column": "주주내역/주주_1/주주명"
       },
       "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_3",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shareholder_1_share_count",
-      "label": "소유주식수[0]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 1 소유주식수",
+      "label": "소유주식수",
+      "semantic_path": [
+        "주주내역",
+        "주주_1",
+        "소유주식수"
+      ],
+      "bbox_label_id": "det_000009",
+      "source_detection_id": "det_000009",
+      "source_text": "501,000주",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:share_count_values",
       "style_class": "style_shareholder_1_share_count",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "소유주식수[0]",
-        "csv_column": "소유주식수[0]"
+        "json_path": "주주내역/주주_1/소유주식수",
+        "csv_column": "주주내역/주주_1/소유주식수"
       },
       "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_4",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "shareholder_1_attendance_shares",
-      "label": "회의출석[0]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 1 회의출석",
+      "field_id": "shareholder_1_share_type",
+      "label": "주식종류",
+      "semantic_path": [
+        "주주내역",
+        "주주_1",
+        "주식종류"
+      ],
+      "bbox_label_id": "det_000010",
+      "source_detection_id": "det_000010",
+      "source_text": "보통주식",
       "value_type": "free_text.short",
-      "generator": "choice:참석|불참|위임",
-      "style_class": "style_shareholder_1_attendance_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "회의출석[0]",
-        "csv_column": "회의출석[0]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_5",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_1_approval_shares",
-      "label": "의결찬성[0]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 1 의결찬성",
-      "value_type": "free_text.short",
-      "generator": "choice:찬성|반대|기권",
-      "style_class": "style_shareholder_1_approval_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성[0]",
-        "csv_column": "의결찬성[0]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_6",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_1_notarization_shares",
-      "label": "인증촉탁[0]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 1 인증촉탁",
-      "value_type": "free_text.short",
-      "generator": "choice:촉탁|미촉탁|해당없음",
-      "style_class": "style_shareholder_1_notarization_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁[0]",
-        "csv_column": "인증촉탁[0]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_7",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_1_note",
-      "label": "비고[0]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 1 비고",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:보통주식|상환전환우선주식|전환우선주식",
       "style_class": "style_shareholder_1_note",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[0]",
-        "csv_column": "비고[0]"
+        "json_path": "주주내역/주주_1/주식종류",
+        "csv_column": "주주내역/주주_1/주식종류"
       },
       "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_8",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "shareholder_2_name",
-      "label": "주주명[1]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 2 주주명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "field_id": "shareholder_2_name_line_1",
+      "label": "주주명 첫째줄",
+      "semantic_path": [
+        "주주내역",
+        "주주_2",
+        "주주명_첫째줄"
+      ],
+      "bbox_label_id": "det_000011",
+      "source_detection_id": "det_000011",
+      "source_text": "경기창조경제혁신센터",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_shareholder_2_name",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "주주명[1]",
-        "csv_column": "주주명[1]"
+        "json_path": "주주내역/주주_2/주주명_첫째줄",
+        "csv_column": "주주내역/주주_2/주주명_첫째줄"
       },
       "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_9",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "shareholder_2_name_line_2",
+      "label": "주주명 둘째줄",
+      "semantic_path": [
+        "주주내역",
+        "주주_2",
+        "주주명_둘째줄"
+      ],
+      "bbox_label_id": "det_000014",
+      "source_detection_id": "det_000014",
+      "source_text": "개인투자조합 제2호",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "style_shareholder_2_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "주주내역/주주_2/주주명_둘째줄",
+        "csv_column": "주주내역/주주_2/주주명_둘째줄"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shareholder_2_share_count",
-      "label": "소유주식수[1]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 2 소유주식수",
+      "label": "소유주식수",
+      "semantic_path": [
+        "주주내역",
+        "주주_2",
+        "소유주식수"
+      ],
+      "bbox_label_id": "det_000012",
+      "source_detection_id": "det_000012",
+      "source_text": "11,112 주",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:share_count_values",
       "style_class": "style_shareholder_2_share_count",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "소유주식수[1]",
-        "csv_column": "소유주식수[1]"
+        "json_path": "주주내역/주주_2/소유주식수",
+        "csv_column": "주주내역/주주_2/소유주식수"
       },
       "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_10",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "shareholder_2_attendance_shares",
-      "label": "회의출석[1]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 2 회의출석",
+      "field_id": "shareholder_2_share_type",
+      "label": "주식종류",
+      "semantic_path": [
+        "주주내역",
+        "주주_2",
+        "주식종류"
+      ],
+      "bbox_label_id": "det_000013",
+      "source_detection_id": "det_000013",
+      "source_text": "전환우선주식",
       "value_type": "free_text.short",
-      "generator": "choice:참석|불참|위임",
-      "style_class": "style_shareholder_2_attendance_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "회의출석[1]",
-        "csv_column": "회의출석[1]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_11",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_2_approval_shares",
-      "label": "의결찬성[1]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 2 의결찬성",
-      "value_type": "free_text.short",
-      "generator": "choice:찬성|반대|기권",
-      "style_class": "style_shareholder_2_approval_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성[1]",
-        "csv_column": "의결찬성[1]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_12",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_2_notarization_shares",
-      "label": "인증촉탁[1]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 2 인증촉탁",
-      "value_type": "free_text.short",
-      "generator": "choice:촉탁|미촉탁|해당없음",
-      "style_class": "style_shareholder_2_notarization_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁[1]",
-        "csv_column": "인증촉탁[1]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_13",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_2_note",
-      "label": "비고[1]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 2 비고",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:보통주식|상환전환우선주식|전환우선주식",
       "style_class": "style_shareholder_2_note",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[1]",
-        "csv_column": "비고[1]"
+        "json_path": "주주내역/주주_2/주식종류",
+        "csv_column": "주주내역/주주_2/주식종류"
       },
       "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_14",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "shareholder_3_name",
-      "label": "주주명[2]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 3 주주명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "field_id": "shareholder_3_name_line_1",
+      "label": "주주명 첫째줄",
+      "semantic_path": [
+        "주주내역",
+        "주주_3",
+        "주주명_첫째줄"
+      ],
+      "bbox_label_id": "det_000015",
+      "source_detection_id": "det_000015",
+      "source_text": "스마트트랜스링크벤처투자",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_shareholder_3_name",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "주주명[2]",
-        "csv_column": "주주명[2]"
+        "json_path": "주주내역/주주_3/주주명_첫째줄",
+        "csv_column": "주주내역/주주_3/주주명_첫째줄"
       },
       "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_15",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "shareholder_3_name_line_2",
+      "label": "주주명 둘째줄",
+      "semantic_path": [
+        "주주내역",
+        "주주_3",
+        "주주명_둘째줄"
+      ],
+      "bbox_label_id": "det_000018",
+      "source_detection_id": "det_000018",
+      "source_text": "조합VI",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "style_shareholder_3_name",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "주주내역/주주_3/주주명_둘째줄",
+        "csv_column": "주주내역/주주_3/주주명_둘째줄"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shareholder_3_share_count",
-      "label": "소유주식수[2]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 3 소유주식수",
+      "label": "소유주식수",
+      "semantic_path": [
+        "주주내역",
+        "주주_3",
+        "소유주식수"
+      ],
+      "bbox_label_id": "det_000016",
+      "source_detection_id": "det_000016",
+      "source_text": "20,485주",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:share_count_values",
       "style_class": "style_shareholder_3_share_count",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "소유주식수[2]",
-        "csv_column": "소유주식수[2]"
+        "json_path": "주주내역/주주_3/소유주식수",
+        "csv_column": "주주내역/주주_3/소유주식수"
       },
       "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_16",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "shareholder_3_attendance_shares",
-      "label": "회의출석[2]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 3 회의출석",
+      "field_id": "shareholder_3_share_type",
+      "label": "주식종류",
+      "semantic_path": [
+        "주주내역",
+        "주주_3",
+        "주식종류"
+      ],
+      "bbox_label_id": "det_000017",
+      "source_detection_id": "det_000017",
+      "source_text": "전환우선주식",
       "value_type": "free_text.short",
-      "generator": "choice:참석|불참|위임",
-      "style_class": "style_shareholder_3_attendance_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "회의출석[2]",
-        "csv_column": "회의출석[2]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_17",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_3_approval_shares",
-      "label": "의결찬성[2]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 3 의결찬성",
-      "value_type": "free_text.short",
-      "generator": "choice:찬성|반대|기권",
-      "style_class": "style_shareholder_3_approval_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성[2]",
-        "csv_column": "의결찬성[2]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_18",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_3_notarization_shares",
-      "label": "인증촉탁[2]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 3 인증촉탁",
-      "value_type": "free_text.short",
-      "generator": "choice:촉탁|미촉탁|해당없음",
-      "style_class": "style_shareholder_3_notarization_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁[2]",
-        "csv_column": "인증촉탁[2]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_19",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_3_note",
-      "label": "비고[2]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 3 비고",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:보통주식|상환전환우선주식|전환우선주식",
       "style_class": "style_shareholder_3_note",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[2]",
-        "csv_column": "비고[2]"
+        "json_path": "주주내역/주주_3/주식종류",
+        "csv_column": "주주내역/주주_3/주식종류"
       },
       "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_20",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "shareholder_4_name",
-      "label": "주주명[3]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 4 주주명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_4_name",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "주주명[3]",
-        "csv_column": "주주명[3]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_21",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_4_share_count",
-      "label": "소유주식수[3]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 4 소유주식수",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_4_share_count",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "소유주식수[3]",
-        "csv_column": "소유주식수[3]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_22",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_4_attendance_shares",
-      "label": "회의출석[3]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 4 회의출석",
-      "value_type": "free_text.short",
-      "generator": "choice:참석|불참|위임",
-      "style_class": "style_shareholder_4_attendance_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "회의출석[3]",
-        "csv_column": "회의출석[3]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_23",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_4_approval_shares",
-      "label": "의결찬성[3]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 4 의결찬성",
-      "value_type": "free_text.short",
-      "generator": "choice:찬성|반대|기권",
-      "style_class": "style_shareholder_4_approval_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성[3]",
-        "csv_column": "의결찬성[3]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_24",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_4_notarization_shares",
-      "label": "인증촉탁[3]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 4 인증촉탁",
-      "value_type": "free_text.short",
-      "generator": "choice:촉탁|미촉탁|해당없음",
-      "style_class": "style_shareholder_4_notarization_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁[3]",
-        "csv_column": "인증촉탁[3]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_25",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_4_note",
-      "label": "비고[3]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 4 비고",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_4_note",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "비고[3]",
-        "csv_column": "비고[3]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_26",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_5_name",
-      "label": "주주명[4]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 5 주주명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_5_name",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "주주명[4]",
-        "csv_column": "주주명[4]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_27",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_5_share_count",
-      "label": "소유주식수[4]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 5 소유주식수",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_5_share_count",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "소유주식수[4]",
-        "csv_column": "소유주식수[4]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_28",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_5_attendance_shares",
-      "label": "회의출석[4]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 5 회의출석",
-      "value_type": "free_text.short",
-      "generator": "choice:참석|불참|위임",
-      "style_class": "style_shareholder_5_attendance_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "회의출석[4]",
-        "csv_column": "회의출석[4]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_29",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_5_approval_shares",
-      "label": "의결찬성[4]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 5 의결찬성",
-      "value_type": "free_text.short",
-      "generator": "choice:찬성|반대|기권",
-      "style_class": "style_shareholder_5_approval_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성[4]",
-        "csv_column": "의결찬성[4]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_30",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_5_notarization_shares",
-      "label": "인증촉탁[4]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 5 인증촉탁",
-      "value_type": "free_text.short",
-      "generator": "choice:촉탁|미촉탁|해당없음",
-      "style_class": "style_shareholder_5_notarization_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁[4]",
-        "csv_column": "인증촉탁[4]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_31",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_5_note",
-      "label": "비고[4]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 5 비고",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_5_note",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "비고[4]",
-        "csv_column": "비고[4]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_32",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_6_name",
-      "label": "주주명[5]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 6 주주명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_6_name",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "주주명[5]",
-        "csv_column": "주주명[5]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_33",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_6_share_count",
-      "label": "소유주식수[5]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 6 소유주식수",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_6_share_count",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "소유주식수[5]",
-        "csv_column": "소유주식수[5]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_34",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_6_attendance_shares",
-      "label": "회의출석[5]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 6 회의출석",
-      "value_type": "free_text.short",
-      "generator": "choice:참석|불참|위임",
-      "style_class": "style_shareholder_6_attendance_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "회의출석[5]",
-        "csv_column": "회의출석[5]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_35",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_6_approval_shares",
-      "label": "의결찬성[5]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 6 의결찬성",
-      "value_type": "free_text.short",
-      "generator": "choice:찬성|반대|기권",
-      "style_class": "style_shareholder_6_approval_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성[5]",
-        "csv_column": "의결찬성[5]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_36",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_6_notarization_shares",
-      "label": "인증촉탁[5]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 6 인증촉탁",
-      "value_type": "free_text.short",
-      "generator": "choice:촉탁|미촉탁|해당없음",
-      "style_class": "style_shareholder_6_notarization_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁[5]",
-        "csv_column": "인증촉탁[5]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_37",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_6_note",
-      "label": "비고[5]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 6 비고",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_6_note",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "비고[5]",
-        "csv_column": "비고[5]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_38",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_7_name",
-      "label": "주주명[6]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 7 주주명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_7_name",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "주주명[6]",
-        "csv_column": "주주명[6]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_39",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_7_share_count",
-      "label": "소유주식수[6]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 7 소유주식수",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_7_share_count",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "소유주식수[6]",
-        "csv_column": "소유주식수[6]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_40",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_7_attendance_shares",
-      "label": "회의출석[6]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 7 회의출석",
-      "value_type": "free_text.short",
-      "generator": "choice:참석|불참|위임",
-      "style_class": "style_shareholder_7_attendance_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "회의출석[6]",
-        "csv_column": "회의출석[6]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_41",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_7_approval_shares",
-      "label": "의결찬성[6]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 7 의결찬성",
-      "value_type": "free_text.short",
-      "generator": "choice:찬성|반대|기권",
-      "style_class": "style_shareholder_7_approval_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성[6]",
-        "csv_column": "의결찬성[6]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_42",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_7_notarization_shares",
-      "label": "인증촉탁[6]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 7 인증촉탁",
-      "value_type": "free_text.short",
-      "generator": "choice:촉탁|미촉탁|해당없음",
-      "style_class": "style_shareholder_7_notarization_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁[6]",
-        "csv_column": "인증촉탁[6]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_43",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_7_note",
-      "label": "비고[6]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 7 비고",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_7_note",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "비고[6]",
-        "csv_column": "비고[6]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_44",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_8_name",
-      "label": "주주명[7]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 8 주주명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_8_name",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "주주명[7]",
-        "csv_column": "주주명[7]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_45",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_8_share_count",
-      "label": "소유주식수[7]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 8 소유주식수",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_8_share_count",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "소유주식수[7]",
-        "csv_column": "소유주식수[7]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_46",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_8_attendance_shares",
-      "label": "회의출석[7]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 8 회의출석",
-      "value_type": "free_text.short",
-      "generator": "choice:참석|불참|위임",
-      "style_class": "style_shareholder_8_attendance_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "회의출석[7]",
-        "csv_column": "회의출석[7]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_47",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_8_approval_shares",
-      "label": "의결찬성[7]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 8 의결찬성",
-      "value_type": "free_text.short",
-      "generator": "choice:찬성|반대|기권",
-      "style_class": "style_shareholder_8_approval_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성[7]",
-        "csv_column": "의결찬성[7]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_48",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_8_notarization_shares",
-      "label": "인증촉탁[7]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 8 인증촉탁",
-      "value_type": "free_text.short",
-      "generator": "choice:촉탁|미촉탁|해당없음",
-      "style_class": "style_shareholder_8_notarization_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁[7]",
-        "csv_column": "인증촉탁[7]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_49",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_8_note",
-      "label": "비고[7]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 8 비고",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_8_note",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "비고[7]",
-        "csv_column": "비고[7]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_50",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_9_name",
-      "label": "주주명[8]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 9 주주명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_table_name",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "주주명[8]",
-        "csv_column": "주주명[8]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_51",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_9_share_count",
-      "label": "소유주식수[8]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 9 소유주식수",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_shareholder_9_share_count",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "소유주식수[8]",
-        "csv_column": "소유주식수[8]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_52",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_9_attendance_shares",
-      "label": "회의출석[8]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 9 회의출석",
-      "value_type": "free_text.short",
-      "generator": "choice:참석|불참|위임",
-      "style_class": "style_shareholder_9_attendance_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "회의출석[8]",
-        "csv_column": "회의출석[8]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_53",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_9_approval_shares",
-      "label": "의결찬성[8]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 9 의결찬성",
-      "value_type": "free_text.short",
-      "generator": "choice:찬성|반대|기권",
-      "style_class": "style_shareholder_9_approval_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성[8]",
-        "csv_column": "의결찬성[8]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_54",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_9_notarization_shares",
-      "label": "인증촉탁[8]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 9 인증촉탁",
-      "value_type": "free_text.short",
-      "generator": "choice:촉탁|미촉탁|해당없음",
-      "style_class": "style_table_number",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁[8]",
-        "csv_column": "인증촉탁[8]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_55",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "shareholder_9_note",
-      "label": "비고[8]",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "주주 9 비고",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_table_note",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "비고[8]",
-        "csv_column": "비고[8]"
-      },
-      "required": true,
-      "notes": "원본에는 일부 행만 값이 있으나, 생산용 KIE 템플릿을 위해 주주 표 전체 행/열을 bbox로 확장함.",
-      "bbox_label_id": "manual_grid_20260702_56",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "total_issued_shares",
+      "field_id": "total_share_count",
       "label": "총주식수",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "총주식수",
+      "semantic_path": [
+        "합계",
+        "총주식수"
+      ],
+      "bbox_label_id": "det_000024",
+      "source_detection_id": "det_000024",
+      "source_text": "532,597주",
       "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_total_issued_shares",
-      "render_policy": {
-        "align": "center",
-        "valign": "bottom",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "총주식수",
-        "csv_column": "총주식수"
-      },
-      "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_57",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "attendance_total",
-      "label": "출석주식수",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "출석주식수",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_attendance_total",
-      "render_policy": {
-        "align": "center",
-        "valign": "bottom",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "출석주식수",
-        "csv_column": "출석주식수"
-      },
-      "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_58",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "approval_total",
-      "label": "의결찬성주식수",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "의결찬성주식수",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_approval_total",
-      "render_policy": {
-        "align": "center",
-        "valign": "bottom",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "의결찬성주식수",
-        "csv_column": "의결찬성주식수"
-      },
-      "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_59",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "notarization_total",
-      "label": "인증촉탁주식수",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "인증촉탁주식수",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_notarization_total",
-      "render_policy": {
-        "align": "center",
-        "valign": "bottom",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "인증촉탁주식수",
-        "csv_column": "인증촉탁주식수"
-      },
-      "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_60",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "par_value",
-      "label": "주당 금액",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "1주당 금액",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:total_share_count_values",
       "style_class": "style_summary_number",
       "render_policy": {
-        "align": "center",
-        "valign": "bottom",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "주당 금액",
-        "csv_column": "주당 금액"
-      },
-      "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_61",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "issue_date",
-      "label": "작성일",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "작성일",
-      "value_type": "date.kr",
-      "generator": "literal:",
-      "style_class": "style_footer_date",
-      "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "작성일",
-        "csv_column": "작성일"
+        "json_path": "합계/총주식수",
+        "csv_column": "합계/총주식수"
       },
       "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_62",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "company_name",
-      "label": "회사명",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "회사명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "field_id": "par_value_per_share",
+      "label": "1주당금액",
+      "semantic_path": [
+        "합계",
+        "1주당금액"
+      ],
+      "bbox_label_id": "det_000023",
+      "source_detection_id": "det_000023",
+      "source_text": "100원",
+      "value_type": "money.krw",
+      "generator": "choice:100원|500원|1,000원|5,000원",
+      "style_class": "style_summary_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "합계/1주당금액",
+        "csv_column": "합계/1주당금액"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "certification_date",
+      "label": "증명일",
+      "semantic_path": [
+        "증명",
+        "증명일"
+      ],
+      "bbox_label_id": "det_000031",
+      "source_detection_id": "det_000031",
+      "source_text": "2025년 9월 19일",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "style_footer_date",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "증명/증명일",
+        "csv_column": "증명/증명일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "certifying_company_name",
+      "label": "법인명",
+      "semantic_path": [
+        "증명",
+        "법인명"
+      ],
+      "bbox_label_id": "det_000033",
+      "source_detection_id": "det_000033",
+      "source_text": "한국딥러닝 주식회사(Korea Deep Learning Inc.)",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_footer_company",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "회사명",
-        "csv_column": "회사명"
+        "json_path": "증명/법인명",
+        "csv_column": "증명/법인명"
       },
       "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_63",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "company_address",
-      "label": "소재지",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "소재지",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "field_id": "certifying_company_address_line_1",
+      "label": "소재지 첫째구간",
+      "semantic_path": [
+        "증명",
+        "소재지_첫째구간"
+      ],
+      "bbox_label_id": "det_000034",
+      "source_detection_id": "det_000034",
+      "source_text": "서울특별시 서초구",
+      "value_type": "address.ko",
+      "generator": "address.ko",
       "style_class": "style_footer_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "소재지",
-        "csv_column": "소재지"
+        "json_path": "증명/소재지_첫째구간",
+        "csv_column": "증명/소재지_첫째구간"
       },
       "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_64",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "representative_name",
-      "label": "대표이사",
-      "source_detection_id": "manual_grid_20260702",
-      "source_text": "대표이사",
+      "field_id": "certifying_company_address_line_2",
+      "label": "소재지 둘째구간",
+      "semantic_path": [
+        "증명",
+        "소재지_둘째구간"
+      ],
+      "bbox_label_id": "det_000035",
+      "source_detection_id": "det_000035",
+      "source_text": "강남대로89길 30, 르헤브빌딩(반포동)",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
+      "style_class": "style_footer_address",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "증명/소재지_둘째구간",
+        "csv_column": "증명/소재지_둘째구간"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "representative_director_name",
+      "label": "대표이사",
+      "semantic_path": [
+        "증명",
+        "대표이사"
+      ],
+      "bbox_label_id": "det_000037",
+      "source_detection_id": "det_000037",
+      "source_text": "김지현",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_footer_rep",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "대표이사",
-        "csv_column": "대표이사"
+        "json_path": "증명/대표이사",
+        "csv_column": "증명/대표이사"
       },
       "required": true,
-      "notes": "2026-07-02 ID-03 고품질 생산 템플릿: 원본 빈 표 구조를 grid 기준으로 확장한 수동 bbox",
-      "bbox_label_id": "manual_grid_20260702_65",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
-  "groups": [
-    {
-      "group_id": "shareholder_rows",
-      "type": "table",
-      "row_count": 9,
-      "columns": [
-        "name",
-        "share_count",
-        "attendance_shares",
-        "approval_shares",
-        "notarization_shares",
-        "note"
-      ],
-      "grid": {
-        "x": [
-          143,
-          293,
-          430,
-          568,
-          706,
-          843,
-          996
-        ],
-        "y": [
-          386,
-          443,
-          500,
-          557,
-          614,
-          671,
-          728,
-          785,
-          842,
-          899,
-          956
-        ]
-      },
-      "notes": "원본 빈 표를 생산 가능 KIE 데이터로 확장한 주주 행 그룹"
-    }
-  ],
-  "authoring_mode": "id03_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/주주명부__ID-03/review/original_4_page_001/review.json"
-  }
+  "groups": [],
+  "updated_at": "2026-07-13T01:24:56.819589+00:00"
 }

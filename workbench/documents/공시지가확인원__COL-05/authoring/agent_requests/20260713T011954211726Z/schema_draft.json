@@ -1,0 +1,3140 @@
+{
+  "schema_version": 2,
+  "doc_id": "COL-05",
+  "title": "개별공시지가 확인서",
+  "semantic_schema": {
+    "문서확인번호": "",
+    "민원접수": {
+      "접수번호": "",
+      "접수일": ""
+    },
+    "신청인": {
+      "성명(법인명)": "",
+      "생년월일(사업자등록번호)": "",
+      "주소": "",
+      "용도": ""
+    },
+    "확인내용": {
+      "개별공시지가 내역": {
+        "1행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "2행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "3행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "4행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "5행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "6행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "7행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "8행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "9행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "10행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        }
+      }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "p1_document_verification_number",
+      "key": "문서확인번호",
+      "semantic_path": "문서확인번호",
+      "anchor_id": "manual_col05_pipeline_ready_20260702",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####-####-####",
+      "style_class": "style_top_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          363,
+          42,
+          285,
+          32
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_receipt_number",
+      "key": "접수번호",
+      "semantic_path": "민원접수.접수번호",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_2",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_receipt_number",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          185,
+          289,
+          380,
+          38
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_receipt_date",
+      "key": "접수일",
+      "semantic_path": "민원접수.접수일",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_3",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_header_value",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          715,
+          289,
+          170,
+          38
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_applicant_name",
+      "key": "성명(법인명)",
+      "semantic_path": "신청인.성명(법인명)",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_4",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_body_value",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          330,
+          336,
+          285,
+          48
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_birth_or_business_number",
+      "key": "생년월일(사업자등록번호)",
+      "semantic_path": "신청인.생년월일(사업자등록번호)",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_5",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_birth_or_business_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          820,
+          336,
+          250,
+          48
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      },
+      "review_required": true,
+      "confidence": 0.75
+    },
+    {
+      "field_id": "p1_applicant_address",
+      "key": "주소",
+      "semantic_path": "신청인.주소",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_6",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_body_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          334,
+          395,
+          445,
+          45
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_purpose",
+      "key": "용도",
+      "semantic_path": "신청인.용도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_7",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_body_value",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          334,
+          449,
+          750,
+          46
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.1행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_8",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_1_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          618,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.1행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_9",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_1_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          618,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.1행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_10",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_1_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          618,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.1행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_11",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_1_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          618,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.1행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_12",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_1_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          618,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.1행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_13",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_1_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          618,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_1_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.1행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_14",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_1_note",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          618,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.2행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_15",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_2_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          664,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.2행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_16",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_2_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          664,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.2행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_17",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_2_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          664,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.2행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_18",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_2_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          664,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.2행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_19",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_2_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          664,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.2행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_20",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_2_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          664,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_2_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.2행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_21",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_2_note",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          664,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.3행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_22",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_3_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          709,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.3행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_23",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_3_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          709,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.3행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_24",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_3_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          709,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.3행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_25",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_3_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          709,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.3행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_26",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_3_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          709,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.3행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_27",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_3_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          709,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_3_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.3행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_28",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_3_note",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          709,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.4행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_29",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_4_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          755,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.4행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_30",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_4_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          755,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.4행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_31",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_4_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          755,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.4행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_32",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_4_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          755,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.4행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_33",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_4_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          755,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.4행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_34",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_4_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          755,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_4_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.4행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_35",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_4_note",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          755,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.5행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_36",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_5_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          800,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.5행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_37",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_5_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          800,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.5행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_38",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_5_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          800,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.5행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_39",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_5_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          800,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.5행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_40",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_5_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          800,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.5행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_41",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_5_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          800,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_5_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.5행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_42",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_5_note",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          800,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.6행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_43",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_6_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          846,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.6행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_44",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_6_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          846,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.6행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_45",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_6_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          846,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.6행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_46",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_6_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          846,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.6행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_47",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_6_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          846,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.6행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_48",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_6_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          846,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_6_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.6행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_49",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_6_note",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          846,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.7행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_50",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_7_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          891,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.7행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_51",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_7_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          891,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.7행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_52",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_7_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          891,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.7행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_53",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_7_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          891,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.7행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_54",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_7_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          891,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.7행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_55",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_7_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          891,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_7_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.7행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_56",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_7_note",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          891,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.8행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_57",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_8_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          936,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.8행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_58",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_8_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          936,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.8행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_59",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_8_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          936,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.8행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_60",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_8_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          936,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.8행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_61",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_8_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          936,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.8행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_62",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_8_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          936,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_8_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.8행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_63",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_8_note",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          936,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.9행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_64",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_9_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          982,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.9행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_65",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_9_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          982,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.9행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_66",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_9_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          982,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.9행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_67",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_9_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          982,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.9행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_68",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_9_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          982,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.9행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_69",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_9_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          982,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_9_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.9행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_70",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_land_row_9_note",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          982,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_year",
+      "key": "가격기준연도",
+      "semantic_path": "확인내용.개별공시지가 내역.10행.가격기준연도",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_71",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_land_row_10_year",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          99,
+          1027,
+          126,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_location",
+      "key": "토지소재지",
+      "semantic_path": "확인내용.개별공시지가 내역.10행.토지소재지",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_72",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_p1_land_row_10_location",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          242,
+          1027,
+          268,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_lot_number",
+      "key": "지번",
+      "semantic_path": "확인내용.개별공시지가 내역.10행.지번",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_73",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####-####",
+      "style_class": "style_p1_land_row_10_lot_number",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          523,
+          1027,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_price",
+      "key": "개별공시지가",
+      "semantic_path": "확인내용.개별공시지가 내역.10행.개별공시지가",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_74",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_p1_land_row_10_price",
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": false,
+        "static_unit": "원/㎡",
+        "evidence": "전체 템플릿의 열 머리글에 정적 단위가 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-FORM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          637,
+          1027,
+          124,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_base_date",
+      "key": "기준일자",
+      "semantic_path": "확인내용.개별공시지가 내역.10행.기준일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_75",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1월 1일 기준",
+      "style_class": "style_p1_land_row_10_base_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          773,
+          1027,
+          102,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_announced_date",
+      "key": "공시일자",
+      "semantic_path": "확인내용.개별공시지가 내역.10행.공시일자",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_76",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_land_row_10_announced_date",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          886,
+          1027,
+          103,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    },
+    {
+      "field_id": "p1_land_row_10_note",
+      "key": "비고",
+      "semantic_path": "확인내용.개별공시지가 내역.10행.비고",
+      "anchor_id": "manual_col05_pipeline_ready_20260702_77",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_table_value",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "unit_policy": {
+        "include_in_value": true,
+        "static_unit": null
+      },
+      "research_evidence_ids": [
+        "VIS-001",
+        "LAW-SYSTEM-001"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          1000,
+          1027,
+          108,
+          42
+        ],
+        "image_size": {
+          "width": 1191,
+          "height": 1684
+        },
+        "confidence": 0.95
+      }
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 77,
+    "bound_use_anchor_count": 77,
+    "percent": 100,
+    "unmapped_use_anchors": []
+  },
+  "field_id_contract": {
+    "status": "frozen_for_pass_2",
+    "immutable": true,
+    "pass": 1
+  }
+}

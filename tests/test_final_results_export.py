@@ -29,6 +29,20 @@ def test_resolve_scope_entries_defaults_to_registry_first_priority() -> None:
     assert _resolve_scope_entries(None, registry=registry) == (("금융", "DOC-1"),)
 
 
+def test_load_semantic_schema_prefers_canonical_embedded_schema_over_stale_sidecar(tmp_path: Path) -> None:
+    schema_path = tmp_path / "schema.json"
+    schema_path.write_text(
+        json.dumps({"semantic_schema": {"신규구조": {"필드": ""}}}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    (tmp_path / "semantic_schema.json").write_text(
+        json.dumps({"구형구조": {"필드": ""}}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    assert fre._load_semantic_schema(schema_path) == {"신규구조": {"필드": ""}}
+
+
 def test_resolve_scope_entries_accepts_selected_group_scope_and_deduplicates() -> None:
     registry = RegistryData(
         documents={

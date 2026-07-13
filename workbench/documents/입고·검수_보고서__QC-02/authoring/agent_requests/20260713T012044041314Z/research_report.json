@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "doc_id": "QC-02",
+  "search_date": "2026-07-13",
+  "scope": "입고품 검수보고서의 표시 필드 의미 확인",
+  "queries": [
+    "site:law.go.kr 물품 검사 검수 계약 수량 품질",
+    "site:law.go.kr 검수는 계약된 물품의 규격 수량",
+    "site:go.kr 물품검수조서 품명 규격 수량 검수 filetype:pdf",
+    "입고 검수 보고서 검수방법 품질 수량 규격"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "title": "물품구매계약 품질관리 특수조건",
+      "url": "https://law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000126691",
+      "source_type": "국가법령정보센터 행정규칙",
+      "summary": "검사는 구매규격·시방서 적합 여부를, 검수는 손상·훼손 여부와 계약서 또는 납품서류상의 수량 일치 여부를 확인하는 업무로 정의한다.",
+      "applied_to": ["기본정보/발주번호", "검수내역/*/규격", "검수내역/*/검수결과/수량", "검수내역/*/검수결과/품질"]
+    },
+    {
+      "evidence_id": "R2",
+      "title": "조달물품 전문기관검사 업무규정",
+      "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2000000018359",
+      "source_type": "국가법령정보센터 행정규칙",
+      "summary": "검사방법에는 관능검사, 이화학시험, 전수검사, 샘플링검사 등이 있으며 검사 결과는 계약 내용 또는 판정 기준에 따라 합격·조건부 합격·불합격 등으로 판정될 수 있다.",
+      "applied_to": ["기본정보/검수방법", "검수내역/*/검수결과/품질", "검수내역/*/검수결과/기타", "검수내역/*/비고"]
+    },
+    {
+      "evidence_id": "R3",
+      "title": "국방부본부 물품관리 예규 별지 제4호 물품 검수 조서",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=200203&flNm=%5B%EB%B3%84%EC%A7%80+4%5D+%EB%AC%BC%ED%92%88+%EA%B2%80%EC%88%98+%EC%A1%B0%EC%84%9C%28%EC%A0%9C23%EC%A1%B0+%EC%A0%9C4%ED%95%AD+%EA%B4%80%EB%A0%A8%29&flSeq=158302869",
+      "source_type": "공식 서식",
+      "summary": "공식 물품검수조서는 계약·납품 정보와 함께 일련번호, 품명, 규격, 수량 및 확인자·검수자 서명을 기록한다.",
+      "applied_to": ["기본정보/거래처", "기본정보/발주번호", "기본정보/입고일자", "기본정보/입고장소", "검수내역/*/번호", "검수내역/*/품명", "검수내역/*/규격", "검수내역/*/검수결과/수량", "종합확인"]
+    }
+  ],
+  "field_evidence_links": [
+    {"semantic_path_pattern": "기본정보/*", "evidence_ids": ["R1", "R3"], "visual_priority": true},
+    {"semantic_path_pattern": "검수내역/*/*", "evidence_ids": ["R1", "R2", "R3"], "visual_priority": true},
+    {"semantic_path_pattern": "종합확인/*", "evidence_ids": ["R3"], "visual_priority": true}
+  ],
+  "research_boundary": "웹 근거는 표시된 anchor의 의미 확인에만 사용했으며 템플릿에 없는 금액, 계약명, 납품기한 등의 필드는 추가하지 않았다."
+}

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import date
 from pathlib import Path
 from typing import Sequence
 
@@ -83,6 +84,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     render_authoring_parser.add_argument("--out", type=Path, required=True)
     render_authoring_parser.add_argument("--seed", type=int, default=1234)
     render_authoring_parser.add_argument("--sample-id", default="preview_000001")
+    render_authoring_parser.add_argument("--as-of-date", type=date.fromisoformat, default=None, metavar="YYYY-MM-DD")
 
     render_authoring_batch_parser = subparsers.add_parser("render-authoring-batch", help="Render multiple synthetic samples from schema/stylesheet/faker authoring files")
     render_authoring_batch_parser.add_argument("--schema", type=Path, required=True)
@@ -91,6 +93,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     render_authoring_batch_parser.add_argument("--out", type=Path, required=True)
     render_authoring_batch_parser.add_argument("--count", type=int, default=5)
     render_authoring_batch_parser.add_argument("--seed", type=int, default=20260702)
+    render_authoring_batch_parser.add_argument("--as-of-date", type=date.fromisoformat, default=None, metavar="YYYY-MM-DD")
 
     args = parser.parse_args(argv)
     if args.command == "inspect":
@@ -144,7 +147,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"faker_profile: {result.faker_profile}")
         return 0
     if args.command == "render-authoring":
-        result = render_authoring_preview(args.schema, args.stylesheet, args.faker_profile, out_dir=args.out, seed=args.seed, sample_id=args.sample_id)
+        result = render_authoring_preview(args.schema, args.stylesheet, args.faker_profile, out_dir=args.out, seed=args.seed, sample_id=args.sample_id, as_of_date=args.as_of_date)
         print(f"Rendered authoring preview {result.sample_id} with {result.field_count} field(s), warnings={result.warning_count}")
         print(f"image: {result.image}")
         print(f"kv: {result.kv}")
@@ -153,7 +156,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"validation_report: {result.validation_report}")
         return 0
     if args.command == "render-authoring-batch":
-        result = render_authoring_batch(args.schema, args.stylesheet, args.faker_profile, out_dir=args.out, count=args.count, seed=args.seed)
+        result = render_authoring_batch(args.schema, args.stylesheet, args.faker_profile, out_dir=args.out, count=args.count, seed=args.seed, as_of_date=args.as_of_date)
         print(f"Rendered authoring batch {result.sample_count} sample(s) with {result.field_count} field(s), warnings={result.warning_count}")
         print(f"out_dir: {result.out_dir}")
         print(f"summary: {result.summary}")

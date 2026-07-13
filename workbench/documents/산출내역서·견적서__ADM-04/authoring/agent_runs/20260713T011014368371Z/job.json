@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "jobId": "20260713T011014368371Z",
+  "docId": "ADM-04",
+  "status": "failed",
+  "createdAt": "2026-07-13T01:10:14.369560+00:00",
+  "startedAt": "2026-07-13T01:10:14.395319+00:00",
+  "finishedAt": "2026-07-13T01:11:06.839761+00:00",
+  "requestPath": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T011014129854Z/request.json",
+  "requestDir": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T011014129854Z",
+  "runDir": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z",
+  "promptPath": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/codex_exec_prompt.md",
+  "lastMessagePath": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/codex_last_message.md",
+  "stdoutPath": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/stdout.log",
+  "stderrPath": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/stderr.log",
+  "requiredOutputs": [
+    "schema_draft.json",
+    "stylesheet_draft.json",
+    "faker_profile_draft.json",
+    "value_pool_draft.json",
+    "research_report.json",
+    "uncertainty_report.json",
+    "anchor_map_draft.json",
+    "application_notes.md"
+  ],
+  "outputs": {
+    "anchor_map_draft.json": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T011014129854Z/anchor_map_draft.json"
+  },
+  "validation": {
+    "ready": false,
+    "missing": [
+      "schema_draft.json",
+      "stylesheet_draft.json",
+      "faker_profile_draft.json",
+      "value_pool_draft.json",
+      "research_report.json",
+      "uncertainty_report.json",
+      "application_notes.md"
+    ],
+    "invalidJson": [],
+    "contractErrors": [
+      {
+        "code": "schema_missing_semantic_schema",
+        "message": "schema_draft.json must include metadata-free semantic_schema object"
+      },
+      {
+        "code": "schema_fields_missing",
+        "message": "schema_draft.json must include fields or field_bindings binding list"
+      }
+    ],
+    "outputs": {
+      "anchor_map_draft.json": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T011014129854Z/anchor_map_draft.json"
+    },
+    "repairSummary": {
+      "materializedUseAnchors": [],
+      "materializedCount": 0,
+      "removedUnmappedDeclaration": false
+    },
+    "summary": {
+      "required": 8,
+      "present": 1,
+      "missing": 7,
+      "invalidJson": 0,
+      "contractErrors": 2
+    }
+  },
+  "options": {
+    "reasoningEffort": "medium",
+    "fastMode": false,
+    "minPoolSize": 20,
+    "scalarPoolMinSize": 20,
+    "recordPoolMinSize": 12,
+    "mode": "authoring"
+  },
+  "passState": {
+    "current": "failed",
+    "completed": [],
+    "planned": [
+      "schema",
+      "faker",
+      "validation_repair"
+    ]
+  },
+  "stages": [
+    {
+      "stage": "schema",
+      "returnCode": 1,
+      "promptPath": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/codex_schema_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/codex_schema_pass_last_message.md",
+      "stdoutPath": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/schema_pass_stdout.log",
+      "stderrPath": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/schema_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/codex_schema_pass_last_message.md",
+        "-"
+      ]
+    }
+  ],
+  "returnCode": 1,
+  "command": [
+    "codex",
+    "--search",
+    "--ask-for-approval",
+    "never",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "--disable",
+    "fast_mode",
+    "exec",
+    "--cd",
+    "/Users/lsh930309/projects/dataFatory",
+    "--sandbox",
+    "workspace-write",
+    "--output-last-message",
+    "/Users/lsh930309/projects/dataFatory/workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_runs/20260713T011014368371Z/codex_schema_pass_last_message.md",
+    "-"
+  ],
+  "repairSummary": {
+    "materializedUseAnchors": [],
+    "materializedCount": 0,
+    "removedUnmappedDeclaration": false
+  },
+  "error": "codex exec failed with exit code 1"
+}

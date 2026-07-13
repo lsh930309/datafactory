@@ -1,1878 +1,2501 @@
 {
   "schema_version": 1,
-  "created_at": "2026-07-02T00:48:49.850599+00:00",
-  "updated_at": "2026-07-02T07:35:30.600460+00:00",
+  "created_at": "2026-07-13T01:27:13.937279+00:00",
   "doc_id": "COL-05",
-  "title": "공시지가확인원 page 1",
-  "page_index": 1,
+  "title": "공시지가확인원",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/authoring/agent_applied_reviews/20260713T011954211726Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/samples/original/공시지가확인원_page_001.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/inpaint/original_공시지가확인원_page_001/manual_cleanup/inpainted_lama.png",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/inpaint/original_공시지가확인원_page_001/lama/inpainted_lama.png",
   "image": {
     "width": 1191,
     "height": 1684
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/authoring/agent_applied_reviews/20260713T011954211726Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/공시지가확인원__COL-05/authoring/agent_requests/20260713T011954211726Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "문서확인번호": "",
+    "민원접수": {
+      "접수번호": "",
+      "접수일": ""
+    },
+    "신청인": {
+      "성명(법인명)": "",
+      "생년월일(사업자등록번호)": "",
+      "주소": "",
+      "용도": ""
+    },
+    "확인내용": {
+      "개별공시지가 내역": {
+        "1행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "2행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "3행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "4행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "5행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "6행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "7행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "8행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "9행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        },
+        "10행": {
+          "가격기준연도": "",
+          "토지소재지": "",
+          "지번": "",
+          "개별공시지가": "",
+          "기준일자": "",
+          "공시일자": "",
+          "비고": ""
+        }
+      }
+    }
   },
   "fields": [
     {
       "field_id": "p1_document_verification_number",
       "label": "문서확인번호",
+      "semantic_path": [
+        "문서확인번호"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702",
       "source_detection_id": "manual_col05_pipeline_ready_20260702",
       "source_text": "문서확인번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####-####-####",
       "style_class": "style_top_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
         "json_path": "문서확인번호",
         "csv_column": "문서확인번호"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_receipt_number",
       "label": "접수번호",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "semantic_path": [
+        "민원접수",
+        "접수번호"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_2",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_2",
       "source_text": "접수번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-AA-#####-########",
       "style_class": "style_p1_receipt_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "접수번호",
-        "csv_column": "접수번호"
+        "json_path": "민원접수/접수번호",
+        "csv_column": "민원접수/접수번호"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_2",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_receipt_date",
       "label": "접수일",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "semantic_path": [
+        "민원접수",
+        "접수일"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_3",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_3",
       "source_text": "접수일",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_header_value",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "접수일",
-        "csv_column": "접수일"
+        "json_path": "민원접수/접수일",
+        "csv_column": "민원접수/접수일"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_3",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_applicant_name",
-      "label": "성명",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "성명(법인명)",
+      "semantic_path": [
+        "신청인",
+        "성명(법인명)"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_4",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_4",
       "source_text": "성명",
       "value_type": "person.name_ko",
-      "generator": "literal:",
+      "generator": "person.name_ko",
       "style_class": "style_body_value",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "성명",
-        "csv_column": "성명"
+        "json_path": "신청인/성명(법인명)",
+        "csv_column": "신청인/성명(법인명)"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_4",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_birth_or_business_number",
-      "label": "생년월일",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "생년월일(사업자등록번호)",
+      "semantic_path": [
+        "신청인",
+        "생년월일(사업자등록번호)"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_5",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_5",
       "source_text": "생년월일",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_birth_or_business_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "생년월일",
-        "csv_column": "생년월일"
+        "json_path": "신청인/생년월일(사업자등록번호)",
+        "csv_column": "신청인/생년월일(사업자등록번호)"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_5",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_applicant_address",
       "label": "주소",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "semantic_path": [
+        "신청인",
+        "주소"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_6",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_6",
       "source_text": "주소",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_body_value",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "주소",
-        "csv_column": "주소"
+        "json_path": "신청인/주소",
+        "csv_column": "신청인/주소"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_6",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_purpose",
       "label": "용도",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "semantic_path": [
+        "신청인",
+        "용도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_7",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_7",
       "source_text": "용도",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:purpose_values",
       "style_class": "style_body_value",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "용도",
-        "csv_column": "용도"
+        "json_path": "신청인/용도",
+        "csv_column": "신청인/용도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_7",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_1_year",
-      "label": "공시지가 기준년도 1",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "1행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_8",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_8",
       "source_text": "공시지가 기준년도 1",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_1_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 1",
-        "csv_column": "공시지가 기준년도 1"
+        "json_path": "확인내용/개별공시지가 내역/1행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/1행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_8",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_1_location",
-      "label": "토지소재지 1",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "1행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_9",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_9",
       "source_text": "토지소재지 1",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_1_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 1",
-        "csv_column": "토지소재지 1"
+        "json_path": "확인내용/개별공시지가 내역/1행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/1행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_9",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_1_lot_number",
-      "label": "지번 1",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "1행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_10",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_10",
       "source_text": "지번 1",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_1_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 1",
-        "csv_column": "지번 1"
+        "json_path": "확인내용/개별공시지가 내역/1행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/1행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_10",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_1_price",
-      "label": "개별공시지가 1",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "1행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_11",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_11",
       "source_text": "개별공시지가 1",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_1_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 1",
-        "csv_column": "개별공시지가 1"
+        "json_path": "확인내용/개별공시지가 내역/1행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/1행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_11",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_1_base_date",
-      "label": "기준일자 1",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "1행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_12",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_12",
       "source_text": "기준일자 1",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_1_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 1",
-        "csv_column": "기준일자 1"
+        "json_path": "확인내용/개별공시지가 내역/1행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/1행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_12",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_1_announced_date",
-      "label": "공시일자 1",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "1행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_13",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_13",
       "source_text": "공시일자 1",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_1_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 1",
-        "csv_column": "공시일자 1"
+        "json_path": "확인내용/개별공시지가 내역/1행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/1행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_13",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_1_note",
-      "label": "비고 1",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "1행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_14",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_14",
       "source_text": "비고 1",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_p1_land_row_1_note",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 1",
-        "csv_column": "비고 1"
+        "json_path": "확인내용/개별공시지가 내역/1행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/1행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_14",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_2_year",
-      "label": "공시지가 기준년도 2",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "2행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_15",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_15",
       "source_text": "공시지가 기준년도 2",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_2_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 2",
-        "csv_column": "공시지가 기준년도 2"
+        "json_path": "확인내용/개별공시지가 내역/2행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/2행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_15",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_2_location",
-      "label": "토지소재지 2",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "2행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_16",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_16",
       "source_text": "토지소재지 2",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_2_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 2",
-        "csv_column": "토지소재지 2"
+        "json_path": "확인내용/개별공시지가 내역/2행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/2행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_16",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_2_lot_number",
-      "label": "지번 2",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "2행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_17",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_17",
       "source_text": "지번 2",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_2_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 2",
-        "csv_column": "지번 2"
+        "json_path": "확인내용/개별공시지가 내역/2행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/2행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_17",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_2_price",
-      "label": "개별공시지가 2",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "2행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_18",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_18",
       "source_text": "개별공시지가 2",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_2_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 2",
-        "csv_column": "개별공시지가 2"
+        "json_path": "확인내용/개별공시지가 내역/2행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/2행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_18",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_2_base_date",
-      "label": "기준일자 2",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "2행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_19",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_19",
       "source_text": "기준일자 2",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_2_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 2",
-        "csv_column": "기준일자 2"
+        "json_path": "확인내용/개별공시지가 내역/2행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/2행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_19",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_2_announced_date",
-      "label": "공시일자 2",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "2행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_20",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_20",
       "source_text": "공시일자 2",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_2_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 2",
-        "csv_column": "공시일자 2"
+        "json_path": "확인내용/개별공시지가 내역/2행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/2행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_20",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_2_note",
-      "label": "비고 2",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "2행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_21",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_21",
       "source_text": "비고 2",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_p1_land_row_2_note",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 2",
-        "csv_column": "비고 2"
+        "json_path": "확인내용/개별공시지가 내역/2행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/2행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_21",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_3_year",
-      "label": "공시지가 기준년도 3",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "3행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_22",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_22",
       "source_text": "공시지가 기준년도 3",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_3_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 3",
-        "csv_column": "공시지가 기준년도 3"
+        "json_path": "확인내용/개별공시지가 내역/3행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/3행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_22",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_3_location",
-      "label": "토지소재지 3",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "3행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_23",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_23",
       "source_text": "토지소재지 3",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_3_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 3",
-        "csv_column": "토지소재지 3"
+        "json_path": "확인내용/개별공시지가 내역/3행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/3행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_23",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_3_lot_number",
-      "label": "지번 3",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "3행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_24",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_24",
       "source_text": "지번 3",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_3_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 3",
-        "csv_column": "지번 3"
+        "json_path": "확인내용/개별공시지가 내역/3행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/3행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_24",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_3_price",
-      "label": "개별공시지가 3",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "3행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_25",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_25",
       "source_text": "개별공시지가 3",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_3_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 3",
-        "csv_column": "개별공시지가 3"
+        "json_path": "확인내용/개별공시지가 내역/3행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/3행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_25",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_3_base_date",
-      "label": "기준일자 3",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "3행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_26",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_26",
       "source_text": "기준일자 3",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_3_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 3",
-        "csv_column": "기준일자 3"
+        "json_path": "확인내용/개별공시지가 내역/3행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/3행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_26",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_3_announced_date",
-      "label": "공시일자 3",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "3행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_27",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_27",
       "source_text": "공시일자 3",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_3_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 3",
-        "csv_column": "공시일자 3"
+        "json_path": "확인내용/개별공시지가 내역/3행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/3행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_27",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_3_note",
-      "label": "비고 3",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "3행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_28",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_28",
       "source_text": "비고 3",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_p1_land_row_3_note",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 3",
-        "csv_column": "비고 3"
+        "json_path": "확인내용/개별공시지가 내역/3행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/3행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_28",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_4_year",
-      "label": "공시지가 기준년도 4",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "4행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_29",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_29",
       "source_text": "공시지가 기준년도 4",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_4_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 4",
-        "csv_column": "공시지가 기준년도 4"
+        "json_path": "확인내용/개별공시지가 내역/4행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/4행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_29",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_4_location",
-      "label": "토지소재지 4",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "4행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_30",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_30",
       "source_text": "토지소재지 4",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_4_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 4",
-        "csv_column": "토지소재지 4"
+        "json_path": "확인내용/개별공시지가 내역/4행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/4행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_30",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_4_lot_number",
-      "label": "지번 4",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "4행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_31",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_31",
       "source_text": "지번 4",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_4_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 4",
-        "csv_column": "지번 4"
+        "json_path": "확인내용/개별공시지가 내역/4행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/4행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_31",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_4_price",
-      "label": "개별공시지가 4",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "4행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_32",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_32",
       "source_text": "개별공시지가 4",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_4_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 4",
-        "csv_column": "개별공시지가 4"
+        "json_path": "확인내용/개별공시지가 내역/4행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/4행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_32",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_4_base_date",
-      "label": "기준일자 4",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "4행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_33",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_33",
       "source_text": "기준일자 4",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_4_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 4",
-        "csv_column": "기준일자 4"
+        "json_path": "확인내용/개별공시지가 내역/4행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/4행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_33",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_4_announced_date",
-      "label": "공시일자 4",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "4행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_34",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_34",
       "source_text": "공시일자 4",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_4_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 4",
-        "csv_column": "공시일자 4"
+        "json_path": "확인내용/개별공시지가 내역/4행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/4행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_34",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_4_note",
-      "label": "비고 4",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "4행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_35",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_35",
       "source_text": "비고 4",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_p1_land_row_4_note",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 4",
-        "csv_column": "비고 4"
+        "json_path": "확인내용/개별공시지가 내역/4행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/4행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_35",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_5_year",
-      "label": "공시지가 기준년도 5",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "5행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_36",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_36",
       "source_text": "공시지가 기준년도 5",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_5_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 5",
-        "csv_column": "공시지가 기준년도 5"
+        "json_path": "확인내용/개별공시지가 내역/5행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/5행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_36",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_5_location",
-      "label": "토지소재지 5",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "5행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_37",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_37",
       "source_text": "토지소재지 5",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_5_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 5",
-        "csv_column": "토지소재지 5"
+        "json_path": "확인내용/개별공시지가 내역/5행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/5행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_37",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_5_lot_number",
-      "label": "지번 5",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "5행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_38",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_38",
       "source_text": "지번 5",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_5_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 5",
-        "csv_column": "지번 5"
+        "json_path": "확인내용/개별공시지가 내역/5행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/5행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_38",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_5_price",
-      "label": "개별공시지가 5",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "5행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_39",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_39",
       "source_text": "개별공시지가 5",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_5_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 5",
-        "csv_column": "개별공시지가 5"
+        "json_path": "확인내용/개별공시지가 내역/5행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/5행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_39",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_5_base_date",
-      "label": "기준일자 5",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "5행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_40",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_40",
       "source_text": "기준일자 5",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_5_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 5",
-        "csv_column": "기준일자 5"
+        "json_path": "확인내용/개별공시지가 내역/5행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/5행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_40",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_5_announced_date",
-      "label": "공시일자 5",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "5행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_41",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_41",
       "source_text": "공시일자 5",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_5_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 5",
-        "csv_column": "공시일자 5"
+        "json_path": "확인내용/개별공시지가 내역/5행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/5행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_41",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_5_note",
-      "label": "비고 5",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "5행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_42",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_42",
       "source_text": "비고 5",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_p1_land_row_5_note",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 5",
-        "csv_column": "비고 5"
+        "json_path": "확인내용/개별공시지가 내역/5행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/5행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_42",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_6_year",
-      "label": "공시지가 기준년도 6",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "6행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_43",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_43",
       "source_text": "공시지가 기준년도 6",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_6_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 6",
-        "csv_column": "공시지가 기준년도 6"
+        "json_path": "확인내용/개별공시지가 내역/6행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/6행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_43",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_6_location",
-      "label": "토지소재지 6",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "6행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_44",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_44",
       "source_text": "토지소재지 6",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_6_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 6",
-        "csv_column": "토지소재지 6"
+        "json_path": "확인내용/개별공시지가 내역/6행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/6행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_44",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_6_lot_number",
-      "label": "지번 6",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "6행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_45",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_45",
       "source_text": "지번 6",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_6_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 6",
-        "csv_column": "지번 6"
+        "json_path": "확인내용/개별공시지가 내역/6행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/6행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_45",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_6_price",
-      "label": "개별공시지가 6",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "6행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_46",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_46",
       "source_text": "개별공시지가 6",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_6_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 6",
-        "csv_column": "개별공시지가 6"
+        "json_path": "확인내용/개별공시지가 내역/6행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/6행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_46",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_6_base_date",
-      "label": "기준일자 6",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "6행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_47",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_47",
       "source_text": "기준일자 6",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_6_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 6",
-        "csv_column": "기준일자 6"
+        "json_path": "확인내용/개별공시지가 내역/6행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/6행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_47",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_6_announced_date",
-      "label": "공시일자 6",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "6행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_48",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_48",
       "source_text": "공시일자 6",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_6_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 6",
-        "csv_column": "공시일자 6"
+        "json_path": "확인내용/개별공시지가 내역/6행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/6행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_48",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_6_note",
-      "label": "비고 6",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "6행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_49",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_49",
       "source_text": "비고 6",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_p1_land_row_6_note",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 6",
-        "csv_column": "비고 6"
+        "json_path": "확인내용/개별공시지가 내역/6행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/6행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_49",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_7_year",
-      "label": "공시지가 기준년도 7",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "7행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_50",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_50",
       "source_text": "공시지가 기준년도 7",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_7_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 7",
-        "csv_column": "공시지가 기준년도 7"
+        "json_path": "확인내용/개별공시지가 내역/7행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/7행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_50",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_7_location",
-      "label": "토지소재지 7",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "7행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_51",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_51",
       "source_text": "토지소재지 7",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_7_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 7",
-        "csv_column": "토지소재지 7"
+        "json_path": "확인내용/개별공시지가 내역/7행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/7행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_51",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_7_lot_number",
-      "label": "지번 7",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "7행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_52",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_52",
       "source_text": "지번 7",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_7_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 7",
-        "csv_column": "지번 7"
+        "json_path": "확인내용/개별공시지가 내역/7행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/7행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_52",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_7_price",
-      "label": "개별공시지가 7",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "7행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_53",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_53",
       "source_text": "개별공시지가 7",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_7_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 7",
-        "csv_column": "개별공시지가 7"
+        "json_path": "확인내용/개별공시지가 내역/7행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/7행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_53",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_7_base_date",
-      "label": "기준일자 7",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "7행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_54",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_54",
       "source_text": "기준일자 7",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_7_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 7",
-        "csv_column": "기준일자 7"
+        "json_path": "확인내용/개별공시지가 내역/7행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/7행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_54",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_7_announced_date",
-      "label": "공시일자 7",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "7행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_55",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_55",
       "source_text": "공시일자 7",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_7_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 7",
-        "csv_column": "공시일자 7"
+        "json_path": "확인내용/개별공시지가 내역/7행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/7행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_55",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_7_note",
-      "label": "비고 7",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "7행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_56",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_56",
       "source_text": "비고 7",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_p1_land_row_7_note",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 7",
-        "csv_column": "비고 7"
+        "json_path": "확인내용/개별공시지가 내역/7행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/7행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_56",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_8_year",
-      "label": "공시지가 기준년도 8",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "8행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_57",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_57",
       "source_text": "공시지가 기준년도 8",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_8_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 8",
-        "csv_column": "공시지가 기준년도 8"
+        "json_path": "확인내용/개별공시지가 내역/8행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/8행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_57",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_8_location",
-      "label": "토지소재지 8",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "8행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_58",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_58",
       "source_text": "토지소재지 8",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_8_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 8",
-        "csv_column": "토지소재지 8"
+        "json_path": "확인내용/개별공시지가 내역/8행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/8행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_58",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_8_lot_number",
-      "label": "지번 8",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "8행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_59",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_59",
       "source_text": "지번 8",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_8_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 8",
-        "csv_column": "지번 8"
+        "json_path": "확인내용/개별공시지가 내역/8행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/8행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_59",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_8_price",
-      "label": "개별공시지가 8",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "8행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_60",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_60",
       "source_text": "개별공시지가 8",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_8_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 8",
-        "csv_column": "개별공시지가 8"
+        "json_path": "확인내용/개별공시지가 내역/8행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/8행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_60",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_8_base_date",
-      "label": "기준일자 8",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "8행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_61",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_61",
       "source_text": "기준일자 8",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_8_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 8",
-        "csv_column": "기준일자 8"
+        "json_path": "확인내용/개별공시지가 내역/8행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/8행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_61",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_8_announced_date",
-      "label": "공시일자 8",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "8행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_62",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_62",
       "source_text": "공시일자 8",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_8_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 8",
-        "csv_column": "공시일자 8"
+        "json_path": "확인내용/개별공시지가 내역/8행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/8행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_62",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_8_note",
-      "label": "비고 8",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "8행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_63",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_63",
       "source_text": "비고 8",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_p1_land_row_8_note",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 8",
-        "csv_column": "비고 8"
+        "json_path": "확인내용/개별공시지가 내역/8행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/8행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_63",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_9_year",
-      "label": "공시지가 기준년도 9",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "9행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_64",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_64",
       "source_text": "공시지가 기준년도 9",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_9_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 9",
-        "csv_column": "공시지가 기준년도 9"
+        "json_path": "확인내용/개별공시지가 내역/9행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/9행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_64",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_9_location",
-      "label": "토지소재지 9",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "9행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_65",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_65",
       "source_text": "토지소재지 9",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_9_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 9",
-        "csv_column": "토지소재지 9"
+        "json_path": "확인내용/개별공시지가 내역/9행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/9행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_65",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_9_lot_number",
-      "label": "지번 9",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "9행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_66",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_66",
       "source_text": "지번 9",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_9_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 9",
-        "csv_column": "지번 9"
+        "json_path": "확인내용/개별공시지가 내역/9행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/9행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_66",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_9_price",
-      "label": "개별공시지가 9",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "9행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_67",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_67",
       "source_text": "개별공시지가 9",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_9_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 9",
-        "csv_column": "개별공시지가 9"
+        "json_path": "확인내용/개별공시지가 내역/9행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/9행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_67",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_9_base_date",
-      "label": "기준일자 9",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "9행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_68",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_68",
       "source_text": "기준일자 9",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_9_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 9",
-        "csv_column": "기준일자 9"
+        "json_path": "확인내용/개별공시지가 내역/9행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/9행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_68",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_9_announced_date",
-      "label": "공시일자 9",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "9행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_69",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_69",
       "source_text": "공시일자 9",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_9_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 9",
-        "csv_column": "공시일자 9"
+        "json_path": "확인내용/개별공시지가 내역/9행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/9행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_69",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_9_note",
-      "label": "비고 9",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "9행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_70",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_70",
       "source_text": "비고 9",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_p1_land_row_9_note",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 9",
-        "csv_column": "비고 9"
+        "json_path": "확인내용/개별공시지가 내역/9행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/9행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_70",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_10_year",
-      "label": "공시지가 기준년도 10",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "가격기준연도",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "10행",
+        "가격기준연도"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_71",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_71",
       "source_text": "공시지가 기준년도 10",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_land_row_10_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시지가 기준년도 10",
-        "csv_column": "공시지가 기준년도 10"
+        "json_path": "확인내용/개별공시지가 내역/10행/가격기준연도",
+        "csv_column": "확인내용/개별공시지가 내역/10행/가격기준연도"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_71",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_10_location",
-      "label": "토지소재지 10",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "토지소재지",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "10행",
+        "토지소재지"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_72",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_72",
       "source_text": "토지소재지 10",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_p1_land_row_10_location",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "토지소재지 10",
-        "csv_column": "토지소재지 10"
+        "json_path": "확인내용/개별공시지가 내역/10행/토지소재지",
+        "csv_column": "확인내용/개별공시지가 내역/10행/토지소재지"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_72",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_10_lot_number",
-      "label": "지번 10",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "지번",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "10행",
+        "지번"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_73",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_73",
       "source_text": "지번 10",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####-####",
       "style_class": "style_p1_land_row_10_lot_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지번 10",
-        "csv_column": "지번 10"
+        "json_path": "확인내용/개별공시지가 내역/10행/지번",
+        "csv_column": "확인내용/개별공시지가 내역/10행/지번"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_73",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_10_price",
-      "label": "개별공시지가 10",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "개별공시지가",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "10행",
+        "개별공시지가"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_74",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_74",
       "source_text": "개별공시지가 10",
       "value_type": "money.krw",
-      "generator": "literal:",
+      "generator": "money.krw",
       "style_class": "style_p1_land_row_10_price",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개별공시지가 10",
-        "csv_column": "개별공시지가 10"
+        "json_path": "확인내용/개별공시지가 내역/10행/개별공시지가",
+        "csv_column": "확인내용/개별공시지가 내역/10행/개별공시지가"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_74",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_10_base_date",
-      "label": "기준일자 10",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "기준일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "10행",
+        "기준일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_75",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_75",
       "source_text": "기준일자 10",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1월 1일 기준",
       "style_class": "style_p1_land_row_10_base_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기준일자 10",
-        "csv_column": "기준일자 10"
+        "json_path": "확인내용/개별공시지가 내역/10행/기준일자",
+        "csv_column": "확인내용/개별공시지가 내역/10행/기준일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_75",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_10_announced_date",
-      "label": "공시일자 10",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "공시일자",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "10행",
+        "공시일자"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_76",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_76",
       "source_text": "공시일자 10",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_p1_land_row_10_announced_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공시일자 10",
-        "csv_column": "공시일자 10"
+        "json_path": "확인내용/개별공시지가 내역/10행/공시일자",
+        "csv_column": "확인내용/개별공시지가 내역/10행/공시일자"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_76",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_land_row_10_note",
-      "label": "비고 10",
-      "source_detection_id": "manual_col05_pipeline_ready_20260702",
+      "label": "비고",
+      "semantic_path": [
+        "확인내용",
+        "개별공시지가 내역",
+        "10행",
+        "비고"
+      ],
+      "bbox_label_id": "manual_col05_pipeline_ready_20260702_77",
+      "source_detection_id": "manual_col05_pipeline_ready_20260702_77",
       "source_text": "비고 10",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:|정정공시|분할 전 지번",
       "style_class": "style_table_value",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고 10",
-        "csv_column": "비고 10"
+        "json_path": "확인내용/개별공시지가 내역/10행/비고",
+        "csv_column": "확인내용/개별공시지가 내역/10행/비고"
       },
-      "required": false,
-      "notes": "COL-05 page 1 filled sample 기반 생산용 수동 bbox/style 보정 필드. crop 비교 미사용.",
-      "bbox_label_id": "manual_col05_pipeline_ready_20260702_77",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
-  "groups": [
-    {
-      "group_id": "land_price_rows",
-      "type": "table",
-      "notes": "COL-05 filled sample 기반 생산용 schema"
-    }
-  ],
-  "authoring_mode": "col05_page_1_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/review/authoring_migrated/review.json",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/공시지가확인원__COL-05/review/authoring_migrated/review.json"
-  }
+  "groups": [],
+  "updated_at": "2026-07-13T02:01:13.865278+00:00"
 }

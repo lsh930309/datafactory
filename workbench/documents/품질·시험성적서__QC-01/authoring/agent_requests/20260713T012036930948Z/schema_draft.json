@@ -1,0 +1,2639 @@
+{
+  "schema_version": 2,
+  "doc_id": "QC-01",
+  "title": "품질·시험성적서",
+  "semantic_schema": {
+    "의뢰정보": {
+      "시료명(생산국)": "",
+      "접수번호": "",
+      "시료채취 장소": "",
+      "접수일자": "",
+      "성과 이용 목적": "",
+      "채취일": "",
+      "공사명": "",
+      "채취자": "",
+      "발주자": "",
+      "참관자": "",
+      "시공자": "",
+      "생산자": "",
+      "의뢰인": "",
+      "재고량": "",
+      "국가중요시설여부": ""
+    },
+    "시험결과": {
+      "시험 1": {
+        "연번": "",
+        "시험·검사항목": "",
+        "측정항목": {
+          "내경 명칭": "",
+          "외경 명칭": "",
+          "길이 명칭": ""
+        },
+        "시험·검사방법": "",
+        "규격별 측정결과": {
+          "D19": {
+            "내경": "",
+            "외경": "",
+            "길이": ""
+          },
+          "D22": {
+            "내경": "",
+            "외경": "",
+            "길이": ""
+          },
+          "D25": {
+            "내경": "",
+            "외경": "",
+            "길이": ""
+          }
+        },
+        "책임기술인": {
+          "자격종목": "",
+          "자격증 번호": "",
+          "성명": "",
+          "서명": ""
+        },
+        "시험·검사자": {
+          "성명": "",
+          "서명": ""
+        }
+      },
+      "시험 2": {
+        "연번": "",
+        "시험·검사항목": "",
+        "측정항목": {
+          "내경 명칭": "",
+          "외경 명칭": "",
+          "길이 명칭": ""
+        },
+        "시험·검사방법": "",
+        "규격별 측정결과": {
+          "D29": {
+            "내경": "",
+            "외경": "",
+            "길이": ""
+          },
+          "D32": {
+            "내경": "",
+            "외경": "",
+            "길이": ""
+          }
+        },
+        "책임기술인": {
+          "자격종목": "",
+          "자격증 번호": "",
+          "성명": "",
+          "서명": ""
+        },
+        "시험·검사자": {
+          "성명": "",
+          "서명": ""
+        }
+      }
+    },
+    "발행정보": {
+      "발행일": "",
+      "대표자 표기": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "주소": "",
+      "페이지 표기": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "sample_name_country",
+      "key": "시료명(생산국)",
+      "semantic_path": "의뢰정보/시료명(생산국)",
+      "anchor_id": "manual_qc_01_001",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_sample_name_country",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          522,
+          469,
+          743,
+          57
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0052_manual_qc_01_001.png",
+        "observed_text": "울트라 커플러(현장체결식철근커플러)(한국)"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "receipt_number",
+      "key": "접수번호",
+      "semantic_path": "의뢰정보/접수번호",
+      "anchor_id": "manual_qc_01_002",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:######-###",
+      "style_class": "style_receipt_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1566,
+          480,
+          230,
+          46
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0053_manual_qc_01_002.png",
+        "observed_text": "230531-012"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "sampling_location",
+      "key": "시료채취 장소",
+      "semantic_path": "의뢰정보/시료채취 장소",
+      "anchor_id": "manual_qc_01_003",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "address.ko",
+      "style_class": "style_sampling_location",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          522,
+          530,
+          155,
+          51
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0054_manual_qc_01_003.png",
+        "observed_text": "준성산업"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "receipt_date_text",
+      "key": "접수일자",
+      "semantic_path": "의뢰정보/접수일자",
+      "anchor_id": "manual_qc_01_004",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_receipt_date_text",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1566,
+          537,
+          250,
+          51
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0055_manual_qc_01_004.png",
+        "observed_text": "2023.05. 31."
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "intended_use",
+      "key": "성과 이용 목적",
+      "semantic_path": "의뢰정보/성과 이용 목적",
+      "anchor_id": "manual_qc_01_005",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_intended_use",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          518,
+          586,
+          237,
+          55
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0056_manual_qc_01_005.png",
+        "observed_text": "공급원승인용"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "sampling_date_text",
+      "key": "채취일",
+      "semantic_path": "의뢰정보/채취일",
+      "anchor_id": "manual_qc_01_006",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_sampling_date_text",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1564,
+          595,
+          250,
+          54
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0057_manual_qc_01_006.png",
+        "observed_text": "2023.05.30."
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "project_name",
+      "key": "공사명",
+      "semantic_path": "의뢰정보/공사명",
+      "anchor_id": "manual_qc_01_007",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_project_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          516,
+          651,
+          750,
+          50
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0058_manual_qc_01_007.png",
+        "observed_text": "-"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "sampler_name",
+      "key": "채취자",
+      "semantic_path": "의뢰정보/채취자",
+      "anchor_id": "manual_qc_01_008",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_sampler_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1566,
+          656,
+          504,
+          53
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0059_manual_qc_01_008.png",
+        "observed_text": "준성산업 품질관리자 박준우"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "ordering_client",
+      "key": "발주자",
+      "semantic_path": "의뢰정보/발주자",
+      "anchor_id": "manual_qc_01_009",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_ordering_client",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          516,
+          709,
+          750,
+          52
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0060_manual_qc_01_009.png",
+        "observed_text": "-"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "observer_name",
+      "key": "참관자",
+      "semantic_path": "의뢰정보/참관자",
+      "anchor_id": "manual_qc_01_010",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_observer_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1566,
+          716,
+          430,
+          52
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0061_manual_qc_01_010.png",
+        "observed_text": "-"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "contractor_name",
+      "key": "시공자",
+      "semantic_path": "의뢰정보/시공자",
+      "anchor_id": "manual_qc_01_011",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_contractor_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          516,
+          769,
+          750,
+          51
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0062_manual_qc_01_011.png",
+        "observed_text": "-"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "manufacturer_name",
+      "key": "생산자",
+      "semantic_path": "의뢰정보/생산자",
+      "anchor_id": "manual_qc_01_012",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_manufacturer_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1567,
+          776,
+          156,
+          51
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0063_manual_qc_01_012.png",
+        "observed_text": "준성산업"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "requester_name",
+      "key": "의뢰인",
+      "semantic_path": "의뢰정보/의뢰인",
+      "anchor_id": "manual_qc_01_013",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_requester_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          516,
+          825,
+          309,
+          56
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0064_manual_qc_01_013.png",
+        "observed_text": "준성산업 박준우"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "inventory_quantity",
+      "key": "재고량",
+      "semantic_path": "의뢰정보/재고량",
+      "anchor_id": "manual_qc_01_014",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_inventory_quantity",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1566,
+          836,
+          250,
+          53
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0065_manual_qc_01_014.png",
+        "observed_text": "-"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "national_critical_facility_status",
+      "key": "국가중요시설여부",
+      "semantic_path": "의뢰정보/국가중요시설여부",
+      "anchor_id": "manual_qc_01_015",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_national_critical_facility_status",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          515,
+          884,
+          234,
+          55
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0066_manual_qc_01_015.png",
+        "observed_text": "해당사항없음"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_number",
+      "key": "연번[0]",
+      "semantic_path": "시험결과/시험 1/연번",
+      "anchor_id": "manual_qc_01_016",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:1",
+      "style_class": "style_section_1_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          153,
+          1410,
+          32,
+          42
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0067_manual_qc_01_016.png",
+        "observed_text": "1"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_test_item_name",
+      "key": "시험검사항목[0]",
+      "semantic_path": "시험결과/시험 1/시험·검사항목",
+      "anchor_id": "manual_qc_01_017",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:치수",
+      "style_class": "style_section_1_test_item_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          268,
+          1403,
+          94,
+          56
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0068_manual_qc_01_017.png",
+        "observed_text": "치수"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_inner_label",
+      "key": "내경 라벨[0]",
+      "semantic_path": "시험결과/시험 1/측정항목/내경 명칭",
+      "anchor_id": "manual_qc_01_018",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:내경(D2)",
+      "style_class": "style_section_1_inner_label",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          463,
+          1329,
+          167,
+          58
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0069_manual_qc_01_018.png",
+        "observed_text": "내경(D2)"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_outer_label",
+      "key": "외경 라벨[0]",
+      "semantic_path": "시험결과/시험 1/측정항목/외경 명칭",
+      "anchor_id": "manual_qc_01_019",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:외경(D1)",
+      "style_class": "style_section_1_outer_label",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          465,
+          1406,
+          166,
+          53
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0070_manual_qc_01_019.png",
+        "observed_text": "외경(D1)"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_length_label",
+      "key": "길이 라벨[0]",
+      "semantic_path": "시험결과/시험 1/측정항목/길이 명칭",
+      "anchor_id": "manual_qc_01_020",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:길이(L1)",
+      "style_class": "style_section_1_length_label",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          463,
+          1475,
+          163,
+          63
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0071_manual_qc_01_020.png",
+        "observed_text": "길이(L1)"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_test_method",
+      "key": "시험검사방법[0]",
+      "semantic_path": "시험결과/시험 1/시험·검사방법",
+      "anchor_id": "manual_qc_01_021",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_section_1_test_method",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          705,
+          1406,
+          270,
+          54
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0072_manual_qc_01_021.png",
+        "observed_text": "의뢰인제시방법"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_d19_inner_diameter",
+      "key": "D19 내경",
+      "semantic_path": "시험결과/시험 1/규격별 측정결과/D19/내경",
+      "anchor_id": "manual_qc_01_022",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_1_d19_inner_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1031,
+          1337,
+          143,
+          46
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0073_manual_qc_01_022.png",
+        "observed_text": "22.3mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_1_d22_inner_diameter",
+      "key": "D22 내경",
+      "semantic_path": "시험결과/시험 1/규격별 측정결과/D22/내경",
+      "anchor_id": "manual_qc_01_023",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_1_d22_inner_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1229,
+          1341,
+          142,
+          45
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0074_manual_qc_01_023.png",
+        "observed_text": "25.5mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_1_d25_inner_diameter",
+      "key": "D25 내경",
+      "semantic_path": "시험결과/시험 1/규격별 측정결과/D25/내경",
+      "anchor_id": "manual_qc_01_024",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_1_d25_inner_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1422,
+          1338,
+          149,
+          54
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0075_manual_qc_01_024.png",
+        "observed_text": "28.7mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_1_d19_outer_diameter",
+      "key": "D19 외경",
+      "semantic_path": "시험결과/시험 1/규격별 측정결과/D19/외경",
+      "anchor_id": "manual_qc_01_025",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_1_d19_outer_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1031,
+          1412,
+          145,
+          50
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0076_manual_qc_01_025.png",
+        "observed_text": "41.4mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_1_d22_outer_diameter",
+      "key": "D22 외경",
+      "semantic_path": "시험결과/시험 1/규격별 측정결과/D22/외경",
+      "anchor_id": "manual_qc_01_026",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_1_d22_outer_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1227,
+          1413,
+          144,
+          51
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0077_manual_qc_01_026.png",
+        "observed_text": "47.7mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_1_d25_outer_diameter",
+      "key": "D25 외경",
+      "semantic_path": "시험결과/시험 1/규격별 측정결과/D25/외경",
+      "anchor_id": "manual_qc_01_027",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_1_d25_outer_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1422,
+          1415,
+          149,
+          52
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0078_manual_qc_01_027.png",
+        "observed_text": "51.1mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_1_d19_length",
+      "key": "D19 길이",
+      "semantic_path": "시험결과/시험 1/규격별 측정결과/D19/길이",
+      "anchor_id": "manual_qc_01_028",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_1_d19_length",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1031,
+          1486,
+          143,
+          53
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0079_manual_qc_01_028.png",
+        "observed_text": "63.4mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_1_d22_length",
+      "key": "D22 길이",
+      "semantic_path": "시험결과/시험 1/규격별 측정결과/D22/길이",
+      "anchor_id": "manual_qc_01_029",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_1_d22_length",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1226,
+          1488,
+          144,
+          54
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0080_manual_qc_01_029.png",
+        "observed_text": "68.6mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_1_d25_length",
+      "key": "D25 길이",
+      "semantic_path": "시험결과/시험 1/규격별 측정결과/D25/길이",
+      "anchor_id": "manual_qc_01_030",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_1_d25_length",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1422,
+          1490,
+          147,
+          52
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0081_manual_qc_01_030.png",
+        "observed_text": "74.9mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_1_responsible_qualification",
+      "key": "책임기술인 자격[0]",
+      "semantic_path": "시험결과/시험 1/책임기술인/자격종목",
+      "anchor_id": "manual_qc_01_031",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_section_1_responsible_qualification",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1613,
+          1401,
+          238,
+          42
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0082_manual_qc_01_031.png",
+        "observed_text": "건설재료시험기사"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_responsible_cert_number",
+      "key": "책임기술인 자격번호[0]",
+      "semantic_path": "시험결과/시험 1/책임기술인/자격증 번호",
+      "anchor_id": "manual_qc_01_032",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:############",
+      "style_class": "style_section_1_responsible_cert_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1631,
+          1439,
+          203,
+          43
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0083_manual_qc_01_032.png",
+        "observed_text": "062021411561"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_responsible_engineer_name",
+      "key": "책임기술인 성명[0]",
+      "semantic_path": "시험결과/시험 1/책임기술인/성명",
+      "anchor_id": "manual_qc_01_033",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_section_1_responsible_engineer_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1876,
+          1416,
+          89,
+          64
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0084_manual_qc_01_033.png",
+        "observed_text": "곽재현"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_responsible_engineer_signature",
+      "key": "책임기술인 서명[0]",
+      "semantic_path": "시험결과/시험 1/책임기술인/서명",
+      "anchor_id": "manual_qc_01_034",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_section_1_responsible_engineer_signature",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1965,
+          1401,
+          122,
+          83
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0085_manual_qc_01_034.png",
+        "observed_text": "곽재현"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_examiner_name",
+      "key": "시험검사자 성명[0]",
+      "semantic_path": "시험결과/시험 1/시험·검사자/성명",
+      "anchor_id": "manual_qc_01_035",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_section_1_examiner_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          2109,
+          1418,
+          92,
+          64
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0086_manual_qc_01_035.png",
+        "observed_text": "김현준"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_1_examiner_signature",
+      "key": "시험검사자 서명[0]",
+      "semantic_path": "시험결과/시험 1/시험·검사자/서명",
+      "anchor_id": "manual_qc_01_036",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_section_1_examiner_signature",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          2204,
+          1407,
+          122,
+          77
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0087_manual_qc_01_036.png",
+        "observed_text": "김현준"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_number",
+      "key": "연번[1]",
+      "semantic_path": "시험결과/시험 2/연번",
+      "anchor_id": "manual_qc_01_037",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:2",
+      "style_class": "style_section_2_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          146,
+          1841,
+          39,
+          46
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0088_manual_qc_01_037.png",
+        "observed_text": "2"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_test_item_name",
+      "key": "시험검사항목[1]",
+      "semantic_path": "시험결과/시험 2/시험·검사항목",
+      "anchor_id": "manual_qc_01_038",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:치수",
+      "style_class": "style_section_2_test_item_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          263,
+          1831,
+          98,
+          64
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0089_manual_qc_01_038.png",
+        "observed_text": "치수"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_inner_label",
+      "key": "내경 라벨[1]",
+      "semantic_path": "시험결과/시험 2/측정항목/내경 명칭",
+      "anchor_id": "manual_qc_01_039",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:내경(D2)",
+      "style_class": "style_section_2_inner_label",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          457,
+          1759,
+          169,
+          63
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0090_manual_qc_01_039.png",
+        "observed_text": "내경(D2)"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_outer_label",
+      "key": "외경 라벨[1]",
+      "semantic_path": "시험결과/시험 2/측정항목/외경 명칭",
+      "anchor_id": "manual_qc_01_040",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:외경(D1)",
+      "style_class": "style_section_2_outer_label",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          459,
+          1835,
+          167,
+          60
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0091_manual_qc_01_040.png",
+        "observed_text": "외경(D1)"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_length_label",
+      "key": "길이 라벨[1]",
+      "semantic_path": "시험결과/시험 2/측정항목/길이 명칭",
+      "anchor_id": "manual_qc_01_041",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "literal:길이(L1)",
+      "style_class": "style_section_2_length_label",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          463,
+          1914,
+          157,
+          53
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0092_manual_qc_01_041.png",
+        "observed_text": "길이(L1)"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_test_method",
+      "key": "시험검사방법[1]",
+      "semantic_path": "시험결과/시험 2/시험·검사방법",
+      "anchor_id": "manual_qc_01_042",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_section_2_test_method",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          699,
+          1837,
+          272,
+          58
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0093_manual_qc_01_042.png",
+        "observed_text": "의뢰인제시방법"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_d29_inner_diameter",
+      "key": "D29 내경",
+      "semantic_path": "시험결과/시험 2/규격별 측정결과/D29/내경",
+      "anchor_id": "manual_qc_01_043",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_2_d29_inner_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1077,
+          1767,
+          143,
+          55
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0094_manual_qc_01_043.png",
+        "observed_text": "32.6mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_2_d32_inner_diameter",
+      "key": "D32 내경",
+      "semantic_path": "시험결과/시험 2/규격별 측정결과/D32/내경",
+      "anchor_id": "manual_qc_01_044",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_2_d32_inner_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1370,
+          1769,
+          147,
+          55
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0095_manual_qc_01_044.png",
+        "observed_text": "36.4mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_2_d29_outer_diameter",
+      "key": "D29 외경",
+      "semantic_path": "시험결과/시험 2/규격별 측정결과/D29/외경",
+      "anchor_id": "manual_qc_01_045",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_2_d29_outer_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1077,
+          1844,
+          143,
+          51
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0096_manual_qc_01_045.png",
+        "observed_text": "58.2mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_2_d32_outer_diameter",
+      "key": "D32 외경",
+      "semantic_path": "시험결과/시험 2/규격별 측정결과/D32/외경",
+      "anchor_id": "manual_qc_01_046",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_2_d32_outer_diameter",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1370,
+          1846,
+          144,
+          54
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0097_manual_qc_01_046.png",
+        "observed_text": "64.3mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_2_d29_length",
+      "key": "D29 길이",
+      "semantic_path": "시험결과/시험 2/규격별 측정결과/D29/길이",
+      "anchor_id": "manual_qc_01_047",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_2_d29_length",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1077,
+          1919,
+          141,
+          50
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0098_manual_qc_01_047.png",
+        "observed_text": "83.6mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_2_d32_length",
+      "key": "D32 길이",
+      "semantic_path": "시험결과/시험 2/규격별 측정결과/D32/길이",
+      "anchor_id": "manual_qc_01_048",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:{{pattern:##.#}}mm",
+      "style_class": "style_section_2_d32_length",
+      "unit_policy": {
+        "unit": "mm",
+        "mode": "include_in_value",
+        "evidence": "전체 원본 이미지에서 mm가 각 측정값 문자열의 일부로 동일 bbox 안에 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1369,
+          1923,
+          145,
+          50
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0099_manual_qc_01_048.png",
+        "observed_text": "94.1mm"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "section_2_responsible_qualification",
+      "key": "책임기술인 자격[1]",
+      "semantic_path": "시험결과/시험 2/책임기술인/자격종목",
+      "anchor_id": "manual_qc_01_049",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_section_2_responsible_qualification",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1609,
+          1834,
+          238,
+          42
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0100_manual_qc_01_049.png",
+        "observed_text": "건설재료시험기사"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_responsible_cert_number",
+      "key": "책임기술인 자격번호[1]",
+      "semantic_path": "시험결과/시험 2/책임기술인/자격증 번호",
+      "anchor_id": "manual_qc_01_050",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:############",
+      "style_class": "style_section_2_responsible_cert_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1627,
+          1870,
+          204,
+          43
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0101_manual_qc_01_050.png",
+        "observed_text": "062021411561"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_responsible_engineer_name",
+      "key": "책임기술인 성명[1]",
+      "semantic_path": "시험결과/시험 2/책임기술인/성명",
+      "anchor_id": "manual_qc_01_051",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_section_2_responsible_engineer_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1864,
+          1846,
+          103,
+          62
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0102_manual_qc_01_051.png",
+        "observed_text": "곽재현"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_responsible_engineer_signature",
+      "key": "책임기술인 서명[1]",
+      "semantic_path": "시험결과/시험 2/책임기술인/서명",
+      "anchor_id": "manual_qc_01_052",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_section_2_responsible_engineer_signature",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1963,
+          1840,
+          129,
+          79
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0103_manual_qc_01_052.png",
+        "observed_text": "곽재현"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_examiner_name",
+      "key": "시험검사자 성명[1]",
+      "semantic_path": "시험결과/시험 2/시험·검사자/성명",
+      "anchor_id": "manual_qc_01_053",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_section_2_examiner_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          2103,
+          1849,
+          96,
+          61
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0104_manual_qc_01_053.png",
+        "observed_text": "김현준"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "section_2_examiner_signature",
+      "key": "시험검사자 서명[1]",
+      "semantic_path": "시험결과/시험 2/시험·검사자/서명",
+      "anchor_id": "manual_qc_01_054",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_section_2_examiner_signature",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          2206,
+          1846,
+          122,
+          77
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0105_manual_qc_01_054.png",
+        "observed_text": "김현준"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "issue_date_text",
+      "key": "발행일",
+      "semantic_path": "발행정보/발행일",
+      "anchor_id": "manual_qc_01_055",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_issue_date_text",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1895,
+          2590,
+          379,
+          61
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0106_manual_qc_01_055.png",
+        "observed_text": "2023년 06월 09일"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "representative_title_name",
+      "key": "대표자명",
+      "semantic_path": "발행정보/대표자 표기",
+      "anchor_id": "manual_qc_01_056",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_representative_title_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1448,
+          2765,
+          418,
+          92
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0107_manual_qc_01_056.png",
+        "observed_text": "대표 박동준"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "office_phone",
+      "key": "기관 전화번호",
+      "semantic_path": "발행정보/전화번호",
+      "anchor_id": "manual_qc_01_057",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_office_phone",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          343,
+          2914,
+          264,
+          48
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0108_manual_qc_01_057.png",
+        "observed_text": "053-582-1070"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "office_fax",
+      "key": "기관 팩스번호",
+      "semantic_path": "발행정보/팩스번호",
+      "anchor_id": "manual_qc_01_058",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_office_fax",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          756,
+          2913,
+          273,
+          50
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0109_manual_qc_01_058.png",
+        "observed_text": "053-582-1071"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "office_address",
+      "key": "기관 주소",
+      "semantic_path": "발행정보/주소",
+      "anchor_id": "manual_qc_01_059",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "address.ko",
+      "style_class": "style_office_address",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          265,
+          2971,
+          734,
+          59
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0110_manual_qc_01_059.png",
+        "observed_text": "대구광역시 달성군 화원읍 비슬로530길 39"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "page_indicator",
+      "key": "페이지 표기",
+      "semantic_path": "발행정보/페이지 표기",
+      "anchor_id": "manual_qc_01_060",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_page_indicator",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/품질·시험성적서__QC-01/samples/original/품질시험성적서.jpg",
+        "bbox": [
+          1031,
+          3359,
+          362,
+          55
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/품질·시험성적서__QC-01/authoring/agent_requests/20260713T012036930948Z/visual_evidence/crops/crop_0111_manual_qc_01_060.png",
+        "observed_text": "총2페이지중 1페이지"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    }
+  ],
+  "authoring_pass": {
+    "pass": 1,
+    "field_id_contract": "frozen_for_pass_2",
+    "use_anchor_coverage": "60/60"
+  }
+}

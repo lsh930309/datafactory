@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "doc_id": "RPT-01",
+  "locale": "ko_KR",
+  "as_of_date": "2026-07-13",
+  "field_generators": {
+    "housing_other_text": "pool:housing_other_uses",
+    "education_other_text": "pool:education_other_uses",
+    "startup_other_text": "pool:startup_other_uses",
+    "medical_other_text": "pool:medical_other_uses",
+    "finance_other_text": "pool:finance_other_uses",
+    "childcare_other_text": "pool:childcare_other_uses",
+    "marriage_other_text": "pool:marriage_other_uses",
+    "self_reliance_other_text": "pool:self_reliance_other_uses"
+  },
+  "data_pools": {
+    "housing_other_uses": [
+      "이사비", "중개보수", "입주청소비", "도배비", "장판교체비", "방충망교체비", "보일러수리비", "수도배관수리비", "전기설비수리비", "주방시설수리비", "욕실시설수리비", "창호수리비", "누수보수비", "단열공사비", "현관문수리비", "조명교체비", "붙박이장설치비", "세탁기설치비", "이삿짐보관비", "주거안전시설비"
+    ],
+    "education_other_uses": [
+      "온라인강의 수강료", "실습재료비", "교육용 소프트웨어 구입", "학습기기 구입", "직업훈련 교통비", "기숙사비", "교육과정 등록비", "포트폴리오 제작비", "자격증 발급비", "현장실습비", "어학시험 응시료", "기술교육 교재비", "학습공간 이용료", "직무교육 수강료", "국가고시 응시료", "전문서적 구입비", "교육용 장비 대여료", "실기시험 준비비", "취업교육 참가비", "학습상담비"
+    ],
+    "startup_other_uses": [
+      "사업장 임차보증금", "사업장 월세", "원재료 구입비", "포장재 구입비", "간판 제작비", "홍보물 제작비", "온라인몰 구축비", "결제단말기 구입비", "업무용 장비 구입비", "작업도구 구입비", "사업자 교육비", "상표 출원비", "위생교육비", "영업신고 수수료", "배송비", "창고 임차료", "시제품 제작비", "시장조사비", "회계기장료", "사업용 소프트웨어 구독료"
+    ],
+    "medical_other_uses": [
+      "치과 치료비", "안경 구입비", "보청기 구입비", "재활치료비", "심리상담비", "예방접종비", "건강검진비", "한방치료비", "물리치료비", "의료용 보조기 구입비", "처방약 구입비", "통원 교통비", "간병용품 구입비", "재활보조기구 대여비", "치료식 구입비", "산후진료비", "응급진료비", "검사비", "수술 후 관리비", "의료기기 소모품비"
+    ],
+    "finance_other_uses": [
+      "정기예금 가입", "정기적금 가입", "주택청약종합저축", "개인형퇴직연금 납입", "연금저축 납입", "청년형 장기펀드 가입", "국채 매입", "지방채 매입", "채권형 펀드 가입", "혼합형 펀드 가입", "인덱스 펀드 가입", "상호금융 예탁금", "저축성보험 가입", "비상예비자금 예치", "교육자금 적립", "노후자금 적립", "주거자금 적립", "창업준비자금 적립", "의료비 예비자금 적립", "생활안정자금 적립"
+    ],
+    "childcare_other_uses": [
+      "방과후 돌봄비", "아이돌봄서비스 본인부담금", "보육시설 특별활동비", "급식비", "통학차량비", "기저귀 구입비", "분유 구입비", "아동의류 구입비", "유아용 침구 구입비", "안전용품 구입비", "영유아 교구 구입비", "아동도서 구입비", "예체능 활동비", "체험학습비", "돌봄교통비", "아동 건강검진비", "예방접종비", "육아용품 대여비", "보육상담비", "긴급돌봄 이용료"
+    ],
+    "marriage_other_uses": [
+      "예식장 대관료", "예복 대여비", "혼수용품 구입비", "신혼여행비", "웨딩촬영비", "청첩장 제작비", "예식 식대", "신혼집 이사비", "신혼집 중개보수", "가전제품 구입비", "가구 구입비", "주방용품 구입비", "예물 구입비", "헤어메이크업비", "부케 구입비", "예식 장식비", "사회자 사례비", "폐백 준비비", "혼인신고 서류비", "신혼집 생활용품비"
+    ],
+    "self_reliance_other_uses": [
+      "취업면접 교통비", "면접복장 구입비", "구직서류 발급비", "운전면허 취득비", "업무용 컴퓨터 구입비", "통신기기 구입비", "작업복 구입비", "안전화 구입비", "직업상담비", "취업박람회 참가비", "이력서 사진 촬영비", "출퇴근 교통비", "근로용 자전거 구입비", "생활기술 교육비", "신용회복 상담비", "법률상담비", "재무상담비", "자활근로 준비물 구입비", "취업교육 숙박비", "근로활동 보조기기 구입비"
+    ]
+  },
+  "pool_policies": {
+    "housing_other_uses": {"kind": "open_scalar", "min_size": 20, "synthetic_only": true},
+    "education_other_uses": {"kind": "open_scalar", "min_size": 20, "synthetic_only": true},
+    "startup_other_uses": {"kind": "open_scalar", "min_size": 20, "synthetic_only": true},
+    "medical_other_uses": {"kind": "open_scalar", "min_size": 20, "synthetic_only": true},
+    "finance_other_uses": {"kind": "open_scalar", "min_size": 20, "synthetic_only": true},
+    "childcare_other_uses": {"kind": "open_scalar", "min_size": 20, "synthetic_only": true},
+    "marriage_other_uses": {"kind": "open_scalar", "min_size": 20, "synthetic_only": true},
+    "self_reliance_other_uses": {"kind": "open_scalar", "min_size": 20, "synthetic_only": true}
+  },
+  "constraints": [],
+  "field_rules": [
+    {"field_id": "housing_other_text", "anchor_id": "det_000026", "rule": "pool:housing_other_uses", "evidence_ids": ["RES-01", "RES-02", "RES-03"], "unit_handling": "정적 닫는 괄호는 anchor 밖에 보존되므로 생성값에는 괄호와 단위를 넣지 않음"},
+    {"field_id": "education_other_text", "anchor_id": "det_000034", "rule": "pool:education_other_uses", "evidence_ids": ["RES-01", "RES-02", "RES-03"], "unit_handling": "정적 닫는 괄호는 anchor 밖에 보존되므로 생성값에는 괄호와 단위를 넣지 않음"},
+    {"field_id": "startup_other_text", "anchor_id": "det_000038", "rule": "pool:startup_other_uses", "evidence_ids": ["RES-01", "RES-02", "RES-03"], "unit_handling": "정적 닫는 괄호는 anchor 밖에 보존되므로 생성값에는 괄호와 단위를 넣지 않음"},
+    {"field_id": "medical_other_text", "anchor_id": "det_000044", "rule": "pool:medical_other_uses", "evidence_ids": ["RES-01", "RES-02", "RES-03"], "unit_handling": "정적 닫는 괄호는 anchor 밖에 보존되므로 생성값에는 괄호와 단위를 넣지 않음"},
+    {"field_id": "finance_other_text", "anchor_id": "det_000049", "rule": "pool:finance_other_uses", "evidence_ids": ["RES-01", "RES-02", "RES-03"], "unit_handling": "정적 닫는 괄호는 anchor 밖에 보존되므로 생성값에는 괄호와 단위를 넣지 않음"},
+    {"field_id": "childcare_other_text", "anchor_id": "det_000052", "rule": "pool:childcare_other_uses", "evidence_ids": ["RES-01", "RES-02", "RES-03"], "unit_handling": "정적 닫는 괄호는 anchor 밖에 보존되므로 생성값에는 괄호와 단위를 넣지 않음"},
+    {"field_id": "marriage_other_text", "anchor_id": "det_000055", "rule": "pool:marriage_other_uses", "evidence_ids": ["RES-01", "RES-02", "RES-03"], "unit_handling": "정적 닫는 괄호는 anchor 밖에 보존되므로 생성값에는 괄호와 단위를 넣지 않음"},
+    {"field_id": "self_reliance_other_text", "anchor_id": "det_000058", "rule": "pool:self_reliance_other_uses", "evidence_ids": ["RES-01", "RES-02", "RES-03"], "unit_handling": "정적 닫는 괄호는 anchor 밖에 보존되므로 생성값에는 괄호와 단위를 넣지 않음"}
+  ],
+  "notes": "2차 pass는 고정된 8개 자유기재 binding에만 generator를 부여했다. 모든 pool은 비식별 합성 문구이며, 현재 필드 사이에 렌더러가 지원하는 필수 상관관계가 없어 constraints는 빈 배열로 유지했다."
+}

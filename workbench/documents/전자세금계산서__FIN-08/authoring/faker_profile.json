@@ -1,26 +1,29 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "doc_id": "FIN-08",
   "title": "전자세금계산서",
+  "status": "draft",
+  "as_of_date": "2026-07-13",
+  "updated_at": "2026-07-13T01:47:27.085092+00:00",
   "field_generators": {
     "approval_number": "pattern:########################",
-    "supplier_business_registration_number": "pattern:###-##-#####",
+    "supplier_business_registration_number": "business_reg_no",
     "supplier_branch_number": "pattern:####",
     "supplier_company_name": "company.name_ko",
     "supplier_representative_name": "person.name_ko",
     "supplier_business_address": "address.ko",
     "supplier_business_type": "pool:business_types",
     "supplier_business_item": "pool:business_items",
-    "supplier_email": "company.email",
-    "recipient_business_registration_number": "pattern:###-##-#####",
+    "supplier_email": "free_text.short",
+    "recipient_business_registration_number": "business_reg_no",
     "recipient_branch_number": "pattern:####",
     "recipient_company_name": "company.name_ko",
     "recipient_representative_name": "person.name_ko",
     "recipient_business_address": "address.ko",
     "recipient_business_type": "pool:business_types",
     "recipient_business_item": "pool:business_items",
-    "recipient_email_1": "company.email",
-    "recipient_email_2": "company.email",
+    "recipient_email_1": "free_text.short",
+    "recipient_email_2": "free_text.short",
     "issue_date": "date.kr",
     "summary_supply_amount": "money.krw",
     "summary_tax_amount": "money.krw",
@@ -63,133 +66,450 @@
     "line4_tax_amount": "money.krw",
     "line4_remark": "pool:line_remarks",
     "total_amount": "money.krw",
-    "cash_amount": "money.krw",
+    "cash_amount": "same_as:total_amount",
     "check_amount": "literal:0",
     "promissory_note_amount": "literal:0",
     "receivable_amount": "literal:0"
   },
   "data_pools": {
     "business_types": [
-      "서비스업",
-      "도매 및 소매업",
-      "제조업",
       "정보통신업",
-      "전문, 과학 및 기술서비스업"
+      "제조업",
+      "도매 및 소매업",
+      "전문, 과학 및 기술서비스업",
+      "사업시설 관리 및 사업지원 서비스업",
+      "건설업",
+      "운수 및 창고업",
+      "숙박 및 음식점업",
+      "금융 및 보험업",
+      "부동산업",
+      "교육 서비스업",
+      "보건업 및 사회복지 서비스업",
+      "예술, 스포츠 및 여가관련 서비스업",
+      "수리 및 기타 개인 서비스업",
+      "출판업",
+      "소프트웨어 개발 및 공급업",
+      "광고업",
+      "연구개발업",
+      "기계장비 제조업",
+      "전자상거래 소매업"
     ],
     "business_items": [
-      "회계감사 및 사업비정산",
       "소프트웨어 개발 및 공급",
-      "문구 및 사무용품",
+      "시스템 통합 및 유지보수",
       "경영컨설팅",
+      "회계감사 및 사업비정산",
       "전자부품 도매",
-      "시스템 통합 및 유지보수"
+      "문구 및 사무용품 도매",
+      "산업용 기계 제조",
+      "온라인 정보 제공",
+      "데이터 처리 서비스",
+      "광고대행",
+      "교육 콘텐츠 개발",
+      "시설관리 용역",
+      "물류대행",
+      "건축공사",
+      "전기공사",
+      "디자인 용역",
+      "시장조사 및 분석",
+      "연구개발 용역",
+      "통신장비 판매",
+      "전자상거래"
     ],
     "item_names": [
-      "라이선스 이용료",
-      "사무용품",
       "소프트웨어 개발 용역",
-      "유지보수 용역",
-      "자문료",
-      "전자부품"
+      "시스템 유지보수 용역",
+      "클라우드 이용료",
+      "라이선스 이용료",
+      "기술지원 용역",
+      "경영자문 용역",
+      "회계검토 용역",
+      "디자인 용역",
+      "광고운영 용역",
+      "데이터 분석 용역",
+      "서버 장비",
+      "노트북 컴퓨터",
+      "모니터",
+      "네트워크 장비",
+      "전자부품",
+      "산업용 센서",
+      "사무용품",
+      "인쇄물 제작",
+      "교육 운영 용역",
+      "시설관리 용역",
+      "운송 용역",
+      "포장 자재",
+      "회의실 임차료",
+      "정기 구독료"
     ],
     "item_specs": [
       "1식",
       "월정액",
+      "연정액",
       "EA",
       "SET",
-      "건"
-    ],
-    "amendment_reasons": [
-      "기재사항 착오정정",
-      "공급가액 변동",
-      "계약의 해제",
-      "환입"
+      "BOX",
+      "건",
+      "회",
+      "시간",
+      "일",
+      "대",
+      "개",
+      "권",
+      "부",
+      "팩",
+      "10EA",
+      "20EA",
+      "표준형",
+      "고급형",
+      "기업용"
     ],
     "line_remarks": [
       "계약분",
-      "6월분",
+      "월 마감분",
       "납품완료",
-      "프로젝트",
+      "검수완료",
       "정상공급",
-      "사용료"
+      "정기분",
+      "추가분",
+      "1차분",
+      "2차분",
+      "최종분",
+      "프로젝트분",
+      "유지보수분",
+      "사용료",
+      "구독료",
+      "설치완료",
+      "교육완료",
+      "운송완료",
+      "선납분",
+      "잔금분",
+      "별도계약"
     ],
     "summary_notes": [
       "청구",
       "영수",
       "계약서 기준",
-      "월 마감분"
+      "월 마감분",
+      "검수 완료분",
+      "납품 완료분",
+      "정기 결제분",
+      "프로젝트 1차분",
+      "프로젝트 2차분",
+      "프로젝트 최종분",
+      "유지보수 정기분",
+      "라이선스 사용분",
+      "서비스 이용분",
+      "발주서 기준",
+      "거래명세서 기준",
+      "선금 청구",
+      "중도금 청구",
+      "잔금 청구",
+      "정상 발급",
+      "담당자 확인 완료"
+    ],
+    "amendment_reasons": [
+      "",
+      "기재사항 착오정정",
+      "공급가액 변동",
+      "계약의 해제",
+      "환입",
+      "내국신용장 등 사후개설"
     ],
     "supplier_records": [
       {
-        "business_registration_number": "120-81-47521",
+        "business_registration_number": "101-81-12341",
         "branch_number": "0000",
-        "company_name": "한빛솔루션",
-        "representative_name": "김민준",
-        "business_address": "서울특별시 강남구 테헤란로 152",
-        "business_type": "서비스업",
-        "business_item": "소프트웨어 개발 및 공급",
-        "email": "tax@hanbitsolution.co.kr"
-      },
-      {
-        "business_registration_number": "214-86-39210",
-        "branch_number": "0000",
-        "company_name": "미래테크",
-        "representative_name": "박서연",
-        "business_address": "경기도 성남시 분당구 판교역로 235",
+        "company_name": "가온데이터 주식회사",
+        "representative_name": "김도윤",
+        "business_address": "서울특별시 강남구 테헤란로 101",
         "business_type": "정보통신업",
-        "business_item": "시스템 통합 및 유지보수",
-        "email": "invoice@miraetech.co.kr"
+        "business_item": "소프트웨어 개발 및 공급",
+        "email": "tax@dummy-supplier-01.example",
+        "email_1": "invoice@dummy-supplier-01.example",
+        "email_2": "accounting@dummy-supplier-01.example"
       },
       {
-        "business_registration_number": "105-87-64832",
+        "business_registration_number": "112-82-34565",
         "branch_number": "0001",
-        "company_name": "대한비즈파트너스",
-        "representative_name": "이도윤",
-        "business_address": "서울특별시 영등포구 국제금융로 10",
-        "business_type": "전문, 과학 및 기술서비스업",
+        "company_name": "누리솔루션 주식회사",
+        "representative_name": "이서현",
+        "business_address": "서울특별시 영등포구 국제금융로 24",
+        "business_type": "제조업",
+        "business_item": "시스템 통합 및 유지보수",
+        "email": "tax@dummy-supplier-02.example",
+        "email_1": "invoice@dummy-supplier-02.example",
+        "email_2": "accounting@dummy-supplier-02.example"
+      },
+      {
+        "business_registration_number": "123-83-45676",
+        "branch_number": "0002",
+        "company_name": "다온테크 주식회사",
+        "representative_name": "박지후",
+        "business_address": "경기도 성남시 분당구 판교로 201",
+        "business_type": "도매 및 소매업",
         "business_item": "경영컨설팅",
-        "email": "tax@daehanbiz.co.kr"
+        "email": "tax@dummy-supplier-03.example",
+        "email_1": "invoice@dummy-supplier-03.example",
+        "email_2": "accounting@dummy-supplier-03.example"
+      },
+      {
+        "business_registration_number": "134-84-56786",
+        "branch_number": "0003",
+        "company_name": "라온시스템 주식회사",
+        "representative_name": "최하은",
+        "business_address": "경기도 수원시 영통구 광교로 152",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "회계감사 및 사업비정산",
+        "email": "tax@dummy-supplier-04.example",
+        "email_1": "invoice@dummy-supplier-04.example",
+        "email_2": "accounting@dummy-supplier-04.example"
+      },
+      {
+        "business_registration_number": "145-85-67897",
+        "branch_number": "0000",
+        "company_name": "마루산업 주식회사",
+        "representative_name": "정민준",
+        "business_address": "인천광역시 연수구 컨벤시아대로 88",
+        "business_type": "사업시설 관리 및 사업지원 서비스업",
+        "business_item": "전자부품 도매",
+        "email": "tax@dummy-supplier-05.example",
+        "email_1": "invoice@dummy-supplier-05.example",
+        "email_2": "accounting@dummy-supplier-05.example"
+      },
+      {
+        "business_registration_number": "156-86-78902",
+        "branch_number": "0001",
+        "company_name": "바른비즈 주식회사",
+        "representative_name": "강서윤",
+        "business_address": "부산광역시 해운대구 센텀중앙로 55",
+        "business_type": "건설업",
+        "business_item": "문구 및 사무용품 도매",
+        "email": "tax@dummy-supplier-06.example",
+        "email_1": "invoice@dummy-supplier-06.example",
+        "email_2": "accounting@dummy-supplier-06.example"
+      },
+      {
+        "business_registration_number": "167-87-89013",
+        "branch_number": "0002",
+        "company_name": "새빛네트웍스 주식회사",
+        "representative_name": "윤지호",
+        "business_address": "대구광역시 달서구 성서공단로 31",
+        "business_type": "운수 및 창고업",
+        "business_item": "산업용 기계 제조",
+        "email": "tax@dummy-supplier-07.example",
+        "email_1": "invoice@dummy-supplier-07.example",
+        "email_2": "accounting@dummy-supplier-07.example"
+      },
+      {
+        "business_registration_number": "178-88-90123",
+        "branch_number": "0003",
+        "company_name": "아람파트너스 주식회사",
+        "representative_name": "한예린",
+        "business_address": "광주광역시 북구 첨단과기로 77",
+        "business_type": "숙박 및 음식점업",
+        "business_item": "온라인 정보 제공",
+        "email": "tax@dummy-supplier-08.example",
+        "email_1": "invoice@dummy-supplier-08.example",
+        "email_2": "accounting@dummy-supplier-08.example"
+      },
+      {
+        "business_registration_number": "189-89-01234",
+        "branch_number": "0000",
+        "company_name": "이음정보 주식회사",
+        "representative_name": "임시우",
+        "business_address": "대전광역시 유성구 대학로 99",
+        "business_type": "금융 및 보험업",
+        "business_item": "데이터 처리 서비스",
+        "email": "tax@dummy-supplier-09.example",
+        "email_1": "invoice@dummy-supplier-09.example",
+        "email_2": "accounting@dummy-supplier-09.example"
+      },
+      {
+        "business_registration_number": "190-80-12344",
+        "branch_number": "0001",
+        "company_name": "한결유통 주식회사",
+        "representative_name": "송다은",
+        "business_address": "울산광역시 남구 산업로 120",
+        "business_type": "부동산업",
+        "business_item": "광고대행",
+        "email": "tax@dummy-supplier-10.example",
+        "email_1": "invoice@dummy-supplier-10.example",
+        "email_2": "accounting@dummy-supplier-10.example"
+      },
+      {
+        "business_registration_number": "201-81-23454",
+        "branch_number": "0002",
+        "company_name": "푸른기술 주식회사",
+        "representative_name": "오현우",
+        "business_address": "세종특별자치시 한누리대로 2150",
+        "business_type": "교육 서비스업",
+        "business_item": "교육 콘텐츠 개발",
+        "email": "tax@dummy-supplier-11.example",
+        "email_1": "invoice@dummy-supplier-11.example",
+        "email_2": "accounting@dummy-supplier-11.example"
+      },
+      {
+        "business_registration_number": "212-82-34564",
+        "branch_number": "0003",
+        "company_name": "해온서비스 주식회사",
+        "representative_name": "신가은",
+        "business_address": "충청북도 청주시 흥덕구 오송생명로 45",
+        "business_type": "보건업 및 사회복지 서비스업",
+        "business_item": "시설관리 용역",
+        "email": "tax@dummy-supplier-12.example",
+        "email_1": "invoice@dummy-supplier-12.example",
+        "email_2": "accounting@dummy-supplier-12.example"
       }
     ],
     "recipient_records": [
       {
-        "business_registration_number": "220-88-91473",
+        "business_registration_number": "301-81-43217",
         "branch_number": "0000",
-        "company_name": "우리유통",
-        "representative_name": "최지우",
-        "business_address": "부산광역시 해운대구 센텀중앙로 79",
-        "business_type": "도매 및 소매업",
-        "business_item": "전자부품 도매",
-        "email_1": "ap@wooridist.co.kr",
-        "email_2": "tax@wooridist.co.kr"
+        "company_name": "가온데이터 주식회사",
+        "representative_name": "김도윤",
+        "business_address": "서울특별시 강남구 테헤란로 101",
+        "business_type": "정보통신업",
+        "business_item": "소프트웨어 개발 및 공급",
+        "email": "tax@dummy-recipient-01.example",
+        "email_1": "invoice@dummy-recipient-01.example",
+        "email_2": "accounting@dummy-recipient-01.example"
       },
       {
-        "business_registration_number": "301-85-26744",
-        "branch_number": "0000",
-        "company_name": "새롬산업",
-        "representative_name": "정하준",
-        "business_address": "인천광역시 남동구 남동대로 239",
+        "business_registration_number": "312-82-54327",
+        "branch_number": "0001",
+        "company_name": "누리솔루션 주식회사",
+        "representative_name": "이서현",
+        "business_address": "서울특별시 영등포구 국제금융로 24",
         "business_type": "제조업",
-        "business_item": "산업용 기계 제조",
-        "email_1": "invoice@saeromind.co.kr",
-        "email_2": "finance@saeromind.co.kr"
+        "business_item": "시스템 통합 및 유지보수",
+        "email": "tax@dummy-recipient-02.example",
+        "email_1": "invoice@dummy-recipient-02.example",
+        "email_2": "accounting@dummy-recipient-02.example"
       },
       {
-        "business_registration_number": "617-81-73025",
+        "business_registration_number": "323-83-65438",
         "branch_number": "0002",
-        "company_name": "제일상사",
-        "representative_name": "강서윤",
-        "business_address": "대구광역시 달서구 성서공단로 11",
+        "company_name": "다온테크 주식회사",
+        "representative_name": "박지후",
+        "business_address": "경기도 성남시 분당구 판교로 201",
         "business_type": "도매 및 소매업",
-        "business_item": "문구 및 사무용품",
-        "email_1": "tax@jeiltrade.co.kr",
-        "email_2": "accounting@jeiltrade.co.kr"
+        "business_item": "경영컨설팅",
+        "email": "tax@dummy-recipient-03.example",
+        "email_1": "invoice@dummy-recipient-03.example",
+        "email_2": "accounting@dummy-recipient-03.example"
+      },
+      {
+        "business_registration_number": "334-84-76548",
+        "branch_number": "0003",
+        "company_name": "라온시스템 주식회사",
+        "representative_name": "최하은",
+        "business_address": "경기도 수원시 영통구 광교로 152",
+        "business_type": "전문, 과학 및 기술서비스업",
+        "business_item": "회계감사 및 사업비정산",
+        "email": "tax@dummy-recipient-04.example",
+        "email_1": "invoice@dummy-recipient-04.example",
+        "email_2": "accounting@dummy-recipient-04.example"
+      },
+      {
+        "business_registration_number": "345-85-87659",
+        "branch_number": "0000",
+        "company_name": "마루산업 주식회사",
+        "representative_name": "정민준",
+        "business_address": "인천광역시 연수구 컨벤시아대로 88",
+        "business_type": "사업시설 관리 및 사업지원 서비스업",
+        "business_item": "전자부품 도매",
+        "email": "tax@dummy-recipient-05.example",
+        "email_1": "invoice@dummy-recipient-05.example",
+        "email_2": "accounting@dummy-recipient-05.example"
+      },
+      {
+        "business_registration_number": "356-86-98769",
+        "branch_number": "0001",
+        "company_name": "바른비즈 주식회사",
+        "representative_name": "강서윤",
+        "business_address": "부산광역시 해운대구 센텀중앙로 55",
+        "business_type": "건설업",
+        "business_item": "문구 및 사무용품 도매",
+        "email": "tax@dummy-recipient-06.example",
+        "email_1": "invoice@dummy-recipient-06.example",
+        "email_2": "accounting@dummy-recipient-06.example"
+      },
+      {
+        "business_registration_number": "367-87-09870",
+        "branch_number": "0002",
+        "company_name": "새빛네트웍스 주식회사",
+        "representative_name": "윤지호",
+        "business_address": "대구광역시 달서구 성서공단로 31",
+        "business_type": "운수 및 창고업",
+        "business_item": "산업용 기계 제조",
+        "email": "tax@dummy-recipient-07.example",
+        "email_1": "invoice@dummy-recipient-07.example",
+        "email_2": "accounting@dummy-recipient-07.example"
+      },
+      {
+        "business_registration_number": "378-88-10980",
+        "branch_number": "0003",
+        "company_name": "아람파트너스 주식회사",
+        "representative_name": "한예린",
+        "business_address": "광주광역시 북구 첨단과기로 77",
+        "business_type": "숙박 및 음식점업",
+        "business_item": "온라인 정보 제공",
+        "email": "tax@dummy-recipient-08.example",
+        "email_1": "invoice@dummy-recipient-08.example",
+        "email_2": "accounting@dummy-recipient-08.example"
+      },
+      {
+        "business_registration_number": "389-89-21091",
+        "branch_number": "0000",
+        "company_name": "이음정보 주식회사",
+        "representative_name": "임시우",
+        "business_address": "대전광역시 유성구 대학로 99",
+        "business_type": "금융 및 보험업",
+        "business_item": "데이터 처리 서비스",
+        "email": "tax@dummy-recipient-09.example",
+        "email_1": "invoice@dummy-recipient-09.example",
+        "email_2": "accounting@dummy-recipient-09.example"
+      },
+      {
+        "business_registration_number": "390-80-32106",
+        "branch_number": "0001",
+        "company_name": "한결유통 주식회사",
+        "representative_name": "송다은",
+        "business_address": "울산광역시 남구 산업로 120",
+        "business_type": "부동산업",
+        "business_item": "광고대행",
+        "email": "tax@dummy-recipient-10.example",
+        "email_1": "invoice@dummy-recipient-10.example",
+        "email_2": "accounting@dummy-recipient-10.example"
+      },
+      {
+        "business_registration_number": "401-81-43216",
+        "branch_number": "0002",
+        "company_name": "푸른기술 주식회사",
+        "representative_name": "오현우",
+        "business_address": "세종특별자치시 한누리대로 2150",
+        "business_type": "교육 서비스업",
+        "business_item": "교육 콘텐츠 개발",
+        "email": "tax@dummy-recipient-11.example",
+        "email_1": "invoice@dummy-recipient-11.example",
+        "email_2": "accounting@dummy-recipient-11.example"
+      },
+      {
+        "business_registration_number": "412-82-54326",
+        "branch_number": "0003",
+        "company_name": "해온서비스 주식회사",
+        "representative_name": "신가은",
+        "business_address": "충청북도 청주시 흥덕구 오송생명로 45",
+        "business_type": "보건업 및 사회복지 서비스업",
+        "business_item": "시설관리 용역",
+        "email": "tax@dummy-recipient-12.example",
+        "email_1": "invoice@dummy-recipient-12.example",
+        "email_2": "accounting@dummy-recipient-12.example"
       }
     ],
     "tax_line_records": [
       {
-        "month": "06",
-        "day": "03",
         "item_name": "소프트웨어 개발 용역",
         "specification": "1식",
         "quantity": "1",
@@ -199,108 +519,318 @@
         "remark": "계약분"
       },
       {
-        "month": "06",
-        "day": "10",
-        "item_name": "유지보수 용역",
+        "item_name": "시스템 유지보수 용역",
         "specification": "월정액",
         "quantity": "1",
         "unit_price": "850,000",
         "supply_amount": "850,000",
         "tax_amount": "85,000",
-        "remark": "6월분"
+        "remark": "월 마감분"
       },
       {
-        "month": "06",
-        "day": "15",
-        "item_name": "사무용품",
-        "specification": "SET",
+        "item_name": "클라우드 이용료",
+        "specification": "월정액",
         "quantity": "3",
-        "unit_price": "120,000",
-        "supply_amount": "360,000",
-        "tax_amount": "36,000",
-        "remark": "납품완료"
+        "unit_price": "180,000",
+        "supply_amount": "540,000",
+        "tax_amount": "54,000",
+        "remark": "사용료"
       },
       {
-        "month": "06",
-        "day": "20",
-        "item_name": "자문료",
-        "specification": "건",
-        "quantity": "2",
-        "unit_price": "450,000",
-        "supply_amount": "900,000",
-        "tax_amount": "90,000",
-        "remark": "프로젝트"
+        "item_name": "라이선스 이용료",
+        "specification": "연정액",
+        "quantity": "5",
+        "unit_price": "320,000",
+        "supply_amount": "1,600,000",
+        "tax_amount": "160,000",
+        "remark": "구독료"
       },
       {
-        "month": "07",
-        "day": "01",
-        "item_name": "전자부품",
-        "specification": "EA",
-        "quantity": "10",
-        "unit_price": "75,000",
-        "supply_amount": "750,000",
-        "tax_amount": "75,000",
+        "item_name": "기술지원 용역",
+        "specification": "시간",
+        "quantity": "12",
+        "unit_price": "90,000",
+        "supply_amount": "1,080,000",
+        "tax_amount": "108,000",
         "remark": "정상공급"
       },
       {
-        "month": "07",
-        "day": "05",
-        "item_name": "라이선스 이용료",
+        "item_name": "경영자문 용역",
+        "specification": "건",
+        "quantity": "2",
+        "unit_price": "600,000",
+        "supply_amount": "1,200,000",
+        "tax_amount": "120,000",
+        "remark": "프로젝트분"
+      },
+      {
+        "item_name": "회계검토 용역",
+        "specification": "1식",
+        "quantity": "1",
+        "unit_price": "1,800,000",
+        "supply_amount": "1,800,000",
+        "tax_amount": "180,000",
+        "remark": "검수완료"
+      },
+      {
+        "item_name": "디자인 용역",
+        "specification": "건",
+        "quantity": "4",
+        "unit_price": "250,000",
+        "supply_amount": "1,000,000",
+        "tax_amount": "100,000",
+        "remark": "최종분"
+      },
+      {
+        "item_name": "광고운영 용역",
         "specification": "월정액",
+        "quantity": "1",
+        "unit_price": "1,300,000",
+        "supply_amount": "1,300,000",
+        "tax_amount": "130,000",
+        "remark": "정기분"
+      },
+      {
+        "item_name": "데이터 분석 용역",
+        "specification": "1식",
+        "quantity": "1",
+        "unit_price": "2,100,000",
+        "supply_amount": "2,100,000",
+        "tax_amount": "210,000",
+        "remark": "납품완료"
+      },
+      {
+        "item_name": "서버 장비",
+        "specification": "대",
+        "quantity": "2",
+        "unit_price": "1,750,000",
+        "supply_amount": "3,500,000",
+        "tax_amount": "350,000",
+        "remark": "설치완료"
+      },
+      {
+        "item_name": "노트북 컴퓨터",
+        "specification": "대",
+        "quantity": "3",
+        "unit_price": "1,200,000",
+        "supply_amount": "3,600,000",
+        "tax_amount": "360,000",
+        "remark": "납품완료"
+      },
+      {
+        "item_name": "모니터",
+        "specification": "EA",
+        "quantity": "8",
+        "unit_price": "280,000",
+        "supply_amount": "2,240,000",
+        "tax_amount": "224,000",
+        "remark": "정상공급"
+      },
+      {
+        "item_name": "네트워크 장비",
+        "specification": "SET",
+        "quantity": "2",
+        "unit_price": "950,000",
+        "supply_amount": "1,900,000",
+        "tax_amount": "190,000",
+        "remark": "설치완료"
+      },
+      {
+        "item_name": "전자부품",
+        "specification": "20EA",
+        "quantity": "4",
+        "unit_price": "420,000",
+        "supply_amount": "1,680,000",
+        "tax_amount": "168,000",
+        "remark": "추가분"
+      },
+      {
+        "item_name": "산업용 센서",
+        "specification": "10EA",
+        "quantity": "3",
+        "unit_price": "760,000",
+        "supply_amount": "2,280,000",
+        "tax_amount": "228,000",
+        "remark": "1차분"
+      },
+      {
+        "item_name": "사무용품",
+        "specification": "BOX",
+        "quantity": "6",
+        "unit_price": "110,000",
+        "supply_amount": "660,000",
+        "tax_amount": "66,000",
+        "remark": "월 마감분"
+      },
+      {
+        "item_name": "인쇄물 제작",
+        "specification": "부",
+        "quantity": "500",
+        "unit_price": "2,400",
+        "supply_amount": "1,200,000",
+        "tax_amount": "120,000",
+        "remark": "납품완료"
+      },
+      {
+        "item_name": "교육 운영 용역",
+        "specification": "회",
+        "quantity": "3",
+        "unit_price": "450,000",
+        "supply_amount": "1,350,000",
+        "tax_amount": "135,000",
+        "remark": "교육완료"
+      },
+      {
+        "item_name": "운송 용역",
+        "specification": "건",
         "quantity": "5",
-        "unit_price": "180,000",
-        "supply_amount": "900,000",
-        "tax_amount": "90,000",
-        "remark": "사용료"
+        "unit_price": "160,000",
+        "supply_amount": "800,000",
+        "tax_amount": "80,000",
+        "remark": "운송완료"
       }
     ],
     "transaction_date_sets": [
       {
-        "issue_date": "2025-06-30",
+        "issue_date": "2025-08-31",
+        "m1": "08",
+        "d1": "03",
+        "m2": "08",
+        "d2": "10",
+        "m3": "08",
+        "d3": "17",
+        "m4": "08",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2025-09-30",
+        "m1": "09",
+        "d1": "03",
+        "m2": "09",
+        "d2": "10",
+        "m3": "09",
+        "d3": "17",
+        "m4": "09",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2025-10-31",
+        "m1": "10",
+        "d1": "03",
+        "m2": "10",
+        "d2": "10",
+        "m3": "10",
+        "d3": "17",
+        "m4": "10",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2025-11-30",
+        "m1": "11",
+        "d1": "03",
+        "m2": "11",
+        "d2": "10",
+        "m3": "11",
+        "d3": "17",
+        "m4": "11",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2025-12-31",
+        "m1": "12",
+        "d1": "03",
+        "m2": "12",
+        "d2": "10",
+        "m3": "12",
+        "d3": "17",
+        "m4": "12",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2026-01-31",
+        "m1": "01",
+        "d1": "03",
+        "m2": "01",
+        "d2": "10",
+        "m3": "01",
+        "d3": "17",
+        "m4": "01",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2026-02-28",
+        "m1": "02",
+        "d1": "03",
+        "m2": "02",
+        "d2": "10",
+        "m3": "02",
+        "d3": "17",
+        "m4": "02",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2026-03-31",
+        "m1": "03",
+        "d1": "03",
+        "m2": "03",
+        "d2": "10",
+        "m3": "03",
+        "d3": "17",
+        "m4": "03",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2026-04-30",
+        "m1": "04",
+        "d1": "03",
+        "m2": "04",
+        "d2": "10",
+        "m3": "04",
+        "d3": "17",
+        "m4": "04",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2026-05-31",
+        "m1": "05",
+        "d1": "03",
+        "m2": "05",
+        "d2": "10",
+        "m3": "05",
+        "d3": "17",
+        "m4": "05",
+        "d4": "24"
+      },
+      {
+        "issue_date": "2026-06-30",
         "m1": "06",
         "d1": "03",
         "m2": "06",
         "d2": "10",
         "m3": "06",
-        "d3": "15",
+        "d3": "17",
         "m4": "06",
-        "d4": "20"
+        "d4": "24"
       },
       {
-        "issue_date": "2025-07-31",
+        "issue_date": "2026-07-13",
         "m1": "07",
-        "d1": "01",
+        "d1": "03",
         "m2": "07",
-        "d2": "05",
+        "d2": "10",
         "m3": "07",
-        "d3": "12",
+        "d3": "17",
         "m4": "07",
-        "d4": "25"
-      },
-      {
-        "issue_date": "2026-01-31",
-        "m1": "01",
-        "d1": "06",
-        "m2": "01",
-        "d2": "13",
-        "m3": "01",
-        "d3": "20",
-        "m4": "01",
-        "d4": "27"
+        "d4": "24"
       }
-    ],
-    "email_domains": [
-      "naver.com",
-      "gmail.com",
-      "kakao.com",
-      "daum.net",
-      "hanmail.net",
-      "nate.com",
-      "outlook.com",
-      "company.co.kr",
-      "bizmail.co.kr",
-      "office.kr"
     ]
+  },
+  "pool_policies": {
+    "amendment_reasons": {
+      "closed_set": true,
+      "exception_kind": "legal_or_form_closed_set",
+      "evidence": "부가가치세법 시행령상 수정세금계산서 발급사유의 제한된 선택지와 일반 발급의 공란을 합성 표현함."
+    }
   },
   "constraints": [
     {
@@ -315,8 +845,7 @@
         "supplier_business_type": "business_type",
         "supplier_business_item": "business_item",
         "supplier_email": "email"
-      },
-      "note": "공급자 사업자번호/상호/대표/주소/업태/종목/이메일은 같은 사업자 레코드에서 함께 선택한다."
+      }
     },
     {
       "type": "pick_record",
@@ -331,8 +860,7 @@
         "recipient_business_item": "business_item",
         "recipient_email_1": "email_1",
         "recipient_email_2": "email_2"
-      },
-      "note": "공급받는자 정보도 단일 사업자 레코드에서 함께 선택한다."
+      }
     },
     {
       "type": "pick_record",
@@ -347,8 +875,7 @@
         "line3_day": "d3",
         "line4_month": "m4",
         "line4_day": "d4"
-      },
-      "note": "품목 행의 월/일은 작성일자와 같은 과세기간 안에 들어가도록 날짜 세트를 함께 선택한다."
+      }
     },
     {
       "type": "pick_record",
@@ -361,8 +888,7 @@
         "line1_supply_amount": "supply_amount",
         "line1_tax_amount": "tax_amount",
         "line1_remark": "remark"
-      },
-      "note": "1행 품목은 수량×단가=공급가액, 세액=공급가액×10%로 미리 계산된 레코드에서 함께 선택한다."
+      }
     },
     {
       "type": "pick_record",
@@ -375,8 +901,7 @@
         "line2_supply_amount": "supply_amount",
         "line2_tax_amount": "tax_amount",
         "line2_remark": "remark"
-      },
-      "note": "2행 품목은 수량×단가=공급가액, 세액=공급가액×10%로 미리 계산된 레코드에서 함께 선택한다."
+      }
     },
     {
       "type": "pick_record",
@@ -389,8 +914,7 @@
         "line3_supply_amount": "supply_amount",
         "line3_tax_amount": "tax_amount",
         "line3_remark": "remark"
-      },
-      "note": "3행 품목은 수량×단가=공급가액, 세액=공급가액×10%로 미리 계산된 레코드에서 함께 선택한다."
+      }
     },
     {
       "type": "pick_record",
@@ -403,8 +927,12 @@
         "line4_supply_amount": "supply_amount",
         "line4_tax_amount": "tax_amount",
         "line4_remark": "remark"
-      },
-      "note": "4행 품목은 수량×단가=공급가액, 세액=공급가액×10%로 미리 계산된 레코드에서 함께 선택한다."
+      }
+    },
+    {
+      "type": "date_not_after",
+      "target": "issue_date",
+      "max": "as_of_date"
     },
     {
       "type": "sum",
@@ -415,8 +943,7 @@
         "line4_supply_amount"
       ],
       "target": "summary_supply_amount",
-      "format": "money.krw",
-      "note": "상단 공급가액은 품목 1~4행 공급가액 합계다."
+      "format": "money.krw"
     },
     {
       "type": "sum",
@@ -427,8 +954,7 @@
         "line4_tax_amount"
       ],
       "target": "summary_tax_amount",
-      "format": "money.krw",
-      "note": "상단 세액은 품목 1~4행 세액 합계다."
+      "format": "money.krw"
     },
     {
       "type": "sum",
@@ -437,14 +963,12 @@
         "summary_tax_amount"
       ],
       "target": "total_amount",
-      "format": "money.krw",
-      "note": "합계금액은 공급가액+세액이다."
+      "format": "money.krw"
     },
     {
       "type": "copy",
       "source": "total_amount",
-      "target": "cash_amount",
-      "note": "기본 샘플은 전액 현금 결제 케이스로 합계금액을 현금 칸에 반영한다."
+      "target": "cash_amount"
     }
   ],
   "field_rules": [
@@ -453,742 +977,698 @@
       "semantic_path": "승인번호",
       "generator": "pattern:########################",
       "anchor_id": "visual_0002",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R2",
         "R3"
       ],
-      "note": "Top-right blank region beside 승인번호 label; no printed prefix or unit in value cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "supplier_business_registration_number",
       "semantic_path": "공급자.등록번호",
-      "generator": "pattern:###-##-#####",
+      "generator": "business_reg_no",
       "anchor_id": "det_000004",
-      "unit_policy": "none",
       "evidence_ids": [
         "R1",
         "R2"
       ],
-      "note": "Red 공급자 block first value row; business registration number format visible."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "supplier_branch_number",
       "semantic_path": "공급자.종사업장번호",
       "generator": "pattern:####",
       "anchor_id": "manual_1783511142890",
-      "unit_policy": "none",
       "evidence_ids": [
         "R1",
         "R2"
       ],
-      "note": "Small supplier-side branch-number cell right of registration number label."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "supplier_company_name",
       "semantic_path": "공급자.상호",
       "generator": "company.name_ko",
       "anchor_id": "det_000011",
-      "unit_policy": "none",
       "evidence_ids": [
         "R1",
         "R2"
       ],
-      "note": "Supplier 상호/법인명 cell contains company name."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "supplier_representative_name",
       "semantic_path": "공급자.성명",
       "generator": "person.name_ko",
       "anchor_id": "det_000013",
-      "unit_policy": "none",
       "evidence_ids": [
         "R1",
         "R2"
       ],
-      "note": "Supplier 성명 cell contains representative name."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "supplier_business_address",
       "semantic_path": "공급자.사업장주소",
       "generator": "address.ko",
       "anchor_id": "det_000021",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Supplier address value spans the 사업장 주소 row."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "supplier_business_type",
       "semantic_path": "공급자.업태",
       "generator": "pool:business_types",
       "anchor_id": "det_000027",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Supplier 업태 cell; text is industry category, not seal despite auto_type."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "supplier_business_item",
       "semantic_path": "공급자.종목",
       "generator": "pool:business_items",
       "anchor_id": "det_000029",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Supplier 종목 cell to the right of 업태."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "supplier_email",
       "semantic_path": "공급자.이메일",
-      "generator": "company.email",
+      "generator": "free_text.short",
       "anchor_id": "visual_0018",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Blank supplier email value region; no static suffix in value cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 지원 generator의 안전한 fallback은 free_text.short이며 pick_record가 합성 example 도메인 이메일로 덮어씀."
     },
     {
       "field_id": "recipient_business_registration_number",
       "semantic_path": "공급받는자.등록번호",
-      "generator": "pattern:###-##-#####",
+      "generator": "business_reg_no",
       "anchor_id": "visual_0005",
-      "unit_policy": "none",
       "evidence_ids": [
         "R1",
         "R2"
       ],
-      "note": "Blue 공급받는자 block registration number value cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "recipient_branch_number",
       "semantic_path": "공급받는자.종사업장번호",
       "generator": "pattern:####",
       "anchor_id": "visual_0006",
-      "unit_policy": "none",
       "evidence_ids": [
         "R1",
         "R2"
       ],
-      "note": "Recipient-side branch-number cell beside registration number."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "recipient_company_name",
       "semantic_path": "공급받는자.상호",
       "generator": "company.name_ko",
       "anchor_id": "visual_0007",
-      "unit_policy": "none",
       "evidence_ids": [
         "R1",
         "R2"
       ],
-      "note": "Recipient 상호/법인명 blank cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "recipient_representative_name",
       "semantic_path": "공급받는자.성명",
       "generator": "person.name_ko",
       "anchor_id": "visual_0008",
-      "unit_policy": "none",
       "evidence_ids": [
         "R1",
         "R2"
       ],
-      "note": "Recipient 성명 blank cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "recipient_business_address",
       "semantic_path": "공급받는자.사업장주소",
       "generator": "address.ko",
       "anchor_id": "visual_0009",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Recipient business address row spans wide blank cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "recipient_business_type",
       "semantic_path": "공급받는자.업태",
       "generator": "pool:business_types",
       "anchor_id": "manual_1783510826259",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Recipient 업태 blank value cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "recipient_business_item",
       "semantic_path": "공급받는자.종목",
       "generator": "pool:business_items",
       "anchor_id": "visual_0013",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Recipient 종목 blank value cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "recipient_email_1",
       "semantic_path": "공급받는자.이메일1",
-      "generator": "company.email",
+      "generator": "free_text.short",
       "anchor_id": "visual_0015",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "First recipient email row blank value cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 지원 generator의 안전한 fallback은 free_text.short이며 pick_record가 합성 example 도메인 이메일로 덮어씀."
     },
     {
       "field_id": "recipient_email_2",
       "semantic_path": "공급받는자.이메일2",
-      "generator": "company.email",
+      "generator": "free_text.short",
       "anchor_id": "visual_0019",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Second recipient email row blank value cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 지원 generator의 안전한 fallback은 free_text.short이며 pick_record가 합성 example 도메인 이메일로 덮어씀."
     },
     {
       "field_id": "issue_date",
       "semantic_path": "거래요약.작성일자",
       "generator": "date.kr",
       "anchor_id": "det_000041",
-      "unit_policy": "none",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "작성일자 value appears as YYYY-MM-DD; value cell has no static unit."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "summary_supply_amount",
       "semantic_path": "거래요약.공급가액",
       "generator": "money.krw",
       "anchor_id": "det_000042",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Summary supply amount cell contains comma-formatted amount; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "summary_tax_amount",
       "semantic_path": "거래요약.세액",
       "generator": "money.krw",
       "anchor_id": "det_000043",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Summary tax amount cell contains comma-formatted amount; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "amendment_reason",
       "semantic_path": "거래요약.수정사유",
       "generator": "pool:amendment_reasons",
       "anchor_id": "visual_0022",
-      "unit_policy": "none",
       "evidence_ids": [
+        "R2",
         "R3"
       ],
-      "note": "Blank 수정사유 cell; ordinary issuance may be empty, but pool supports 수정세금계산서 samples."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "summary_note",
       "semantic_path": "거래요약.비고",
-      "generator": "free_text.short",
+      "generator": "pool:summary_notes",
       "anchor_id": "visual_0023",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Wide blank 비고 cell in summary row."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line1_month",
       "semantic_path": "품목내역.1행.월",
       "generator": "date.month",
       "anchor_id": "det_000053",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 1 month cell; label is 월 and value cell has no printed suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line1_day",
       "semantic_path": "품목내역.1행.일",
       "generator": "date.day",
       "anchor_id": "det_000054",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 1 day cell; label is 일 and value cell has no printed suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line1_item_name",
       "semantic_path": "품목내역.1행.품목",
       "generator": "pool:item_names",
       "anchor_id": "det_000055",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 1 품목 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line1_specification",
       "semantic_path": "품목내역.1행.규격",
       "generator": "pool:item_specs",
       "anchor_id": "manual_1783510901475",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 1 규격 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line1_quantity",
       "semantic_path": "품목내역.1행.수량",
       "generator": "choice:1|2|3|5|10",
       "anchor_id": "manual_1783510909542",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 1 수량 cell; no static unit at value position."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line1_unit_price",
       "semantic_path": "품목내역.1행.단가",
       "generator": "money.krw",
       "anchor_id": "manual_1783510914842",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 1 단가 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line1_supply_amount",
       "semantic_path": "품목내역.1행.공급가액",
       "generator": "money.krw",
       "anchor_id": "det_000056",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Item row 1 공급가액 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line1_tax_amount",
       "semantic_path": "품목내역.1행.세액",
       "generator": "money.krw",
       "anchor_id": "det_000057",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Item row 1 세액 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line1_remark",
       "semantic_path": "품목내역.1행.비고",
-      "generator": "free_text.short",
+      "generator": "pool:line_remarks",
       "anchor_id": "manual_1783510924942",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 1 비고 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line2_month",
       "semantic_path": "품목내역.2행.월",
       "generator": "date.month",
       "anchor_id": "manual_1783510962924",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 2 month cell; label is 월 and value cell has no printed suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line2_day",
       "semantic_path": "품목내역.2행.일",
       "generator": "date.day",
       "anchor_id": "manual_1783510968208",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 2 day cell; label is 일 and value cell has no printed suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line2_item_name",
       "semantic_path": "품목내역.2행.품목",
       "generator": "pool:item_names",
       "anchor_id": "manual_1783510994008",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 2 품목 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line2_specification",
       "semantic_path": "품목내역.2행.규격",
       "generator": "pool:item_specs",
       "anchor_id": "manual_1783511010823",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 2 규격 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line2_quantity",
       "semantic_path": "품목내역.2행.수량",
       "generator": "choice:1|2|3|5|10",
       "anchor_id": "manual_1783511024107",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 2 수량 cell; no static unit at value position."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line2_unit_price",
       "semantic_path": "품목내역.2행.단가",
       "generator": "money.krw",
       "anchor_id": "manual_1783511036824",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 2 단가 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line2_supply_amount",
       "semantic_path": "품목내역.2행.공급가액",
       "generator": "money.krw",
       "anchor_id": "manual_1783511041541",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Item row 2 공급가액 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line2_tax_amount",
       "semantic_path": "품목내역.2행.세액",
       "generator": "money.krw",
       "anchor_id": "manual_1783510945874",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Item row 2 세액 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line2_remark",
       "semantic_path": "품목내역.2행.비고",
-      "generator": "free_text.short",
+      "generator": "pool:line_remarks",
       "anchor_id": "manual_1783510928574",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 2 비고 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line3_month",
       "semantic_path": "품목내역.3행.월",
       "generator": "date.month",
       "anchor_id": "manual_1783510970773",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 3 month cell; label is 월 and value cell has no printed suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line3_day",
       "semantic_path": "품목내역.3행.일",
       "generator": "date.day",
       "anchor_id": "manual_1783510973909",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 3 day cell; label is 일 and value cell has no printed suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line3_item_name",
       "semantic_path": "품목내역.3행.품목",
       "generator": "pool:item_names",
       "anchor_id": "manual_1783511000658",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 3 품목 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line3_specification",
       "semantic_path": "품목내역.3행.규격",
       "generator": "pool:item_specs",
       "anchor_id": "manual_1783511014741",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 3 규격 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line3_quantity",
       "semantic_path": "품목내역.3행.수량",
       "generator": "choice:1|2|3|5|10",
       "anchor_id": "manual_1783511030024",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 3 수량 cell; no static unit at value position."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line3_unit_price",
       "semantic_path": "품목내역.3행.단가",
       "generator": "money.krw",
       "anchor_id": "manual_1783511045623",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 3 단가 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line3_supply_amount",
       "semantic_path": "품목내역.3행.공급가액",
       "generator": "money.krw",
       "anchor_id": "manual_1783511050374",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Item row 3 공급가액 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line3_tax_amount",
       "semantic_path": "품목내역.3행.세액",
       "generator": "money.krw",
       "anchor_id": "manual_1783510950823",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Item row 3 세액 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line3_remark",
       "semantic_path": "품목내역.3행.비고",
-      "generator": "free_text.short",
+      "generator": "pool:line_remarks",
       "anchor_id": "manual_1783510935325",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 3 비고 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line4_month",
       "semantic_path": "품목내역.4행.월",
       "generator": "date.month",
       "anchor_id": "manual_1783510976657",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 4 month cell; label is 월 and value cell has no printed suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line4_day",
       "semantic_path": "품목내역.4행.일",
       "generator": "date.day",
       "anchor_id": "manual_1783510978923",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 4 day cell; label is 일 and value cell has no printed suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line4_item_name",
       "semantic_path": "품목내역.4행.품목",
       "generator": "pool:item_names",
       "anchor_id": "manual_1783511005640",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 4 품목 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line4_specification",
       "semantic_path": "품목내역.4행.규격",
       "generator": "pool:item_specs",
       "anchor_id": "manual_1783511019041",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 4 규격 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line4_quantity",
       "semantic_path": "품목내역.4행.수량",
       "generator": "choice:1|2|3|5|10",
       "anchor_id": "manual_1783511032808",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 4 수량 cell; no static unit at value position."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "line4_unit_price",
       "semantic_path": "품목내역.4행.단가",
       "generator": "money.krw",
       "anchor_id": "manual_1783511057240",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 4 단가 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line4_supply_amount",
       "semantic_path": "품목내역.4행.공급가액",
       "generator": "money.krw",
       "anchor_id": "manual_1783511053540",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Item row 4 공급가액 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line4_tax_amount",
       "semantic_path": "품목내역.4행.세액",
       "generator": "money.krw",
       "anchor_id": "manual_1783510957274",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Item row 4 세액 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "line4_remark",
       "semantic_path": "품목내역.4행.비고",
-      "generator": "free_text.short",
+      "generator": "pool:line_remarks",
       "anchor_id": "manual_1783510939392",
-      "unit_policy": "none",
       "evidence_ids": [
-        "R2"
+        "R3"
       ],
-      "note": "Item row 4 비고 cell."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음."
     },
     {
       "field_id": "total_amount",
       "semantic_path": "결제.합계금액",
       "generator": "money.krw",
       "anchor_id": "det_000064",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
         "R1",
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Bottom 합계금액 cell; no printed 원 suffix."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "cash_amount",
       "semantic_path": "결제.현금",
-      "generator": "money.krw",
+      "generator": "same_as:total_amount",
       "anchor_id": "manual_1783511062690",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Bottom 현금 cell; blank in sample."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "check_amount",
       "semantic_path": "결제.수표",
-      "generator": "money.krw",
+      "generator": "literal:0",
       "anchor_id": "manual_1783511065606",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Bottom 수표 cell; blank in sample."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "promissory_note_amount",
       "semantic_path": "결제.어음",
-      "generator": "money.krw",
+      "generator": "literal:0",
       "anchor_id": "manual_1783511068557",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Bottom 어음 cell; blank in sample."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     },
     {
       "field_id": "receivable_amount",
       "semantic_path": "결제.외상미수금",
-      "generator": "money.krw",
+      "generator": "literal:0",
       "anchor_id": "manual_1783511072790",
-      "unit_policy": "omit_static_unit",
       "evidence_ids": [
-        "R2"
+        "R2",
+        "R3"
       ],
-      "note": "Bottom 외상미수금 cell; blank in sample."
+      "note": "전체 템플릿 이미지 기준 값 위치에 정적 단위 없음. 금액 값에는 원 접미사를 넣지 않고 쉼표 숫자만 사용."
     }
   ],
-  "updated_at": "2026-07-08T23:53:29.664525+00:00",
   "relationship_model": {
-    "version": 1,
+    "version": 2,
     "strategy": "renderer_supported_constraints_only",
-    "rules": [
-      "supplier_* fields are selected from one supplier_records object",
-      "recipient_* fields are selected from one recipient_records object",
-      "issue_date and lineN_month/day are selected from one transaction_date_sets object",
-      "line item amount records precompute quantity * unit_price = supply_amount and tax_amount = supply_amount * 10%",
-      "summary_supply_amount = sum(line1..line4 supply_amount)",
-      "summary_tax_amount = sum(line1..line4 tax_amount)",
-      "total_amount = summary_supply_amount + summary_tax_amount",
-      "cash_amount = total_amount, check/promissory_note/receivable amount cells are rendered as 0 by default"
+    "as_of_date": "2026-07-13",
+    "notes": [
+      "사업자 묶음, 작성일-품목일, 품목 수량-단가-공급가액-세액은 pick_record로 일관성을 보장한다.",
+      "품목 합계와 세액 합계, 총액은 sum으로 계산한다.",
+      "결제수단은 현금 전액 결제 기본값으로 total_amount를 copy하고 나머지는 0으로 둔다."
     ]
   }
 }

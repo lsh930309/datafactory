@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-05",
+  "pass": "2/2_faker_and_relationship_expansion",
+  "unresolved_fields": [],
+  "conflicting_evidence": [
+    {
+      "id": "U1",
+      "field_ids": ["doctor_opinion"],
+      "issue": "OCR은 정적 라벨을 '의사소건'으로 인식했으나 전체 템플릿과 공식 서식은 '의사소견'이다.",
+      "resolution": "전체 이미지와 공식 서식을 우선해 의사소견으로 유지",
+      "review_required": false
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "id": "U2",
+      "field_ids": ["patient_rrn", "patient_age"],
+      "issue": "지원 문법에는 주민등록번호 뒤 6자리 마스킹 여부를 별도 지정하는 옵션이 없다.",
+      "approximation": "patient_rrn은 person.rrn을 사용하고 patient_age는 age_from_rrn으로 발급일 기준 만 나이를 맞춘다.",
+      "required_followup": "적용 전 현재 렌더러의 person.rrn이 유효 생년월일과 뒤 6자리 마스킹을 함께 보장하는지 확인",
+      "review_required": true
+    },
+    {
+      "id": "U3",
+      "field_ids": ["admission_discharge_period", "admission_date", "discharge_date"],
+      "issue": "한 개의 가시 bbox에 두 날짜를 합성 렌더링하고 두 primary 날짜 필드는 숨겨야 한다.",
+      "approximation": "hospitalization_records의 label을 pick_record로 복합 표시 필드에 주입하고 primary 날짜와 동일 레코드로 동기화한다.",
+      "required_followup": "UI 승인 시 export.include=false 및 render_policy.render=false 처리 확인",
+      "review_required": true
+    },
+    {
+      "id": "U4",
+      "field_ids": ["admission_discharge_type"],
+      "issue": "서식은 '입원·퇴원구분'만 제시하며 실제 발급 관행에서 값이 단일 상태인지 확인 문구인지 명확하지 않다.",
+      "approximation": "공식 라벨에 직접 드러난 입원/퇴원 두 값만 사용",
+      "required_followup": "샘플 기입본이 확보되면 값 표기 관행 재검토",
+      "review_required": true
+    }
+  ],
+  "unsupported_relationships": [
+    {
+      "field_ids": ["medical_institution_name", "medical_institution_address", "doctor_name", "doctor_license_number"],
+      "issue": "기관-주소-의사-면허번호를 함께 묶을 신뢰 가능한 합성 record를 만들 수 있으나 실제 기관처럼 오인될 위험이 있다.",
+      "decision": "독립 합성 generator를 유지하고 관계 constraint는 보류",
+      "needed_change": "명백한 가상 기관/의사 record pool 정책과 승인"
+    }
+  ],
+  "user_decisions_needed": [
+    "person.rrn 렌더러의 마스킹 보장 확인",
+    "입원·퇴원구분 값의 실제 표기 관행 승인",
+    "복합 입퇴원 기간 렌더링 동작 확인"
+  ],
+  "scope_limits": [
+    "현재 단일 페이지 템플릿만 다룬다.",
+    "고정된 schema_draft.json, anchor_map_draft.json, research_report.json, stylesheet_draft.json은 변경하지 않았다.",
+    "진단 record는 합성·예시용이며 임상 코딩이나 실제 진단을 대체하지 않는다."
+  ],
+  "coverage": {"use_anchors": 27, "bound_use_anchors": 27, "unmapped_use_anchors": []}
+}

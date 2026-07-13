@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-05",
+  "pass": 1,
+  "unresolved_fields": [
+    {
+      "field_id": "p1_birth_or_business_number",
+      "semantic_path": "신청인/생년월일(사업자등록번호)",
+      "issue": "동일 bbox가 개인 생년월일과 법인 사업자등록번호를 선택적으로 수용한다.",
+      "impact": "2차 faker pass에서 신청인 유형과 값 형식을 연동해야 한다.",
+      "recommended_decision": "person/company 레코드 풀과 pick_record 지원 가능성을 검토하되 현재 field_id와 semantic_path는 유지한다.",
+      "review_required": true,
+      "confidence": 0.82
+    }
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "p1_birth_or_business_number",
+      "current_rule": "free_text.short",
+      "reason": "단일 지원 rule로 생년월일 또는 사업자등록번호의 조건부 형식을 동시에 표현할 수 없다."
+    },
+    {
+      "field_id_pattern": "p1_land_row_*_lot_number",
+      "current_rule": "free_text.short",
+      "reason": "지번 전용 generator가 지원 문법에 없어 2차 패스에서 pattern 또는 충분한 pool로 근사해야 한다."
+    },
+    {
+      "field_id_pattern": "p1_land_row_*_base_date",
+      "current_rule": "free_text.short",
+      "reason": "'1월 1일 기준' 같은 자연어 기준일 표기를 지원 전용 rule이 없어 2차 패스에서 폐쇄형 choice/pool 근거를 확정해야 한다."
+    }
+  ],
+  "user_decisions_needed": [
+    {
+      "topic": "신청인 유형",
+      "question": "합성 데이터에서 개인/법인을 모두 지원할지, 한 유형으로 고정할지 승인 필요",
+      "pass_target": 2
+    }
+  ],
+  "page_scope_limit": {
+    "observed_page_label": "1/2",
+    "provided_page_count": 1,
+    "policy": "현재 요청의 77개 use 앵커가 있는 1쪽만 동결한다. 2쪽 필드 확장은 이번 차수에서 보류한다."
+  },
+  "coverage_repairs": [],
+  "summary": {
+    "use_anchor_coverage_percent": 100,
+    "review_required_field_count": 1,
+    "unresolved_anchor_count": 0
+  }
+}

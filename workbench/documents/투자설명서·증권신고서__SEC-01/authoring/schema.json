@@ -1,263 +1,330 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-30T11:49:12.318967+00:00",
-  "updated_at": "2026-07-02T08:44:14.353782+00:00",
+  "created_at": "2026-07-13T01:54:11.493883+00:00",
   "doc_id": "SEC-01",
   "title": "투자설명서·증권신고서",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자설명서·증권신고서__SEC-01/review/original_투자설명서_page_001/review.json",
-  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자설명서·증권신고서__SEC-01/samples/original/투자설명서_page_001.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자설명서·증권신고서__SEC-01/inpaint/original_투자설명서_page_001/lama/inpainted_lama.png",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자설명서·증권신고서__SEC-01/authoring/agent_applied_reviews/20260713T014615362553Z/review.json",
+  "source_image": "workbench/documents/투자설명서·증권신고서__SEC-01/samples/original/투자설명서_page_001.jpg",
+  "source_inpainted": "workbench/documents/투자설명서·증권신고서__SEC-01/inpaint/original_투자설명서_page_001/lama/inpainted_lama.png",
   "image": {
     "width": 1191,
     "height": 1684
   },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자설명서·증권신고서__SEC-01/authoring/agent_applied_reviews/20260713T014615362553Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/투자설명서·증권신고서__SEC-01/authoring/agent_requests/20260713T014615362553Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "투자위험정보": {
+      "투자위험등급 표기": "",
+      "투자위험등급": ""
+    },
+    "집합투자기구 기본정보": {
+      "집합투자기구 명칭": "",
+      "집합투자업자 명칭": "",
+      "판매회사·공시 참조 안내": ""
+    },
+    "신고 및 모집정보": {
+      "작성기준일": "",
+      "증권신고서 효력발생일": "",
+      "모집(매출) 증권의 종류": "",
+      "모집(매출) 총액": "",
+      "모집(매출) 기간": ""
+    }
+  },
   "fields": [
     {
       "field_id": "investment_risk_grade_label",
-      "label": "투자위험등급 표제",
+      "label": "투자위험등급 표기",
+      "semantic_path": [
+        "투자위험정보",
+        "투자위험등급 표기"
+      ],
+      "bbox_label_id": "det_000001",
       "source_detection_id": "det_000001",
-      "source_text": "투자 위험 둥급",
+      "source_text": "투자 위험 등급",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:투자 위험 등급",
       "style_class": "style_investment_risk_grade_label",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "투자위험등급 표제",
-        "csv_column": "투자위험등급 표제"
+        "json_path": "투자위험정보/투자위험등급 표기",
+        "csv_column": "투자위험정보/투자위험등급 표기"
       },
       "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000001",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "investment_risk_grade",
       "label": "투자위험등급",
+      "semantic_path": [
+        "투자위험정보",
+        "투자위험등급"
+      ],
+      "bbox_label_id": "det_000003",
       "source_detection_id": "det_000003",
       "source_text": "2등급(높은위험)",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:1등급(매우높은위험)|2등급(높은위험)|3등급(다소높은위험)|4등급(보통위험)|5등급(낮은위험)|6등급(매우낮은위험)",
       "style_class": "style_investment_risk_grade",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "투자위험등급",
-        "csv_column": "투자위험등급"
+        "json_path": "투자위험정보/투자위험등급",
+        "csv_column": "투자위험정보/투자위험등급"
       },
       "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000003",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "fund_name",
       "label": "집합투자기구 명칭",
+      "semantic_path": [
+        "집합투자기구 기본정보",
+        "집합투자기구 명칭"
+      ],
+      "bbox_label_id": "det_000032",
       "source_detection_id": "det_000032",
       "source_text": "삼성KODEX 코리아배당성장 증권상장지수투자신탁[주식]",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_fund_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "집합투자기구 명칭",
-        "csv_column": "집합투자기구 명칭"
+        "json_path": "집합투자기구 기본정보/집합투자기구 명칭",
+        "csv_column": "집합투자기구 기본정보/집합투자기구 명칭"
       },
       "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000032",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "asset_manager_name",
       "label": "집합투자업자 명칭",
+      "semantic_path": [
+        "집합투자기구 기본정보",
+        "집합투자업자 명칭"
+      ],
+      "bbox_label_id": "det_000034",
       "source_detection_id": "det_000034",
       "source_text": "삼성자산운용주식회사",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_asset_manager_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "집합투자업자 명칭",
-        "csv_column": "집합투자업자 명칭"
+        "json_path": "집합투자기구 기본정보/집합투자업자 명칭",
+        "csv_column": "집합투자기구 기본정보/집합투자업자 명칭"
       },
       "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000034",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "disclosure_reference_text",
       "label": "판매회사·공시 참조 안내",
+      "semantic_path": [
+        "집합투자기구 기본정보",
+        "판매회사·공시 참조 안내"
+      ],
+      "bbox_label_id": "det_000036",
       "source_detection_id": "det_000036",
-      "source_text": ":집합투자업자(http://www.samsungfumd.com)및 금음투자협회(www.kofia.or.kr)홈페이지 참조",
+      "source_text": "집합투자업자(http://www.samsungfund.com) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_disclosure_reference_text",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "판매회사·공시 참조 안내",
-        "csv_column": "판매회사·공시 참조 안내"
+        "json_path": "집합투자기구 기본정보/판매회사·공시 참조 안내",
+        "csv_column": "집합투자기구 기본정보/판매회사·공시 참조 안내"
       },
       "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000036",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "prospectus_preparation_date",
       "label": "작성기준일",
+      "semantic_path": [
+        "신고 및 모집정보",
+        "작성기준일"
+      ],
+      "bbox_label_id": "det_000039",
       "source_detection_id": "det_000039",
-      "source_text": "2026. 3.3",
+      "source_text": "2026. 3. 3",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_prospectus_preparation_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "작성기준일",
-        "csv_column": "작성기준일"
+        "json_path": "신고 및 모집정보/작성기준일",
+        "csv_column": "신고 및 모집정보/작성기준일"
       },
       "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000039",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "offering_total_amount",
-      "label": "모집(매출) 총액",
-      "source_detection_id": "det_000042",
-      "source_text": "[모집(매출) 총액:10조좌]",
-      "value_type": "money.krw",
-      "generator": "literal:",
-      "style_class": "style_offering_total_amount",
-      "render_policy": {
-        "align": "left",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "모집(매출) 총액",
-        "csv_column": "모집(매출) 총액"
-      },
-      "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000042",
-      "bbox_status": "use"
-    },
-    {
-      "field_id": "offering_period_description",
-      "label": "모집(매출) 기간",
-      "source_detection_id": "det_000044",
-      "source_text": "이 집합투자기구는 별도의 모집(매출)기간이 정해져 있지 않으며, 계속하여 모집할 수 있습니다.",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_offering_period_description",
-      "render_policy": {
-        "align": "left",
-        "valign": "middle",
-        "fit": "wrap",
-        "overflow": "wrap",
-        "checkbox_style": "v_mark"
-      },
-      "export": {
-        "json_path": "모집(매출) 기간",
-        "csv_column": "모집(매출) 기간"
-      },
-      "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000044",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "securities_registration_effective_date",
       "label": "증권신고서 효력발생일",
+      "semantic_path": [
+        "신고 및 모집정보",
+        "증권신고서 효력발생일"
+      ],
+      "bbox_label_id": "manual_1782795434153",
       "source_detection_id": "manual_1782795434153",
-      "source_text": "2026. 3.17",
+      "source_text": "2026. 3. 17",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_securities_registration_effective_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "증권신고서 효력발생일",
-        "csv_column": "증권신고서 효력발생일"
+        "json_path": "신고 및 모집정보/증권신고서 효력발생일",
+        "csv_column": "신고 및 모집정보/증권신고서 효력발생일"
       },
       "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_1782795434153",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "offered_security_type",
       "label": "모집(매출) 증권의 종류",
+      "semantic_path": [
+        "신고 및 모집정보",
+        "모집(매출) 증권의 종류"
+      ],
+      "bbox_label_id": "manual_1782795478965",
       "source_detection_id": "manual_1782795478965",
-      "source_text": "투자신탁 수익중권",
+      "source_text": "투자신탁 수익증권",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:투자신탁 수익증권|투자회사 주식|투자유한회사 지분증권|투자합자회사 지분증권",
       "style_class": "style_offered_security_type",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "모집(매출) 증권의 종류",
-        "csv_column": "모집(매출) 증권의 종류"
+        "json_path": "신고 및 모집정보/모집(매출) 증권의 종류",
+        "csv_column": "신고 및 모집정보/모집(매출) 증권의 종류"
       },
       "required": true,
-      "notes": "SEC-01 투자설명서 첫 페이지 생산용 보정 필드. 위험등급/펀드명/운용사/일자/증권종류/모집정보를 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_1782795478965",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "offering_total_amount",
+      "label": "모집(매출) 총액",
+      "semantic_path": [
+        "신고 및 모집정보",
+        "모집(매출) 총액"
+      ],
+      "bbox_label_id": "det_000042",
+      "source_detection_id": "det_000042",
+      "source_text": "[모집(매출) 총액 : 10조좌]",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "style_offering_total_amount",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신고 및 모집정보/모집(매출) 총액",
+        "csv_column": "신고 및 모집정보/모집(매출) 총액"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "offering_period_description",
+      "label": "모집(매출) 기간",
+      "semantic_path": [
+        "신고 및 모집정보",
+        "모집(매출) 기간"
+      ],
+      "bbox_label_id": "det_000044",
+      "source_detection_id": "det_000044",
+      "source_text": "이 집합투자기구는 별도의 모집(매출)기간이 정해져 있지 않으며, 계속하여 모집할 수 있습니다.",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "style_offering_period_description",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "신고 및 모집정보/모집(매출) 기간",
+        "csv_column": "신고 및 모집정보/모집(매출) 기간"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "authoring_mode": "sec01_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자설명서·증권신고서__SEC-01/review/original_투자설명서_page_001/review.json"
-  }
+  "updated_at": "2026-07-13T01:54:11.516531+00:00"
 }

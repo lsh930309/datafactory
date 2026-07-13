@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-01",
+  "unresolved_fields": [
+    {"field_id":"corporate_registration_number_masked","issue":"개인 선택 시 주민등록번호, 법인 선택 시 법인등록번호가 같은 bbox를 공유하지만 지원 constraint에는 체크박스에 따른 조건부 포맷 전환이 없다.","current_fallback":"법인 예시와 동일하게 앞 6자리 및 뒤 7자리 별표 마스킹을 공통 적용","decision_needed":"개인/법인별 별도 bbox 또는 조건부 generator 지원 여부"},
+    {"field_id":"business_registration_number","issue":"pattern fallback 자체는 checksum을 보장하지 않는다.","current_fallback":"pick_record가 checksum 검증된 합성 번호로 최종 값을 덮어씀","decision_needed":"renderer에서 constraint 적용 실패 시 fallback 값을 허용할지 여부"}
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    {"field_id":"tax_office_chief","rule":"free_text.short","reason":"fallback 문법에는 세무서 기관장 전용 rule이 없어 record constraint가 최종 값을 제공한다."},
+    {"field_id":"business_item","rule":"free_text.short","reason":"업태와 종목의 정합성은 company record constraint에서 보장한다."}
+  ],
+  "scope_limits": [
+    {"issue":"현재 request는 4쪽 문서 중 1쪽 이미지만 authoring 대상으로 제공한다.","impact":"재무상태표·손익계산서·부속명세서 본문 페이지의 KIE 및 합계 관계는 이번 차수에서 확장하지 않았다.","required_followup":"후속 페이지별 use anchor와 fixed schema를 별도 pass에서 확정"}
+  ],
+  "user_decisions_needed": [
+    "개인/법인 선택에 따라 주민(법인)등록번호 포맷을 분기하려면 renderer의 조건부 관계 지원 또는 별도 field/bbox 설계가 필요하다.",
+    "후속 2~4쪽의 재무 수치 합계 관계는 해당 페이지 anchor가 준비된 뒤 별도 authoring pass에서 추가한다."
+  ]
+}

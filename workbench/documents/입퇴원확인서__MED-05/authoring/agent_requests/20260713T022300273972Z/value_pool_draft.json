@@ -1,0 +1,13 @@
+{
+  "schema_version": 2,
+  "doc_id": "MED-05",
+  "source_of_truth": "faker_profile_draft.json.data_pools",
+  "pools": {
+    "diagnosis_records": {"kind":"record","count":20,"usage":"병명과 질병분류기호의 동시 선택","source_note":"공식 서식의 병명/질병분류기호 구조와 KCD 분류 체계를 참고한 합성 예시"},
+    "hospitalization_records": {"kind":"record","count":20,"usage":"발병일·입원일·퇴원일·표시문구의 일관된 동시 선택","source_note":"기준일 2026-07-13 이전의 합성 입퇴원 사례"},
+    "doctor_opinions": {"kind":"scalar","count":20,"usage":"의사소견 값 후보","source_note":"개인 식별정보가 없는 보수적 합성 문장"},
+    "remarks": {"kind":"scalar","count":20,"usage":"비고 값 후보","source_note":"발급·제출·기록 확인 목적의 합성 문장"}
+  },
+  "pool_policies": {},
+  "notes": ["실제 환자·의사·의료기관 데이터는 포함하지 않는다.","pick_record 대상 record pool은 20개, 열린 scalar pool은 각각 20개로 구성했다."]
+}

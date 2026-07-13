@@ -1,1751 +1,2314 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-30T11:49:12.318967+00:00",
-  "updated_at": "2026-07-03T02:04:41.105707+00:00",
+  "created_at": "2026-07-13T02:31:05.952006+00:00",
   "doc_id": "QC-02",
   "title": "입고·검수 보고서",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/review/original_검수보고서_page_001/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/authoring/agent_applied_reviews/20260713T022300271543Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/samples/original/검수보고서_page_001.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/inpaint/original_검수보고서_page_001/lama/inpainted_lama.png",
+  "source_inpainted": "workbench/documents/입고·검수_보고서__QC-02/inpaint/original_검수보고서_page_001/lama/inpainted_lama.png",
   "image": {
     "width": 1190,
     "height": 1682
   },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/authoring/agent_applied_reviews/20260713T022300271543Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/입고·검수_보고서__QC-02/authoring/agent_requests/20260713T022300271543Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "결재": {
+      "담당": "",
+      "검토": "",
+      "승인": ""
+    },
+    "입고정보": {
+      "거래처": "",
+      "발주번호": "",
+      "발주일자": {
+        "연": "",
+        "월": "",
+        "일": ""
+      },
+      "입고일자": {
+        "연": "",
+        "월": "",
+        "일": ""
+      },
+      "검수담당자": "",
+      "입고장소": "",
+      "검수방법": ""
+    },
+    "검수내역": {
+      "행1": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행2": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행3": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행4": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행5": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행6": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행7": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행8": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      }
+    },
+    "확인": {
+      "검수자 의견": "",
+      "부서장 확인": ""
+    }
+  },
   "fields": [
     {
       "field_id": "approval_owner_name",
-      "label": "담당 결재자",
+      "label": "담당",
+      "semantic_path": [
+        "결재",
+        "담당"
+      ],
+      "bbox_label_id": "manual_qc_02_001",
       "source_detection_id": "manual_qc_02_001",
       "source_text": "담당",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_approval_owner_name",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "담당 결재자",
-        "csv_column": "담당 결재자"
+        "json_path": "결재/담당",
+        "csv_column": "결재/담당"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_001",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "approval_reviewer_name",
-      "label": "검토 결재자",
+      "label": "검토",
+      "semantic_path": [
+        "결재",
+        "검토"
+      ],
+      "bbox_label_id": "manual_qc_02_002",
       "source_detection_id": "manual_qc_02_002",
       "source_text": "검토",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_approval_reviewer_name",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "검토 결재자",
-        "csv_column": "검토 결재자"
+        "json_path": "결재/검토",
+        "csv_column": "결재/검토"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_002",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "approval_manager_name",
-      "label": "승인 결재자",
+      "label": "승인",
+      "semantic_path": [
+        "결재",
+        "승인"
+      ],
+      "bbox_label_id": "manual_qc_02_003",
       "source_detection_id": "manual_qc_02_003",
       "source_text": "승인",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_approval_manager_name",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "승인 결재자",
-        "csv_column": "승인 결재자"
+        "json_path": "결재/승인",
+        "csv_column": "결재/승인"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_003",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "supplier_company_name",
       "label": "거래처",
+      "semantic_path": [
+        "입고정보",
+        "거래처"
+      ],
+      "bbox_label_id": "manual_qc_02_004",
       "source_detection_id": "manual_qc_02_004",
       "source_text": "거래처",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_supplier_company_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "거래처",
-        "csv_column": "거래처"
+        "json_path": "입고정보/거래처",
+        "csv_column": "입고정보/거래처"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_004",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "purchase_order_number",
       "label": "발주번호",
+      "semantic_path": [
+        "입고정보",
+        "발주번호"
+      ],
+      "bbox_label_id": "manual_qc_02_005",
       "source_detection_id": "manual_qc_02_005",
       "source_text": "발주번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:PO-########-###",
       "style_class": "style_purchase_order_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발주번호",
-        "csv_column": "발주번호"
+        "json_path": "입고정보/발주번호",
+        "csv_column": "입고정보/발주번호"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_005",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "purchase_order_year",
       "label": "발주일자 연",
+      "semantic_path": [
+        "입고정보",
+        "발주일자",
+        "연"
+      ],
+      "bbox_label_id": "manual_qc_02_006",
       "source_detection_id": "manual_qc_02_006",
-      "source_text": "발주 연",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "source_text": "20",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_purchase_order_year",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발주일자 연",
-        "csv_column": "발주일자 연"
+        "json_path": "입고정보/발주일자/연",
+        "csv_column": "입고정보/발주일자/연"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_006",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "purchase_order_month",
       "label": "발주일자 월",
+      "semantic_path": [
+        "입고정보",
+        "발주일자",
+        "월"
+      ],
+      "bbox_label_id": "manual_qc_02_007",
       "source_detection_id": "manual_qc_02_007",
       "source_text": "발주 월",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.month",
+      "generator": "date.month",
       "style_class": "style_purchase_order_month",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발주일자 월",
-        "csv_column": "발주일자 월"
+        "json_path": "입고정보/발주일자/월",
+        "csv_column": "입고정보/발주일자/월"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_007",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "purchase_order_day",
       "label": "발주일자 일",
+      "semantic_path": [
+        "입고정보",
+        "발주일자",
+        "일"
+      ],
+      "bbox_label_id": "manual_qc_02_008",
       "source_detection_id": "manual_qc_02_008",
       "source_text": "발주 일",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.day",
+      "generator": "date.day",
       "style_class": "style_purchase_order_day",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발주일자 일",
-        "csv_column": "발주일자 일"
+        "json_path": "입고정보/발주일자/일",
+        "csv_column": "입고정보/발주일자/일"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_008",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "receiving_year",
       "label": "입고일자 연",
+      "semantic_path": [
+        "입고정보",
+        "입고일자",
+        "연"
+      ],
+      "bbox_label_id": "manual_qc_02_009",
       "source_detection_id": "manual_qc_02_009",
-      "source_text": "입고 연",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "source_text": "20",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_receiving_year",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "입고일자 연",
-        "csv_column": "입고일자 연"
+        "json_path": "입고정보/입고일자/연",
+        "csv_column": "입고정보/입고일자/연"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_009",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "receiving_month",
       "label": "입고일자 월",
+      "semantic_path": [
+        "입고정보",
+        "입고일자",
+        "월"
+      ],
+      "bbox_label_id": "manual_qc_02_010",
       "source_detection_id": "manual_qc_02_010",
       "source_text": "입고 월",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.month",
+      "generator": "date.month",
       "style_class": "style_receiving_month",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "입고일자 월",
-        "csv_column": "입고일자 월"
+        "json_path": "입고정보/입고일자/월",
+        "csv_column": "입고정보/입고일자/월"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_010",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "receiving_day",
       "label": "입고일자 일",
+      "semantic_path": [
+        "입고정보",
+        "입고일자",
+        "일"
+      ],
+      "bbox_label_id": "manual_qc_02_011",
       "source_detection_id": "manual_qc_02_011",
       "source_text": "입고 일",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.day",
+      "generator": "date.day",
       "style_class": "style_receiving_day",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "입고일자 일",
-        "csv_column": "입고일자 일"
+        "json_path": "입고정보/입고일자/일",
+        "csv_column": "입고정보/입고일자/일"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_011",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "inspection_manager_name",
       "label": "검수담당자",
+      "semantic_path": [
+        "입고정보",
+        "검수담당자"
+      ],
+      "bbox_label_id": "manual_qc_02_012",
       "source_detection_id": "manual_qc_02_012",
       "source_text": "검수담당자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_inspection_manager_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "검수담당자",
-        "csv_column": "검수담당자"
+        "json_path": "입고정보/검수담당자",
+        "csv_column": "입고정보/검수담당자"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_012",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "receiving_location",
       "label": "입고장소",
+      "semantic_path": [
+        "입고정보",
+        "입고장소"
+      ],
+      "bbox_label_id": "manual_qc_02_013",
       "source_detection_id": "manual_qc_02_013",
       "source_text": "입고장소",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:inspection_locations",
       "style_class": "style_receiving_location",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "입고장소",
-        "csv_column": "입고장소"
+        "json_path": "입고정보/입고장소",
+        "csv_column": "입고정보/입고장소"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_013",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "inspection_method",
       "label": "검수방법",
+      "semantic_path": [
+        "입고정보",
+        "검수방법"
+      ],
+      "bbox_label_id": "manual_qc_02_014",
       "source_detection_id": "manual_qc_02_014",
       "source_text": "검수방법",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:inspection_methods",
       "style_class": "style_inspection_method",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "검수방법",
-        "csv_column": "검수방법"
+        "json_path": "입고정보/검수방법",
+        "csv_column": "입고정보/검수방법"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_014",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_1_number",
-      "label": "번호[0]",
+      "label": "번호",
+      "semantic_path": [
+        "검수내역",
+        "행1",
+        "번호"
+      ],
+      "bbox_label_id": "manual_qc_02_015",
       "source_detection_id": "manual_qc_02_015",
       "source_text": "1",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1",
       "style_class": "style_line_1_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "번호[0]",
-        "csv_column": "번호[0]"
+        "json_path": "검수내역/행1/번호",
+        "csv_column": "검수내역/행1/번호"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_015",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_1_item_name",
-      "label": "품명[0]",
+      "label": "품명",
+      "semantic_path": [
+        "검수내역",
+        "행1",
+        "품명"
+      ],
+      "bbox_label_id": "manual_qc_02_016",
       "source_detection_id": "manual_qc_02_016",
       "source_text": "품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:육각볼트|육각너트|평와셔|스프링와셔|가이드핀|브래킷 LH|브래킷 RH|알루미늄 플레이트|스페이서 링|베어링 하우징|모터 샤프트|금형 인서트|센서 브래킷|냉각 플레이트|직선 베어링|타이밍 벨트|타이밍 풀리|공압 실린더|솔레노이드 밸브|근접 센서|제어함 브래킷|케이블 글랜드|패킹 가이드|우레탄 패드",
       "style_class": "style_line_1_item_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[0]",
-        "csv_column": "품명[0]"
+        "json_path": "검수내역/행1/품명",
+        "csv_column": "검수내역/행1/품명"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_016",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_1_specification",
-      "label": "규격[0]",
+      "label": "규격",
+      "semantic_path": [
+        "검수내역",
+        "행1",
+        "규격"
+      ],
+      "bbox_label_id": "manual_qc_02_017",
       "source_detection_id": "manual_qc_02_017",
       "source_text": "규격",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:M8×30, SS400|M8, SS400|M8, SUS304|M10, 탄소강|Ø10×80, SKD11|2.0T, SPCC|2.0T, SPCC|120×80×15T, AL6061|Ø45, SUS304|H-6204, AL6061|Ø18×220, SCM440|A형, SKD61|SB-04, SUS304|CP-210, AL6061|LM20UU|HTD5M-600|20T, 5M|Ø32×100ST|DC24V, 5/2WAY|M12, PNP NO|CB-02, 1.6T|PG13.5, IP68|PG-15, POM|50×50×10T, 70A",
       "style_class": "style_line_1_specification",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[0]",
-        "csv_column": "규격[0]"
+        "json_path": "검수내역/행1/규격",
+        "csv_column": "검수내역/행1/규격"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_017",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_1_received_quantity",
-      "label": "수량[0]",
+      "label": "수량",
+      "semantic_path": [
+        "검수내역",
+        "행1",
+        "검수결과",
+        "수량"
+      ],
+      "bbox_label_id": "manual_qc_02_018",
       "source_detection_id": "manual_qc_02_018",
       "source_text": "수량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_line_1_received_quantity",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[0]",
-        "csv_column": "수량[0]"
+        "json_path": "검수내역/행1/검수결과/수량",
+        "csv_column": "검수내역/행1/검수결과/수량"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_018",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_1_quality_result",
-      "label": "품질결과[0]",
+      "label": "품질",
+      "semantic_path": [
+        "검수내역",
+        "행1",
+        "검수결과",
+        "품질"
+      ],
+      "bbox_label_id": "manual_qc_02_019",
       "source_detection_id": "manual_qc_02_019",
       "source_text": "품질",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:합격|부분합격|불합격",
       "style_class": "style_line_1_quality_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품질결과[0]",
-        "csv_column": "품질결과[0]"
+        "json_path": "검수내역/행1/검수결과/품질",
+        "csv_column": "검수내역/행1/검수결과/품질"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_019",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_1_other_result",
-      "label": "기타결과[0]",
+      "label": "기타",
+      "semantic_path": [
+        "검수내역",
+        "행1",
+        "검수결과",
+        "기타"
+      ],
+      "bbox_label_id": "manual_qc_02_020",
       "source_detection_id": "manual_qc_02_020",
       "source_text": "기타",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:other_results",
       "style_class": "style_line_1_other_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기타결과[0]",
-        "csv_column": "기타결과[0]"
+        "json_path": "검수내역/행1/검수결과/기타",
+        "csv_column": "검수내역/행1/검수결과/기타"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_020",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_1_remark",
-      "label": "비고[0]",
+      "label": "비고",
+      "semantic_path": [
+        "검수내역",
+        "행1",
+        "비고"
+      ],
+      "bbox_label_id": "manual_qc_02_021",
       "source_detection_id": "manual_qc_02_021",
       "source_text": "비고",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:remarks",
       "style_class": "style_line_1_remark",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[0]",
-        "csv_column": "비고[0]"
+        "json_path": "검수내역/행1/비고",
+        "csv_column": "검수내역/행1/비고"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_021",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_2_number",
-      "label": "번호[1]",
+      "label": "번호",
+      "semantic_path": [
+        "검수내역",
+        "행2",
+        "번호"
+      ],
+      "bbox_label_id": "manual_qc_02_022",
       "source_detection_id": "manual_qc_02_022",
       "source_text": "2",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:2",
       "style_class": "style_line_2_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "번호[1]",
-        "csv_column": "번호[1]"
+        "json_path": "검수내역/행2/번호",
+        "csv_column": "검수내역/행2/번호"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_022",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_2_item_name",
-      "label": "품명[1]",
+      "label": "품명",
+      "semantic_path": [
+        "검수내역",
+        "행2",
+        "품명"
+      ],
+      "bbox_label_id": "manual_qc_02_023",
       "source_detection_id": "manual_qc_02_023",
       "source_text": "품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:육각볼트|육각너트|평와셔|스프링와셔|가이드핀|브래킷 LH|브래킷 RH|알루미늄 플레이트|스페이서 링|베어링 하우징|모터 샤프트|금형 인서트|센서 브래킷|냉각 플레이트|직선 베어링|타이밍 벨트|타이밍 풀리|공압 실린더|솔레노이드 밸브|근접 센서|제어함 브래킷|케이블 글랜드|패킹 가이드|우레탄 패드",
       "style_class": "style_line_2_item_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[1]",
-        "csv_column": "품명[1]"
+        "json_path": "검수내역/행2/품명",
+        "csv_column": "검수내역/행2/품명"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_023",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_2_specification",
-      "label": "규격[1]",
+      "label": "규격",
+      "semantic_path": [
+        "검수내역",
+        "행2",
+        "규격"
+      ],
+      "bbox_label_id": "manual_qc_02_024",
       "source_detection_id": "manual_qc_02_024",
       "source_text": "규격",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:M8×30, SS400|M8, SS400|M8, SUS304|M10, 탄소강|Ø10×80, SKD11|2.0T, SPCC|2.0T, SPCC|120×80×15T, AL6061|Ø45, SUS304|H-6204, AL6061|Ø18×220, SCM440|A형, SKD61|SB-04, SUS304|CP-210, AL6061|LM20UU|HTD5M-600|20T, 5M|Ø32×100ST|DC24V, 5/2WAY|M12, PNP NO|CB-02, 1.6T|PG13.5, IP68|PG-15, POM|50×50×10T, 70A",
       "style_class": "style_line_2_specification",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[1]",
-        "csv_column": "규격[1]"
+        "json_path": "검수내역/행2/규격",
+        "csv_column": "검수내역/행2/규격"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_024",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_2_received_quantity",
-      "label": "수량[1]",
+      "label": "수량",
+      "semantic_path": [
+        "검수내역",
+        "행2",
+        "검수결과",
+        "수량"
+      ],
+      "bbox_label_id": "manual_qc_02_025",
       "source_detection_id": "manual_qc_02_025",
       "source_text": "수량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_line_2_received_quantity",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[1]",
-        "csv_column": "수량[1]"
+        "json_path": "검수내역/행2/검수결과/수량",
+        "csv_column": "검수내역/행2/검수결과/수량"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_025",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_2_quality_result",
-      "label": "품질결과[1]",
+      "label": "품질",
+      "semantic_path": [
+        "검수내역",
+        "행2",
+        "검수결과",
+        "품질"
+      ],
+      "bbox_label_id": "manual_qc_02_026",
       "source_detection_id": "manual_qc_02_026",
       "source_text": "품질",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:합격|부분합격|불합격",
       "style_class": "style_line_2_quality_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품질결과[1]",
-        "csv_column": "품질결과[1]"
+        "json_path": "검수내역/행2/검수결과/품질",
+        "csv_column": "검수내역/행2/검수결과/품질"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_026",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_2_other_result",
-      "label": "기타결과[1]",
+      "label": "기타",
+      "semantic_path": [
+        "검수내역",
+        "행2",
+        "검수결과",
+        "기타"
+      ],
+      "bbox_label_id": "manual_qc_02_027",
       "source_detection_id": "manual_qc_02_027",
       "source_text": "기타",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:other_results",
       "style_class": "style_line_2_other_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기타결과[1]",
-        "csv_column": "기타결과[1]"
+        "json_path": "검수내역/행2/검수결과/기타",
+        "csv_column": "검수내역/행2/검수결과/기타"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_027",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_2_remark",
-      "label": "비고[1]",
+      "label": "비고",
+      "semantic_path": [
+        "검수내역",
+        "행2",
+        "비고"
+      ],
+      "bbox_label_id": "manual_qc_02_028",
       "source_detection_id": "manual_qc_02_028",
       "source_text": "비고",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:remarks",
       "style_class": "style_line_2_remark",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[1]",
-        "csv_column": "비고[1]"
+        "json_path": "검수내역/행2/비고",
+        "csv_column": "검수내역/행2/비고"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_028",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_3_number",
-      "label": "번호[2]",
+      "label": "번호",
+      "semantic_path": [
+        "검수내역",
+        "행3",
+        "번호"
+      ],
+      "bbox_label_id": "manual_qc_02_029",
       "source_detection_id": "manual_qc_02_029",
       "source_text": "3",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:3",
       "style_class": "style_line_3_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "번호[2]",
-        "csv_column": "번호[2]"
+        "json_path": "검수내역/행3/번호",
+        "csv_column": "검수내역/행3/번호"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_029",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_3_item_name",
-      "label": "품명[2]",
+      "label": "품명",
+      "semantic_path": [
+        "검수내역",
+        "행3",
+        "품명"
+      ],
+      "bbox_label_id": "manual_qc_02_030",
       "source_detection_id": "manual_qc_02_030",
       "source_text": "품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:육각볼트|육각너트|평와셔|스프링와셔|가이드핀|브래킷 LH|브래킷 RH|알루미늄 플레이트|스페이서 링|베어링 하우징|모터 샤프트|금형 인서트|센서 브래킷|냉각 플레이트|직선 베어링|타이밍 벨트|타이밍 풀리|공압 실린더|솔레노이드 밸브|근접 센서|제어함 브래킷|케이블 글랜드|패킹 가이드|우레탄 패드",
       "style_class": "style_line_3_item_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[2]",
-        "csv_column": "품명[2]"
+        "json_path": "검수내역/행3/품명",
+        "csv_column": "검수내역/행3/품명"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_030",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_3_specification",
-      "label": "규격[2]",
+      "label": "규격",
+      "semantic_path": [
+        "검수내역",
+        "행3",
+        "규격"
+      ],
+      "bbox_label_id": "manual_qc_02_031",
       "source_detection_id": "manual_qc_02_031",
       "source_text": "규격",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:M8×30, SS400|M8, SS400|M8, SUS304|M10, 탄소강|Ø10×80, SKD11|2.0T, SPCC|2.0T, SPCC|120×80×15T, AL6061|Ø45, SUS304|H-6204, AL6061|Ø18×220, SCM440|A형, SKD61|SB-04, SUS304|CP-210, AL6061|LM20UU|HTD5M-600|20T, 5M|Ø32×100ST|DC24V, 5/2WAY|M12, PNP NO|CB-02, 1.6T|PG13.5, IP68|PG-15, POM|50×50×10T, 70A",
       "style_class": "style_line_3_specification",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[2]",
-        "csv_column": "규격[2]"
+        "json_path": "검수내역/행3/규격",
+        "csv_column": "검수내역/행3/규격"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_031",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_3_received_quantity",
-      "label": "수량[2]",
+      "label": "수량",
+      "semantic_path": [
+        "검수내역",
+        "행3",
+        "검수결과",
+        "수량"
+      ],
+      "bbox_label_id": "manual_qc_02_032",
       "source_detection_id": "manual_qc_02_032",
       "source_text": "수량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_line_3_received_quantity",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[2]",
-        "csv_column": "수량[2]"
+        "json_path": "검수내역/행3/검수결과/수량",
+        "csv_column": "검수내역/행3/검수결과/수량"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_032",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_3_quality_result",
-      "label": "품질결과[2]",
+      "label": "품질",
+      "semantic_path": [
+        "검수내역",
+        "행3",
+        "검수결과",
+        "품질"
+      ],
+      "bbox_label_id": "manual_qc_02_033",
       "source_detection_id": "manual_qc_02_033",
       "source_text": "품질",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:합격|부분합격|불합격",
       "style_class": "style_line_3_quality_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품질결과[2]",
-        "csv_column": "품질결과[2]"
+        "json_path": "검수내역/행3/검수결과/품질",
+        "csv_column": "검수내역/행3/검수결과/품질"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_033",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_3_other_result",
-      "label": "기타결과[2]",
+      "label": "기타",
+      "semantic_path": [
+        "검수내역",
+        "행3",
+        "검수결과",
+        "기타"
+      ],
+      "bbox_label_id": "manual_qc_02_034",
       "source_detection_id": "manual_qc_02_034",
       "source_text": "기타",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:other_results",
       "style_class": "style_line_3_other_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기타결과[2]",
-        "csv_column": "기타결과[2]"
+        "json_path": "검수내역/행3/검수결과/기타",
+        "csv_column": "검수내역/행3/검수결과/기타"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_034",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_3_remark",
-      "label": "비고[2]",
+      "label": "비고",
+      "semantic_path": [
+        "검수내역",
+        "행3",
+        "비고"
+      ],
+      "bbox_label_id": "manual_qc_02_035",
       "source_detection_id": "manual_qc_02_035",
       "source_text": "비고",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:remarks",
       "style_class": "style_line_3_remark",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[2]",
-        "csv_column": "비고[2]"
+        "json_path": "검수내역/행3/비고",
+        "csv_column": "검수내역/행3/비고"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_035",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_4_number",
-      "label": "번호[3]",
+      "label": "번호",
+      "semantic_path": [
+        "검수내역",
+        "행4",
+        "번호"
+      ],
+      "bbox_label_id": "manual_qc_02_036",
       "source_detection_id": "manual_qc_02_036",
       "source_text": "4",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:4",
       "style_class": "style_line_4_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "번호[3]",
-        "csv_column": "번호[3]"
+        "json_path": "검수내역/행4/번호",
+        "csv_column": "검수내역/행4/번호"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_036",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_4_item_name",
-      "label": "품명[3]",
+      "label": "품명",
+      "semantic_path": [
+        "검수내역",
+        "행4",
+        "품명"
+      ],
+      "bbox_label_id": "manual_qc_02_037",
       "source_detection_id": "manual_qc_02_037",
       "source_text": "품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:육각볼트|육각너트|평와셔|스프링와셔|가이드핀|브래킷 LH|브래킷 RH|알루미늄 플레이트|스페이서 링|베어링 하우징|모터 샤프트|금형 인서트|센서 브래킷|냉각 플레이트|직선 베어링|타이밍 벨트|타이밍 풀리|공압 실린더|솔레노이드 밸브|근접 센서|제어함 브래킷|케이블 글랜드|패킹 가이드|우레탄 패드",
       "style_class": "style_line_4_item_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[3]",
-        "csv_column": "품명[3]"
+        "json_path": "검수내역/행4/품명",
+        "csv_column": "검수내역/행4/품명"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_037",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_4_specification",
-      "label": "규격[3]",
+      "label": "규격",
+      "semantic_path": [
+        "검수내역",
+        "행4",
+        "규격"
+      ],
+      "bbox_label_id": "manual_qc_02_038",
       "source_detection_id": "manual_qc_02_038",
       "source_text": "규격",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:M8×30, SS400|M8, SS400|M8, SUS304|M10, 탄소강|Ø10×80, SKD11|2.0T, SPCC|2.0T, SPCC|120×80×15T, AL6061|Ø45, SUS304|H-6204, AL6061|Ø18×220, SCM440|A형, SKD61|SB-04, SUS304|CP-210, AL6061|LM20UU|HTD5M-600|20T, 5M|Ø32×100ST|DC24V, 5/2WAY|M12, PNP NO|CB-02, 1.6T|PG13.5, IP68|PG-15, POM|50×50×10T, 70A",
       "style_class": "style_line_4_specification",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[3]",
-        "csv_column": "규격[3]"
+        "json_path": "검수내역/행4/규격",
+        "csv_column": "검수내역/행4/규격"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_038",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_4_received_quantity",
-      "label": "수량[3]",
+      "label": "수량",
+      "semantic_path": [
+        "검수내역",
+        "행4",
+        "검수결과",
+        "수량"
+      ],
+      "bbox_label_id": "manual_qc_02_039",
       "source_detection_id": "manual_qc_02_039",
       "source_text": "수량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_line_4_received_quantity",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[3]",
-        "csv_column": "수량[3]"
+        "json_path": "검수내역/행4/검수결과/수량",
+        "csv_column": "검수내역/행4/검수결과/수량"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_039",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_4_quality_result",
-      "label": "품질결과[3]",
+      "label": "품질",
+      "semantic_path": [
+        "검수내역",
+        "행4",
+        "검수결과",
+        "품질"
+      ],
+      "bbox_label_id": "manual_qc_02_040",
       "source_detection_id": "manual_qc_02_040",
       "source_text": "품질",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:합격|부분합격|불합격",
       "style_class": "style_line_4_quality_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품질결과[3]",
-        "csv_column": "품질결과[3]"
+        "json_path": "검수내역/행4/검수결과/품질",
+        "csv_column": "검수내역/행4/검수결과/품질"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_040",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_4_other_result",
-      "label": "기타결과[3]",
+      "label": "기타",
+      "semantic_path": [
+        "검수내역",
+        "행4",
+        "검수결과",
+        "기타"
+      ],
+      "bbox_label_id": "manual_qc_02_041",
       "source_detection_id": "manual_qc_02_041",
       "source_text": "기타",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:other_results",
       "style_class": "style_line_4_other_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기타결과[3]",
-        "csv_column": "기타결과[3]"
+        "json_path": "검수내역/행4/검수결과/기타",
+        "csv_column": "검수내역/행4/검수결과/기타"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_041",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_4_remark",
-      "label": "비고[3]",
+      "label": "비고",
+      "semantic_path": [
+        "검수내역",
+        "행4",
+        "비고"
+      ],
+      "bbox_label_id": "manual_qc_02_042",
       "source_detection_id": "manual_qc_02_042",
       "source_text": "비고",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:remarks",
       "style_class": "style_line_4_remark",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[3]",
-        "csv_column": "비고[3]"
+        "json_path": "검수내역/행4/비고",
+        "csv_column": "검수내역/행4/비고"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_042",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_5_number",
-      "label": "번호[4]",
+      "label": "번호",
+      "semantic_path": [
+        "검수내역",
+        "행5",
+        "번호"
+      ],
+      "bbox_label_id": "manual_qc_02_043",
       "source_detection_id": "manual_qc_02_043",
       "source_text": "5",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:5",
       "style_class": "style_line_5_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "번호[4]",
-        "csv_column": "번호[4]"
+        "json_path": "검수내역/행5/번호",
+        "csv_column": "검수내역/행5/번호"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_043",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_5_item_name",
-      "label": "품명[4]",
+      "label": "품명",
+      "semantic_path": [
+        "검수내역",
+        "행5",
+        "품명"
+      ],
+      "bbox_label_id": "manual_qc_02_044",
       "source_detection_id": "manual_qc_02_044",
       "source_text": "품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:육각볼트|육각너트|평와셔|스프링와셔|가이드핀|브래킷 LH|브래킷 RH|알루미늄 플레이트|스페이서 링|베어링 하우징|모터 샤프트|금형 인서트|센서 브래킷|냉각 플레이트|직선 베어링|타이밍 벨트|타이밍 풀리|공압 실린더|솔레노이드 밸브|근접 센서|제어함 브래킷|케이블 글랜드|패킹 가이드|우레탄 패드",
       "style_class": "style_line_5_item_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[4]",
-        "csv_column": "품명[4]"
+        "json_path": "검수내역/행5/품명",
+        "csv_column": "검수내역/행5/품명"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_044",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_5_specification",
-      "label": "규격[4]",
+      "label": "규격",
+      "semantic_path": [
+        "검수내역",
+        "행5",
+        "규격"
+      ],
+      "bbox_label_id": "manual_qc_02_045",
       "source_detection_id": "manual_qc_02_045",
       "source_text": "규격",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:M8×30, SS400|M8, SS400|M8, SUS304|M10, 탄소강|Ø10×80, SKD11|2.0T, SPCC|2.0T, SPCC|120×80×15T, AL6061|Ø45, SUS304|H-6204, AL6061|Ø18×220, SCM440|A형, SKD61|SB-04, SUS304|CP-210, AL6061|LM20UU|HTD5M-600|20T, 5M|Ø32×100ST|DC24V, 5/2WAY|M12, PNP NO|CB-02, 1.6T|PG13.5, IP68|PG-15, POM|50×50×10T, 70A",
       "style_class": "style_line_5_specification",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[4]",
-        "csv_column": "규격[4]"
+        "json_path": "검수내역/행5/규격",
+        "csv_column": "검수내역/행5/규격"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_045",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_5_received_quantity",
-      "label": "수량[4]",
+      "label": "수량",
+      "semantic_path": [
+        "검수내역",
+        "행5",
+        "검수결과",
+        "수량"
+      ],
+      "bbox_label_id": "manual_qc_02_046",
       "source_detection_id": "manual_qc_02_046",
       "source_text": "수량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_line_5_received_quantity",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[4]",
-        "csv_column": "수량[4]"
+        "json_path": "검수내역/행5/검수결과/수량",
+        "csv_column": "검수내역/행5/검수결과/수량"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_046",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_5_quality_result",
-      "label": "품질결과[4]",
+      "label": "품질",
+      "semantic_path": [
+        "검수내역",
+        "행5",
+        "검수결과",
+        "품질"
+      ],
+      "bbox_label_id": "manual_qc_02_047",
       "source_detection_id": "manual_qc_02_047",
       "source_text": "품질",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:합격|부분합격|불합격",
       "style_class": "style_line_5_quality_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품질결과[4]",
-        "csv_column": "품질결과[4]"
+        "json_path": "검수내역/행5/검수결과/품질",
+        "csv_column": "검수내역/행5/검수결과/품질"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_047",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_5_other_result",
-      "label": "기타결과[4]",
+      "label": "기타",
+      "semantic_path": [
+        "검수내역",
+        "행5",
+        "검수결과",
+        "기타"
+      ],
+      "bbox_label_id": "manual_qc_02_048",
       "source_detection_id": "manual_qc_02_048",
       "source_text": "기타",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:other_results",
       "style_class": "style_line_5_other_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기타결과[4]",
-        "csv_column": "기타결과[4]"
+        "json_path": "검수내역/행5/검수결과/기타",
+        "csv_column": "검수내역/행5/검수결과/기타"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_048",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_5_remark",
-      "label": "비고[4]",
+      "label": "비고",
+      "semantic_path": [
+        "검수내역",
+        "행5",
+        "비고"
+      ],
+      "bbox_label_id": "manual_qc_02_049",
       "source_detection_id": "manual_qc_02_049",
       "source_text": "비고",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:remarks",
       "style_class": "style_line_5_remark",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[4]",
-        "csv_column": "비고[4]"
+        "json_path": "검수내역/행5/비고",
+        "csv_column": "검수내역/행5/비고"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_049",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_6_number",
-      "label": "번호[5]",
+      "label": "번호",
+      "semantic_path": [
+        "검수내역",
+        "행6",
+        "번호"
+      ],
+      "bbox_label_id": "manual_qc_02_050",
       "source_detection_id": "manual_qc_02_050",
       "source_text": "6",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:6",
       "style_class": "style_line_6_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "번호[5]",
-        "csv_column": "번호[5]"
+        "json_path": "검수내역/행6/번호",
+        "csv_column": "검수내역/행6/번호"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_050",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_6_item_name",
-      "label": "품명[5]",
+      "label": "품명",
+      "semantic_path": [
+        "검수내역",
+        "행6",
+        "품명"
+      ],
+      "bbox_label_id": "manual_qc_02_051",
       "source_detection_id": "manual_qc_02_051",
       "source_text": "품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:육각볼트|육각너트|평와셔|스프링와셔|가이드핀|브래킷 LH|브래킷 RH|알루미늄 플레이트|스페이서 링|베어링 하우징|모터 샤프트|금형 인서트|센서 브래킷|냉각 플레이트|직선 베어링|타이밍 벨트|타이밍 풀리|공압 실린더|솔레노이드 밸브|근접 센서|제어함 브래킷|케이블 글랜드|패킹 가이드|우레탄 패드",
       "style_class": "style_line_6_item_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[5]",
-        "csv_column": "품명[5]"
+        "json_path": "검수내역/행6/품명",
+        "csv_column": "검수내역/행6/품명"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_051",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_6_specification",
-      "label": "규격[5]",
+      "label": "규격",
+      "semantic_path": [
+        "검수내역",
+        "행6",
+        "규격"
+      ],
+      "bbox_label_id": "manual_qc_02_052",
       "source_detection_id": "manual_qc_02_052",
       "source_text": "규격",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:M8×30, SS400|M8, SS400|M8, SUS304|M10, 탄소강|Ø10×80, SKD11|2.0T, SPCC|2.0T, SPCC|120×80×15T, AL6061|Ø45, SUS304|H-6204, AL6061|Ø18×220, SCM440|A형, SKD61|SB-04, SUS304|CP-210, AL6061|LM20UU|HTD5M-600|20T, 5M|Ø32×100ST|DC24V, 5/2WAY|M12, PNP NO|CB-02, 1.6T|PG13.5, IP68|PG-15, POM|50×50×10T, 70A",
       "style_class": "style_line_6_specification",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[5]",
-        "csv_column": "규격[5]"
+        "json_path": "검수내역/행6/규격",
+        "csv_column": "검수내역/행6/규격"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_052",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_6_received_quantity",
-      "label": "수량[5]",
+      "label": "수량",
+      "semantic_path": [
+        "검수내역",
+        "행6",
+        "검수결과",
+        "수량"
+      ],
+      "bbox_label_id": "manual_qc_02_053",
       "source_detection_id": "manual_qc_02_053",
       "source_text": "수량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_line_6_received_quantity",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[5]",
-        "csv_column": "수량[5]"
+        "json_path": "검수내역/행6/검수결과/수량",
+        "csv_column": "검수내역/행6/검수결과/수량"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_053",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_6_quality_result",
-      "label": "품질결과[5]",
+      "label": "품질",
+      "semantic_path": [
+        "검수내역",
+        "행6",
+        "검수결과",
+        "품질"
+      ],
+      "bbox_label_id": "manual_qc_02_054",
       "source_detection_id": "manual_qc_02_054",
       "source_text": "품질",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:합격|부분합격|불합격",
       "style_class": "style_line_6_quality_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품질결과[5]",
-        "csv_column": "품질결과[5]"
+        "json_path": "검수내역/행6/검수결과/품질",
+        "csv_column": "검수내역/행6/검수결과/품질"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_054",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_6_other_result",
-      "label": "기타결과[5]",
+      "label": "기타",
+      "semantic_path": [
+        "검수내역",
+        "행6",
+        "검수결과",
+        "기타"
+      ],
+      "bbox_label_id": "manual_qc_02_055",
       "source_detection_id": "manual_qc_02_055",
       "source_text": "기타",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:other_results",
       "style_class": "style_line_6_other_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기타결과[5]",
-        "csv_column": "기타결과[5]"
+        "json_path": "검수내역/행6/검수결과/기타",
+        "csv_column": "검수내역/행6/검수결과/기타"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_055",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_6_remark",
-      "label": "비고[5]",
+      "label": "비고",
+      "semantic_path": [
+        "검수내역",
+        "행6",
+        "비고"
+      ],
+      "bbox_label_id": "manual_qc_02_056",
       "source_detection_id": "manual_qc_02_056",
       "source_text": "비고",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:remarks",
       "style_class": "style_line_6_remark",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[5]",
-        "csv_column": "비고[5]"
+        "json_path": "검수내역/행6/비고",
+        "csv_column": "검수내역/행6/비고"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_056",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_7_number",
-      "label": "번호[6]",
+      "label": "번호",
+      "semantic_path": [
+        "검수내역",
+        "행7",
+        "번호"
+      ],
+      "bbox_label_id": "manual_qc_02_057",
       "source_detection_id": "manual_qc_02_057",
       "source_text": "7",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:7",
       "style_class": "style_line_7_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "번호[6]",
-        "csv_column": "번호[6]"
+        "json_path": "검수내역/행7/번호",
+        "csv_column": "검수내역/행7/번호"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_057",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_7_item_name",
-      "label": "품명[6]",
+      "label": "품명",
+      "semantic_path": [
+        "검수내역",
+        "행7",
+        "품명"
+      ],
+      "bbox_label_id": "manual_qc_02_058",
       "source_detection_id": "manual_qc_02_058",
       "source_text": "품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:육각볼트|육각너트|평와셔|스프링와셔|가이드핀|브래킷 LH|브래킷 RH|알루미늄 플레이트|스페이서 링|베어링 하우징|모터 샤프트|금형 인서트|센서 브래킷|냉각 플레이트|직선 베어링|타이밍 벨트|타이밍 풀리|공압 실린더|솔레노이드 밸브|근접 센서|제어함 브래킷|케이블 글랜드|패킹 가이드|우레탄 패드",
       "style_class": "style_line_7_item_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[6]",
-        "csv_column": "품명[6]"
+        "json_path": "검수내역/행7/품명",
+        "csv_column": "검수내역/행7/품명"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_058",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_7_specification",
-      "label": "규격[6]",
+      "label": "규격",
+      "semantic_path": [
+        "검수내역",
+        "행7",
+        "규격"
+      ],
+      "bbox_label_id": "manual_qc_02_059",
       "source_detection_id": "manual_qc_02_059",
       "source_text": "규격",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:M8×30, SS400|M8, SS400|M8, SUS304|M10, 탄소강|Ø10×80, SKD11|2.0T, SPCC|2.0T, SPCC|120×80×15T, AL6061|Ø45, SUS304|H-6204, AL6061|Ø18×220, SCM440|A형, SKD61|SB-04, SUS304|CP-210, AL6061|LM20UU|HTD5M-600|20T, 5M|Ø32×100ST|DC24V, 5/2WAY|M12, PNP NO|CB-02, 1.6T|PG13.5, IP68|PG-15, POM|50×50×10T, 70A",
       "style_class": "style_line_7_specification",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[6]",
-        "csv_column": "규격[6]"
+        "json_path": "검수내역/행7/규격",
+        "csv_column": "검수내역/행7/규격"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_059",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_7_received_quantity",
-      "label": "수량[6]",
+      "label": "수량",
+      "semantic_path": [
+        "검수내역",
+        "행7",
+        "검수결과",
+        "수량"
+      ],
+      "bbox_label_id": "manual_qc_02_060",
       "source_detection_id": "manual_qc_02_060",
       "source_text": "수량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_line_7_received_quantity",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[6]",
-        "csv_column": "수량[6]"
+        "json_path": "검수내역/행7/검수결과/수량",
+        "csv_column": "검수내역/행7/검수결과/수량"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_060",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_7_quality_result",
-      "label": "품질결과[6]",
+      "label": "품질",
+      "semantic_path": [
+        "검수내역",
+        "행7",
+        "검수결과",
+        "품질"
+      ],
+      "bbox_label_id": "manual_qc_02_061",
       "source_detection_id": "manual_qc_02_061",
       "source_text": "품질",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:합격|부분합격|불합격",
       "style_class": "style_line_7_quality_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품질결과[6]",
-        "csv_column": "품질결과[6]"
+        "json_path": "검수내역/행7/검수결과/품질",
+        "csv_column": "검수내역/행7/검수결과/품질"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_061",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_7_other_result",
-      "label": "기타결과[6]",
+      "label": "기타",
+      "semantic_path": [
+        "검수내역",
+        "행7",
+        "검수결과",
+        "기타"
+      ],
+      "bbox_label_id": "manual_qc_02_062",
       "source_detection_id": "manual_qc_02_062",
       "source_text": "기타",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:other_results",
       "style_class": "style_line_7_other_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기타결과[6]",
-        "csv_column": "기타결과[6]"
+        "json_path": "검수내역/행7/검수결과/기타",
+        "csv_column": "검수내역/행7/검수결과/기타"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_062",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_7_remark",
-      "label": "비고[6]",
+      "label": "비고",
+      "semantic_path": [
+        "검수내역",
+        "행7",
+        "비고"
+      ],
+      "bbox_label_id": "manual_qc_02_063",
       "source_detection_id": "manual_qc_02_063",
       "source_text": "비고",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:remarks",
       "style_class": "style_line_7_remark",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[6]",
-        "csv_column": "비고[6]"
+        "json_path": "검수내역/행7/비고",
+        "csv_column": "검수내역/행7/비고"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_063",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_8_number",
-      "label": "번호[7]",
+      "label": "번호",
+      "semantic_path": [
+        "검수내역",
+        "행8",
+        "번호"
+      ],
+      "bbox_label_id": "manual_qc_02_064",
       "source_detection_id": "manual_qc_02_064",
       "source_text": "8",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:8",
       "style_class": "style_line_8_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "번호[7]",
-        "csv_column": "번호[7]"
+        "json_path": "검수내역/행8/번호",
+        "csv_column": "검수내역/행8/번호"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_064",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_8_item_name",
-      "label": "품명[7]",
+      "label": "품명",
+      "semantic_path": [
+        "검수내역",
+        "행8",
+        "품명"
+      ],
+      "bbox_label_id": "manual_qc_02_065",
       "source_detection_id": "manual_qc_02_065",
       "source_text": "품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:육각볼트|육각너트|평와셔|스프링와셔|가이드핀|브래킷 LH|브래킷 RH|알루미늄 플레이트|스페이서 링|베어링 하우징|모터 샤프트|금형 인서트|센서 브래킷|냉각 플레이트|직선 베어링|타이밍 벨트|타이밍 풀리|공압 실린더|솔레노이드 밸브|근접 센서|제어함 브래킷|케이블 글랜드|패킹 가이드|우레탄 패드",
       "style_class": "style_line_8_item_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명[7]",
-        "csv_column": "품명[7]"
+        "json_path": "검수내역/행8/품명",
+        "csv_column": "검수내역/행8/품명"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_065",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_8_specification",
-      "label": "규격[7]",
+      "label": "규격",
+      "semantic_path": [
+        "검수내역",
+        "행8",
+        "규격"
+      ],
+      "bbox_label_id": "manual_qc_02_066",
       "source_detection_id": "manual_qc_02_066",
       "source_text": "규격",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:M8×30, SS400|M8, SS400|M8, SUS304|M10, 탄소강|Ø10×80, SKD11|2.0T, SPCC|2.0T, SPCC|120×80×15T, AL6061|Ø45, SUS304|H-6204, AL6061|Ø18×220, SCM440|A형, SKD61|SB-04, SUS304|CP-210, AL6061|LM20UU|HTD5M-600|20T, 5M|Ø32×100ST|DC24V, 5/2WAY|M12, PNP NO|CB-02, 1.6T|PG13.5, IP68|PG-15, POM|50×50×10T, 70A",
       "style_class": "style_line_8_specification",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[7]",
-        "csv_column": "규격[7]"
+        "json_path": "검수내역/행8/규격",
+        "csv_column": "검수내역/행8/규격"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_066",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_8_received_quantity",
-      "label": "수량[7]",
+      "label": "수량",
+      "semantic_path": [
+        "검수내역",
+        "행8",
+        "검수결과",
+        "수량"
+      ],
+      "bbox_label_id": "manual_qc_02_067",
       "source_detection_id": "manual_qc_02_067",
       "source_text": "수량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_line_8_received_quantity",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[7]",
-        "csv_column": "수량[7]"
+        "json_path": "검수내역/행8/검수결과/수량",
+        "csv_column": "검수내역/행8/검수결과/수량"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_067",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_8_quality_result",
-      "label": "품질결과[7]",
+      "label": "품질",
+      "semantic_path": [
+        "검수내역",
+        "행8",
+        "검수결과",
+        "품질"
+      ],
+      "bbox_label_id": "manual_qc_02_068",
       "source_detection_id": "manual_qc_02_068",
       "source_text": "품질",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:합격|부분합격|불합격",
       "style_class": "style_line_8_quality_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품질결과[7]",
-        "csv_column": "품질결과[7]"
+        "json_path": "검수내역/행8/검수결과/품질",
+        "csv_column": "검수내역/행8/검수결과/품질"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_068",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_8_other_result",
-      "label": "기타결과[7]",
+      "label": "기타",
+      "semantic_path": [
+        "검수내역",
+        "행8",
+        "검수결과",
+        "기타"
+      ],
+      "bbox_label_id": "manual_qc_02_069",
       "source_detection_id": "manual_qc_02_069",
       "source_text": "기타",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:other_results",
       "style_class": "style_line_8_other_result",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기타결과[7]",
-        "csv_column": "기타결과[7]"
+        "json_path": "검수내역/행8/검수결과/기타",
+        "csv_column": "검수내역/행8/검수결과/기타"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_069",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "line_8_remark",
-      "label": "비고[7]",
+      "label": "비고",
+      "semantic_path": [
+        "검수내역",
+        "행8",
+        "비고"
+      ],
+      "bbox_label_id": "manual_qc_02_070",
       "source_detection_id": "manual_qc_02_070",
       "source_text": "비고",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:remarks",
       "style_class": "style_line_8_remark",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "비고[7]",
-        "csv_column": "비고[7]"
+        "json_path": "검수내역/행8/비고",
+        "csv_column": "검수내역/행8/비고"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_070",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "inspector_opinion",
       "label": "검수자 의견",
+      "semantic_path": [
+        "확인",
+        "검수자 의견"
+      ],
+      "bbox_label_id": "manual_qc_02_071",
       "source_detection_id": "manual_qc_02_071",
       "source_text": "검수자 의견",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:inspector_opinions",
       "style_class": "style_inspector_opinion",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "검수자 의견",
-        "csv_column": "검수자 의견"
+        "json_path": "확인/검수자 의견",
+        "csv_column": "확인/검수자 의견"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_071",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "department_head_confirmation",
       "label": "부서장 확인",
+      "semantic_path": [
+        "확인",
+        "부서장 확인"
+      ],
+      "bbox_label_id": "manual_qc_02_072",
       "source_detection_id": "manual_qc_02_072",
       "source_text": "부서장 확인",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_department_head_confirmation",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "부서장 확인",
-        "csv_column": "부서장 확인"
+        "json_path": "확인/부서장 확인",
+        "csv_column": "확인/부서장 확인"
       },
       "required": true,
-      "notes": "QC-02 입고·검수 보고서 생산용 보정 필드. 거래처/발주/입고/검수 품목 8행을 하나의 inspection record에서 일관 생성한다.",
-      "bbox_label_id": "manual_qc_02_072",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "authoring_mode": "qc02_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/review/original_검수보고서_page_001/review.json"
-  }
+  "updated_at": "2026-07-13T02:31:05.975049+00:00"
 }

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서 불확실성 보고서",
+  "status": "draft",
+  "updated_at": "2026-07-13T01:46:15.665568+00:00",
+  "summary": {
+    "unresolved_field_count": 0,
+    "low_confidence_generator_count": 2,
+    "binding_coverage": "64/64",
+    "generator_coverage": "64/64"
+  },
+  "unresolved_fields": [],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [
+    {
+      "fields": [
+        "supplier_email",
+        "recipient_email_1",
+        "recipient_email_2"
+      ],
+      "rule": "free_text.short + pick_record override",
+      "reason": "지원 문법에 이메일 전용 generator가 없어 fallback은 free_text.short이며 실제 렌더 값은 합성 example 도메인 record가 덮어쓴다."
+    },
+    {
+      "fields": [
+        "amendment_reason"
+      ],
+      "rule": "pool:amendment_reasons",
+      "reason": "일반 세금계산서는 공란이고 수정 발급일 때만 사유가 적용되지만 조건부 선택 constraint는 지원되지 않는다."
+    }
+  ],
+  "deferred_relationships": [
+    {
+      "topic": "수정사유 조건부 표시",
+      "reason": "일반/수정 발급 여부 필드와 조건부 constraint가 현재 고정 스키마 및 지원 grammar에 없음.",
+      "needed_change": "향후 발급유형 bbox/schema와 조건부 렌더 계약 추가"
+    },
+    {
+      "topic": "다중 결제수단 임의 배분",
+      "reason": "합계금액을 네 결제수단에 임의 분할하는 복합 수식/조건부 선택은 지원 grammar로 안전하게 표현할 수 없음.",
+      "needed_change": "현재는 현금 전액 결제로 제한; 향후 합계 보존 분할 constraint 필요"
+    },
+    {
+      "topic": "세액 반올림과 영세율/면세",
+      "reason": "고정 스키마에 세율·과세구분 필드가 없고 복합 반올림 수식은 지원되지 않음.",
+      "needed_change": "현재 pool은 10% 정수 세액만 사용; 세율/과세구분 bbox 추가 시 확장"
+    }
+  ],
+  "user_decisions_needed": [
+    "수정사유를 항상 공란으로 제한할지, 수정 발급 합성 사례도 허용할지 승인 필요",
+    "현금 전액 결제 기본 정책을 유지할지 승인 필요"
+  ],
+  "page_scope_limit": "요청에 따라 현재 단일 이미지 페이지의 KIE와 값 품질만 다루며 다중 페이지 확장은 수행하지 않음."
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "doc_id": "RPT-07",
+  "pass": 2,
+  "unresolved_fields": [
+    {"field_id": "document_number", "issue": "실제 사내 문서번호 체계가 템플릿에 제시되지 않음", "current_rule": "pattern:****-####", "decision_needed": "운영 조직의 문서번호 규칙 승인 또는 교체"},
+    {"field_id": "account_number", "issue": "은행별 계좌 자리수·구분자가 다르며 은행명 bbox가 없음", "current_rule": "pattern:###-###-######", "decision_needed": "합성 범용 형식 유지 여부"},
+    {"field_id": "amount_line", "issue": "단일 복합 문자열 내부의 건수와 금액을 별도 field에 연결할 지원 constraint가 없음", "current_rule": "free_text.short + pick_record override", "decision_needed": "향후 건수·금액 분리 bbox/schema 도입 여부"},
+    {"field_id": "purpose_line", "issue": "번호·라벨·용도가 하나의 bbox에 함께 렌더링됨", "current_rule": "free_text.short + pick_record override", "decision_needed": "복합 표시 전용 field 분리 여부"},
+    {"field_id": "total_label", "issue": "총 건수는 문자열 내부에 있으며 현재 스키마는 상세행 1개만 지원", "current_rule": "literal:합계(총 1건)", "decision_needed": "다중 행 확장 시 count field와 composite render field 필요"},
+    {"field_id": "attachment_summary", "issue": "첨부 개수와 용량이 단일 문자열이며 파일명 bbox와의 조건부/계산 관계는 지원되지 않음", "current_rule": "free_text.short + pick_record override", "decision_needed": "개수·용량의 별도 render field 도입 여부"}
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": ["document_number", "account_number", "amount_line", "purpose_line", "attachment_summary", "attachment_filename"],
+  "relationship_limitations": [
+    "pick_record가 복합 문자열의 금액·건수·첨부 메타데이터 정합성을 보장하지만, 개별 문자열 내부 계산은 지원 constraint로 표현할 수 없다.",
+    "request_date와 approval_date의 요일·슬래시 표시는 date.kr 기본 출력과 다를 수 있어 레코드 값으로 안전하게 덮어쓴다.",
+    "현재 페이지에는 상세내역 1행만 binding되어 다중 경비 행·다중 첨부의 일반화는 이번 pass 범위 밖이다."
+  ],
+  "visual_unit_findings": [
+    "영수증 금액·신청 청구금액·합계 청구금액 값 셀에는 정적 '원'이 없으므로 record 값에는 숫자만 두고, 기존 스타일/렌더 정책의 단위 표기를 유지한다.",
+    "품의 금액·합계 표시·첨부 요약 bbox는 접두·접미 문구 전체를 받으므로 record 값에 문구를 포함한다."
+  ],
+  "research_note": "2026-07-13 국가법령정보센터의 지출증명서류 근거를 재검색해 신용카드매출전표·현금영수증·세금계산서·계산서 분류를 확인했다. 고정 research_report는 pass 1 입력이므로 변경하지 않았다."
+}

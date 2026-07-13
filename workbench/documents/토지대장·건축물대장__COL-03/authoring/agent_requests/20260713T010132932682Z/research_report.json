@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-03",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:law.go.kr 건축물대장의 기재 및 관리 등에 관한 규칙 별지 제1호서식 일반건축물대장 갑",
+    "site:gov.kr 건축물대장 발급 일반건축물대장 기재사항",
+    "site:eais.go.kr 건축물대장 고유번호 건물ID 안내"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1_FORM",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110202&flSeq=106886981",
+      "source_type": "official_legal_form",
+      "publisher": "국가법령정보센터",
+      "summary": "건축물대장의 기재 및 관리 등에 관한 규칙 별지 제1호서식은 일반건축물대장(갑)의 표제부, 건축물 현황, 소유자 현황, 발급정보 항목과 정적 단위를 제시한다.",
+      "field_links": [
+        "건축물표제부/*",
+        "건축물현황/*",
+        "소유자현황/*",
+        "발급정보/발급일",
+        "발급정보/담당자",
+        "발급정보/전화",
+        "발급정보/발급기관장"
+      ]
+    },
+    {
+      "evidence_id": "R2_RULE",
+      "url": "https://www.law.go.kr/LSW/lsSideInfoP.do?docCls=jo&joBrNo=00&joNo=0007&lsiSeq=273103&urlMode=lsScJoRltInfoR",
+      "source_type": "official_regulation",
+      "publisher": "국가법령정보센터",
+      "summary": "규칙 제7조는 일반건축물대장을 별지 제1호서식으로 정하고, 기재란 부족 시 건축물현황·소유자현황 등의 후속 서식을 사용하도록 한다.",
+      "field_links": [
+        "건축물현황/*",
+        "소유자현황/*"
+      ]
+    },
+    {
+      "evidence_id": "R3_WRITING",
+      "url": "https://www.law.go.kr/flDownload.do?bylClsCd=110201&flSeq=154898495&gubun=",
+      "source_type": "official_writing_guidance",
+      "publisher": "국가법령정보센터",
+      "summary": "공식 작성방법은 대지위치, 지번, 명칭 등 주요 항목의 기재 기준을 설명하며 이미지에서 관찰한 항목 의미를 뒷받침한다.",
+      "field_links": [
+        "건축물표제부/소재지/*",
+        "건축물표제부/기본정보/명칭"
+      ]
+    },
+    {
+      "evidence_id": "R2_SERVICE",
+      "url": "https://m.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15000000098&HighCtgCD=A09005&tp_seq=01",
+      "source_type": "official_public_service",
+      "publisher": "정부24",
+      "summary": "건축물대장 등본·초본 발급·열람 민원이며 일반건축물대장이 공식 발급서류에 포함됨을 확인한다.",
+      "field_links": [
+        "발급정보/*"
+      ]
+    }
+  ],
+  "evidence_policy": "필드 존재와 단위·레이아웃은 전체 템플릿 이미지를 우선하고, 웹 근거는 공식 명칭과 제도적 의미 확인에만 사용했다."
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-07",
+  "source_of_truth": "faker_profile_draft.json.data_pools",
+  "pools": [
+    {"name":"receiver_records","kind":"record","size":12,"usage":"수신 회사명·담당·전화·팩스·이메일·주소 동시 선택","source_note":"전체 템플릿의 수신처 블록 구조를 반영한 비실재 합성 레코드"},
+    {"name":"sender_records","kind":"record","size":12,"usage":"발신 회사·담당·연락처·주소·발송지·납품장소 동시 선택","source_note":"전체 템플릿의 발신처와 하단 발송지 관계를 반영한 비실재 합성 레코드"},
+    {"name":"approval_date_records","kind":"record","size":20,"usage":"작성일<=검토일<=승인일 및 MM/DD 폭 보존","source_note":"기준일 2026-07-13 이전 조합과 연중 레이아웃 시험 조합을 함께 포함"},
+    {"name":"item_records","kind":"record","size":20,"usage":"품명·수량·단가·금액·납기 동시 선택","source_note":"제조 구매 품목의 수량×단가=금액이 사전 검산된 합성 레코드"},
+    {"name":"item_descriptions","kind":"scalar","size":20,"usage":"품명/규격 안전 기본 generator","source_note":"item_records와 동일한 제조 구매 합성 품목명"},
+    {"name":"item_quantities","kind":"scalar","size":20,"usage":"수량 안전 기본 generator","source_note":"EA 정적 단위 열과 중복되지 않는 숫자 문자열"},
+    {"name":"due_date_terms","kind":"scalar","size":20,"usage":"납기 안전 기본 generator","source_note":"날짜형과 ASAP·협의·납기준수 혼합"},
+    {"name":"purchase_remarks","kind":"scalar","size":20,"usage":"공통 비고","source_note":"제조 발주에서 통용되는 합성 품질·포장·납품 조건"},
+    {"name":"approval_dates_mmdd","kind":"scalar","size":20,"usage":"결재일 안전 기본 generator","source_note":"좁은 결재 셀에 맞춘 MM/DD 값"}
+  ],
+  "privacy_note": "모든 회사명, 담당자 조합, 연락처, 이메일 도메인은 합성 데이터이며 실제 식별정보를 재사용하지 않는다."
+}

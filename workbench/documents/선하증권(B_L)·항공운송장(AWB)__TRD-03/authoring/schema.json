@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "created_at": "2026-07-09T07:42:07.853839+00:00",
+  "created_at": "2026-07-13T02:16:06.394770+00:00",
   "doc_id": "TRD-03",
   "title": "선하증권(B/L)·항공운송장(AWB)",
-  "source_review": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/review/original_선하증권_page_001/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_applied_reviews/20260713T020729577514Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/inpaint/original_선하증권_page_001/lama/inpainted_lama.png",
+  "source_inpainted": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/inpaint/original_선하증권_page_001/lama/inpainted_lama.png",
   "image": {
     "width": 1190,
     "height": 1684
   },
   "bbox_source": {
     "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_applied_reviews/20260709T073040709699Z/review.json"
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_applied_reviews/20260713T020729577514Z/review.json"
   },
-  "anchor_map_ref": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260709T073040709699Z/anchor_map_draft.json",
+  "anchor_map_ref": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T020729577514Z/anchor_map_draft.json",
   "semantic_schema": {
     "선하증권": {
       "문서정보": {
@@ -106,8 +106,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "shipper_address",
@@ -120,7 +119,7 @@
       ],
       "bbox_label_id": "manual_1783580879857",
       "source_detection_id": "manual_1783580879857",
-      "source_text": "",
+      "source_text": "송하인 주소",
       "value_type": "free_text.short",
       "generator": "pool:global_addresses",
       "style_class": "style_shipper_address",
@@ -138,8 +137,7 @@
       },
       "required": true,
       "notes": "송하인 주소 상세 영역. 값 bbox 내부에 정적 라벨 없음.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "bl_number",
@@ -169,8 +167,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "consignee_name",
@@ -201,8 +198,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "consignee_address",
@@ -233,8 +229,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "consignee_tel",
@@ -249,7 +244,7 @@
       "source_detection_id": "manual_1783580846324",
       "source_text": "+966",
       "value_type": "free_text.short",
-      "generator": "pool:international_phone_short",
+      "generator": "pattern:+### ## ### ####",
       "style_class": "style_consignee_tel",
       "render_policy": {
         "align": "left",
@@ -265,8 +260,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "notify_party",
@@ -279,9 +273,9 @@
       ],
       "bbox_label_id": "manual_1783580887356",
       "source_detection_id": "manual_1783580887356",
-      "source_text": "",
+      "source_text": "통지처",
       "value_type": "free_text.short",
-      "generator": "pool:notify_parties",
+      "generator": "free_text.short",
       "style_class": "style_notify_party",
       "render_policy": {
         "align": "left",
@@ -297,8 +291,7 @@
       },
       "required": true,
       "notes": "Notify Party 박스의 수동 활성 영역. 실제 B/L 관행상 수하인 또는 별도 통지처 상호/주소가 들어간다.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "vessel_voyage",
@@ -312,7 +305,7 @@
       "source_detection_id": "det_000028",
       "source_text": "CAP SAN JUAN/310W",
       "value_type": "free_text.short",
-      "generator": "pool:vessel_voyage",
+      "generator": "pattern:AAAAAA STAR/###A",
       "style_class": "style_vessel_voyage",
       "render_policy": {
         "align": "left",
@@ -328,8 +321,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "port_of_loading",
@@ -359,8 +351,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "port_of_discharge",
@@ -390,8 +381,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "destination_on_carriage",
@@ -421,8 +411,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "freight_payable_at",
@@ -452,8 +441,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "number_of_originals",
@@ -483,8 +471,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "excess_value_declaration",
@@ -496,9 +483,9 @@
       ],
       "bbox_label_id": "manual_1783582955481",
       "source_detection_id": "manual_1783582955481",
-      "source_text": "",
+      "source_text": "초과가액신고",
       "value_type": "free_text.short",
-      "generator": "pool:excess_value_declarations",
+      "generator": "choice:N.V.D.|NO VALUE DECLARED|AS PER COMMERCIAL INVOICE",
       "style_class": "style_excess_value_declaration",
       "render_policy": {
         "align": "left",
@@ -514,8 +501,7 @@
       },
       "required": true,
       "notes": "Excess Value Declaration 값 영역. 상업 B/L에서는 공란, N.V.D. 또는 신고가액이 올 수 있으나 활성 bbox이므로 표시값을 생성.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "marks_and_numbers",
@@ -527,9 +513,9 @@
       ],
       "bbox_label_id": "manual_1783580998106",
       "source_detection_id": "manual_1783580998106",
-      "source_text": "",
+      "source_text": "화인 및 번호",
       "value_type": "free_text.short",
-      "generator": "pool:marks_numbers",
+      "generator": "pattern:PO-###### / C/NO. #-#",
       "style_class": "style_marks_and_numbers",
       "render_policy": {
         "align": "left",
@@ -545,8 +531,7 @@
       },
       "required": true,
       "notes": "Marks and Numbers 칸. 선적 마크, PO/LOT 번호, 목적지 표시를 다중 행으로 생성.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "package_description",
@@ -560,7 +545,7 @@
       "source_detection_id": "det_000042",
       "source_text": "3 PACKAGES",
       "value_type": "free_text.short",
-      "generator": "pool:package_descriptions",
+      "generator": "choice:1 CONTAINER|2 PALLETS|3 PACKAGES|5 CARTONS|8 CRATES",
       "style_class": "style_package_description",
       "render_policy": {
         "align": "left",
@@ -576,8 +561,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "goods_description",
@@ -591,7 +575,7 @@
       "source_detection_id": "det_000044",
       "source_text": "GENERAL CARGO",
       "value_type": "free_text.short",
-      "generator": "pool:goods_descriptions",
+      "generator": "free_text.short",
       "style_class": "style_goods_description",
       "render_policy": {
         "align": "left",
@@ -607,8 +591,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "gross_weight",
@@ -622,7 +605,7 @@
       "source_detection_id": "det_000043",
       "source_text": "22,700.000 KGS",
       "value_type": "free_text.short",
-      "generator": "pool:weights_kgs",
+      "generator": "pattern:##,###.### KGS",
       "style_class": "style_gross_weight",
       "render_policy": {
         "align": "right",
@@ -638,8 +621,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "measurement_m3",
@@ -651,9 +633,9 @@
       ],
       "bbox_label_id": "manual_1783580989557",
       "source_detection_id": "manual_1783580989557",
-      "source_text": "",
+      "source_text": "용적",
       "value_type": "free_text.short",
-      "generator": "pool:measurements_m3",
+      "generator": "pattern:##.###",
       "style_class": "style_measurement_m3",
       "render_policy": {
         "align": "right",
@@ -669,8 +651,7 @@
       },
       "required": true,
       "notes": "용적 값 영역. 단위 M3는 열 라벨에 있으나 원본 값 관행상 숫자와 M3를 함께 표시할 수 있음.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "container_number",
@@ -700,8 +681,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "seal_number",
@@ -713,7 +693,7 @@
       ],
       "bbox_label_id": "manual_1783581006873",
       "source_detection_id": "manual_1783581006873",
-      "source_text": "",
+      "source_text": "봉인번호",
       "value_type": "free_text.short",
       "generator": "pattern:AA#######",
       "style_class": "style_seal_number",
@@ -731,8 +711,7 @@
       },
       "required": true,
       "notes": "봉인번호 값 영역. 값 bbox 내부에 정적 라벨 없음.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "container_type",
@@ -746,7 +725,7 @@
       "source_detection_id": "det_000053",
       "source_text": "40' FLAT",
       "value_type": "free_text.short",
-      "generator": "pool:container_types",
+      "generator": "choice:20' DRY|40' DRY|40' HC|20' OPEN TOP|40' FLAT",
       "style_class": "style_container_type",
       "render_policy": {
         "align": "left",
@@ -762,8 +741,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "container_weight",
@@ -777,7 +755,7 @@
       "source_detection_id": "det_000054",
       "source_text": "22,700.000 KGS",
       "value_type": "free_text.short",
-      "generator": "pool:weights_kgs",
+      "generator": "same_as:gross_weight",
       "style_class": "style_container_weight",
       "render_policy": {
         "align": "right",
@@ -793,8 +771,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "container_volume",
@@ -806,9 +783,9 @@
       ],
       "bbox_label_id": "manual_1783581010773",
       "source_detection_id": "manual_1783581010773",
-      "source_text": "",
+      "source_text": "컨테이너 용적",
       "value_type": "free_text.short",
-      "generator": "pool:measurements_m3",
+      "generator": "pattern:##.### M3",
       "style_class": "style_container_volume",
       "render_policy": {
         "align": "right",
@@ -824,8 +801,7 @@
       },
       "required": true,
       "notes": "컨테이너 용적 값 영역.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "container_packages",
@@ -839,7 +815,7 @@
       "source_detection_id": "det_000055",
       "source_text": "3",
       "value_type": "free_text.short",
-      "generator": "choice:1|2|3|4|5",
+      "generator": "pattern:##",
       "style_class": "style_container_packages",
       "render_policy": {
         "align": "right",
@@ -855,8 +831,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "container_mode",
@@ -886,8 +861,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "incoterm",
@@ -901,7 +875,7 @@
       "source_detection_id": "det_000058",
       "source_text": "FOB",
       "value_type": "free_text.short",
-      "generator": "choice:FOB|CIF|CFR|EXW|DAP",
+      "generator": "choice:EXW|FCA|FOB|CFR|CIF|CPT|CIP|DAP|DPU|DDP",
       "style_class": "style_incoterm",
       "render_policy": {
         "align": "left",
@@ -917,8 +891,7 @@
       },
       "required": true,
       "notes": "INCO TERM 오른쪽 값 FOB. 실제 값이므로 keep에서 use로 보정.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "surrender_to",
@@ -930,9 +903,9 @@
       ],
       "bbox_label_id": "manual_1783583273356",
       "source_detection_id": "manual_1783583273356",
-      "source_text": "",
+      "source_text": "선하증권제출처",
       "value_type": "free_text.short",
-      "generator": "pool:surrender_to_parties",
+      "generator": "free_text.short",
       "style_class": "style_surrender_to",
       "render_policy": {
         "align": "left",
@@ -948,8 +921,7 @@
       },
       "required": true,
       "notes": "Bill of Lading must be surrendered to: 아래 수동 활성 영역. 은행/수하인/운송사 지점 등 제출처를 생성.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "freight_details",
@@ -979,8 +951,7 @@
       },
       "required": true,
       "notes": "Freight Details, Charges, etc 아래 값.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "place_of_issue",
@@ -994,7 +965,7 @@
       "source_detection_id": "det_000065",
       "source_text": "MUMBAI",
       "value_type": "free_text.short",
-      "generator": "pool:issue_places",
+      "generator": "pool:ports",
       "style_class": "style_place_of_issue",
       "render_policy": {
         "align": "left",
@@ -1010,8 +981,7 @@
       },
       "required": true,
       "notes": "Place and Date of Issue 중 장소 값.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "date_of_issue",
@@ -1041,8 +1011,7 @@
       },
       "required": true,
       "notes": "",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "place_of_receipt",
@@ -1072,8 +1041,7 @@
       },
       "required": true,
       "notes": "Place of Receipt 값.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "place_of_delivery",
@@ -1103,8 +1071,7 @@
       },
       "required": true,
       "notes": "Place of Delivery 값.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "total_packages_words",
@@ -1118,7 +1085,7 @@
       "source_detection_id": "det_000074",
       "source_text": "ONE CONTAINER",
       "value_type": "free_text.short",
-      "generator": "choice:ONE CONTAINER|TWO CONTAINERS|THREE PACKAGES|FIVE CARTONS|TWELVE PALLETS",
+      "generator": "choice:ONE CONTAINER|TWO PALLETS|THREE PACKAGES|FIVE CARTONS|EIGHT CRATES",
       "style_class": "style_total_packages_words",
       "render_policy": {
         "align": "left",
@@ -1134,8 +1101,7 @@
       },
       "required": true,
       "notes": "Total No. of Packages (in words) 값.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "cargo_note",
@@ -1147,9 +1113,9 @@
       ],
       "bbox_label_id": "manual_1783583287923",
       "source_detection_id": "manual_1783583287923",
-      "source_text": "",
+      "source_text": "화물 비고",
       "value_type": "free_text.short",
-      "generator": "pool:cargo_notes",
+      "generator": "choice:SHIPPER LOAD, STOW AND COUNT|SAID TO CONTAIN|CLEAN ON BOARD|FREIGHT AS ARRANGED",
       "style_class": "style_cargo_note",
       "render_policy": {
         "align": "left",
@@ -1165,10 +1131,9 @@
       },
       "required": true,
       "notes": "Note: 아래 수동 활성 영역. 화물 책임/상태 관련 짧은 비고를 생성.",
-      "render_mode": "printed",
-      "bbox_status": "use"
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "updated_at": "2026-07-09T08:43:23.499281+00:00"
+  "updated_at": "2026-07-13T02:16:06.418006+00:00"
 }

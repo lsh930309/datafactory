@@ -1,1306 +1,1690 @@
 {
   "schema_version": 1,
-  "created_at": "2026-07-02T00:41:25.734628+00:00",
-  "updated_at": "2026-07-02T06:49:22.452956+00:00",
+  "created_at": "2026-07-13T01:29:15.944387+00:00",
   "doc_id": "CRD-01",
-  "title": "신용정보조회서(NICE·KCB) page 1",
-  "page_index": 1,
+  "title": "신용정보조회서(NICE·KCB)",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/authoring/agent_applied_reviews/20260713T011915066577Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/samples/original/개인신용정보서_page_001.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/inpaint/original_개인신용정보서_page_001/manual_cleanup/inpainted_lama.png",
+  "source_inpainted": "workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/inpaint/original_개인신용정보서_page_001/lama/inpainted_lama.png",
   "image": {
     "width": 734,
     "height": 924
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/authoring/agent_applied_reviews/20260713T011915066577Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/authoring/agent_requests/20260713T011915066577Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "문서정보": {
+      "발급일시": "",
+      "발급번호": "",
+      "페이지": ""
+    },
+    "조회대상": {
+      "주민등록번호": "",
+      "성명": ""
+    },
+    "개설·발급정보": {
+      "1": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": ""
+      },
+      "2": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": ""
+      }
+    },
+    "대출정보": {
+      "1": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": "",
+        "금액": ""
+      },
+      "2": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": "",
+        "금액": ""
+      },
+      "3": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": "",
+        "금액": ""
+      },
+      "4": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": "",
+        "금액": ""
+      },
+      "5": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": "",
+        "금액": ""
+      },
+      "6": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": "",
+        "금액": ""
+      },
+      "7": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": "",
+        "금액": ""
+      },
+      "8": {
+        "구분": "",
+        "내역·사유": "",
+        "기관·점포명": "",
+        "등록사유발생일자": "",
+        "금액": ""
+      }
+    }
   },
   "fields": [
     {
       "field_id": "p1_issued_at",
       "label": "발급일시",
+      "semantic_path": [
+        "문서정보",
+        "발급일시"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702",
       "source_detection_id": "manual_crd01_filled_sample_20260702",
       "source_text": "발급일시",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "template:{{date.kr}} {{pool:issue_times}}",
       "style_class": "style_p1_issued_at",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발급일시",
-        "csv_column": "발급일시"
+        "json_path": "문서정보/발급일시",
+        "csv_column": "문서정보/발급일시"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_issue_number",
       "label": "발급번호",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "semantic_path": [
+        "문서정보",
+        "발급번호"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_2",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_2",
       "source_text": "발급번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:#######-#####-#####",
       "style_class": "style_p1_issue_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발급번호",
-        "csv_column": "발급번호"
+        "json_path": "문서정보/발급번호",
+        "csv_column": "문서정보/발급번호"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_2",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_page_number",
       "label": "페이지",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "semantic_path": [
+        "문서정보",
+        "페이지"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_3",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_3",
       "source_text": "페이지",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:1",
       "style_class": "style_header",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "페이지",
-        "csv_column": "페이지"
+        "json_path": "문서정보/페이지",
+        "csv_column": "문서정보/페이지"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_3",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_resident_registration_number",
       "label": "주민등록번호",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "semantic_path": [
+        "조회대상",
+        "주민등록번호"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_4",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_4",
       "source_text": "주민등록번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:masked_rrns",
       "style_class": "style_p1_resident_registration_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "주민등록번호",
-        "csv_column": "주민등록번호"
+        "json_path": "조회대상/주민등록번호",
+        "csv_column": "조회대상/주민등록번호"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_4",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_person_name",
       "label": "성명",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "semantic_path": [
+        "조회대상",
+        "성명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_5",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_5",
       "source_text": "성명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_text",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "성명",
-        "csv_column": "성명"
+        "json_path": "조회대상/성명",
+        "csv_column": "조회대상/성명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_5",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_account_1_category",
       "label": "구분",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "semantic_path": [
+        "개설·발급정보",
+        "1",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_6",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_6",
       "source_text": "account_1 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:개설발급",
       "style_class": "style_p1_account_1_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분",
-        "csv_column": "구분"
+        "json_path": "개설·발급정보/1/구분",
+        "csv_column": "개설·발급정보/1/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_6",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_account_1_reason",
-      "label": "내역사유",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "개설·발급정보",
+        "1",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_7",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_7",
       "source_text": "account_1 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_account_1_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유",
-        "csv_column": "내역사유"
+        "json_path": "개설·발급정보/1/내역·사유",
+        "csv_column": "개설·발급정보/1/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_7",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_account_1_institution",
-      "label": "기관점포명",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "개설·발급정보",
+        "1",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_8",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_8",
       "source_text": "account_1 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_account_1_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명",
-        "csv_column": "기관점포명"
+        "json_path": "개설·발급정보/1/기관·점포명",
+        "csv_column": "개설·발급정보/1/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_8",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_account_1_registered_at",
       "label": "등록사유발생일자",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "semantic_path": [
+        "개설·발급정보",
+        "1",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_9",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_9",
       "source_text": "account_1 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_account_1_registered_at",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자",
-        "csv_column": "등록사유발생일자"
+        "json_path": "개설·발급정보/1/등록사유발생일자",
+        "csv_column": "개설·발급정보/1/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_9",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_account_2_category",
-      "label": "구분[1]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "구분",
+      "semantic_path": [
+        "개설·발급정보",
+        "2",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_10",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_10",
       "source_text": "account_2 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:개설발급",
       "style_class": "style_p1_account_2_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분[1]",
-        "csv_column": "구분[1]"
+        "json_path": "개설·발급정보/2/구분",
+        "csv_column": "개설·발급정보/2/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_10",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_account_2_reason",
-      "label": "내역사유[1]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "개설·발급정보",
+        "2",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_11",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_11",
       "source_text": "account_2 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_account_2_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유[1]",
-        "csv_column": "내역사유[1]"
+        "json_path": "개설·발급정보/2/내역·사유",
+        "csv_column": "개설·발급정보/2/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_11",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_account_2_institution",
-      "label": "기관점포명[1]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "개설·발급정보",
+        "2",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_12",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_12",
       "source_text": "account_2 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_account_2_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명[1]",
-        "csv_column": "기관점포명[1]"
+        "json_path": "개설·발급정보/2/기관·점포명",
+        "csv_column": "개설·발급정보/2/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_12",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_account_2_registered_at",
-      "label": "등록사유발생일자[1]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "등록사유발생일자",
+      "semantic_path": [
+        "개설·발급정보",
+        "2",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_13",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_13",
       "source_text": "account_2 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_account_2_registered_at",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자[1]",
-        "csv_column": "등록사유발생일자[1]"
+        "json_path": "개설·발급정보/2/등록사유발생일자",
+        "csv_column": "개설·발급정보/2/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_13",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_1_category",
-      "label": "구분[2]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "구분",
+      "semantic_path": [
+        "대출정보",
+        "1",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_14",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_14",
       "source_text": "loan_1 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:대출",
       "style_class": "style_p1_loan_1_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분[2]",
-        "csv_column": "구분[2]"
+        "json_path": "대출정보/1/구분",
+        "csv_column": "대출정보/1/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_14",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_1_reason",
-      "label": "내역사유[2]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "대출정보",
+        "1",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_15",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_15",
       "source_text": "loan_1 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_1_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유[2]",
-        "csv_column": "내역사유[2]"
+        "json_path": "대출정보/1/내역·사유",
+        "csv_column": "대출정보/1/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_15",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_1_institution",
-      "label": "기관점포명[2]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "대출정보",
+        "1",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_16",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_16",
       "source_text": "loan_1 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_1_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명[2]",
-        "csv_column": "기관점포명[2]"
+        "json_path": "대출정보/1/기관·점포명",
+        "csv_column": "대출정보/1/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_16",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_1_registered_at",
-      "label": "등록사유발생일자[2]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "등록사유발생일자",
+      "semantic_path": [
+        "대출정보",
+        "1",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_17",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_17",
       "source_text": "loan_1 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_loan_1_registered_at",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자[2]",
-        "csv_column": "등록사유발생일자[2]"
+        "json_path": "대출정보/1/등록사유발생일자",
+        "csv_column": "대출정보/1/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_17",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_1_amount",
       "label": "금액",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "semantic_path": [
+        "대출정보",
+        "1",
+        "금액"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_18",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_18",
       "source_text": "loan_1 금액",
-      "value_type": "money.krw",
-      "generator": "literal:",
-      "style_class": "style_p1_loan_1_amount",
+      "value_type": "free_text.short",
+      "generator": "pool:loan_amounts_thousand",
+      "style_class": "style_amount",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액",
-        "csv_column": "금액"
+        "json_path": "대출정보/1/금액",
+        "csv_column": "대출정보/1/금액"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_18",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_2_category",
-      "label": "구분[3]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "구분",
+      "semantic_path": [
+        "대출정보",
+        "2",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_19",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_19",
       "source_text": "loan_2 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:대출",
       "style_class": "style_p1_loan_2_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분[3]",
-        "csv_column": "구분[3]"
+        "json_path": "대출정보/2/구분",
+        "csv_column": "대출정보/2/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_19",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_2_reason",
-      "label": "내역사유[3]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "대출정보",
+        "2",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_20",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_20",
       "source_text": "loan_2 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_2_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유[3]",
-        "csv_column": "내역사유[3]"
+        "json_path": "대출정보/2/내역·사유",
+        "csv_column": "대출정보/2/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_20",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_2_institution",
-      "label": "기관점포명[3]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "대출정보",
+        "2",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_21",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_21",
       "source_text": "loan_2 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_2_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명[3]",
-        "csv_column": "기관점포명[3]"
+        "json_path": "대출정보/2/기관·점포명",
+        "csv_column": "대출정보/2/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_21",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_2_registered_at",
-      "label": "등록사유발생일자[3]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "등록사유발생일자",
+      "semantic_path": [
+        "대출정보",
+        "2",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_22",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_22",
       "source_text": "loan_2 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_loan_2_registered_at",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자[3]",
-        "csv_column": "등록사유발생일자[3]"
+        "json_path": "대출정보/2/등록사유발생일자",
+        "csv_column": "대출정보/2/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_22",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_2_amount",
-      "label": "금액[1]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "금액",
+      "semantic_path": [
+        "대출정보",
+        "2",
+        "금액"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_23",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_23",
       "source_text": "loan_2 금액",
-      "value_type": "money.krw",
-      "generator": "literal:",
-      "style_class": "style_p1_loan_2_amount",
+      "value_type": "free_text.short",
+      "generator": "pool:loan_amounts_thousand",
+      "style_class": "style_amount",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액[1]",
-        "csv_column": "금액[1]"
+        "json_path": "대출정보/2/금액",
+        "csv_column": "대출정보/2/금액"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_23",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_3_category",
-      "label": "구분[4]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "구분",
+      "semantic_path": [
+        "대출정보",
+        "3",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_24",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_24",
       "source_text": "loan_3 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:대출",
       "style_class": "style_p1_loan_3_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분[4]",
-        "csv_column": "구분[4]"
+        "json_path": "대출정보/3/구분",
+        "csv_column": "대출정보/3/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_24",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_3_reason",
-      "label": "내역사유[4]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "대출정보",
+        "3",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_25",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_25",
       "source_text": "loan_3 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_3_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유[4]",
-        "csv_column": "내역사유[4]"
+        "json_path": "대출정보/3/내역·사유",
+        "csv_column": "대출정보/3/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_25",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_3_institution",
-      "label": "기관점포명[4]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "대출정보",
+        "3",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_26",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_26",
       "source_text": "loan_3 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_3_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명[4]",
-        "csv_column": "기관점포명[4]"
+        "json_path": "대출정보/3/기관·점포명",
+        "csv_column": "대출정보/3/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_26",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_3_registered_at",
-      "label": "등록사유발생일자[4]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "등록사유발생일자",
+      "semantic_path": [
+        "대출정보",
+        "3",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_27",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_27",
       "source_text": "loan_3 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_loan_3_registered_at",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자[4]",
-        "csv_column": "등록사유발생일자[4]"
+        "json_path": "대출정보/3/등록사유발생일자",
+        "csv_column": "대출정보/3/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_27",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_3_amount",
-      "label": "금액[2]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "금액",
+      "semantic_path": [
+        "대출정보",
+        "3",
+        "금액"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_28",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_28",
       "source_text": "loan_3 금액",
-      "value_type": "money.krw",
-      "generator": "literal:",
-      "style_class": "style_p1_loan_3_amount",
+      "value_type": "free_text.short",
+      "generator": "pool:loan_amounts_thousand",
+      "style_class": "style_amount",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액[2]",
-        "csv_column": "금액[2]"
+        "json_path": "대출정보/3/금액",
+        "csv_column": "대출정보/3/금액"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_28",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_4_category",
-      "label": "구분[5]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "구분",
+      "semantic_path": [
+        "대출정보",
+        "4",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_29",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_29",
       "source_text": "loan_4 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:대출",
       "style_class": "style_p1_loan_4_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분[5]",
-        "csv_column": "구분[5]"
+        "json_path": "대출정보/4/구분",
+        "csv_column": "대출정보/4/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_29",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_4_reason",
-      "label": "내역사유[5]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "대출정보",
+        "4",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_30",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_30",
       "source_text": "loan_4 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_4_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유[5]",
-        "csv_column": "내역사유[5]"
+        "json_path": "대출정보/4/내역·사유",
+        "csv_column": "대출정보/4/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_30",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_4_institution",
-      "label": "기관점포명[5]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "대출정보",
+        "4",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_31",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_31",
       "source_text": "loan_4 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_4_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명[5]",
-        "csv_column": "기관점포명[5]"
+        "json_path": "대출정보/4/기관·점포명",
+        "csv_column": "대출정보/4/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_31",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_4_registered_at",
-      "label": "등록사유발생일자[5]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "등록사유발생일자",
+      "semantic_path": [
+        "대출정보",
+        "4",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_32",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_32",
       "source_text": "loan_4 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_loan_4_registered_at",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자[5]",
-        "csv_column": "등록사유발생일자[5]"
+        "json_path": "대출정보/4/등록사유발생일자",
+        "csv_column": "대출정보/4/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_32",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_4_amount",
-      "label": "금액[3]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "금액",
+      "semantic_path": [
+        "대출정보",
+        "4",
+        "금액"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_33",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_33",
       "source_text": "loan_4 금액",
-      "value_type": "money.krw",
-      "generator": "literal:",
-      "style_class": "style_p1_loan_4_amount",
+      "value_type": "free_text.short",
+      "generator": "pool:loan_amounts_thousand",
+      "style_class": "style_amount",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액[3]",
-        "csv_column": "금액[3]"
+        "json_path": "대출정보/4/금액",
+        "csv_column": "대출정보/4/금액"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_33",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_5_category",
-      "label": "구분[6]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "구분",
+      "semantic_path": [
+        "대출정보",
+        "5",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_34",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_34",
       "source_text": "loan_5 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:대출",
       "style_class": "style_p1_loan_5_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분[6]",
-        "csv_column": "구분[6]"
+        "json_path": "대출정보/5/구분",
+        "csv_column": "대출정보/5/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_34",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_5_reason",
-      "label": "내역사유[6]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "대출정보",
+        "5",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_35",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_35",
       "source_text": "loan_5 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_5_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유[6]",
-        "csv_column": "내역사유[6]"
+        "json_path": "대출정보/5/내역·사유",
+        "csv_column": "대출정보/5/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_35",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_5_institution",
-      "label": "기관점포명[6]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "대출정보",
+        "5",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_36",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_36",
       "source_text": "loan_5 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_5_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명[6]",
-        "csv_column": "기관점포명[6]"
+        "json_path": "대출정보/5/기관·점포명",
+        "csv_column": "대출정보/5/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_36",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_5_registered_at",
-      "label": "등록사유발생일자[6]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "등록사유발생일자",
+      "semantic_path": [
+        "대출정보",
+        "5",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_37",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_37",
       "source_text": "loan_5 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_loan_5_registered_at",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자[6]",
-        "csv_column": "등록사유발생일자[6]"
+        "json_path": "대출정보/5/등록사유발생일자",
+        "csv_column": "대출정보/5/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_37",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_5_amount",
-      "label": "금액[4]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "금액",
+      "semantic_path": [
+        "대출정보",
+        "5",
+        "금액"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_38",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_38",
       "source_text": "loan_5 금액",
-      "value_type": "money.krw",
-      "generator": "literal:",
-      "style_class": "style_p1_loan_5_amount",
+      "value_type": "free_text.short",
+      "generator": "pool:loan_amounts_thousand",
+      "style_class": "style_amount",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액[4]",
-        "csv_column": "금액[4]"
+        "json_path": "대출정보/5/금액",
+        "csv_column": "대출정보/5/금액"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_38",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_6_category",
-      "label": "구분[7]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "구분",
+      "semantic_path": [
+        "대출정보",
+        "6",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_39",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_39",
       "source_text": "loan_6 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:대출",
       "style_class": "style_p1_loan_6_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분[7]",
-        "csv_column": "구분[7]"
+        "json_path": "대출정보/6/구분",
+        "csv_column": "대출정보/6/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_39",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_6_reason",
-      "label": "내역사유[7]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "대출정보",
+        "6",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_40",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_40",
       "source_text": "loan_6 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_6_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유[7]",
-        "csv_column": "내역사유[7]"
+        "json_path": "대출정보/6/내역·사유",
+        "csv_column": "대출정보/6/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_40",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_6_institution",
-      "label": "기관점포명[7]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "대출정보",
+        "6",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_41",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_41",
       "source_text": "loan_6 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_6_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명[7]",
-        "csv_column": "기관점포명[7]"
+        "json_path": "대출정보/6/기관·점포명",
+        "csv_column": "대출정보/6/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_41",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_6_registered_at",
-      "label": "등록사유발생일자[7]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "등록사유발생일자",
+      "semantic_path": [
+        "대출정보",
+        "6",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_42",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_42",
       "source_text": "loan_6 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_loan_6_registered_at",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자[7]",
-        "csv_column": "등록사유발생일자[7]"
+        "json_path": "대출정보/6/등록사유발생일자",
+        "csv_column": "대출정보/6/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_42",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_6_amount",
-      "label": "금액[5]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "금액",
+      "semantic_path": [
+        "대출정보",
+        "6",
+        "금액"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_43",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_43",
       "source_text": "loan_6 금액",
-      "value_type": "money.krw",
-      "generator": "literal:",
-      "style_class": "style_p1_loan_6_amount",
+      "value_type": "free_text.short",
+      "generator": "pool:loan_amounts_thousand",
+      "style_class": "style_amount",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액[5]",
-        "csv_column": "금액[5]"
+        "json_path": "대출정보/6/금액",
+        "csv_column": "대출정보/6/금액"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_43",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_7_category",
-      "label": "구분[8]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "구분",
+      "semantic_path": [
+        "대출정보",
+        "7",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_44",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_44",
       "source_text": "loan_7 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:대출",
       "style_class": "style_p1_loan_7_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분[8]",
-        "csv_column": "구분[8]"
+        "json_path": "대출정보/7/구분",
+        "csv_column": "대출정보/7/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_44",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_7_reason",
-      "label": "내역사유[8]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "대출정보",
+        "7",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_45",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_45",
       "source_text": "loan_7 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_7_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유[8]",
-        "csv_column": "내역사유[8]"
+        "json_path": "대출정보/7/내역·사유",
+        "csv_column": "대출정보/7/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_45",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_7_institution",
-      "label": "기관점포명[8]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "대출정보",
+        "7",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_46",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_46",
       "source_text": "loan_7 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_7_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명[8]",
-        "csv_column": "기관점포명[8]"
+        "json_path": "대출정보/7/기관·점포명",
+        "csv_column": "대출정보/7/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_46",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_7_registered_at",
-      "label": "등록사유발생일자[8]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "등록사유발생일자",
+      "semantic_path": [
+        "대출정보",
+        "7",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_47",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_47",
       "source_text": "loan_7 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_loan_7_registered_at",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자[8]",
-        "csv_column": "등록사유발생일자[8]"
+        "json_path": "대출정보/7/등록사유발생일자",
+        "csv_column": "대출정보/7/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_47",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_7_amount",
-      "label": "금액[6]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "금액",
+      "semantic_path": [
+        "대출정보",
+        "7",
+        "금액"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_48",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_48",
       "source_text": "loan_7 금액",
-      "value_type": "money.krw",
-      "generator": "literal:",
-      "style_class": "style_p1_loan_7_amount",
+      "value_type": "free_text.short",
+      "generator": "pool:loan_amounts_thousand",
+      "style_class": "style_amount",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액[6]",
-        "csv_column": "금액[6]"
+        "json_path": "대출정보/7/금액",
+        "csv_column": "대출정보/7/금액"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_48",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_8_category",
-      "label": "구분[9]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "구분",
+      "semantic_path": [
+        "대출정보",
+        "8",
+        "구분"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_49",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_49",
       "source_text": "loan_8 구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "literal:대출",
       "style_class": "style_p1_loan_8_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구분[9]",
-        "csv_column": "구분[9]"
+        "json_path": "대출정보/8/구분",
+        "csv_column": "대출정보/8/구분"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_49",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_8_reason",
-      "label": "내역사유[9]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "내역·사유",
+      "semantic_path": [
+        "대출정보",
+        "8",
+        "내역·사유"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_50",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_50",
       "source_text": "loan_8 내역사유",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_8_reason",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "내역사유[9]",
-        "csv_column": "내역사유[9]"
+        "json_path": "대출정보/8/내역·사유",
+        "csv_column": "대출정보/8/내역·사유"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_50",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_8_institution",
-      "label": "기관점포명[9]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "기관·점포명",
+      "semantic_path": [
+        "대출정보",
+        "8",
+        "기관·점포명"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_51",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_51",
       "source_text": "loan_8 기관점포명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_p1_loan_8_institution",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기관점포명[9]",
-        "csv_column": "기관점포명[9]"
+        "json_path": "대출정보/8/기관·점포명",
+        "csv_column": "대출정보/8/기관·점포명"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_51",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_8_registered_at",
-      "label": "등록사유발생일자[9]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "등록사유발생일자",
+      "semantic_path": [
+        "대출정보",
+        "8",
+        "등록사유발생일자"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_52",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_52",
       "source_text": "loan_8 등록사유발생일자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
-      "style_class": "style_small",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "style_text",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "등록사유발생일자[9]",
-        "csv_column": "등록사유발생일자[9]"
+        "json_path": "대출정보/8/등록사유발생일자",
+        "csv_column": "대출정보/8/등록사유발생일자"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_52",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "p1_loan_8_amount",
-      "label": "금액[7]",
-      "source_detection_id": "manual_crd01_filled_sample_20260702",
+      "label": "금액",
+      "semantic_path": [
+        "대출정보",
+        "8",
+        "금액"
+      ],
+      "bbox_label_id": "manual_crd01_filled_sample_20260702_53",
+      "source_detection_id": "manual_crd01_filled_sample_20260702_53",
       "source_text": "loan_8 금액",
-      "value_type": "money.krw",
-      "generator": "literal:",
+      "value_type": "free_text.short",
+      "generator": "pool:loan_amounts_thousand",
       "style_class": "style_amount",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액[7]",
-        "csv_column": "금액[7]"
+        "json_path": "대출정보/8/금액",
+        "csv_column": "대출정보/8/금액"
       },
-      "required": false,
-      "notes": "CRD-01 filled sample을 blank template화한 뒤 수동 bbox/style 필드로 재구성",
-      "bbox_label_id": "manual_crd01_filled_sample_20260702_53",
-      "bbox_status": "use"
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
-  "groups": [
-    {
-      "group_id": "header",
-      "type": "common_header"
-    },
-    {
-      "group_id": "credit_rows",
-      "type": "table_rows",
-      "notes": "page1 account/loan rows are record-generated"
-    }
-  ],
-  "authoring_mode": "crd01_page_1_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/review/authoring_migrated/review.json",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/신용정보조회서(NICE·KCB)__CRD-01/review/authoring_migrated/review.json"
-  }
+  "groups": [],
+  "updated_at": "2026-07-13T01:29:15.986190+00:00"
 }

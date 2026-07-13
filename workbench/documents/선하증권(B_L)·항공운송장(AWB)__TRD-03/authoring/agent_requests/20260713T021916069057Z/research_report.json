@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-03",
+  "search_date": "2026-07-13",
+  "scope": "현재 샘플에 실제로 보이는 해상 선하증권(B/L) 1페이지 필드의 의미 확인",
+  "queries": [
+    "site:maersk.com bill of lading shipper consignee notify party port of loading official",
+    "site:iccwbo.org Incoterms 2020 official FOB",
+    "site:unece.org bill of lading data elements official",
+    "site:fiata.org bill of lading official document fields"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.maersk.com/logistics-explained/shipping-documentation/2023/10/02/what-is-bill-of-lading",
+      "source_type": "carrier_official_explainer",
+      "summary": "B/L은 운송계약의 증거, 화물 수령증, 권리증권 기능을 가지며 송하인·수하인·통지처, 화물 설명·중량·포장수·용적, 지급조건, 선적항·양륙항 등을 포함한다."
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://service.unece.org/trade/untdid/d17b/tred/tred1001.htm",
+      "source_type": "un_official_data_standard",
+      "summary": "UNECE UN/EDIFACT는 B/L을 해상 운송계약과 화물 인수·적재를 증명하고 문서 상환으로 인도하는 운송 문서로 정의한다."
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.maersk.com/~/media_sc9/maersk/local-information/files/asia-pacific/vietnam/export/shipping-instruction-format.pdf",
+      "source_type": "carrier_official_form",
+      "summary": "공식 Shipping Instruction 양식에서 송하인·수하인·통지처, 선박/항차, 선적항·양륙항·인도지, 화물 설명, 컨테이너/봉인번호, 크기/유형, 화인, 총중량, CBM, 포장수, 운임 선불/후불, 발행일 필드를 확인했다."
+    },
+    {
+      "evidence_id": "R4",
+      "url": "https://unece.org/fileadmin/DAM/trade/Publications/ECE_TRADE_432E_CF-Rec1.pdf",
+      "source_type": "un_official_layout_standard",
+      "summary": "UN Layout Key는 consignee, notify party, shipping marks, container number 등 운송문서 데이터 요소와 B/L의 선박명·선적항·양륙항 필요성을 설명한다."
+    },
+    {
+      "evidence_id": "R5",
+      "url": "https://academy.iccwbo.org/incoterms/article/incoterms-2020-fca-or-fob/",
+      "source_type": "icc_official_explainer",
+      "summary": "FOB는 해상 운송에 쓰이는 Incoterms 규칙이며, 템플릿의 INCO TERM 값 해석 근거로 사용했다."
+    }
+  ],
+  "field_evidence": [
+    {
+      "evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "field_ids": [
+        "consignee_address",
+        "consignee_name",
+        "consignee_tel",
+        "notify_party",
+        "shipper_address",
+        "shipper_name"
+      ],
+      "conclusion": "당사자 필드와 주소/연락 영역을 템플릿 라벨대로 유지"
+    },
+    {
+      "evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "field_ids": [
+        "date_of_issue",
+        "destination_on_carriage",
+        "freight_payable_at",
+        "place_of_delivery",
+        "place_of_issue",
+        "place_of_receipt",
+        "port_of_discharge",
+        "port_of_loading",
+        "vessel_voyage"
+      ],
+      "conclusion": "선박·항차와 출발/도착/수령/인도 장소 및 발행정보 계층을 유지"
+    },
+    {
+      "evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "field_ids": [
+        "cargo_note",
+        "container_mode",
+        "container_number",
+        "container_packages",
+        "container_type",
+        "container_volume",
+        "container_weight",
+        "goods_description",
+        "gross_weight",
+        "marks_and_numbers",
+        "measurement_m3",
+        "package_description",
+        "seal_number",
+        "total_packages_words"
+      ],
+      "conclusion": "화물, 포장, 중량, 용적, 컨테이너 상세를 별도 leaf로 유지"
+    },
+    {
+      "evidence_ids": [
+        "R3",
+        "R5"
+      ],
+      "field_ids": [
+        "excess_value_declaration",
+        "freight_details",
+        "incoterm",
+        "number_of_originals",
+        "surrender_to"
+      ],
+      "conclusion": "운임조건·원본부수·인코텀즈·제출처/가액신고 영역을 템플릿 구조대로 유지"
+    }
+  ],
+  "research_boundary": "웹 자료는 보이는 앵커의 의미 확인에만 사용했고 템플릿에 없는 일반 B/L/AWB 필드는 추가하지 않았다."
+}

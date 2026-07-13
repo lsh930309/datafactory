@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "doc_id": "MED-05",
+  "title": "입·퇴원확인서",
+  "semantic_schema": {
+    "문서관리": {"등록번호": "", "연번호": ""},
+    "환자": {"성명": "", "주민등록번호": "", "만나이": "", "주소": ""},
+    "진료내용": {
+      "진단내역": {
+        "1": {"병명": "", "질병분류기호": ""},
+        "2": {"병명": "", "질병분류기호": ""},
+        "3": {"병명": "", "질병분류기호": ""}
+      },
+      "발병연월일": "",
+      "입원퇴원구분": "",
+      "입원퇴원연월일": {"입원일": "", "퇴원일": ""},
+      "의사소견": "",
+      "비고": "",
+      "용도": ""
+    },
+    "발급확인": {
+      "발급일자": {"년": "", "월": "", "일": ""},
+      "의료기관": {"명칭": "", "주소": ""},
+      "의사": {"면허번호": "", "성명": ""}
+    }
+  },
+  "fields": [
+    {"field_id":"registration_number","key":"등록번호","semantic_path":["문서관리","등록번호"],"anchor_id":"visual_0001","value":"","label_anchor_ids":["det_000003"],"value_type":"free_text.short","faker_rule":"pattern:######","style_class":"style_registration_number","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[214,253,154,35],"basis":"등록번호 라벨 오른쪽 빈 표 셀"},"confidence":0.98},
+    {"field_id":"serial_number","key":"연번호","semantic_path":["문서관리","연번호"],"anchor_id":"visual_0003","value":"","label_anchor_ids":["det_000004"],"value_type":"free_text.short","faker_rule":"pattern:######","style_class":"style_serial_number","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[215,292,153,35],"basis":"연번호 라벨 오른쪽 빈 표 셀"},"confidence":0.98},
+    {"field_id":"patient_name","key":"환자의 성명","semantic_path":["환자","성명"],"anchor_id":"visual_0008","value":"","label_anchor_ids":["det_000006"],"value_type":"person.name_ko","faker_rule":"person.name_ko","style_class":"style_patient_name","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,352,290,58]},"confidence":0.99},
+    {"field_id":"patient_rrn","key":"환자의 주민등록번호","semantic_path":["환자","주민등록번호"],"anchor_id":"manual_1783555808485","value":"","label_anchor_ids":["det_000005","det_000008"],"value_type":"person.rrn","faker_rule":"person.rrn","style_class":"style_patient_rrn","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[757,353,201,59]},"confidence":0.99},
+    {"field_id":"patient_age","key":"만 나이","semantic_path":["환자","만나이"],"anchor_id":"manual_1783555828470","value":"","label_anchor_ids":["manual_1783555820519","det_000007"],"value_type":"free_text.short","faker_rule":"pattern:##","style_class":"style_patient_age","unit_policy":{"value":"number_only","static_prefix":"만(","static_suffix":")세"},"research_evidence_ids":["R1"],"visual_evidence":{"bbox":[991,368,37,29],"basis":"값 위치 좌우에 정적 만( 및 )세가 인쇄됨"},"confidence":0.99},
+    {"field_id":"patient_address","key":"환자의 주소","semantic_path":["환자","주소"],"anchor_id":"visual_0009","value":"","label_anchor_ids":["det_000009"],"value_type":"address.ko","faker_rule":"address.ko","style_class":"style_patient_address","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,414,748,58]},"confidence":0.99},
+    {"field_id":"diagnosis_1_name","key":"병명 1","semantic_path":["진료내용","진단내역","1","병명"],"anchor_id":"manual_1783555842269","value":"","label_anchor_ids":["det_000011","visual_0012"],"value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_diagnosis_1_name","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[316,527,287,61]},"confidence":0.97},
+    {"field_id":"diagnosis_1_code","key":"질병분류기호 1","semantic_path":["진료내용","진단내역","1","질병분류기호"],"anchor_id":"manual_1783555847070","value":"","label_anchor_ids":["det_000010"],"value_type":"free_text.short","faker_rule":"pattern:A##.#","style_class":"style_diagnosis_1_code","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[608,526,455,61]},"confidence":0.97},
+    {"field_id":"diagnosis_2_name","key":"병명 2","semantic_path":["진료내용","진단내역","2","병명"],"anchor_id":"manual_1783556053407","value":"","label_anchor_ids":["det_000011","visual_0012"],"value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_diagnosis_2_name","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[316,591,287,69]},"confidence":0.96},
+    {"field_id":"diagnosis_2_code","key":"질병분류기호 2","semantic_path":["진료내용","진단내역","2","질병분류기호"],"anchor_id":"manual_1783556059258","value":"","label_anchor_ids":["det_000010"],"value_type":"free_text.short","faker_rule":"pattern:A##.#","style_class":"style_diagnosis_2_code","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[608,590,454,71]},"confidence":0.96},
+    {"field_id":"diagnosis_3_name","key":"병명 3","semantic_path":["진료내용","진단내역","3","병명"],"anchor_id":"manual_1783556063857","value":"","label_anchor_ids":["det_000011","visual_0012"],"value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_diagnosis_3_name","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,663,291,59]},"confidence":0.96},
+    {"field_id":"diagnosis_3_code","key":"질병분류기호 3","semantic_path":["진료내용","진단내역","3","질병분류기호"],"anchor_id":"manual_1783556069641","value":"","label_anchor_ids":["det_000010"],"value_type":"free_text.short","faker_rule":"pattern:A##.#","style_class":"style_diagnosis_3_code","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[608,661,456,65]},"confidence":0.96},
+    {"field_id":"onset_date","key":"발병연월일","semantic_path":["진료내용","발병연월일"],"anchor_id":"visual_0013","value":"","label_anchor_ids":["det_000012"],"value_type":"date.kr","faker_rule":"date.kr","style_class":"style_onset_date","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,726,290,44]},"confidence":0.99},
+    {"field_id":"admission_discharge_type","key":"입원·퇴원구분","semantic_path":["진료내용","입원퇴원구분"],"anchor_id":"manual_1783555854753","value":"","label_anchor_ids":["det_000013"],"value_type":"free_text.short","faker_rule":"choice:입원|퇴원","style_class":"style_admission_discharge_type","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[758,727,305,45]},"confidence":0.99},
+    {"field_id":"admission_date","key":"입원일","semantic_path":["진료내용","입원퇴원연월일","입원일"],"anchor_id":"manual_1783555859603","value":"","label_anchor_ids":["det_000014"],"value_type":"date.kr","faker_rule":"date.kr","style_class":"style_admission_discharge_period","render_policy":{"render":false},"research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,774,748,120]},"confidence":0.96},
+    {"field_id":"discharge_date","key":"퇴원일","semantic_path":["진료내용","입원퇴원연월일","퇴원일"],"anchor_id":"manual_1783555859603","value":"","label_anchor_ids":["det_000014"],"value_type":"date.kr","faker_rule":"date.kr","style_class":"style_admission_discharge_period","render_policy":{"render":false},"research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,774,748,120]},"confidence":0.96},
+    {"field_id":"admission_discharge_period","key":"입원·퇴원연월일 표시문구","semantic_path":["렌더링전용","입원퇴원연월일"],"anchor_id":"manual_1783555859603","value":"","label_anchor_ids":["det_000014"],"value_type":"free_text.short","faker_rule":"template:입원: {{date.kr}}, 퇴원: {{date.kr}}","style_class":"style_admission_discharge_period","export":{"include":false},"research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,774,748,120]},"confidence":0.96},
+    {"field_id":"doctor_opinion","key":"의사소견","semantic_path":["진료내용","의사소견"],"anchor_id":"manual_1783555864171","value":"","label_anchor_ids":["det_000015"],"value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_doctor_opinion","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,895,749,121]},"confidence":0.99},
+    {"field_id":"remarks","key":"비고","semantic_path":["진료내용","비고"],"anchor_id":"manual_1783555874470","value":"","label_anchor_ids":["det_000016"],"value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_remarks","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,1018,749,122]},"confidence":0.99},
+    {"field_id":"purpose","key":"용도","semantic_path":["진료내용","용도"],"anchor_id":"visual_0014","value":"","label_anchor_ids":["det_000017"],"value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_purpose","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[314,1141,749,55]},"confidence":0.99},
+    {"field_id":"issue_year","key":"발급일자 년","semantic_path":["발급확인","발급일자","년"],"anchor_id":"manual_1783555879954","value":"","label_anchor_ids":["det_000019"],"value_type":"date.year","faker_rule":"date.year","style_class":"style_issue_year","unit_policy":{"value":"number_only","static_suffix":"년"},"research_evidence_ids":["R1","R2"],"visual_evidence":{"bbox":[800,1292,73,26]},"confidence":0.99},
+    {"field_id":"issue_month","key":"발급일자 월","semantic_path":["발급확인","발급일자","월"],"anchor_id":"manual_1783555882770","value":"","label_anchor_ids":["det_000020"],"value_type":"date.month","faker_rule":"date.month","style_class":"style_issue_month","unit_policy":{"value":"number_only","static_suffix":"월"},"research_evidence_ids":["R1","R2"],"visual_evidence":{"bbox":[904,1291,35,23]},"confidence":0.99},
+    {"field_id":"issue_day","key":"발급일자 일","semantic_path":["발급확인","발급일자","일"],"anchor_id":"manual_1783555885620","value":"","label_anchor_ids":["det_000021"],"value_type":"date.day","faker_rule":"date.day","style_class":"style_issue_day","unit_policy":{"value":"number_only","static_suffix":"일"},"research_evidence_ids":["R1","R2"],"visual_evidence":{"bbox":[964,1292,38,23]},"confidence":0.99},
+    {"field_id":"medical_institution_name","key":"의료기관 명칭","semantic_path":["발급확인","의료기관","명칭"],"anchor_id":"manual_1783555901787","value":"","label_anchor_ids":["det_000022"],"value_type":"medical.institution_ko","faker_rule":"medical.institution_ko","style_class":"style_medical_institution_name","research_evidence_ids":["R1","R2"],"visual_evidence":{"bbox":[316,1344,444,26]},"confidence":0.99},
+    {"field_id":"medical_institution_address","key":"의료기관 주소","semantic_path":["발급확인","의료기관","주소"],"anchor_id":"manual_1783555905554","value":"","label_anchor_ids":["det_000023"],"value_type":"address.ko","faker_rule":"address.ko","style_class":"style_medical_institution_address","research_evidence_ids":["R1","R2"],"visual_evidence":{"bbox":[318,1397,444,62]},"confidence":0.99},
+    {"field_id":"doctor_license_number","key":"면허번호","semantic_path":["발급확인","의사","면허번호"],"anchor_id":"manual_1783555891704","value":"","label_anchor_ids":["det_000024","det_000025"],"value_type":"free_text.short","faker_rule":"pattern:######","style_class":"style_doctor_license_number","unit_policy":{"value":"number_only","static_prefix":"제","static_suffix":"호"},"research_evidence_ids":["R1"],"visual_evidence":{"bbox":[930,1452,107,24]},"confidence":0.99},
+    {"field_id":"doctor_name","key":"의사 성명","semantic_path":["발급확인","의사","성명"],"anchor_id":"manual_1783555895988","value":"","label_anchor_ids":["det_000026"],"value_type":"person.name_ko","faker_rule":"person.name_ko","style_class":"style_doctor_name","research_evidence_ids":["R1"],"visual_evidence":{"bbox":[633,1503,198,28]},"confidence":0.99}
+  ],
+  "coverage": {"use_anchor_count":25,"bound_use_anchor_count":25,"coverage_percent":100,"unmapped_use_anchors":[]},
+  "field_id_contract": {"immutable_for_pass_2":true,"frozen_at":"2026-07-13"}
+}

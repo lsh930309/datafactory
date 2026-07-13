@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-03",
+  "pass": "2/2",
+  "unresolved_fields": [
+    {"field_id":"container_volume","anchor_id":"manual_1783581010773","confidence":"medium","issue":"Volume 열에는 정적 단위가 보이지 않지만 실제 운송사 양식에 따라 CBM/M3 표기 관행이 다를 수 있음","current_rule":"pattern:##.### M3","decision_needed":"값에 M3를 포함할지 숫자만 렌더링할지 승인"},
+    {"field_id":"excess_value_declaration","anchor_id":"manual_1783582955481","confidence":"medium","issue":"실무에서 공란, N.V.D., 신고가액 모두 가능하나 빈 문자열 generator는 지원되지 않음","current_rule":"choice:N.V.D.|NO VALUE DECLARED|AS PER COMMERCIAL INVOICE","decision_needed":"공란 렌더링 지원 시 빈 값 선택지 추가 여부"},
+    {"field_id":"notify_party","anchor_id":"manual_1783580887356","confidence":"medium","issue":"수하인과 동일하거나 별도 당사자일 수 있으나 조건부 copy를 지원하지 않음","current_rule":"free_text.short","decision_needed":"별도 영문 당사자 record pool 확장 여부"},
+    {"field_id":"surrender_to","anchor_id":"manual_1783583273356","confidence":"medium","issue":"은행·운송사 지점·수하인 등 거래 조건에 따라 달라지는 자유기재란","current_rule":"free_text.short","decision_needed":"업무 도메인별 제출처 pool 승인 여부"}
+  ],
+  "unsupported_relationships": [
+    {"fields":["container_number"],"reason":"ISO 6346 check digit 계산 constraint가 지원되지 않아 pattern만 적용"},
+    {"fields":["bl_number"],"reason":"운송사별 번호 체계가 달라 범용 checksum/접두어 관계를 확정할 수 없음"},
+    {"fields":["notify_party","consignee_name","consignee_address"],"reason":"SAME AS CONSIGNEE 또는 별도 통지처의 조건부 분기 constraint가 지원되지 않음"}
+  ],
+  "conflicting_evidence": [],
+  "page_scope_limitations": ["현재 입력은 선하증권 1페이지이며 문서 제목에 포함된 AWB 별도 양식은 이번 pass에서 확장하지 않음"],
+  "validation_notes": ["모든 35개 fixed binding에 정확히 하나의 field_generators rule을 제공함","두 record pool은 각각 최소 12개, 열린 scalar pool은 각각 최소 20개를 충족함"]
+}

@@ -1,0 +1,1446 @@
+{
+  "schema_version": 2,
+  "doc_id": "TRD-07",
+  "title": "발주서(PO)·거래명세서",
+  "semantic_schema": {
+    "발주정보": {
+      "발주번호": ""
+    },
+    "수신처": {
+      "회사명": "",
+      "참조": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "이메일": "",
+      "주소": ""
+    },
+    "발신처": {
+      "회사명": "",
+      "부서_담당": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "이메일": "",
+      "주소": ""
+    },
+    "결재": {
+      "작성일": "",
+      "검토일": "",
+      "승인일": ""
+    },
+    "품목내역": {
+      "품목1": {
+        "번호": "",
+        "품명_규격": "",
+        "수량": "",
+        "단가": "",
+        "금액": "",
+        "납기": ""
+      },
+      "품목2": {
+        "번호": "",
+        "품명_규격": "",
+        "수량": "",
+        "단가": "",
+        "금액": "",
+        "납기": ""
+      },
+      "품목3": {
+        "번호": "",
+        "품명_규격": "",
+        "수량": "",
+        "단가": "",
+        "금액": "",
+        "납기": ""
+      },
+      "품목4": {
+        "번호": "",
+        "품명_규격": "",
+        "수량": "",
+        "단가": "",
+        "금액": "",
+        "납기": ""
+      },
+      "공통비고": ""
+    },
+    "납품정보": {
+      "발송지": "",
+      "납품장소명": ""
+    },
+    "금액정보": {
+      "공급가합계": ""
+    },
+    "문서관리": {
+      "서식번호": "",
+      "발행회사명": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "purchase_order_number",
+      "key": "발주번호",
+      "semantic_path": "발주정보/발주번호",
+      "anchor_id": "det_000006",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_purchase_order_number",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          824,
+          130,
+          146,
+          28
+        ],
+        "source_text": "P201209-11"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "receiver_company_name",
+      "key": "수신 회사명",
+      "semantic_path": "수신처/회사명",
+      "anchor_id": "det_000008",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_receiver_company_name",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          205,
+          221,
+          367,
+          28
+        ],
+        "source_text": "아남정밀"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "sender_company_name",
+      "key": "발신 회사명",
+      "semantic_path": "발신처/회사명",
+      "anchor_id": "det_000010",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_sender_company_name",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          788,
+          221,
+          368,
+          27
+        ],
+        "source_text": "(주)고려이노테크"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "receiver_contact_title",
+      "key": "수신 참조",
+      "semantic_path": "수신처/참조",
+      "anchor_id": "det_000015",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_receiver_contact_title",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          203,
+          256,
+          370,
+          24
+        ],
+        "source_text": "정창식 사장님"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "sender_department_contact",
+      "key": "발신 부서/담당",
+      "semantic_path": "발신처/부서_담당",
+      "anchor_id": "det_000017",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_sender_department_contact",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          788,
+          253,
+          369,
+          28
+        ],
+        "source_text": "구매팀 정규현대리"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "receiver_tel",
+      "key": "수신 전화번호",
+      "semantic_path": "수신처/전화번호",
+      "anchor_id": "det_000020",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_receiver_tel",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          203,
+          286,
+          370,
+          24
+        ],
+        "source_text": "010-3873-7636"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "sender_tel",
+      "key": "발신 전화번호",
+      "semantic_path": "발신처/전화번호",
+      "anchor_id": "det_000022",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_sender_tel",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          788,
+          284,
+          369,
+          27
+        ],
+        "source_text": "055–242–6196(328)"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "receiver_fax",
+      "key": "수신 팩스번호",
+      "semantic_path": "수신처/팩스번호",
+      "anchor_id": "det_000024",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_receiver_fax",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          202,
+          318,
+          371,
+          20
+        ],
+        "source_text": "055-246-2951"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "receiver_email",
+      "key": "수신 이메일",
+      "semantic_path": "수신처/이메일",
+      "anchor_id": "manual_1783047953282",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_receiver_email",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          205,
+          345,
+          370,
+          27
+        ],
+        "source_text": ""
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "sender_fax",
+      "key": "발신 팩스번호",
+      "semantic_path": "발신처/팩스번호",
+      "anchor_id": "det_000026",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_sender_fax",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          789,
+          316,
+          368,
+          24
+        ],
+        "source_text": "055-245-3123"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "sender_email",
+      "key": "발신 이메일",
+      "semantic_path": "발신처/이메일",
+      "anchor_id": "det_000030",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_sender_email",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          788,
+          343,
+          369,
+          29
+        ],
+        "source_text": "gyuhyun@kinno.co.kr"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "receiver_address",
+      "key": "수신 주소",
+      "semantic_path": "수신처/주소",
+      "anchor_id": "det_000032",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_receiver_address",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          203,
+          376,
+          369,
+          23
+        ],
+        "source_text": "경남창원시마산합포구 문화동3길14"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "sender_address",
+      "key": "발신 주소",
+      "semantic_path": "발신처/주소",
+      "anchor_id": "det_000034",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_sender_address",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          788,
+          375,
+          371,
+          30
+        ],
+        "source_text": "경남창원시 마산합포구 진북면산단1길5"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "prepared_date",
+      "key": "작성일",
+      "semantic_path": "결재/작성일",
+      "anchor_id": "det_000035",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_prepared_date",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1282,
+          375,
+          51,
+          27
+        ],
+        "source_text": "12/9"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "reviewed_date",
+      "key": "검토일",
+      "semantic_path": "결재/검토일",
+      "anchor_id": "det_000036",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_reviewed_date",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1408,
+          376,
+          50,
+          27
+        ],
+        "source_text": "12/9"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "approved_date",
+      "key": "승인일",
+      "semantic_path": "결재/승인일",
+      "anchor_id": "det_000037",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_approved_date",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1534,
+          376,
+          49,
+          27
+        ],
+        "source_text": "12/9"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_1_number",
+      "key": "품목 1 번호",
+      "semantic_path": "품목내역/품목1/번호",
+      "anchor_id": "det_000053",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_number",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          78,
+          497,
+          36,
+          24
+        ],
+        "source_text": "1"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_1_item_description",
+      "key": "품목 1 품명/규격",
+      "semantic_path": "품목내역/품목1/품명_규격",
+      "anchor_id": "det_000054",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_item_description",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          120,
+          497,
+          619,
+          24
+        ],
+        "source_text": "Side Retainer Core 직경 및 길이 검사용Jig 폭76.3mm*길이 10Omm"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_1_quantity",
+      "key": "품목 1 수량",
+      "semantic_path": "품목내역/품목1/수량",
+      "anchor_id": "det_000060",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          829,
+          497,
+          119,
+          24
+        ],
+        "source_text": "1"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_1_unit_price",
+      "key": "품목 1 단가",
+      "semantic_path": "품목내역/품목1/단가",
+      "anchor_id": "det_000061",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_1_unit_price",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          954,
+          497,
+          119,
+          24
+        ],
+        "source_text": "60,000"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_1_amount",
+      "key": "품목 1 금액",
+      "semantic_path": "품목내역/품목1/금액",
+      "anchor_id": "det_000062",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_1_amount",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1079,
+          497,
+          161,
+          24
+        ],
+        "source_text": "60,000"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_1_due_date",
+      "key": "품목 1 납기",
+      "semantic_path": "품목내역/품목1/납기",
+      "anchor_id": "det_000063",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_due_date",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "납기 셀은 ASAP 같은 문자열을 직접 수용하며 정적 접미사가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1246,
+          497,
+          120,
+          24
+        ],
+        "source_text": "ASAP"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_2_number",
+      "key": "품목 2 번호",
+      "semantic_path": "품목내역/품목2/번호",
+      "anchor_id": "det_000064",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_number",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          78,
+          527,
+          36,
+          24
+        ],
+        "source_text": "2"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_2_item_description",
+      "key": "품목 2 품명/규격",
+      "semantic_path": "품목내역/품목2/품명_규격",
+      "anchor_id": "det_000065",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_item_description",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          120,
+          527,
+          619,
+          24
+        ],
+        "source_text": "Side Retainer Core 직경 및 길이 검사용Jig폭 77.7mm*길이10Omm"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_2_quantity",
+      "key": "품목 2 수량",
+      "semantic_path": "품목내역/품목2/수량",
+      "anchor_id": "det_000071",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          829,
+          527,
+          119,
+          24
+        ],
+        "source_text": "-"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_2_unit_price",
+      "key": "품목 2 단가",
+      "semantic_path": "품목내역/품목2/단가",
+      "anchor_id": "det_000072",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_2_unit_price",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          954,
+          527,
+          119,
+          24
+        ],
+        "source_text": "60,000"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_2_amount",
+      "key": "품목 2 금액",
+      "semantic_path": "품목내역/품목2/금액",
+      "anchor_id": "det_000073",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_2_amount",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1079,
+          527,
+          161,
+          24
+        ],
+        "source_text": "60,000"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_2_due_date",
+      "key": "품목 2 납기",
+      "semantic_path": "품목내역/품목2/납기",
+      "anchor_id": "det_000074",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_due_date",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "납기 셀은 ASAP 같은 문자열을 직접 수용하며 정적 접미사가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1246,
+          527,
+          120,
+          24
+        ],
+        "source_text": "ASAP"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_2_remark",
+      "key": "공통 비고",
+      "semantic_path": "품목내역/공통비고",
+      "anchor_id": "det_000075",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_remark",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1372,
+          496,
+          244,
+          116
+        ],
+        "source_text": "Core 직경 및 길이 검사용"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_3_number",
+      "key": "품목 3 번호",
+      "semantic_path": "품목내역/품목3/번호",
+      "anchor_id": "det_000076",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_number",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          78,
+          557,
+          36,
+          25
+        ],
+        "source_text": "3"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_3_item_description",
+      "key": "품목 3 품명/규격",
+      "semantic_path": "품목내역/품목3/품명_규격",
+      "anchor_id": "det_000077",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_item_description",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          120,
+          557,
+          619,
+          25
+        ],
+        "source_text": "Side Retainer Core 직경 및 길이 검사용Jig폭 76.3mm*길이 12Omm"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_3_quantity",
+      "key": "품목 3 수량",
+      "semantic_path": "품목내역/품목3/수량",
+      "anchor_id": "det_000082",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          829,
+          557,
+          119,
+          25
+        ],
+        "source_text": "1"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_3_unit_price",
+      "key": "품목 3 단가",
+      "semantic_path": "품목내역/품목3/단가",
+      "anchor_id": "det_000083",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_3_unit_price",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          954,
+          557,
+          119,
+          25
+        ],
+        "source_text": "60,000"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_3_amount",
+      "key": "품목 3 금액",
+      "semantic_path": "품목내역/품목3/금액",
+      "anchor_id": "det_000084",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_3_amount",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1079,
+          557,
+          161,
+          25
+        ],
+        "source_text": "60,000"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_3_due_date",
+      "key": "품목 3 납기",
+      "semantic_path": "품목내역/품목3/납기",
+      "anchor_id": "det_000085",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_due_date",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "납기 셀은 ASAP 같은 문자열을 직접 수용하며 정적 접미사가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1246,
+          557,
+          120,
+          25
+        ],
+        "source_text": "ASAP"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_4_number",
+      "key": "품목 4 번호",
+      "semantic_path": "품목내역/품목4/번호",
+      "anchor_id": "det_000087",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_number",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          78,
+          588,
+          36,
+          24
+        ],
+        "source_text": "4"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_4_item_description",
+      "key": "품목 4 품명/규격",
+      "semantic_path": "품목내역/품목4/품명_규격",
+      "anchor_id": "det_000088",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_item_description",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          120,
+          588,
+          619,
+          24
+        ],
+        "source_text": "Side Retainer Core 직경 및 길이 검사용Jig폭 77.7mm*길이 12Omm"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_4_quantity",
+      "key": "품목 4 수량",
+      "semantic_path": "품목내역/품목4/수량",
+      "anchor_id": "det_000093",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          829,
+          588,
+          119,
+          24
+        ],
+        "source_text": "1"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_4_unit_price",
+      "key": "품목 4 단가",
+      "semantic_path": "품목내역/품목4/단가",
+      "anchor_id": "det_000094",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_4_unit_price",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          954,
+          588,
+          119,
+          24
+        ],
+        "source_text": "60,000"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_4_amount",
+      "key": "품목 4 금액",
+      "semantic_path": "품목내역/품목4/금액",
+      "anchor_id": "det_000095",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_4_amount",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1079,
+          588,
+          161,
+          24
+        ],
+        "source_text": "60,000"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "line_4_due_date",
+      "key": "품목 4 납기",
+      "semantic_path": "품목내역/품목4/납기",
+      "anchor_id": "det_000096",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_due_date",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "납기 셀은 ASAP 같은 문자열을 직접 수용하며 정적 접미사가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1246,
+          588,
+          120,
+          24
+        ],
+        "source_text": "ASAP"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "shipping_address",
+      "key": "발송지",
+      "semantic_path": "납품정보/발송지",
+      "anchor_id": "det_000097",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_shipping_address",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          166,
+          815,
+          530,
+          31
+        ],
+        "source_text": "발송지: 경남 창원시 마산합포구 진북면 산단1길5"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "delivery_site_name",
+      "key": "납품장소명",
+      "semantic_path": "납품정보/납품장소명",
+      "anchor_id": "det_000098",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_delivery_site_name",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          304,
+          869,
+          250,
+          31
+        ],
+        "source_text": "고려이노테크 진북공장"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "supply_total_amount",
+      "key": "공급가합계",
+      "semantic_path": "금액정보/공급가합계",
+      "anchor_id": "det_000100",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_supply_total_amount",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          1079,
+          921,
+          161,
+          25
+        ],
+        "source_text": "240,000"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "form_code",
+      "key": "서식번호",
+      "semantic_path": "문서관리/서식번호",
+      "anchor_id": "det_000107",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_form_code",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          78,
+          1109,
+          226,
+          20
+        ],
+        "source_text": "KIT–QP-S09-01_ReV.0"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    },
+    {
+      "field_id": "issuer_company_footer",
+      "key": "발행회사명",
+      "semantic_path": "문서관리/발행회사명",
+      "anchor_id": "det_000108",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_issuer_company_footer",
+      "unit_policy": {
+        "mode": "none",
+        "reason": "값 bbox 주변에 별도 정적 단위가 없음"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/발주서(PO)·거래명세서__TRD-07/samples/original/발주서_page_001.jpg",
+        "bbox": [
+          796,
+          1108,
+          144,
+          21
+        ],
+        "source_text": "(주)고려이노테크"
+      },
+      "confidence": 0.98,
+      "review_required": false
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 46,
+    "bound_use_anchor_count": 46,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  },
+  "contract_note": "pass 1에서 동결된 field_id와 semantic_path는 pass 2의 불변 계약이다."
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "doc_id": "COL-05",
+  "pass": 2,
+  "unresolved_fields": [
+    {
+      "id": "UNC-001",
+      "field_id": "p1_birth_or_business_number",
+      "issue": "한 bbox가 개인 생년월일과 법인 사업자등록번호를 선택적으로 수용하지만 지원 constraint에 조건부 분기가 없다.",
+      "current_decision": "개인 신청인 합성 레코드만 생성하고 date.kr 기본 rule을 사용한다.",
+      "user_decision_needed": "법인 사례가 필요하면 신청인 유형 필드 또는 개인/법인별 템플릿 분리"
+    },
+    {
+      "id": "UNC-002",
+      "fields": [
+        "p1_land_row_1_location",
+        "p1_land_row_2_location",
+        "p1_land_row_3_location",
+        "p1_land_row_4_location",
+        "p1_land_row_5_location",
+        "p1_land_row_6_location",
+        "p1_land_row_7_location",
+        "p1_land_row_8_location",
+        "p1_land_row_9_location",
+        "p1_land_row_10_location"
+      ],
+      "issue": "원본은 첫 행만 소재지를 표시하고 후속 행은 공란이다.",
+      "current_decision": "record pool에서 첫 행만 소재지를 채우고 후속 행은 공란으로 유지한다.",
+      "user_decision_needed": null
+    },
+    {
+      "id": "UNC-003",
+      "scope": "page_1_only",
+      "issue": "원본은 1/2 문서이나 요청 패키지는 1페이지 77개 use anchor만 제공한다.",
+      "current_decision": "현재 페이지 faker와 관계만 구성했다.",
+      "user_decision_needed": "별도 차수에서 page 2 anchor package 제공"
+    },
+    {
+      "id": "UNC-004",
+      "field_pattern": "p1_land_row_*_price",
+      "issue": "지원 문법에는 연도별 가격 변동률이나 동일 필지 가격 시계열을 직접 계산하는 제약이 없다.",
+      "current_decision": "20개 pick_record 레코드에 완결된 합성 가격 시계열을 사전 구성했다.",
+      "user_decision_needed": null
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "id": "CONFLICT-001",
+      "issue": "레지스트리 제목과 실제 문서 표제가 다름",
+      "resolution": "pass 1의 고정 title과 schema를 변경하지 않음"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "p1_birth_or_business_number",
+      "proposed_rule": "date.kr",
+      "reason": "개인 사례에 한정한 보수적 생성"
+    }
+  ],
+  "coverage_issues": [],
+  "user_decisions_needed": [
+    "법인 신청인 사례 지원 방식",
+    "page 2 별도 authoring 여부"
+  ]
+}

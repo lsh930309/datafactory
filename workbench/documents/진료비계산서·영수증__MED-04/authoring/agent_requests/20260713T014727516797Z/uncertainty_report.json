@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "doc_id": "MED-04",
+  "pass": "2/2_faker_and_relationship_expansion",
+  "unresolved_fields": [
+    {
+      "field_ids": [
+        "patient_total"
+      ],
+      "issue": "서식 공식에 상한액 초과금 차감이 포함되지만 지원 sum 문법은 뺄셈을 표현할 수 없음",
+      "decision_needed": "렌더러에 subtract/formula 관계를 추가하거나 해당 값은 후처리 계산"
+    },
+    {
+      "field_ids": [
+        "amount_due",
+        "unpaid_amount"
+      ],
+      "issue": "각각 환자부담총액-이미납부액, 납부할금액-납부합계의 뺄셈 관계가 필요하나 지원 constraint에 뺄셈이 없음",
+      "decision_needed": "차감 관계 지원 전까지 독립 money.krw 생성 후 numeric_compare만 적용"
+    },
+    {
+      "field_ids": [
+        "doc_kind_discharge",
+        "doc_kind_interim"
+      ],
+      "issue": "퇴원/중간은 입원 선택 시에만 의미가 있으나 조건부 체크박스 관계는 지원되지 않음",
+      "decision_needed": "조건부 exclusive group 지원 여부 검토"
+    },
+    {
+      "field_ids": [
+        "cash_receipt_purpose",
+        "cash_receipt_identity_no",
+        "cash_receipt_approval_no"
+      ],
+      "issue": "현금영수증 선택 여부에 따른 식별번호·승인번호 조건부 생성 관계가 지원되지 않음",
+      "decision_needed": "조건부 렌더링 관계 지원 여부 검토"
+    },
+    {
+      "field_ids": [
+        "drg_number"
+      ],
+      "issue": "템플릿은 질병군 번호만 요구하며 진단명 bbox가 없어 질병-코드 record 관계를 추가할 수 없음",
+      "decision_needed": "현재 pattern 근사를 유지하거나 향후 실제 DRG 코드 pool 승인"
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "issue": "검색 결과에는 과거 별지 제6호와 현행 계열 별지 제7호가 함께 노출됨",
+      "resolution": "고정 schema와 실제 2024-07-18 표기 전체 템플릿을 우선하고, 웹 근거는 의미 보조로만 사용"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "drg_number",
+      "generator": "pattern:AA####",
+      "reason": "지원 문법 내 형식 근사이며 실제 DRG 유효성은 보장하지 않음"
+    },
+    {
+      "field_id": "cash_receipt_identity_no",
+      "generator": "pattern:#############",
+      "reason": "개인정보를 피하기 위해 형식만 합성하며 실제 식별번호 의미 검증은 하지 않음"
+    }
+  ],
+  "scope_limits": [
+    "blank_template 1페이지의 현재 KIE와 값 품질만 다룸",
+    "고정된 schema_draft, anchor_map_draft, research_report, stylesheet_draft의 구조와 바인딩은 변경하지 않음"
+  ],
+  "user_decisions_needed": [
+    "뺄셈/조건부 관계를 렌더러 계약에 추가할지 결정",
+    "DRG 유효 코드 pool을 별도 승인할지 결정"
+  ]
+}

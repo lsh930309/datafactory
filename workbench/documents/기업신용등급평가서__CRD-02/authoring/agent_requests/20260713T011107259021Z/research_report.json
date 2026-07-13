@@ -1,0 +1,24 @@
+{
+  "schema_version":1,
+  "doc_id":"CRD-02",
+  "search_date":"2026-07-13",
+  "queries":[
+    "기업신용평가등급 확인서 공공기관 입찰 기업신용조회회사 공식",
+    "기업신용평가등급확인서 유효기간 평가일 제출처 용도 공식",
+    "기업신용평가등급 체계 회사채 등급 준하는 등급 기업신용평가 공식"
+  ],
+  "sources":[
+    {"evidence_id":"WEB-01","url":"https://www.seoulcredit.co.kr/faq/","source_type":"기업신용평가 서비스 안내","title":"기업신용평가 자주묻는 질문","summary":"공공기관 제출용 기업신용평가등급서는 조달청 입찰 및 공기업 제출에 사용된다는 설명을 제공한다.","applies_to":["submission_purpose"]},
+    {"evidence_id":"WEB-02","url":"https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01520938&bidPbancOrd=000&fileSeq=2&fileType=&prcmBsneSeCd=03","source_type":"공공기관 입찰 원문","title":"나라장터 입찰 첨부문서","summary":"공공기관 입찰용 기업신용평가등급 확인서 제출을 요구하며 등급, 평가일, 유효기간이 확인서의 핵심 평가 정보임을 뒷받침한다.","applies_to":["rating_evaluation_date","rating_valid_until","submission_purpose","credit_rating","rating_description"]},
+    {"evidence_id":"WEB-03","url":"https://krc.korea.ac.kr/bbs/innovation/551/121902/download.do","source_type":"공개된 실제 신용분석보고서","title":"신용분석보고서","summary":"회사명, 대표자, 법인등록번호, 사업자번호, 주소, 재무결산기준일, 등급평가일, 등급유효기간, 제출처 및 용도가 함께 나타나는 실제 문서 구조를 확인했다.","applies_to":["evaluated_company_name","representative_name","corporate_registration_number","business_registration_number","headquarters_address","fiscal_year_end","rating_evaluation_date","rating_valid_until","submission_purpose"]},
+    {"evidence_id":"WEB-04","url":"https://www.kbiz.or.kr/download.do?fleDwnDs=bbsAttachFile&orgalFle=ecb2a8ebb6805f312e32303235eb8584eb8f84ec82b0ec9785eab384ec9790eb848eca780eab480eba6acec8b9cec8aa4ed859cebb3b4eab889eca780ec9b90ec82acec9785ec8b9ced9689eab384ed9a8deab3b5eab3a0ebacb828ec9588295f7666e298852e706466&saveFle=174294943535552510.pdf&seq=85191","source_type":"공공 지원사업 공고 원문","title":"산업계 에너지관리시스템 보급 지원사업 공고","summary":"기업신용평가등급을 회사채 신용평가등급에 준하는 등급으로 대응시키는 표와 확인서 평가 기준을 제공한다.","applies_to":["credit_rating","rating_description"]},
+    {"evidence_id":"VIS-01","url":"local:workbench/documents/기업신용등급평가서__CRD-02/samples/original/기업신용평가서_page_001.jpg","source_type":"전체 템플릿 이미지","title":"CRD-02 원본 1쪽","summary":"모든 필드 타깃, 라벨-값 관계, 날짜 표기, 등급 기호, 수신처 접미어, 단위 포함 여부의 최우선 시각 근거다.","applies_to":["certificate_serial_number","issue_number","recipient_company_name","recipient_suffix","evaluated_company_name","representative_name","corporate_registration_number","business_registration_number","headquarters_address","fiscal_year_end","rating_evaluation_date","rating_valid_until","submission_purpose","credit_rating","rating_description"]}
+  ],
+  "field_evidence":{
+    "document_identity":["VIS-01","WEB-03"],
+    "corporate_identity_fields":["VIS-01","WEB-03"],
+    "rating_dates_and_purpose":["VIS-01","WEB-01","WEB-02","WEB-03"],
+    "rating_and_equivalent_description":["VIS-01","WEB-02","WEB-04"]
+  },
+  "research_conclusion":"웹 근거는 전체 이미지에서 확인된 15개 필드의 의미를 보조하며, 템플릿에 없는 필드는 추가하지 않았다."
+}

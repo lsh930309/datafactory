@@ -32,7 +32,14 @@ COMPANY_SUFFIXES = ["상사", "산업", "테크", "유통", "건설", "파트너
 TEXT_SNIPPETS = ["샘플값", "예시값", "더미값", "테스트값"]
 
 
-def generate_value(field_type: str, rng: random.Random, *, choices: list[str] | None = None, fmt: str | None = None) -> str:
+def generate_value(
+    field_type: str,
+    rng: random.Random,
+    *,
+    choices: list[str] | None = None,
+    fmt: str | None = None,
+    as_of_date: date | None = None,
+) -> str:
     if choices:
         return rng.choice(choices)
 
@@ -42,7 +49,7 @@ def generate_value(field_type: str, rng: random.Random, *, choices: list[str] | 
     if normalized in {"amount", "money", "price"}:
         return _amount(rng)
     if normalized in {"date", "issue_date", "birth_date"}:
-        return _date(rng, fmt or "%Y-%m-%d")
+        return _date(rng, fmt or "%Y-%m-%d", as_of_date=as_of_date)
     if normalized in {"account", "account_no", "account_number"}:
         return _account(rng)
     if normalized in {"address", "road_address"}:
@@ -54,7 +61,7 @@ def generate_value(field_type: str, rng: random.Random, *, choices: list[str] | 
     if normalized in {"medical_institution", "medical_institution_name", "hospital", "clinic"}:
         return _medical_institution(rng)
     if normalized in {"business_reg_no", "business_number"}:
-        return f"{rng.randint(100, 999)}-{rng.randint(10, 99)}-{rng.randint(10000, 99999)}"
+        return _business_registration_number(rng)
     if normalized in {"resident_reg_no", "rrn"}:
         return _rrn(rng)
     if normalized in {"phone", "mobile"}:
@@ -72,9 +79,12 @@ def _amount(rng: random.Random) -> str:
     return f"{rng.randrange(10_000, 9_999_000, 100):,}"
 
 
-def _date(rng: random.Random, fmt: str) -> str:
+def _date(rng: random.Random, fmt: str, *, as_of_date: date | None = None) -> str:
     start = date(2020, 1, 1)
-    value = start + timedelta(days=rng.randint(0, 365 * 8))
+    end = as_of_date or date.today()
+    if end < start:
+        end = start
+    value = start + timedelta(days=rng.randint(0, (end - start).days))
     return value.strftime(fmt)
 
 
@@ -87,7 +97,31 @@ def _rrn(rng: random.Random) -> str:
         sex_digit = "1" if male else "2"
     else:
         sex_digit = "3" if male else "4"
-    return f"{birth:%y%m%d}-{sex_digit}{rng.randint(0, 999999):06d}"
+    return f"{birth:%y%m%d}-{sex_digit}******"
+
+
+def _business_registration_number(rng: random.Random) -> str:
+    """Return a Korean business registration number with a valid checksum."""
+
+    digits = [rng.randint(0, 9) for _ in range(9)]
+    if digits[0] == 0:
+        digits[0] = rng.randint(1, 9)
+    weights = [1, 3, 7, 1, 3, 7, 1, 3, 5]
+    weighted = sum(value * weight for value, weight in zip(digits, weights))
+    weighted += (digits[8] * 5) // 10
+    check_digit = (10 - (weighted % 10)) % 10
+    all_digits = "".join(str(value) for value in [*digits, check_digit])
+    return f"{all_digits[:3]}-{all_digits[3:5]}-{all_digits[5:]}"
+
+
+def is_valid_business_registration_number(value: str) -> bool:
+    digits = [int(char) for char in str(value or "") if char.isdigit()]
+    if len(digits) != 10:
+        return False
+    weights = [1, 3, 7, 1, 3, 7, 1, 3, 5]
+    weighted = sum(number * weight for number, weight in zip(digits[:9], weights))
+    weighted += (digits[8] * 5) // 10
+    return (10 - (weighted % 10)) % 10 == digits[9]
 
 
 def _account(rng: random.Random) -> str:

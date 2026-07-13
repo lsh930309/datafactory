@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "doc_id": "ADM-04",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:g2b.go.kr 견적서 견적금액 부가가치세 품목 수량 단가",
+    "site:law.go.kr 부가가치세 공급가액 세액 견적서",
+    "한국 견적서 필수 항목 공급자 사업자등록번호 품목 수량 단가 부가세"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://formda.kr/tools/estimate",
+      "source_type": "실무 양식·작성 도구 설명",
+      "summary": "견적서는 거래 전 품목·수량·단가·금액과 거래조건을 제시하며 공급자 상호·사업자등록번호·주소·연락처를 함께 둔다.",
+      "applied_fields": [
+        "발행처/*",
+        "견적조건/*",
+        "품목내역/*"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://law.go.kr/LSW/LsiJoLinkP.do?lsNm=%EB%B6%80%EA%B0%80%EA%B0%80%EC%B9%98%EC%84%B8%EB%B2%95",
+      "source_type": "국가법령정보센터·부가가치세법",
+      "summary": "재화·용역 공급 시 공급가액에 세율을 적용한 부가가치세를 거래징수하며 세금계산서에는 법정 기재사항을 둔다. 본 템플릿의 소계·부가세·합계 분리를 해석하는 보조 근거로만 사용했다.",
+      "applied_fields": [
+        "금액요약/소계",
+        "금액요약/부가세",
+        "금액요약/합계"
+      ]
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.law.go.kr/LSW/precInfoR.do?precSeq=183996&vSct=%2A",
+      "source_type": "판례·견적서 세액 해석",
+      "summary": "견적서에서 공급가액과 세액을 구분하고 세액 별도를 표시한 사례가 부가가치세액 해석 근거가 됐다.",
+      "applied_fields": [
+        "견적개요/합계문구",
+        "금액요약/*"
+      ]
+    }
+  ],
+  "method_note": "웹 근거는 실제 전체 템플릿 이미지와 use bbox 해석을 보조하는 데만 사용했으며, 이미지에 없는 필드는 추가하지 않았다."
+}

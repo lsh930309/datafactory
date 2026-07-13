@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-04",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:iccwbo.org documentary credit UCP 600 irrevocable letter of credit fields applicant beneficiary expiry shipment",
+    "site:swift.com documentary credits MT700 field 31D 32B 41A 42C 43P 43T 44E 44F 44C 45A 46A",
+    "site:trade.gov letter of credit documentary credit applicant beneficiary issuing bank documents required",
+    "site:academy.iccwbo.org letter of credit applicant beneficiary issuing bank documents"
+  ],
+  "sources": [
+    {
+      "evidence_id": "RES-001",
+      "url": "https://library.iccwbo.org/content/tfb/RULES/tfb-ucp600-rules.htm?AGENT=ICC_HQ&l3=Rules",
+      "source_type": "official_rule",
+      "title": "ICC UCP 600",
+      "summary": "신용장은 취소불능의 확정적 지급확약이며 applicant, beneficiary, issuing bank, nominated bank 및 complying presentation의 의미를 정의한다.",
+      "field_links": [
+        "신용장조건/신용장형태",
+        "당사자/신청인",
+        "당사자/수익자",
+        "당사자/개설은행",
+        "당사자/사용가능은행_조건"
+      ]
+    },
+    {
+      "evidence_id": "RES-002",
+      "url": "https://www.trade.gov/report/trade-finance-guide",
+      "source_type": "government_guide",
+      "title": "U.S. Trade Administration Trade Finance Guide",
+      "summary": "신용장은 신청인(수입자)을 대신한 개설은행이 수익자(수출자)에게 조건에 맞는 선적서류 제시를 전제로 지급을 약정하는 문서이며 주요 당사자 역할을 설명한다.",
+      "field_links": [
+        "당사자",
+        "문서정보",
+        "물품명세"
+      ]
+    },
+    {
+      "evidence_id": "RES-003",
+      "url": "https://library.iccwbo.org/content/tfb/DIGITAL_COM_BRIEFINGS/20240402_Commercialisation_Briefing_eUCP_MT700_templates_n_3.pdf",
+      "source_type": "official_format_guidance",
+      "title": "ICC Banking Commission MT700 template guidance",
+      "summary": "MT700 40A의 신용장 형태, 45A 물품명세, 46A 요구서류 등 신용장 메시지 필드의 작성 방향과 명확성 원칙을 제공한다.",
+      "field_links": [
+        "신용장조건",
+        "선적조건",
+        "물품명세"
+      ]
+    },
+    {
+      "evidence_id": "RES-004",
+      "url": "https://library.iccwbo.org/content/tfb/pdf/set-of-guidance-papers-on-recommended-principles-and-usages-around-ucp600-rules.pdf",
+      "source_type": "official_guidance",
+      "title": "ICC Guidance Notes for Documentary Credit Formats",
+      "summary": "45A는 물품 및 합의된 무역조건의 간결한 설명, 46A는 요구서류, 47A는 추가조건에 사용하며 불명확한 조건을 피하도록 권고한다.",
+      "field_links": [
+        "물품명세/물품명",
+        "물품명세/HS코드",
+        "물품명세/계약참조문구"
+      ]
+    }
+  ],
+  "evidence_policy": "웹 근거는 시각적으로 확인된 anchor 의미를 보조하며 템플릿에 없는 필드는 추가하지 않음"
+}

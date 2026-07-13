@@ -1,0 +1,2403 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-05",
+  "title": "수출신고필증(적재전, 갑지)",
+  "sample_kind": "filled_sample",
+  "semantic_schema": {
+    "신고 기본정보": {
+      "결재환율": "",
+      "USD환율": "",
+      "제출번호": "",
+      "신고번호": "",
+      "신고일자": "",
+      "신고구분": ""
+    },
+    "신고인": {
+      "신고인 관세사명": "",
+      "신고인 관세사무소": ""
+    },
+    "거래 및 운송": {
+      "결제방법 코드": "",
+      "거래구분 코드": "",
+      "수출 종류 코드": "",
+      "거래구분 명칭": "",
+      "수출 종류 명칭": "",
+      "결제방법 명칭": "",
+      "목적국 코드": "",
+      "적재항 코드": "",
+      "선박회사 항공사": "",
+      "목적국명": "",
+      "적재항": "",
+      "운송형태": ""
+    },
+    "수출자 및 화주": {
+      "수출대행자명": "",
+      "수출자구분": "",
+      "수출대행자 통관고유부호": "",
+      "수출화주명": "",
+      "수출화주 통관고유부호": "",
+      "수출화주 주소": "",
+      "수출화주 소재지": "",
+      "대표자명": "",
+      "사업자등록번호": ""
+    },
+    "검사 및 물품소재지": {
+      "검사희망일": "",
+      "물품소재지 코드": "",
+      "물품소재지 주소": "",
+      "물품상태": "",
+      "사전임시개청 통보여부": ""
+    },
+    "제조자": {
+      "제조자명": "",
+      "제조자 통관고유부호": "",
+      "산업단지부호": "",
+      "제조장소 코드": ""
+    },
+    "구매자 및 환급": {
+      "구매자명": "",
+      "환급신청인": "",
+      "간이환급": "",
+      "구매자부호": ""
+    },
+    "품목": {
+      "품명": "",
+      "거래품명": "",
+      "품목 수량": "",
+      "단가 USD": "",
+      "금액 USD": "",
+      "모델규격": "",
+      "순중량": "",
+      "세번부호": "",
+      "원산지 코드": "",
+      "수출품장부호": ""
+    },
+    "가격 및 결제": {
+      "신고가격 FOB(USD)": "",
+      "신고가격 원화": "",
+      "총신고가격 FOB(USD)": "",
+      "총신고가격 원화": "",
+      "결제금액": "",
+      "운임 원화": "",
+      "보험료 원화": ""
+    },
+    "수출요건 및 포장": {
+      "포장갯수 종류": "",
+      "수출요건확인 번호": "",
+      "발급서류명": "",
+      "총포장갯수": "",
+      "총중량": ""
+    },
+    "수리 및 기한": {
+      "컨테이너 여부": "",
+      "신고수리 세관장": "",
+      "관세사": "",
+      "신고수리일자": "",
+      "적재의무기한": "",
+      "운송기간 시작": "",
+      "운송기간 종료": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "settlement_exchange_rate",
+      "key": "결재환율",
+      "semantic_path": "신고 기본정보/결재환율",
+      "anchor_id": "manual_trd_05_001",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_settlement_exchange_rate",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          141,
+          115,
+          80,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0083_manual_trd_05_001.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "usd_exchange_rate",
+      "key": "USD환율",
+      "semantic_path": "신고 기본정보/USD환율",
+      "anchor_id": "manual_trd_05_002",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_usd_exchange_rate",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          316,
+          115,
+          89,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0084_manual_trd_05_002.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "issue_number",
+      "key": "제출번호",
+      "semantic_path": "신고 기본정보/제출번호",
+      "anchor_id": "manual_trd_05_003",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:***************",
+      "style_class": "style_issue_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          138,
+          148,
+          157,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0085_manual_trd_05_003.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "declaration_number",
+      "key": "신고번호",
+      "semantic_path": "신고 기본정보/신고번호",
+      "anchor_id": "manual_trd_05_006",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:***************",
+      "style_class": "style_declaration_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          471,
+          173,
+          179,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0088_manual_trd_05_006.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "declaration_date",
+      "key": "신고일자",
+      "semantic_path": "신고 기본정보/신고일자",
+      "anchor_id": "manual_trd_05_007",
+      "value": "",
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "style_declaration_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          739,
+          175,
+          103,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0089_manual_trd_05_007.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "declaration_type_name",
+      "key": "신고구분",
+      "semantic_path": "신고 기본정보/신고구분",
+      "anchor_id": "manual_trd_05_008",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_declaration_type_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          875,
+          176,
+          98,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0090_manual_trd_05_008.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "customs_broker_name",
+      "key": "신고인 관세사명",
+      "semantic_path": "신고인/신고인 관세사명",
+      "anchor_id": "manual_trd_05_005",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_customs_broker_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          355,
+          178,
+          62,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0087_manual_trd_05_005.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "customs_broker_office",
+      "key": "신고인 관세사무소",
+      "semantic_path": "신고인/신고인 관세사무소",
+      "anchor_id": "manual_trd_05_004",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_customs_broker_office",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          208,
+          179,
+          141,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0086_manual_trd_05_004.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "payment_method_code",
+      "key": "결제방법 코드",
+      "semantic_path": "거래 및 운송/결제방법 코드",
+      "anchor_id": "manual_1783037371852",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_payment_method_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          1022,
+          209,
+          20,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0153_manual_1783037371852.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "transaction_type_code",
+      "key": "거래구분 코드",
+      "semantic_path": "거래 및 운송/거래구분 코드",
+      "anchor_id": "manual_1783037356836",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_transaction_type_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          722,
+          211,
+          23,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0151_manual_1783037356836.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "export_type_code",
+      "key": "수출 종류 코드",
+      "semantic_path": "거래 및 운송/수출 종류 코드",
+      "anchor_id": "manual_1783037363686",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_export_type_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          845,
+          211,
+          17,
+          19
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0152_manual_1783037363686.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_name_top",
+      "key": "수출대행자명",
+      "semantic_path": "수출자 및 화주/수출대행자명",
+      "anchor_id": "manual_trd_05_009",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_exporter_name_top",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          207,
+          213,
+          132,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0091_manual_trd_05_009.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "transaction_type",
+      "key": "거래구분 명칭",
+      "semantic_path": "거래 및 운송/거래구분 명칭",
+      "anchor_id": "manual_trd_05_012",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_transaction_type",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          638,
+          230,
+          73,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0094_manual_trd_05_012.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "export_type",
+      "key": "수출 종류 명칭",
+      "semantic_path": "거래 및 운송/수출 종류 명칭",
+      "anchor_id": "manual_trd_05_013",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_export_type",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          803,
+          230,
+          71,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0095_manual_trd_05_013.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "payment_method",
+      "key": "결제방법 명칭",
+      "semantic_path": "거래 및 운송/결제방법 명칭",
+      "anchor_id": "manual_trd_05_014",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_payment_method",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          938,
+          230,
+          104,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0096_manual_trd_05_014.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_category",
+      "key": "수출자구분",
+      "semantic_path": "수출자 및 화주/수출자구분",
+      "anchor_id": "manual_trd_05_011",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_exporter_category",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          581,
+          237,
+          22,
+          29
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0093_manual_trd_05_011.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_trade_code_top",
+      "key": "수출대행자 통관고유부호",
+      "semantic_path": "수출자 및 화주/수출대행자 통관고유부호",
+      "anchor_id": "manual_trd_05_010",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:***************",
+      "style_class": "style_exporter_trade_code_top",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          206,
+          239,
+          186,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0092_manual_trd_05_010.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "destination_code",
+      "key": "목적국 코드",
+      "semantic_path": "거래 및 운송/목적국 코드",
+      "anchor_id": "manual_1783037384535",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_destination_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          706,
+          256,
+          26,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0154_manual_1783037384535.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "loading_port_code",
+      "key": "적재항 코드",
+      "semantic_path": "거래 및 운송/적재항 코드",
+      "anchor_id": "manual_1783037391818",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_loading_port_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          862,
+          256,
+          31,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0155_manual_1783037391818.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_name",
+      "key": "수출화주명",
+      "semantic_path": "수출자 및 화주/수출화주명",
+      "anchor_id": "manual_trd_05_019",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_exporter_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          208,
+          274,
+          128,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0100_manual_trd_05_019.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "carrier_name",
+      "key": "선박회사 항공사",
+      "semantic_path": "거래 및 운송/선박회사 항공사",
+      "anchor_id": "manual_trd_05_018",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_carrier_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          938,
+          275,
+          71,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0099_manual_trd_05_018.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "destination_country",
+      "key": "목적국명",
+      "semantic_path": "거래 및 운송/목적국명",
+      "anchor_id": "manual_trd_05_016",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_destination_country",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          636,
+          276,
+          60,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0097_manual_trd_05_016.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "loading_port",
+      "key": "적재항",
+      "semantic_path": "거래 및 운송/적재항",
+      "anchor_id": "manual_trd_05_017",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_loading_port",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          803,
+          276,
+          72,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0098_manual_trd_05_017.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_trade_code",
+      "key": "수출화주 통관고유부호",
+      "semantic_path": "수출자 및 화주/수출화주 통관고유부호",
+      "anchor_id": "manual_trd_05_020",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:***************",
+      "style_class": "style_exporter_trade_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          208,
+          305,
+          183,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0101_manual_trd_05_020.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_address",
+      "key": "수출화주 주소",
+      "semantic_path": "수출자 및 화주/수출화주 주소",
+      "anchor_id": "manual_trd_05_021",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "address.ko",
+      "style_class": "style_exporter_address",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          210,
+          335,
+          215,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0102_manual_trd_05_021.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "transport_type",
+      "key": "운송형태",
+      "semantic_path": "거래 및 운송/운송형태",
+      "anchor_id": "manual_trd_05_026",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_transport_type",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          721,
+          354,
+          64,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0107_manual_trd_05_026.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "inspection_due_date",
+      "key": "검사희망일",
+      "semantic_path": "검사 및 물품소재지/검사희망일",
+      "anchor_id": "manual_trd_05_025",
+      "value": "",
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "style_inspection_due_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          960,
+          354,
+          94,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0106_manual_trd_05_025.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_location_code",
+      "key": "수출화주 소재지",
+      "semantic_path": "수출자 및 화주/수출화주 소재지",
+      "anchor_id": "manual_trd_05_023",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_exporter_location_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          566,
+          361,
+          36,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0104_manual_trd_05_023.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_representative_name",
+      "key": "대표자명",
+      "semantic_path": "수출자 및 화주/대표자명",
+      "anchor_id": "manual_trd_05_022",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_exporter_representative_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          208,
+          363,
+          59,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0103_manual_trd_05_022.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "goods_location_code",
+      "key": "물품소재지 코드",
+      "semantic_path": "검사 및 물품소재지/물품소재지 코드",
+      "anchor_id": "manual_trd_05_027",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_goods_location_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          763,
+          392,
+          34,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0108_manual_trd_05_027.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_business_registration_number",
+      "key": "사업자등록번호",
+      "semantic_path": "수출자 및 화주/사업자등록번호",
+      "anchor_id": "manual_trd_05_024",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "business_reg_no",
+      "style_class": "style_exporter_business_registration_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          208,
+          393,
+          113,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0105_manual_trd_05_024.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "goods_location_address",
+      "key": "물품소재지 주소",
+      "semantic_path": "검사 및 물품소재지/물품소재지 주소",
+      "anchor_id": "manual_trd_05_028",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "address.ko",
+      "style_class": "style_goods_location_address",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          639,
+          413,
+          214,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0109_manual_trd_05_028.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "manufacturer_name",
+      "key": "제조자명",
+      "semantic_path": "제조자/제조자명",
+      "anchor_id": "manual_trd_05_029",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_manufacturer_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          208,
+          444,
+          128,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0110_manual_trd_05_029.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "goods_status",
+      "key": "물품상태",
+      "semantic_path": "검사 및 물품소재지/물품상태",
+      "anchor_id": "manual_1783036542616",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_goods_status",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          946,
+          448,
+          18,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0146_manual_1783036542616.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "manufacturer_trade_code",
+      "key": "제조자 통관고유부호",
+      "semantic_path": "제조자/제조자 통관고유부호",
+      "anchor_id": "manual_trd_05_030",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:***************",
+      "style_class": "style_manufacturer_trade_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          208,
+          469,
+          184,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0111_manual_trd_05_030.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "notice_request_flag",
+      "key": "사전임시개청 통보여부",
+      "semantic_path": "검사 및 물품소재지/사전임시개청 통보여부",
+      "anchor_id": "manual_1783036537532",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_notice_request_flag",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          823,
+          490,
+          17,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0145_manual_1783036537532.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "industrial_zone_code",
+      "key": "산업단지부호",
+      "semantic_path": "제조자/산업단지부호",
+      "anchor_id": "manual_trd_05_032",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_industrial_zone_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          468,
+          495,
+          38,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0113_manual_trd_05_032.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "manufacture_place_code",
+      "key": "제조장소 코드",
+      "semantic_path": "제조자/제조장소 코드",
+      "anchor_id": "manual_trd_05_031",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_manufacture_place_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          208,
+          498,
+          35,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0112_manual_trd_05_031.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "buyer_name",
+      "key": "구매자명",
+      "semantic_path": "구매자 및 환급/구매자명",
+      "anchor_id": "manual_trd_05_033",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_buyer_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          209,
+          530,
+          106,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0114_manual_trd_05_033.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "refund_applicant_type",
+      "key": "환급신청인",
+      "semantic_path": "구매자 및 환급/환급신청인",
+      "anchor_id": "manual_trd_05_035",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_refund_applicant_type",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          735,
+          532,
+          21,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0116_manual_trd_05_035.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "refund_applicant_description",
+      "key": "간이환급",
+      "semantic_path": "구매자 및 환급/간이환급",
+      "anchor_id": "manual_trd_05_036",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_refund_applicant_description",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          735,
+          553,
+          65,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0117_manual_trd_05_036.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "buyer_code",
+      "key": "구매자부호",
+      "semantic_path": "구매자 및 환급/구매자부호",
+      "anchor_id": "manual_trd_05_034",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:***************",
+      "style_class": "style_buyer_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          209,
+          554,
+          120,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0115_manual_trd_05_034.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "goods_name",
+      "key": "품명",
+      "semantic_path": "품목/품명",
+      "anchor_id": "manual_trd_05_038",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_goods_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          171,
+          623,
+          165,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0118_manual_trd_05_038.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "trade_goods_name",
+      "key": "거래품명",
+      "semantic_path": "품목/거래품명",
+      "anchor_id": "manual_trd_05_039",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_trade_goods_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          172,
+          645,
+          294,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0119_manual_trd_05_039.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "item_quantity",
+      "key": "품목 수량",
+      "semantic_path": "품목/품목 수량",
+      "anchor_id": "manual_trd_05_041",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_quantity",
+      "unit_policy": {
+        "mode": "include_in_value",
+        "evidence": "전체 이미지의 값 영역에 수량 또는 중량과 괄호 단위가 함께 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          728,
+          710,
+          57,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0121_manual_trd_05_041.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "unit_price_usd",
+      "key": "단가 USD",
+      "semantic_path": "품목/단가 USD",
+      "anchor_id": "manual_trd_05_042",
+      "value": "",
+      "value_type": "money",
+      "faker_rule": "pattern:#######",
+      "style_class": "style_unit_price_usd",
+      "unit_policy": {
+        "mode": "omit_static_label_unit",
+        "unit": "USD",
+        "evidence": "USD/FOB는 열 라벨에 표시되고 값 영역에는 통화기호 또는 숫자가 표시됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          838,
+          711,
+          87,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0122_manual_trd_05_042.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "amount_usd",
+      "key": "금액 USD",
+      "semantic_path": "품목/금액 USD",
+      "anchor_id": "manual_trd_05_043",
+      "value": "",
+      "value_type": "money",
+      "faker_rule": "pattern:#######",
+      "style_class": "style_amount_usd",
+      "unit_policy": {
+        "mode": "omit_static_label_unit",
+        "unit": "USD",
+        "evidence": "USD/FOB는 열 라벨에 표시되고 값 영역에는 통화기호 또는 숫자가 표시됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          988,
+          711,
+          87,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0123_manual_trd_05_043.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "model_specification",
+      "key": "모델규격",
+      "semantic_path": "품목/모델규격",
+      "anchor_id": "manual_trd_05_040",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_model_specification",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          52,
+          713,
+          110,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0120_manual_trd_05_040.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "reported_price_fob",
+      "key": "신고가격 FOB(USD)",
+      "semantic_path": "가격 및 결제/신고가격 FOB(USD)",
+      "anchor_id": "manual_trd_05_047",
+      "value": "",
+      "value_type": "money",
+      "faker_rule": "pattern:#######",
+      "style_class": "style_reported_price_fob",
+      "unit_policy": {
+        "mode": "omit_static_label_unit",
+        "unit": "USD",
+        "evidence": "USD/FOB는 열 라벨에 표시되고 값 영역에는 통화기호 또는 숫자가 표시됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          981,
+          892,
+          96,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0127_manual_trd_05_047.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "net_weight",
+      "key": "순중량",
+      "semantic_path": "품목/순중량",
+      "anchor_id": "manual_trd_05_045",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_net_weight",
+      "unit_policy": {
+        "mode": "include_in_value",
+        "evidence": "전체 이미지의 값 영역에 수량 또는 중량과 괄호 단위가 함께 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          511,
+          898,
+          65,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0125_manual_trd_05_045.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "hs_code",
+      "key": "세번부호",
+      "semantic_path": "품목/세번부호",
+      "anchor_id": "manual_trd_05_044",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:***************",
+      "style_class": "style_hs_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          183,
+          900,
+          109,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0124_manual_trd_05_044.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "reported_price_krw",
+      "key": "신고가격 원화",
+      "semantic_path": "가격 및 결제/신고가격 원화",
+      "anchor_id": "manual_1783036900366",
+      "value": "",
+      "value_type": "money",
+      "faker_rule": "money.krw",
+      "style_class": "style_reported_price_krw",
+      "unit_policy": {
+        "mode": "preserve_value_currency_marker",
+        "unit": "KRW",
+        "evidence": "원화 값 행은 W 표기 또는 원화 숫자 문자열이 값 영역에 나타남"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          946,
+          913,
+          132,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0148_manual_1783036900366.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "package_count_type",
+      "key": "포장갯수 종류",
+      "semantic_path": "수출요건 및 포장/포장갯수 종류",
+      "anchor_id": "manual_trd_05_049",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_package_count_type",
+      "unit_policy": {
+        "mode": "include_in_value",
+        "evidence": "전체 이미지의 값 영역에 수량 또는 중량과 괄호 단위가 함께 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          1026,
+          942,
+          52,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0129_manual_trd_05_049.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "origin_country_code",
+      "key": "원산지 코드",
+      "semantic_path": "품목/원산지 코드",
+      "anchor_id": "manual_1783037014782",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_origin_country_code",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          710,
+          945,
+          61,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0150_manual_1783037014782.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "export_goods_number",
+      "key": "수출품장부호",
+      "semantic_path": "품목/수출품장부호",
+      "anchor_id": "manual_trd_05_048",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:***************",
+      "style_class": "style_export_goods_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          190,
+          946,
+          101,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0128_manual_trd_05_048.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "export_requirement_approval_number",
+      "key": "수출요건확인 번호",
+      "semantic_path": "수출요건 및 포장/수출요건확인 번호",
+      "anchor_id": "manual_trd_05_050",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:***************",
+      "style_class": "style_export_requirement_approval_number",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          229,
+          983,
+          164,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0130_manual_trd_05_050.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "export_requirement_document_name",
+      "key": "발급서류명",
+      "semantic_path": "수출요건 및 포장/발급서류명",
+      "anchor_id": "manual_trd_05_051",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_export_requirement_document_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          223,
+          1007,
+          177,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0131_manual_trd_05_051.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "total_reported_price_fob",
+      "key": "총신고가격 FOB(USD)",
+      "semantic_path": "가격 및 결제/총신고가격 FOB(USD)",
+      "anchor_id": "manual_trd_05_054",
+      "value": "",
+      "value_type": "money",
+      "faker_rule": "pattern:#######",
+      "style_class": "style_total_reported_price_fob",
+      "unit_policy": {
+        "mode": "omit_static_label_unit",
+        "unit": "USD",
+        "evidence": "USD/FOB는 열 라벨에 표시되고 값 영역에는 통화기호 또는 숫자가 표시됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          982,
+          1038,
+          95,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0134_manual_trd_05_054.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "total_package_count",
+      "key": "총포장갯수",
+      "semantic_path": "수출요건 및 포장/총포장갯수",
+      "anchor_id": "manual_trd_05_053",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_total_package_count",
+      "unit_policy": {
+        "mode": "include_in_value",
+        "evidence": "전체 이미지의 값 영역에 수량 또는 중량과 괄호 단위가 함께 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          582,
+          1046,
+          51,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0133_manual_trd_05_053.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "total_gross_weight",
+      "key": "총중량",
+      "semantic_path": "수출요건 및 포장/총중량",
+      "anchor_id": "manual_trd_05_052",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_total_gross_weight",
+      "unit_policy": {
+        "mode": "include_in_value",
+        "evidence": "전체 이미지의 값 영역에 수량 또는 중량과 괄호 단위가 함께 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          244,
+          1049,
+          63,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0132_manual_trd_05_052.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "total_reported_price_krw",
+      "key": "총신고가격 원화",
+      "semantic_path": "가격 및 결제/총신고가격 원화",
+      "anchor_id": "manual_1783036910915",
+      "value": "",
+      "value_type": "money",
+      "faker_rule": "money.krw",
+      "style_class": "style_total_reported_price_krw",
+      "unit_policy": {
+        "mode": "preserve_value_currency_marker",
+        "unit": "KRW",
+        "evidence": "원화 값 행은 W 표기 또는 원화 숫자 문자열이 값 영역에 나타남"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          949,
+          1062,
+          128,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0149_manual_1783036910915.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "payment_amount_text",
+      "key": "결제금액",
+      "semantic_path": "가격 및 결제/결제금액",
+      "anchor_id": "manual_trd_05_057",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_payment_amount_text",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          803,
+          1096,
+          179,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0137_manual_trd_05_057.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "freight_krw",
+      "key": "운임 원화",
+      "semantic_path": "가격 및 결제/운임 원화",
+      "anchor_id": "manual_trd_05_055",
+      "value": "",
+      "value_type": "money",
+      "faker_rule": "money.krw",
+      "style_class": "style_freight_krw",
+      "unit_policy": {
+        "mode": "preserve_value_currency_marker",
+        "unit": "KRW",
+        "evidence": "원화 값 행은 W 표기 또는 원화 숫자 문자열이 값 영역에 나타남"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          297,
+          1097,
+          84,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0135_manual_trd_05_055.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "insurance_krw",
+      "key": "보험료 원화",
+      "semantic_path": "가격 및 결제/보험료 원화",
+      "anchor_id": "manual_trd_05_056",
+      "value": "",
+      "value_type": "money",
+      "faker_rule": "money.krw",
+      "style_class": "style_insurance_krw",
+      "unit_policy": {
+        "mode": "preserve_value_currency_marker",
+        "unit": "KRW",
+        "evidence": "원화 값 행은 W 표기 또는 원화 숫자 문자열이 값 영역에 나타남"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          566,
+          1097,
+          67,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0136_manual_trd_05_056.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "container_flag",
+      "key": "컨테이너 여부",
+      "semantic_path": "수리 및 기한/컨테이너 여부",
+      "anchor_id": "manual_trd_05_058",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_container_flag",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          1055,
+          1139,
+          18,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0138_manual_trd_05_058.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "customs_chief_name",
+      "key": "신고수리 세관장",
+      "semantic_path": "수리 및 기한/신고수리 세관장",
+      "anchor_id": "manual_trd_05_059",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_customs_chief_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          942,
+          1275,
+          89,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0139_manual_trd_05_059.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "customs_officer_name",
+      "key": "관세사",
+      "semantic_path": "수리 및 기한/관세사",
+      "anchor_id": "manual_trd_05_060",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_customs_officer_name",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          959,
+          1308,
+          76,
+          30
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0140_manual_trd_05_060.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "acceptance_date",
+      "key": "신고수리일자",
+      "semantic_path": "수리 및 기한/신고수리일자",
+      "anchor_id": "manual_trd_05_064",
+      "value": "",
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "style_acceptance_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          975,
+          1411,
+          95,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0144_manual_trd_05_064.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "loading_due_date",
+      "key": "적재의무기한",
+      "semantic_path": "수리 및 기한/적재의무기한",
+      "anchor_id": "manual_trd_05_063",
+      "value": "",
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "style_loading_due_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          551,
+          1414,
+          97,
+          28
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0143_manual_trd_05_063.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "period_start_date",
+      "key": "운송기간 시작",
+      "semantic_path": "수리 및 기한/운송기간 시작",
+      "anchor_id": "manual_trd_05_061",
+      "value": "",
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "style_period_start_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          116,
+          1424,
+          103,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0141_manual_trd_05_061.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    },
+    {
+      "field_id": "period_end_date",
+      "key": "운송기간 종료",
+      "semantic_path": "수리 및 기한/운송기간 종료",
+      "anchor_id": "manual_trd_05_062",
+      "value": "",
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "style_period_end_date",
+      "unit_policy": {
+        "mode": "none"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
+        "bbox": [
+          265,
+          1424,
+          103,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/visual_evidence/crops/crop_0142_manual_trd_05_062.png",
+        "full_image_checked": true
+      },
+      "confidence": 0.92,
+      "review_required": false
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 71,
+    "bound_use_anchor_count": 71,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  },
+  "contract_note": "field_id는 2차 faker/relationship pass의 immutable contract이다."
+}

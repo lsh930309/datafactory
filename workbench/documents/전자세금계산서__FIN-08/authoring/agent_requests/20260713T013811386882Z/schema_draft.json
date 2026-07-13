@@ -1,0 +1,3200 @@
+{
+  "schema_version": 2,
+  "doc_id": "FIN-08",
+  "title": "전자세금계산서",
+  "sample_kind": "filled_sample",
+  "semantic_schema": {
+    "승인번호": "",
+    "공급자": {
+      "등록번호": "",
+      "종사업장번호": "",
+      "상호": "",
+      "성명": "",
+      "사업장주소": "",
+      "업태": "",
+      "종목": "",
+      "이메일": ""
+    },
+    "공급받는자": {
+      "등록번호": "",
+      "종사업장번호": "",
+      "상호": "",
+      "성명": "",
+      "사업장주소": "",
+      "업태": "",
+      "종목": "",
+      "이메일1": "",
+      "이메일2": ""
+    },
+    "거래요약": {
+      "작성일자": "",
+      "공급가액": "",
+      "세액": "",
+      "수정사유": "",
+      "비고": ""
+    },
+    "품목내역": {
+      "1행": {
+        "월": "",
+        "일": "",
+        "품목": "",
+        "규격": "",
+        "수량": "",
+        "단가": "",
+        "공급가액": "",
+        "세액": "",
+        "비고": ""
+      },
+      "2행": {
+        "월": "",
+        "일": "",
+        "품목": "",
+        "규격": "",
+        "수량": "",
+        "단가": "",
+        "공급가액": "",
+        "세액": "",
+        "비고": ""
+      },
+      "3행": {
+        "월": "",
+        "일": "",
+        "품목": "",
+        "규격": "",
+        "수량": "",
+        "단가": "",
+        "공급가액": "",
+        "세액": "",
+        "비고": ""
+      },
+      "4행": {
+        "월": "",
+        "일": "",
+        "품목": "",
+        "규격": "",
+        "수량": "",
+        "단가": "",
+        "공급가액": "",
+        "세액": "",
+        "비고": ""
+      }
+    },
+    "결제": {
+      "합계금액": "",
+      "현금": "",
+      "수표": "",
+      "어음": "",
+      "외상미수금": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "approval_number",
+      "label": "승인번호",
+      "semantic_path": [
+        "승인번호"
+      ],
+      "anchor_id": "visual_0002",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:########################",
+      "style_class": "style_approval_number",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          687,
+          14,
+          400,
+          44
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "supplier_business_registration_number",
+      "label": "공급자 등록번호",
+      "semantic_path": [
+        "공급자",
+        "등록번호"
+      ],
+      "anchor_id": "det_000004",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000003"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:###-##-#####",
+      "style_class": "style_supplier_business_registration_number",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          149,
+          62,
+          186,
+          43
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "632-08-00201",
+        "confidence": 0.9718226790428162
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "supplier_branch_number",
+      "label": "공급자 종사업장번호",
+      "semantic_path": [
+        "공급자",
+        "종사업장번호"
+      ],
+      "anchor_id": "manual_1783511142890",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000005",
+        "det_000008"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####",
+      "style_class": "style_supplier_branch_number",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          417,
+          63,
+          131,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "supplier_company_name",
+      "label": "공급자 상호(법인명)",
+      "semantic_path": [
+        "공급자",
+        "상호"
+      ],
+      "anchor_id": "det_000011",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000010",
+        "det_000015"
+      ],
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_supplier_company_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          150,
+          105,
+          184,
+          44
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "한경세무회계",
+        "confidence": 0.9992027878761292
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "supplier_representative_name",
+      "label": "공급자 성명",
+      "semantic_path": [
+        "공급자",
+        "성명"
+      ],
+      "anchor_id": "det_000013",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000012"
+      ],
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_supplier_representative_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          416,
+          105,
+          131,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "정영록",
+        "confidence": 0.9776083827018738
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "supplier_business_address",
+      "label": "공급자 사업장 주소",
+      "semantic_path": [
+        "공급자",
+        "사업장주소"
+      ],
+      "anchor_id": "det_000021",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000020",
+        "det_000023"
+      ],
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_supplier_business_address",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          149,
+          149,
+          399,
+          44
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "서울특별시 영등포구 선유동1로 32,301호(당산동3가,신 일빌딩)",
+        "confidence": 0.9708534777164459
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "supplier_business_type",
+      "label": "공급자 업태",
+      "semantic_path": [
+        "공급자",
+        "업태"
+      ],
+      "anchor_id": "det_000027",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000026"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:business_types",
+      "style_class": "style_supplier_business_type",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          149,
+          194,
+          105,
+          39
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "전문,과학 및 기술서비스업",
+        "confidence": 0.960586279630661
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "supplier_business_item",
+      "label": "공급자 종목",
+      "semantic_path": [
+        "공급자",
+        "종목"
+      ],
+      "anchor_id": "det_000029",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:business_items",
+      "style_class": "style_supplier_business_item",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          337,
+          195,
+          211,
+          37
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "회계감사 및 사업비정산",
+        "confidence": 0.9871686100959778
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "supplier_email",
+      "label": "공급자 이메일",
+      "semantic_path": [
+        "공급자",
+        "이메일"
+      ],
+      "anchor_id": "visual_0018",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000034"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_supplier_email",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          149,
+          234,
+          399,
+          64
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "recipient_business_registration_number",
+      "label": "공급받는자 등록번호",
+      "semantic_path": [
+        "공급받는자",
+        "등록번호"
+      ],
+      "anchor_id": "visual_0005",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000006"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:###-##-#####",
+      "style_class": "style_recipient_business_registration_number",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          688,
+          62,
+          185,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "recipient_branch_number",
+      "label": "공급받는자 종사업장번호",
+      "semantic_path": [
+        "공급받는자",
+        "종사업장번호"
+      ],
+      "anchor_id": "visual_0006",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000007",
+        "det_000009"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####",
+      "style_class": "style_recipient_branch_number",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          957,
+          62,
+          131,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "recipient_company_name",
+      "label": "공급받는자 상호(법인명)",
+      "semantic_path": [
+        "공급받는자",
+        "상호"
+      ],
+      "anchor_id": "visual_0007",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000014",
+        "det_000017"
+      ],
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_recipient_company_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          688,
+          106,
+          185,
+          39
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "recipient_representative_name",
+      "label": "공급받는자 성명",
+      "semantic_path": [
+        "공급받는자",
+        "성명"
+      ],
+      "anchor_id": "visual_0008",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000018"
+      ],
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_recipient_representative_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          957,
+          106,
+          131,
+          39
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "recipient_business_address",
+      "label": "공급받는자 사업장 주소",
+      "semantic_path": [
+        "공급받는자",
+        "사업장주소"
+      ],
+      "anchor_id": "visual_0009",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000022",
+        "det_000025"
+      ],
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_recipient_business_address",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          688,
+          149,
+          399,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "recipient_business_type",
+      "label": "공급받는자 업태",
+      "semantic_path": [
+        "공급받는자",
+        "업태"
+      ],
+      "anchor_id": "manual_1783510826259",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000030"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:business_types",
+      "style_class": "style_recipient_business_type",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          689,
+          195,
+          106,
+          37
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "recipient_business_item",
+      "label": "공급받는자 종목",
+      "semantic_path": [
+        "공급받는자",
+        "종목"
+      ],
+      "anchor_id": "visual_0013",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000031"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:business_items",
+      "style_class": "style_recipient_business_item",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          875,
+          194,
+          213,
+          36
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "recipient_email_1",
+      "label": "공급받는자 이메일 1",
+      "semantic_path": [
+        "공급받는자",
+        "이메일1"
+      ],
+      "anchor_id": "visual_0015",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000033"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_recipient_email_1",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          688,
+          233,
+          399,
+          32
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "recipient_email_2",
+      "label": "공급받는자 이메일 2",
+      "semantic_path": [
+        "공급받는자",
+        "이메일2"
+      ],
+      "anchor_id": "visual_0019",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000035"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_recipient_email_2",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          689,
+          268,
+          400,
+          30
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "issue_date",
+      "label": "작성일자",
+      "semantic_path": [
+        "거래요약",
+        "작성일자"
+      ],
+      "anchor_id": "det_000041",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000036"
+      ],
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_issue_date",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          15,
+          336,
+          132,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "2023-01-03",
+        "confidence": 0.991089940071106
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "summary_supply_amount",
+      "label": "공급가액",
+      "semantic_path": [
+        "거래요약",
+        "공급가액"
+      ],
+      "anchor_id": "det_000042",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000037"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_summary_supply_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          151,
+          336,
+          198,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "300,000",
+        "confidence": 0.9993744492530823
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "summary_tax_amount",
+      "label": "세액",
+      "semantic_path": [
+        "거래요약",
+        "세액"
+      ],
+      "anchor_id": "det_000043",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000038"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_summary_tax_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          351,
+          336,
+          199,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "30,000",
+        "confidence": 0.9994680285453796
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "amendment_reason",
+      "label": "수정사유",
+      "semantic_path": [
+        "거래요약",
+        "수정사유"
+      ],
+      "anchor_id": "visual_0022",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:amendment_reasons",
+      "style_class": "style_amendment_reason",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          551,
+          335,
+          136,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "summary_note",
+      "label": "비고",
+      "semantic_path": [
+        "거래요약",
+        "비고"
+      ],
+      "anchor_id": "visual_0023",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000040"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:summary_notes",
+      "style_class": "style_summary_note",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          689,
+          335,
+          399,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line1_month",
+      "label": "1행 월",
+      "semantic_path": [
+        "품목내역",
+        "1행",
+        "월"
+      ],
+      "anchor_id": "det_000053",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_line1_month",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          15,
+          413,
+          36,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "01",
+        "confidence": 0.9996124505996704
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line1_day",
+      "label": "1행 일",
+      "semantic_path": [
+        "품목내역",
+        "1행",
+        "일"
+      ],
+      "anchor_id": "det_000054",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_line1_day",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          53,
+          413,
+          38,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "03",
+        "confidence": 0.9988964796066284
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line1_item_name",
+      "label": "1행 품목",
+      "semantic_path": [
+        "품목내역",
+        "1행",
+        "품목"
+      ],
+      "anchor_id": "det_000055",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:item_names",
+      "style_class": "style_line1_item_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          93,
+          413,
+          270,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "수수료",
+        "confidence": 0.9998483657836914
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line1_specification",
+      "label": "1행 규격",
+      "semantic_path": [
+        "품목내역",
+        "1행",
+        "규격"
+      ],
+      "anchor_id": "manual_1783510901475",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:item_specs",
+      "style_class": "style_line1_specification",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          365,
+          413,
+          91,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line1_quantity",
+      "label": "1행 수량",
+      "semantic_path": [
+        "품목내역",
+        "1행",
+        "수량"
+      ],
+      "anchor_id": "manual_1783510909542",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000048"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "choice:1|2|3|5|10",
+      "style_class": "style_line1_quantity",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          461,
+          412,
+          89,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line1_unit_price",
+      "label": "1행 단가",
+      "semantic_path": [
+        "품목내역",
+        "1행",
+        "단가"
+      ],
+      "anchor_id": "manual_1783510914842",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000049"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line1_unit_price",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          553,
+          412,
+          132,
+          43
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line1_supply_amount",
+      "label": "1행 공급가액",
+      "semantic_path": [
+        "품목내역",
+        "1행",
+        "공급가액"
+      ],
+      "anchor_id": "det_000056",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line1_supply_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          688,
+          411,
+          159,
+          43
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "300,000",
+        "confidence": 0.9995126128196716
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line1_tax_amount",
+      "label": "1행 세액",
+      "semantic_path": [
+        "품목내역",
+        "1행",
+        "세액"
+      ],
+      "anchor_id": "det_000057",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000051"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line1_tax_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          849,
+          412,
+          132,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "30,000",
+        "confidence": 0.9994502067565918
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line1_remark",
+      "label": "1행 비고",
+      "semantic_path": [
+        "품목내역",
+        "1행",
+        "비고"
+      ],
+      "anchor_id": "manual_1783510924942",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000052"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:line_remarks",
+      "style_class": "style_line1_remark",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          984,
+          413,
+          103,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line2_month",
+      "label": "2행 월",
+      "semantic_path": [
+        "품목내역",
+        "2행",
+        "월"
+      ],
+      "anchor_id": "manual_1783510962924",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_line2_month",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          14,
+          455,
+          38,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line2_day",
+      "label": "2행 일",
+      "semantic_path": [
+        "품목내역",
+        "2행",
+        "일"
+      ],
+      "anchor_id": "manual_1783510968208",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_line2_day",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          54,
+          456,
+          40,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line2_item_name",
+      "label": "2행 품목",
+      "semantic_path": [
+        "품목내역",
+        "2행",
+        "품목"
+      ],
+      "anchor_id": "manual_1783510994008",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:item_names",
+      "style_class": "style_line2_item_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          96,
+          456,
+          267,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line2_specification",
+      "label": "2행 규격",
+      "semantic_path": [
+        "품목내역",
+        "2행",
+        "규격"
+      ],
+      "anchor_id": "manual_1783511010823",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:item_specs",
+      "style_class": "style_line2_specification",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          363,
+          455,
+          93,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line2_quantity",
+      "label": "2행 수량",
+      "semantic_path": [
+        "품목내역",
+        "2행",
+        "수량"
+      ],
+      "anchor_id": "manual_1783511024107",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000048"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "choice:1|2|3|5|10",
+      "style_class": "style_line2_quantity",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          458,
+          453,
+          94,
+          45
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line2_unit_price",
+      "label": "2행 단가",
+      "semantic_path": [
+        "품목내역",
+        "2행",
+        "단가"
+      ],
+      "anchor_id": "manual_1783511036824",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000049"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line2_unit_price",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          553,
+          456,
+          135,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line2_supply_amount",
+      "label": "2행 공급가액",
+      "semantic_path": [
+        "품목내역",
+        "2행",
+        "공급가액"
+      ],
+      "anchor_id": "manual_1783511041541",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line2_supply_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          687,
+          456,
+          161,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line2_tax_amount",
+      "label": "2행 세액",
+      "semantic_path": [
+        "품목내역",
+        "2행",
+        "세액"
+      ],
+      "anchor_id": "manual_1783510945874",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000051"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line2_tax_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          850,
+          456,
+          132,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line2_remark",
+      "label": "2행 비고",
+      "semantic_path": [
+        "품목내역",
+        "2행",
+        "비고"
+      ],
+      "anchor_id": "manual_1783510928574",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000052"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:line_remarks",
+      "style_class": "style_line2_remark",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          983,
+          456,
+          106,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line3_month",
+      "label": "3행 월",
+      "semantic_path": [
+        "품목내역",
+        "3행",
+        "월"
+      ],
+      "anchor_id": "manual_1783510970773",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_line3_month",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          13,
+          498,
+          38,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line3_day",
+      "label": "3행 일",
+      "semantic_path": [
+        "품목내역",
+        "3행",
+        "일"
+      ],
+      "anchor_id": "manual_1783510973909",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_line3_day",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          54,
+          498,
+          38,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line3_item_name",
+      "label": "3행 품목",
+      "semantic_path": [
+        "품목내역",
+        "3행",
+        "품목"
+      ],
+      "anchor_id": "manual_1783511000658",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:item_names",
+      "style_class": "style_line3_item_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          92,
+          498,
+          271,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line3_specification",
+      "label": "3행 규격",
+      "semantic_path": [
+        "품목내역",
+        "3행",
+        "규격"
+      ],
+      "anchor_id": "manual_1783511014741",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:item_specs",
+      "style_class": "style_line3_specification",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          363,
+          498,
+          94,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line3_quantity",
+      "label": "3행 수량",
+      "semantic_path": [
+        "품목내역",
+        "3행",
+        "수량"
+      ],
+      "anchor_id": "manual_1783511030024",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000048"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "choice:1|2|3|5|10",
+      "style_class": "style_line3_quantity",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          458,
+          499,
+          96,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line3_unit_price",
+      "label": "3행 단가",
+      "semantic_path": [
+        "품목내역",
+        "3행",
+        "단가"
+      ],
+      "anchor_id": "manual_1783511045623",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000049"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line3_unit_price",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          553,
+          498,
+          132,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line3_supply_amount",
+      "label": "3행 공급가액",
+      "semantic_path": [
+        "품목내역",
+        "3행",
+        "공급가액"
+      ],
+      "anchor_id": "manual_1783511050374",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line3_supply_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          686,
+          498,
+          162,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line3_tax_amount",
+      "label": "3행 세액",
+      "semantic_path": [
+        "품목내역",
+        "3행",
+        "세액"
+      ],
+      "anchor_id": "manual_1783510950823",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000051"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line3_tax_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          850,
+          498,
+          131,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line3_remark",
+      "label": "3행 비고",
+      "semantic_path": [
+        "품목내역",
+        "3행",
+        "비고"
+      ],
+      "anchor_id": "manual_1783510935325",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000052"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:line_remarks",
+      "style_class": "style_line3_remark",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          984,
+          499,
+          103,
+          38
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line4_month",
+      "label": "4행 월",
+      "semantic_path": [
+        "품목내역",
+        "4행",
+        "월"
+      ],
+      "anchor_id": "manual_1783510976657",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000044"
+      ],
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_line4_month",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          14,
+          541,
+          37,
+          38
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line4_day",
+      "label": "4행 일",
+      "semantic_path": [
+        "품목내역",
+        "4행",
+        "일"
+      ],
+      "anchor_id": "manual_1783510978923",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000045"
+      ],
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_line4_day",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          55,
+          540,
+          37,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line4_item_name",
+      "label": "4행 품목",
+      "semantic_path": [
+        "품목내역",
+        "4행",
+        "품목"
+      ],
+      "anchor_id": "manual_1783511005640",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000046"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:item_names",
+      "style_class": "style_line4_item_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          93,
+          541,
+          271,
+          40
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line4_specification",
+      "label": "4행 규격",
+      "semantic_path": [
+        "품목내역",
+        "4행",
+        "규격"
+      ],
+      "anchor_id": "manual_1783511019041",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000047"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:item_specs",
+      "style_class": "style_line4_specification",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          362,
+          540,
+          96,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line4_quantity",
+      "label": "4행 수량",
+      "semantic_path": [
+        "품목내역",
+        "4행",
+        "수량"
+      ],
+      "anchor_id": "manual_1783511032808",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000048"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "choice:1|2|3|5|10",
+      "style_class": "style_line4_quantity",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          460,
+          541,
+          93,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line4_unit_price",
+      "label": "4행 단가",
+      "semantic_path": [
+        "품목내역",
+        "4행",
+        "단가"
+      ],
+      "anchor_id": "manual_1783511057240",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000049"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line4_unit_price",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          554,
+          542,
+          131,
+          38
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line4_supply_amount",
+      "label": "4행 공급가액",
+      "semantic_path": [
+        "품목내역",
+        "4행",
+        "공급가액"
+      ],
+      "anchor_id": "manual_1783511053540",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000050"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line4_supply_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          686,
+          541,
+          162,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line4_tax_amount",
+      "label": "4행 세액",
+      "semantic_path": [
+        "품목내역",
+        "4행",
+        "세액"
+      ],
+      "anchor_id": "manual_1783510957274",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000051"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line4_tax_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          850,
+          541,
+          131,
+          38
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "line4_remark",
+      "label": "4행 비고",
+      "semantic_path": [
+        "품목내역",
+        "4행",
+        "비고"
+      ],
+      "anchor_id": "manual_1783510939392",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000052"
+      ],
+      "value_type": "free_text.short",
+      "faker_rule": "pool:line_remarks",
+      "style_class": "style_line4_remark",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          984,
+          541,
+          104,
+          38
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "total_amount",
+      "label": "합계금액",
+      "semantic_path": [
+        "결제",
+        "합계금액"
+      ],
+      "anchor_id": "det_000064",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000058"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_total_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          15,
+          615,
+          182,
+          42
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "330,000",
+        "confidence": 0.9994182586669922
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "cash_amount",
+      "label": "현금",
+      "semantic_path": [
+        "결제",
+        "현금"
+      ],
+      "anchor_id": "manual_1783511062690",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000059"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_cash_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          200,
+          617,
+          158,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "check_amount",
+      "label": "수표",
+      "semantic_path": [
+        "결제",
+        "수표"
+      ],
+      "anchor_id": "manual_1783511065606",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000060"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "literal:0",
+      "style_class": "style_check_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          363,
+          617,
+          157,
+          39
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "promissory_note_amount",
+      "label": "어음",
+      "semantic_path": [
+        "결제",
+        "어음"
+      ],
+      "anchor_id": "manual_1783511068557",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000061"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "literal:0",
+      "style_class": "style_promissory_note_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          523,
+          617,
+          160,
+          38
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "receivable_amount",
+      "label": "외상미수금",
+      "semantic_path": [
+        "결제",
+        "외상미수금"
+      ],
+      "anchor_id": "manual_1783511072790",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000062"
+      ],
+      "value_type": "money.krw",
+      "faker_rule": "literal:0",
+      "style_class": "style_receivable_amount",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false,
+        "evidence": "전체 원본 이미지의 값 셀 안과 인접 위치에 별도 단위 접미사가 보이지 않음; 금액은 숫자/쉼표만 렌더링"
+      },
+      "research_evidence_ids": [
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
+        "bbox": [
+          688,
+          617,
+          159,
+          41
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "confidence": 0.9
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 64,
+    "bound_use_anchor_count": 64,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  },
+  "field_id_contract": {
+    "frozen_for_pass_2": true,
+    "count": 64,
+    "note": "이 field_id 목록은 pass 2 faker/relationship 작성의 불변 계약이다."
+  }
+}

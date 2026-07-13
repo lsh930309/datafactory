@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "doc_id": "RPT-01",
+  "source_of_truth": "faker_profile_draft.json.data_pools",
+  "pools": [
+    {"name": "housing_other_uses", "usage": "주택 구입·임대 행의 기타 사용내용", "value_count": 20, "source_note": "전체 템플릿의 기존 주택 선택지와 겹치지 않는 주거 이전·수선 관련 합성 문구"},
+    {"name": "education_other_uses", "usage": "고등교육·기술훈련 행의 기타 사용내용", "value_count": 20, "source_note": "기존 학비·교재·시험·자격증 선택지를 보완하는 교육 관련 합성 문구"},
+    {"name": "startup_other_uses", "usage": "창업·운영자금 행의 기타 사용내용", "value_count": 20, "source_note": "운영자금 외 구체적인 창업 준비·운영 비용 합성 문구"},
+    {"name": "medical_other_uses", "usage": "의료비 행의 기타 사용내용", "value_count": 20, "source_note": "기존 의료비·보장구·돌봄 선택지를 보완하는 치료 관련 합성 문구"},
+    {"name": "finance_other_uses", "usage": "금융자산형성 행의 기타 사용내용", "value_count": 20, "source_note": "기존 ISA·적금 외 합법적인 저축·투자·예비자금 목적의 합성 문구"},
+    {"name": "childcare_other_uses", "usage": "자녀양육·보육비 행의 기타 사용내용", "value_count": 20, "source_note": "보육·돌봄·아동 생활에 필요한 합성 비용 문구"},
+    {"name": "marriage_other_uses", "usage": "결혼자금 행의 기타 사용내용", "value_count": 20, "source_note": "예식과 신혼 생활 준비에 관한 합성 비용 문구"},
+    {"name": "self_reliance_other_uses", "usage": "그 밖의 자립·자활 행의 기타 사용내용", "value_count": 20, "source_note": "취업·근로 준비와 생활 자립에 관한 합성 비용 문구"}
+  ],
+  "policy": {
+    "scalar_pool_min_size": 20,
+    "personal_or_company_data": "none",
+    "renderer_reference": "각 pool은 faker_profile_draft.json의 동일 이름 data_pools에 정의됨"
+  }
+}

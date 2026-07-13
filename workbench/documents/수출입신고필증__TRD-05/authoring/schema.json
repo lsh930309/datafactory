@@ -1,1727 +1,2176 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-30T11:49:12.318967+00:00",
-  "updated_at": "2026-07-03T00:52:46.199616+00:00",
+  "created_at": "2026-07-13T02:10:50.978293+00:00",
   "doc_id": "TRD-05",
   "title": "수출입신고필증",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/수출입신고필증__TRD-05/review/original_수출신고필증/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/수출입신고필증__TRD-05/authoring/agent_applied_reviews/20260713T020203096839Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/수출입신고필증__TRD-05/samples/original/수출신고필증.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/수출입신고필증__TRD-05/inpaint/original_수출신고필증/lama/inpainted_lama.png",
+  "source_inpainted": "workbench/documents/수출입신고필증__TRD-05/inpaint/original_수출신고필증/lama/inpainted_lama.png",
   "image": {
     "width": 1163,
     "height": 1600
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/수출입신고필증__TRD-05/authoring/agent_applied_reviews/20260713T020203096839Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/수출입신고필증__TRD-05/authoring/agent_requests/20260713T020203096839Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "신고 기본정보": {
+      "결재환율": "",
+      "USD환율": "",
+      "제출번호": "",
+      "신고번호": "",
+      "신고일자": "",
+      "신고구분": ""
+    },
+    "신고인": {
+      "신고인 관세사명": "",
+      "신고인 관세사무소": ""
+    },
+    "거래 및 운송": {
+      "결제방법 코드": "",
+      "거래구분 코드": "",
+      "수출 종류 코드": "",
+      "거래구분 명칭": "",
+      "수출 종류 명칭": "",
+      "결제방법 명칭": "",
+      "목적국 코드": "",
+      "적재항 코드": "",
+      "선박회사 항공사": "",
+      "목적국명": "",
+      "적재항": "",
+      "운송형태": ""
+    },
+    "수출자 및 화주": {
+      "수출대행자명": "",
+      "수출자구분": "",
+      "수출대행자 통관고유부호": "",
+      "수출화주명": "",
+      "수출화주 통관고유부호": "",
+      "수출화주 주소": "",
+      "수출화주 소재지": "",
+      "대표자명": "",
+      "사업자등록번호": ""
+    },
+    "검사 및 물품소재지": {
+      "검사희망일": "",
+      "물품소재지 코드": "",
+      "물품소재지 주소": "",
+      "물품상태": "",
+      "사전임시개청 통보여부": ""
+    },
+    "제조자": {
+      "제조자명": "",
+      "제조자 통관고유부호": "",
+      "산업단지부호": "",
+      "제조장소 코드": ""
+    },
+    "구매자 및 환급": {
+      "구매자명": "",
+      "환급신청인": "",
+      "간이환급": "",
+      "구매자부호": ""
+    },
+    "품목": {
+      "품명": "",
+      "거래품명": "",
+      "품목 수량": "",
+      "단가 USD": "",
+      "금액 USD": "",
+      "모델규격": "",
+      "순중량": "",
+      "세번부호": "",
+      "원산지 코드": "",
+      "수출품장부호": ""
+    },
+    "가격 및 결제": {
+      "신고가격 FOB(USD)": "",
+      "신고가격 원화": "",
+      "총신고가격 FOB(USD)": "",
+      "총신고가격 원화": "",
+      "결제금액": "",
+      "운임 원화": "",
+      "보험료 원화": ""
+    },
+    "수출요건 및 포장": {
+      "포장갯수 종류": "",
+      "수출요건확인 번호": "",
+      "발급서류명": "",
+      "총포장갯수": "",
+      "총중량": ""
+    },
+    "수리 및 기한": {
+      "컨테이너 여부": "",
+      "신고수리 세관장": "",
+      "관세사": "",
+      "신고수리일자": "",
+      "적재의무기한": "",
+      "운송기간 시작": "",
+      "운송기간 종료": ""
+    }
   },
   "fields": [
     {
       "field_id": "settlement_exchange_rate",
       "label": "결재환율",
+      "semantic_path": [
+        "신고 기본정보",
+        "결재환율"
+      ],
+      "bbox_label_id": "manual_trd_05_001",
       "source_detection_id": "manual_trd_05_001",
       "source_text": "결재환율",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:#,###.###",
       "style_class": "style_settlement_exchange_rate",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결재환율",
-        "csv_column": "결재환율"
+        "json_path": "신고 기본정보/결재환율",
+        "csv_column": "신고 기본정보/결재환율"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_001",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "usd_exchange_rate",
       "label": "USD환율",
+      "semantic_path": [
+        "신고 기본정보",
+        "USD환율"
+      ],
+      "bbox_label_id": "manual_trd_05_002",
       "source_detection_id": "manual_trd_05_002",
       "source_text": "USD환율",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "same_as:settlement_exchange_rate",
       "style_class": "style_usd_exchange_rate",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "USD환율",
-        "csv_column": "USD환율"
+        "json_path": "신고 기본정보/USD환율",
+        "csv_column": "신고 기본정보/USD환율"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_002",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "issue_number",
       "label": "제출번호",
+      "semantic_path": [
+        "신고 기본정보",
+        "제출번호"
+      ],
+      "bbox_label_id": "manual_trd_05_003",
       "source_detection_id": "manual_trd_05_003",
       "source_text": "제출번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:#####-##-#######",
       "style_class": "style_issue_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제출번호",
-        "csv_column": "제출번호"
+        "json_path": "신고 기본정보/제출번호",
+        "csv_column": "신고 기본정보/제출번호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_003",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "declaration_number",
       "label": "신고번호",
+      "semantic_path": [
+        "신고 기본정보",
+        "신고번호"
+      ],
+      "bbox_label_id": "manual_trd_05_006",
       "source_detection_id": "manual_trd_05_006",
       "source_text": "신고번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###-##-##-########",
       "style_class": "style_declaration_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고번호",
-        "csv_column": "신고번호"
+        "json_path": "신고 기본정보/신고번호",
+        "csv_column": "신고 기본정보/신고번호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_006",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "declaration_date",
       "label": "신고일자",
+      "semantic_path": [
+        "신고 기본정보",
+        "신고일자"
+      ],
+      "bbox_label_id": "manual_trd_05_007",
       "source_detection_id": "manual_trd_05_007",
       "source_text": "신고일자",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_declaration_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고일자",
-        "csv_column": "신고일자"
+        "json_path": "신고 기본정보/신고일자",
+        "csv_column": "신고 기본정보/신고일자"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_007",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "declaration_type_name",
       "label": "신고구분",
+      "semantic_path": [
+        "신고 기본정보",
+        "신고구분"
+      ],
+      "bbox_label_id": "manual_trd_05_008",
       "source_detection_id": "manual_trd_05_008",
       "source_text": "신고구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:일반P/L신고|서류제출신고|검사대상신고",
       "style_class": "style_declaration_type_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고구분",
-        "csv_column": "신고구분"
+        "json_path": "신고 기본정보/신고구분",
+        "csv_column": "신고 기본정보/신고구분"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_008",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "customs_broker_name",
       "label": "신고인 관세사명",
+      "semantic_path": [
+        "신고인",
+        "신고인 관세사명"
+      ],
+      "bbox_label_id": "manual_trd_05_005",
       "source_detection_id": "manual_trd_05_005",
       "source_text": "신고인 관세사명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_customs_broker_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고인 관세사명",
-        "csv_column": "신고인 관세사명"
+        "json_path": "신고인/신고인 관세사명",
+        "csv_column": "신고인/신고인 관세사명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_005",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "customs_broker_office",
       "label": "신고인 관세사무소",
+      "semantic_path": [
+        "신고인",
+        "신고인 관세사무소"
+      ],
+      "bbox_label_id": "manual_trd_05_004",
       "source_detection_id": "manual_trd_05_004",
       "source_text": "신고인 관세사무소",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_customs_broker_office",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고인 관세사무소",
-        "csv_column": "신고인 관세사무소"
+        "json_path": "신고인/신고인 관세사무소",
+        "csv_column": "신고인/신고인 관세사무소"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_004",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "payment_method_code",
       "label": "결제방법 코드",
-      "source_detection_id": "manual_1783037371852",
+      "semantic_path": [
+        "거래 및 운송",
+        "결제방법 코드"
+      ],
       "bbox_label_id": "manual_1783037371852",
+      "source_detection_id": "manual_1783037371852",
       "source_text": "T",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:TT|LC|DP|DA",
       "style_class": "style_payment_method_code",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제방법 코드",
-        "csv_column": "결제방법 코드"
+        "json_path": "거래 및 운송/결제방법 코드",
+        "csv_column": "거래 및 운송/결제방법 코드"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "transaction_type_code",
       "label": "거래구분 코드",
-      "source_detection_id": "manual_1783037356836",
+      "semantic_path": [
+        "거래 및 운송",
+        "거래구분 코드"
+      ],
       "bbox_label_id": "manual_1783037356836",
+      "source_detection_id": "manual_1783037356836",
       "source_text": "11",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:11|15|21|31",
       "style_class": "style_transaction_type_code",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "거래구분 코드",
-        "csv_column": "거래구분 코드"
+        "json_path": "거래 및 운송/거래구분 코드",
+        "csv_column": "거래 및 운송/거래구분 코드"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "export_type_code",
       "label": "수출 종류 코드",
-      "source_detection_id": "manual_1783037363686",
+      "semantic_path": [
+        "거래 및 운송",
+        "수출 종류 코드"
+      ],
       "bbox_label_id": "manual_1783037363686",
+      "source_detection_id": "manual_1783037363686",
       "source_text": "A",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:A|B|C",
       "style_class": "style_export_type_code",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출 종류 코드",
-        "csv_column": "수출 종류 코드"
+        "json_path": "거래 및 운송/수출 종류 코드",
+        "csv_column": "거래 및 운송/수출 종류 코드"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_name_top",
       "label": "수출대행자명",
+      "semantic_path": [
+        "수출자 및 화주",
+        "수출대행자명"
+      ],
+      "bbox_label_id": "manual_trd_05_009",
       "source_detection_id": "manual_trd_05_009",
       "source_text": "수출대행자명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_exporter_name_top",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출대행자명",
-        "csv_column": "수출대행자명"
+        "json_path": "수출자 및 화주/수출대행자명",
+        "csv_column": "수출자 및 화주/수출대행자명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_009",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "transaction_type",
       "label": "거래구분 명칭",
+      "semantic_path": [
+        "거래 및 운송",
+        "거래구분 명칭"
+      ],
+      "bbox_label_id": "manual_trd_05_012",
       "source_detection_id": "manual_trd_05_012",
       "source_text": "거래구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:일반형태|위탁판매|무상수출|임대수출",
       "style_class": "style_transaction_type",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "거래구분 명칭",
-        "csv_column": "거래구분 명칭"
+        "json_path": "거래 및 운송/거래구분 명칭",
+        "csv_column": "거래 및 운송/거래구분 명칭"
       },
       "required": true,
-      "notes": "TRD-05 split bbox 보정: 기존 코드+명칭 또는 USD+KRW 통합 값을 실제 문서 위치에 맞춰 분리했다.",
-      "bbox_label_id": "manual_trd_05_012",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "export_type",
       "label": "수출 종류 명칭",
+      "semantic_path": [
+        "거래 및 운송",
+        "수출 종류 명칭"
+      ],
+      "bbox_label_id": "manual_trd_05_013",
       "source_detection_id": "manual_trd_05_013",
       "source_text": "종류",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:일반수출|위탁가공수출|중계무역수출",
       "style_class": "style_export_type",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출 종류 명칭",
-        "csv_column": "수출 종류 명칭"
+        "json_path": "거래 및 운송/수출 종류 명칭",
+        "csv_column": "거래 및 운송/수출 종류 명칭"
       },
       "required": true,
-      "notes": "TRD-05 split bbox 보정: 기존 코드+명칭 또는 USD+KRW 통합 값을 실제 문서 위치에 맞춰 분리했다.",
-      "bbox_label_id": "manual_trd_05_013",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "payment_method",
       "label": "결제방법 명칭",
+      "semantic_path": [
+        "거래 및 운송",
+        "결제방법 명칭"
+      ],
+      "bbox_label_id": "manual_trd_05_014",
       "source_detection_id": "manual_trd_05_014",
       "source_text": "결제방법",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:단순송금방식|신용장|지급인도|인수인도",
       "style_class": "style_payment_method",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제방법 명칭",
-        "csv_column": "결제방법 명칭"
+        "json_path": "거래 및 운송/결제방법 명칭",
+        "csv_column": "거래 및 운송/결제방법 명칭"
       },
       "required": true,
-      "notes": "TRD-05 split bbox 보정: 기존 코드+명칭 또는 USD+KRW 통합 값을 실제 문서 위치에 맞춰 분리했다.",
-      "bbox_label_id": "manual_trd_05_014",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_category",
       "label": "수출자구분",
+      "semantic_path": [
+        "수출자 및 화주",
+        "수출자구분"
+      ],
+      "bbox_label_id": "manual_trd_05_011",
       "source_detection_id": "manual_trd_05_011",
       "source_text": "수출자구분",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:A|B|C",
       "style_class": "style_exporter_category",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출자구분",
-        "csv_column": "수출자구분"
+        "json_path": "수출자 및 화주/수출자구분",
+        "csv_column": "수출자 및 화주/수출자구분"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_011",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_trade_code_top",
       "label": "수출대행자 통관고유부호",
+      "semantic_path": [
+        "수출자 및 화주",
+        "수출대행자 통관고유부호"
+      ],
+      "bbox_label_id": "manual_trd_05_010",
       "source_detection_id": "manual_trd_05_010",
       "source_text": "수출대행자 통관고유부호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:***************",
       "style_class": "style_exporter_trade_code_top",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출대행자 통관고유부호",
-        "csv_column": "수출대행자 통관고유부호"
+        "json_path": "수출자 및 화주/수출대행자 통관고유부호",
+        "csv_column": "수출자 및 화주/수출대행자 통관고유부호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_010",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "destination_code",
       "label": "목적국 코드",
-      "source_detection_id": "manual_1783037384535",
+      "semantic_path": [
+        "거래 및 운송",
+        "목적국 코드"
+      ],
       "bbox_label_id": "manual_1783037384535",
+      "source_detection_id": "manual_1783037384535",
       "source_text": "TR",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:US|JP|CN|DE|VN|TR|SG|AU",
       "style_class": "style_destination_code",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "목적국 코드",
-        "csv_column": "목적국 코드"
+        "json_path": "거래 및 운송/목적국 코드",
+        "csv_column": "거래 및 운송/목적국 코드"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "loading_port_code",
       "label": "적재항 코드",
-      "source_detection_id": "manual_1783037391818",
+      "semantic_path": [
+        "거래 및 운송",
+        "적재항 코드"
+      ],
       "bbox_label_id": "manual_1783037391818",
+      "source_detection_id": "manual_1783037391818",
       "source_text": "ICN",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:ICN|PUS|KRPUS|KRINC",
       "style_class": "style_loading_port_code",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "적재항 코드",
-        "csv_column": "적재항 코드"
+        "json_path": "거래 및 운송/적재항 코드",
+        "csv_column": "거래 및 운송/적재항 코드"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_name",
       "label": "수출화주명",
+      "semantic_path": [
+        "수출자 및 화주",
+        "수출화주명"
+      ],
+      "bbox_label_id": "manual_trd_05_019",
       "source_detection_id": "manual_trd_05_019",
       "source_text": "수출화주명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "same_as:exporter_name_top",
       "style_class": "style_exporter_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출화주명",
-        "csv_column": "수출화주명"
+        "json_path": "수출자 및 화주/수출화주명",
+        "csv_column": "수출자 및 화주/수출화주명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_019",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "carrier_name",
       "label": "선박회사 항공사",
+      "semantic_path": [
+        "거래 및 운송",
+        "선박회사 항공사"
+      ],
+      "bbox_label_id": "manual_trd_05_018",
       "source_detection_id": "manual_trd_05_018",
       "source_text": "선박회사 항공사",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_carrier_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선박회사 항공사",
-        "csv_column": "선박회사 항공사"
+        "json_path": "거래 및 운송/선박회사 항공사",
+        "csv_column": "거래 및 운송/선박회사 항공사"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_018",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "destination_country",
       "label": "목적국명",
+      "semantic_path": [
+        "거래 및 운송",
+        "목적국명"
+      ],
+      "bbox_label_id": "manual_trd_05_016",
       "source_detection_id": "manual_trd_05_016",
       "source_text": "목적국명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:UNITED STATES|JAPAN|CHINA|GERMANY|VIET NAM|TURKEY|SINGAPORE|AUSTRALIA",
       "style_class": "style_destination_country",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "목적국명",
-        "csv_column": "목적국명"
+        "json_path": "거래 및 운송/목적국명",
+        "csv_column": "거래 및 운송/목적국명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_016",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "loading_port",
       "label": "적재항",
+      "semantic_path": [
+        "거래 및 운송",
+        "적재항"
+      ],
+      "bbox_label_id": "manual_trd_05_017",
       "source_detection_id": "manual_trd_05_017",
       "source_text": "적재항",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:인천공항|부산항|인천항|김포공항",
       "style_class": "style_loading_port",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "적재항",
-        "csv_column": "적재항"
+        "json_path": "거래 및 운송/적재항",
+        "csv_column": "거래 및 운송/적재항"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_017",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_trade_code",
       "label": "수출화주 통관고유부호",
+      "semantic_path": [
+        "수출자 및 화주",
+        "수출화주 통관고유부호"
+      ],
+      "bbox_label_id": "manual_trd_05_020",
       "source_detection_id": "manual_trd_05_020",
       "source_text": "수출화주 통관고유부호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "same_as:exporter_trade_code_top",
       "style_class": "style_exporter_trade_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출화주 통관고유부호",
-        "csv_column": "수출화주 통관고유부호"
+        "json_path": "수출자 및 화주/수출화주 통관고유부호",
+        "csv_column": "수출자 및 화주/수출화주 통관고유부호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_020",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_address",
       "label": "수출화주 주소",
+      "semantic_path": [
+        "수출자 및 화주",
+        "수출화주 주소"
+      ],
+      "bbox_label_id": "manual_trd_05_021",
       "source_detection_id": "manual_trd_05_021",
       "source_text": "수출화주 주소",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "address.ko",
+      "generator": "address.ko",
       "style_class": "style_exporter_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출화주 주소",
-        "csv_column": "수출화주 주소"
+        "json_path": "수출자 및 화주/수출화주 주소",
+        "csv_column": "수출자 및 화주/수출화주 주소"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_021",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "transport_type",
       "label": "운송형태",
+      "semantic_path": [
+        "거래 및 운송",
+        "운송형태"
+      ],
+      "bbox_label_id": "manual_trd_05_026",
       "source_detection_id": "manual_trd_05_026",
       "source_text": "운송형태",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:10 SEA|20 AIR|30 RAIL|40 ETC",
       "style_class": "style_transport_type",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "운송형태",
-        "csv_column": "운송형태"
+        "json_path": "거래 및 운송/운송형태",
+        "csv_column": "거래 및 운송/운송형태"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_026",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "inspection_due_date",
       "label": "검사희망일",
+      "semantic_path": [
+        "검사 및 물품소재지",
+        "검사희망일"
+      ],
+      "bbox_label_id": "manual_trd_05_025",
       "source_detection_id": "manual_trd_05_025",
       "source_text": "검사희망일",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_inspection_due_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "검사희망일",
-        "csv_column": "검사희망일"
+        "json_path": "검사 및 물품소재지/검사희망일",
+        "csv_column": "검사 및 물품소재지/검사희망일"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_025",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_location_code",
       "label": "수출화주 소재지",
+      "semantic_path": [
+        "수출자 및 화주",
+        "수출화주 소재지"
+      ],
+      "bbox_label_id": "manual_trd_05_023",
       "source_detection_id": "manual_trd_05_023",
       "source_text": "수출화주 소재지",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_exporter_location_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출화주 소재지",
-        "csv_column": "수출화주 소재지"
+        "json_path": "수출자 및 화주/수출화주 소재지",
+        "csv_column": "수출자 및 화주/수출화주 소재지"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_023",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_representative_name",
       "label": "대표자명",
+      "semantic_path": [
+        "수출자 및 화주",
+        "대표자명"
+      ],
+      "bbox_label_id": "manual_trd_05_022",
       "source_detection_id": "manual_trd_05_022",
       "source_text": "대표자명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_exporter_representative_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "대표자명",
-        "csv_column": "대표자명"
+        "json_path": "수출자 및 화주/대표자명",
+        "csv_column": "수출자 및 화주/대표자명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_022",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "goods_location_code",
       "label": "물품소재지 코드",
+      "semantic_path": [
+        "검사 및 물품소재지",
+        "물품소재지 코드"
+      ],
+      "bbox_label_id": "manual_trd_05_027",
       "source_detection_id": "manual_trd_05_027",
       "source_text": "물품소재지 코드",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_goods_location_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "물품소재지 코드",
-        "csv_column": "물품소재지 코드"
+        "json_path": "검사 및 물품소재지/물품소재지 코드",
+        "csv_column": "검사 및 물품소재지/물품소재지 코드"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_027",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "exporter_business_registration_number",
       "label": "사업자등록번호",
+      "semantic_path": [
+        "수출자 및 화주",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "manual_trd_05_024",
       "source_detection_id": "manual_trd_05_024",
       "source_text": "사업자등록번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "business_reg_no",
       "style_class": "style_exporter_business_registration_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "사업자등록번호",
-        "csv_column": "사업자등록번호"
+        "json_path": "수출자 및 화주/사업자등록번호",
+        "csv_column": "수출자 및 화주/사업자등록번호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_024",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "goods_location_address",
       "label": "물품소재지 주소",
+      "semantic_path": [
+        "검사 및 물품소재지",
+        "물품소재지 주소"
+      ],
+      "bbox_label_id": "manual_trd_05_028",
       "source_detection_id": "manual_trd_05_028",
       "source_text": "물품소재지 주소",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "address.ko",
+      "generator": "address.ko",
       "style_class": "style_goods_location_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "물품소재지 주소",
-        "csv_column": "물품소재지 주소"
+        "json_path": "검사 및 물품소재지/물품소재지 주소",
+        "csv_column": "검사 및 물품소재지/물품소재지 주소"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_028",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "manufacturer_name",
       "label": "제조자명",
+      "semantic_path": [
+        "제조자",
+        "제조자명"
+      ],
+      "bbox_label_id": "manual_trd_05_029",
       "source_detection_id": "manual_trd_05_029",
       "source_text": "제조자명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_manufacturer_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제조자명",
-        "csv_column": "제조자명"
+        "json_path": "제조자/제조자명",
+        "csv_column": "제조자/제조자명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_029",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "goods_status",
       "label": "물품상태",
-      "source_detection_id": "manual_1783036542616",
+      "semantic_path": [
+        "검사 및 물품소재지",
+        "물품상태"
+      ],
       "bbox_label_id": "manual_1783036542616",
+      "source_detection_id": "manual_1783036542616",
       "source_text": "N",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:N|Y",
       "style_class": "style_goods_status",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "물품상태",
-        "csv_column": "물품상태"
+        "json_path": "검사 및 물품소재지/물품상태",
+        "csv_column": "검사 및 물품소재지/물품상태"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "manufacturer_trade_code",
       "label": "제조자 통관고유부호",
+      "semantic_path": [
+        "제조자",
+        "제조자 통관고유부호"
+      ],
+      "bbox_label_id": "manual_trd_05_030",
       "source_detection_id": "manual_trd_05_030",
       "source_text": "제조자 통관고유부호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:***************",
       "style_class": "style_manufacturer_trade_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제조자 통관고유부호",
-        "csv_column": "제조자 통관고유부호"
+        "json_path": "제조자/제조자 통관고유부호",
+        "csv_column": "제조자/제조자 통관고유부호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_030",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "notice_request_flag",
       "label": "사전임시개청 통보여부",
-      "source_detection_id": "manual_1783036537532",
+      "semantic_path": [
+        "검사 및 물품소재지",
+        "사전임시개청 통보여부"
+      ],
       "bbox_label_id": "manual_1783036537532",
+      "source_detection_id": "manual_1783036537532",
       "source_text": "A",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:A|N",
       "style_class": "style_notice_request_flag",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "사전임시개청 통보여부",
-        "csv_column": "사전임시개청 통보여부"
+        "json_path": "검사 및 물품소재지/사전임시개청 통보여부",
+        "csv_column": "검사 및 물품소재지/사전임시개청 통보여부"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "industrial_zone_code",
       "label": "산업단지부호",
+      "semantic_path": [
+        "제조자",
+        "산업단지부호"
+      ],
+      "bbox_label_id": "manual_trd_05_032",
       "source_detection_id": "manual_trd_05_032",
       "source_text": "산업단지부호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_industrial_zone_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "산업단지부호",
-        "csv_column": "산업단지부호"
+        "json_path": "제조자/산업단지부호",
+        "csv_column": "제조자/산업단지부호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_032",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "manufacture_place_code",
       "label": "제조장소 코드",
+      "semantic_path": [
+        "제조자",
+        "제조장소 코드"
+      ],
+      "bbox_label_id": "manual_trd_05_031",
       "source_detection_id": "manual_trd_05_031",
       "source_text": "제조장소 코드",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###",
       "style_class": "style_manufacture_place_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제조장소 코드",
-        "csv_column": "제조장소 코드"
+        "json_path": "제조자/제조장소 코드",
+        "csv_column": "제조자/제조장소 코드"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_031",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "buyer_name",
       "label": "구매자명",
+      "semantic_path": [
+        "구매자 및 환급",
+        "구매자명"
+      ],
+      "bbox_label_id": "manual_trd_05_033",
       "source_detection_id": "manual_trd_05_033",
       "source_text": "구매자명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_buyer_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구매자명",
-        "csv_column": "구매자명"
+        "json_path": "구매자 및 환급/구매자명",
+        "csv_column": "구매자 및 환급/구매자명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_033",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "refund_applicant_type",
       "label": "환급신청인",
+      "semantic_path": [
+        "구매자 및 환급",
+        "환급신청인"
+      ],
+      "bbox_label_id": "manual_trd_05_035",
       "source_detection_id": "manual_trd_05_035",
       "source_text": "환급신청인",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:1|2",
       "style_class": "style_refund_applicant_type",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "환급신청인",
-        "csv_column": "환급신청인"
+        "json_path": "구매자 및 환급/환급신청인",
+        "csv_column": "구매자 및 환급/환급신청인"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_035",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "refund_applicant_description",
       "label": "간이환급",
+      "semantic_path": [
+        "구매자 및 환급",
+        "간이환급"
+      ],
+      "bbox_label_id": "manual_trd_05_036",
       "source_detection_id": "manual_trd_05_036",
       "source_text": "간이환급",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:간이환급 NO|간이환급 YES",
       "style_class": "style_refund_applicant_description",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "간이환급",
-        "csv_column": "간이환급"
+        "json_path": "구매자 및 환급/간이환급",
+        "csv_column": "구매자 및 환급/간이환급"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_036",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "buyer_code",
       "label": "구매자부호",
+      "semantic_path": [
+        "구매자 및 환급",
+        "구매자부호"
+      ],
+      "bbox_label_id": "manual_trd_05_034",
       "source_detection_id": "manual_trd_05_034",
       "source_text": "구매자부호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:***************",
       "style_class": "style_buyer_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구매자부호",
-        "csv_column": "구매자부호"
+        "json_path": "구매자 및 환급/구매자부호",
+        "csv_column": "구매자 및 환급/구매자부호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_034",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "goods_name",
       "label": "품명",
+      "semantic_path": [
+        "품목",
+        "품명"
+      ],
+      "bbox_label_id": "manual_trd_05_038",
       "source_detection_id": "manual_trd_05_038",
       "source_text": "품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:export_goods_names",
       "style_class": "style_goods_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명",
-        "csv_column": "품명"
+        "json_path": "품목/품명",
+        "csv_column": "품목/품명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_038",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "trade_goods_name",
       "label": "거래품명",
+      "semantic_path": [
+        "품목",
+        "거래품명"
+      ],
+      "bbox_label_id": "manual_trd_05_039",
       "source_detection_id": "manual_trd_05_039",
       "source_text": "거래품명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:trade_goods_names",
       "style_class": "style_trade_goods_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "거래품명",
-        "csv_column": "거래품명"
+        "json_path": "품목/거래품명",
+        "csv_column": "품목/거래품명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_039",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "item_quantity",
       "label": "품목 수량",
+      "semantic_path": [
+        "품목",
+        "품목 수량"
+      ],
+      "bbox_label_id": "manual_trd_05_041",
       "source_detection_id": "manual_trd_05_041",
       "source_text": "품목 수량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:item_quantity_values",
       "style_class": "style_item_quantity",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목 수량",
-        "csv_column": "품목 수량"
+        "json_path": "품목/품목 수량",
+        "csv_column": "품목/품목 수량"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_041",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "unit_price_usd",
       "label": "단가 USD",
+      "semantic_path": [
+        "품목",
+        "단가 USD"
+      ],
+      "bbox_label_id": "manual_trd_05_042",
       "source_detection_id": "manual_trd_05_042",
       "source_text": "단가 USD",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:#######",
       "style_class": "style_unit_price_usd",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "단가 USD",
-        "csv_column": "단가 USD"
+        "json_path": "품목/단가 USD",
+        "csv_column": "품목/단가 USD"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_042",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "amount_usd",
       "label": "금액 USD",
+      "semantic_path": [
+        "품목",
+        "금액 USD"
+      ],
+      "bbox_label_id": "manual_trd_05_043",
       "source_detection_id": "manual_trd_05_043",
       "source_text": "금액 USD",
-      "value_type": "money.krw",
-      "generator": "literal:",
+      "value_type": "free_text.short",
+      "generator": "pattern:#######",
       "style_class": "style_amount_usd",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "금액 USD",
-        "csv_column": "금액 USD"
+        "json_path": "품목/금액 USD",
+        "csv_column": "품목/금액 USD"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_043",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "model_specification",
       "label": "모델규격",
+      "semantic_path": [
+        "품목",
+        "모델규격"
+      ],
+      "bbox_label_id": "manual_trd_05_040",
       "source_detection_id": "manual_trd_05_040",
       "source_text": "모델규격",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:AAA-####",
       "style_class": "style_model_specification",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "모델규격",
-        "csv_column": "모델규격"
+        "json_path": "품목/모델규격",
+        "csv_column": "품목/모델규격"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_040",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "reported_price_fob",
       "label": "신고가격 FOB(USD)",
+      "semantic_path": [
+        "가격 및 결제",
+        "신고가격 FOB(USD)"
+      ],
+      "bbox_label_id": "manual_trd_05_047",
       "source_detection_id": "manual_trd_05_047",
       "source_text": "신고가격 FOB",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:#######",
       "style_class": "style_reported_price_fob",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고가격 FOB(USD)",
-        "csv_column": "신고가격 FOB(USD)"
+        "json_path": "가격 및 결제/신고가격 FOB(USD)",
+        "csv_column": "가격 및 결제/신고가격 FOB(USD)"
       },
       "required": true,
-      "notes": "TRD-05 split bbox 보정: 기존 코드+명칭 또는 USD+KRW 통합 값을 실제 문서 위치에 맞춰 분리했다.",
-      "bbox_label_id": "manual_trd_05_047",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "net_weight",
       "label": "순중량",
+      "semantic_path": [
+        "품목",
+        "순중량"
+      ],
+      "bbox_label_id": "manual_trd_05_045",
       "source_detection_id": "manual_trd_05_045",
       "source_text": "순중량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:weight_values",
       "style_class": "style_net_weight",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "순중량",
-        "csv_column": "순중량"
+        "json_path": "품목/순중량",
+        "csv_column": "품목/순중량"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_045",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "hs_code",
       "label": "세번부호",
+      "semantic_path": [
+        "품목",
+        "세번부호"
+      ],
+      "bbox_label_id": "manual_trd_05_044",
       "source_detection_id": "manual_trd_05_044",
       "source_text": "세번부호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:####.##-####",
       "style_class": "style_hs_code",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "세번부호",
-        "csv_column": "세번부호"
+        "json_path": "품목/세번부호",
+        "csv_column": "품목/세번부호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_044",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "reported_price_krw",
       "label": "신고가격 원화",
-      "source_detection_id": "manual_1783036900366",
+      "semantic_path": [
+        "가격 및 결제",
+        "신고가격 원화"
+      ],
       "bbox_label_id": "manual_1783036900366",
+      "source_detection_id": "manual_1783036900366",
       "source_text": "W4,269,592, 117",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "money.krw",
+      "generator": "money.krw",
       "style_class": "style_reported_price_krw",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고가격 원화",
-        "csv_column": "신고가격 원화"
+        "json_path": "가격 및 결제/신고가격 원화",
+        "csv_column": "가격 및 결제/신고가격 원화"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "package_count_type",
       "label": "포장갯수 종류",
+      "semantic_path": [
+        "수출요건 및 포장",
+        "포장갯수 종류"
+      ],
+      "bbox_label_id": "manual_trd_05_049",
       "source_detection_id": "manual_trd_05_049",
       "source_text": "포장갯수 종류",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:package_values",
       "style_class": "style_package_count_type",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포장갯수 종류",
-        "csv_column": "포장갯수 종류"
+        "json_path": "수출요건 및 포장/포장갯수 종류",
+        "csv_column": "수출요건 및 포장/포장갯수 종류"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_049",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "origin_country_code",
       "label": "원산지 코드",
-      "source_detection_id": "manual_1783037014782",
+      "semantic_path": [
+        "품목",
+        "원산지 코드"
+      ],
       "bbox_label_id": "manual_1783037014782",
+      "source_detection_id": "manual_1783037014782",
       "source_text": "KR-B--",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:KR-A--|KR-B--|KR-C--",
       "style_class": "style_origin_country_code",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "원산지 코드",
-        "csv_column": "원산지 코드"
+        "json_path": "품목/원산지 코드",
+        "csv_column": "품목/원산지 코드"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "export_goods_number",
       "label": "수출품장부호",
+      "semantic_path": [
+        "품목",
+        "수출품장부호"
+      ],
+      "bbox_label_id": "manual_trd_05_048",
       "source_detection_id": "manual_trd_05_048",
       "source_text": "수출품장부호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:A-AAA-####",
       "style_class": "style_export_goods_number",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출품장부호",
-        "csv_column": "수출품장부호"
+        "json_path": "품목/수출품장부호",
+        "csv_column": "품목/수출품장부호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_048",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "export_requirement_approval_number",
       "label": "수출요건확인 번호",
+      "semantic_path": [
+        "수출요건 및 포장",
+        "수출요건확인 번호"
+      ],
+      "bbox_label_id": "manual_trd_05_050",
       "source_detection_id": "manual_trd_05_050",
       "source_text": "수출요건확인 번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:A-###############",
       "style_class": "style_export_requirement_approval_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수출요건확인 번호",
-        "csv_column": "수출요건확인 번호"
+        "json_path": "수출요건 및 포장/수출요건확인 번호",
+        "csv_column": "수출요건 및 포장/수출요건확인 번호"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_050",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "export_requirement_document_name",
       "label": "발급서류명",
+      "semantic_path": [
+        "수출요건 및 포장",
+        "발급서류명"
+      ],
+      "bbox_label_id": "manual_trd_05_051",
       "source_detection_id": "manual_trd_05_051",
       "source_text": "발급서류명",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:(전략물자수출허가서)|(수출요건확인서)|(검사증명서)",
       "style_class": "style_export_requirement_document_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발급서류명",
-        "csv_column": "발급서류명"
+        "json_path": "수출요건 및 포장/발급서류명",
+        "csv_column": "수출요건 및 포장/발급서류명"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_051",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "total_reported_price_fob",
       "label": "총신고가격 FOB(USD)",
+      "semantic_path": [
+        "가격 및 결제",
+        "총신고가격 FOB(USD)"
+      ],
+      "bbox_label_id": "manual_trd_05_054",
       "source_detection_id": "manual_trd_05_054",
       "source_text": "총신고가격 FOB",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:#######",
       "style_class": "style_total_reported_price_fob",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "총신고가격 FOB(USD)",
-        "csv_column": "총신고가격 FOB(USD)"
+        "json_path": "가격 및 결제/총신고가격 FOB(USD)",
+        "csv_column": "가격 및 결제/총신고가격 FOB(USD)"
       },
       "required": true,
-      "notes": "TRD-05 split bbox 보정: 기존 코드+명칭 또는 USD+KRW 통합 값을 실제 문서 위치에 맞춰 분리했다.",
-      "bbox_label_id": "manual_trd_05_054",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "total_package_count",
       "label": "총포장갯수",
+      "semantic_path": [
+        "수출요건 및 포장",
+        "총포장갯수"
+      ],
+      "bbox_label_id": "manual_trd_05_053",
       "source_detection_id": "manual_trd_05_053",
       "source_text": "총포장갯수",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:package_values",
       "style_class": "style_total_package_count",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "총포장갯수",
-        "csv_column": "총포장갯수"
+        "json_path": "수출요건 및 포장/총포장갯수",
+        "csv_column": "수출요건 및 포장/총포장갯수"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_053",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "total_gross_weight",
       "label": "총중량",
+      "semantic_path": [
+        "수출요건 및 포장",
+        "총중량"
+      ],
+      "bbox_label_id": "manual_trd_05_052",
       "source_detection_id": "manual_trd_05_052",
       "source_text": "총중량",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:weight_values",
       "style_class": "style_total_gross_weight",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "총중량",
-        "csv_column": "총중량"
+        "json_path": "수출요건 및 포장/총중량",
+        "csv_column": "수출요건 및 포장/총중량"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_052",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "total_reported_price_krw",
       "label": "총신고가격 원화",
-      "source_detection_id": "manual_1783036910915",
+      "semantic_path": [
+        "가격 및 결제",
+        "총신고가격 원화"
+      ],
       "bbox_label_id": "manual_1783036910915",
+      "source_detection_id": "manual_1783036910915",
       "source_text": "W4,269,592, 117",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "money.krw",
+      "generator": "money.krw",
       "style_class": "style_total_reported_price_krw",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "총신고가격 원화",
-        "csv_column": "총신고가격 원화"
+        "json_path": "가격 및 결제/총신고가격 원화",
+        "csv_column": "가격 및 결제/총신고가격 원화"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 수동 split bbox 보정 필드. 기존 통합 값에서 코드/명칭 또는 USD/KRW를 분리해 렌더링한다.",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "payment_amount_text",
       "label": "결제금액",
+      "semantic_path": [
+        "가격 및 결제",
+        "결제금액"
+      ],
+      "bbox_label_id": "manual_trd_05_057",
       "source_detection_id": "manual_trd_05_057",
       "source_text": "결제금액",
-      "value_type": "money.krw",
-      "generator": "literal:",
+      "value_type": "free_text.short",
+      "generator": "template:FOB-USD-{{pattern:#######}}.00",
       "style_class": "style_payment_amount_text",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제금액",
-        "csv_column": "결제금액"
+        "json_path": "가격 및 결제/결제금액",
+        "csv_column": "가격 및 결제/결제금액"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_057",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "freight_krw",
       "label": "운임 원화",
+      "semantic_path": [
+        "가격 및 결제",
+        "운임 원화"
+      ],
+      "bbox_label_id": "manual_trd_05_055",
       "source_detection_id": "manual_trd_05_055",
       "source_text": "운임 원화",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "money.krw",
+      "generator": "money.krw",
       "style_class": "style_freight_krw",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "운임 원화",
-        "csv_column": "운임 원화"
+        "json_path": "가격 및 결제/운임 원화",
+        "csv_column": "가격 및 결제/운임 원화"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_055",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "insurance_krw",
       "label": "보험료 원화",
+      "semantic_path": [
+        "가격 및 결제",
+        "보험료 원화"
+      ],
+      "bbox_label_id": "manual_trd_05_056",
       "source_detection_id": "manual_trd_05_056",
       "source_text": "보험료 원화",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "money.krw",
+      "generator": "money.krw",
       "style_class": "style_insurance_krw",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "보험료 원화",
-        "csv_column": "보험료 원화"
+        "json_path": "가격 및 결제/보험료 원화",
+        "csv_column": "가격 및 결제/보험료 원화"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_056",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "container_flag",
       "label": "컨테이너 여부",
+      "semantic_path": [
+        "수리 및 기한",
+        "컨테이너 여부"
+      ],
+      "bbox_label_id": "manual_trd_05_058",
       "source_detection_id": "manual_trd_05_058",
       "source_text": "컨테이너 여부",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:Y|N",
       "style_class": "style_container_flag",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "컨테이너 여부",
-        "csv_column": "컨테이너 여부"
+        "json_path": "수리 및 기한/컨테이너 여부",
+        "csv_column": "수리 및 기한/컨테이너 여부"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_058",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "customs_chief_name",
       "label": "신고수리 세관장",
+      "semantic_path": [
+        "수리 및 기한",
+        "신고수리 세관장"
+      ],
+      "bbox_label_id": "manual_trd_05_059",
       "source_detection_id": "manual_trd_05_059",
       "source_text": "신고수리 세관장",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:인천세관장|부산세관장|서울세관장|대전세관장",
       "style_class": "style_customs_chief_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고수리 세관장",
-        "csv_column": "신고수리 세관장"
+        "json_path": "수리 및 기한/신고수리 세관장",
+        "csv_column": "수리 및 기한/신고수리 세관장"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_059",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "customs_officer_name",
       "label": "관세사",
+      "semantic_path": [
+        "수리 및 기한",
+        "관세사"
+      ],
+      "bbox_label_id": "manual_trd_05_060",
       "source_detection_id": "manual_trd_05_060",
       "source_text": "관세사",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_customs_officer_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "관세사",
-        "csv_column": "관세사"
+        "json_path": "수리 및 기한/관세사",
+        "csv_column": "수리 및 기한/관세사"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_060",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "acceptance_date",
       "label": "신고수리일자",
+      "semantic_path": [
+        "수리 및 기한",
+        "신고수리일자"
+      ],
+      "bbox_label_id": "manual_trd_05_064",
       "source_detection_id": "manual_trd_05_064",
       "source_text": "신고수리일자",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_acceptance_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신고수리일자",
-        "csv_column": "신고수리일자"
+        "json_path": "수리 및 기한/신고수리일자",
+        "csv_column": "수리 및 기한/신고수리일자"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_064",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "loading_due_date",
       "label": "적재의무기한",
+      "semantic_path": [
+        "수리 및 기한",
+        "적재의무기한"
+      ],
+      "bbox_label_id": "manual_trd_05_063",
       "source_detection_id": "manual_trd_05_063",
       "source_text": "적재의무기한",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_loading_due_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "적재의무기한",
-        "csv_column": "적재의무기한"
+        "json_path": "수리 및 기한/적재의무기한",
+        "csv_column": "수리 및 기한/적재의무기한"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_063",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "period_start_date",
       "label": "운송기간 시작",
+      "semantic_path": [
+        "수리 및 기한",
+        "운송기간 시작"
+      ],
+      "bbox_label_id": "manual_trd_05_061",
       "source_detection_id": "manual_trd_05_061",
       "source_text": "운송기간 시작",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_period_start_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "운송기간 시작",
-        "csv_column": "운송기간 시작"
+        "json_path": "수리 및 기한/운송기간 시작",
+        "csv_column": "수리 및 기한/운송기간 시작"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_061",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "period_end_date",
       "label": "운송기간 종료",
+      "semantic_path": [
+        "수리 및 기한",
+        "운송기간 종료"
+      ],
+      "bbox_label_id": "manual_trd_05_062",
       "source_detection_id": "manual_trd_05_062",
       "source_text": "운송기간 종료",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_period_end_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "운송기간 종료",
-        "csv_column": "운송기간 종료"
+        "json_path": "수리 및 기한/운송기간 종료",
+        "csv_column": "수리 및 기한/운송기간 종료"
       },
       "required": true,
-      "notes": "TRD-05 수출신고필증 생산용 보정 필드. 신고번호/수출자/제조자/구매자/품목/금액/중량/수리일자를 하나의 record에서 일관 생성한다.",
-      "bbox_label_id": "manual_trd_05_062",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "authoring_mode": "trd05_manual_split_authoring_20260703",
-  "quality_status": "manual_split_bbox_ready",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/수출입신고필증__TRD-05/review/original_수출신고필증/review.json"
-  }
+  "updated_at": "2026-07-13T02:10:51.002447+00:00"
 }

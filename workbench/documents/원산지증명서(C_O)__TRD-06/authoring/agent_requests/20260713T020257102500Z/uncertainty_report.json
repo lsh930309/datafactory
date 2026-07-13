@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-06",
+  "pass": 2,
+  "unresolved_fields": [
+    {
+      "field_ids": [
+        "item_1_preference_criterion",
+        "item_2_preference_criterion",
+        "item_3_preference_criterion"
+      ],
+      "severity": "medium",
+      "issue": "실제 원산지 결정기준은 HS 품목별 규칙과 생산공정 증빙에 따라 달라진다.",
+      "current_approximation": "합성 product record에서 CTC/RVC/WO/PE를 HS 예시와 함께 선택",
+      "decision_needed": "실제 업무 데이터 적용 전 관세사 또는 품목별 원산지 규정 검증"
+    },
+    {
+      "field_ids": [
+        "item_1_hs_no",
+        "item_2_hs_no",
+        "item_3_hs_no"
+      ],
+      "severity": "medium",
+      "issue": "HS 6단위 예시는 설명과 일반적으로 대응하지만 법적 품목분류 판정이 아니다.",
+      "current_approximation": "20개 합성 품목 레코드의 6단위 형식",
+      "decision_needed": "운영 전 실제 상품 사양에 대한 HS 분류 확인"
+    },
+    {
+      "field_ids": [
+        "certification_date",
+        "authorized_name"
+      ],
+      "severity": "low",
+      "issue": "원본 서명은 필기 이미지이나 고정 schema는 단일 텍스트 bbox로 유지된다.",
+      "current_approximation": "합성 영문 이니셜 이름과 date.kr",
+      "decision_needed": "서명 이미지 렌더링이 필요하면 별도 renderer/bbox 계약 설계"
+    }
+  ],
+  "conflicting_evidence": [],
+  "low_confidence_faker_rules": [],
+  "limitations": [
+    "현재 pass는 고정된 1페이지 schema/anchor만 다루며 원본 PDF의 추가 페이지 완결성을 확장하지 않는다.",
+    "지원 constraint에는 문자열 내부 수량과 단위를 분리 검증하는 문법이 없어 origin_product_records로 함께 보존한다.",
+    "이메일 전용 faker rule이 없어 fallback은 template+pattern으로 근사하고 최종 값은 party record가 덮어쓴다.",
+    "수입자 국제 전화/주소 전용 generator가 없어 fallback은 pattern/free_text.short로 근사하고 최종 값은 party record가 덮어쓴다."
+  ],
+  "user_decisions_needed": [
+    "품목별 HS/원산지 기준의 법적 검증 수준",
+    "서명 이미지 생성 필요 여부"
+  ],
+  "coverage": {
+    "binding_count": 37,
+    "generator_count": 37,
+    "use_anchor_coverage_expected": "100%"
+  }
+}

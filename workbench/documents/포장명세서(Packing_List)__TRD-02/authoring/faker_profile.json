@@ -1,133 +1,68 @@
 {
-  "schema_version": 1,
-  "created_at": "2026-06-30T11:49:12.318967+00:00",
-  "updated_at": "2026-07-02T23:34:17.854343+00:00",
+  "schema_version": 2,
   "doc_id": "TRD-02",
-  "locale": "en_US",
+  "title": "포장명세서(Packing List)",
+  "as_of_date": "2026-07-13",
+  "profile_kind": "renderer_compatible_correlated_records",
   "field_generators": {
-    "shipper_exporter_name": "literal:",
-    "packing_list_number_date": "literal:",
-    "shipper_address_line1": "literal:",
-    "shipper_address_line2": "literal:",
-    "shipper_tel": "literal:",
-    "shipper_fax": "literal:",
-    "buyer_importer_name": "literal:",
-    "buyer_address_line1": "literal:",
-    "notify_party": "literal:",
-    "buyer_address_line2": "literal:",
-    "buyer_tel": "literal:",
-    "consignee_name": "literal:",
-    "payment_delivery_1": "literal:",
-    "payment_delivery_2": "literal:",
-    "payment_delivery_3": "literal:",
-    "port_loading_city": "literal:",
-    "final_destination_city": "literal:",
-    "port_loading_country": "literal:",
-    "final_destination_country": "literal:",
-    "carrier_vessel": "literal:",
-    "sailing_date": "literal:",
-    "shipping_mark_buyer": "literal:",
-    "shipping_mark_destination": "literal:",
-    "description_goods_header": "literal:",
-    "shipping_mark_carton_range": "literal:",
-    "shipping_mark_item_no": "literal:",
-    "box_1_title": "literal:",
-    "box_1_net_weight": "literal:",
-    "box_1_gross_weight": "literal:",
-    "box_1_volume": "literal:",
-    "box_1_dimensions": "literal:",
-    "box_1_item_code": "literal:",
-    "box_1_quantity": "literal:",
-    "box_1_carton_breakdown": "literal:",
-    "box_2_title": "literal:",
-    "box_2_net_weight": "literal:",
-    "box_2_gross_weight": "literal:",
-    "box_2_volume": "literal:",
-    "box_2_dimensions": "literal:",
-    "box_2_item_code": "literal:",
-    "box_2_quantity": "literal:",
-    "box_2_carton_breakdown": "literal:",
-    "total_trade_terms": "literal:",
-    "total_net_weight": "literal:",
-    "total_gross_weight": "literal:",
-    "total_volume": "literal:",
-    "net_weight_unit": "literal:",
-    "gross_weight_unit": "literal:",
-    "volume_unit": "literal:",
-    "package_summary": "literal:",
-    "say_package_only": "literal:",
-    "container_seal_no": "literal:",
-    "origin_country_statement": "literal:",
-    "footer_company_name": "literal:",
-    "footer_tel": "literal:",
-    "footer_fax": "literal:",
-    "signed_by_name": "literal:"
+    "shipper_exporter_name": "company.name_ko",
+    "packing_list_number_date": "free_text.short",
+    "shipper_address_line1": "free_text.short",
+    "shipper_address_line2": "free_text.short",
+    "shipper_tel": "person.phone_kr",
+    "shipper_fax": "person.phone_kr",
+    "buyer_importer_name": "company.name_ko",
+    "buyer_address_line1": "free_text.short",
+    "notify_party": "free_text.short",
+    "buyer_address_line2": "free_text.short",
+    "buyer_tel": "person.phone_kr",
+    "consignee_name": "free_text.short",
+    "payment_delivery_1": "free_text.short",
+    "payment_delivery_2": "free_text.short",
+    "payment_delivery_3": "free_text.short",
+    "port_loading_city": "free_text.short",
+    "final_destination_city": "free_text.short",
+    "port_loading_country": "free_text.short",
+    "final_destination_country": "free_text.short",
+    "carrier_vessel": "free_text.short",
+    "sailing_date": "date.kr",
+    "shipping_mark_buyer": "free_text.short",
+    "shipping_mark_destination": "free_text.short",
+    "description_goods_header": "free_text.short",
+    "shipping_mark_carton_range": "free_text.short",
+    "shipping_mark_item_no": "free_text.short",
+    "box_1_title": "free_text.short",
+    "box_1_net_weight": "free_text.short",
+    "box_1_gross_weight": "free_text.short",
+    "box_1_volume": "free_text.short",
+    "box_1_dimensions": "free_text.short",
+    "box_1_item_code": "free_text.short",
+    "box_1_quantity": "free_text.short",
+    "box_1_carton_breakdown": "free_text.short",
+    "box_2_title": "free_text.short",
+    "box_2_net_weight": "free_text.short",
+    "box_2_gross_weight": "free_text.short",
+    "box_2_volume": "free_text.short",
+    "box_2_dimensions": "free_text.short",
+    "box_2_item_code": "free_text.short",
+    "box_2_quantity": "free_text.short",
+    "box_2_carton_breakdown": "free_text.short",
+    "total_trade_terms": "free_text.short",
+    "total_net_weight": "free_text.short",
+    "total_gross_weight": "free_text.short",
+    "total_volume": "free_text.short",
+    "net_weight_unit": "choice:KGS|KG",
+    "gross_weight_unit": "choice:KGS|KG",
+    "volume_unit": "choice:CBM|M3",
+    "package_summary": "free_text.short",
+    "say_package_only": "free_text.short",
+    "container_seal_no": "free_text.short",
+    "origin_country_statement": "free_text.short",
+    "footer_company_name": "company.name_ko",
+    "footer_tel": "person.phone_kr",
+    "footer_fax": "person.phone_kr",
+    "signed_by_name": "free_text.short"
   },
-  "constraints": [
-    {
-      "type": "pick_record",
-      "pool": "trd02_packing_list_records",
-      "targets": {
-        "shipper_exporter_name": "shipper_exporter_name",
-        "packing_list_number_date": "packing_list_number_date",
-        "shipper_address_line1": "shipper_address_line1",
-        "shipper_address_line2": "shipper_address_line2",
-        "shipper_tel": "shipper_tel",
-        "shipper_fax": "shipper_fax",
-        "buyer_importer_name": "buyer_importer_name",
-        "buyer_address_line1": "buyer_address_line1",
-        "notify_party": "notify_party",
-        "buyer_address_line2": "buyer_address_line2",
-        "buyer_tel": "buyer_tel",
-        "consignee_name": "consignee_name",
-        "payment_delivery_1": "payment_delivery_1",
-        "payment_delivery_2": "payment_delivery_2",
-        "payment_delivery_3": "payment_delivery_3",
-        "port_loading_city": "port_loading_city",
-        "final_destination_city": "final_destination_city",
-        "port_loading_country": "port_loading_country",
-        "final_destination_country": "final_destination_country",
-        "carrier_vessel": "carrier_vessel",
-        "sailing_date": "sailing_date",
-        "shipping_mark_buyer": "shipping_mark_buyer",
-        "shipping_mark_destination": "shipping_mark_destination",
-        "description_goods_header": "description_goods_header",
-        "shipping_mark_carton_range": "shipping_mark_carton_range",
-        "shipping_mark_item_no": "shipping_mark_item_no",
-        "box_1_title": "box_1_title",
-        "box_1_net_weight": "box_1_net_weight",
-        "box_1_gross_weight": "box_1_gross_weight",
-        "box_1_volume": "box_1_volume",
-        "box_1_dimensions": "box_1_dimensions",
-        "box_1_item_code": "box_1_item_code",
-        "box_1_quantity": "box_1_quantity",
-        "box_1_carton_breakdown": "box_1_carton_breakdown",
-        "box_2_title": "box_2_title",
-        "box_2_net_weight": "box_2_net_weight",
-        "box_2_gross_weight": "box_2_gross_weight",
-        "box_2_volume": "box_2_volume",
-        "box_2_dimensions": "box_2_dimensions",
-        "box_2_item_code": "box_2_item_code",
-        "box_2_quantity": "box_2_quantity",
-        "box_2_carton_breakdown": "box_2_carton_breakdown",
-        "total_trade_terms": "total_trade_terms",
-        "total_net_weight": "total_net_weight",
-        "total_gross_weight": "total_gross_weight",
-        "total_volume": "total_volume",
-        "net_weight_unit": "net_weight_unit",
-        "gross_weight_unit": "gross_weight_unit",
-        "volume_unit": "volume_unit",
-        "package_summary": "package_summary",
-        "say_package_only": "say_package_only",
-        "container_seal_no": "container_seal_no",
-        "origin_country_statement": "origin_country_statement",
-        "footer_company_name": "footer_company_name",
-        "footer_tel": "footer_tel",
-        "footer_fax": "footer_fax",
-        "signed_by_name": "signed_by_name"
-      }
-    }
-  ],
   "data_pools": {
     "trd02_packing_list_records": [
       {
@@ -840,27 +775,705 @@
       }
     ]
   },
-  "source_notes": [
+  "pool_policies": {
+    "trd02_packing_list_records": {
+      "closed_set": false,
+      "pool_kind": "correlated_record_pool",
+      "minimum_required": 12,
+      "note": "모든 값은 합성 예시이며 동일 레코드 안에서 거래당사자, 항로, 품목, 포장, 중량, 용적, 합계, 발행 정보를 함께 선택한다."
+    }
+  },
+  "constraints": [
     {
-      "source": "source_image",
-      "url": "workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
-      "note": "Packing List 원본 이미지의 shipper/exporter, buyer/importer, consignee, notify party, terms, port/destination, carrier, sailing date, shipping mark, 2개 box line, 중량/CBM 합계, container/seal, origin statement, signed by 영역을 기준으로 schema를 정의함."
+      "type": "pick_record",
+      "pool": "trd02_packing_list_records",
+      "targets": {
+        "shipper_exporter_name": "shipper_exporter_name",
+        "packing_list_number_date": "packing_list_number_date",
+        "shipper_address_line1": "shipper_address_line1",
+        "shipper_address_line2": "shipper_address_line2",
+        "shipper_tel": "shipper_tel",
+        "shipper_fax": "shipper_fax",
+        "buyer_importer_name": "buyer_importer_name",
+        "buyer_address_line1": "buyer_address_line1",
+        "notify_party": "notify_party",
+        "buyer_address_line2": "buyer_address_line2",
+        "buyer_tel": "buyer_tel",
+        "consignee_name": "consignee_name",
+        "payment_delivery_1": "payment_delivery_1",
+        "payment_delivery_2": "payment_delivery_2",
+        "payment_delivery_3": "payment_delivery_3",
+        "port_loading_city": "port_loading_city",
+        "final_destination_city": "final_destination_city",
+        "port_loading_country": "port_loading_country",
+        "final_destination_country": "final_destination_country",
+        "carrier_vessel": "carrier_vessel",
+        "sailing_date": "sailing_date",
+        "shipping_mark_buyer": "shipping_mark_buyer",
+        "shipping_mark_destination": "shipping_mark_destination",
+        "description_goods_header": "description_goods_header",
+        "shipping_mark_carton_range": "shipping_mark_carton_range",
+        "shipping_mark_item_no": "shipping_mark_item_no",
+        "box_1_title": "box_1_title",
+        "box_1_net_weight": "box_1_net_weight",
+        "box_1_gross_weight": "box_1_gross_weight",
+        "box_1_volume": "box_1_volume",
+        "box_1_dimensions": "box_1_dimensions",
+        "box_1_item_code": "box_1_item_code",
+        "box_1_quantity": "box_1_quantity",
+        "box_1_carton_breakdown": "box_1_carton_breakdown",
+        "box_2_title": "box_2_title",
+        "box_2_net_weight": "box_2_net_weight",
+        "box_2_gross_weight": "box_2_gross_weight",
+        "box_2_volume": "box_2_volume",
+        "box_2_dimensions": "box_2_dimensions",
+        "box_2_item_code": "box_2_item_code",
+        "box_2_quantity": "box_2_quantity",
+        "box_2_carton_breakdown": "box_2_carton_breakdown",
+        "total_trade_terms": "total_trade_terms",
+        "total_net_weight": "total_net_weight",
+        "total_gross_weight": "total_gross_weight",
+        "total_volume": "total_volume",
+        "net_weight_unit": "net_weight_unit",
+        "gross_weight_unit": "gross_weight_unit",
+        "volume_unit": "volume_unit",
+        "package_summary": "package_summary",
+        "say_package_only": "say_package_only",
+        "container_seal_no": "container_seal_no",
+        "origin_country_statement": "origin_country_statement",
+        "footer_company_name": "footer_company_name",
+        "footer_tel": "footer_tel",
+        "footer_fax": "footer_fax",
+        "signed_by_name": "signed_by_name"
+      }
     },
     {
-      "source": "official_site",
-      "url": "https://www.trade.gov/export-solutions",
-      "note": "수출 문서와 해외 발송 업무 맥락 확인용. 포장명세서는 상업송장/선하증권과 함께 선적 물품, 포장 수량, 중량, 용적, 운송 정보를 대조하는 문서로 다룸."
+      "type": "copy",
+      "source": "shipper_exporter_name",
+      "target": "footer_company_name"
     },
     {
-      "source": "domain_reference",
-      "url": "https://www.trade.gov/commercial-invoice",
-      "note": "상업송장과 함께 수출 선적 문서에 등장하는 수출자, 수입자, 품목, 수량, 가격/운송 조건 맥락을 확인하고 packing list의 shipper/buyer/goods/terms 생성 정책에 반영함."
+      "type": "copy",
+      "source": "shipper_tel",
+      "target": "footer_tel"
     },
     {
-      "source": "domain_rule",
-      "url": "local:TRD02_PACKING_LIST_PROFILES",
-      "note": "box별 quantity는 carton 수와 carton당 수량의 곱으로 만들고, net/gross/volume은 품목별 단위값과 수량/박스 수에서 계산한다. total_net/gross/volume은 box 1+box 2 합계와 일치한다."
+      "type": "copy",
+      "source": "shipper_fax",
+      "target": "footer_fax"
+    },
+    {
+      "type": "copy",
+      "source": "description_goods_header",
+      "target": "box_1_title"
+    },
+    {
+      "type": "copy",
+      "source": "description_goods_header",
+      "target": "box_2_title"
+    },
+    {
+      "type": "date_not_after",
+      "target": "sailing_date",
+      "max": "as_of_date"
+    },
+    {
+      "type": "numeric_compare",
+      "left": "box_1_net_weight",
+      "operator": "<=",
+      "right": "box_1_gross_weight"
+    },
+    {
+      "type": "numeric_compare",
+      "left": "box_2_net_weight",
+      "operator": "<=",
+      "right": "box_2_gross_weight"
+    },
+    {
+      "type": "numeric_compare",
+      "left": "total_net_weight",
+      "operator": "<=",
+      "right": "total_gross_weight"
     }
   ],
-  "notes": "TRD-02 생산용 profile. 포장명세서의 shipper/buyer/shipping/box/weight/volume/package summary를 하나의 record로 생성하며 box totals와 package count가 일치한다."
+  "field_rules": [
+    {
+      "field_id": "box_1_carton_breakdown",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_1_dimensions",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_1_gross_weight",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_1_item_code",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_1_net_weight",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_1_quantity",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_1_title",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_1_volume",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_2_carton_breakdown",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_2_dimensions",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_2_gross_weight",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_2_item_code",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_2_net_weight",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_2_quantity",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_2_title",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "box_2_volume",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "buyer_address_line1",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "buyer_address_line2",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "buyer_importer_name",
+      "generator": "company.name_ko",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "buyer_tel",
+      "generator": "person.phone_kr",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "carrier_vessel",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "consignee_name",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "container_seal_no",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "description_goods_header",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "final_destination_city",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "final_destination_country",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "footer_company_name",
+      "generator": "company.name_ko",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "footer_fax",
+      "generator": "person.phone_kr",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "footer_tel",
+      "generator": "person.phone_kr",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "gross_weight_unit",
+      "generator": "choice:KGS|KG",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "net_weight_unit",
+      "generator": "choice:KGS|KG",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "notify_party",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "origin_country_statement",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "package_summary",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "packing_list_number_date",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "payment_delivery_1",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "payment_delivery_2",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "payment_delivery_3",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "port_loading_city",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "port_loading_country",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "sailing_date",
+      "generator": "date.kr",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "say_package_only",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "shipper_address_line1",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "shipper_address_line2",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "shipper_exporter_name",
+      "generator": "company.name_ko",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "shipper_fax",
+      "generator": "person.phone_kr",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "shipper_tel",
+      "generator": "person.phone_kr",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "shipping_mark_buyer",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "shipping_mark_carton_range",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "shipping_mark_destination",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "shipping_mark_item_no",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "signed_by_name",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "total_gross_weight",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "total_net_weight",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "total_trade_terms",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "total_volume",
+      "generator": "free_text.short",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    },
+    {
+      "field_id": "volume_unit",
+      "generator": "choice:CBM|M3",
+      "source": "schema_draft fixed binding + full template image + correlated record pool",
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ]
+    }
+  ],
+  "relationship_notes": [
+    "pick_record가 57개 필드를 한 레코드에서 선택하여 품목명, 수량, 카톤 구성, 개별 중량/용적, 합계, 거래당사자와 발행정보의 일관성을 보장한다.",
+    "copy 제약은 발행회사/연락처와 상단 송하인 정보, 대표 품명과 두 포장행 품명을 일치시킨다.",
+    "date_not_after는 출항일이 기준일 2026-07-13 이후가 되지 않도록 제한한다.",
+    "numeric_compare는 각 행 및 합계의 순중량이 총중량을 초과하지 않도록 제한한다.",
+    "중량/용적 수치 bbox에는 정적 단위가 붙지 않으며 단위는 별도 필드이므로 수치 값에는 단위를 포함하지 않는다."
+  ],
+  "updated_at": "2026-07-13T02:02:02.904861+00:00"
 }

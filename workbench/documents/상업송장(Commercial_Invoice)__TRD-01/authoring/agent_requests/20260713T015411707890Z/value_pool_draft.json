@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-01",
+  "generated_at": "2026-07-13",
+  "pools": {
+    "trd01_commercial_invoice_records": {
+      "kind": "record",
+      "count": 20,
+      "faker_profile_path": "data_pools.trd01_commercial_invoice_records",
+      "usage": "모든 28개 필드를 동일 record에서 선택하여 문서 내부 상관관계를 유지",
+      "source_note": "공식 상업송장 작성 지침과 원본 템플릿 형식을 바탕으로 만든 허구 기업·주소·참조번호·거래값",
+      "synthetic_data_policy": "실제 개인·기업·계좌·식별정보를 사용하지 않음"
+    }
+  },
+  "relationship_notes": [
+    "invoice date < L/C date < departure date를 각 record에서 보장하고 모든 날짜는 2026-07-13 이하이다.",
+    "amount는 quantity × unit_price로 계산하며 US$와 PC 표기를 원본 값 bbox 형식대로 값에 포함한다.",
+    "consignee 국가·주소·도착항·화인 목적지는 같은 거래 목적지로 맞춘다.",
+    "signed_by는 shipper_name과 동일한 합성 수출자 상호로 맞춘다."
+  ]
+}

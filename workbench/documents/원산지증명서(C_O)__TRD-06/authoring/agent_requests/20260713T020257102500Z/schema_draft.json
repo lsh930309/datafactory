@@ -1,0 +1,1355 @@
+{
+  "schema_version": 2,
+  "doc_id": "TRD-06",
+  "title": "원산지증명서(C/O)",
+  "semantic_schema": {
+    "수출자": {
+      "명칭": "",
+      "이메일": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "주소": ""
+    },
+    "포괄기간": {
+      "시작일": "",
+      "종료일": ""
+    },
+    "생산자": {
+      "명칭": "",
+      "이메일": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "주소": ""
+    },
+    "수입자": {
+      "명칭": "",
+      "이메일": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "주소": ""
+    },
+    "원산지증명대상품목": {
+      "1행": {
+        "일련번호": "",
+        "품명": "",
+        "수량 및 단위": "",
+        "HS 번호": "",
+        "특혜 원산지 기준": "",
+        "원산지 국가": ""
+      },
+      "2행": {
+        "일련번호": "",
+        "품명": "",
+        "수량 및 단위": "",
+        "HS 번호": "",
+        "특혜 원산지 기준": "",
+        "원산지 국가": ""
+      },
+      "3행": {
+        "일련번호": "",
+        "품명": "",
+        "수량 및 단위": "",
+        "HS 번호": "",
+        "특혜 원산지 기준": "",
+        "원산지 국가": ""
+      }
+    },
+    "인증": {
+      "증명일": "",
+      "권한자 성명 또는 서명": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "exporter_name",
+      "key": "수출자명",
+      "semantic_path": "수출자/명칭",
+      "anchor_id": "manual_trd_06_001",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002",
+        "det_000003"
+      ],
+      "value_type": "text",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_exporter_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          220,
+          206,
+          360,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0033_manual_trd_06_001.png",
+        "evidence_text": "YesForm Co., Ltd."
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_email",
+      "key": "수출자 이메일",
+      "semantic_path": "수출자/이메일",
+      "anchor_id": "manual_trd_06_002",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002",
+        "det_000005"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_exporter_email",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          754,
+          205,
+          265,
+          22
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0034_manual_trd_06_002.png",
+        "evidence_text": "export@yesform.co.kr"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_telephone",
+      "key": "수출자 전화번호",
+      "semantic_path": "수출자/전화번호",
+      "anchor_id": "manual_trd_06_003",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002",
+        "det_000007"
+      ],
+      "value_type": "text",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_exporter_telephone",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          218,
+          246,
+          180,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0035_manual_trd_06_003.png",
+        "evidence_text": "+82-2-123-4567"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_fax",
+      "key": "수출자 팩스번호",
+      "semantic_path": "수출자/팩스번호",
+      "anchor_id": "manual_trd_06_004",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002",
+        "det_000009"
+      ],
+      "value_type": "text",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_exporter_fax",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          755,
+          246,
+          180,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0036_manual_trd_06_004.png",
+        "evidence_text": "+82-2-123-4568"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "exporter_address",
+      "key": "수출자 주소",
+      "semantic_path": "수출자/주소",
+      "anchor_id": "manual_trd_06_005",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000002",
+        "det_000011"
+      ],
+      "value_type": "text",
+      "faker_rule": "address.ko",
+      "style_class": "style_exporter_address",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          221,
+          284,
+          430,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0037_manual_trd_06_005.png",
+        "evidence_text": "123 Yes Street, Yes-gu, Yes, Republic of Korea"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "blanket_period_from",
+      "key": "포괄기간 시작일",
+      "semantic_path": "포괄기간/시작일",
+      "anchor_id": "manual_trd_06_006",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000013",
+        "det_000014"
+      ],
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "style_blanket_period_from",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          127,
+          379,
+          169,
+          27
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0038_manual_trd_06_006.png",
+        "evidence_text": "____/__/__"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "blanket_period_to",
+      "key": "포괄기간 종료일",
+      "semantic_path": "포괄기간/종료일",
+      "anchor_id": "manual_trd_06_007",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000013",
+        "det_000016"
+      ],
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "style_blanket_period_to",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          353,
+          378,
+          172,
+          26
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0039_manual_trd_06_007.png",
+        "evidence_text": "____/__/__"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "producer_name",
+      "key": "생산자명",
+      "semantic_path": "생산자/명칭",
+      "anchor_id": "manual_trd_06_008",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000018"
+      ],
+      "value_type": "text",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_producer_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          218,
+          489,
+          300,
+          19
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0040_manual_trd_06_008.png",
+        "evidence_text": "Yes Manufacturing Co."
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "producer_email",
+      "key": "생산자 이메일",
+      "semantic_path": "생산자/이메일",
+      "anchor_id": "manual_trd_06_009",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000020"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_producer_email",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          753,
+          488,
+          265,
+          21
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0041_manual_trd_06_009.png",
+        "evidence_text": "producer@yesmfg.co.kr"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "producer_telephone",
+      "key": "생산자 전화번호",
+      "semantic_path": "생산자/전화번호",
+      "anchor_id": "manual_trd_06_010",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000022"
+      ],
+      "value_type": "text",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_producer_telephone",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          218,
+          527,
+          180,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0042_manual_trd_06_010.png",
+        "evidence_text": "+82-32-456-7890"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "producer_fax",
+      "key": "생산자 팩스번호",
+      "semantic_path": "생산자/팩스번호",
+      "anchor_id": "manual_trd_06_011",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000024"
+      ],
+      "value_type": "text",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_producer_fax",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          756,
+          529,
+          180,
+          17
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0043_manual_trd_06_011.png",
+        "evidence_text": "+82-32-456-7891"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "producer_address",
+      "key": "생산자 주소",
+      "semantic_path": "생산자/주소",
+      "anchor_id": "manual_trd_06_012",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000017",
+        "det_000026"
+      ],
+      "value_type": "text",
+      "faker_rule": "address.ko",
+      "style_class": "style_producer_address",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          220,
+          569,
+          430,
+          17
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0044_manual_trd_06_012.png",
+        "evidence_text": "456 Yes Industrial Park, Yes, Republic of Korea"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "importer_name",
+      "key": "수입자명",
+      "semantic_path": "수입자/명칭",
+      "anchor_id": "manual_trd_06_013",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000029"
+      ],
+      "value_type": "text",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_importer_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          220,
+          663,
+          300,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0045_manual_trd_06_013.png",
+        "evidence_text": "Nono Wholesale Inc."
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "importer_email",
+      "key": "수입자 이메일",
+      "semantic_path": "수입자/이메일",
+      "anchor_id": "manual_trd_06_014",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000031"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_importer_email",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          755,
+          664,
+          280,
+          17
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0046_manual_trd_06_014.png",
+        "evidence_text": "imports@nonowholesale.com"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "importer_telephone",
+      "key": "수입자 전화번호",
+      "semantic_path": "수입자/전화번호",
+      "anchor_id": "manual_trd_06_015",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000033"
+      ],
+      "value_type": "text",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_importer_telephone",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          219,
+          704,
+          180,
+          17
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0047_manual_trd_06_015.png",
+        "evidence_text": "+1-213-987-6543"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "importer_fax",
+      "key": "수입자 팩스번호",
+      "semantic_path": "수입자/팩스번호",
+      "anchor_id": "manual_trd_06_016",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000035"
+      ],
+      "value_type": "text",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_importer_fax",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          756,
+          704,
+          180,
+          17
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0048_manual_trd_06_016.png",
+        "evidence_text": "+1-213-987-6544"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "importer_address",
+      "key": "수입자 주소",
+      "semantic_path": "수입자/주소",
+      "anchor_id": "manual_trd_06_017",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000028",
+        "det_000037"
+      ],
+      "value_type": "text",
+      "faker_rule": "address.ko",
+      "style_class": "style_importer_address",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          220,
+          741,
+          420,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0049_manual_trd_06_017.png",
+        "evidence_text": "789 Trade Ave, Nono city, Nono, USA"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_1_serial_no",
+      "key": "1행 일련번호",
+      "semantic_path": "원산지증명대상품목/1행/일련번호",
+      "anchor_id": "manual_trd_06_018",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000040"
+      ],
+      "value_type": "text",
+      "faker_rule": "pattern:####",
+      "style_class": "style_item_1_serial_no",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          96,
+          899,
+          60,
+          21
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0050_manual_trd_06_018.png",
+        "evidence_text": "0123"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_1_description",
+      "key": "1행 품명",
+      "semantic_path": "원산지증명대상품목/1행/품명",
+      "anchor_id": "manual_trd_06_019",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000041"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_1_description",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          184,
+          898,
+          205,
+          23
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0051_manual_trd_06_019.png",
+        "evidence_text": "Plastic Office Supplies"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_1_quantity_unit",
+      "key": "1행 수량 및 단위",
+      "semantic_path": "원산지증명대상품목/1행/수량 및 단위",
+      "anchor_id": "manual_trd_06_020",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000042"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_1_quantity_unit",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "value_includes_unit": true,
+        "evidence": "전체 원본 이미지의 Quantity & Unit 셀 안에 수량과 단위가 함께 값으로 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          399,
+          897,
+          208,
+          26
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0052_manual_trd_06_020.png",
+        "evidence_text": "5,000 pcs"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_1_hs_no",
+      "key": "1행 HS 번호",
+      "semantic_path": "원산지증명대상품목/1행/HS 번호",
+      "anchor_id": "manual_trd_06_021",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000043"
+      ],
+      "value_type": "text",
+      "faker_rule": "pattern:####.##",
+      "style_class": "style_item_1_hs_no",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          647,
+          899,
+          80,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0053_manual_trd_06_021.png",
+        "evidence_text": "3926.90"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_1_preference_criterion",
+      "key": "1행 특혜 원산지 기준",
+      "semantic_path": "원산지증명대상품목/1행/특혜 원산지 기준",
+      "anchor_id": "manual_trd_06_022",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000044"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_1_preference_criterion",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          770,
+          899,
+          135,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0054_manual_trd_06_022.png",
+        "evidence_text": "CTC"
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "item_1_country_of_origin",
+      "key": "1행 원산지 국가",
+      "semantic_path": "원산지증명대상품목/1행/원산지 국가",
+      "anchor_id": "manual_trd_06_023",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000045"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_1_country_of_origin",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          938,
+          898,
+          165,
+          24
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0055_manual_trd_06_023.png",
+        "evidence_text": "Republic of Korea"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_2_serial_no",
+      "key": "2행 일련번호",
+      "semantic_path": "원산지증명대상품목/2행/일련번호",
+      "anchor_id": "manual_trd_06_024",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000040"
+      ],
+      "value_type": "text",
+      "faker_rule": "pattern:####",
+      "style_class": "style_item_2_serial_no",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          96,
+          939,
+          60,
+          21
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0056_manual_trd_06_024.png",
+        "evidence_text": "0123"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_2_description",
+      "key": "2행 품명",
+      "semantic_path": "원산지증명대상품목/2행/품명",
+      "anchor_id": "manual_trd_06_025",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000041"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_2_description",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          184,
+          938,
+          205,
+          23
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0057_manual_trd_06_025.png",
+        "evidence_text": "Plastic Office Supplies"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_2_quantity_unit",
+      "key": "2행 수량 및 단위",
+      "semantic_path": "원산지증명대상품목/2행/수량 및 단위",
+      "anchor_id": "manual_trd_06_026",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000042"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_2_quantity_unit",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "value_includes_unit": true,
+        "evidence": "전체 원본 이미지의 Quantity & Unit 셀 안에 수량과 단위가 함께 값으로 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          399,
+          937,
+          207,
+          26
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0058_manual_trd_06_026.png",
+        "evidence_text": "200 units"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_2_hs_no",
+      "key": "2행 HS 번호",
+      "semantic_path": "원산지증명대상품목/2행/HS 번호",
+      "anchor_id": "manual_trd_06_027",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000043"
+      ],
+      "value_type": "text",
+      "faker_rule": "pattern:####.##",
+      "style_class": "style_item_2_hs_no",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          647,
+          939,
+          80,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0059_manual_trd_06_027.png",
+        "evidence_text": "3926.90"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_2_preference_criterion",
+      "key": "2행 특혜 원산지 기준",
+      "semantic_path": "원산지증명대상품목/2행/특혜 원산지 기준",
+      "anchor_id": "manual_trd_06_028",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000044"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_2_preference_criterion",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          770,
+          939,
+          135,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0060_manual_trd_06_028.png",
+        "evidence_text": "CTC"
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "item_2_country_of_origin",
+      "key": "2행 원산지 국가",
+      "semantic_path": "원산지증명대상품목/2행/원산지 국가",
+      "anchor_id": "manual_trd_06_029",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000045"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_2_country_of_origin",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          938,
+          938,
+          165,
+          24
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0061_manual_trd_06_029.png",
+        "evidence_text": "Republic of Korea"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_3_serial_no",
+      "key": "3행 일련번호",
+      "semantic_path": "원산지증명대상품목/3행/일련번호",
+      "anchor_id": "manual_trd_06_030",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000040"
+      ],
+      "value_type": "text",
+      "faker_rule": "pattern:####",
+      "style_class": "style_item_3_serial_no",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          96,
+          978,
+          60,
+          21
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0062_manual_trd_06_030.png",
+        "evidence_text": "0123"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_3_description",
+      "key": "3행 품명",
+      "semantic_path": "원산지증명대상품목/3행/품명",
+      "anchor_id": "manual_trd_06_031",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000041"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_3_description",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          184,
+          977,
+          205,
+          23
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0063_manual_trd_06_031.png",
+        "evidence_text": "Plastic Office Supplies"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_3_quantity_unit",
+      "key": "3행 수량 및 단위",
+      "semantic_path": "원산지증명대상품목/3행/수량 및 단위",
+      "anchor_id": "manual_trd_06_032",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000042"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_3_quantity_unit",
+      "unit_policy": {
+        "static_unit_at_value_position": false,
+        "value_includes_unit": true,
+        "evidence": "전체 원본 이미지의 Quantity & Unit 셀 안에 수량과 단위가 함께 값으로 인쇄됨"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          399,
+          976,
+          205,
+          26
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0064_manual_trd_06_032.png",
+        "evidence_text": "3,000 pcs"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_3_hs_no",
+      "key": "3행 HS 번호",
+      "semantic_path": "원산지증명대상품목/3행/HS 번호",
+      "anchor_id": "manual_trd_06_033",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000043"
+      ],
+      "value_type": "text",
+      "faker_rule": "pattern:####.##",
+      "style_class": "style_item_3_hs_no",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          647,
+          978,
+          80,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0065_manual_trd_06_033.png",
+        "evidence_text": "3926.90"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "item_3_preference_criterion",
+      "key": "3행 특혜 원산지 기준",
+      "semantic_path": "원산지증명대상품목/3행/특혜 원산지 기준",
+      "anchor_id": "manual_trd_06_034",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000044"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_3_preference_criterion",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          770,
+          978,
+          135,
+          20
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0066_manual_trd_06_034.png",
+        "evidence_text": "CTC"
+      },
+      "confidence": 0.88,
+      "review_required": false
+    },
+    {
+      "field_id": "item_3_country_of_origin",
+      "key": "3행 원산지 국가",
+      "semantic_path": "원산지증명대상품목/3행/원산지 국가",
+      "anchor_id": "manual_trd_06_035",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000039",
+        "det_000045"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_item_3_country_of_origin",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          938,
+          977,
+          165,
+          24
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0067_manual_trd_06_035.png",
+        "evidence_text": "Republic of Korea"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "certification_date",
+      "key": "증명일",
+      "semantic_path": "인증/증명일",
+      "anchor_id": "manual_trd_06_036",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000071"
+      ],
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "style_certification_date",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          625,
+          1507,
+          150,
+          28
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0068_manual_trd_06_036.png",
+        "evidence_text": "Certification date"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    },
+    {
+      "field_id": "authorized_name",
+      "key": "권한자 성명 또는 서명",
+      "semantic_path": "인증/권한자 성명 또는 서명",
+      "anchor_id": "manual_trd_06_037",
+      "value": "",
+      "label_anchor_ids": [
+        "det_000073"
+      ],
+      "value_type": "text",
+      "faker_rule": "free_text.short",
+      "style_class": "style_authorized_name",
+      "unit_policy": {
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source": "workbench/documents/원산지증명서(C_O)__TRD-06/inpaint/original_원산지증명서_page_001/lama/inpainted_lama.png",
+        "full_template_checked": true,
+        "bbox": [
+          885,
+          1573,
+          134,
+          30
+        ],
+        "crop_path": "workbench/documents/원산지증명서(C_O)__TRD-06/authoring/agent_requests/20260713T020257102500Z/visual_evidence/crops/crop_0069_manual_trd_06_037.png",
+        "evidence_text": "Authorized name/signature"
+      },
+      "confidence": 0.96,
+      "review_required": false
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 37,
+    "bound_use_anchor_count": 37,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  },
+  "pass_contract": {
+    "pass": 1,
+    "field_ids_frozen": true,
+    "faker_profile_deferred_to_pass_2": true
+  }
+}

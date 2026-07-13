@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "doc_id": "CRD-01",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:credit4u.or.kr 본인신용정보 열람서비스 신용정보 조회서",
+    "site:law.go.kr 신용정보의 이용 및 보호에 관한 법률 본인신용정보 열람",
+    "site:allcredit.co.kr 신용정보보고서 대출 개설 발급 정보",
+    "site:niceinfo.co.kr 신용보고서 대출정보 신용카드 개설정보"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.credit4u.or.kr/",
+      "source_type": "공식 서비스",
+      "title": "한국신용정보원 본인신용정보 열람서비스",
+      "summary": "본인신용정보를 온라인에서 조회하는 공식 서비스임을 확인. 문서의 조회대상 식별정보와 발급 메타정보 해석의 보조 근거."
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.law.go.kr/LSW/LsiJoLinkP.do?docType=JO&joNo=003800000&languageType=KO&lsNm=%EC%8B%A0%EC%9A%A9%EC%A0%95%EB%B3%B4%EC%9D%98+%EC%9D%B4%EC%9A%A9+%EB%B0%8F+%EB%B3%B4%ED%98%B8%EC%97%90+%EA%B4%80%ED%95%9C+%EB%B2%95%EB%A5%A0",
+      "source_type": "법령",
+      "title": "신용정보법 제38조 신용정보의 열람 및 정정청구 등",
+      "summary": "신용정보주체가 본인 확인 후 본인 신용정보의 교부 또는 열람을 청구할 수 있음을 확인."
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.allcredit.co.kr/down/Personal_Credit_Rating_Result_First_2025.pdf",
+      "source_type": "KCB 공식 공개 보고서",
+      "title": "2025년 상반기 개인신용평가체계 검증결과 보고서",
+      "summary": "개설발급정보는 가계당좌예금·신용카드·체크카드 개설 내역, 개인대출정보는 대출상품·금융기관·금액 및 잔액 등의 대출 내역이라는 분류 근거."
+    },
+    {
+      "evidence_id": "R4",
+      "url": "https://www.niceinfo.co.kr/creditrating/cb_score_1_4_2.nice",
+      "source_type": "NICE 공식 설명",
+      "title": "NICE 개인신용평가 활용정보",
+      "summary": "신용개설정보와 대출정보가 개인신용평가의 부채수준·신용거래 관련 정보로 사용됨을 확인."
+    },
+    {
+      "evidence_id": "R5",
+      "url": "https://www.niceinfo.co.kr/etc/repayment.nice",
+      "source_type": "NICE 공식 설명",
+      "title": "대출 원리금상환액 산정 관련 안내",
+      "summary": "한국신용정보원 신용정보조회서상의 대출 및 대출잔액이 금융 판단 자료로 쓰임을 확인."
+    }
+  ],
+  "field_evidence": [
+    {
+      "semantic_paths": [
+        "문서정보/*",
+        "조회대상/*"
+      ],
+      "evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "application": "문서 성격과 본인 식별·발급 정보의 상위 구조에만 사용"
+    },
+    {
+      "semantic_paths": [
+        "개설·발급정보/*"
+      ],
+      "evidence_ids": [
+        "R3",
+        "R4"
+      ],
+      "application": "개설·발급정보 표의 의미 확인"
+    },
+    {
+      "semantic_paths": [
+        "대출정보/*"
+      ],
+      "evidence_ids": [
+        "R3",
+        "R4",
+        "R5"
+      ],
+      "application": "대출정보 표의 의미와 금액 열 해석 확인"
+    }
+  ],
+  "evidence_boundary": "웹 근거는 보조 자료이며, 필드 존재·행 수·단위·bbox는 전체 템플릿 이미지와 review use anchor를 우선함."
+}

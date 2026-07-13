@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "created_at": "2026-07-08T11:58:35.459213+00:00",
+  "created_at": "2026-07-13T01:47:27.060769+00:00",
   "doc_id": "FIN-08",
   "title": "전자세금계산서",
-  "source_review": "workbench/documents/전자세금계산서__FIN-08/review/original_전자세금계산서/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/전자세금계산서__FIN-08/authoring/agent_applied_reviews/20260713T013811386882Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/전자세금계산서__FIN-08/samples/original/전자세금계산서.png",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
+  "source_inpainted": "workbench/documents/전자세금계산서__FIN-08/inpaint/original_전자세금계산서/lama/inpainted_lama.png",
   "image": {
     "width": 1103,
     "height": 736
   },
   "bbox_source": {
     "canonical": "review",
-    "review_path": "workbench/documents/전자세금계산서__FIN-08/review/original_전자세금계산서/review.json"
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/전자세금계산서__FIN-08/authoring/agent_applied_reviews/20260713T013811386882Z/review.json"
   },
-  "anchor_map_ref": "/Users/lsh930309/projects/dataFatory/workbench/documents/전자세금계산서__FIN-08/review/original_전자세금계산서/review.json",
+  "anchor_map_ref": "workbench/documents/전자세금계산서__FIN-08/authoring/agent_requests/20260713T013811386882Z/anchor_map_draft.json",
   "semantic_schema": {
     "승인번호": "",
     "공급자": {
@@ -117,7 +117,8 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
         "json_path": "승인번호",
@@ -125,7 +126,7 @@
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "supplier_business_registration_number",
@@ -138,22 +139,23 @@
       "source_detection_id": "det_000004",
       "source_text": "632-08-00201",
       "value_type": "free_text.short",
-      "generator": "pattern:###-##-#####",
+      "generator": "business_reg_no",
       "style_class": "style_supplier_business_registration_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급자.등록번호",
-        "csv_column": "공급자 등록번호"
+        "json_path": "공급자/등록번호",
+        "csv_column": "공급자/등록번호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "supplier_branch_number",
@@ -173,15 +175,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급자.종사업장번호",
-        "csv_column": "공급자 종사업장번호"
+        "json_path": "공급자/종사업장번호",
+        "csv_column": "공급자/종사업장번호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "supplier_company_name",
@@ -201,15 +204,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급자.상호",
-        "csv_column": "공급자 상호(법인명)"
+        "json_path": "공급자/상호",
+        "csv_column": "공급자/상호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "supplier_representative_name",
@@ -229,15 +233,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급자.성명",
-        "csv_column": "공급자 성명"
+        "json_path": "공급자/성명",
+        "csv_column": "공급자/성명"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "supplier_business_address",
@@ -257,15 +262,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급자.사업장주소",
-        "csv_column": "공급자 사업장 주소"
+        "json_path": "공급자/사업장주소",
+        "csv_column": "공급자/사업장주소"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "supplier_business_type",
@@ -285,15 +291,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급자.업태",
-        "csv_column": "공급자 업태"
+        "json_path": "공급자/업태",
+        "csv_column": "공급자/업태"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "supplier_business_item",
@@ -313,15 +320,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급자.종목",
-        "csv_column": "공급자 종목"
+        "json_path": "공급자/종목",
+        "csv_column": "공급자/종목"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "supplier_email",
@@ -333,23 +341,24 @@
       "bbox_label_id": "visual_0018",
       "source_detection_id": "visual_0018",
       "source_text": "공급자 이메일",
-      "value_type": "company.email",
-      "generator": "company.email",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
       "style_class": "style_supplier_email",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급자.이메일",
-        "csv_column": "공급자 이메일"
+        "json_path": "공급자/이메일",
+        "csv_column": "공급자/이메일"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "recipient_business_registration_number",
@@ -362,22 +371,23 @@
       "source_detection_id": "visual_0005",
       "source_text": "공급받는자 등록번호",
       "value_type": "free_text.short",
-      "generator": "pattern:###-##-#####",
+      "generator": "business_reg_no",
       "style_class": "style_recipient_business_registration_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급받는자.등록번호",
-        "csv_column": "공급받는자 등록번호"
+        "json_path": "공급받는자/등록번호",
+        "csv_column": "공급받는자/등록번호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "recipient_branch_number",
@@ -397,15 +407,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급받는자.종사업장번호",
-        "csv_column": "공급받는자 종사업장번호"
+        "json_path": "공급받는자/종사업장번호",
+        "csv_column": "공급받는자/종사업장번호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "recipient_company_name",
@@ -425,15 +436,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급받는자.상호",
-        "csv_column": "공급받는자 상호(법인명)"
+        "json_path": "공급받는자/상호",
+        "csv_column": "공급받는자/상호"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "recipient_representative_name",
@@ -453,15 +465,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급받는자.성명",
-        "csv_column": "공급받는자 성명"
+        "json_path": "공급받는자/성명",
+        "csv_column": "공급받는자/성명"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "recipient_business_address",
@@ -481,15 +494,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급받는자.사업장주소",
-        "csv_column": "공급받는자 사업장 주소"
+        "json_path": "공급받는자/사업장주소",
+        "csv_column": "공급받는자/사업장주소"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "recipient_business_type",
@@ -509,15 +523,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급받는자.업태",
-        "csv_column": "공급받는자 업태"
+        "json_path": "공급받는자/업태",
+        "csv_column": "공급받는자/업태"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "recipient_business_item",
@@ -537,15 +552,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급받는자.종목",
-        "csv_column": "공급받는자 종목"
+        "json_path": "공급받는자/종목",
+        "csv_column": "공급받는자/종목"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "recipient_email_1",
@@ -557,23 +573,24 @@
       "bbox_label_id": "visual_0015",
       "source_detection_id": "visual_0015",
       "source_text": "공급받는자 이메일 1",
-      "value_type": "company.email",
-      "generator": "company.email",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
       "style_class": "style_recipient_email_1",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급받는자.이메일1",
-        "csv_column": "공급받는자 이메일 1"
+        "json_path": "공급받는자/이메일1",
+        "csv_column": "공급받는자/이메일1"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "recipient_email_2",
@@ -585,23 +602,24 @@
       "bbox_label_id": "visual_0019",
       "source_detection_id": "visual_0019",
       "source_text": "공급받는자 이메일 2",
-      "value_type": "company.email",
-      "generator": "company.email",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
       "style_class": "style_recipient_email_2",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "공급받는자.이메일2",
-        "csv_column": "공급받는자 이메일 2"
+        "json_path": "공급받는자/이메일2",
+        "csv_column": "공급받는자/이메일2"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "issue_date",
@@ -621,15 +639,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "거래요약.작성일자",
-        "csv_column": "작성일자"
+        "json_path": "거래요약/작성일자",
+        "csv_column": "거래요약/작성일자"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "summary_supply_amount",
@@ -649,15 +668,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "거래요약.공급가액",
-        "csv_column": "공급가액"
+        "json_path": "거래요약/공급가액",
+        "csv_column": "거래요약/공급가액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "summary_tax_amount",
@@ -677,15 +697,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "거래요약.세액",
-        "csv_column": "세액"
+        "json_path": "거래요약/세액",
+        "csv_column": "거래요약/세액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "amendment_reason",
@@ -705,15 +726,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "거래요약.수정사유",
-        "csv_column": "수정사유"
+        "json_path": "거래요약/수정사유",
+        "csv_column": "거래요약/수정사유"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "summary_note",
@@ -733,15 +755,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "거래요약.비고",
-        "csv_column": "비고"
+        "json_path": "거래요약/비고",
+        "csv_column": "거래요약/비고"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line1_month",
@@ -762,15 +785,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.1행.월",
-        "csv_column": "1행 월"
+        "json_path": "품목내역/1행/월",
+        "csv_column": "품목내역/1행/월"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line1_day",
@@ -791,15 +815,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.1행.일",
-        "csv_column": "1행 일"
+        "json_path": "품목내역/1행/일",
+        "csv_column": "품목내역/1행/일"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line1_item_name",
@@ -820,15 +845,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.1행.품목",
-        "csv_column": "1행 품목"
+        "json_path": "품목내역/1행/품목",
+        "csv_column": "품목내역/1행/품목"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line1_specification",
@@ -849,15 +875,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.1행.규격",
-        "csv_column": "1행 규격"
+        "json_path": "품목내역/1행/규격",
+        "csv_column": "품목내역/1행/규격"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line1_quantity",
@@ -878,15 +905,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.1행.수량",
-        "csv_column": "1행 수량"
+        "json_path": "품목내역/1행/수량",
+        "csv_column": "품목내역/1행/수량"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line1_unit_price",
@@ -907,15 +935,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.1행.단가",
-        "csv_column": "1행 단가"
+        "json_path": "품목내역/1행/단가",
+        "csv_column": "품목내역/1행/단가"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line1_supply_amount",
@@ -936,15 +965,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.1행.공급가액",
-        "csv_column": "1행 공급가액"
+        "json_path": "품목내역/1행/공급가액",
+        "csv_column": "품목내역/1행/공급가액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line1_tax_amount",
@@ -965,15 +995,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.1행.세액",
-        "csv_column": "1행 세액"
+        "json_path": "품목내역/1행/세액",
+        "csv_column": "품목내역/1행/세액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line1_remark",
@@ -994,15 +1025,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.1행.비고",
-        "csv_column": "1행 비고"
+        "json_path": "품목내역/1행/비고",
+        "csv_column": "품목내역/1행/비고"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line2_month",
@@ -1023,15 +1055,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.2행.월",
-        "csv_column": "2행 월"
+        "json_path": "품목내역/2행/월",
+        "csv_column": "품목내역/2행/월"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line2_day",
@@ -1052,15 +1085,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.2행.일",
-        "csv_column": "2행 일"
+        "json_path": "품목내역/2행/일",
+        "csv_column": "품목내역/2행/일"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line2_item_name",
@@ -1081,15 +1115,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.2행.품목",
-        "csv_column": "2행 품목"
+        "json_path": "품목내역/2행/품목",
+        "csv_column": "품목내역/2행/품목"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line2_specification",
@@ -1110,15 +1145,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.2행.규격",
-        "csv_column": "2행 규격"
+        "json_path": "품목내역/2행/규격",
+        "csv_column": "품목내역/2행/규격"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line2_quantity",
@@ -1139,15 +1175,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.2행.수량",
-        "csv_column": "2행 수량"
+        "json_path": "품목내역/2행/수량",
+        "csv_column": "품목내역/2행/수량"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line2_unit_price",
@@ -1168,15 +1205,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.2행.단가",
-        "csv_column": "2행 단가"
+        "json_path": "품목내역/2행/단가",
+        "csv_column": "품목내역/2행/단가"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line2_supply_amount",
@@ -1197,15 +1235,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.2행.공급가액",
-        "csv_column": "2행 공급가액"
+        "json_path": "품목내역/2행/공급가액",
+        "csv_column": "품목내역/2행/공급가액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line2_tax_amount",
@@ -1226,15 +1265,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.2행.세액",
-        "csv_column": "2행 세액"
+        "json_path": "품목내역/2행/세액",
+        "csv_column": "품목내역/2행/세액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line2_remark",
@@ -1255,15 +1295,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.2행.비고",
-        "csv_column": "2행 비고"
+        "json_path": "품목내역/2행/비고",
+        "csv_column": "품목내역/2행/비고"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line3_month",
@@ -1284,15 +1325,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.3행.월",
-        "csv_column": "3행 월"
+        "json_path": "품목내역/3행/월",
+        "csv_column": "품목내역/3행/월"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line3_day",
@@ -1313,15 +1355,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.3행.일",
-        "csv_column": "3행 일"
+        "json_path": "품목내역/3행/일",
+        "csv_column": "품목내역/3행/일"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line3_item_name",
@@ -1342,15 +1385,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.3행.품목",
-        "csv_column": "3행 품목"
+        "json_path": "품목내역/3행/품목",
+        "csv_column": "품목내역/3행/품목"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line3_specification",
@@ -1371,15 +1415,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.3행.규격",
-        "csv_column": "3행 규격"
+        "json_path": "품목내역/3행/규격",
+        "csv_column": "품목내역/3행/규격"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line3_quantity",
@@ -1400,15 +1445,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.3행.수량",
-        "csv_column": "3행 수량"
+        "json_path": "품목내역/3행/수량",
+        "csv_column": "품목내역/3행/수량"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line3_unit_price",
@@ -1429,15 +1475,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.3행.단가",
-        "csv_column": "3행 단가"
+        "json_path": "품목내역/3행/단가",
+        "csv_column": "품목내역/3행/단가"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line3_supply_amount",
@@ -1458,15 +1505,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.3행.공급가액",
-        "csv_column": "3행 공급가액"
+        "json_path": "품목내역/3행/공급가액",
+        "csv_column": "품목내역/3행/공급가액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line3_tax_amount",
@@ -1487,15 +1535,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.3행.세액",
-        "csv_column": "3행 세액"
+        "json_path": "품목내역/3행/세액",
+        "csv_column": "품목내역/3행/세액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line3_remark",
@@ -1516,15 +1565,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.3행.비고",
-        "csv_column": "3행 비고"
+        "json_path": "품목내역/3행/비고",
+        "csv_column": "품목내역/3행/비고"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line4_month",
@@ -1545,15 +1595,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.4행.월",
-        "csv_column": "4행 월"
+        "json_path": "품목내역/4행/월",
+        "csv_column": "품목내역/4행/월"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line4_day",
@@ -1574,15 +1625,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.4행.일",
-        "csv_column": "4행 일"
+        "json_path": "품목내역/4행/일",
+        "csv_column": "품목내역/4행/일"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line4_item_name",
@@ -1603,15 +1655,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.4행.품목",
-        "csv_column": "4행 품목"
+        "json_path": "품목내역/4행/품목",
+        "csv_column": "품목내역/4행/품목"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line4_specification",
@@ -1632,15 +1685,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.4행.규격",
-        "csv_column": "4행 규격"
+        "json_path": "품목내역/4행/규격",
+        "csv_column": "품목내역/4행/규격"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line4_quantity",
@@ -1661,15 +1715,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.4행.수량",
-        "csv_column": "4행 수량"
+        "json_path": "품목내역/4행/수량",
+        "csv_column": "품목내역/4행/수량"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line4_unit_price",
@@ -1690,15 +1745,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.4행.단가",
-        "csv_column": "4행 단가"
+        "json_path": "품목내역/4행/단가",
+        "csv_column": "품목내역/4행/단가"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line4_supply_amount",
@@ -1719,15 +1775,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.4행.공급가액",
-        "csv_column": "4행 공급가액"
+        "json_path": "품목내역/4행/공급가액",
+        "csv_column": "품목내역/4행/공급가액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line4_tax_amount",
@@ -1748,15 +1805,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.4행.세액",
-        "csv_column": "4행 세액"
+        "json_path": "품목내역/4행/세액",
+        "csv_column": "품목내역/4행/세액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "line4_remark",
@@ -1777,15 +1835,16 @@
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목내역.4행.비고",
-        "csv_column": "4행 비고"
+        "json_path": "품목내역/4행/비고",
+        "csv_column": "품목내역/4행/비고"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "total_amount",
@@ -1805,15 +1864,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제.합계금액",
-        "csv_column": "합계금액"
+        "json_path": "결제/합계금액",
+        "csv_column": "결제/합계금액"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "cash_amount",
@@ -1826,22 +1886,23 @@
       "source_detection_id": "manual_1783511062690",
       "source_text": "현금",
       "value_type": "money.krw",
-      "generator": "money.krw",
+      "generator": "same_as:total_amount",
       "style_class": "style_cash_amount",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제.현금",
-        "csv_column": "현금"
+        "json_path": "결제/현금",
+        "csv_column": "결제/현금"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "check_amount",
@@ -1861,15 +1922,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제.수표",
-        "csv_column": "수표"
+        "json_path": "결제/수표",
+        "csv_column": "결제/수표"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "promissory_note_amount",
@@ -1889,15 +1951,16 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제.어음",
-        "csv_column": "어음"
+        "json_path": "결제/어음",
+        "csv_column": "결제/어음"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     },
     {
       "field_id": "receivable_amount",
@@ -1917,17 +1980,18 @@
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제.외상미수금",
-        "csv_column": "외상미수금"
+        "json_path": "결제/외상미수금",
+        "csv_column": "결제/외상미수금"
       },
       "required": true,
       "notes": "",
-      "bbox_status": "use"
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "updated_at": "2026-07-08T23:53:29.664585+00:00"
+  "updated_at": "2026-07-13T01:47:27.083758+00:00"
 }

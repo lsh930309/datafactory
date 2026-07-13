@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "doc_id": "QC-02",
+  "pass": "faker_and_relationship_expansion",
+  "unresolved": [
+    {
+      "id": "U1",
+      "fields": [
+        "line_*_quality_result",
+        "line_*_other_result",
+        "line_*_remark"
+      ],
+      "severity": "medium",
+      "issue": "품질 판정에 따라 조치·비고를 조건부로 묶는 관계는 지원 constraint grammar에 조건 분기 타입이 없다.",
+      "current_fallback": "품명·규격·기타검사내용만 pick_record로 묶고 품질/비고는 지원 choice로 독립 생성한다.",
+      "decision_needed": "향후 조건부 record override를 지원하거나 행 전체 record pool을 별도 렌더 정책으로 승인할지 결정."
+    },
+    {
+      "id": "U2",
+      "fields": [
+        "purchase_order_year",
+        "receiving_year"
+      ],
+      "severity": "low",
+      "issue": "원본 채움 샘플에는 20이 보이지만 인페인트 전체 이미지에서는 제거되어 동적 값으로 판정했다.",
+      "current_fallback": "2020~2026 범위의 유효한 4자리 연도를 bbox에 렌더한다.",
+      "decision_needed": "승인 화면에서 4자리 연도가 폭 46px/42px bbox에 맞는지 확인."
+    },
+    {
+      "id": "U3",
+      "fields": [
+        "approval_owner_name",
+        "approval_reviewer_name",
+        "approval_manager_name",
+        "department_head_confirmation"
+      ],
+      "severity": "low",
+      "issue": "서명/날인 이미지가 아니라 인명 텍스트를 렌더하는 초안이다.",
+      "current_fallback": "person.name_ko 사용.",
+      "decision_needed": "도장 이미지 렌더가 필요하면 별도 이미지 필드 계약 필요."
+    },
+    {
+      "id": "U4",
+      "fields": [
+        "all"
+      ],
+      "severity": "info",
+      "issue": "이번 요청은 현재 1페이지만 대상으로 하며 다중 페이지 완결성은 확장하지 않았다.",
+      "current_fallback": "현재 72개 use anchor에만 100% binding/generator coverage 제공.",
+      "decision_needed": "추가 페이지가 확인될 때 별도 authoring pass 수행."
+    }
+  ],
+  "conflicts": [],
+  "low_confidence_rules": [
+    "line_*_quality_result",
+    "line_*_remark"
+  ],
+  "user_decisions_needed": [
+    "조건부 품질판정-조치-비고 상관관계 확장 여부",
+    "결재/확인란 도장 이미지 지원 여부"
+  ],
+  "research_refresh": {
+    "date": "2026-07-13",
+    "sources": [
+      "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000271470",
+      "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000275978"
+    ],
+    "note": "국가법령정보센터 최신 검색으로 검수의 수량·손상 확인 및 품질검사 맥락을 재확인함."
+  }
+}

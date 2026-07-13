@@ -448,6 +448,10 @@ function emptyCleanupMask(width = 1200, height = 1600) {
 function cleanupStrokeId() {
   return `cleanup_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 }
+function localDateInputValue(now = new Date()) {
+  const offset = now.getTimezoneOffset() * 60_000;
+  return new Date(now.getTime() - offset).toISOString().slice(0, 10);
+}
 function pointDistance(left, right) {
   return Math.hypot((left?.x || 0) - (right?.x || 0), (left?.y || 0) - (right?.y || 0));
 }
@@ -461,6 +465,7 @@ function App() {
   const [assessmentEdits, setAssessmentEdits] = useState({});
   const [assessmentExport, setAssessmentExport] = useState(null);
   const [finalExportCount, setFinalExportCount] = useState(1);
+  const [authoringAsOfDate, setAuthoringAsOfDate] = useState(() => localDateInputValue());
   const [finalExportHandwritingAsPrinted, setFinalExportHandwritingAsPrinted] = useState(false);
   const [finalExportResult, setFinalExportResult] = useState(null);
   const [assessmentPopover, setAssessmentPopover] = useState(null);
@@ -527,7 +532,8 @@ function App() {
   const [authoringAgentInstruction, setAuthoringAgentInstruction] = useState('');
   const [authoringAgentReasoning, setAuthoringAgentReasoning] = useState('medium');
   const [authoringAgentFastMode, setAuthoringAgentFastMode] = useState(false);
-  const [authoringAgentMinPoolSize, setAuthoringAgentMinPoolSize] = useState(12);
+  const [authoringAgentScalarPoolMinSize, setAuthoringAgentScalarPoolMinSize] = useState(20);
+  const [authoringAgentRecordPoolMinSize, setAuthoringAgentRecordPoolMinSize] = useState(12);
   const [authoringAgentRequest, setAuthoringAgentRequest] = useState(null);
   const [authoringAgentRun, setAuthoringAgentRun] = useState(null);
   const [authoringLibrary, setAuthoringLibrary] = useState(null);
@@ -963,7 +969,10 @@ function App() {
       mode,
       reasoningEffort: authoringAgentReasoning,
       fastMode: authoringAgentFastMode,
-      minPoolSize: clampNumber(authoringAgentMinPoolSize, 1, 100),
+      minPoolSize: clampNumber(authoringAgentScalarPoolMinSize, 1, 100),
+      scalarPoolMinSize: clampNumber(authoringAgentScalarPoolMinSize, 1, 100),
+      recordPoolMinSize: clampNumber(authoringAgentRecordPoolMinSize, 1, 100),
+      asOfDate: authoringAsOfDate,
     };
   }
 
@@ -1406,6 +1415,7 @@ function App() {
           clean: true,
           renderHandwritingAsPrinted: finalExportHandwritingAsPrinted,
           scopeEntries,
+          asOfDate: authoringAsOfDate,
         }),
       });
       setFinalExportResult(payload);
@@ -2561,6 +2571,7 @@ function App() {
           fakerProfile: authoringBundle.faker_profile,
           seed: 1234,
           renderScale: 2,
+          asOfDate: authoringAsOfDate,
           handwritingPreview: selectedIsHandwriting,
           qrBbox: selectedIsHandwriting ? (authoringBundle.schema?.handwriting?.qr_bbox || null) : null,
         }),
@@ -2600,6 +2611,7 @@ function App() {
           schemaPath: resolved.schema,
           stylesheetPath: resolved.stylesheet,
           fakerProfilePath: resolved.faker_profile,
+          asOfDate: authoringAsOfDate,
         }),
       });
       const version = Date.now();
@@ -2640,6 +2652,7 @@ function App() {
           seed: 20260702,
           outDir,
           renderScale: 2,
+          asOfDate: authoringAsOfDate,
         }),
       });
       setAuthoringBatchResult(payload);
@@ -3015,6 +3028,13 @@ function App() {
                 </span>
               </label>
               <div className="final-export-controls">
+                <label>데이터 기준일
+                  <input
+                    type="date"
+                    value={authoringAsOfDate}
+                    onChange={(event) => setAuthoringAsOfDate(event.target.value)}
+                  />
+                </label>
                 <label>문서별 생성 매수
                   <input
                     type="number"
@@ -3455,7 +3475,10 @@ function App() {
               value={authoringAgentInstruction}
               onChange={(event) => setAuthoringAgentInstruction(event.target.value)}
             />
-            <div className="agent-options-grid">
+              <div className="agent-options-grid">
+                <label>데이터 기준일
+                  <input type="date" value={authoringAsOfDate} onChange={(event) => setAuthoringAsOfDate(event.target.value)} />
+                </label>
               <label>사고 레벨
                 <select value={authoringAgentReasoning} onChange={(event) => setAuthoringAgentReasoning(event.target.value)}>
                   <option value="low">low</option>
@@ -3463,8 +3486,11 @@ function App() {
                   <option value="high">high</option>
                 </select>
               </label>
-              <label>Pool 최소 원소
-                <input type="number" min="1" max="100" value={authoringAgentMinPoolSize} onChange={(event) => setAuthoringAgentMinPoolSize(clampNumber(event.target.value, 1, 100))} />
+              <label>Scalar pool 최소
+                <input type="number" min="1" max="100" value={authoringAgentScalarPoolMinSize} onChange={(event) => setAuthoringAgentScalarPoolMinSize(clampNumber(event.target.value, 1, 100))} />
+              </label>
+              <label>Record pool 최소
+                <input type="number" min="1" max="100" value={authoringAgentRecordPoolMinSize} onChange={(event) => setAuthoringAgentRecordPoolMinSize(clampNumber(event.target.value, 1, 100))} />
               </label>
               <label className={`check-row ${authoringAgentFastMode ? 'on' : ''}`}>
                 <input type="checkbox" checked={authoringAgentFastMode} onChange={(event) => setAuthoringAgentFastMode(event.target.checked)} />
@@ -3488,7 +3514,9 @@ function App() {
                 <b>Agent run: {latestAgentRunStatus}</b>
                 <small>{latestAgentRunPath}</small>
                 {latestAgentRunPolling && <small>상태 자동 갱신 중...</small>}
+                {authoringAgentRun?.passState && <small>pass {authoringAgentRun.passState.current} · 완료 {(authoringAgentRun.passState.completed || []).join(' → ') || '없음'}</small>}
                 {authoringAgentRun?.validation?.summary && <small>draft {authoringAgentRun.validation.summary.present}/{authoringAgentRun.validation.summary.required} · missing {authoringAgentRun.validation.summary.missing} · invalid JSON {authoringAgentRun.validation.summary.invalidJson}</small>}
+                {authoringAgentRun?.repairSummary?.materializedCount > 0 && <small>누락 use bbox 자동 보강 {authoringAgentRun.repairSummary.materializedCount}건 · 검토필요 leaf 생성</small>}
                 {latestAgentRunReady && <small>schema/faker/research draft 생성 및 JSON 검증 완료</small>}
               </div>
             )}

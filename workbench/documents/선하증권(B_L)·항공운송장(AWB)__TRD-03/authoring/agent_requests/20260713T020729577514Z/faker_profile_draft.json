@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "doc_id": "TRD-03",
+  "title": "선하증권(B/L)·항공운송장(AWB)",
+  "status": "draft_faker_relationship_expanded",
+  "pass": "2/2",
+  "as_of_date": "2026-07-13",
+  "field_generators": {
+    "shipper_name": "pool:trading_company_names",
+    "shipper_address": "pool:global_addresses",
+    "bl_number": "pattern:AAA**************",
+    "consignee_name": "pool:trading_company_names",
+    "consignee_address": "pool:global_addresses",
+    "consignee_tel": "pattern:+### ## ### ####",
+    "notify_party": "free_text.short",
+    "vessel_voyage": "pattern:AAAAAA STAR/###A",
+    "port_of_loading": "pool:ports",
+    "port_of_discharge": "pool:ports",
+    "destination_on_carriage": "pool:ports",
+    "freight_payable_at": "pool:ports",
+    "number_of_originals": "choice:3(THREE)|2(TWO)|1(ONE)",
+    "excess_value_declaration": "choice:N.V.D.|NO VALUE DECLARED|AS PER COMMERCIAL INVOICE",
+    "marks_and_numbers": "pattern:PO-###### / C/NO. #-#",
+    "package_description": "choice:1 CONTAINER|2 PALLETS|3 PACKAGES|5 CARTONS|8 CRATES",
+    "goods_description": "free_text.short",
+    "gross_weight": "pattern:##,###.### KGS",
+    "measurement_m3": "pattern:##.###",
+    "container_number": "pattern:AAAA#######",
+    "seal_number": "pattern:AA#######",
+    "container_type": "choice:20' DRY|40' DRY|40' HC|20' OPEN TOP|40' FLAT",
+    "container_weight": "same_as:gross_weight",
+    "container_volume": "pattern:##.### M3",
+    "container_packages": "pattern:##",
+    "container_mode": "choice:FCL|LCL",
+    "incoterm": "choice:EXW|FCA|FOB|CFR|CIF|CPT|CIP|DAP|DPU|DDP",
+    "surrender_to": "free_text.short",
+    "freight_details": "choice:FREIGHT COLLECT|FREIGHT PREPAID|AS ARRANGED",
+    "place_of_issue": "pool:ports",
+    "date_of_issue": "pool:date_dd_mmm_yy",
+    "place_of_receipt": "pool:ports",
+    "place_of_delivery": "pool:ports",
+    "total_packages_words": "choice:ONE CONTAINER|TWO PALLETS|THREE PACKAGES|FIVE CARTONS|EIGHT CRATES",
+    "cargo_note": "choice:SHIPPER LOAD, STOW AND COUNT|SAID TO CONTAIN|CLEAN ON BOARD|FREIGHT AS ARRANGED"
+  },
+  "data_pools": {
+    "trading_company_names": [
+      "SAMPLE PACIFIC TRADING CO. LTD.", "DEMO HARBOR INDUSTRIES LTD.", "TEST OCEAN COMPONENTS INC.", "SAMPLE EASTERN EXPORTS LLC", "DEMO BLUEWATER MACHINERY CO.",
+      "TEST SUMMIT MATERIALS LTD.", "SAMPLE MERIDIAN TEXTILES CO.", "DEMO COASTAL PARTS INC.", "TEST HORIZON FOODS LTD.", "SAMPLE ATLAS EQUIPMENT LLC",
+      "DEMO NOVA CHEMICALS CO.", "TEST RIVERSTONE METALS LTD.", "SAMPLE ORCHID HOMEWARE INC.", "DEMO CEDAR ELECTRONICS LLC", "TEST SILVERLINE TOOLS CO.",
+      "SAMPLE CORAL PACKAGING LTD.", "DEMO PIONEER CERAMICS INC.", "TEST EVERGREEN SUPPLIES LLC", "SAMPLE SUNRISE AUTO PARTS CO.", "DEMO NORTHSTAR EXPORTS LTD."
+    ],
+    "global_addresses": [
+      "12 SAMPLE TRADE ROAD, BUSAN, REPUBLIC OF KOREA", "88 DEMO PORT AVENUE, INCHEON, REPUBLIC OF KOREA", "UNIT 4, TEST LOGISTICS PARK, SINGAPORE 018960", "P.O. BOX 12045, SAMPLE INDUSTRIAL AREA, DUBAI, UAE", "BUILDING 7, DEMO COMMERCE ZONE, JEDDAH, SAUDI ARABIA",
+      "45 TEST MARINE DRIVE, MUMBAI, INDIA", "21 SAMPLE DOCK STREET, HAMBURG, GERMANY", "9 DEMO CANAL ROAD, ROTTERDAM, NETHERLANDS", "100 TEST BAY STREET, VANCOUVER, CANADA", "32 SAMPLE HARBOR WAY, LOS ANGELES, USA",
+      "17 DEMO EXPORT LANE, SHANGHAI, CHINA", "66 TEST TERMINAL ROAD, NINGBO, CHINA", "5 SAMPLE OCEAN STREET, TOKYO, JAPAN", "73 DEMO FREIGHT ROAD, OSAKA, JAPAN", "28 TEST MARKET AVENUE, BANGKOK, THAILAND",
+      "14 SAMPLE PORTSIDE ROAD, HO CHI MINH CITY, VIETNAM", "39 DEMO TRADE CENTER, JAKARTA, INDONESIA", "52 TEST INDUSTRIAL WAY, PORT KLANG, MALAYSIA", "6 SAMPLE QUAY ROAD, ANTWERP, BELGIUM", "84 DEMO SHIPPING LANE, FELIXSTOWE, UNITED KINGDOM"
+    ],
+    "ports": [
+      "BUSAN, REPUBLIC OF KOREA", "INCHEON, REPUBLIC OF KOREA", "SINGAPORE", "JEBEL ALI, UNITED ARAB EMIRATES", "JEDDAH, SAUDI ARABIA",
+      "NHAVA SHEVA, INDIA", "MUNDRA, INDIA", "SHANGHAI, CHINA", "NINGBO, CHINA", "QINGDAO, CHINA",
+      "YOKOHAMA, JAPAN", "KOBE, JAPAN", "PORT KLANG, MALAYSIA", "LAEM CHABANG, THAILAND", "HO CHI MINH CITY, VIETNAM",
+      "ROTTERDAM, NETHERLANDS", "HAMBURG, GERMANY", "ANTWERP, BELGIUM", "LOS ANGELES, USA", "VANCOUVER, CANADA"
+    ],
+    "date_dd_mmm_yy": [
+      "15-JAN-24", "28-FEB-24", "12-MAR-24", "30-APR-24", "17-MAY-24", "08-JUN-24", "25-JUL-24", "19-AUG-24", "06-SEP-24", "21-OCT-24",
+      "14-NOV-24", "09-DEC-24", "18-JAN-25", "27-FEB-25", "11-APR-25", "23-JUN-25", "05-AUG-25", "16-OCT-25", "20-MAR-26", "10-JUL-26"
+    ],
+    "route_records": [
+      {"loading":"BUSAN, REPUBLIC OF KOREA","discharge":"SINGAPORE","destination":"SINGAPORE","freight_place":"SINGAPORE","receipt":"BUSAN, REPUBLIC OF KOREA","delivery":"SINGAPORE","issue":"BUSAN, REPUBLIC OF KOREA"},
+      {"loading":"INCHEON, REPUBLIC OF KOREA","discharge":"JEBEL ALI, UNITED ARAB EMIRATES","destination":"DUBAI, UNITED ARAB EMIRATES","freight_place":"JEBEL ALI, UNITED ARAB EMIRATES","receipt":"INCHEON, REPUBLIC OF KOREA","delivery":"DUBAI, UNITED ARAB EMIRATES","issue":"INCHEON, REPUBLIC OF KOREA"},
+      {"loading":"NHAVA SHEVA, INDIA","discharge":"JEDDAH, SAUDI ARABIA","destination":"JEDDAH, SAUDI ARABIA","freight_place":"JEDDAH, SAUDI ARABIA","receipt":"NHAVA SHEVA, INDIA","delivery":"JEDDAH, SAUDI ARABIA","issue":"NHAVA SHEVA, INDIA"},
+      {"loading":"MUNDRA, INDIA","discharge":"SINGAPORE","destination":"PORT KLANG, MALAYSIA","freight_place":"SINGAPORE","receipt":"MUNDRA, INDIA","delivery":"PORT KLANG, MALAYSIA","issue":"MUNDRA, INDIA"},
+      {"loading":"SHANGHAI, CHINA","discharge":"BUSAN, REPUBLIC OF KOREA","destination":"BUSAN, REPUBLIC OF KOREA","freight_place":"BUSAN, REPUBLIC OF KOREA","receipt":"SHANGHAI, CHINA","delivery":"BUSAN, REPUBLIC OF KOREA","issue":"SHANGHAI, CHINA"},
+      {"loading":"NINGBO, CHINA","discharge":"LOS ANGELES, USA","destination":"LOS ANGELES, USA","freight_place":"LOS ANGELES, USA","receipt":"NINGBO, CHINA","delivery":"LOS ANGELES, USA","issue":"NINGBO, CHINA"},
+      {"loading":"QINGDAO, CHINA","discharge":"VANCOUVER, CANADA","destination":"VANCOUVER, CANADA","freight_place":"VANCOUVER, CANADA","receipt":"QINGDAO, CHINA","delivery":"VANCOUVER, CANADA","issue":"QINGDAO, CHINA"},
+      {"loading":"YOKOHAMA, JAPAN","discharge":"ROTTERDAM, NETHERLANDS","destination":"ROTTERDAM, NETHERLANDS","freight_place":"ROTTERDAM, NETHERLANDS","receipt":"YOKOHAMA, JAPAN","delivery":"ROTTERDAM, NETHERLANDS","issue":"YOKOHAMA, JAPAN"},
+      {"loading":"KOBE, JAPAN","discharge":"HAMBURG, GERMANY","destination":"HAMBURG, GERMANY","freight_place":"HAMBURG, GERMANY","receipt":"KOBE, JAPAN","delivery":"HAMBURG, GERMANY","issue":"KOBE, JAPAN"},
+      {"loading":"PORT KLANG, MALAYSIA","discharge":"ANTWERP, BELGIUM","destination":"ANTWERP, BELGIUM","freight_place":"ANTWERP, BELGIUM","receipt":"PORT KLANG, MALAYSIA","delivery":"ANTWERP, BELGIUM","issue":"PORT KLANG, MALAYSIA"},
+      {"loading":"LAEM CHABANG, THAILAND","discharge":"SINGAPORE","destination":"SINGAPORE","freight_place":"SINGAPORE","receipt":"LAEM CHABANG, THAILAND","delivery":"SINGAPORE","issue":"LAEM CHABANG, THAILAND"},
+      {"loading":"HO CHI MINH CITY, VIETNAM","discharge":"BUSAN, REPUBLIC OF KOREA","destination":"INCHEON, REPUBLIC OF KOREA","freight_place":"BUSAN, REPUBLIC OF KOREA","receipt":"HO CHI MINH CITY, VIETNAM","delivery":"INCHEON, REPUBLIC OF KOREA","issue":"HO CHI MINH CITY, VIETNAM"}
+    ],
+    "cargo_records": [
+      {"package":"1 CONTAINER","count":"1","words":"ONE CONTAINER","goods":"MACHINERY SPARE PARTS","weight":"12,450.000 KGS","measurement":"24.500","volume":"24.500 M3"},
+      {"package":"2 PALLETS","count":"2","words":"TWO PALLETS","goods":"AUTOMOTIVE COMPONENTS","weight":"3,280.000 KGS","measurement":"11.750","volume":"11.750 M3"},
+      {"package":"3 PACKAGES","count":"3","words":"THREE PACKAGES","goods":"STEEL FABRICATION PARTS","weight":"22,700.000 KGS","measurement":"28.500","volume":"28.500 M3"},
+      {"package":"5 CARTONS","count":"5","words":"FIVE CARTONS","goods":"ELECTRONIC ACCESSORIES","weight":"1,125.500 KGS","measurement":"6.250","volume":"6.250 M3"},
+      {"package":"8 CRATES","count":"8","words":"EIGHT CRATES","goods":"INDUSTRIAL PUMPS","weight":"9,840.000 KGS","measurement":"19.800","volume":"19.800 M3"},
+      {"package":"10 DRUMS","count":"10","words":"TEN DRUMS","goods":"NON-HAZARDOUS LUBRICANT ADDITIVES","weight":"7,600.000 KGS","measurement":"14.200","volume":"14.200 M3"},
+      {"package":"12 BAGS","count":"12","words":"TWELVE BAGS","goods":"SYNTHETIC RESIN SAMPLES","weight":"4,320.000 KGS","measurement":"9.600","volume":"9.600 M3"},
+      {"package":"15 BUNDLES","count":"15","words":"FIFTEEN BUNDLES","goods":"ALUMINUM PROFILES","weight":"18,250.000 KGS","measurement":"32.400","volume":"32.400 M3"},
+      {"package":"18 CASES","count":"18","words":"EIGHTEEN CASES","goods":"CERAMIC TABLEWARE","weight":"6,480.000 KGS","measurement":"21.300","volume":"21.300 M3"},
+      {"package":"20 BOXES","count":"20","words":"TWENTY BOXES","goods":"TEXTILE MACHINE PARTS","weight":"5,940.000 KGS","measurement":"17.850","volume":"17.850 M3"},
+      {"package":"24 ROLLS","count":"24","words":"TWENTY FOUR ROLLS","goods":"PACKAGING FILM","weight":"8,760.000 KGS","measurement":"26.100","volume":"26.100 M3"},
+      {"package":"30 CARTONS","count":"30","words":"THIRTY CARTONS","goods":"HOUSEHOLD HARDWARE","weight":"2,975.000 KGS","measurement":"13.450","volume":"13.450 M3"}
+    ]
+  },
+  "constraints": [
+    {"type":"pick_record","pool":"route_records","targets":{"port_of_loading":"loading","port_of_discharge":"discharge","destination_on_carriage":"destination","freight_payable_at":"freight_place","place_of_receipt":"receipt","place_of_delivery":"delivery","place_of_issue":"issue"}},
+    {"type":"pick_record","pool":"cargo_records","targets":{"package_description":"package","container_packages":"count","total_packages_words":"words","goods_description":"goods","gross_weight":"weight","measurement_m3":"measurement","container_volume":"volume"}},
+    {"type":"copy","source":"gross_weight","target":"container_weight"}
+  ],
+  "pool_policies": {},
+  "field_rules": [
+    {"field_ids":["gross_weight","container_weight"],"rule":"unit included","reason":"전체 이미지의 값 문자열 자체에 KGS가 포함됨","evidence_ids":["R-BL-001","R-BL-003"]},
+    {"field_ids":["measurement_m3"],"rule":"numeric only","reason":"M3는 값 bbox가 아니라 열 머리글에 정적으로 인쇄됨","evidence_ids":["R-BL-003"]},
+    {"field_ids":["container_volume"],"rule":"unit included","reason":"Volume 열과 값 위치 주변에 정적 M3 표기가 없음; 의미 명확화를 위해 값에 M3 포함","evidence_ids":["R-BL-003"]},
+    {"field_ids":["date_of_issue"],"rule":"pool:date_dd_mmm_yy","reason":"템플릿의 DD-MMM-YY 형식을 보존하면서 기준일 이후 날짜를 배제","evidence_ids":["R-BL-003"]}
+  ],
+  "limitations": [
+    "지원 grammar에 DD-MMM-YY formatter가 없어 기준일 이전 20개 날짜 pool로 근사했다.",
+    "컨테이너 ISO 6346 check digit 검증 constraint가 지원되지 않아 pattern으로만 근사했다.",
+    "B/L 번호와 봉인번호는 운송사별 규칙이 달라 pattern으로만 제한했다."
+  ]
+}

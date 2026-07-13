@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-03",
+  "search_date": "2026-07-13",
+  "scope": "현재 1페이지 해상 선하증권 템플릿의 보이는 필드 의미 확인",
+  "queries": [
+    "site:maersk.com bill of lading fields shipper consignee notify party port of loading gross weight official",
+    "site:unece.org bill of lading data elements shipper consignee notify party",
+    "site:iccwbo.org Incoterms FOB official meaning",
+    "site:uncitral.un.org bill of lading receipt contract title",
+    "site:imo.org SOLAS verified gross mass official"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R-BL-001",
+      "title": "Bill of Lading - what is it and why is it important?",
+      "url": "https://www.maersk.com/logistics-explained/shipping-documentation/2023/10/02/what-is-bill-of-lading",
+      "source_type": "carrier_official_guidance",
+      "summary": "선하증권은 운송계약의 증거, 화물 수령증, 권리증권 기능을 하며 송하인·수하인·통지처, 화물 설명·중량·포장수·용적, 운임 조건, 선적항·양륙항 등을 포함한다.",
+      "field_links": ["shipper_name", "shipper_address", "consignee_name", "consignee_address", "consignee_tel", "notify_party", "port_of_loading", "port_of_discharge", "package_description", "goods_description", "gross_weight", "measurement_m3", "freight_details"]
+    },
+    {
+      "evidence_id": "R-BL-002",
+      "title": "United Nations Layout Key for Trade Documents",
+      "url": "https://unece.org/DAM/trade/Publications/ECE_TRADE_432E_CF-Rec1.pdf",
+      "source_type": "un_standard",
+      "summary": "표준 운송문서 데이터 요소로 수하인, 통지처, 화인, 컨테이너 번호를 정의하고 선하증권 책임 판단에 선적항·양륙항·선박명 같은 요소가 필요함을 설명한다.",
+      "field_links": ["consignee_name", "consignee_address", "notify_party", "vessel_voyage", "port_of_loading", "port_of_discharge", "marks_and_numbers", "container_number"]
+    },
+    {
+      "evidence_id": "R-BL-003",
+      "title": "Maersk Shipping Instruction Format",
+      "url": "https://www.maersk.com/~/media_sc9/maersk/local-information/files/asia-pacific/vietnam/export/shipping-instruction-format.pdf",
+      "source_type": "carrier_official_form",
+      "summary": "실제 작성 지시서에 송하인, 수하인, 통지처, 선박·항차, 선적항·양륙항·인도지, 포장 종류, 화물 설명, 컨테이너·봉인 번호, 크기·유형, 총중량, CBM, 포장수, 운임 선불/후불, 발행일이 배치된다.",
+      "field_links": ["vessel_voyage", "place_of_delivery", "container_number", "seal_number", "container_type", "container_weight", "container_volume", "container_packages", "date_of_issue"]
+    },
+    {
+      "evidence_id": "R-BL-004",
+      "title": "Incoterms 2020: FCA or FOB?",
+      "url": "https://academy.iccwbo.org/incoterms/article/incoterms-2020-fca-or-fob/",
+      "source_type": "icc_official_guidance",
+      "summary": "FOB는 해상·내수로 운송에서 지정 선적항의 본선 적재 시 인도와 위험 이전이 이루어지는 거래조건이다.",
+      "field_links": ["incoterm"]
+    },
+    {
+      "evidence_id": "R-BL-005",
+      "title": "UNCITRAL Working Group VI - Negotiable Cargo Documents",
+      "url": "https://uncitral.un.org/en/working_groups/6/negotiablecargodocuments",
+      "source_type": "un_legal_reference",
+      "summary": "해상 선하증권은 화물을 대표하는 권리증권 기능을 수행하는 협상가능 운송문서의 대표 사례다.",
+      "field_links": ["bl_number", "number_of_originals", "surrender_to"]
+    },
+    {
+      "evidence_id": "R-BL-006",
+      "title": "Maersk Glossary of Shipping Terms",
+      "url": "https://www.maersk.com/support/glossaries/shipping-terms",
+      "source_type": "carrier_official_glossary",
+      "summary": "Notify Party는 도착 통지를 받을 당사자이며, 원본 선하증권 surrender는 선적항 측에서 원본이 제출되었음을 의미한다.",
+      "field_links": ["notify_party", "surrender_to"]
+    }
+  ],
+  "template_conclusions": [
+    "문서 제목은 혼합 B/L·AWB 범주지만 현재 시각 자료는 BILL OF LADING 해상 양식이므로 primary root를 선하증권으로 고정한다.",
+    "웹 근거는 보이는 앵커 해석에만 사용했으며 템플릿에 없는 일반 필드는 추가하지 않았다.",
+    "Gross Weight Kgs. 및 Measurement M3는 열 제목에 단위가 인쇄되어 있으나 원본 값 bbox에서 중량은 KGS를 포함한다. 최종 faker 단위 결정은 2차 패스에서 이 시각 근거를 따른다."
+  ]
+}

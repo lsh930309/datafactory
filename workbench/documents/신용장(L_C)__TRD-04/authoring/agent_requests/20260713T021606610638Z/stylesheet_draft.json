@@ -1,0 +1,1141 @@
+{
+  "schema_version": 2,
+  "doc_id": "TRD-04",
+  "title": "신용장(L/C) 렌더 스타일 초안",
+  "render_defaults": {
+    "font_family": "Arial",
+    "font_size_pt": 10,
+    "color": "#111827",
+    "line_height": 1.25,
+    "horizontal_align": "left",
+    "vertical_align": "top"
+  },
+  "style_classes": [
+    {
+      "style_class": "body_default",
+      "font_family": "default_korean",
+      "font_path": "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+      "font_size": 28,
+      "fill": [
+        32,
+        32,
+        32
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.2,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "lc_date",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "lc_identifier",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": -4,
+      "x_shift": -1,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "short_value",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "amount",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "company_name",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "multiline_value",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "top",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "long_text",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "top",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "signature_bank_name",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "center",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_issue_date_header",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 16,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": -1,
+      "x_shift": -2,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000006"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_lc_number",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 16,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": -1,
+      "x_shift": -3,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000009"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_issuing_bank_header_address",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "top",
+      "line_spacing": 1.5,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 3,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000010"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_application_number",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 16,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": -1,
+      "x_shift": -2,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000012"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_reference_contract_number",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 16,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": -3,
+      "x_shift": -2,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000015"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_reference_contract_date",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 16,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": -4,
+      "x_shift": -5,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000016"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_applicant_name",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": -4,
+      "x_shift": 3,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000020"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_applicant_address",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "top",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 1,
+      "x_shift": 3,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000022"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_issuing_bank_name",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": -2,
+      "x_shift": 3,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000021"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_issuing_bank_address",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "top",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 2,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000023"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_issuing_bank_swift_header",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 16,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": -4,
+      "x_shift": 1,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "manual_1783565051305"
+      ],
+      "font_index": 0,
+      "font_weight": "bold",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_beneficiary_name",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000030"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_beneficiary_address",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "top",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000032"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_expiry_date",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000041"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_expiry_place",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000044"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_date_of_issue",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000042"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_documentary_credit_form",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000043"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_currency_code",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000047"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_credit_amount",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000048"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_maximum_currency_code",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000049"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_amount_currency_name",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000051"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_amount_in_words",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "top",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "manual_1783565130087"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_drafts_at",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "top",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000053"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_drawee_bank_place",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "manual_1783565166020"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_partial_shipments",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000059"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_transshipment",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000060"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_port_of_loading",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000061"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_port_of_discharge",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "middle",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000064"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    },
+    {
+      "style_class": "style_goods_description",
+      "font_family": "Gulim",
+      "font_path": "fonts/gulim.ttc",
+      "font_size": 15,
+      "fill": [
+        24,
+        24,
+        24
+      ],
+      "opacity": 1,
+      "align": "left",
+      "valign": "top",
+      "line_spacing": 1,
+      "letter_spacing": 0,
+      "baseline_shift": 0,
+      "x_shift": 0,
+      "overflow": "shrink",
+      "confidence": 0.65,
+      "source_detection_ids": [
+        "det_000067"
+      ],
+      "font_index": 0,
+      "font_weight": "normal",
+      "font_style": "normal"
+    }
+  ],
+  "field_styles": {
+    "issue_date_header": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000006"
+    },
+    "lc_number": {
+      "style_class": "lc_identifier",
+      "anchor_id": "det_000009"
+    },
+    "issuing_bank_header_address": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000010"
+    },
+    "application_number": {
+      "style_class": "lc_identifier",
+      "anchor_id": "det_000012"
+    },
+    "reference_contract_number": {
+      "style_class": "lc_identifier",
+      "anchor_id": "det_000015"
+    },
+    "reference_contract_date": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000016"
+    },
+    "applicant_name": {
+      "style_class": "company_name",
+      "anchor_id": "det_000020"
+    },
+    "applicant_address": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000022"
+    },
+    "issuing_bank_name": {
+      "style_class": "company_name",
+      "anchor_id": "det_000021"
+    },
+    "issuing_bank_address": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000023"
+    },
+    "issuing_bank_swift_header": {
+      "style_class": "lc_identifier",
+      "anchor_id": "manual_1783565051305"
+    },
+    "issuing_bank_swift": {
+      "style_class": "lc_identifier",
+      "anchor_id": "manual_1783565087472"
+    },
+    "beneficiary_name": {
+      "style_class": "company_name",
+      "anchor_id": "det_000030"
+    },
+    "beneficiary_address": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000032"
+    },
+    "available_with_by": {
+      "style_class": "multiline_value",
+      "anchor_id": "det_000031"
+    },
+    "expiry_date": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000041"
+    },
+    "expiry_place": {
+      "style_class": "short_value",
+      "anchor_id": "det_000044"
+    },
+    "date_of_issue": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000042"
+    },
+    "documentary_credit_form": {
+      "style_class": "short_value",
+      "anchor_id": "det_000043"
+    },
+    "currency_code": {
+      "style_class": "short_value",
+      "anchor_id": "det_000047"
+    },
+    "credit_amount": {
+      "style_class": "amount",
+      "anchor_id": "det_000048"
+    },
+    "maximum_currency_code": {
+      "style_class": "short_value",
+      "anchor_id": "det_000049"
+    },
+    "maximum_credit_amount": {
+      "style_class": "amount",
+      "anchor_id": "det_000050"
+    },
+    "amount_currency_name": {
+      "style_class": "short_value",
+      "anchor_id": "det_000051"
+    },
+    "amount_in_words": {
+      "style_class": "long_text",
+      "anchor_id": "manual_1783565130087"
+    },
+    "drafts_at": {
+      "style_class": "long_text",
+      "anchor_id": "det_000053"
+    },
+    "drawee_bank_name": {
+      "style_class": "company_name",
+      "anchor_id": "det_000055"
+    },
+    "drawee_bank_place": {
+      "style_class": "short_value",
+      "anchor_id": "manual_1783565166020"
+    },
+    "partial_shipments": {
+      "style_class": "short_value",
+      "anchor_id": "det_000059"
+    },
+    "transshipment": {
+      "style_class": "short_value",
+      "anchor_id": "det_000060"
+    },
+    "port_of_loading": {
+      "style_class": "short_value",
+      "anchor_id": "det_000061"
+    },
+    "port_of_discharge": {
+      "style_class": "short_value",
+      "anchor_id": "det_000064"
+    },
+    "latest_shipment_date": {
+      "style_class": "lc_date",
+      "anchor_id": "det_000065"
+    },
+    "goods_description": {
+      "style_class": "long_text",
+      "anchor_id": "det_000067"
+    },
+    "hs_code": {
+      "style_class": "short_value",
+      "anchor_id": "manual_1783565189703"
+    },
+    "sales_contract_reference": {
+      "style_class": "long_text",
+      "anchor_id": "det_000069"
+    },
+    "authorized_signature_bank_name": {
+      "style_class": "signature_bank_name",
+      "anchor_id": "det_000091"
+    }
+  },
+  "notes": [
+    "원본은 흰 배경, 검은 표선, Arial 계열 영문 텍스트로 보이므로 보수적인 기본 스타일만 제안했다.",
+    "DOCX 경로는 request에서 비활성화되어 이미지 템플릿 렌더링 lineage 용도로 작성했다."
+  ],
+  "updated_at": "2026-07-13T00:00:00+09:00",
+  "source_of_truth": "기존 검증 스타일을 보존하고 전체 템플릿 이미지에서 확인된 인쇄체 배치를 따름"
+}

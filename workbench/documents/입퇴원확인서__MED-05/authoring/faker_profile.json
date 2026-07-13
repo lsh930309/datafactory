@@ -1,7 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "doc_id": "MED-05",
   "title": "입퇴원확인서",
+  "as_of_date": "2026-07-13",
   "field_generators": {
     "registration_number": "pattern:######",
     "serial_number": "pattern:######",
@@ -9,17 +10,17 @@
     "patient_rrn": "person.rrn",
     "patient_age": "pattern:##",
     "patient_address": "address.ko",
-    "diagnosis_1_name": "pool:diagnosis_names",
-    "diagnosis_1_code": "pool:diagnosis_codes",
-    "diagnosis_2_name": "pool:diagnosis_names",
-    "diagnosis_2_code": "pool:diagnosis_codes",
-    "diagnosis_3_name": "pool:diagnosis_names",
-    "diagnosis_3_code": "pool:diagnosis_codes",
+    "diagnosis_1_name": "free_text.short",
+    "diagnosis_1_code": "pattern:A##.#",
+    "diagnosis_2_name": "free_text.short",
+    "diagnosis_2_code": "pattern:A##.#",
+    "diagnosis_3_name": "free_text.short",
+    "diagnosis_3_code": "pattern:A##.#",
     "onset_date": "date.kr",
     "admission_discharge_type": "choice:입원|퇴원",
-    "admission_date": "pool:admission_dates",
-    "discharge_date": "pool:discharge_dates",
-    "admission_discharge_period": "pool:admission_period_labels",
+    "admission_date": "date.kr",
+    "discharge_date": "date.kr",
+    "admission_discharge_period": "free_text.short",
     "doctor_opinion": "pool:doctor_opinions",
     "remarks": "pool:remarks",
     "purpose": "choice:보험회사 제출용|회사 제출용|학교 제출용|관공서 제출용",
@@ -32,176 +33,274 @@
     "doctor_name": "person.name_ko"
   },
   "data_pools": {
-    "diagnosis_names": [
-      "급성 기관지염, 상세불명",
-      "상세불명의 폐렴",
-      "감염성 기원으로 추정되는 위장염 및 결장염",
-      "요추 및 골반의 염좌 및 긴장",
-      "무릎의 기타 일차성 관절증",
-      "상세불명의 천식",
-      "어깨관절의 염좌 및 긴장",
-      "상세불명의 전정기능장애"
-    ],
-    "diagnosis_codes": [
-      "J20.9",
-      "J18.9",
-      "A09.9",
-      "S33.5",
-      "M17.1",
-      "J45.9",
-      "S43.4",
-      "H81.9"
-    ],
     "diagnosis_records": [
+      {
+        "name": "급성 비인두염",
+        "code": "J00"
+      },
+      {
+        "name": "급성 인두염, 상세불명",
+        "code": "J02.9"
+      },
+      {
+        "name": "급성 편도염, 상세불명",
+        "code": "J03.9"
+      },
       {
         "name": "급성 기관지염, 상세불명",
         "code": "J20.9"
       },
       {
-        "name": "상세불명의 폐렴",
+        "name": "폐렴, 상세불명",
         "code": "J18.9"
       },
       {
-        "name": "감염성 기원으로 추정되는 위장염 및 결장염",
+        "name": "천식, 상세불명",
+        "code": "J45.9"
+      },
+      {
+        "name": "위-식도역류병",
+        "code": "K21.9"
+      },
+      {
+        "name": "급성 위염",
+        "code": "K29.1"
+      },
+      {
+        "name": "감염성 위장염 및 결장염",
         "code": "A09.9"
       },
       {
-        "name": "요추 및 골반의 염좌 및 긴장",
+        "name": "요추의 염좌 및 긴장",
         "code": "S33.5"
       },
       {
-        "name": "무릎의 기타 일차성 관절증",
-        "code": "M17.1"
-      },
-      {
-        "name": "상세불명의 천식",
-        "code": "J45.9"
+        "name": "발목의 염좌 및 긴장",
+        "code": "S93.4"
       },
       {
         "name": "어깨관절의 염좌 및 긴장",
         "code": "S43.4"
       },
       {
-        "name": "상세불명의 전정기능장애",
-        "code": "H81.9"
+        "name": "무릎관절증",
+        "code": "M17.9"
+      },
+      {
+        "name": "허리통증",
+        "code": "M54.5"
+      },
+      {
+        "name": "편두통, 상세불명",
+        "code": "G43.9"
+      },
+      {
+        "name": "양성 발작성 현기증",
+        "code": "H81.1"
+      },
+      {
+        "name": "본태성 고혈압",
+        "code": "I10"
+      },
+      {
+        "name": "철결핍빈혈, 상세불명",
+        "code": "D50.9"
+      },
+      {
+        "name": "급성 방광염",
+        "code": "N30.0"
+      },
+      {
+        "name": "알레르기비염, 상세불명",
+        "code": "J30.4"
       }
     ],
     "hospitalization_records": [
       {
         "type": "입원",
-        "onset": "2024-03-08",
-        "admission": "2024-03-12",
-        "discharge": "2024-03-18",
-        "label": "입원: 2024-03-12, 퇴원: 2024-03-18"
-      },
-      {
-        "type": "입원",
-        "onset": "2025-01-20",
-        "admission": "2025-01-22",
-        "discharge": "2025-01-29",
-        "label": "입원: 2025-01-22, 퇴원: 2025-01-29"
-      },
-      {
-        "type": "입원",
-        "onset": "2023-10-02",
-        "admission": "2023-10-04",
-        "discharge": "2023-10-10",
-        "label": "입원: 2023-10-04, 퇴원: 2023-10-10"
-      },
-      {
-        "type": "입원",
-        "onset": "2026-05-11",
-        "admission": "2026-05-12",
-        "discharge": "2026-05-15",
-        "label": "입원: 2026-05-12, 퇴원: 2026-05-15"
+        "onset": "2023-01-03",
+        "admission": "2023-01-04",
+        "discharge": "2023-01-08",
+        "label": "입원 2023-01-04 / 퇴원 2023-01-08"
       },
       {
         "type": "퇴원",
+        "onset": "2023-02-11",
+        "admission": "2023-02-12",
+        "discharge": "2023-02-17",
+        "label": "입원 2023-02-12 / 퇴원 2023-02-17"
+      },
+      {
+        "type": "입원",
+        "onset": "2023-03-20",
+        "admission": "2023-03-22",
+        "discharge": "2023-03-27",
+        "label": "입원 2023-03-22 / 퇴원 2023-03-27"
+      },
+      {
+        "type": "퇴원",
+        "onset": "2023-05-06",
+        "admission": "2023-05-06",
+        "discharge": "2023-05-12",
+        "label": "입원 2023-05-06 / 퇴원 2023-05-12"
+      },
+      {
+        "type": "입원",
+        "onset": "2023-07-14",
+        "admission": "2023-07-15",
+        "discharge": "2023-07-19",
+        "label": "입원 2023-07-15 / 퇴원 2023-07-19"
+      },
+      {
+        "type": "퇴원",
+        "onset": "2023-09-02",
+        "admission": "2023-09-04",
+        "discharge": "2023-09-11",
+        "label": "입원 2023-09-04 / 퇴원 2023-09-11"
+      },
+      {
+        "type": "입원",
+        "onset": "2023-11-18",
+        "admission": "2023-11-18",
+        "discharge": "2023-11-23",
+        "label": "입원 2023-11-18 / 퇴원 2023-11-23"
+      },
+      {
+        "type": "퇴원",
+        "onset": "2024-01-09",
+        "admission": "2024-01-10",
+        "discharge": "2024-01-16",
+        "label": "입원 2024-01-10 / 퇴원 2024-01-16"
+      },
+      {
+        "type": "입원",
+        "onset": "2024-03-08",
+        "admission": "2024-03-12",
+        "discharge": "2024-03-18",
+        "label": "입원 2024-03-12 / 퇴원 2024-03-18"
+      },
+      {
+        "type": "퇴원",
+        "onset": "2024-05-21",
+        "admission": "2024-05-22",
+        "discharge": "2024-05-25",
+        "label": "입원 2024-05-22 / 퇴원 2024-05-25"
+      },
+      {
+        "type": "입원",
         "onset": "2024-08-14",
         "admission": "2024-08-16",
         "discharge": "2024-08-23",
-        "label": "입원: 2024-08-16, 퇴원: 2024-08-23"
+        "label": "입원 2024-08-16 / 퇴원 2024-08-23"
+      },
+      {
+        "type": "퇴원",
+        "onset": "2024-10-01",
+        "admission": "2024-10-02",
+        "discharge": "2024-10-09",
+        "label": "입원 2024-10-02 / 퇴원 2024-10-09"
+      },
+      {
+        "type": "입원",
+        "onset": "2024-12-27",
+        "admission": "2024-12-28",
+        "discharge": "2025-01-03",
+        "label": "입원 2024-12-28 / 퇴원 2025-01-03"
+      },
+      {
+        "type": "퇴원",
+        "onset": "2025-01-20",
+        "admission": "2025-01-22",
+        "discharge": "2025-01-29",
+        "label": "입원 2025-01-22 / 퇴원 2025-01-29"
+      },
+      {
+        "type": "입원",
+        "onset": "2025-03-13",
+        "admission": "2025-03-14",
+        "discharge": "2025-03-19",
+        "label": "입원 2025-03-14 / 퇴원 2025-03-19"
+      },
+      {
+        "type": "퇴원",
+        "onset": "2025-06-07",
+        "admission": "2025-06-08",
+        "discharge": "2025-06-13",
+        "label": "입원 2025-06-08 / 퇴원 2025-06-13"
+      },
+      {
+        "type": "입원",
+        "onset": "2025-09-15",
+        "admission": "2025-09-17",
+        "discharge": "2025-09-24",
+        "label": "입원 2025-09-17 / 퇴원 2025-09-24"
+      },
+      {
+        "type": "퇴원",
+        "onset": "2025-12-01",
+        "admission": "2025-12-02",
+        "discharge": "2025-12-06",
+        "label": "입원 2025-12-02 / 퇴원 2025-12-06"
+      },
+      {
+        "type": "입원",
+        "onset": "2026-03-09",
+        "admission": "2026-03-10",
+        "discharge": "2026-03-16",
+        "label": "입원 2026-03-10 / 퇴원 2026-03-16"
+      },
+      {
+        "type": "퇴원",
+        "onset": "2026-05-11",
+        "admission": "2026-05-12",
+        "discharge": "2026-05-15",
+        "label": "입원 2026-05-12 / 퇴원 2026-05-15"
       }
     ],
-    "admission_dates": [
-      "2024-03-12",
-      "2025-01-22",
-      "2023-10-04",
-      "2026-05-12",
-      "2024-08-16"
-    ],
-    "discharge_dates": [
-      "2024-03-18",
-      "2025-01-29",
-      "2023-10-10",
-      "2026-05-15",
-      "2024-08-23"
-    ],
-    "admission_period_labels": [
-      "입원: 2024-03-12, 퇴원: 2024-03-18",
-      "입원: 2025-01-22, 퇴원: 2025-01-29",
-      "입원: 2023-10-04, 퇴원: 2023-10-10",
-      "입원: 2026-05-12, 퇴원: 2026-05-15",
-      "입원: 2024-08-16, 퇴원: 2024-08-23"
-    ],
     "doctor_opinions": [
-      "상기 환자는 입원 치료 후 증상이 호전되어 퇴원하였으며, 퇴원 후 약물치료와 외래 추적 관찰이 필요함.",
-      "입원 기간 중 보존적 치료 및 경과 관찰을 시행하였고 현재 일상생활 복귀가 가능하나 무리한 활동은 제한함.",
-      "급성 증상으로 입원 치료를 시행하였으며, 향후 2주간 안정 및 정기 외래 진료가 필요함.",
-      "검사 및 치료 결과 전반적인 상태는 안정적이며, 처방 약 복용과 증상 악화 시 즉시 재진을 권고함.",
-      "치료 경과상 추가 입원은 필요하지 않으나 재발 방지를 위해 생활관리와 외래 추적 검사가 필요함."
+      "입원 치료 후 증상이 호전되어 외래 추적 관찰이 필요함.",
+      "보존적 치료 후 상태가 안정되어 퇴원함.",
+      "퇴원 후 처방약 복용과 충분한 안정이 필요함.",
+      "증상 재발 시 즉시 외래 진료를 권고함.",
+      "일상생활은 가능하나 과도한 활동은 제한함.",
+      "퇴원 후 일주일 이내 외래 재진이 필요함.",
+      "치료 경과는 양호하며 정기 추적 검사가 필요함.",
+      "수분 섭취와 규칙적인 식사를 권고함.",
+      "퇴원 후 상처 부위 관리와 경과 관찰이 필요함.",
+      "현재 전반적인 상태는 안정적임.",
+      "약물치료를 지속하며 증상 변화를 관찰해야 함.",
+      "향후 이 주간 무리한 운동을 피하도록 권고함.",
+      "정기적인 혈압 측정과 외래 추적이 필요함.",
+      "퇴원 후 식이 조절과 생활 습관 관리가 필요함.",
+      "검사 결과에 따라 추가 외래 진료가 필요할 수 있음.",
+      "통증 악화 시 예정일 전이라도 재진을 권고함.",
+      "감염 예방을 위한 개인위생 관리가 필요함.",
+      "퇴원 교육을 시행하였으며 보호자 관찰이 필요함.",
+      "복약 지침을 준수하고 이상 반응 시 진료가 필요함.",
+      "안정 후 단계적으로 일상 활동을 재개하도록 권고함."
     ],
     "remarks": [
       "보험회사 제출용으로 발급함.",
-      "입퇴원 기간 및 진단명 확인을 위해 발급함.",
-      "세부 검사 결과와 투약 내역은 의무기록 사본을 참조함.",
-      "상기 내용은 원무기록과 진료기록에 근거하여 작성함.",
-      "추가 확인 사항은 해당 진료과 외래 또는 원무과로 문의 바람."
-    ],
-    "purpose_values": [
-      "보험회사 제출용",
-      "회사 제출용",
-      "학교 제출용",
-      "관공서 제출용"
+      "입퇴원 기간 확인을 위해 발급함.",
+      "진단명 확인을 위해 발급함.",
+      "회사 제출용으로 발급함.",
+      "학교 제출용으로 발급함.",
+      "관공서 제출용으로 발급함.",
+      "진료기록에 근거하여 작성함.",
+      "원무기록에 기재된 기간과 동일함.",
+      "세부 치료 내용은 의무기록 사본을 참조함.",
+      "추가 확인은 해당 진료과에 문의 바람.",
+      "검사 결과지는 별도 발급 대상임.",
+      "투약 내역은 처방전을 참조함.",
+      "입원 및 퇴원 사실 확인용임.",
+      "환자 요청에 따라 발급함.",
+      "보호자 요청에 따라 발급함.",
+      "제출처 요청 양식에 따라 발급함.",
+      "발급일 현재 기록을 기준으로 작성함.",
+      "재발급된 확인서임.",
+      "원본 대조 후 발급함.",
+      "기타 사항 없음."
     ]
-  },
-  "field_rules": {
-    "patient_address": {
-      "rule": "address.ko",
-      "note": "상세 주소는 층/호 또는 건물명/호까지 포함하되 소괄호를 쓰지 않는다."
-    },
-    "medical_institution_name": {
-      "rule": "medical.institution_ko",
-      "note": "일반 기업명이 아니라 병원/의원/요양병원 등 의료기관 명칭으로 생성한다."
-    },
-    "patient_age": {
-      "rule": "pattern:## + age_from_rrn",
-      "note": "최종 값은 age_from_rrn constraint가 주민등록번호와 발급일자를 기준으로 덮어쓴다."
-    },
-    "admission_discharge_period": {
-      "rule": "pool:admission_period_labels + pick_record",
-      "note": "렌더링은 '입원: yyyy-mm-dd, 퇴원: yyyy-mm-dd' 형식이며 primary schema에는 입원일/퇴원일을 분리 저장한다."
-    },
-    "doctor_opinion": {
-      "rule": "pool:doctor_opinions",
-      "note": "입원 치료 경과, 퇴원 후 외래 추적, 안정 권고 등 실제 확인서에 들어갈 수 있는 문장을 사용한다."
-    },
-    "remarks": {
-      "rule": "pool:remarks",
-      "note": "제출용도/기록 근거/추가 확인 등 다양한 비고 문구를 사용한다."
-    },
-    "issue_year": {
-      "rule": "date.year + date_not_before",
-      "note": "발급일자 연월일은 date_group으로 유효 날짜를 만든 뒤 date_not_before로 퇴원일보다 과거가 되지 않게 보정한다."
-    },
-    "issue_month": {
-      "rule": "date.month + date_not_before",
-      "note": "발급일자 연월일은 date_group으로 유효 날짜를 만든 뒤 date_not_before로 퇴원일보다 과거가 되지 않게 보정한다."
-    },
-    "issue_day": {
-      "rule": "date.day + date_not_before",
-      "note": "발급일자 연월일은 date_group으로 유효 날짜를 만든 뒤 date_not_before로 퇴원일보다 과거가 되지 않게 보정한다."
-    }
   },
   "constraints": [
     {
@@ -210,11 +309,7 @@
       "targets": {
         "diagnosis_1_name": "name",
         "diagnosis_1_code": "code"
-      },
-      "note": "1행 병명과 질병분류기호는 같은 KCD 예시 레코드에서 선택한다.",
-      "evidence_ids": [
-        "R2"
-      ]
+      }
     },
     {
       "type": "pick_record",
@@ -222,11 +317,7 @@
       "targets": {
         "diagnosis_2_name": "name",
         "diagnosis_2_code": "code"
-      },
-      "note": "2행 병명과 질병분류기호는 같은 KCD 예시 레코드에서 선택한다.",
-      "evidence_ids": [
-        "R2"
-      ]
+      }
     },
     {
       "type": "pick_record",
@@ -234,11 +325,7 @@
       "targets": {
         "diagnosis_3_name": "name",
         "diagnosis_3_code": "code"
-      },
-      "note": "3행 병명과 질병분류기호는 같은 KCD 예시 레코드에서 선택한다.",
-      "evidence_ids": [
-        "R2"
-      ]
+      }
     },
     {
       "type": "pick_record",
@@ -249,8 +336,21 @@
         "admission_date": "admission",
         "discharge_date": "discharge",
         "admission_discharge_period": "label"
-      },
-      "note": "발병일, 입원일, 퇴원일, 표시문구는 같은 입퇴원 사례 레코드에서 선택한다."
+      }
+    },
+    {
+      "type": "date_order",
+      "start": "onset_date",
+      "end": "admission_date",
+      "min_days": 0,
+      "max_days": 60
+    },
+    {
+      "type": "date_order",
+      "start": "admission_date",
+      "end": "discharge_date",
+      "min_days": 0,
+      "max_days": 60
     },
     {
       "type": "date_group",
@@ -258,11 +358,7 @@
       "month": "issue_month",
       "day": "issue_day",
       "min_year": 2020,
-      "max_year": 2027,
-      "note": "하단 발급일자는 연월일 분리 bbox가 하나의 유효 날짜를 이루어야 함.",
-      "evidence_ids": [
-        "R1"
-      ]
+      "max_year": 2026
     },
     {
       "type": "date_not_before",
@@ -273,9 +369,16 @@
         "day": "issue_day"
       },
       "min_days": 0,
-      "max_days": 90,
-      "max_year": 2027,
-      "note": "발급일자는 퇴원일자보다 과거일 수 없으므로 퇴원일 당일~90일 후 범위로 보정한다."
+      "max_days": 90
+    },
+    {
+      "type": "date_not_after",
+      "target": {
+        "year": "issue_year",
+        "month": "issue_month",
+        "day": "issue_day"
+      },
+      "max": "as_of_date"
     },
     {
       "type": "age_from_rrn",
@@ -285,10 +388,43 @@
         "year": "issue_year",
         "month": "issue_month",
         "day": "issue_day"
-      },
-      "note": "환자 나이는 주민등록번호 생년월일과 발급일자 기준 만 나이로 일치시킨다."
+      }
     }
   ],
-  "privacy_policy": "합성 값만 사용하며 실제 환자, 의료기관, 의사, 식별번호를 사용하지 않음.",
-  "updated_at": "2026-07-09T01:47:16.027037+00:00"
+  "field_rules": {
+    "patient_rrn": {
+      "rule": "person.rrn",
+      "note": "유효 생년월일과 뒷자리 마스킹은 renderer 구현 확인이 필요하며, age_from_rrn으로 나이 관계를 강제한다."
+    },
+    "patient_age": {
+      "rule": "pattern:##",
+      "note": "전체 이미지에서 만( )세가 정적으로 인쇄되어 숫자만 렌더링한다."
+    },
+    "diagnosis_1_name": {
+      "rule": "free_text.short",
+      "note": "pick_record가 KCD 진단명과 코드를 동일 레코드로 덮어쓴다."
+    },
+    "admission_discharge_period": {
+      "rule": "free_text.short",
+      "note": "pick_record가 한 셀용 입원/퇴원 복합 문자열을 덮어쓴다."
+    },
+    "issue_year": {
+      "rule": "date.year",
+      "note": "정적 년 표기를 제외하고 분리 날짜 constraint를 적용한다."
+    },
+    "issue_month": {
+      "rule": "date.month",
+      "note": "정적 월 표기를 제외하고 분리 날짜 constraint를 적용한다."
+    },
+    "issue_day": {
+      "rule": "date.day",
+      "note": "정적 일 표기를 제외하고 분리 날짜 constraint를 적용한다."
+    },
+    "doctor_license_number": {
+      "rule": "pattern:######",
+      "note": "정적 제/호를 제외하고 숫자만 렌더링한다."
+    }
+  },
+  "privacy_policy": "모든 값은 합성 예시이며 실제 환자·의사·기관의 식별정보로 사용하지 않는다.",
+  "updated_at": "2026-07-13T02:37:44.853731+00:00"
 }

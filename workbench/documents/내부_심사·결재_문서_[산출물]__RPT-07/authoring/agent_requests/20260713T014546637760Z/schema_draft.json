@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "doc_id": "RPT-07",
+  "title": "개인경비 지출결의서",
+  "semantic_schema": {
+    "기안정보": {
+      "기안자": "",
+      "소속": "",
+      "기안일": "",
+      "문서번호": ""
+    },
+    "결재정보": {
+      "신청": {"직책": "", "결재자": ""},
+      "승인": {"직책": "", "결재자": ""},
+      "결재일": ""
+    },
+    "지출요청": {
+      "제목": "",
+      "입금계좌번호": "",
+      "특이사항": "",
+      "품의금액표시": "",
+      "개인경비사용용도": ""
+    },
+    "상세내역": {
+      "내역1": {
+        "사용일자": "",
+        "사용처": "",
+        "영수증종류": "",
+        "영수증금액": "",
+        "신청청구금액": "",
+        "사용용도": "",
+        "상세사용용도": "",
+        "프로젝트": ""
+      },
+      "합계": {"표시문구": "", "청구금액": ""}
+    },
+    "첨부파일": {"요약": "", "파일명": ""}
+  },
+  "fields": [
+    {"field_id":"requester_name","key":"기안자","semantic_path":"기안정보.기안자","anchor_id":"manual_rpt07_20260702","value":"","value_type":"person_name","faker_rule":"person.name_ko","style_class":"style_requester_name","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[198,194,220,32],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"department","key":"소속","semantic_path":"기안정보.소속","anchor_id":"manual_rpt07_20260702_2","value":"","value_type":"organization_unit","faker_rule":"free_text.short","style_class":"style_body_small","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[198,231,300,32],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"request_date","key":"기안일","semantic_path":"기안정보.기안일","anchor_id":"manual_rpt07_20260702_3","value":"","value_type":"date","faker_rule":"date.kr","style_class":"style_request_date","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[198,269,135,32],"source":"full_template+filled_sample","observed_format":"YYYY-MM-DD(요일)"},"confidence":0.99},
+    {"field_id":"document_number","key":"문서번호","semantic_path":"기안정보.문서번호","anchor_id":"manual_rpt07_20260702_4","value":"","value_type":"identifier","faker_rule":"pattern:****-####","style_class":"style_document_number","research_evidence_ids":["VIS-001","WEB-003"],"visual_evidence":{"bbox":[198,305,220,31],"source":"full_template","observed_value":"blank"},"confidence":0.78,"review_required":true},
+    {"field_id":"submitter_role","key":"신청 직책","semantic_path":"결재정보.신청.직책","anchor_id":"manual_rpt07_20260702_5","value":"","value_type":"role_title","faker_rule":"free_text.short","style_class":"style_approval_role","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[875,191,95,34],"source":"full_template+filled_sample"},"confidence":0.97},
+    {"field_id":"approver_role","key":"승인 직책","semantic_path":"결재정보.승인.직책","anchor_id":"manual_rpt07_20260702_6","value":"","value_type":"role_title","faker_rule":"free_text.short","style_class":"style_approval_role","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[1010,191,100,34],"source":"full_template+filled_sample"},"confidence":0.97},
+    {"field_id":"submitter_name","key":"신청 결재자","semantic_path":"결재정보.신청.결재자","anchor_id":"manual_rpt07_20260702_7","value":"","value_type":"person_name","faker_rule":"person.name_ko","style_class":"style_submitter_name","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[872,251,100,46],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"approver_name","key":"승인 결재자","semantic_path":"결재정보.승인.결재자","anchor_id":"manual_rpt07_20260702_8","value":"","value_type":"person_name","faker_rule":"person.name_ko","style_class":"style_approval_name","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[1015,252,95,46],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"approval_date","key":"결재일","semantic_path":"결재정보.결재일","anchor_id":"manual_rpt07_20260702_9","value":"","value_type":"date","faker_rule":"date.kr","style_class":"style_approval_date","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[880,327,86,27],"source":"full_template+filled_sample","observed_format":"YYYY/MM/DD"},"confidence":0.98},
+    {"field_id":"expense_title","key":"제목","semantic_path":"지출요청.제목","anchor_id":"manual_rpt07_20260702_10","value":"","value_type":"short_text","faker_rule":"free_text.short","style_class":"style_title_value","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[240,461,470,34],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"account_number","key":"계좌번호","semantic_path":"지출요청.입금계좌번호","anchor_id":"manual_rpt07_20260702_11","value":"","value_type":"account_number","faker_rule":"pattern:###-###-######","style_class":"style_body","research_evidence_ids":["VIS-001","WEB-003"],"visual_evidence":{"bbox":[240,510,190,34],"source":"full_template+filled_sample","static_note":"미입력시 월급통장"},"confidence":0.94,"review_required":true},
+    {"field_id":"special_note","key":"특이사항","semantic_path":"지출요청.특이사항","anchor_id":"manual_rpt07_20260702_12","value":"","value_type":"long_text","faker_rule":"free_text.short","style_class":"style_special_note","research_evidence_ids":["VIS-001","WEB-001"],"visual_evidence":{"bbox":[74,904,1035,67],"source":"full_template+filled_sample"},"confidence":0.98},
+    {"field_id":"amount_line","key":"품의 금액","semantic_path":"지출요청.품의금액표시","anchor_id":"manual_rpt07_20260702_13","value":"","value_type":"composite_text","faker_rule":"free_text.short","style_class":"style_amount_line","unit_policy":{"mode":"include_in_composite","observed_static_unit":false,"note":"bbox 전체가 '1. 품의 금액: 총 N건, 금액원' 표시 영역"},"research_evidence_ids":["VIS-001","WEB-001"],"visual_evidence":{"bbox":[72,1042,300,31],"source":"full_template+filled_sample"},"confidence":0.93,"review_required":true},
+    {"field_id":"purpose_line","key":"개인경비 사용용도","semantic_path":"지출요청.개인경비사용용도","anchor_id":"manual_rpt07_20260702_14","value":"","value_type":"short_text","faker_rule":"free_text.short","style_class":"style_line_item","research_evidence_ids":["VIS-001","WEB-001"],"visual_evidence":{"bbox":[72,1072,420,31],"source":"full_template+filled_sample"},"confidence":0.98},
+    {"field_id":"expense_1_expense_date","key":"사용일자","semantic_path":"상세내역.내역1.사용일자","anchor_id":"manual_table_grid_20260702","value":"","value_type":"date","faker_rule":"date.kr","style_class":"style_table_date","research_evidence_ids":["VIS-001","WEB-002"],"visual_evidence":{"bbox":[82,1175,116,63],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"expense_1_vendor","key":"사용처","semantic_path":"상세내역.내역1.사용처","anchor_id":"manual_table_grid_20260702_2","value":"","value_type":"merchant","faker_rule":"company.name_ko","style_class":"style_expense_1_vendor","research_evidence_ids":["VIS-001","WEB-002"],"visual_evidence":{"bbox":[212,1175,116,63],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"expense_1_receipt_type","key":"영수증 종류","semantic_path":"상세내역.내역1.영수증종류","anchor_id":"manual_table_grid_20260702_3","value":"","value_type":"receipt_type","faker_rule":"choice:개인카드|법인카드|현금영수증|계좌이체","style_class":"style_table_center","research_evidence_ids":["VIS-001","WEB-002"],"visual_evidence":{"bbox":[342,1175,114,63],"source":"full_template+filled_sample"},"confidence":0.97},
+    {"field_id":"expense_1_receipt_amount","key":"영수증 금액","semantic_path":"상세내역.내역1.영수증금액","anchor_id":"manual_table_grid_20260702_4","value":"","value_type":"money","faker_rule":"money.krw","style_class":"style_expense_1_receipt_amount","unit_policy":{"mode":"include","observed_static_unit":false,"note":"값 셀에 정적 원 단위 없음"},"research_evidence_ids":["VIS-001","WEB-002"],"visual_evidence":{"bbox":[470,1175,116,63],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"expense_1_claim_amount","key":"신청 청구금액","semantic_path":"상세내역.내역1.신청청구금액","anchor_id":"manual_table_grid_20260702_5","value":"","value_type":"money","faker_rule":"money.krw","style_class":"style_table_money","unit_policy":{"mode":"include","observed_static_unit":false,"note":"값 셀에 정적 원 단위 없음"},"research_evidence_ids":["VIS-001","WEB-002"],"visual_evidence":{"bbox":[600,1175,116,63],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"expense_1_purpose","key":"사용용도","semantic_path":"상세내역.내역1.사용용도","anchor_id":"manual_table_grid_20260702_6","value":"","value_type":"short_text","faker_rule":"free_text.short","style_class":"style_expense_1_purpose","research_evidence_ids":["VIS-001","WEB-001"],"visual_evidence":{"bbox":[730,1175,116,63],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"expense_1_detail_purpose","key":"상세 사용용도","semantic_path":"상세내역.내역1.상세사용용도","anchor_id":"manual_table_grid_20260702_7","value":"","value_type":"short_text","faker_rule":"free_text.short","style_class":"style_expense_1_detail_purpose","research_evidence_ids":["VIS-001","WEB-001"],"visual_evidence":{"bbox":[860,1175,115,63],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"expense_1_project","key":"프로젝트","semantic_path":"상세내역.내역1.프로젝트","anchor_id":"manual_table_grid_20260702_8","value":"","value_type":"project_name","faker_rule":"free_text.short","style_class":"style_table_multiline","research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[989,1175,117,63],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"total_label","key":"합계 표시문구","semantic_path":"상세내역.합계.표시문구","anchor_id":"manual_table_grid_20260702_9","value":"","value_type":"composite_text","faker_rule":"free_text.short","style_class":"style_total_label","unit_policy":{"mode":"include_in_composite","observed_static_unit":false,"note":"bbox가 '합계(총 N건)' 자체를 받음"},"research_evidence_ids":["VIS-001"],"visual_evidence":{"bbox":[82,1246,116,19],"source":"full_template+filled_sample"},"confidence":0.96,"review_required":true},
+    {"field_id":"total_claim_amount","key":"합계 청구금액","semantic_path":"상세내역.합계.청구금액","anchor_id":"manual_table_grid_20260702_10","value":"","value_type":"money","faker_rule":"money.krw","style_class":"style_total_money","unit_policy":{"mode":"include","observed_static_unit":false,"note":"합계 셀에 정적 원 단위 없음"},"research_evidence_ids":["VIS-001","WEB-003"],"visual_evidence":{"bbox":[600,1246,116,19],"source":"full_template+filled_sample"},"confidence":0.99},
+    {"field_id":"attachment_summary","key":"첨부파일 요약","semantic_path":"첨부파일.요약","anchor_id":"manual_rpt07_20260702_15","value":"","value_type":"composite_text","faker_rule":"free_text.short","style_class":"style_attachment_summary","research_evidence_ids":["VIS-001","WEB-002"],"visual_evidence":{"bbox":[83,1299,240,31],"source":"full_template+filled_sample","observed_format":"첨부파일 N개 (용량)"},"confidence":0.94,"review_required":true},
+    {"field_id":"attachment_filename","key":"첨부파일명","semantic_path":"첨부파일.파일명","anchor_id":"manual_rpt07_20260702_16","value":"","value_type":"filename","faker_rule":"free_text.short","style_class":"style_attachment_file","research_evidence_ids":["VIS-001","WEB-002"],"visual_evidence":{"bbox":[80,1344,390,34],"source":"full_template+filled_sample","observed_format":"파일명.확장자 (용량)"},"confidence":0.96}
+  ],
+  "coverage": {"use_anchor_count":26,"bound_use_anchor_count":26,"coverage_percent":100,"unmapped_use_anchors":[]},
+  "field_id_contract": {"status":"frozen_for_pass_2","count":26}
+}

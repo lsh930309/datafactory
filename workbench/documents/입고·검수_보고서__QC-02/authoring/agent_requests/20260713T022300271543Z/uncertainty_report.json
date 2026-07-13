@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "doc_id": "QC-02",
+  "pass": "2/2 faker_and_relationship_expansion",
+  "summary": {
+    "unmapped_use_anchors": 0,
+    "review_required_fields": 0,
+    "fixed_binding_generator_coverage": "72/72",
+    "user_decisions_needed": 1
+  },
+  "items": [
+    {
+      "id": "U-01",
+      "scope": "검수내역/*/검수결과/기타",
+      "severity": "medium",
+      "issue": "기타 열은 양식에 허용값이 인쇄되지 않아 조직별 처리상태로 해석했다.",
+      "current_decision": "20개 합성 처리상태 pool을 사용한다.",
+      "user_decision_needed": "입고·격리·반품 등 조직의 실제 폐쇄형 선택지 승인"
+    },
+    {
+      "id": "U-02",
+      "scope": "검수내역/*/검수결과/수량↔품질",
+      "severity": "low",
+      "issue": "양식에는 합격수량·불량수량 bbox가 없어 수량에서 불량분을 산술적으로 분리할 수 없다.",
+      "current_decision": "품명·규격·품질·기타·비고는 pick_record로 연결하고 수량은 1~999 범위로 제한한다.",
+      "user_decision_needed": "없음; 불량수량 관계가 필요하면 별도 bbox/schema 확장 필요"
+    },
+    {
+      "id": "U-03",
+      "scope": "결재",
+      "severity": "low",
+      "issue": "상단 결재란에는 담당만 인쇄되고 검토·승인 역할명은 고정 스키마의 기존 판단이다.",
+      "current_decision": "field_id와 semantic_path를 변경하지 않고 이름 generator를 적용한다.",
+      "user_decision_needed": "조직의 실제 결재 단계 명칭 확인"
+    },
+    {
+      "id": "U-04",
+      "scope": "입고정보/발주일자,입고정보/입고일자",
+      "severity": "medium",
+      "issue": "원본 이미지의 연도 bbox에는 20이 보이지만 인페인트 이미지에서는 제거된다. 고정 schema는 이를 static_prefix=20, generated_value_format=yy로 규정한다.",
+      "current_decision": "현재 패스에서는 고정 schema를 따라 date_group year_format yy와 date_order/date_not_after를 적용한다.",
+      "user_decision_needed": "적용 전 렌더러가 20 prefix를 보존하는지 샘플 렌더 확인"
+    },
+    {
+      "id": "U-05",
+      "scope": "sample_kind",
+      "severity": "informational",
+      "issue": "request contract는 filled_sample이나 제공된 전체 이미지는 값이 없는 양식으로 보인다.",
+      "current_decision": "2차 패스에서는 고정된 use anchor/binding을 변경하지 않고 시각 근거는 단위·prefix 판단에만 사용했다.",
+      "user_decision_needed": "향후 재추론 시 sample_kind 정합성 확인"
+    },
+    {
+      "id": "U-06",
+      "scope": "페이지 범위",
+      "severity": "informational",
+      "issue": "manifest와 요청 입력은 1페이지만 포함한다.",
+      "current_decision": "현재 1페이지 72개 use anchor만 대상으로 한다.",
+      "user_decision_needed": "추가 페이지 존재 시 별도 차수에서 확장"
+    }
+  ],
+  "conflicts": [
+    {
+      "evidence": "request.contract.sample_kind=filled_sample",
+      "visual": "전체 템플릿 이미지에는 입력값이 보이지 않음",
+      "resolution": "현재 패스 고정 입력 유지"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    "line_*_other_result",
+    "line_*_remark"
+  ]
+}

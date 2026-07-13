@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "doc_id": "CRD-01",
+  "generated_at": "2026-07-13",
+  "pools": {
+    "issue_times": {
+      "kind": "scalar",
+      "size": 20,
+      "usage": "발급일시의 시각 부분",
+      "source_note": "유효한 업무시간대 HH:MM 합성 값",
+      "faker_profile_path": "data_pools.issue_times"
+    },
+    "masked_rrns": {
+      "kind": "scalar",
+      "size": 20,
+      "usage": "조회대상 주민등록번호",
+      "source_note": "유효한 생년월일과 세기·성별 구분 숫자 뒤 6자리를 마스킹한 비식별 합성 값",
+      "faker_profile_path": "data_pools.masked_rrns"
+    },
+    "loan_amounts_thousand": {
+      "kind": "scalar",
+      "unit": "천원",
+      "include_unit_in_value": false,
+      "size": 24,
+      "usage": "대출정보 8개 금액 필드",
+      "source_note": "전체 템플릿의 정적 '(단위: 천원)' 표기와 KCB 공개 보고서의 대출 금액·잔액 정보 설명을 반영한 합성 범위",
+      "values": ["300", "500", "750", "1,000", "1,200", "1,500", "2,000", "2,500", "3,000", "3,500", "4,000", "4,500", "5,000", "6,000", "7,500", "8,000", "10,000", "12,000", "15,000", "20,000", "25,000", "30,000", "40,000", "50,000"]
+    },
+    "account_records": {
+      "kind": "record",
+      "size": 12,
+      "usage": "개설·발급정보의 내역·사유와 기관·점포명 결합",
+      "source_note": "신용카드·체크카드·가계당좌예금 개설 내역이라는 공식 분류를 따르되 모든 기관명은 비실재 합성 명칭",
+      "faker_profile_path": "data_pools.account_records"
+    },
+    "loan_records": {
+      "kind": "record",
+      "size": 14,
+      "usage": "대출정보의 내역·사유와 기관·점포명 결합",
+      "source_note": "대출상품과 금융기관이 함께 제시된다는 공식 설명을 반영하며 모든 기관명은 비실재 합성 명칭",
+      "faker_profile_path": "data_pools.loan_records"
+    }
+  },
+  "privacy_policy": "실제 개인·회사·계좌·식별번호를 value pool에 포함하지 않는다."
+}

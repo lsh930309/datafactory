@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "doc_id": "RPT-07",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:law.go.kr 지출결의서 증빙서류 회계 규정",
+    "site:go.kr 개인경비 지출결의서 법인카드 증빙 사용일자 사용처",
+    "site:ac.kr 지출결의서 영수증 사용용도 증빙"
+  ],
+  "sources": [
+    {"evidence_id":"WEB-001","url":"https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2000000055894","source_type":"국가법령정보센터 행정규칙","title":"공기업·준정부기관 회계기준","summary":"지출결의서 적요에는 지급의 뜻, 품명·수량, 산출내역 등 필요한 사항을 명기하며 증빙서류를 갖추도록 규정한다.","field_links":["special_note","amount_line","purpose_line","expense_1_purpose","expense_1_detail_purpose"]},
+    {"evidence_id":"WEB-002","url":"https://law.go.kr/schlPubRulInfoP.do?chrClsCd=&schlPubRulSeq=2200000127001","source_type":"국가법령정보센터 지방공사공단 규정","title":"대구시설공단 회계규정시행내규","summary":"기타 경비 지급에는 청구서·지급내역서·영수증 등 증빙을 첨부하고, 소액경비도 품명·규격·수량·단가가 표시된 카드전표·세금계산서 등의 증빙을 요구한다.","field_links":["expense_1_expense_date","expense_1_vendor","expense_1_receipt_type","expense_1_receipt_amount","expense_1_claim_amount","attachment_summary","attachment_filename"]},
+    {"evidence_id":"WEB-003","url":"https://law.go.kr/LSW/flDownload.do?bylClsCd=110202&flSeq=87305841","source_type":"국가법령정보센터 법정서식","title":"입금의뢰명세서 별지 서식","summary":"지출결의서 번호, 입금 계좌번호, 금액 및 합계금액을 연결해 기록하는 공식 서식 사례다.","field_links":["document_number","account_number","total_claim_amount"]},
+    {"evidence_id":"VIS-001","url":null,"source_type":"로컬 전체 이미지 및 bbox review","title":"06월개인경비_page_001 전체 이미지","summary":"필드 존재·라벨·값 위치·단위 포함 여부의 1차 근거. 웹 자료는 의미 해석 보조로만 사용했다.","field_links":["*"]}
+  ],
+  "research_boundary": "공공 회계 규정은 일반적 의미와 증빙 관행만 보조한다. 실제 기업 내부 양식의 필드 채택과 위치는 전체 템플릿 이미지 및 review use bbox를 우선했다."
+}

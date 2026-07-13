@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "doc_id": "SEC-01",
+  "status": "review_required_before_application",
+  "unresolved_fields": [
+    {
+      "field_id": "offering_total_amount",
+      "severity": "medium",
+      "issue": "현재 anchor가 라벨, 금액, 좌 단위를 포함한 복합 문자열 하나이므로 숫자 범위 제약을 별도로 적용할 수 없다.",
+      "current_safe_approximation": "fund_cover_records에서 대괄호와 좌 단위를 포함한 완성 문자열을 선택한다.",
+      "decision_needed": "금액 숫자만 독립 제약하려면 후속 pass에서 값 숫자 전용 bbox와 render-only composite field로 schema를 분리해야 한다. 이번 pass에서는 고정 schema 계약 때문에 보류한다."
+    },
+    {
+      "field_id": "disclosure_reference_text",
+      "severity": "low",
+      "issue": "실제 운용사 홈페이지 주소를 합성 회사명과 정확히 연결할 수 없다.",
+      "current_safe_approximation": "실재 오인을 피하기 위해 example.invalid 예약 도메인과 공식 금융투자협회 주소를 함께 사용한다.",
+      "decision_needed": "실제 기관 데이터 사용 승인 여부를 적용 전에 결정한다."
+    },
+    {
+      "field_id": "investment_risk_grade",
+      "severity": "low",
+      "issue": "위험등급 명칭은 회사가 자율적으로 정할 수 있어 등급별 한글 명칭이 모든 운용사에서 동일하지 않다.",
+      "current_safe_approximation": "템플릿 표현과 협회 6단계 방향성을 따르는 대표 명칭을 사용한다.",
+      "decision_needed": "운용사별 실제 등급 명칭이 필요하면 승인된 기관별 record source가 필요하다."
+    }
+  ],
+  "relationship_limitations": [
+    {
+      "fields": ["investment_risk_grade","fund_name"],
+      "reason": "지원 grammar에는 자산군별 위험도 산식이 없어 합성 record의 보수적 짝으로만 관리한다."
+    },
+    {
+      "fields": ["offering_total_amount"],
+      "reason": "단일 복합 문자열 내부 숫자에는 numeric_range를 적용할 수 없다."
+    }
+  ],
+  "page_scope": {
+    "current_page": 1,
+    "source_pdf_pages": 67,
+    "expanded_multi_page_schema": false,
+    "limitation": "요청 지시에 따라 현재 표지 페이지의 KIE와 값 관계만 확장했다. 후속 페이지의 위험요소, 재무, 사업 항목은 이번 pass 범위 밖이다."
+  },
+  "conflicting_evidence": [],
+  "coverage_gaps": [],
+  "validation_expectation": "10개 고정 binding과 10개 field_generators가 정확히 일치하고 10개 use anchor가 모두 binding되어야 한다."
+}

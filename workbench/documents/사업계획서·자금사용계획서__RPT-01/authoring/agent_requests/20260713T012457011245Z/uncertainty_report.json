@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "doc_id": "RPT-01",
+  "pass": "1_of_2_schema_and_evidence_freeze",
+  "unresolved_fields": [],
+  "conflicting_evidence": [
+    {"id":"U1","anchors":["det_000026","det_000034","det_000038","det_000044","det_000049","det_000052","det_000055","det_000058"],"issue":"OCR 텍스트는 닫는 괄호 ')'만 인식해 suggested_schema_key가 무의미하지만, 전체 페이지의 행 구조와 각 왼쪽 라벨은 모두 괄호 내부 자유기재란임을 명확히 보여준다.","resolution":"전체 이미지 우선 원칙에 따라 8개를 각 용도별 기타 내용 필드로 확정했다.","review_required":false},
+    {"id":"U2","anchors":["det_000049"],"issue":"금융자산형성 행의 '기타(' 시작 문구가 review OCR 목록에서 독립 라벨로 보존되지 않았다.","resolution":"전체 이미지에서 적금상품 가입 아래의 기타(개인계좌 저축) 구조와 닫는 괄호 위치를 확인하고 금융자산형성 기타 내용으로 확정했다.","review_required":false}
+  ],
+  "low_confidence_faker_rules": [],
+  "user_decisions_needed": [],
+  "deferred_to_pass_2":["faker_profile_draft.json field_generators와 data pool","value_pool_draft.json","관계 constraint 정합성 검증"],
+  "pass_boundary_note":"현재 패스 지시에 따라 faker_profile_draft.json, value_pool_draft.json, application_notes.md는 생성하거나 교체하지 않았다."
+}

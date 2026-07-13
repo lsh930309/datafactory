@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-02",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:trade.gov packing list export document contents weights dimensions official",
+    "site:fedex.com packing list international shipping contents weight dimensions",
+    "site:customs.go.kr packing list 포장명세서 수출 서류"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.trade.gov/packing-list",
+      "source_type": "official_government",
+      "summary": "포장명세서는 각 포장 단위의 내용물, 중량, 치수와 상세 물품 목록을 기재하며 운송주선인과 세관의 확인에 사용된다.",
+      "field_links": [
+        "물품명세",
+        "합계·요약"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.trade.gov/common-export-documents",
+      "source_type": "official_government",
+      "summary": "수출 포장명세서에는 판매자·구매자·송하인, 문서번호, 선적일, 운송수단·운송인, 수량·품명·포장형태·포장수, 순중량·총중량, 화인과 치수 등이 포함될 수 있다.",
+      "field_links": [
+        "거래당사자",
+        "문서정보",
+        "운송정보",
+        "화인·번호",
+        "물품명세",
+        "합계·요약"
+      ]
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://www.customs.go.kr/call/ad/crmcc/selectBoardView.do?cnslAcapSrno=2849548&mi=6827",
+      "source_type": "official_government",
+      "summary": "관세청 안내는 포장명세서를 수출자가 작성하며 포장 개수·일련번호·포장명세·총중량·순중량 등을 포함하는 서류로 설명한다.",
+      "field_links": [
+        "화인·번호",
+        "물품명세",
+        "합계·요약"
+      ]
+    },
+    {
+      "evidence_id": "R4",
+      "url": "https://www.fedex.com/en-us/shipping/international/create-documents.html",
+      "source_type": "carrier_official",
+      "summary": "수출 포장명세서는 포장 상세, 외부 화인·번호, 개별 포장의 순·총중량과 치수, 구매자·판매자 참조를 제공한다.",
+      "field_links": [
+        "거래당사자",
+        "화인·번호",
+        "물품명세"
+      ]
+    }
+  ],
+  "evidence_policy": "웹 근거는 보조 수단이며 실제 전체 템플릿에 존재하는 57개 use 앵커만 schema에 포함했다."
+}

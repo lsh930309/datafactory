@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "doc_id": "TRD-07",
+  "search_date": "2026-07-13",
+  "queries": [
+    "발주서 필수 기재 항목 발주번호 품명 수량 단가 납기 공식",
+    "공공기관 물품 구매 발주서 서식 품명 규격 수량 단가 납기",
+    "국세청 사업자등록번호 구성 검증 공식",
+    "대한상공회의소 구매주문서 purchase order 항목"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=200201&flNm=%5B%EB%B3%84%ED%91%9C+1%5D+%EA%B1%B0%EB%9E%98%EC%A0%95%EB%B3%B4%28%EC%A0%9C12%EC%A1%B0+%EA%B4%80%EB%A0%A8%29&flSeq=141881163",
+      "source_type": "법령정보 원문 서식",
+      "summary": "거래정보에서 주문번호, 상품명·모델/규격, 수량, 단가, 금액 및 총 상품금액을 구분하며 총 상품금액은 항목 금액 합계로 설명한다.",
+      "applies_to": [
+        "발주정보/발주번호",
+        "품목내역/*",
+        "금액정보/공급가합계"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://www.g2b.go.kr/pn/pnp/pnpe/UntyAtchFile/downloadFile.do?bidPbancNo=R26BK01460821&bidPbancOrd=000&fileSeq=1&fileType=&prcmBsneSeCd=01",
+      "source_type": "조달청 나라장터 구매 공고 원문",
+      "summary": "물품 구매 문서가 품명, 규격, 수량, 단가와 납품장소를 함께 관리하는 실제 공공 구매 사례를 제공한다.",
+      "applies_to": [
+        "품목내역/*",
+        "납품정보/*"
+      ]
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://supplier.goodyear.com/docs/resources/asia/invoice_instruction_asia_kor.pdf",
+      "source_type": "기업 공급자 청구 지침",
+      "summary": "발행일, 고유 문서번호, 공급받는 자 상호·주소, PO와 일치하는 품목명, 항목별 수량·단위를 거래 문서의 핵심 식별 정보로 제시한다.",
+      "applies_to": [
+        "발주정보/*",
+        "수신처/*",
+        "발신처/*",
+        "결재/*",
+        "품목내역/*"
+      ]
+    },
+    {
+      "evidence_id": "R4",
+      "url": "https://bizinfo.go.kr/biz/bizb/selectBIZB100View.do?cpage=538&rows=5",
+      "source_type": "중소벤처기업부 기업마당 업무용 서식 안내",
+      "summary": "구매·발주 관련 업무서식이 물품 규격, 수량, 단가 및 구매·견적 발주 정보를 기재하는 용도임을 확인한다.",
+      "applies_to": [
+        "품목내역/*"
+      ]
+    }
+  ],
+  "field_level_evidence": {
+    "purchase_order_number": [
+      "R3"
+    ],
+    "receiver_company_name": [
+      "R3"
+    ],
+    "sender_company_name": [
+      "R3"
+    ],
+    "receiver_contact_title": [
+      "R3"
+    ],
+    "sender_department_contact": [
+      "R3"
+    ],
+    "receiver_tel": [
+      "R3"
+    ],
+    "sender_tel": [
+      "R3"
+    ],
+    "receiver_fax": [
+      "R3"
+    ],
+    "receiver_email": [
+      "R3"
+    ],
+    "sender_fax": [
+      "R3"
+    ],
+    "sender_email": [
+      "R3"
+    ],
+    "receiver_address": [
+      "R3"
+    ],
+    "sender_address": [
+      "R3"
+    ],
+    "prepared_date": [
+      "R3"
+    ],
+    "reviewed_date": [
+      "R3"
+    ],
+    "approved_date": [
+      "R3"
+    ],
+    "line_1_number": [
+      "R1",
+      "R2"
+    ],
+    "line_1_item_description": [
+      "R1",
+      "R2"
+    ],
+    "line_1_quantity": [
+      "R1",
+      "R2"
+    ],
+    "line_1_unit_price": [
+      "R1",
+      "R2"
+    ],
+    "line_1_amount": [
+      "R1",
+      "R2"
+    ],
+    "line_1_due_date": [
+      "R1",
+      "R2"
+    ],
+    "line_2_number": [
+      "R1",
+      "R2"
+    ],
+    "line_2_item_description": [
+      "R1",
+      "R2"
+    ],
+    "line_2_quantity": [
+      "R1",
+      "R2"
+    ],
+    "line_2_unit_price": [
+      "R1",
+      "R2"
+    ],
+    "line_2_amount": [
+      "R1",
+      "R2"
+    ],
+    "line_2_due_date": [
+      "R1",
+      "R2"
+    ],
+    "line_2_remark": [
+      "R1",
+      "R2"
+    ],
+    "line_3_number": [
+      "R1",
+      "R2"
+    ],
+    "line_3_item_description": [
+      "R1",
+      "R2"
+    ],
+    "line_3_quantity": [
+      "R1",
+      "R2"
+    ],
+    "line_3_unit_price": [
+      "R1",
+      "R2"
+    ],
+    "line_3_amount": [
+      "R1",
+      "R2"
+    ],
+    "line_3_due_date": [
+      "R1",
+      "R2"
+    ],
+    "line_4_number": [
+      "R1",
+      "R2"
+    ],
+    "line_4_item_description": [
+      "R1",
+      "R2"
+    ],
+    "line_4_quantity": [
+      "R1",
+      "R2"
+    ],
+    "line_4_unit_price": [
+      "R1",
+      "R2"
+    ],
+    "line_4_amount": [
+      "R1",
+      "R2"
+    ],
+    "line_4_due_date": [
+      "R1",
+      "R2"
+    ],
+    "shipping_address": [
+      "R3"
+    ],
+    "delivery_site_name": [
+      "R3"
+    ],
+    "supply_total_amount": [
+      "R1",
+      "R2"
+    ],
+    "form_code": [
+      "R3"
+    ],
+    "issuer_company_footer": [
+      "R3"
+    ]
+  },
+  "research_boundary": "웹 근거는 이미지에 실제로 존재하는 46개 use anchor의 의미 해석에만 사용했으며 템플릿 외 필드는 추가하지 않았다."
+}

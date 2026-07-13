@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import random
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
 import pytest
@@ -20,8 +20,9 @@ from datafactory.authoring import (
     save_authoring_bundle,
     update_authoring_source_inpainted,
     _generate_values,
+    _template_from_authoring,
 )
-from datafactory.fake_data import generate_value
+from datafactory.fake_data import generate_value, is_valid_business_registration_number
 from datafactory.fonts import list_font_faces, load_font, resolve_font_path
 from datafactory.models import BBox, FieldSpec, TemplateSpec
 from datafactory.policy import load_review_policy
@@ -621,6 +622,27 @@ def test_semantic_schema_to_authoring_schema_preserves_hierarchy_in_export(tmp_p
     assert kv["flat_values"] == {"소유자 현황/성명": "홍길동"}
 
 
+def test_semantic_schema_to_authoring_schema_parses_string_semantic_path() -> None:
+    from datafactory.authoring import semantic_schema_to_authoring_schema
+
+    schema = semantic_schema_to_authoring_schema(
+        {
+            "semantic_schema": {"발급정보": {"출력정보": {"출력일자": ""}}},
+            "fields": [
+                {
+                    "field_id": "print_date",
+                    "label": "출력일자",
+                    "semantic_path": "발급정보/출력정보/출력일자",
+                    "anchor_id": "det_date",
+                }
+            ],
+        }
+    )
+
+    assert schema["fields"][0]["semantic_path"] == ["발급정보", "출력정보", "출력일자"]
+    assert schema["fields"][0]["export"]["json_path"] == "발급정보/출력정보/출력일자"
+
+
 def test_save_authoring_bundle_preserves_explicit_export_keys(tmp_path: Path) -> None:
     review, base = _write_review(tmp_path)
     draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
@@ -1126,6 +1148,41 @@ def test_common_faker_address_and_medical_institution_are_realistic() -> None:
     assert any(hospital.endswith(suffix) for suffix in ("병원", "의원", "요양병원", "메디컬센터", "종합병원"))
     assert "-" in rrn
     assert rrn.split("-", 1)[1][0] in {"1", "2", "3", "4"}
+    assert rrn.split("-", 1)[1][1:] == "******"
+
+
+def test_common_faker_business_number_checksum_and_as_of_date() -> None:
+    business_number = generate_value("business_reg_no", random.Random(11))
+    generated_date = generate_value("date", random.Random(11), as_of_date=date(2024, 2, 29))
+
+    assert is_valid_business_registration_number(business_number)
+    assert generated_date <= "2024-02-29"
+
+
+def test_numeric_and_date_ceiling_constraints_enforce_real_world_bounds() -> None:
+    schema = {
+        "fields": [
+            {"field_id": "rate", "generator": "literal:86.55%"},
+            {"field_id": "equity", "generator": "literal:41,700"},
+            {"field_id": "assets", "generator": "literal:25,300"},
+            {"field_id": "event_date", "generator": "literal:2026-08-20"},
+        ]
+    }
+    faker_profile = {
+        "field_generators": {field["field_id"]: field["generator"] for field in schema["fields"]},
+        "constraints": [
+            {"type": "numeric_range", "target": "rate", "min": 2.5, "max": 20, "decimals": 2, "suffix": "%"},
+            {"type": "numeric_compare", "left": "equity", "operator": "<=", "right": "assets"},
+            {"type": "date_not_after", "target": "event_date", "max": "as_of_date"},
+        ],
+    }
+
+    values, warnings = _generate_values(schema, faker_profile, random.Random(2), as_of_date=date(2026, 7, 13))
+
+    assert warnings == []
+    assert float(values["rate"].rstrip("%")) <= 20
+    assert int(values["equity"].replace(",", "")) <= int(values["assets"].replace(",", ""))
+    assert values["event_date"] == "2026-07-13"
 
 
 def test_render_authoring_batch_writes_multiple_samples_and_summary(tmp_path: Path) -> None:
@@ -1311,3 +1368,54 @@ def test_authoring_email_faker_uses_realistic_domains() -> None:
     assert all("@" in value for value in values.values())
     assert not any("example" in value for value in values.values())
     assert len({value.split("@", 1)[1] for value in values.values()}) >= 2
+
+
+def test_authoring_template_scales_review_bbox_to_actual_template_dimensions(tmp_path: Path) -> None:
+    review = tmp_path / "review.json"
+    review.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_engine": "test",
+                "source_detections": "",
+                "source_image": "",
+                "image": {"width": 1000, "height": 2000},
+                "labels": [
+                    {
+                        "id": "det_value",
+                        "text": "값",
+                        "confidence": 1.0,
+                        "bbox": [100, 400, 200, 100],
+                        "bbox_format": "xywh",
+                        "polygon": [[100, 400], [300, 400], [300, 500], [100, 500]],
+                        "status": "use",
+                        "auto_type": "field_value",
+                        "reason": "test",
+                    }
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    base = tmp_path / "template.png"
+    Image.new("RGB", (500, 1000), "white").save(base)
+    schema = {
+        "doc_id": "DOC-1",
+        "source_review": str(review),
+        "image": {"width": 1000, "height": 2000},
+        "fields": [
+            {
+                "field_id": "value",
+                "bbox_label_id": "det_value",
+                "style_class": "default",
+                "value_type": "free_text.short",
+            }
+        ],
+    }
+    stylesheet = {"style_classes": [{"style_class": "default", "font_size": 20}]}
+
+    template, warnings = _template_from_authoring(schema, stylesheet, base)
+
+    assert template.fields[0].bbox == BBox(50, 200, 100, 50)
+    assert any(warning["type"] == "bbox_scaled_to_template" for warning in warnings)

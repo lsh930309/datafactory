@@ -1,1391 +1,1799 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-30T11:49:12.318967+00:00",
-  "updated_at": "2026-07-02T23:34:17.852307+00:00",
+  "created_at": "2026-07-13T02:02:02.880297+00:00",
   "doc_id": "TRD-02",
   "title": "포장명세서(Packing List)",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/review/original_포장명세서/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_applied_reviews/20260713T015504712925Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/samples/original/포장명세서.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/inpaint/original_포장명세서/lama/inpainted_lama.png",
+  "source_inpainted": "workbench/documents/포장명세서(Packing_List)__TRD-02/inpaint/original_포장명세서/lama/inpainted_lama.png",
   "image": {
     "width": 714,
     "height": 875
   },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_applied_reviews/20260713T015504712925Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/포장명세서(Packing_List)__TRD-02/authoring/agent_requests/20260713T015504712925Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "거래당사자": {
+      "송하인·수출자": {
+        "회사명": "",
+        "주소 1행": "",
+        "주소 2행": "",
+        "전화번호": "",
+        "팩스번호": ""
+      },
+      "구매자·수입자·신청인": {
+        "회사명": "",
+        "주소 1행": "",
+        "주소 2행": "",
+        "전화번호": ""
+      },
+      "통지처": {
+        "명칭": ""
+      },
+      "수하인": {
+        "명칭": ""
+      }
+    },
+    "문서정보": {
+      "포장명세서 번호 및 일자": ""
+    },
+    "결제·인도조건": {
+      "운임 조건": "",
+      "HS 코드 문구": "",
+      "선하증권 번호 문구": ""
+    },
+    "운송정보": {
+      "선적항": {
+        "도시": "",
+        "국가": ""
+      },
+      "최종도착지": {
+        "도시": "",
+        "국가": ""
+      },
+      "운송인·선박": "",
+      "출항일": ""
+    },
+    "화인·번호": {
+      "구매자 표기": "",
+      "도착지 표기": "",
+      "카톤 번호 범위": "",
+      "품목번호 표제": ""
+    },
+    "물품명세": {
+      "대표 품명": "",
+      "포장 1": {
+        "품명": "",
+        "순중량": "",
+        "총중량": "",
+        "용적": "",
+        "포장 규격": "",
+        "품목코드": "",
+        "수량": "",
+        "카톤 구성": ""
+      },
+      "포장 2": {
+        "품명": "",
+        "순중량": "",
+        "총중량": "",
+        "용적": "",
+        "포장 규격": "",
+        "품목코드": "",
+        "수량": "",
+        "카톤 구성": ""
+      }
+    },
+    "합계·요약": {
+      "무역조건": "",
+      "순중량": "",
+      "총중량": "",
+      "용적": "",
+      "순중량 단위": "",
+      "총중량 단위": "",
+      "용적 단위": "",
+      "포장 요약": ""
+    },
+    "부가명세": {
+      "포장수량 한정 문구": "",
+      "컨테이너 및 봉인번호": "",
+      "원산지 문구": ""
+    },
+    "발행·서명": {
+      "발행회사명": "",
+      "전화번호": "",
+      "팩스번호": "",
+      "서명자 및 직책": ""
+    }
+  },
   "fields": [
     {
       "field_id": "shipper_exporter_name",
-      "label": "송하인수출자명",
+      "label": "송하인·수출자 회사명",
+      "semantic_path": [
+        "거래당사자",
+        "송하인·수출자",
+        "회사명"
+      ],
+      "bbox_label_id": "manual_trd_02_001",
       "source_detection_id": "manual_trd_02_001",
       "source_text": "ABC CORPORATION",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_shipper_exporter_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "송하인수출자명",
-        "csv_column": "송하인수출자명"
+        "json_path": "거래당사자/송하인·수출자/회사명",
+        "csv_column": "거래당사자/송하인·수출자/회사명"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_001",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "packing_list_number_date",
-      "label": "포장명세명세번호일자",
+      "label": "포장명세서 번호 및 일자",
+      "semantic_path": [
+        "문서정보",
+        "포장명세서 번호 및 일자"
+      ],
+      "bbox_label_id": "manual_trd_02_002",
       "source_detection_id": "manual_trd_02_002",
       "source_text": "ABCCI 2015-001 MAY 19, 2015",
-      "value_type": "date.kr",
-      "generator": "literal:",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
       "style_class": "style_packing_list_number_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포장명세명세번호일자",
-        "csv_column": "포장명세명세번호일자"
+        "json_path": "문서정보/포장명세서 번호 및 일자",
+        "csv_column": "문서정보/포장명세서 번호 및 일자"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_002",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipper_address_line1",
-      "label": "송하인주소주소행1",
+      "label": "송하인·수출자 주소 1행",
+      "semantic_path": [
+        "거래당사자",
+        "송하인·수출자",
+        "주소 1행"
+      ],
+      "bbox_label_id": "manual_trd_02_003",
       "source_detection_id": "manual_trd_02_003",
       "source_text": "120, SAMSUNG - DONG, GANGNAM - GU,",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_shipper_address_line1",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "송하인주소주소행1",
-        "csv_column": "송하인주소주소행1"
+        "json_path": "거래당사자/송하인·수출자/주소 1행",
+        "csv_column": "거래당사자/송하인·수출자/주소 1행"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_003",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipper_address_line2",
-      "label": "송하인주소주소행2",
+      "label": "송하인·수출자 주소 2행",
+      "semantic_path": [
+        "거래당사자",
+        "송하인·수출자",
+        "주소 2행"
+      ],
+      "bbox_label_id": "manual_trd_02_004",
       "source_detection_id": "manual_trd_02_004",
       "source_text": "SEOUL, SOUTH KOREA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_shipper_address_line2",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "송하인주소주소행2",
-        "csv_column": "송하인주소주소행2"
+        "json_path": "거래당사자/송하인·수출자/주소 2행",
+        "csv_column": "거래당사자/송하인·수출자/주소 2행"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_004",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipper_tel",
-      "label": "송하인전화번호",
+      "label": "송하인·수출자 전화번호",
+      "semantic_path": [
+        "거래당사자",
+        "송하인·수출자",
+        "전화번호"
+      ],
+      "bbox_label_id": "manual_trd_02_005",
       "source_detection_id": "manual_trd_02_005",
       "source_text": "+82-2-000-0000",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_shipper_tel",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "송하인전화번호",
-        "csv_column": "송하인전화번호"
+        "json_path": "거래당사자/송하인·수출자/전화번호",
+        "csv_column": "거래당사자/송하인·수출자/전화번호"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_005",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipper_fax",
-      "label": "송하인팩스",
+      "label": "송하인·수출자 팩스번호",
+      "semantic_path": [
+        "거래당사자",
+        "송하인·수출자",
+        "팩스번호"
+      ],
+      "bbox_label_id": "manual_trd_02_006",
       "source_detection_id": "manual_trd_02_006",
       "source_text": "+82-2-000-0000",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_shipper_fax",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "송하인팩스",
-        "csv_column": "송하인팩스"
+        "json_path": "거래당사자/송하인·수출자/팩스번호",
+        "csv_column": "거래당사자/송하인·수출자/팩스번호"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_006",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "buyer_importer_name",
-      "label": "구매자수입자명",
+      "label": "구매자·수입자·신청인 회사명",
+      "semantic_path": [
+        "거래당사자",
+        "구매자·수입자·신청인",
+        "회사명"
+      ],
+      "bbox_label_id": "manual_trd_02_007",
       "source_detection_id": "manual_trd_02_007",
       "source_text": "DEF CORPORATION",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_buyer_importer_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구매자수입자명",
-        "csv_column": "구매자수입자명"
+        "json_path": "거래당사자/구매자·수입자·신청인/회사명",
+        "csv_column": "거래당사자/구매자·수입자·신청인/회사명"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_007",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "buyer_address_line1",
-      "label": "구매자주소주소행1",
+      "label": "구매자·수입자·신청인 주소 1행",
+      "semantic_path": [
+        "거래당사자",
+        "구매자·수입자·신청인",
+        "주소 1행"
+      ],
+      "bbox_label_id": "manual_trd_02_008",
       "source_detection_id": "manual_trd_02_008",
       "source_text": "110, FLOWER ROAD,",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_buyer_address_line1",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구매자주소주소행1",
-        "csv_column": "구매자주소주소행1"
+        "json_path": "거래당사자/구매자·수입자·신청인/주소 1행",
+        "csv_column": "거래당사자/구매자·수입자·신청인/주소 1행"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_008",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "notify_party",
-      "label": "통지처제공",
+      "label": "통지처 명칭",
+      "semantic_path": [
+        "거래당사자",
+        "통지처",
+        "명칭"
+      ],
+      "bbox_label_id": "manual_trd_02_009",
       "source_detection_id": "manual_trd_02_009",
       "source_text": "SAME AS CONSIGNEE",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_notify_party",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "통지처제공",
-        "csv_column": "통지처제공"
+        "json_path": "거래당사자/통지처/명칭",
+        "csv_column": "거래당사자/통지처/명칭"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_009",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "buyer_address_line2",
-      "label": "구매자주소주소행2",
+      "label": "구매자·수입자·신청인 주소 2행",
+      "semantic_path": [
+        "거래당사자",
+        "구매자·수입자·신청인",
+        "주소 2행"
+      ],
+      "bbox_label_id": "manual_trd_02_010",
       "source_detection_id": "manual_trd_02_010",
       "source_text": "NEW YORK, U.S.A",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_buyer_address_line2",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구매자주소주소행2",
-        "csv_column": "구매자주소주소행2"
+        "json_path": "거래당사자/구매자·수입자·신청인/주소 2행",
+        "csv_column": "거래당사자/구매자·수입자·신청인/주소 2행"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_010",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "buyer_tel",
-      "label": "구매자전화번호",
+      "label": "구매자·수입자·신청인 전화번호",
+      "semantic_path": [
+        "거래당사자",
+        "구매자·수입자·신청인",
+        "전화번호"
+      ],
+      "bbox_label_id": "manual_trd_02_011",
       "source_detection_id": "manual_trd_02_011",
       "source_text": "+1-123-456789",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_buyer_tel",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "구매자전화번호",
-        "csv_column": "구매자전화번호"
+        "json_path": "거래당사자/구매자·수입자·신청인/전화번호",
+        "csv_column": "거래당사자/구매자·수입자·신청인/전화번호"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_011",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "consignee_name",
-      "label": "수하인명",
+      "label": "수하인 명칭",
+      "semantic_path": [
+        "거래당사자",
+        "수하인",
+        "명칭"
+      ],
+      "bbox_label_id": "manual_trd_02_012",
       "source_detection_id": "manual_trd_02_012",
       "source_text": "SAME AS ABOVE",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_consignee_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수하인명",
-        "csv_column": "수하인명"
+        "json_path": "거래당사자/수하인/명칭",
+        "csv_column": "거래당사자/수하인/명칭"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_012",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "payment_delivery_1",
-      "label": "결제인도1",
+      "label": "운임 조건",
+      "semantic_path": [
+        "결제·인도조건",
+        "운임 조건"
+      ],
+      "bbox_label_id": "manual_trd_02_013",
       "source_detection_id": "manual_trd_02_013",
       "source_text": "1) FREIGHT COLLECT BY OCEAN",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_payment_delivery_1",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제인도1",
-        "csv_column": "결제인도1"
+        "json_path": "결제·인도조건/운임 조건",
+        "csv_column": "결제·인도조건/운임 조건"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_013",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "payment_delivery_2",
-      "label": "결제인도2",
+      "label": "HS 코드 문구",
+      "semantic_path": [
+        "결제·인도조건",
+        "HS 코드 문구"
+      ],
+      "bbox_label_id": "manual_trd_02_014",
       "source_detection_id": "manual_trd_02_014",
       "source_text": "2)H.S. CODE NO. : 1234-00-0000",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_payment_delivery_2",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제인도2",
-        "csv_column": "결제인도2"
+        "json_path": "결제·인도조건/HS 코드 문구",
+        "csv_column": "결제·인도조건/HS 코드 문구"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_014",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "payment_delivery_3",
-      "label": "결제인도3",
+      "label": "선하증권 번호 문구",
+      "semantic_path": [
+        "결제·인도조건",
+        "선하증권 번호 문구"
+      ],
+      "bbox_label_id": "manual_trd_02_015",
       "source_detection_id": "manual_trd_02_015",
       "source_text": "3) NO. OF BILL, OF LADING: ABC012345678",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_payment_delivery_3",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "결제인도3",
-        "csv_column": "결제인도3"
+        "json_path": "결제·인도조건/선하증권 번호 문구",
+        "csv_column": "결제·인도조건/선하증권 번호 문구"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_015",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "port_loading_city",
-      "label": "항구선적도시",
+      "label": "선적항 도시",
+      "semantic_path": [
+        "운송정보",
+        "선적항",
+        "도시"
+      ],
+      "bbox_label_id": "manual_trd_02_016",
       "source_detection_id": "manual_trd_02_016",
       "source_text": "BUSAN,",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_port_loading_city",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "항구선적도시",
-        "csv_column": "항구선적도시"
+        "json_path": "운송정보/선적항/도시",
+        "csv_column": "운송정보/선적항/도시"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_016",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "final_destination_city",
-      "label": "최종도착지도시",
+      "label": "최종도착지 도시",
+      "semantic_path": [
+        "운송정보",
+        "최종도착지",
+        "도시"
+      ],
+      "bbox_label_id": "manual_trd_02_017",
       "source_detection_id": "manual_trd_02_017",
       "source_text": "NEW YORK,",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_final_destination_city",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "최종도착지도시",
-        "csv_column": "최종도착지도시"
+        "json_path": "운송정보/최종도착지/도시",
+        "csv_column": "운송정보/최종도착지/도시"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_017",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "port_loading_country",
-      "label": "항구선적국가",
+      "label": "선적항 국가",
+      "semantic_path": [
+        "운송정보",
+        "선적항",
+        "국가"
+      ],
+      "bbox_label_id": "manual_trd_02_018",
       "source_detection_id": "manual_trd_02_018",
       "source_text": "SOUTH KOREA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_port_loading_country",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "항구선적국가",
-        "csv_column": "항구선적국가"
+        "json_path": "운송정보/선적항/국가",
+        "csv_column": "운송정보/선적항/국가"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_018",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "final_destination_country",
-      "label": "최종도착지국가",
+      "label": "최종도착지 국가",
+      "semantic_path": [
+        "운송정보",
+        "최종도착지",
+        "국가"
+      ],
+      "bbox_label_id": "manual_trd_02_019",
       "source_detection_id": "manual_trd_02_019",
       "source_text": "U.S.A",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_final_destination_country",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "최종도착지국가",
-        "csv_column": "최종도착지국가"
+        "json_path": "운송정보/최종도착지/국가",
+        "csv_column": "운송정보/최종도착지/국가"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_019",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "carrier_vessel",
-      "label": "운송사선박",
+      "label": "운송인·선박",
+      "semantic_path": [
+        "운송정보",
+        "운송인·선박"
+      ],
+      "bbox_label_id": "manual_trd_02_020",
       "source_detection_id": "manual_trd_02_020",
       "source_text": "HAPPY VESSEL V.50E",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_carrier_vessel",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "운송사선박",
-        "csv_column": "운송사선박"
+        "json_path": "운송정보/운송인·선박",
+        "csv_column": "운송정보/운송인·선박"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_020",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "sailing_date",
-      "label": "출항일자",
+      "label": "출항일",
+      "semantic_path": [
+        "운송정보",
+        "출항일"
+      ],
+      "bbox_label_id": "manual_trd_02_021",
       "source_detection_id": "manual_trd_02_021",
       "source_text": "MAY 25, 2015",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_sailing_date",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "출항일자",
-        "csv_column": "출항일자"
+        "json_path": "운송정보/출항일",
+        "csv_column": "운송정보/출항일"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_021",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipping_mark_buyer",
-      "label": "화인마크구매자",
+      "label": "화인 구매자 표기",
+      "semantic_path": [
+        "화인·번호",
+        "구매자 표기"
+      ],
+      "bbox_label_id": "manual_trd_02_022",
       "source_detection_id": "manual_trd_02_022",
       "source_text": "DEF CORP.",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_shipping_mark_buyer",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "화인마크구매자",
-        "csv_column": "화인마크구매자"
+        "json_path": "화인·번호/구매자 표기",
+        "csv_column": "화인·번호/구매자 표기"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_022",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipping_mark_destination",
-      "label": "화인마크도착지",
+      "label": "화인 도착지 표기",
+      "semantic_path": [
+        "화인·번호",
+        "도착지 표기"
+      ],
+      "bbox_label_id": "manual_trd_02_023",
       "source_detection_id": "manual_trd_02_023",
       "source_text": "NEW YORK",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_shipping_mark_destination",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "화인마크도착지",
-        "csv_column": "화인마크도착지"
+        "json_path": "화인·번호/도착지 표기",
+        "csv_column": "화인·번호/도착지 표기"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_023",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "description_goods_header",
-      "label": "품명물품헤더",
+      "label": "대표 품명",
+      "semantic_path": [
+        "물품명세",
+        "대표 품명"
+      ],
+      "bbox_label_id": "manual_trd_02_024",
       "source_detection_id": "manual_trd_02_024",
       "source_text": "MOTORCYCLE GLOVES",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_description_goods_header",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품명물품헤더",
-        "csv_column": "품명물품헤더"
+        "json_path": "물품명세/대표 품명",
+        "csv_column": "물품명세/대표 품명"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_024",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipping_mark_carton_range",
-      "label": "화인마크카톤범위",
+      "label": "카톤 번호 범위",
+      "semantic_path": [
+        "화인·번호",
+        "카톤 번호 범위"
+      ],
+      "bbox_label_id": "manual_trd_02_025",
       "source_detection_id": "manual_trd_02_025",
       "source_text": "C/NO.1~2",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_shipping_mark_carton_range",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "화인마크카톤범위",
-        "csv_column": "화인마크카톤범위"
+        "json_path": "화인·번호/카톤 번호 범위",
+        "csv_column": "화인·번호/카톤 번호 범위"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_025",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "shipping_mark_item_no",
-      "label": "화인마크품목번호",
+      "label": "품목번호 표제",
+      "semantic_path": [
+        "화인·번호",
+        "품목번호 표제"
+      ],
+      "bbox_label_id": "manual_trd_02_026",
       "source_detection_id": "manual_trd_02_026",
       "source_text": "ITEM NO.",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_shipping_mark_item_no",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "화인마크품목번호",
-        "csv_column": "화인마크품목번호"
+        "json_path": "화인·번호/품목번호 표제",
+        "csv_column": "화인·번호/품목번호 표제"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_026",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_1_title",
-      "label": "제목[0]",
+      "label": "품명",
+      "semantic_path": [
+        "물품명세",
+        "포장 1",
+        "품명"
+      ],
+      "bbox_label_id": "manual_trd_02_027",
       "source_detection_id": "manual_trd_02_027",
       "source_text": "MOTORCYCLE GLOVES",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_1_title",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제목[0]",
-        "csv_column": "제목[0]"
+        "json_path": "물품명세/포장 1/품명",
+        "csv_column": "물품명세/포장 1/품명"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_027",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_1_net_weight",
-      "label": "순중량[0]",
+      "label": "순중량",
+      "semantic_path": [
+        "물품명세",
+        "포장 1",
+        "순중량"
+      ],
+      "bbox_label_id": "manual_trd_02_028",
       "source_detection_id": "manual_trd_02_028",
       "source_text": "420.000",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_1_net_weight",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "순중량[0]",
-        "csv_column": "순중량[0]"
+        "json_path": "물품명세/포장 1/순중량",
+        "csv_column": "물품명세/포장 1/순중량"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_028",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_1_gross_weight",
-      "label": "총중량[0]",
+      "label": "총중량",
+      "semantic_path": [
+        "물품명세",
+        "포장 1",
+        "총중량"
+      ],
+      "bbox_label_id": "manual_trd_02_029",
       "source_detection_id": "manual_trd_02_029",
       "source_text": "500.000",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_1_gross_weight",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "총중량[0]",
-        "csv_column": "총중량[0]"
+        "json_path": "물품명세/포장 1/총중량",
+        "csv_column": "물품명세/포장 1/총중량"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_029",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_1_volume",
-      "label": "용적[0]",
+      "label": "용적",
+      "semantic_path": [
+        "물품명세",
+        "포장 1",
+        "용적"
+      ],
+      "bbox_label_id": "manual_trd_02_030",
       "source_detection_id": "manual_trd_02_030",
       "source_text": "0.212",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_1_volume",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "용적[0]",
-        "csv_column": "용적[0]"
+        "json_path": "물품명세/포장 1/용적",
+        "csv_column": "물품명세/포장 1/용적"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_030",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_1_dimensions",
-      "label": "규격[0]",
+      "label": "포장 규격",
+      "semantic_path": [
+        "물품명세",
+        "포장 1",
+        "포장 규격"
+      ],
+      "bbox_label_id": "manual_trd_02_031",
       "source_detection_id": "manual_trd_02_031",
       "source_text": "(1,200 X 420 X 420 MM)",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_1_dimensions",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[0]",
-        "csv_column": "규격[0]"
+        "json_path": "물품명세/포장 1/포장 규격",
+        "csv_column": "물품명세/포장 1/포장 규격"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_031",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_1_item_code",
-      "label": "품목코드[0]",
+      "label": "품목코드",
+      "semantic_path": [
+        "물품명세",
+        "포장 1",
+        "품목코드"
+      ],
+      "bbox_label_id": "manual_trd_02_032",
       "source_detection_id": "manual_trd_02_032",
       "source_text": "(1) MG-001",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_1_item_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목코드[0]",
-        "csv_column": "품목코드[0]"
+        "json_path": "물품명세/포장 1/품목코드",
+        "csv_column": "물품명세/포장 1/품목코드"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_032",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_1_quantity",
-      "label": "수량[0]",
+      "label": "수량",
+      "semantic_path": [
+        "물품명세",
+        "포장 1",
+        "수량"
+      ],
+      "bbox_label_id": "manual_trd_02_033",
       "source_detection_id": "manual_trd_02_033",
       "source_text": "X 1,000 PRS",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_1_quantity",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[0]",
-        "csv_column": "수량[0]"
+        "json_path": "물품명세/포장 1/수량",
+        "csv_column": "물품명세/포장 1/수량"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_033",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_1_carton_breakdown",
-      "label": "카톤내역[0]",
+      "label": "카톤 구성",
+      "semantic_path": [
+        "물품명세",
+        "포장 1",
+        "카톤 구성"
+      ],
+      "bbox_label_id": "manual_trd_02_034",
       "source_detection_id": "manual_trd_02_034",
       "source_text": "(200 PRS X 5 CARTONS)",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_1_carton_breakdown",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "카톤내역[0]",
-        "csv_column": "카톤내역[0]"
+        "json_path": "물품명세/포장 1/카톤 구성",
+        "csv_column": "물품명세/포장 1/카톤 구성"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_034",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_2_title",
-      "label": "제목[1]",
+      "label": "품명",
+      "semantic_path": [
+        "물품명세",
+        "포장 2",
+        "품명"
+      ],
+      "bbox_label_id": "manual_trd_02_035",
       "source_detection_id": "manual_trd_02_035",
       "source_text": "MOTORCYCLE GLOVES",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_2_title",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제목[1]",
-        "csv_column": "제목[1]"
+        "json_path": "물품명세/포장 2/품명",
+        "csv_column": "물품명세/포장 2/품명"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_035",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_2_net_weight",
-      "label": "순중량[1]",
+      "label": "순중량",
+      "semantic_path": [
+        "물품명세",
+        "포장 2",
+        "순중량"
+      ],
+      "bbox_label_id": "manual_trd_02_036",
       "source_detection_id": "manual_trd_02_036",
       "source_text": "420.000",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_2_net_weight",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "순중량[1]",
-        "csv_column": "순중량[1]"
+        "json_path": "물품명세/포장 2/순중량",
+        "csv_column": "물품명세/포장 2/순중량"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_036",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_2_gross_weight",
-      "label": "총중량[1]",
+      "label": "총중량",
+      "semantic_path": [
+        "물품명세",
+        "포장 2",
+        "총중량"
+      ],
+      "bbox_label_id": "manual_trd_02_037",
       "source_detection_id": "manual_trd_02_037",
       "source_text": "500,000",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_2_gross_weight",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "총중량[1]",
-        "csv_column": "총중량[1]"
+        "json_path": "물품명세/포장 2/총중량",
+        "csv_column": "물품명세/포장 2/총중량"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_037",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_2_volume",
-      "label": "용적[1]",
+      "label": "용적",
+      "semantic_path": [
+        "물품명세",
+        "포장 2",
+        "용적"
+      ],
+      "bbox_label_id": "manual_trd_02_038",
       "source_detection_id": "manual_trd_02_038",
       "source_text": "0.212",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_2_volume",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "용적[1]",
-        "csv_column": "용적[1]"
+        "json_path": "물품명세/포장 2/용적",
+        "csv_column": "물품명세/포장 2/용적"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_038",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_2_dimensions",
-      "label": "규격[1]",
+      "label": "포장 규격",
+      "semantic_path": [
+        "물품명세",
+        "포장 2",
+        "포장 규격"
+      ],
+      "bbox_label_id": "manual_trd_02_039",
       "source_detection_id": "manual_trd_02_039",
       "source_text": "(1,200 X 420 X 420 MM)",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_2_dimensions",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "규격[1]",
-        "csv_column": "규격[1]"
+        "json_path": "물품명세/포장 2/포장 규격",
+        "csv_column": "물품명세/포장 2/포장 규격"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_039",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_2_item_code",
-      "label": "품목코드[1]",
+      "label": "품목코드",
+      "semantic_path": [
+        "물품명세",
+        "포장 2",
+        "품목코드"
+      ],
+      "bbox_label_id": "manual_trd_02_040",
       "source_detection_id": "manual_trd_02_040",
       "source_text": "(1) MG-002",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_2_item_code",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "품목코드[1]",
-        "csv_column": "품목코드[1]"
+        "json_path": "물품명세/포장 2/품목코드",
+        "csv_column": "물품명세/포장 2/품목코드"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_040",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_2_quantity",
-      "label": "수량[1]",
+      "label": "수량",
+      "semantic_path": [
+        "물품명세",
+        "포장 2",
+        "수량"
+      ],
+      "bbox_label_id": "manual_trd_02_041",
       "source_detection_id": "manual_trd_02_041",
       "source_text": "X 1.000 PRS",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_2_quantity",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수량[1]",
-        "csv_column": "수량[1]"
+        "json_path": "물품명세/포장 2/수량",
+        "csv_column": "물품명세/포장 2/수량"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_041",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "box_2_carton_breakdown",
-      "label": "카톤내역[1]",
+      "label": "카톤 구성",
+      "semantic_path": [
+        "물품명세",
+        "포장 2",
+        "카톤 구성"
+      ],
+      "bbox_label_id": "manual_trd_02_042",
       "source_detection_id": "manual_trd_02_042",
       "source_text": "(200 PRS X 5 CARTONS )",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_box_2_carton_breakdown",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "카톤내역[1]",
-        "csv_column": "카톤내역[1]"
+        "json_path": "물품명세/포장 2/카톤 구성",
+        "csv_column": "물품명세/포장 2/카톤 구성"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_042",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "total_trade_terms",
-      "label": "합계무역조건",
+      "label": "합계행 무역조건",
+      "semantic_path": [
+        "합계·요약",
+        "무역조건"
+      ],
+      "bbox_label_id": "manual_trd_02_043",
       "source_detection_id": "manual_trd_02_043",
       "source_text": "FOB BUSAN, SOUTH KOREA",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_total_trade_terms",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "합계무역조건",
-        "csv_column": "합계무역조건"
+        "json_path": "합계·요약/무역조건",
+        "csv_column": "합계·요약/무역조건"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_043",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "total_net_weight",
-      "label": "합계순중량",
+      "label": "총 순중량",
+      "semantic_path": [
+        "합계·요약",
+        "순중량"
+      ],
+      "bbox_label_id": "manual_trd_02_044",
       "source_detection_id": "manual_trd_02_044",
       "source_text": "840.000",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_total_net_weight",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "합계순중량",
-        "csv_column": "합계순중량"
+        "json_path": "합계·요약/순중량",
+        "csv_column": "합계·요약/순중량"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_044",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "total_gross_weight",
-      "label": "합계총중량",
+      "label": "총 총중량",
+      "semantic_path": [
+        "합계·요약",
+        "총중량"
+      ],
+      "bbox_label_id": "manual_trd_02_045",
       "source_detection_id": "manual_trd_02_045",
       "source_text": "1,000.000",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_total_gross_weight",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "합계총중량",
-        "csv_column": "합계총중량"
+        "json_path": "합계·요약/총중량",
+        "csv_column": "합계·요약/총중량"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_045",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "total_volume",
-      "label": "합계용적",
+      "label": "총 용적",
+      "semantic_path": [
+        "합계·요약",
+        "용적"
+      ],
+      "bbox_label_id": "manual_trd_02_046",
       "source_detection_id": "manual_trd_02_046",
       "source_text": "0.424",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_total_volume",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "합계용적",
-        "csv_column": "합계용적"
+        "json_path": "합계·요약/용적",
+        "csv_column": "합계·요약/용적"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_046",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "net_weight_unit",
-      "label": "순중량단위",
+      "label": "순중량 단위",
+      "semantic_path": [
+        "합계·요약",
+        "순중량 단위"
+      ],
+      "bbox_label_id": "manual_trd_02_047",
       "source_detection_id": "manual_trd_02_047",
       "source_text": "KGS",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:KGS|KG",
       "style_class": "style_net_weight_unit",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "순중량단위",
-        "csv_column": "순중량단위"
+        "json_path": "합계·요약/순중량 단위",
+        "csv_column": "합계·요약/순중량 단위"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_047",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "gross_weight_unit",
-      "label": "총중량단위",
+      "label": "총중량 단위",
+      "semantic_path": [
+        "합계·요약",
+        "총중량 단위"
+      ],
+      "bbox_label_id": "manual_trd_02_048",
       "source_detection_id": "manual_trd_02_048",
       "source_text": "KGS",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:KGS|KG",
       "style_class": "style_gross_weight_unit",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "총중량단위",
-        "csv_column": "총중량단위"
+        "json_path": "합계·요약/총중량 단위",
+        "csv_column": "합계·요약/총중량 단위"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_048",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "volume_unit",
-      "label": "용적단위",
+      "label": "용적 단위",
+      "semantic_path": [
+        "합계·요약",
+        "용적 단위"
+      ],
+      "bbox_label_id": "manual_trd_02_049",
       "source_detection_id": "manual_trd_02_049",
       "source_text": "KGS",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:CBM|M3",
       "style_class": "style_volume_unit",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "용적단위",
-        "csv_column": "용적단위"
+        "json_path": "합계·요약/용적 단위",
+        "csv_column": "합계·요약/용적 단위"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_049",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "package_summary",
-      "label": "포장요약",
+      "label": "포장 요약",
+      "semantic_path": [
+        "합계·요약",
+        "포장 요약"
+      ],
+      "bbox_label_id": "manual_trd_02_050",
       "source_detection_id": "manual_trd_02_050",
       "source_text": "TWO (2) BOXES OF MOTORCYCLE GLOVES",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_package_summary",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포장요약",
-        "csv_column": "포장요약"
+        "json_path": "합계·요약/포장 요약",
+        "csv_column": "합계·요약/포장 요약"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_050",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "say_package_only",
-      "label": "포장수량문구포장한정",
+      "label": "포장수량 한정 문구",
+      "semantic_path": [
+        "부가명세",
+        "포장수량 한정 문구"
+      ],
+      "bbox_label_id": "manual_trd_02_051",
       "source_detection_id": "manual_trd_02_051",
       "source_text": "*SAY: TWO (2) BOXES ONLY.",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_say_package_only",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포장수량문구포장한정",
-        "csv_column": "포장수량문구포장한정"
+        "json_path": "부가명세/포장수량 한정 문구",
+        "csv_column": "부가명세/포장수량 한정 문구"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_051",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "container_seal_no",
-      "label": "컨테이너봉인번호",
+      "label": "컨테이너 및 봉인번호",
+      "semantic_path": [
+        "부가명세",
+        "컨테이너 및 봉인번호"
+      ],
+      "bbox_label_id": "manual_trd_02_052",
       "source_detection_id": "manual_trd_02_052",
       "source_text": "* CONTANER & SEAL NO. :ABCP1Z34567/EFB2IOOD",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_container_seal_no",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "컨테이너봉인번호",
-        "csv_column": "컨테이너봉인번호"
+        "json_path": "부가명세/컨테이너 및 봉인번호",
+        "csv_column": "부가명세/컨테이너 및 봉인번호"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_052",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "origin_country_statement",
-      "label": "원산지국가문구",
+      "label": "원산지 문구",
+      "semantic_path": [
+        "부가명세",
+        "원산지 문구"
+      ],
+      "bbox_label_id": "manual_trd_02_053",
       "source_detection_id": "manual_trd_02_053",
       "source_text": "*ORIGIN OF COUNTRY: REFUBLIC OF KOREA (R. O.K)",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_origin_country_statement",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "원산지국가문구",
-        "csv_column": "원산지국가문구"
+        "json_path": "부가명세/원산지 문구",
+        "csv_column": "부가명세/원산지 문구"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_053",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "footer_company_name",
-      "label": "하단회사명",
+      "label": "발행회사명",
+      "semantic_path": [
+        "발행·서명",
+        "발행회사명"
+      ],
+      "bbox_label_id": "manual_trd_02_054",
       "source_detection_id": "manual_trd_02_054",
       "source_text": "ABC CORPORATION",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
       "style_class": "style_footer_company_name",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "하단회사명",
-        "csv_column": "하단회사명"
+        "json_path": "발행·서명/발행회사명",
+        "csv_column": "발행·서명/발행회사명"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_054",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "footer_tel",
-      "label": "하단전화번호",
+      "label": "발행회사 전화번호",
+      "semantic_path": [
+        "발행·서명",
+        "전화번호"
+      ],
+      "bbox_label_id": "manual_trd_02_055",
       "source_detection_id": "manual_trd_02_055",
       "source_text": "+ 82-2-000-0000",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_footer_tel",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "하단전화번호",
-        "csv_column": "하단전화번호"
+        "json_path": "발행·서명/전화번호",
+        "csv_column": "발행·서명/전화번호"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_055",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "footer_fax",
-      "label": "하단팩스",
+      "label": "발행회사 팩스번호",
+      "semantic_path": [
+        "발행·서명",
+        "팩스번호"
+      ],
+      "bbox_label_id": "manual_trd_02_056",
       "source_detection_id": "manual_trd_02_056",
       "source_text": "+82-2-000-0000",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.phone_kr",
+      "generator": "person.phone_kr",
       "style_class": "style_footer_fax",
       "render_policy": {
         "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "하단팩스",
-        "csv_column": "하단팩스"
+        "json_path": "발행·서명/팩스번호",
+        "csv_column": "발행·서명/팩스번호"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_056",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
       "field_id": "signed_by_name",
-      "label": "서명자명",
+      "label": "서명자 및 직책",
+      "semantic_path": [
+        "발행·서명",
+        "서명자 및 직책"
+      ],
+      "bbox_label_id": "manual_trd_02_057",
       "source_detection_id": "manual_trd_02_057",
       "source_text": "K. D. HONG / MANAGING DIRECTOR",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_signed_by_name",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
-        "fit": "allow_overflow",
-        "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "서명자명",
-        "csv_column": "서명자명"
+        "json_path": "발행·서명/서명자 및 직책",
+        "csv_column": "발행·서명/서명자 및 직책"
       },
       "required": true,
-      "notes": "TRD-02 포장명세서 생산용 보정 필드. 수출자/수입자/선적/박스별 중량·부피·포장 수량을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_trd_02_057",
-      "bbox_status": "use"
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "authoring_mode": "trd02_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/포장명세서(Packing_List)__TRD-02/review/original_포장명세서/review.json"
-  }
+  "updated_at": "2026-07-13T02:02:02.903747+00:00"
 }

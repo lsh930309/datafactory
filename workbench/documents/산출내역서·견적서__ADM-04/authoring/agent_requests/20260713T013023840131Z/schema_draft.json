@@ -1,0 +1,5405 @@
+{
+  "schema_version": 2,
+  "doc_id": "ADM-04",
+  "title": "산출내역서·견적서",
+  "semantic_schema": {
+    "문서상단": {
+      "담당자연락처": "",
+      "홈페이지": "",
+      "이메일": ""
+    },
+    "발행처": {
+      "인감표시상호": "",
+      "사업자등록번호": "",
+      "상호": "",
+      "대표자": "",
+      "주소": "",
+      "업태종목": "",
+      "전화": "",
+      "팩스": ""
+    },
+    "수신처": {
+      "업체명": "",
+      "담당자호칭": "",
+      "하단업체명": "",
+      "전화": "",
+      "팩스": "",
+      "휴대전화": ""
+    },
+    "견적조건": {
+      "견적일자": "",
+      "지불조건": "",
+      "납품기간": "",
+      "견적유효기간": "",
+      "검교정기간": ""
+    },
+    "견적개요": {
+      "제목": "",
+      "합계문구": ""
+    },
+    "품목내역": {
+      "01행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      },
+      "02행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "비고": ""
+      },
+      "03행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "비고": ""
+      },
+      "04행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      },
+      "05행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      },
+      "06행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      },
+      "07행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      },
+      "08행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      },
+      "09행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      },
+      "10행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      },
+      "11행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      },
+      "12행": {
+        "번호": "",
+        "품목": "",
+        "모델": "",
+        "단위": "",
+        "수량": "",
+        "단가": "",
+        "검교정비": "",
+        "견적금액": ""
+      }
+    },
+    "결제정보": {
+      "국민은행계좌": "",
+      "예금주": "",
+      "신한은행계좌": "",
+      "우리은행계좌": "",
+      "기업농협계좌": ""
+    },
+    "금액요약": {
+      "소계": "",
+      "부가세": "",
+      "합계": ""
+    },
+    "하단안내": {
+      "회사설명": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "top_contact_line",
+      "key": "상단 담당자/연락처",
+      "semantic_path": "문서상단/담당자연락처",
+      "anchor_id": "det_000001",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_top_contact_line",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          88,
+          119,
+          499,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0040_det_000001.png",
+        "observed_text": "슬기계측기 법정장비 담당자:김남재 팀장(010-6319-1529)"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "supplier_company_stamp_name",
+      "key": "발행처 인감명",
+      "semantic_path": "발행처/인감표시상호",
+      "anchor_id": "det_000006",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_supplier_company_stamp_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          766,
+          287,
+          145,
+          35
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0041_det_000006.png",
+        "observed_text": "슬기계측기"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "recipient_company_name",
+      "key": "고객 업체명",
+      "semantic_path": "수신처/업체명",
+      "anchor_id": "manual_1783045002652",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_recipient_company_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          94,
+          291,
+          228,
+          41
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0160_manual_1783045002652.png",
+        "observed_text": ""
+      },
+      "confidence": 0.78,
+      "review_required": true,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "recipient_title",
+      "key": "수신자",
+      "semantic_path": "수신처/담당자호칭",
+      "anchor_id": "det_000008",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_recipient_title",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          219,
+          353,
+          167,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0042_det_000008.png",
+        "observed_text": "법정장비 담당자 님"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "supplier_business_registration_number",
+      "key": "발행처 사업자등록번호",
+      "semantic_path": "발행처/사업자등록번호",
+      "anchor_id": "det_000010",
+      "value": "",
+      "value_type": "business_reg_no",
+      "faker_rule": "business_reg_no",
+      "style_class": "style_supplier_business_registration_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          802,
+          353,
+          143,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0043_det_000010.png",
+        "observed_text": "105-07-16785"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "estimate_date_text",
+      "key": "견적일자",
+      "semantic_path": "견적조건/견적일자",
+      "anchor_id": "det_000012",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_estimate_date_text",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          219,
+          386,
+          176,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0044_det_000012.png",
+        "observed_text": "2013년 일 월"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "supplier_company_name",
+      "key": "발행처 상호",
+      "semantic_path": "발행처/상호",
+      "anchor_id": "det_000016",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_supplier_company_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          802,
+          384,
+          103,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0045_det_000016.png",
+        "observed_text": "슬기계측기"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "payment_terms",
+      "key": "지불조건",
+      "semantic_path": "견적조건/지불조건",
+      "anchor_id": "det_000018",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_payment_terms",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          221,
+          416,
+          75,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0046_det_000018.png",
+        "observed_text": "현금결재"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "supplier_representative_name",
+      "key": "발행처 대표자",
+      "semantic_path": "발행처/대표자",
+      "anchor_id": "det_000021",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_supplier_representative_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          799,
+          415,
+          93,
+          28
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0047_det_000021.png",
+        "observed_text": "김남재"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "delivery_period",
+      "key": "납품기간",
+      "semantic_path": "견적조건/납품기간",
+      "anchor_id": "det_000023",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_delivery_period",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          220,
+          451,
+          271,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0048_det_000023.png",
+        "observed_text": "발주 후 9일이내(검교정기간포함)"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "supplier_address",
+      "key": "발행처 주소",
+      "semantic_path": "발행처/주소",
+      "anchor_id": "det_000025",
+      "value": "",
+      "value_type": "address.ko",
+      "faker_rule": "address.ko",
+      "style_class": "style_supplier_address",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          802,
+          449,
+          282,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0049_det_000025.png",
+        "observed_text": "서울 종로구 장사동 27번지 1층"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "supplier_business_type_item",
+      "key": "발행처 업태/종목",
+      "semantic_path": "발행처/업태종목",
+      "anchor_id": "det_000028",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_supplier_business_type_item",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          801,
+          481,
+          250,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0050_det_000028.png",
+        "observed_text": "도소매/계측기,자동화부품"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "supplier_tel",
+      "key": "발행처 전화",
+      "semantic_path": "발행처/전화",
+      "anchor_id": "det_000031",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_supplier_tel",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          802,
+          514,
+          143,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0051_det_000031.png",
+        "observed_text": "02-2263–5826"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "supplier_fax",
+      "key": "발행처 팩스",
+      "semantic_path": "발행처/팩스",
+      "anchor_id": "det_000033",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_supplier_fax",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          801,
+          545,
+          143,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0052_det_000033.png",
+        "observed_text": "02-2272–5827"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "estimate_subject",
+      "key": "견적 제목",
+      "semantic_path": "견적개요/제목",
+      "anchor_id": "det_000037",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_estimate_subject",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          227,
+          645,
+          411,
+          30
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0053_det_000037.png",
+        "observed_text": "전기제조 형식승인 법정장비 보유품목"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "estimate_total_text",
+      "key": "견적 합계 문구",
+      "semantic_path": "견적개요/합계문구",
+      "anchor_id": "det_000038",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_estimate_total_text",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          223,
+          686,
+          408,
+          33
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0054_det_000038.png",
+        "observed_text": "삼백사만원(W3,040,000--)부가세별도"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_1_number",
+      "key": "행 번호",
+      "semantic_path": "품목내역/01행/번호",
+      "anchor_id": "det_000047",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_1_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          98,
+          778,
+          18,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0055_det_000047.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_1_item_name",
+      "key": "행 품목",
+      "semantic_path": "품목내역/01행/품목",
+      "anchor_id": "det_000048",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          131,
+          775,
+          206,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0056_det_000048.png",
+        "observed_text": "전압계(V METER)-O.5급"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_1_model",
+      "key": "행 모델",
+      "semantic_path": "품목내역/01행/모델",
+      "anchor_id": "det_000049",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          359,
+          776,
+          90,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0057_det_000049.png",
+        "observed_text": "DW-6090"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_1_unit",
+      "key": "행 단위",
+      "semantic_path": "품목내역/01행/단위",
+      "anchor_id": "det_000050",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          558,
+          776,
+          43,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0058_det_000050.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_1_quantity",
+      "key": "행 수량",
+      "semantic_path": "품목내역/01행/수량",
+      "anchor_id": "det_000051",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_1_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          625,
+          777,
+          18,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0059_det_000051.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_1_unit_price",
+      "key": "행 단가",
+      "semantic_path": "품목내역/01행/단가",
+      "anchor_id": "det_000052",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_1_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          701,
+          776,
+          94,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0060_det_000052.png",
+        "observed_text": "W450,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_1_calibration_fee",
+      "key": "행 검교정",
+      "semantic_path": "품목내역/01행/검교정비",
+      "anchor_id": "det_000053",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_1_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          861,
+          775,
+          94,
+          27
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0061_det_000053.png",
+        "observed_text": "W210,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_1_amount",
+      "key": "행 견적금액",
+      "semantic_path": "품목내역/01행/견적금액",
+      "anchor_id": "det_000054",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_1_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1010,
+          777,
+          93,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0062_det_000054.png",
+        "observed_text": "W660,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_2_number",
+      "key": "행 번호[1]",
+      "semantic_path": "품목내역/02행/번호",
+      "anchor_id": "det_000055",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_2_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          98,
+          808,
+          19,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0063_det_000055.png",
+        "observed_text": "2"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_2_item_name",
+      "key": "행 품목[1]",
+      "semantic_path": "품목내역/02행/품목",
+      "anchor_id": "det_000056",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          131,
+          805,
+          206,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0064_det_000056.png",
+        "observed_text": "전류계(A METER)-O.5급"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_2_model",
+      "key": "행 모델[1]",
+      "semantic_path": "품목내역/02행/모델",
+      "anchor_id": "det_000057",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          361,
+          808,
+          87,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0065_det_000057.png",
+        "observed_text": "DW-6090"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_2_unit",
+      "key": "행 단위[1]",
+      "semantic_path": "품목내역/02행/단위",
+      "anchor_id": "det_000058",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          557,
+          805,
+          46,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0066_det_000058.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_2_quantity",
+      "key": "행 수량[1]",
+      "semantic_path": "품목내역/02행/수량",
+      "anchor_id": "det_000059",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_2_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          625,
+          807,
+          18,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0067_det_000059.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_2_note",
+      "key": "행 비고",
+      "semantic_path": "품목내역/02행/비고",
+      "anchor_id": "det_000060",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_note",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          657,
+          806,
+          291,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0068_det_000060.png",
+        "observed_text": "*한장비로 전압,전류,전력 공통사용"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_3_number",
+      "key": "행 번호[2]",
+      "semantic_path": "품목내역/03행/번호",
+      "anchor_id": "det_000061",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_3_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          98,
+          839,
+          19,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0069_det_000061.png",
+        "observed_text": "3"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_3_item_name",
+      "key": "행 품목[2]",
+      "semantic_path": "품목내역/03행/품목",
+      "anchor_id": "det_000062",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          130,
+          836,
+          207,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0070_det_000062.png",
+        "observed_text": "전력계(WMETER)-O.5급"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_3_model",
+      "key": "행 모델[2]",
+      "semantic_path": "품목내역/03행/모델",
+      "anchor_id": "det_000063",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          361,
+          838,
+          87,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0071_det_000063.png",
+        "observed_text": "DW-6090"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_3_unit",
+      "key": "행 단위[2]",
+      "semantic_path": "품목내역/03행/단위",
+      "anchor_id": "det_000064",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          837,
+          43,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0072_det_000064.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_3_quantity",
+      "key": "행 수량[2]",
+      "semantic_path": "품목내역/03행/수량",
+      "anchor_id": "det_000065",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_3_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          626,
+          838,
+          17,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0073_det_000065.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_3_note",
+      "key": "행 비고[1]",
+      "semantic_path": "품목내역/03행/비고",
+      "anchor_id": "det_000066",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_note",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          658,
+          836,
+          258,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0074_det_000066.png",
+        "observed_text": "*검교정 전압,전류,전력3개모두"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_4_number",
+      "key": "행 번호[3]",
+      "semantic_path": "품목내역/04행/번호",
+      "anchor_id": "det_000067",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_4_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          98,
+          869,
+          19,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0075_det_000067.png",
+        "observed_text": "4"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_4_item_name",
+      "key": "행 품목[3]",
+      "semantic_path": "품목내역/04행/품목",
+      "anchor_id": "det_000068",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          130,
+          869,
+          93,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0076_det_000068.png",
+        "observed_text": "절연저항계"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_4_model",
+      "key": "행 모델[3]",
+      "semantic_path": "품목내역/04행/모델",
+      "anchor_id": "det_000069",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          361,
+          869,
+          109,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0077_det_000069.png",
+        "observed_text": "500V 1000M"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_4_unit",
+      "key": "행 단위[3]",
+      "semantic_path": "품목내역/04행/단위",
+      "anchor_id": "det_000070",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          867,
+          43,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0078_det_000070.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_4_quantity",
+      "key": "행 수량[3]",
+      "semantic_path": "품목내역/04행/수량",
+      "anchor_id": "det_000071",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_4_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          626,
+          869,
+          16,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0079_det_000071.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_4_unit_price",
+      "key": "행 단가[1]",
+      "semantic_path": "품목내역/04행/단가",
+      "anchor_id": "det_000072",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_4_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          710,
+          864,
+          85,
+          28
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0080_det_000072.png",
+        "observed_text": "W70,000|"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_4_calibration_fee",
+      "key": "행 검교정[1]",
+      "semantic_path": "품목내역/04행/검교정비",
+      "anchor_id": "det_000073",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_4_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          872,
+          867,
+          84,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0081_det_000073.png",
+        "observed_text": "W90,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_4_amount",
+      "key": "행 견적금액[1]",
+      "semantic_path": "품목내역/04행/견적금액",
+      "anchor_id": "det_000074",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_4_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1011,
+          869,
+          91,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0082_det_000074.png",
+        "observed_text": "W160,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_5_number",
+      "key": "행 번호[4]",
+      "semantic_path": "품목내역/05행/번호",
+      "anchor_id": "det_000075",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_5_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          98,
+          899,
+          19,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0083_det_000075.png",
+        "observed_text": "5"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_5_item_name",
+      "key": "행 품목[4]",
+      "semantic_path": "품목내역/05행/품목",
+      "anchor_id": "det_000076",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_5_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          128,
+          897,
+          114,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0084_det_000076.png",
+        "observed_text": "내전압시험기"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_5_model",
+      "key": "행 모델[4]",
+      "semantic_path": "품목내역/05행/모델",
+      "anchor_id": "det_000077",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_5_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          361,
+          899,
+          100,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0085_det_000077.png",
+        "observed_text": "AC 5KV/HS"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_5_unit",
+      "key": "행 단위[4]",
+      "semantic_path": "품목내역/05행/단위",
+      "anchor_id": "det_000078",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_5_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          897,
+          42,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0086_det_000078.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_5_quantity",
+      "key": "행 수량[4]",
+      "semantic_path": "품목내역/05행/수량",
+      "anchor_id": "det_000079",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_5_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          628,
+          900,
+          13,
+          18
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0087_det_000079.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_5_unit_price",
+      "key": "행 단가[2]",
+      "semantic_path": "품목내역/05행/단가",
+      "anchor_id": "det_000080",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_5_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          701,
+          897,
+          92,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0088_det_000080.png",
+        "observed_text": "W290,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_5_calibration_fee",
+      "key": "행 검교정[2]",
+      "semantic_path": "품목내역/05행/검교정비",
+      "anchor_id": "det_000081",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_5_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          872,
+          897,
+          84,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0089_det_000081.png",
+        "observed_text": "W80,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_5_amount",
+      "key": "행 견적금액[2]",
+      "semantic_path": "품목내역/05행/견적금액",
+      "anchor_id": "det_000082",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_5_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1011,
+          899,
+          91,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0090_det_000082.png",
+        "observed_text": "W370,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_6_number",
+      "key": "행 번호[5]",
+      "semantic_path": "품목내역/06행/번호",
+      "anchor_id": "det_000083",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_6_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          100,
+          928,
+          17,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0091_det_000083.png",
+        "observed_text": "6"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_6_item_name",
+      "key": "행 품목[5]",
+      "semantic_path": "품목내역/06행/품목",
+      "anchor_id": "det_000084",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_6_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          129,
+          928,
+          128,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0092_det_000084.png",
+        "observed_text": "자동전압조정기"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_6_model",
+      "key": "행 모델[5]",
+      "semantic_path": "품목내역/06행/모델",
+      "anchor_id": "det_000085",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_6_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          361,
+          928,
+          90,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0093_det_000085.png",
+        "observed_text": "AVR 3KVA"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_6_unit",
+      "key": "행 단위[5]",
+      "semantic_path": "품목내역/06행/단위",
+      "anchor_id": "det_000086",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_6_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          926,
+          42,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0094_det_000086.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_6_quantity",
+      "key": "행 수량[5]",
+      "semantic_path": "품목내역/06행/수량",
+      "anchor_id": "det_000087",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_6_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          628,
+          929,
+          14,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0095_det_000087.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_6_unit_price",
+      "key": "행 단가[3]",
+      "semantic_path": "품목내역/06행/단가",
+      "anchor_id": "det_000088",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_6_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          702,
+          926,
+          91,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0096_det_000088.png",
+        "observed_text": "W340,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_6_calibration_fee",
+      "key": "행 검교정[3]",
+      "semantic_path": "품목내역/06행/검교정비",
+      "anchor_id": "det_000089",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_6_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          872,
+          926,
+          84,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0097_det_000089.png",
+        "observed_text": "W70,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_6_amount",
+      "key": "행 견적금액[3]",
+      "semantic_path": "품목내역/06행/견적금액",
+      "anchor_id": "det_000090",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_6_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1011,
+          928,
+          92,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0098_det_000090.png",
+        "observed_text": "W410,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_7_number",
+      "key": "행 번호[6]",
+      "semantic_path": "품목내역/07행/번호",
+      "anchor_id": "det_000091",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_7_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          98,
+          959,
+          18,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0099_det_000091.png",
+        "observed_text": "7"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_7_item_name",
+      "key": "행 품목[6]",
+      "semantic_path": "품목내역/07행/품목",
+      "anchor_id": "det_000092",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_7_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          129,
+          957,
+          113,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0100_det_000092.png",
+        "observed_text": "열전식온도계"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_7_model",
+      "key": "행 모델[6]",
+      "semantic_path": "품목내역/07행/모델",
+      "anchor_id": "det_000093",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_7_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          361,
+          958,
+          82,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0101_det_000093.png",
+        "observed_text": "YF-160A"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_7_unit",
+      "key": "행 단위[6]",
+      "semantic_path": "품목내역/07행/단위",
+      "anchor_id": "det_000094",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_7_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          957,
+          42,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0102_det_000094.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_7_quantity",
+      "key": "행 수량[6]",
+      "semantic_path": "품목내역/07행/수량",
+      "anchor_id": "det_000095",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_7_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          628,
+          959,
+          14,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0103_det_000095.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_7_unit_price",
+      "key": "행 단가[4]",
+      "semantic_path": "품목내역/07행/단가",
+      "anchor_id": "det_000096",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_7_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          711,
+          957,
+          82,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0104_det_000096.png",
+        "observed_text": "W78,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_7_calibration_fee",
+      "key": "행 검교정[4]",
+      "semantic_path": "품목내역/07행/검교정비",
+      "anchor_id": "det_000097",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_7_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          873,
+          957,
+          84,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0105_det_000097.png",
+        "observed_text": "W55,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_7_amount",
+      "key": "행 견적금액[4]",
+      "semantic_path": "품목내역/07행/견적금액",
+      "anchor_id": "det_000098",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_7_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1011,
+          957,
+          92,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0106_det_000098.png",
+        "observed_text": "W133,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_8_number",
+      "key": "행 번호[7]",
+      "semantic_path": "품목내역/08행/번호",
+      "anchor_id": "det_000099",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_8_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          98,
+          989,
+          19,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0107_det_000099.png",
+        "observed_text": "8"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_8_item_name",
+      "key": "행 품목[7]",
+      "semantic_path": "품목내역/08행/품목",
+      "anchor_id": "det_000100",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_8_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          129,
+          987,
+          147,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0108_det_000100.png",
+        "observed_text": "버어니어켈리퍼스"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_8_model",
+      "key": "행 모델[7]",
+      "semantic_path": "품목내역/08행/모델",
+      "anchor_id": "det_000101",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_8_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          362,
+          989,
+          141,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0109_det_000101.png",
+        "observed_text": "150mm 0.05mm"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_8_unit",
+      "key": "행 단위[7]",
+      "semantic_path": "품목내역/08행/단위",
+      "anchor_id": "det_000102",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_8_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          987,
+          42,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0110_det_000102.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_8_quantity",
+      "key": "행 수량[7]",
+      "semantic_path": "품목내역/08행/수량",
+      "anchor_id": "det_000103",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_8_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          628,
+          989,
+          14,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0111_det_000103.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_8_unit_price",
+      "key": "행 단가[5]",
+      "semantic_path": "품목내역/08행/단가",
+      "anchor_id": "det_000104",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_8_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          710,
+          987,
+          84,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0112_det_000104.png",
+        "observed_text": "W45,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_8_calibration_fee",
+      "key": "행 검교정[5]",
+      "semantic_path": "품목내역/08행/검교정비",
+      "anchor_id": "det_000105",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_8_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          872,
+          987,
+          85,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0113_det_000105.png",
+        "observed_text": "W30,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_8_amount",
+      "key": "행 견적금액[5]",
+      "semantic_path": "품목내역/08행/견적금액",
+      "anchor_id": "det_000106",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_8_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1020,
+          987,
+          84,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0114_det_000106.png",
+        "observed_text": "W75,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_9_number",
+      "key": "행 번호[8]",
+      "semantic_path": "품목내역/09행/번호",
+      "anchor_id": "det_000107",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_9_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          98,
+          1019,
+          19,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0115_det_000107.png",
+        "observed_text": "9"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_9_item_name",
+      "key": "행 품목[8]",
+      "semantic_path": "품목내역/09행/품목",
+      "anchor_id": "det_000108",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_9_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          128,
+          1016,
+          172,
+          26
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0116_det_000108.png",
+        "observed_text": "마이크로메타25mm"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_9_model",
+      "key": "행 모델[8]",
+      "semantic_path": "품목내역/09행/모델",
+      "anchor_id": "det_000109",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_9_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          361,
+          1017,
+          129,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0117_det_000109.png",
+        "observed_text": "0-25mm(0.01)"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_9_unit",
+      "key": "행 단위[8]",
+      "semantic_path": "품목내역/09행/단위",
+      "anchor_id": "det_000110",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_9_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          1018,
+          42,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0118_det_000110.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_9_quantity",
+      "key": "행 수량[8]",
+      "semantic_path": "품목내역/09행/수량",
+      "anchor_id": "det_000111",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_9_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          626,
+          1019,
+          17,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0119_det_000111.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_9_unit_price",
+      "key": "행 단가[6]",
+      "semantic_path": "품목내역/09행/단가",
+      "anchor_id": "det_000112",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_9_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          710,
+          1017,
+          84,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0120_det_000112.png",
+        "observed_text": "W45,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_9_calibration_fee",
+      "key": "행 검교정[6]",
+      "semantic_path": "품목내역/09행/검교정비",
+      "anchor_id": "det_000113",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_9_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          872,
+          1018,
+          85,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0121_det_000113.png",
+        "observed_text": "W30,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_9_amount",
+      "key": "행 견적금액[6]",
+      "semantic_path": "품목내역/09행/견적금액",
+      "anchor_id": "det_000114",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_9_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1020,
+          1017,
+          84,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0122_det_000114.png",
+        "observed_text": "W75,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_10_number",
+      "key": "행 번호[9]",
+      "semantic_path": "품목내역/10행/번호",
+      "anchor_id": "det_000115",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_10_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          94,
+          1049,
+          28,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0123_det_000115.png",
+        "observed_text": "10"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_10_item_name",
+      "key": "행 품목[9]",
+      "semantic_path": "품목내역/10행/품목",
+      "anchor_id": "det_000116",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_10_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          132,
+          1049,
+          195,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0124_det_000116.png",
+        "observed_text": "토크게이지(법정검사용)"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_10_model",
+      "key": "행 모델[9]",
+      "semantic_path": "품목내역/10행/모델",
+      "anchor_id": "det_000117",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_10_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          360,
+          1050,
+          96,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0125_det_000117.png",
+        "observed_text": "2800kg/cm"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_10_unit",
+      "key": "행 단위[9]",
+      "semantic_path": "품목내역/10행/단위",
+      "anchor_id": "det_000118",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_10_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          1048,
+          42,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0126_det_000118.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_10_quantity",
+      "key": "행 수량[9]",
+      "semantic_path": "품목내역/10행/수량",
+      "anchor_id": "det_000119",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_10_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          626,
+          1048,
+          16,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0127_det_000119.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_10_unit_price",
+      "key": "행 단가[7]",
+      "semantic_path": "품목내역/10행/단가",
+      "anchor_id": "det_000120",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_10_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          702,
+          1048,
+          92,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0128_det_000120.png",
+        "observed_text": "W620,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_10_calibration_fee",
+      "key": "행 검교정[7]",
+      "semantic_path": "품목내역/10행/검교정비",
+      "anchor_id": "det_000121",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_10_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          872,
+          1048,
+          85,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0129_det_000121.png",
+        "observed_text": "W80,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_10_amount",
+      "key": "행 견적금액[7]",
+      "semantic_path": "품목내역/10행/견적금액",
+      "anchor_id": "det_000122",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_10_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1011,
+          1048,
+          93,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0130_det_000122.png",
+        "observed_text": "W700,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_11_number",
+      "key": "행 번호[10]",
+      "semantic_path": "품목내역/11행/번호",
+      "anchor_id": "det_000123",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_11_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          92,
+          1077,
+          31,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0131_det_000123.png",
+        "observed_text": "11"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_11_item_name",
+      "key": "행 품목[10]",
+      "semantic_path": "품목내역/11행/품목",
+      "anchor_id": "det_000124",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_11_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          130,
+          1078,
+          110,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0132_det_000124.png",
+        "observed_text": "토크드라이버"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_11_model",
+      "key": "행 모델[10]",
+      "semantic_path": "품목내역/11행/모델",
+      "anchor_id": "det_000125",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_11_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          361,
+          1076,
+          100,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0133_det_000125.png",
+        "observed_text": "LTDK(일본)"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_11_unit",
+      "key": "행 단위[10]",
+      "semantic_path": "품목내역/11행/단위",
+      "anchor_id": "det_000126",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_11_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          1077,
+          42,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0134_det_000126.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_11_quantity",
+      "key": "행 수량[10]",
+      "semantic_path": "품목내역/11행/수량",
+      "anchor_id": "det_000127",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_11_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          626,
+          1077,
+          16,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0135_det_000127.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_11_unit_price",
+      "key": "행 단가[8]",
+      "semantic_path": "품목내역/11행/단가",
+      "anchor_id": "det_000128",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_11_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          702,
+          1077,
+          91,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0136_det_000128.png",
+        "observed_text": "W250,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_11_calibration_fee",
+      "key": "행 검교정[8]",
+      "semantic_path": "품목내역/11행/검교정비",
+      "anchor_id": "det_000129",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_11_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          873,
+          1077,
+          83,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0137_det_000129.png",
+        "observed_text": "W47,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_11_amount",
+      "key": "행 견적금액[8]",
+      "semantic_path": "품목내역/11행/견적금액",
+      "anchor_id": "det_000130",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_11_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1011,
+          1077,
+          93,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0138_det_000130.png",
+        "observed_text": "W297,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_12_number",
+      "key": "행 번호[11]",
+      "semantic_path": "품목내역/12행/번호",
+      "anchor_id": "det_000131",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_12_number",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          92,
+          1107,
+          32,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0139_det_000131.png",
+        "observed_text": "12"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_12_item_name",
+      "key": "행 품목[11]",
+      "semantic_path": "품목내역/12행/품목",
+      "anchor_id": "det_000132",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_12_item_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          129,
+          1107,
+          126,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0140_det_000132.png",
+        "observed_text": "테스트 핀/핑거"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_12_model",
+      "key": "행 모델[11]",
+      "semantic_path": "품목내역/12행/모델",
+      "anchor_id": "det_000133",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_12_model",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          361,
+          1108,
+          71,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0141_det_000133.png",
+        "observed_text": "SS-100"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_12_unit",
+      "key": "행 단위[11]",
+      "semantic_path": "품목내역/12행/단위",
+      "anchor_id": "det_000134",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_12_unit",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          559,
+          1107,
+          42,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0142_det_000134.png",
+        "observed_text": "SET"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_12_quantity",
+      "key": "행 수량[11]",
+      "semantic_path": "품목내역/12행/수량",
+      "anchor_id": "det_000135",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_line_12_quantity",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          626,
+          1107,
+          17,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0143_det_000135.png",
+        "observed_text": "1"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_12_unit_price",
+      "key": "행 단가[9]",
+      "semantic_path": "품목내역/12행/단가",
+      "anchor_id": "det_000136",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_12_unit_price",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          701,
+          1107,
+          92,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0144_det_000136.png",
+        "observed_text": "W160,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_12_calibration_fee",
+      "key": "행 검교정[9]",
+      "semantic_path": "품목내역/12행/검교정비",
+      "anchor_id": "det_000137",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_12_calibration_fee",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          841,
+          1107,
+          113,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0145_det_000137.png",
+        "observed_text": "교정제외품목"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "line_12_amount",
+      "key": "행 견적금액[9]",
+      "semantic_path": "품목내역/12행/견적금액",
+      "anchor_id": "det_000138",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_line_12_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1010,
+          1107,
+          93,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0146_det_000138.png",
+        "observed_text": "W160,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "bank_account_kb",
+      "key": "국민은행 계좌",
+      "semantic_path": "결제정보/국민은행계좌",
+      "anchor_id": "det_000139",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_bank_account_kb",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          131,
+          1334,
+          214,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0147_det_000139.png",
+        "observed_text": "국민:408801-01-167169"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "bank_account_holder",
+      "key": "예금주",
+      "semantic_path": "결제정보/예금주",
+      "anchor_id": "det_000140",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_bank_account_holder",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          363,
+          1335,
+          202,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0148_det_000140.png",
+        "observed_text": "예금주:김남재(슬기상사)"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "subtotal_amount",
+      "key": "소계",
+      "semantic_path": "금액요약/소계",
+      "anchor_id": "det_000142",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_subtotal_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          995,
+          1334,
+          108,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0149_det_000142.png",
+        "observed_text": "W3,040,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "bank_account_shinhan",
+      "key": "신한은행 계좌",
+      "semantic_path": "결제정보/신한은행계좌",
+      "anchor_id": "det_000143",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_bank_account_shinhan",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          132,
+          1363,
+          191,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0150_det_000143.png",
+        "observed_text": "신한:110-219-132688"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "bank_account_woori",
+      "key": "우리은행 계좌",
+      "semantic_path": "결제정보/우리은행계좌",
+      "anchor_id": "det_000144",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_bank_account_woori",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          363,
+          1362,
+          222,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0151_det_000144.png",
+        "observed_text": "우리:077-290768-13-101"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "vat_amount",
+      "key": "부가세",
+      "semantic_path": "금액요약/부가세",
+      "anchor_id": "det_000146",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_vat_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          1011,
+          1361,
+          92,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0152_det_000146.png",
+        "observed_text": "W304,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "bank_account_enterprise_nonghyup",
+      "key": "기업/농협 계좌",
+      "semantic_path": "결제정보/기업농협계좌",
+      "anchor_id": "det_000147",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_bank_account_enterprise_nonghyup",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          132,
+          1390,
+          423,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0153_det_000147.png",
+        "observed_text": "기업:023-081255-04–017농협:1271-01-000873"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "grand_total_amount",
+      "key": "합계",
+      "semantic_path": "금액요약/합계",
+      "anchor_id": "det_000149",
+      "value": "",
+      "value_type": "money.krw",
+      "faker_rule": "money.krw",
+      "style_class": "style_grand_total_amount",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          996,
+          1390,
+          106,
+          21
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0154_det_000149.png",
+        "observed_text": "W3,344,000"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "company_description",
+      "key": "회사 설명",
+      "semantic_path": "하단안내/회사설명",
+      "anchor_id": "det_000150",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_company_description",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          259,
+          1418,
+          670,
+          20
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0155_det_000150.png",
+        "observed_text": "저희 슬기계측기 회사는 각종 검교정 대행 및 법정장비(시험장비) 등록 업체입니다."
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "footer_recipient_company_name",
+      "key": "하단 고객 업체명",
+      "semantic_path": "수신처/하단업체명",
+      "anchor_id": "manual_1783045954214",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_footer_recipient_company_name",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          87,
+          1468,
+          113,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0162_manual_1783045954214.png",
+        "observed_text": ""
+      },
+      "confidence": 0.78,
+      "review_required": true,
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "recipient_tel",
+      "key": "고객 전화번호",
+      "semantic_path": "수신처/전화",
+      "anchor_id": "manual_1783045959179",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_recipient_tel",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          128,
+          1501,
+          131,
+          22
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0163_manual_1783045959179.png",
+        "observed_text": ""
+      },
+      "confidence": 0.78,
+      "review_required": true,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "recipient_fax",
+      "key": "고객 팩스번호",
+      "semantic_path": "수신처/팩스",
+      "anchor_id": "manual_1783045964113",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_recipient_fax",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          308,
+          1501,
+          170,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0164_manual_1783045964113.png",
+        "observed_text": ""
+      },
+      "confidence": 0.78,
+      "review_required": true,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "recipient_mobile",
+      "key": "고객 휴대전화",
+      "semantic_path": "수신처/휴대전화",
+      "anchor_id": "manual_1783045947279",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_recipient_mobile",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          533,
+          1501,
+          161,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0161_manual_1783045947279.png",
+        "observed_text": ""
+      },
+      "confidence": 0.78,
+      "review_required": true,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "homepage_url",
+      "key": "홈페이지",
+      "semantic_path": "문서상단/홈페이지",
+      "anchor_id": "manual_1782796396598",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_homepage_url",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          204,
+          151,
+          180,
+          25
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0156_manual_1782796396598.png",
+        "observed_text": "www.sulgicom.co.kr"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "email_address",
+      "key": "이메일",
+      "semantic_path": "문서상단/이메일",
+      "anchor_id": "manual_1782796412897",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_email_address",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          462,
+          151,
+          157,
+          24
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0157_manual_1782796412897.png",
+        "observed_text": "knjds@naver.com"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "quote_validity_period",
+      "key": "견적유효기간",
+      "semantic_path": "견적조건/견적유효기간",
+      "anchor_id": "manual_1782796478664",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_quote_validity_period",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          221,
+          484,
+          146,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0158_manual_1782796478664.png",
+        "observed_text": "견적일로부터 2주"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    },
+    {
+      "field_id": "calibration_period",
+      "key": "검교정기간",
+      "semantic_path": "견적조건/검교정기간",
+      "anchor_id": "manual_1782796484230",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_calibration_period",
+      "unit_policy": {
+        "mode": "preserve_value_notation",
+        "decision": "원본 값 bbox 안의 통화기호·접두 표현을 값 표기 일부로 취급; 별도 정적 단위 중복 없음"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/산출내역서·견적서__ADM-04/samples/original/견적서_page_001.jpg",
+        "bbox": [
+          221,
+          516,
+          186,
+          23
+        ],
+        "bbox_format": "xywh",
+        "crop_path": "workbench/documents/산출내역서·견적서__ADM-04/authoring/agent_requests/20260713T013023840131Z/visual_evidence/crops/crop_0159_manual_1782796484230.png",
+        "observed_text": "발주일로부터 8일 이내"
+      },
+      "confidence": 0.96,
+      "review_required": false,
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "export": {
+        "include": true
+      }
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 125,
+    "bound_use_anchor_count": 125,
+    "coverage_percent": 100.0
+  },
+  "field_id_contract": {
+    "status": "frozen_for_pass_2",
+    "immutable": true
+  }
+}

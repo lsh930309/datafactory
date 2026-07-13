@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "doc_id": "FIN-01",
+  "title": "표준재무제표증명",
+  "semantic_schema": {
+    "문서정보": {
+      "페이지": "",
+      "발급번호": ""
+    },
+    "신청인구분": {
+      "개인": "",
+      "법인": ""
+    },
+    "사업자정보": {
+      "상호(법인명)": "",
+      "사업자등록번호": "",
+      "성명(대표자)": "",
+      "주민(법인)등록번호": "",
+      "업태": "",
+      "종목": "",
+      "주소(본점)": ""
+    },
+    "신고정보": {
+      "사업연도": {
+        "시작일": "",
+        "종료일": ""
+      },
+      "신고구분": "",
+      "신고일": ""
+    },
+    "발급정보": {
+      "증명발급일": "",
+      "접수번호": "",
+      "담당부서": "",
+      "세무서장": "",
+      "연락처": ""
+    }
+  },
+  "fields": [
+    {"field_id":"page_number","key":"페이지","semantic_path":"문서정보/페이지","anchor_id":"det_000003","value":"","value_type":"free_text.short","faker_rule":"literal:( 1 / 4 )","style_class":"style_page_number","unit_policy":{"mode":"none"},"research_evidence_ids":["visual_page_1"],"visual_evidence":{"source":"full_template_image","observed":"좌상단에 ( 1 / 4 )로 인쇄"}},
+    {"field_id":"document_confirmation_number","key":"발급번호","semantic_path":"문서정보/발급번호","anchor_id":"det_000007","value":"","label_anchor_ids":["det_000004"],"value_type":"free_text.short","faker_rule":"pattern:####-###-####-###","style_class":"style_document_confirmation_number","unit_policy":{"mode":"none"},"research_evidence_ids":["official_form_13","visual_page_1"],"visual_evidence":{"source":"full_template_image","observed":"발급번호 라벨 아래 4-3-4-3 숫자 형식"}},
+    {"field_id":"applicant_type_individual_checkbox","key":"개인","semantic_path":"신청인구분/개인","anchor_id":"det_000008","value":"","label_anchor_ids":["manual_1782777785172"],"value_type":"checkbox.bool","faker_rule":"checkbox.bool","style_class":"style_applicant_type_individual_checkbox","research_evidence_ids":["official_form_13","visual_page_1"],"visual_evidence":{"source":"full_template_image","observed":"개인 라벨 왼쪽 체크박스"}},
+    {"field_id":"applicant_type_corporate_checkbox","key":"법인","semantic_path":"신청인구분/법인","anchor_id":"det_000012","value":"","label_anchor_ids":["det_000009"],"value_type":"checkbox.bool","faker_rule":"checkbox.bool","style_class":"style_applicant_type_corporate_checkbox","research_evidence_ids":["official_form_13","visual_page_1"],"visual_evidence":{"source":"full_template_image","observed":"법인 라벨 왼쪽 체크박스"}},
+    {"field_id":"company_name","key":"상호(법인명)","semantic_path":"사업자정보/상호(법인명)","anchor_id":"det_000014","value":"","label_anchor_ids":["det_000013"],"value_type":"company.name_ko","faker_rule":"company.name_ko","style_class":"style_company_name","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"business_registration_number","key":"사업자등록번호","semantic_path":"사업자정보/사업자등록번호","anchor_id":"det_000016","value":"","label_anchor_ids":["det_000015"],"value_type":"free_text.short","faker_rule":"pattern:###-##-#####","style_class":"style_business_registration_number","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"representative_name","key":"성명(대표자)","semantic_path":"사업자정보/성명(대표자)","anchor_id":"det_000018","value":"","label_anchor_ids":["det_000017"],"value_type":"person.name_ko","faker_rule":"person.name_ko","style_class":"style_representative_name","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"corporate_registration_number_masked","key":"주민(법인)등록번호","semantic_path":"사업자정보/주민(법인)등록번호","anchor_id":"det_000020","value":"","label_anchor_ids":["det_000019"],"value_type":"free_text.short","faker_rule":"pattern:######-*******","style_class":"style_corporate_registration_number_masked","research_evidence_ids":["official_form_13","visual_page_1"],"visual_evidence":{"source":"full_template_image","observed":"법인 선택 상태이며 뒤 7자리가 별표로 마스킹됨"}},
+    {"field_id":"business_type","key":"업태","semantic_path":"사업자정보/업태","anchor_id":"det_000023","value":"","label_anchor_ids":["det_000021"],"value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_business_type","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"business_item","key":"종목","semantic_path":"사업자정보/종목","anchor_id":"det_000026","value":"","label_anchor_ids":["det_000024"],"value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_business_item","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"company_address","key":"주소(본점)","semantic_path":"사업자정보/주소(본점)","anchor_id":"det_000028","value":"","label_anchor_ids":["det_000027"],"value_type":"address.ko","faker_rule":"address.ko","style_class":"style_company_address","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"fiscal_period_start","key":"사업연도 시작일","semantic_path":"신고정보/사업연도/시작일","anchor_id":"det_000029","value":"","label_anchor_ids":["det_000031"],"value_type":"date.kr","faker_rule":"date.kr","style_class":"style_fiscal_period_start","research_evidence_ids":["official_form_13","visual_page_1"],"visual_evidence":{"source":"full_template_image","observed":"사업연도 셀 첫 줄, YYYY.MM.DD"}},
+    {"field_id":"fiscal_period_end","key":"사업연도 종료일","semantic_path":"신고정보/사업연도/종료일","anchor_id":"det_000036","value":"","label_anchor_ids":["det_000031"],"value_type":"date.kr","faker_rule":"date.kr","style_class":"style_fiscal_period_end","research_evidence_ids":["official_form_13","visual_page_1"],"visual_evidence":{"source":"full_template_image","observed":"정적 물결표 뒤의 사업연도 종료일; 값에는 물결표 미포함"},"unit_policy":{"mode":"exclude_static_prefix","static_prefix":"~"}},
+    {"field_id":"filing_type","key":"신고구분","semantic_path":"신고정보/신고구분","anchor_id":"det_000039","value":"","label_anchor_ids":["det_000038"],"value_type":"free_text.short","faker_rule":"choice:정기 신고|수정 신고|기한후 신고","style_class":"style_filing_type","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"filing_date","key":"신고일","semantic_path":"신고정보/신고일","anchor_id":"det_000045","value":"","label_anchor_ids":["det_000042"],"value_type":"date.kr","faker_rule":"date.kr","style_class":"style_filing_date","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"certificate_issue_date","key":"증명발급일","semantic_path":"발급정보/증명발급일","anchor_id":"det_000051","value":"","value_type":"date.kr","faker_rule":"date.kr","style_class":"style_certificate_issue_date","research_evidence_ids":["official_form_13","visual_page_1"],"visual_evidence":{"source":"full_template_image","observed":"증명 문구 하단, 세무서장 직인 위의 발급일"}},
+    {"field_id":"receipt_number","key":"접수번호","semantic_path":"발급정보/접수번호","anchor_id":"det_000054","value":"","label_anchor_ids":["det_000052"],"value_type":"free_text.short","faker_rule":"pattern:############","style_class":"style_receipt_number","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"service_counter","key":"담당부서","semantic_path":"발급정보/담당부서","anchor_id":"det_000057","value":"","label_anchor_ids":["det_000056"],"value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_service_counter","research_evidence_ids":["official_form_13","visual_page_1"]},
+    {"field_id":"tax_office_chief","key":"세무서장","semantic_path":"발급정보/세무서장","anchor_id":"det_000058","value":"","value_type":"free_text.short","faker_rule":"free_text.short","style_class":"style_tax_office_chief","research_evidence_ids":["official_form_13","visual_page_1"],"visual_evidence":{"source":"full_template_image","observed":"발급기관장 명칭과 직인"}},
+    {"field_id":"tax_office_phone","key":"연락처","semantic_path":"발급정보/연락처","anchor_id":"det_000062","value":"","label_anchor_ids":["det_000061"],"value_type":"person.phone_kr","faker_rule":"person.phone_kr","style_class":"style_tax_office_phone","research_evidence_ids":["official_form_13","visual_page_1"]}
+  ]
+}

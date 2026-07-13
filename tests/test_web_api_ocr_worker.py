@@ -5,6 +5,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from PIL import Image
+import pytest
 
 from datafactory import web_api
 
@@ -391,6 +392,7 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
     fake_registry = SimpleNamespace(documents={fake_doc.doc_id: fake_doc})
     manifest_updates: list[tuple[str, str, str]] = []
     captured: dict[str, object] = {}
+    calls: list[str] = []
 
     def fake_workbench_subdir(doc_id: str, subdir: str):
         target = tmp_path / "workbench" / doc_id / subdir
@@ -398,6 +400,7 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
         return target
 
     def fake_run(cmd, *, input, cwd, text, capture_output, timeout, check):  # noqa: ANN001, A002
+        calls.append(str(input))
         captured["cmd"] = cmd
         captured["input"] = input
         request_dirs = sorted((tmp_path / "workbench" / fake_doc.doc_id / "authoring" / "agent_requests").glob("*"))
@@ -407,7 +410,10 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
             if name.endswith(".json"):
                 payload = {"schema_version": 1, "name": name}
                 if name == "schema_draft.json":
-                    payload.update({"semantic_schema": {"환자 성명": ""}, "fields": [{"field_id": "patient_name", "key": "환자 성명", "semantic_path": ["환자 성명"], "anchor_id": "det_name", "value": ""}]})
+                    if len(calls) == 2:
+                        payload.update({"semantic_schema": {"변조된 필드": ""}, "fields": [{"field_id": "mutated", "key": "변조된 필드", "semantic_path": ["변조된 필드"], "anchor_id": "det_name", "value": ""}]})
+                    else:
+                        payload.update({"semantic_schema": {"환자 성명": ""}, "fields": [{"field_id": "patient_name", "key": "환자 성명", "semantic_path": ["환자 성명"], "anchor_id": "det_name", "value": ""}]})
                 elif name == "faker_profile_draft.json":
                     payload.update({"field_generators": {"patient_name": "person.name_ko"}})
                 elif name == "anchor_map_draft.json":
@@ -442,6 +448,13 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
     assert "Supported faker relationship constraint grammar" in str(captured["input"])
     assert "pick_record" in str(captured["input"])
     assert "constraint 내부 `records`" in str(captured["input"])
+    assert len(calls) == 2
+    assert "Current pass: 1/2 schema" in calls[0]
+    assert "Current pass: 2/2 faker" in calls[1]
+    assert payload["stages"][1]["frozenArtifactViolations"] == ["schema_draft.json"]
+    restored_request_dir = sorted((tmp_path / "workbench" / fake_doc.doc_id / "authoring" / "agent_requests").glob("*"))[-1]
+    restored_schema = json.loads((restored_request_dir / "schema_draft.json").read_text(encoding="utf-8"))
+    assert restored_schema["semantic_schema"] == {"환자 성명": ""}
     assert any(key == "authoring_agent_schema_draft" for _doc_id, key, _path in manifest_updates)
     status = web_api.authoring_agent_run_status_payload({"jobPath": payload["jobPath"]})
     assert status["status"] == "succeeded"
@@ -593,6 +606,32 @@ def test_blank_template_agent_validation_requires_confirmed_use_value_anchor(tmp
     assert validation["ready"] is True
 
 
+def test_blank_template_agent_validation_allows_hidden_semantic_fields_with_one_composite_render(tmp_path: Path) -> None:
+    request_dir = tmp_path / "request"
+    request_dir.mkdir()
+    (request_dir / "request.json").write_text(
+        json.dumps({"contract": {"sample_kind": "blank_template"}}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    parsed = {
+        "schema_draft.json": {
+            "semantic_schema": {"입원정보": {"입원일": "", "퇴원일": "", "표시값": ""}},
+            "fields": [
+                {"field_id": "admission", "semantic_path": ["입원정보", "입원일"], "anchor_id": "cell_1", "render_policy": {"render": False}},
+                {"field_id": "discharge", "semantic_path": ["입원정보", "퇴원일"], "anchor_id": "cell_1", "render_policy": {"render": False}},
+                {"field_id": "display", "semantic_path": ["입원정보", "표시값"], "anchor_id": "cell_1", "render_policy": {"render": True}},
+            ],
+        },
+        "anchor_map_draft.json": {
+            "anchors": [{"anchor_id": "cell_1", "status": "use", "role": "value_region"}]
+        },
+    }
+
+    errors = web_api._validate_blank_template_agent_contract(request_dir, parsed)
+
+    assert not any(error["code"] == "blank_template_duplicate_field_anchor" for error in errors)
+
+
 def test_authoring_agent_validation_auto_materializes_unmapped_use_anchor(tmp_path: Path) -> None:
     request_dir = tmp_path / "request"
     request_dir.mkdir()
@@ -685,3 +724,46 @@ def test_authoring_agent_options_control_codex_command_and_pool_minimum(tmp_path
     assert payload["status"] == "succeeded"
     assert 'model_reasoning_effort="high"' in captured["cmd"]
     assert "--disable" not in captured["cmd"]
+
+
+def test_business_registration_rule_and_fixed_as_of_date_are_agent_contract_inputs() -> None:
+    assert web_api._faker_rule_supported("business_reg_no") is True
+    options = web_api._authoring_agent_options({"options": {"asOfDate": "2026-07-13"}})
+    assert options["asOfDate"] == "2026-07-13"
+    with pytest.raises(ValueError, match="YYYY-MM-DD"):
+        web_api._authoring_agent_options({"options": {"asOfDate": "2026/07/13"}})
+
+
+def test_faker_pool_contract_separates_scalar_record_and_closed_set_minimums() -> None:
+    fields = [
+        {"field_id": "category"},
+        {"field_id": "diagnosis_name"},
+        {"field_id": "diagnosis_code"},
+    ]
+    faker_profile = {
+        "field_generators": {
+            "category": "pool:categories",
+            "diagnosis_name": "free_text.short",
+            "diagnosis_code": "pattern:A##.#",
+        },
+        "data_pools": {
+            "categories": ["신규", "갱신"],
+            "diagnoses": [{"name": "급성 기관지염", "code": "J20.9"}],
+        },
+        "constraints": [
+            {
+                "type": "pick_record",
+                "pool": "diagnoses",
+                "targets": {"diagnosis_name": "name", "diagnosis_code": "code"},
+            }
+        ],
+    }
+
+    errors = web_api._validate_faker_profile_contract(faker_profile, fields, min_pool_size=20, min_record_pool_size=12)
+    assert {error["code"] for error in errors} == {"faker_pool_too_small", "faker_record_pool_too_small"}
+
+    faker_profile["pool_policies"] = {
+        "categories": {"closed_set": True, "exception_kind": "legal_or_form_closed_set", "evidence": "서식상 신규/갱신 택1"},
+    }
+    errors = web_api._validate_faker_profile_contract(faker_profile, fields, min_pool_size=20, min_record_pool_size=12)
+    assert {error["code"] for error in errors} == {"faker_record_pool_too_small"}

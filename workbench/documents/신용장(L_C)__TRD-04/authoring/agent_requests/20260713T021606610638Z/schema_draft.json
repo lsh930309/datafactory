@@ -1,0 +1,1745 @@
+{
+  "schema_version": 2,
+  "doc_id": "TRD-04",
+  "title": "신용장(L/C)",
+  "semantic_schema": {
+    "문서정보": {
+      "발행일": "",
+      "신용장번호": "",
+      "신청번호": "",
+      "참조계약번호": "",
+      "참조계약일자": "",
+      "발행은행_상단주소": "",
+      "발행은행_상단SWIFT": ""
+    },
+    "당사자": {
+      "신청인": {
+        "상호": "",
+        "주소": ""
+      },
+      "개설은행": {
+        "은행명": "",
+        "주소": "",
+        "SWIFT": ""
+      },
+      "수익자": {
+        "상호": "",
+        "주소": ""
+      },
+      "사용가능은행_조건": "",
+      "어음지급은행": {
+        "은행명": "",
+        "소재지": ""
+      }
+    },
+    "신용장조건": {
+      "만기일자": "",
+      "만기장소": "",
+      "발행일자": "",
+      "신용장형태": "",
+      "통화코드": "",
+      "금액": "",
+      "최대통화코드": "",
+      "최대금액": "",
+      "금액통화명": "",
+      "금액영문표기": "",
+      "어음조건": ""
+    },
+    "선적조건": {
+      "분할선적": "",
+      "환적": "",
+      "선적항": "",
+      "양륙항": "",
+      "최종선적일": ""
+    },
+    "물품명세": {
+      "물품명": "",
+      "HS코드": "",
+      "계약참조문구": ""
+    },
+    "발행확인": {
+      "서명은행명": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "issue_date_header",
+      "key": "발행일",
+      "semantic_path": [
+        "문서정보",
+        "발행일"
+      ],
+      "anchor_id": "det_000006",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:english_date",
+      "style_class": "style_issue_date_header",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          722,
+          94,
+          104,
+          17
+        ],
+        "observed_text": "07 MAY 2024",
+        "confidence": 0.9359143972396851
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "lc_number",
+      "key": "신용장번호",
+      "semantic_path": [
+        "문서정보",
+        "신용장번호"
+      ],
+      "anchor_id": "det_000009",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:AA##A#######",
+      "style_class": "style_lc_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          724,
+          122,
+          122,
+          17
+        ],
+        "observed_text": "GF24N0507001",
+        "confidence": 0.999220609664917
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "issuing_bank_header_address",
+      "key": "발행은행 상단 주소",
+      "semantic_path": [
+        "문서정보",
+        "발행은행_상단주소"
+      ],
+      "anchor_id": "det_000010",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:trade_addresses",
+      "style_class": "style_issuing_bank_header_address",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          104,
+          123,
+          220,
+          42
+        ],
+        "observed_text": "45, Teheran-ro, Gangnam-gu Seoul, 06164, Korea",
+        "confidence": 0.9736356437206268
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "wrap",
+        "overflow": "wrap",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "application_number",
+      "key": "신청번호",
+      "semantic_path": [
+        "문서정보",
+        "신청번호"
+      ],
+      "anchor_id": "det_000012",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:AAA######-###",
+      "style_class": "style_application_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          723,
+          150,
+          116,
+          14
+        ],
+        "observed_text": "APP240507-001",
+        "confidence": 0.999374508857727
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "reference_contract_number",
+      "key": "참조계약번호",
+      "semantic_path": [
+        "문서정보",
+        "참조계약번호"
+      ],
+      "anchor_id": "det_000015",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:SALE-CONTRACT NO. {{pattern:AA-####-##}}",
+      "style_class": "style_reference_contract_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          723,
+          180,
+          246,
+          20
+        ],
+        "observed_text": "SALE-CONTRACT NO. SC-2404-18",
+        "confidence": 0.9586876034736633
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "reference_contract_date",
+      "key": "참조계약일자",
+      "semantic_path": [
+        "문서정보",
+        "참조계약일자"
+      ],
+      "anchor_id": "det_000016",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:DATED {{pool:english_date}}",
+      "style_class": "style_reference_contract_date",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          726,
+          206,
+          149,
+          14
+        ],
+        "observed_text": "DATED 18 APR 2024",
+        "confidence": 0.955422580242157
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "applicant_name",
+      "key": "신청인 상호",
+      "semantic_path": [
+        "당사자",
+        "신청인",
+        "상호"
+      ],
+      "anchor_id": "det_000020",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:trade_company_names",
+      "style_class": "style_applicant_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-002"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          85,
+          308,
+          210,
+          14
+        ],
+        "observed_text": "MarineTech Solutions Co., Ltd.",
+        "confidence": 0.97067791223526
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "applicant_address",
+      "key": "신청인 주소",
+      "semantic_path": [
+        "당사자",
+        "신청인",
+        "주소"
+      ],
+      "anchor_id": "det_000022",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:trade_addresses",
+      "style_class": "style_applicant_address",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-002"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          83,
+          326,
+          304,
+          45
+        ],
+        "observed_text": "501, 12, Seolleung-ro 90-gil, Gangnam-gu, Seoul, 06159, Korea",
+        "confidence": 0.9693516492843628
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "wrap",
+        "overflow": "wrap",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "issuing_bank_name",
+      "key": "개설은행명",
+      "semantic_path": [
+        "당사자",
+        "개설은행",
+        "은행명"
+      ],
+      "anchor_id": "det_000021",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:bank_names",
+      "style_class": "style_issuing_bank_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-002"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          554,
+          305,
+          122,
+          17
+        ],
+        "observed_text": "Global First Bank",
+        "confidence": 0.9920103549957275
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "issuing_bank_address",
+      "key": "개설은행 주소",
+      "semantic_path": [
+        "당사자",
+        "개설은행",
+        "주소"
+      ],
+      "anchor_id": "det_000023",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "same_as:issuing_bank_header_address",
+      "style_class": "style_issuing_bank_address",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          554,
+          326,
+          288,
+          44
+        ],
+        "observed_text": "45, Teheran-ro, Gangnam-gu, Seoul, 06164, Korea",
+        "confidence": 0.9749996960163116
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "wrap",
+        "overflow": "wrap",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "issuing_bank_swift_header",
+      "key": "상단 발행은행 SWIFT",
+      "semantic_path": [
+        "문서정보",
+        "발행은행_상단SWIFT"
+      ],
+      "anchor_id": "manual_1783565051305",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:AAAAAAAA",
+      "style_class": "style_issuing_bank_swift_header",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          168,
+          172,
+          91,
+          21
+        ],
+        "observed_text": "GFBKKRSE",
+        "confidence": 0.994608998298645
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "issuing_bank_swift",
+      "key": "개설은행 SWIFT",
+      "semantic_path": [
+        "당사자",
+        "개설은행",
+        "SWIFT"
+      ],
+      "anchor_id": "manual_1783565087472",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "same_as:issuing_bank_swift_header",
+      "style_class": "lc_identifier",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          617,
+          373,
+          83,
+          23
+        ],
+        "observed_text": "GFBKKRSE",
+        "confidence": 0.9964625239372253
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "beneficiary_name",
+      "key": "수익자 상호",
+      "semantic_path": [
+        "당사자",
+        "수익자",
+        "상호"
+      ],
+      "anchor_id": "det_000030",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:trade_company_names",
+      "style_class": "style_beneficiary_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-002"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          85,
+          437,
+          195,
+          17
+        ],
+        "observed_text": "Oceanic Machinery Pte. Ltd.",
+        "confidence": 0.988929033279419
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "beneficiary_address",
+      "key": "수익자 주소",
+      "semantic_path": [
+        "당사자",
+        "수익자",
+        "주소"
+      ],
+      "anchor_id": "det_000032",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:trade_addresses",
+      "style_class": "style_beneficiary_address",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-002"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          85,
+          458,
+          230,
+          44
+        ],
+        "observed_text": "18 Tuas Avenue 5 Singapore 639340",
+        "confidence": 0.9850179553031921
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "available_with_by",
+      "key": "사용가능은행/방법",
+      "semantic_path": [
+        "당사자",
+        "사용가능은행_조건"
+      ],
+      "anchor_id": "det_000031",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:availability_terms",
+      "style_class": "multiline_value",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-002"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          554,
+          435,
+          289,
+          44
+        ],
+        "observed_text": "Any Bank by Negotiation in Singapore",
+        "confidence": 0.9841155409812927
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "expiry_date",
+      "key": "만기일자",
+      "semantic_path": [
+        "신용장조건",
+        "만기일자"
+      ],
+      "anchor_id": "det_000041",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:english_date",
+      "style_class": "style_expiry_date",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          83,
+          589,
+          97,
+          17
+        ],
+        "observed_text": "07 AUG 2024",
+        "confidence": 0.934378445148468
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "expiry_place",
+      "key": "만기장소",
+      "semantic_path": [
+        "신용장조건",
+        "만기장소"
+      ],
+      "anchor_id": "det_000044",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:trade_places",
+      "style_class": "style_expiry_place",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          83,
+          607,
+          92,
+          18
+        ],
+        "observed_text": "Seoul, Korea",
+        "confidence": 0.9873256683349609
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "date_of_issue",
+      "key": "신용장 발행일자",
+      "semantic_path": [
+        "신용장조건",
+        "발행일자"
+      ],
+      "anchor_id": "det_000042",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "same_as:issue_date_header",
+      "style_class": "style_date_of_issue",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          400,
+          589,
+          96,
+          17
+        ],
+        "observed_text": "07 MAY 2024",
+        "confidence": 0.9653709530830383
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "documentary_credit_form",
+      "key": "신용장형태",
+      "semantic_path": [
+        "신용장조건",
+        "신용장형태"
+      ],
+      "anchor_id": "det_000043",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:IRREVOCABLE|TRANSFERABLE|CONFIRMED",
+      "style_class": "style_documentary_credit_form",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          702,
+          589,
+          108,
+          17
+        ],
+        "observed_text": "IRREVOCABLE",
+        "confidence": 0.9975189566612244
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "currency_code",
+      "key": "통화코드",
+      "semantic_path": [
+        "신용장조건",
+        "통화코드"
+      ],
+      "anchor_id": "det_000047",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:USD|EUR|JPY|KRW",
+      "style_class": "style_currency_code",
+      "unit_policy": {
+        "mode": "value_is_currency_identifier",
+        "static_unit_at_value_position": false,
+        "include_in_value": true
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          82,
+          670,
+          38,
+          19
+        ],
+        "observed_text": "USD",
+        "confidence": 0.9907957911491394
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "credit_amount",
+      "key": "신용장금액",
+      "semantic_path": [
+        "신용장조건",
+        "금액"
+      ],
+      "anchor_id": "det_000048",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:amount_values",
+      "style_class": "style_credit_amount",
+      "unit_policy": {
+        "mode": "currency_in_separate_anchor",
+        "static_unit_at_value_position": false,
+        "include_currency_in_value": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          134,
+          671,
+          86,
+          17
+        ],
+        "observed_text": "250,000.00",
+        "confidence": 0.9987543225288391
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "maximum_currency_code",
+      "key": "최대금액 통화코드",
+      "semantic_path": [
+        "신용장조건",
+        "최대통화코드"
+      ],
+      "anchor_id": "det_000049",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "same_as:currency_code",
+      "style_class": "style_maximum_currency_code",
+      "unit_policy": {
+        "mode": "value_is_currency_identifier",
+        "static_unit_at_value_position": false,
+        "include_in_value": true
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          554,
+          670,
+          43,
+          18
+        ],
+        "observed_text": "USD",
+        "confidence": 0.989378035068512
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "maximum_credit_amount",
+      "key": "최대신용장금액",
+      "semantic_path": [
+        "신용장조건",
+        "최대금액"
+      ],
+      "anchor_id": "det_000050",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "same_as:credit_amount",
+      "style_class": "amount",
+      "unit_policy": {
+        "mode": "currency_in_separate_anchor",
+        "static_unit_at_value_position": false,
+        "include_currency_in_value": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          602,
+          670,
+          87,
+          18
+        ],
+        "observed_text": "250,000.00",
+        "confidence": 0.9985283017158508
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "amount_currency_name",
+      "key": "금액 통화명",
+      "semantic_path": [
+        "신용장조건",
+        "금액통화명"
+      ],
+      "anchor_id": "det_000051",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:U.S. DOLLARS|EUROS|JAPANESE YEN|KOREAN WON",
+      "style_class": "style_amount_currency_name",
+      "unit_policy": {
+        "mode": "value_is_currency_identifier",
+        "static_unit_at_value_position": false,
+        "include_in_value": true
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          84,
+          694,
+          106,
+          16
+        ],
+        "observed_text": "U.S. DOLLARS",
+        "confidence": 0.967641294002533
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "amount_in_words",
+      "key": "금액 영문표기",
+      "semantic_path": [
+        "신용장조건",
+        "금액영문표기"
+      ],
+      "anchor_id": "manual_1783565130087",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:amount_words",
+      "style_class": "style_amount_in_words",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          187,
+          693,
+          291,
+          17
+        ],
+        "observed_text": "TWO HUNDRED FIFTY THOUSAND ONLY",
+        "confidence": 0.9736775159835815
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "drafts_at",
+      "key": "어음조건",
+      "semantic_path": [
+        "신용장조건",
+        "어음조건"
+      ],
+      "anchor_id": "det_000053",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:SIGHT FOR 100% INVOICE VALUE|AT 30 DAYS AFTER SIGHT|AT 60 DAYS AFTER BILL OF LADING DATE",
+      "style_class": "style_drafts_at",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          84,
+          754,
+          237,
+          19
+        ],
+        "observed_text": "SIGHT FOR 1OO% INVOICE VALUE",
+        "confidence": 0.9517397284507751
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "drawee_bank_name",
+      "key": "어음지급은행명",
+      "semantic_path": [
+        "당사자",
+        "어음지급은행",
+        "은행명"
+      ],
+      "anchor_id": "det_000055",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:bank_names",
+      "style_class": "company_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-002"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          84,
+          812,
+          125,
+          22
+        ],
+        "observed_text": "Global First Bank,",
+        "confidence": 0.9707704186439514
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "drawee_bank_place",
+      "key": "어음지급은행 소재지",
+      "semantic_path": [
+        "당사자",
+        "어음지급은행",
+        "소재지"
+      ],
+      "anchor_id": "manual_1783565166020",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:trade_places",
+      "style_class": "style_drawee_bank_place",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-001",
+        "RES-002"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          210,
+          812,
+          95,
+          22
+        ],
+        "observed_text": "Seoul, Korea",
+        "confidence": 0.9602079391479492
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "partial_shipments",
+      "key": "분할선적",
+      "semantic_path": [
+        "선적조건",
+        "분할선적"
+      ],
+      "anchor_id": "det_000059",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:ALLOWED|NOT ALLOWED",
+      "style_class": "style_partial_shipments",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-003",
+        "RES-004"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          82,
+          874,
+          78,
+          20
+        ],
+        "observed_text": "ALLOWED",
+        "confidence": 0.9992197155952454
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "transshipment",
+      "key": "환적",
+      "semantic_path": [
+        "선적조건",
+        "환적"
+      ],
+      "anchor_id": "det_000060",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:ALLOWED|NOT ALLOWED",
+      "style_class": "style_transshipment",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-003",
+        "RES-004"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          400,
+          873,
+          75,
+          17
+        ],
+        "observed_text": "ALLOWED",
+        "confidence": 0.9985355734825134
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "port_of_loading",
+      "key": "선적항",
+      "semantic_path": [
+        "선적조건",
+        "선적항"
+      ],
+      "anchor_id": "det_000061",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:ports",
+      "style_class": "style_port_of_loading",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-003",
+        "RES-004"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          656,
+          874,
+          94,
+          17
+        ],
+        "observed_text": "Busan, Korea",
+        "confidence": 0.9783571362495422
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "port_of_discharge",
+      "key": "양륙항",
+      "semantic_path": [
+        "선적조건",
+        "양륙항"
+      ],
+      "anchor_id": "det_000064",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:ports",
+      "style_class": "style_port_of_discharge",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-003",
+        "RES-004"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          79,
+          937,
+          76,
+          23
+        ],
+        "observed_text": "Singapore",
+        "confidence": 0.9994910359382629
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "latest_shipment_date",
+      "key": "최종선적일",
+      "semantic_path": [
+        "선적조건",
+        "최종선적일"
+      ],
+      "anchor_id": "det_000065",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:english_date",
+      "style_class": "lc_date",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-003",
+        "RES-004"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          560,
+          939,
+          93,
+          17
+        ],
+        "observed_text": "07 JUL 2024",
+        "confidence": 0.9449346661567688
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "goods_description",
+      "key": "물품명",
+      "semantic_path": [
+        "물품명세",
+        "물품명"
+      ],
+      "anchor_id": "det_000067",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:goods_descriptions",
+      "style_class": "style_goods_description",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-003",
+        "RES-004"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          82,
+          995,
+          251,
+          17
+        ],
+        "observed_text": "Industrial Gear Pump Model GP-200",
+        "confidence": 0.9831064343452454
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "hs_code",
+      "key": "HS코드",
+      "semantic_path": [
+        "물품명세",
+        "HS코드"
+      ],
+      "anchor_id": "manual_1783565189703",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:####.##",
+      "style_class": "short_value",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-003",
+        "RES-004"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          156,
+          1014,
+          65,
+          20
+        ],
+        "observed_text": "8413.60",
+        "confidence": 0.9992155432701111
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "sales_contract_reference",
+      "key": "계약참조문구",
+      "semantic_path": [
+        "물품명세",
+        "계약참조문구"
+      ],
+      "anchor_id": "det_000069",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "template:As per Sales Contract No. {{pattern:AA-####-##}} Dated {{pool:english_date}}",
+      "style_class": "long_text",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-003",
+        "RES-004"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          83,
+          1035,
+          406,
+          16
+        ],
+        "observed_text": "As per Sales Contract No. SC-2404-18 Dated 18 APR 2024",
+        "confidence": 0.97197425365448
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    },
+    {
+      "field_id": "authorized_signature_bank_name",
+      "key": "서명은행명",
+      "semantic_path": [
+        "발행확인",
+        "서명은행명"
+      ],
+      "anchor_id": "det_000091",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "same_as:issuing_bank_name",
+      "style_class": "signature_bank_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false
+      },
+      "research_evidence_ids": [
+        "RES-002",
+        "RES-003"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "source_path": "workbench/documents/신용장(L_C)__TRD-04/samples/original/신용증.png",
+        "bbox": [
+          638,
+          1470,
+          152,
+          14
+        ],
+        "observed_text": "GLOBAL FIRST BANK",
+        "confidence": 0.9884249567985535
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": true
+      },
+      "export": {
+        "include": true
+      },
+      "review_required": false
+    }
+  ]
+}

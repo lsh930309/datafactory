@@ -8,7 +8,7 @@ import re
 import shutil
 import zipfile
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -32,6 +32,7 @@ class FinalExportOptions:
     seed: int = 20260703
     render_scale: int = 2
     clean: bool = True
+    as_of_date: date | None = None
 
 
 @dataclass(frozen=True)
@@ -48,6 +49,7 @@ def export_final_results(
     render_scale: int = 2,
     clean: bool = True,
     render_handwriting_as_printed: bool = False,
+    as_of_date: date | None = None,
     scope_entries: Any | None = None,
     registry: RegistryData | None = None,
     root: Path = WORKBENCH_ROOT,
@@ -56,6 +58,7 @@ def export_final_results(
 
     if count <= 0:
         raise ValueError("count must be positive")
+    as_of_date = as_of_date or date.today()
     registry = registry or load_registry()
     resolved_scope_entries = _resolve_scope_entries(scope_entries, registry=registry)
     out_dir = out_dir.resolve()
@@ -109,6 +112,7 @@ def export_final_results(
                         count=count,
                         seed=seed + len(rendered_cache) * 1000,
                         render_scale=render_scale,
+                        as_of_date=as_of_date,
                         work_dir=ROOT / ".bin" / "final_results_work" / run_id / f"{_safe_component(doc_id)}_{slugify_title(title)}",
                     )
                 if clean and doc_dir.exists():
@@ -164,6 +168,7 @@ def export_final_results(
         "schema_version": 1,
         "run_id": run_id,
         "created_at": _now(),
+        "as_of_date": as_of_date.isoformat(),
         "count_per_pipeline_document": count,
         "out_dir": _display_path(out_dir),
         "backup_dir": _display_path(backup_dir) if backup_dir else "",
@@ -299,6 +304,7 @@ def _render_pipeline_document(
     seed: int,
     render_scale: int,
     work_dir: Path,
+    as_of_date: date,
 ) -> PipelineRenderResult:
     doc_id = str(item["docId"])
     schema_path = _resolve_existing_path(item["latestAuthoringSchema"])
@@ -314,6 +320,7 @@ def _render_pipeline_document(
         sample_prefix="sample",
         clean=True,
         render_scale=render_scale,
+        as_of_date=as_of_date,
     )
     schema = _read_json(schema_path)
     fields = [field for field in schema.get("fields", []) if isinstance(field, dict)]
@@ -464,11 +471,11 @@ def _is_pure_semantic_path(path: str) -> bool:
 
 
 def _load_semantic_schema(schema_path: Path, *, title: str = "") -> dict[str, Any]:
+    schema_payload = _read_json(schema_path)
+    if isinstance(schema_payload.get("semantic_schema"), dict):
+        return _strip_schema_metadata(schema_payload["semantic_schema"], title=title)
     path = schema_path.with_name("semantic_schema.json")
     if not path.exists():
-        schema_payload = _read_json(schema_path)
-        if isinstance(schema_payload.get("semantic_schema"), dict):
-            return _strip_schema_metadata(schema_payload["semantic_schema"], title=title)
         return {}
     payload = _read_json(path)
     if not isinstance(payload, dict):
@@ -555,14 +562,16 @@ def _semantic_bbox_payload(
             continue
         bbox = annotation.get("bbox") if isinstance(annotation.get("bbox"), list) else [0, 0, 1, 1]
         x, y, w, h = [float(v) for v in bbox[:4]]
+        normalize_x = lambda value: round(max(0.0, min(1.0, value / width)), 4)
+        normalize_y = lambda value: round(max(0.0, min(1.0, value / height)), 4)
         _set_semantic_value(
             bbox_tree,
             path,
             {
-                "l": round(x / width, 4),
-                "t": round(y / height, 4),
-                "r": round((x + w) / width, 4),
-                "b": round((y + h) / height, 4),
+                "l": normalize_x(x),
+                "t": normalize_y(y),
+                "r": normalize_x(x + w),
+                "b": normalize_y(y + h),
             },
         )
     return bbox_tree

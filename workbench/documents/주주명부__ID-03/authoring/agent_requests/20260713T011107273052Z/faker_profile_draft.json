@@ -1,0 +1,98 @@
+{
+  "schema_version": 2,
+  "doc_id": "ID-03",
+  "title": "주주명부",
+  "field_generators": {
+    "as_of_year": "template:{{date.year}}년",
+    "as_of_month_day_current": "pool:month_day_current_values",
+    "shareholder_1_name": "person.name_ko",
+    "shareholder_1_share_count": "pool:share_count_values",
+    "shareholder_1_share_type": "choice:보통주식|상환전환우선주식|전환우선주식",
+    "shareholder_2_name_line_1": "company.name_ko",
+    "shareholder_2_name_line_2": "free_text.short",
+    "shareholder_2_share_count": "pool:share_count_values",
+    "shareholder_2_share_type": "choice:보통주식|상환전환우선주식|전환우선주식",
+    "shareholder_3_name_line_1": "company.name_ko",
+    "shareholder_3_name_line_2": "free_text.short",
+    "shareholder_3_share_count": "pool:share_count_values",
+    "shareholder_3_share_type": "choice:보통주식|상환전환우선주식|전환우선주식",
+    "total_share_count": "pool:total_share_count_values",
+    "par_value_per_share": "choice:100원|500원|1,000원|5,000원",
+    "certification_date": "date.kr",
+    "certifying_company_name": "company.name_ko",
+    "certifying_company_address_line_1": "address.ko",
+    "certifying_company_address_line_2": "free_text.short",
+    "representative_director_name": "person.name_ko"
+  },
+  "data_pools": {
+    "month_day_current_values": [
+      "1월 8일 현재", "1월 24일 현재", "2월 7일 현재", "2월 21일 현재", "3월 6일 현재",
+      "3월 28일 현재", "4월 10일 현재", "4월 25일 현재", "5월 9일 현재", "5월 23일 현재",
+      "6월 5일 현재", "6월 26일 현재", "7월 4일 현재", "7월 18일 현재", "8월 8일 현재",
+      "8월 29일 현재", "9월 12일 현재", "10월 2일 현재", "11월 14일 현재", "12월 19일 현재"
+    ],
+    "share_count_values": [
+      "1,000주", "2,500주", "4,000주", "5,000주", "7,500주", "8,000주", "10,000주", "12,500주", "15,000주", "18,000주",
+      "20,000주", "22,500주", "25,000주", "30,000주", "35,000주", "40,000주", "45,000주", "50,000주", "75,000주", "100,000주"
+    ],
+    "total_share_count_values": [
+      "15,000주", "20,000주", "25,000주", "30,000주", "35,000주", "40,000주", "45,000주", "50,000주", "60,000주", "70,000주",
+      "75,000주", "80,000주", "90,000주", "100,000주", "120,000주", "150,000주", "180,000주", "200,000주", "250,000주", "300,000주"
+    ],
+    "share_types": ["보통주식", "상환전환우선주식", "전환우선주식"],
+    "par_value_values": ["100원", "500원", "1,000원", "5,000원"],
+    "shareholder_register_records": [
+      {"year":"2023년","month_day":"1월 24일 현재","s1n":"강하린","s1c":"20,000주","s1t":"보통주식","s2a":"새봄창업투자조합","s2b":"제1호","s2c":"15,000주","s2t":"전환우선주식","s3a":"푸른길벤처투자조합","s3b":"제2호","s3c":"15,000주","s3t":"전환우선주식","total":"50,000주","par":"500원","date":"2023년 1월 24일","company":"가온정밀 주식회사","addr1":"서울특별시 금천구","addr2":"벚꽃로 24, 5층(가산동)","rep":"강하린"},
+      {"year":"2023년","month_day":"3월 6일 현재","s1n":"윤도현","s1c":"30,000주","s1t":"보통주식","s2a":"다온혁신투자조합","s2b":"제3호","s2c":"10,000주","s2t":"상환전환우선주식","s3a":"한빛성장벤처조합","s3b":"제1호","s3c":"20,000주","s3t":"전환우선주식","total":"60,000주","par":"100원","date":"2023년 3월 6일","company":"다온소재 주식회사","addr1":"경기도 성남시 분당구","addr2":"새나리로 18, 7층(삼평동)","rep":"윤도현"},
+      {"year":"2023년","month_day":"5월 9일 현재","s1n":"박서윤","s1c":"25,000주","s1t":"보통주식","s2a":"해솔기술투자조합","s2b":"제4호","s2c":"25,000주","s2t":"전환우선주식","s3a":"이룸신성장조합","s3b":"제2호","s3c":"25,000주","s3t":"상환전환우선주식","total":"75,000주","par":"1,000원","date":"2023년 5월 9일","company":"해솔바이오 주식회사","addr1":"대전광역시 유성구","addr2":"연구단지로 31, 3층(관평동)","rep":"박서윤"},
+      {"year":"2023년","month_day":"7월 18일 현재","s1n":"최민준","s1c":"40,000주","s1t":"보통주식","s2a":"온누리벤처투자조합","s2b":"제5호","s2c":"20,000주","s2t":"전환우선주식","s3a":"마루미래투자조합","s3b":"제1호","s3c":"20,000주","s3t":"상환전환우선주식","total":"80,000주","par":"500원","date":"2023년 7월 18일","company":"온누리로보틱스 주식회사","addr1":"인천광역시 연수구","addr2":"바다로 52, 9층(송도동)","rep":"최민준"},
+      {"year":"2023년","month_day":"9월 12일 현재","s1n":"한지우","s1c":"50,000주","s1t":"보통주식","s2a":"바른성장투자조합","s2b":"제2호","s2c":"20,000주","s2t":"전환우선주식","s3a":"소담창업벤처조합","s3b":"제6호","s3c":"30,000주","s3t":"상환전환우선주식","total":"100,000주","par":"5,000원","date":"2023년 9월 12일","company":"바른모빌리티 주식회사","addr1":"부산광역시 해운대구","addr2":"센텀별빛로 40, 11층(우동)","rep":"한지우"},
+      {"year":"2024년","month_day":"1월 8일 현재","s1n":"김도윤","s1c":"45,000주","s1t":"보통주식","s2a":"늘봄산업투자조합","s2b":"제3호","s2c":"35,000주","s2t":"전환우선주식","s3a":"가람기술벤처조합","s3b":"제2호","s3c":"40,000주","s3t":"상환전환우선주식","total":"120,000주","par":"100원","date":"2024년 1월 8일","company":"늘봄에너지 주식회사","addr1":"울산광역시 남구","addr2":"산업로 76, 4층(삼산동)","rep":"김도윤"},
+      {"year":"2024년","month_day":"3월 28일 현재","s1n":"이하은","s1c":"75,000주","s1t":"보통주식","s2a":"미르신기술투자조합","s2b":"제7호","s2c":"25,000주","s2t":"전환우선주식","s3a":"참빛혁신벤처조합","s3b":"제1호","s3c":"50,000주","s3t":"상환전환우선주식","total":"150,000주","par":"500원","date":"2024년 3월 28일","company":"미르데이터 주식회사","addr1":"광주광역시 북구","addr2":"첨단샘물로 15, 6층(오룡동)","rep":"이하은"},
+      {"year":"2024년","month_day":"6월 5일 현재","s1n":"정시온","s1c":"100,000주","s1t":"보통주식","s2a":"라온벤처투자조합","s2b":"제8호","s2c":"30,000주","s2t":"전환우선주식","s3a":"한결성장투자조합","s3b":"제4호","s3c":"50,000주","s3t":"상환전환우선주식","total":"180,000주","par":"1,000원","date":"2024년 6월 5일","company":"라온전자 주식회사","addr1":"대구광역시 달서구","addr2":"성서새길 63, 8층(호산동)","rep":"정시온"},
+      {"year":"2024년","month_day":"8월 29일 현재","s1n":"조하람","s1c":"100,000주","s1t":"보통주식","s2a":"도담창업투자조합","s2b":"제5호","s2c":"50,000주","s2t":"전환우선주식","s3a":"새길첨단벤처조합","s3b":"제3호","s3c":"50,000주","s3t":"상환전환우선주식","total":"200,000주","par":"5,000원","date":"2024년 8월 29일","company":"도담헬스케어 주식회사","addr1":"충청북도 청주시 흥덕구","addr2":"오송생명로 28, 10층(오송읍)","rep":"조하람"},
+      {"year":"2025년","month_day":"2월 7일 현재","s1n":"서유진","s1c":"100,000주","s1t":"보통주식","s2a":"아라미래투자조합","s2b":"제6호","s2c":"75,000주","s2t":"전환우선주식","s3a":"나래신성장벤처조합","s3b":"제2호","s3c":"75,000주","s3t":"상환전환우선주식","total":"250,000주","par":"100원","date":"2025년 2월 7일","company":"아라콘텐츠 주식회사","addr1":"제주특별자치도 제주시","addr2":"한라새길 19, 2층(노형동)","rep":"서유진"},
+      {"year":"2025년","month_day":"4월 25일 현재","s1n":"임서준","s1c":"100,000주","s1t":"보통주식","s2a":"해든산업투자조합","s2b":"제9호","s2c":"100,000주","s2t":"전환우선주식","s3a":"푸름기술벤처조합","s3b":"제4호","s3c":"100,000주","s3t":"상환전환우선주식","total":"300,000주","par":"500원","date":"2025년 4월 25일","company":"해든패키징 주식회사","addr1":"경상남도 창원시 성산구","addr2":"공단새길 88, 3층(상남동)","rep":"임서준"},
+      {"year":"2026년","month_day":"6월 26일 현재","s1n":"오지안","s1c":"50,000주","s1t":"보통주식","s2a":"모아혁신투자조합","s2b":"제10호","s2c":"25,000주","s2t":"전환우선주식","s3a":"솔빛창업벤처조합","s3b":"제5호","s3c":"25,000주","s3t":"상환전환우선주식","total":"100,000주","par":"1,000원","date":"2026년 6월 26일","company":"모아클라우드 주식회사","addr1":"세종특별자치시","addr2":"한누리새길 47, 12층(나성동)","rep":"오지안"}
+    ]
+  },
+  "pool_policies": {
+    "share_types": {"closed_set": true, "evidence_note": "현재 서식의 주식종류 열과 일반적인 보통주·우선주 계열 표기를 보수적으로 한정한 선택지"},
+    "par_value_values": {"closed_set": true, "evidence_note": "서식의 1주당 금액 칸에 사용하는 대표적 액면금액 합성 선택지"}
+  },
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "shareholder_register_records",
+      "targets": {
+        "as_of_year": "year",
+        "as_of_month_day_current": "month_day",
+        "shareholder_1_name": "s1n",
+        "shareholder_1_share_count": "s1c",
+        "shareholder_1_share_type": "s1t",
+        "shareholder_2_name_line_1": "s2a",
+        "shareholder_2_name_line_2": "s2b",
+        "shareholder_2_share_count": "s2c",
+        "shareholder_2_share_type": "s2t",
+        "shareholder_3_name_line_1": "s3a",
+        "shareholder_3_name_line_2": "s3b",
+        "shareholder_3_share_count": "s3c",
+        "shareholder_3_share_type": "s3t",
+        "total_share_count": "total",
+        "par_value_per_share": "par",
+        "certification_date": "date",
+        "certifying_company_name": "company",
+        "certifying_company_address_line_1": "addr1",
+        "certifying_company_address_line_2": "addr2",
+        "representative_director_name": "rep"
+      }
+    },
+    {"type": "date_not_after", "target": "certification_date", "max": "as_of_date"}
+  ],
+  "field_rules": [
+    {"fields":["shareholder_1_share_count","shareholder_2_share_count","shareholder_3_share_count","total_share_count"],"rule":"pool:share_count_values / pick_record override","evidence_ids":["R1","R2","R3"],"note":"전체 이미지에서 숫자와 '주'가 동일 값 bbox에 있으므로 단위를 포함하며, record 제약으로 세 주주 수의 합과 총주식수를 일치시킨다."},
+    {"fields":["as_of_year","as_of_month_day_current","certification_date"],"rule":"pick_record override","evidence_ids":["R3","R4"],"note":"기준일과 증명일을 동일 레코드에서 선택하고 작업일 이후 날짜를 배제했다."},
+    {"fields":["shareholder_2_name_line_1","shareholder_2_name_line_2","shareholder_3_name_line_1","shareholder_3_name_line_2"],"rule":"pick_record override","evidence_ids":["R1","R2"],"note":"두 줄로 분리된 법인·조합 명칭을 동일 레코드의 앞·뒤 구간으로 유지한다."},
+    {"fields":["par_value_per_share"],"rule":"choice:100원|500원|1,000원|5,000원","evidence_ids":["R3"],"note":"전체 이미지에서 숫자와 '원'이 동일 값 bbox에 있어 원 단위를 값에 포함한다."}
+  ]
+}

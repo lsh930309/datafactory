@@ -1,0 +1,1946 @@
+{
+  "schema_version": 2,
+  "doc_id": "TRD-03",
+  "title": "선하증권(B/L)·항공운송장(AWB)",
+  "pass": "1_of_2_schema_and_evidence_freeze",
+  "status": "draft",
+  "field_id_contract": "immutable_for_pass_2",
+  "sample_kind": "filled_sample",
+  "semantic_schema": {
+    "선하증권": {
+      "문서정보": {
+        "선하증권번호": "",
+        "원본발행부수": ""
+      },
+      "당사자": {
+        "송하인": {
+          "상호": "",
+          "주소": ""
+        },
+        "수하인": {
+          "상호": "",
+          "주소": "",
+          "전화": ""
+        },
+        "통지처": {
+          "내용": ""
+        }
+      },
+      "운송정보": {
+        "선박항차": "",
+        "선적항": "",
+        "양륙항": "",
+        "최종목적지": "",
+        "운임지급지": "",
+        "수령지": "",
+        "인도지": ""
+      },
+      "화물정보": {
+        "화인번호": "",
+        "포장수량종류": "",
+        "화물설명": "",
+        "총중량": "",
+        "용적": "",
+        "총포장수문자": "",
+        "초과가액신고": "",
+        "비고": ""
+      },
+      "컨테이너": {
+        "컨테이너번호": "",
+        "봉인번호": "",
+        "유형": "",
+        "중량": "",
+        "용적": "",
+        "포장수": "",
+        "운송모드": ""
+      },
+      "거래조건": {
+        "인코텀즈": "",
+        "선하증권제출처": ""
+      },
+      "운임": {
+        "운임세부조건": ""
+      },
+      "발행정보": {
+        "발행장소": "",
+        "발행일": ""
+      }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "shipper_name",
+      "key": "송하인명",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "송하인",
+        "상호"
+      ],
+      "anchor_id": "det_000004",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:trading_company_names",
+      "style_class": "style_shipper_name",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0004_det_000004.png",
+        "bbox": [
+          42,
+          65,
+          228,
+          19
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "DEMO-SHIPPER ENGG COMPANY",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9815675616264343
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/송하인/상호",
+        "csv_column": "송하인명"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "shipper_address",
+      "key": "송하인 주소",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "송하인",
+        "주소"
+      ],
+      "anchor_id": "manual_1783580879857",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:global_addresses",
+      "style_class": "style_shipper_address",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0083_manual_1783580879857.png",
+        "bbox": [
+          44,
+          88,
+          553,
+          119
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": null
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/송하인/주소",
+        "csv_column": "송하인 주소"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "송하인 주소 상세 영역. 값 bbox 내부에 정적 라벨 없음."
+    },
+    {
+      "field_id": "bl_number",
+      "key": "선하증권 번호",
+      "semantic_path": [
+        "선하증권",
+        "문서정보",
+        "선하증권번호"
+      ],
+      "anchor_id": "det_000005",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:AAA**************",
+      "style_class": "style_bl_number",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0005_det_000005.png",
+        "bbox": [
+          905,
+          65,
+          145,
+          19
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "NSAJED85630124277",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9984763860702515
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/문서정보/선하증권번호",
+        "csv_column": "선하증권 번호"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "consignee_name",
+      "key": "수하인명",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "수하인",
+        "상호"
+      ],
+      "anchor_id": "det_000010",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:trading_company_names",
+      "style_class": "style_consignee_name",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0010_det_000010.png",
+        "bbox": [
+          42,
+          233,
+          518,
+          14
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "DEMO STEEL FACTORY CO. LTD.",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9666908383369446
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/수하인/상호",
+        "csv_column": "수하인명"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "consignee_address",
+      "key": "수하인 주소",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "수하인",
+        "주소"
+      ],
+      "anchor_id": "det_000011",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:global_addresses",
+      "style_class": "style_consignee_address",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0011_det_000011.png",
+        "bbox": [
+          41,
+          251,
+          519,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "P.O BOX 11700, 8100 UNIT NO 2 JEDDAH SAUDI ARABIA SAUDI ARABIA21463",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9745720028877258
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/수하인/주소",
+        "csv_column": "수하인 주소"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "consignee_tel",
+      "key": "수하인 전화",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "수하인",
+        "전화"
+      ],
+      "anchor_id": "manual_1783580846324",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:+### ## ### ####",
+      "style_class": "style_consignee_tel",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0082_manual_1783580846324.png",
+        "bbox": [
+          78,
+          271,
+          193,
+          19
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "+966",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9988344311714172
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/수하인/전화",
+        "csv_column": "수하인 전화"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "notify_party",
+      "key": "통지처",
+      "semantic_path": [
+        "선하증권",
+        "당사자",
+        "통지처",
+        "내용"
+      ],
+      "anchor_id": "manual_1783580887356",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_notify_party",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0084_manual_1783580887356.png",
+        "bbox": [
+          43,
+          403,
+          555,
+          137
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": null
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/당사자/통지처/내용",
+        "csv_column": "통지처"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Notify Party 박스의 수동 활성 영역. 실제 B/L 관행상 수하인 또는 별도 통지처 상호/주소가 들어간다."
+    },
+    {
+      "field_id": "vessel_voyage",
+      "key": "선박 및 항차",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "선박항차"
+      ],
+      "anchor_id": "det_000028",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:AAAAAA STAR/###A",
+      "style_class": "style_vessel_voyage",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0028_det_000028.png",
+        "bbox": [
+          41,
+          572,
+          147,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "CAP SAN JUAN/310W",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9767143130302429
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/선박항차",
+        "csv_column": "선박 및 항차"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "port_of_loading",
+      "key": "선적항",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "선적항"
+      ],
+      "anchor_id": "det_000029",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:ports",
+      "style_class": "style_port_of_loading",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0029_det_000029.png",
+        "bbox": [
+          605,
+          573,
+          149,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "NHAVA SHEVA, INDIA",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9710991382598877
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/선적항",
+        "csv_column": "선적항"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "port_of_discharge",
+      "key": "양륙항",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "양륙항"
+      ],
+      "anchor_id": "det_000034",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:ports",
+      "style_class": "style_port_of_discharge",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0034_det_000034.png",
+        "bbox": [
+          41,
+          628,
+          165,
+          18
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "JEDDAH, SAUDI ARABIA",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9610638618469238
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/양륙항",
+        "csv_column": "양륙항"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "destination_on_carriage",
+      "key": "최종 목적지",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "최종목적지"
+      ],
+      "anchor_id": "det_000035",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:ports",
+      "style_class": "style_destination_on_carriage",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0035_det_000035.png",
+        "bbox": [
+          360,
+          628,
+          161,
+          16
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "JEDDAH SAUDI ARABIA",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9573875069618225
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/최종목적지",
+        "csv_column": "최종 목적지"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "freight_payable_at",
+      "key": "운임 지급지",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "운임지급지"
+      ],
+      "anchor_id": "det_000036",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:ports",
+      "style_class": "style_freight_payable_at",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0036_det_000036.png",
+        "bbox": [
+          605,
+          628,
+          61,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "JEDDAH",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9825882315635681
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/운임지급지",
+        "csv_column": "운임 지급지"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "number_of_originals",
+      "key": "원본 발행 부수",
+      "semantic_path": [
+        "선하증권",
+        "문서정보",
+        "원본발행부수"
+      ],
+      "anchor_id": "det_000037",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:3(THREE)|2(TWO)|1(ONE)",
+      "style_class": "style_number_of_originals",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0037_det_000037.png",
+        "bbox": [
+          914,
+          629,
+          67,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "3(THREE)",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9979998469352722
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/문서정보/원본발행부수",
+        "csv_column": "원본 발행 부수"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "excess_value_declaration",
+      "key": "초과가액신고",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "초과가액신고"
+      ],
+      "anchor_id": "manual_1783582955481",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:N.V.D.|NO VALUE DECLARED|AS PER COMMERCIAL INVOICE",
+      "style_class": "style_excess_value_declaration",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0089_manual_1783582955481.png",
+        "bbox": [
+          917,
+          572,
+          187,
+          22
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": null
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/초과가액신고",
+        "csv_column": "초과가액신고"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Excess Value Declaration 값 영역. 상업 B/L에서는 공란, N.V.D. 또는 신고가액이 올 수 있으나 활성 bbox이므로 표시값을 생성."
+    },
+    {
+      "field_id": "marks_and_numbers",
+      "key": "화인 및 번호",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "화인번호"
+      ],
+      "anchor_id": "manual_1783580998106",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:PO-###### / C/NO. #-#",
+      "style_class": "style_marks_and_numbers",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0086_manual_1783580998106.png",
+        "bbox": [
+          41,
+          687,
+          315,
+          18
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": null
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/화인번호",
+        "csv_column": "화인 및 번호"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Marks and Numbers 칸. 선적 마크, PO/LOT 번호, 목적지 표시를 다중 행으로 생성."
+    },
+    {
+      "field_id": "package_description",
+      "key": "포장 수량 및 종류",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "포장수량종류"
+      ],
+      "anchor_id": "det_000042",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:1 CONTAINER|2 PALLETS|3 PACKAGES|5 CARTONS|8 CRATES",
+      "style_class": "style_package_description",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0042_det_000042.png",
+        "bbox": [
+          361,
+          684,
+          93,
+          18
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "3 PACKAGES",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9680077433586121
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/포장수량종류",
+        "csv_column": "포장 수량 및 종류"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "goods_description",
+      "key": "화물 설명",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "화물설명"
+      ],
+      "anchor_id": "det_000044",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_goods_description",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0044_det_000044.png",
+        "bbox": [
+          361,
+          720,
+          504,
+          20
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "GENERAL CARGO",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9819098711013794
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/화물설명",
+        "csv_column": "화물 설명"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "gross_weight",
+      "key": "총중량",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "총중량"
+      ],
+      "anchor_id": "det_000043",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##,###.### KGS",
+      "style_class": "style_gross_weight",
+      "unit_policy": {
+        "mode": "include_in_value",
+        "unit": "KGS",
+        "basis": "값 문자열 자체에 KGS가 포함되고 별도 정적 suffix가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0043_det_000043.png",
+        "bbox": [
+          890,
+          683,
+          108,
+          19
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "22,700.000 KGS",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9947609901428223
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/총중량",
+        "csv_column": "총중량"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "measurement_m3",
+      "key": "용적",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "용적"
+      ],
+      "anchor_id": "manual_1783580989557",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##.###",
+      "style_class": "style_measurement_m3",
+      "unit_policy": {
+        "mode": "include_in_value",
+        "unit": "M3",
+        "basis": "M3는 열 라벨에만 있고 값 위치에 별도 정적 suffix가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0085_manual_1783580989557.png",
+        "bbox": [
+          1020,
+          684,
+          120,
+          19
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": null
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/용적",
+        "csv_column": "용적"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "용적 값 영역. 단위 M3는 열 라벨에 있으나 원본 값 관행상 숫자와 M3를 함께 표시할 수 있음."
+    },
+    {
+      "field_id": "container_number",
+      "key": "컨테이너 번호",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "컨테이너번호"
+      ],
+      "anchor_id": "det_000052",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:AAAA#######",
+      "style_class": "style_container_number",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0052_det_000052.png",
+        "bbox": [
+          41,
+          782,
+          95,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "TTNU0712894",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9988006353378296
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/컨테이너번호",
+        "csv_column": "컨테이너 번호"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "seal_number",
+      "key": "봉인번호",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "봉인번호"
+      ],
+      "anchor_id": "manual_1783581006873",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:AA#######",
+      "style_class": "style_seal_number",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0087_manual_1783581006873.png",
+        "bbox": [
+          235,
+          783,
+          128,
+          22
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": null
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/봉인번호",
+        "csv_column": "봉인번호"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "봉인번호 값 영역. 값 bbox 내부에 정적 라벨 없음."
+    },
+    {
+      "field_id": "container_type",
+      "key": "컨테이너 유형",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "유형"
+      ],
+      "anchor_id": "det_000053",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:20' DRY|40' DRY|40' HC|20' OPEN TOP|40' FLAT",
+      "style_class": "style_container_type",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0053_det_000053.png",
+        "bbox": [
+          395,
+          782,
+          62,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "40' FLAT",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9734396934509277
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/유형",
+        "csv_column": "컨테이너 유형"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "container_weight",
+      "key": "컨테이너 중량",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "중량"
+      ],
+      "anchor_id": "det_000054",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "same_as:gross_weight",
+      "style_class": "style_container_weight",
+      "unit_policy": {
+        "mode": "include_in_value",
+        "unit": "KGS",
+        "basis": "값 문자열 자체에 KGS가 포함되고 별도 정적 suffix가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0054_det_000054.png",
+        "bbox": [
+          628,
+          782,
+          108,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "22,700.000 KGS",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9922706484794617
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/중량",
+        "csv_column": "컨테이너 중량"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "container_volume",
+      "key": "컨테이너 용적",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "용적"
+      ],
+      "anchor_id": "manual_1783581010773",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##.### M3",
+      "style_class": "style_container_volume",
+      "unit_policy": {
+        "mode": "include_in_value",
+        "unit": "M3",
+        "basis": "Volume 열 값 위치에 별도 정적 suffix가 없음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0088_manual_1783581010773.png",
+        "bbox": [
+          788,
+          780,
+          114,
+          22
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": null
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/용적",
+        "csv_column": "컨테이너 용적"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "컨테이너 용적 값 영역."
+    },
+    {
+      "field_id": "container_packages",
+      "key": "컨테이너 포장수",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "포장수"
+      ],
+      "anchor_id": "det_000055",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##",
+      "style_class": "style_container_packages",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0055_det_000055.png",
+        "bbox": [
+          1024,
+          783,
+          14,
+          16
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "3",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9990243911743164
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/포장수",
+        "csv_column": "컨테이너 포장수"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "container_mode",
+      "key": "컨테이너 모드",
+      "semantic_path": [
+        "선하증권",
+        "컨테이너",
+        "운송모드"
+      ],
+      "anchor_id": "det_000056",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:FCL|LCL",
+      "style_class": "style_container_mode",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0056_det_000056.png",
+        "bbox": [
+          1075,
+          781,
+          36,
+          19
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "FCL",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9942805171012878
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/컨테이너/운송모드",
+        "csv_column": "컨테이너 모드"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "incoterm",
+      "key": "인코텀즈",
+      "semantic_path": [
+        "선하증권",
+        "거래조건",
+        "인코텀즈"
+      ],
+      "anchor_id": "det_000058",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:EXW|FCA|FOB|CFR|CIF|CPT|CIP|DAP|DPU|DDP",
+      "style_class": "style_incoterm",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0058_det_000058.png",
+        "bbox": [
+          159,
+          1269,
+          37,
+          19
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "FOB",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9961090087890625
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/거래조건/인코텀즈",
+        "csv_column": "인코텀즈"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "INCO TERM 오른쪽 값 FOB. 실제 값이므로 keep에서 use로 보정."
+    },
+    {
+      "field_id": "surrender_to",
+      "key": "선하증권제출처",
+      "semantic_path": [
+        "선하증권",
+        "거래조건",
+        "선하증권제출처"
+      ],
+      "anchor_id": "manual_1783583273356",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_surrender_to",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0090_manual_1783583273356.png",
+        "bbox": [
+          47,
+          1338,
+          717,
+          81
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": null
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "top",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/거래조건/선하증권제출처",
+        "csv_column": "선하증권제출처"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Bill of Lading must be surrendered to: 아래 수동 활성 영역. 은행/수하인/운송사 지점 등 제출처를 생성."
+    },
+    {
+      "field_id": "freight_details",
+      "key": "운임 세부 조건",
+      "semantic_path": [
+        "선하증권",
+        "운임",
+        "운임세부조건"
+      ],
+      "anchor_id": "det_000063",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:FREIGHT COLLECT|FREIGHT PREPAID|AS ARRANGED",
+      "style_class": "style_freight_details",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0063_det_000063.png",
+        "bbox": [
+          769,
+          1335,
+          137,
+          22
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "FREIGHT COLLECT",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9911677837371826
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운임/운임세부조건",
+        "csv_column": "운임 세부 조건"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Freight Details, Charges, etc 아래 값."
+    },
+    {
+      "field_id": "place_of_issue",
+      "key": "발행장소",
+      "semantic_path": [
+        "선하증권",
+        "발행정보",
+        "발행장소"
+      ],
+      "anchor_id": "det_000065",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:ports",
+      "style_class": "style_place_of_issue",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0065_det_000065.png",
+        "bbox": [
+          44,
+          1448,
+          63,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "MUMBAI",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9859194159507751
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/발행정보/발행장소",
+        "csv_column": "발행장소"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Place and Date of Issue 중 장소 값."
+    },
+    {
+      "field_id": "date_of_issue",
+      "key": "발행일",
+      "semantic_path": [
+        "선하증권",
+        "발행정보",
+        "발행일"
+      ],
+      "anchor_id": "det_000066",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:date_dd_mmm_yy",
+      "style_class": "body_default",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0066_det_000066.png",
+        "bbox": [
+          679,
+          1451,
+          75,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "17-MAY-23",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9996572136878967
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/발행정보/발행일",
+        "csv_column": "발행일"
+      },
+      "required": true,
+      "review_required": false
+    },
+    {
+      "field_id": "place_of_receipt",
+      "key": "수령지",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "수령지"
+      ],
+      "anchor_id": "det_000070",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:ports",
+      "style_class": "style_place_of_receipt",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0070_det_000070.png",
+        "bbox": [
+          43,
+          1524,
+          149,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "NHAVA SHEVA, INDIA",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9750707149505615
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/수령지",
+        "csv_column": "수령지"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Place of Receipt 값."
+    },
+    {
+      "field_id": "place_of_delivery",
+      "key": "인도지",
+      "semantic_path": [
+        "선하증권",
+        "운송정보",
+        "인도지"
+      ],
+      "anchor_id": "det_000071",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pool:ports",
+      "style_class": "style_place_of_delivery",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0071_det_000071.png",
+        "bbox": [
+          408,
+          1526,
+          164,
+          14
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "JEDDAH, SAUDI ARABIA",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9520394206047058
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/운송정보/인도지",
+        "csv_column": "인도지"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Place of Delivery 값."
+    },
+    {
+      "field_id": "total_packages_words",
+      "key": "총 포장수 문자",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "총포장수문자"
+      ],
+      "anchor_id": "det_000074",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:ONE CONTAINER|TWO PALLETS|THREE PACKAGES|FIVE CARTONS|EIGHT CRATES",
+      "style_class": "style_total_packages_words",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0074_det_000074.png",
+        "bbox": [
+          769,
+          1557,
+          120,
+          17
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "ONE CONTAINER",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": 0.9635289907455444
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/총포장수문자",
+        "csv_column": "총 포장수 문자"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Total No. of Packages (in words) 값."
+    },
+    {
+      "field_id": "cargo_note",
+      "key": "화물 비고",
+      "semantic_path": [
+        "선하증권",
+        "화물정보",
+        "비고"
+      ],
+      "anchor_id": "manual_1783583287923",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "choice:SHIPPER LOAD, STOW AND COUNT|SAID TO CONTAIN|CLEAN ON BOARD|FREIGHT AS ARRANGED",
+      "style_class": "style_cargo_note",
+      "unit_policy": {
+        "mode": "none",
+        "basis": "전체 이미지에서 값 위치의 별도 정적 단위/prefix/suffix가 확인되지 않음"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/samples/original/선하증권_page_001.jpg",
+        "crop_path": "workbench/documents/선하증권(B_L)·항공운송장(AWB)__TRD-03/authoring/agent_requests/20260713T021916069057Z/visual_evidence/crops/crop_0091_manual_1783583287923.png",
+        "bbox": [
+          811,
+          1579,
+          333,
+          18
+        ],
+        "bbox_format": "xywh",
+        "observed_text": "",
+        "review_status": "use",
+        "role": "value_region",
+        "confidence": null
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "선하증권/화물정보/비고",
+        "csv_column": "화물 비고"
+      },
+      "required": true,
+      "review_required": false,
+      "notes": "Note: 아래 수동 활성 영역. 화물 책임/상태 관련 짧은 비고를 생성."
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 35,
+    "bound_use_anchor_count": 35,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  }
+}

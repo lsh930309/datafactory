@@ -1,0 +1,2234 @@
+{
+  "schema_version": 2,
+  "doc_id": "QC-02",
+  "title": "입고·검수 보고서",
+  "semantic_schema": {
+    "결재": {
+      "담당": "",
+      "검토": "",
+      "승인": ""
+    },
+    "입고정보": {
+      "거래처": "",
+      "발주번호": "",
+      "발주일자": {
+        "연": "",
+        "월": "",
+        "일": ""
+      },
+      "입고일자": {
+        "연": "",
+        "월": "",
+        "일": ""
+      },
+      "검수담당자": "",
+      "입고장소": "",
+      "검수방법": ""
+    },
+    "검수내역": {
+      "행1": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행2": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행3": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행4": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행5": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행6": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행7": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      },
+      "행8": {
+        "번호": "",
+        "품명": "",
+        "규격": "",
+        "검수결과": {
+          "수량": "",
+          "품질": "",
+          "기타": ""
+        },
+        "비고": ""
+      }
+    },
+    "확인": {
+      "검수자 의견": "",
+      "부서장 확인": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "approval_owner_name",
+      "key": "담당",
+      "semantic_path": "결재/담당",
+      "anchor_id": "manual_qc_02_001",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_approval_owner_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-03"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          807,
+          122,
+          88,
+          32
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_001"
+      }
+    },
+    {
+      "field_id": "approval_reviewer_name",
+      "key": "검토",
+      "semantic_path": "결재/검토",
+      "anchor_id": "manual_qc_02_002",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_approval_reviewer_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-03"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          896,
+          122,
+          88,
+          32
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_002"
+      }
+    },
+    {
+      "field_id": "approval_manager_name",
+      "key": "승인",
+      "semantic_path": "결재/승인",
+      "anchor_id": "manual_qc_02_003",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_approval_manager_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-03"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          985,
+          122,
+          88,
+          32
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_003"
+      }
+    },
+    {
+      "field_id": "supplier_company_name",
+      "key": "거래처",
+      "semantic_path": "입고정보/거래처",
+      "anchor_id": "manual_qc_02_004",
+      "value": "",
+      "value_type": "company.name_ko",
+      "faker_rule": "company.name_ko",
+      "style_class": "style_supplier_company_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          324,
+          273,
+          270,
+          39
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_004"
+      }
+    },
+    {
+      "field_id": "purchase_order_number",
+      "key": "발주번호",
+      "semantic_path": "입고정보/발주번호",
+      "anchor_id": "manual_qc_02_005",
+      "value": "",
+      "value_type": "pattern",
+      "faker_rule": "pattern:PO-########-###",
+      "style_class": "style_purchase_order_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          800,
+          273,
+          270,
+          39
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_005"
+      }
+    },
+    {
+      "field_id": "purchase_order_year",
+      "key": "발주일자 연",
+      "semantic_path": "입고정보/발주일자/연",
+      "anchor_id": "manual_qc_02_006",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_purchase_order_year",
+      "unit_policy": {
+        "mode": "static_prefix_and_suffix",
+        "static_prefix": "20",
+        "static_suffix": "년",
+        "generated_value_format": "yy",
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          323,
+          323,
+          46,
+          26
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_006"
+      }
+    },
+    {
+      "field_id": "purchase_order_month",
+      "key": "발주일자 월",
+      "semantic_path": "입고정보/발주일자/월",
+      "anchor_id": "manual_qc_02_007",
+      "value": "",
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_purchase_order_month",
+      "unit_policy": {
+        "mode": "static_suffix",
+        "static_suffix": "월",
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          374,
+          323,
+          28,
+          26
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_007"
+      }
+    },
+    {
+      "field_id": "purchase_order_day",
+      "key": "발주일자 일",
+      "semantic_path": "입고정보/발주일자/일",
+      "anchor_id": "manual_qc_02_008",
+      "value": "",
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_purchase_order_day",
+      "unit_policy": {
+        "mode": "static_suffix",
+        "static_suffix": "일",
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          426,
+          323,
+          28,
+          26
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_008"
+      }
+    },
+    {
+      "field_id": "receiving_year",
+      "key": "입고일자 연",
+      "semantic_path": "입고정보/입고일자/연",
+      "anchor_id": "manual_qc_02_009",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_receiving_year",
+      "unit_policy": {
+        "mode": "static_prefix_and_suffix",
+        "static_prefix": "20",
+        "static_suffix": "년",
+        "generated_value_format": "yy",
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          802,
+          323,
+          42,
+          26
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_009"
+      }
+    },
+    {
+      "field_id": "receiving_month",
+      "key": "입고일자 월",
+      "semantic_path": "입고정보/입고일자/월",
+      "anchor_id": "manual_qc_02_010",
+      "value": "",
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_receiving_month",
+      "unit_policy": {
+        "mode": "static_suffix",
+        "static_suffix": "월",
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          854,
+          323,
+          28,
+          26
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_010"
+      }
+    },
+    {
+      "field_id": "receiving_day",
+      "key": "입고일자 일",
+      "semantic_path": "입고정보/입고일자/일",
+      "anchor_id": "manual_qc_02_011",
+      "value": "",
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_receiving_day",
+      "unit_policy": {
+        "mode": "static_suffix",
+        "static_suffix": "일",
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          906,
+          323,
+          28,
+          26
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_011"
+      }
+    },
+    {
+      "field_id": "inspection_manager_name",
+      "key": "검수담당자",
+      "semantic_path": "입고정보/검수담당자",
+      "anchor_id": "manual_qc_02_012",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_inspection_manager_name",
+      "unit_policy": {
+        "mode": "static_suffix",
+        "static_suffix": "(인)",
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-03"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          324,
+          362,
+          205,
+          39
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_012"
+      }
+    },
+    {
+      "field_id": "receiving_location",
+      "key": "입고장소",
+      "semantic_path": "입고정보/입고장소",
+      "anchor_id": "manual_qc_02_013",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_receiving_location",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          800,
+          362,
+          270,
+          39
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_013"
+      }
+    },
+    {
+      "field_id": "inspection_method",
+      "key": "검수방법",
+      "semantic_path": "입고정보/검수방법",
+      "anchor_id": "manual_qc_02_014",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_inspection_method",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          324,
+          409,
+          745,
+          38
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_014"
+      }
+    },
+    {
+      "field_id": "line_1_number",
+      "key": "번호",
+      "semantic_path": "검수내역/행1/번호",
+      "anchor_id": "manual_qc_02_015",
+      "value": "",
+      "value_type": "literal",
+      "faker_rule": "literal:1",
+      "style_class": "style_line_1_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          116,
+          604,
+          83,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_015"
+      }
+    },
+    {
+      "field_id": "line_1_item_name",
+      "key": "품명",
+      "semantic_path": "검수내역/행1/품명",
+      "anchor_id": "manual_qc_02_016",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_item_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          200,
+          604,
+          292,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_016"
+      }
+    },
+    {
+      "field_id": "line_1_specification",
+      "key": "규격",
+      "semantic_path": "검수내역/행1/규격",
+      "anchor_id": "manual_qc_02_017",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_specification",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          493,
+          604,
+          145,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_017"
+      }
+    },
+    {
+      "field_id": "line_1_received_quantity",
+      "key": "수량",
+      "semantic_path": "검수내역/행1/검수결과/수량",
+      "anchor_id": "manual_qc_02_018",
+      "value": "",
+      "value_type": "pattern",
+      "faker_rule": "pattern:###",
+      "style_class": "style_line_1_received_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          639,
+          604,
+          103,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_018"
+      }
+    },
+    {
+      "field_id": "line_1_quality_result",
+      "key": "품질",
+      "semantic_path": "검수내역/행1/검수결과/품질",
+      "anchor_id": "manual_qc_02_019",
+      "value": "",
+      "value_type": "choice",
+      "faker_rule": "choice:합격|부분합격|불합격",
+      "style_class": "style_line_1_quality_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          743,
+          604,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_019"
+      }
+    },
+    {
+      "field_id": "line_1_other_result",
+      "key": "기타",
+      "semantic_path": "검수내역/행1/검수결과/기타",
+      "anchor_id": "manual_qc_02_020",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_other_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          845,
+          604,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_020"
+      }
+    },
+    {
+      "field_id": "line_1_remark",
+      "key": "비고",
+      "semantic_path": "검수내역/행1/비고",
+      "anchor_id": "manual_qc_02_021",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_1_remark",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          947,
+          604,
+          127,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_021"
+      }
+    },
+    {
+      "field_id": "line_2_number",
+      "key": "번호",
+      "semantic_path": "검수내역/행2/번호",
+      "anchor_id": "manual_qc_02_022",
+      "value": "",
+      "value_type": "literal",
+      "faker_rule": "literal:2",
+      "style_class": "style_line_2_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          116,
+          649,
+          83,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_022"
+      }
+    },
+    {
+      "field_id": "line_2_item_name",
+      "key": "품명",
+      "semantic_path": "검수내역/행2/품명",
+      "anchor_id": "manual_qc_02_023",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_item_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          200,
+          649,
+          292,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_023"
+      }
+    },
+    {
+      "field_id": "line_2_specification",
+      "key": "규격",
+      "semantic_path": "검수내역/행2/규격",
+      "anchor_id": "manual_qc_02_024",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_specification",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          493,
+          649,
+          145,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_024"
+      }
+    },
+    {
+      "field_id": "line_2_received_quantity",
+      "key": "수량",
+      "semantic_path": "검수내역/행2/검수결과/수량",
+      "anchor_id": "manual_qc_02_025",
+      "value": "",
+      "value_type": "pattern",
+      "faker_rule": "pattern:###",
+      "style_class": "style_line_2_received_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          639,
+          649,
+          103,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_025"
+      }
+    },
+    {
+      "field_id": "line_2_quality_result",
+      "key": "품질",
+      "semantic_path": "검수내역/행2/검수결과/품질",
+      "anchor_id": "manual_qc_02_026",
+      "value": "",
+      "value_type": "choice",
+      "faker_rule": "choice:합격|부분합격|불합격",
+      "style_class": "style_line_2_quality_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          743,
+          649,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_026"
+      }
+    },
+    {
+      "field_id": "line_2_other_result",
+      "key": "기타",
+      "semantic_path": "검수내역/행2/검수결과/기타",
+      "anchor_id": "manual_qc_02_027",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_other_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          845,
+          649,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_027"
+      }
+    },
+    {
+      "field_id": "line_2_remark",
+      "key": "비고",
+      "semantic_path": "검수내역/행2/비고",
+      "anchor_id": "manual_qc_02_028",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_2_remark",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          947,
+          649,
+          127,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_028"
+      }
+    },
+    {
+      "field_id": "line_3_number",
+      "key": "번호",
+      "semantic_path": "검수내역/행3/번호",
+      "anchor_id": "manual_qc_02_029",
+      "value": "",
+      "value_type": "literal",
+      "faker_rule": "literal:3",
+      "style_class": "style_line_3_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          116,
+          694,
+          83,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_029"
+      }
+    },
+    {
+      "field_id": "line_3_item_name",
+      "key": "품명",
+      "semantic_path": "검수내역/행3/품명",
+      "anchor_id": "manual_qc_02_030",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_item_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          200,
+          694,
+          292,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_030"
+      }
+    },
+    {
+      "field_id": "line_3_specification",
+      "key": "규격",
+      "semantic_path": "검수내역/행3/규격",
+      "anchor_id": "manual_qc_02_031",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_specification",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          493,
+          694,
+          145,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_031"
+      }
+    },
+    {
+      "field_id": "line_3_received_quantity",
+      "key": "수량",
+      "semantic_path": "검수내역/행3/검수결과/수량",
+      "anchor_id": "manual_qc_02_032",
+      "value": "",
+      "value_type": "pattern",
+      "faker_rule": "pattern:###",
+      "style_class": "style_line_3_received_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          639,
+          694,
+          103,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_032"
+      }
+    },
+    {
+      "field_id": "line_3_quality_result",
+      "key": "품질",
+      "semantic_path": "검수내역/행3/검수결과/품질",
+      "anchor_id": "manual_qc_02_033",
+      "value": "",
+      "value_type": "choice",
+      "faker_rule": "choice:합격|부분합격|불합격",
+      "style_class": "style_line_3_quality_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          743,
+          694,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_033"
+      }
+    },
+    {
+      "field_id": "line_3_other_result",
+      "key": "기타",
+      "semantic_path": "검수내역/행3/검수결과/기타",
+      "anchor_id": "manual_qc_02_034",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_other_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          845,
+          694,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_034"
+      }
+    },
+    {
+      "field_id": "line_3_remark",
+      "key": "비고",
+      "semantic_path": "검수내역/행3/비고",
+      "anchor_id": "manual_qc_02_035",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_3_remark",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          947,
+          694,
+          127,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_035"
+      }
+    },
+    {
+      "field_id": "line_4_number",
+      "key": "번호",
+      "semantic_path": "검수내역/행4/번호",
+      "anchor_id": "manual_qc_02_036",
+      "value": "",
+      "value_type": "literal",
+      "faker_rule": "literal:4",
+      "style_class": "style_line_4_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          116,
+          739,
+          83,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_036"
+      }
+    },
+    {
+      "field_id": "line_4_item_name",
+      "key": "품명",
+      "semantic_path": "검수내역/행4/품명",
+      "anchor_id": "manual_qc_02_037",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_item_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          200,
+          739,
+          292,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_037"
+      }
+    },
+    {
+      "field_id": "line_4_specification",
+      "key": "규격",
+      "semantic_path": "검수내역/행4/규격",
+      "anchor_id": "manual_qc_02_038",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_specification",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          493,
+          739,
+          145,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_038"
+      }
+    },
+    {
+      "field_id": "line_4_received_quantity",
+      "key": "수량",
+      "semantic_path": "검수내역/행4/검수결과/수량",
+      "anchor_id": "manual_qc_02_039",
+      "value": "",
+      "value_type": "pattern",
+      "faker_rule": "pattern:###",
+      "style_class": "style_line_4_received_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          639,
+          739,
+          103,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_039"
+      }
+    },
+    {
+      "field_id": "line_4_quality_result",
+      "key": "품질",
+      "semantic_path": "검수내역/행4/검수결과/품질",
+      "anchor_id": "manual_qc_02_040",
+      "value": "",
+      "value_type": "choice",
+      "faker_rule": "choice:합격|부분합격|불합격",
+      "style_class": "style_line_4_quality_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          743,
+          739,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_040"
+      }
+    },
+    {
+      "field_id": "line_4_other_result",
+      "key": "기타",
+      "semantic_path": "검수내역/행4/검수결과/기타",
+      "anchor_id": "manual_qc_02_041",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_other_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          845,
+          739,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_041"
+      }
+    },
+    {
+      "field_id": "line_4_remark",
+      "key": "비고",
+      "semantic_path": "검수내역/행4/비고",
+      "anchor_id": "manual_qc_02_042",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_4_remark",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          947,
+          739,
+          127,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_042"
+      }
+    },
+    {
+      "field_id": "line_5_number",
+      "key": "번호",
+      "semantic_path": "검수내역/행5/번호",
+      "anchor_id": "manual_qc_02_043",
+      "value": "",
+      "value_type": "literal",
+      "faker_rule": "literal:5",
+      "style_class": "style_line_5_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          116,
+          784,
+          83,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_043"
+      }
+    },
+    {
+      "field_id": "line_5_item_name",
+      "key": "품명",
+      "semantic_path": "검수내역/행5/품명",
+      "anchor_id": "manual_qc_02_044",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_5_item_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          200,
+          784,
+          292,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_044"
+      }
+    },
+    {
+      "field_id": "line_5_specification",
+      "key": "규격",
+      "semantic_path": "검수내역/행5/규격",
+      "anchor_id": "manual_qc_02_045",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_5_specification",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          493,
+          784,
+          145,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_045"
+      }
+    },
+    {
+      "field_id": "line_5_received_quantity",
+      "key": "수량",
+      "semantic_path": "검수내역/행5/검수결과/수량",
+      "anchor_id": "manual_qc_02_046",
+      "value": "",
+      "value_type": "pattern",
+      "faker_rule": "pattern:###",
+      "style_class": "style_line_5_received_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          639,
+          784,
+          103,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_046"
+      }
+    },
+    {
+      "field_id": "line_5_quality_result",
+      "key": "품질",
+      "semantic_path": "검수내역/행5/검수결과/품질",
+      "anchor_id": "manual_qc_02_047",
+      "value": "",
+      "value_type": "choice",
+      "faker_rule": "choice:합격|부분합격|불합격",
+      "style_class": "style_line_5_quality_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          743,
+          784,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_047"
+      }
+    },
+    {
+      "field_id": "line_5_other_result",
+      "key": "기타",
+      "semantic_path": "검수내역/행5/검수결과/기타",
+      "anchor_id": "manual_qc_02_048",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_5_other_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          845,
+          784,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_048"
+      }
+    },
+    {
+      "field_id": "line_5_remark",
+      "key": "비고",
+      "semantic_path": "검수내역/행5/비고",
+      "anchor_id": "manual_qc_02_049",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_5_remark",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          947,
+          784,
+          127,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_049"
+      }
+    },
+    {
+      "field_id": "line_6_number",
+      "key": "번호",
+      "semantic_path": "검수내역/행6/번호",
+      "anchor_id": "manual_qc_02_050",
+      "value": "",
+      "value_type": "literal",
+      "faker_rule": "literal:6",
+      "style_class": "style_line_6_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          116,
+          829,
+          83,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_050"
+      }
+    },
+    {
+      "field_id": "line_6_item_name",
+      "key": "품명",
+      "semantic_path": "검수내역/행6/품명",
+      "anchor_id": "manual_qc_02_051",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_6_item_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          200,
+          829,
+          292,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_051"
+      }
+    },
+    {
+      "field_id": "line_6_specification",
+      "key": "규격",
+      "semantic_path": "검수내역/행6/규격",
+      "anchor_id": "manual_qc_02_052",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_6_specification",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          493,
+          829,
+          145,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_052"
+      }
+    },
+    {
+      "field_id": "line_6_received_quantity",
+      "key": "수량",
+      "semantic_path": "검수내역/행6/검수결과/수량",
+      "anchor_id": "manual_qc_02_053",
+      "value": "",
+      "value_type": "pattern",
+      "faker_rule": "pattern:###",
+      "style_class": "style_line_6_received_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          639,
+          829,
+          103,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_053"
+      }
+    },
+    {
+      "field_id": "line_6_quality_result",
+      "key": "품질",
+      "semantic_path": "검수내역/행6/검수결과/품질",
+      "anchor_id": "manual_qc_02_054",
+      "value": "",
+      "value_type": "choice",
+      "faker_rule": "choice:합격|부분합격|불합격",
+      "style_class": "style_line_6_quality_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          743,
+          829,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_054"
+      }
+    },
+    {
+      "field_id": "line_6_other_result",
+      "key": "기타",
+      "semantic_path": "검수내역/행6/검수결과/기타",
+      "anchor_id": "manual_qc_02_055",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_6_other_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          845,
+          829,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_055"
+      }
+    },
+    {
+      "field_id": "line_6_remark",
+      "key": "비고",
+      "semantic_path": "검수내역/행6/비고",
+      "anchor_id": "manual_qc_02_056",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_6_remark",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          947,
+          829,
+          127,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_056"
+      }
+    },
+    {
+      "field_id": "line_7_number",
+      "key": "번호",
+      "semantic_path": "검수내역/행7/번호",
+      "anchor_id": "manual_qc_02_057",
+      "value": "",
+      "value_type": "literal",
+      "faker_rule": "literal:7",
+      "style_class": "style_line_7_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          116,
+          874,
+          83,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_057"
+      }
+    },
+    {
+      "field_id": "line_7_item_name",
+      "key": "품명",
+      "semantic_path": "검수내역/행7/품명",
+      "anchor_id": "manual_qc_02_058",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_7_item_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          200,
+          874,
+          292,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_058"
+      }
+    },
+    {
+      "field_id": "line_7_specification",
+      "key": "규격",
+      "semantic_path": "검수내역/행7/규격",
+      "anchor_id": "manual_qc_02_059",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_7_specification",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          493,
+          874,
+          145,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_059"
+      }
+    },
+    {
+      "field_id": "line_7_received_quantity",
+      "key": "수량",
+      "semantic_path": "검수내역/행7/검수결과/수량",
+      "anchor_id": "manual_qc_02_060",
+      "value": "",
+      "value_type": "pattern",
+      "faker_rule": "pattern:###",
+      "style_class": "style_line_7_received_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          639,
+          874,
+          103,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_060"
+      }
+    },
+    {
+      "field_id": "line_7_quality_result",
+      "key": "품질",
+      "semantic_path": "검수내역/행7/검수결과/품질",
+      "anchor_id": "manual_qc_02_061",
+      "value": "",
+      "value_type": "choice",
+      "faker_rule": "choice:합격|부분합격|불합격",
+      "style_class": "style_line_7_quality_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          743,
+          874,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_061"
+      }
+    },
+    {
+      "field_id": "line_7_other_result",
+      "key": "기타",
+      "semantic_path": "검수내역/행7/검수결과/기타",
+      "anchor_id": "manual_qc_02_062",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_7_other_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          845,
+          874,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_062"
+      }
+    },
+    {
+      "field_id": "line_7_remark",
+      "key": "비고",
+      "semantic_path": "검수내역/행7/비고",
+      "anchor_id": "manual_qc_02_063",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_7_remark",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          947,
+          874,
+          127,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_063"
+      }
+    },
+    {
+      "field_id": "line_8_number",
+      "key": "번호",
+      "semantic_path": "검수내역/행8/번호",
+      "anchor_id": "manual_qc_02_064",
+      "value": "",
+      "value_type": "literal",
+      "faker_rule": "literal:8",
+      "style_class": "style_line_8_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          116,
+          919,
+          83,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_064"
+      }
+    },
+    {
+      "field_id": "line_8_item_name",
+      "key": "품명",
+      "semantic_path": "검수내역/행8/품명",
+      "anchor_id": "manual_qc_02_065",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_8_item_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          200,
+          919,
+          292,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_065"
+      }
+    },
+    {
+      "field_id": "line_8_specification",
+      "key": "규격",
+      "semantic_path": "검수내역/행8/규격",
+      "anchor_id": "manual_qc_02_066",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_8_specification",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          493,
+          919,
+          145,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_066"
+      }
+    },
+    {
+      "field_id": "line_8_received_quantity",
+      "key": "수량",
+      "semantic_path": "검수내역/행8/검수결과/수량",
+      "anchor_id": "manual_qc_02_067",
+      "value": "",
+      "value_type": "pattern",
+      "faker_rule": "pattern:###",
+      "style_class": "style_line_8_received_quantity",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-01"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          639,
+          919,
+          103,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_067"
+      }
+    },
+    {
+      "field_id": "line_8_quality_result",
+      "key": "품질",
+      "semantic_path": "검수내역/행8/검수결과/품질",
+      "anchor_id": "manual_qc_02_068",
+      "value": "",
+      "value_type": "choice",
+      "faker_rule": "choice:합격|부분합격|불합격",
+      "style_class": "style_line_8_quality_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          743,
+          919,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_068"
+      }
+    },
+    {
+      "field_id": "line_8_other_result",
+      "key": "기타",
+      "semantic_path": "검수내역/행8/검수결과/기타",
+      "anchor_id": "manual_qc_02_069",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_8_other_result",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          845,
+          919,
+          101,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_069"
+      }
+    },
+    {
+      "field_id": "line_8_remark",
+      "key": "비고",
+      "semantic_path": "검수내역/행8/비고",
+      "anchor_id": "manual_qc_02_070",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_line_8_remark",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          947,
+          919,
+          127,
+          43
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_070"
+      }
+    },
+    {
+      "field_id": "inspector_opinion",
+      "key": "검수자 의견",
+      "semantic_path": "확인/검수자 의견",
+      "anchor_id": "manual_qc_02_071",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_inspector_opinion",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-02"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          200,
+          1423,
+          742,
+          96
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_071"
+      }
+    },
+    {
+      "field_id": "department_head_confirmation",
+      "key": "부서장 확인",
+      "semantic_path": "확인/부서장 확인",
+      "anchor_id": "manual_qc_02_072",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_department_head_confirmation",
+      "unit_policy": {
+        "mode": "none",
+        "static_unit_at_value_position": false,
+        "generated_value_includes_unit": false
+      },
+      "research_evidence_ids": [
+        "RE-03"
+      ],
+      "visual_evidence": {
+        "source": "full_template_image",
+        "bbox": [
+          948,
+          1450,
+          124,
+          78
+        ],
+        "confidence": 0.97,
+        "manifest_anchor_id": "manual_qc_02_072"
+      }
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 72,
+    "bound_use_anchor_count": 72,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  },
+  "field_id_contract": {
+    "immutable_for_pass_2": true,
+    "frozen_at": "2026-07-13",
+    "count": 72
+  },
+  "sources": {
+    "sample_kind": "filled_sample",
+    "full_template_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/입고·검수_보고서__QC-02/samples/original/검수보고서_page_001.jpg",
+    "anchor_map": "anchor_map_draft.json",
+    "research_report": "research_report.json"
+  }
+}

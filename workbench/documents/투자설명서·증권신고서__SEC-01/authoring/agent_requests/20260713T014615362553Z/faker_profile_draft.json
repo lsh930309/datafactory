@@ -1,0 +1,86 @@
+{
+  "schema_version": 2,
+  "doc_id": "SEC-01",
+  "title": "투자설명서·증권신고서",
+  "as_of_date": "2026-07-13",
+  "field_generators": {
+    "investment_risk_grade_label": "literal:투자 위험 등급",
+    "investment_risk_grade": "choice:1등급(매우높은위험)|2등급(높은위험)|3등급(다소높은위험)|4등급(보통위험)|5등급(낮은위험)|6등급(매우낮은위험)",
+    "fund_name": "free_text.short",
+    "asset_manager_name": "company.name_ko",
+    "disclosure_reference_text": "free_text.short",
+    "prospectus_preparation_date": "date.kr",
+    "securities_registration_effective_date": "date.kr",
+    "offered_security_type": "choice:투자신탁 수익증권|투자회사 주식|투자유한회사 지분증권|투자합자회사 지분증권",
+    "offering_total_amount": "free_text.short",
+    "offering_period_description": "free_text.short"
+  },
+  "data_pools": {
+    "fund_cover_records": [
+      {"risk_grade":"2등급(높은위험)","fund_name":"가온 코리아배당성장 증권상장지수투자신탁[주식]","asset_manager":"가온자산운용주식회사","disclosure_reference":"집합투자업자(https://gaon.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 10조좌]","offering_period":"이 집합투자기구는 별도의 모집(매출)기간이 정해져 있지 않으며, 계속하여 모집할 수 있습니다."},
+      {"risk_grade":"3등급(다소높은위험)","fund_name":"누리 글로벌우량채권 증권투자신탁[채권]","asset_manager":"누리자산운용주식회사","disclosure_reference":"집합투자업자(https://nuri.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 5조좌]","offering_period":"이 집합투자기구는 별도의 모집(매출)기간 없이 계속 모집합니다."},
+      {"risk_grade":"4등급(보통위험)","fund_name":"다온 단기국공채 증권투자신탁[채권]","asset_manager":"다온자산운용주식회사","disclosure_reference":"집합투자업자(https://daon.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 3조좌]","offering_period":"이 집합투자기구는 별도의 모집(매출)기간이 없으며 수시로 모집할 수 있습니다."},
+      {"risk_grade":"1등급(매우높은위험)","fund_name":"라온 글로벌혁신성장 증권투자신탁[주식]","asset_manager":"라온자산운용주식회사","disclosure_reference":"집합투자업자(https://raon.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 8조좌]","offering_period":"이 집합투자기구는 별도의 모집(매출)기간이 정해져 있지 않아 계속 모집할 수 있습니다."},
+      {"risk_grade":"5등급(낮은위험)","fund_name":"마루 초단기채 증권투자신탁[채권]","asset_manager":"마루자산운용주식회사","disclosure_reference":"집합투자업자(https://maru.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 2조좌]","offering_period":"이 집합투자기구는 판매기간을 별도로 정하지 않고 계속 모집합니다."},
+      {"risk_grade":"3등급(다소높은위험)","fund_name":"바른 코리아가치주 증권투자신탁[주식]","asset_manager":"바른자산운용주식회사","disclosure_reference":"집합투자업자(https://bareun.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 6조좌]","offering_period":"이 집합투자기구는 모집(매출)기간을 별도로 정하지 않으며 계속 모집할 수 있습니다."},
+      {"risk_grade":"4등급(보통위험)","fund_name":"새론 인컴밸런스 증권투자신탁[채권혼합]","asset_manager":"새론자산운용주식회사","disclosure_reference":"집합투자업자(https://saeron.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 4조좌]","offering_period":"이 집합투자기구는 별도의 판매기간 없이 지속적으로 모집할 수 있습니다."},
+      {"risk_grade":"2등급(높은위험)","fund_name":"아람 아시아성장 증권투자신탁[주식]","asset_manager":"아람자산운용주식회사","disclosure_reference":"집합투자업자(https://aram.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 9조좌]","offering_period":"이 집합투자기구는 모집기간을 특정하지 않고 계속하여 모집할 수 있습니다."},
+      {"risk_grade":"6등급(매우낮은위험)","fund_name":"이든 국공채머니마켓 투자신탁[국공채]","asset_manager":"이든자산운용주식회사","disclosure_reference":"집합투자업자(https://ideun.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 1조좌]","offering_period":"이 집합투자기구는 별도의 모집기간을 두지 않고 계속 모집합니다."},
+      {"risk_grade":"3등급(다소높은위험)","fund_name":"자람 미국배당성장 증권투자신탁[주식]","asset_manager":"자람자산운용주식회사","disclosure_reference":"집합투자업자(https://jaram.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 7조좌]","offering_period":"이 집합투자기구는 별도의 모집(매출)기간 없이 상시 모집할 수 있습니다."},
+      {"risk_grade":"4등급(보통위험)","fund_name":"키움새길 멀티에셋 증권투자신탁[혼합자산]","asset_manager":"새길자산운용주식회사","disclosure_reference":"집합투자업자(https://saegil.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 12조좌]","offering_period":"이 집합투자기구는 별도의 판매기간이 정해져 있지 않으며 계속 모집할 수 있습니다."},
+      {"risk_grade":"2등급(높은위험)","fund_name":"하람 친환경리더스 증권투자신탁[주식]","asset_manager":"하람자산운용주식회사","disclosure_reference":"집합투자업자(https://haram.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 11조좌]","offering_period":"이 집합투자기구는 모집 종료일을 정하지 않고 계속하여 모집합니다."},
+      {"risk_grade":"5등급(낮은위험)","fund_name":"해솔 우량회사채 증권투자신탁[채권]","asset_manager":"해솔자산운용주식회사","disclosure_reference":"집합투자업자(https://haesol.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 2조5천억좌]","offering_period":"이 집합투자기구는 별도의 모집(매출)기간 없이 계속 모집할 예정입니다."},
+      {"risk_grade":"1등급(매우높은위험)","fund_name":"한결 글로벌테크 증권투자신탁[주식]","asset_manager":"한결자산운용주식회사","disclosure_reference":"집합투자업자(https://hangyeol.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 15조좌]","offering_period":"이 집합투자기구는 판매기간 제한 없이 계속하여 모집할 수 있습니다."},
+      {"risk_grade":"3등급(다소높은위험)","fund_name":"한빛 코리아중소형주 증권투자신탁[주식]","asset_manager":"한빛자산운용주식회사","disclosure_reference":"집합투자업자(https://hanbit.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 6조5천억좌]","offering_period":"이 집합투자기구는 모집기간을 별도로 설정하지 않고 계속 모집합니다."},
+      {"risk_grade":"4등급(보통위험)","fund_name":"온새미로 글로벌자산배분 증권투자신탁[혼합자산]","asset_manager":"온새미로자산운용주식회사","disclosure_reference":"집합투자업자(https://onsaemiro.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 4조5천억좌]","offering_period":"이 집합투자기구는 정해진 모집(매출)기간 없이 계속 모집할 수 있습니다."},
+      {"risk_grade":"2등급(높은위험)","fund_name":"푸른 유럽퀄리티 증권투자신탁[주식]","asset_manager":"푸른자산운용주식회사","disclosure_reference":"집합투자업자(https://pureun.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 13조좌]","offering_period":"이 집합투자기구는 별도의 청약기간 없이 지속적으로 모집할 수 있습니다."},
+      {"risk_grade":"5등급(낮은위험)","fund_name":"다솜 단기우량채 증권투자신탁[채권]","asset_manager":"다솜자산운용주식회사","disclosure_reference":"집합투자업자(https://dasom.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 3조5천억좌]","offering_period":"이 집합투자기구는 별도의 판매 종료일 없이 계속 모집합니다."},
+      {"risk_grade":"3등급(다소높은위험)","fund_name":"보람 아시아인컴 증권투자신탁[주식혼합]","asset_manager":"보람자산운용주식회사","disclosure_reference":"집합투자업자(https://boram.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 7조5천억좌]","offering_period":"이 집합투자기구는 별도의 모집기간이 정해져 있지 않아 상시 모집합니다."},
+      {"risk_grade":"4등급(보통위험)","fund_name":"소담 안정성장 증권투자신탁[채권혼합]","asset_manager":"소담자산운용주식회사","disclosure_reference":"집합투자업자(https://sodam.example.invalid) 및 금융투자협회(www.kofia.or.kr) 홈페이지 참조","security_type":"투자신탁 수익증권","offering_total":"[모집(매출) 총액 : 5조5천억좌]","offering_period":"이 집합투자기구는 모집(매출)기간을 한정하지 않고 계속 모집할 수 있습니다."}
+    ]
+  },
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "fund_cover_records",
+      "targets": {
+        "investment_risk_grade": "risk_grade",
+        "fund_name": "fund_name",
+        "asset_manager_name": "asset_manager",
+        "disclosure_reference_text": "disclosure_reference",
+        "offered_security_type": "security_type",
+        "offering_total_amount": "offering_total",
+        "offering_period_description": "offering_period"
+      }
+    },
+    {
+      "type": "date_order",
+      "start": "prospectus_preparation_date",
+      "end": "securities_registration_effective_date",
+      "min_days": 0,
+      "max_days": 60
+    },
+    {
+      "type": "date_not_after",
+      "target": "prospectus_preparation_date",
+      "max": "as_of_date"
+    },
+    {
+      "type": "date_not_after",
+      "target": "securities_registration_effective_date",
+      "max": "as_of_date"
+    }
+  ],
+  "field_rules": [
+    {"field_id":"investment_risk_grade_label","rule":"literal:투자 위험 등급","evidence_ids":["RISK-GRADE-01"],"note":"전체 이미지에서 표제 자체가 값 anchor에 포함되어 고정 표제로 생성한다."},
+    {"field_id":"investment_risk_grade","rule":"choice:1~6등급","evidence_ids":["RISK-GRADE-01"],"note":"협회 기준의 최소 6단계를 사용하고 record constraint가 펀드 레코드와 함께 최종값을 선택한다."},
+    {"field_id":"fund_name","rule":"free_text.short","evidence_ids":["DART-FUND-01"],"note":"실제 최종값은 fund_cover_records의 합성 펀드명으로 덮어쓴다."},
+    {"field_id":"asset_manager_name","rule":"company.name_ko","evidence_ids":["DART-FUND-01"],"note":"실제 최종값은 펀드 레코드와 짝지어진 합성 운용사명으로 덮어쓴다."},
+    {"field_id":"disclosure_reference_text","rule":"free_text.short","evidence_ids":["DART-FUND-01"],"note":"오인을 막기 위해 합성 운용사 URL은 예약 도메인 example.invalid를 사용한다."},
+    {"field_id":"prospectus_preparation_date","rule":"date.kr","evidence_ids":["CAPITAL-MARKETS-ACT-01"],"note":"전체 이미지상 정적 연월일 접미사가 없으므로 날짜 전체를 생성하며 효력발생일 이전, 기준일 이하로 제한한다."},
+    {"field_id":"securities_registration_effective_date","rule":"date.kr","evidence_ids":["CAPITAL-MARKETS-ACT-01","DART-FUND-01"],"note":"작성기준일 이후 0~60일, 기준일 이하로 제한한다."},
+    {"field_id":"offered_security_type","rule":"choice:법적 형태 4종","evidence_ids":["DART-FUND-01"],"note":"레코드에서는 현재 표지 형태에 맞춰 투자신탁 수익증권을 사용한다."},
+    {"field_id":"offering_total_amount","rule":"free_text.short","evidence_ids":["DART-FUND-01"],"note":"anchor가 대괄호·라벨·좌 단위를 모두 포함하므로 완성된 복합 문자열을 record에서 제공한다."},
+    {"field_id":"offering_period_description","rule":"free_text.short","evidence_ids":["CAPITAL-MARKETS-ACT-01","DART-FUND-01"],"note":"개방형 계속모집 문구의 합성 변형을 record에서 제공한다."}
+  ]
+}

@@ -144,6 +144,7 @@ def test_handwriting_print_pack_and_scan_intake_roundtrip(tmp_path: Path) -> Non
     assert pack_pdf.exists()
     assert pack_pdf.parent.name == "수기테스트_HW-01"
     assert sample["qr_payload"] == {"doc_id": "HW-01", "sample_id": "sample_000", "run_id": sample["run_id"]}
+    assert len(sample["warp_markers"]) == 4
     assert sample["handwriting_field_count"] == 1
     assert sample["printed_field_count"] == 1
     with Image.open(problem_path).convert("L") as rendered_template:
@@ -196,7 +197,8 @@ def test_handwriting_scan_intake_warps_to_template_and_writes_debug_overlay_only
 
     assert intake["summary"]["acceptedCount"] == 1
     record = intake["manifest"]["records"][0]
-    assert record["warp_method"] == "qr_translate"
+    assert record["warp_method"] == "fiducial_homography"
+    assert record["debug"]["warp"]["matched_marker_count"] == 4
     overlay_path = Path(record["debug"]["bbox_overlay"])
     warped_path = Path(record["debug"]["warped_image"])
     template_path = Path(record["debug"]["warp_template"])

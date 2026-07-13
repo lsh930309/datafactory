@@ -21,8 +21,10 @@ from .workbench import WORKBENCH_ROOT, document_dir, render_pdf_pages, update_ma
 ROOT = Path(__file__).resolve().parents[2]
 HANDWRITING_DIR = "handwriting_pipeline"
 QR_FORMAT = "datafactory-qr-v1"
+WARP_MARKER_FORMAT = "aruco-4x4-50-v1"
 DEFAULT_WECHAT_QR_MODEL_DIR = Path("/Users/lsh930309/projects/SamsungLife/models/wechat_qrcode")
 QR_DEFAULT_PIXEL_SIZE = 240
+WARP_MARKER_IDS = (0, 1, 2, 3)
 HANDWRITING_PREVIEW_FILL = [220, 0, 0]
 SOURCE_KIND_PRINT_PACK = "handwriting_print_pack"
 SOURCE_KIND_SCANNED = "handwriting_scanned"
@@ -100,9 +102,10 @@ def create_handwriting_print_pack(
     template_path = _resolve_template_image(schema)
     template = Image.open(template_path).convert("RGB")
     bbox = _resolve_qr_bbox(qr_bbox or _schema_qr_bbox(schema), width=template.width, height=template.height)
+    warp_markers = _resolve_warp_markers(schema, width=template.width, height=template.height, qr_bbox=bbox)
     resolved_run_id = run_id or _run_id()
     run_dir = doc_root / HANDWRITING_DIR / "print_packs" / resolved_run_id
-    dirs = _ensure_dirs(run_dir, ["answer_sheets", "problem_sheets", "qr", "values", "gt", "bbox"])
+    dirs = _ensure_dirs(run_dir, ["answer_sheets", "problem_sheets", "qr", "warp_markers", "values", "gt", "bbox"])
     public_dir = _handwriting_public_doc_dir(doc, root=root)
     public_dir.mkdir(parents=True, exist_ok=True)
 
@@ -159,6 +162,15 @@ def create_handwriting_print_pack(
         qr_image = encode_marker_image(payload, pixel_size=bbox[2])
         qr_image.save(qr_path)
         problem_sheet = printed_template.copy()
+        sample_warp_markers: list[dict[str, Any]] = []
+        for marker in warp_markers:
+            marker_id = int(marker["id"])
+            marker_bbox = [int(item) for item in marker["bbox"]]
+            marker_path = dirs["warp_markers"] / f"{sample_id}_{marker['role']}_{marker_id}.png"
+            marker_image = encode_warp_marker_image(marker_id, pixel_size=marker_bbox[2])
+            marker_image.save(marker_path)
+            problem_sheet.paste(marker_image.resize((marker_bbox[2], marker_bbox[3]), Image.Resampling.NEAREST), (marker_bbox[0], marker_bbox[1]))
+            sample_warp_markers.append({**marker, "image": _display_path(marker_path)})
         problem_sheet.paste(qr_image.resize((bbox[2], bbox[3]), Image.Resampling.NEAREST), (bbox[0], bbox[1]))
         problem_sheet.save(problem_png)
         _save_two_page_pdf(public_pdf, [answer_sheet, problem_sheet])
@@ -171,6 +183,8 @@ def create_handwriting_print_pack(
                 "source_kind": SOURCE_KIND_PRINT_PACK,
                 "qr_payload": payload,
                 "qr_bbox": bbox,
+                "warp_marker_format": WARP_MARKER_FORMAT,
+                "warp_markers": sample_warp_markers,
                 "template_size": [template.width, template.height],
                 "print_pack_pdf": _display_path(public_pdf),
                 "public_gt": _display_path(public_gt),
@@ -201,6 +215,8 @@ def create_handwriting_print_pack(
         "seed": seed,
         "marker_format": QR_FORMAT,
         "barcode_format": QR_FORMAT,
+        "warp_marker_format": WARP_MARKER_FORMAT,
+        "warp_markers": warp_markers,
         "template": _display_path(template_path),
         "qr_bbox": bbox,
         "schema": _display_path(primary_schema_path),
@@ -379,6 +395,19 @@ def latest_accepted_handwriting_samples(item: dict[str, Any], *, root: Path = RO
 
 def encode_marker_image(payload: dict[str, Any], *, pixel_size: int = QR_DEFAULT_PIXEL_SIZE) -> Image.Image:
     return encode_qr_image(_minimal_qr_payload(payload), pixel_size=pixel_size)
+
+
+def encode_warp_marker_image(marker_id: int, *, pixel_size: int) -> Image.Image:
+    try:
+        import cv2  # type: ignore
+    except Exception as exc:
+        raise RuntimeError("OpenCV aruco is required for warp marker generation. Install opencv-contrib-python-headless.") from exc
+    aruco = getattr(cv2, "aruco", None)
+    if aruco is None:
+        raise RuntimeError("OpenCV aruco module was not found. Install opencv-contrib-python-headless.")
+    dictionary = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
+    image = aruco.generateImageMarker(dictionary, int(marker_id), int(pixel_size))
+    return Image.fromarray(image).convert("RGB")
 
 
 def _qrcode_available() -> bool:
@@ -599,7 +628,8 @@ def _accept_scan(raw_path: Path, image: Image.Image, match: _QrMatch, sample: di
     decoded_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     warped, warp_info = _warp_scan_to_template(image, match, sample)
     qr_remove_bbox = warp_info.get("qr_bbox") if isinstance(warp_info.get("qr_bbox"), list) else match.bbox
-    removed, qr_remove_method = _remove_qr_marker(warped, qr_remove_bbox)
+    marker_remove_bboxes = _sample_warp_marker_bboxes(sample)
+    removed, qr_remove_method = _remove_machine_markers(warped, [qr_remove_bbox, *marker_remove_bboxes])
     removed.save(qr_removed_path, "JPEG", quality=95)
     gt_source = _resolve_path(sample.get("gt") or sample.get("public_gt") or payload.get("gt_path"))
     if not gt_source.exists():
@@ -658,6 +688,9 @@ def _warp_scan_to_template(image: Image.Image, match: _QrMatch, sample: dict[str
     resize_scale_x = target_w / max(1, image.width)
     resize_scale_y = target_h / max(1, image.height)
     base = image if image.size == (target_w, target_h) else image.resize((target_w, target_h), Image.Resampling.BICUBIC)
+    fiducial = _warp_scan_with_fiducials(base, sample, target_size=(target_w, target_h), page_scale=(resize_scale_x, resize_scale_y))
+    if fiducial is not None:
+        return fiducial
     scaled_points = [[float(x) * resize_scale_x, float(y) * resize_scale_y] for x, y in match.points] if match.points else None
     observed_box = _float_bbox_from_points(scaled_points)
     expected_points = _expected_qr_points(sample)
@@ -721,6 +754,113 @@ def _expected_qr_points(sample: dict[str, Any]) -> list[list[float]] | None:
             except Exception:
                 pass
     return _bbox_corners(qr_bbox)
+
+
+def _warp_scan_with_fiducials(image: Image.Image, sample: dict[str, Any], *, target_size: tuple[int, int], page_scale: tuple[float, float]) -> tuple[Image.Image, dict[str, Any]] | None:
+    markers = sample.get("warp_markers")
+    if not isinstance(markers, list) or len(markers) < 3:
+        return None
+    detected = _detect_warp_markers(image)
+    if len(detected) < 3:
+        return None
+    expected_by_id = {int(marker.get("id")): marker for marker in markers if isinstance(marker, dict) and str(marker.get("id", "")).strip() != ""}
+    src_points: list[list[float]] = []
+    dst_points: list[list[float]] = []
+    matched_ids: list[int] = []
+    for marker_id, marker in expected_by_id.items():
+        observed = detected.get(marker_id)
+        if not observed:
+            continue
+        bbox = marker.get("bbox")
+        if not isinstance(bbox, list) or len(bbox) != 4:
+            continue
+        expected_corners = _bbox_corners([int(round(float(item))) for item in bbox[:4]])
+        src_points.extend(observed[:4])
+        dst_points.extend(expected_corners)
+        matched_ids.append(marker_id)
+    if len(matched_ids) < 3 or len(src_points) < 12:
+        return None
+    try:
+        import cv2  # type: ignore
+        import numpy as np  # type: ignore
+    except Exception:
+        return None
+    src = np.asarray(src_points, dtype="float32")
+    dst = np.asarray(dst_points, dtype="float32")
+    array = np.asarray(image.convert("RGB"))
+    target_w, target_h = target_size
+    if len(matched_ids) >= 4:
+        matrix, inliers = cv2.findHomography(src, dst, cv2.RANSAC, 4.0)
+        if matrix is None:
+            return None
+        warped = cv2.warpPerspective(array, matrix, (target_w, target_h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+        method = "fiducial_homography"
+    else:
+        matrix, inliers = cv2.estimateAffinePartial2D(src, dst, method=cv2.RANSAC, ransacReprojThreshold=4.0)
+        if matrix is None:
+            return None
+        warped = cv2.warpAffine(array, matrix, (target_w, target_h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+        method = "fiducial_affine"
+    qr_bbox = _resolve_qr_bbox(sample.get("qr_bbox"), width=target_w, height=target_h)
+    inlier_count = int(inliers.sum()) if inliers is not None else 0
+    return Image.fromarray(warped).convert("RGB"), {
+        "method": method,
+        "target_size": [target_w, target_h],
+        "qr_bbox": qr_bbox,
+        "page_scale_x": round(float(page_scale[0]), 6),
+        "page_scale_y": round(float(page_scale[1]), 6),
+        "matched_marker_ids": matched_ids,
+        "matched_marker_count": len(matched_ids),
+        "point_count": len(src_points),
+        "inlier_count": inlier_count,
+    }
+
+
+def _detect_warp_markers(image: Image.Image) -> dict[int, list[list[float]]]:
+    try:
+        import cv2  # type: ignore
+        import numpy as np  # type: ignore
+    except Exception:
+        return {}
+    aruco = getattr(cv2, "aruco", None)
+    if aruco is None:
+        return {}
+    dictionary = aruco.getPredefinedDictionary(aruco.DICT_4X4_50)
+    gray = np.asarray(image.convert("L"))
+    try:
+        parameters = aruco.DetectorParameters()
+        detector = aruco.ArucoDetector(dictionary, parameters)
+        corners, ids, _rejected = detector.detectMarkers(gray)
+    except Exception:
+        try:
+            corners, ids, _rejected = aruco.detectMarkers(gray, dictionary)
+        except Exception:
+            return {}
+    if ids is None:
+        return {}
+    result: dict[int, list[list[float]]] = {}
+    for marker_id, corner in zip(ids.flatten().tolist(), corners):
+        points = np.asarray(corner, dtype="float32").reshape(-1, 2)
+        if len(points) >= 4:
+            result[int(marker_id)] = [[float(x), float(y)] for x, y in points[:4]]
+    return result
+
+
+def _sample_warp_marker_bboxes(sample: dict[str, Any]) -> list[list[int]]:
+    markers = sample.get("warp_markers")
+    result: list[list[int]] = []
+    if not isinstance(markers, list):
+        return result
+    for marker in markers:
+        if not isinstance(marker, dict):
+            continue
+        bbox = marker.get("bbox")
+        if isinstance(bbox, list) and len(bbox) == 4:
+            try:
+                result.append([int(round(float(item))) for item in bbox[:4]])
+            except Exception:
+                continue
+    return result
 
 
 def _offset_points(points: list[list[float]] | None, dx: float, dy: float) -> list[list[float]] | None:
@@ -846,16 +986,26 @@ def _render_warp_debug_diff(warped: Image.Image, template: Image.Image) -> Image
 
 
 def _remove_qr_marker(image: Image.Image, bbox: list[int]) -> tuple[Image.Image, str]:
+    return _remove_machine_markers(image, [bbox])
+
+
+def _remove_machine_markers(image: Image.Image, bboxes: list[list[int]]) -> tuple[Image.Image, str]:
     mask = Image.new("L", image.size, 0)
     draw = ImageDraw.Draw(mask)
     pad = 3
-    draw.rectangle([bbox[0] - pad, bbox[1] - pad, bbox[0] + bbox[2] + pad, bbox[1] + bbox[3] + pad], fill=255)
+    for bbox in bboxes:
+        if not isinstance(bbox, list) or len(bbox) != 4:
+            continue
+        draw.rectangle([bbox[0] - pad, bbox[1] - pad, bbox[0] + bbox[2] + pad, bbox[1] + bbox[3] + pad], fill=255)
     try:
         return lama_inpaint(image.convert("RGB"), mask, max_side=1800), "lama"
     except Exception:
         removed = image.copy()
         fallback_draw = ImageDraw.Draw(removed)
-        fallback_draw.rectangle([bbox[0] - pad, bbox[1] - pad, bbox[0] + bbox[2] + pad, bbox[1] + bbox[3] + pad], fill="white")
+        for bbox in bboxes:
+            if not isinstance(bbox, list) or len(bbox) != 4:
+                continue
+            fallback_draw.rectangle([bbox[0] - pad, bbox[1] - pad, bbox[0] + bbox[2] + pad, bbox[1] + bbox[3] + pad], fill="white")
         return removed, "white_fill_fallback"
 
 
@@ -1147,6 +1297,53 @@ def _resolve_qr_bbox(value: list[int] | tuple[int, int, int, int] | None, *, wid
             return [left, top, side, side]
     size = min(QR_DEFAULT_PIXEL_SIZE, max(96, int(min(width, height) * 0.16)))
     return [max(0, width - size - 24), 24, size, size]
+
+
+def _resolve_warp_markers(schema: dict[str, Any], *, width: int, height: int, qr_bbox: list[int] | None = None) -> list[dict[str, Any]]:
+    handwriting = schema.get("handwriting") if isinstance(schema.get("handwriting"), dict) else {}
+    configured = handwriting.get("warp_markers")
+    markers: list[dict[str, Any]] = []
+    if isinstance(configured, list):
+        for index, item in enumerate(configured):
+            if not isinstance(item, dict):
+                continue
+            bbox_value = item.get("bbox")
+            if isinstance(bbox_value, dict):
+                bbox_value = [bbox_value.get("x"), bbox_value.get("y"), bbox_value.get("width"), bbox_value.get("height")]
+            if not isinstance(bbox_value, list) or len(bbox_value) != 4:
+                continue
+            try:
+                x, y, w, h = [int(round(float(value))) for value in bbox_value]
+            except Exception:
+                continue
+            side = max(24, min(w, h))
+            x = min(max(0, x), max(0, width - side))
+            y = min(max(0, y), max(0, height - side))
+            markers.append({"id": int(item.get("id", WARP_MARKER_IDS[index % len(WARP_MARKER_IDS)])), "role": str(item.get("role") or f"marker_{index}"), "bbox": [x, y, side, side]})
+    if markers:
+        return markers
+
+    side = min(72, max(32, int(round(min(width, height) * 0.045))))
+    margin = max(12, int(round(side * 0.45)))
+    candidates = [
+        ("top_left", [margin, margin, side, side]),
+        ("top_right", [width - margin - side, margin, side, side]),
+        ("bottom_left", [margin, height - margin - side, side, side]),
+        ("bottom_right", [width - margin - side, height - margin - side, side, side]),
+    ]
+    result: list[dict[str, Any]] = []
+    for index, (role, bbox) in enumerate(candidates):
+        if qr_bbox and _bboxes_overlap(bbox, qr_bbox):
+            # Keep marker placement deterministic but avoid the QR identifier.
+            bbox = [bbox[0], min(max(0, bbox[1] + side + margin), max(0, height - side)), side, side]
+        result.append({"id": WARP_MARKER_IDS[index], "role": role, "bbox": bbox})
+    return result
+
+
+def _bboxes_overlap(left: list[int], right: list[int]) -> bool:
+    lx, ly, lw, lh = left
+    rx, ry, rw, rh = right
+    return lx < rx + rw and lx + lw > rx and ly < ry + rh and ly + lh > ry
 
 
 def _scaled_bbox(bbox_value: Any, source_size: Any, target_size: list[int], *, pad_ratio: float = 0.0) -> list[int]:

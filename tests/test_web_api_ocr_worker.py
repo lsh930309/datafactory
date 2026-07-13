@@ -591,3 +591,97 @@ def test_blank_template_agent_validation_requires_confirmed_use_value_anchor(tmp
     validation = web_api._validate_authoring_agent_outputs(request_dir)
 
     assert validation["ready"] is True
+
+
+def test_authoring_agent_validation_auto_materializes_unmapped_use_anchor(tmp_path: Path) -> None:
+    request_dir = tmp_path / "request"
+    request_dir.mkdir()
+    (request_dir / "request.json").write_text(json.dumps({"options": {"minPoolSize": 3}}, ensure_ascii=False), encoding="utf-8")
+    payloads = {
+        "schema_draft.json": {
+            "schema_version": 1,
+            "semantic_schema": {"성명": ""},
+            "fields": [{"field_id": "name", "key": "성명", "semantic_path": ["성명"], "anchor_id": "det_name", "value": ""}],
+            "unmapped_use_anchors": [{"anchor_id": "det_unknown", "reason": "uncertain"}],
+        },
+        "anchor_map_draft.json": {
+            "schema_version": 1,
+            "anchors": [
+                {"anchor_id": "det_name", "status": "use", "role": "value_region", "bbox": [1, 2, 3, 4]},
+                {"anchor_id": "det_unknown", "status": "use", "role": "value_region", "text": "미확인", "bbox": [5, 6, 7, 8]},
+            ],
+        },
+        "stylesheet_draft.json": {"schema_version": 1},
+        "faker_profile_draft.json": {"schema_version": 1, "field_generators": {"name": "person.name_ko"}},
+        "value_pool_draft.json": {"schema_version": 1},
+        "research_report.json": {"schema_version": 1, "sources": []},
+        "uncertainty_report.json": {"schema_version": 1},
+    }
+    for name, payload in payloads.items():
+        (request_dir / name).write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    (request_dir / "application_notes.md").write_text("notes", encoding="utf-8")
+
+    validation = web_api._validate_authoring_agent_outputs(request_dir)
+
+    assert validation["ready"] is True
+    schema = json.loads((request_dir / "schema_draft.json").read_text(encoding="utf-8"))
+    faker = json.loads((request_dir / "faker_profile_draft.json").read_text(encoding="utf-8"))
+    assert "unmapped_use_anchors" not in schema
+    placeholder = next(field for field in schema["fields"] if field["anchor_id"] == "det_unknown")
+    assert placeholder["semantic_path"][0] == "검토필요"
+    assert placeholder["review_required"] is True
+    assert faker["field_generators"][placeholder["field_id"]] == "free_text.short"
+
+
+def test_authoring_agent_options_control_codex_command_and_pool_minimum(tmp_path: Path, monkeypatch) -> None:
+    class FakeDoc:
+        doc_id = "APP-14"
+        title = "카드발급신청서"
+
+        def to_dict(self) -> dict[str, object]:
+            return {"docId": self.doc_id, "title": self.title}
+
+    fake_doc = FakeDoc()
+    fake_registry = SimpleNamespace(documents={fake_doc.doc_id: fake_doc})
+    captured: dict[str, object] = {}
+
+    def fake_workbench_subdir(doc_id: str, subdir: str):
+        target = tmp_path / "workbench" / doc_id / subdir
+        target.mkdir(parents=True, exist_ok=True)
+        return target
+
+    def fake_run(cmd, *, input, cwd, text, capture_output, timeout, check):  # noqa: ANN001, A002
+        captured["cmd"] = cmd
+        request_dir = sorted((tmp_path / "workbench" / fake_doc.doc_id / "authoring" / "agent_requests").glob("*"))[-1]
+        for name in web_api.AUTHORING_AGENT_REQUIRED_OUTPUTS:
+            path = request_dir / name
+            if name.endswith(".json"):
+                payload = {"schema_version": 1, "name": name}
+                if name == "schema_draft.json":
+                    payload.update({"semantic_schema": {"항목": ""}, "fields": [{"field_id": "field_1", "key": "항목", "semantic_path": ["항목"], "anchor_id": "det_1", "value": ""}]})
+                elif name == "faker_profile_draft.json":
+                    payload.update({"field_generators": {"field_1": "pool:items"}, "data_pools": {"items": ["A", "B", "C", "D"]}})
+                elif name == "anchor_map_draft.json":
+                    payload.update({"anchors": [{"anchor_id": "det_1", "status": "use", "role": "value_region"}]})
+                elif name == "research_report.json":
+                    payload.update({"sources": []})
+                path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+            else:
+                path.write_text("ok", encoding="utf-8")
+        return SimpleNamespace(returncode=0, stdout="ok", stderr="")
+
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    monkeypatch.setattr(web_api, "load_registry", lambda: fake_registry)
+    monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
+    monkeypatch.setattr(web_api, "list_work_items", lambda registry: [{"docId": fake_doc.doc_id, "samples": [], "latestReview": "", "latestInpainted": ""}])
+    monkeypatch.setattr(web_api, "update_manifest_artifact", lambda *args, **kwargs: None)
+    monkeypatch.setattr(web_api.subprocess, "run", fake_run)
+
+    payload = web_api.authoring_agent_run_payload(
+        {"docId": fake_doc.doc_id, "options": {"reasoningEffort": "high", "fastMode": True, "minPoolSize": 4}},
+        async_run=False,
+    )
+
+    assert payload["status"] == "succeeded"
+    assert 'model_reasoning_effort="high"' in captured["cmd"]
+    assert "--disable" not in captured["cmd"]

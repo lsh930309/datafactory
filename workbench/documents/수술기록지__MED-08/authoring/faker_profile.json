@@ -52,7 +52,42 @@
     "전신마취제_Ethran": "checkbox.bool",
     "전신마취제_Forane": "checkbox.bool",
     "마취재료": "pool:anesthesia_materials",
-    "주사처방": "pool:injection_orders"
+    "주사처방": "pool:injection_orders",
+    "수술4_수술코드": "pool:surgery_code_values",
+    "수술4_수술명": "pool:surgery_name_values",
+    "수술4_수량": "choice:1|2|3",
+    "수술4_주수술": "checkbox.bool",
+    "수술4_부수술": "checkbox.bool",
+    "수술5_수술코드": "pool:surgery_code_values",
+    "수술5_수술명": "pool:surgery_name_values",
+    "수술5_수량": "choice:1|2|3",
+    "수술5_주수술": "checkbox.bool",
+    "수술5_부수술": "checkbox.bool",
+    "수술6_수술코드": "pool:surgery_code_values",
+    "수술6_수술명": "pool:surgery_name_values",
+    "수술6_수량": "choice:1|2|3",
+    "수술6_주수술": "checkbox.bool",
+    "수술6_부수술": "checkbox.bool",
+    "수술7_수술코드": "pool:surgery_code_values",
+    "수술7_수술명": "pool:surgery_name_values",
+    "수술7_수량": "choice:1|2|3",
+    "수술7_주수술": "checkbox.bool",
+    "수술7_부수술": "checkbox.bool",
+    "수술8_수술코드": "pool:surgery_code_values",
+    "수술8_수술명": "pool:surgery_name_values",
+    "수술8_수량": "choice:1|2|3",
+    "수술8_주수술": "checkbox.bool",
+    "수술8_부수술": "checkbox.bool",
+    "수술9_수술코드": "pool:surgery_code_values",
+    "수술9_수술명": "pool:surgery_name_values",
+    "수술9_수량": "choice:1|2|3",
+    "수술9_주수술": "checkbox.bool",
+    "수술9_부수술": "checkbox.bool",
+    "수술10_수술코드": "pool:surgery_code_values",
+    "수술10_수술명": "pool:surgery_name_values",
+    "수술10_수량": "choice:1|2|3",
+    "수술10_주수술": "checkbox.bool",
+    "수술10_부수술": "checkbox.bool"
   },
   "data_pools": {
     "departments": [
@@ -258,9 +293,37 @@
         {
           "primary": "수술3_주수술",
           "secondary": "수술3_부수술"
+        },
+        {
+          "primary": "수술4_주수술",
+          "secondary": "수술4_부수술"
+        },
+        {
+          "primary": "수술5_주수술",
+          "secondary": "수술5_부수술"
+        },
+        {
+          "primary": "수술6_주수술",
+          "secondary": "수술6_부수술"
+        },
+        {
+          "primary": "수술7_주수술",
+          "secondary": "수술7_부수술"
+        },
+        {
+          "primary": "수술8_주수술",
+          "secondary": "수술8_부수술"
+        },
+        {
+          "primary": "수술9_주수술",
+          "secondary": "수술9_부수술"
+        },
+        {
+          "primary": "수술10_주수술",
+          "secondary": "수술10_부수술"
         }
       ],
-      "note": "수술 행이 모두 작성되는 템플릿 기준: 정확히 한 행은 주수술, 나머지 행은 부수술로 표시한다."
+      "note": "수술목록 use bbox는 10행까지 모두 authoring한다. 실제 렌더링에서는 행 채움 정책으로 일부 행을 비울 수 있으며, 채워진 행 중 주수술/부수술 관계를 적용한다."
     },
     {
       "type": "exclusive_choice",
@@ -277,6 +340,62 @@
         "전신마취제_Ethran",
         "전신마취제_Forane"
       ]
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술4_수술코드": "code",
+        "수술4_수술명": "name"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술5_수술코드": "code",
+        "수술5_수술명": "name"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술6_수술코드": "code",
+        "수술6_수술명": "name"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술7_수술코드": "code",
+        "수술7_수술명": "name"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술8_수술코드": "code",
+        "수술8_수술명": "name"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술9_수술코드": "code",
+        "수술9_수술명": "name"
+      }
+    },
+    {
+      "type": "pick_record",
+      "pool": "surgery_records",
+      "targets": {
+        "수술10_수술코드": "code",
+        "수술10_수술명": "name"
+      }
     }
   ],
   "field_rules": {
@@ -764,11 +883,267 @@
       "research_evidence_ids": [
         "R4"
       ]
+    },
+    "수술4_수술코드": {
+      "semantic_path": "수술목록.4행.수술코드",
+      "anchor_id": "manual_1783576431217",
+      "rule": "pool:surgery_code_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술4_수술명": {
+      "semantic_path": "수술목록.4행.수술명",
+      "anchor_id": "manual_1783576638601",
+      "rule": "pool:surgery_name_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술4_수량": {
+      "semantic_path": "수술목록.4행.수량",
+      "anchor_id": "manual_1783576846267",
+      "rule": "choice:1|2|3",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술4_주수술": {
+      "semantic_path": "수술목록.4행.주수술",
+      "anchor_id": "manual_1783576901383",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술4_부수술": {
+      "semantic_path": "수술목록.4행.부수술",
+      "anchor_id": "manual_1783576740399",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술5_수술코드": {
+      "semantic_path": "수술목록.5행.수술코드",
+      "anchor_id": "manual_1783576436050",
+      "rule": "pool:surgery_code_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술5_수술명": {
+      "semantic_path": "수술목록.5행.수술명",
+      "anchor_id": "manual_1783576652952",
+      "rule": "pool:surgery_name_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술5_수량": {
+      "semantic_path": "수술목록.5행.수량",
+      "anchor_id": "manual_1783576849484",
+      "rule": "choice:1|2|3",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술5_주수술": {
+      "semantic_path": "수술목록.5행.주수술",
+      "anchor_id": "manual_1783576907500",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술5_부수술": {
+      "semantic_path": "수술목록.5행.부수술",
+      "anchor_id": "manual_1783576746849",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술6_수술코드": {
+      "semantic_path": "수술목록.6행.수술코드",
+      "anchor_id": "manual_1783576442351",
+      "rule": "pool:surgery_code_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술6_수술명": {
+      "semantic_path": "수술목록.6행.수술명",
+      "anchor_id": "manual_1783576660951",
+      "rule": "pool:surgery_name_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술6_수량": {
+      "semantic_path": "수술목록.6행.수량",
+      "anchor_id": "manual_1783576852400",
+      "rule": "choice:1|2|3",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술6_주수술": {
+      "semantic_path": "수술목록.6행.주수술",
+      "anchor_id": "manual_1783576913851",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술6_부수술": {
+      "semantic_path": "수술목록.6행.부수술",
+      "anchor_id": "manual_1783576753881",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술7_수술코드": {
+      "semantic_path": "수술목록.7행.수술코드",
+      "anchor_id": "manual_1783576572717",
+      "rule": "pool:surgery_code_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술7_수술명": {
+      "semantic_path": "수술목록.7행.수술명",
+      "anchor_id": "manual_1783576669774",
+      "rule": "pool:surgery_name_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술7_수량": {
+      "semantic_path": "수술목록.7행.수량",
+      "anchor_id": "manual_1783576859117",
+      "rule": "choice:1|2|3",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술7_주수술": {
+      "semantic_path": "수술목록.7행.주수술",
+      "anchor_id": "manual_1783576922267",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술7_부수술": {
+      "semantic_path": "수술목록.7행.부수술",
+      "anchor_id": "manual_1783576757164",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술8_수술코드": {
+      "semantic_path": "수술목록.8행.수술코드",
+      "anchor_id": "manual_1783576579268",
+      "rule": "pool:surgery_code_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술8_수술명": {
+      "semantic_path": "수술목록.8행.수술명",
+      "anchor_id": "manual_1783576693546",
+      "rule": "pool:surgery_name_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술8_수량": {
+      "semantic_path": "수술목록.8행.수량",
+      "anchor_id": "manual_1783576862217",
+      "rule": "choice:1|2|3",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술8_주수술": {
+      "semantic_path": "수술목록.8행.주수술",
+      "anchor_id": "manual_1783576926866",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술8_부수술": {
+      "semantic_path": "수술목록.8행.부수술",
+      "anchor_id": "manual_1783576762198",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술9_수술코드": {
+      "semantic_path": "수술목록.9행.수술코드",
+      "anchor_id": "manual_1783576584452",
+      "rule": "pool:surgery_code_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술9_수술명": {
+      "semantic_path": "수술목록.9행.수술명",
+      "anchor_id": "manual_1783576697764",
+      "rule": "pool:surgery_name_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술9_수량": {
+      "semantic_path": "수술목록.9행.수량",
+      "anchor_id": "manual_1783576865483",
+      "rule": "choice:1|2|3",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술9_주수술": {
+      "semantic_path": "수술목록.9행.주수술",
+      "anchor_id": "manual_1783576931967",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술9_부수술": {
+      "semantic_path": "수술목록.9행.부수술",
+      "anchor_id": "manual_1783576768315",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술10_수술코드": {
+      "semantic_path": "수술목록.10행.수술코드",
+      "anchor_id": "manual_1783576588751",
+      "rule": "pool:surgery_code_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술10_수술명": {
+      "semantic_path": "수술목록.10행.수술명",
+      "anchor_id": "manual_1783576702130",
+      "rule": "pool:surgery_name_values",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술10_수량": {
+      "semantic_path": "수술목록.10행.수량",
+      "anchor_id": "manual_1783576868967",
+      "rule": "choice:1|2|3",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술10_주수술": {
+      "semantic_path": "수술목록.10행.주수술",
+      "anchor_id": "manual_1783576875250",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
+    },
+    "수술10_부수술": {
+      "semantic_path": "수술목록.10행.부수술",
+      "anchor_id": "manual_1783576772832",
+      "rule": "checkbox.bool",
+      "basis": "manual completion of existing use bbox in surgery table spare rows; optional row fill may leave values blank at generation time",
+      "research_evidence_ids": []
     }
   },
   "privacy": "synthetic dummy values only; no real patient, company, account, or institutional identifiers",
   "updated_at": "2026-07-09T08:23:58.151808+00:00",
   "quality_notes": [
     "2026-07-09: 주수술/부수술은 체크박스형 행 역할 표시로 유지하되 primary_secondary_group constraint로 정확히 한 주수술만 생성. 재료처치/마취재료/주사처방/마취시간 pool을 확장."
-  ]
+  ],
+  "generation_policy": {
+    "수술목록": {
+      "type": "sparse_rows",
+      "row_prefix": "수술",
+      "min_filled_rows": 1,
+      "max_filled_rows": 3,
+      "total_authored_rows": 10,
+      "blank_unfilled_rows": true,
+      "note": "Authoring covers every use bbox, but synthetic samples should not necessarily fill all spare surgery rows."
+    }
+  }
 }

@@ -525,6 +525,9 @@ function App() {
   const [reviewAudit, setReviewAudit] = useState(null);
   const [manualCleanupAudit, setManualCleanupAudit] = useState(null);
   const [authoringAgentInstruction, setAuthoringAgentInstruction] = useState('');
+  const [authoringAgentReasoning, setAuthoringAgentReasoning] = useState('medium');
+  const [authoringAgentFastMode, setAuthoringAgentFastMode] = useState(false);
+  const [authoringAgentMinPoolSize, setAuthoringAgentMinPoolSize] = useState(12);
   const [authoringAgentRequest, setAuthoringAgentRequest] = useState(null);
   const [authoringAgentRun, setAuthoringAgentRun] = useState(null);
   const [authoringLibrary, setAuthoringLibrary] = useState(null);
@@ -955,17 +958,26 @@ function App() {
     }
   }
 
-  async function createAuthoringAgentRequest() {
+  function authoringAgentOptions(mode = 'authoring') {
+    return {
+      mode,
+      reasoningEffort: authoringAgentReasoning,
+      fastMode: authoringAgentFastMode,
+      minPoolSize: clampNumber(authoringAgentMinPoolSize, 1, 100),
+    };
+  }
+
+  async function createAuthoringAgentRequest(mode = 'authoring') {
     if (!selectedDocId) return;
-    setBusy('authoringAgentRequest');
+    setBusy(mode === 'bbox_correction' ? 'authoringAgentBboxRequest' : 'authoringAgentRequest');
     setError('');
     try {
       const payload = await apiJson('/api/authoring/agent-request', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction }),
+        body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction, options: authoringAgentOptions(mode) }),
       });
       setAuthoringAgentRequest(payload);
-      setMessage(`Agent authoring 요청 패키지 생성 완료: ${payload.paths.request}${payload.paths.prompt ? ` · ${payload.paths.prompt}` : ''}`);
+      setMessage(`${mode === 'bbox_correction' ? 'BBox 보정' : 'Agent authoring'} 요청 패키지 생성 완료: ${payload.paths.request}${payload.paths.prompt ? ` · ${payload.paths.prompt}` : ''}`);
       await refreshAll({ preserveSelection: true });
     } finally {
       setBusy('');
@@ -994,19 +1006,19 @@ function App() {
     }
   }
 
-  async function runAuthoringAgentInference() {
+  async function runAuthoringAgentInference(mode = 'authoring') {
     if (!selectedDocId) return;
-    setBusy('authoringAgentRun');
+    setBusy(mode === 'bbox_correction' ? 'authoringAgentBboxRun' : 'authoringAgentRun');
     setError('');
     authoringAgentTerminalRefreshRef.current = '';
     try {
       const payload = await apiJson('/api/authoring/agent-run', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction }),
+        body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction, options: authoringAgentOptions(mode) }),
       });
       setAuthoringAgentRequest({ docId: payload.docId, paths: { request: payload.requestPath }, request: null });
       setAuthoringAgentRun(payload);
-      setMessage(`Agent 추론 job 시작: ${payload.jobPath}`);
+      setMessage(`${mode === 'bbox_correction' ? 'BBox 보정 Agent' : 'Agent 추론'} job 시작: ${payload.jobPath}`);
       await refreshAll({ preserveSelection: true });
     } finally {
       setBusy('');
@@ -1048,6 +1060,32 @@ function App() {
       setMessage(`${section} raw JSON을 적용했습니다. 저장 전까지 파일에는 반영되지 않습니다.`);
     } catch (err) {
       setError(`${section} JSON 파싱 실패: ${err.message || String(err)}`);
+    }
+  }
+
+  async function validateAuthoringConsistency({ strictReviewCoverage = true } = {}) {
+    if (!authoringBundle) return null;
+    setBusy('authoringValidate');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/validate', {
+        method: 'POST',
+        body: JSON.stringify({
+          schema: authoringBundle.schema,
+          fakerProfile: authoringBundle.faker_profile,
+          strictReviewCoverage,
+        }),
+      });
+      setAuthoringBundle((current) => ({ ...(current || {}), consistency: payload.consistency }));
+      const summary = payload.consistency?.summary || {};
+      if (payload.consistency?.ready) {
+        setMessage(`Authoring 정합성 OK: field ${summary.fieldCount || 0}개 · semantic leaf ${summary.semanticLeafCount || 0}개`);
+      } else {
+        setError(`Authoring 정합성 오류 ${summary.errorCount || 0}건: ${payload.consistency?.errors?.[0]?.code || 'unknown'}`);
+      }
+      return payload;
+    } finally {
+      setBusy('');
     }
   }
 
@@ -3417,11 +3455,27 @@ function App() {
               value={authoringAgentInstruction}
               onChange={(event) => setAuthoringAgentInstruction(event.target.value)}
             />
+            <div className="agent-options-grid">
+              <label>사고 레벨
+                <select value={authoringAgentReasoning} onChange={(event) => setAuthoringAgentReasoning(event.target.value)}>
+                  <option value="low">low</option>
+                  <option value="medium">medium</option>
+                  <option value="high">high</option>
+                </select>
+              </label>
+              <label>Pool 최소 원소
+                <input type="number" min="1" max="100" value={authoringAgentMinPoolSize} onChange={(event) => setAuthoringAgentMinPoolSize(clampNumber(event.target.value, 1, 100))} />
+              </label>
+              <label className={`check-row ${authoringAgentFastMode ? 'on' : ''}`}>
+                <input type="checkbox" checked={authoringAgentFastMode} onChange={(event) => setAuthoringAgentFastMode(event.target.checked)} />
+                <span>fast mode 사용</span>
+              </label>
+            </div>
             <div className="button-row compact-buttons">
-              <button className="primary" onClick={() => run(runAuthoringAgentInference)} disabled={!selectedDocId || isBusy}>
+              <button className="primary" onClick={() => run(() => runAuthoringAgentInference('authoring'))} disabled={!selectedDocId || isBusy}>
                 {busy === 'authoringAgentRun' ? 'Agent 추론 시작 중...' : 'Agent 추론 실행'}
               </button>
-              <button onClick={() => run(createAuthoringAgentRequest)} disabled={!selectedDocId || isBusy}>
+              <button onClick={() => run(() => createAuthoringAgentRequest('authoring'))} disabled={!selectedDocId || isBusy}>
                 {busy === 'authoringAgentRequest' ? '요청 패키지 생성 중...' : '요청 패키지만 생성'}
               </button>
               <button onClick={() => run(() => refreshAuthoringAgentRunStatus())} disabled={!latestAgentRunPath || isBusy}>
@@ -3439,6 +3493,9 @@ function App() {
               </div>
             )}
             <div className="button-row compact-buttons">
+              <button onClick={() => run(() => runAuthoringAgentInference('bbox_correction'))} disabled={!selectedDocId || isBusy}>
+                {busy === 'authoringAgentBboxRun' ? 'BBox 보정 시작 중...' : 'Agent BBox 보정 draft'}
+              </button>
               <button onClick={() => run(loadAuthoringLibrary)} disabled={isBusy}>{busy === 'authoringLibrary' ? '라이브러리 로드 중...' : 'Faker/Profile 라이브러리'}</button>
               <button onClick={() => run(approveAuthoringDraftsToLibrary)} disabled={!latestAgentRequestPath || isBusy}>{busy === 'authoringApproveDrafts' ? '승인 기록 중...' : 'Draft 라이브러리 승인 기록'}</button>
               <button onClick={() => run(applyAuthoringAgentDrafts)} disabled={!latestAgentRunReady || isBusy}>{busy === 'authoringApplyAgentDrafts' ? '적용 중...' : 'Draft 최종 Authoring 적용'}</button>
@@ -3454,7 +3511,17 @@ function App() {
               <button className={authoringDirty ? 'primary' : ''} onClick={() => run(() => saveAuthoringBundle())} disabled={!authoringBundle || isBusy}>
                 {busy === 'authoringSave' ? '저장 중...' : authoringDirty ? 'Authoring 저장 *' : 'Authoring 저장'}
               </button>
+              <button onClick={() => run(() => validateAuthoringConsistency({ strictReviewCoverage: true }))} disabled={!authoringBundle || isBusy}>
+                {busy === 'authoringValidate' ? '검사 중...' : '정합성 검사'}
+              </button>
             </div>
+            {authoringBundle?.consistency && (
+              <div className={`audit-box ${authoringBundle.consistency.ready ? 'agent-run-box succeeded' : 'agent-run-box failed'}`}>
+                <b>Authoring 정합성: {authoringBundle.consistency.ready ? 'OK' : '오류'}</b>
+                <small>errors {authoringBundle.consistency.summary?.errorCount || 0} · warnings {authoringBundle.consistency.summary?.warningCount || 0} · fields {authoringBundle.consistency.summary?.fieldCount || 0} · semantic leaves {authoringBundle.consistency.summary?.semanticLeafCount || 0}</small>
+                {(authoringBundle.consistency.errors || []).slice(0, 3).map((item, index) => <small key={index}>{item.code}{item.field ? ` · ${item.field}` : ''}{item.semantic_path ? ` · ${item.semantic_path}` : ''}</small>)}
+              </div>
+            )}
             {authoringLivePreview?.error && <p className="warning-text">Live preview 렌더링 오류: {authoringLivePreview.error}</p>}
             {missingAuthoringFields.length > 0 && (
               <p className="warning-text">Review에서 삭제되었거나 미사용 상태인 bbox에 연결된 Authoring field {missingAuthoringFields.length}개가 숨겨져 있습니다. BBox 리뷰 저장 시 정합성 경고에서 삭제를 확정하세요.</p>

@@ -1215,6 +1215,8 @@ def _generate_values(
             warnings.append(warning)
     constraint_warnings = _apply_generation_constraints(values, faker_profile, rng)
     warnings.extend(constraint_warnings)
+    sparse_warnings = _apply_sparse_row_generation_policy(values, faker_profile, rng)
+    warnings.extend(sparse_warnings)
     two_digit_year_fields = _date_group_two_digit_year_fields(faker_profile)
     for field in schema.get("fields", []):
         if not isinstance(field, dict):
@@ -1227,6 +1229,67 @@ def _generate_values(
         if field_id in two_digit_year_fields:
             values[field_id] = _normalize_two_digit_year(values[field_id])
     return values, warnings
+
+
+def _apply_sparse_row_generation_policy(values: dict[str, str], faker_profile: dict[str, Any], rng: random.Random) -> list[dict[str, Any]]:
+    """Blank optional trailing table rows after all field relationships run.
+
+    Authoring can deliberately cover every reviewed/use bbox while generated samples
+    should fill only the first N logical rows.  This policy lives outside the
+    prompt/validation constraint grammar so older profiles remain valid and the
+    renderer still receives ordinary field values.
+    """
+
+    policies = faker_profile.get("generation_policy")
+    if not isinstance(policies, dict):
+        return []
+    warnings: list[dict[str, Any]] = []
+    for section, raw_policy in policies.items():
+        if not isinstance(raw_policy, dict):
+            continue
+        if str(raw_policy.get("type") or "").strip().lower() != "sparse_rows":
+            continue
+        prefix = str(raw_policy.get("row_prefix") or "").strip()
+        if not prefix:
+            warnings.append({"type": "invalid_generation_policy", "message": "sparse_rows requires row_prefix", "section": section})
+            continue
+        total_rows = _constraint_int(raw_policy.get("total_authored_rows"), default=0, minimum=0, maximum=200)
+        if total_rows <= 0:
+            total_rows = _infer_sparse_total_rows(values, prefix)
+        if total_rows <= 0:
+            warnings.append({"type": "invalid_generation_policy", "message": "sparse_rows found no matching row fields", "section": section, "row_prefix": prefix})
+            continue
+        min_rows = _constraint_int(raw_policy.get("min_filled_rows"), default=1, minimum=0, maximum=total_rows)
+        max_rows = _constraint_int(raw_policy.get("max_filled_rows"), default=min(3, total_rows), minimum=min_rows, maximum=total_rows)
+        filled_rows = rng.randint(min_rows, max_rows)
+        for row_index in range(filled_rows + 1, total_rows + 1):
+            row_marker = f"{prefix}{row_index}_"
+            for field_id in list(values.keys()):
+                if field_id.startswith(row_marker):
+                    values[field_id] = ""
+        _normalize_sparse_primary_secondary_rows(values, prefix, filled_rows)
+    return warnings
+
+
+def _infer_sparse_total_rows(values: dict[str, str], prefix: str) -> int:
+    max_row = 0
+    pattern = re.compile(rf"^{re.escape(prefix)}(\d+)_")
+    for field_id in values:
+        match = pattern.match(str(field_id))
+        if match:
+            max_row = max(max_row, int(match.group(1)))
+    return max_row
+
+
+def _normalize_sparse_primary_secondary_rows(values: dict[str, str], prefix: str, filled_rows: int) -> None:
+    primary_fields = [f"{prefix}{row}_주수술" for row in range(1, filled_rows + 1) if f"{prefix}{row}_주수술" in values]
+    secondary_fields = [f"{prefix}{row}_부수술" for row in range(1, filled_rows + 1) if f"{prefix}{row}_부수술" in values]
+    if not primary_fields or len(primary_fields) != len(secondary_fields):
+        return
+    selected_index = 0
+    for index, (primary, secondary) in enumerate(zip(primary_fields, secondary_fields)):
+        values[primary] = "true" if index == selected_index else "false"
+        values[secondary] = "false" if index == selected_index else "true"
 
 
 def _generate_authoring_value(

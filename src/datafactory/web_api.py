@@ -81,6 +81,8 @@ AUTHORING_AGENT_REQUIRED_OUTPUTS = [
     "application_notes.md",
 ]
 AUTHORING_AGENT_JSON_OUTPUTS = {name for name in AUTHORING_AGENT_REQUIRED_OUTPUTS if name.endswith(".json")}
+DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE = 12
+AUTHORING_AGENT_REASONING_EFFORTS = {"low", "medium", "high"}
 AUTHORING_AGENT_SUPPORTED_FAKER_RULES = [
     "literal:<고정 더미 문자열>",
     "choice:<값1>|<값2>|<값3>",
@@ -471,7 +473,25 @@ def _authoring_agent_prompt_markdown(request: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _authoring_agent_options(payload: dict[str, Any]) -> dict[str, Any]:
+    raw_options = payload.get("options") if isinstance(payload.get("options"), dict) else payload
+    reasoning = str(raw_options.get("reasoningEffort") or raw_options.get("reasoning") or "medium").strip().lower()
+    if reasoning not in AUTHORING_AGENT_REASONING_EFFORTS:
+        reasoning = "medium"
+    fast_mode = bool(raw_options.get("fastMode", False))
+    try:
+        min_pool_size = int(raw_options.get("minPoolSize") or raw_options.get("fakerMinPoolSize") or DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE)
+    except (TypeError, ValueError):
+        min_pool_size = DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE
+    min_pool_size = max(1, min(100, min_pool_size))
+    mode = str(raw_options.get("mode") or "authoring").strip().lower()
+    if mode not in {"authoring", "bbox_correction"}:
+        mode = "authoring"
+    return {"reasoningEffort": reasoning, "fastMode": fast_mode, "minPoolSize": min_pool_size, "mode": mode}
+
+
 def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    options = _authoring_agent_options(payload)
     doc_id = str(payload.get("docId") or "")
     if not doc_id:
         raise ValueError("docId is required")
@@ -507,8 +527,10 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "docId": doc_id,
         "title": doc.title,
         "instruction": str(payload.get("instruction") or "").strip(),
+        "options": options,
         "contract": {
-            "mode": "agentic_authoring_a_to_z",
+            "mode": "agentic_bbox_correction" if options["mode"] == "bbox_correction" else "agentic_authoring_a_to_z",
+            "inference_options": options,
             "sample_kind": sample_kind,
             "input_formats": ["pdf", "jpg", "jpeg", "png", "docx"],
             "generation_paths": ["image-template", "editable-office-template"],
@@ -516,8 +538,9 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             "workflow_steps": [
                 "입력 파일, OCR, bbox review, 기존 authoring 파일을 먼저 읽고 근거 anchor를 정리한다.",
                 "실제 문서명을 웹 검색해 작성 방법, 문서 의미, 포함 정보, 실제 샘플 양식, 공식/공공/기관/기업 설명을 수집한다.",
-                "문서에 보이는 anchor와 리서치 근거를 연결해 schema_draft와 faker_profile_draft를 작성한다.",
-                "불확실하거나 출처가 충돌하는 항목은 확정하지 않고 uncertainty_report에 남긴다.",
+                "1차 pass에서는 문서/시각/OCR/리서치 근거로 primary semantic_schema와 모든 use bbox binding을 먼저 확정한다.",
+                "2차 pass에서는 확정된 schema/field_id를 기준으로 faker_profile_draft의 data pool과 relationship constraint를 확장한다.",
+                "불확실하거나 출처가 충돌하는 항목은 검토필요 leaf 또는 uncertainty_report에 남긴다.",
                 "모든 산출물은 draft로만 저장하며 적용/덮어쓰기는 UI 승인 이후 수행한다.",
             ],
             "web_research_rules": [
@@ -537,7 +560,8 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "key는 실제 문서에 보이는 라벨, 표제, placeholder, 주변 텍스트, 편집 가능한 anchor 기반 한국어 자연어를 우선한다.",
                 "문서에 보이지 않는 추상 키, 업무 추론만으로 만든 키, downstream 편의용 임의 구조체를 만들지 않는다.",
                 "웹 리서치로 발견한 일반 항목이라도 대응 anchor가 없으면 schema_draft에 자동 추가하지 않는다.",
-                "`use` anchor 중 schema field로 매핑하지 않는 anchor가 있으면 `unmapped_use_anchors`에 anchor_id와 제외 사유를 기록한다.",
+                "`use` anchor는 절대 생략하지 않는다. 의미가 불확실해도 반드시 `검토필요/<anchor_id 또는 보이는 label>` primary leaf와 binding field를 만들고 `review_required:true`, 낮은 confidence, uncertainty_report 항목을 남긴다.",
+                "`unmapped_use_anchors`는 성공 산출물에서 금지한다. 모든 use anchor coverage는 100%여야 한다.",
                 "예: primary semantic schema에는 `입원일`, `퇴원일`을 분리 저장하되 문서에는 `입원: yyyy-mm-dd, 퇴원: yyyy-mm-dd` 한 줄로 찍어야 한다면, 분리 leaf field는 `render_policy:{render:false}`로 두고 복합 표시 field는 같은 anchor에 `export:{include:false}`로 둔다.",
             ],
             "visual_source_of_truth_rules": [
@@ -557,7 +581,7 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "`호/가구/세대`처럼 라벨에만 단위 의미가 있고 값 위치에 별도 정적 단위가 없는 복합 값은 단위를 포함해 생성한다. 단위 포함/제외 근거를 field_rules 또는 uncertainty_report에 기록한다.",
                 "faker_profile_draft.json에는 렌더러가 직접 읽는 `field_generators` 객체를 반드시 포함하고, key는 schema_draft.fields[].field_id, value는 지원 rule 문자열이어야 한다.",
                 f"지원 rule 문법: {', '.join(AUTHORING_AGENT_SUPPORTED_FAKER_RULES)}.",
-                "`pool:<name>`을 쓰는 경우 faker_profile_draft.json의 `data_pools.<name>`에 반드시 실제 scalar 합성 값 배열을 함께 정의한다. data_pools에 없는 pool 이름은 절대 쓰지 않는다.",
+                f"`pool:<name>`을 쓰는 경우 faker_profile_draft.json의 `data_pools.<name>`에 반드시 실제 scalar 합성 값 배열을 함께 정의한다. pool은 최소 {options['minPoolSize']}개 이상의 다양하고 현실적인 scalar 값을 포함해야 하며, data_pools에 없는 pool 이름은 절대 쓰지 않는다.",
                 "`date_between:`, `time|format:`, `decimal_range:`, `identifier.*`, `area.*`, `land_use.*`, `building.*`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`처럼 현재 렌더러가 모르는 custom rule/type 이름은 field_generators 값으로 쓰지 않는다.",
                 "지원 문법만으로 정밀 형식을 표현하기 어렵다면 `pattern:`, `choice:`, `pool:`, `template:` 중 하나로 근사하고, 근사 사유와 원래 의도는 field_rules 또는 uncertainty_report에 기록한다.",
                 "의미가 불확실한 key는 literal:, choice:, pool: 등을 임의 생성하지 말고 보류 사유를 기록한다.",
@@ -585,6 +609,12 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "기존 authoring 파일을 덮어쓰기 전 사용자 승인과 백업 경로가 필요하다.",
                 "UI 확정 전에는 schema_draft, faker_profile_draft, value_pool_draft, research_report, uncertainty_report를 함께 검토 가능해야 한다.",
             ],
+        },
+        "agent_contract_summary": {
+            "use_anchor_coverage_required": True,
+            "unknown_use_anchor_policy": "create primary semantic leaf under 검토필요 and mark review_required",
+            "faker_profile_workflow": "internal_two_pass_schema_then_pool_expansion",
+            "min_pool_size": options["minPoolSize"],
         },
         "inputs": {
             "registry": doc.to_dict(),
@@ -726,6 +756,7 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
     last_message_path = run_dir / "codex_last_message.md"
     stdout_path = run_dir / "stdout.log"
     stderr_path = run_dir / "stderr.log"
+    options = request_payload.get("request", {}).get("options") if isinstance(request_payload.get("request"), dict) else _authoring_agent_options(payload)
     prompt = _authoring_agent_exec_prompt(request_path=request_path, request_dir=request_dir, run_dir=run_dir)
     prompt_path.write_text(prompt, encoding="utf-8")
     job = {
@@ -746,6 +777,7 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
         "requiredOutputs": list(AUTHORING_AGENT_REQUIRED_OUTPUTS),
         "outputs": {},
         "validation": {"missing": list(AUTHORING_AGENT_REQUIRED_OUTPUTS), "invalidJson": [], "ready": False},
+        "options": options,
     }
     _write_agent_job(job_path, job)
     update_manifest_artifact(doc_id, "authoring_agent_run", job_path)
@@ -828,6 +860,7 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
         schema["source_review"] = str(applied_review_path.resolve())
         schema["bbox_source"] = {"canonical": "review", "review_path": str(applied_review_path.resolve())}
         schema["anchor_map_ref"] = _display_path(anchor_map_path, ROOT)
+    consistency = _raise_if_authoring_inconsistent(schema, faker_profile_draft, strict_review_coverage=True)
     result = save_authoring_bundle(
         authoring_dir / "schema.json",
         authoring_dir / "stylesheet.json",
@@ -848,6 +881,7 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
         "docId": doc_id,
         "requestPath": _display_path(request_path, ROOT),
         "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
+        "consistency": consistency,
         **result.payload,
     }
 
@@ -961,7 +995,8 @@ You are running as a local Codex subprocess for the DataFactory workbench.
 - Write outputs only inside this request directory: `{_display_path(request_dir, ROOT)}`.
 - Do not overwrite final `schema.json`, `stylesheet.json`, or `faker_profile.json`.
 - Do not edit source code, registry files, workbench manifests, or samples.
-- If a field is uncertain, keep the schema key anchored to visible/template evidence and record uncertainty instead of inventing a faker rule.
+- Run the work as an internal two-pass process: first finalize primary semantic_schema plus bbox bindings for every use anchor, then expand faker_profile/value pools/constraints against those fixed field_ids.
+- If a use anchor is uncertain, do not omit it. Create a `검토필요/<anchor_id or visible label>` primary schema leaf, bind the anchor, set `review_required:true`, use a conservative supported faker rule such as `free_text.short`, and record the uncertainty.
 - For blank templates, never use a static label/keep bbox as `schema_draft.fields[].anchor_id`. Use `label_anchor_ids` for label evidence and use only a confirmed value-region/checkbox/table-cell/manual/visual-line-detect anchor as the field target.
 
 ## Required output files
@@ -969,7 +1004,7 @@ You are running as a local Codex subprocess for the DataFactory workbench.
 
 ## Output contracts
 - `schema_draft.json`: constrained full authoring draft with `schema_version`, `doc_id`, `title`, primary `semantic_schema`, and binding layer `fields` or `field_bindings`. `semantic_schema` must be a metadata-free KIE key-value hierarchy whose leaf values are empty strings. The binding layer is only the bridge from semantic leaf to bbox target; each binding must include `field_id`, `key` or `label`, `semantic_path`, `anchor_id`, `value` as an empty string, and optional `label_anchor_ids`, `value_type`, `faker_rule`/`generator`, `style_class`, `unit_policy`, `research_evidence_ids`, and `visual_evidence`.
-- Every binding `semantic_path` must point to an existing `semantic_schema` leaf. Exception: if a field is only a composite render string and should not enter the primary semantic schema, set `export:{{"include":false}}`; then its `semantic_path` may be a render-only path. Every binding `anchor_id` must exist in `anchor_map_draft.json` and target a `use` value-region anchor. If a `use` anchor is intentionally not mapped, list it in `schema_draft.json.unmapped_use_anchors` with a reason.
+- Every binding `semantic_path` must point to an existing `semantic_schema` leaf. Exception: if a field is only a composite render string and should not enter the primary semantic schema, set `export:{{"include":false}}`; then its `semantic_path` may be a render-only path. Every binding `anchor_id` must exist in `anchor_map_draft.json` and target a `use` value-region anchor. `unmapped_use_anchors` is not allowed: every use anchor must have a binding, using `검토필요/...` when uncertain.
 - For split-primary/composite-render cases, keep the primary semantic fields as hidden render fields with `render_policy:{{"render":false}}` and create a separate visible composite field with `export:{{"include":false}}`. Example: store `입원일` and `퇴원일` separately, but render one visible string like `입원: yyyy-mm-dd, 퇴원: yyyy-mm-dd`.
 - `stylesheet_draft.json`: draft render style classes or field style hints; keep conservative defaults if visual style is uncertain.
 - `faker_profile_draft.json`: must include `field_generators` as the renderer-compatible source of truth. It may also include `field_rules` for traceability, but every `field_generators` value must use only the supported rule grammar below. Do not use real personal/company/account data.
@@ -986,7 +1021,7 @@ Use only these forms in `faker_profile_draft.json.field_generators`.
 
 Do not put unsupported semantic type names in `field_generators`.
 Before adding or removing a unit suffix in any generated value, inspect the full template image around the target bbox; use the crop only as a zoom aid if needed. If the unit remains as static text at the value position, omit the unit from the faker value. If the unit appears only in the label, such as 호/가구/세대, keep the unit in the generated value when it is part of the natural value notation.
-If you use `pool:<name>`, define `data_pools.<name>` as a non-empty array of scalar synthetic values in the same `faker_profile_draft.json`; never reference an undefined pool.
+If you use `pool:<name>`, define `data_pools.<name>` as an array of scalar synthetic values in the same `faker_profile_draft.json`; never reference an undefined pool. The minimum pool size is declared in request.options.minPoolSize and must be met unless the field is a small closed legal/visual choice set.
 Examples of forbidden generator values: `date_between:-365d:+0d|format:%Y/%m/%d`, `time|format:%H:%M:%S`, `decimal_range:10..99`, `identifier.document_confirmation`, `area.square_meter`, `land_use.zoning`, `building.structure`, `text.short`, `count_triplet`, `lot_number`, `page_count_label`.
 If precision would require an unsupported rule, approximate with `pattern:`, `choice:`, `pool:`, or `template:` and record the limitation in `uncertainty_report.json`.
 
@@ -995,7 +1030,7 @@ If precision would require an unsupported rule, approximate with `pattern:`, `ch
 {chr(10).join(f"- {rule}" for rule in AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES)}
 
 ## Completion criteria
-Before finishing, verify all required files exist, all JSON files parse, every `field_generators` key matches a schema binding field_id, every pool reference exists, and every `constraints` item follows the exact supported relationship constraint grammar above.
+Before finishing, verify all required files exist, all JSON files parse, every use anchor has a schema binding, every binding has a matching `field_generators` entry, every `field_generators` key matches a schema binding field_id, every pool reference exists and meets minPoolSize, and every `constraints` item follows the exact supported relationship constraint grammar above.
 Return a short Korean final summary only after the files are written.
 
 ## Run directory
@@ -1016,15 +1051,21 @@ def _run_authoring_agent_job(
     job = _read_agent_job(job_path)
     job.update({"status": "running", "startedAt": datetime.now(timezone.utc).isoformat()})
     _write_agent_job(job_path, job)
+    options = job.get("options") if isinstance(job.get("options"), dict) else {}
+    reasoning_effort = str(options.get("reasoningEffort") or "medium").strip().lower()
+    if reasoning_effort not in AUTHORING_AGENT_REASONING_EFFORTS:
+        reasoning_effort = "medium"
     command = [
         "codex",
         "--search",
         "--ask-for-approval",
         "never",
         "-c",
-        'model_reasoning_effort="medium"',
-        "--disable",
-        "fast_mode",
+        f'model_reasoning_effort="{reasoning_effort}"',
+    ]
+    if not bool(options.get("fastMode", False)):
+        command.extend(["--disable", "fast_mode"])
+    command.extend([
         "exec",
         "--cd",
         str(ROOT),
@@ -1033,7 +1074,7 @@ def _run_authoring_agent_job(
         "--output-last-message",
         str(last_message_path),
         "-",
-    ]
+    ])
     try:
         completed = subprocess.run(
             command,
@@ -1084,6 +1125,178 @@ def _run_authoring_agent_job(
         update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_research_report", request_dir / "research_report.json")
 
 
+
+def _request_min_pool_size(request_dir: Path) -> int:
+    request_path = request_dir / "request.json"
+    try:
+        request = json.loads(request_path.read_text(encoding="utf-8"))
+    except Exception:
+        return DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE
+    options = request.get("options") if isinstance(request.get("options"), dict) else {}
+    try:
+        return max(1, min(100, int(options.get("minPoolSize") or DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE)))
+    except (TypeError, ValueError):
+        return DEFAULT_AUTHORING_AGENT_MIN_POOL_SIZE
+
+
+def _semantic_schema_set_leaf(root: dict[str, Any], path: list[str], value: str = "") -> None:
+    cursor = root
+    for part in path[:-1]:
+        existing = cursor.get(part)
+        if not isinstance(existing, dict):
+            existing = {}
+            cursor[part] = existing
+        cursor = existing
+    if path:
+        cursor[path[-1]] = value
+
+
+def _unique_semantic_path(root: dict[str, Any], anchor_id: str, label: str = "") -> list[str]:
+    base = label.strip() or anchor_id.strip() or "미확인"
+    safe = _safe_name(base) or "미확인"
+    # Keep Korean-facing root stable while using a safe deterministic leaf token.
+    candidate = ["검토필요", safe]
+    leaves = {path for path, _value in _iter_semantic_leaf_values(root)}
+    if "/".join(candidate) not in leaves:
+        return candidate
+    index = 2
+    while True:
+        next_candidate = ["검토필요", f"{safe}_{index}"]
+        if "/".join(next_candidate) not in leaves:
+            return next_candidate
+        index += 1
+
+
+def _ensure_use_anchor_placeholders(parsed_json: dict[str, Any], request_dir: Path) -> None:
+    """Guarantee draft coverage for every use anchor before contract validation.
+
+    Agent omission is hard to control perfectly.  Rather than accepting missing
+    use anchors or letting final export fail later, materialize a low-confidence
+    primary semantic leaf under ``검토필요`` and a conservative faker rule.
+    """
+
+    schema = parsed_json.get("schema_draft.json") if isinstance(parsed_json.get("schema_draft.json"), dict) else None
+    anchor_map = parsed_json.get("anchor_map_draft.json") if isinstance(parsed_json.get("anchor_map_draft.json"), dict) else None
+    faker_profile = parsed_json.get("faker_profile_draft.json") if isinstance(parsed_json.get("faker_profile_draft.json"), dict) else None
+    if not isinstance(schema, dict) or not isinstance(anchor_map, dict) or not isinstance(faker_profile, dict):
+        return
+    semantic_schema = schema.get("semantic_schema")
+    if not isinstance(semantic_schema, dict):
+        semantic_schema = {}
+        schema["semantic_schema"] = semantic_schema
+    fields = _schema_draft_bindings(schema)
+    if not isinstance(fields, list):
+        fields = []
+        schema["fields"] = fields
+    generators = faker_profile.get("field_generators")
+    if not isinstance(generators, dict):
+        generators = {}
+        faker_profile["field_generators"] = generators
+    anchors = _anchor_map_by_id(anchor_map)
+    use_anchor_ids = [anchor_id for anchor_id, anchor in anchors.items() if str(anchor.get("status") or "").strip().lower() == "use"]
+    mapped_anchor_ids = {
+        str(field.get("anchor_id") or field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+        for field in fields
+        if isinstance(field, dict)
+    }
+    changed = False
+    for anchor_id in use_anchor_ids:
+        if anchor_id in mapped_anchor_ids:
+            continue
+        anchor = anchors.get(anchor_id) or {}
+        label = str(anchor.get("text") or anchor.get("suggested_schema_key") or anchor_id).strip()
+        path = _unique_semantic_path(semantic_schema, anchor_id, label)
+        _semantic_schema_set_leaf(semantic_schema, path, "")
+        field_id = f"review_required_{_safe_name(anchor_id) or len(fields) + 1}"
+        existing_ids = {str(field.get("field_id") or "") for field in fields if isinstance(field, dict)}
+        suffix = 2
+        base_field_id = field_id
+        while field_id in existing_ids:
+            field_id = f"{base_field_id}_{suffix}"
+            suffix += 1
+        fields.append(
+            {
+                "field_id": field_id,
+                "key": path[-1],
+                "label": label or path[-1],
+                "semantic_path": path,
+                "anchor_id": anchor_id,
+                "value": "",
+                "value_type": "free_text.short",
+                "faker_rule": "free_text.short",
+                "review_required": True,
+                "confidence": 0.05,
+                "notes": "자동 보강: agent가 use bbox를 매핑하지 않아 검토필요 primary leaf로 연결함",
+            }
+        )
+        generators[field_id] = "free_text.short"
+        changed = True
+    if schema.pop("unmapped_use_anchors", None) is not None:
+        changed = True
+    if changed:
+        (request_dir / "schema_draft.json").write_text(json.dumps(schema, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        (request_dir / "faker_profile_draft.json").write_text(json.dumps(faker_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _authoring_bundle_consistency(schema: dict[str, Any], faker_profile: dict[str, Any], *, strict_review_coverage: bool = True, min_pool_size: int = 1) -> dict[str, Any]:
+    errors: list[dict[str, Any]] = []
+    warnings: list[dict[str, Any]] = []
+    semantic_schema = schema.get("semantic_schema") if isinstance(schema.get("semantic_schema"), dict) else {}
+    semantic_leaf_paths = {path for path, value in _iter_semantic_leaf_values(semantic_schema) if path}
+    fields = schema.get("fields") if isinstance(schema.get("fields"), list) else []
+    field_ids: set[str] = set()
+    exported_paths: list[str] = []
+    bbox_ids: set[str] = set()
+    for index, field in enumerate(fields):
+        if not isinstance(field, dict):
+            errors.append({"code": "authoring_field_not_object", "index": index})
+            continue
+        field_id = str(field.get("field_id") or "").strip()
+        if not field_id:
+            errors.append({"code": "authoring_field_missing_id", "index": index})
+            continue
+        if field_id in field_ids:
+            errors.append({"code": "authoring_duplicate_field_id", "field": field_id})
+        field_ids.add(field_id)
+        bbox_id = str(field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+        if bbox_id:
+            bbox_ids.add(bbox_id)
+        if _binding_export_enabled(field):
+            path = _binding_semantic_path(field)
+            if not path:
+                errors.append({"code": "authoring_field_missing_semantic_path", "field": field_id})
+            elif semantic_leaf_paths and path not in semantic_leaf_paths:
+                errors.append({"code": "authoring_field_semantic_path_missing", "field": field_id, "semantic_path": path})
+            exported_paths.append(path)
+    duplicates = sorted({path for path in exported_paths if path and exported_paths.count(path) > 1})
+    for path in duplicates:
+        errors.append({"code": "authoring_duplicate_semantic_path", "semantic_path": path})
+    unmapped_leaves = sorted(semantic_leaf_paths - {path for path in exported_paths if path})
+    for path in unmapped_leaves[:30]:
+        errors.append({"code": "authoring_semantic_leaf_unmapped", "semantic_path": path})
+    errors.extend(_validate_faker_profile_contract(faker_profile, fields, min_pool_size=min_pool_size))
+    if strict_review_coverage:
+        bbox_source = schema.get("bbox_source") if isinstance(schema.get("bbox_source"), dict) else {}
+        review_value = str(schema.get("source_review") or bbox_source.get("review_path") or "")
+        if review_value:
+            try:
+                policy = load_review_policy(_resolve_workspace_path(review_value))
+                use_ids = {label.id for label in policy.labels if label.status == "use"}
+                missing = sorted(use_ids - bbox_ids)
+                if missing:
+                    errors.append({"code": "authoring_unmapped_use_bboxes", "anchor_ids": missing[:30], "count": len(missing), "message": "all use bbox labels must have authoring fields"})
+            except Exception as exc:
+                warnings.append({"code": "authoring_review_coverage_skipped", "message": str(exc)})
+    return {"ready": not errors, "errors": errors, "warnings": warnings, "summary": {"errorCount": len(errors), "warningCount": len(warnings), "fieldCount": len(field_ids), "semanticLeafCount": len(semantic_leaf_paths)}}
+
+
+def _raise_if_authoring_inconsistent(schema: dict[str, Any], faker_profile: dict[str, Any], *, strict_review_coverage: bool = True) -> dict[str, Any]:
+    validation = _authoring_bundle_consistency(schema, faker_profile, strict_review_coverage=strict_review_coverage)
+    if validation["errors"]:
+        first = validation["errors"][0]
+        raise ValueError(f"authoring consistency validation failed: {first.get('code')} ({validation['summary']['errorCount']} errors)")
+    return validation
+
 def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
     outputs: dict[str, str] = {}
     missing: list[str] = []
@@ -1101,8 +1314,10 @@ def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
             except Exception as exc:
                 invalid_json.append({"name": name, "error": str(exc)})
     contract_errors: list[dict[str, Any]] = []
+    min_pool_size = _request_min_pool_size(request_dir)
     if not invalid_json:
-        contract_errors.extend(_validate_schema_draft_contract(parsed_json))
+        _ensure_use_anchor_placeholders(parsed_json, request_dir)
+        contract_errors.extend(_validate_schema_draft_contract(parsed_json, min_pool_size=min_pool_size))
         contract_errors.extend(_validate_blank_template_agent_contract(request_dir, parsed_json))
     return {
         "ready": not missing and not invalid_json and not contract_errors,
@@ -1120,7 +1335,7 @@ def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
     }
 
 
-def _validate_schema_draft_contract(parsed_json: dict[str, Any]) -> list[dict[str, Any]]:
+def _validate_schema_draft_contract(parsed_json: dict[str, Any], *, min_pool_size: int = 1) -> list[dict[str, Any]]:
     schema = parsed_json.get("schema_draft.json") if isinstance(parsed_json.get("schema_draft.json"), dict) else {}
     anchor_map = parsed_json.get("anchor_map_draft.json") if isinstance(parsed_json.get("anchor_map_draft.json"), dict) else {}
     faker_profile = parsed_json.get("faker_profile_draft.json") if isinstance(parsed_json.get("faker_profile_draft.json"), dict) else {}
@@ -1173,13 +1388,15 @@ def _validate_schema_draft_contract(parsed_json: dict[str, Any]) -> list[dict[st
         for evidence_id in _binding_research_evidence_ids(field):
             if research_source_ids and evidence_id not in research_source_ids:
                 errors.append({"code": "schema_field_unknown_research_evidence", "field": field_id, "research_evidence_id": evidence_id, "message": "research_evidence_ids must refer to research_report.sources[].id"})
-    errors.extend(_validate_faker_profile_contract(faker_profile, fields))
+    errors.extend(_validate_faker_profile_contract(faker_profile, fields, min_pool_size=min_pool_size))
     if anchors:
         use_anchor_ids = {anchor_id for anchor_id, anchor in anchors.items() if str(anchor.get("status") or "").strip().lower() == "use"}
-        acknowledged_unmapped = _unmapped_use_anchor_ids(schema)
-        unmapped = sorted(use_anchor_ids - mapped_anchor_ids - acknowledged_unmapped)
+        prohibited_unmapped = _unmapped_use_anchor_ids(schema)
+        if prohibited_unmapped:
+            errors.append({"code": "schema_unmapped_use_anchors_prohibited", "anchor_ids": sorted(prohibited_unmapped)[:20], "count": len(prohibited_unmapped), "message": "unmapped_use_anchors is prohibited; create 검토필요 bindings instead"})
+        unmapped = sorted(use_anchor_ids - mapped_anchor_ids)
         if unmapped:
-            errors.append({"code": "schema_unmapped_use_anchors", "anchor_ids": unmapped[:20], "count": len(unmapped), "message": "every use anchor must be mapped or listed in unmapped_use_anchors with a reason"})
+            errors.append({"code": "schema_unmapped_use_anchors", "anchor_ids": unmapped[:20], "count": len(unmapped), "message": "every use anchor must be mapped; create 검토필요 bindings when uncertain"})
     return errors
 
 
@@ -1244,13 +1461,15 @@ def _binding_research_evidence_ids(field: dict[str, Any]) -> list[str]:
     return [str(value).strip() for value in values if str(value).strip()]
 
 
-def _validate_faker_profile_contract(faker_profile: dict[str, Any], fields: list[Any]) -> list[dict[str, Any]]:
+def _validate_faker_profile_contract(faker_profile: dict[str, Any], fields: list[Any], *, min_pool_size: int = 1) -> list[dict[str, Any]]:
     errors: list[dict[str, Any]] = []
     generators = faker_profile.get("field_generators")
     if not isinstance(generators, dict):
         errors.append({"code": "faker_missing_field_generators", "message": "faker_profile_draft.json must include field_generators object"})
         return errors
     field_ids = {str(field.get("field_id") or "").strip() for field in fields if isinstance(field, dict) and str(field.get("field_id") or "").strip()}
+    for field_id in sorted(field_ids - {str(key) for key in generators.keys()}):
+        errors.append({"code": "faker_missing_field_generator", "field": field_id, "message": "every schema binding field_id must have a field_generators rule"})
     for field_id, rule_value in generators.items():
         rule = str(rule_value or "").strip()
         if field_ids and str(field_id) not in field_ids:
@@ -1262,6 +1481,8 @@ def _validate_faker_profile_contract(faker_profile: dict[str, Any], fields: list
             pool = _faker_pool_values(faker_profile, pool_name)
             if not pool:
                 errors.append({"code": "faker_missing_pool", "field": str(field_id), "pool": pool_name, "message": "pool rule must define data_pools.<name> with scalar values"})
+            elif len(pool) < max(1, min_pool_size):
+                errors.append({"code": "faker_pool_too_small", "field": str(field_id), "pool": pool_name, "count": len(pool), "min": max(1, min_pool_size), "message": "pool rule must meet the configured minimum scalar value count"})
     errors.extend(_validate_faker_constraints_contract(faker_profile, field_ids))
     return errors
 
@@ -2310,9 +2531,11 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 faker_profile_path = _resolve_workspace_path(_first_query_value(query, "fakerProfile"))
                 _sync_authoring_template_from_schema_path(schema_path)
                 result = load_authoring_bundle(schema_path, stylesheet_path, faker_profile_path)
+                consistency = _authoring_bundle_consistency(result.payload["schema"], result.payload["faker_profile"], strict_review_coverage=True)
                 self._send_json(
                     {
                         "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
+                        "consistency": consistency,
                         **result.payload,
                     }
                 )
@@ -2756,6 +2979,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     raise ValueError("schema, stylesheet and fakerProfile are required")
                 seed = int(payload.get("seed") or 1234)
                 render_scale = int(payload.get("renderScale") or 2)
+                consistency = _raise_if_authoring_inconsistent(raw_schema, raw_faker_profile, strict_review_coverage=False)
                 if bool(payload.get("handwritingPreview")):
                     result = render_handwriting_authoring_preview(
                         doc_id,
@@ -2772,6 +2996,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                         {
                             "docId": doc_id,
                             "summary": {"sample_id": result["sample_id"], "field_count": result["field_count"], "warning_count": result["warning_count"], "printed_field_count": result["printed_field_count"], "handwriting_field_count": result["handwriting_field_count"], "qr_bbox": result["qr_bbox"]},
+                            "consistency": consistency,
                             "paths": _paths_to_client(paths),
                             "imageUrl": f"/api/file?path={_display_path(result['image'], ROOT)}",
                         }
@@ -2790,6 +3015,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                         {
                             "docId": doc_id,
                             "summary": {"sample_id": result.sample_id, "field_count": result.field_count, "warning_count": result.warning_count},
+                            "consistency": consistency,
                             "paths": _paths_to_client(
                                 {
                                     "image": result.image,
@@ -2855,6 +3081,13 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 )
                 self._send_json({"schema": schema, "summary": {"fieldCount": len(schema.get("fields") or [])}})
                 return
+            if parsed.path == "/api/authoring/validate":
+                raw_schema = payload.get("schema")
+                raw_faker_profile = payload.get("fakerProfile")
+                if not isinstance(raw_schema, dict) or not isinstance(raw_faker_profile, dict):
+                    raise ValueError("schema and fakerProfile are required")
+                self._send_json({"consistency": _authoring_bundle_consistency(raw_schema, raw_faker_profile, strict_review_coverage=bool(payload.get("strictReviewCoverage", True)))})
+                return
             if parsed.path == "/api/authoring/save":
                 doc_id = str(payload.get("docId") or "")
                 if not doc_id:
@@ -2868,6 +3101,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 raw_faker_profile = payload.get("fakerProfile")
                 if not isinstance(raw_schema, dict) or not isinstance(raw_stylesheet, dict) or not isinstance(raw_faker_profile, dict):
                     raise ValueError("schema, stylesheet and fakerProfile are required")
+                consistency = _raise_if_authoring_inconsistent(raw_schema, raw_faker_profile, strict_review_coverage=True)
                 result = save_authoring_bundle(
                     schema_path,
                     stylesheet_path,
@@ -2883,6 +3117,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     {
                         "docId": doc_id,
                         "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
+                        "consistency": consistency,
                         **result.payload,
                     }
                 )

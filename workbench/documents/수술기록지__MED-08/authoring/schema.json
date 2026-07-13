@@ -61,6 +61,55 @@
         "수량": "",
         "주수술": "",
         "부수술": ""
+      },
+      "4행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "5행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "6행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "7행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "8행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "9행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
+      },
+      "10행": {
+        "수술코드": "",
+        "수술명": "",
+        "수량": "",
+        "주수술": "",
+        "부수술": ""
       }
     },
     "재료처치": {
@@ -1633,6 +1682,1091 @@
       },
       "required": true,
       "notes": "",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술4_수술코드",
+      "label": "수술 4행 수술코드",
+      "semantic_path": [
+        "수술목록",
+        "4행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576431217",
+      "source_detection_id": "manual_1783576431217",
+      "source_text": "수술 4행 수술코드",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술4_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/4행/수술코드",
+        "csv_column": "수술목록/4행/수술코드"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술4_수술명",
+      "label": "수술 4행 수술명",
+      "semantic_path": [
+        "수술목록",
+        "4행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576638601",
+      "source_detection_id": "manual_1783576638601",
+      "source_text": "수술 4행 수술명",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술4_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/4행/수술명",
+        "csv_column": "수술목록/4행/수술명"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술4_수량",
+      "label": "수술 4행 수량",
+      "semantic_path": [
+        "수술목록",
+        "4행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576846267",
+      "source_detection_id": "manual_1783576846267",
+      "source_text": "수술 4행 수량",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술4_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/4행/수량",
+        "csv_column": "수술목록/4행/수량"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술4_주수술",
+      "label": "수술 4행 주수술",
+      "semantic_path": [
+        "수술목록",
+        "4행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576901383",
+      "source_detection_id": "manual_1783576901383",
+      "source_text": "수술 4행 주수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술4_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/4행/주수술",
+        "csv_column": "수술목록/4행/주수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술4_부수술",
+      "label": "수술 4행 부수술",
+      "semantic_path": [
+        "수술목록",
+        "4행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576740399",
+      "source_detection_id": "manual_1783576740399",
+      "source_text": "수술 4행 부수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술4_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/4행/부수술",
+        "csv_column": "수술목록/4행/부수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술5_수술코드",
+      "label": "수술 5행 수술코드",
+      "semantic_path": [
+        "수술목록",
+        "5행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576436050",
+      "source_detection_id": "manual_1783576436050",
+      "source_text": "수술 5행 수술코드",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술5_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/5행/수술코드",
+        "csv_column": "수술목록/5행/수술코드"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술5_수술명",
+      "label": "수술 5행 수술명",
+      "semantic_path": [
+        "수술목록",
+        "5행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576652952",
+      "source_detection_id": "manual_1783576652952",
+      "source_text": "수술 5행 수술명",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술5_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/5행/수술명",
+        "csv_column": "수술목록/5행/수술명"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술5_수량",
+      "label": "수술 5행 수량",
+      "semantic_path": [
+        "수술목록",
+        "5행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576849484",
+      "source_detection_id": "manual_1783576849484",
+      "source_text": "수술 5행 수량",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술5_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/5행/수량",
+        "csv_column": "수술목록/5행/수량"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술5_주수술",
+      "label": "수술 5행 주수술",
+      "semantic_path": [
+        "수술목록",
+        "5행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576907500",
+      "source_detection_id": "manual_1783576907500",
+      "source_text": "수술 5행 주수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술5_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/5행/주수술",
+        "csv_column": "수술목록/5행/주수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술5_부수술",
+      "label": "수술 5행 부수술",
+      "semantic_path": [
+        "수술목록",
+        "5행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576746849",
+      "source_detection_id": "manual_1783576746849",
+      "source_text": "수술 5행 부수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술5_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/5행/부수술",
+        "csv_column": "수술목록/5행/부수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술6_수술코드",
+      "label": "수술 6행 수술코드",
+      "semantic_path": [
+        "수술목록",
+        "6행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576442351",
+      "source_detection_id": "manual_1783576442351",
+      "source_text": "수술 6행 수술코드",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술6_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/6행/수술코드",
+        "csv_column": "수술목록/6행/수술코드"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술6_수술명",
+      "label": "수술 6행 수술명",
+      "semantic_path": [
+        "수술목록",
+        "6행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576660951",
+      "source_detection_id": "manual_1783576660951",
+      "source_text": "수술 6행 수술명",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술6_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/6행/수술명",
+        "csv_column": "수술목록/6행/수술명"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술6_수량",
+      "label": "수술 6행 수량",
+      "semantic_path": [
+        "수술목록",
+        "6행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576852400",
+      "source_detection_id": "manual_1783576852400",
+      "source_text": "수술 6행 수량",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술6_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/6행/수량",
+        "csv_column": "수술목록/6행/수량"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술6_주수술",
+      "label": "수술 6행 주수술",
+      "semantic_path": [
+        "수술목록",
+        "6행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576913851",
+      "source_detection_id": "manual_1783576913851",
+      "source_text": "수술 6행 주수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술6_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/6행/주수술",
+        "csv_column": "수술목록/6행/주수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술6_부수술",
+      "label": "수술 6행 부수술",
+      "semantic_path": [
+        "수술목록",
+        "6행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576753881",
+      "source_detection_id": "manual_1783576753881",
+      "source_text": "수술 6행 부수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술6_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/6행/부수술",
+        "csv_column": "수술목록/6행/부수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술7_수술코드",
+      "label": "수술 7행 수술코드",
+      "semantic_path": [
+        "수술목록",
+        "7행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576572717",
+      "source_detection_id": "manual_1783576572717",
+      "source_text": "수술 7행 수술코드",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술7_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/7행/수술코드",
+        "csv_column": "수술목록/7행/수술코드"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술7_수술명",
+      "label": "수술 7행 수술명",
+      "semantic_path": [
+        "수술목록",
+        "7행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576669774",
+      "source_detection_id": "manual_1783576669774",
+      "source_text": "수술 7행 수술명",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술7_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/7행/수술명",
+        "csv_column": "수술목록/7행/수술명"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술7_수량",
+      "label": "수술 7행 수량",
+      "semantic_path": [
+        "수술목록",
+        "7행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576859117",
+      "source_detection_id": "manual_1783576859117",
+      "source_text": "수술 7행 수량",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술7_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/7행/수량",
+        "csv_column": "수술목록/7행/수량"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술7_주수술",
+      "label": "수술 7행 주수술",
+      "semantic_path": [
+        "수술목록",
+        "7행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576922267",
+      "source_detection_id": "manual_1783576922267",
+      "source_text": "수술 7행 주수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술7_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/7행/주수술",
+        "csv_column": "수술목록/7행/주수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술7_부수술",
+      "label": "수술 7행 부수술",
+      "semantic_path": [
+        "수술목록",
+        "7행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576757164",
+      "source_detection_id": "manual_1783576757164",
+      "source_text": "수술 7행 부수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술7_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/7행/부수술",
+        "csv_column": "수술목록/7행/부수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술8_수술코드",
+      "label": "수술 8행 수술코드",
+      "semantic_path": [
+        "수술목록",
+        "8행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576579268",
+      "source_detection_id": "manual_1783576579268",
+      "source_text": "수술 8행 수술코드",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술8_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/8행/수술코드",
+        "csv_column": "수술목록/8행/수술코드"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술8_수술명",
+      "label": "수술 8행 수술명",
+      "semantic_path": [
+        "수술목록",
+        "8행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576693546",
+      "source_detection_id": "manual_1783576693546",
+      "source_text": "수술 8행 수술명",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술8_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/8행/수술명",
+        "csv_column": "수술목록/8행/수술명"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술8_수량",
+      "label": "수술 8행 수량",
+      "semantic_path": [
+        "수술목록",
+        "8행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576862217",
+      "source_detection_id": "manual_1783576862217",
+      "source_text": "수술 8행 수량",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술8_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/8행/수량",
+        "csv_column": "수술목록/8행/수량"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술8_주수술",
+      "label": "수술 8행 주수술",
+      "semantic_path": [
+        "수술목록",
+        "8행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576926866",
+      "source_detection_id": "manual_1783576926866",
+      "source_text": "수술 8행 주수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술8_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/8행/주수술",
+        "csv_column": "수술목록/8행/주수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술8_부수술",
+      "label": "수술 8행 부수술",
+      "semantic_path": [
+        "수술목록",
+        "8행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576762198",
+      "source_detection_id": "manual_1783576762198",
+      "source_text": "수술 8행 부수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술8_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/8행/부수술",
+        "csv_column": "수술목록/8행/부수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술9_수술코드",
+      "label": "수술 9행 수술코드",
+      "semantic_path": [
+        "수술목록",
+        "9행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576584452",
+      "source_detection_id": "manual_1783576584452",
+      "source_text": "수술 9행 수술코드",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술9_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/9행/수술코드",
+        "csv_column": "수술목록/9행/수술코드"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술9_수술명",
+      "label": "수술 9행 수술명",
+      "semantic_path": [
+        "수술목록",
+        "9행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576697764",
+      "source_detection_id": "manual_1783576697764",
+      "source_text": "수술 9행 수술명",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술9_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/9행/수술명",
+        "csv_column": "수술목록/9행/수술명"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술9_수량",
+      "label": "수술 9행 수량",
+      "semantic_path": [
+        "수술목록",
+        "9행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576865483",
+      "source_detection_id": "manual_1783576865483",
+      "source_text": "수술 9행 수량",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술9_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/9행/수량",
+        "csv_column": "수술목록/9행/수량"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술9_주수술",
+      "label": "수술 9행 주수술",
+      "semantic_path": [
+        "수술목록",
+        "9행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576931967",
+      "source_detection_id": "manual_1783576931967",
+      "source_text": "수술 9행 주수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술9_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/9행/주수술",
+        "csv_column": "수술목록/9행/주수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술9_부수술",
+      "label": "수술 9행 부수술",
+      "semantic_path": [
+        "수술목록",
+        "9행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576768315",
+      "source_detection_id": "manual_1783576768315",
+      "source_text": "수술 9행 부수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술9_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/9행/부수술",
+        "csv_column": "수술목록/9행/부수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술10_수술코드",
+      "label": "수술 10행 수술코드",
+      "semantic_path": [
+        "수술목록",
+        "10행",
+        "수술코드"
+      ],
+      "bbox_label_id": "manual_1783576588751",
+      "source_detection_id": "manual_1783576588751",
+      "source_text": "수술 10행 수술코드",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_code_values",
+      "style_class": "style_수술10_수술코드",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/10행/수술코드",
+        "csv_column": "수술목록/10행/수술코드"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술10_수술명",
+      "label": "수술 10행 수술명",
+      "semantic_path": [
+        "수술목록",
+        "10행",
+        "수술명"
+      ],
+      "bbox_label_id": "manual_1783576702130",
+      "source_detection_id": "manual_1783576702130",
+      "source_text": "수술 10행 수술명",
+      "value_type": "free_text.short",
+      "generator": "pool:surgery_name_values",
+      "style_class": "style_수술10_수술명",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/10행/수술명",
+        "csv_column": "수술목록/10행/수술명"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술10_수량",
+      "label": "수술 10행 수량",
+      "semantic_path": [
+        "수술목록",
+        "10행",
+        "수량"
+      ],
+      "bbox_label_id": "manual_1783576868967",
+      "source_detection_id": "manual_1783576868967",
+      "source_text": "수술 10행 수량",
+      "value_type": "free_text.short",
+      "generator": "choice:1|2|3",
+      "style_class": "style_수술10_수량",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/10행/수량",
+        "csv_column": "수술목록/10행/수량"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술10_주수술",
+      "label": "수술 10행 주수술",
+      "semantic_path": [
+        "수술목록",
+        "10행",
+        "주수술"
+      ],
+      "bbox_label_id": "manual_1783576875250",
+      "source_detection_id": "manual_1783576875250",
+      "source_text": "수술 10행 주수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술10_주수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/10행/주수술",
+        "csv_column": "수술목록/10행/주수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
+      "render_mode": "printed",
+      "bbox_status": "use"
+    },
+    {
+      "field_id": "수술10_부수술",
+      "label": "수술 10행 부수술",
+      "semantic_path": [
+        "수술목록",
+        "10행",
+        "부수술"
+      ],
+      "bbox_label_id": "manual_1783576772832",
+      "source_detection_id": "manual_1783576772832",
+      "source_text": "수술 10행 부수술",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "style_수술10_부수술",
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "check_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "수술목록/10행/부수술",
+        "csv_column": "수술목록/10행/부수술"
+      },
+      "required": false,
+      "notes": "수기 원본의 예비 수술목록 행까지 use bbox authoring 누락이 없도록 추가한 선택 행. 렌더링 시 행 채움 정책으로 비울 수 있음.",
       "render_mode": "printed",
       "bbox_status": "use"
     }

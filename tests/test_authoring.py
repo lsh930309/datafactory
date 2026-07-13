@@ -969,6 +969,49 @@ def test_primary_secondary_group_marks_one_primary_and_remaining_secondary(tmp_p
             assert {primary, secondary} == {"", "V"}
 
 
+def test_sparse_row_generation_policy_blanks_trailing_authored_rows(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile)
+    schema = loaded.payload["schema"]
+    base_field = dict(schema["fields"][0])
+    fields = []
+    for row in range(1, 6):
+        for suffix, rule in (("수술명", "pool:surgery_names"), ("주수술", "checkbox.bool"), ("부수술", "checkbox.bool")):
+            field_id = f"수술{row}_{suffix}"
+            fields.append(dict(base_field, field_id=field_id, label=field_id, generator=rule))
+    schema["fields"] = fields
+    faker_profile = loaded.payload["faker_profile"]
+    faker_profile["field_generators"] = {field["field_id"]: field["generator"] for field in fields}
+    faker_profile["data_pools"] = {"surgery_names": ["충수절제술", "담낭절제술"]}
+    faker_profile["constraints"] = [
+        {
+            "type": "primary_secondary_group",
+            "rows": [{"primary": f"수술{row}_주수술", "secondary": f"수술{row}_부수술"} for row in range(1, 6)],
+        }
+    ]
+    faker_profile["generation_policy"] = {
+        "수술목록": {
+            "type": "sparse_rows",
+            "row_prefix": "수술",
+            "min_filled_rows": 2,
+            "max_filled_rows": 2,
+            "total_authored_rows": 5,
+        }
+    }
+
+    values, warnings = _generate_values(schema, faker_profile, random.Random(7))
+
+    assert warnings == []
+    assert values["수술1_수술명"]
+    assert values["수술2_수술명"]
+    assert values["수술3_수술명"] == ""
+    assert values["수술4_주수술"] == ""
+    assert values["수술5_부수술"] == ""
+    assert [values["수술1_주수술"], values["수술2_주수술"]].count("V") == 1
+    assert [values["수술1_부수술"], values["수술2_부수술"]].count("V") == 1
+
+
 def test_render_authoring_preview_supports_semantic_hidden_and_render_only_fields(tmp_path: Path) -> None:
     review, base = _write_review(tmp_path)
     draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")

@@ -670,6 +670,9 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "latestCleanroomPdf": artifact_flags.get("latest_cleanroom_pdf"),
                 "latestCleanroomContactSheet": artifact_flags.get("latest_cleanroom_contact_sheet"),
                 "latestCleanroomNotes": artifact_flags.get("latest_cleanroom_notes"),
+                "latestCleanroomPagesDir": artifact_flags.get("latest_cleanroom_pages_dir"),
+                "hasLibrarySampleAnnotation": artifact_flags.get("has_library_sample_annotation", False),
+                "latestLibrarySampleAnnotation": artifact_flags.get("latest_library_sample_annotation"),
                 "hasHandwritingPrintPack": artifact_flags.get("has_handwriting_print_pack"),
                 "hasHandwritingScanIntake": artifact_flags.get("has_handwriting_scan_intake"),
                 "handwritingAcceptedCount": artifact_flags.get("handwriting_accepted_count", 0),
@@ -893,6 +896,9 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     manifest_ocr = _existing_display_path(artifacts.get("ocr"))
     manifest_review = _existing_display_path(artifacts.get("review"))
     cleanroom = _cleanroom_artifact_flags(artifacts.get("cleanroom"))
+    library_sample_annotation = _existing_display_path(artifacts.get("library_sample_annotation"))
+    if not library_sample_annotation:
+        library_sample_annotation = _existing_display_path(doc_root / "library_sample" / "annotation.json")
     handwriting = _handwriting_artifact_flags(doc_root, artifacts)
     latest_inpaint_comparison_path = inpaint_paths[-1] if inpaint_paths else None
     latest_inpainted_path = inpainted_paths[-1] if inpainted_paths else None
@@ -937,6 +943,8 @@ def _artifact_flags(doc_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         "latest_docx_page_images": artifacts.get("docx_page_images"),
         "latest_docx_bbox": artifacts.get("docx_bbox"),
         "latest_docx_labels": artifacts.get("docx_labels"),
+        "has_library_sample_annotation": bool(library_sample_annotation),
+        "latest_library_sample_annotation": library_sample_annotation,
         **cleanroom,
         **handwriting,
     }
@@ -983,12 +991,23 @@ def _cleanroom_artifact_flags(raw: Any) -> dict[str, str]:
     contact_sheet = _existing_display_path(cleanroom.get("contact_sheet"))
     notes = _existing_display_path(cleanroom.get("notes"))
     preview = _first_existing_cleanroom_page(cleanroom.get("pages_dir")) or contact_sheet or ""
+    pages_dir = _existing_directory_display_path(cleanroom.get("pages_dir"))
     return {
         "latest_cleanroom_preview": preview,
         "latest_cleanroom_pdf": pdf,
         "latest_cleanroom_contact_sheet": contact_sheet,
         "latest_cleanroom_notes": notes,
+        "latest_cleanroom_pages_dir": pages_dir,
     }
+
+
+def _existing_directory_display_path(value: Any) -> str:
+    if not value:
+        return ""
+    path = Path(str(value))
+    if not path.is_absolute():
+        path = ROOT / path
+    return _display_path(path) if path.exists() and path.is_dir() else ""
 
 
 def _first_existing_cleanroom_page(value: Any) -> str:

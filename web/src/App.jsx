@@ -389,12 +389,14 @@ function itemHasAuthoringBundle(item) {
   return Boolean(item?.latestAuthoringSchema && item?.latestAuthoringStylesheet && item?.latestAuthoringFakerProfile);
 }
 function finalExportReady(item, options = {}) {
-  if (item?.latestCleanroomPdf) return true;
+  if (item?.latestCleanroomPdf && item?.isNonPipeline) return Boolean(item?.hasLibrarySampleAnnotation);
   if (isHandwritingItem(item)) {
     if (options.handwritingAsPrinted && itemHasAuthoringBundle(item)) return true;
-    return handwritingReady(item);
+    if (handwritingReady(item)) return true;
+    return Boolean(item?.latestCleanroomPdf && item?.hasLibrarySampleAnnotation);
   }
-  return Boolean(item?.latestCleanroomPdf) || itemHasAuthoringBundle(item);
+  if (itemHasAuthoringBundle(item)) return true;
+  return Boolean(item?.latestCleanroomPdf && item?.hasLibrarySampleAnnotation);
 }
 function cleanroomArtifact(item) {
   const cleanroom = item?.manifest?.artifacts?.cleanroom || {};
@@ -548,6 +550,10 @@ function App() {
   const [handwritingScanPopoverOpen, setHandwritingScanPopoverOpen] = useState(false);
   const [handwritingScanIntakeResult, setHandwritingScanIntakeResult] = useState(null);
   const [authoringQrEditMode, setAuthoringQrEditMode] = useState(false);
+  const [cleanroomLibrary, setCleanroomLibrary] = useState(null);
+  const [cleanroomEditing, setCleanroomEditing] = useState(false);
+  const [cleanroomFields, setCleanroomFields] = useState([]);
+  const [cleanroomPrivacy, setCleanroomPrivacy] = useState({ include_keys: [], exclude_keys: [] });
   const [busy, setBusy] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -667,7 +673,7 @@ function App() {
     () => finalOutputForItem(selectedItem, selectedIsNonPipeline, selectedSample),
     [selectedItem, selectedIsNonPipeline, selectedSample],
   );
-  const selectedWorkflowLocked = Boolean(selectedFinalOutput?.locked);
+  const selectedWorkflowLocked = Boolean(selectedFinalOutput?.locked && !cleanroomEditing);
 
   const filteredItems = useMemo(() => {
     const query = normalizeSearchText(search);
@@ -1417,7 +1423,7 @@ function App() {
         }),
       });
       setFinalExportResult(payload);
-      setMessage(`${activeTargetGroup.label} 최종 산출물 생성 완료: OK ${payload.summary.okCount}건 · 오류 ${payload.summary.errorCount}건 · ${payload.paths.outDir}`);
+      setMessage(`${activeTargetGroup.label} 최종 산출물 생성 완료: OK ${payload.summary.okCount}건 · 오류 ${payload.summary.errorCount}건 · PII ${payload.summary.piiFileCount || 0}개 · 경고 ${payload.summary.warningCount || 0}건 · ${payload.paths.outDir}`);
     } finally {
       setBusy('');
     }
@@ -1547,6 +1553,10 @@ function App() {
     setCanvasMode('review');
     setBboxEditMode('select');
     setReviewDirty(false);
+    setCleanroomLibrary(null);
+    setCleanroomEditing(false);
+    setCleanroomFields([]);
+    setCleanroomPrivacy({ include_keys: [], exclude_keys: [] });
   }, [selectedDocId]);
 
   useEffect(() => {
@@ -1557,10 +1567,28 @@ function App() {
 
   useEffect(() => {
     setSelectedSample((current) => {
+      const cleanroomPages = cleanroomLibrary?.pages || [];
+      if (cleanroomEditing) {
+        if (current && cleanroomPages.some((page) => page.path === current)) return current;
+        return cleanroomPages[0]?.path || '';
+      }
       if (current && selectedItem?.samples?.includes(current)) return current;
       return selectedItem?.samples?.find(isImagePath) || selectedItem?.samples?.[0] || '';
     });
-  }, [selectedItem?.docId, selectedItem?.samples]);
+  }, [selectedItem?.docId, selectedItem?.samples, cleanroomEditing, cleanroomLibrary?.pages]);
+
+  useEffect(() => {
+    if (!cleanroomEditing || !policy) return;
+    const useLabels = (policy.labels || []).filter((label) => label.status === 'use');
+    setCleanroomFields((current) => {
+      const byId = new Map(current.map((field) => [field.bboxLabelId, field]));
+      return useLabels.map((label) => ({
+        key: byId.get(label.id)?.key || '',
+        value: byId.get(label.id)?.value ?? label.text ?? '',
+        bboxLabelId: label.id,
+      }));
+    });
+  }, [cleanroomEditing, policy]);
 
   useEffect(() => {
     if (!selectedItem || selectedItem.docId !== selectedDocId) return undefined;
@@ -2355,6 +2383,110 @@ function App() {
     }
   }
 
+  function updateDocumentPrivacyKey(key, mode) {
+    if (!key || !authoringBundle) return;
+    setAuthoringBundle((current) => {
+      const currentPrivacy = current.schema?.privacy || {};
+      const include = new Set(currentPrivacy.include_keys || []);
+      const exclude = new Set(currentPrivacy.exclude_keys || []);
+      include.delete(key);
+      exclude.delete(key);
+      if (mode === 'include') include.add(key);
+      if (mode === 'exclude') exclude.add(key);
+      return {
+        ...current,
+        schema: {
+          ...current.schema,
+          privacy: { include_keys: [...include], exclude_keys: [...exclude] },
+        },
+      };
+    });
+    setAuthoringDirty(true);
+  }
+
+  async function loadCleanroomLibrary({ edit = false } = {}) {
+    if (!selectedDocId) return null;
+    setBusy('cleanroomLibraryLoad');
+    setError('');
+    try {
+      const payload = await apiJson(`/api/library-sample/cleanroom?docId=${encodeURIComponent(selectedDocId)}`);
+      setCleanroomLibrary(payload);
+      const annotation = payload.annotation || {};
+      setCleanroomFields((annotation.fields || []).map((field) => ({
+        key: field.key || '',
+        value: field.value ?? '',
+        bboxLabelId: field.bbox_label_id || field.bboxLabelId || '',
+      })));
+      setCleanroomPrivacy(annotation.privacy || { include_keys: [], exclude_keys: [] });
+      if (edit) {
+        setCleanroomEditing(true);
+        const sourceImage = annotation.source_image || payload.pages?.[0]?.path || '';
+        setSelectedSample(sourceImage);
+        setCanvasMode('review');
+        if (annotation.review_path) await loadReview(annotation.review_path);
+      }
+      setMessage(payload.ready ? 'Cleanroom 라이브러리 샘플 주석을 불러왔습니다.' : '대표 cleanroom 페이지를 선택하고 OCR/BBox 리뷰를 시작하세요.');
+      return payload;
+    } finally {
+      setBusy('');
+    }
+  }
+
+  function updateCleanroomField(bboxLabelId, patch) {
+    const previous = cleanroomFields.find((field) => field.bboxLabelId === bboxLabelId);
+    setCleanroomFields((current) => current.map((field) => (field.bboxLabelId === bboxLabelId ? { ...field, ...patch } : field)));
+    if (previous && Object.prototype.hasOwnProperty.call(patch, 'key') && patch.key !== previous.key) {
+      setCleanroomPrivacy((privacy) => {
+        const include = new Set(privacy.include_keys || []);
+        const exclude = new Set(privacy.exclude_keys || []);
+        const mode = include.has(previous.key) ? 'include' : exclude.has(previous.key) ? 'exclude' : 'inherit';
+        include.delete(previous.key);
+        exclude.delete(previous.key);
+        if (patch.key && mode === 'include') include.add(patch.key);
+        if (patch.key && mode === 'exclude') exclude.add(patch.key);
+        return { include_keys: [...include], exclude_keys: [...exclude] };
+      });
+    }
+  }
+
+  function updateCleanroomPrivacyKey(key, mode) {
+    if (!key) return;
+    setCleanroomPrivacy((current) => {
+      const include = new Set(current.include_keys || []);
+      const exclude = new Set(current.exclude_keys || []);
+      include.delete(key);
+      exclude.delete(key);
+      if (mode === 'include') include.add(key);
+      if (mode === 'exclude') exclude.add(key);
+      return { include_keys: [...include], exclude_keys: [...exclude] };
+    });
+  }
+
+  async function saveCleanroomLibrary() {
+    if (!selectedDocId || !selectedSample || !reviewPath || !cleanroomFields.length) return;
+    setBusy('cleanroomLibrarySave');
+    setError('');
+    try {
+      const payload = await apiJson('/api/library-sample/cleanroom/save', {
+        method: 'POST',
+        body: JSON.stringify({
+          docId: selectedDocId,
+          sourceImage: selectedSample,
+          reviewPath,
+          fields: cleanroomFields,
+          privacy: cleanroomPrivacy,
+        }),
+      });
+      setCleanroomLibrary(payload);
+      setCleanroomEditing(false);
+      setMessage(`Cleanroom 라이브러리 샘플 주석 저장 완료: ${payload.annotationPath}`);
+      await refreshAll({ preserveSelection: true });
+      return payload;
+    } finally {
+      setBusy('');
+    }
+  }
+
   function updateAuthoringField(fieldId, patch) {
     if (!authoringBundle) return;
     const hasFakerRule = Object.prototype.hasOwnProperty.call(patch, 'faker_rule');
@@ -2702,7 +2834,7 @@ function App() {
         if (isBusy) return;
         if (canvasMode === 'authoring' && authoringBundle) run(() => saveAuthoringBundle());
         else if (canvasMode === 'cleanup' && policy && inpaintedPath) run(() => saveCleanupMask());
-        else if (policy) run(saveReview);
+        else if (policy) run(() => cleanroomEditing ? saveReview({ skipPruneConfirm: true, pruneAuthoring: false }) : saveReview());
         return;
       }
       if (modifier && key === 'z' && !event.shiftKey) {
@@ -2753,16 +2885,16 @@ function App() {
     }
     window.addEventListener('keydown', handleGlobalShortcuts, true);
     return () => window.removeEventListener('keydown', handleGlobalShortcuts, true);
-  }, [authoringBundle, authoringResult?.paths?.image, bboxEditMode, canvasMode, cleanupHistory, inpaintedPath, isBusy, policy, reviewHistory, selectedAuthoringFieldIds, selectedCleanupId, selectedIds, selectedItem?.latestAuthoringPreview, selectedWorkflowLocked]);
+  }, [authoringBundle, authoringResult?.paths?.image, bboxEditMode, canvasMode, cleanupHistory, inpaintedPath, isBusy, policy, reviewHistory, selectedAuthoringFieldIds, selectedCleanupId, selectedIds, selectedItem?.latestAuthoringPreview, selectedWorkflowLocked, cleanroomEditing]);
 
   useEffect(() => {
-    if (!selectedDocId || !authoringBundle || selectedWorkflowLocked) return undefined;
+    if (!selectedDocId || !authoringBundle || selectedWorkflowLocked || cleanroomEditing) return undefined;
     if (authoringBundle?.schema?.generation_path === 'editable-office-template') return undefined;
     const handle = window.setTimeout(() => {
       renderAuthoringLivePreview({ silent: true });
     }, 350);
     return () => window.clearTimeout(handle);
-  }, [selectedDocId, authoringBundle, selectedWorkflowLocked]);
+  }, [selectedDocId, authoringBundle, selectedWorkflowLocked, cleanroomEditing]);
 
   const authoringPaths = resolveAuthoringPaths();
   const authoringAllFields = authoringBundle?.schema?.fields || [];
@@ -2778,7 +2910,7 @@ function App() {
   const canLoadAuthoring = Boolean(authoringPaths.schema && authoringPaths.stylesheet && authoringPaths.faker_profile);
 
   useEffect(() => {
-    if (!selectedDocId || !canLoadAuthoring || authoringBundle || authoringDirty || selectedWorkflowLocked) return undefined;
+    if (!selectedDocId || !canLoadAuthoring || authoringBundle || authoringDirty || selectedWorkflowLocked || cleanroomEditing) return undefined;
     let cancelled = false;
     const handle = window.setTimeout(() => {
       loadAuthoringBundle(authoringPaths, { silentBusy: true })
@@ -2793,8 +2925,8 @@ function App() {
       cancelled = true;
       window.clearTimeout(handle);
     };
-  }, [selectedDocId, canLoadAuthoring, authoringPaths.schema, authoringPaths.stylesheet, authoringPaths.faker_profile, authoringBundle, authoringDirty, selectedWorkflowLocked]);
-  const showFinalOutputCanvas = Boolean(selectedFinalOutput?.locked);
+  }, [selectedDocId, canLoadAuthoring, authoringPaths.schema, authoringPaths.stylesheet, authoringPaths.faker_profile, authoringBundle, authoringDirty, selectedWorkflowLocked, cleanroomEditing]);
+  const showFinalOutputCanvas = Boolean(selectedFinalOutput?.locked && !cleanroomEditing);
   const showInpaintCanvas = Boolean(inpaintedPath && canvasMode === 'inpaint');
   const showCleanupCanvas = Boolean(policy && inpaintedPath && canvasMode === 'cleanup');
   const authoringEditImagePath = authoringBundle?.schema?.source_inpainted || inpaintedPath;
@@ -2813,7 +2945,7 @@ function App() {
 
   useEffect(() => {
     const sourceReviewPath = reviewPath || selectedItem?.latestReview || '';
-    if (!selectedDocId || !policy || !sourceReviewPath || !selectedItem?.latestInpainted || cleanupDirty) return undefined;
+    if (!selectedDocId || !policy || !sourceReviewPath || !selectedItem?.latestInpainted || cleanupDirty || cleanroomEditing) return undefined;
     let cancelled = false;
     const query = new URLSearchParams({ docId: selectedDocId, reviewPath: sourceReviewPath, baseImagePath: inpaintedPath || selectedItem?.latestInpainted || '' });
     apiJson(`/api/cleanup-paint?${query.toString()}`)
@@ -2839,7 +2971,7 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [selectedDocId, reviewPath, selectedItem?.latestReview, selectedItem?.latestInpainted, inpaintedPath, policy?.image?.width, policy?.image?.height, cleanupDirty]);
+  }, [selectedDocId, reviewPath, selectedItem?.latestReview, selectedItem?.latestInpainted, inpaintedPath, policy?.image?.width, policy?.image?.height, cleanupDirty, cleanroomEditing]);
 
   return (
     <div className="app workbench-app" onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
@@ -3011,7 +3143,7 @@ function App() {
             <div className="final-export-card">
               <div className="final-export-head">
                 <b>최종 산출물 생성</b>
-                <span>{finalExportResult?.summary ? `OK ${finalExportResult.summary.okCount} · 오류 ${finalExportResult.summary.errorCount}` : `${activeTargetGroup.label} · ${targetGroupFinalExportScopeEntries.length} scope`}</span>
+                <span>{finalExportResult?.summary ? `OK ${finalExportResult.summary.okCount} · 오류 ${finalExportResult.summary.errorCount} · 경고 ${finalExportResult.summary.warningCount || 0}` : `${activeTargetGroup.label} · ${targetGroupFinalExportScopeEntries.length} scope`}</span>
               </div>
               <p className="muted mini-help">현재 선택 그룹 기준으로 `outputs/results`에 생성합니다. 출력 가능 {targetGroupFinalExportReadyItems.length}종 · 미준비 {targetGroupFinalExportMissingItems.length}종</p>
               <label className="toggle-row final-export-toggle">
@@ -3047,6 +3179,7 @@ function App() {
                 </button>
               </div>
               {targetGroupFinalExportMissingItems.length > 0 && <p className="muted">미준비: {targetGroupFinalExportMissingItems.slice(0, 3).map((item) => item.title).join(', ')}{targetGroupFinalExportMissingItems.length > 3 ? ` 외 ${targetGroupFinalExportMissingItems.length - 3}종` : ''}</p>}
+              {finalExportResult?.summary && <p className="muted">생성 파일 {finalExportResult.summary.generatedFileCount || 0}개 · explicit PII 파일 {finalExportResult.summary.piiFileCount || 0}개 · 이미지 규격 경고 {finalExportResult.summary.warningCount || 0}건</p>}
               {finalExportResult?.paths?.manifest && (
                 <div className="final-export-links">
                   <a className="result-link compact" href={finalExportResult.urls?.manifest || fileUrl(finalExportResult.paths.manifest)} target="_blank" rel="noreferrer">Manifest XLSX 열기</a>
@@ -3360,13 +3493,47 @@ function App() {
             )) : <p className="muted">연결된 seed가 없습니다. 웹에서 샘플을 수집해 `seed_samples/{selectedDoc?.title || '문서명'}/`에 넣으면 입고함에 표시됩니다.</p>}
           </section>
 
+          {selectedItem?.latestCleanroomPdf && (
+            <section className="panel-block cleanroom-library-panel">
+              <div className="block-title-row">
+                <h2>Cleanroom 라이브러리 샘플</h2>
+                <span className={`mode-pill ${selectedItem.hasLibrarySampleAnnotation ? 'ready' : 'edit'}`}>
+                  {selectedItem.hasLibrarySampleAnnotation ? '주석 완료' : '주석 필요'}
+                </span>
+              </div>
+              <p className="muted">생성된 cleanroom 페이지 중 대표 1장을 선택하고 OCR/BBox 리뷰 후 flat key/value 주석을 저장합니다. 원본 실문서는 선택할 수 없습니다.</p>
+              <div className="button-row compact-buttons">
+                <button className="primary" onClick={() => run(() => loadCleanroomLibrary({ edit: true }))} disabled={isBusy}>
+                  {busy === 'cleanroomLibraryLoad' ? '불러오는 중...' : selectedItem.hasLibrarySampleAnnotation ? '주석 편집' : '대표 페이지 선택/주석'}
+                </button>
+                {cleanroomEditing && <button onClick={() => setCleanroomEditing(false)} disabled={isBusy}>편집 닫기</button>}
+                {selectedItem.latestLibrarySampleAnnotation && <a className="result-link compact" href={fileUrl(selectedItem.latestLibrarySampleAnnotation)} target="_blank" rel="noreferrer">annotation.json</a>}
+              </div>
+              {cleanroomEditing && cleanroomLibrary?.pages?.length > 0 && (
+                <div className="cleanroom-page-grid">
+                  {cleanroomLibrary.pages.map((page) => (
+                    <button
+                      type="button"
+                      key={page.path}
+                      className={selectedSample === page.path ? 'cleanroom-page active' : 'cleanroom-page'}
+                      onClick={() => { setSelectedSample(page.path); setPolicy(null); setReviewPath(''); setCleanroomFields([]); setCleanroomPrivacy({ include_keys: [], exclude_keys: [] }); setCanvasMode('review'); }}
+                    >
+                      <img src={page.url} alt={page.name} />
+                      <span>{page.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </section>
+          )}
+
           {selectedWorkflowLocked && <FinalOutputPanel finalOutput={selectedFinalOutput} selectedItem={selectedItem} />}
 
           {!selectedWorkflowLocked && <>
           <section className="panel-block">
             <h2>BBox 검출</h2>
-            <label>작업 샘플<select value={selectedSample} onChange={(event) => setSelectedSample(event.target.value)}><option value="">샘플 선택</option>{(selectedItem?.samples || []).map((sample) => <option key={sample} value={sample}>{shortPath(sample)}</option>)}</select></label>
-            <div className="sample-kind-controls">
+            <label>작업 샘플<select value={selectedSample} onChange={(event) => setSelectedSample(event.target.value)}><option value="">샘플 선택</option>{(cleanroomEditing ? (cleanroomLibrary?.pages || []).map((page) => page.path) : (selectedItem?.samples || [])).map((sample) => <option key={sample} value={sample}>{shortPath(sample)}</option>)}</select></label>
+            {!cleanroomEditing && <div className="sample-kind-controls">
               <label className={`check-row ${selectedSampleKind === 'blank_template' ? 'on' : ''}`}>
                 <input
                   type="checkbox"
@@ -3388,7 +3555,7 @@ function App() {
                   <span>선/그리드 bbox 후보 추가</span>
                 </label>
               )}
-            </div>
+            </div>}
             <p className="muted">검출 방식: PaddleOCR 정밀 모드({DEFAULT_OCR_PRESET}){selectedIsBlankTemplate && blankTemplateLineDetectEnabled ? ' + opt-in 선/그리드 후보' : ''}</p>
             {!isImagePath(selectedSample) && selectedSample && <p className="warning-text">현재 OCR GUI 실행은 이미지 파일을 대상으로 합니다. PDF는 변환된 JPG/PNG를 선택하세요.</p>}
             <button className="primary" onClick={() => run(runOcrDetect)} disabled={!selectedDocId || !selectedSample || !isImagePath(selectedSample) || isBusy}>{busy === 'detect' ? 'BBox 검출 중...' : selectedIsBlankTemplate && blankTemplateLineDetectEnabled ? 'PaddleOCR + 선/그리드 후보 검출' : 'PaddleOCR 정밀 BBox 검출'}</button>
@@ -3427,10 +3594,48 @@ function App() {
             {reviewAudit && <p className="mini-path">전체 ignore: {reviewAudit.summary.ignoreCount}개 / {reviewAudit.summary.documentCount}문서</p>}
             {reviewHistory.length > 0 && <button onClick={undoReview} disabled={!policy || isBusy}>실행 취소 (⌘Z)</button>}
             <button onClick={() => run(() => loadReview())} disabled={!selectedItem?.latestReview || isBusy}>기존 리뷰 불러오기</button>
-            <button className="primary" onClick={() => run(saveReview)} disabled={!policy || isBusy}>{busy === 'save' ? '저장 중...' : reviewDirty ? '리뷰 저장 *' : '리뷰 저장'}</button>
+            <button className="primary" onClick={() => run(() => cleanroomEditing ? saveReview({ skipPruneConfirm: true, pruneAuthoring: false }) : saveReview())} disabled={!policy || isBusy}>{busy === 'save' ? '저장 중...' : reviewDirty ? '리뷰 저장 *' : '리뷰 저장'}</button>
           </section>
 
-          {selectedIsBlankTemplate ? (
+          {cleanroomEditing ? (
+            <section className="panel-block cleanroom-annotation-panel">
+              <h2>Flat Schema / GT / PII 주석</h2>
+              <p className="muted">리뷰에서 `사용`으로 지정한 bbox마다 flat export key와 GT value를 지정합니다. PII는 공통 정책을 기본으로 하고 문서 예외만 선택합니다.</p>
+              {!policy && <p className="warning-text">선택한 대표 페이지에서 BBox 검출을 먼저 실행하세요.</p>}
+              {policy && stats.byStatus.use === 0 && <p className="warning-text">최종 값으로 내보낼 bbox를 `사용`으로 지정하세요.</p>}
+              <div className="cleanroom-field-list">
+                {cleanroomFields.map((field, index) => {
+                  const privacyMode = (cleanroomPrivacy.include_keys || []).includes(field.key)
+                    ? 'include'
+                    : (cleanroomPrivacy.exclude_keys || []).includes(field.key) ? 'exclude' : 'inherit';
+                  return (
+                    <div className="cleanroom-field-row" key={field.bboxLabelId}>
+                      <span className="field-index">{index + 1}</span>
+                      <label>Export key<input value={field.key} placeholder="예: 성명" onChange={(event) => updateCleanroomField(field.bboxLabelId, { key: event.target.value })} /></label>
+                      <label>GT value<input value={field.value} onChange={(event) => updateCleanroomField(field.bboxLabelId, { value: event.target.value })} /></label>
+                      <label>PII
+                        <select value={privacyMode} disabled={!field.key} onChange={(event) => updateCleanroomPrivacyKey(field.key, event.target.value)}>
+                          <option value="inherit">공통 정책</option>
+                          <option value="include">강제 포함</option>
+                          <option value="exclude">explicit 목록 제외(자동판정 유지)</option>
+                        </select>
+                      </label>
+                      <small>{field.bboxLabelId}</small>
+                    </div>
+                  );
+                })}
+              </div>
+              <button
+                className="primary"
+                onClick={() => run(saveCleanroomLibrary)}
+                disabled={!policy || !reviewPath || reviewDirty || !cleanroomFields.length || cleanroomFields.some((field) => !field.key.trim()) || isBusy}
+              >
+                {busy === 'cleanroomLibrarySave' ? '저장 중...' : 'Cleanroom 라이브러리 주석 저장'}
+              </button>
+              {reviewDirty && <p className="warning-text">BBox 리뷰를 먼저 저장한 뒤 cleanroom 주석을 저장하세요.</p>}
+              {cleanroomLibrary?.privacy?.resolvedKeys?.length > 0 && <p className="mini-path">현재 explicit PII: {cleanroomLibrary.privacy.resolvedKeys.join(', ')}</p>}
+            </section>
+          ) : selectedIsBlankTemplate ? (
             <section className="panel-block">
               <h2>빈 템플릿 흐름</h2>
               <p className="muted">이 샘플은 이미 깨끗한 양식이므로 인페인팅/템플릿 보정을 건너뜁니다. 리뷰에서 값 입력 bbox를 확정한 뒤 Agentic Authoring 추론을 실행하세요.</p>
@@ -3444,7 +3649,7 @@ function App() {
             </section>
           )}
 
-          {!selectedIsBlankTemplate && <section className="panel-block compact">
+          {!cleanroomEditing && !selectedIsBlankTemplate && <section className="panel-block compact">
             <h2>템플릿 보정</h2>
             <p className="muted">LaMa 후처리 대신 스포이드로 주변색을 찍고 브러시로 직접 칠합니다.</p>
             <div className="selected-box">
@@ -3489,7 +3694,7 @@ function App() {
             {cleanupResult?.paths?.inpainted && <p className="mini-path">{cleanupResult.paths.inpainted}</p>}
           </section>}
 
-          <section className="panel-block authoring-control-panel">
+          {!cleanroomEditing && <section className="panel-block authoring-control-panel">
             <h2>Authoring 작업</h2>
             <p className="muted">Schema / Style / Faker / Render를 분리해 다룹니다. 기존 파일 3종이 있으면 문서 선택 시 자동으로 불러와 최종 Pillow 렌더러 live preview를 표시합니다.</p>
             <div className="authoring-step-label"><b>0. Agentic Authoring 추론</b><span>Codex exec가 문서 이미지/OCR/review + 웹 리서치 기반 draft를 실제 생성</span></div>
@@ -3591,7 +3796,10 @@ function App() {
                 selectedStyle={selectedAuthoringStyle}
                 fontOptions={fontOptions}
                 isHandwritingDocument={selectedIsHandwriting}
+                privacy={authoringBundle.schema?.privacy || {}}
+                privacyPolicy={authoringBundle.librarySamplePrivacy || {}}
                 onFieldChange={updateAuthoringField}
+                onPrivacyChange={updateDocumentPrivacyKey}
                 onRenderModeChange={updateAuthoringFieldRenderModes}
                 onStyleChange={updateAuthoringStyles}
                 onRenderPolicyChange={updateAuthoringRenderPolicies}
@@ -3682,7 +3890,7 @@ function App() {
                 </div>
               </div>
             )}
-          </section>
+          </section>}
           </>}
         </aside>
       </div>
@@ -3935,7 +4143,10 @@ function AuthoringEditor({
   selectedStyle,
   fontOptions,
   isHandwritingDocument,
+  privacy,
+  privacyPolicy,
   onFieldChange,
+  onPrivacyChange,
   onRenderModeChange,
   onStyleChange,
   onRenderPolicyChange,
@@ -3948,6 +4159,12 @@ function AuthoringEditor({
   const currentRule = selectedField ? (fakerProfile?.field_generators?.[selectedField.field_id] || selectedField.generator || selectedField.value_type || 'free_text.short') : '';
   const selectedFontId = fontIdForStyle(selectedStyle, fontOptions);
   const selectedExport = selectedField?.export || {};
+  const selectedPrivacyKey = fieldSemanticPathParts(selectedField).at(-1) || '';
+  const privacyMode = (privacy?.include_keys || []).includes(selectedPrivacyKey)
+    ? 'include'
+    : (privacy?.exclude_keys || []).includes(selectedPrivacyKey) ? 'exclude' : 'inherit';
+  const privacyDefaultIncluded = (privacyPolicy?.defaultKeys || []).includes(selectedPrivacyKey);
+  const privacyResolvedIncluded = privacyMode === 'include' || (privacyMode === 'inherit' && privacyDefaultIncluded);
   const selectedCheckboxFields = selectedFields.filter((field) => isAuthoringCheckboxField(field, fakerProfile));
   const hasCheckboxSelection = selectedCheckboxFields.length > 0;
   const checkboxStyles = [...new Set(selectedCheckboxFields.map((field) => field.render_policy?.checkbox_style || 'v_mark'))];
@@ -4010,6 +4227,14 @@ function AuthoringEditor({
                 <datalist id="faker-rule-examples">
                   {fakerRuleExamples.map((rule) => <option key={rule} value={rule} />)}
                 </datalist>
+              </label>
+              <label>라이브러리 샘플 PII key
+                <select value={privacyMode} disabled={!selectedPrivacyKey} onChange={(event) => onPrivacyChange(selectedPrivacyKey, event.target.value)}>
+                  <option value="inherit">공통 정책 사용</option>
+                  <option value="include">문서 예외: 강제 포함</option>
+                  <option value="exclude">문서 예외: explicit 목록 제외(자동판정 유지)</option>
+                </select>
+                <small>{selectedPrivacyKey || 'semantic leaf 없음'} · 최종 explicit PII: {privacyResolvedIncluded ? '포함' : '미포함'}{privacyDefaultIncluded ? ' · 공통 정책 대상' : ''}</small>
               </label>
               <div className="rule-help">
                 <span>preset: person.name_ko</span>

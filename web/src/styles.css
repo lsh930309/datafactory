@@ -530,3 +530,18 @@ button.slim { padding: 7px 9px; font-size: 12px; white-space: nowrap; }
 .scan-intake-record.accepted { border-color: #bbf7d0; background: #f0fdf4; }
 .scan-intake-record.review_required, .scan-intake-record.failed { border-color: #fed7aa; background: #fff7ed; }
 .scan-intake-record > span { font-weight: 700; color: #344054; }
+
+.cleanroom-library-panel,
+.cleanroom-annotation-panel { border-color: #a7d9c2; background: #f6fffb; }
+.mode-pill.ready { background: #dcfce7; color: #166534; }
+.cleanroom-page-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; max-height: 320px; overflow: auto; }
+.cleanroom-page { display: grid; gap: 5px; padding: 6px; border: 1px solid #d0d5dd; border-radius: 10px; background: #fff; color: #475467; font-size: 11px; }
+.cleanroom-page img { width: 100%; height: 120px; object-fit: contain; border-radius: 6px; background: #f2f4f7; }
+.cleanroom-page.active { border-color: #12a36d; box-shadow: 0 0 0 2px rgba(18, 163, 109, 0.14); color: #08754e; }
+.cleanroom-field-list { display: grid; gap: 7px; max-height: 420px; overflow: auto; }
+.cleanroom-field-row { display: grid; grid-template-columns: 26px minmax(0, 1fr) minmax(0, 1.3fr) minmax(105px, 0.8fr); gap: 6px; align-items: end; border: 1px solid #d7e9df; border-radius: 10px; background: #fff; padding: 7px; }
+.cleanroom-field-row label { font-size: 10px; }
+.cleanroom-field-row input,
+.cleanroom-field-row select { width: 100%; padding: 7px; }
+.cleanroom-field-row .field-index { align-self: center; border-radius: 999px; background: #dcfce7; color: #166534; padding: 4px; text-align: center; font-size: 10px; font-weight: 900; }
+.cleanroom-field-row small { grid-column: 2 / -1; color: #667085; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }

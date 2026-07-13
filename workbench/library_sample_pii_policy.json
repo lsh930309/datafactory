@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "description": "라이브러리 샘플 explicit PII key 공통 정책. 문서별 schema.privacy include/exclude가 이 기본값을 보정한다.",
+  "include_exact_keys": [
+    "성명",
+    "이름",
+    "주민등록번호",
+    "외국인등록번호",
+    "여권번호",
+    "법인등록번호",
+    "사업자등록번호",
+    "계좌번호"
+  ],
+  "include_key_patterns": [
+    "(성명|이름|대표자)$",
+    "(주민등록번호|외국인등록번호|여권번호|법인등록번호|사업자등록번호)",
+    "(전화|연락처|휴대폰|이메일)",
+    "(주소|소재지)"
+  ],
+  "include_value_types": [
+    "person.name_ko",
+    "person.phone_kr",
+    "person.rrn",
+    "person.email",
+    "address.ko",
+    "company.email",
+    "business_reg_no"
+  ],
+  "include_generators": [
+    "person.name_ko",
+    "person.phone_kr",
+    "person.rrn",
+    "person.email",
+    "address.ko",
+    "company.email",
+    "business_reg_no"
+  ]
+}

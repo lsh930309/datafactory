@@ -41,6 +41,14 @@ from .authoring import (
 from .first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
 from .fonts import default_font_id, list_font_faces
 from .final_results_export import export_final_results
+from .library_sample import (
+    cleanroom_annotation_path,
+    fields_with_generators,
+    list_cleanroom_pages,
+    load_cleanroom_annotation,
+    privacy_payload,
+    save_cleanroom_annotation,
+)
 from .handwriting import QR_FORMAT, DEFAULT_WECHAT_QR_MODEL_DIR, create_handwriting_print_pack, intake_handwriting_scans, render_handwriting_authoring_preview
 from .docx_pipeline import analyze_docx_template, draft_docx_authoring, generate_docx_outputs
 from .inpaint import InpaintConfig, InpaintResult, inpaint_from_review_policy, lama_inpaint, render_mask_overlay
@@ -1598,6 +1606,13 @@ def _authoring_bundle_consistency(schema: dict[str, Any], faker_profile: dict[st
     for path in unmapped_leaves[:30]:
         errors.append({"code": "authoring_semantic_leaf_unmapped", "semantic_path": path})
     errors.extend(_validate_faker_profile_contract(faker_profile, fields, min_pool_size=min_pool_size))
+    privacy_validation = privacy_payload(
+        semantic_schema,
+        fields=fields_with_generators([field for field in fields if isinstance(field, dict)], faker_profile),
+        privacy=schema.get("privacy"),
+    )["validation"]
+    errors.extend(privacy_validation["errors"])
+    warnings.extend(privacy_validation["warnings"])
     if strict_review_coverage:
         bbox_source = schema.get("bbox_source") if isinstance(schema.get("bbox_source"), dict) else {}
         review_value = str(schema.get("source_review") or bbox_source.get("review_path") or "")
@@ -1611,6 +1626,64 @@ def _authoring_bundle_consistency(schema: dict[str, Any], faker_profile: dict[st
             except Exception as exc:
                 warnings.append({"code": "authoring_review_coverage_skipped", "message": str(exc)})
     return {"ready": not errors, "errors": errors, "warnings": warnings, "summary": {"errorCount": len(errors), "warningCount": len(warnings), "fieldCount": len(field_ids), "semanticLeafCount": len(semantic_leaf_paths)}}
+
+
+def _library_sample_cleanroom_payload(doc_id: str) -> dict[str, Any]:
+    registry = load_registry()
+    item = next((entry for entry in list_work_items(registry=registry) if entry.get("docId") == doc_id), None)
+    if item is None:
+        raise ValueError(f"unknown docId: {doc_id}")
+    pages_dir_value = item.get("latestCleanroomPagesDir")
+    if not pages_dir_value:
+        raise ValueError("cleanroom pages_dir is not available")
+    pages_dir = _resolve_workspace_path(str(pages_dir_value))
+    pages = list_cleanroom_pages(pages_dir)
+    if not pages:
+        raise ValueError("cleanroom pages_dir has no image pages")
+    document_root = _resolve_workspace_path(str(item["documentDir"]))
+    annotation_path = cleanroom_annotation_path(document_root)
+    annotation = load_cleanroom_annotation(annotation_path)
+    fields = annotation.get("fields", []) if annotation else []
+    semantic_schema = {str(field.get("key") or ""): "" for field in fields if isinstance(field, dict) and str(field.get("key") or "").strip()}
+    privacy = privacy_payload(semantic_schema, privacy=annotation.get("privacy") if annotation else None) if semantic_schema else None
+    return {
+        "docId": doc_id,
+        "ready": bool(annotation),
+        "pagesDir": _display_path(pages_dir, ROOT),
+        "pages": [
+            {"name": page.name, "path": _display_path(page, ROOT), "url": f"/api/image?path={_display_path(page, ROOT)}"}
+            for page in pages
+        ],
+        "annotationPath": _display_path(annotation_path, ROOT),
+        "annotation": annotation,
+        "privacy": privacy,
+    }
+
+
+def _save_library_sample_cleanroom_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "").strip()
+    if not doc_id:
+        raise ValueError("docId is required")
+    registry = load_registry()
+    item = next((entry for entry in list_work_items(registry=registry) if entry.get("docId") == doc_id), None)
+    if item is None:
+        raise ValueError(f"unknown docId: {doc_id}")
+    pages_dir_value = item.get("latestCleanroomPagesDir")
+    if not pages_dir_value:
+        raise ValueError("cleanroom pages_dir is not available")
+    pages_dir = _resolve_workspace_path(str(pages_dir_value))
+    document_root = _resolve_workspace_path(str(item["documentDir"]))
+    annotation_path = cleanroom_annotation_path(document_root)
+    normalized_payload = {
+        **payload,
+        "sourceImage": str(_resolve_workspace_path(str(payload.get("sourceImage") or payload.get("source_image") or ""))),
+        "reviewPath": str(_resolve_workspace_path(str(payload.get("reviewPath") or payload.get("review_path") or ""))),
+    }
+    saved = save_cleanroom_annotation(annotation_path, normalized_payload, pages_dir=pages_dir)
+    update_manifest_artifact(doc_id, "library_sample_annotation", annotation_path, registry=registry)
+    result = _library_sample_cleanroom_payload(doc_id)
+    result["saved"] = saved
+    return result
 
 
 def _raise_if_authoring_inconsistent(schema: dict[str, Any], faker_profile: dict[str, Any], *, strict_review_coverage: bool = True) -> dict[str, Any]:
@@ -2909,6 +2982,10 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 policy = load_review_policy(review_path)
                 self._send_json(policy_to_client(policy, review_path=review_path))
                 return
+            if parsed.path == "/api/library-sample/cleanroom":
+                query = parse_qs(parsed.query)
+                self._send_json(_library_sample_cleanroom_payload(_first_query_value(query, "docId")))
+                return
             if parsed.path == "/api/cleanup-mask":
                 query = parse_qs(parsed.query)
                 doc_id = _first_query_value(query, "docId")
@@ -2935,6 +3012,14 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     {
                         "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
                         "consistency": consistency,
+                        "librarySamplePrivacy": privacy_payload(
+                            result.payload["schema"].get("semantic_schema") if isinstance(result.payload["schema"].get("semantic_schema"), dict) else {},
+                            fields=fields_with_generators(
+                                result.payload["schema"].get("fields") if isinstance(result.payload["schema"].get("fields"), list) else [],
+                                result.payload["faker_profile"],
+                            ),
+                            privacy=result.payload["schema"].get("privacy"),
+                        ),
                         **result.payload,
                     }
                 )
@@ -3142,6 +3227,9 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                         },
                     }
                 )
+                return
+            if parsed.path == "/api/library-sample/cleanroom/save":
+                self._send_json(_save_library_sample_cleanroom_payload(payload))
                 return
             if parsed.path == "/api/handwriting/print-pack":
                 doc_id = str(payload.get("docId") or "")
@@ -3527,6 +3615,14 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                         "docId": doc_id,
                         "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
                         "consistency": consistency,
+                        "librarySamplePrivacy": privacy_payload(
+                            result.payload["schema"].get("semantic_schema") if isinstance(result.payload["schema"].get("semantic_schema"), dict) else {},
+                            fields=fields_with_generators(
+                                result.payload["schema"].get("fields") if isinstance(result.payload["schema"].get("fields"), list) else [],
+                                result.payload["faker_profile"],
+                            ),
+                            privacy=result.payload["schema"].get("privacy"),
+                        ),
                         **result.payload,
                     }
                 )

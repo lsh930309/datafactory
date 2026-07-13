@@ -4,6 +4,8 @@ import json
 import zipfile
 from pathlib import Path
 
+from PIL import Image
+
 from datafactory import final_results_export as fre
 from datafactory.final_results_export import (
     _field_semantic_paths,
@@ -67,6 +69,22 @@ def test_resolve_scope_entries_accepts_selected_group_scope_and_deduplicates() -
     assert result == (("금융", "DOC-1"), ("제조", "DOC-2"))
 
 
+def test_resolve_scope_entries_rejects_unsupported_library_domain() -> None:
+    registry = RegistryData(
+        documents={"DOC-1": RegistryDocument(doc_id="DOC-1", title="테스트문서")},
+        workflows={},
+        bindings=[],
+        source_path=Path("registry.xlsx"),
+    )
+
+    try:
+        _resolve_scope_entries([{"domain": "기타", "docId": "DOC-1"}], registry=registry)
+    except ValueError as exc:
+        assert "unsupported library-sample domain" in str(exc)
+    else:
+        raise AssertionError("expected unsupported domain to fail")
+
+
 def test_resolve_output_mode_allows_handwriting_temporary_printed_export() -> None:
     item = {
         "writingMethod": "수기",
@@ -93,7 +111,7 @@ def test_resolve_output_mode_prefers_cleanroom_for_non_pipeline_scope() -> None:
         "latestCleanroomPdf": "cleanroom.pdf",
     }
 
-    assert fre._resolve_output_mode(item, render_handwriting_as_printed=True, prefer_cleanroom=True) == "cleanroom"
+    assert fre._resolve_output_mode(item, render_handwriting_as_printed=True, prefer_cleanroom=True) == "cleanroom_static"
 
 
 def test_resolve_output_mode_uses_cleanroom_for_handwriting_without_authoring() -> None:
@@ -102,7 +120,7 @@ def test_resolve_output_mode_uses_cleanroom_for_handwriting_without_authoring() 
         "latestCleanroomPdf": "cleanroom.pdf",
     }
 
-    assert fre._resolve_output_mode(item, render_handwriting_as_printed=True) == "cleanroom"
+    assert fre._resolve_output_mode(item, render_handwriting_as_printed=True) == "cleanroom_static"
 
 
 def test_primary_schema_payload_uses_only_primary_schema_leaves() -> None:
@@ -111,9 +129,9 @@ def test_primary_schema_payload_uses_only_primary_schema_leaves() -> None:
         "담보": {"종류": ""},
     }
     field_paths = {
-        "account_name": "회사이름",
-        "owner": "대표자명",
-        "collateral_type": "담보/종류",
+        "account_name": ("회사이름",),
+        "owner": ("대표자명",),
+        "collateral_type": ("담보", "종류"),
     }
 
     assert _primary_schema_payload(semantic_schema, field_paths) == {
@@ -147,8 +165,8 @@ def test_final_export_prefers_authoring_semantic_paths_over_flat_export_labels()
     semantic_schema = {"환자": {"성명": ""}, "확인": {"발급일자": {"년": ""}}}
 
     assert _field_semantic_paths(fields, semantic_schema=semantic_schema) == {
-        "patient_name": "환자/성명",
-        "issue_year": "확인/발급일자/년",
+        "patient_name": ("환자", "성명"),
+        "issue_year": ("확인", "발급일자", "년"),
     }
 
 
@@ -286,9 +304,105 @@ def test_final_export_preserves_existing_scope_dir_when_strict_pipeline_fails(tm
     assert stale.read_text(encoding="utf-8") == "{\"legacy\": true}"
 
 
+def test_final_export_preserves_existing_scope_dir_when_cleanroom_annotation_is_missing(tmp_path: Path, monkeypatch) -> None:
+    registry = RegistryData(
+        documents={"DOC-1": RegistryDocument(doc_id="DOC-1", title="테스트문서")},
+        workflows={},
+        bindings=[],
+        source_path=Path("registry.xlsx"),
+    )
+    out_dir = tmp_path / "outputs" / "results"
+    doc_dir = out_dir / "금융" / "DOC-1_테스트문서"
+    doc_dir.mkdir(parents=True)
+    stale = doc_dir / "sample_000.pdf"
+    stale.write_bytes(b"legacy")
+    cleanroom_pdf = tmp_path / "cleanroom.pdf"
+    cleanroom_pdf.write_bytes(b"%PDF-test")
+
+    monkeypatch.setattr(fre, "ROOT", tmp_path)
+    monkeypatch.setattr(fre, "BACKUP_ROOT", tmp_path / ".bin" / "backups")
+    monkeypatch.setattr(
+        fre,
+        "list_work_items",
+        lambda *, registry, root: [{"docId": "DOC-1", "title": "테스트문서", "latestCleanroomPdf": str(cleanroom_pdf)}],
+    )
+    monkeypatch.setattr(fre, "_assessment_rows_by_key", lambda *, registry, root: {})
+    monkeypatch.setattr(fre, "_source_hashes", lambda items_by_doc_id: {})
+    monkeypatch.setattr(fre, "_changed_sources", lambda source_hashes: [])
+
+    result = fre.export_final_results(count=1, out_dir=out_dir, scope_entries=[{"domain": "금융", "docId": "DOC-1"}], registry=registry, root=tmp_path)
+
+    assert result["summary"]["errorCount"] == 1
+    assert "annotation is required" in result["errors"][0]["error"]
+    assert stale.read_bytes() == b"legacy"
+
+
+def test_render_cleanroom_document_exports_static_jpg_json_bbox_schema_and_pii(tmp_path: Path, monkeypatch) -> None:
+    pages_dir = tmp_path / "cleanroom" / "pages"
+    pages_dir.mkdir(parents=True)
+    image_path = pages_dir / "page_001.png"
+    Image.new("RGB", (1400, 1800), "white").save(image_path)
+    review_path = tmp_path / "review" / "review.json"
+    review_path.parent.mkdir(parents=True)
+    review_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_detections": str(tmp_path / "detections.json"),
+                "source_image": str(image_path),
+                "image": {"width": 1400, "height": 1800},
+                "labels": [{"id": "name", "text": "홍길동", "confidence": 1.0, "bbox": [140, 180, 280, 90], "polygon": [], "status": "use", "auto_type": "field_value", "reason": "test"}],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    annotation_path = tmp_path / "library_sample" / "annotation.json"
+    annotation_path.parent.mkdir(parents=True)
+    annotation_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_image": str(image_path),
+                "review_path": str(review_path),
+                "fields": [{"key": "성명", "value": "홍길동", "bbox_label_id": "name"}],
+                "privacy": {"include_keys": [], "exclude_keys": []},
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(fre, "ROOT", tmp_path)
+
+    result = fre._render_cleanroom_document(
+        {
+            "latestLibrarySampleAnnotation": str(annotation_path),
+            "latestCleanroomPagesDir": str(pages_dir),
+        },
+        work_dir=tmp_path / "work",
+    )
+
+    names = {path.name for path in result.samples[0].values()}
+    assert names == {"sample_000.jpg", "sample_000.json", "sample_000-bbox.json", "sample_000-pii.json"}
+    assert json.loads(result.primary_schema.read_text(encoding="utf-8")) == {"성명": ""}
+    assert result.pii_keys == ["성명"]
+
+
+def test_cleanroom_multi_page_source_reports_deferred_single_page_warning(tmp_path: Path) -> None:
+    pages_dir = tmp_path / "pages"
+    pages_dir.mkdir()
+    for index in range(2):
+        Image.new("RGB", (10, 10), "white").save(pages_dir / f"page_{index + 1:03d}.png")
+
+    warnings = fre._deferred_multi_page_warnings({"latestCleanroomPagesDir": str(pages_dir)}, mode="cleanroom_static")
+
+    assert warnings[0]["code"] == "multi_page_export_deferred"
+    assert warnings[0]["detectedPageCount"] == 2
+
+
 def test_semantic_bbox_payload_rounds_to_four_decimals_and_has_only_ltrb() -> None:
     schema = {"성명": ""}
-    field_paths = {"name": "성명"}
+    field_paths = {"name": ("성명",)}
     payload = {
         "image": {"width": 1000, "height": 2000},
         "annotations": [
@@ -303,7 +417,7 @@ def test_semantic_bbox_payload_rounds_to_four_decimals_and_has_only_ltrb() -> No
 
 def test_semantic_bbox_payload_omits_empty_text_annotation() -> None:
     schema = {"신청구분": {"신규": "", "증대": ""}}
-    field_paths = {"new": "신청구분/신규", "increase": "신청구분/증대"}
+    field_paths = {"new": ("신청구분", "신규"), "increase": ("신청구분", "증대")}
     payload = {
         "image": {"width": 1000, "height": 2000},
         "annotations": [
@@ -319,7 +433,7 @@ def test_semantic_bbox_payload_omits_empty_text_annotation() -> None:
 
 def test_semantic_bbox_payload_omits_fields_without_rendered_annotation() -> None:
     schema = {"성명": "", "미렌더링필드": ""}
-    field_paths = {"name": "성명", "empty": "미렌더링필드"}
+    field_paths = {"name": ("성명",), "empty": ("미렌더링필드",)}
     payload = {
         "image": {"width": 1000, "height": 2000},
         "annotations": [
@@ -330,6 +444,19 @@ def test_semantic_bbox_payload_omits_fields_without_rendered_annotation() -> Non
     result = _semantic_bbox_payload(schema, field_paths, payload)
 
     assert result == {"성명": {"l": 0.01, "t": 0.01, "r": 0.04, "b": 0.03}}
+
+
+def test_semantic_bbox_payload_preserves_literal_slash_in_leaf_key() -> None:
+    schema = {"대리인": {"주소(자택/직장)": ""}}
+    field_paths = {"address": ("대리인", "주소(자택/직장)")}
+    payload = {
+        "image": {"width": 1000, "height": 1000},
+        "annotations": [{"field": "address", "text": "서울시", "bbox": [100, 200, 300, 100]}],
+    }
+
+    assert _semantic_bbox_payload(schema, field_paths, payload) == {
+        "대리인": {"주소(자택/직장)": {"l": 0.1, "t": 0.2, "r": 0.4, "b": 0.3}}
+    }
 
 
 def test_write_manifest_xlsx_creates_valid_zip_parts(tmp_path: Path) -> None:

@@ -562,6 +562,78 @@ def test_apply_authoring_agent_drafts_writes_final_authoring_bundle(tmp_path: Pa
     assert any(key == "authoring_agent_applied_review" for _doc_id, key, _path in manifest_updates)
 
 
+def test_authoring_agent_apply_regression_rejects_source_page_change(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    previous = {
+        "source_image": str(tmp_path / "page_001.png"),
+        "fields": [{"field_id": "name", "bbox_label_id": "det_name"}],
+    }
+    candidate = {
+        "source_image": str(tmp_path / "page_002.png"),
+        "fields": [{"field_id": "name", "bbox_label_id": "det_name"}],
+    }
+
+    result = web_api._validate_authoring_agent_apply_regression(previous, candidate)
+
+    assert result["ready"] is False
+    assert result["errors"][0]["code"] == "authoring_agent_source_image_changed"
+
+
+def test_authoring_agent_apply_regression_rejects_large_field_drop(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    source = str(tmp_path / "page_001.png")
+    previous = {
+        "source_image": source,
+        "fields": [
+            {"field_id": "name", "bbox_label_id": "det_name"},
+            {"field_id": "date", "bbox_label_id": "det_date"},
+            {"field_id": "total", "bbox_label_id": "det_total"},
+        ],
+    }
+    candidate = {
+        "source_image": source,
+        "fields": [{"field_id": "name", "bbox_label_id": "det_name"}],
+    }
+
+    result = web_api._validate_authoring_agent_apply_regression(previous, candidate)
+
+    assert result["ready"] is False
+    assert result["errors"][0]["code"] == "authoring_agent_existing_field_coverage_drop"
+    assert result["summary"]["previousFieldCount"] == 3
+    assert result["summary"]["candidateFieldCount"] == 1
+
+
+def test_authoring_agent_apply_regression_allows_same_page_bbox_update(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    source = str(tmp_path / "page_001.png")
+    previous = {
+        "source_image": source,
+        "fields": [{"field_id": "name", "bbox_label_id": "det_name", "bbox": [10, 10, 20, 10]}],
+    }
+    candidate = {
+        "source_image": source,
+        "fields": [{"field_id": "name", "bbox_label_id": "det_name", "bbox": [12, 11, 22, 11]}],
+    }
+
+    result = web_api._validate_authoring_agent_apply_regression(previous, candidate)
+
+    assert result["ready"] is True
+    assert result["summary"]["retainedAnchorCount"] == 1
+
+
+def test_authoring_agent_apply_regression_allows_new_document(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    candidate = {
+        "source_image": str(tmp_path / "page_001.png"),
+        "fields": [{"field_id": "name", "bbox_label_id": "det_name"}],
+    }
+
+    result = web_api._validate_authoring_agent_apply_regression(None, candidate)
+
+    assert result["ready"] is True
+    assert result["summary"]["previousFieldCount"] == 0
+
+
 def test_blank_template_agent_validation_rejects_static_label_field_anchor(tmp_path: Path) -> None:
     request_dir = tmp_path / "request"
     request_dir.mkdir()

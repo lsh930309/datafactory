@@ -217,7 +217,7 @@ def render_authoring_preview(
     values, generation_warnings = _generate_values(schema, faker_profile, rng, as_of_date=as_of_date)
     template, template_warnings = _template_from_authoring(schema, stylesheet, base_image)
     image, annotations = render_template(template, values, render_scale=render_scale)
-    validation = _validate_render(schema, annotations, [*(generation_warnings or []), *template_warnings])
+    validation = _validate_render(schema, annotations, [*(generation_warnings or []), *template_warnings], values=values)
 
     image_path = out_dir / f"{sample_id}.png"
     kv_path = out_dir / f"{sample_id}.kv.json"
@@ -286,7 +286,7 @@ def render_authoring_live_preview(
     values, generation_warnings = _generate_values(schema, faker_profile, rng, force_visible=True, as_of_date=as_of_date)
     template, template_warnings = _template_from_authoring(schema, stylesheet, base_image)
     image, annotations = render_template(template, values, render_scale=render_scale)
-    validation = _validate_render(schema, annotations, [*(generation_warnings or []), *template_warnings])
+    validation = _validate_render(schema, annotations, [*(generation_warnings or []), *template_warnings], values=values)
 
     image_path = out_dir / f"{sample_id}.png"
     kv_path = out_dir / f"{sample_id}.kv.json"
@@ -1991,7 +1991,13 @@ def _render_pattern(pattern: str, rng: random.Random) -> str:
     return "".join(out)
 
 
-def _validate_render(schema: dict[str, Any], annotations: list[RenderedAnnotation], generation_warnings: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+def _validate_render(
+    schema: dict[str, Any],
+    annotations: list[RenderedAnnotation],
+    generation_warnings: list[dict[str, Any]] | None = None,
+    *,
+    values: dict[str, str] | None = None,
+) -> dict[str, Any]:
     fields = {str(field["field_id"]): field for field in schema.get("fields", [])}
     annotated_fields = {annotation.field for annotation in annotations}
     warnings: list[dict[str, Any]] = list(generation_warnings or [])
@@ -2014,6 +2020,8 @@ def _validate_render(schema: dict[str, Any], annotations: list[RenderedAnnotatio
             warnings.append({"field_id": annotation.field, "type": "unknown_field", "message": "annotation has no schema field"})
     for field_id, field in fields.items():
         if isinstance(field, dict) and not _field_render_enabled(field):
+            continue
+        if values is not None and not str(values.get(field_id) or "").strip():
             continue
         if field_id not in annotated_fields:
             warnings.append({"field_id": field_id, "type": "not_rendered", "message": "schema field was not rendered, usually because its reviewed bbox label is missing or disabled"})

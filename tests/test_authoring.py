@@ -402,9 +402,8 @@ def test_symbol_box_checkbox_is_drawn_without_unicode_font_dependency(tmp_path: 
 
     image, annotations = render_template(template, {"checked": "V", "unchecked": ""}, render_scale=1)
 
-    assert len(annotations) == 2
+    assert len(annotations) == 1
     assert annotations[0].text == "V"
-    assert annotations[1].text == ""
     # Both boxes should have vector-drawn dark pixels; the checked one should
     # contain more dark pixels due to the additional check stroke.
     checked_dark = sum(1 for pixel in image.crop((10, 10, 42, 42)).getdata() if pixel != (255, 255, 255))
@@ -428,7 +427,8 @@ def test_standalone_check_mark_styles_are_vector_drawn(tmp_path: Path) -> None:
 
     image, annotations = render_template(template, {"thin": "✓", "heavy": "✔️", "blank": ""}, render_scale=1)
 
-    assert len(annotations) == 3
+    assert len(annotations) == 2
+    assert [annotation.field for annotation in annotations] == ["thin", "heavy"]
     thin_dark = sum(1 for pixel in image.crop((10, 10, 48, 48)).getdata() if pixel != (255, 255, 255))
     heavy_dark = sum(1 for pixel in image.crop((60, 10, 98, 48)).getdata() if pixel != (255, 255, 255))
     blank_dark = sum(1 for pixel in image.crop((110, 10, 148, 48)).getdata() if pixel != (255, 255, 255))

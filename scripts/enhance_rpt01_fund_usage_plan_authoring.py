@@ -2,10 +2,9 @@
 from __future__ import annotations
 
 import json
-import random
-import shutil
 import sys
-from datetime import datetime, timezone
+from copy import deepcopy
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -14,9 +13,10 @@ from PIL import Image, ImageChops, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from datafactory.authoring import render_authoring_preview
+from datafactory.authoring import render_authoring_preview, save_authoring_bundle
 from datafactory.workbench import update_manifest_artifact
 from datafactory.authoring_backup import backup_authoring_json_before_write
+from datafactory.web_api import _authoring_bundle_consistency, _validate_faker_profile_contract
 
 DOC_ID = "RPT-01"
 DOC_TITLE = "사업계획서·자금사용계획서"
@@ -25,7 +25,7 @@ AUTHORING = DOC_DIR / "authoring"
 OUT_DIR = AUTHORING / "render_preview"
 BATCH_DIR = ROOT / "outputs" / "pipeline_ready" / "RPT-01_사업계획서·자금사용계획서"
 CALIB_DIR = ROOT / "outputs" / "style_calibration" / "RPT-01_사업계획서·자금사용계획서"
-PROGRESS = ROOT / "docs/reports/pipeline_ready/20260702_rpt01_fund_usage_plan_pipeline_readiness.md"
+PROGRESS = ROOT / "outputs/reports/pipeline_ready/20260713_rpt01_fund_usage_plan_restoration.md"
 ORIGINAL_BLANK = DOC_DIR / "samples" / "original" / "자금사용계획서_page_001.jpg"
 FILLED_REFERENCE = DOC_DIR / "samples" / "original" / "자금사용계획서_page_002.jpg"
 REVIEW_PAGE1 = DOC_DIR / "review" / "original_자금사용계획서_page_001" / "review.json"
@@ -45,7 +45,6 @@ FIELDS: list[dict[str, Any]] = [
     {"id": "account_youth_check", "label": "청년내일저축계좌 선택", "bbox": [246, 489, 24, 24], "style": "style_check", "align": "center"},
     {"id": "hope_join_month", "label": "희망저축계좌 가입기수", "bbox": [790, 438, 140, 30], "style": "style_small_center", "align": "center"},
     {"id": "youth_join_month", "label": "청년내일저축계좌 가입기수", "bbox": [790, 481, 140, 30], "style": "style_small_center", "align": "center"},
-    {"id": "youth_join_note", "label": "가입연월 안내", "bbox": [790, 506, 140, 24], "style": "style_note", "align": "center"},
     # applicant info
     {"id": "applicant_name", "label": "성명", "bbox": [339, 526, 175, 32], "style": "style_text", "align": "left"},
     {"id": "birth_date", "label": "생년월일", "bbox": [702, 528, 165, 32], "style": "style_text", "align": "left"},
@@ -117,6 +116,84 @@ for _field in FIELDS:
         _field["bbox"][3] += 3
 
 
+SEMANTIC_PATHS: dict[str, list[str]] = {
+    "account_hope_check": ["통장정보", "통장종류", "희망저축계좌II"],
+    "account_youth_check": ["통장정보", "통장종류", "청년내일저축계좌"],
+    "hope_join_month": ["통장정보", "가입기수", "희망저축계좌II"],
+    "youth_join_month": ["통장정보", "가입기수", "청년내일저축계좌"],
+    "applicant_name": ["신청인", "성명"],
+    "birth_date": ["신청인", "생년월일"],
+    "total_grant_amount_text": ["지급정보", "지급액 총액"],
+    "personal_saving_text": ["지급정보", "본인적립금"],
+    "support_amount_text": ["지급정보", "지원금"],
+    "usage_total_amount": ["사용용도계획", "총합"],
+    "application_year": ["신청정보", "신청일", "연"],
+    "application_month": ["신청정보", "신청일", "월"],
+    "application_day": ["신청정보", "신청일", "일"],
+    "signature_name": ["신청정보", "신청인 성명"],
+}
+
+_CATEGORY_PATHS = {
+    "housing": "주거 구입·임대",
+    "education": "본인·자녀의 고등교육·기술훈련",
+    "startup": "창업·운영자금",
+    "medical": "의료비",
+    "finance": "금융자산형성",
+    "childcare": "자녀양육·보육비",
+    "marriage": "결혼자금",
+    "self_reliance": "그밖의 자립·자활",
+}
+_CATEGORY_LEAVES = {
+    "housing_self_purchase_check": ("housing", "자가구입"),
+    "housing_deposit_check": ("housing", "보증금"),
+    "housing_rent_check": ("housing", "월세"),
+    "housing_loan_check": ("housing", "대출상환"),
+    "housing_repair_check": ("housing", "주택 유지 및 보수"),
+    "housing_dorm_check": ("housing", "기숙사비"),
+    "housing_other_check": ("housing", "기타 선택"),
+    "housing_other_text": ("housing", "기타 내용"),
+    "housing_amount": ("housing", "금액"),
+    "education_tuition_check": ("education", "자녀 학비"),
+    "education_books_check": ("education", "교재·교복"),
+    "education_loan_check": ("education", "학자금 대출상환"),
+    "education_exam_check": ("education", "시험 응시료"),
+    "education_academy_check": ("education", "학원비"),
+    "education_certificate_check": ("education", "자격증 취득"),
+    "education_other_check": ("education", "기타 선택"),
+    "education_other_text": ("education", "기타 내용"),
+    "education_amount": ("education", "금액"),
+    "startup_working_capital_check": ("startup", "운용자금"),
+    "startup_other_check": ("startup", "기타 선택"),
+    "startup_other_text": ("startup", "기타 내용"),
+    "startup_amount": ("startup", "금액"),
+    "medical_self_check": ("medical", "본인 의료비"),
+    "medical_family_check": ("medical", "가구원 의료비"),
+    "medical_equipment_check": ("medical", "의료보장구"),
+    "medical_care_check": ("medical", "돌봄 비용"),
+    "medical_other_check": ("medical", "기타 선택"),
+    "medical_other_text": ("medical", "기타 내용"),
+    "medical_amount": ("medical", "금액"),
+    "finance_isa_check": ("finance", "개인종합자산관리계좌(ISA)"),
+    "finance_savings_check": ("finance", "적금상품 가입"),
+    "finance_other_check": ("finance", "기타 선택"),
+    "finance_other_text": ("finance", "기타 내용"),
+    "finance_amount": ("finance", "금액"),
+    "childcare_other_check": ("childcare", "기타 선택"),
+    "childcare_other_text": ("childcare", "기타 내용"),
+    "childcare_amount": ("childcare", "금액"),
+    "marriage_other_check": ("marriage", "기타 선택"),
+    "marriage_other_text": ("marriage", "기타 내용"),
+    "marriage_amount": ("marriage", "금액"),
+    "self_reliance_other_check": ("self_reliance", "기타 선택"),
+    "self_reliance_other_text": ("self_reliance", "기타 내용"),
+    "self_reliance_amount": ("self_reliance", "금액"),
+}
+for _field_id, (_category, _leaf) in _CATEGORY_LEAVES.items():
+    SEMANTIC_PATHS[_field_id] = ["사용용도계획", _CATEGORY_PATHS[_category], _leaf]
+
+RENDER_ONLY_FIELDS = {"usage_plan_note"}
+
+
 def write_json(path: Path, data: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     backup_authoring_json_before_write(path, next_payload=data, reason=Path(__file__).name + ".write_json")
@@ -169,27 +246,93 @@ def style(style_id: str, size: int, *, align: str = "left", opacity: float = 0.9
 
 
 def build_schema() -> dict[str, Any]:
-    return {
-        "schema_version": 1,
-        "created_at": NOW,
-        "updated_at": NOW,
-        "doc_id": DOC_ID,
-        "title": "자산형성지원사업 자금사용계획서",
-        "source_review": str(REVIEW_PAGE1.resolve()),
-        "source_image": str(ORIGINAL_BLANK.resolve()),
-        "source_inpainted": str(ORIGINAL_BLANK.resolve()),
-        "image": {"width": 1191, "height": 1684},
-        "fields": [field(item) for item in FIELDS],
-        "groups": [
-            {"group_id": "account_selection", "type": "checkbox_group", "fields": ["account_hope_check", "account_youth_check", "hope_join_month", "youth_join_month"]},
-            {"group_id": "usage_plan", "type": "amount_table", "notes": "usage_* 금액 합계가 usage_total_amount와 일치하도록 faker profile에서 record 단위 생성"},
-        ],
-        "authoring_mode": "rpt01_fund_usage_plan_pipeline_ready_20260702",
-        "quality_status": "pipeline_ready_candidate",
-    }
+    expected_ids = {item["id"] for item in FIELDS}
+    candidates = [AUTHORING / "schema.json", *sorted((AUTHORING / "backups").glob("*/schema.json"), reverse=True)]
+    recovered: dict[str, Any] | None = None
+    recovered_from: Path | None = None
+    for candidate in candidates:
+        if not candidate.exists():
+            continue
+        payload = json.loads(candidate.read_text(encoding="utf-8"))
+        fields = payload.get("fields") if isinstance(payload.get("fields"), list) else []
+        if {str(item.get("field_id") or "") for item in fields if isinstance(item, dict)} != expected_ids:
+            continue
+        if Path(str(payload.get("source_image") or "")).name != ORIGINAL_BLANK.name:
+            continue
+        recovered = deepcopy(payload)
+        recovered_from = candidate
+        break
+    if recovered is None or recovered_from is None:
+        raise RuntimeError("no complete 58-field page_001 authoring bundle is available for RPT-01 recovery")
+
+    semantic_schema = build_semantic_schema()
+    with Image.open(ORIGINAL_BLANK) as source_image:
+        image_width, image_height = source_image.size
+    review = json.loads(REVIEW_PAGE1.read_text(encoding="utf-8"))
+    use_ids = {str(item.get("id") or "") for item in review.get("labels", []) if isinstance(item, dict) and item.get("status") == "use"}
+    fields_by_id = {str(item.get("field_id")): item for item in recovered["fields"] if isinstance(item, dict)}
+    normalized_fields: list[dict[str, Any]] = []
+    for spec in FIELDS:
+        field_id = spec["id"]
+        item = deepcopy(fields_by_id[field_id])
+        bbox_label_id = str(item.get("bbox_label_id") or item.get("source_detection_id") or "")
+        if bbox_label_id not in use_ids:
+            raise RuntimeError(f"{field_id} does not map to a page_001 use bbox: {bbox_label_id}")
+        if field_id in RENDER_ONLY_FIELDS:
+            item.pop("semantic_path", None)
+            item["export"] = {"include": False, "json_path": "", "csv_column": ""}
+            item.setdefault("render_policy", {})["render"] = False
+        else:
+            path = SEMANTIC_PATHS[field_id]
+            item["semantic_path"] = path
+            item["export"] = {"json_path": "/".join(path), "csv_column": "/".join(path)}
+        item["generator"] = "literal:"
+        item["render_mode"] = "printed"
+        item["required"] = False
+        item["notes"] = "page_001 빈 템플릿의 review use bbox에 연결됨. page_002는 값·스타일 예제 참고자료로만 사용."
+        normalized_fields.append(item)
+
+    recovered.update(
+        {
+            "schema_version": 1,
+            "updated_at": NOW,
+            "doc_id": DOC_ID,
+            "title": "자산형성지원사업 자금사용계획서",
+            "sample_kind": "blank_template",
+            "source_review": str(REVIEW_PAGE1.resolve()),
+            "source_image": str(ORIGINAL_BLANK.resolve()),
+            "source_inpainted": str(ORIGINAL_BLANK.resolve()),
+            "image": {"width": image_width, "height": image_height},
+            "reference_images": [{"path": str(FILLED_REFERENCE.resolve()), "role": "filled_example", "render_source": False}],
+            "bbox_source": {"canonical": "review", "review_path": str(REVIEW_PAGE1.resolve())},
+            "semantic_schema": semantic_schema,
+            "fields": normalized_fields,
+            "groups": [
+                {"group_id": "account_selection", "type": "checkbox_group", "fields": ["account_hope_check", "account_youth_check", "hope_join_month", "youth_join_month"]},
+                {"group_id": "usage_plan", "type": "amount_table", "notes": "category amounts sum to usage_total_amount through one correlated record"},
+            ],
+            "authoring_mode": "rpt01_blank_template_restored_and_refined_20260713",
+            "quality_status": "restored_and_validated",
+            "recovery_source": str(recovered_from.resolve()),
+        }
+    )
+    recovered.pop("anchor_map_ref", None)
+    return recovered
 
 
-def build_stylesheet() -> dict[str, Any]:
+def build_stylesheet(schema: dict[str, Any]) -> dict[str, Any]:
+    current_path = AUTHORING / "stylesheet.json"
+    if current_path.exists():
+        current = json.loads(current_path.read_text(encoding="utf-8"))
+        classes = current.get("style_classes") if isinstance(current.get("style_classes"), list) else []
+        class_ids = {str(item.get("style_class") or "") for item in classes if isinstance(item, dict)}
+        expected = {str(field.get("style_class") or "") for field in schema["fields"]}
+        if expected <= class_ids:
+            current["notes"] = [
+                "page_002 filled example을 참고해 복원·재매핑된 58개 bbox별 스타일을 보존한다.",
+                "page_001만 실제 렌더 템플릿이며 page_002는 렌더 source로 사용하지 않는다.",
+            ]
+            return current
     return {
         "schema_version": 1,
         "created_at": NOW,
@@ -208,113 +351,14 @@ def build_stylesheet() -> dict[str, Any]:
     }
 
 
-def build_semantic_schema(schema: dict[str, Any]) -> dict[str, Any]:
-    field_mapping = {field["field_id"]: field["export"]["json_path"] for field in schema["fields"]}
-    return {
-        "schema_version": 1,
-        "created_at": NOW,
-        "updated_at": NOW,
-        "doc_id": DOC_ID,
-        "title": "자산형성지원사업 자금사용계획서",
-        "purpose": "렌더링 bbox/style 속성을 제외한 KIE/라벨링 관점의 의미 구조",
-        "semantic_schema": {
-            "자금사용계획서": {
-                "통장종류": {
-                    "희망저축계좌II": "",
-                    "청년내일저축계좌": "",
-                    "희망저축계좌 가입기수": "",
-                    "청년내일저축계좌 가입기수": "",
-                    "가입연월 안내": "",
-                },
-                "신청인": {
-                    "성명": "",
-                    "생년월일": "",
-                },
-                "지급액": {
-                    "총액": "",
-                    "본인적립금": "",
-                    "지원금": "",
-                    "사용용도 계획 안내": "",
-                },
-                "사용용도계획": {
-                    "주거 구입·임대": {
-                        "자가구입": "",
-                        "보증금": "",
-                        "월세": "",
-                        "대출상환": "",
-                        "주택 유지 및 보수": "",
-                        "기숙사비": "",
-                        "기타": "",
-                        "기타 내용": "",
-                        "금액": "",
-                    },
-                    "본인·자녀의 고등교육·기술훈련": {
-                        "자녀 학비": "",
-                        "교재·교복": "",
-                        "학자금 대출상환": "",
-                        "시험 응시료": "",
-                        "학원비": "",
-                        "자격증 취득": "",
-                        "기타": "",
-                        "기타 내용": "",
-                        "금액": "",
-                    },
-                    "창업·운영자금": {
-                        "운용자금": "",
-                        "기타": "",
-                        "기타 내용": "",
-                        "금액": "",
-                    },
-                    "의료비": {
-                        "본인 의료비": "",
-                        "가구원 의료비": "",
-                        "의료보장구": "",
-                        "돌봄 비용": "",
-                        "기타": "",
-                        "기타 내용": "",
-                        "금액": "",
-                    },
-                    "금융자산형성": {
-                        "ISA": "",
-                        "적금상품": "",
-                        "기타": "",
-                        "기타 내용": "",
-                        "금액": "",
-                    },
-                    "자녀양육·보육비": {
-                        "기타": "",
-                        "기타 내용": "",
-                        "금액": "",
-                    },
-                    "결혼자금": {
-                        "기타": "",
-                        "기타 내용": "",
-                        "금액": "",
-                    },
-                    "그밖의 자립·자활": {
-                        "기타": "",
-                        "기타 내용": "",
-                        "금액": "",
-                    },
-                    "총합": "",
-                },
-                "신청일": {
-                    "연": "",
-                    "월": "",
-                    "일": "",
-                },
-                "서명": {
-                    "신청인 성명": "",
-                },
-            }
-        },
-        "field_mapping": field_mapping,
-        "notes": [
-            "schema.json은 렌더러 호환을 위해 bbox/style/generator 정보를 유지한다.",
-            "semantic_schema.json은 schema key-name 집합과 계층만 별도로 관리하기 위한 파일이다.",
-            "현재 RPT-01은 수집된 정형 자금사용계획서 양식 기준이며 산문형 사업계획서 일반형은 범위 밖이다.",
-        ],
-    }
+def build_semantic_schema() -> dict[str, Any]:
+    semantic_schema: dict[str, Any] = {}
+    for path in SEMANTIC_PATHS.values():
+        cursor = semantic_schema
+        for part in path[:-1]:
+            cursor = cursor.setdefault(part, {})
+        cursor[path[-1]] = ""
+    return semantic_schema
 
 
 def krw(value: int) -> str:
@@ -322,106 +366,159 @@ def krw(value: int) -> str:
 
 
 def make_profiles() -> list[dict[str, str]]:
-    rng = random.Random(20260702)
-    names = ["홍길동", "김서연", "박민준", "이하은", "정도윤", "최지우"]
-    births = ["1999.1.1.", "1997.3.14.", "2000.8.22.", "1998.11.5.", "1996.6.30.", "2001.2.18."]
-    months = ["2022년 10월", "2023년 4월", "2024년 7월", "2025년 1월", "2025년 9월", "2026년 3월"]
+    names = [
+        "김민준", "이서연", "박도윤", "최하은", "정현우", "강지우", "조시윤", "윤서준",
+        "장예린", "임지호", "한수아", "오민재", "서다은", "신준서", "권유진", "황태윤",
+        "안채원", "송건우", "전소윤", "홍재민", "문가은", "배시우", "백나연", "유도현",
+    ]
+    other_uses = {
+        "housing": ["이사비", "중개보수", "입주청소비", "도배·장판 교체비", "보일러 수리비", "창호 보수비"],
+        "education": ["온라인강의 수강료", "실습재료비", "전문서적 구입비", "직업훈련 교통비", "교육용 장비 대여료", "현장실습비"],
+        "startup": ["사업장 임차료", "원재료 구입비", "포장재 구입비", "온라인몰 구축비", "업무용 장비 구입비", "시제품 제작비"],
+        "medical": ["치과 치료비", "재활치료비", "처방약 구입비", "건강검진비", "간병용품 구입비", "수술 후 관리비"],
+        "finance": ["주택청약종합저축", "정기예금 가입", "연금저축 납입", "비상예비자금 예치", "주거자금 적립", "창업준비자금 적립"],
+        "childcare": ["아이돌봄서비스 본인부담금", "보육시설 특별활동비", "급식비", "통학차량비", "영유아 교구 구입비", "긴급돌봄 이용료"],
+        "marriage": ["예식장 대관료", "예식 식대", "웨딩촬영비", "신혼집 이사비", "혼수용품 구입비", "청첩장 제작비"],
+        "self_reliance": ["운전면허 취득비", "면접복장 구입비", "업무용 컴퓨터 구입비", "직업상담비", "취업교육 참가비", "작업도구 구입비"],
+    }
+    category_fields = {
+        "housing": {
+            "amount": "housing_amount",
+            "choices": ["housing_self_purchase_check", "housing_deposit_check", "housing_rent_check", "housing_loan_check", "housing_repair_check", "housing_dorm_check", "housing_other_check"],
+            "other_check": "housing_other_check",
+            "other_text": "housing_other_text",
+        },
+        "education": {
+            "amount": "education_amount",
+            "choices": ["education_tuition_check", "education_books_check", "education_loan_check", "education_exam_check", "education_academy_check", "education_certificate_check", "education_other_check"],
+            "other_check": "education_other_check",
+            "other_text": "education_other_text",
+        },
+        "startup": {"amount": "startup_amount", "choices": ["startup_working_capital_check", "startup_other_check"], "other_check": "startup_other_check", "other_text": "startup_other_text"},
+        "medical": {"amount": "medical_amount", "choices": ["medical_self_check", "medical_family_check", "medical_equipment_check", "medical_care_check", "medical_other_check"], "other_check": "medical_other_check", "other_text": "medical_other_text"},
+        "finance": {"amount": "finance_amount", "choices": ["finance_isa_check", "finance_savings_check", "finance_other_check"], "other_check": "finance_other_check", "other_text": "finance_other_text"},
+        "childcare": {"amount": "childcare_amount", "choices": ["childcare_other_check"], "other_check": "childcare_other_check", "other_text": "childcare_other_text"},
+        "marriage": {"amount": "marriage_amount", "choices": ["marriage_other_check"], "other_check": "marriage_other_check", "other_text": "marriage_other_text"},
+        "self_reliance": {"amount": "self_reliance_amount", "choices": ["self_reliance_other_check"], "other_check": "self_reliance_other_check", "other_text": "self_reliance_other_text"},
+    }
+    categories = list(category_fields)
     profiles: list[dict[str, str]] = []
     for idx, name in enumerate(names):
-        is_youth = idx % 3 != 1
-        year = 2025 + (idx % 2)
-        month = 10 if idx % 2 == 0 else 6
-        day = 30 - idx
-        # Create correlated category amounts in units of 100,000 KRW.
-        housing = rng.choice([0, 800_000, 1_000_000, 1_500_000])
-        education = rng.choice([0, 900_000, 1_200_000, 1_800_000])
-        startup = rng.choice([0, 500_000, 1_000_000])
-        medical = rng.choice([0, 600_000, 900_000])
-        finance = rng.choice([2_000_000, 3_000_000, 4_000_000, 5_000_000])
-        childcare = rng.choice([0, 400_000, 700_000])
-        marriage = rng.choice([0, 500_000])
-        self_reliance = rng.choice([0, 300_000, 600_000])
-        amounts = [housing, education, startup, medical, finance, childcare, marriage, self_reliance]
-        total = sum(amounts)
-        # Keep total in realistic grant split: personal and support are half each.
-        if total % 2:
-            total += 100_000
-            finance += 100_000
+        is_youth = idx % 3 != 2
+        application_date = date(2024 + idx % 3, 1 + idx % 7, 3 + idx % 10)
+        join_date = application_date - timedelta(days=180 + (idx % 6) * 30)
+        birth_year = (1990 + idx % 14) if is_youth else (1980 + idx % 12)
+        birth_date = date(birth_year, 1 + idx % 12, 1 + (idx * 3) % 27)
+        record = {item["id"]: "" for item in FIELDS}
+        active_count = 2 + idx % 4
+        active_categories = {categories[(idx + offset * 2) % len(categories)] for offset in range(active_count)}
+        amounts: dict[str, int] = {}
+        for category, spec in category_fields.items():
+            if category not in active_categories:
+                amounts[category] = 0
+                continue
+            amount = (4 + ((idx * 3 + categories.index(category)) % 18)) * 100_000
+            if amount % 200_000:
+                amount += 100_000
+            amounts[category] = amount
+            choice = spec["choices"][(idx + categories.index(category)) % len(spec["choices"])]
+            record[choice] = CHECK
+            if choice == spec["other_check"]:
+                record[spec["other_text"]] = other_uses[category][idx % len(other_uses[category])]
+            record[spec["amount"]] = krw(amount)
+        total = sum(amounts.values())
         personal = total // 2
         support = total - personal
-        record = {item["id"]: "" for item in FIELDS}
         record.update(
             {
                 "account_hope_check": CHECK if not is_youth else "",
                 "account_youth_check": CHECK if is_youth else "",
-                "hope_join_month": months[idx] if not is_youth else "",
-                "youth_join_month": months[idx] if is_youth else "",
-                "youth_join_note": "(가입 연월을 기재)" if is_youth else "",
+                "hope_join_month": f"{join_date.year}년 {join_date.month}월" if not is_youth else "",
+                "youth_join_month": f"{join_date.year}년 {join_date.month}월" if is_youth else "",
                 "applicant_name": name,
-                "birth_date": births[idx],
+                "birth_date": f"{birth_date.year}.{birth_date.month}.{birth_date.day}.",
                 "total_grant_amount_text": f"{krw(total)}원 (본인저축금+근로소득장려금 총액을 기재)",
                 "personal_saving_text": f"{krw(personal)}원 (본인저축금을 기재)",
                 "support_amount_text": f"{krw(support)}원 (근로소득장려금을 기재)",
-                "usage_plan_note": "(지급액 총액에 대한 사용계획을 기재)",
-                "housing_amount": krw(housing) if housing else "",
-                "education_amount": krw(education) if education else "",
-                "startup_amount": krw(startup) if startup else "",
-                "medical_amount": krw(medical) if medical else "",
-                "finance_amount": krw(finance) if finance else "",
-                "childcare_amount": krw(childcare) if childcare else "",
-                "marriage_amount": krw(marriage) if marriage else "",
-                "self_reliance_amount": krw(self_reliance) if self_reliance else "",
+                "usage_plan_note": "",
                 "usage_total_amount": krw(total),
-                "application_year": str(year),
-                "application_month": str(month),
-                "application_day": str(day),
+                "application_year": str(application_date.year),
+                "application_month": str(application_date.month),
+                "application_day": str(application_date.day),
                 "signature_name": name,
             }
         )
-        if housing:
-            record[rng.choice(["housing_rent_check", "housing_deposit_check", "housing_loan_check"])] = CHECK
-        if education:
-            record[rng.choice(["education_tuition_check", "education_academy_check", "education_certificate_check"])] = CHECK
-        if startup:
-            record["startup_working_capital_check"] = CHECK
-        if medical:
-            record[rng.choice(["medical_self_check", "medical_family_check", "medical_equipment_check"])] = CHECK
-        if finance:
-            record["finance_savings_check"] = CHECK
-            if idx % 2 == 0:
-                record["finance_other_check"] = CHECK
-                record["finance_other_text"] = "개인계좌 저축"
-        if childcare:
-            record["childcare_other_check"] = CHECK
-            record["childcare_other_text"] = "보육료 납부"
-        if marriage:
-            record["marriage_other_check"] = CHECK
-            record["marriage_other_text"] = "예식 계약금"
-        if self_reliance:
-            record["self_reliance_other_check"] = CHECK
-            record["self_reliance_other_text"] = "직업훈련비"
         profiles.append(record)
     return profiles
 
 
+def validate_profiles(profiles: list[dict[str, str]]) -> None:
+    amount_fields = [
+        "housing_amount", "education_amount", "startup_amount", "medical_amount",
+        "finance_amount", "childcare_amount", "marriage_amount", "self_reliance_amount",
+    ]
+
+    def amount(value: str) -> int:
+        digits = "".join(char for char in str(value).split("원", 1)[0] if char.isdigit())
+        return int(digits or 0)
+
+    for index, record in enumerate(profiles):
+        if set(record) != {item["id"] for item in FIELDS}:
+            raise ValueError(f"profile {index} does not cover all 58 fields")
+        if sum(bool(record[field]) for field in ("account_hope_check", "account_youth_check")) != 1:
+            raise ValueError(f"profile {index} must select exactly one account type")
+        if bool(record["hope_join_month"]) != bool(record["account_hope_check"]):
+            raise ValueError(f"profile {index} hope account join month mismatch")
+        if bool(record["youth_join_month"]) != bool(record["account_youth_check"]):
+            raise ValueError(f"profile {index} youth account join month mismatch")
+        category_sum = sum(amount(record[field]) for field in amount_fields)
+        total = amount(record["usage_total_amount"])
+        if category_sum != total:
+            raise ValueError(f"profile {index} usage amount sum mismatch: {category_sum} != {total}")
+        if amount(record["total_grant_amount_text"]) != total:
+            raise ValueError(f"profile {index} grant total mismatch")
+        if amount(record["personal_saving_text"]) + amount(record["support_amount_text"]) != total:
+            raise ValueError(f"profile {index} grant split mismatch")
+        if record["signature_name"] != record["applicant_name"]:
+            raise ValueError(f"profile {index} applicant/signature mismatch")
+        application = date(int(record["application_year"]), int(record["application_month"]), int(record["application_day"]))
+        if application > date(2026, 7, 13):
+            raise ValueError(f"profile {index} application date exceeds as_of_date")
+
+
 def build_faker_profile(schema: dict[str, Any]) -> dict[str, Any]:
     field_ids = [field["field_id"] for field in schema["fields"]]
+    profiles = make_profiles()
+    validate_profiles(profiles)
     return {
         "schema_version": 1,
         "created_at": NOW,
         "updated_at": NOW,
         "doc_id": DOC_ID,
         "locale": "ko_KR",
+        "as_of_date": "2026-07-13",
         "field_generators": {field_id: "literal:" for field_id in field_ids},
         "constraints": [{"type": "pick_record", "pool": "rpt01_profiles", "targets": {field_id: field_id for field_id in field_ids}}],
-        "data_pools": {"rpt01_profiles": make_profiles()},
-        "notes": "RPT-01 자금사용계획서 record profile. 통장종류, 가입월, 신청자, 지급액, 사용용도 항목별 금액, 총합을 하나의 record로 묶어 정합성을 유지한다.",
+        "data_pools": {"rpt01_profiles": profiles},
+        "pool_policies": {
+            "rpt01_profiles": {
+                "kind": "correlated_record",
+                "min_size": 24,
+                "synthetic_only": True,
+                "evidence_note": "page_002 작성 예제와 page_001 양식의 관계를 기준으로 계좌종류·가입월·신청자·항목 선택·금액·합계·신청일·서명을 한 레코드로 묶음",
+            }
+        },
+        "field_rules": [
+            {"relationship": "exclusive_account_type", "fields": ["account_hope_check", "account_youth_check"], "rule": "exactly one is selected and only its join month is populated"},
+            {"relationship": "grant_split", "fields": ["total_grant_amount_text", "personal_saving_text", "support_amount_text"], "rule": "total equals personal saving plus support"},
+            {"relationship": "usage_sum", "fields": [field_id for field_id in field_ids if field_id.endswith("_amount")], "rule": "category amounts sum to usage_total_amount"},
+            {"relationship": "identity_copy", "fields": ["applicant_name", "signature_name"], "rule": "signature name equals applicant name"},
+        ],
+        "notes": "24개 상관관계 record pool. 모든 58개 use bbox에 값을 제공하면서 통장종류, 가입월, 지급액 분할, 사용용도 선택·금액·총합, 신청일, 서명 정합성을 함께 유지한다.",
     }
 
 
 def render_batch(schema_path: Path, style_path: Path, faker_path: Path, count: int = 5) -> dict[str, Any]:
-    if BATCH_DIR.exists():
-        shutil.rmtree(BATCH_DIR)
     BATCH_DIR.mkdir(parents=True, exist_ok=True)
     samples: list[dict[str, Any]] = []
     images: list[Path] = []
@@ -484,8 +581,6 @@ def make_contact_sheet(images: list[Path]) -> Path:
 
 
 def compare(rendered: Path) -> Path:
-    if CALIB_DIR.exists():
-        shutil.rmtree(CALIB_DIR)
     CALIB_DIR.mkdir(parents=True, exist_ok=True)
     blank = Image.open(ORIGINAL_BLANK).convert("RGB")
     reference = Image.open(FILLED_REFERENCE).convert("RGB").resize(blank.size)
@@ -516,8 +611,9 @@ def compare(rendered: Path) -> Path:
 
 
 def write_progress(summary: dict[str, Any], comparison: Path, preview: Path) -> None:
+    PROGRESS.parent.mkdir(parents=True, exist_ok=True)
     PROGRESS.write_text(
-        f"""# 2026-07-02 RPT-01 자금사용계획서 파이프라인 준비 작업
+        f"""# 2026-07-13 RPT-01 자금사용계획서 복원 및 품질 개선
 
 ## 목표
 - `RPT-01 사업계획서·자금사용계획서` 중 현재 샘플이 확보된 `자산형성지원사업 자금사용계획서`를 순차 처리한다.
@@ -532,7 +628,7 @@ def write_progress(summary: dict[str, Any], comparison: Path, preview: Path) -> 
 
 ## 구현 내용
 - 통장종류 선택, 가입기수, 성명, 생년월일, 지급액 총액/본인적립금/지원금, 사용용도 체크박스, 항목별 금액, 총합, 신청일, 신청인 성명을 필드화했다.
-- faker profile은 `rpt01_profiles` record pool을 사용하며, 항목별 금액 합계가 `usage_total_amount`와 일치하도록 생성했다.
+- faker profile은 24개의 `rpt01_profiles` 상관관계 record pool을 사용하며, 항목별 금액 합계가 `usage_total_amount`와 일치하도록 생성했다.
 - font-family는 filled reference의 빨간 명조 계열 기입값과 가장 유사한 `{FONT_FAMILY}`로 선택했다.
 - crop 비교는 사용하지 않고 전체 문서/filled reference/render/overlay 비교만 생성했다.
 
@@ -551,6 +647,7 @@ def write_progress(summary: dict[str, Any], comparison: Path, preview: Path) -> 
 - page_count: {summary['page_count']}
 - field_count: {summary['field_count']}
 - warning_count: {summary['warning_count']}
+- warning은 선택되지 않은 선택형/기타 필드가 렌더되지 않았다는 `not_rendered` 알림이며, 값이 없는 필드는 최종 GT bbox에서 제외된다.
 
 ## 한계 및 다음 조치
 - 현재 `RPT-01`은 사업계획서 전체가 아니라, 수집된 정형 `자금사용계획서` 양식에 대한 pipeline-ready 처리다.
@@ -567,20 +664,28 @@ def main() -> None:
             raise FileNotFoundError(required)
     AUTHORING.mkdir(parents=True, exist_ok=True)
     schema = build_schema()
-    semantic_schema = build_semantic_schema(schema)
-    stylesheet = build_stylesheet()
+    stylesheet = build_stylesheet(schema)
     faker = build_faker_profile(schema)
     schema_path = AUTHORING / "schema.json"
     style_path = AUTHORING / "stylesheet.json"
     faker_path = AUTHORING / "faker_profile.json"
-    write_json(schema_path, schema)
-    write_json(SEMANTIC_SCHEMA, semantic_schema)
-    write_json(style_path, stylesheet)
-    write_json(faker_path, faker)
+    consistency = _authoring_bundle_consistency(schema, faker, strict_review_coverage=True, min_pool_size=20)
+    faker_errors = _validate_faker_profile_contract(faker, schema["fields"], min_pool_size=20, min_record_pool_size=12)
+    if consistency["errors"] or faker_errors:
+        raise RuntimeError(json.dumps({"consistency": consistency, "faker_errors": faker_errors}, ensure_ascii=False, indent=2))
+    save_authoring_bundle(
+        schema_path,
+        style_path,
+        faker_path,
+        schema=schema,
+        stylesheet=stylesheet,
+        faker_profile=faker,
+    )
     preview = render_authoring_preview(schema_path, style_path, faker_path, out_dir=OUT_DIR, seed=20260702, sample_id="preview_000001")
     summary = render_batch(schema_path, style_path, faker_path, count=5)
     comparison = compare(preview.image)
     update_manifest_artifact(DOC_ID, "authoring", schema_path)
+    update_manifest_artifact(DOC_ID, "review", REVIEW_PAGE1)
     update_manifest_artifact(DOC_ID, "authoring_semantic_schema", SEMANTIC_SCHEMA)
     update_manifest_artifact(DOC_ID, "authoring_stylesheet", style_path)
     update_manifest_artifact(DOC_ID, "authoring_faker_profile", faker_path)
@@ -590,6 +695,7 @@ def main() -> None:
     update_manifest_artifact(DOC_ID, "authoring_contact_sheet", BATCH_DIR / "contact_sheet.jpg")
     update_manifest_artifact(DOC_ID, "authoring_style_comparison", comparison)
     write_progress(summary, comparison, preview.image)
+    print("consistency", json.dumps(consistency["summary"], ensure_ascii=False), "record_pool", len(faker["data_pools"]["rpt01_profiles"]))
     print("preview", preview.image, "warnings", preview.warning_count)
     print("batch", BATCH_DIR / "summary.json", "warnings", summary["warning_count"])
     print("contact", BATCH_DIR / "contact_sheet.jpg")

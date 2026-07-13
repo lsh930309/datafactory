@@ -131,11 +131,15 @@ def _render_template_on_image(image: Image.Image, template: TemplateSpec, values
                 actual = _draw_checkbox(draw, requested, checked, field)
             else:
                 actual = BBox(requested.x, requested.y, 1, 1)
-            if field.include_gt:
+            # An unchecked checkbox may still draw its structural box, but it
+            # does not render a target value.  GT annotations represent actual
+            # rendered value glyphs only, so blank checkbox states must not
+            # produce a synthetic 1x1/empty-text annotation.
+            if field.include_gt and checked:
                 annotations.append(
                     RenderedAnnotation(
                         field=field.name,
-                        text="V" if checked else "",
+                        text="V",
                         bbox=actual,
                         requested_bbox=requested,
                     )

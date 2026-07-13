@@ -891,6 +891,16 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
         title=doc.title if doc else str(schema_draft.get("title") or ""),
     )
     authoring_dir = workbench_subdir(doc_id, "authoring")
+    existing_schema_path = authoring_dir / "schema.json"
+    existing_stylesheet_path = authoring_dir / "stylesheet.json"
+    existing_schema = json.loads(existing_schema_path.read_text(encoding="utf-8")) if existing_schema_path.exists() else None
+    regression = _validate_authoring_agent_apply_regression(existing_schema, schema)
+    if regression["errors"]:
+        first = regression["errors"][0]
+        raise ValueError(
+            f"authoring agent apply regression blocked: {first.get('code')} "
+            f"({regression['summary']['previousFieldCount']} -> {regression['summary']['candidateFieldCount']} fields)"
+        )
     applied_review_path: Path | None = None
     if isinstance(anchor_map, dict) and isinstance(anchor_map.get("anchors"), list):
         applied_review_path = _write_authoring_agent_anchor_review(
@@ -904,10 +914,7 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
         schema["bbox_source"] = {"canonical": "review", "review_path": str(applied_review_path.resolve())}
         schema["anchor_map_ref"] = _display_path(anchor_map_path, ROOT)
     style_remap: dict[str, Any] | None = None
-    existing_schema_path = authoring_dir / "schema.json"
-    existing_stylesheet_path = authoring_dir / "stylesheet.json"
-    if existing_schema_path.exists() and existing_stylesheet_path.exists():
-        existing_schema = json.loads(existing_schema_path.read_text(encoding="utf-8"))
+    if existing_schema is not None and existing_stylesheet_path.exists():
         if "handwriting" not in schema and isinstance(existing_schema.get("handwriting"), dict):
             schema["handwriting"] = json.loads(json.dumps(existing_schema["handwriting"]))
         schema, stylesheet_draft, style_remap = remap_styles_from_previous(
@@ -939,8 +946,95 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
         "requestPath": _display_path(request_path, ROOT),
         "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
         "consistency": consistency,
+        "regression": regression,
         "styleRemap": style_remap,
         **result.payload,
+    }
+
+
+def _validate_authoring_agent_apply_regression(
+    existing_schema: dict[str, Any] | None,
+    candidate_schema: dict[str, Any],
+    *,
+    minimum_field_retention: float = 1.0,
+) -> dict[str, Any]:
+    """Detect silent destructive replacement before an agent draft is saved.
+
+    The ordinary consistency validator proves that a candidate is internally
+    complete relative to its own review.  It cannot notice that the candidate
+    accidentally switched pages or discarded most of an already-authored
+    document.  This comparison protects that previous contract while allowing
+    new documents and coordinate-only bbox edits on the same source page.
+    """
+
+    errors: list[dict[str, Any]] = []
+    warnings: list[dict[str, Any]] = []
+    previous_fields = existing_schema.get("fields") if isinstance(existing_schema, dict) and isinstance(existing_schema.get("fields"), list) else []
+    candidate_fields = candidate_schema.get("fields") if isinstance(candidate_schema.get("fields"), list) else []
+    previous_ids = {
+        str(field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+        for field in previous_fields
+        if isinstance(field, dict) and str(field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+    }
+    candidate_ids = {
+        str(field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+        for field in candidate_fields
+        if isinstance(field, dict) and str(field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+    }
+    previous_count = len(previous_fields)
+    candidate_count = len(candidate_fields)
+    retained_ids = previous_ids & candidate_ids
+
+    def source_identity(value: Any) -> str:
+        text = str(value or "").strip()
+        return str(_resolve_workspace_path(text).resolve()) if text else ""
+
+    previous_source = source_identity(existing_schema.get("source_image")) if isinstance(existing_schema, dict) else ""
+    candidate_source = source_identity(candidate_schema.get("source_image"))
+    if previous_count and previous_source and candidate_source and previous_source != candidate_source:
+        errors.append(
+            {
+                "code": "authoring_agent_source_image_changed",
+                "previous": _display_path(Path(previous_source), ROOT),
+                "candidate": _display_path(Path(candidate_source), ROOT),
+                "message": "agent draft cannot silently replace the source page of an existing authoring bundle",
+            }
+        )
+
+    field_retention = candidate_count / previous_count if previous_count else 1.0
+    if previous_count and field_retention < minimum_field_retention:
+        errors.append(
+            {
+                "code": "authoring_agent_existing_field_coverage_drop",
+                "previous": previous_count,
+                "candidate": candidate_count,
+                "retention": round(field_retention, 4),
+                "minimum": minimum_field_retention,
+                "message": "agent draft discarded too much of the existing authoring contract",
+            }
+        )
+    elif previous_ids and len(retained_ids) / len(previous_ids) < minimum_field_retention:
+        warnings.append(
+            {
+                "code": "authoring_agent_anchor_identity_changed",
+                "previous": len(previous_ids),
+                "retained": len(retained_ids),
+                "message": "most anchor ids changed while field coverage was retained; verify intentional bbox splitting",
+            }
+        )
+
+    return {
+        "ready": not errors,
+        "errors": errors,
+        "warnings": warnings,
+        "summary": {
+            "previousFieldCount": previous_count,
+            "candidateFieldCount": candidate_count,
+            "previousAnchorCount": len(previous_ids),
+            "candidateAnchorCount": len(candidate_ids),
+            "retainedAnchorCount": len(retained_ids),
+            "fieldRetention": round(field_retention, 4),
+        },
     }
 
 

@@ -515,6 +515,27 @@ def test_apply_authoring_agent_drafts_writes_final_authoring_bundle(tmp_path: Pa
     monkeypatch.setattr(web_api, "list_work_items", lambda registry: [{"docId": fake_doc.doc_id, "latestReview": "review.json", "latestInpainted": "inpainted.png", "samples": []}])
     monkeypatch.setattr(web_api, "update_manifest_artifact", lambda doc_id, key, path: manifest_updates.append((doc_id, key, str(path))))
 
+    authoring_dir = tmp_path / "workbench" / fake_doc.doc_id / "authoring"
+    (authoring_dir / "schema.json").write_text(
+        json.dumps(
+            {
+                "fields": [
+                    {
+                        "field_id": "previous_patient_name",
+                        "bbox_label_id": "det_name",
+                        "style_class": "previous_name_style",
+                        "render_policy": {"align": "right", "valign": "bottom"},
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    (authoring_dir / "stylesheet.json").write_text(
+        json.dumps({"style_classes": [{"style_class": "previous_name_style", "font_size": 13, "align": "right"}]}),
+        encoding="utf-8",
+    )
+
     payload = web_api.apply_authoring_agent_drafts_payload({"docId": fake_doc.doc_id, "requestPath": str(request_path)})
 
     assert payload["summary"]["field_count"] == 1
@@ -524,6 +545,11 @@ def test_apply_authoring_agent_drafts_writes_final_authoring_bundle(tmp_path: Pa
     saved_schema = json.loads((tmp_path / payload["paths"]["schema"]).read_text(encoding="utf-8"))
     assert saved_schema["fields"][0]["bbox_label_id"] == "det_name"
     assert saved_schema["fields"][0]["label"] == "환자 성명"
+    assert saved_schema["fields"][0]["style_class"] == "previous_name_style"
+    assert saved_schema["fields"][0]["render_policy"]["align"] == "right"
+    saved_stylesheet = json.loads((tmp_path / payload["paths"]["stylesheet"]).read_text(encoding="utf-8"))
+    assert saved_stylesheet["style_classes"][0]["font_size"] == 13
+    assert payload["styleRemap"]["methods"]["anchor"] == 1
     assert saved_schema["source_review"].endswith("/authoring/agent_applied_reviews/run1/review.json")
     assert payload["schema"]["fields"][0]["bbox"] == [10, 12, 30, 14]
     assert any(key == "authoring_agent_applied_request" for _doc_id, key, _path in manifest_updates)

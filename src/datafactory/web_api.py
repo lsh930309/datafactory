@@ -50,6 +50,7 @@ from .ocr_detectors import PADDLEOCR_PRESETS, normalize_paddleocr_preset
 from .ocr_worker import run_ocr_eval
 from .policy import ReviewPolicy, augment_blank_template_policy, draft_review_policy, load_review_policy, review_summary, write_review_policy
 from .registry import load_registry
+from .style_remap import remap_styles_from_previous
 from .workbench import (
     delete_target_group,
     document_dir,
@@ -902,6 +903,17 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
         schema["source_review"] = str(applied_review_path.resolve())
         schema["bbox_source"] = {"canonical": "review", "review_path": str(applied_review_path.resolve())}
         schema["anchor_map_ref"] = _display_path(anchor_map_path, ROOT)
+    style_remap: dict[str, Any] | None = None
+    existing_schema_path = authoring_dir / "schema.json"
+    existing_stylesheet_path = authoring_dir / "stylesheet.json"
+    if existing_schema_path.exists() and existing_stylesheet_path.exists():
+        schema, stylesheet_draft, style_remap = remap_styles_from_previous(
+            schema,
+            stylesheet_draft,
+            json.loads(existing_schema_path.read_text(encoding="utf-8")),
+            json.loads(existing_stylesheet_path.read_text(encoding="utf-8")),
+            require_all_rendered=False,
+        )
     consistency = _raise_if_authoring_inconsistent(schema, faker_profile_draft, strict_review_coverage=True)
     result = save_authoring_bundle(
         authoring_dir / "schema.json",
@@ -924,6 +936,7 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
         "requestPath": _display_path(request_path, ROOT),
         "paths": _paths_to_client({"schema": result.schema, "stylesheet": result.stylesheet, "faker_profile": result.faker_profile}),
         "consistency": consistency,
+        "styleRemap": style_remap,
         **result.payload,
     }
 

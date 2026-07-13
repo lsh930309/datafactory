@@ -160,14 +160,60 @@ def test_handwriting_print_pack_and_scan_intake_roundtrip(tmp_path: Path) -> Non
     intake = intake_handwriting_scans(doc_id="HW-01", scan_dir=scan_dir, registry=registry, root=root)
 
     assert intake["summary"]["acceptedCount"] == 1
+    assert "debug" not in intake["manifest"]["records"][0]
     accepted = intake["manifest"]["accepted_samples"][0]
     assert Path(accepted["image"]).exists()
+    assert "bbox_overlay" not in accepted
     assert json.loads(Path(accepted["gt"]).read_text(encoding="utf-8")) == {"성명": "김수기", "코드": "P-123"}
 
     item = {"latestHandwritingScanIntake": intake["paths"]["manifest"]}
     samples = latest_accepted_handwriting_samples(item)
     assert len(samples) == 1
     assert samples[0].gt.exists()
+
+
+def test_handwriting_scan_intake_warps_to_template_and_writes_debug_overlay_only_when_requested(tmp_path: Path) -> None:
+    import pytest
+
+    cv2 = pytest.importorskip("cv2")
+    np = pytest.importorskip("numpy")
+    registry, root = _prepare_authoring(tmp_path)
+    pack = create_handwriting_print_pack("HW-01", count=1, registry=registry, root=root, qr_bbox=[420, 40, 160, 160])
+    sample = pack["manifest"]["samples"][0]
+    with Image.open(sample["problem_sheet"]).convert("RGB") as problem:
+        source = np.asarray(problem)
+    h, w = source.shape[:2]
+    src = np.asarray([[0, 0], [w, 0], [w, h], [0, h]], dtype="float32")
+    dst = np.asarray([[3, 2], [w - 5, 9], [w - 8, h - 4], [6, h - 9]], dtype="float32")
+    matrix = cv2.getPerspectiveTransform(src, dst)
+    scanned = cv2.warpPerspective(source, matrix, (w, h), borderMode=cv2.BORDER_REPLICATE)
+    scan_dir = tmp_path / "warped-scans"
+    scan_dir.mkdir()
+    scan_path = scan_dir / "scan_001.png"
+    Image.fromarray(scanned).save(scan_path)
+
+    intake = intake_handwriting_scans(doc_id="HW-01", scan_dir=scan_dir, registry=registry, root=root, debug_bbox_overlay=True)
+
+    assert intake["summary"]["acceptedCount"] == 1
+    record = intake["manifest"]["records"][0]
+    assert record["warp_method"] == "qr_translate"
+    overlay_path = Path(record["debug"]["bbox_overlay"])
+    warped_path = Path(record["debug"]["warped_image"])
+    template_path = Path(record["debug"]["warp_template"])
+    diff_path = Path(record["debug"]["warp_diff"])
+    assert overlay_path.exists()
+    assert warped_path.exists()
+    assert template_path.exists()
+    assert diff_path.exists()
+    with Image.open(record["qr_removed"]) as image:
+        assert image.size == (640, 420)
+    with Image.open(diff_path).convert("RGB") as diff:
+        colors = set(diff.getdata())
+        assert (0, 0, 0) in colors
+        assert any(red > 150 and green < 80 and blue < 80 for red, green, blue in colors)
+        assert any(red < 80 and green > 100 and blue < 80 for red, green, blue in colors)
+    assert "bbox_overlay" not in intake["manifest"]["accepted_samples"][0]
+    assert "warp_diff" not in intake["manifest"]["accepted_samples"][0]
 
 
 def test_qr_decode_upscales_small_scanned_marker() -> None:

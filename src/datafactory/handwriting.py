@@ -42,6 +42,13 @@ class HandwritingAcceptedSample:
     source_scan: Path | None = None
 
 
+@dataclass(frozen=True)
+class _QrMatch:
+    payload: dict[str, Any]
+    bbox: list[int]
+    points: list[list[float]] | None = None
+
+
 def create_handwriting_print_pack(
     doc_id: str,
     *,
@@ -218,6 +225,7 @@ def intake_handwriting_scans(
     run_id: str | None = None,
     registry: RegistryData | None = None,
     root: Path = WORKBENCH_ROOT,
+    debug_bbox_overlay: bool = False,
 ) -> dict[str, Any]:
     """Decode scanned handwriting templates and pair them with prebuilt GT."""
 
@@ -234,7 +242,10 @@ def intake_handwriting_scans(
     if resolved_doc_id and doc is None:
         raise ValueError(f"unknown docId: {resolved_doc_id}")
     run_dir = (document_dir(doc, root) / HANDWRITING_DIR / "scanned_intake" / resolved_run_id) if doc is not None else (_workbench_root_from_documents_root(root) / "handwriting_scan_intake" / resolved_run_id)
-    dirs = _ensure_dirs(run_dir, ["raw_scans", "decoded", "qr_removed", "matched_gt", "review"])
+    dir_names = ["raw_scans", "decoded", "qr_removed", "matched_gt", "review"]
+    if debug_bbox_overlay:
+        dir_names.append("debug_bbox_overlay")
+    dirs = _ensure_dirs(run_dir, dir_names)
     expanded_scans = _expand_scan_inputs(candidates)
     records: list[dict[str, Any]] = []
     accepted: list[dict[str, Any]] = []
@@ -242,7 +253,7 @@ def intake_handwriting_scans(
     for index, source in enumerate(expanded_scans):
         raw_path = dirs["raw_scans"] / f"scan_{index:03d}{source.suffix.lower() or '.png'}"
         shutil.copy2(source, raw_path)
-        record = _intake_single_scan(raw_path, manifests, dirs=dirs)
+        record = _intake_single_scan(raw_path, manifests, dirs=dirs, debug_bbox_overlay=debug_bbox_overlay)
         records.append(record)
         if record.get("status") == ACCEPTED_STATUS:
             accepted.append(record)
@@ -274,9 +285,10 @@ def intake_handwriting_scans(
     }
     manifest_path = run_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    accepted_doc_ids = sorted({str(item.get("doc_id") or "") for item in accepted if item.get("doc_id")})
-    for accepted_doc_id in accepted_doc_ids or ([resolved_doc_id] if resolved_doc_id else []):
-        update_manifest_artifact(accepted_doc_id, "handwriting_scan_intake", manifest_path, registry=registry, root=root)
+    if not debug_bbox_overlay:
+        accepted_doc_ids = sorted({str(item.get("doc_id") or "") for item in accepted if item.get("doc_id")})
+        for accepted_doc_id in accepted_doc_ids or ([resolved_doc_id] if resolved_doc_id else []):
+            update_manifest_artifact(accepted_doc_id, "handwriting_scan_intake", manifest_path, registry=registry, root=root)
     return {"summary": {"docId": resolved_doc_id, "runId": resolved_run_id, "scanCount": len(records), "acceptedCount": len(accepted), "reviewRequiredCount": manifest["review_required_count"]}, "paths": {"runDir": _display_path(run_dir), "manifest": _display_path(manifest_path)}, "manifest": manifest}
 
 
@@ -398,23 +410,30 @@ def decode_marker_image(image: Image.Image, *, wechat_detector: Any | None = Non
 
 
 def decode_qr_image(image: Image.Image, *, wechat_detector: Any | None = None) -> dict[str, Any]:
+    payload, _points = decode_qr_image_with_points(image, wechat_detector=wechat_detector)
+    return payload
+
+
+def decode_qr_image_with_points(image: Image.Image, *, wechat_detector: Any | None = None) -> tuple[dict[str, Any], list[list[float]] | None]:
     try:
         import numpy as np  # type: ignore
     except Exception as exc:
         raise RuntimeError("numpy is required for QR decoding") from exc
     rgb = image.convert("RGB")
-    candidates: list[str] = []
     try:
         import cv2  # type: ignore
     except Exception:
         cv2 = None  # type: ignore[assignment]
 
-    for candidate_image in _qr_decode_image_variants(rgb):
+    for candidate_image, scale_x, scale_y in _qr_decode_image_variant_specs(rgb):
         array = np.asarray(candidate_image.convert("RGB"))
         if wechat_detector is not None:
             try:
                 decoded, _points = wechat_detector.detectAndDecode(array)
-                candidates.extend(_decoded_qr_texts(decoded))
+                for text in _decoded_qr_texts(decoded):
+                    payload = _parse_qr_text(text)
+                    if payload is not None:
+                        return payload, _normalize_qr_points(_points, scale_x=scale_x, scale_y=scale_y)
             except Exception:
                 pass
         if cv2 is not None:
@@ -422,21 +441,33 @@ def decode_qr_image(image: Image.Image, *, wechat_detector: Any | None = None) -
                 detector = cv2.QRCodeDetector()
                 bgr = cv2.cvtColor(array, cv2.COLOR_RGB2BGR)
                 decoded, _points, _straight = detector.detectAndDecode(bgr)
-                candidates.extend(_decoded_qr_texts(decoded))
+                for text in _decoded_qr_texts(decoded):
+                    payload = _parse_qr_text(text)
+                    if payload is not None:
+                        return payload, _normalize_qr_points(_points, scale_x=scale_x, scale_y=scale_y)
             except Exception:
                 pass
             try:
                 decoded, _points, _straight = detector.detectAndDecodeCurved(bgr)
-                candidates.extend(_decoded_qr_texts(decoded))
+                for text in _decoded_qr_texts(decoded):
+                    payload = _parse_qr_text(text)
+                    if payload is not None:
+                        return payload, _normalize_qr_points(_points, scale_x=scale_x, scale_y=scale_y)
             except Exception:
                 pass
-    for text in candidates:
-        if not text:
-            continue
+    raise ValueError("qr decode failed")
+
+
+def _parse_qr_text(text: str) -> dict[str, Any] | None:
+    if not text:
+        return None
+    try:
         payload = json.loads(str(text))
         if isinstance(payload, dict):
             return _minimal_qr_payload(payload)
-    raise ValueError("qr decode failed")
+    except Exception:
+        return None
+    return None
 
 
 def _decoded_qr_texts(decoded: Any) -> list[str]:
@@ -448,6 +479,10 @@ def _decoded_qr_texts(decoded: Any) -> list[str]:
 
 
 def _qr_decode_image_variants(image: Image.Image) -> list[Image.Image]:
+    return [candidate for candidate, _scale_x, _scale_y in _qr_decode_image_variant_specs(image)]
+
+
+def _qr_decode_image_variant_specs(image: Image.Image) -> list[tuple[Image.Image, float, float]]:
     variants: list[Image.Image] = [image]
     min_side = max(1, min(image.size))
     if min_side < 400:
@@ -455,7 +490,20 @@ def _qr_decode_image_variants(image: Image.Image) -> list[Image.Image]:
         target = (image.width * scale, image.height * scale)
         variants.append(image.resize(target, Image.Resampling.LANCZOS))
         variants.append(image.resize(target, Image.Resampling.NEAREST))
-    return variants
+    return [(variant, image.width / max(1, variant.width), image.height / max(1, variant.height)) for variant in variants]
+
+
+def _normalize_qr_points(points: Any, *, scale_x: float, scale_y: float) -> list[list[float]] | None:
+    try:
+        import numpy as np  # type: ignore
+    except Exception:
+        return None
+    if points is None:
+        return None
+    array = np.asarray(points, dtype="float32").reshape(-1, 2)
+    if len(array) < 4:
+        return None
+    return [[float(x) * scale_x, float(y) * scale_y] for x, y in array[:4]]
 
 
 def create_wechat_qr_detector(model_dir: str | Path | None = None) -> Any:
@@ -495,7 +543,7 @@ def resolve_wechat_model_paths(model_dir: str | Path | None = None) -> tuple[str
     return ("", "", "", "")
 
 
-def _intake_single_scan(raw_path: Path, manifests: list[Path], *, dirs: dict[str, Path]) -> dict[str, Any]:
+def _intake_single_scan(raw_path: Path, manifests: list[Path], *, dirs: dict[str, Path], debug_bbox_overlay: bool = False) -> dict[str, Any]:
     image = Image.open(raw_path).convert("RGB")
     failures: list[str] = []
     for manifest_path in reversed(manifests):
@@ -504,29 +552,10 @@ def _intake_single_scan(raw_path: Path, manifests: list[Path], *, dirs: dict[str
             if not isinstance(sample, dict):
                 continue
             try:
-                payload: dict[str, Any] | None = None
-                bbox: list[int] | None = None
-                last_error: Exception | None = None
-                for pad_ratio in (0.0, 0.1, 0.2):
-                    candidate_bbox = _scaled_bbox(sample.get("qr_bbox"), sample.get("template_size"), [image.width, image.height], pad_ratio=pad_ratio)
-                    crop = image.crop((candidate_bbox[0], candidate_bbox[1], candidate_bbox[0] + candidate_bbox[2], candidate_bbox[1] + candidate_bbox[3]))
-                    try:
-                        payload = decode_marker_image(crop, wechat_detector=_wechat_detector_or_none())
-                        bbox = candidate_bbox
-                        break
-                    except Exception as exc:
-                        last_error = exc
-                if payload is None:
-                    exact_bbox = _scaled_bbox(sample.get("qr_bbox"), sample.get("template_size"), [image.width, image.height], pad_ratio=0.0)
-                    exact_crop = image.crop((exact_bbox[0], exact_bbox[1], exact_bbox[0] + exact_bbox[2], exact_bbox[1] + exact_bbox[3]))
-                    if _matches_generated_qr(exact_crop, sample):
-                        payload = _minimal_qr_payload(sample.get("qr_payload") if isinstance(sample.get("qr_payload"), dict) else sample)
-                        bbox = exact_bbox
-                    else:
-                        raise last_error or ValueError("qr decode failed")
-                if payload.get("sample_id") != sample.get("sample_id") or payload.get("doc_id") != sample.get("doc_id") or payload.get("run_id") != sample.get("run_id"):
+                match = _find_qr_match(image, sample)
+                if match.payload.get("sample_id") != sample.get("sample_id") or match.payload.get("doc_id") != sample.get("doc_id") or match.payload.get("run_id") != sample.get("run_id"):
                     raise ValueError("decoded payload does not match candidate sample")
-                return _accept_scan(raw_path, image, bbox or [0, 0, 1, 1], payload, sample, dirs=dirs)
+                return _accept_scan(raw_path, image, match, sample, dirs=dirs, debug_bbox_overlay=debug_bbox_overlay)
             except Exception as exc:
                 failures.append(f"{manifest_path.name}/{sample.get('sample_id')}: {exc}")
     review_path = dirs["review"] / f"{raw_path.stem}.json"
@@ -541,14 +570,36 @@ def _intake_single_scan(raw_path: Path, manifests: list[Path], *, dirs: dict[str
     return record
 
 
-def _accept_scan(raw_path: Path, image: Image.Image, bbox: list[int], payload: dict[str, Any], sample: dict[str, Any], *, dirs: dict[str, Path]) -> dict[str, Any]:
+def _find_qr_match(image: Image.Image, sample: dict[str, Any]) -> _QrMatch:
+    last_error: Exception | None = None
+    for pad_ratio in (0.0, 0.1, 0.2):
+        candidate_bbox = _scaled_bbox(sample.get("qr_bbox"), sample.get("template_size"), [image.width, image.height], pad_ratio=pad_ratio)
+        crop = image.crop((candidate_bbox[0], candidate_bbox[1], candidate_bbox[0] + candidate_bbox[2], candidate_bbox[1] + candidate_bbox[3]))
+        try:
+            payload, points = decode_qr_image_with_points(crop, wechat_detector=_wechat_detector_or_none())
+            absolute_points = _offset_points(points, candidate_bbox[0], candidate_bbox[1]) if points else None
+            return _QrMatch(payload=payload, bbox=_bbox_from_points(absolute_points, image.size) if absolute_points else candidate_bbox, points=absolute_points)
+        except Exception as exc:
+            last_error = exc
+    exact_bbox = _scaled_bbox(sample.get("qr_bbox"), sample.get("template_size"), [image.width, image.height], pad_ratio=0.0)
+    exact_crop = image.crop((exact_bbox[0], exact_bbox[1], exact_bbox[0] + exact_bbox[2], exact_bbox[1] + exact_bbox[3]))
+    if _matches_generated_qr(exact_crop, sample):
+        payload = _minimal_qr_payload(sample.get("qr_payload") if isinstance(sample.get("qr_payload"), dict) else sample)
+        return _QrMatch(payload=payload, bbox=exact_bbox, points=_bbox_corners(exact_bbox))
+    raise last_error or ValueError("qr decode failed")
+
+
+def _accept_scan(raw_path: Path, image: Image.Image, match: _QrMatch, sample: dict[str, Any], *, dirs: dict[str, Path], debug_bbox_overlay: bool = False) -> dict[str, Any]:
+    payload = match.payload
     sample_id = str(payload["sample_id"])
     decoded_path = dirs["decoded"] / f"{sample_id}.json"
     qr_removed_path = dirs["qr_removed"] / f"{sample_id}.jpg"
     matched_gt_path = dirs["matched_gt"] / f"{sample_id}.json"
     matched_bbox_path = dirs["matched_gt"] / f"{sample_id}-bbox.json"
     decoded_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    removed, qr_remove_method = _remove_qr_marker(image, bbox)
+    warped, warp_info = _warp_scan_to_template(image, match, sample)
+    qr_remove_bbox = warp_info.get("qr_bbox") if isinstance(warp_info.get("qr_bbox"), list) else match.bbox
+    removed, qr_remove_method = _remove_qr_marker(warped, qr_remove_bbox)
     removed.save(qr_removed_path, "JPEG", quality=95)
     gt_source = _resolve_path(sample.get("gt") or sample.get("public_gt") or payload.get("gt_path"))
     if not gt_source.exists():
@@ -559,7 +610,24 @@ def _accept_scan(raw_path: Path, image: Image.Image, bbox: list[int], payload: d
     if bbox_source.exists():
         shutil.copy2(bbox_source, matched_bbox_path)
         matched_bbox = _display_path(matched_bbox_path)
-    return {
+    debug: dict[str, Any] = {"warp": warp_info}
+    if debug_bbox_overlay and "debug_bbox_overlay" in dirs:
+        template_debug = _debug_template_image(sample)
+        if template_debug is not None:
+            warped_path = dirs["debug_bbox_overlay"] / f"{sample_id}.warped.png"
+            template_path = dirs["debug_bbox_overlay"] / f"{sample_id}.template.png"
+            diff_path = dirs["debug_bbox_overlay"] / f"{sample_id}.warp_diff.png"
+            warped.save(warped_path)
+            template_debug.save(template_path)
+            _render_warp_debug_diff(warped, template_debug).save(diff_path)
+            debug["warped_image"] = _display_path(warped_path)
+            debug["warp_template"] = _display_path(template_path)
+            debug["warp_diff"] = _display_path(diff_path)
+    if debug_bbox_overlay and matched_bbox_path.exists() and "debug_bbox_overlay" in dirs:
+        overlay_path = dirs["debug_bbox_overlay"] / f"{sample_id}.bbox_overlay.png"
+        _render_bbox_debug_overlay(removed, _read_json(matched_bbox_path)).save(overlay_path)
+        debug["bbox_overlay"] = _display_path(overlay_path)
+    record = {
         "raw_scan": _display_path(raw_path),
         "sample_id": sample_id,
         "doc_id": str(payload.get("doc_id") or ""),
@@ -570,9 +638,211 @@ def _accept_scan(raw_path: Path, image: Image.Image, bbox: list[int], payload: d
         "qr_removed": _display_path(qr_removed_path),
         "matched_gt": _display_path(matched_gt_path),
         "matched_bbox": matched_bbox,
-        "qr_bbox": bbox,
+        "qr_bbox": qr_remove_bbox,
         "qr_remove_method": qr_remove_method,
+        "warp_method": str(warp_info.get("method") or "none"),
     }
+    if debug_bbox_overlay:
+        record["debug"] = debug
+    return record
+
+
+def _warp_scan_to_template(image: Image.Image, match: _QrMatch, sample: dict[str, Any]) -> tuple[Image.Image, dict[str, Any]]:
+    template_size = sample.get("template_size")
+    if not isinstance(template_size, list) or len(template_size) != 2:
+        return image, {"method": "none", "reason": "missing_template_size", "qr_bbox": match.bbox}
+    target_w, target_h = int(round(float(template_size[0]))), int(round(float(template_size[1])))
+    if target_w <= 0 or target_h <= 0:
+        return image, {"method": "none", "reason": "invalid_template_size", "qr_bbox": match.bbox}
+    expected_qr_bbox = _resolve_qr_bbox(sample.get("qr_bbox"), width=target_w, height=target_h)
+    resize_scale_x = target_w / max(1, image.width)
+    resize_scale_y = target_h / max(1, image.height)
+    base = image if image.size == (target_w, target_h) else image.resize((target_w, target_h), Image.Resampling.BICUBIC)
+    scaled_points = [[float(x) * resize_scale_x, float(y) * resize_scale_y] for x, y in match.points] if match.points else None
+    observed_box = _float_bbox_from_points(scaled_points)
+    expected_points = _expected_qr_points(sample)
+    expected_box = _float_bbox_from_points(expected_points)
+    if observed_box is None or expected_box is None:
+        method = "none_same_size" if image.size == (target_w, target_h) else "page_resize"
+        return base, {"method": method, "reason": "missing_qr_points", "qr_bbox": expected_qr_bbox, "target_size": [target_w, target_h]}
+    try:
+        import cv2  # type: ignore
+        import numpy as np  # type: ignore
+    except Exception:
+        method = "none_same_size" if image.size == (target_w, target_h) else "page_resize"
+        return base, {"method": method, "reason": "opencv_unavailable", "qr_bbox": expected_qr_bbox, "target_size": [target_w, target_h]}
+    obs_x, obs_y, obs_w, obs_h = observed_box
+    exp_x, exp_y, exp_w, exp_h = expected_box
+    # Scanner output for this workflow is expected to be mostly fronto-parallel.
+    # Never extrapolate QR-local perspective or QR-local size into a full-page
+    # transform.  The QR marker is only a coarse registration anchor: page size
+    # is normalized first, then only the QR center offset is translated.
+    tx = (exp_x + exp_w / 2.0) - (obs_x + obs_w / 2.0)
+    ty = (exp_y + exp_h / 2.0) - (obs_y + obs_h / 2.0)
+    if abs(tx) < 0.5 and abs(ty) < 0.5:
+        method = "none_same_size" if image.size == (target_w, target_h) else "page_resize"
+        return base, {
+            "method": method,
+            "qr_bbox": expected_qr_bbox,
+            "target_size": [target_w, target_h],
+            "observed_qr_bbox": [round(float(item), 3) for item in observed_box],
+            "expected_qr_bbox": [round(float(item), 3) for item in expected_box],
+        }
+    affine = np.asarray([[1.0, 0.0, tx], [0.0, 1.0, ty]], dtype="float32")
+    array = np.asarray(base.convert("RGB"))
+    warped = cv2.warpAffine(array, affine, (target_w, target_h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+    return Image.fromarray(warped).convert("RGB"), {
+        "method": "qr_translate" if image.size == (target_w, target_h) else "page_resize_qr_translate",
+        "target_size": [target_w, target_h],
+        "qr_bbox": expected_qr_bbox,
+        "page_scale_x": round(float(resize_scale_x), 6),
+        "page_scale_y": round(float(resize_scale_y), 6),
+        "translate_x": round(float(tx), 3),
+        "translate_y": round(float(ty), 3),
+        "observed_qr_bbox": [round(float(item), 3) for item in observed_box],
+        "expected_qr_bbox": [round(float(item), 3) for item in expected_box],
+    }
+
+
+def _expected_qr_points(sample: dict[str, Any]) -> list[list[float]] | None:
+    qr_bbox = _resolve_qr_bbox(sample.get("qr_bbox"), width=int(sample.get("template_size", [1, 1])[0] or 1), height=int(sample.get("template_size", [1, 1])[1] or 1))
+    qr_path_value = sample.get("qr_image")
+    if qr_path_value:
+        qr_path = _resolve_path(qr_path_value)
+        if qr_path.exists():
+            try:
+                with Image.open(qr_path) as opened:
+                    qr_image = opened.convert("RGB")
+                _payload, points = decode_qr_image_with_points(qr_image, wechat_detector=None)
+                if points:
+                    scale_x = qr_bbox[2] / max(1, qr_image.width)
+                    scale_y = qr_bbox[3] / max(1, qr_image.height)
+                    return [[qr_bbox[0] + point[0] * scale_x, qr_bbox[1] + point[1] * scale_y] for point in points]
+            except Exception:
+                pass
+    return _bbox_corners(qr_bbox)
+
+
+def _offset_points(points: list[list[float]] | None, dx: float, dy: float) -> list[list[float]] | None:
+    if not points:
+        return None
+    return [[float(x) + dx, float(y) + dy] for x, y in points]
+
+
+def _bbox_corners(bbox: list[int] | tuple[int, int, int, int]) -> list[list[float]]:
+    x, y, w, h = [float(item) for item in bbox]
+    return [[x, y], [x + w, y], [x + w, y + h], [x, y + h]]
+
+
+def _bbox_from_points(points: list[list[float]] | None, image_size: tuple[int, int]) -> list[int]:
+    if not points:
+        return [0, 0, 1, 1]
+    xs = [float(point[0]) for point in points]
+    ys = [float(point[1]) for point in points]
+    left = max(0, int(round(min(xs))))
+    top = max(0, int(round(min(ys))))
+    right = min(image_size[0], int(round(max(xs))))
+    bottom = min(image_size[1], int(round(max(ys))))
+    return [left, top, max(1, right - left), max(1, bottom - top)]
+
+
+def _float_bbox_from_points(points: list[list[float]] | None) -> tuple[float, float, float, float] | None:
+    if not points:
+        return None
+    xs = [float(point[0]) for point in points]
+    ys = [float(point[1]) for point in points]
+    left, top, right, bottom = min(xs), min(ys), max(xs), max(ys)
+    if right <= left or bottom <= top:
+        return None
+    return (left, top, right - left, bottom - top)
+
+
+def _ordered_quad(points: list[list[float]]) -> list[list[float]]:
+    if len(points) < 4:
+        return points
+    pts = [[float(x), float(y)] for x, y in points[:4]]
+    sums = [x + y for x, y in pts]
+    diffs = [x - y for x, y in pts]
+    top_left = pts[sums.index(min(sums))]
+    bottom_right = pts[sums.index(max(sums))]
+    top_right = pts[diffs.index(max(diffs))]
+    bottom_left = pts[diffs.index(min(diffs))]
+    return [top_left, top_right, bottom_right, bottom_left]
+
+
+def _render_bbox_debug_overlay(image: Image.Image, bbox_payload: dict[str, Any]) -> Image.Image:
+    overlay = image.convert("RGBA")
+    layer = Image.new("RGBA", overlay.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(layer)
+    width = max(2, round(max(overlay.size) / 900))
+    for path, box in _iter_semantic_bboxes(bbox_payload):
+        if not isinstance(box, dict):
+            continue
+        try:
+            left = float(box["l"]) * overlay.width
+            top = float(box["t"]) * overlay.height
+            right = float(box["r"]) * overlay.width
+            bottom = float(box["b"]) * overlay.height
+        except Exception:
+            continue
+        if right <= left or bottom <= top:
+            continue
+        draw.rectangle([left, top, right, bottom], outline=(255, 128, 0, 230), width=width)
+        if path:
+            draw.text((left + 2, max(0, top - 12)), path[-36:], fill=(255, 80, 0, 230))
+    return Image.alpha_composite(overlay, layer).convert("RGB")
+
+
+def _iter_semantic_bboxes(value: Any, prefix: str = "") -> list[tuple[str, dict[str, Any]]]:
+    if isinstance(value, dict) and {"l", "t", "r", "b"}.issubset(value.keys()):
+        return [(prefix, value)]
+    results: list[tuple[str, dict[str, Any]]] = []
+    if isinstance(value, dict):
+        for key, child in value.items():
+            child_prefix = f"{prefix}.{key}" if prefix else str(key)
+            results.extend(_iter_semantic_bboxes(child, child_prefix))
+    return results
+
+
+def _debug_template_image(sample: dict[str, Any]) -> Image.Image | None:
+    for key in ("problem_sheet", "qr_template", "template"):
+        value = sample.get(key)
+        if not value:
+            continue
+        path = _resolve_path(value)
+        if path.exists() and path.is_file():
+            return Image.open(path).convert("RGB")
+    return None
+
+
+def _render_warp_debug_diff(warped: Image.Image, template: Image.Image) -> Image.Image:
+    """Render temporary registration diff for warp tuning.
+
+    Color contract:
+    - red: dark pixel exists only in warped scan
+    - green: dark pixel exists only in template
+    - black: dark pixels overlap
+    - white: neither side has a dark pixel
+    """
+
+    try:
+        import numpy as np  # type: ignore
+    except Exception as exc:
+        raise RuntimeError("numpy is required for warp debug diff") from exc
+    if warped.size != template.size:
+        warped = warped.resize(template.size, Image.Resampling.BICUBIC)
+    warped_gray = np.asarray(warped.convert("L"))
+    template_gray = np.asarray(template.convert("L"))
+    warped_mask = warped_gray < 190
+    template_mask = template_gray < 190
+    diff = np.full((template.height, template.width, 3), 255, dtype=np.uint8)
+    overlap = warped_mask & template_mask
+    warped_only = warped_mask & ~template_mask
+    template_only = template_mask & ~warped_mask
+    diff[overlap] = [0, 0, 0]
+    diff[warped_only] = [220, 0, 0]
+    diff[template_only] = [0, 160, 0]
+    return Image.fromarray(diff, mode="RGB")
 
 
 def _remove_qr_marker(image: Image.Image, bbox: list[int]) -> tuple[Image.Image, str]:

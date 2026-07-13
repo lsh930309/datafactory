@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "doc_id": "SEC-03",
+  "generated_for": "faker_relationship_pass_2",
+  "pools": {
+    "proxy_relations": {
+      "values": [
+        "배우자",
+        "부",
+        "모",
+        "아들",
+        "딸",
+        "형",
+        "오빠",
+        "누나",
+        "언니",
+        "남동생",
+        "여동생",
+        "조부",
+        "조모",
+        "손자녀",
+        "법정대리인",
+        "친권자",
+        "후견인",
+        "가족",
+        "동거인",
+        "기타 친족"
+      ],
+      "value_kind": "scalar",
+      "usage": [
+        "p1_proxy_relation"
+      ],
+      "source_note": "전체 템플릿의 위임장 '본인과의 관계' 입력란과 공식 원문 R1을 기준으로 만든 비식별 합성 관계 표현.",
+      "policy": {
+        "closed_set": false,
+        "min_size": 20
+      }
+    },
+    "contact_times": {
+      "values": [
+        "09:00",
+        "09:20",
+        "09:40",
+        "10:00",
+        "10:20",
+        "10:40",
+        "11:00",
+        "11:20",
+        "11:40",
+        "13:00",
+        "13:20",
+        "13:40",
+        "14:00",
+        "14:20",
+        "14:40",
+        "15:00",
+        "15:20",
+        "15:40",
+        "16:00",
+        "16:20",
+        "16:40",
+        "17:00",
+        "17:20",
+        "17:40"
+      ],
+      "value_kind": "scalar",
+      "usage": [
+        "p1_receiver_time"
+      ],
+      "source_note": "전체 템플릿의 '유선접수시간:' 값 영역에 정적 단위가 없음을 확인하고 영업시간대 HH:MM 합성값으로 구성.",
+      "policy": {
+        "closed_set": false,
+        "min_size": 20
+      }
+    }
+  },
+  "excluded_real_data": true,
+  "notes": [
+    "두 풀 모두 scalarPoolMinSize=20을 충족한다.",
+    "faker_profile_draft.json.data_pools와 동일한 승인 후보 목록이다."
+  ]
+}

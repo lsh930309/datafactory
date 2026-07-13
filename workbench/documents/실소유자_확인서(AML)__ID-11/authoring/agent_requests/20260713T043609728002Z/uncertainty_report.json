@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "doc_id": "ID-11",
+  "pass": "2/2 faker and relationship expansion",
+  "unresolved_fields": [],
+  "conflicting_evidence": [
+    {
+      "id": "UNC-01",
+      "scope": "sample_kind",
+      "request_value": "filled_sample",
+      "observed_evidence": "1페이지 원본 JPG와 OCR에는 작성된 개인·기관 값이 없고 정적 양식 텍스트만 보임",
+      "resolution": "계약의 filled_sample 분류와 1차 스키마를 그대로 유지하고, 합성 값은 use 값 영역과 전체 이미지의 정적 접미어를 기준으로 설계함",
+      "impact": "none_on_anchor_or_generator_coverage"
+    }
+  ],
+  "resolved_pass_1_items": [
+    {
+      "id": "RES-01",
+      "scope": "영문 성명",
+      "resolution": "지원 문법 안에서 24개 합성 영문명 scalar pool을 사용하고 pick_record로 한글명과 짝을 맞춤"
+    },
+    {
+      "id": "RES-02",
+      "scope": "선택 경로와 실제소유자 행의 조건부 관계",
+      "resolution": "12개 합성 record pool과 전체 6개 체크박스 exclusive_choice로 지원 문법 안에서 모델링"
+    },
+    {
+      "id": "RES-03",
+      "scope": "상단·하단 작성인 정보",
+      "resolution": "동일인 copy를 가정하지 않고 생략 시 상단, 일반 확인 시 하단만 채우도록 record별로 분리"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_ids": ["p1_owner_1_birth_date", "p1_owner_2_birth_date", "p1_owner_3_birth_date", "p1_owner_4_birth_date"],
+      "rule": "pool:adult_birth_dates",
+      "reason": "템플릿에 날짜 구분자가 정적으로 인쇄되지 않아 렌더러 기본 date.kr 표기 변동을 피하려고 YYYY.MM.DD 합성 pool로 고정함"
+    }
+  ],
+  "deferred_relationships": [
+    {
+      "id": "REL-01",
+      "fields": ["p1_owner_1_ownership_percent", "p1_owner_2_ownership_percent", "p1_owner_3_ownership_percent", "p1_owner_4_ownership_percent"],
+      "reason": "현재 스키마에 합계 target bbox가 없으므로 지원 sum constraint로 지분율 합계를 강제할 수 없음",
+      "mitigation": "id11_scenarios의 지분 기준 record는 기입된 지분율 합계가 100이 되도록 구성하고 다른 확인 경로는 지분율을 비움",
+      "needed_change": "향후 합계 필드를 추가하지 않는 한 별도 관계식 추가 불필요"
+    },
+    {
+      "id": "REL-02",
+      "fields": ["p1_owner_omission_checkbox", "p1_owner_path_25_percent_checkbox", "p1_owner_path_no_25_percent_max_shareholder_checkbox", "p1_owner_path_no_25_percent_control_appointment_checkbox", "p1_owner_path_no_25_percent_de_facto_controller_checkbox", "p1_owner_path_representative_checkbox"],
+      "reason": "지원 exclusive_choice는 정확히 하나 선택은 보장하지만 선택별 필드 공백 조건 자체를 표현하지 못함",
+      "mitigation": "pick_record가 선택 경로와 상·하단 작성인 및 실제소유자 행을 한 레코드에서 함께 덮어씀",
+      "needed_change": "렌더러가 constraint 순서를 변경할 경우 pick_record 후 exclusive_choice가 선택값만 바꾸지 않는지 회귀 검증 필요"
+    }
+  ],
+  "page_limitations": [
+    {
+      "scope": "page_1_only",
+      "detail": "원본 PDF는 3페이지이나 현재 review/use bbox는 1페이지만 존재하므로 2·3페이지 및 구형 p2/p3/p4 faker 항목은 신규 draft에서 제외함"
+    }
+  ],
+  "user_decisions_needed": [],
+  "validation_expectation": {
+    "use_anchor_coverage_percent": 100,
+    "field_id_contract": "immutable_for_pass_2",
+    "generator_coverage_percent": 100,
+    "record_pool_minimum": 12,
+    "scalar_pool_minimum": 20
+  }
+}

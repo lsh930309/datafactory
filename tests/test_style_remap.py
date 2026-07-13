@@ -23,6 +23,7 @@ def test_style_remap_prefers_anchor_and_restores_visual_render_policy() -> None:
                 "field_id": "old_name",
                 "bbox_label_id": "anchor_1",
                 "style_class": "old_name_style",
+                "render_mode": "handwriting",
                 "render_policy": {"align": "right", "valign": "bottom", "overflow": "shrink"},
             }
         ]
@@ -33,6 +34,7 @@ def test_style_remap_prefers_anchor_and_restores_visual_render_policy() -> None:
                 "field_id": "new_name",
                 "bbox_label_id": "anchor_1",
                 "style_class": "agent_default",
+                "render_mode": "printed",
                 "render_policy": {"render": True, "align": "left", "valign": "middle", "overflow": "clip"},
             }
         ]
@@ -47,9 +49,11 @@ def test_style_remap_prefers_anchor_and_restores_visual_render_policy() -> None:
 
     field = schema["fields"][0]
     assert field["style_class"] == "old_name_style"
+    assert field["render_mode"] == "handwriting"
     assert field["render_policy"] == {"render": True, "align": "right", "valign": "bottom", "overflow": "shrink"}
     assert stylesheet["style_classes"][0]["font_size"] == 17
     assert report["methods"] == {"anchor": 1, "field_id": 0, "style_class": 0}
+    assert report["restoredRenderModes"] == 1
 
 
 def test_style_remap_uses_field_id_then_existing_previous_style_class() -> None:

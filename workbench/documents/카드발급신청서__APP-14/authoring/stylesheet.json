@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "created_at": "2026-07-02T01:30:07.257433+00:00",
-  "updated_at": "2026-07-06T07:52:55.730611+00:00",
+  "updated_at": "2026-07-13T04:36:09.284161+00:00",
   "doc_id": "APP-14",
   "style_classes": [
     {
@@ -993,5 +993,16 @@
       "font_style": "normal"
     }
   ],
-  "notes": "APP-14 카드발급신청서 생산용 스타일. 원본은 blank form이므로 전체 렌더/overlay 기준 Apple SD Gothic Neo 저농도 텍스트와 작은 체크 표시를 사용함. crop 비교 미사용."
+  "notes": "APP-14 카드발급신청서 생산용 스타일. 원본은 blank form이므로 전체 렌더/overlay 기준 Apple SD Gothic Neo 저농도 텍스트와 작은 체크 표시를 사용함. crop 비교 미사용.",
+  "title": "카드발급신청서",
+  "status": "draft_pass1_preserved",
+  "source_stylesheet": "workbench/documents/카드발급신청서__APP-14/authoring/stylesheet.json",
+  "preservation_policy": "기존 style_class 자산을 변경 없이 보존하고 schema_draft의 binding에 재사용",
+  "visual_review": {
+    "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+    "result": "기존 수기용 서체·정렬·baseline/shift를 보존하는 것이 가장 보수적임",
+    "uncertain": [
+      "배송사 바코드는 텍스트 스타일만 존재하여 실제 바코드 렌더링 여부는 pass 2/적용 전에 확인 필요"
+    ]
+  }
 }

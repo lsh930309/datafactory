@@ -1,0 +1,2845 @@
+{
+  "schema_version": 2,
+  "doc_id": "APP-14",
+  "title": "카드발급신청서",
+  "status": "draft_pass1_schema_frozen",
+  "sample_kind": "filled_sample",
+  "page_index": 0,
+  "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+  "semantic_schema": {
+    "카드인수": {
+      "교부자 기재란": {
+        "신분증 종류": {
+          "주민등록증": "",
+          "공무원증": "",
+          "외국인등록증(거소증)": "",
+          "장애인등록증(복지카드)": "",
+          "운전면허증": "",
+          "여권": ""
+        },
+        "발급일자": "",
+        "발급기관": "",
+        "증번호": "",
+        "발송일자 일련번호": "",
+        "배송사 바코드": ""
+      },
+      "회원 기재란": {
+        "수령일자": {
+          "년": "",
+          "월": "",
+          "일": ""
+        },
+        "신청인 성명": ""
+      }
+    },
+    "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의": {
+      "수집/이용": {
+        "개인(신용)정보": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "제3자 제공": {
+        "개인(신용)정보": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "신용정보 조회": {
+        "개인(신용)정보": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "동의 작성": {
+        "년": "",
+        "월": "",
+        "일": "",
+        "본인 성명": ""
+      }
+    },
+    "개인(신용) 선택적 수집/이용/제공 동의": {
+      "수집/이용": {
+        "카드·금융상품 안내 및 이용권유": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "카드상품 및 부수 서비스 안내": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "이용권유 방법": {
+        "전화": "",
+        "문자메시지": "",
+        "서면": "",
+        "이메일": "",
+        "전부동의": "",
+        "동의하지않음": ""
+      },
+      "제3자 제공": {
+        "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "부정사용 방지 목적 출입국 관리 사무소 제공": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "동의 작성": {
+        "년": "",
+        "월": "",
+        "일": "",
+        "본인 성명": ""
+      }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "p1_id_resident",
+      "key": "주민등록증",
+      "semantic_path": "카드인수/교부자 기재란/신분증 종류/주민등록증",
+      "anchor_id": "manual_app14_blank_form_20260702",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_id_resident",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          235,
+          307,
+          18,
+          20
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check id_resident",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/신분증 종류/주민등록증",
+        "csv_column": "주민등록증"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "신분증주민등록체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702"
+      }
+    },
+    {
+      "field_id": "p1_id_gov",
+      "key": "공무원증",
+      "semantic_path": "카드인수/교부자 기재란/신분증 종류/공무원증",
+      "anchor_id": "manual_app14_blank_form_20260702_2",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_id_gov",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          349,
+          307,
+          18,
+          20
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check id_gov",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/신분증 종류/공무원증",
+        "csv_column": "공무원증"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "신분증공무원증체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_2"
+      }
+    },
+    {
+      "field_id": "p1_id_foreign",
+      "key": "외국인등록증(거소증)",
+      "semantic_path": "카드인수/교부자 기재란/신분증 종류/외국인등록증(거소증)",
+      "anchor_id": "manual_app14_blank_form_20260702_3",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_id_foreign",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          455,
+          305,
+          18,
+          20
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check id_foreign",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/신분증 종류/외국인등록증(거소증)",
+        "csv_column": "외국인등록증(거소증)"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "신분증외국인등록증체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_3"
+      }
+    },
+    {
+      "field_id": "p1_id_welfare",
+      "key": "장애인등록증(복지카드)",
+      "semantic_path": "카드인수/교부자 기재란/신분증 종류/장애인등록증(복지카드)",
+      "anchor_id": "manual_app14_blank_form_20260702_4",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_id_welfare",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          585,
+          307,
+          18,
+          20
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check id_welfare",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/신분증 종류/장애인등록증(복지카드)",
+        "csv_column": "장애인등록증(복지카드)"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "신분증복지카드체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_4"
+      }
+    },
+    {
+      "field_id": "p1_id_driver",
+      "key": "운전면허증",
+      "semantic_path": "카드인수/교부자 기재란/신분증 종류/운전면허증",
+      "anchor_id": "manual_app14_blank_form_20260702_5",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_id_driver",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          351,
+          351,
+          18,
+          20
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check id_driver",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/신분증 종류/운전면허증",
+        "csv_column": "운전면허증"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "신분증운전면허체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_5"
+      }
+    },
+    {
+      "field_id": "p1_id_passport",
+      "key": "여권",
+      "semantic_path": "카드인수/교부자 기재란/신분증 종류/여권",
+      "anchor_id": "manual_app14_blank_form_20260702_6",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_id_passport",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          454,
+          351,
+          18,
+          20
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check id_passport",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/신분증 종류/여권",
+        "csv_column": "여권"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "신분증여권체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_6"
+      }
+    },
+    {
+      "field_id": "p1_privacy1_agree",
+      "key": "수집/이용 개인(신용)정보 동의함",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/개인(신용)정보/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_7",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy1_agree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          862,
+          644,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy1_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/개인(신용)정보/동의함",
+        "csv_column": "수집/이용 개인(신용)정보 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보1동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_7"
+      }
+    },
+    {
+      "field_id": "p1_privacy1_disagree",
+      "key": "수집/이용 개인(신용)정보 동의하지않음",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/개인(신용)정보/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_8",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy1_disagree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1005,
+          646,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy1_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/개인(신용)정보/동의하지않음",
+        "csv_column": "수집/이용 개인(신용)정보 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보1미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_8"
+      }
+    },
+    {
+      "field_id": "p1_privacy2_agree",
+      "key": "수집/이용 고유식별정보 처리 동의함",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/고유식별정보 처리/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_9",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy2_agree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          862,
+          681,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy2_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/고유식별정보 처리/동의함",
+        "csv_column": "수집/이용 고유식별정보 처리 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보2동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_9"
+      }
+    },
+    {
+      "field_id": "p1_privacy2_disagree",
+      "key": "수집/이용 고유식별정보 처리 동의하지않음",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/고유식별정보 처리/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_10",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy2_disagree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1003,
+          682,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy2_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/고유식별정보 처리/동의하지않음",
+        "csv_column": "수집/이용 고유식별정보 처리 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보2미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_10"
+      }
+    },
+    {
+      "field_id": "p1_privacy3_agree",
+      "key": "제3자 제공 개인(신용)정보 동의함",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/개인(신용)정보/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_11",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy3_agree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          862,
+          770,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy3_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/개인(신용)정보/동의함",
+        "csv_column": "제3자 제공 개인(신용)정보 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보3동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_11"
+      }
+    },
+    {
+      "field_id": "p1_privacy3_disagree",
+      "key": "제3자 제공 개인(신용)정보 동의하지않음",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/개인(신용)정보/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_12",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy3_disagree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1005,
+          769,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy3_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/개인(신용)정보/동의하지않음",
+        "csv_column": "제3자 제공 개인(신용)정보 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보3미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_12"
+      }
+    },
+    {
+      "field_id": "p1_privacy4_agree",
+      "key": "제3자 제공 고유식별정보 처리 동의함",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/고유식별정보 처리/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_13",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy4_agree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          862,
+          805,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy4_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/고유식별정보 처리/동의함",
+        "csv_column": "제3자 제공 고유식별정보 처리 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보4동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_13"
+      }
+    },
+    {
+      "field_id": "p1_privacy4_disagree",
+      "key": "제3자 제공 고유식별정보 처리 동의하지않음",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/고유식별정보 처리/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_14",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy4_disagree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1005,
+          805,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy4_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/고유식별정보 처리/동의하지않음",
+        "csv_column": "제3자 제공 고유식별정보 처리 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보4미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_14"
+      }
+    },
+    {
+      "field_id": "p1_privacy5_agree",
+      "key": "신용정보 조회 개인(신용)정보 동의함",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/개인(신용)정보/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_15",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy5_agree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          861,
+          889,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy5_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/개인(신용)정보/동의함",
+        "csv_column": "신용정보 조회 개인(신용)정보 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보5동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_15"
+      }
+    },
+    {
+      "field_id": "p1_privacy5_disagree",
+      "key": "신용정보 조회 개인(신용)정보 동의하지않음",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/개인(신용)정보/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_16",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy5_disagree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1005,
+          888,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy5_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/개인(신용)정보/동의하지않음",
+        "csv_column": "신용정보 조회 개인(신용)정보 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보5미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_16"
+      }
+    },
+    {
+      "field_id": "p1_privacy6_agree",
+      "key": "신용정보 조회 고유식별정보 처리 동의함",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/고유식별정보 처리/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_17",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy6_agree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          861,
+          923,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy6_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/고유식별정보 처리/동의함",
+        "csv_column": "신용정보 조회 고유식별정보 처리 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보6동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_17"
+      }
+    },
+    {
+      "field_id": "p1_privacy6_disagree",
+      "key": "신용정보 조회 고유식별정보 처리 동의하지않음",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/고유식별정보 처리/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_18",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_privacy6_disagree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R5"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1004,
+          923,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check privacy6_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/고유식별정보 처리/동의하지않음",
+        "csv_column": "신용정보 조회 고유식별정보 처리 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "개인정보6미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_18"
+      }
+    },
+    {
+      "field_id": "p1_optional1_agree",
+      "key": "카드·금융상품 안내 및 이용권유 동의함",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드·금융상품 안내 및 이용권유/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_19",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          862,
+          1132,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check optional1_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드·금융상품 안내 및 이용권유/동의함",
+        "csv_column": "카드·금융상품 안내 및 이용권유 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택1동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_19"
+      }
+    },
+    {
+      "field_id": "p1_optional1_disagree",
+      "key": "카드·금융상품 안내 및 이용권유 동의하지않음",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드·금융상품 안내 및 이용권유/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_20",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1006,
+          1131,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check optional1_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드·금융상품 안내 및 이용권유/동의하지않음",
+        "csv_column": "카드·금융상품 안내 및 이용권유 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택1미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_20"
+      }
+    },
+    {
+      "field_id": "p1_optional2_agree",
+      "key": "카드상품 및 부수 서비스 안내 동의함",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드상품 및 부수 서비스 안내/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_21",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          861,
+          1155,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check optional2_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드상품 및 부수 서비스 안내/동의함",
+        "csv_column": "카드상품 및 부수 서비스 안내 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택2동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_21"
+      }
+    },
+    {
+      "field_id": "p1_optional2_disagree",
+      "key": "카드상품 및 부수 서비스 안내 동의하지않음",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드상품 및 부수 서비스 안내/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_22",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1004,
+          1154,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check optional2_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드상품 및 부수 서비스 안내/동의하지않음",
+        "csv_column": "카드상품 및 부수 서비스 안내 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택2미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_22"
+      }
+    },
+    {
+      "field_id": "p1_optional3_agree",
+      "key": "고유식별정보 처리 동의함",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/고유식별정보 처리/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_23",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          862,
+          1204,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check optional3_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/고유식별정보 처리/동의함",
+        "csv_column": "고유식별정보 처리 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택3동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_23"
+      }
+    },
+    {
+      "field_id": "p1_optional3_disagree",
+      "key": "고유식별정보 처리 동의하지않음",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/고유식별정보 처리/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_24",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1005,
+          1206,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check optional3_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/고유식별정보 처리/동의하지않음",
+        "csv_column": "고유식별정보 처리 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택3미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_24"
+      }
+    },
+    {
+      "field_id": "p1_channel_phone",
+      "key": "이용권유 방법 전화",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/전화",
+      "anchor_id": "manual_app14_blank_form_20260702_25",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          475,
+          1250,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check channel_phone",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/전화",
+        "csv_column": "이용권유 방법 전화"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "수신채널전화번호체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_25"
+      }
+    },
+    {
+      "field_id": "p1_channel_sms",
+      "key": "이용권유 방법 문자메시지",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/문자메시지",
+      "anchor_id": "manual_app14_blank_form_20260702_26",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          553,
+          1251,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check channel_sms",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/문자메시지",
+        "csv_column": "이용권유 방법 문자메시지"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "수신채널SMS체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_26"
+      }
+    },
+    {
+      "field_id": "p1_channel_paper",
+      "key": "이용권유 방법 서면",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/서면",
+      "anchor_id": "manual_app14_blank_form_20260702_27",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          676,
+          1248,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check channel_paper",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/서면",
+        "csv_column": "이용권유 방법 서면"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "수신채널서면체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_27"
+      }
+    },
+    {
+      "field_id": "p1_channel_email",
+      "key": "이용권유 방법 이메일",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/이메일",
+      "anchor_id": "manual_app14_blank_form_20260702_28",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          759,
+          1251,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check channel_email",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/이메일",
+        "csv_column": "이용권유 방법 이메일"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "수신채널이메일체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_28"
+      }
+    },
+    {
+      "field_id": "p1_channel_all",
+      "key": "이용권유 방법 전부동의",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/전부동의",
+      "anchor_id": "manual_app14_blank_form_20260702_29",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          863,
+          1249,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check channel_all",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/전부동의",
+        "csv_column": "이용권유 방법 전부동의"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "수신채널전체체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_29"
+      }
+    },
+    {
+      "field_id": "p1_channel_disagree",
+      "key": "이용권유 방법 동의하지않음",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_30",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1003,
+          1250,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check channel_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/동의하지않음",
+        "csv_column": "이용권유 방법 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "수신채널미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_30"
+      }
+    },
+    {
+      "field_id": "p1_third_party1_agree",
+      "key": "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동 동의함",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_31",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_third_party1_agree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          864,
+          1434,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check third_party1_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동/동의함",
+        "csv_column": "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "제3자제공1동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_31"
+      }
+    },
+    {
+      "field_id": "p1_third_party1_disagree",
+      "key": "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동 동의하지않음",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_32",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_third_party1_disagree",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1007,
+          1429,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check third_party1_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동/동의하지않음",
+        "csv_column": "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "제3자제공1미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_32"
+      }
+    },
+    {
+      "field_id": "p1_third_party2_agree",
+      "key": "부정사용 방지 목적 출입국 관리 사무소 제공 동의함",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/부정사용 방지 목적 출입국 관리 사무소 제공/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_33",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          862,
+          1454,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check third_party2_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/부정사용 방지 목적 출입국 관리 사무소 제공/동의함",
+        "csv_column": "부정사용 방지 목적 출입국 관리 사무소 제공 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "제3자제공2동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_33"
+      }
+    },
+    {
+      "field_id": "p1_third_party2_disagree",
+      "key": "부정사용 방지 목적 출입국 관리 사무소 제공 동의하지않음",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/부정사용 방지 목적 출입국 관리 사무소 제공/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_34",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1004,
+          1457,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check third_party2_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/부정사용 방지 목적 출입국 관리 사무소 제공/동의하지않음",
+        "csv_column": "부정사용 방지 목적 출입국 관리 사무소 제공 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "제3자제공2미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_34"
+      }
+    },
+    {
+      "field_id": "p1_third_party3_agree",
+      "key": "고유식별정보 처리 동의함",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/고유식별정보 처리/동의함",
+      "anchor_id": "manual_app14_blank_form_20260702_35",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          862,
+          1503,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check third_party3_agree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/고유식별정보 처리/동의함",
+        "csv_column": "고유식별정보 처리 동의함"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "제3자제공3동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_35"
+      }
+    },
+    {
+      "field_id": "p1_third_party3_disagree",
+      "key": "고유식별정보 처리 동의하지않음",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/고유식별정보 처리/동의하지않음",
+      "anchor_id": "manual_app14_blank_form_20260702_36",
+      "value": "",
+      "value_type": "checkbox.bool",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          1004,
+          1500,
+          22,
+          24
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 check third_party3_disagree",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.98
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "check_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/고유식별정보 처리/동의하지않음",
+        "csv_column": "고유식별정보 처리 동의하지않음"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "제3자제공3미동의체크",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_36"
+      }
+    },
+    {
+      "field_id": "p1_receipt_year",
+      "key": "수령일자 년",
+      "semantic_path": "카드인수/회원 기재란/수령일자/년",
+      "anchor_id": "manual_app14_blank_form_20260702_37",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_receipt_year",
+      "unit_policy": {
+        "static_prefix": "20",
+        "static_suffix": "년",
+        "include_in_value": false,
+        "year_format": "yy"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          250,
+          449,
+          50,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 receipt_year",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/회원 기재란/수령일자/년",
+        "csv_column": "수령일자 년"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "접수년",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_37"
+      }
+    },
+    {
+      "field_id": "p1_receipt_month",
+      "key": "수령일자 월",
+      "semantic_path": "카드인수/회원 기재란/수령일자/월",
+      "anchor_id": "manual_app14_blank_form_20260702_38",
+      "value": "",
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_p1_receipt_month",
+      "unit_policy": {
+        "static_suffix": "월",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          404,
+          447,
+          50,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 receipt_month",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/회원 기재란/수령일자/월",
+        "csv_column": "수령일자 월"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "접수월",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_38"
+      }
+    },
+    {
+      "field_id": "p1_receipt_day",
+      "key": "수령일자 일",
+      "semantic_path": "카드인수/회원 기재란/수령일자/일",
+      "anchor_id": "manual_app14_blank_form_20260702_39",
+      "value": "",
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_p1_receipt_day",
+      "unit_policy": {
+        "static_suffix": "일",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          520,
+          449,
+          50,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 receipt_day",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/회원 기재란/수령일자/일",
+        "csv_column": "수령일자 일"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "접수일",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_39"
+      }
+    },
+    {
+      "field_id": "p1_applicant_name",
+      "key": "신청인 성명",
+      "semantic_path": "카드인수/회원 기재란/신청인 성명",
+      "anchor_id": "manual_app14_blank_form_20260702_40",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_p1_applicant_name",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R2"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          235,
+          490,
+          280,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 applicant_name",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/회원 기재란/신청인 성명",
+        "csv_column": "신청인 성명"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "신청인명",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_40"
+      }
+    },
+    {
+      "field_id": "p1_issuer_date",
+      "key": "발급일자",
+      "semantic_path": "카드인수/교부자 기재란/발급일자",
+      "anchor_id": "manual_app14_blank_form_20260702_41",
+      "value": "",
+      "value_type": "date.kr",
+      "faker_rule": "date.kr",
+      "style_class": "style_p1_issuer_date",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          791,
+          303,
+          129,
+          29
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 issuer_date",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/발급일자",
+        "csv_column": "발급일자"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "발급일자",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_41"
+      }
+    },
+    {
+      "field_id": "p1_issuer_agency",
+      "key": "발급기관",
+      "semantic_path": "카드인수/교부자 기재란/발급기관",
+      "anchor_id": "manual_app14_blank_form_20260702_42",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_issuer_agency",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          990,
+          302,
+          164,
+          32
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 issuer_agency",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/발급기관",
+        "csv_column": "발급기관"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "발급기관",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_42"
+      }
+    },
+    {
+      "field_id": "p1_tracking_number",
+      "key": "증번호",
+      "semantic_path": "카드인수/교부자 기재란/증번호",
+      "anchor_id": "manual_app14_blank_form_20260702_43",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:************",
+      "style_class": "style_p1_tracking_number",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          773,
+          349,
+          379,
+          30
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 tracking_number",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/증번호",
+        "csv_column": "증번호"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "배송추적번호",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_43"
+      }
+    },
+    {
+      "field_id": "p1_dispatch_date",
+      "key": "발송일자 일련번호",
+      "semantic_path": "카드인수/교부자 기재란/발송일자 일련번호",
+      "anchor_id": "manual_app14_blank_form_20260702_44",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_dispatch_date",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          724,
+          397,
+          429,
+          38
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 dispatch_date",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/발송일자 일련번호",
+        "csv_column": "발송일자 일련번호"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "발송일자",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_44"
+      }
+    },
+    {
+      "field_id": "p1_delivery_barcode",
+      "key": "배송사 바코드",
+      "semantic_path": "카드인수/교부자 기재란/배송사 바코드",
+      "anchor_id": "manual_app14_blank_form_20260702_45",
+      "value": "",
+      "value_type": "barcode",
+      "faker_rule": "pattern:################",
+      "style_class": "style_text_small",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          724,
+          456,
+          426,
+          49
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 delivery_barcode",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "카드인수/교부자 기재란/배송사 바코드",
+        "csv_column": "배송사 바코드"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "인도바코드",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_45"
+      }
+    },
+    {
+      "field_id": "p1_required_consent_year",
+      "key": "필수 동의 작성 년",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/년",
+      "anchor_id": "manual_app14_blank_form_20260702_46",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_required_consent_year",
+      "unit_policy": {
+        "static_prefix": "20",
+        "static_suffix": "년",
+        "include_in_value": false,
+        "year_format": "yy"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          285,
+          968,
+          48,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 required_consent_year",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/년",
+        "csv_column": "필수 동의 작성 년"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "필수동의년",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_46"
+      }
+    },
+    {
+      "field_id": "p1_required_consent_month",
+      "key": "필수 동의 작성 월",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/월",
+      "anchor_id": "manual_app14_blank_form_20260702_47",
+      "value": "",
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_p1_required_consent_month",
+      "unit_policy": {
+        "static_suffix": "월",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          452,
+          968,
+          48,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 required_consent_month",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/월",
+        "csv_column": "필수 동의 작성 월"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "필수동의월",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_47"
+      }
+    },
+    {
+      "field_id": "p1_required_consent_day",
+      "key": "필수 동의 작성 일",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/일",
+      "anchor_id": "manual_app14_blank_form_20260702_48",
+      "value": "",
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_p1_required_consent_day",
+      "unit_policy": {
+        "static_suffix": "일",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          572,
+          968,
+          48,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 required_consent_day",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/일",
+        "csv_column": "필수 동의 작성 일"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "필수동의일",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_48"
+      }
+    },
+    {
+      "field_id": "p1_required_consent_name",
+      "key": "필수 동의 본인 성명",
+      "semantic_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/본인 성명",
+      "anchor_id": "manual_app14_blank_form_20260702_49",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_p1_required_consent_name",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          820,
+          969,
+          235,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 required_consent_name",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/본인 성명",
+        "csv_column": "필수 동의 본인 성명"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "필수동의명",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_49"
+      }
+    },
+    {
+      "field_id": "p1_optional_consent_year",
+      "key": "선택 동의 작성 년",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/년",
+      "anchor_id": "manual_app14_blank_form_20260702_50",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_optional_consent_year",
+      "unit_policy": {
+        "static_prefix": "20",
+        "static_suffix": "년",
+        "include_in_value": false,
+        "year_format": "yy"
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          285,
+          1551,
+          48,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 optional_consent_year",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/년",
+        "csv_column": "선택 동의 작성 년"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택동의년",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_50"
+      }
+    },
+    {
+      "field_id": "p1_optional_consent_month",
+      "key": "선택 동의 작성 월",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/월",
+      "anchor_id": "manual_app14_blank_form_20260702_51",
+      "value": "",
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_p1_optional_consent_month",
+      "unit_policy": {
+        "static_suffix": "월",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          452,
+          1549,
+          48,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 optional_consent_month",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/월",
+        "csv_column": "선택 동의 작성 월"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택동의월",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_51"
+      }
+    },
+    {
+      "field_id": "p1_optional_consent_day",
+      "key": "선택 동의 작성 일",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/일",
+      "anchor_id": "manual_app14_blank_form_20260702_52",
+      "value": "",
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_date",
+      "unit_policy": {
+        "static_suffix": "일",
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          569,
+          1547,
+          48,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 optional_consent_day",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "right",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/일",
+        "csv_column": "선택 동의 작성 일"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택동의일",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_52"
+      }
+    },
+    {
+      "field_id": "p1_optional_consent_name",
+      "key": "선택 동의 본인 성명",
+      "semantic_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/본인 성명",
+      "anchor_id": "manual_app14_blank_form_20260702_53",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_text",
+      "unit_policy": {
+        "static_prefix": null,
+        "static_suffix": null,
+        "include_in_value": false
+      },
+      "research_evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
+        "bbox": [
+          817,
+          1548,
+          243,
+          26
+        ],
+        "bbox_format": "xywh",
+        "anchor_text": "page1 optional_consent_name",
+        "basis": "전체 템플릿 이미지에서 확인한 값 입력 영역",
+        "confidence": 0.94
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true,
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/본인 성명",
+        "csv_column": "선택 동의 본인 성명"
+      },
+      "required": false,
+      "review_required": false,
+      "lineage": {
+        "legacy_label": "선택동의명",
+        "legacy_bbox_label_id": "manual_app14_blank_form_20260702_53"
+      }
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 53,
+    "bound_use_anchor_count": 53,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  },
+  "field_id_contract": {
+    "frozen_for_pass2": true,
+    "field_count": 53,
+    "note": "pass 2는 이 field_id 집합을 추가·삭제·변경하지 않는다."
+  }
+}

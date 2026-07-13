@@ -1,0 +1,2897 @@
+{
+  "schema_version": 2,
+  "doc_id": "SEC-03",
+  "title": "일반투자자 정보 확인서(개인용)",
+  "sample_kind": "filled_sample",
+  "semantic_schema": {
+    "투자권유희망여부": {
+      "투자권유희망": "",
+      "고객정보제공": "",
+      "고객정보미제공": "",
+      "투자권유불원": ""
+    },
+    "작성구분": {
+      "신규등록": "",
+      "정보변경": "",
+      "기존정보와동일": ""
+    },
+    "투자성향설문": {
+      "1_연령대": {
+        "19세이하": "",
+        "20세이상40세이하": "",
+        "41세이상50세이하": "",
+        "51세이상60세이하": "",
+        "61세이상": ""
+      },
+      "2_투자가능기간": {
+        "6개월미만": "",
+        "6개월이상1년미만": "",
+        "1년이상2년미만": "",
+        "2년이상3년미만": "",
+        "3년이상": ""
+      },
+      "3_투자경험금융상품": {
+        "안정형상품": "",
+        "안정추구형상품": "",
+        "위험중립형상품": "",
+        "적극투자형상품": "",
+        "공격형상품": ""
+      },
+      "4_금융상품투자지식수준": {
+        "매우낮은수준": "",
+        "낮은수준": "",
+        "높은수준": "",
+        "매우높은수준": ""
+      },
+      "5_투자자금의전체금융자산대비비중": {
+        "10퍼센트미만": "",
+        "10퍼센트이상20퍼센트미만": "",
+        "20퍼센트이상30퍼센트미만": "",
+        "30퍼센트이상40퍼센트미만": "",
+        "40퍼센트이상": ""
+      },
+      "6_수입원": {
+        "일정수입유지또는증가예상": "",
+        "일정수입감소또는불안정예상": "",
+        "일정수입없고연금이주수입원": ""
+      },
+      "7_손실감내도": {
+        "반드시원금보전": "",
+        "10퍼센트미만손실감수": "",
+        "20퍼센트미만손실감수": "",
+        "고수익기대시고위험감수": ""
+      },
+      "8_투자목표와투자성향": {
+        "안정형": "",
+        "안정추구형": "",
+        "위험중립형": "",
+        "적극투자형": "",
+        "공격투자형": ""
+      },
+      "9_파생상품투자경험및기간": {
+        "없음": "",
+        "1년미만": "",
+        "1년이상3년미만": "",
+        "3년이상": ""
+      },
+      "10_지분증권투자자약식확인": {
+        "동의하지않음": "",
+        "동의함": ""
+      }
+    },
+    "투자자확인": {
+      "실명번호_주민등록번호": "",
+      "확인날짜": {
+        "연": "",
+        "월": "",
+        "일": ""
+      },
+      "고객성명": ""
+    },
+    "기존정보동일확인": {
+      "확인날짜": {
+        "연": "",
+        "월": "",
+        "일": ""
+      },
+      "고객성명": ""
+    },
+    "위임장": {
+      "대리인성명": "",
+      "대리인주민등록번호": "",
+      "대리인전화번호": "",
+      "본인과의관계": "",
+      "본인_위임인성명": ""
+    },
+    "유선접수": {
+      "접수자_상담자": "",
+      "접수시간": "",
+      "고객전화번호": ""
+    }
+  },
+  "fields": [
+    {
+      "field_id": "p1_solicitation_wanted",
+      "key": "투자권유희망",
+      "semantic_path": "투자권유희망여부/투자권유희망",
+      "anchor_id": "manual_sec03_checkbox_form_20260702",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_solicitation_wanted",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          393,
+          260,
+          18,
+          18
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_solicitation_info_provided",
+      "key": "고객정보 제공",
+      "semantic_path": "투자권유희망여부/고객정보제공",
+      "anchor_id": "manual_1782980250157",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_solicitation_info_provided",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          561,
+          257,
+          21,
+          19
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "p1_solicitation_info_not_provided",
+      "key": "고객정보 미제공",
+      "semantic_path": "투자권유희망여부/고객정보미제공",
+      "anchor_id": "manual_1782980255089",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_solicitation_info_not_provided",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          720,
+          259,
+          22,
+          19
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "p1_solicitation_not_wanted",
+      "key": "투자권유불원",
+      "semantic_path": "투자권유희망여부/투자권유불원",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_2",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_solicitation_not_wanted",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          941,
+          262,
+          18,
+          18
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_new_registration",
+      "key": "신규등록",
+      "semantic_path": "작성구분/신규등록",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_3",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_new_registration",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          389,
+          293,
+          18,
+          18
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_info_change",
+      "key": "정보변경",
+      "semantic_path": "작성구분/정보변경",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_4",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_info_change",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          630,
+          293,
+          18,
+          18
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_same_as_existing",
+      "key": "기존정보와 동일",
+      "semantic_path": "작성구분/기존정보와동일",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_5",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_same_as_existing",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          940,
+          293,
+          18,
+          18
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_period_lt_6m",
+      "key": "6개월 미만",
+      "semantic_path": "투자성향설문/2_투자가능기간/6개월미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_6",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_period_lt_6m",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          378,
+          365,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_period_6m_1y",
+      "key": "6개월 이상~1년 미만",
+      "semantic_path": "투자성향설문/2_투자가능기간/6개월이상1년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_7",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_period_6m_1y",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          490,
+          363,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_period_1y_2y",
+      "key": "1년 이상~2년 미만",
+      "semantic_path": "투자성향설문/2_투자가능기간/1년이상2년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_8",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_period_1y_2y",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          689,
+          364,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_period_2y_3y",
+      "key": "2년 이상~3년 미만",
+      "semantic_path": "투자성향설문/2_투자가능기간/2년이상3년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_9",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_period_2y_3y",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          858,
+          363,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_period_gt_3y",
+      "key": "3년 이상",
+      "semantic_path": "투자성향설문/2_투자가능기간/3년이상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_10",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_period_gt_3y",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          1025,
+          364,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_product_stable",
+      "key": "안정형 상품",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/안정형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_11",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_product_stable",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          395,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_product_conservative",
+      "key": "안정추구형 상품",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/안정추구형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_12",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_product_conservative",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          421,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_product_balanced",
+      "key": "위험중립형 상품",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/위험중립형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_13",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_product_balanced",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          447,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_product_growth",
+      "key": "적극투자형 상품",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/적극투자형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_14",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_product_growth",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          378,
+          469,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_product_aggressive",
+      "key": "공격형 상품",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/공격형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_15",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_product_aggressive",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          378,
+          492,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_knowledge_very_low",
+      "key": "매우 낮은 수준",
+      "semantic_path": "투자성향설문/4_금융상품투자지식수준/매우낮은수준",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_16",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_knowledge_very_low",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          525,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_knowledge_low",
+      "key": "낮은 수준",
+      "semantic_path": "투자성향설문/4_금융상품투자지식수준/낮은수준",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_17",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_knowledge_low",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          549,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_knowledge_high",
+      "key": "높은 수준",
+      "semantic_path": "투자성향설문/4_금융상품투자지식수준/높은수준",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_18",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_knowledge_high",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          378,
+          572,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_knowledge_very_high",
+      "key": "매우 높은 수준",
+      "semantic_path": "투자성향설문/4_금융상품투자지식수준/매우높은수준",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_19",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_knowledge_very_high",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          596,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_portfolio_lt_10",
+      "key": "10% 미만",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/10퍼센트미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_20",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_portfolio_lt_10",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          630,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_portfolio_10_20",
+      "key": "10% 이상~20% 미만",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/10퍼센트이상20퍼센트미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_21",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_portfolio_10_20",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          625,
+          630,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_portfolio_20_30",
+      "key": "20% 이상~30% 미만",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/20퍼센트이상30퍼센트미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_22",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_portfolio_20_30",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          376,
+          652,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_portfolio_30_40",
+      "key": "30% 이상~40% 미만",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/30퍼센트이상40퍼센트미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_23",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_portfolio_30_40",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          624,
+          653,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_portfolio_gt_40",
+      "key": "40% 이상",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/40퍼센트이상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_24",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_portfolio_gt_40",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          871,
+          652,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_loss_principal",
+      "key": "반드시 원금 보전",
+      "semantic_path": "투자성향설문/7_손실감내도/반드시원금보전",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_25",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_loss_principal",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          375,
+          755,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_loss_10",
+      "key": "10% 미만까지 손실 감수",
+      "semantic_path": "투자성향설문/7_손실감내도/10퍼센트미만손실감수",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_26",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_loss_10",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          565,
+          757,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_loss_20",
+      "key": "20% 미만 손실 감수",
+      "semantic_path": "투자성향설문/7_손실감내도/20퍼센트미만손실감수",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_27",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_loss_20",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          777,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_loss_any",
+      "key": "기대수익이 높다면 고위험 감수",
+      "semantic_path": "투자성향설문/7_손실감내도/고수익기대시고위험감수",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_28",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_loss_any",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          568,
+          779,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_type_stable",
+      "key": "안정형",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/안정형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_29",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_type_stable",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          811,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_type_conservative",
+      "key": "안정추구형",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/안정추구형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_30",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_type_conservative",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          376,
+          835,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_type_balanced",
+      "key": "위험중립형",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/위험중립형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_31",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_type_balanced",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          375,
+          906,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_type_growth",
+      "key": "적극투자형",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/적극투자형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_32",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_type_growth",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          375,
+          954,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_type_aggressive",
+      "key": "공격투자형",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/공격투자형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_33",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_type_aggressive",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          376,
+          1005,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_derivative_none",
+      "key": "없음",
+      "semantic_path": "투자성향설문/9_파생상품투자경험및기간/없음",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_34",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_derivative_none",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          649,
+          1086,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_derivative_lt_1y",
+      "key": "1년 미만",
+      "semantic_path": "투자성향설문/9_파생상품투자경험및기간/1년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_35",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_derivative_lt_1y",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          736,
+          1087,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_derivative_1_3y",
+      "key": "1년~3년 미만",
+      "semantic_path": "투자성향설문/9_파생상품투자경험및기간/1년이상3년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_36",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_derivative_1_3y",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          848,
+          1087,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_derivative_gt_3y",
+      "key": "3년 이상",
+      "semantic_path": "투자성향설문/9_파생상품투자경험및기간/3년이상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_37",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_derivative_gt_3y",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          993,
+          1087,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_agreement_no",
+      "key": "동의하지 않음",
+      "semantic_path": "투자성향설문/10_지분증권투자자약식확인/동의하지않음",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_38",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_agreement_no",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          75,
+          1150,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_agreement_yes",
+      "key": "동의함",
+      "semantic_path": "투자성향설문/10_지분증권투자자약식확인/동의함",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_39",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_check",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          218,
+          1150,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_age_lt_19",
+      "key": "19세 이하",
+      "semantic_path": "투자성향설문/1_연령대/19세이하",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_41",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_age_lt_19",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          328,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_age_20_40",
+      "key": "20세~40세",
+      "semantic_path": "투자성향설문/1_연령대/20세이상40세이하",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_42",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_age_20_40",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          489,
+          330,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_age_41_50",
+      "key": "41세~50세",
+      "semantic_path": "투자성향설문/1_연령대/41세이상50세이하",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_43",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_age_41_50",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          602,
+          330,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_age_51_60",
+      "key": "51세~60세",
+      "semantic_path": "투자성향설문/1_연령대/51세이상60세이하",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_44",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_age_51_60",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          722,
+          329,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_age_gt_61",
+      "key": "61세 이상",
+      "semantic_path": "투자성향설문/1_연령대/61세이상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_45",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_age_gt_61",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          841,
+          329,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_income_stable",
+      "key": "일정한 수입 유지 또는 증가 예상",
+      "semantic_path": "투자성향설문/6_수입원/일정수입유지또는증가예상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_46",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_income_stable",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          377,
+          682,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_income_decrease",
+      "key": "일정한 수입 감소 또는 불안정 예상",
+      "semantic_path": "투자성향설문/6_수입원/일정수입감소또는불안정예상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_47",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_income_decrease",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          376,
+          703,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_income_none",
+      "key": "일정한 수입 없음, 연금이 주 수입원",
+      "semantic_path": "투자성향설문/6_수입원/일정수입없고연금이주수입원",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_48",
+      "value": "",
+      "value_type": "bool.checkbox",
+      "faker_rule": "checkbox.bool",
+      "style_class": "style_p1_income_none",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          378,
+          737,
+          17,
+          17
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "allow_overflow",
+        "overflow": "allow",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_identity_number",
+      "key": "실명번호(주민등록번호)",
+      "semantic_path": "투자자확인/실명번호_주민등록번호",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_49",
+      "value": "",
+      "value_type": "person.rrn",
+      "faker_rule": "person.rrn",
+      "style_class": "style_p1_identity_number",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          31,
+          1337,
+          528,
+          28
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_customer_name",
+      "key": "고객성명",
+      "semantic_path": "투자자확인/고객성명",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_51",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_p1_customer_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          888,
+          1339,
+          224,
+          28
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_reconfirm_name",
+      "key": "기존정보 동일 고객성명",
+      "semantic_path": "기존정보동일확인/고객성명",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_53",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_p1_reconfirm_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          887,
+          1425,
+          223,
+          31
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_proxy_name",
+      "key": "대리인성명",
+      "semantic_path": "위임장/대리인성명",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_54",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_p1_proxy_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          30,
+          1524,
+          280,
+          24
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_proxy_rrn",
+      "key": "대리인 주민등록번호",
+      "semantic_path": "위임장/대리인주민등록번호",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_55",
+      "value": "",
+      "value_type": "person.rrn",
+      "faker_rule": "person.rrn",
+      "style_class": "style_p1_proxy_rrn",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          313,
+          1524,
+          310,
+          24
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_proxy_phone",
+      "key": "대리인 전화번호",
+      "semantic_path": "위임장/대리인전화번호",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_56",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_p1_proxy_phone",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          626,
+          1524,
+          303,
+          24
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_proxy_relation",
+      "key": "본인과의 관계",
+      "semantic_path": "위임장/본인과의관계",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_57",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "free_text.short",
+      "style_class": "style_p1_proxy_relation",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          934,
+          1524,
+          230,
+          24
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_delegator_name",
+      "key": "본인(위임인) 성명",
+      "semantic_path": "위임장/본인_위임인성명",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_58",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_p1_delegator_name",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          766,
+          1552,
+          281,
+          32
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_receiver_name",
+      "key": "유선접수자(상담자)",
+      "semantic_path": "유선접수/접수자_상담자",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_59",
+      "value": "",
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "style_text",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          173,
+          1607,
+          225,
+          32
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_receiver_time",
+      "key": "유선접수시간",
+      "semantic_path": "유선접수/접수시간",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_60",
+      "value": "",
+      "value_type": "free_text.short",
+      "faker_rule": "pattern:##:##",
+      "style_class": "style_p1_receiver_time",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          582,
+          1607,
+          256,
+          31
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_customer_phone",
+      "key": "고객전화번호",
+      "semantic_path": "유선접수/고객전화번호",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_61",
+      "value": "",
+      "value_type": "person.phone_kr",
+      "faker_rule": "person.phone_kr",
+      "style_class": "style_text_small",
+      "unit_policy": {
+        "mode": "none",
+        "static_text": ""
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          966,
+          1608,
+          198,
+          31
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_confirmation_year",
+      "key": "확인 날짜 연",
+      "semantic_path": "투자자확인/확인날짜/연",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_50",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_confirmation_year",
+      "unit_policy": {
+        "mode": "exclude_static_suffix",
+        "static_text": "년"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          608,
+          1343,
+          88,
+          24
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_confirmation_month",
+      "key": "확인 날짜 월",
+      "semantic_path": "투자자확인/확인날짜/월",
+      "anchor_id": "manual_1782980178496",
+      "value": "",
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_p1_confirmation_month",
+      "unit_policy": {
+        "mode": "exclude_static_suffix",
+        "static_text": "월"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          726,
+          1344,
+          44,
+          24
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "p1_confirmation_day",
+      "key": "확인 날짜 일",
+      "semantic_path": "투자자확인/확인날짜/일",
+      "anchor_id": "manual_1782980181378",
+      "value": "",
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_p1_confirmation_day",
+      "unit_policy": {
+        "mode": "exclude_static_suffix",
+        "static_text": "일"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          798,
+          1343,
+          44,
+          24
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "p1_reconfirm_year",
+      "key": "기존정보 동일 확인 날짜 연",
+      "semantic_path": "기존정보동일확인/확인날짜/연",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_52",
+      "value": "",
+      "value_type": "date.year",
+      "faker_rule": "date.year",
+      "style_class": "style_p1_reconfirm_year",
+      "unit_policy": {
+        "mode": "exclude_static_suffix",
+        "static_text": "년"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          607,
+          1432,
+          91,
+          24
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.99
+    },
+    {
+      "field_id": "p1_reconfirm_month",
+      "key": "기존정보 동일 확인 날짜 월",
+      "semantic_path": "기존정보동일확인/확인날짜/월",
+      "anchor_id": "manual_1782980195344",
+      "value": "",
+      "value_type": "date.month",
+      "faker_rule": "date.month",
+      "style_class": "style_p1_reconfirm_month",
+      "unit_policy": {
+        "mode": "exclude_static_suffix",
+        "static_text": "월"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          723,
+          1431,
+          47,
+          25
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    },
+    {
+      "field_id": "p1_reconfirm_day",
+      "key": "기존정보 동일 확인 날짜 일",
+      "semantic_path": "기존정보동일확인/확인날짜/일",
+      "anchor_id": "manual_1782980199177",
+      "value": "",
+      "value_type": "date.day",
+      "faker_rule": "date.day",
+      "style_class": "style_date",
+      "unit_policy": {
+        "mode": "exclude_static_suffix",
+        "static_text": "일"
+      },
+      "research_evidence_ids": [
+        "R1"
+      ],
+      "visual_evidence": {
+        "source_image": "workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
+        "page": 1,
+        "bbox": [
+          797,
+          1431,
+          44,
+          27
+        ],
+        "bbox_format": "xywh",
+        "basis": "full_template_image_primary"
+      },
+      "render_policy": {
+        "align": "center",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark"
+      },
+      "render_mode": "handwriting",
+      "export": {
+        "include": true
+      },
+      "review_required": false,
+      "confidence": 0.96
+    }
+  ],
+  "coverage": {
+    "use_anchor_count": 66,
+    "bound_use_anchor_count": 66,
+    "coverage_percent": 100.0,
+    "unmapped_use_anchors": []
+  },
+  "field_id_contract": {
+    "status": "frozen_for_pass_2",
+    "count": 66,
+    "note": "Pass 2 must not add, remove, or rename field_id values."
+  }
+}

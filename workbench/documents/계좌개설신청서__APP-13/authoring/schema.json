@@ -1,371 +1,546 @@
 {
   "schema_version": 1,
-  "created_at": "2026-07-02T01:00:23.514712+00:00",
-  "updated_at": "2026-07-02T08:01:23.530602+00:00",
+  "created_at": "2026-07-13T04:40:53.994965+00:00",
   "doc_id": "APP-13",
   "title": "계좌개설신청서",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/계좌개설신청서__APP-13/review/original_계좌개설신청서_page_001/review.json",
-  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/계좌개설신청서__APP-13/samples/original/계좌개설신청서_page_001.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/계좌개설신청서__APP-13/inpaint/original/lama/inpainted_lama.png",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/계좌개설신청서__APP-13/authoring/agent_applied_reviews/20260713T042225196654Z/review.json",
+  "source_image": "workbench/documents/계좌개설신청서__APP-13/samples/original/계좌개설신청서_page_001.jpg",
+  "source_inpainted": "workbench/documents/계좌개설신청서__APP-13/inpaint/original/lama/inpainted_lama.png",
   "image": {
     "width": 1191,
     "height": 1684
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/계좌개설신청서__APP-13/authoring/agent_applied_reviews/20260713T042225196654Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/계좌개설신청서__APP-13/authoring/agent_requests/20260713T042225196654Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "신청정보": {
+      "작성일": ""
+    },
+    "기존계좌": {
+      "회사이름": "",
+      "계좌번호": ""
+    },
+    "추가계좌": {
+      "계좌명(회사이름)": "",
+      "계좌종류": "",
+      "통화": "",
+      "법적주소": "",
+      "사업장주소": "",
+      "수권서명": ""
+    },
+    "대리인": {
+      "성명": "",
+      "주민등록번호": "",
+      "주소(자택/직장)": "",
+      "연락처": ""
+    },
+    "서명확인": {
+      "회사이름": "",
+      "수권서명(명판 및 법인인감)": ""
+    }
   },
   "fields": [
     {
       "field_id": "application_date",
       "label": "작성일",
+      "semantic_path": [
+        "신청정보",
+        "작성일"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702",
       "source_detection_id": "manual_app13_blank_form_20260702",
       "source_text": "작성일",
       "value_type": "date.kr",
-      "generator": "literal:",
+      "generator": "date.kr",
       "style_class": "style_application_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "작성일",
-        "csv_column": "작성일"
+        "json_path": "신청정보/작성일",
+        "csv_column": "신청정보/작성일"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "company_name_inline",
-      "label": "회사이름 본문",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "label": "회사이름",
+      "semantic_path": [
+        "기존계좌",
+        "회사이름"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_2",
+      "source_detection_id": "manual_app13_blank_form_20260702_2",
       "source_text": "회사이름 본문",
       "value_type": "company.name_ko",
-      "generator": "literal:",
+      "generator": "company.name_ko",
       "style_class": "style_company_name_inline",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "회사이름 본문",
-        "csv_column": "회사이름 본문"
+        "json_path": "기존계좌/회사이름",
+        "csv_column": "기존계좌/회사이름"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_2",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "existing_account_number",
       "label": "기존 계좌번호",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "semantic_path": [
+        "기존계좌",
+        "계좌번호"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_3",
+      "source_detection_id": "manual_app13_blank_form_20260702_3",
       "source_text": "기존 계좌번호",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:###-######-##",
       "style_class": "style_existing_account_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기존 계좌번호",
-        "csv_column": "기존 계좌번호"
+        "json_path": "기존계좌/계좌번호",
+        "csv_column": "기존계좌/계좌번호"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_3",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "account_name",
-      "label": "회사이름",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "label": "계좌명(회사이름)",
+      "semantic_path": [
+        "추가계좌",
+        "계좌명(회사이름)"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_4",
+      "source_detection_id": "manual_app13_blank_form_20260702_4",
       "source_text": "Account Name 회사이름",
       "value_type": "company.name_ko",
-      "generator": "literal:",
+      "generator": "same_as:company_name_inline",
       "style_class": "style_account_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "회사이름",
-        "csv_column": "회사이름"
+        "json_path": "추가계좌/계좌명(회사이름)",
+        "csv_column": "추가계좌/계좌명(회사이름)"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_4",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
-      "field_id": "account_type_currency",
-      "label": "계좌 종류 및 통화",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "field_id": "account_type",
+      "label": "계좌종류",
+      "semantic_path": [
+        "추가계좌",
+        "계좌종류"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_5",
+      "source_detection_id": "manual_app13_blank_form_20260702_5",
       "source_text": "계좌 종류 및 통화",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "choice:보통예금|당좌예금|기업자유예금|외화보통예금|정기예금",
       "style_class": "style_account_type_currency",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "false"
       },
       "export": {
-        "json_path": "계좌 종류 및 통화",
-        "csv_column": "계좌 종류 및 통화"
+        "json_path": "추가계좌/계좌종류",
+        "csv_column": "추가계좌/계좌종류"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
+      "notes": "",
+      "render_mode": "handwriting"
+    },
+    {
+      "field_id": "account_currency",
+      "label": "통화",
+      "semantic_path": [
+        "추가계좌",
+        "통화"
+      ],
       "bbox_label_id": "manual_app13_blank_form_20260702_5",
-      "bbox_status": "use",
+      "source_detection_id": "manual_app13_blank_form_20260702_5",
+      "source_text": "계좌 종류 및 통화",
+      "value_type": "free_text.short",
+      "generator": "choice:KRW|USD|EUR|JPY|GBP|SGD|HKD",
+      "style_class": "style_account_type_currency",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "false"
+      },
+      "export": {
+        "json_path": "추가계좌/통화",
+        "csv_column": "추가계좌/통화"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "handwriting"
+    },
+    {
+      "field_id": "account_type_currency",
+      "label": "계좌 종류 및 통화",
+      "semantic_path": [
+        "렌더전용",
+        "계좌 종류 및 통화"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_5",
+      "source_detection_id": "manual_app13_blank_form_20260702_5",
+      "source_text": "계좌 종류 및 통화",
+      "value_type": "free_text.short",
+      "generator": "template:{{same_as:account_type}} / {{same_as:account_currency}}",
+      "style_class": "style_account_type_currency",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "렌더전용/계좌 종류 및 통화",
+        "csv_column": "렌더전용/계좌 종류 및 통화",
+        "include": "false"
+      },
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "legal_address",
       "label": "법적 주소",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "semantic_path": [
+        "추가계좌",
+        "법적주소"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_6",
+      "source_detection_id": "manual_app13_blank_form_20260702_6",
       "source_text": "법적 주소",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_legal_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "법적 주소",
-        "csv_column": "법적 주소"
+        "json_path": "추가계좌/법적주소",
+        "csv_column": "추가계좌/법적주소"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_6",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "business_address",
       "label": "사업장 주소",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "semantic_path": [
+        "추가계좌",
+        "사업장주소"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_7",
+      "source_detection_id": "manual_app13_blank_form_20260702_7",
       "source_text": "사업장 주소",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_business_address",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "사업장 주소",
-        "csv_column": "사업장 주소"
+        "json_path": "추가계좌/사업장주소",
+        "csv_column": "추가계좌/사업장주소"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_7",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "signatories",
-      "label": "수권서명자",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "label": "수권서명",
+      "semantic_path": [
+        "추가계좌",
+        "수권서명"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_8",
+      "source_detection_id": "manual_app13_blank_form_20260702_8",
       "source_text": "수권서명자",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_signatories",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수권서명자",
-        "csv_column": "수권서명자"
+        "json_path": "추가계좌/수권서명",
+        "csv_column": "추가계좌/수권서명"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_8",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
-      "field_id": "attorney_identity",
-      "label": "대리인 성명 및 주민등록번호",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "field_id": "attorney_name",
+      "label": "대리인 성명",
+      "semantic_path": [
+        "대리인",
+        "성명"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_9",
+      "source_detection_id": "manual_app13_blank_form_20260702_9",
       "source_text": "대리인 성명 및 주민등록번호",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_attorney_identity",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "false"
       },
       "export": {
-        "json_path": "대리인 성명 및 주민등록번호",
-        "csv_column": "대리인 성명 및 주민등록번호"
+        "json_path": "대리인/성명",
+        "csv_column": "대리인/성명"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
+      "notes": "",
+      "render_mode": "handwriting"
+    },
+    {
+      "field_id": "attorney_rrn",
+      "label": "대리인 주민등록번호",
+      "semantic_path": [
+        "대리인",
+        "주민등록번호"
+      ],
       "bbox_label_id": "manual_app13_blank_form_20260702_9",
-      "bbox_status": "use",
+      "source_detection_id": "manual_app13_blank_form_20260702_9",
+      "source_text": "대리인 성명 및 주민등록번호",
+      "value_type": "person.rrn",
+      "generator": "person.rrn",
+      "style_class": "style_attorney_identity",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "false"
+      },
+      "export": {
+        "json_path": "대리인/주민등록번호",
+        "csv_column": "대리인/주민등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "handwriting"
+    },
+    {
+      "field_id": "attorney_identity",
+      "label": "대리인 성명 및 주민등록번호",
+      "semantic_path": [
+        "렌더전용",
+        "대리인 성명 및 주민등록번호"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_9",
+      "source_detection_id": "manual_app13_blank_form_20260702_9",
+      "source_text": "대리인 성명 및 주민등록번호",
+      "value_type": "free_text.short",
+      "generator": "template:{{same_as:attorney_name}} / {{same_as:attorney_rrn}}",
+      "style_class": "style_attorney_identity",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "렌더전용/대리인 성명 및 주민등록번호",
+        "csv_column": "렌더전용/대리인 성명 및 주민등록번호",
+        "include": "false"
+      },
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "attorney_address",
-      "label": "대리인 주소",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "label": "주소(자택/직장)",
+      "semantic_path": [
+        "대리인",
+        "주소(자택",
+        "직장)"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_10",
+      "source_detection_id": "manual_app13_blank_form_20260702_10",
       "source_text": "대리인 주소",
       "value_type": "address.ko",
-      "generator": "literal:",
+      "generator": "address.ko",
       "style_class": "style_value_small",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "대리인 주소",
-        "csv_column": "대리인 주소"
+        "json_path": "대리인/주소(자택/직장)",
+        "csv_column": "대리인/주소(자택/직장)"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_10",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "attorney_phone",
-      "label": "대리인 연락처",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "label": "연락처",
+      "semantic_path": [
+        "대리인",
+        "연락처"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_11",
+      "source_detection_id": "manual_app13_blank_form_20260702_11",
       "source_text": "대리인 연락처",
       "value_type": "person.phone_kr",
-      "generator": "literal:",
+      "generator": "person.phone_kr",
       "style_class": "style_attorney_phone",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "대리인 연락처",
-        "csv_column": "대리인 연락처"
+        "json_path": "대리인/연락처",
+        "csv_column": "대리인/연락처"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_11",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "behalf_company",
-      "label": "회사이름[1]",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "label": "회사이름",
+      "semantic_path": [
+        "서명확인",
+        "회사이름"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_12",
+      "source_detection_id": "manual_app13_blank_form_20260702_12",
       "source_text": "For and on behalf of 회사이름",
       "value_type": "company.name_ko",
-      "generator": "literal:",
+      "generator": "same_as:company_name_inline",
       "style_class": "style_value",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "회사이름[1]",
-        "csv_column": "회사이름[1]"
+        "json_path": "서명확인/회사이름",
+        "csv_column": "서명확인/회사이름"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_12",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "authorised_signatory",
-      "label": "명판 및 법인인감 서명자",
-      "source_detection_id": "manual_app13_blank_form_20260702",
+      "label": "수권서명(명판 및 법인인감)",
+      "semantic_path": [
+        "서명확인",
+        "수권서명(명판 및 법인인감)"
+      ],
+      "bbox_label_id": "manual_app13_blank_form_20260702_13",
+      "source_detection_id": "manual_app13_blank_form_20260702_13",
       "source_text": "명판 및 법인인감 서명자",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "free_text.short",
       "style_class": "style_signature",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "명판 및 법인인감 서명자",
-        "csv_column": "명판 및 법인인감 서명자"
+        "json_path": "서명확인/수권서명(명판 및 법인인감)",
+        "csv_column": "서명확인/수권서명(명판 및 법인인감)"
       },
       "required": true,
-      "notes": "2026-07-02 APP-13 blank form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_app13_blank_form_20260702_13",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     }
   ],
-  "groups": [
-    {
-      "group_id": "company_account",
-      "type": "section",
-      "columns": [
-        "company_name",
-        "account_number",
-        "account_type_currency"
-      ],
-      "notes": "상단 회사/계좌 정보"
-    },
-    {
-      "group_id": "attorney",
-      "type": "section",
-      "columns": [
-        "attorney_identity",
-        "attorney_address",
-        "attorney_phone"
-      ],
-      "notes": "대리인 정보"
-    }
-  ],
-  "authoring_mode": "app13_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/계좌개설신청서__APP-13/review/original_계좌개설신청서_page_001/review.json"
-  },
+  "groups": [],
   "handwriting": {
     "qr_bbox": [
       977,
@@ -374,5 +549,6 @@
       190
     ],
     "default_sample_count": 1
-  }
+  },
+  "updated_at": "2026-07-13T04:40:54.025219+00:00"
 }

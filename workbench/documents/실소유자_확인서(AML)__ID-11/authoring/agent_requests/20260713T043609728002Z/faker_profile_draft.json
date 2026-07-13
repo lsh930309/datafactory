@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "doc_id": "ID-11",
+  "title": "실소유자 확인서(AML) faker draft",
+  "pass": "2/2 faker and relationship expansion",
+  "as_of_date": "2026-07-13",
+  "field_generators": {
+    "p1_writer_organization_name_top": "pool:synthetic_company_names",
+    "p1_writer_position_top": "pool:writer_positions",
+    "p1_writer_name_top": "person.name_ko",
+    "p1_owner_omission_checkbox": "checkbox.bool",
+    "p1_owner_path_25_percent_checkbox": "checkbox.bool",
+    "p1_owner_path_no_25_percent_max_shareholder_checkbox": "checkbox.bool",
+    "p1_owner_path_no_25_percent_control_appointment_checkbox": "checkbox.bool",
+    "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "checkbox.bool",
+    "p1_owner_path_representative_checkbox": "checkbox.bool",
+    "p1_owner_1_name_ko": "person.name_ko",
+    "p1_owner_1_name_en": "pool:owner_names_en",
+    "p1_owner_1_birth_date": "pool:adult_birth_dates",
+    "p1_owner_1_ownership_percent": "pool:ownership_percent_values",
+    "p1_owner_1_nationality": "literal:대한민국",
+    "p1_owner_2_name_ko": "person.name_ko",
+    "p1_owner_2_name_en": "pool:owner_names_en",
+    "p1_owner_2_birth_date": "pool:adult_birth_dates",
+    "p1_owner_2_ownership_percent": "pool:ownership_percent_values",
+    "p1_owner_2_nationality": "literal:대한민국",
+    "p1_owner_3_name_ko": "person.name_ko",
+    "p1_owner_3_name_en": "pool:owner_names_en",
+    "p1_owner_3_birth_date": "pool:adult_birth_dates",
+    "p1_owner_3_ownership_percent": "pool:ownership_percent_values",
+    "p1_owner_3_nationality": "literal:대한민국",
+    "p1_owner_4_name_ko": "person.name_ko",
+    "p1_owner_4_name_en": "pool:owner_names_en",
+    "p1_owner_4_birth_date": "pool:adult_birth_dates",
+    "p1_owner_4_ownership_percent": "pool:ownership_percent_values",
+    "p1_owner_4_nationality": "literal:대한민국",
+    "p1_writer_organization_name_bottom": "pool:synthetic_company_names",
+    "p1_writer_position_bottom": "pool:writer_positions",
+    "p1_writer_name_bottom": "person.name_ko"
+  },
+  "data_pools": {
+    "synthetic_company_names": [
+      "가상새봄테크 주식회사", "가상누리데이터 주식회사", "가상한결솔루션 주식회사", "가상다온물산 주식회사",
+      "가상푸른길산업 주식회사", "가상온새미로테크 주식회사", "가상해든파트너스 유한회사", "가상라온시스템 주식회사",
+      "가상마루바이오 주식회사", "가상별하유통 주식회사", "가상아람네트웍스 주식회사", "가상미르콘텐츠 주식회사",
+      "가상도담모빌리티 주식회사", "가상나래에너지 주식회사", "가상윤슬로지스 주식회사", "가상가온리서치 주식회사",
+      "가상소담푸드 주식회사", "가상이든소재 주식회사", "가상채움서비스 주식회사", "가상바른웍스 주식회사"
+    ],
+    "writer_positions": [
+      "계좌개설 대리인", "대표이사", "사내이사", "재무이사", "경영지원본부장", "재무팀장", "회계팀장", "자금팀장",
+      "경영관리팀장", "준법감시인", "준법지원팀장", "법무팀장", "총무팀장", "관리부장", "재무부장", "경영기획실장",
+      "업무집행사원", "상무이사", "전무이사", "부대표"
+    ],
+    "owner_names_en": [
+      "GARAM KIM", "NURI LEE", "HANEUL PARK", "DASOM CHOI", "RAON JUNG", "MIRU KANG", "SEONHO YOON", "YEOREUM HAN",
+      "GAON LIM", "BOM SONG", "ARIN OH", "MARU SHIN", "DANBI KWON", "HAEDEN HONG", "NARAE BAE", "YUNSEUL MOON",
+      "SODAM BAEK", "IDEUN NAM", "CHAEUM SEO", "BARUN JANG", "DOYUN RYU", "SEOHA JIN", "JIU NOH", "HARAM AHN"
+    ],
+    "adult_birth_dates": [
+      "1968.02.14", "1970.11.03", "1972.05.21", "1974.09.08", "1976.01.17", "1978.07.29", "1980.03.12", "1981.10.24",
+      "1983.06.05", "1984.12.19", "1986.04.27", "1987.08.16", "1988.11.07", "1989.02.23", "1990.09.30", "1991.05.11",
+      "1992.07.18", "1993.01.26", "1994.10.09", "1995.03.15", "1996.06.28", "1997.12.04", "1998.08.22", "1999.04.13"
+    ],
+    "ownership_percent_values": [
+      "5", "8", "10", "12", "15", "18", "20", "22", "24", "25", "27", "30", "32", "35", "38", "40", "45", "50", "60", "70"
+    ],
+    "id11_scenarios": [
+      {
+        "p1_writer_organization_name_top": "가상새봄테크 주식회사", "p1_writer_position_top": "계좌개설 대리인", "p1_writer_name_top": "김가람",
+        "p1_owner_omission_checkbox": "✓", "p1_owner_path_25_percent_checkbox": "", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "", "p1_owner_1_name_en": "", "p1_owner_1_birth_date": "", "p1_owner_1_ownership_percent": "", "p1_owner_1_nationality": "",
+        "p1_owner_2_name_ko": "", "p1_owner_2_name_en": "", "p1_owner_2_birth_date": "", "p1_owner_2_ownership_percent": "", "p1_owner_2_nationality": "",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "", "p1_writer_position_bottom": "", "p1_writer_name_bottom": ""
+      },
+      {
+        "p1_writer_organization_name_top": "가상누리데이터 주식회사", "p1_writer_position_top": "계좌개설 대리인", "p1_writer_name_top": "이누리",
+        "p1_owner_omission_checkbox": "✓", "p1_owner_path_25_percent_checkbox": "", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "", "p1_owner_1_name_en": "", "p1_owner_1_birth_date": "", "p1_owner_1_ownership_percent": "", "p1_owner_1_nationality": "",
+        "p1_owner_2_name_ko": "", "p1_owner_2_name_en": "", "p1_owner_2_birth_date": "", "p1_owner_2_ownership_percent": "", "p1_owner_2_nationality": "",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "", "p1_writer_position_bottom": "", "p1_writer_name_bottom": ""
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "✓", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "박하늘", "p1_owner_1_name_en": "HANEUL PARK", "p1_owner_1_birth_date": "1974.09.08", "p1_owner_1_ownership_percent": "60", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "최다솜", "p1_owner_2_name_en": "DASOM CHOI", "p1_owner_2_birth_date": "1983.06.05", "p1_owner_2_ownership_percent": "40", "p1_owner_2_nationality": "대한민국",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상한결솔루션 주식회사", "p1_writer_position_bottom": "대표이사", "p1_writer_name_bottom": "정라온"
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "✓", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "강미루", "p1_owner_1_name_en": "MIRU KANG", "p1_owner_1_birth_date": "1978.07.29", "p1_owner_1_ownership_percent": "50", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "윤선호", "p1_owner_2_name_en": "SEONHO YOON", "p1_owner_2_birth_date": "1986.04.27", "p1_owner_2_ownership_percent": "25", "p1_owner_2_nationality": "대한민국",
+        "p1_owner_3_name_ko": "한여름", "p1_owner_3_name_en": "YEOREUM HAN", "p1_owner_3_birth_date": "1991.05.11", "p1_owner_3_ownership_percent": "25", "p1_owner_3_nationality": "대한민국",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상다온물산 주식회사", "p1_writer_position_bottom": "재무이사", "p1_writer_name_bottom": "임가온"
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "✓", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "송봄", "p1_owner_1_name_en": "BOM SONG", "p1_owner_1_birth_date": "1980.03.12", "p1_owner_1_ownership_percent": "70", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "오아린", "p1_owner_2_name_en": "ARIN OH", "p1_owner_2_birth_date": "1988.11.07", "p1_owner_2_ownership_percent": "30", "p1_owner_2_nationality": "대한민국",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상푸른길산업 주식회사", "p1_writer_position_bottom": "경영지원본부장", "p1_writer_name_bottom": "신마루"
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "✓", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "권단비", "p1_owner_1_name_en": "DANBI KWON", "p1_owner_1_birth_date": "1972.05.21", "p1_owner_1_ownership_percent": "24", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "", "p1_owner_2_name_en": "", "p1_owner_2_birth_date": "", "p1_owner_2_ownership_percent": "", "p1_owner_2_nationality": "",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상온새미로테크 주식회사", "p1_writer_position_bottom": "회계팀장", "p1_writer_name_bottom": "홍해든"
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "✓", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "배나래", "p1_owner_1_name_en": "NARAE BAE", "p1_owner_1_birth_date": "1984.12.19", "p1_owner_1_ownership_percent": "22", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "", "p1_owner_2_name_en": "", "p1_owner_2_birth_date": "", "p1_owner_2_ownership_percent": "", "p1_owner_2_nationality": "",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상해든파트너스 유한회사", "p1_writer_position_bottom": "자금팀장", "p1_writer_name_bottom": "문윤슬"
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "✓", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "백소담", "p1_owner_1_name_en": "SODAM BAEK", "p1_owner_1_birth_date": "1970.11.03", "p1_owner_1_ownership_percent": "", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "", "p1_owner_2_name_en": "", "p1_owner_2_birth_date": "", "p1_owner_2_ownership_percent": "", "p1_owner_2_nationality": "",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상라온시스템 주식회사", "p1_writer_position_bottom": "준법감시인", "p1_writer_name_bottom": "남이든"
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "✓", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "서채움", "p1_owner_1_name_en": "CHAEUM SEO", "p1_owner_1_birth_date": "1976.01.17", "p1_owner_1_ownership_percent": "", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "", "p1_owner_2_name_en": "", "p1_owner_2_birth_date": "", "p1_owner_2_ownership_percent": "", "p1_owner_2_nationality": "",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상마루바이오 주식회사", "p1_writer_position_bottom": "법무팀장", "p1_writer_name_bottom": "장바른"
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "✓", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "류도윤", "p1_owner_1_name_en": "DOYUN RYU", "p1_owner_1_birth_date": "1968.02.14", "p1_owner_1_ownership_percent": "", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "", "p1_owner_2_name_en": "", "p1_owner_2_birth_date": "", "p1_owner_2_ownership_percent": "", "p1_owner_2_nationality": "",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상별하유통 주식회사", "p1_writer_position_bottom": "관리부장", "p1_writer_name_bottom": "진서하"
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "✓", "p1_owner_path_representative_checkbox": "",
+        "p1_owner_1_name_ko": "노지우", "p1_owner_1_name_en": "JIU NOH", "p1_owner_1_birth_date": "1981.10.24", "p1_owner_1_ownership_percent": "", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "", "p1_owner_2_name_en": "", "p1_owner_2_birth_date": "", "p1_owner_2_ownership_percent": "", "p1_owner_2_nationality": "",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상아람네트웍스 주식회사", "p1_writer_position_bottom": "경영기획실장", "p1_writer_name_bottom": "안하람"
+      },
+      {
+        "p1_writer_organization_name_top": "", "p1_writer_position_top": "", "p1_writer_name_top": "",
+        "p1_owner_omission_checkbox": "", "p1_owner_path_25_percent_checkbox": "", "p1_owner_path_no_25_percent_max_shareholder_checkbox": "", "p1_owner_path_no_25_percent_control_appointment_checkbox": "", "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "", "p1_owner_path_representative_checkbox": "✓",
+        "p1_owner_1_name_ko": "김가람", "p1_owner_1_name_en": "GARAM KIM", "p1_owner_1_birth_date": "1972.05.21", "p1_owner_1_ownership_percent": "", "p1_owner_1_nationality": "대한민국",
+        "p1_owner_2_name_ko": "", "p1_owner_2_name_en": "", "p1_owner_2_birth_date": "", "p1_owner_2_ownership_percent": "", "p1_owner_2_nationality": "",
+        "p1_owner_3_name_ko": "", "p1_owner_3_name_en": "", "p1_owner_3_birth_date": "", "p1_owner_3_ownership_percent": "", "p1_owner_3_nationality": "",
+        "p1_owner_4_name_ko": "", "p1_owner_4_name_en": "", "p1_owner_4_birth_date": "", "p1_owner_4_ownership_percent": "", "p1_owner_4_nationality": "",
+        "p1_writer_organization_name_bottom": "가상미르콘텐츠 주식회사", "p1_writer_position_bottom": "대표이사", "p1_writer_name_bottom": "이누리"
+      }
+    ]
+  },
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "id11_scenarios",
+      "targets": {
+        "p1_writer_organization_name_top": "p1_writer_organization_name_top",
+        "p1_writer_position_top": "p1_writer_position_top",
+        "p1_writer_name_top": "p1_writer_name_top",
+        "p1_owner_omission_checkbox": "p1_owner_omission_checkbox",
+        "p1_owner_path_25_percent_checkbox": "p1_owner_path_25_percent_checkbox",
+        "p1_owner_path_no_25_percent_max_shareholder_checkbox": "p1_owner_path_no_25_percent_max_shareholder_checkbox",
+        "p1_owner_path_no_25_percent_control_appointment_checkbox": "p1_owner_path_no_25_percent_control_appointment_checkbox",
+        "p1_owner_path_no_25_percent_de_facto_controller_checkbox": "p1_owner_path_no_25_percent_de_facto_controller_checkbox",
+        "p1_owner_path_representative_checkbox": "p1_owner_path_representative_checkbox",
+        "p1_owner_1_name_ko": "p1_owner_1_name_ko", "p1_owner_1_name_en": "p1_owner_1_name_en", "p1_owner_1_birth_date": "p1_owner_1_birth_date", "p1_owner_1_ownership_percent": "p1_owner_1_ownership_percent", "p1_owner_1_nationality": "p1_owner_1_nationality",
+        "p1_owner_2_name_ko": "p1_owner_2_name_ko", "p1_owner_2_name_en": "p1_owner_2_name_en", "p1_owner_2_birth_date": "p1_owner_2_birth_date", "p1_owner_2_ownership_percent": "p1_owner_2_ownership_percent", "p1_owner_2_nationality": "p1_owner_2_nationality",
+        "p1_owner_3_name_ko": "p1_owner_3_name_ko", "p1_owner_3_name_en": "p1_owner_3_name_en", "p1_owner_3_birth_date": "p1_owner_3_birth_date", "p1_owner_3_ownership_percent": "p1_owner_3_ownership_percent", "p1_owner_3_nationality": "p1_owner_3_nationality",
+        "p1_owner_4_name_ko": "p1_owner_4_name_ko", "p1_owner_4_name_en": "p1_owner_4_name_en", "p1_owner_4_birth_date": "p1_owner_4_birth_date", "p1_owner_4_ownership_percent": "p1_owner_4_ownership_percent", "p1_owner_4_nationality": "p1_owner_4_nationality",
+        "p1_writer_organization_name_bottom": "p1_writer_organization_name_bottom",
+        "p1_writer_position_bottom": "p1_writer_position_bottom",
+        "p1_writer_name_bottom": "p1_writer_name_bottom"
+      }
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_owner_omission_checkbox",
+        "p1_owner_path_25_percent_checkbox",
+        "p1_owner_path_no_25_percent_max_shareholder_checkbox",
+        "p1_owner_path_no_25_percent_control_appointment_checkbox",
+        "p1_owner_path_no_25_percent_de_facto_controller_checkbox",
+        "p1_owner_path_representative_checkbox"
+      ]
+    }
+  ],
+  "field_rules": [
+    {
+      "field_ids": ["p1_owner_1_ownership_percent", "p1_owner_2_ownership_percent", "p1_owner_3_ownership_percent", "p1_owner_4_ownership_percent"],
+      "rule": "pool:ownership_percent_values",
+      "visual_evidence": "전체 템플릿에서 각 값 칸 오른쪽에 %가 정적으로 인쇄되어 생성값에는 숫자만 둠",
+      "evidence_ids": ["VIS-01", "LAW-01", "KOFIU-01"]
+    },
+    {
+      "field_ids": ["p1_owner_1_nationality", "p1_owner_2_nationality", "p1_owner_3_nationality", "p1_owner_4_nationality"],
+      "rule": "literal:대한민국",
+      "reason": "현재 비대면용 서식은 외국인이 포함되면 개설 불가라고 명시하므로 승인 가능한 비대면 합성 시나리오는 대한민국으로 제한",
+      "evidence_ids": ["VIS-01", "FORM-01"]
+    },
+    {
+      "field_ids": ["p1_writer_name_top", "p1_writer_name_bottom"],
+      "rule": "person.name_ko",
+      "visual_evidence": "성명 값 칸 오른쪽의 (인)은 정적 인쇄이므로 생성값에서 제외",
+      "evidence_ids": ["VIS-01", "FORM-01"]
+    },
+    {
+      "field_ids": ["p1_owner_1_name_en", "p1_owner_2_name_en", "p1_owner_3_name_en", "p1_owner_4_name_en"],
+      "rule": "pool:owner_names_en",
+      "reason": "영문 인명 전용 기본 rule이 없어 20개 이상 합성 영문명 pool을 안전한 fallback으로 사용하고 pick_record가 한글명과의 짝을 덮어씀",
+      "evidence_ids": ["VIS-01"]
+    }
+  ],
+  "relationship_notes": [
+    {
+      "constraint": "pick_record:id11_scenarios",
+      "summary": "생략/확인 경로, 작성 위치, 한글·영문 성명, 생년월일, 지분율, 국적을 같은 합성 시나리오에서 선택",
+      "evidence_ids": ["VIS-01", "LAW-01", "KOFIU-01", "FORM-01"]
+    },
+    {
+      "constraint": "exclusive_choice",
+      "summary": "생략 체크와 5개 확인 경로 전체에서 정확히 하나만 선택",
+      "evidence_ids": ["VIS-01", "LAW-01", "KOFIU-01"]
+    }
+  ]
+}

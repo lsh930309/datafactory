@@ -1,138 +1,386 @@
 {
-  "schema_version": 1,
-  "created_at": "2026-07-02T01:00:23.514712+00:00",
-  "updated_at": "2026-07-02T08:01:23.531230+00:00",
+  "schema_version": 2,
   "doc_id": "APP-13",
   "locale": "ko_KR",
+  "as_of_date": "2026-07-13",
+  "pass": 2,
   "field_generators": {
-    "application_date": "literal:",
-    "company_name_inline": "literal:",
-    "existing_account_number": "literal:",
-    "account_name": "literal:",
-    "account_type_currency": "literal:",
-    "legal_address": "literal:",
-    "business_address": "literal:",
-    "signatories": "literal:",
-    "attorney_identity": "literal:",
-    "attorney_address": "literal:",
-    "attorney_phone": "literal:",
-    "behalf_company": "literal:",
-    "authorised_signatory": "literal:"
+    "application_date": "date.kr",
+    "company_name_inline": "company.name_ko",
+    "existing_account_number": "pattern:###-######-##",
+    "account_name": "same_as:company_name_inline",
+    "account_type": "choice:보통예금|당좌예금|기업자유예금|외화보통예금|정기예금",
+    "account_currency": "choice:KRW|USD|EUR|JPY|GBP|SGD|HKD",
+    "account_type_currency": "template:{{same_as:account_type}} / {{same_as:account_currency}}",
+    "legal_address": "address.ko",
+    "business_address": "address.ko",
+    "signatories": "free_text.short",
+    "attorney_name": "person.name_ko",
+    "attorney_rrn": "person.rrn",
+    "attorney_identity": "template:{{same_as:attorney_name}} / {{same_as:attorney_rrn}}",
+    "attorney_address": "address.ko",
+    "attorney_phone": "person.phone_kr",
+    "behalf_company": "same_as:company_name_inline",
+    "authorised_signatory": "free_text.short"
+  },
+  "data_pools": {
+    "corporate_application_profiles": [
+      {
+        "company_name": "주식회사 새한데이터",
+        "existing_account_number": "104-230581-17",
+        "account_type": "보통예금",
+        "account_currency": "KRW",
+        "account_type_currency": "보통예금 / KRW",
+        "legal_address": "서울특별시 강서구 새빛로 101, 8층",
+        "business_address": "서울특별시 금천구 디지털새길 24, 5층",
+        "signatories": "김가온 대표이사, 이다온 재무담당",
+        "attorney_name": "이다온",
+        "attorney_rrn": "010203-3104238",
+        "attorney_identity": "이다온 / 010203-3104238",
+        "attorney_address": "서울특별시 금천구 디지털새길 24, 5층",
+        "attorney_phone": "010-2401-5837",
+        "authorised_signatory": "김가온 대표이사"
+      },
+      {
+        "company_name": "늘봄솔루션 주식회사",
+        "existing_account_number": "215-341692-28",
+        "account_type": "기업자유예금",
+        "account_currency": "KRW",
+        "account_type_currency": "기업자유예금 / KRW",
+        "legal_address": "경기도 성남시 분당구 미래로 212, 11층",
+        "business_address": "경기도 성남시 수정구 창업로 77, 4층",
+        "signatories": "박하람 대표이사, 최서우 자금담당",
+        "attorney_name": "최서우",
+        "attorney_rrn": "020314-4215341",
+        "attorney_identity": "최서우 / 020314-4215341",
+        "attorney_address": "경기도 성남시 수정구 창업로 77, 4층",
+        "attorney_phone": "010-3512-6948",
+        "authorised_signatory": "박하람 대표이사"
+      },
+      {
+        "company_name": "주식회사 푸른소재",
+        "existing_account_number": "326-452703-39",
+        "account_type": "외화보통예금",
+        "account_currency": "USD",
+        "account_type_currency": "외화보통예금 / USD",
+        "legal_address": "부산광역시 해운대구 센텀새로 33, 14층",
+        "business_address": "부산광역시 강서구 녹산미래길 180",
+        "signatories": "정도윤 대표이사, 한예린 재무담당",
+        "attorney_name": "한예린",
+        "attorney_rrn": "990425-1326450",
+        "attorney_identity": "한예린 / 990425-1326450",
+        "attorney_address": "부산광역시 강서구 녹산미래길 180",
+        "attorney_phone": "010-4623-7059",
+        "authorised_signatory": "정도윤 대표이사"
+      },
+      {
+        "company_name": "한결바이오 주식회사",
+        "existing_account_number": "437-563814-40",
+        "account_type": "외화보통예금",
+        "account_currency": "EUR",
+        "account_type_currency": "외화보통예금 / EUR",
+        "legal_address": "대전광역시 유성구 연구새길 56, 9층",
+        "business_address": "충청북도 청주시 흥덕구 바이오미래로 120",
+        "signatories": "윤시온 대표이사, 오채린 회계담당",
+        "attorney_name": "오채린",
+        "attorney_rrn": "980506-2437564",
+        "attorney_identity": "오채린 / 980506-2437564",
+        "attorney_address": "충청북도 청주시 흥덕구 바이오미래로 120",
+        "attorney_phone": "010-5734-8160",
+        "authorised_signatory": "윤시온 대표이사"
+      },
+      {
+        "company_name": "주식회사 온누리식품",
+        "existing_account_number": "548-674925-51",
+        "account_type": "정기예금",
+        "account_currency": "KRW",
+        "account_type_currency": "정기예금 / KRW",
+        "legal_address": "충청남도 천안시 서북구 한들새로 88",
+        "business_address": "충청남도 아산시 산업미래길 41",
+        "signatories": "임서준 대표이사, 문유나 자금담당",
+        "attorney_name": "문유나",
+        "attorney_rrn": "000617-3548678",
+        "attorney_identity": "문유나 / 000617-3548678",
+        "attorney_address": "충청남도 아산시 산업미래길 41",
+        "attorney_phone": "010-6845-9271",
+        "authorised_signatory": "임서준 대표이사"
+      },
+      {
+        "company_name": "다솜패키징 주식회사",
+        "existing_account_number": "659-785036-62",
+        "account_type": "보통예금",
+        "account_currency": "KRW",
+        "account_type_currency": "보통예금 / KRW",
+        "legal_address": "광주광역시 북구 첨단새길 123, 6층",
+        "business_address": "광주광역시 광산구 빛고을산단로 72",
+        "signatories": "강지후 대표이사, 송하린 재무담당",
+        "attorney_name": "송하린",
+        "attorney_rrn": "010728-4659781",
+        "attorney_identity": "송하린 / 010728-4659781",
+        "attorney_address": "광주광역시 광산구 빛고을산단로 72",
+        "attorney_phone": "010-7956-0382",
+        "authorised_signatory": "강지후 대표이사"
+      },
+      {
+        "company_name": "주식회사 해솔모빌리티",
+        "existing_account_number": "760-896147-73",
+        "account_type": "당좌예금",
+        "account_currency": "KRW",
+        "account_type_currency": "당좌예금 / KRW",
+        "legal_address": "인천광역시 연수구 송도새로 205, 17층",
+        "business_address": "인천광역시 남동구 미래산단로 19",
+        "signatories": "조유현 대표이사, 배서아 회계담당",
+        "attorney_name": "배서아",
+        "attorney_rrn": "970809-1760896",
+        "attorney_identity": "배서아 / 970809-1760896",
+        "attorney_address": "인천광역시 남동구 미래산단로 19",
+        "attorney_phone": "010-8067-1493",
+        "authorised_signatory": "조유현 대표이사"
+      },
+      {
+        "company_name": "마루정밀 주식회사",
+        "existing_account_number": "871-907258-84",
+        "account_type": "외화보통예금",
+        "account_currency": "JPY",
+        "account_type_currency": "외화보통예금 / JPY",
+        "legal_address": "대구광역시 달서구 성서새길 64",
+        "business_address": "경상북도 구미시 공단미래로 305",
+        "signatories": "신도현 대표이사, 고은채 재무담당",
+        "attorney_name": "고은채",
+        "attorney_rrn": "960920-2871908",
+        "attorney_identity": "고은채 / 960920-2871908",
+        "attorney_address": "경상북도 구미시 공단미래로 305",
+        "attorney_phone": "010-9178-2504",
+        "authorised_signatory": "신도현 대표이사"
+      },
+      {
+        "company_name": "주식회사 가람콘텐츠",
+        "existing_account_number": "982-018369-95",
+        "account_type": "기업자유예금",
+        "account_currency": "KRW",
+        "account_type_currency": "기업자유예금 / KRW",
+        "legal_address": "서울특별시 마포구 문화새길 39, 10층",
+        "business_address": "서울특별시 영등포구 미디어미래로 18, 7층",
+        "signatories": "류재온 대표이사, 남지아 자금담당",
+        "attorney_name": "남지아",
+        "attorney_rrn": "021031-3982019",
+        "attorney_identity": "남지아 / 021031-3982019",
+        "attorney_address": "서울특별시 영등포구 미디어미래로 18, 7층",
+        "attorney_phone": "010-1289-3615",
+        "authorised_signatory": "류재온 대표이사"
+      },
+      {
+        "company_name": "이음에너지 주식회사",
+        "existing_account_number": "193-129470-06",
+        "account_type": "외화보통예금",
+        "account_currency": "GBP",
+        "account_type_currency": "외화보통예금 / GBP",
+        "legal_address": "울산광역시 남구 에너지새로 90, 12층",
+        "business_address": "울산광역시 울주군 친환경미래길 155",
+        "signatories": "차시우 대표이사, 노다인 재무담당",
+        "attorney_name": "노다인",
+        "attorney_rrn": "031112-4193121",
+        "attorney_identity": "노다인 / 031112-4193121",
+        "attorney_address": "울산광역시 울주군 친환경미래길 155",
+        "attorney_phone": "010-2390-4726",
+        "authorised_signatory": "차시우 대표이사"
+      },
+      {
+        "company_name": "주식회사 바른로지스",
+        "existing_account_number": "204-230581-17",
+        "account_type": "외화보통예금",
+        "account_currency": "SGD",
+        "account_type_currency": "외화보통예금 / SGD",
+        "legal_address": "경기도 평택시 항만새길 44",
+        "business_address": "경기도 화성시 물류미래로 208",
+        "signatories": "안하준 대표이사, 전수빈 회계담당",
+        "attorney_name": "전수빈",
+        "attorney_rrn": "991223-1204231",
+        "attorney_identity": "전수빈 / 991223-1204231",
+        "attorney_address": "경기도 화성시 물류미래로 208",
+        "attorney_phone": "010-3401-5837",
+        "authorised_signatory": "안하준 대표이사"
+      },
+      {
+        "company_name": "예담헬스케어 주식회사",
+        "existing_account_number": "315-341692-28",
+        "account_type": "외화보통예금",
+        "account_currency": "HKD",
+        "account_type_currency": "외화보통예금 / HKD",
+        "legal_address": "세종특별자치시 도움새로 71, 6층",
+        "business_address": "충청북도 청주시 흥덕구 오송읍 바이오미래길 27",
+        "signatories": "서지완 대표이사, 권나윤 재무담당",
+        "attorney_name": "권나윤",
+        "attorney_rrn": "000104-2315347",
+        "attorney_identity": "권나윤 / 000104-2315347",
+        "attorney_address": "충청북도 청주시 흥덕구 오송읍 바이오미래길 27",
+        "attorney_phone": "010-4512-6948",
+        "authorised_signatory": "서지완 대표이사"
+      }
+    ]
   },
   "constraints": [
     {
       "type": "pick_record",
-      "pool": "app13_account_profiles",
+      "pool": "corporate_application_profiles",
       "targets": {
-        "application_date": "date",
         "company_name_inline": "company_name",
         "existing_account_number": "existing_account_number",
-        "account_name": "account_name",
+        "account_type": "account_type",
+        "account_currency": "account_currency",
         "account_type_currency": "account_type_currency",
         "legal_address": "legal_address",
         "business_address": "business_address",
         "signatories": "signatories",
+        "attorney_name": "attorney_name",
+        "attorney_rrn": "attorney_rrn",
         "attorney_identity": "attorney_identity",
         "attorney_address": "attorney_address",
         "attorney_phone": "attorney_phone",
-        "behalf_company": "behalf_company",
         "authorised_signatory": "authorised_signatory"
       }
+    },
+    {
+      "type": "copy",
+      "source": "company_name_inline",
+      "target": "account_name"
+    },
+    {
+      "type": "copy",
+      "source": "company_name_inline",
+      "target": "behalf_company"
+    },
+    {
+      "type": "date_not_after",
+      "target": "application_date",
+      "max": "as_of_date"
     }
   ],
-  "data_pools": {
-    "app13_account_profiles": [
-      {
-        "date": "2026-06-02",
-        "company_name": "주식회사 한빛테크놀로지",
-        "existing_account_number": "834-231916-96",
-        "account_name": "주식회사 한빛테크놀로지",
-        "account_type_currency": "보통예금 / KRW",
-        "legal_address": "서울특별시 강남구 테헤란로 152, 18층",
-        "business_address": "서울특별시 강남구 테헤란로 152, 18층",
-        "signatories": "김민준 대표이사, 박서연 재무담당",
-        "attorney_identity": "박서연 / 785141-1404410",
-        "attorney_address": "서울특별시 강남구 테헤란로 152, 18층",
-        "attorney_phone": "010-9586-4391",
-        "behalf_company": "주식회사 한빛테크놀로지",
-        "authorised_signatory": "김민준 대표이사"
-      },
-      {
-        "date": "2026-06-06",
-        "company_name": "새론모빌리티 주식회사",
-        "existing_account_number": "225-420455-50",
-        "account_name": "새론모빌리티 주식회사",
-        "account_type_currency": "기업자유예금 / KRW",
-        "legal_address": "경기도 성남시 분당구 판교역로 235",
-        "business_address": "경기도 성남시 분당구 대왕판교로 660",
-        "signatories": "이도윤 대표이사, 최하은 재무담당",
-        "attorney_identity": "최하은 / 819162-3287463",
-        "attorney_address": "경기도 성남시 분당구 대왕판교로 660",
-        "attorney_phone": "010-9378-3768",
-        "behalf_company": "새론모빌리티 주식회사",
-        "authorised_signatory": "이도윤 대표이사"
-      },
-      {
-        "date": "2026-06-10",
-        "company_name": "대한소재 주식회사",
-        "existing_account_number": "994-690466-74",
-        "account_name": "대한소재 주식회사",
-        "account_type_currency": "외화보통예금 / USD",
-        "legal_address": "부산광역시 해운대구 센텀중앙로 79",
-        "business_address": "부산광역시 해운대구 센텀중앙로 79",
-        "signatories": "정우진 대표이사, 강서윤 재무담당",
-        "attorney_identity": "강서윤 / 835297-1376900",
-        "attorney_address": "부산광역시 해운대구 센텀중앙로 79",
-        "attorney_phone": "010-9234-1761",
-        "behalf_company": "대한소재 주식회사",
-        "authorised_signatory": "정우진 대표이사"
-      },
-      {
-        "date": "2026-06-14",
-        "company_name": "미래식품 주식회사",
-        "existing_account_number": "309-513915-83",
-        "account_name": "미래식품 주식회사",
-        "account_type_currency": "정기예금 / KRW",
-        "legal_address": "대전광역시 유성구 테크노중앙로 50",
-        "business_address": "충청남도 천안시 서북구 직산읍 공단로 21",
-        "signatories": "조현우 대표이사, 오지민 재무담당",
-        "attorney_identity": "오지민 / 874835-3679585",
-        "attorney_address": "충청남도 천안시 서북구 직산읍 공단로 21",
-        "attorney_phone": "010-4724-1782",
-        "behalf_company": "미래식품 주식회사",
-        "authorised_signatory": "조현우 대표이사"
-      },
-      {
-        "date": "2026-06-18",
-        "company_name": "세종바이오 주식회사",
-        "existing_account_number": "839-842461-52",
-        "account_name": "세종바이오 주식회사",
-        "account_type_currency": "보통예금 / KRW",
-        "legal_address": "서울특별시 마포구 월드컵북로 396",
-        "business_address": "인천광역시 연수구 송도과학로 32",
-        "signatories": "윤지호 대표이사, 한유진 재무담당",
-        "attorney_identity": "한유진 / 990020-1461972",
-        "attorney_address": "인천광역시 연수구 송도과학로 32",
-        "attorney_phone": "010-6609-7773",
-        "behalf_company": "세종바이오 주식회사",
-        "authorised_signatory": "윤지호 대표이사"
-      },
-      {
-        "date": "2026-06-22",
-        "company_name": "누리패키징 주식회사",
-        "existing_account_number": "723-714912-83",
-        "account_name": "누리패키징 주식회사",
-        "account_type_currency": "기업자유예금 / KRW",
-        "legal_address": "광주광역시 북구 첨단과기로 123",
-        "business_address": "광주광역시 북구 첨단벤처로 108",
-        "signatories": "임서준 대표이사, 문하린 재무담당",
-        "attorney_identity": "문하린 / 782648-3825157",
-        "attorney_address": "광주광역시 북구 첨단벤처로 108",
-        "attorney_phone": "010-6505-6492",
-        "behalf_company": "누리패키징 주식회사",
-        "authorised_signatory": "임서준 대표이사"
-      }
-    ]
-  },
-  "notes": "APP-13 계좌개설신청서 faker profile. 회사명/주소/대리인/계좌 정보를 하나의 record에서 선택해 정합성을 유지함."
+  "field_rules": [
+    {
+      "field_ids": [
+        "application_date"
+      ],
+      "generator": "date.kr",
+      "anchor_ids": [
+        "manual_app13_blank_form_20260702"
+      ],
+      "evidence_ids": [
+        "R1"
+      ],
+      "decision": "Date: 뒤 값 영역에는 정적 날짜 구분자나 단위가 없어 date.kr를 사용하고 기준일 이후 날짜는 date_not_after로 차단한다.",
+      "confidence": 0.95
+    },
+    {
+      "field_ids": [
+        "company_name_inline",
+        "account_name",
+        "behalf_company"
+      ],
+      "generator": "company.name_ko + copy",
+      "anchor_ids": [
+        "manual_app13_blank_form_20260702_2",
+        "manual_app13_blank_form_20260702_4",
+        "manual_app13_blank_form_20260702_12"
+      ],
+      "evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "decision": "동일 신청 법인의 회사명이 세 위치에 반복되므로 첫 필드를 원본으로 하고 두 필드에 copy한다.",
+      "confidence": 0.98
+    },
+    {
+      "field_ids": [
+        "existing_account_number"
+      ],
+      "generator": "pattern:###-######-##",
+      "anchor_ids": [
+        "manual_app13_blank_form_20260702_3"
+      ],
+      "evidence_ids": [
+        "R1"
+      ],
+      "decision": "값 영역에 정적 하이픈이 없으므로 합성 계좌번호 자체에 구분자를 포함한다. 은행 실계좌와 무관한 테스트용 번호만 사용한다.",
+      "confidence": 0.82
+    },
+    {
+      "field_ids": [
+        "account_type",
+        "account_currency",
+        "account_type_currency"
+      ],
+      "generator": "choice + composite template + pick_record",
+      "anchor_ids": [
+        "manual_app13_blank_form_20260702_5"
+      ],
+      "evidence_ids": [
+        "R1"
+      ],
+      "decision": "종류와 통화는 primary 값으로 분리하고 동일 레코드에서 유효한 조합을 선택한다. 시각 값은 기존 render_policy의 ' / ' 구분자와 template fallback을 사용한다.",
+      "confidence": 0.78
+    },
+    {
+      "field_ids": [
+        "legal_address",
+        "business_address"
+      ],
+      "generator": "address.ko + pick_record",
+      "anchor_ids": [
+        "manual_app13_blank_form_20260702_6",
+        "manual_app13_blank_form_20260702_7"
+      ],
+      "evidence_ids": [
+        "R1",
+        "R3"
+      ],
+      "decision": "법적 주소와 실제 사업장 주소가 같거나 다를 수 있도록 합성 법인 레코드에 두 값을 함께 둔다.",
+      "confidence": 0.9
+    },
+    {
+      "field_ids": [
+        "signatories",
+        "authorised_signatory"
+      ],
+      "generator": "free_text.short + pick_record",
+      "anchor_ids": [
+        "manual_app13_blank_form_20260702_8",
+        "manual_app13_blank_form_20260702_13"
+      ],
+      "evidence_ids": [
+        "R1",
+        "R4"
+      ],
+      "decision": "합성 레코드에서는 대표이사와 재무/회계 담당자 목록 및 대표 수권서명자를 일치시키되, 명판·인감 이미지 자산은 생성하지 않는다.",
+      "confidence": 0.72
+    },
+    {
+      "field_ids": [
+        "attorney_name",
+        "attorney_rrn",
+        "attorney_identity",
+        "attorney_address",
+        "attorney_phone"
+      ],
+      "generator": "person/address generators + composite template + pick_record",
+      "anchor_ids": [
+        "manual_app13_blank_form_20260702_9",
+        "manual_app13_blank_form_20260702_10",
+        "manual_app13_blank_form_20260702_11"
+      ],
+      "evidence_ids": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "decision": "한 합성 레코드에서 대리인 식별·주소·연락처를 선택하고, 성명과 주민등록번호의 표시 문자열도 같은 레코드 값으로 고정한다.",
+      "confidence": 0.9
+    }
+  ],
+  "notes": [
+    "모든 레코드는 DataFactory 테스트 전용으로 작성한 합성 값이며 실제 인물·법인·계좌와의 일치는 의도하지 않았다.",
+    "시각적으로 값 위치에 정적 단위나 prefix/suffix가 없어 generator 값에 별도 단위를 더하거나 제거하지 않았다.",
+    "pick_record 제약이 최종 상관값을 덮어쓰며 각 field_generators 값은 렌더러 호환 fallback이다."
+  ],
+  "updated_at": "2026-07-13T04:40:54.025941+00:00"
 }

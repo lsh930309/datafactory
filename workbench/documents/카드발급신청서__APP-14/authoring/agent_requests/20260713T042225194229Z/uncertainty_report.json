@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-14",
+  "status": "draft_pass2_review_required",
+  "as_of_date": "2026-07-13",
+  "unresolved_fields": [
+    {
+      "field_id": "p1_dispatch_date",
+      "semantic_path": "카드인수/교부자 기재란/발송일자 일련번호",
+      "confidence": 0.72,
+      "issue": "하나의 bbox가 발송일자와 일련번호를 함께 받는 복합 문자열이다.",
+      "current_approximation": "template:{{date.kr}} / {{pattern:######}}",
+      "limitation": "지원 constraint 문법으로 복합 문자열 내부 날짜를 p1_issuer_date 또는 수령일자와 순서 비교할 수 없다.",
+      "decision_needed": "적용 전 실제 인쇄 구분자와 날짜 형식을 확인하거나, 향후 bbox/schema를 날짜와 일련번호로 분리한다."
+    },
+    {
+      "field_id": "p1_delivery_barcode",
+      "semantic_path": "카드인수/교부자 기재란/배송사 바코드",
+      "confidence": 0.68,
+      "issue": "현재 지원 rule은 숫자 문자열 생성만 보장하며 실제 바코드 심벌 렌더링 여부는 faker 계약 밖이다.",
+      "current_approximation": "pattern:################",
+      "decision_needed": "문자열만 인쇄할지 별도 바코드 렌더 모드를 사용할지 적용 UI에서 확인한다."
+    },
+    {
+      "field_id": "p1_issuer_agency",
+      "semantic_path": "카드인수/교부자 기재란/발급기관",
+      "confidence": 0.76,
+      "issue": "신분증별 실제 발급기관 표기는 지역·기관·문서 종류에 따라 달라질 수 있다.",
+      "current_approximation": "합성 기관명 20개와 신분증-기관 record pool 18개",
+      "decision_needed": "실제 기관명을 허용할지, 현재처럼 명백한 합성 기관명만 유지할지 결정한다."
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "scope": "문서 제목과 버전",
+      "template_evidence": "전체 이미지 제목은 발급신청확인서 및 인수증(신규/재발급 등), 하단 표기는 2017.10 개정 Ver.02이다.",
+      "registry_evidence": "request registry title은 카드발급신청서이다.",
+      "resolution": "pass 1 고정 title과 semantic_schema를 변경하지 않고, faker 의미 판단은 전체 이미지와 동일 발급사 원문을 우선했다."
+    },
+    {
+      "scope": "최신 하나카드 원문과 현재 구형 템플릿",
+      "template_evidence": "현재 페이지에는 전화·문자메시지·서면·이메일 및 전부동의·동의하지않음 선택지가 있다.",
+      "web_evidence": "2022 개정 원문은 전자적 전송매체 표현과 선택지 구성이 일부 다르다.",
+      "resolution": "현재 페이지의 anchor와 보이는 라벨만 유지하고 최신 원문의 추가 필드는 생성하지 않았다."
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "p1_tracking_number",
+      "rule": "pattern:######-##",
+      "reason": "증번호의 정확한 발급기관별 규격은 템플릿과 공개 원문에서 확정되지 않아 시각적으로 맞는 합성 형식으로 근사했다."
+    },
+    {
+      "field_id": "p1_dispatch_date",
+      "rule": "template:{{date.kr}} / {{pattern:######}}",
+      "reason": "발송일자와 일련번호의 실제 구분자 및 자릿수가 명시되지 않았다."
+    }
+  ],
+  "relationship_limitations": [
+    {
+      "fields": ["p1_issuer_date", "p1_dispatch_date", "p1_receipt_year", "p1_receipt_month", "p1_receipt_day"],
+      "reason": "p1_dispatch_date가 복합 문자열이어서 issuer/dispatch/receipt의 시간 순서를 지원 constraint로 안전하게 표현할 수 없다.",
+      "recommended_repair": "발송일자와 일련번호를 별도 bbox 및 field_id로 분리한 뒤 date_order 또는 date_not_before를 적용한다."
+    },
+    {
+      "fields": ["p1_required_consent_year", "p1_required_consent_month", "p1_required_consent_day", "p1_optional_consent_year", "p1_optional_consent_month", "p1_optional_consent_day"],
+      "reason": "현재 draft는 한 장에서 동시에 서명한다는 보수적 가정으로 선택 동의일을 필수 동의일에서 복사한다.",
+      "recommended_repair": "서로 다른 날짜가 실제로 허용되어야 한다면 세 copy constraint를 제거하고 date_order로 교체한다."
+    }
+  ],
+  "coverage": {
+    "fixed_binding_count": 53,
+    "field_generator_count": 53,
+    "missing_generators": [],
+    "extra_generators": [],
+    "use_anchor_count": 53,
+    "bound_use_anchor_count": 53,
+    "unmapped_use_anchors": []
+  }
+}

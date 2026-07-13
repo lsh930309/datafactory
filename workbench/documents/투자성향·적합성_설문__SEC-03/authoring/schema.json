@@ -1,1687 +1,2091 @@
 {
   "schema_version": 1,
-  "created_at": "2026-07-02T01:18:12.988245+00:00",
-  "updated_at": "2026-07-02T08:38:12.465856+00:00",
+  "created_at": "2026-07-13T04:51:41.985844+00:00",
   "doc_id": "SEC-03",
-  "title": "투자성향·적합성 설문 page 1",
-  "page_index": 1,
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자성향·적합성_설문__SEC-03/review/original_투자성향적합성설문_page_001/review.json",
+  "title": "투자성향·적합성 설문",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자성향·적합성_설문__SEC-03/authoring/agent_applied_reviews/20260713T044054307865Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
   "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자성향·적합성_설문__SEC-03/samples/original/투자성향적합성설문_page_001.jpg",
   "image": {
     "width": 1191,
     "height": 1684
   },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자성향·적합성_설문__SEC-03/authoring/agent_applied_reviews/20260713T044054307865Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/투자성향·적합성_설문__SEC-03/authoring/agent_requests/20260713T044054307865Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "투자권유희망여부": {
+      "투자권유희망": "",
+      "고객정보제공": "",
+      "고객정보미제공": "",
+      "투자권유불원": ""
+    },
+    "작성구분": {
+      "신규등록": "",
+      "정보변경": "",
+      "기존정보와동일": ""
+    },
+    "투자성향설문": {
+      "1_연령대": {
+        "19세이하": "",
+        "20세이상40세이하": "",
+        "41세이상50세이하": "",
+        "51세이상60세이하": "",
+        "61세이상": ""
+      },
+      "2_투자가능기간": {
+        "6개월미만": "",
+        "6개월이상1년미만": "",
+        "1년이상2년미만": "",
+        "2년이상3년미만": "",
+        "3년이상": ""
+      },
+      "3_투자경험금융상품": {
+        "안정형상품": "",
+        "안정추구형상품": "",
+        "위험중립형상품": "",
+        "적극투자형상품": "",
+        "공격형상품": ""
+      },
+      "4_금융상품투자지식수준": {
+        "매우낮은수준": "",
+        "낮은수준": "",
+        "높은수준": "",
+        "매우높은수준": ""
+      },
+      "5_투자자금의전체금융자산대비비중": {
+        "10퍼센트미만": "",
+        "10퍼센트이상20퍼센트미만": "",
+        "20퍼센트이상30퍼센트미만": "",
+        "30퍼센트이상40퍼센트미만": "",
+        "40퍼센트이상": ""
+      },
+      "6_수입원": {
+        "일정수입유지또는증가예상": "",
+        "일정수입감소또는불안정예상": "",
+        "일정수입없고연금이주수입원": ""
+      },
+      "7_손실감내도": {
+        "반드시원금보전": "",
+        "10퍼센트미만손실감수": "",
+        "20퍼센트미만손실감수": "",
+        "고수익기대시고위험감수": ""
+      },
+      "8_투자목표와투자성향": {
+        "안정형": "",
+        "안정추구형": "",
+        "위험중립형": "",
+        "적극투자형": "",
+        "공격투자형": ""
+      },
+      "9_파생상품투자경험및기간": {
+        "없음": "",
+        "1년미만": "",
+        "1년이상3년미만": "",
+        "3년이상": ""
+      },
+      "10_지분증권투자자약식확인": {
+        "동의하지않음": "",
+        "동의함": ""
+      }
+    },
+    "투자자확인": {
+      "실명번호_주민등록번호": "",
+      "확인날짜": {
+        "연": "",
+        "월": "",
+        "일": ""
+      },
+      "고객성명": ""
+    },
+    "기존정보동일확인": {
+      "확인날짜": {
+        "연": "",
+        "월": "",
+        "일": ""
+      },
+      "고객성명": ""
+    },
+    "위임장": {
+      "대리인성명": "",
+      "대리인주민등록번호": "",
+      "대리인전화번호": "",
+      "본인과의관계": "",
+      "본인_위임인성명": ""
+    },
+    "유선접수": {
+      "접수자_상담자": "",
+      "접수시간": "",
+      "고객전화번호": ""
+    }
+  },
   "fields": [
     {
       "field_id": "p1_solicitation_wanted",
-      "label": "투자권유희망체크",
+      "label": "투자권유희망",
+      "semantic_path": [
+        "투자권유희망여부",
+        "투자권유희망"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702",
       "source_detection_id": "manual_sec03_checkbox_form_20260702",
       "source_text": "페이지 1 체크 solicitation_wanted",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_solicitation_wanted",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "투자권유희망체크",
-        "csv_column": "투자권유희망체크"
+        "json_path": "투자권유희망여부/투자권유희망",
+        "csv_column": "투자권유희망여부/투자권유희망"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_solicitation_info_provided",
-      "label": "투자권유희망 고객정보 제공 체크",
+      "label": "고객정보 제공",
+      "semantic_path": [
+        "투자권유희망여부",
+        "고객정보제공"
+      ],
+      "bbox_label_id": "manual_1782980250157",
       "source_detection_id": "manual_1782980250157",
-      "source_text": "",
+      "source_text": "고객정보 제공",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_solicitation_info_provided",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "투자권유희망 고객정보 제공 체크",
-        "csv_column": "투자권유희망 고객정보 제공 체크"
+        "json_path": "투자권유희망여부/고객정보제공",
+        "csv_column": "투자권유희망여부/고객정보제공"
       },
-      "required": false,
-      "notes": "2026-07-02 사용자 수동 bbox 편집분을 원본 시각 정보 기준으로 SEC-03 authoring schema에 연결함.",
-      "bbox_label_id": "manual_1782980250157",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_solicitation_info_not_provided",
-      "label": "투자권유희망 고객정보 미제공 체크",
+      "label": "고객정보 미제공",
+      "semantic_path": [
+        "투자권유희망여부",
+        "고객정보미제공"
+      ],
+      "bbox_label_id": "manual_1782980255089",
       "source_detection_id": "manual_1782980255089",
-      "source_text": "",
+      "source_text": "고객정보 미제공",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_solicitation_info_not_provided",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "투자권유희망 고객정보 미제공 체크",
-        "csv_column": "투자권유희망 고객정보 미제공 체크"
+        "json_path": "투자권유희망여부/고객정보미제공",
+        "csv_column": "투자권유희망여부/고객정보미제공"
       },
-      "required": false,
-      "notes": "2026-07-02 사용자 수동 bbox 편집분을 원본 시각 정보 기준으로 SEC-03 authoring schema에 연결함.",
-      "bbox_label_id": "manual_1782980255089",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_solicitation_not_wanted",
-      "label": "투자권유미희망체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "투자권유불원",
+      "semantic_path": [
+        "투자권유희망여부",
+        "투자권유불원"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_2",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_2",
       "source_text": "페이지 1 체크 solicitation_not_wanted",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_solicitation_not_wanted",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "투자권유미희망체크",
-        "csv_column": "투자권유미희망체크"
+        "json_path": "투자권유희망여부/투자권유불원",
+        "csv_column": "투자권유희망여부/투자권유불원"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_2",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_new_registration",
-      "label": "신규등록체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "신규등록",
+      "semantic_path": [
+        "작성구분",
+        "신규등록"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_3",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_3",
       "source_text": "페이지 1 체크 new_registration",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_new_registration",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신규등록체크",
-        "csv_column": "신규등록체크"
+        "json_path": "작성구분/신규등록",
+        "csv_column": "작성구분/신규등록"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_3",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_info_change",
-      "label": "정보변경체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "정보변경",
+      "semantic_path": [
+        "작성구분",
+        "정보변경"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_4",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_4",
       "source_text": "페이지 1 체크 info_change",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_info_change",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "정보변경체크",
-        "csv_column": "정보변경체크"
+        "json_path": "작성구분/정보변경",
+        "csv_column": "작성구분/정보변경"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_4",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_same_as_existing",
-      "label": "동일기존체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "기존정보와 동일",
+      "semantic_path": [
+        "작성구분",
+        "기존정보와동일"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_5",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_5",
       "source_text": "페이지 1 체크 same_as_existing",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_same_as_existing",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "동일기존체크",
-        "csv_column": "동일기존체크"
+        "json_path": "작성구분/기존정보와동일",
+        "csv_column": "작성구분/기존정보와동일"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_5",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_period_lt_6m",
-      "label": "기간미만6개월체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "6개월 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "2_투자가능기간",
+        "6개월미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_6",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_6",
       "source_text": "페이지 1 체크 period_lt_6m",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_period_lt_6m",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기간미만6개월체크",
-        "csv_column": "기간미만6개월체크"
+        "json_path": "투자성향설문/2_투자가능기간/6개월미만",
+        "csv_column": "투자성향설문/2_투자가능기간/6개월미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_6",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_period_6m_1y",
-      "label": "기간6개월1년체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "6개월 이상~1년 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "2_투자가능기간",
+        "6개월이상1년미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_7",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_7",
       "source_text": "페이지 1 체크 period_6m_1y",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_period_6m_1y",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기간6개월1년체크",
-        "csv_column": "기간6개월1년체크"
+        "json_path": "투자성향설문/2_투자가능기간/6개월이상1년미만",
+        "csv_column": "투자성향설문/2_투자가능기간/6개월이상1년미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_7",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_period_1y_2y",
-      "label": "기간1년2년체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "1년 이상~2년 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "2_투자가능기간",
+        "1년이상2년미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_8",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_8",
       "source_text": "페이지 1 체크 period_1y_2y",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_period_1y_2y",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기간1년2년체크",
-        "csv_column": "기간1년2년체크"
+        "json_path": "투자성향설문/2_투자가능기간/1년이상2년미만",
+        "csv_column": "투자성향설문/2_투자가능기간/1년이상2년미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_8",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_period_2y_3y",
-      "label": "기간2년3년체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "2년 이상~3년 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "2_투자가능기간",
+        "2년이상3년미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_9",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_9",
       "source_text": "페이지 1 체크 period_2y_3y",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_period_2y_3y",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기간2년3년체크",
-        "csv_column": "기간2년3년체크"
+        "json_path": "투자성향설문/2_투자가능기간/2년이상3년미만",
+        "csv_column": "투자성향설문/2_투자가능기간/2년이상3년미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_9",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_period_gt_3y",
-      "label": "기간초과3년체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "3년 이상",
+      "semantic_path": [
+        "투자성향설문",
+        "2_투자가능기간",
+        "3년이상"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_10",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_10",
       "source_text": "페이지 1 체크 period_gt_3y",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_period_gt_3y",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기간초과3년체크",
-        "csv_column": "기간초과3년체크"
+        "json_path": "투자성향설문/2_투자가능기간/3년이상",
+        "csv_column": "투자성향설문/2_투자가능기간/3년이상"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_10",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_product_stable",
-      "label": "상품안정형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "안정형 상품",
+      "semantic_path": [
+        "투자성향설문",
+        "3_투자경험금융상품",
+        "안정형상품"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_11",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_11",
       "source_text": "페이지 1 체크 product_stable",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_product_stable",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "상품안정형체크",
-        "csv_column": "상품안정형체크"
+        "json_path": "투자성향설문/3_투자경험금융상품/안정형상품",
+        "csv_column": "투자성향설문/3_투자경험금융상품/안정형상품"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_11",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_product_conservative",
-      "label": "상품안정추구형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "안정추구형 상품",
+      "semantic_path": [
+        "투자성향설문",
+        "3_투자경험금융상품",
+        "안정추구형상품"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_12",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_12",
       "source_text": "페이지 1 체크 product_conservative",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_product_conservative",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "상품안정추구형체크",
-        "csv_column": "상품안정추구형체크"
+        "json_path": "투자성향설문/3_투자경험금융상품/안정추구형상품",
+        "csv_column": "투자성향설문/3_투자경험금융상품/안정추구형상품"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_12",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_product_balanced",
-      "label": "상품위험중립형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "위험중립형 상품",
+      "semantic_path": [
+        "투자성향설문",
+        "3_투자경험금융상품",
+        "위험중립형상품"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_13",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_13",
       "source_text": "페이지 1 체크 product_balanced",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_product_balanced",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "상품위험중립형체크",
-        "csv_column": "상품위험중립형체크"
+        "json_path": "투자성향설문/3_투자경험금융상품/위험중립형상품",
+        "csv_column": "투자성향설문/3_투자경험금융상품/위험중립형상품"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_13",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_product_growth",
-      "label": "상품적극투자형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "적극투자형 상품",
+      "semantic_path": [
+        "투자성향설문",
+        "3_투자경험금융상품",
+        "적극투자형상품"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_14",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_14",
       "source_text": "페이지 1 체크 product_growth",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_product_growth",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "상품적극투자형체크",
-        "csv_column": "상품적극투자형체크"
+        "json_path": "투자성향설문/3_투자경험금융상품/적극투자형상품",
+        "csv_column": "투자성향설문/3_투자경험금융상품/적극투자형상품"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_14",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_product_aggressive",
-      "label": "상품공격투자형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "공격형 상품",
+      "semantic_path": [
+        "투자성향설문",
+        "3_투자경험금융상품",
+        "공격형상품"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_15",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_15",
       "source_text": "페이지 1 체크 product_aggressive",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_product_aggressive",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "상품공격투자형체크",
-        "csv_column": "상품공격투자형체크"
+        "json_path": "투자성향설문/3_투자경험금융상품/공격형상품",
+        "csv_column": "투자성향설문/3_투자경험금융상품/공격형상품"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_15",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_knowledge_very_low",
-      "label": "지식매우낮음체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "매우 낮은 수준",
+      "semantic_path": [
+        "투자성향설문",
+        "4_금융상품투자지식수준",
+        "매우낮은수준"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_16",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_16",
       "source_text": "페이지 1 체크 knowledge_very_low",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_knowledge_very_low",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지식매우낮음체크",
-        "csv_column": "지식매우낮음체크"
+        "json_path": "투자성향설문/4_금융상품투자지식수준/매우낮은수준",
+        "csv_column": "투자성향설문/4_금융상품투자지식수준/매우낮은수준"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_16",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_knowledge_low",
-      "label": "지식낮음체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "낮은 수준",
+      "semantic_path": [
+        "투자성향설문",
+        "4_금융상품투자지식수준",
+        "낮은수준"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_17",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_17",
       "source_text": "페이지 1 체크 knowledge_low",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_knowledge_low",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지식낮음체크",
-        "csv_column": "지식낮음체크"
+        "json_path": "투자성향설문/4_금융상품투자지식수준/낮은수준",
+        "csv_column": "투자성향설문/4_금융상품투자지식수준/낮은수준"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_17",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_knowledge_high",
-      "label": "지식높음체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "높은 수준",
+      "semantic_path": [
+        "투자성향설문",
+        "4_금융상품투자지식수준",
+        "높은수준"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_18",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_18",
       "source_text": "페이지 1 체크 knowledge_high",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_knowledge_high",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지식높음체크",
-        "csv_column": "지식높음체크"
+        "json_path": "투자성향설문/4_금융상품투자지식수준/높은수준",
+        "csv_column": "투자성향설문/4_금융상품투자지식수준/높은수준"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_18",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_knowledge_very_high",
-      "label": "지식매우높음체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "매우 높은 수준",
+      "semantic_path": [
+        "투자성향설문",
+        "4_금융상품투자지식수준",
+        "매우높은수준"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_19",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_19",
       "source_text": "페이지 1 체크 knowledge_very_high",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_knowledge_very_high",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "지식매우높음체크",
-        "csv_column": "지식매우높음체크"
+        "json_path": "투자성향설문/4_금융상품투자지식수준/매우높은수준",
+        "csv_column": "투자성향설문/4_금융상품투자지식수준/매우높은수준"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_19",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_portfolio_lt_10",
-      "label": "포트폴리오미만10체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "10% 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "5_투자자금의전체금융자산대비비중",
+        "10퍼센트미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_20",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_20",
       "source_text": "페이지 1 체크 portfolio_lt_10",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_portfolio_lt_10",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포트폴리오미만10체크",
-        "csv_column": "포트폴리오미만10체크"
+        "json_path": "투자성향설문/5_투자자금의전체금융자산대비비중/10퍼센트미만",
+        "csv_column": "투자성향설문/5_투자자금의전체금융자산대비비중/10퍼센트미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_20",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_portfolio_10_20",
-      "label": "포트폴리오1020체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "10% 이상~20% 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "5_투자자금의전체금융자산대비비중",
+        "10퍼센트이상20퍼센트미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_21",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_21",
       "source_text": "페이지 1 체크 portfolio_10_20",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_portfolio_10_20",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포트폴리오1020체크",
-        "csv_column": "포트폴리오1020체크"
+        "json_path": "투자성향설문/5_투자자금의전체금융자산대비비중/10퍼센트이상20퍼센트미만",
+        "csv_column": "투자성향설문/5_투자자금의전체금융자산대비비중/10퍼센트이상20퍼센트미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_21",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_portfolio_20_30",
-      "label": "포트폴리오2030체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "20% 이상~30% 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "5_투자자금의전체금융자산대비비중",
+        "20퍼센트이상30퍼센트미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_22",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_22",
       "source_text": "페이지 1 체크 portfolio_20_30",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_portfolio_20_30",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포트폴리오2030체크",
-        "csv_column": "포트폴리오2030체크"
+        "json_path": "투자성향설문/5_투자자금의전체금융자산대비비중/20퍼센트이상30퍼센트미만",
+        "csv_column": "투자성향설문/5_투자자금의전체금융자산대비비중/20퍼센트이상30퍼센트미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_22",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_portfolio_30_40",
-      "label": "포트폴리오3040체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "30% 이상~40% 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "5_투자자금의전체금융자산대비비중",
+        "30퍼센트이상40퍼센트미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_23",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_23",
       "source_text": "페이지 1 체크 portfolio_30_40",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_portfolio_30_40",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포트폴리오3040체크",
-        "csv_column": "포트폴리오3040체크"
+        "json_path": "투자성향설문/5_투자자금의전체금융자산대비비중/30퍼센트이상40퍼센트미만",
+        "csv_column": "투자성향설문/5_투자자금의전체금융자산대비비중/30퍼센트이상40퍼센트미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_23",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_portfolio_gt_40",
-      "label": "포트폴리오초과40체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "40% 이상",
+      "semantic_path": [
+        "투자성향설문",
+        "5_투자자금의전체금융자산대비비중",
+        "40퍼센트이상"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_24",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_24",
       "source_text": "페이지 1 체크 portfolio_gt_40",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_portfolio_gt_40",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "포트폴리오초과40체크",
-        "csv_column": "포트폴리오초과40체크"
+        "json_path": "투자성향설문/5_투자자금의전체금융자산대비비중/40퍼센트이상",
+        "csv_column": "투자성향설문/5_투자자금의전체금융자산대비비중/40퍼센트이상"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_24",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_loss_principal",
-      "label": "손실원금체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "반드시 원금 보전",
+      "semantic_path": [
+        "투자성향설문",
+        "7_손실감내도",
+        "반드시원금보전"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_25",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_25",
       "source_text": "페이지 1 체크 loss_principal",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_loss_principal",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "손실원금체크",
-        "csv_column": "손실원금체크"
+        "json_path": "투자성향설문/7_손실감내도/반드시원금보전",
+        "csv_column": "투자성향설문/7_손실감내도/반드시원금보전"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_25",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_loss_10",
-      "label": "손실10체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "10% 미만까지 손실 감수",
+      "semantic_path": [
+        "투자성향설문",
+        "7_손실감내도",
+        "10퍼센트미만손실감수"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_26",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_26",
       "source_text": "페이지 1 체크 loss_10",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_loss_10",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "손실10체크",
-        "csv_column": "손실10체크"
+        "json_path": "투자성향설문/7_손실감내도/10퍼센트미만손실감수",
+        "csv_column": "투자성향설문/7_손실감내도/10퍼센트미만손실감수"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_26",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_loss_20",
-      "label": "손실20체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "20% 미만 손실 감수",
+      "semantic_path": [
+        "투자성향설문",
+        "7_손실감내도",
+        "20퍼센트미만손실감수"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_27",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_27",
       "source_text": "페이지 1 체크 loss_20",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_loss_20",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "손실20체크",
-        "csv_column": "손실20체크"
+        "json_path": "투자성향설문/7_손실감내도/20퍼센트미만손실감수",
+        "csv_column": "투자성향설문/7_손실감내도/20퍼센트미만손실감수"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_27",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_loss_any",
-      "label": "손실전액체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "기대수익이 높다면 고위험 감수",
+      "semantic_path": [
+        "투자성향설문",
+        "7_손실감내도",
+        "고수익기대시고위험감수"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_28",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_28",
       "source_text": "페이지 1 체크 loss_any",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_loss_any",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "손실전액체크",
-        "csv_column": "손실전액체크"
+        "json_path": "투자성향설문/7_손실감내도/고수익기대시고위험감수",
+        "csv_column": "투자성향설문/7_손실감내도/고수익기대시고위험감수"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_28",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_type_stable",
-      "label": "유형안정형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "안정형",
+      "semantic_path": [
+        "투자성향설문",
+        "8_투자목표와투자성향",
+        "안정형"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_29",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_29",
       "source_text": "페이지 1 체크 type_stable",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_type_stable",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "유형안정형체크",
-        "csv_column": "유형안정형체크"
+        "json_path": "투자성향설문/8_투자목표와투자성향/안정형",
+        "csv_column": "투자성향설문/8_투자목표와투자성향/안정형"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_29",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_type_conservative",
-      "label": "유형안정추구형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "안정추구형",
+      "semantic_path": [
+        "투자성향설문",
+        "8_투자목표와투자성향",
+        "안정추구형"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_30",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_30",
       "source_text": "페이지 1 체크 type_conservative",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_type_conservative",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "유형안정추구형체크",
-        "csv_column": "유형안정추구형체크"
+        "json_path": "투자성향설문/8_투자목표와투자성향/안정추구형",
+        "csv_column": "투자성향설문/8_투자목표와투자성향/안정추구형"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_30",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_type_balanced",
-      "label": "유형위험중립형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "위험중립형",
+      "semantic_path": [
+        "투자성향설문",
+        "8_투자목표와투자성향",
+        "위험중립형"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_31",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_31",
       "source_text": "페이지 1 체크 type_balanced",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_type_balanced",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "유형위험중립형체크",
-        "csv_column": "유형위험중립형체크"
+        "json_path": "투자성향설문/8_투자목표와투자성향/위험중립형",
+        "csv_column": "투자성향설문/8_투자목표와투자성향/위험중립형"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_31",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_type_growth",
-      "label": "유형적극투자형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "적극투자형",
+      "semantic_path": [
+        "투자성향설문",
+        "8_투자목표와투자성향",
+        "적극투자형"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_32",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_32",
       "source_text": "페이지 1 체크 type_growth",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_type_growth",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "유형적극투자형체크",
-        "csv_column": "유형적극투자형체크"
+        "json_path": "투자성향설문/8_투자목표와투자성향/적극투자형",
+        "csv_column": "투자성향설문/8_투자목표와투자성향/적극투자형"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_32",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_type_aggressive",
-      "label": "유형공격투자형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "공격투자형",
+      "semantic_path": [
+        "투자성향설문",
+        "8_투자목표와투자성향",
+        "공격투자형"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_33",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_33",
       "source_text": "페이지 1 체크 type_aggressive",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_type_aggressive",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "유형공격투자형체크",
-        "csv_column": "유형공격투자형체크"
+        "json_path": "투자성향설문/8_투자목표와투자성향/공격투자형",
+        "csv_column": "투자성향설문/8_투자목표와투자성향/공격투자형"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_33",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_derivative_none",
-      "label": "파생상품없음체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "없음",
+      "semantic_path": [
+        "투자성향설문",
+        "9_파생상품투자경험및기간",
+        "없음"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_34",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_34",
       "source_text": "페이지 1 체크 derivative_none",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_derivative_none",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "파생상품없음체크",
-        "csv_column": "파생상품없음체크"
+        "json_path": "투자성향설문/9_파생상품투자경험및기간/없음",
+        "csv_column": "투자성향설문/9_파생상품투자경험및기간/없음"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_34",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_derivative_lt_1y",
-      "label": "파생상품미만1년체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "1년 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "9_파생상품투자경험및기간",
+        "1년미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_35",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_35",
       "source_text": "페이지 1 체크 derivative_lt_1y",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_derivative_lt_1y",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "파생상품미만1년체크",
-        "csv_column": "파생상품미만1년체크"
+        "json_path": "투자성향설문/9_파생상품투자경험및기간/1년미만",
+        "csv_column": "투자성향설문/9_파생상품투자경험및기간/1년미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_35",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_derivative_1_3y",
-      "label": "파생상품13년체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "1년~3년 미만",
+      "semantic_path": [
+        "투자성향설문",
+        "9_파생상품투자경험및기간",
+        "1년이상3년미만"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_36",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_36",
       "source_text": "페이지 1 체크 derivative_1_3y",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_derivative_1_3y",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "파생상품13년체크",
-        "csv_column": "파생상품13년체크"
+        "json_path": "투자성향설문/9_파생상품투자경험및기간/1년이상3년미만",
+        "csv_column": "투자성향설문/9_파생상품투자경험및기간/1년이상3년미만"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_36",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_derivative_gt_3y",
-      "label": "파생상품초과3년체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "3년 이상",
+      "semantic_path": [
+        "투자성향설문",
+        "9_파생상품투자경험및기간",
+        "3년이상"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_37",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_37",
       "source_text": "페이지 1 체크 derivative_gt_3y",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_derivative_gt_3y",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "파생상품초과3년체크",
-        "csv_column": "파생상품초과3년체크"
+        "json_path": "투자성향설문/9_파생상품투자경험및기간/3년이상",
+        "csv_column": "투자성향설문/9_파생상품투자경험및기간/3년이상"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_37",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_agreement_no",
-      "label": "동의서번호체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "동의하지 않음",
+      "semantic_path": [
+        "투자성향설문",
+        "10_지분증권투자자약식확인",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_38",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_38",
       "source_text": "페이지 1 체크 agreement_no",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_agreement_no",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "동의서번호체크",
-        "csv_column": "동의서번호체크"
+        "json_path": "투자성향설문/10_지분증권투자자약식확인/동의하지않음",
+        "csv_column": "투자성향설문/10_지분증권투자자약식확인/동의하지않음"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_38",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_agreement_yes",
-      "label": "동의서예체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "동의함",
+      "semantic_path": [
+        "투자성향설문",
+        "10_지분증권투자자약식확인",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_39",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_39",
       "source_text": "페이지 1 체크 agreement_yes",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "동의서예체크",
-        "csv_column": "동의서예체크"
+        "json_path": "투자성향설문/10_지분증권투자자약식확인/동의함",
+        "csv_column": "투자성향설문/10_지분증권투자자약식확인/동의함"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_39",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_age_lt_19",
-      "label": "연령미만19체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "19세 이하",
+      "semantic_path": [
+        "투자성향설문",
+        "1_연령대",
+        "19세이하"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_41",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_41",
       "source_text": "페이지 1 체크 age_lt_19",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_age_lt_19",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "연령미만19체크",
-        "csv_column": "연령미만19체크"
+        "json_path": "투자성향설문/1_연령대/19세이하",
+        "csv_column": "투자성향설문/1_연령대/19세이하"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_41",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_age_20_40",
-      "label": "연령2040체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "20세~40세",
+      "semantic_path": [
+        "투자성향설문",
+        "1_연령대",
+        "20세이상40세이하"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_42",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_42",
       "source_text": "페이지 1 체크 age_20_40",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_age_20_40",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "연령2040체크",
-        "csv_column": "연령2040체크"
+        "json_path": "투자성향설문/1_연령대/20세이상40세이하",
+        "csv_column": "투자성향설문/1_연령대/20세이상40세이하"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_42",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_age_41_50",
-      "label": "연령4150체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "41세~50세",
+      "semantic_path": [
+        "투자성향설문",
+        "1_연령대",
+        "41세이상50세이하"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_43",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_43",
       "source_text": "페이지 1 체크 age_41_50",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_age_41_50",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "연령4150체크",
-        "csv_column": "연령4150체크"
+        "json_path": "투자성향설문/1_연령대/41세이상50세이하",
+        "csv_column": "투자성향설문/1_연령대/41세이상50세이하"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_43",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_age_51_60",
-      "label": "연령5160체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "51세~60세",
+      "semantic_path": [
+        "투자성향설문",
+        "1_연령대",
+        "51세이상60세이하"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_44",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_44",
       "source_text": "페이지 1 체크 age_51_60",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_age_51_60",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "연령5160체크",
-        "csv_column": "연령5160체크"
+        "json_path": "투자성향설문/1_연령대/51세이상60세이하",
+        "csv_column": "투자성향설문/1_연령대/51세이상60세이하"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_44",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_age_gt_61",
-      "label": "연령초과61체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "61세 이상",
+      "semantic_path": [
+        "투자성향설문",
+        "1_연령대",
+        "61세이상"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_45",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_45",
       "source_text": "페이지 1 체크 age_gt_61",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_age_gt_61",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "연령초과61체크",
-        "csv_column": "연령초과61체크"
+        "json_path": "투자성향설문/1_연령대/61세이상",
+        "csv_column": "투자성향설문/1_연령대/61세이상"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_45",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_income_stable",
-      "label": "소득안정형체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "일정한 수입 유지 또는 증가 예상",
+      "semantic_path": [
+        "투자성향설문",
+        "6_수입원",
+        "일정수입유지또는증가예상"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_46",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_46",
       "source_text": "페이지 1 체크 income_stable",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_income_stable",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "소득안정형체크",
-        "csv_column": "소득안정형체크"
+        "json_path": "투자성향설문/6_수입원/일정수입유지또는증가예상",
+        "csv_column": "투자성향설문/6_수입원/일정수입유지또는증가예상"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_46",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_income_decrease",
-      "label": "소득감소체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "일정한 수입 감소 또는 불안정 예상",
+      "semantic_path": [
+        "투자성향설문",
+        "6_수입원",
+        "일정수입감소또는불안정예상"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_47",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_47",
       "source_text": "페이지 1 체크 income_decrease",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_income_decrease",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "소득감소체크",
-        "csv_column": "소득감소체크"
+        "json_path": "투자성향설문/6_수입원/일정수입감소또는불안정예상",
+        "csv_column": "투자성향설문/6_수입원/일정수입감소또는불안정예상"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_47",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_income_none",
-      "label": "소득없음체크",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "일정한 수입 없음, 연금이 주 수입원",
+      "semantic_path": [
+        "투자성향설문",
+        "6_수입원",
+        "일정수입없고연금이주수입원"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_48",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_48",
       "source_text": "페이지 1 체크 income_none",
       "value_type": "bool.checkbox",
-      "generator": "literal:",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_income_none",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "allow_overflow",
         "overflow": "allow",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "소득없음체크",
-        "csv_column": "소득없음체크"
+        "json_path": "투자성향설문/6_수입원/일정수입없고연금이주수입원",
+        "csv_column": "투자성향설문/6_수입원/일정수입없고연금이주수입원"
       },
-      "required": false,
-      "notes": "선택된 항목은 ■, 미선택 항목은 공란으로 렌더링",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_48",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_identity_number",
-      "label": "실명번호",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "실명번호(주민등록번호)",
+      "semantic_path": [
+        "투자자확인",
+        "실명번호_주민등록번호"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_49",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_49",
       "source_text": "실명번호",
       "value_type": "person.rrn",
-      "generator": "literal:",
+      "generator": "person.rrn",
       "style_class": "style_p1_identity_number",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "실명번호",
-        "csv_column": "실명번호"
+        "json_path": "투자자확인/실명번호_주민등록번호",
+        "csv_column": "투자자확인/실명번호_주민등록번호"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_49",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_customer_name",
       "label": "고객성명",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "semantic_path": [
+        "투자자확인",
+        "고객성명"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_51",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_51",
       "source_text": "고객성명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_p1_customer_name",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "고객성명",
-        "csv_column": "고객성명"
+        "json_path": "투자자확인/고객성명",
+        "csv_column": "투자자확인/고객성명"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_51",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_reconfirm_name",
       "label": "기존정보 동일 고객성명",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "semantic_path": [
+        "기존정보동일확인",
+        "고객성명"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_53",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_53",
       "source_text": "기존정보 동일 고객성명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "same_as:p1_customer_name",
       "style_class": "style_p1_reconfirm_name",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기존정보 동일 고객성명",
-        "csv_column": "기존정보 동일 고객성명"
+        "json_path": "기존정보동일확인/고객성명",
+        "csv_column": "기존정보동일확인/고객성명"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_53",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_proxy_name",
       "label": "대리인성명",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "semantic_path": [
+        "위임장",
+        "대리인성명"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_54",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_54",
       "source_text": "대리인성명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_p1_proxy_name",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "대리인성명",
-        "csv_column": "대리인성명"
+        "json_path": "위임장/대리인성명",
+        "csv_column": "위임장/대리인성명"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_54",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_proxy_rrn",
       "label": "대리인 주민등록번호",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "semantic_path": [
+        "위임장",
+        "대리인주민등록번호"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_55",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_55",
       "source_text": "대리인 주민등록번호",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.rrn",
+      "generator": "person.rrn",
       "style_class": "style_p1_proxy_rrn",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "대리인 주민등록번호",
-        "csv_column": "대리인 주민등록번호"
+        "json_path": "위임장/대리인주민등록번호",
+        "csv_column": "위임장/대리인주민등록번호"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_55",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_proxy_phone",
       "label": "대리인 전화번호",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "semantic_path": [
+        "위임장",
+        "대리인전화번호"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_56",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_56",
       "source_text": "대리인 전화번호",
       "value_type": "person.phone_kr",
-      "generator": "literal:",
+      "generator": "person.phone_kr",
       "style_class": "style_p1_proxy_phone",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "대리인 전화번호",
-        "csv_column": "대리인 전화번호"
+        "json_path": "위임장/대리인전화번호",
+        "csv_column": "위임장/대리인전화번호"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_56",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_proxy_relation",
       "label": "본인과의 관계",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "semantic_path": [
+        "위임장",
+        "본인과의관계"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_57",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_57",
       "source_text": "본인과의 관계",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:proxy_relations",
       "style_class": "style_p1_proxy_relation",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "본인과의 관계",
-        "csv_column": "본인과의 관계"
+        "json_path": "위임장/본인과의관계",
+        "csv_column": "위임장/본인과의관계"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_57",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_delegator_name",
-      "label": "위임자명",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "본인(위임인) 성명",
+      "semantic_path": [
+        "위임장",
+        "본인_위임인성명"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_58",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_58",
       "source_text": "위임자명",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "same_as:p1_customer_name",
       "style_class": "style_p1_delegator_name",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "위임자명",
-        "csv_column": "위임자명"
+        "json_path": "위임장/본인_위임인성명",
+        "csv_column": "위임장/본인_위임인성명"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_58",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_receiver_name",
-      "label": "유선접수자",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "label": "유선접수자(상담자)",
+      "semantic_path": [
+        "유선접수",
+        "접수자_상담자"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_59",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_59",
       "source_text": "유선접수자",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_text",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "유선접수자",
-        "csv_column": "유선접수자"
+        "json_path": "유선접수/접수자_상담자",
+        "csv_column": "유선접수/접수자_상담자"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_59",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_receiver_time",
       "label": "유선접수시간",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "semantic_path": [
+        "유선접수",
+        "접수시간"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_60",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_60",
       "source_text": "유선접수시간",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:contact_times",
       "style_class": "style_p1_receiver_time",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "유선접수시간",
-        "csv_column": "유선접수시간"
+        "json_path": "유선접수/접수시간",
+        "csv_column": "유선접수/접수시간"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_60",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_customer_phone",
       "label": "고객전화번호",
-      "source_detection_id": "manual_sec03_checkbox_form_20260702",
+      "semantic_path": [
+        "유선접수",
+        "고객전화번호"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_61",
+      "source_detection_id": "manual_sec03_checkbox_form_20260702_61",
       "source_text": "고객전화번호",
       "value_type": "person.phone_kr",
-      "generator": "literal:",
+      "generator": "person.phone_kr",
       "style_class": "style_text_small",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "고객전화번호",
-        "csv_column": "고객전화번호"
+        "json_path": "유선접수/고객전화번호",
+        "csv_column": "유선접수/고객전화번호"
       },
-      "required": false,
-      "notes": "2026-07-02 SEC-03 blank checkbox form 기반 수동 bbox/style 보정 필드",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_61",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_confirmation_year",
       "label": "확인 날짜 연",
+      "semantic_path": [
+        "투자자확인",
+        "확인날짜",
+        "연"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_50",
       "source_detection_id": "manual_sec03_checkbox_form_20260702_50",
       "source_text": "확인 날짜",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_confirmation_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "확인 날짜 연",
-        "csv_column": "확인 날짜 연"
+        "json_path": "투자자확인/확인날짜/연",
+        "csv_column": "투자자확인/확인날짜/연"
       },
-      "required": false,
-      "notes": "2026-07-02 사용자 수동 bbox 편집분을 원본 시각 정보 기준으로 SEC-03 authoring schema에 연결함.",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_50",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_confirmation_month",
       "label": "확인 날짜 월",
+      "semantic_path": [
+        "투자자확인",
+        "확인날짜",
+        "월"
+      ],
+      "bbox_label_id": "manual_1782980178496",
       "source_detection_id": "manual_1782980178496",
-      "source_text": "",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "source_text": "확인 날짜 월",
+      "value_type": "date.month",
+      "generator": "date.month",
       "style_class": "style_p1_confirmation_month",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "확인 날짜 월",
-        "csv_column": "확인 날짜 월"
+        "json_path": "투자자확인/확인날짜/월",
+        "csv_column": "투자자확인/확인날짜/월"
       },
-      "required": false,
-      "notes": "2026-07-02 사용자 수동 bbox 편집분을 원본 시각 정보 기준으로 SEC-03 authoring schema에 연결함.",
-      "bbox_label_id": "manual_1782980178496",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_confirmation_day",
       "label": "확인 날짜 일",
+      "semantic_path": [
+        "투자자확인",
+        "확인날짜",
+        "일"
+      ],
+      "bbox_label_id": "manual_1782980181378",
       "source_detection_id": "manual_1782980181378",
-      "source_text": "",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "source_text": "확인 날짜 일",
+      "value_type": "date.day",
+      "generator": "date.day",
       "style_class": "style_p1_confirmation_day",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "확인 날짜 일",
-        "csv_column": "확인 날짜 일"
+        "json_path": "투자자확인/확인날짜/일",
+        "csv_column": "투자자확인/확인날짜/일"
       },
-      "required": false,
-      "notes": "2026-07-02 사용자 수동 bbox 편집분을 원본 시각 정보 기준으로 SEC-03 authoring schema에 연결함.",
-      "bbox_label_id": "manual_1782980181378",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_reconfirm_year",
       "label": "기존정보 동일 확인 날짜 연",
+      "semantic_path": [
+        "기존정보동일확인",
+        "확인날짜",
+        "연"
+      ],
+      "bbox_label_id": "manual_sec03_checkbox_form_20260702_52",
       "source_detection_id": "manual_sec03_checkbox_form_20260702_52",
       "source_text": "기존정보 동일 확인 날짜",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_reconfirm_year",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기존정보 동일 확인 날짜 연",
-        "csv_column": "기존정보 동일 확인 날짜 연"
+        "json_path": "기존정보동일확인/확인날짜/연",
+        "csv_column": "기존정보동일확인/확인날짜/연"
       },
-      "required": false,
-      "notes": "2026-07-02 사용자 수동 bbox 편집분을 원본 시각 정보 기준으로 SEC-03 authoring schema에 연결함.",
-      "bbox_label_id": "manual_sec03_checkbox_form_20260702_52",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_reconfirm_month",
       "label": "기존정보 동일 확인 날짜 월",
+      "semantic_path": [
+        "기존정보동일확인",
+        "확인날짜",
+        "월"
+      ],
+      "bbox_label_id": "manual_1782980195344",
       "source_detection_id": "manual_1782980195344",
-      "source_text": "",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "source_text": "기존정보 동일 확인 날짜 월",
+      "value_type": "date.month",
+      "generator": "date.month",
       "style_class": "style_p1_reconfirm_month",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기존정보 동일 확인 날짜 월",
-        "csv_column": "기존정보 동일 확인 날짜 월"
+        "json_path": "기존정보동일확인/확인날짜/월",
+        "csv_column": "기존정보동일확인/확인날짜/월"
       },
-      "required": false,
-      "notes": "2026-07-02 사용자 수동 bbox 편집분을 원본 시각 정보 기준으로 SEC-03 authoring schema에 연결함.",
-      "bbox_label_id": "manual_1782980195344",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_reconfirm_day",
       "label": "기존정보 동일 확인 날짜 일",
+      "semantic_path": [
+        "기존정보동일확인",
+        "확인날짜",
+        "일"
+      ],
+      "bbox_label_id": "manual_1782980199177",
       "source_detection_id": "manual_1782980199177",
-      "source_text": "",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "source_text": "기존정보 동일 확인 날짜 일",
+      "value_type": "date.day",
+      "generator": "date.day",
       "style_class": "style_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "기존정보 동일 확인 날짜 일",
-        "csv_column": "기존정보 동일 확인 날짜 일"
+        "json_path": "기존정보동일확인/확인날짜/일",
+        "csv_column": "기존정보동일확인/확인날짜/일"
       },
-      "required": false,
-      "notes": "2026-07-02 사용자 수동 bbox 편집분을 원본 시각 정보 기준으로 SEC-03 authoring schema에 연결함.",
-      "bbox_label_id": "manual_1782980199177",
-      "bbox_status": "use",
+      "required": true,
+      "notes": "",
       "render_mode": "handwriting"
     }
   ],
-  "groups": [
-    {
-      "group_id": "survey_checkboxes",
-      "type": "checkbox_survey",
-      "notes": "SEC-03 page 1 선택식 설문 체크박스 묶음"
-    },
-    {
-      "group_id": "signature_and_proxy",
-      "type": "signature_section",
-      "notes": "SEC-03 page 1 하단 실명확인/위임장/유선접수 필드"
-    }
-  ],
-  "authoring_mode": "sec03_page_1_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/투자성향·적합성_설문__SEC-03/review/original_투자성향적합성설문_page_001/review.json"
-  },
+  "groups": [],
   "handwriting": {
     "qr_bbox": [
       977,
@@ -1690,5 +2094,6 @@
       190
     ],
     "default_sample_count": 1
-  }
+  },
+  "updated_at": "2026-07-13T04:51:42.011882+00:00"
 }

@@ -80,6 +80,7 @@ def remap_styles_from_previous(
     unresolved_hidden: list[str] = []
     changed_style_refs = 0
     restored_render_policies = 0
+    restored_render_modes = 0
 
     for field in current_fields:
         field_id = str(field.get("field_id") or "").strip()
@@ -113,6 +114,10 @@ def remap_styles_from_previous(
             field["style_class"] = target_style_class
             changed_style_refs += 1
         if previous_field is not None:
+            previous_render_mode = str(previous_field.get("render_mode") or "").strip()
+            if previous_render_mode in {"handwriting", "printed"} and field.get("render_mode") != previous_render_mode:
+                field["render_mode"] = previous_render_mode
+                restored_render_modes += 1
             render_policy, changed = _restore_visual_render_policy(field, previous_field)
             if render_policy:
                 field["render_policy"] = render_policy
@@ -142,6 +147,7 @@ def remap_styles_from_previous(
         "methods": methods,
         "changedStyleReferences": changed_style_refs,
         "restoredRenderPolicies": restored_render_policies,
+        "restoredRenderModes": restored_render_modes,
         "unresolvedRendered": unresolved_rendered,
         "unresolvedHidden": unresolved_hidden,
         "styleClasses": len(merged_styles),

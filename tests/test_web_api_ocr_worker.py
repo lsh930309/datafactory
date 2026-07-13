@@ -524,9 +524,11 @@ def test_apply_authoring_agent_drafts_writes_final_authoring_bundle(tmp_path: Pa
                         "field_id": "previous_patient_name",
                         "bbox_label_id": "det_name",
                         "style_class": "previous_name_style",
+                        "render_mode": "handwriting",
                         "render_policy": {"align": "right", "valign": "bottom"},
                     }
-                ]
+                ],
+                "handwriting": {"qr_bbox": [70, 5, 20, 20], "default_sample_count": 1},
             }
         ),
         encoding="utf-8",
@@ -546,7 +548,10 @@ def test_apply_authoring_agent_drafts_writes_final_authoring_bundle(tmp_path: Pa
     assert saved_schema["fields"][0]["bbox_label_id"] == "det_name"
     assert saved_schema["fields"][0]["label"] == "환자 성명"
     assert saved_schema["fields"][0]["style_class"] == "previous_name_style"
+    assert saved_schema["fields"][0]["render_mode"] == "handwriting"
     assert saved_schema["fields"][0]["render_policy"]["align"] == "right"
+    assert saved_schema["handwriting"] == {"qr_bbox": [70, 5, 20, 20], "default_sample_count": 1}
+    assert json.loads((authoring_dir / "semantic_schema.json").read_text(encoding="utf-8")) == {"환자 성명": ""}
     saved_stylesheet = json.loads((tmp_path / payload["paths"]["stylesheet"]).read_text(encoding="utf-8"))
     assert saved_stylesheet["style_classes"][0]["font_size"] == 13
     assert payload["styleRemap"]["methods"]["anchor"] == 1

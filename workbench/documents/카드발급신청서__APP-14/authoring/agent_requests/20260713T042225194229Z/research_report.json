@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-14",
+  "title": "카드발급신청서",
+  "search_date": "2026-07-13",
+  "as_of_date": "2026-07-13",
+  "scope_note": "웹 근거는 화면에 존재하는 anchor 의미 확인에만 사용했으며 새 필드를 추가하지 않았다.",
+  "queries": [
+    "발급신청확인서 및 인수증 하나카드",
+    "신용카드 발급 신청 본인확인 신분증 여신금융협회",
+    "개인정보 보호법 제15조 제17조 동의 국가법령정보센터",
+    "선택 동의 개인정보 수집 이용 마케팅 개인정보보호위원회",
+    "신용정보법 개인신용정보 제공 동의 국가법령정보센터"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "url": "https://www.hanacard.co.kr/ATTACH/WWW/pdf/inhabit/consent_after_lssuing_221018.pdf",
+      "source_type": "issuer_original_pdf",
+      "publisher": "하나카드",
+      "title": "발급신청확인서 및 인수증(신규/재발급 등)",
+      "summary": "동일 문서명 원문으로 카드 인수, 필수·선택 개인(신용)정보 동의, 고유식별정보, 제공·조회 구조를 확인했다. 현재 템플릿 이미지가 구형 양식이므로 세부 라벨은 이미지가 우선이다.",
+      "field_level_links": [
+        "신분증 종류",
+        "발급/배송 정보",
+        "필수 동의",
+        "선택 동의",
+        "동의 작성일 및 본인 성명"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "url": "https://gongsi.crefia.or.kr/portal/financialProdInfo/cardProd",
+      "source_type": "industry_association_guidance",
+      "publisher": "여신금융협회",
+      "title": "가입 시, 한눈에 보는 카드가입 안내",
+      "summary": "카드 발급은 본인 신청·확인, 신청서 제출, 심사, 발급·수령 흐름으로 진행됨을 확인했다.",
+      "field_level_links": [
+        "신분증 종류",
+        "신청인 성명",
+        "수령일자",
+        "교부/배송 정보"
+      ]
+    },
+    {
+      "evidence_id": "R3",
+      "url": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1020398625",
+      "source_type": "law",
+      "publisher": "국가법령정보센터",
+      "title": "개인정보 보호법 제15조·제17조",
+      "summary": "개인정보 수집·이용 및 제3자 제공의 동의와 고지 항목을 확인했다.",
+      "field_level_links": [
+        "필수 수집/이용",
+        "필수 제3자 제공",
+        "선택 수집/이용",
+        "선택 제3자 제공"
+      ]
+    },
+    {
+      "evidence_id": "R4",
+      "url": "https://www.pipc.go.kr/np/cop/bbs/selectBoardArticle.do?bbsId=BS074&mCode=C020010000&nttId=10566",
+      "source_type": "regulator_guidance",
+      "publisher": "개인정보보호위원회",
+      "title": "개인정보 수집·이용 시 동의 여부 및 방법 안내",
+      "summary": "계약과 직접 관련되지 않은 정보는 자유로운 선택 동의를 보장하고, 고유식별정보는 별도 동의 구조가 필요함을 확인했다.",
+      "field_level_links": [
+        "선택 동의",
+        "이용권유 방법",
+        "고유식별정보 처리"
+      ]
+    },
+    {
+      "evidence_id": "R5",
+      "url": "https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=900515796",
+      "source_type": "law_linked_provision",
+      "publisher": "국가법령정보센터",
+      "title": "개인신용정보 제공 동의 관련 조문정보",
+      "summary": "개인신용정보 제공 동의의 의사표시 확인과 제공 동의 고지 요소를 확인했다.",
+      "field_level_links": [
+        "필수 제3자 제공",
+        "신용정보 조회",
+        "동의함/동의하지않음"
+      ]
+    }
+  ],
+  "evidence_priority": [
+    "전체 템플릿 이미지",
+    "동일 발급사 원문",
+    "법령/규제기관",
+    "업계 안내"
+  ]
+}

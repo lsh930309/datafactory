@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "doc_id": "ID-11",
+  "search_date": "2026-07-13",
+  "queries": [
+    "site:law.go.kr 특정 금융거래정보의 보고 및 이용 등에 관한 법률 시행령 제10조의5 실제 소유자",
+    "site:kofiu.go.kr 실제소유자 확인 25% 최대 지분 소유자 대표자",
+    "site:fss.or.kr 실제소유자 확인 법인 25% 지분 소유자",
+    "미래에셋증권 실제소유자확인서 법인 비대면 PDF"
+  ],
+  "sources": [
+    {"evidence_id":"LAW-01","url":"https://www.law.go.kr/LSW/lsInfoP.do?ancYnChk=0&lsId=009256","source_type":"official_law","title":"특정 금융거래정보의 보고 및 이용 등에 관한 법률 시행령","summary":"제10조의5는 법인·단체 실제 소유자의 성명, 생년월일, 국적을 확인하고 25% 이상 지분 소유자, 최대 지분 소유자·과반수 선임자·사실상 지배자, 대표자의 순서로 확인하도록 규정한다."},
+    {"evidence_id":"LAW-02","url":"https://law.go.kr/LSW/lumLsLinkPop.do?chrClsCd=010202&lspttninfSeq=82839","source_type":"official_law_article","title":"시행령 제10조의5 실제 소유자에 대한 확인","summary":"국가·지방자치단체, 일정 공공단체, 다른 금융회사 및 사업보고서 제출대상법인은 실제 소유자 확인을 하지 않을 수 있음을 명시한다."},
+    {"evidence_id":"KOFIU-01","url":"https://www.kofiu.go.kr/kor/policy/amls05.do","source_type":"government_guidance","title":"금융정보분석원 고객확인제도","summary":"고객확인제도의 목적과 법인·단체의 실제 소유자 3단계 확인 순서를 설명한다."},
+    {"evidence_id":"FORM-01","url":"https://securities.miraeasset.com/public/mw/guide/html/account.html?ver=20220518000117","source_type":"issuer_guidance","title":"미래에셋증권 비대면 법인 계좌개설 안내","summary":"법인 비대면 계좌개설 과정에서 실제소유자확인서를 제공하는 발급기관 안내 페이지다. 세부 필드 의미는 전체 템플릿 이미지와 공식 법령을 우선했다."},
+    {"evidence_id":"VIS-01","url":"local:workbench/documents/실소유자_확인서(AML)__ID-11/inpaint/original_실소유자확인서_page_001/lama/inpainted_lama.png","source_type":"full_template_visual","title":"ID-11 1페이지 전체 템플릿 이미지","summary":"모든 32개 use 앵커의 실제 위치, 라벨 문맥, 체크 영역, 정적 (인) 및 % 접미어를 확인한 최우선 시각 근거다."}
+  ],
+  "field_evidence": [
+    {"semantic_paths":["실제 소유자 확인 생략/생략 대상 선택"],"evidence_ids":["VIS-01","LAW-02"],"conclusion":"생략 대상 체크와 작성인 정보는 별도 최상위 의미 그룹으로 구성한다."},
+    {"semantic_paths":["실제 소유자 확인/확인 기준/25% 이상 지분 소유자","실제 소유자 확인/확인 기준/최대 지분 소유자","실제 소유자 확인/확인 기준/대표자·임원·업무집행사원 과반수 선임 주주","실제 소유자 확인/확인 기준/법인·단체 사실상 지배자","실제 소유자 확인/확인 기준/법인 또는 단체의 대표자"],"evidence_ids":["VIS-01","LAW-01","KOFIU-01"],"conclusion":"템플릿의 5개 선택지는 법령상 실제 소유자 확인 우선순위를 직접 표현한다."},
+    {"semantic_paths":["실제 소유자 확인/작성 사항/실제소유자 1","실제 소유자 확인/작성 사항/실제소유자 2","실제 소유자 확인/작성 사항/실제소유자 3","실제 소유자 확인/작성 사항/실제소유자 4"],"evidence_ids":["VIS-01","LAW-01"],"conclusion":"각 반복 열은 성명(한글·영문), 생년월일, 지분율, 국적의 동일한 object 구조로 고정한다."},
+    {"semantic_paths":["실제 소유자 확인 생략/작성인 정보","실제 소유자 확인/작성인 정보"],"evidence_ids":["VIS-01","FORM-01"],"conclusion":"상·하단 작성인 정보는 서로 다른 시각 섹션이므로 별도 semantic path와 기존 field_id를 유지한다."}
+  ],
+  "research_conclusion":"공식 법령과 금융정보분석원 안내는 전체 템플릿의 계층·선택 순서·확인 항목과 일치한다. 웹 근거는 시각적으로 존재하는 1페이지 필드의 의미 확인에만 사용했으며 2·3페이지 필드는 추가하지 않았다."
+}

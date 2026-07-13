@@ -618,6 +618,7 @@ def test_semantic_schema_to_authoring_schema_preserves_hierarchy_in_export(tmp_p
     kv = json.loads(result.kv.read_text(encoding="utf-8"))
 
     assert json.loads(saved.schema.read_text(encoding="utf-8"))["semantic_schema"] == {"소유자 현황": {"성명": ""}}
+    assert json.loads((tmp_path / "semantic_schema.json").read_text(encoding="utf-8")) == {"소유자 현황": {"성명": ""}}
     assert kv["semantic_values"] == {"소유자 현황": {"성명": "홍길동"}}
     assert kv["flat_values"] == {"소유자 현황/성명": "홍길동"}
 

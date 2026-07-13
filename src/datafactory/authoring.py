@@ -418,6 +418,13 @@ def save_authoring_bundle(
 ) -> AuthoringBundleResult:
     normalized_schema, normalized_stylesheet, normalized_faker = _normalize_authoring_bundle(schema, stylesheet, faker_profile)
     _write_json(schema_path, normalized_schema)
+    semantic_schema = normalized_schema.get("semantic_schema")
+    if isinstance(semantic_schema, dict):
+        # ``schema.json.semantic_schema`` is the runtime source of truth, while
+        # the sibling file is the primary-schema artifact shipped with final
+        # outputs. Keep both representations identical on every authoring save
+        # so a manual edit or agent migration cannot leave stale GT structure.
+        _write_json(schema_path.with_name("semantic_schema.json"), semantic_schema)
     _write_json(stylesheet_path, normalized_stylesheet)
     _write_json(faker_profile_path, normalized_faker)
     return AuthoringBundleResult(

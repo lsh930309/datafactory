@@ -1,1357 +1,1841 @@
 {
   "schema_version": 1,
-  "created_at": "2026-07-02T01:30:07.257433+00:00",
-  "updated_at": "2026-07-06T07:52:55.730604+00:00",
+  "created_at": "2026-07-13T04:36:09.259212+00:00",
   "doc_id": "APP-14",
-  "title": "카드발급신청서 page 1",
-  "page_index": 1,
+  "title": "카드발급신청서",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/카드발급신청서__APP-14/authoring/agent_applied_reviews/20260713T042225194229Z/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
   "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/카드발급신청서__APP-14/samples/original/카드발급신청서_page_001.jpg",
   "image": {
     "width": 1191,
     "height": 1684
   },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/카드발급신청서__APP-14/authoring/agent_applied_reviews/20260713T042225194229Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/카드발급신청서__APP-14/authoring/agent_requests/20260713T042225194229Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "카드인수": {
+      "교부자 기재란": {
+        "신분증 종류": {
+          "주민등록증": "",
+          "공무원증": "",
+          "외국인등록증(거소증)": "",
+          "장애인등록증(복지카드)": "",
+          "운전면허증": "",
+          "여권": ""
+        },
+        "발급일자": "",
+        "발급기관": "",
+        "증번호": "",
+        "발송일자 일련번호": "",
+        "배송사 바코드": ""
+      },
+      "회원 기재란": {
+        "수령일자": {
+          "년": "",
+          "월": "",
+          "일": ""
+        },
+        "신청인 성명": ""
+      }
+    },
+    "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의": {
+      "수집/이용": {
+        "개인(신용)정보": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "제3자 제공": {
+        "개인(신용)정보": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "신용정보 조회": {
+        "개인(신용)정보": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "동의 작성": {
+        "년": "",
+        "월": "",
+        "일": "",
+        "본인 성명": ""
+      }
+    },
+    "개인(신용) 선택적 수집/이용/제공 동의": {
+      "수집/이용": {
+        "카드·금융상품 안내 및 이용권유": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "카드상품 및 부수 서비스 안내": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "이용권유 방법": {
+        "전화": "",
+        "문자메시지": "",
+        "서면": "",
+        "이메일": "",
+        "전부동의": "",
+        "동의하지않음": ""
+      },
+      "제3자 제공": {
+        "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "부정사용 방지 목적 출입국 관리 사무소 제공": {
+          "동의함": "",
+          "동의하지않음": ""
+        },
+        "고유식별정보 처리": {
+          "동의함": "",
+          "동의하지않음": ""
+        }
+      },
+      "동의 작성": {
+        "년": "",
+        "월": "",
+        "일": "",
+        "본인 성명": ""
+      }
+    }
+  },
   "fields": [
     {
       "field_id": "p1_id_resident",
-      "label": "신분증주민등록체크",
+      "label": "주민등록증",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "신분증 종류",
+        "주민등록증"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702",
       "source_detection_id": "manual_app14_blank_form_20260702",
       "source_text": "page1 check id_resident",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_id_resident",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신분증주민등록체크",
-        "csv_column": "신분증주민등록체크"
+        "json_path": "카드인수/교부자 기재란/신분증 종류/주민등록증",
+        "csv_column": "주민등록증"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_id_gov",
-      "label": "신분증공무원증체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "공무원증",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "신분증 종류",
+        "공무원증"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_2",
+      "source_detection_id": "manual_app14_blank_form_20260702_2",
       "source_text": "page1 check id_gov",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_id_gov",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신분증공무원증체크",
-        "csv_column": "신분증공무원증체크"
+        "json_path": "카드인수/교부자 기재란/신분증 종류/공무원증",
+        "csv_column": "공무원증"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_2",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_id_foreign",
-      "label": "신분증외국인등록증체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "외국인등록증(거소증)",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "신분증 종류",
+        "외국인등록증(거소증)"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_3",
+      "source_detection_id": "manual_app14_blank_form_20260702_3",
       "source_text": "page1 check id_foreign",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_id_foreign",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신분증외국인등록증체크",
-        "csv_column": "신분증외국인등록증체크"
+        "json_path": "카드인수/교부자 기재란/신분증 종류/외국인등록증(거소증)",
+        "csv_column": "외국인등록증(거소증)"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_3",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_id_welfare",
-      "label": "신분증복지카드체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "장애인등록증(복지카드)",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "신분증 종류",
+        "장애인등록증(복지카드)"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_4",
+      "source_detection_id": "manual_app14_blank_form_20260702_4",
       "source_text": "page1 check id_welfare",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_id_welfare",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신분증복지카드체크",
-        "csv_column": "신분증복지카드체크"
+        "json_path": "카드인수/교부자 기재란/신분증 종류/장애인등록증(복지카드)",
+        "csv_column": "장애인등록증(복지카드)"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_4",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_id_driver",
-      "label": "신분증운전면허체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "운전면허증",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "신분증 종류",
+        "운전면허증"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_5",
+      "source_detection_id": "manual_app14_blank_form_20260702_5",
       "source_text": "page1 check id_driver",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_id_driver",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신분증운전면허체크",
-        "csv_column": "신분증운전면허체크"
+        "json_path": "카드인수/교부자 기재란/신분증 종류/운전면허증",
+        "csv_column": "운전면허증"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_5",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_id_passport",
-      "label": "신분증여권체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "여권",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "신분증 종류",
+        "여권"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_6",
+      "source_detection_id": "manual_app14_blank_form_20260702_6",
       "source_text": "page1 check id_passport",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_id_passport",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신분증여권체크",
-        "csv_column": "신분증여권체크"
+        "json_path": "카드인수/교부자 기재란/신분증 종류/여권",
+        "csv_column": "여권"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_6",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy1_agree",
-      "label": "개인정보1동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "수집/이용 개인(신용)정보 동의함",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "수집",
+        "이용",
+        "개인(신용)정보",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_7",
+      "source_detection_id": "manual_app14_blank_form_20260702_7",
       "source_text": "page1 check privacy1_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy1_agree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보1동의체크",
-        "csv_column": "개인정보1동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/개인(신용)정보/동의함",
+        "csv_column": "수집/이용 개인(신용)정보 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_7",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy1_disagree",
-      "label": "개인정보1미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "수집/이용 개인(신용)정보 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "수집",
+        "이용",
+        "개인(신용)정보",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_8",
+      "source_detection_id": "manual_app14_blank_form_20260702_8",
       "source_text": "page1 check privacy1_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy1_disagree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보1미동의체크",
-        "csv_column": "개인정보1미동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/개인(신용)정보/동의하지않음",
+        "csv_column": "수집/이용 개인(신용)정보 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_8",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy2_agree",
-      "label": "개인정보2동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "수집/이용 고유식별정보 처리 동의함",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "수집",
+        "이용",
+        "고유식별정보 처리",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_9",
+      "source_detection_id": "manual_app14_blank_form_20260702_9",
       "source_text": "page1 check privacy2_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy2_agree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보2동의체크",
-        "csv_column": "개인정보2동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/고유식별정보 처리/동의함",
+        "csv_column": "수집/이용 고유식별정보 처리 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_9",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy2_disagree",
-      "label": "개인정보2미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "수집/이용 고유식별정보 처리 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "수집",
+        "이용",
+        "고유식별정보 처리",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_10",
+      "source_detection_id": "manual_app14_blank_form_20260702_10",
       "source_text": "page1 check privacy2_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy2_disagree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보2미동의체크",
-        "csv_column": "개인정보2미동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/수집/이용/고유식별정보 처리/동의하지않음",
+        "csv_column": "수집/이용 고유식별정보 처리 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_10",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy3_agree",
-      "label": "개인정보3동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "제3자 제공 개인(신용)정보 동의함",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "제3자 제공",
+        "개인(신용)정보",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_11",
+      "source_detection_id": "manual_app14_blank_form_20260702_11",
       "source_text": "page1 check privacy3_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy3_agree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보3동의체크",
-        "csv_column": "개인정보3동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/개인(신용)정보/동의함",
+        "csv_column": "제3자 제공 개인(신용)정보 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_11",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy3_disagree",
-      "label": "개인정보3미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "제3자 제공 개인(신용)정보 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "제3자 제공",
+        "개인(신용)정보",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_12",
+      "source_detection_id": "manual_app14_blank_form_20260702_12",
       "source_text": "page1 check privacy3_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy3_disagree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보3미동의체크",
-        "csv_column": "개인정보3미동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/개인(신용)정보/동의하지않음",
+        "csv_column": "제3자 제공 개인(신용)정보 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_12",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy4_agree",
-      "label": "개인정보4동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "제3자 제공 고유식별정보 처리 동의함",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "제3자 제공",
+        "고유식별정보 처리",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_13",
+      "source_detection_id": "manual_app14_blank_form_20260702_13",
       "source_text": "page1 check privacy4_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy4_agree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보4동의체크",
-        "csv_column": "개인정보4동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/고유식별정보 처리/동의함",
+        "csv_column": "제3자 제공 고유식별정보 처리 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_13",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy4_disagree",
-      "label": "개인정보4미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "제3자 제공 고유식별정보 처리 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "제3자 제공",
+        "고유식별정보 처리",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_14",
+      "source_detection_id": "manual_app14_blank_form_20260702_14",
       "source_text": "page1 check privacy4_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy4_disagree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보4미동의체크",
-        "csv_column": "개인정보4미동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/제3자 제공/고유식별정보 처리/동의하지않음",
+        "csv_column": "제3자 제공 고유식별정보 처리 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_14",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy5_agree",
-      "label": "개인정보5동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "신용정보 조회 개인(신용)정보 동의함",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "신용정보 조회",
+        "개인(신용)정보",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_15",
+      "source_detection_id": "manual_app14_blank_form_20260702_15",
       "source_text": "page1 check privacy5_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy5_agree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보5동의체크",
-        "csv_column": "개인정보5동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/개인(신용)정보/동의함",
+        "csv_column": "신용정보 조회 개인(신용)정보 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_15",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy5_disagree",
-      "label": "개인정보5미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "신용정보 조회 개인(신용)정보 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "신용정보 조회",
+        "개인(신용)정보",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_16",
+      "source_detection_id": "manual_app14_blank_form_20260702_16",
       "source_text": "page1 check privacy5_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy5_disagree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보5미동의체크",
-        "csv_column": "개인정보5미동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/개인(신용)정보/동의하지않음",
+        "csv_column": "신용정보 조회 개인(신용)정보 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_16",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy6_agree",
-      "label": "개인정보6동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "신용정보 조회 고유식별정보 처리 동의함",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "신용정보 조회",
+        "고유식별정보 처리",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_17",
+      "source_detection_id": "manual_app14_blank_form_20260702_17",
       "source_text": "page1 check privacy6_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy6_agree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보6동의체크",
-        "csv_column": "개인정보6동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/고유식별정보 처리/동의함",
+        "csv_column": "신용정보 조회 고유식별정보 처리 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_17",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_privacy6_disagree",
-      "label": "개인정보6미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "신용정보 조회 고유식별정보 처리 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "신용정보 조회",
+        "고유식별정보 처리",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_18",
+      "source_detection_id": "manual_app14_blank_form_20260702_18",
       "source_text": "page1 check privacy6_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_privacy6_disagree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "개인정보6미동의체크",
-        "csv_column": "개인정보6미동의체크"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/신용정보 조회/고유식별정보 처리/동의하지않음",
+        "csv_column": "신용정보 조회 고유식별정보 처리 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_18",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional1_agree",
-      "label": "선택1동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "카드·금융상품 안내 및 이용권유 동의함",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "수집",
+        "이용",
+        "카드·금융상품 안내 및 이용권유",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_19",
+      "source_detection_id": "manual_app14_blank_form_20260702_19",
       "source_text": "page1 check optional1_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택1동의체크",
-        "csv_column": "선택1동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드·금융상품 안내 및 이용권유/동의함",
+        "csv_column": "카드·금융상품 안내 및 이용권유 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_19",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional1_disagree",
-      "label": "선택1미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "카드·금융상품 안내 및 이용권유 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "수집",
+        "이용",
+        "카드·금융상품 안내 및 이용권유",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_20",
+      "source_detection_id": "manual_app14_blank_form_20260702_20",
       "source_text": "page1 check optional1_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택1미동의체크",
-        "csv_column": "선택1미동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드·금융상품 안내 및 이용권유/동의하지않음",
+        "csv_column": "카드·금융상품 안내 및 이용권유 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_20",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional2_agree",
-      "label": "선택2동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "카드상품 및 부수 서비스 안내 동의함",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "수집",
+        "이용",
+        "카드상품 및 부수 서비스 안내",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_21",
+      "source_detection_id": "manual_app14_blank_form_20260702_21",
       "source_text": "page1 check optional2_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택2동의체크",
-        "csv_column": "선택2동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드상품 및 부수 서비스 안내/동의함",
+        "csv_column": "카드상품 및 부수 서비스 안내 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_21",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional2_disagree",
-      "label": "선택2미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "카드상품 및 부수 서비스 안내 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "수집",
+        "이용",
+        "카드상품 및 부수 서비스 안내",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_22",
+      "source_detection_id": "manual_app14_blank_form_20260702_22",
       "source_text": "page1 check optional2_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택2미동의체크",
-        "csv_column": "선택2미동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/카드상품 및 부수 서비스 안내/동의하지않음",
+        "csv_column": "카드상품 및 부수 서비스 안내 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_22",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional3_agree",
-      "label": "선택3동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "고유식별정보 처리 동의함",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "수집",
+        "이용",
+        "고유식별정보 처리",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_23",
+      "source_detection_id": "manual_app14_blank_form_20260702_23",
       "source_text": "page1 check optional3_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택3동의체크",
-        "csv_column": "선택3동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/고유식별정보 처리/동의함",
+        "csv_column": "고유식별정보 처리 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_23",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional3_disagree",
-      "label": "선택3미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "고유식별정보 처리 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "수집",
+        "이용",
+        "고유식별정보 처리",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_24",
+      "source_detection_id": "manual_app14_blank_form_20260702_24",
       "source_text": "page1 check optional3_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택3미동의체크",
-        "csv_column": "선택3미동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/수집/이용/고유식별정보 처리/동의하지않음",
+        "csv_column": "고유식별정보 처리 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_24",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_channel_phone",
-      "label": "수신채널전화번호체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "이용권유 방법 전화",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "이용권유 방법",
+        "전화"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_25",
+      "source_detection_id": "manual_app14_blank_form_20260702_25",
       "source_text": "page1 check channel_phone",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수신채널전화번호체크",
-        "csv_column": "수신채널전화번호체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/전화",
+        "csv_column": "이용권유 방법 전화"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_25",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_channel_sms",
-      "label": "수신채널SMS체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "이용권유 방법 문자메시지",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "이용권유 방법",
+        "문자메시지"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_26",
+      "source_detection_id": "manual_app14_blank_form_20260702_26",
       "source_text": "page1 check channel_sms",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수신채널SMS체크",
-        "csv_column": "수신채널SMS체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/문자메시지",
+        "csv_column": "이용권유 방법 문자메시지"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_26",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_channel_paper",
-      "label": "수신채널서면체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "이용권유 방법 서면",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "이용권유 방법",
+        "서면"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_27",
+      "source_detection_id": "manual_app14_blank_form_20260702_27",
       "source_text": "page1 check channel_paper",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수신채널서면체크",
-        "csv_column": "수신채널서면체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/서면",
+        "csv_column": "이용권유 방법 서면"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_27",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_channel_email",
-      "label": "수신채널이메일체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "이용권유 방법 이메일",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "이용권유 방법",
+        "이메일"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_28",
+      "source_detection_id": "manual_app14_blank_form_20260702_28",
       "source_text": "page1 check channel_email",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수신채널이메일체크",
-        "csv_column": "수신채널이메일체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/이메일",
+        "csv_column": "이용권유 방법 이메일"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_28",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_channel_all",
-      "label": "수신채널전체체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "이용권유 방법 전부동의",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "이용권유 방법",
+        "전부동의"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_29",
+      "source_detection_id": "manual_app14_blank_form_20260702_29",
       "source_text": "page1 check channel_all",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수신채널전체체크",
-        "csv_column": "수신채널전체체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/전부동의",
+        "csv_column": "이용권유 방법 전부동의"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_29",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_channel_disagree",
-      "label": "수신채널미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "이용권유 방법 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "이용권유 방법",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_30",
+      "source_detection_id": "manual_app14_blank_form_20260702_30",
       "source_text": "page1 check channel_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "수신채널미동의체크",
-        "csv_column": "수신채널미동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/이용권유 방법/동의하지않음",
+        "csv_column": "이용권유 방법 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_30",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_third_party1_agree",
-      "label": "제3자제공1동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동 동의함",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "제3자 제공",
+        "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_31",
+      "source_detection_id": "manual_app14_blank_form_20260702_31",
       "source_text": "page1 check third_party1_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_third_party1_agree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제3자제공1동의체크",
-        "csv_column": "제3자제공1동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동/동의함",
+        "csv_column": "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_31",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_third_party1_disagree",
-      "label": "제3자제공1미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "제3자 제공",
+        "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_32",
+      "source_detection_id": "manual_app14_blank_form_20260702_32",
       "source_text": "page1 check third_party1_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_p1_third_party1_disagree",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제3자제공1미동의체크",
-        "csv_column": "제3자제공1미동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동/동의하지않음",
+        "csv_column": "하나금융그룹 자회사 상품권유 및 판매 등 마케팅활동 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_32",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_third_party2_agree",
-      "label": "제3자제공2동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "부정사용 방지 목적 출입국 관리 사무소 제공 동의함",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "제3자 제공",
+        "부정사용 방지 목적 출입국 관리 사무소 제공",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_33",
+      "source_detection_id": "manual_app14_blank_form_20260702_33",
       "source_text": "page1 check third_party2_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제3자제공2동의체크",
-        "csv_column": "제3자제공2동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/부정사용 방지 목적 출입국 관리 사무소 제공/동의함",
+        "csv_column": "부정사용 방지 목적 출입국 관리 사무소 제공 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_33",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_third_party2_disagree",
-      "label": "제3자제공2미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "부정사용 방지 목적 출입국 관리 사무소 제공 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "제3자 제공",
+        "부정사용 방지 목적 출입국 관리 사무소 제공",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_34",
+      "source_detection_id": "manual_app14_blank_form_20260702_34",
       "source_text": "page1 check third_party2_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제3자제공2미동의체크",
-        "csv_column": "제3자제공2미동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/부정사용 방지 목적 출입국 관리 사무소 제공/동의하지않음",
+        "csv_column": "부정사용 방지 목적 출입국 관리 사무소 제공 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_34",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_third_party3_agree",
-      "label": "제3자제공3동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "고유식별정보 처리 동의함",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "제3자 제공",
+        "고유식별정보 처리",
+        "동의함"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_35",
+      "source_detection_id": "manual_app14_blank_form_20260702_35",
       "source_text": "page1 check third_party3_agree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제3자제공3동의체크",
-        "csv_column": "제3자제공3동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/고유식별정보 처리/동의함",
+        "csv_column": "고유식별정보 처리 동의함"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_35",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_third_party3_disagree",
-      "label": "제3자제공3미동의체크",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "고유식별정보 처리 동의하지않음",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "제3자 제공",
+        "고유식별정보 처리",
+        "동의하지않음"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_36",
+      "source_detection_id": "manual_app14_blank_form_20260702_36",
       "source_text": "page1 check third_party3_disagree",
       "value_type": "bool.checkbox",
-      "generator": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "style_check",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "check_mark"
+        "checkbox_style": "check_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "제3자제공3미동의체크",
-        "csv_column": "제3자제공3미동의체크"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/제3자 제공/고유식별정보 처리/동의하지않음",
+        "csv_column": "고유식별정보 처리 동의하지않음"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_36",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_receipt_year",
-      "label": "접수년",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "수령일자 년",
+      "semantic_path": [
+        "카드인수",
+        "회원 기재란",
+        "수령일자",
+        "년"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_37",
+      "source_detection_id": "manual_app14_blank_form_20260702_37",
       "source_text": "page1 receipt_year",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_receipt_year",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "접수년",
-        "csv_column": "접수년"
+        "json_path": "카드인수/회원 기재란/수령일자/년",
+        "csv_column": "수령일자 년"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_37",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_receipt_month",
-      "label": "접수월",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "수령일자 월",
+      "semantic_path": [
+        "카드인수",
+        "회원 기재란",
+        "수령일자",
+        "월"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_38",
+      "source_detection_id": "manual_app14_blank_form_20260702_38",
       "source_text": "page1 receipt_month",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.month",
+      "generator": "date.month",
       "style_class": "style_p1_receipt_month",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "접수월",
-        "csv_column": "접수월"
+        "json_path": "카드인수/회원 기재란/수령일자/월",
+        "csv_column": "수령일자 월"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_38",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_receipt_day",
-      "label": "접수일",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "수령일자 일",
+      "semantic_path": [
+        "카드인수",
+        "회원 기재란",
+        "수령일자",
+        "일"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_39",
+      "source_detection_id": "manual_app14_blank_form_20260702_39",
       "source_text": "page1 receipt_day",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.day",
+      "generator": "date.day",
       "style_class": "style_p1_receipt_day",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "접수일",
-        "csv_column": "접수일"
+        "json_path": "카드인수/회원 기재란/수령일자/일",
+        "csv_column": "수령일자 일"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_39",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_applicant_name",
-      "label": "신청인명",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "신청인 성명",
+      "semantic_path": [
+        "카드인수",
+        "회원 기재란",
+        "신청인 성명"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_40",
+      "source_detection_id": "manual_app14_blank_form_20260702_40",
       "source_text": "page1 applicant_name",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_p1_applicant_name",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "신청인명",
-        "csv_column": "신청인명"
+        "json_path": "카드인수/회원 기재란/신청인 성명",
+        "csv_column": "신청인 성명"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_40",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_issuer_date",
       "label": "발급일자",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "발급일자"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_41",
+      "source_detection_id": "manual_app14_blank_form_20260702_41",
       "source_text": "page1 issuer_date",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.kr",
+      "generator": "date.kr",
       "style_class": "style_p1_issuer_date",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발급일자",
+        "json_path": "카드인수/교부자 기재란/발급일자",
         "csv_column": "발급일자"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_41",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_issuer_agency",
       "label": "발급기관",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "발급기관"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_42",
+      "source_detection_id": "manual_app14_blank_form_20260702_42",
       "source_text": "page1 issuer_agency",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pool:issuer_agencies",
       "style_class": "style_p1_issuer_agency",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발급기관",
+        "json_path": "카드인수/교부자 기재란/발급기관",
         "csv_column": "발급기관"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_42",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_tracking_number",
-      "label": "배송추적번호",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "증번호",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "증번호"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_43",
+      "source_detection_id": "manual_app14_blank_form_20260702_43",
       "source_text": "page1 tracking_number",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:######-##",
       "style_class": "style_p1_tracking_number",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "배송추적번호",
-        "csv_column": "배송추적번호"
+        "json_path": "카드인수/교부자 기재란/증번호",
+        "csv_column": "증번호"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_43",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_dispatch_date",
-      "label": "발송일자",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "발송일자 일련번호",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "발송일자 일련번호"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_44",
+      "source_detection_id": "manual_app14_blank_form_20260702_44",
       "source_text": "page1 dispatch_date",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "template:{{date.kr}} / {{pattern:######}}",
       "style_class": "style_p1_dispatch_date",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "발송일자",
-        "csv_column": "발송일자"
+        "json_path": "카드인수/교부자 기재란/발송일자 일련번호",
+        "csv_column": "발송일자 일련번호"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_44",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_delivery_barcode",
-      "label": "인도바코드",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "배송사 바코드",
+      "semantic_path": [
+        "카드인수",
+        "교부자 기재란",
+        "배송사 바코드"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_45",
+      "source_detection_id": "manual_app14_blank_form_20260702_45",
       "source_text": "page1 delivery_barcode",
       "value_type": "free_text.short",
-      "generator": "literal:",
+      "generator": "pattern:################",
       "style_class": "style_text_small",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "인도바코드",
-        "csv_column": "인도바코드"
+        "json_path": "카드인수/교부자 기재란/배송사 바코드",
+        "csv_column": "배송사 바코드"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_45",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_required_consent_year",
-      "label": "필수동의년",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "필수 동의 작성 년",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "동의 작성",
+        "년"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_46",
+      "source_detection_id": "manual_app14_blank_form_20260702_46",
       "source_text": "page1 required_consent_year",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_required_consent_year",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "필수동의년",
-        "csv_column": "필수동의년"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/년",
+        "csv_column": "필수 동의 작성 년"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_46",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_required_consent_month",
-      "label": "필수동의월",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "필수 동의 작성 월",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "동의 작성",
+        "월"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_47",
+      "source_detection_id": "manual_app14_blank_form_20260702_47",
       "source_text": "page1 required_consent_month",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.month",
+      "generator": "date.month",
       "style_class": "style_p1_required_consent_month",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "필수동의월",
-        "csv_column": "필수동의월"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/월",
+        "csv_column": "필수 동의 작성 월"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_47",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_required_consent_day",
-      "label": "필수동의일",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "필수 동의 작성 일",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "동의 작성",
+        "일"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_48",
+      "source_detection_id": "manual_app14_blank_form_20260702_48",
       "source_text": "page1 required_consent_day",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.day",
+      "generator": "date.day",
       "style_class": "style_p1_required_consent_day",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "필수동의일",
-        "csv_column": "필수동의일"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/일",
+        "csv_column": "필수 동의 작성 일"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_48",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_required_consent_name",
-      "label": "필수동의명",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "필수 동의 본인 성명",
+      "semantic_path": [
+        "개인(신용) 필수적 수집",
+        "이용",
+        "제공 및 신용정보 조회 동의",
+        "동의 작성",
+        "본인 성명"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_49",
+      "source_detection_id": "manual_app14_blank_form_20260702_49",
       "source_text": "page1 required_consent_name",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_p1_required_consent_name",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "필수동의명",
-        "csv_column": "필수동의명"
+        "json_path": "개인(신용) 필수적 수집/이용/제공 및 신용정보 조회 동의/동의 작성/본인 성명",
+        "csv_column": "필수 동의 본인 성명"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_49",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional_consent_year",
-      "label": "선택동의년",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "선택 동의 작성 년",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "동의 작성",
+        "년"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_50",
+      "source_detection_id": "manual_app14_blank_form_20260702_50",
       "source_text": "page1 optional_consent_year",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.year",
+      "generator": "date.year",
       "style_class": "style_p1_optional_consent_year",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택동의년",
-        "csv_column": "선택동의년"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/년",
+        "csv_column": "선택 동의 작성 년"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_50",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional_consent_month",
-      "label": "선택동의월",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "선택 동의 작성 월",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "동의 작성",
+        "월"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_51",
+      "source_detection_id": "manual_app14_blank_form_20260702_51",
       "source_text": "page1 optional_consent_month",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.month",
+      "generator": "date.month",
       "style_class": "style_p1_optional_consent_month",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택동의월",
-        "csv_column": "선택동의월"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/월",
+        "csv_column": "선택 동의 작성 월"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_51",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional_consent_day",
-      "label": "선택동의일",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "선택 동의 작성 일",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "동의 작성",
+        "일"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_52",
+      "source_detection_id": "manual_app14_blank_form_20260702_52",
       "source_text": "page1 optional_consent_day",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "date.day",
+      "generator": "date.day",
       "style_class": "style_date",
       "render_policy": {
         "align": "right",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택동의일",
-        "csv_column": "선택동의일"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/일",
+        "csv_column": "선택 동의 작성 일"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_52",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     },
     {
       "field_id": "p1_optional_consent_name",
-      "label": "선택동의명",
-      "source_detection_id": "manual_app14_blank_form_20260702",
+      "label": "선택 동의 본인 성명",
+      "semantic_path": [
+        "개인(신용) 선택적 수집",
+        "이용",
+        "제공 동의",
+        "동의 작성",
+        "본인 성명"
+      ],
+      "bbox_label_id": "manual_app14_blank_form_20260702_53",
+      "source_detection_id": "manual_app14_blank_form_20260702_53",
       "source_text": "page1 optional_consent_name",
-      "value_type": "free_text.short",
-      "generator": "literal:",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
       "style_class": "style_text",
       "render_policy": {
         "align": "center",
         "valign": "middle",
         "fit": "shrink_to_fit",
         "overflow": "shrink",
-        "checkbox_style": "v_mark"
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "선택동의명",
-        "csv_column": "선택동의명"
+        "json_path": "개인(신용) 선택적 수집/이용/제공 동의/동의 작성/본인 성명",
+        "csv_column": "선택 동의 본인 성명"
       },
       "required": false,
-      "notes": "APP-14 blank form 수동 bbox/style 필드",
-      "bbox_label_id": "manual_app14_blank_form_20260702_53",
-      "bbox_status": "use",
+      "notes": "",
       "render_mode": "handwriting"
     }
   ],
-  "groups": [
-    {
-      "group_id": "card_application_values",
-      "type": "blank_form_fields",
-      "notes": "APP-14 page 1 수동 체크/기입 필드"
-    }
-  ],
-  "authoring_mode": "app14_page_1_pipeline_ready_20260702",
-  "quality_status": "pipeline_ready_candidate",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/카드발급신청서__APP-14/review/authoring_migrated/review.json",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/카드발급신청서__APP-14/review/authoring_migrated/review.json"
-  },
+  "groups": [],
   "handwriting": {
     "qr_bbox": [
       977,
@@ -1360,5 +1844,6 @@
       190
     ],
     "default_sample_count": 1
-  }
+  },
+  "updated_at": "2026-07-13T04:36:09.284153+00:00"
 }

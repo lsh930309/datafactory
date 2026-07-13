@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "doc_id": "ID-11",
+  "pass": "2/2 faker and relationship expansion",
+  "source_profile": "faker_profile_draft.json",
+  "pools": {
+    "synthetic_company_names": {
+      "kind": "scalar",
+      "count": 20,
+      "usage": ["p1_writer_organization_name_top", "p1_writer_organization_name_bottom"],
+      "source_note": "실제 기업으로 오인될 가능성을 낮추기 위해 모든 이름에 '가상' 접두어를 사용한 합성 기관명"
+    },
+    "writer_positions": {
+      "kind": "scalar",
+      "count": 20,
+      "usage": ["p1_writer_position_top", "p1_writer_position_bottom"],
+      "source_note": "템플릿의 계좌개설 대리인 안내와 일반 법인 작성인 직책에 모두 사용할 수 있는 합성 직책 후보"
+    },
+    "owner_names_en": {
+      "kind": "scalar",
+      "count": 24,
+      "usage": ["p1_owner_1_name_en", "p1_owner_2_name_en", "p1_owner_3_name_en", "p1_owner_4_name_en"],
+      "source_note": "영문 인명 전용 generator 부재를 보완하는 합성 대문자 영문명"
+    },
+    "adult_birth_dates": {
+      "kind": "scalar",
+      "count": 24,
+      "usage": ["p1_owner_1_birth_date", "p1_owner_2_birth_date", "p1_owner_3_birth_date", "p1_owner_4_birth_date"],
+      "source_note": "기준일 2026-07-13보다 과거이며 성인 범위인 합성 생년월일; YYYY.MM.DD 표기"
+    },
+    "ownership_percent_values": {
+      "kind": "scalar",
+      "count": 20,
+      "usage": ["p1_owner_1_ownership_percent", "p1_owner_2_ownership_percent", "p1_owner_3_ownership_percent", "p1_owner_4_ownership_percent"],
+      "source_note": "값 칸의 정적 %와 중복되지 않도록 단위를 제외한 정수 문자열"
+    },
+    "id11_scenarios": {
+      "kind": "record",
+      "count": 12,
+      "usage": ["all 32 frozen schema bindings"],
+      "source_note": "생략 2건, 25% 기준 3건, 최대 지분 2건, 과반 선임 2건, 사실상 지배 2건, 대표자 1건으로 구성된 합성 관계 시나리오",
+      "relationship_policy": "각 record는 정확히 하나의 경로만 선택하며 생략이면 상단 작성인만, 일반 확인이면 하단 작성인과 필요한 실제소유자 행만 채움"
+    }
+  },
+  "privacy": {
+    "real_personal_data": false,
+    "real_company_data": false,
+    "account_or_registration_numbers": false,
+    "note": "모든 값은 문서 렌더링 검증용 합성 데이터"
+  }
+}

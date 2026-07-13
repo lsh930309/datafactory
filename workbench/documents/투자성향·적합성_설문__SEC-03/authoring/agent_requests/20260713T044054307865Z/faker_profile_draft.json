@@ -1,0 +1,951 @@
+{
+  "schema_version": 1,
+  "doc_id": "SEC-03",
+  "title": "일반투자자 정보 확인서(개인용) faker 초안",
+  "locale": "ko_KR",
+  "as_of_date": "2026-07-13",
+  "field_generators": {
+    "p1_solicitation_wanted": "checkbox.bool",
+    "p1_solicitation_info_provided": "checkbox.bool",
+    "p1_solicitation_info_not_provided": "checkbox.bool",
+    "p1_solicitation_not_wanted": "checkbox.bool",
+    "p1_new_registration": "checkbox.bool",
+    "p1_info_change": "checkbox.bool",
+    "p1_same_as_existing": "checkbox.bool",
+    "p1_period_lt_6m": "checkbox.bool",
+    "p1_period_6m_1y": "checkbox.bool",
+    "p1_period_1y_2y": "checkbox.bool",
+    "p1_period_2y_3y": "checkbox.bool",
+    "p1_period_gt_3y": "checkbox.bool",
+    "p1_product_stable": "checkbox.bool",
+    "p1_product_conservative": "checkbox.bool",
+    "p1_product_balanced": "checkbox.bool",
+    "p1_product_growth": "checkbox.bool",
+    "p1_product_aggressive": "checkbox.bool",
+    "p1_knowledge_very_low": "checkbox.bool",
+    "p1_knowledge_low": "checkbox.bool",
+    "p1_knowledge_high": "checkbox.bool",
+    "p1_knowledge_very_high": "checkbox.bool",
+    "p1_portfolio_lt_10": "checkbox.bool",
+    "p1_portfolio_10_20": "checkbox.bool",
+    "p1_portfolio_20_30": "checkbox.bool",
+    "p1_portfolio_30_40": "checkbox.bool",
+    "p1_portfolio_gt_40": "checkbox.bool",
+    "p1_loss_principal": "checkbox.bool",
+    "p1_loss_10": "checkbox.bool",
+    "p1_loss_20": "checkbox.bool",
+    "p1_loss_any": "checkbox.bool",
+    "p1_type_stable": "checkbox.bool",
+    "p1_type_conservative": "checkbox.bool",
+    "p1_type_balanced": "checkbox.bool",
+    "p1_type_growth": "checkbox.bool",
+    "p1_type_aggressive": "checkbox.bool",
+    "p1_derivative_none": "checkbox.bool",
+    "p1_derivative_lt_1y": "checkbox.bool",
+    "p1_derivative_1_3y": "checkbox.bool",
+    "p1_derivative_gt_3y": "checkbox.bool",
+    "p1_agreement_no": "checkbox.bool",
+    "p1_agreement_yes": "checkbox.bool",
+    "p1_age_lt_19": "checkbox.bool",
+    "p1_age_20_40": "checkbox.bool",
+    "p1_age_41_50": "checkbox.bool",
+    "p1_age_51_60": "checkbox.bool",
+    "p1_age_gt_61": "checkbox.bool",
+    "p1_income_stable": "checkbox.bool",
+    "p1_income_decrease": "checkbox.bool",
+    "p1_income_none": "checkbox.bool",
+    "p1_identity_number": "person.rrn",
+    "p1_customer_name": "person.name_ko",
+    "p1_reconfirm_name": "same_as:p1_customer_name",
+    "p1_proxy_name": "person.name_ko",
+    "p1_proxy_rrn": "person.rrn",
+    "p1_proxy_phone": "person.phone_kr",
+    "p1_proxy_relation": "pool:proxy_relations",
+    "p1_delegator_name": "same_as:p1_customer_name",
+    "p1_receiver_name": "person.name_ko",
+    "p1_receiver_time": "pool:contact_times",
+    "p1_customer_phone": "person.phone_kr",
+    "p1_confirmation_year": "date.year",
+    "p1_confirmation_month": "date.month",
+    "p1_confirmation_day": "date.day",
+    "p1_reconfirm_year": "date.year",
+    "p1_reconfirm_month": "date.month",
+    "p1_reconfirm_day": "date.day"
+  },
+  "data_pools": {
+    "proxy_relations": [
+      "배우자",
+      "부",
+      "모",
+      "아들",
+      "딸",
+      "형",
+      "오빠",
+      "누나",
+      "언니",
+      "남동생",
+      "여동생",
+      "조부",
+      "조모",
+      "손자녀",
+      "법정대리인",
+      "친권자",
+      "후견인",
+      "가족",
+      "동거인",
+      "기타 친족"
+    ],
+    "contact_times": [
+      "09:00",
+      "09:20",
+      "09:40",
+      "10:00",
+      "10:20",
+      "10:40",
+      "11:00",
+      "11:20",
+      "11:40",
+      "13:00",
+      "13:20",
+      "13:40",
+      "14:00",
+      "14:20",
+      "14:40",
+      "15:00",
+      "15:20",
+      "15:40",
+      "16:00",
+      "16:20",
+      "16:40",
+      "17:00",
+      "17:20",
+      "17:40"
+    ]
+  },
+  "constraints": [
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_solicitation_wanted",
+        "p1_solicitation_not_wanted"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_new_registration",
+        "p1_info_change",
+        "p1_same_as_existing"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_age_lt_19",
+        "p1_age_20_40",
+        "p1_age_41_50",
+        "p1_age_51_60",
+        "p1_age_gt_61"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_period_lt_6m",
+        "p1_period_6m_1y",
+        "p1_period_1y_2y",
+        "p1_period_2y_3y",
+        "p1_period_gt_3y"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_knowledge_very_low",
+        "p1_knowledge_low",
+        "p1_knowledge_high",
+        "p1_knowledge_very_high"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_portfolio_lt_10",
+        "p1_portfolio_10_20",
+        "p1_portfolio_20_30",
+        "p1_portfolio_30_40",
+        "p1_portfolio_gt_40"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_income_stable",
+        "p1_income_decrease",
+        "p1_income_none"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_loss_principal",
+        "p1_loss_10",
+        "p1_loss_20",
+        "p1_loss_any"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_type_stable",
+        "p1_type_conservative",
+        "p1_type_balanced",
+        "p1_type_growth",
+        "p1_type_aggressive"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_derivative_none",
+        "p1_derivative_lt_1y",
+        "p1_derivative_1_3y",
+        "p1_derivative_gt_3y"
+      ]
+    },
+    {
+      "type": "exclusive_choice",
+      "targets": [
+        "p1_agreement_no",
+        "p1_agreement_yes"
+      ]
+    },
+    {
+      "type": "date_group",
+      "year": "p1_confirmation_year",
+      "month": "p1_confirmation_month",
+      "day": "p1_confirmation_day",
+      "min_year": 2020,
+      "max_year": 2026
+    },
+    {
+      "type": "date_group",
+      "year": "p1_reconfirm_year",
+      "month": "p1_reconfirm_month",
+      "day": "p1_reconfirm_day",
+      "min_year": 2020,
+      "max_year": 2026
+    },
+    {
+      "type": "date_order",
+      "start": {
+        "year": "p1_confirmation_year",
+        "month": "p1_confirmation_month",
+        "day": "p1_confirmation_day"
+      },
+      "end": {
+        "year": "p1_reconfirm_year",
+        "month": "p1_reconfirm_month",
+        "day": "p1_reconfirm_day"
+      },
+      "min_days": 0,
+      "max_days": 730
+    },
+    {
+      "type": "date_not_after",
+      "target": {
+        "year": "p1_confirmation_year",
+        "month": "p1_confirmation_month",
+        "day": "p1_confirmation_day"
+      },
+      "max": "as_of_date"
+    },
+    {
+      "type": "date_not_after",
+      "target": {
+        "year": "p1_reconfirm_year",
+        "month": "p1_reconfirm_month",
+        "day": "p1_reconfirm_day"
+      },
+      "max": "as_of_date"
+    },
+    {
+      "type": "copy",
+      "source": "p1_customer_name",
+      "target": "p1_reconfirm_name"
+    },
+    {
+      "type": "copy",
+      "source": "p1_customer_name",
+      "target": "p1_delegator_name"
+    }
+  ],
+  "field_rules": [
+    {
+      "field_id": "p1_solicitation_wanted",
+      "semantic_path": "투자권유희망여부/투자권유희망",
+      "anchor_id": "manual_sec03_checkbox_form_20260702",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_solicitation_info_provided",
+      "semantic_path": "투자권유희망여부/고객정보제공",
+      "anchor_id": "manual_1782980250157",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_solicitation_info_not_provided",
+      "semantic_path": "투자권유희망여부/고객정보미제공",
+      "anchor_id": "manual_1782980255089",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_solicitation_not_wanted",
+      "semantic_path": "투자권유희망여부/투자권유불원",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_2",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_new_registration",
+      "semantic_path": "작성구분/신규등록",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_3",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_info_change",
+      "semantic_path": "작성구분/정보변경",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_4",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_same_as_existing",
+      "semantic_path": "작성구분/기존정보와동일",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_5",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_period_lt_6m",
+      "semantic_path": "투자성향설문/2_투자가능기간/6개월미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_6",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_period_6m_1y",
+      "semantic_path": "투자성향설문/2_투자가능기간/6개월이상1년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_7",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_period_1y_2y",
+      "semantic_path": "투자성향설문/2_투자가능기간/1년이상2년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_8",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_period_2y_3y",
+      "semantic_path": "투자성향설문/2_투자가능기간/2년이상3년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_9",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_period_gt_3y",
+      "semantic_path": "투자성향설문/2_투자가능기간/3년이상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_10",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_product_stable",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/안정형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_11",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_product_conservative",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/안정추구형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_12",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_product_balanced",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/위험중립형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_13",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_product_growth",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/적극투자형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_14",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_product_aggressive",
+      "semantic_path": "투자성향설문/3_투자경험금융상품/공격형상품",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_15",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_knowledge_very_low",
+      "semantic_path": "투자성향설문/4_금융상품투자지식수준/매우낮은수준",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_16",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_knowledge_low",
+      "semantic_path": "투자성향설문/4_금융상품투자지식수준/낮은수준",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_17",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_knowledge_high",
+      "semantic_path": "투자성향설문/4_금융상품투자지식수준/높은수준",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_18",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_knowledge_very_high",
+      "semantic_path": "투자성향설문/4_금융상품투자지식수준/매우높은수준",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_19",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_portfolio_lt_10",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/10퍼센트미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_20",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_portfolio_10_20",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/10퍼센트이상20퍼센트미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_21",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_portfolio_20_30",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/20퍼센트이상30퍼센트미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_22",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_portfolio_30_40",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/30퍼센트이상40퍼센트미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_23",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_portfolio_gt_40",
+      "semantic_path": "투자성향설문/5_투자자금의전체금융자산대비비중/40퍼센트이상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_24",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_loss_principal",
+      "semantic_path": "투자성향설문/7_손실감내도/반드시원금보전",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_25",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_loss_10",
+      "semantic_path": "투자성향설문/7_손실감내도/10퍼센트미만손실감수",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_26",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_loss_20",
+      "semantic_path": "투자성향설문/7_손실감내도/20퍼센트미만손실감수",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_27",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_loss_any",
+      "semantic_path": "투자성향설문/7_손실감내도/고수익기대시고위험감수",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_28",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_type_stable",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/안정형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_29",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_type_conservative",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/안정추구형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_30",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_type_balanced",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/위험중립형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_31",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_type_growth",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/적극투자형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_32",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_type_aggressive",
+      "semantic_path": "투자성향설문/8_투자목표와투자성향/공격투자형",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_33",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_derivative_none",
+      "semantic_path": "투자성향설문/9_파생상품투자경험및기간/없음",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_34",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_derivative_lt_1y",
+      "semantic_path": "투자성향설문/9_파생상품투자경험및기간/1년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_35",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_derivative_1_3y",
+      "semantic_path": "투자성향설문/9_파생상품투자경험및기간/1년이상3년미만",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_36",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_derivative_gt_3y",
+      "semantic_path": "투자성향설문/9_파생상품투자경험및기간/3년이상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_37",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_agreement_no",
+      "semantic_path": "투자성향설문/10_지분증권투자자약식확인/동의하지않음",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_38",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_agreement_yes",
+      "semantic_path": "투자성향설문/10_지분증권투자자약식확인/동의함",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_39",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_age_lt_19",
+      "semantic_path": "투자성향설문/1_연령대/19세이하",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_41",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_age_20_40",
+      "semantic_path": "투자성향설문/1_연령대/20세이상40세이하",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_42",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_age_41_50",
+      "semantic_path": "투자성향설문/1_연령대/41세이상50세이하",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_43",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_age_51_60",
+      "semantic_path": "투자성향설문/1_연령대/51세이상60세이하",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_44",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_age_gt_61",
+      "semantic_path": "투자성향설문/1_연령대/61세이상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_45",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_income_stable",
+      "semantic_path": "투자성향설문/6_수입원/일정수입유지또는증가예상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_46",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_income_decrease",
+      "semantic_path": "투자성향설문/6_수입원/일정수입감소또는불안정예상",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_47",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_income_none",
+      "semantic_path": "투자성향설문/6_수입원/일정수입없고연금이주수입원",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_48",
+      "generator": "checkbox.bool",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 양식의 실제 체크박스 값 영역과 공식 원문 선택지를 따름"
+    },
+    {
+      "field_id": "p1_identity_number",
+      "semantic_path": "투자자확인/실명번호_주민등록번호",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_49",
+      "generator": "person.rrn",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "고정 semantic_path와 값 영역의 자연스러운 합성 타입을 사용함"
+    },
+    {
+      "field_id": "p1_customer_name",
+      "semantic_path": "투자자확인/고객성명",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_51",
+      "generator": "person.name_ko",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "고정 semantic_path와 값 영역의 자연스러운 합성 타입을 사용함"
+    },
+    {
+      "field_id": "p1_reconfirm_name",
+      "semantic_path": "기존정보동일확인/고객성명",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_53",
+      "generator": "same_as:p1_customer_name",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "고정 semantic_path와 값 영역의 자연스러운 합성 타입을 사용함"
+    },
+    {
+      "field_id": "p1_proxy_name",
+      "semantic_path": "위임장/대리인성명",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_54",
+      "generator": "person.name_ko",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "고정 semantic_path와 값 영역의 자연스러운 합성 타입을 사용함"
+    },
+    {
+      "field_id": "p1_proxy_rrn",
+      "semantic_path": "위임장/대리인주민등록번호",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_55",
+      "generator": "person.rrn",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "고정 semantic_path와 값 영역의 자연스러운 합성 타입을 사용함"
+    },
+    {
+      "field_id": "p1_proxy_phone",
+      "semantic_path": "위임장/대리인전화번호",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_56",
+      "generator": "person.phone_kr",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "고정 semantic_path와 값 영역의 자연스러운 합성 타입을 사용함"
+    },
+    {
+      "field_id": "p1_proxy_relation",
+      "semantic_path": "위임장/본인과의관계",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_57",
+      "generator": "pool:proxy_relations",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "위임장 관계란에 맞는 20개 합성 관계 표현 풀을 사용함"
+    },
+    {
+      "field_id": "p1_delegator_name",
+      "semantic_path": "위임장/본인_위임인성명",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_58",
+      "generator": "same_as:p1_customer_name",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "고정 semantic_path와 값 영역의 자연스러운 합성 타입을 사용함"
+    },
+    {
+      "field_id": "p1_receiver_name",
+      "semantic_path": "유선접수/접수자_상담자",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_59",
+      "generator": "person.name_ko",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "고정 semantic_path와 값 영역의 자연스러운 합성 타입을 사용함"
+    },
+    {
+      "field_id": "p1_receiver_time",
+      "semantic_path": "유선접수/접수시간",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_60",
+      "generator": "pool:contact_times",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "정적 시간 접미사가 없어 24개 영업시간대 합성 풀을 사용함"
+    },
+    {
+      "field_id": "p1_customer_phone",
+      "semantic_path": "유선접수/고객전화번호",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_61",
+      "generator": "person.phone_kr",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "고정 semantic_path와 값 영역의 자연스러운 합성 타입을 사용함"
+    },
+    {
+      "field_id": "p1_confirmation_year",
+      "semantic_path": "투자자확인/확인날짜/연",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_50",
+      "generator": "date.year",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 이미지에서 년·월·일 접미사가 정적으로 인쇄된 분리 입력란임"
+    },
+    {
+      "field_id": "p1_confirmation_month",
+      "semantic_path": "투자자확인/확인날짜/월",
+      "anchor_id": "manual_1782980178496",
+      "generator": "date.month",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 이미지에서 년·월·일 접미사가 정적으로 인쇄된 분리 입력란임"
+    },
+    {
+      "field_id": "p1_confirmation_day",
+      "semantic_path": "투자자확인/확인날짜/일",
+      "anchor_id": "manual_1782980181378",
+      "generator": "date.day",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 이미지에서 년·월·일 접미사가 정적으로 인쇄된 분리 입력란임"
+    },
+    {
+      "field_id": "p1_reconfirm_year",
+      "semantic_path": "기존정보동일확인/확인날짜/연",
+      "anchor_id": "manual_sec03_checkbox_form_20260702_52",
+      "generator": "date.year",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 이미지에서 년·월·일 접미사가 정적으로 인쇄된 분리 입력란임"
+    },
+    {
+      "field_id": "p1_reconfirm_month",
+      "semantic_path": "기존정보동일확인/확인날짜/월",
+      "anchor_id": "manual_1782980195344",
+      "generator": "date.month",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 이미지에서 년·월·일 접미사가 정적으로 인쇄된 분리 입력란임"
+    },
+    {
+      "field_id": "p1_reconfirm_day",
+      "semantic_path": "기존정보동일확인/확인날짜/일",
+      "anchor_id": "manual_1782980199177",
+      "generator": "date.day",
+      "evidence_ids": [
+        "R1"
+      ],
+      "rationale": "전체 이미지에서 년·월·일 접미사가 정적으로 인쇄된 분리 입력란임"
+    }
+  ],
+  "notes": [
+    "field_generators가 렌더러 적용 기준이며 66개 고정 바인딩과 정확히 일치한다.",
+    "3번 투자경험 상품은 원문상 중복응답 가능이므로 exclusive_choice를 적용하지 않았다.",
+    "날짜 값에는 전체 이미지에 정적으로 인쇄된 년·월·일 접미사를 포함하지 않는다.",
+    "실제 개인정보나 실제 계정·회사 데이터는 포함하지 않는다."
+  ]
+}

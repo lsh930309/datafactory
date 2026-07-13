@@ -907,10 +907,13 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
     existing_schema_path = authoring_dir / "schema.json"
     existing_stylesheet_path = authoring_dir / "stylesheet.json"
     if existing_schema_path.exists() and existing_stylesheet_path.exists():
+        existing_schema = json.loads(existing_schema_path.read_text(encoding="utf-8"))
+        if "handwriting" not in schema and isinstance(existing_schema.get("handwriting"), dict):
+            schema["handwriting"] = json.loads(json.dumps(existing_schema["handwriting"]))
         schema, stylesheet_draft, style_remap = remap_styles_from_previous(
             schema,
             stylesheet_draft,
-            json.loads(existing_schema_path.read_text(encoding="utf-8")),
+            existing_schema,
             json.loads(existing_stylesheet_path.read_text(encoding="utf-8")),
             require_all_rendered=False,
         )

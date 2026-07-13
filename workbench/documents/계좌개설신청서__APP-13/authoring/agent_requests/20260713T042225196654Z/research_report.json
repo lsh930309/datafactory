@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-13",
+  "search_date": "2026-07-13",
+  "scope": "현재 1페이지의 use 앵커 의미 해석 보조. 템플릿에 없는 필드는 추가하지 않음.",
+  "queries": [
+    "site:citibank.co.kr 추가계좌 개설 신청서 법인 계좌 수권서명자",
+    "site:citibank.co.kr 기업 계좌개설 필요서류 대리인",
+    "site:law.go.kr 금융실명거래 계좌 개설 대리인 실명확인",
+    "site:ibk.co.kr 법인 계좌개설 필요서류 대리인 공식"
+  ],
+  "sources": [
+    {
+      "evidence_id": "R1",
+      "title": "한국씨티은행 추가계좌 개설 신청서",
+      "url": "https://www.citibank.co.kr/cgrp_pjt/down/kor/8addac.pdf",
+      "source_type": "은행 공식 원문 양식 PDF",
+      "accessed_at": "2026-07-13",
+      "summary": "로컬 원본과 동일한 1페이지 양식이다. 작성일, 기존 회사명과 계좌번호, 추가계좌의 Account Name, Account Type & Currency, Legal Address, Business Address, Signatories, 대리인 성명·주민등록번호·주소·연락처, 회사 명의 서명과 Authorised Signatory 항목을 직접 확인했다.",
+      "field_links": [
+        "application_date",
+        "company_name_inline",
+        "existing_account_number",
+        "account_name",
+        "account_type",
+        "account_currency",
+        "account_type_currency",
+        "legal_address",
+        "business_address",
+        "signatories",
+        "attorney_name",
+        "attorney_rrn",
+        "attorney_identity",
+        "attorney_address",
+        "attorney_phone",
+        "behalf_company",
+        "authorised_signatory"
+      ]
+    },
+    {
+      "evidence_id": "R2",
+      "title": "대구고등법원 2015. 8. 13. 선고 2014나22414 판결",
+      "url": "https://www.law.go.kr/LSW/precInfoP.do?precSeq=182927",
+      "source_type": "국가법령정보센터 판례",
+      "accessed_at": "2026-07-13",
+      "summary": "대리인을 통한 계좌 개설에서 위임장·인감증명서 제출과 대리인 신분증 확인이 최소 확인 절차로 논의된다. 양식의 대리인 성명·주민등록번호·주소·연락처가 대리인 식별 및 위임 맥락에 놓인다는 보조 근거다.",
+      "field_links": ["attorney_name", "attorney_rrn", "attorney_identity", "attorney_address", "attorney_phone"]
+    },
+    {
+      "evidence_id": "R3",
+      "title": "IBK기업은행 법인·단체 필요서류 목록",
+      "url": "https://kiup.ibk.co.kr/uib/jsp/popup/popup_edd_doc.html",
+      "source_type": "은행 공식 안내",
+      "accessed_at": "2026-07-13",
+      "summary": "법인 계좌 관련 확인 자료로 사업자등록증, 법인등기사항전부증명서, 실제소유자 확인서류, 법인인감도장 등을 안내하며, 대리인 내점 시 대리인 신분증·법인인감증명서·법인인감 날인 위임장을 요구한다. 회사 주소·대리인·법인인감 서명 영역의 제도적 맥락을 보강한다.",
+      "field_links": ["legal_address", "business_address", "attorney_name", "attorney_rrn", "attorney_address", "attorney_phone", "authorised_signatory"]
+    },
+    {
+      "evidence_id": "R4",
+      "title": "한국씨티은행 계좌 해지 신청시 준비할 서류",
+      "url": "https://www.citibank.co.kr/cgrp_pjt/down/kor/9closeguide.pdf",
+      "source_type": "은행 공식 안내 PDF",
+      "accessed_at": "2026-07-13",
+      "summary": "씨티은행 등록 서명 또는 법인 명판·인감 사용, 위임자 날인, 대리인 신분증 확인을 안내한다. 본 양식 하단의 For and on behalf of 회사이름 및 Authorised Signatory(명판 및 법인인감)를 사람 이름만이 아니라 회사 명의의 등록 서명·인감 행위로 해석하는 보조 근거다.",
+      "field_links": ["signatories", "behalf_company", "authorised_signatory"]
+    }
+  ],
+  "field_evidence": [
+    {
+      "semantic_paths": ["신청정보/작성일", "기존계좌/회사이름", "기존계좌/계좌번호"],
+      "evidence_ids": ["R1"],
+      "decision": "양식 상단 문장과 밑줄의 직접 대응을 사용했다."
+    },
+    {
+      "semantic_paths": ["추가계좌/계좌명(회사이름)", "추가계좌/계좌종류", "추가계좌/통화", "추가계좌/법적주소", "추가계좌/사업장주소", "추가계좌/수권서명"],
+      "evidence_ids": ["R1", "R3", "R4"],
+      "decision": "공식 원문 양식의 영문·국문 병기 라벨을 우선하고, 일반 법인 계좌 실무 자료는 의미 보조로만 사용했다."
+    },
+    {
+      "semantic_paths": ["대리인/성명", "대리인/주민등록번호", "대리인/주소(자택/직장)", "대리인/연락처"],
+      "evidence_ids": ["R1", "R2", "R3"],
+      "decision": "한 bbox의 성명·주민등록번호는 primary schema에서 분리하고, 화면에는 하나의 복합 문자열로 렌더하도록 설계했다."
+    },
+    {
+      "semantic_paths": ["서명확인/회사이름", "서명확인/수권서명(명판 및 법인인감)"],
+      "evidence_ids": ["R1", "R4"],
+      "decision": "회사 명의의 서명·날인 영역으로 해석했으며 단순 서명자 이름 필드로 축소하지 않았다."
+    }
+  ],
+  "research_limits": [
+    "웹 근거는 현재 양식의 보이는 앵커 해석에만 사용했으며 신규 KYC/실소유자 필드는 추가하지 않았다.",
+    "계좌종류와 통화의 허용값 집합, 수권서명의 정확한 기입 형식은 공식 원문에 예시가 없어 2차 faker pass에서 보수적으로 확정해야 한다."
+  ]
+}

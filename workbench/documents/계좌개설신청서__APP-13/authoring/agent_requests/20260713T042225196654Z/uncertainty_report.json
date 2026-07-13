@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "doc_id": "APP-13",
+  "pass": 2,
+  "summary": {
+    "binding_count": 17,
+    "generator_count": 17,
+    "use_anchor_count": 13,
+    "bound_use_anchor_count": 13,
+    "record_pool_count": 1,
+    "record_pool_minimum_met": true,
+    "blocking_for_draft_generation": false,
+    "review_required_field_ids": ["signatories", "authorised_signatory"]
+  },
+  "unresolved_fields": [
+    {
+      "uncertainty_id": "U1",
+      "kind": "contract_visual_conflict",
+      "field_ids": [],
+      "anchors": [],
+      "issue": "request.contract.sample_kind는 filled_sample이지만 원본 전체 이미지에는 기입값이 없고 기존 authoring 메모는 blank form으로 기록한다.",
+      "decision": "고정 입력의 sample_kind는 변경하지 않았다. faker 관계는 review에서 use로 확정된 13개 값 영역과 17개 고정 binding만 대상으로 했다.",
+      "user_decision_needed": "향후 요청 패키지 생성 시 sample_kind를 blank_template로 정정할지 검토",
+      "severity": "medium"
+    },
+    {
+      "uncertainty_id": "U2",
+      "kind": "account_type_closed_set_unknown",
+      "field_ids": ["account_type", "account_currency", "account_type_currency"],
+      "anchors": ["manual_app13_blank_form_20260702_5"],
+      "issue": "공식 양식은 계좌 종류와 통화를 요구하지만 허용 가능한 상품명 전체 집합이나 조합을 제시하지 않는다.",
+      "decision": "fallback은 지원 choice 문법으로 보수적 예시를 두고, 실제 record pool에서는 원화 계좌와 외화보통예금 조합만 사용했다. 이를 법적 폐쇄 집합으로 주장하지 않는다.",
+      "user_decision_needed": "적용 전 현재 한국씨티은행 기업계좌 상품명과 허용 통화 목록을 운영 기준으로 제한할지 결정",
+      "severity": "medium"
+    },
+    {
+      "uncertainty_id": "U3",
+      "kind": "composite_renderer_dependency",
+      "field_ids": ["account_type_currency", "attorney_identity"],
+      "anchors": ["manual_app13_blank_form_20260702_5", "manual_app13_blank_form_20260702_9"],
+      "issue": "지원 constraint grammar에는 두 source field를 구분자로 이어 붙이는 concat 제약이 없다.",
+      "decision": "고정 schema의 composite_sources와 separator를 유지하고 field_generators에는 지원 template fallback을 두었다. pick_record도 완성된 복합값을 같은 레코드에서 덮어쓴다.",
+      "user_decision_needed": "렌더러가 composite render_policy를 constraints 적용 후 평가하는지 통합 테스트에서 확인",
+      "severity": "low"
+    },
+    {
+      "uncertainty_id": "U4",
+      "kind": "semantic_granularity",
+      "field_ids": ["signatories"],
+      "anchors": ["manual_app13_blank_form_20260702_8"],
+      "issue": "Signatories(수권서명)가 이름 목록만 의미하는지 서명 방식·권한 조합까지 포함하는지 공식 양식에 작성 예시가 없다.",
+      "decision": "합성 pool에서는 대표이사와 재무·회계·자금 담당자의 짧은 이름·직책 목록으로 제한하고 free_text.short fallback을 유지했다.",
+      "user_decision_needed": "운영 적용 시 허용 직책 및 인원 수 규칙 승인",
+      "severity": "medium"
+    },
+    {
+      "uncertainty_id": "U5",
+      "kind": "signature_rendering",
+      "field_ids": ["authorised_signatory"],
+      "anchors": ["manual_app13_blank_form_20260702_13"],
+      "issue": "하단 값 영역은 서명선이며 라벨은 Authorised Signatory(명판 및 법인인감)이다. 텍스트, 명판, 인감 이미지 중 최종 렌더 자산 형태가 확정되지 않았다.",
+      "decision": "현재 pass에서는 대표이사 이름·직책 텍스트만 합성하고 인감·서명 이미지를 만들지 않았다.",
+      "user_decision_needed": "적용 UI에서 수기 텍스트를 유지할지 별도 명판·인감 자산을 요구할지 결정",
+      "severity": "high"
+    },
+    {
+      "uncertainty_id": "U6",
+      "kind": "synthetic_identifier_appearance",
+      "field_ids": ["existing_account_number", "attorney_rrn", "attorney_identity"],
+      "anchors": ["manual_app13_blank_form_20260702_3", "manual_app13_blank_form_20260702_9"],
+      "issue": "형식 충실도를 위해 합성 계좌번호와 주민등록번호가 실제 식별정보처럼 보인다.",
+      "decision": "값 조합은 agent가 테스트 전용으로 새로 작성했고 실제 자료를 사용하지 않았다. 외부 배포나 고객 테스트에는 사용하지 않는다.",
+      "user_decision_needed": "외부 노출 환경에서는 마스킹된 전용 test identifier 정책 적용 여부 결정",
+      "severity": "medium"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_ids": ["account_type", "account_currency", "account_type_currency"],
+      "rule": "choice + template + pick_record",
+      "reason": "현재 운영 상품과 통화의 공식 전체 허용 집합이 고정 근거에 없음"
+    },
+    {
+      "field_ids": ["signatories", "authorised_signatory"],
+      "rule": "free_text.short + pick_record",
+      "reason": "텍스트 목록과 실제 서명·인감 자산의 경계가 미확정"
+    }
+  ],
+  "resolved_in_pass_2": [
+    "12개 합성 법인 신청 record pool로 회사·계좌·주소·대리인·수권서명 상관관계를 구성함",
+    "회사명 3개 필드를 copy 관계로 일치시킴",
+    "작성일을 2026-07-13 이후로 생성하지 않도록 date_not_after를 추가함",
+    "모든 17개 고정 binding에 정확히 하나의 지원 field_generators rule을 제공함"
+  ]
+}

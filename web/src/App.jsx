@@ -1290,9 +1290,7 @@ function App() {
       const payload = await apiJson('/api/handwriting/scan-upload-intake', {
         method: 'POST',
         body: JSON.stringify({
-          docId: selectedDocId || '',
           files,
-          printPackManifest: selectedItem?.latestHandwritingPrintPack || '',
         }),
       });
       setHandwritingScanFiles([]);
@@ -3293,7 +3291,7 @@ function App() {
             {selectedIsHandwriting && (
               <div className="audit-box handwriting-pipeline-box">
                 <b>수기체 데이터 생성</b>
-                <span>print pack → 인쇄/작성/스캔 → QR/barcode intake → accepted-only export</span>
+                <span>print pack → 인쇄/작성/스캔 → QR intake → accepted-only export</span>
                 <small>수기 문서는 최종 이미지에 텍스트 렌더링을 하지 않습니다. schema/faker/GT만 사전 생성하고 실제 글씨는 작업자 스캔본을 사용합니다.</small>
                 <small>최근 print pack: {selectedItem?.latestHandwritingPrintPack || '없음'}</small>
                 <small>최근 intake: {selectedItem?.latestHandwritingScanIntake || '없음'} · accepted {selectedItem?.handwritingAcceptedCount || 0} · review {selectedItem?.handwritingReviewRequiredCount || 0}</small>
@@ -3310,11 +3308,37 @@ function App() {
                 <button onClick={() => run(runHandwritingScanIntake)} disabled={!selectedItem?.latestHandwritingPrintPack || !handwritingScanDir.trim() || isBusy}>
                   {busy === 'handwritingScanIntake' ? '매칭 중...' : '스캔 intake / GT 매칭'}
                 </button>
-                <button onClick={() => openHandwritingScanPopover([])} disabled={!selectedItem?.latestHandwritingPrintPack || isBusy}>
+                <button onClick={() => openHandwritingScanPopover([])} disabled={isBusy}>
                   scan 문서 처리하기
                 </button>
                 {handwritingPrintPackResult?.paths?.manifest && <small>생성 manifest: {handwritingPrintPackResult.paths.manifest}</small>}
+                {Array.isArray(handwritingPrintPackResult?.manifest?.samples) && handwritingPrintPackResult.manifest.samples.length > 0 && (
+                  <small>생성 PDF: {handwritingPrintPackResult.manifest.samples.slice(0, 3).map((sample) => sample.print_pack_pdf).filter(Boolean).join(' · ')}</small>
+                )}
                 {handwritingScanIntakeResult?.paths?.manifest && <small>intake manifest: {handwritingScanIntakeResult.paths.manifest}</small>}
+                {handwritingScanIntakeResult?.summary && (
+                  <div className="scan-intake-result">
+                    <b>최근 scan 처리 결과</b>
+                    <span>accepted {handwritingScanIntakeResult.summary.acceptedCount || 0} · review {handwritingScanIntakeResult.summary.reviewRequiredCount || 0} · scans {handwritingScanIntakeResult.summary.scanCount || 0}</span>
+                    <div className="result-link-row">
+                      {handwritingScanIntakeResult.urls?.manifest && <a className="result-link compact" href={handwritingScanIntakeResult.urls.manifest} target="_blank" rel="noreferrer">manifest</a>}
+                      {!handwritingScanIntakeResult.urls?.manifest && handwritingScanIntakeResult.paths?.manifest && <a className="result-link compact" href={fileUrl(handwritingScanIntakeResult.paths.manifest)} target="_blank" rel="noreferrer">manifest</a>}
+                    </div>
+                    {(handwritingScanIntakeResult.manifest?.records || []).slice(0, 8).map((record, index) => (
+                      <div className={`scan-intake-record ${record.status || 'unknown'}`} key={`${record.raw_scan || record.sample_id || 'scan'}-${index}`}>
+                        <span>{record.status || 'unknown'} · {record.doc_id || '-'} · {record.sample_id || `scan_${index}`}</span>
+                        {record.reason && <small className="warning-text">{record.reason}</small>}
+                        <div className="result-link-row">
+                          {record.qr_removed && <a className="result-link compact" href={fileUrl(record.qr_removed)} target="_blank" rel="noreferrer">QR 제거 이미지</a>}
+                          {record.matched_gt && <a className="result-link compact" href={fileUrl(record.matched_gt)} target="_blank" rel="noreferrer">GT</a>}
+                          {record.matched_bbox && <a className="result-link compact" href={fileUrl(record.matched_bbox)} target="_blank" rel="noreferrer">BBox</a>}
+                          {record.review && <a className="result-link compact" href={fileUrl(record.review)} target="_blank" rel="noreferrer">Review</a>}
+                        </div>
+                      </div>
+                    ))}
+                    {(handwritingScanIntakeResult.manifest?.records || []).length > 8 && <small>외 {(handwritingScanIntakeResult.manifest.records.length - 8)}건은 manifest에서 확인</small>}
+                  </div>
+                )}
               </div>
             )}
             {seedRevertPreview?.docId === selectedDocId && (

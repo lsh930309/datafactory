@@ -5,7 +5,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from datafactory.handwriting import _resolve_qr_bbox, create_handwriting_print_pack, decode_barcode_image, intake_handwriting_scans, latest_accepted_handwriting_samples, render_handwriting_authoring_preview
+from datafactory.handwriting import _resolve_qr_bbox, create_handwriting_print_pack, decode_marker_image, encode_marker_image, intake_handwriting_scans, latest_accepted_handwriting_samples, render_handwriting_authoring_preview
 from datafactory.policy import draft_review_policy, write_review_policy
 from datafactory.registry import RegistryData, RegistryDocument
 from datafactory.workbench import document_dir
@@ -139,23 +139,24 @@ def test_handwriting_print_pack_and_scan_intake_roundtrip(tmp_path: Path) -> Non
 
     pack = create_handwriting_print_pack("HW-01", count=1, registry=registry, root=root, qr_bbox=[420, 40, 160, 160])
     sample = pack["manifest"]["samples"][0]
-    template_path = Path(sample["qr_template"])
-    barcode_bbox = sample["qr_bbox"]
-    with Image.open(template_path) as image:
-        crop = image.crop((barcode_bbox[0], barcode_bbox[1], barcode_bbox[0] + barcode_bbox[2], barcode_bbox[1] + barcode_bbox[3]))
-        decoded = decode_barcode_image(crop)
-    assert decoded["doc_id"] == "HW-01"
-    assert decoded["sample_id"] == "sample_000"
+    problem_path = Path(sample["problem_sheet"])
+    pack_pdf = Path(sample["print_pack_pdf"])
+    assert pack_pdf.exists()
+    assert pack_pdf.parent.name == "수기테스트_HW-01"
+    assert sample["qr_payload"] == {"doc_id": "HW-01", "sample_id": "sample_000", "run_id": sample["run_id"]}
     assert sample["handwriting_field_count"] == 1
     assert sample["printed_field_count"] == 1
-    with Image.open(template_path).convert("L") as rendered_template:
+    with Image.open(problem_path).convert("L") as rendered_template:
         printed_crop = rendered_template.crop((160, 130, 280, 154))
         assert sum(1 for pixel in printed_crop.getdata() if pixel < 200) > 10
+    with Image.open(sample["answer_sheet"]).convert("RGB") as answer_sheet:
+        handwriting_crop = answer_sheet.crop((160, 80, 250, 104))
+        assert sum(1 for red, green, blue in handwriting_crop.getdata() if red > 150 and green < 80 and blue < 80) > 10
 
     scan_dir = tmp_path / "scans"
     scan_dir.mkdir()
     scan_path = scan_dir / "scan_001.png"
-    Image.open(template_path).save(scan_path)
+    Image.open(problem_path).save(scan_path)
     intake = intake_handwriting_scans(doc_id="HW-01", scan_dir=scan_dir, registry=registry, root=root)
 
     assert intake["summary"]["acceptedCount"] == 1
@@ -167,6 +168,96 @@ def test_handwriting_print_pack_and_scan_intake_roundtrip(tmp_path: Path) -> Non
     samples = latest_accepted_handwriting_samples(item)
     assert len(samples) == 1
     assert samples[0].gt.exists()
+
+
+def test_qr_decode_upscales_small_scanned_marker() -> None:
+    import pytest
+
+    pytest.importorskip("cv2")
+    payload = {"doc_id": "APP-13", "sample_id": "sample_000", "run_id": "20260713T065822404584Z"}
+    qr = encode_marker_image(payload, pixel_size=159)
+    scanned_like = Image.new("RGB", (191, 191), "white")
+    # Simulate the PDF/rendered scan crop that keeps a small quiet-zone margin
+    # around the 159px QR.  The decoder must internally try a high-quality
+    # upscaled candidate; otherwise this case is commonly missed by OpenCV.
+    scanned_like.paste(qr, (16, 16))
+
+    assert decode_marker_image(scanned_like) == payload
+
+
+def test_handwriting_print_pack_prefers_render_only_composite_for_duplicate_bbox(tmp_path: Path) -> None:
+    registry, root = _prepare_authoring(tmp_path)
+    doc_root = document_dir(registry.documents["HW-01"], root)
+    authoring_dir = doc_root / "authoring"
+    schema_path = authoring_dir / "schema.json"
+    faker_path = authoring_dir / "faker_profile.json"
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    # Two primary leaves and one render-only composite share the same value bbox.
+    # The primary leaves must stay in GT/schema, but only the composite should be
+    # visibly printed on the answer sheet to avoid overprinted red text.
+    schema["semantic_schema"] = {"성명": "", "계좌": {"종류": "", "통화": ""}}
+    schema["fields"] = [schema["fields"][0]] + [
+        {
+            "field_id": "account_type",
+            "label": "계좌종류",
+            "value_type": "literal:외화보통예금",
+            "bbox_label_id": "value_code",
+            "render_mode": "handwriting",
+            "semantic_path": ["계좌", "종류"],
+            "export": {"json_path": "계좌/종류"},
+        },
+        {
+            "field_id": "account_currency",
+            "label": "통화",
+            "value_type": "literal:SGD",
+            "bbox_label_id": "value_code",
+            "render_mode": "handwriting",
+            "semantic_path": ["계좌", "통화"],
+            "export": {"json_path": "계좌/통화"},
+        },
+        {
+            "field_id": "account_type_currency",
+            "label": "계좌 종류 및 통화",
+            "value_type": "literal:외화보통예금 / SGD",
+            "bbox_label_id": "value_code",
+            "render_mode": "handwriting",
+            "semantic_path": ["렌더전용", "계좌 종류 및 통화"],
+            "export": {"json_path": "렌더전용/계좌 종류 및 통화", "include": "false"},
+        },
+    ]
+    schema_path.write_text(json.dumps(schema, ensure_ascii=False, indent=2), encoding="utf-8")
+    faker_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "field_generators": {
+                    "name": "literal:김수기",
+                    "account_type": "literal:외화보통예금",
+                    "account_currency": "literal:SGD",
+                    "account_type_currency": "literal:외화보통예금 / SGD",
+                },
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    pack = create_handwriting_print_pack("HW-01", count=1, registry=registry, root=root, qr_bbox=[420, 40, 160, 160])
+    sample = pack["manifest"]["samples"][0]
+
+    assert sample["handwriting_fields"] == ["name", "account_type_currency"]
+    assert sample["handwriting_field_count"] == 2
+    assert json.loads(Path(sample["public_gt"]).read_text(encoding="utf-8")) == {
+        "성명": "김수기",
+        "계좌": {"종류": "외화보통예금", "통화": "SGD"},
+    }
+    public_bbox = json.loads(Path(sample["public_bbox"]).read_text(encoding="utf-8"))
+    assert "렌더전용" not in public_bbox
+    with Image.open(sample["answer_sheet"]).convert("RGB") as answer_sheet:
+        crop = answer_sheet.crop((160, 130, 280, 154))
+        red_pixels = sum(1 for red, green, blue in crop.getdata() if red > 150 and green < 80 and blue < 80)
+        assert red_pixels > 10
 
 
 def test_handwriting_qr_bbox_is_forced_to_square() -> None:

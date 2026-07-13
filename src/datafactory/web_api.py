@@ -41,7 +41,7 @@ from .authoring import (
 from .first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
 from .fonts import default_font_id, list_font_faces
 from .final_results_export import export_final_results
-from .handwriting import BARCODE_FORMAT, DEFAULT_WECHAT_QR_MODEL_DIR, create_handwriting_print_pack, intake_handwriting_scans, render_handwriting_authoring_preview
+from .handwriting import QR_FORMAT, DEFAULT_WECHAT_QR_MODEL_DIR, create_handwriting_print_pack, intake_handwriting_scans, render_handwriting_authoring_preview
 from .docx_pipeline import analyze_docx_template, draft_docx_authoring, generate_docx_outputs
 from .inpaint import InpaintConfig, InpaintResult, inpaint_from_review_policy, lama_inpaint, render_mask_overlay
 from .inpaint_export import write_inpaint_result
@@ -184,7 +184,8 @@ def runtime_health() -> dict[str, Any]:
             "first_priority_assessment": True,
             "final_results_export": True,
             "handwriting_pipeline": True,
-            "handwriting_barcode": BARCODE_FORMAT,
+            "handwriting_marker": QR_FORMAT,
+            "handwriting_barcode": QR_FORMAT,
             "wechat_qr_model_dir": str(DEFAULT_WECHAT_QR_MODEL_DIR),
             "wechat_qr_models_present": all((DEFAULT_WECHAT_QR_MODEL_DIR / name).exists() for name in ("detect.prototxt", "detect.caffemodel", "sr.prototxt", "sr.caffemodel")),
             "manual_template_cleanup": True,
@@ -3159,7 +3160,12 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     registry=load_registry(),
                 )
                 manifest_path = _resolve_workspace_path(result["paths"]["manifest"])
-                self._send_json({**result, "urls": {"manifest": f"/api/file?path={_display_path(manifest_path, ROOT)}"}})
+                sample_pdf_urls = [
+                    f"/api/file?path={str(sample.get('print_pack_pdf') or '')}"
+                    for sample in result.get("manifest", {}).get("samples", [])
+                    if isinstance(sample, dict) and sample.get("print_pack_pdf")
+                ]
+                self._send_json({**result, "urls": {"manifest": f"/api/file?path={_display_path(manifest_path, ROOT)}", "printPackPdfs": sample_pdf_urls}})
                 return
             if parsed.path == "/api/handwriting/scan-upload-intake":
                 doc_id = str(payload.get("docId") or "") or None

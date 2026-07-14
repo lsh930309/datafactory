@@ -492,6 +492,26 @@ def test_authoring_preserves_ellipse_mark_as_supported_checkbox_style(tmp_path: 
     assert "ellipse_mark" in reloaded["supported_checkbox_styles"]
 
 
+def test_authoring_preserves_supported_display_format(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile).payload
+    loaded["schema"]["fields"][0]["display_format"] = "date.yy/mm/dd"
+
+    saved = save_authoring_bundle(
+        draft.schema,
+        draft.stylesheet,
+        draft.faker_profile,
+        schema=loaded["schema"],
+        stylesheet=loaded["stylesheet"],
+        faker_profile=loaded["faker_profile"],
+    )
+    reloaded = load_authoring_bundle(saved.schema, saved.stylesheet, saved.faker_profile).payload
+
+    assert reloaded["schema"]["fields"][0]["display_format"] == "yy/mm/dd"
+    assert reloaded["supported_display_formats"] == ["money.krw", "yy/mm/dd"]
+
+
 def test_update_authoring_source_inpainted_only_for_matching_page(tmp_path: Path) -> None:
     page_1 = tmp_path / "page_001.jpg"
     page_2 = tmp_path / "page_002.jpg"
@@ -977,6 +997,66 @@ def test_render_authoring_preview_applies_relational_constraints(tmp_path: Path)
         end = datetime(int(values["end_year"]), int(values["end_month"]), int(values["end_day"]))
         assert start <= end
         assert (end - start).days <= 30
+
+
+def test_generate_values_applies_display_formats_after_constraints() -> None:
+    schema = {
+        "fields": [
+            {"field_id": "amount_current", "label": "현재 금액", "display_format": "money.krw"},
+            {"field_id": "amount_prior", "label": "종전 금액", "display_format": "money.krw"},
+            {"field_id": "amount_total", "label": "합계", "display_format": "money.krw"},
+            {"field_id": "period_start", "label": "근무기간 시작", "display_format": "yy/mm/dd"},
+            {"field_id": "blank_amount", "label": "미발생 금액", "display_format": "money.krw"},
+        ]
+    }
+    faker_profile = {
+        "field_generators": {
+            "amount_current": "literal:",
+            "amount_prior": "literal:",
+            "amount_total": "literal:",
+            "period_start": "literal:",
+            "blank_amount": "literal:",
+        },
+        "data_pools": {
+            "employment": [
+                {
+                    "current": 1_250_000,
+                    "prior": 250_000,
+                    "period_start": "2024.03.05",
+                    "blank_amount": "",
+                }
+            ]
+        },
+        "constraints": [
+            {
+                "type": "pick_record",
+                "pool": "employment",
+                "targets": {
+                    "amount_current": "current",
+                    "amount_prior": "prior",
+                    "period_start": "period_start",
+                    "blank_amount": "blank_amount",
+                },
+            },
+            {
+                "type": "sum",
+                "sources": ["amount_current", "amount_prior"],
+                "target": "amount_total",
+                "format": "plain",
+            },
+        ],
+    }
+
+    values, warnings = _generate_values(schema, faker_profile, random.Random(7))
+
+    assert warnings == []
+    assert values == {
+        "amount_current": "1,250,000",
+        "amount_prior": "250,000",
+        "amount_total": "1,500,000",
+        "period_start": "24/03/05",
+        "blank_amount": "",
+    }
 
 
 def test_date_group_can_emit_two_digit_year_when_template_has_century_prefix(tmp_path: Path) -> None:

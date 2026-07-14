@@ -6,6 +6,8 @@ from typing import Any
 
 import pytest
 
+pytestmark = pytest.mark.artifact
+
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS_ROOT = ROOT / "outputs" / "results"
 

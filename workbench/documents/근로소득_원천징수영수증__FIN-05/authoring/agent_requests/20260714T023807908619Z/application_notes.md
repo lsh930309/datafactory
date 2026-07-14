@@ -28,3 +28,9 @@
 - 비과세 및 감면소득명세의 국외근로·야간근로수당·보육수당·출산지원금·연구보조비는 매 레코드에서 최소 2개 항목에 유효 금액을 배정합니다. 미발생 항목과 다른 유효값 없는 표 칸은 `0` 대신 빈 문자열로 렌더링합니다.
 - canonical bbox review와 재대조하여 삭제된 `visual_0067`, `visual_0074`, `visual_0237`은 제거하고, review에 `use`로 남아 있는 농어촌특별세 bbox(`manual_1783992911760`)는 복원했습니다. 해당 값이 없을 때는 `0` 대신 공란을 출력합니다.
 - 문서 하단 `징수(보고)의무자 서명 또는 인` bbox는 징수의무자 대표자 성명을 재사용하도록 연결해 유효한 합성 값을 항상 주입합니다.
+
+## Manual display-format correction
+
+- 마지막 targeted revision은 롤백하고 기존 faker generator, data pool, constraints를 유지했습니다.
+- 실제 금액 bbox 115개에는 `display_format: money.krw`만 지정해 값 생성과 관계식 계산이 끝난 뒤 자릿수 콤마를 적용합니다.
+- 근무기간·감면기간 bbox 20개에는 `display_format: yy/mm/dd`만 지정해 원래 날짜 생성·레코드 선택을 유지한 채 표시만 축약합니다.

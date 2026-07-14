@@ -27,3 +27,7 @@ where = ["src"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+addopts = "-m 'not artifact'"
+markers = [
+  "artifact: validates mutable generated artifacts such as outputs/results; excluded from the default logic test suite",
+]

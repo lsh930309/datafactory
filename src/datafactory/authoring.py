@@ -22,6 +22,7 @@ from .authoring_backup import backup_authoring_json_before_write
 AUTHORING_SCHEMA_VERSION = 1
 DEFAULT_STYLE_CLASS = "body_default"
 CHECKBOX_VALUE_TYPE = "bool.checkbox"
+SUPPORTED_DISPLAY_FORMATS = ["money.krw", "yy/mm/dd"]
 SUPPORTED_VALUE_TYPES = {
     CHECKBOX_VALUE_TYPE,
     "person.name_ko",
@@ -659,6 +660,7 @@ def _authoring_payload(schema: dict[str, Any], stylesheet: dict[str, Any], faker
         "supported_valign": ["top", "middle", "bottom"],
         "supported_overflow": ["shrink", "clip", "allow", "wrap"],
         "supported_checkbox_styles": ["v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot", "ellipse_mark"],
+        "supported_display_formats": SUPPORTED_DISPLAY_FORMATS,
         "fonts": {"defaultFontId": default_font_id(), "items": list_font_faces()},
         "bbox_source": {"canonical": "review", "review_path": schema.get("source_review")},
     }
@@ -757,6 +759,11 @@ def _normalize_authoring_bundle(
         render_mode = str(field.get("render_mode") or "printed").strip().lower()
         field["render_mode"] = render_mode if render_mode in {"handwriting", "printed"} else "printed"
         field["render_policy"] = _normalize_render_policy(field.get("render_policy"))
+        display_format = _normalize_display_format(field.get("display_format"))
+        if display_format:
+            field["display_format"] = display_format
+        else:
+            field.pop("display_format", None)
         field["export"] = _normalize_export(field.get("export"), field_id, str(field["label"]), used_export_keys)
         field["required"] = bool(field.get("required", True))
         field["notes"] = str(field.get("notes") or "")
@@ -959,6 +966,17 @@ def _normalize_render_policy(value: Any) -> dict[str, str]:
     render_value = str(raw.get("render") if "render" in raw else raw.get("visible") if "visible" in raw else "true").strip().lower()
     render = "false" if render_value in {"false", "0", "no", "off", "skip", "hidden"} else "true"
     return {"align": align, "valign": valign, "fit": fit_value, "overflow": overflow, "checkbox_style": checkbox_style, "render": render}
+
+
+def _normalize_display_format(value: Any) -> str:
+    normalized = str(value or "").strip().lower()
+    aliases = {
+        "money": "money.krw",
+        "krw": "money.krw",
+        "date.yy/mm/dd": "yy/mm/dd",
+    }
+    normalized = aliases.get(normalized, normalized)
+    return normalized if normalized in SUPPORTED_DISPLAY_FORMATS else ""
 
 
 def _normalize_export(value: Any, field_id: str, label: str, used_keys: dict[str, int]) -> dict[str, str]:
@@ -1271,6 +1289,7 @@ def _generate_values(
         values[field_id] = _normalize_generated_value_for_field(field, rule, values[field_id], force_visible=force_visible)
         if field_id in two_digit_year_fields:
             values[field_id] = _normalize_two_digit_year(values[field_id])
+        values[field_id] = _format_display_value(values[field_id], field.get("display_format"))
     return values, warnings
 
 
@@ -1529,6 +1548,34 @@ def _normalize_two_digit_year(value: str) -> str:
     if not digits:
         return "20"
     return f"{int(digits[-2:]):02d}"
+
+
+def _format_display_value(value: str, display_format: Any) -> str:
+    normalized = _normalize_display_format(display_format)
+    text = str(value or "").strip()
+    if not normalized or not text:
+        return text
+    if normalized == "money.krw":
+        numeric = text.replace(",", "")
+        if not re.fullmatch(r"[+-]?\d+(?:\.0+)?", numeric):
+            return text
+        integer = int(numeric.split(".", 1)[0])
+        return f"{integer:,}"
+    if normalized == "yy/mm/dd":
+        match = re.fullmatch(r"(\d{2}|\d{4})\D(\d{1,2})\D(\d{1,2})", text)
+        if not match:
+            return text
+        raw_year, raw_month, raw_day = match.groups()
+        year = int(raw_year)
+        month = int(raw_month)
+        day = int(raw_day)
+        validation_year = year if len(raw_year) == 4 else 2000 + year
+        try:
+            date(validation_year, month, day)
+        except ValueError:
+            return text
+        return f"{year % 100:02d}/{month:02d}/{day:02d}"
+    return text
 
 
 def _field_is_checkbox(field: dict[str, Any], rule: str) -> bool:

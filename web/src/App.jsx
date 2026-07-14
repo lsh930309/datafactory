@@ -1068,7 +1068,13 @@ function App() {
     try {
       const payload = await apiJson('/api/authoring/agent-request', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction, options: authoringAgentOptions(mode) }),
+        body: JSON.stringify({
+          docId: selectedDocId,
+          sourceImage: selectedSample,
+          reviewPath,
+          instruction: authoringAgentInstruction,
+          options: authoringAgentOptions(mode),
+        }),
       });
       setAuthoringAgentRequest(payload);
       setMessage(`${mode === 'bbox_correction' ? 'BBox 보정' : 'Agent authoring'} 요청 패키지 생성 완료: ${payload.paths.request}${payload.paths.prompt ? ` · ${payload.paths.prompt}` : ''}`);
@@ -1130,6 +1136,8 @@ function App() {
         method: 'POST',
         body: JSON.stringify({
           docId: selectedDocId,
+          sourceImage: selectedSample,
+          reviewPath,
           instruction,
           options: authoringAgentOptions(mode, executionMode),
           ...(['schema_only', 'faker_only', 'validation_repair', 'targeted_revision'].includes(executionMode) && requestPath ? { requestPath } : {}),
@@ -4216,6 +4224,9 @@ function App() {
                   <div><b>새 draft 생성</b><small>{selectedDocId} 문서만 대상으로 실행</small></div>
                   <span className="agent-scope-badge">문서 격리</span>
                 </div>
+                <small className={isImagePath(selectedSample) ? 'agent-mode-help' : 'warning-text'}>
+                  Agent 시각 원본: {isImagePath(selectedSample) ? `${shortPath(selectedSample)} 1매만 사용` : '작업 샘플에서 JPG/PNG 페이지 1매를 선택하세요.'}
+                </small>
                 <textarea
                   className="agent-request-input"
                   placeholder="생성 의도나 주의사항을 입력하세요. 예: 하단 체크박스는 이미지 기준으로 날짜·카드종류·동의여부를 구분."
@@ -4287,12 +4298,12 @@ function App() {
                   <button
                     className="primary"
                     onClick={() => run(() => runAuthoringAgentInference('authoring', authoringAgentExecutionMode))}
-                    disabled={!selectedDocId || isBusy || (['faker_only', 'validation_repair'].includes(authoringAgentExecutionMode) && !latestAgentRequestPath)}
+                    disabled={!selectedDocId || !isImagePath(selectedSample) || !reviewPath || isBusy || (['faker_only', 'validation_repair'].includes(authoringAgentExecutionMode) && !latestAgentRequestPath)}
                   >
                     {busy === 'authoringAgentRun' ? 'Agent 시작 중...' : `${AUTHORING_AGENT_EXECUTION_MODE_LABELS[authoringAgentExecutionMode] || 'Agent 추론'} 실행`}
                   </button>
                   <button onClick={() => run(() => refreshAuthoringAgentRunStatus())} disabled={!latestAgentRunPath || isBusy}>상태 새로고침</button>
-                  <button onClick={() => run(() => createAuthoringAgentRequest('authoring'))} disabled={!selectedDocId || isBusy}>
+                  <button onClick={() => run(() => createAuthoringAgentRequest('authoring'))} disabled={!selectedDocId || !isImagePath(selectedSample) || !reviewPath || isBusy}>
                     {busy === 'authoringAgentRequest' ? '생성 중...' : '요청 파일만 생성'}
                   </button>
                 </div>
@@ -4321,7 +4332,7 @@ function App() {
 
               {latestAgentRunNeedsRepair && latestAgentRequestPath && (
                 <div className="button-row single-action-row">
-                  <button className="primary" onClick={() => run(() => runAuthoringAgentInference('authoring', 'validation_repair'))} disabled={authoringAgentRetryBusy}>검증 보정 실행</button>
+                  <button className="primary" onClick={() => run(() => runAuthoringAgentInference('authoring', 'validation_repair'))} disabled={!isImagePath(selectedSample) || !reviewPath || authoringAgentRetryBusy}>검증 보정 실행</button>
                 </div>
               )}
 
@@ -4343,7 +4354,7 @@ function App() {
                     <button
                       className="primary"
                       onClick={() => run(() => runAuthoringAgentInference('authoring', 'targeted_revision', authoringAgentRevisionInstruction))}
-                      disabled={!latestAgentRunReady || !authoringAgentRevisionInstruction.trim() || authoringAgentRetryBusy}
+                      disabled={!latestAgentRunReady || !isImagePath(selectedSample) || !reviewPath || !authoringAgentRevisionInstruction.trim() || authoringAgentRetryBusy}
                     >요청 보정 실행</button>
                   </div>
                 </section>
@@ -4379,14 +4390,14 @@ function App() {
                 <summary>재실행·적용 도구 <span>고급 작업</span></summary>
                 {latestAgentRequestPath && (
                   <div className="button-row compact-buttons agent-retry-buttons">
-                    <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'schema_only'))} disabled={authoringAgentRetryBusy}>Schema 재실행</button>
-                    <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'faker_only'))} disabled={authoringAgentRetryBusy}>Faker 재실행</button>
-                    <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'validation_repair'))} disabled={authoringAgentRetryBusy || !latestAgentRunNeedsRepair}>검증 보정</button>
+                    <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'schema_only'))} disabled={!isImagePath(selectedSample) || !reviewPath || authoringAgentRetryBusy}>Schema 재실행</button>
+                    <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'faker_only'))} disabled={!isImagePath(selectedSample) || !reviewPath || authoringAgentRetryBusy}>Faker 재실행</button>
+                    <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'validation_repair'))} disabled={!isImagePath(selectedSample) || !reviewPath || authoringAgentRetryBusy || !latestAgentRunNeedsRepair}>검증 보정</button>
                     {latestAgentRunCanCancel && <button className="danger" onClick={() => run(cancelAuthoringAgentRun)} disabled={isBusy || latestAgentRunStatus === 'cancelling'}>{busy === 'authoringAgentCancel' || latestAgentRunStatus === 'cancelling' ? '취소 처리 중...' : '실행 취소'}</button>}
                   </div>
                 )}
                 <div className="button-row compact-buttons">
-                  <button onClick={() => run(() => runAuthoringAgentInference('bbox_correction', 'single_pass'))} disabled={!selectedDocId || isBusy}>{busy === 'authoringAgentBboxRun' ? '시작 중...' : 'BBox 보정 draft'}</button>
+                  <button onClick={() => run(() => runAuthoringAgentInference('bbox_correction', 'single_pass'))} disabled={!selectedDocId || !isImagePath(selectedSample) || !reviewPath || isBusy}>{busy === 'authoringAgentBboxRun' ? '시작 중...' : 'BBox 보정 draft'}</button>
                   <button onClick={() => run(loadAuthoringLibrary)} disabled={isBusy}>Faker 라이브러리</button>
                   <button onClick={() => run(approveAuthoringDraftsToLibrary)} disabled={!latestAgentRequestPath || isBusy}>승인 기록</button>
                   <button className={latestAgentRunReady ? 'primary' : ''} onClick={() => run(applyAuthoringAgentDrafts)} disabled={!latestAgentRunReady || isBusy}>Draft 최종 적용</button>
@@ -4395,7 +4406,7 @@ function App() {
                 {authoringLibrary && <p className="mini-path">Library: profile {authoringLibrary.summary.profileTypeCount}종 · pool {authoringLibrary.summary.valuePoolCount}개 · approval {authoringLibrary.summary.approvalCount}건</p>}
                 {authoringApprovalResult?.approval && <p className="mini-path">최근 승인: {authoringApprovalResult.approval.path} · missing {authoringApprovalResult.summary.missing}</p>}
               </details>
-              <p className="agent-scope-note">Agent는 선택 문서의 draft request 폴더만 수정합니다. 최종 authoring 파일은 별도 적용 전까지 유지됩니다.</p>
+              <p className="agent-scope-note">Agent는 현재 선택한 페이지 이미지 1매와 해당 review snapshot만 읽고, 선택 문서의 draft request 폴더만 수정합니다. PDF 완본과 다른 페이지는 범위에서 제외됩니다.</p>
             </div>
             <div className="authoring-step-label"><b>1. Schema · Style · Faker</b><span>키/생성 규칙/스타일 편집</span></div>
             <div className="button-row">

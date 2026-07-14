@@ -10,6 +10,61 @@ import pytest
 from datafactory import web_api
 
 
+def _write_authoring_agent_page(tmp_path: Path, doc_id: str, *, name: str = "page_001.png") -> tuple[Path, Path]:
+    doc_root = tmp_path / "workbench" / doc_id
+    image_path = doc_root / "samples" / "original" / name
+    image_path.parent.mkdir(parents=True, exist_ok=True)
+    Image.new("RGB", (120, 80), "white").save(image_path)
+    detections_path = doc_root / "ocr" / "page_001" / "detections.json"
+    detections_path.parent.mkdir(parents=True, exist_ok=True)
+    detections_path.write_text("{}", encoding="utf-8")
+    review_path = doc_root / "review" / "page_001" / "review.json"
+    review_path.parent.mkdir(parents=True, exist_ok=True)
+    review_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "created_at": "2026-07-14T00:00:00+00:00",
+                "source_engine": "test",
+                "source_detections": str(detections_path),
+                "source_image": str(image_path),
+                "image": {"width": 120, "height": 80},
+                "labels": [
+                    {
+                        "id": "det_name",
+                        "text": "성명",
+                        "confidence": 0.99,
+                        "bbox": [10, 20, 40, 14],
+                        "polygon": [[10, 20], [50, 20], [50, 34], [10, 34]],
+                        "status": "use",
+                        "auto_type": "field_value",
+                        "reason": "test",
+                    }
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    return image_path, review_path
+
+
+def _add_single_page_scope(request: dict[str, object], request_dir: Path) -> Path:
+    source_path = request_dir / "source_page.png"
+    Image.new("RGB", (120, 80), "white").save(source_path)
+    request["inputs"] = {
+        "sample": str(source_path),
+        "sourceImage": str(source_path),
+        "pageScope": {
+            "mode": "single_selected_raster_page",
+            "sha256": web_api.file_sha256(source_path),
+            "otherPagesAllowed": False,
+            "documentContainersAllowed": False,
+        },
+    }
+    return source_path
+
+
 def test_authoring_agent_capabilities_follow_local_model_cache(tmp_path: Path) -> None:
     (tmp_path / "models_cache.json").write_text(
         json.dumps(
@@ -93,10 +148,9 @@ def test_targeted_revision_reuses_only_selected_document_request(tmp_path: Path,
     request_dir = tmp_path / "workbench" / doc_id / "authoring" / "agent_requests" / "request1"
     request_dir.mkdir(parents=True)
     request_path = request_dir / "request.json"
-    request_path.write_text(
-        json.dumps({"schema_version": 2, "docId": doc_id, "title": "카드발급신청서", "instruction": "최초 생성"}, ensure_ascii=False),
-        encoding="utf-8",
-    )
+    request_payload: dict[str, object] = {"schema_version": 2, "docId": doc_id, "title": "카드발급신청서", "instruction": "최초 생성"}
+    _add_single_page_scope(request_payload, request_dir)
+    request_path.write_text(json.dumps(request_payload, ensure_ascii=False), encoding="utf-8")
     drafts = {
         "schema_draft.json": {
             "schema_version": 1,
@@ -169,7 +223,9 @@ def test_targeted_revision_requires_existing_valid_draft_and_instruction(tmp_pat
     request_dir = tmp_path / "workbench" / "APP-14" / "authoring" / "agent_requests" / "request1"
     request_dir.mkdir(parents=True)
     request_path = request_dir / "request.json"
-    request_path.write_text(json.dumps({"docId": "APP-14"}), encoding="utf-8")
+    request_payload: dict[str, object] = {"docId": "APP-14"}
+    _add_single_page_scope(request_payload, request_dir)
+    request_path.write_text(json.dumps(request_payload), encoding="utf-8")
     monkeypatch.setattr(web_api, "ROOT", tmp_path)
     monkeypatch.setattr(web_api, "workbench_subdir", lambda doc_id, subdir: tmp_path / "workbench" / doc_id / subdir)
 
@@ -567,6 +623,17 @@ def test_authoring_agent_request_includes_research_and_draft_contract(tmp_path: 
 
     fake_doc = FakeDoc()
     fake_registry = SimpleNamespace(documents={fake_doc.doc_id: fake_doc})
+    source_image, review_path = _write_authoring_agent_page(tmp_path, fake_doc.doc_id)
+    source_pdf = source_image.with_name("card_complete.pdf")
+    source_pdf.write_bytes(b"%PDF-1.4\n")
+    other_page = source_image.with_name("page_002.png")
+    Image.new("RGB", (120, 80), "gray").save(other_page)
+    existing_schema_path = tmp_path / "workbench" / fake_doc.doc_id / "authoring" / "schema.json"
+    existing_schema_path.parent.mkdir(parents=True, exist_ok=True)
+    existing_schema_path.write_text(
+        json.dumps({"source_image": str(source_image.relative_to(tmp_path))}, ensure_ascii=False),
+        encoding="utf-8",
+    )
 
     def fake_workbench_subdir(doc_id: str, subdir: str):
         target = tmp_path / "workbench" / doc_id / subdir
@@ -583,16 +650,24 @@ def test_authoring_agent_request_includes_research_and_draft_contract(tmp_path: 
         lambda registry: [
             {
                 "docId": fake_doc.doc_id,
-                "samples": ["samples/card.png"],
-                "latestReview": "review.json",
+                "samples": [str(source_pdf), str(source_image), str(other_page)],
+                "latestReview": str(review_path),
                 "latestInpainted": "inpainted.png",
+                "latestAuthoringSchema": str(existing_schema_path),
             }
         ],
     )
     monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
     monkeypatch.setattr(web_api, "update_manifest_artifact", lambda doc_id, key, path: manifest_updates.append((doc_id, key, str(path))))
 
-    payload = web_api.authoring_agent_request_payload({"docId": fake_doc.doc_id, "instruction": "체크박스 의미를 보수적으로 판단"})
+    payload = web_api.authoring_agent_request_payload(
+        {
+            "docId": fake_doc.doc_id,
+            "sourceImage": str(source_image),
+            "reviewPath": str(review_path),
+            "instruction": "체크박스 의미를 보수적으로 판단",
+        }
+    )
 
     request_path = tmp_path / payload["paths"]["request"]
     prompt_path = tmp_path / payload["paths"]["prompt"]
@@ -600,6 +675,18 @@ def test_authoring_agent_request_includes_research_and_draft_contract(tmp_path: 
     prompt = prompt_path.read_text(encoding="utf-8")
 
     assert request["schema_version"] == 2
+    assert request["inputs"]["pageScope"]["mode"] == "single_selected_raster_page"
+    assert request["inputs"]["pageScope"]["otherPagesAllowed"] is False
+    assert request["inputs"]["pageScope"]["documentContainersAllowed"] is False
+    assert request["inputs"]["sourceImage"] == request["inputs"]["sample"]
+    assert request["inputs"]["sourceImage"].endswith("/source_page.png")
+    assert ".pdf" not in json.dumps(request["inputs"], ensure_ascii=False).lower()
+    assert Path(tmp_path / request["inputs"]["sourceImage"]).read_bytes() == source_image.read_bytes()
+    assert request["inputs"]["existingAuthoring"]["schema"].endswith("/existing_authoring/schema.json")
+    review_baseline = json.loads((tmp_path / request["inputs"]["latestReview"]).read_text(encoding="utf-8"))
+    assert review_baseline["source_image"] == request["inputs"]["sourceImage"]
+    assert review_baseline["source_detections"] == request["inputs"]["latestDetections"]
+    assert Path(tmp_path / review_baseline["source_detections"]).parent == request_path.parent
     assert "research_report.json" in request["contract"]["outputs"]
     assert "faker_profile_draft.json" in request["contract"]["outputs"]
     assert any("웹 검색" in rule for rule in request["contract"]["web_research_rules"])
@@ -609,7 +696,7 @@ def test_authoring_agent_request_includes_research_and_draft_contract(tmp_path: 
     assert any("date_between:" in rule and "쓰지 않는다" in rule for rule in request["contract"]["faker_profile_rules"])
     assert any("field_id -> data_pools" in rule for rule in request["contract"]["constraint_rules"])
     assert any("constraint 내부 `records`" in rule for rule in request["contract"]["constraint_rules"])
-    assert any("전체 템플릿 이미지가 최상위 source of truth" in rule for rule in request["contract"]["visual_source_of_truth_rules"])
+    assert any("선택 페이지 이미지 1매" in rule for rule in request["contract"]["visual_source_of_truth_rules"])
     assert "웹 리서치 필수 규칙" in prompt
     assert "시각 근거 우선 규칙" in prompt
     assert "지원 Faker relationship constraint 문법" in prompt
@@ -619,8 +706,44 @@ def test_authoring_agent_request_includes_research_and_draft_contract(tmp_path: 
     assert "field_generators" in prompt
     assert "date_between:-365d:+0d" in prompt
     assert "체크박스 의미를 보수적으로 판단" in prompt
+    assert "PDF/DOCX 완본" in prompt
+    assert "sourceImage (유일한 시각 원본)" in prompt
     assert ("APP-14", "authoring_agent_request", str(request_path)) in manifest_updates
     assert ("APP-14", "authoring_agent_prompt", str(prompt_path)) in manifest_updates
+
+
+def test_authoring_agent_request_rejects_pdf_as_visual_source(tmp_path: Path, monkeypatch) -> None:
+    class FakeDoc:
+        doc_id = "APP-14"
+        title = "카드발급신청서"
+
+        def to_dict(self) -> dict[str, object]:
+            return {"docId": self.doc_id, "title": self.title}
+
+    fake_doc = FakeDoc()
+    fake_registry = SimpleNamespace(documents={fake_doc.doc_id: fake_doc})
+    source_image, review_path = _write_authoring_agent_page(tmp_path, fake_doc.doc_id)
+    source_pdf = source_image.with_name("card_complete.pdf")
+    source_pdf.write_bytes(b"%PDF-1.4\n")
+
+    def fake_workbench_subdir(doc_id: str, subdir: str) -> Path:
+        target = tmp_path / "workbench" / doc_id / subdir
+        target.mkdir(parents=True, exist_ok=True)
+        return target
+
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    monkeypatch.setattr(web_api, "load_registry", lambda: fake_registry)
+    monkeypatch.setattr(
+        web_api,
+        "list_work_items",
+        lambda registry: [{"docId": fake_doc.doc_id, "samples": [str(source_pdf), str(source_image)], "latestReview": str(review_path)}],
+    )
+    monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
+
+    with pytest.raises(ValueError, match="raster page image"):
+        web_api.authoring_agent_request_payload(
+            {"docId": fake_doc.doc_id, "sourceImage": str(source_pdf), "reviewPath": str(review_path), "instruction": "test"}
+        )
 
 
 def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path: Path, monkeypatch) -> None:
@@ -633,6 +756,7 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
 
     fake_doc = FakeDoc()
     fake_registry = SimpleNamespace(documents={fake_doc.doc_id: fake_doc})
+    source_image, review_path = _write_authoring_agent_page(tmp_path, fake_doc.doc_id)
     manifest_updates: list[tuple[str, str, str]] = []
     captured: dict[str, object] = {}
     calls: list[str] = []
@@ -674,11 +798,18 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
     monkeypatch.setattr(web_api, "ROOT", tmp_path)
     monkeypatch.setattr(web_api, "load_registry", lambda: fake_registry)
     monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
-    monkeypatch.setattr(web_api, "list_work_items", lambda registry: [{"docId": fake_doc.doc_id, "samples": [], "latestReview": "", "latestInpainted": ""}])
+    monkeypatch.setattr(
+        web_api,
+        "list_work_items",
+        lambda registry: [{"docId": fake_doc.doc_id, "samples": [str(source_image)], "latestReview": str(review_path), "latestInpainted": ""}],
+    )
     monkeypatch.setattr(web_api, "update_manifest_artifact", lambda doc_id, key, path: manifest_updates.append((doc_id, key, str(path))))
     monkeypatch.setattr(web_api, "_run_codex_process", fake_run)
 
-    payload = web_api.authoring_agent_run_payload({"docId": fake_doc.doc_id, "instruction": "원클릭 추론"}, async_run=False)
+    payload = web_api.authoring_agent_run_payload(
+        {"docId": fake_doc.doc_id, "sourceImage": str(source_image), "reviewPath": str(review_path), "instruction": "원클릭 추론"},
+        async_run=False,
+    )
 
     assert payload["status"] == "succeeded"
     assert payload["validation"]["ready"] is True
@@ -698,6 +829,8 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
     assert "schema pass" in calls[0]
     assert "faker pass" in calls[1]
     assert "Do not browse the web" in calls[1]
+    assert "Do not open or search for any PDF/DOCX" in calls[0]
+    assert Path(captured["cmd"][captured["cmd"].index("--cd") + 1]).resolve() == (tmp_path / payload["requestDir"]).resolve()
     assert payload["stages"][1]["frozenArtifactViolations"] == ["schema_draft.json"]
     restored_request_dir = sorted((tmp_path / "workbench" / fake_doc.doc_id / "authoring" / "agent_requests").glob("*"))[-1]
     restored_schema = json.loads((restored_request_dir / "schema_draft.json").read_text(encoding="utf-8"))
@@ -1174,6 +1307,7 @@ def test_authoring_agent_options_control_codex_command_and_pool_minimum(tmp_path
 
     fake_doc = FakeDoc()
     fake_registry = SimpleNamespace(documents={fake_doc.doc_id: fake_doc})
+    source_image, review_path = _write_authoring_agent_page(tmp_path, fake_doc.doc_id)
     captured: dict[str, object] = {}
     prompts: list[str] = []
 
@@ -1209,12 +1343,21 @@ def test_authoring_agent_options_control_codex_command_and_pool_minimum(tmp_path
     monkeypatch.setattr(web_api, "ROOT", tmp_path)
     monkeypatch.setattr(web_api, "load_registry", lambda: fake_registry)
     monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
-    monkeypatch.setattr(web_api, "list_work_items", lambda registry: [{"docId": fake_doc.doc_id, "samples": [], "latestReview": "", "latestInpainted": ""}])
+    monkeypatch.setattr(
+        web_api,
+        "list_work_items",
+        lambda registry: [{"docId": fake_doc.doc_id, "samples": [str(source_image)], "latestReview": str(review_path), "latestInpainted": ""}],
+    )
     monkeypatch.setattr(web_api, "update_manifest_artifact", lambda *args, **kwargs: None)
     monkeypatch.setattr(web_api, "_run_codex_process", fake_run)
 
     payload = web_api.authoring_agent_run_payload(
-        {"docId": fake_doc.doc_id, "options": {"reasoningEffort": "high", "fastMode": True, "minPoolSize": 4, "executionMode": "single_pass"}},
+        {
+            "docId": fake_doc.doc_id,
+            "sourceImage": str(source_image),
+            "reviewPath": str(review_path),
+            "options": {"reasoningEffort": "high", "fastMode": True, "minPoolSize": 4, "executionMode": "single_pass"},
+        },
         async_run=False,
     )
 

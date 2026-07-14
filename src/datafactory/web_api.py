@@ -117,6 +117,7 @@ AUTHORING_AGENT_FAKER_OUTPUTS = [
     "uncertainty_report.json",
     "application_notes.md",
 ]
+AUTHORING_AGENT_IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp", ".webp"}
 DEFAULT_AUTHORING_AGENT_SCALAR_POOL_MIN_SIZE = 20
 DEFAULT_AUTHORING_AGENT_RECORD_POOL_MIN_SIZE = 12
 DEFAULT_AUTHORING_AGENT_MODEL = "gpt-5.6-terra"
@@ -508,6 +509,9 @@ def _authoring_agent_prompt_markdown(request: dict[str, Any]) -> str:
         f"- PO 도메인: {', '.join(registry.get('poDomains') or registry.get('domains') or []) or '-'}",
         f"- 업무 도메인: {', '.join(registry.get('workflowDomains') or []) or '-'}",
         "",
+        "## 단일 페이지 범위",
+        *[f"- {rule}" for rule in contract.get("page_scope_rules", [])],
+        "",
         "## 필수 산출물",
         *[f"- `{name}`" for name in contract["outputs"]],
         "",
@@ -539,6 +543,7 @@ def _authoring_agent_prompt_markdown(request: dict[str, Any]) -> str:
         *[f"- {rule}" for rule in contract["application_rules"]],
         "",
         "## 입력 파일",
+        f"- sourceImage (유일한 시각 원본): {request['inputs'].get('sourceImage') or '-'}",
         f"- sample: {request['inputs'].get('sample') or '-'}",
         f"- latestReview: {request['inputs'].get('latestReview') or '-'}",
         f"- latestInpainted: {request['inputs'].get('latestInpainted') or '-'}",
@@ -671,6 +676,93 @@ def _parse_as_of_date(value: Any) -> date:
         raise ValueError("asOfDate must use YYYY-MM-DD format") from exc
 
 
+def _authoring_agent_page_scope(
+    payload: dict[str, Any],
+    *,
+    doc_id: str,
+    item: dict[str, Any],
+    request_dir: Path,
+) -> dict[str, Any]:
+    """Freeze the one raster page selected in the workbench for agent use."""
+
+    source_value = str(payload.get("sourceImage") or payload.get("source_image") or "").strip()
+    if not source_value:
+        raise ValueError("sourceImage must identify the single JPG/PNG page currently selected in the workbench")
+    source_image = _resolve_workspace_path(source_value)
+    if source_image.suffix.lower() not in AUTHORING_AGENT_IMAGE_SUFFIXES:
+        raise ValueError("authoring agent sourceImage must be a raster page image; PDF/DOCX originals are not allowed")
+    if not source_image.is_file():
+        raise FileNotFoundError(source_image)
+    document_root = workbench_subdir(doc_id, "authoring").parent.resolve()
+    if document_root not in source_image.resolve().parents:
+        raise ValueError("authoring agent sourceImage must belong to the selected workbench document")
+    try:
+        with Image.open(source_image) as image:
+            image.verify()
+    except Exception as exc:
+        raise ValueError(f"authoring agent sourceImage is not a readable raster image: {source_image}") from exc
+
+    review_value = str(payload.get("reviewPath") or payload.get("review_path") or item.get("latestReview") or "").strip()
+    if not review_value:
+        raise ValueError("reviewPath for the selected sourceImage is required before authoring agent inference")
+    review_path = _resolve_workspace_path(review_value)
+    if not review_path.is_file():
+        raise FileNotFoundError(review_path)
+    if document_root not in review_path.resolve().parents:
+        raise ValueError("authoring agent reviewPath must belong to the selected workbench document")
+    policy = load_review_policy(review_path)
+    if policy.source_image.resolve() != source_image.resolve():
+        raise ValueError("reviewPath source_image must match the single sourceImage selected in the workbench")
+
+    existing_schema_value = str(item.get("latestAuthoringSchema") or "").strip()
+    if existing_schema_value:
+        existing_schema_path = _resolve_workspace_path(existing_schema_value)
+        if existing_schema_path.exists():
+            existing_schema = json.loads(existing_schema_path.read_text(encoding="utf-8"))
+            existing_source_value = str(existing_schema.get("source_image") or "").strip()
+            if existing_source_value:
+                existing_source = _resolve_workspace_path(existing_source_value)
+                if existing_source != source_image.resolve():
+                    raise ValueError(
+                        "selected sourceImage differs from the existing authoring source_image; refusing to redefine the document from another page"
+                    )
+
+    request_dir.mkdir(parents=True, exist_ok=False)
+    snapshot_path = request_dir / f"source_page{source_image.suffix.lower()}"
+    shutil.copy2(source_image, snapshot_path)
+    return {
+        "mode": "single_selected_raster_page",
+        "source_image": source_image,
+        "source_snapshot": snapshot_path,
+        "source_sha256": file_sha256(source_image),
+        "review_path": review_path,
+        "review_policy": policy,
+    }
+
+
+def _validate_authoring_agent_request_page_scope(request: dict[str, Any], payload: dict[str, Any]) -> None:
+    inputs = request.get("inputs") if isinstance(request.get("inputs"), dict) else {}
+    page_scope = inputs.get("pageScope") if isinstance(inputs.get("pageScope"), dict) else {}
+    if page_scope.get("mode") != "single_selected_raster_page":
+        raise ValueError("legacy authoring agent request is not single-page scoped; create a new request from the selected JPG/PNG page")
+    source_value = str(inputs.get("sourceImage") or inputs.get("sample") or "").strip()
+    if not source_value:
+        raise ValueError("authoring agent request has no single-page sourceImage")
+    source_path = _resolve_workspace_path(source_value)
+    if source_path.suffix.lower() not in AUTHORING_AGENT_IMAGE_SUFFIXES or not source_path.is_file():
+        raise ValueError("authoring agent request sourceImage must be an existing raster page snapshot")
+    expected_sha256 = str(page_scope.get("sha256") or "")
+    if not expected_sha256 or file_sha256(source_path) != expected_sha256:
+        raise ValueError("authoring agent request source page snapshot changed; create a new request")
+    selected_value = str(payload.get("sourceImage") or payload.get("source_image") or "").strip()
+    if selected_value:
+        selected_path = _resolve_workspace_path(selected_value)
+        if selected_path.suffix.lower() not in AUTHORING_AGENT_IMAGE_SUFFIXES or not selected_path.is_file():
+            raise ValueError("current sourceImage must be a readable raster page image")
+        if file_sha256(selected_path) != expected_sha256:
+            raise ValueError("current workbench sourceImage differs from the page frozen in this agent request; create a new request")
+
+
 def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
     options = _authoring_agent_options(payload)
     doc_id = str(payload.get("docId") or "")
@@ -681,17 +773,27 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
     if doc is None:
         raise ValueError(f"unknown docId: {doc_id}")
     item = next((candidate for candidate in list_work_items(registry=registry) if candidate.get("docId") == doc_id), None)
-    samples = item.get("samples") if item and isinstance(item.get("samples"), list) else []
     sample_kind = str((item or {}).get("sampleKind") or "filled_sample")
-    docx_context: dict[str, Any] | None = None
-    if item and item.get("hasEditableOfficeTemplate"):
-        try:
-            docx_context = analyze_docx_template(doc_id, registry=registry)
-        except Exception as exc:
-            docx_context = {"error": str(exc)}
     created_at = datetime.now(timezone.utc).isoformat()
     request_dir = workbench_subdir(doc_id, "authoring") / "agent_requests" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-    request_dir.mkdir(parents=True, exist_ok=True)
+    page_scope = _authoring_agent_page_scope(payload, doc_id=doc_id, item=item or {}, request_dir=request_dir)
+    existing_authoring: dict[str, str] = {}
+    existing_dir = request_dir / "existing_authoring"
+    for input_key, item_key, file_name in (
+        ("schema", "latestAuthoringSchema", "schema.json"),
+        ("stylesheet", "latestAuthoringStylesheet", "stylesheet.json"),
+        ("fakerProfile", "latestAuthoringFakerProfile", "faker_profile.json"),
+    ):
+        source_value = str((item or {}).get(item_key) or "").strip()
+        if not source_value:
+            continue
+        source_path = _resolve_workspace_path(source_value)
+        if not source_path.is_file():
+            continue
+        existing_dir.mkdir(parents=True, exist_ok=True)
+        snapshot_path = existing_dir / file_name
+        shutil.copy2(source_path, snapshot_path)
+        existing_authoring[input_key] = _display_path(snapshot_path, ROOT)
     outputs = [
         "schema_draft.json",
         "stylesheet_draft.json",
@@ -720,11 +822,11 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "missing_use_anchor_policy": "materialize_under_검토필요_and_report_repair",
             },
             "sample_kind": sample_kind,
-            "input_formats": ["pdf", "jpg", "jpeg", "png", "docx"],
-            "generation_paths": ["image-template", "editable-office-template"],
+            "input_formats": ["jpg", "jpeg", "png", "tif", "tiff", "bmp", "webp"],
+            "generation_paths": ["single-page-image-template"],
             "outputs": outputs,
             "workflow_steps": [
-                "입력 파일, OCR, bbox review, 기존 authoring 파일을 먼저 읽고 근거 anchor를 정리한다.",
+                "현재 작업 화면에서 선택해 request에 snapshot한 이미지 1매, OCR, bbox review, 기존 authoring 파일을 먼저 읽고 근거 anchor를 정리한다.",
                 "실제 문서명을 웹 검색해 작성 방법, 문서 의미, 포함 정보, 실제 샘플 양식, 공식/공공/기관/기업 설명을 수집한다.",
                 "1차 pass에서는 문서/시각/OCR/리서치 근거로 primary semantic_schema와 모든 use bbox binding을 먼저 확정한다.",
                 "2차 pass에서는 확정된 schema/field_id를 기준으로 faker_profile_draft의 data pool과 relationship constraint를 확장한다.",
@@ -754,11 +856,18 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 "예: primary semantic schema에는 `입원일`, `퇴원일`을 분리 저장하되 문서에는 `입원: yyyy-mm-dd, 퇴원: yyyy-mm-dd` 한 줄로 찍어야 한다면, 분리 leaf field는 `render_policy:{render:false}`로 두고 복합 표시 field는 같은 anchor에 `export:{include:false}`로 둔다.",
             ],
             "visual_source_of_truth_rules": [
-                "전체 템플릿 이미지가 최상위 source of truth이다. 웹 리서치, 문서명, 라벨 텍스트, 관행보다 실제 전체 문서 이미지에서 보이는 레이아웃/라벨/값 위치 관계가 우선한다.",
-                "agent_requests의 visual_evidence_manifest.json은 전체 템플릿 이미지 경로와 bbox 위치 인덱스이다. 먼저 전체 이미지를 보고 문맥을 판단하고, crops/*.png는 작은 글자나 경계가 애매할 때만 확대 보조 자료로 확인한다.",
+                "request.inputs.sourceImage의 선택 페이지 이미지 1매가 유일한 최상위 visual source of truth이다. 웹 리서치, 문서명, 라벨 텍스트, 관행보다 이 한 페이지에서 보이는 레이아웃/라벨/값 위치 관계가 우선한다.",
+                "agent_requests의 visual_evidence_manifest.json은 선택된 한 페이지 snapshot과 bbox 위치 인덱스이다. 먼저 이 전체 페이지를 보고 문맥을 판단하고, crops/*.png는 작은 글자나 경계가 애매할 때만 확대 보조 자료로 확인한다.",
+                "PDF/DOCX 완본, 같은 문서의 다른 JPG/PNG 페이지, seed 원본 폴더를 열거나 schema 근거로 사용하지 않는다. 선택 페이지에 보이지 않는 다른 페이지의 필드는 추가하지 않는다.",
                 "값 위치 바로 옆/안에 정적 단위나 prefix/suffix가 실제로 인쇄되어 있는지는 전체 이미지의 문맥에서 판단하고, 필요한 경우 해당 crop으로 확대 확인한다.",
                 "라벨에만 단위 의미가 있고 값 위치에는 별도 정적 단위가 없으면, 그 단위가 자연스러운 값 표기의 일부인지 판단해 포함할 수 있다. 예: 호수/가구수/세대수 값은 `0호/0가구/0세대`처럼 생성한다.",
                 "전체 이미지에서 보이는 시각 근거와 OCR/리서치가 충돌하면 전체 이미지 근거를 따르고, 결정 근거를 faker_profile_draft.json.field_rules 또는 uncertainty_report.json에 기록한다.",
+            ],
+            "page_scope_rules": [
+                "Agent inference의 시각 범위는 request.inputs.sourceImage에 snapshot된 현재 선택 이미지 1매로 고정한다.",
+                "원본 PDF/DOCX 완본 및 같은 문서의 다른 페이지 이미지를 탐색하거나 읽지 않는다.",
+                "기존 authoring 또는 웹 리서치에 다른 페이지 정보가 있더라도 선택 페이지에 anchor가 없으면 primary schema에 추가하지 않는다.",
+                "선택 페이지와 기존 authoring source_image가 다르면 새 schema로 재정의하지 않고 실행을 중단한다.",
             ],
             "faker_profile_rules": [
                 "schema key의 의미가 충분히 명확하고 문서 anchor 또는 리서치 근거와 연결될 때만 faker rule을 제안한다.",
@@ -783,13 +892,8 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             ],
             "constraint_rules": AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES,
             "template_anchor_rules": [
-                "PDF/JPG는 visible text, OCR, bbox 위치, 주변 텍스트를 anchor 근거로 삼는다.",
-                "DOCX는 visible text, content control, form field, table cell, bookmark, placeholder 등 편집 가능한 anchor를 근거로 삼는다.",
-                "DOCX 경로에서는 docx_template_analysis.json과 docx_anchor_map.json의 value_cell anchor를 schema field anchor_id/docx_anchor_id로 사용한다.",
-                "DOCX 경로의 stylesheet는 이미지 렌더링용이 아니라 lineage 호환용이다. 실제 값 삽입은 원본 DOCX 셀 서식을 유지한 채 DOCX XML에 값을 주입한다.",
-                "DOCX 경로의 GT는 PDF OCR 결과가 아니라 faker value set을 source of truth로 한다. 다만 현재 DOCX 경로는 LibreOffice 폰트 재현 품질 문제가 해결되기 전까지 실험/보류 기능이다.",
+                "선택된 JPG/PNG 페이지 1매는 visible text, OCR, bbox 위치, 주변 텍스트를 anchor 근거로 삼는다.",
                 "숨은 메타데이터나 파일명만으로 schema key 또는 faker rule을 만들지 않는다.",
-                "DOCX 경로에서는 원본 템플릿, 채워진 DOCX, 선택적 LibreOffice 렌더링 결과, GT lineage가 manifest에 남아야 한다. 외부 GUI 앱 자동화 렌더러는 사용하지 않는다.",
                 "sample_kind가 blank_template이면 OCR/static label/keep bbox는 라벨 근거(label_anchor_ids)로만 쓰고 schema field의 anchor_id로 쓰지 않는다.",
                 "sample_kind가 blank_template이면 schema field의 anchor_id는 반드시 리뷰에서 use로 확정된 값 입력 후보, 체크박스, 표 셀, manual bbox, visual_line_detect bbox 중 하나여야 한다.",
                 "sample_kind가 blank_template이고 값 삽입 영역을 찾을 수 없으면 field를 만들지 말고 uncertainty_report에 남긴다.",
@@ -812,22 +916,22 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "inputs": {
             "registry": doc.to_dict(),
             "sampleKind": sample_kind,
-            "sample": samples[0] if samples else "",
-            "latestDetections": item.get("latestDetections") if item else "",
-            "latestReview": item.get("latestReview") if item else "",
-            "latestInpainted": item.get("latestInpainted") if item else "",
-            "existingAuthoring": {
-                "schema": item.get("latestAuthoringSchema") if item else "",
-                "stylesheet": item.get("latestAuthoringStylesheet") if item else "",
-                "fakerProfile": item.get("latestAuthoringFakerProfile") if item else "",
+            "sample": _display_path(page_scope["source_snapshot"], ROOT),
+            "sourceImage": _display_path(page_scope["source_snapshot"], ROOT),
+            "pageScope": {
+                "mode": page_scope["mode"],
+                "sha256": page_scope["source_sha256"],
+                "selectedFileName": page_scope["source_image"].name,
+                "otherPagesAllowed": False,
+                "documentContainersAllowed": False,
             },
+            "latestDetections": "",
+            "latestReview": _display_path(page_scope["review_path"], ROOT),
+            "latestInpainted": "",
+            "existingAuthoring": existing_authoring,
             "docx": {
-                "enabled": bool(item and item.get("hasEditableOfficeTemplate")),
-                "officeRender": item.get("officeRender") if item else {},
-                "analysis": (docx_context or {}).get("paths", {}).get("analysis", ""),
-                "anchorMap": (docx_context or {}).get("paths", {}).get("anchorMap", ""),
-                "summary": (docx_context or {}).get("summary", {}),
-                "error": (docx_context or {}).get("error", ""),
+                "enabled": False,
+                "reason": "document container access is disabled for single-page authoring inference",
             },
         },
         "created_at": created_at,
@@ -841,27 +945,40 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
             resolved_review = _resolve_workspace_path(latest_review)
             baseline_path = request_dir / "review_baseline.json"
             shutil.copy2(resolved_review, baseline_path)
+            original_policy = load_review_policy(baseline_path)
+            detections_path = request_dir / "detections_baseline.json"
+            if original_policy.source_detections.is_file():
+                shutil.copy2(original_policy.source_detections, detections_path)
+            else:
+                detections_path.write_text("{}\n", encoding="utf-8")
+            baseline_payload = json.loads(baseline_path.read_text(encoding="utf-8"))
+            baseline_payload["source_image"] = _display_path(page_scope["source_snapshot"], ROOT)
+            baseline_payload["source_detections"] = _display_path(detections_path, ROOT)
+            baseline_path.write_text(json.dumps(baseline_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             baseline_policy = load_review_policy(baseline_path)
+            request["inputs"]["latestReview"] = _display_path(baseline_path, ROOT)
             request["inputs"]["reviewBaseline"] = {
                 "path": _display_path(baseline_path, ROOT),
                 "sha256": file_sha256(baseline_path),
                 "useCount": sum(label.status == "use" for label in baseline_policy.labels),
             }
             generated_sidecars["reviewBaseline"] = _display_path(baseline_path, ROOT)
+            request["inputs"]["latestDetections"] = _display_path(detections_path, ROOT)
+            generated_sidecars["detectionsBaseline"] = _display_path(detections_path, ROOT)
         except Exception as exc:
             generated_sidecars["reviewBaselineError"] = str(exc)
         try:
             anchor_map_path = request_dir / "anchor_map_draft.json"
-            review_anchor_map(_resolve_workspace_path(latest_review), out_path=anchor_map_path, doc_id=doc_id, title=doc.title)
+            review_anchor_map(request_dir / "review_baseline.json", out_path=anchor_map_path, doc_id=doc_id, title=doc.title)
             generated_sidecars["anchorMapDraft"] = _display_path(anchor_map_path, ROOT)
         except Exception as exc:
             generated_sidecars["anchorMapError"] = str(exc)
         try:
             visual_manifest_path = _write_authoring_visual_evidence_manifest(
                 doc_id=doc_id,
-                review_path=_resolve_workspace_path(latest_review),
+                review_path=request_dir / "review_baseline.json",
                 request_dir=request_dir,
-                visual_source_path=_resolve_workspace_path(str(request["inputs"].get("latestInpainted") or "")) if request["inputs"].get("latestInpainted") else None,
+                visual_source_path=page_scope["source_snapshot"],
             )
             generated_sidecars["visualEvidenceManifest"] = _display_path(visual_manifest_path, ROOT)
         except Exception as exc:
@@ -928,11 +1045,12 @@ def _write_authoring_visual_evidence_manifest(
         "doc_id": doc_id,
         "source_review": _display_path(review_path, ROOT),
         "visual_source": _display_path(visual_source, ROOT),
-        "source_image": _display_path(policy.source_image, ROOT),
+        "source_image": _display_path(visual_source, ROOT),
+        "review_source_image_sha256": file_sha256(policy.source_image),
         "image": {"width": policy.image_width, "height": policy.image_height},
         "padding": padding,
         "source_of_truth_policy": [
-            "The full template image is the primary visual source of truth; crops are zoom aids, not replacements for full-page context.",
+            "This single request-local page snapshot is the only visual source of truth; PDFs, DOCX files, and other pages are out of scope.",
             "Unit/prefix/suffix decisions must be made from value-position visual evidence, not from label text alone.",
         ],
         "crops": entries,
@@ -966,6 +1084,7 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
         expected_request_root = (workbench_subdir(doc_id, "authoring") / "agent_requests").resolve()
         if expected_request_root not in request_path.resolve().parents:
             raise ValueError("requestPath is outside the selected document authoring directory")
+        _validate_authoring_agent_request_page_scope(request, payload)
         revision_instruction = str(payload.get("instruction") or "").strip()
         if execution_mode == "targeted_revision":
             if not revision_instruction:
@@ -2003,8 +2122,9 @@ def _authoring_agent_exec_prompt(*, request_path: Path, request_dir: Path, run_d
 You are running as a local Codex subprocess for the DataFactory workbench.
 
 ## Scope
-- Read `{_display_path(request_path, ROOT)}` and the sample, OCR, review, existing authoring, and visual evidence files referenced by it.
-- Inspect the full template image as the primary visual source of truth. Crops are zoom aids only.
+- Read `{request_path.resolve()}` and only the request-local sourceImage snapshot, OCR/review snapshots, existing-authoring snapshots, and visual evidence files referenced by it.
+- Inspect request.inputs.sourceImage as the only full-page visual source of truth. Crops are zoom aids only.
+- Do not open or search for any PDF/DOCX container, seed source folder, or other JPG/PNG page from this document. Never add fields visible only on another page.
 - Use live web search for document meaning and official field evidence, then record sources in research_report.json.
 - Produce only: {', '.join(AUTHORING_AGENT_SCHEMA_OUTPUTS)}.
 - Freeze a complete metadata-free semantic_schema and 100% use-anchor binding coverage.
@@ -2017,7 +2137,7 @@ You are running as a local Codex subprocess for the DataFactory workbench.
 Verify all five JSON files parse, every use anchor is mapped, semantic leaf values are empty, and research/style/anchor references are valid. Do not create faker_profile_draft.json, value_pool_draft.json, or application_notes.md.
 Return a short Korean summary after writing the files.
 
-Run logs and scratch notes may be written only under `{_display_path(run_dir, ROOT)}`.
+Do not create logs or scratch files outside the request directory. The parent process manages run logs separately.
 """
     if stage == "faker":
         return f"""# Codex authoring inference job — faker pass
@@ -2047,7 +2167,7 @@ You are running as a local Codex subprocess for the DataFactory workbench.
 ## Completion
 Verify JSON parsing, full generator coverage, supported rules, pool minimums, constraint references, and date bounds. Return a short Korean summary after writing the files.
 
-Run logs and scratch notes may be written only under `{_display_path(run_dir, ROOT)}`.
+Do not create logs or scratch files outside the request directory. The parent process manages run logs separately.
 """
     if stage == "validation_repair":
         return f"""# Codex authoring inference job — validation repair
@@ -2056,7 +2176,7 @@ Read the request `{_display_path(request_path, ROOT)}` and the current draft fil
 The caller appends the exact machine validation errors to this prompt.
 
 - Make only changes required by those errors across the existing draft files.
-- Do not repeat web research or reopen source images unless an appended error explicitly says visual evidence is missing.
+- Do not repeat web research or reopen source images unless an appended error explicitly says visual evidence is missing. If needed, open only request.inputs.sourceImage; PDFs, DOCX files, and other pages remain prohibited.
 - Preserve valid field IDs, semantic paths, anchors, style, research evidence, generators, pools, and constraints.
 - Never silence an error by dropping a use anchor, semantic leaf, generator, relationship, or evidence item.
 - Write only inside the request directory and verify the complete eight-file contract before finishing.
@@ -2074,6 +2194,7 @@ Paths stored in the request package are relative to the read-only repository roo
 ## Hard scope boundary
 - This request applies only to document `{json.loads(request_path.read_text(encoding='utf-8')).get('docId', '')}` and only to the draft files inside `{request_dir.resolve()}`.
 - 다른 문서(other document)의 directory, request package, registry entry, manifest, sample, source code, or final authoring file을 inspect, edit, rename, or delete하지 않는다.
+- 시각 확인이 필요하면 이 request의 inputs.sourceImage 한 장만 연다. 원본 PDF/DOCX나 같은 문서의 다른 페이지 이미지는 열지 않는다.
 - Preserve every valid field ID, semantic path, anchor, generator, pool, constraint, style, and evidence item that is unrelated to the user request.
 - Make the smallest changes that satisfy the user request. Do not regenerate the complete document and do not repeat broad web research.
 - Inspect the selected document's existing evidence only when necessary to resolve the requested change.
@@ -2092,10 +2213,11 @@ Validate the complete eight-file contract after editing and return a short Korea
 You are running as a local Codex subprocess for the DataFactory workbench.
 
 ## Required behavior
-- Read the request package: `{_display_path(request_path, ROOT)}`.
-- Read every input file referenced by the request when it exists.
-- Treat `generated_sidecars.visualEvidenceManifest` as the visual index for the full template image and bbox locations when present.
-- Inspect the full template image as the primary visual source of truth for field targets, static labels, prefix/suffix, and unit handling. Use crop images only as optional zoom aids for ambiguous or small regions. Do not infer unit inclusion/exclusion from label text alone.
+- Read the request package: `{request_path.resolve()}`.
+- Read only the request-local inputs referenced by the package.
+- Treat `generated_sidecars.visualEvidenceManifest` as the visual index for the one selected page snapshot and bbox locations when present.
+- Inspect request.inputs.sourceImage as the only visual source of truth for field targets, static labels, prefix/suffix, and unit handling. Use crop images only as optional zoom aids for ambiguous or small regions. Do not infer unit inclusion/exclusion from label text alone.
+- Do not open or search for a PDF/DOCX original, seed source folder, or any other page image. Do not add or redefine schema from content outside the selected page.
 - Use live web search for the document type research required by the request contract.
 - Follow `contract.sample_kind` strictly. If it is `blank_template`, treat OCR text bboxes as static label evidence unless review status/role proves they are value regions.
 - Generate the full draft outputs listed below.
@@ -2140,8 +2262,7 @@ If precision would require an unsupported rule, approximate with `pattern:`, `ch
 Before finishing, verify all required files exist, all JSON files parse, every use anchor has a schema binding, every binding has a matching `field_generators` entry, every `field_generators` key matches a schema binding field_id, every pool reference exists and meets its scalar/record minimum or has a valid closed-set policy, and every `constraints` item follows the exact supported relationship constraint grammar above.
 Return a short Korean final summary only after the files are written.
 
-## Run directory
-Use this run directory only for logs or scratch notes if needed: `{_display_path(run_dir, ROOT)}`.
+Do not create logs or scratch files outside the request directory. The parent process manages run logs separately.
 """
 
 
@@ -2358,7 +2479,7 @@ def _run_authoring_agent_job(
     reasoning_effort = str(options.get("reasoningEffort") or DEFAULT_AUTHORING_AGENT_REASONING_EFFORT).strip().lower()
 
     def command_for(message_path: Path) -> list[str]:
-        agent_root = request_dir if execution_mode == "targeted_revision" else ROOT
+        agent_root = request_dir
         command = [
             "codex",
             "--search",

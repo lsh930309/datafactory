@@ -1,0 +1,600 @@
+{
+  "schema_version": 2,
+  "doc_id": "FIN-04",
+  "locale": "ko_KR",
+  "as_of_date": "2026-07-14",
+  "field_generators": {
+    "document_confirmation_number": "pattern:####-####-####-####",
+    "document_confirmation_line": "template:문서확인번호: {{pattern:####-####-####-####}} (신청인: {{person.name_ko}})",
+    "authenticity_date": "date.kr",
+    "authenticity_time": "pattern:##:##:##",
+    "issue_number": "pattern:##############",
+    "issue_datetime": "template:{{date.kr}} {{pattern:##:##}}",
+    "subscriber_rrn": "person.rrn",
+    "subscriber_name": "person.name_ko",
+    "page_counter": "literal:1 / 1",
+    "np_acquisition_date": "date.kr",
+    "np_subscriber_name": "same_as:subscriber_name",
+    "np_subscriber_type": "literal:사업장가입자",
+    "np_workplace_number": "pattern:###########",
+    "np_workplace_name": "company.name_ko",
+    "np_report_received_date": "template:({{date.kr}})",
+    "hi_acquisition_date": "date.kr",
+    "hi_subscriber_name": "same_as:subscriber_name",
+    "hi_subscriber_type": "literal:직장가입자",
+    "hi_workplace_number": "same_as:np_workplace_number",
+    "hi_workplace_name": "same_as:np_workplace_name",
+    "hi_report_received_date": "template:({{date.kr}})",
+    "wc_acquisition_date": "date.kr",
+    "wc_subscriber_name": "same_as:subscriber_name",
+    "wc_subscriber_type": "literal:사업장가입자",
+    "wc_workplace_number": "same_as:np_workplace_number",
+    "wc_workplace_name": "same_as:np_workplace_name",
+    "wc_report_received_date": "template:({{date.kr}})",
+    "ei_acquisition_date": "date.kr",
+    "ei_subscriber_name": "same_as:subscriber_name",
+    "ei_subscriber_type": "literal:사업장가입자",
+    "ei_workplace_number": "same_as:np_workplace_number",
+    "ei_workplace_name": "same_as:np_workplace_name",
+    "ei_report_received_date": "template:({{date.kr}})"
+  },
+  "data_pools": {
+    "fin04_profiles": [
+      {
+        "document_confirmation_number": "4102-7305-1846-9207",
+        "document_confirmation_line": "문서확인번호: 4102-7305-1846-9207 (신청인: 김가온)",
+        "authenticity_date": "2026/01/15",
+        "authenticity_time": "10:36:12",
+        "issue_number": "20260115103421",
+        "issue_datetime": "2026-01-15 10:34",
+        "subscriber_rrn": "900101-1000000",
+        "subscriber_name": "김가온",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2022.03.07",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "11023045001",
+        "np_workplace_name": "가온데이터 주식회사",
+        "np_report_received_date": "(2022.03.09)",
+        "hi_acquisition_date": "2022.03.07",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2022.03.09)",
+        "wc_acquisition_date": "2022.03.08",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2022.03.08)",
+        "ei_acquisition_date": "2022.03.08",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2022.03.08)"
+      },
+      {
+        "document_confirmation_number": "5284-1937-6402-8516",
+        "document_confirmation_line": "문서확인번호: 5284-1937-6402-8516 (신청인: 이누리)",
+        "authenticity_date": "2026/01/28",
+        "authenticity_time": "14:19:43",
+        "issue_number": "20260128141708",
+        "issue_datetime": "2026-01-28 14:17",
+        "subscriber_rrn": "880202-2000000",
+        "subscriber_name": "이누리",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2021.11.15",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "21034056002",
+        "np_workplace_name": "누리정밀 주식회사",
+        "np_report_received_date": "(2021.11.18)",
+        "hi_acquisition_date": "2021.11.15",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2021.11.18)",
+        "wc_acquisition_date": "2021.11.16",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2021.11.16)",
+        "ei_acquisition_date": "2021.11.16",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2021.11.16)"
+      },
+      {
+        "document_confirmation_number": "6371-4028-9153-2740",
+        "document_confirmation_line": "문서확인번호: 6371-4028-9153-2740 (신청인: 박도담)",
+        "authenticity_date": "2026/02/10",
+        "authenticity_time": "09:08:27",
+        "issue_number": "20260210090614",
+        "issue_datetime": "2026-02-10 09:06",
+        "subscriber_rrn": "920303-1000000",
+        "subscriber_name": "박도담",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2023.01.02",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "31045067003",
+        "np_workplace_name": "도담바이오 주식회사",
+        "np_report_received_date": "(2023.01.04)",
+        "hi_acquisition_date": "2023.01.02",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2023.01.04)",
+        "wc_acquisition_date": "2023.01.03",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2023.01.03)",
+        "ei_acquisition_date": "2023.01.03",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2023.01.03)"
+      },
+      {
+        "document_confirmation_number": "7460-5819-3264-1075",
+        "document_confirmation_line": "문서확인번호: 7460-5819-3264-1075 (신청인: 최하람)",
+        "authenticity_date": "2026/02/24",
+        "authenticity_time": "16:44:18",
+        "issue_number": "20260224164205",
+        "issue_datetime": "2026-02-24 16:42",
+        "subscriber_rrn": "950404-2000000",
+        "subscriber_name": "최하람",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2024.04.01",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "41056078004",
+        "np_workplace_name": "하람모빌리티 주식회사",
+        "np_report_received_date": "(2024.04.03)",
+        "hi_acquisition_date": "2024.04.01",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2024.04.03)",
+        "wc_acquisition_date": "2024.04.01",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2024.04.01)",
+        "ei_acquisition_date": "2024.04.01",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2024.04.01)"
+      },
+      {
+        "document_confirmation_number": "8549-2607-4318-6952",
+        "document_confirmation_line": "문서확인번호: 8549-2607-4318-6952 (신청인: 정라온)",
+        "authenticity_date": "2026/03/11",
+        "authenticity_time": "11:27:39",
+        "issue_number": "20260311112526",
+        "issue_datetime": "2026-03-11 11:25",
+        "subscriber_rrn": "870505-1000000",
+        "subscriber_name": "정라온",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2020.09.14",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "51067089005",
+        "np_workplace_name": "라온소재 주식회사",
+        "np_report_received_date": "(2020.09.17)",
+        "hi_acquisition_date": "2020.09.14",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2020.09.17)",
+        "wc_acquisition_date": "2020.09.15",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2020.09.15)",
+        "ei_acquisition_date": "2020.09.15",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2020.09.15)"
+      },
+      {
+        "document_confirmation_number": "9638-1745-5029-3164",
+        "document_confirmation_line": "문서확인번호: 9638-1745-5029-3164 (신청인: 오새봄)",
+        "authenticity_date": "2026/03/27",
+        "authenticity_time": "13:53:06",
+        "issue_number": "20260327135142",
+        "issue_datetime": "2026-03-27 13:51",
+        "subscriber_rrn": "910606-2000000",
+        "subscriber_name": "오새봄",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2025.02.03",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "61078091006",
+        "np_workplace_name": "새봄로보틱스 주식회사",
+        "np_report_received_date": "(2025.02.05)",
+        "hi_acquisition_date": "2025.02.03",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2025.02.05)",
+        "wc_acquisition_date": "2025.02.04",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2025.02.04)",
+        "ei_acquisition_date": "2025.02.04",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2025.02.04)"
+      },
+      {
+        "document_confirmation_number": "1726-8954-6130-4827",
+        "document_confirmation_line": "문서확인번호: 1726-8954-6130-4827 (신청인: 강윤슬)",
+        "authenticity_date": "2026/04/09",
+        "authenticity_time": "08:42:55",
+        "issue_number": "20260409084033",
+        "issue_datetime": "2026-04-09 08:40",
+        "subscriber_rrn": "890707-2000000",
+        "subscriber_name": "강윤슬",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2022.07.11",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "71089012007",
+        "np_workplace_name": "윤슬에너지 주식회사",
+        "np_report_received_date": "(2022.07.14)",
+        "hi_acquisition_date": "2022.07.11",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2022.07.14)",
+        "wc_acquisition_date": "2022.07.12",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2022.07.12)",
+        "ei_acquisition_date": "2022.07.12",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2022.07.12)"
+      },
+      {
+        "document_confirmation_number": "2815-9360-7241-5938",
+        "document_confirmation_line": "문서확인번호: 2815-9360-7241-5938 (신청인: 윤마루)",
+        "authenticity_date": "2026/04/23",
+        "authenticity_time": "15:16:31",
+        "issue_number": "20260423151409",
+        "issue_datetime": "2026-04-23 15:14",
+        "subscriber_rrn": "930808-1000000",
+        "subscriber_name": "윤마루",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2023.10.16",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "81091023008",
+        "np_workplace_name": "마루시스템 주식회사",
+        "np_report_received_date": "(2023.10.18)",
+        "hi_acquisition_date": "2023.10.16",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2023.10.18)",
+        "wc_acquisition_date": "2023.10.17",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2023.10.17)",
+        "ei_acquisition_date": "2023.10.17",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2023.10.17)"
+      },
+      {
+        "document_confirmation_number": "3904-6172-8359-2046",
+        "document_confirmation_line": "문서확인번호: 3904-6172-8359-2046 (신청인: 한해솔)",
+        "authenticity_date": "2026/05/14",
+        "authenticity_time": "10:05:48",
+        "issue_number": "20260514100317",
+        "issue_datetime": "2026-05-14 10:03",
+        "subscriber_rrn": "860909-2000000",
+        "subscriber_name": "한해솔",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2021.05.03",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "91012034009",
+        "np_workplace_name": "해솔푸드 주식회사",
+        "np_report_received_date": "(2021.05.06)",
+        "hi_acquisition_date": "2021.05.03",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2021.05.06)",
+        "wc_acquisition_date": "2021.05.04",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2021.05.04)",
+        "ei_acquisition_date": "2021.05.04",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2021.05.04)"
+      },
+      {
+        "document_confirmation_number": "4093-7281-9460-3157",
+        "document_confirmation_line": "문서확인번호: 4093-7281-9460-3157 (신청인: 서이든)",
+        "authenticity_date": "2026/05/28",
+        "authenticity_time": "17:38:22",
+        "issue_number": "20260528173604",
+        "issue_datetime": "2026-05-28 17:36",
+        "subscriber_rrn": "940101-2000000",
+        "subscriber_name": "서이든",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2024.01.08",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "12023045010",
+        "np_workplace_name": "이든헬스 주식회사",
+        "np_report_received_date": "(2024.01.10)",
+        "hi_acquisition_date": "2024.01.08",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2024.01.10)",
+        "wc_acquisition_date": "2024.01.09",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2024.01.09)",
+        "ei_acquisition_date": "2024.01.09",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2024.01.09)"
+      },
+      {
+        "document_confirmation_number": "5182-8390-1574-4268",
+        "document_confirmation_line": "문서확인번호: 5182-8390-1574-4268 (신청인: 문별하)",
+        "authenticity_date": "2026/06/12",
+        "authenticity_time": "12:21:14",
+        "issue_number": "20260612121952",
+        "issue_datetime": "2026-06-12 12:19",
+        "subscriber_rrn": "850202-1000000",
+        "subscriber_name": "문별하",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2025.06.02",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "22034056011",
+        "np_workplace_name": "별하물류 주식회사",
+        "np_report_received_date": "(2025.06.04)",
+        "hi_acquisition_date": "2025.06.02",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2025.06.04)",
+        "wc_acquisition_date": "2025.06.03",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2025.06.03)",
+        "ei_acquisition_date": "2025.06.03",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2025.06.03)"
+      },
+      {
+        "document_confirmation_number": "6271-9408-2685-5379",
+        "document_confirmation_line": "문서확인번호: 6271-9408-2685-5379 (신청인: 배다온)",
+        "authenticity_date": "2026/07/08",
+        "authenticity_time": "09:47:36",
+        "issue_number": "20260708094511",
+        "issue_datetime": "2026-07-08 09:45",
+        "subscriber_rrn": "960303-2000000",
+        "subscriber_name": "배다온",
+        "page_counter": "1 / 1",
+        "np_acquisition_date": "2020.12.01",
+        "np_subscriber_type": "사업장가입자",
+        "np_workplace_number": "32045067012",
+        "np_workplace_name": "다온건설기술 주식회사",
+        "np_report_received_date": "(2020.12.03)",
+        "hi_acquisition_date": "2020.12.01",
+        "hi_subscriber_type": "직장가입자",
+        "hi_report_received_date": "(2020.12.03)",
+        "wc_acquisition_date": "2020.12.02",
+        "wc_subscriber_type": "사업장가입자",
+        "wc_report_received_date": "(2020.12.02)",
+        "ei_acquisition_date": "2020.12.02",
+        "ei_subscriber_type": "사업장가입자",
+        "ei_report_received_date": "(2020.12.02)"
+      }
+    ]
+  },
+  "constraints": [
+    {
+      "type": "pick_record",
+      "pool": "fin04_profiles",
+      "targets": {
+        "document_confirmation_number": "document_confirmation_number",
+        "document_confirmation_line": "document_confirmation_line",
+        "authenticity_date": "authenticity_date",
+        "authenticity_time": "authenticity_time",
+        "issue_number": "issue_number",
+        "issue_datetime": "issue_datetime",
+        "subscriber_rrn": "subscriber_rrn",
+        "subscriber_name": "subscriber_name",
+        "page_counter": "page_counter",
+        "np_acquisition_date": "np_acquisition_date",
+        "np_subscriber_type": "np_subscriber_type",
+        "np_workplace_number": "np_workplace_number",
+        "np_workplace_name": "np_workplace_name",
+        "np_report_received_date": "np_report_received_date",
+        "hi_acquisition_date": "hi_acquisition_date",
+        "hi_subscriber_type": "hi_subscriber_type",
+        "hi_report_received_date": "hi_report_received_date",
+        "wc_acquisition_date": "wc_acquisition_date",
+        "wc_subscriber_type": "wc_subscriber_type",
+        "wc_report_received_date": "wc_report_received_date",
+        "ei_acquisition_date": "ei_acquisition_date",
+        "ei_subscriber_type": "ei_subscriber_type",
+        "ei_report_received_date": "ei_report_received_date"
+      }
+    },
+    {
+      "type": "copy",
+      "source": "subscriber_name",
+      "target": "np_subscriber_name"
+    },
+    {
+      "type": "copy",
+      "source": "subscriber_name",
+      "target": "hi_subscriber_name"
+    },
+    {
+      "type": "copy",
+      "source": "subscriber_name",
+      "target": "wc_subscriber_name"
+    },
+    {
+      "type": "copy",
+      "source": "subscriber_name",
+      "target": "ei_subscriber_name"
+    },
+    {
+      "type": "copy",
+      "source": "np_workplace_number",
+      "target": "hi_workplace_number"
+    },
+    {
+      "type": "copy",
+      "source": "np_workplace_number",
+      "target": "wc_workplace_number"
+    },
+    {
+      "type": "copy",
+      "source": "np_workplace_number",
+      "target": "ei_workplace_number"
+    },
+    {
+      "type": "copy",
+      "source": "np_workplace_name",
+      "target": "hi_workplace_name"
+    },
+    {
+      "type": "copy",
+      "source": "np_workplace_name",
+      "target": "wc_workplace_name"
+    },
+    {
+      "type": "copy",
+      "source": "np_workplace_name",
+      "target": "ei_workplace_name"
+    }
+  ],
+  "field_rules": [
+    {
+      "field_ids": [
+        "document_confirmation_number",
+        "document_confirmation_line",
+        "subscriber_name"
+      ],
+      "anchor_ids": [
+        "det_000001",
+        "det_000018"
+      ],
+      "evidence_ids": [
+        "VIS-001",
+        "VIS-004",
+        "WEB-003"
+      ],
+      "decision": "상단 복합 문구의 번호와 신청인 성명은 같은 fin04_profiles 레코드에서 선택해 본문 성명과 일치시킨다."
+    },
+    {
+      "field_ids": [
+        "authenticity_date",
+        "authenticity_time",
+        "issue_number",
+        "issue_datetime"
+      ],
+      "anchor_ids": [
+        "det_000005",
+        "det_000006",
+        "det_000012",
+        "det_000014"
+      ],
+      "evidence_ids": [
+        "VIS-002",
+        "VIS-003",
+        "WEB-002",
+        "WEB-003"
+      ],
+      "decision": "전용 time/datetime 관계 DSL이 없어 기본 generator는 형식 근사로 두고, 최종 값은 기준일 이하의 유효한 발급 레코드가 덮어쓴다. KST는 정적 suffix라 값에서 제외한다."
+    },
+    {
+      "field_ids": [
+        "subscriber_rrn",
+        "subscriber_name"
+      ],
+      "anchor_ids": [
+        "det_000016",
+        "det_000018"
+      ],
+      "evidence_ids": [
+        "VIS-004",
+        "WEB-001"
+      ],
+      "decision": "원본 개인정보를 재사용하지 않고 실재 인물·사업장과 연결되지 않는 합성 조합만 사용한다."
+    },
+    {
+      "field_ids": [
+        "page_counter"
+      ],
+      "anchor_ids": [
+        "det_000020"
+      ],
+      "evidence_ids": [
+        "VIS-005"
+      ],
+      "decision": "현재 템플릿은 한 페이지이므로 1 / 1 고정값을 사용한다."
+    },
+    {
+      "field_ids": [
+        "np_acquisition_date",
+        "np_subscriber_name",
+        "np_subscriber_type",
+        "np_workplace_number",
+        "np_workplace_name",
+        "np_report_received_date"
+      ],
+      "anchor_ids": [
+        "det_000030",
+        "det_000032",
+        "det_000033",
+        "det_000034",
+        "det_000035",
+        "det_000036"
+      ],
+      "evidence_ids": [
+        "VIS-006",
+        "WEB-001",
+        "WEB-004",
+        "WEB-005"
+      ],
+      "decision": "신고접수일 괄호는 값 bbox에 포함되므로 생성 값에도 포함한다."
+    },
+    {
+      "field_ids": [
+        "hi_acquisition_date",
+        "hi_subscriber_name",
+        "hi_subscriber_type",
+        "hi_workplace_number",
+        "hi_workplace_name",
+        "hi_report_received_date"
+      ],
+      "anchor_ids": [
+        "det_000037",
+        "det_000039",
+        "det_000040",
+        "det_000041",
+        "det_000042",
+        "det_000043"
+      ],
+      "evidence_ids": [
+        "VIS-007",
+        "WEB-001",
+        "WEB-005"
+      ],
+      "decision": "성명·사업장 식별정보는 copy로 동기화하고 건강보험 가입자종별은 시각 관찰값인 직장가입자로 유지한다."
+    },
+    {
+      "field_ids": [
+        "wc_acquisition_date",
+        "wc_subscriber_name",
+        "wc_subscriber_type",
+        "wc_workplace_number",
+        "wc_workplace_name",
+        "wc_report_received_date"
+      ],
+      "anchor_ids": [
+        "det_000044",
+        "det_000046",
+        "det_000047",
+        "det_000048",
+        "det_000049",
+        "det_000050"
+      ],
+      "evidence_ids": [
+        "VIS-008",
+        "WEB-001",
+        "WEB-005"
+      ],
+      "decision": "현재 filled sample 시나리오에서는 자격취득일을 생성한다. 자진신고 사업장의 조건부 공란은 지원 DSL 부재로 보류한다."
+    },
+    {
+      "field_ids": [
+        "ei_acquisition_date",
+        "ei_subscriber_name",
+        "ei_subscriber_type",
+        "ei_workplace_number",
+        "ei_workplace_name",
+        "ei_report_received_date"
+      ],
+      "anchor_ids": [
+        "det_000051",
+        "det_000053",
+        "det_000054",
+        "det_000055",
+        "det_000056",
+        "det_000057"
+      ],
+      "evidence_ids": [
+        "VIS-009",
+        "WEB-001",
+        "WEB-005"
+      ],
+      "decision": "성명·사업장 식별정보는 copy로 동기화하고 날짜는 같은 레코드 안에서 취득일 이후 신고접수일이 되도록 작성한다."
+    }
+  ],
+  "relationship_notes": [
+    "pick_record는 상단 복합 문구, 발급정보, 가입자정보, 보험별 날짜와 사업장 기준값을 한 레코드에서 선택한다.",
+    "copy는 본문 가입자 성명과 네 보험 행 성명, 국민연금 행의 사업장관리번호·사업장명칭과 나머지 보험 행을 일치시킨다.",
+    "괄호가 포함된 신고접수일은 date_order/date_not_before의 단일 date.kr 대상이 아니므로 레코드 데이터 자체에서 취득일 이상을 보장한다."
+  ],
+  "synthetic_data_policy": {
+    "contains_real_personal_data": false,
+    "contains_real_company_data": false,
+    "note": "이름·주민등록번호·사업장명·관리번호·문서번호는 원본에서 복사하지 않은 합성값이며 실재 인물 또는 법인 식별 용도로 사용할 수 없다."
+  }
+}

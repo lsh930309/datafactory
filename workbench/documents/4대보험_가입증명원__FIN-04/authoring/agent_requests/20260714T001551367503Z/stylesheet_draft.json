@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "doc_id": "FIN-04",
+  "title": "4대 사회보험 가입자 가입내역 확인서",
+  "source_image": "workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg",
+  "image": {"width": 1191, "height": 1684},
+  "defaults": {
+    "font_family": "AppleSDGothicNeo",
+    "font_path": "/System/Library/Fonts/AppleSDGothicNeo.ttc",
+    "font_weight": "normal",
+    "fill": [28, 28, 28],
+    "opacity": 0.92,
+    "valign": "middle",
+    "line_spacing": 1.0,
+    "letter_spacing": 0.0,
+    "baseline_shift": 0,
+    "overflow": "shrink"
+  },
+  "style_classes": [
+    {"style_class":"header_confirmation","font_size":17,"align":"left","fit":"shrink_to_fit","confidence":0.84,"source_detection_ids":["det_000001"]},
+    {"style_class":"stamp_timestamp","font_size":11,"align":"center","fit":"shrink_to_fit","confidence":0.78,"source_detection_ids":["det_000005","det_000006"]},
+    {"style_class":"metadata_value","font_size":17,"align":"center","fit":"shrink_to_fit","confidence":0.84,"source_detection_ids":["det_000012","det_000014","det_000016"]},
+    {"style_class":"name_value","font_size":23,"align":"center","fit":"shrink_to_fit","confidence":0.84,"source_detection_ids":["det_000018"]},
+    {"style_class":"page_counter","font_size":18,"align":"center","fit":"shrink_to_fit","confidence":0.84,"source_detection_ids":["det_000020"]},
+    {"style_class":"table_date","font_size":17,"align":"center","fit":"shrink_to_fit","confidence":0.84,"source_detection_ids":["det_000030","det_000036","det_000037","det_000043","det_000044","det_000050","det_000051","det_000057"]},
+    {"style_class":"table_name","font_size":22,"align":"center","fit":"shrink_to_fit","confidence":0.84,"source_detection_ids":["det_000032","det_000039","det_000046","det_000053"]},
+    {"style_class":"table_text","font_size":19,"align":"center","fit":"shrink_to_fit","confidence":0.84,"source_detection_ids":["det_000033","det_000040","det_000047","det_000054"]},
+    {"style_class":"table_identifier","font_size":16,"align":"center","fit":"shrink_to_fit","confidence":0.84,"source_detection_ids":["det_000034","det_000041","det_000048","det_000055"]},
+    {"style_class":"table_company","font_size":16,"align":"center","fit":"shrink_to_fit","confidence":0.80,"source_detection_ids":["det_000035","det_000042","det_000049","det_000056"]}
+  ],
+  "render_notes": [
+    "전체 1191x1684 이미지와 원본 PDF 렌더를 기준으로 한 보수적 초안이다.",
+    "신고접수일의 괄호는 값 bbox와 함께 제거되므로 값 문자열에 포함한다.",
+    "진본 확인시각 아래 KST는 정적 텍스트이므로 생성 값에 포함하지 않는다.",
+    "긴 사업장명칭과 상단 복합 문구는 shrink_to_fit을 사용한다."
+  ]
+}

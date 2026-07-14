@@ -1,595 +1,6036 @@
 {
   "schema_version": 1,
-  "created_at": "2026-06-29T12:13:18.401338+00:00",
-  "updated_at": "2026-07-02T07:07:56.847094+00:00",
+  "created_at": "2026-07-14T03:00:29.134015+00:00",
   "doc_id": "FIN-05",
   "title": "근로소득 원천징수영수증",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/review/original_이승훈님_원천징수영수증(2023년)_page_001/review.json",
-  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/이승훈님_원천징수영수증(2023년)_page_001.jpg",
-  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/inpaint/original_이승훈님_원천징수영수증(2023년)_page_001/lama/inpainted_lama.png",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_applied_reviews/20260714T023807908619Z/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/근로소득원천징수영수증_page_001.jpg",
+  "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/근로소득원천징수영수증_page_001.jpg",
   "image": {
     "width": 1190,
-    "height": 1684
+    "height": 1682
+  },
+  "bbox_source": {
+    "canonical": "review",
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_applied_reviews/20260714T023807908619Z/review.json"
+  },
+  "anchor_map_ref": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/anchor_map_draft.json",
+  "semantic_schema": {
+    "문서선택": {
+      "근로소득_원천징수영수증": "",
+      "근로소득_지급명세서": ""
+    },
+    "보관용구분": {
+      "소득자_보관용": "",
+      "발행자_보관용": "",
+      "발행자_보고용": ""
+    },
+    "관리": {
+      "관리번호": ""
+    },
+    "인적분류": {
+      "거주구분": {
+        "거주자": "",
+        "비거주자": ""
+      },
+      "거주지국": "",
+      "거주지국코드": "",
+      "내외국인": {
+        "내국인": "",
+        "외국인": ""
+      },
+      "외국인단일세율적용": {
+        "해당": "",
+        "미해당": ""
+      },
+      "외국법인소속파견근로자여부": {
+        "해당": "",
+        "미해당": ""
+      },
+      "종교관련종사자여부": {
+        "해당": "",
+        "미해당": ""
+      },
+      "국적": "",
+      "국적코드": "",
+      "세대주여부": {
+        "세대주": "",
+        "세대원": "",
+        "세대주의_배우자": ""
+      },
+      "연말정산구분": {
+        "계속근로": "",
+        "중도퇴사": ""
+      }
+    },
+    "징수의무자": {
+      "법인명_상호": "",
+      "대표자_성명": "",
+      "사업자등록번호": "",
+      "주민등록번호": "",
+      "사업자단위과세자여부": {
+        "해당": "",
+        "미해당": ""
+      },
+      "종사업장_일련번호": "",
+      "소재지_주소": ""
+    },
+    "소득자": {
+      "성명": "",
+      "주민등록번호_외국인등록번호": "",
+      "주소": ""
+    },
+    "근무처별소득명세": {
+      "주(현)": {
+        "근무처명": "",
+        "사업자등록번호": "",
+        "근무기간": {
+          "시작": "",
+          "종료": ""
+        },
+        "감면기간": {
+          "시작": "",
+          "종료": ""
+        }
+      },
+      "종(전) 1": {
+        "근무처명": "",
+        "사업자등록번호": "",
+        "근무기간": {
+          "시작": "",
+          "종료": ""
+        },
+        "감면기간": {
+          "시작": "",
+          "종료": ""
+        }
+      },
+      "종(전) 2": {
+        "근무처명": "",
+        "사업자등록번호": "",
+        "근무기간": {
+          "종료": "",
+          "시작": ""
+        },
+        "감면기간": {
+          "종료": "",
+          "시작": ""
+        }
+      },
+      "⑯-1 납세조합": {
+        "근무처명": "",
+        "사업자등록번호": "",
+        "근무기간": {
+          "시작": "",
+          "종료": ""
+        },
+        "감면기간": {
+          "시작": "",
+          "종료": ""
+        }
+      },
+      "합계": {
+        "근무처명": "",
+        "사업자등록번호": "",
+        "근무기간": {
+          "시작": "",
+          "종료": ""
+        },
+        "감면기간": {
+          "시작": "",
+          "종료": ""
+        }
+      },
+      "⑬ 급여": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑭ 상여": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑮ 인정상여": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑮-1 주식매수선택권 행사이익": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑮-2 우리사주조합 인출금": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑮-3 임원 퇴직소득금액 한도초과액": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑮-4 직무발명보상금": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑯ 계": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      }
+    },
+    "비과세및감면소득명세": {
+      "⑱ 국외근로": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑱-1 야간근로수당": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑱-2 보육수당": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑱-3 출산지원금": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑱-4 연구보조비": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑱-5 비과세 항목": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑱-41 임원등 할인금액": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑲ 수련보조수당": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑳ 비과세소득 계": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      },
+      "⑳-1 감면소득 계": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      }
+    },
+    "검토필요": {
+      "비과세및감면소득명세_라벨없는_물결표행": {
+        "주(현)": "",
+        "종(전) 1": "",
+        "종(전) 2": "",
+        "⑯-1 납세조합": "",
+        "합계": ""
+      }
+    },
+    "세액명세": {
+      "⑦ 결정세액": {
+        "소득세": "",
+        "지방소득세": "",
+        "농어촌특별세": ""
+      },
+      "⑦② 종(전)근무지 1": {
+        "사업자등록번호": "",
+        "소득세": "",
+        "지방소득세": "",
+        "농어촌특별세": ""
+      },
+      "⑦② 종(전)근무지 2": {
+        "사업자등록번호": "",
+        "소득세": "",
+        "지방소득세": "",
+        "농어촌특별세": ""
+      },
+      "⑦② 종(전)근무지 3": {
+        "사업자등록번호": "",
+        "소득세": "",
+        "지방소득세": "",
+        "농어촌특별세": ""
+      },
+      "⑦③ 주(현)근무지": {
+        "사업자등록번호": "",
+        "소득세": "",
+        "지방소득세": "",
+        "농어촌특별세": ""
+      },
+      "⑦④ 납부특례세액": {
+        "소득세": "",
+        "지방소득세": "",
+        "농어촌특별세": ""
+      },
+      "⑦⑤ 차감징수세액": {
+        "소득세": "",
+        "지방소득세": "",
+        "농어촌특별세": ""
+      }
+    },
+    "영수확인": {
+      "작성일자": {
+        "연도": "",
+        "월": "",
+        "일": ""
+      },
+      "징수_보고_의무자_서명": ""
+    }
   },
   "fields": [
     {
-      "field_id": "employer_name",
-      "label": "징수의무자 상호",
+      "field_id": "fin05_det_000004",
+      "label": "거주구분 거주자1",
+      "semantic_path": [
+        "인적분류",
+        "거주구분",
+        "거주자"
+      ],
+      "bbox_label_id": "det_000004",
+      "source_detection_id": "det_000004",
+      "source_text": "거주자1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/거주구분/거주자",
+        "csv_column": "인적분류/거주구분/거주자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_det_000009",
+      "label": "내외국인 내국인1",
+      "semantic_path": [
+        "인적분류",
+        "내외국인",
+        "내국인"
+      ],
+      "bbox_label_id": "det_000009",
+      "source_detection_id": "det_000009",
+      "source_text": "내국인1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/내외국인/내국인",
+        "csv_column": "인적분류/내외국인/내국인"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_det_000012",
+      "label": "외국인단일세율적용 해당1",
+      "semantic_path": [
+        "인적분류",
+        "외국인단일세율적용",
+        "해당"
+      ],
+      "bbox_label_id": "det_000012",
+      "source_detection_id": "det_000012",
+      "source_text": "해당1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/외국인단일세율적용/해당",
+        "csv_column": "인적분류/외국인단일세율적용/해당"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_det_000015",
+      "label": "외국법인 소속 파견근로자 여부 해당1",
+      "semantic_path": [
+        "인적분류",
+        "외국법인소속파견근로자여부",
+        "해당"
+      ],
+      "bbox_label_id": "det_000015",
+      "source_detection_id": "det_000015",
+      "source_text": "해당1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/외국법인소속파견근로자여부/해당",
+        "csv_column": "인적분류/외국법인소속파견근로자여부/해당"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_det_000018",
+      "label": "종교관련종사자 여부 해당1",
+      "semantic_path": [
+        "인적분류",
+        "종교관련종사자여부",
+        "해당"
+      ],
+      "bbox_label_id": "det_000018",
+      "source_detection_id": "det_000018",
+      "source_text": "해당1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/종교관련종사자여부/해당",
+        "csv_column": "인적분류/종교관련종사자여부/해당"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_det_000023",
+      "label": "세대주여부 세대주1",
+      "semantic_path": [
+        "인적분류",
+        "세대주여부",
+        "세대주"
+      ],
+      "bbox_label_id": "det_000023",
+      "source_detection_id": "det_000023",
+      "source_text": "세대주1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/세대주여부/세대주",
+        "csv_column": "인적분류/세대주여부/세대주"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_det_000024",
+      "label": "세대주여부 세대주의 배우자3",
+      "semantic_path": [
+        "인적분류",
+        "세대주여부",
+        "세대주의_배우자"
+      ],
+      "bbox_label_id": "det_000024",
+      "source_detection_id": "det_000024",
+      "source_text": "세대주의 배우자3",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/세대주여부/세대주의_배우자",
+        "csv_column": "인적분류/세대주여부/세대주의_배우자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_det_000026",
+      "label": "연말정산구분 계속근로1",
+      "semantic_path": [
+        "인적분류",
+        "연말정산구분",
+        "계속근로"
+      ],
+      "bbox_label_id": "det_000026",
       "source_detection_id": "det_000026",
-      "source_text": "메가스터디교육(주)",
+      "source_text": "계속근로1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/연말정산구분/계속근로",
+        "csv_column": "인적분류/연말정산구분/계속근로"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_det_000034",
+      "label": "③-1 사업자단위과세자 여부 해당1",
+      "semantic_path": [
+        "징수의무자",
+        "사업자단위과세자여부",
+        "해당"
+      ],
+      "bbox_label_id": "det_000034",
+      "source_detection_id": "det_000034",
+      "source_text": "해당1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "징수의무자/사업자단위과세자여부/해당",
+        "csv_column": "징수의무자/사업자단위과세자여부/해당"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0031",
+      "label": "① 법인명(상호)",
+      "semantic_path": [
+        "징수의무자",
+        "법인명_상호"
+      ],
+      "bbox_label_id": "visual_0031",
+      "source_detection_id": "visual_0031",
+      "source_text": "① 법인명(상호)",
       "value_type": "company.name_ko",
-      "generator": "pool_record:fin05_withholding_records.employer_name",
-      "style_class": "style_employer_name",
+      "generator": "company.name_ko",
+      "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "employer.name",
-        "csv_column": "employer_name"
+        "json_path": "징수의무자/법인명_상호",
+        "csv_column": "징수의무자/법인명_상호"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000026"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "employer_representative_name",
-      "label": "대표자",
-      "source_detection_id": "det_000028",
-      "source_text": "손성은",
+      "field_id": "fin05_visual_0033",
+      "label": "② 대표자(성명)",
+      "semantic_path": [
+        "징수의무자",
+        "대표자_성명"
+      ],
+      "bbox_label_id": "visual_0033",
+      "source_detection_id": "visual_0033",
+      "source_text": "② 대표자(성명)",
       "value_type": "person.name_ko",
-      "generator": "pool_record:fin05_withholding_records.employer_representative_name",
-      "style_class": "style_employer_representative_name",
+      "generator": "person.name_ko",
+      "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "employer.representative.name",
-        "csv_column": "employer_representative_name"
+        "json_path": "징수의무자/대표자_성명",
+        "csv_column": "징수의무자/대표자_성명"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000028"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "employer_business_registration_number",
-      "label": "사업자등록번호",
-      "source_detection_id": "det_000030",
-      "source_text": "780-87-00034",
+      "field_id": "fin05_visual_0034",
+      "label": "③ 사업자등록번호",
+      "semantic_path": [
+        "징수의무자",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0034",
+      "source_detection_id": "visual_0034",
+      "source_text": "③ 사업자등록번호",
       "value_type": "free_text.short",
-      "generator": "pool_record:fin05_withholding_records.employer_business_registration_number",
-      "style_class": "style_employer_business_registration_number",
-      "render_policy": {
-        "align": "center",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "employer.business.registration.number",
-        "csv_column": "employer_business_registration_number"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000030"
-    },
-    {
-      "field_id": "employer_address",
-      "label": "사업장 소재지",
-      "source_detection_id": "det_000036",
-      "source_text": "서울특별시 서초구 효령로321(서초동,덕원빌딩)",
-      "value_type": "address.ko",
-      "generator": "pool_record:fin05_withholding_records.employer_address",
-      "style_class": "style_employer_address",
+      "generator": "business_reg_no",
+      "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "employer.address",
-        "csv_column": "employer_address"
+        "json_path": "징수의무자/사업자등록번호",
+        "csv_column": "징수의무자/사업자등록번호"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000036"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "employee_name",
-      "label": "소득자 성명",
-      "source_detection_id": "det_000039",
-      "source_text": "이승훈",
-      "value_type": "person.name_ko",
-      "generator": "pool_record:fin05_withholding_records.employee_name",
-      "style_class": "style_employee_name",
-      "render_policy": {
-        "align": "left",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "employee.name",
-        "csv_column": "employee_name"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000039"
-    },
-    {
-      "field_id": "employee_rrn",
-      "label": "주민등록번호",
-      "source_detection_id": "det_000041",
-      "source_text": "930309-1069114",
+      "field_id": "fin05_visual_0037",
+      "label": "④ 주민등록번호",
+      "semantic_path": [
+        "징수의무자",
+        "주민등록번호"
+      ],
+      "bbox_label_id": "visual_0037",
+      "source_detection_id": "visual_0037",
+      "source_text": "④ 주민등록번호",
       "value_type": "person.rrn",
-      "generator": "pool_record:fin05_withholding_records.employee_rrn",
-      "style_class": "style_employee_rrn",
+      "generator": "person.rrn",
+      "style_class": "table_text_cell",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "employee.rrn",
-        "csv_column": "employee_rrn"
+        "json_path": "징수의무자/주민등록번호",
+        "csv_column": "징수의무자/주민등록번호"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000041"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "workplace_business_registration_number",
-      "label": "근무처 사업자번호",
-      "source_detection_id": "det_000055",
-      "source_text": "780-87-00034",
+      "field_id": "fin05_visual_0038",
+      "label": "③-2 종사업장 일련번호",
+      "semantic_path": [
+        "징수의무자",
+        "종사업장_일련번호"
+      ],
+      "bbox_label_id": "visual_0038",
+      "source_detection_id": "visual_0038",
+      "source_text": "③-2 종사업장 일련번호",
       "value_type": "free_text.short",
-      "generator": "pool_record:fin05_withholding_records.workplace_business_registration_number",
-      "style_class": "style_workplace_business_registration_number",
+      "generator": "pattern:####",
+      "style_class": "date_part_cell",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "workplace.business.registration.number",
-        "csv_column": "workplace_business_registration_number"
+        "json_path": "징수의무자/종사업장_일련번호",
+        "csv_column": "징수의무자/종사업장_일련번호"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000055"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "employment_period",
-      "label": "근무기간",
-      "source_detection_id": "det_000058",
-      "source_text": "2023.01.01 ~2023.07.07",
+      "field_id": "fin05_visual_0046",
+      "label": "⑤ 소재지(주소)",
+      "semantic_path": [
+        "징수의무자",
+        "소재지_주소"
+      ],
+      "bbox_label_id": "visual_0046",
+      "source_detection_id": "visual_0046",
+      "source_text": "⑤ 소재지(주소)",
+      "value_type": "address.ko",
+      "generator": "address.ko",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "징수의무자/소재지_주소",
+        "csv_column": "징수의무자/소재지_주소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0048",
+      "label": "⑥ 성명",
+      "semantic_path": [
+        "소득자",
+        "성명"
+      ],
+      "bbox_label_id": "visual_0048",
+      "source_detection_id": "visual_0048",
+      "source_text": "⑥ 성명",
+      "value_type": "person.name_ko",
+      "generator": "person.name_ko",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "소득자/성명",
+        "csv_column": "소득자/성명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0050",
+      "label": "⑦ 주민등록번호(외국인등록번호)",
+      "semantic_path": [
+        "소득자",
+        "주민등록번호_외국인등록번호"
+      ],
+      "bbox_label_id": "visual_0050",
+      "source_detection_id": "visual_0050",
+      "source_text": "⑦ 주민등록번호(외국인등록번호)",
+      "value_type": "person.rrn",
+      "generator": "person.rrn",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "소득자/주민등록번호_외국인등록번호",
+        "csv_column": "소득자/주민등록번호_외국인등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0057",
+      "label": "⑧ 주소",
+      "semantic_path": [
+        "소득자",
+        "주소"
+      ],
+      "bbox_label_id": "visual_0057",
+      "source_detection_id": "visual_0057",
+      "source_text": "⑧ 주소",
+      "value_type": "address.ko",
+      "generator": "address.ko",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "소득자/주소",
+        "csv_column": "소득자/주소"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0062",
+      "label": "⑨ 주(현) 근무처명",
+      "semantic_path": [
+        "근무처별소득명세",
+        "주(현)",
+        "근무처명"
+      ],
+      "bbox_label_id": "visual_0062",
+      "source_detection_id": "visual_0062",
+      "source_text": "⑨ 주(현) 근무처명",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/주(현)/근무처명",
+        "csv_column": "근무처별소득명세/주(현)/근무처명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0063",
+      "label": "⑨ 종(전) 1 근무처명",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 1",
+        "근무처명"
+      ],
+      "bbox_label_id": "visual_0063",
+      "source_detection_id": "visual_0063",
+      "source_text": "⑨ 종(전) 1 근무처명",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 1/근무처명",
+        "csv_column": "근무처별소득명세/종(전) 1/근무처명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0064",
+      "label": "⑨ 종(전) 2 근무처명",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 2",
+        "근무처명"
+      ],
+      "bbox_label_id": "visual_0064",
+      "source_detection_id": "visual_0064",
+      "source_text": "⑨ 종(전) 2 근무처명",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 2/근무처명",
+        "csv_column": "근무처별소득명세/종(전) 2/근무처명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0066",
+      "label": "⑨ ⑯-1 납세조합 근무처명",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯-1 납세조합",
+        "근무처명"
+      ],
+      "bbox_label_id": "visual_0066",
+      "source_detection_id": "visual_0066",
+      "source_text": "⑨ ⑯-1 납세조합 근무처명",
+      "value_type": "company.name_ko",
+      "generator": "company.name_ko",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯-1 납세조합/근무처명",
+        "csv_column": "근무처별소득명세/⑯-1 납세조합/근무처명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0067",
+      "label": "⑨ 합계 근무처명",
+      "semantic_path": [
+        "근무처별소득명세",
+        "합계",
+        "근무처명"
+      ],
+      "bbox_label_id": "visual_0067",
+      "source_detection_id": "visual_0067",
+      "source_text": "⑨ 합계 근무처명",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/합계/근무처명",
+        "csv_column": "근무처별소득명세/합계/근무처명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0069",
+      "label": "⑩ 주(현) 사업자등록번호",
+      "semantic_path": [
+        "근무처별소득명세",
+        "주(현)",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0069",
+      "source_detection_id": "visual_0069",
+      "source_text": "⑩ 주(현) 사업자등록번호",
       "value_type": "free_text.short",
-      "generator": "pool_record:fin05_withholding_records.employment_period",
-      "style_class": "style_employment_period",
+      "generator": "business_reg_no",
+      "style_class": "table_text_cell",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "employment.period",
-        "csv_column": "employment_period"
+        "json_path": "근무처별소득명세/주(현)/사업자등록번호",
+        "csv_column": "근무처별소득명세/주(현)/사업자등록번호"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000058"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "gross_salary_current",
-      "label": "총급여 현재",
-      "source_detection_id": "det_000062",
-      "source_text": "12,063, 480",
+      "field_id": "fin05_visual_0070",
+      "label": "⑩ 종(전) 1 사업자등록번호",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 1",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0070",
+      "source_detection_id": "visual_0070",
+      "source_text": "⑩ 종(전) 1 사업자등록번호",
+      "value_type": "free_text.short",
+      "generator": "business_reg_no",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 1/사업자등록번호",
+        "csv_column": "근무처별소득명세/종(전) 1/사업자등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0071",
+      "label": "⑩ 종(전) 2 사업자등록번호",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 2",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0071",
+      "source_detection_id": "visual_0071",
+      "source_text": "⑩ 종(전) 2 사업자등록번호",
+      "value_type": "free_text.short",
+      "generator": "business_reg_no",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 2/사업자등록번호",
+        "csv_column": "근무처별소득명세/종(전) 2/사업자등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0073",
+      "label": "⑩ ⑯-1 납세조합 사업자등록번호",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯-1 납세조합",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0073",
+      "source_detection_id": "visual_0073",
+      "source_text": "⑩ ⑯-1 납세조합 사업자등록번호",
+      "value_type": "free_text.short",
+      "generator": "business_reg_no",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯-1 납세조합/사업자등록번호",
+        "csv_column": "근무처별소득명세/⑯-1 납세조합/사업자등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0074",
+      "label": "⑩ 합계 사업자등록번호",
+      "semantic_path": [
+        "근무처별소득명세",
+        "합계",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0074",
+      "source_detection_id": "visual_0074",
+      "source_text": "⑩ 합계 사업자등록번호",
       "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.gross_salary_current",
-      "style_class": "style_gross_salary_current",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "gross.salary.current",
-        "csv_column": "gross_salary_current"
+        "json_path": "근무처별소득명세/합계/사업자등록번호",
+        "csv_column": "근무처별소득명세/합계/사업자등록번호"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000062"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "gross_salary_total",
-      "label": "총급여 합계",
-      "source_detection_id": "det_000063",
-      "source_text": "12,063,480",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.gross_salary_total",
-      "style_class": "style_gross_salary_total",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "gross.salary.total",
-        "csv_column": "gross_salary_total"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000063"
-    },
-    {
-      "field_id": "taxable_income_current",
-      "label": "과세소득 현재",
-      "source_detection_id": "det_000072",
-      "source_text": "12,063,480",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.taxable_income_current",
-      "style_class": "style_taxable_income_current",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "taxable.income.current",
-        "csv_column": "taxable_income_current"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000072"
-    },
-    {
-      "field_id": "taxable_income_total",
-      "label": "과세소득 합계",
-      "source_detection_id": "det_000073",
-      "source_text": "12,063,480",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.taxable_income_total",
-      "style_class": "style_taxable_income_total",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "taxable.income.total",
-        "csv_column": "taxable_income_total"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000073"
-    },
-    {
-      "field_id": "income_tax_paid",
-      "label": "기납부 소득세",
-      "source_detection_id": "det_000094",
-      "source_text": "119,100",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.income_tax_paid",
-      "style_class": "style_income_tax_paid",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "income.tax.paid",
-        "csv_column": "income_tax_paid"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000094"
-    },
-    {
-      "field_id": "local_income_tax_paid",
-      "label": "기납부 지방소득세",
-      "source_detection_id": "det_000095",
-      "source_text": "11,880",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.local_income_tax_paid",
-      "style_class": "style_local_income_tax_paid",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "local.income.tax.paid",
-        "csv_column": "local_income_tax_paid"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000095"
-    },
-    {
-      "field_id": "income_tax_refund",
-      "label": "차감징수 소득세",
-      "source_detection_id": "det_000099",
-      "source_text": "-119,100",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.income_tax_refund",
-      "style_class": "style_income_tax_refund",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "income.tax.refund",
-        "csv_column": "income_tax_refund"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000099"
-    },
-    {
-      "field_id": "local_income_tax_refund",
-      "label": "차감징수 지방소득세",
-      "source_detection_id": "det_000100",
-      "source_text": "-11,880",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.local_income_tax_refund",
-      "style_class": "style_local_income_tax_refund",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "local.income.tax.refund",
-        "csv_column": "local_income_tax_refund"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000100"
-    },
-    {
-      "field_id": "determined_income_tax_current",
-      "label": "결정세액 소득세 현재",
-      "source_detection_id": "det_000102",
-      "source_text": "482,340",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.determined_income_tax_current",
-      "style_class": "style_determined_income_tax_current",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "determined.income.tax.current",
-        "csv_column": "determined_income_tax_current"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000102"
-    },
-    {
-      "field_id": "determined_income_tax_total",
-      "label": "결정세액 소득세 합계",
-      "source_detection_id": "det_000104",
-      "source_text": "482,340",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.determined_income_tax_total",
-      "style_class": "style_determined_income_tax_total",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "determined.income.tax.total",
-        "csv_column": "determined_income_tax_total"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000104"
-    },
-    {
-      "field_id": "determined_local_tax_current",
-      "label": "결정세액 지방소득세 현재",
-      "source_detection_id": "det_000107",
-      "source_text": "108,540",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.determined_local_tax_current",
-      "style_class": "style_determined_local_tax_current",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "determined.local.tax.current",
-        "csv_column": "determined_local_tax_current"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000107"
-    },
-    {
-      "field_id": "determined_local_tax_total",
-      "label": "결정세액 지방소득세 합계",
-      "source_detection_id": "det_000109",
-      "source_text": "108,540",
-      "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.determined_local_tax_total",
-      "style_class": "style_determined_local_tax_total",
-      "render_policy": {
-        "align": "right",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink"
-      },
-      "export": {
-        "json_path": "determined.local.tax.total",
-        "csv_column": "determined_local_tax_total"
-      },
-      "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000109"
-    },
-    {
-      "field_id": "receipt_date",
-      "label": "영수일",
-      "source_detection_id": "det_000110",
-      "source_text": "2023 년 07월 31일",
+      "field_id": "fin05_visual_0076",
+      "label": "종(전) 2 근무기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 2",
+        "근무기간",
+        "시작"
+      ],
+      "bbox_label_id": "visual_0076",
+      "source_detection_id": "visual_0076",
+      "source_text": "종(전) 2 근무기간 시작",
       "value_type": "date.kr",
-      "generator": "pool_record:fin05_withholding_records.receipt_date",
-      "style_class": "style_receipt_date",
+      "generator": "date.kr",
+      "style_class": "body_default",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "receipt.date",
-        "csv_column": "receipt_date"
+        "json_path": "근무처별소득명세/종(전) 2/근무기간/시작",
+        "csv_column": "근무처별소득명세/종(전) 2/근무기간/시작"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000110"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "tax_due_income",
-      "label": "납부특례 소득세",
-      "source_detection_id": "det_000112",
-      "source_text": "456,540",
+      "field_id": "fin05_visual_0078",
+      "label": "종(전) 2 감면기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 2",
+        "감면기간",
+        "시작"
+      ],
+      "bbox_label_id": "visual_0078",
+      "source_detection_id": "visual_0078",
+      "source_text": "종(전) 2 감면기간 시작",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 2/감면기간/시작",
+        "csv_column": "근무처별소득명세/종(전) 2/감면기간/시작"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0080",
+      "label": "⑬ 급여 주(현)",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑬ 급여",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0080",
+      "source_detection_id": "visual_0080",
+      "source_text": "⑬ 급여 주(현)",
       "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.tax_due_income",
-      "style_class": "style_tax_due_income",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "tax.due.income",
-        "csv_column": "tax_due_income"
+        "json_path": "근무처별소득명세/⑬ 급여/주(현)",
+        "csv_column": "근무처별소득명세/⑬ 급여/주(현)"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000112"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "tax_due_total",
-      "label": "납부특례 합계",
-      "source_detection_id": "det_000114",
-      "source_text": "456,540",
+      "field_id": "fin05_visual_0081",
+      "label": "⑬ 급여 종(전) 1",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑬ 급여",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0081",
+      "source_detection_id": "visual_0081",
+      "source_text": "⑬ 급여 종(전) 1",
       "value_type": "money.krw",
-      "generator": "pool_record:fin05_withholding_records.tax_due_total",
-      "style_class": "style_tax_due_total",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
       "render_policy": {
-        "align": "right",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "tax.due.total",
-        "csv_column": "tax_due_total"
+        "json_path": "근무처별소득명세/⑬ 급여/종(전) 1",
+        "csv_column": "근무처별소득명세/⑬ 급여/종(전) 1"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000114"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "withholding_agent_name",
-      "label": "원천징수의무자",
-      "source_detection_id": "det_000118",
-      "source_text": "메가스터디교육(주)",
-      "value_type": "company.name_ko",
-      "generator": "pool_record:fin05_withholding_records.withholding_agent_name",
-      "style_class": "style_withholding_agent_name",
+      "field_id": "fin05_visual_0082",
+      "label": "⑬ 급여 종(전) 2",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑬ 급여",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0082",
+      "source_detection_id": "visual_0082",
+      "source_text": "⑬ 급여 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "withholding.agent.name",
-        "csv_column": "withholding_agent_name"
+        "json_path": "근무처별소득명세/⑬ 급여/종(전) 2",
+        "csv_column": "근무처별소득명세/⑬ 급여/종(전) 2"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000118"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "tax_office_recipient",
-      "label": "세무서장 귀하",
-      "source_detection_id": "det_000122",
-      "source_text": "서초세무서장귀하",
+      "field_id": "fin05_visual_0084",
+      "label": "⑬ 급여 ⑯-1 납세조합",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑬ 급여",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0084",
+      "source_detection_id": "visual_0084",
+      "source_text": "⑬ 급여 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑬ 급여/⑯-1 납세조합",
+        "csv_column": "근무처별소득명세/⑬ 급여/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0085",
+      "label": "⑬ 급여 합계",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑬ 급여",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0085",
+      "source_detection_id": "visual_0085",
+      "source_text": "⑬ 급여 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑬ 급여/합계",
+        "csv_column": "근무처별소득명세/⑬ 급여/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0087",
+      "label": "⑭ 상여 주(현)",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑭ 상여",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0087",
+      "source_detection_id": "visual_0087",
+      "source_text": "⑭ 상여 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑭ 상여/주(현)",
+        "csv_column": "근무처별소득명세/⑭ 상여/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0088",
+      "label": "⑭ 상여 종(전) 1",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑭ 상여",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0088",
+      "source_detection_id": "visual_0088",
+      "source_text": "⑭ 상여 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑭ 상여/종(전) 1",
+        "csv_column": "근무처별소득명세/⑭ 상여/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0089",
+      "label": "⑭ 상여 종(전) 2",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑭ 상여",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0089",
+      "source_detection_id": "visual_0089",
+      "source_text": "⑭ 상여 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑭ 상여/종(전) 2",
+        "csv_column": "근무처별소득명세/⑭ 상여/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0091",
+      "label": "⑭ 상여 ⑯-1 납세조합",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑭ 상여",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0091",
+      "source_detection_id": "visual_0091",
+      "source_text": "⑭ 상여 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑭ 상여/⑯-1 납세조합",
+        "csv_column": "근무처별소득명세/⑭ 상여/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0092",
+      "label": "⑭ 상여 합계",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑭ 상여",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0092",
+      "source_detection_id": "visual_0092",
+      "source_text": "⑭ 상여 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑭ 상여/합계",
+        "csv_column": "근무처별소득명세/⑭ 상여/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0094",
+      "label": "⑮ 인정상여 주(현)",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮ 인정상여",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0094",
+      "source_detection_id": "visual_0094",
+      "source_text": "⑮ 인정상여 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮ 인정상여/주(현)",
+        "csv_column": "근무처별소득명세/⑮ 인정상여/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0095",
+      "label": "⑮ 인정상여 종(전) 1",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮ 인정상여",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0095",
+      "source_detection_id": "visual_0095",
+      "source_text": "⑮ 인정상여 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮ 인정상여/종(전) 1",
+        "csv_column": "근무처별소득명세/⑮ 인정상여/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0096",
+      "label": "⑮ 인정상여 종(전) 2",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮ 인정상여",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0096",
+      "source_detection_id": "visual_0096",
+      "source_text": "⑮ 인정상여 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮ 인정상여/종(전) 2",
+        "csv_column": "근무처별소득명세/⑮ 인정상여/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0098",
+      "label": "⑮ 인정상여 ⑯-1 납세조합",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮ 인정상여",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0098",
+      "source_detection_id": "visual_0098",
+      "source_text": "⑮ 인정상여 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮ 인정상여/⑯-1 납세조합",
+        "csv_column": "근무처별소득명세/⑮ 인정상여/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0099",
+      "label": "⑮ 인정상여 합계",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮ 인정상여",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0099",
+      "source_detection_id": "visual_0099",
+      "source_text": "⑮ 인정상여 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮ 인정상여/합계",
+        "csv_column": "근무처별소득명세/⑮ 인정상여/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0100",
+      "label": "⑮-1 주식매수선택권 행사이익 주(현)",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-1 주식매수선택권 행사이익",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0100",
+      "source_detection_id": "visual_0100",
+      "source_text": "⑮-1 주식매수선택권 행사이익 주(현)",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/주(현)",
+        "csv_column": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0101",
+      "label": "⑮-1 주식매수선택권 행사이익 종(전) 1",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-1 주식매수선택권 행사이익",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0101",
+      "source_detection_id": "visual_0101",
+      "source_text": "⑮-1 주식매수선택권 행사이익 종(전) 1",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/종(전) 1",
+        "csv_column": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0102",
+      "label": "⑮-1 주식매수선택권 행사이익 종(전) 2",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-1 주식매수선택권 행사이익",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0102",
+      "source_detection_id": "visual_0102",
+      "source_text": "⑮-1 주식매수선택권 행사이익 종(전) 2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/종(전) 2",
+        "csv_column": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0104",
+      "label": "⑮-1 주식매수선택권 행사이익 ⑯-1 납세조합",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-1 주식매수선택권 행사이익",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0104",
+      "source_detection_id": "visual_0104",
+      "source_text": "⑮-1 주식매수선택권 행사이익 ⑯-1 납세조합",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/⑯-1 납세조합",
+        "csv_column": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0105",
+      "label": "⑮-1 주식매수선택권 행사이익 합계",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-1 주식매수선택권 행사이익",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0105",
+      "source_detection_id": "visual_0105",
+      "source_text": "⑮-1 주식매수선택권 행사이익 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/합계",
+        "csv_column": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0106",
+      "label": "⑮-2 우리사주조합 인출금 주(현)",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-2 우리사주조합 인출금",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0106",
+      "source_detection_id": "visual_0106",
+      "source_text": "⑮-2 우리사주조합 인출금 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/주(현)",
+        "csv_column": "근무처별소득명세/⑮-2 우리사주조합 인출금/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0107",
+      "label": "⑮-2 우리사주조합 인출금 종(전) 1",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-2 우리사주조합 인출금",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0107",
+      "source_detection_id": "visual_0107",
+      "source_text": "⑮-2 우리사주조합 인출금 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/종(전) 1",
+        "csv_column": "근무처별소득명세/⑮-2 우리사주조합 인출금/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0108",
+      "label": "⑮-2 우리사주조합 인출금 종(전) 2",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-2 우리사주조합 인출금",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0108",
+      "source_detection_id": "visual_0108",
+      "source_text": "⑮-2 우리사주조합 인출금 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/종(전) 2",
+        "csv_column": "근무처별소득명세/⑮-2 우리사주조합 인출금/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0110",
+      "label": "⑮-2 우리사주조합 인출금 ⑯-1 납세조합",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-2 우리사주조합 인출금",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0110",
+      "source_detection_id": "visual_0110",
+      "source_text": "⑮-2 우리사주조합 인출금 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/⑯-1 납세조합",
+        "csv_column": "근무처별소득명세/⑮-2 우리사주조합 인출금/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0111",
+      "label": "⑮-2 우리사주조합 인출금 합계",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-2 우리사주조합 인출금",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0111",
+      "source_detection_id": "visual_0111",
+      "source_text": "⑮-2 우리사주조합 인출금 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/합계",
+        "csv_column": "근무처별소득명세/⑮-2 우리사주조합 인출금/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0112",
+      "label": "⑮-3 임원 퇴직소득금액 한도초과액 주(현)",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-3 임원 퇴직소득금액 한도초과액",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0112",
+      "source_detection_id": "visual_0112",
+      "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/주(현)",
+        "csv_column": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0113",
+      "label": "⑮-3 임원 퇴직소득금액 한도초과액 종(전) 1",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-3 임원 퇴직소득금액 한도초과액",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0113",
+      "source_detection_id": "visual_0113",
+      "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/종(전) 1",
+        "csv_column": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0114",
+      "label": "⑮-3 임원 퇴직소득금액 한도초과액 종(전) 2",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-3 임원 퇴직소득금액 한도초과액",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0114",
+      "source_detection_id": "visual_0114",
+      "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/종(전) 2",
+        "csv_column": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0116",
+      "label": "⑮-3 임원 퇴직소득금액 한도초과액 ⑯-1 납세조합",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-3 임원 퇴직소득금액 한도초과액",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0116",
+      "source_detection_id": "visual_0116",
+      "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/⑯-1 납세조합",
+        "csv_column": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0117",
+      "label": "⑮-3 임원 퇴직소득금액 한도초과액 합계",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-3 임원 퇴직소득금액 한도초과액",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0117",
+      "source_detection_id": "visual_0117",
+      "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/합계",
+        "csv_column": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0119",
+      "label": "⑮-4 직무발명보상금 주(현)",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-4 직무발명보상금",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0119",
+      "source_detection_id": "visual_0119",
+      "source_text": "⑮-4 직무발명보상금 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-4 직무발명보상금/주(현)",
+        "csv_column": "근무처별소득명세/⑮-4 직무발명보상금/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0120",
+      "label": "⑮-4 직무발명보상금 종(전) 1",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-4 직무발명보상금",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0120",
+      "source_detection_id": "visual_0120",
+      "source_text": "⑮-4 직무발명보상금 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-4 직무발명보상금/종(전) 1",
+        "csv_column": "근무처별소득명세/⑮-4 직무발명보상금/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0121",
+      "label": "⑮-4 직무발명보상금 종(전) 2",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-4 직무발명보상금",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0121",
+      "source_detection_id": "visual_0121",
+      "source_text": "⑮-4 직무발명보상금 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-4 직무발명보상금/종(전) 2",
+        "csv_column": "근무처별소득명세/⑮-4 직무발명보상금/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0123",
+      "label": "⑮-4 직무발명보상금 ⑯-1 납세조합",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-4 직무발명보상금",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0123",
+      "source_detection_id": "visual_0123",
+      "source_text": "⑮-4 직무발명보상금 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-4 직무발명보상금/⑯-1 납세조합",
+        "csv_column": "근무처별소득명세/⑮-4 직무발명보상금/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0124",
+      "label": "⑮-4 직무발명보상금 합계",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑮-4 직무발명보상금",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0124",
+      "source_detection_id": "visual_0124",
+      "source_text": "⑮-4 직무발명보상금 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑮-4 직무발명보상금/합계",
+        "csv_column": "근무처별소득명세/⑮-4 직무발명보상금/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0127",
+      "label": "⑯ 계 주(현)",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯ 계",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0127",
+      "source_detection_id": "visual_0127",
+      "source_text": "⑯ 계 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯ 계/주(현)",
+        "csv_column": "근무처별소득명세/⑯ 계/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0128",
+      "label": "⑯ 계 종(전) 1",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯ 계",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0128",
+      "source_detection_id": "visual_0128",
+      "source_text": "⑯ 계 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯ 계/종(전) 1",
+        "csv_column": "근무처별소득명세/⑯ 계/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0129",
+      "label": "⑯ 계 종(전) 2",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯ 계",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0129",
+      "source_detection_id": "visual_0129",
+      "source_text": "⑯ 계 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯ 계/종(전) 2",
+        "csv_column": "근무처별소득명세/⑯ 계/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0131",
+      "label": "⑯ 계 ⑯-1 납세조합",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯ 계",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0131",
+      "source_detection_id": "visual_0131",
+      "source_text": "⑯ 계 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯ 계/⑯-1 납세조합",
+        "csv_column": "근무처별소득명세/⑯ 계/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0132",
+      "label": "⑯ 계 합계",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯ 계",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0132",
+      "source_detection_id": "visual_0132",
+      "source_text": "⑯ 계 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯ 계/합계",
+        "csv_column": "근무처별소득명세/⑯ 계/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0133",
+      "label": "⑱ 국외근로 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱ 국외근로",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0133",
+      "source_detection_id": "visual_0133",
+      "source_text": "⑱ 국외근로 주(현)",
       "value_type": "free_text.short",
-      "generator": "pool_record:fin05_withholding_records.tax_office_recipient",
-      "style_class": "style_tax_office_recipient",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "tax.office.recipient",
-        "csv_column": "tax_office_recipient"
+        "json_path": "비과세및감면소득명세/⑱ 국외근로/주(현)",
+        "csv_column": "비과세및감면소득명세/⑱ 국외근로/주(현)"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "det_000122"
+      "notes": "",
+      "render_mode": "printed"
     },
     {
-      "field_id": "workplace_name",
-      "label": "근무처명",
-      "source_detection_id": "manual_fin05_workplace_name",
-      "source_text": "메가스터디교육(주)",
-      "value_type": "company.name_ko",
-      "generator": "pool_record:fin05_withholding_records.workplace_name",
-      "style_class": "style_workplace_name",
+      "field_id": "fin05_visual_0134",
+      "label": "⑱ 국외근로 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱ 국외근로",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0134",
+      "source_detection_id": "visual_0134",
+      "source_text": "⑱ 국외근로 종(전) 1",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
       "render_policy": {
-        "align": "center",
+        "align": "left",
         "valign": "middle",
         "fit": "shrink_to_fit",
-        "overflow": "shrink"
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
       },
       "export": {
-        "json_path": "employment.workplace.name",
-        "csv_column": "workplace_name"
+        "json_path": "비과세및감면소득명세/⑱ 국외근로/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑱ 국외근로/종(전) 1"
       },
       "required": true,
-      "notes": "FIN-05 근로소득 원천징수영수증 1페이지 생산용 보정 필드. 회사/근로자/급여/세액 값을 record 기반으로 일관 생성.",
-      "bbox_label_id": "manual_fin05_workplace_name"
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0135",
+      "label": "⑱ 국외근로 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱ 국외근로",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0135",
+      "source_detection_id": "visual_0135",
+      "source_text": "⑱ 국외근로 종(전) 2",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱ 국외근로/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑱ 국외근로/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0137",
+      "label": "⑱ 국외근로 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱ 국외근로",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0137",
+      "source_detection_id": "visual_0137",
+      "source_text": "⑱ 국외근로 ⑯-1 납세조합",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱ 국외근로/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑱ 국외근로/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0138",
+      "label": "⑱ 국외근로 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱ 국외근로",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0138",
+      "source_detection_id": "visual_0138",
+      "source_text": "⑱ 국외근로 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱ 국외근로/합계",
+        "csv_column": "비과세및감면소득명세/⑱ 국외근로/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0139",
+      "label": "⑱-1 야간근로수당 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-1 야간근로수당",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0139",
+      "source_detection_id": "visual_0139",
+      "source_text": "⑱-1 야간근로수당 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-1 야간근로수당/주(현)",
+        "csv_column": "비과세및감면소득명세/⑱-1 야간근로수당/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0140",
+      "label": "⑱-1 야간근로수당 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-1 야간근로수당",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0140",
+      "source_detection_id": "visual_0140",
+      "source_text": "⑱-1 야간근로수당 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-1 야간근로수당/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑱-1 야간근로수당/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0141",
+      "label": "⑱-1 야간근로수당 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-1 야간근로수당",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0141",
+      "source_detection_id": "visual_0141",
+      "source_text": "⑱-1 야간근로수당 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-1 야간근로수당/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑱-1 야간근로수당/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0143",
+      "label": "⑱-1 야간근로수당 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-1 야간근로수당",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0143",
+      "source_detection_id": "visual_0143",
+      "source_text": "⑱-1 야간근로수당 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-1 야간근로수당/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑱-1 야간근로수당/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0144",
+      "label": "⑱-1 야간근로수당 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-1 야간근로수당",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0144",
+      "source_detection_id": "visual_0144",
+      "source_text": "⑱-1 야간근로수당 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-1 야간근로수당/합계",
+        "csv_column": "비과세및감면소득명세/⑱-1 야간근로수당/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0145",
+      "label": "⑱-2 보육수당 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-2 보육수당",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0145",
+      "source_detection_id": "visual_0145",
+      "source_text": "⑱-2 보육수당 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-2 보육수당/주(현)",
+        "csv_column": "비과세및감면소득명세/⑱-2 보육수당/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0146",
+      "label": "⑱-2 보육수당 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-2 보육수당",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0146",
+      "source_detection_id": "visual_0146",
+      "source_text": "⑱-2 보육수당 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-2 보육수당/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑱-2 보육수당/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0147",
+      "label": "⑱-2 보육수당 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-2 보육수당",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0147",
+      "source_detection_id": "visual_0147",
+      "source_text": "⑱-2 보육수당 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-2 보육수당/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑱-2 보육수당/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0149",
+      "label": "⑱-2 보육수당 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-2 보육수당",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0149",
+      "source_detection_id": "visual_0149",
+      "source_text": "⑱-2 보육수당 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-2 보육수당/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑱-2 보육수당/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0150",
+      "label": "⑱-2 보육수당 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-2 보육수당",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0150",
+      "source_detection_id": "visual_0150",
+      "source_text": "⑱-2 보육수당 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-2 보육수당/합계",
+        "csv_column": "비과세및감면소득명세/⑱-2 보육수당/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0151",
+      "label": "⑱-3 출산지원금 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-3 출산지원금",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0151",
+      "source_detection_id": "visual_0151",
+      "source_text": "⑱-3 출산지원금 주(현)",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-3 출산지원금/주(현)",
+        "csv_column": "비과세및감면소득명세/⑱-3 출산지원금/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0152",
+      "label": "⑱-3 출산지원금 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-3 출산지원금",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0152",
+      "source_detection_id": "visual_0152",
+      "source_text": "⑱-3 출산지원금 종(전) 1",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-3 출산지원금/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑱-3 출산지원금/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0153",
+      "label": "⑱-3 출산지원금 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-3 출산지원금",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0153",
+      "source_detection_id": "visual_0153",
+      "source_text": "⑱-3 출산지원금 종(전) 2",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-3 출산지원금/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑱-3 출산지원금/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0155",
+      "label": "⑱-3 출산지원금 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-3 출산지원금",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0155",
+      "source_detection_id": "visual_0155",
+      "source_text": "⑱-3 출산지원금 ⑯-1 납세조합",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-3 출산지원금/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑱-3 출산지원금/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0156",
+      "label": "⑱-3 출산지원금 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-3 출산지원금",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0156",
+      "source_detection_id": "visual_0156",
+      "source_text": "⑱-3 출산지원금 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-3 출산지원금/합계",
+        "csv_column": "비과세및감면소득명세/⑱-3 출산지원금/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0157",
+      "label": "⑱-4 연구보조비 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-4 연구보조비",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0157",
+      "source_detection_id": "visual_0157",
+      "source_text": "⑱-4 연구보조비 주(현)",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-4 연구보조비/주(현)",
+        "csv_column": "비과세및감면소득명세/⑱-4 연구보조비/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0158",
+      "label": "⑱-4 연구보조비 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-4 연구보조비",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0158",
+      "source_detection_id": "visual_0158",
+      "source_text": "⑱-4 연구보조비 종(전) 1",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-4 연구보조비/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑱-4 연구보조비/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0159",
+      "label": "⑱-4 연구보조비 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-4 연구보조비",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0159",
+      "source_detection_id": "visual_0159",
+      "source_text": "⑱-4 연구보조비 종(전) 2",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-4 연구보조비/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑱-4 연구보조비/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0161",
+      "label": "⑱-4 연구보조비 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-4 연구보조비",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0161",
+      "source_detection_id": "visual_0161",
+      "source_text": "⑱-4 연구보조비 ⑯-1 납세조합",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-4 연구보조비/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑱-4 연구보조비/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0162",
+      "label": "⑱-4 연구보조비 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-4 연구보조비",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0162",
+      "source_detection_id": "visual_0162",
+      "source_text": "⑱-4 연구보조비 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-4 연구보조비/합계",
+        "csv_column": "비과세및감면소득명세/⑱-4 연구보조비/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0165",
+      "label": "⑱-5 비과세 항목 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-5 비과세 항목",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0165",
+      "source_detection_id": "visual_0165",
+      "source_text": "⑱-5 비과세 항목 주(현)",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-5 비과세 항목/주(현)",
+        "csv_column": "비과세및감면소득명세/⑱-5 비과세 항목/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0166",
+      "label": "⑱-5 비과세 항목 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-5 비과세 항목",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0166",
+      "source_detection_id": "visual_0166",
+      "source_text": "⑱-5 비과세 항목 종(전) 1",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-5 비과세 항목/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑱-5 비과세 항목/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0167",
+      "label": "⑱-5 비과세 항목 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-5 비과세 항목",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0167",
+      "source_detection_id": "visual_0167",
+      "source_text": "⑱-5 비과세 항목 종(전) 2",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-5 비과세 항목/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑱-5 비과세 항목/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0169",
+      "label": "⑱-5 비과세 항목 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-5 비과세 항목",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0169",
+      "source_detection_id": "visual_0169",
+      "source_text": "⑱-5 비과세 항목 ⑯-1 납세조합",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-5 비과세 항목/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑱-5 비과세 항목/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0170",
+      "label": "⑱-5 비과세 항목 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-5 비과세 항목",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0170",
+      "source_detection_id": "visual_0170",
+      "source_text": "⑱-5 비과세 항목 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-5 비과세 항목/합계",
+        "csv_column": "비과세및감면소득명세/⑱-5 비과세 항목/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0173",
+      "label": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 주(현)",
+      "semantic_path": [
+        "검토필요",
+        "비과세및감면소득명세_라벨없는_물결표행",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0173",
+      "source_detection_id": "visual_0173",
+      "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/주(현)",
+        "csv_column": "검토필요/비과세및감면소득명세_라벨없는_물결표행/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0174",
+      "label": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 종(전) 1",
+      "semantic_path": [
+        "검토필요",
+        "비과세및감면소득명세_라벨없는_물결표행",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0174",
+      "source_detection_id": "visual_0174",
+      "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/종(전) 1",
+        "csv_column": "검토필요/비과세및감면소득명세_라벨없는_물결표행/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0175",
+      "label": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 종(전) 2",
+      "semantic_path": [
+        "검토필요",
+        "비과세및감면소득명세_라벨없는_물결표행",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0175",
+      "source_detection_id": "visual_0175",
+      "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/종(전) 2",
+        "csv_column": "검토필요/비과세및감면소득명세_라벨없는_물결표행/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0177",
+      "label": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 ⑯-1 납세조합",
+      "semantic_path": [
+        "검토필요",
+        "비과세및감면소득명세_라벨없는_물결표행",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0177",
+      "source_detection_id": "visual_0177",
+      "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/⑯-1 납세조합",
+        "csv_column": "검토필요/비과세및감면소득명세_라벨없는_물결표행/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0178",
+      "label": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 합계",
+      "semantic_path": [
+        "검토필요",
+        "비과세및감면소득명세_라벨없는_물결표행",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0178",
+      "source_detection_id": "visual_0178",
+      "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/합계",
+        "csv_column": "검토필요/비과세및감면소득명세_라벨없는_물결표행/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0179",
+      "label": "⑱-41 임원등 할인금액 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-41 임원등 할인금액",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0179",
+      "source_detection_id": "visual_0179",
+      "source_text": "⑱-41 임원등 할인금액 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/주(현)",
+        "csv_column": "비과세및감면소득명세/⑱-41 임원등 할인금액/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0180",
+      "label": "⑱-41 임원등 할인금액 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-41 임원등 할인금액",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0180",
+      "source_detection_id": "visual_0180",
+      "source_text": "⑱-41 임원등 할인금액 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑱-41 임원등 할인금액/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0181",
+      "label": "⑱-41 임원등 할인금액 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-41 임원등 할인금액",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0181",
+      "source_detection_id": "visual_0181",
+      "source_text": "⑱-41 임원등 할인금액 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑱-41 임원등 할인금액/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0183",
+      "label": "⑱-41 임원등 할인금액 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-41 임원등 할인금액",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0183",
+      "source_detection_id": "visual_0183",
+      "source_text": "⑱-41 임원등 할인금액 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑱-41 임원등 할인금액/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0184",
+      "label": "⑱-41 임원등 할인금액 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑱-41 임원등 할인금액",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0184",
+      "source_detection_id": "visual_0184",
+      "source_text": "⑱-41 임원등 할인금액 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/합계",
+        "csv_column": "비과세및감면소득명세/⑱-41 임원등 할인금액/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0185",
+      "label": "⑲ 수련보조수당 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑲ 수련보조수당",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0185",
+      "source_detection_id": "visual_0185",
+      "source_text": "⑲ 수련보조수당 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑲ 수련보조수당/주(현)",
+        "csv_column": "비과세및감면소득명세/⑲ 수련보조수당/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0186",
+      "label": "⑲ 수련보조수당 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑲ 수련보조수당",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0186",
+      "source_detection_id": "visual_0186",
+      "source_text": "⑲ 수련보조수당 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑲ 수련보조수당/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑲ 수련보조수당/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0187",
+      "label": "⑲ 수련보조수당 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑲ 수련보조수당",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0187",
+      "source_detection_id": "visual_0187",
+      "source_text": "⑲ 수련보조수당 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑲ 수련보조수당/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑲ 수련보조수당/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0189",
+      "label": "⑲ 수련보조수당 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑲ 수련보조수당",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0189",
+      "source_detection_id": "visual_0189",
+      "source_text": "⑲ 수련보조수당 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑲ 수련보조수당/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑲ 수련보조수당/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0190",
+      "label": "⑲ 수련보조수당 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑲ 수련보조수당",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0190",
+      "source_detection_id": "visual_0190",
+      "source_text": "⑲ 수련보조수당 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑲ 수련보조수당/합계",
+        "csv_column": "비과세및감면소득명세/⑲ 수련보조수당/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0192",
+      "label": "⑳ 비과세소득 계 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳ 비과세소득 계",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0192",
+      "source_detection_id": "visual_0192",
+      "source_text": "⑳ 비과세소득 계 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳ 비과세소득 계/주(현)",
+        "csv_column": "비과세및감면소득명세/⑳ 비과세소득 계/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0193",
+      "label": "⑳ 비과세소득 계 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳ 비과세소득 계",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0193",
+      "source_detection_id": "visual_0193",
+      "source_text": "⑳ 비과세소득 계 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳ 비과세소득 계/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑳ 비과세소득 계/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0194",
+      "label": "⑳ 비과세소득 계 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳ 비과세소득 계",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0194",
+      "source_detection_id": "visual_0194",
+      "source_text": "⑳ 비과세소득 계 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳ 비과세소득 계/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑳ 비과세소득 계/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0196",
+      "label": "⑳ 비과세소득 계 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳ 비과세소득 계",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0196",
+      "source_detection_id": "visual_0196",
+      "source_text": "⑳ 비과세소득 계 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳ 비과세소득 계/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑳ 비과세소득 계/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0197",
+      "label": "⑳ 비과세소득 계 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳ 비과세소득 계",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0197",
+      "source_detection_id": "visual_0197",
+      "source_text": "⑳ 비과세소득 계 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳ 비과세소득 계/합계",
+        "csv_column": "비과세및감면소득명세/⑳ 비과세소득 계/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0199",
+      "label": "⑳-1 감면소득 계 주(현)",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳-1 감면소득 계",
+        "주(현)"
+      ],
+      "bbox_label_id": "visual_0199",
+      "source_detection_id": "visual_0199",
+      "source_text": "⑳-1 감면소득 계 주(현)",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳-1 감면소득 계/주(현)",
+        "csv_column": "비과세및감면소득명세/⑳-1 감면소득 계/주(현)"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0200",
+      "label": "⑳-1 감면소득 계 종(전) 1",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳-1 감면소득 계",
+        "종(전) 1"
+      ],
+      "bbox_label_id": "visual_0200",
+      "source_detection_id": "visual_0200",
+      "source_text": "⑳-1 감면소득 계 종(전) 1",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳-1 감면소득 계/종(전) 1",
+        "csv_column": "비과세및감면소득명세/⑳-1 감면소득 계/종(전) 1"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0201",
+      "label": "⑳-1 감면소득 계 종(전) 2",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳-1 감면소득 계",
+        "종(전) 2"
+      ],
+      "bbox_label_id": "visual_0201",
+      "source_detection_id": "visual_0201",
+      "source_text": "⑳-1 감면소득 계 종(전) 2",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳-1 감면소득 계/종(전) 2",
+        "csv_column": "비과세및감면소득명세/⑳-1 감면소득 계/종(전) 2"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0203",
+      "label": "⑳-1 감면소득 계 ⑯-1 납세조합",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳-1 감면소득 계",
+        "⑯-1 납세조합"
+      ],
+      "bbox_label_id": "visual_0203",
+      "source_detection_id": "visual_0203",
+      "source_text": "⑳-1 감면소득 계 ⑯-1 납세조합",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳-1 감면소득 계/⑯-1 납세조합",
+        "csv_column": "비과세및감면소득명세/⑳-1 감면소득 계/⑯-1 납세조합"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0204",
+      "label": "⑳-1 감면소득 계 합계",
+      "semantic_path": [
+        "비과세및감면소득명세",
+        "⑳-1 감면소득 계",
+        "합계"
+      ],
+      "bbox_label_id": "visual_0204",
+      "source_detection_id": "visual_0204",
+      "source_text": "⑳-1 감면소득 계 합계",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "비과세및감면소득명세/⑳-1 감면소득 계/합계",
+        "csv_column": "비과세및감면소득명세/⑳-1 감면소득 계/합계"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0211",
+      "label": "⑦ 결정세액 소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦ 결정세액",
+        "소득세"
+      ],
+      "bbox_label_id": "visual_0211",
+      "source_detection_id": "visual_0211",
+      "source_text": "⑦ 결정세액 소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦ 결정세액/소득세",
+        "csv_column": "세액명세/⑦ 결정세액/소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0213",
+      "label": "⑦ 결정세액 지방소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦ 결정세액",
+        "지방소득세"
+      ],
+      "bbox_label_id": "visual_0213",
+      "source_detection_id": "visual_0213",
+      "source_text": "⑦ 결정세액 지방소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦ 결정세액/지방소득세",
+        "csv_column": "세액명세/⑦ 결정세액/지방소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0215",
+      "label": "⑦ 결정세액 농어촌특별세",
+      "semantic_path": [
+        "세액명세",
+        "⑦ 결정세액",
+        "농어촌특별세"
+      ],
+      "bbox_label_id": "visual_0215",
+      "source_detection_id": "visual_0215",
+      "source_text": "⑦ 결정세액 농어촌특별세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦ 결정세액/농어촌특별세",
+        "csv_column": "세액명세/⑦ 결정세액/농어촌특별세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0217",
+      "label": "⑦② 종(전)근무지 1 사업자등록번호",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 1",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0217",
+      "source_detection_id": "visual_0217",
+      "source_text": "⑦② 종(전)근무지 1 사업자등록번호",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 1/사업자등록번호",
+        "csv_column": "세액명세/⑦② 종(전)근무지 1/사업자등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0218",
+      "label": "⑦② 종(전)근무지 1 소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 1",
+        "소득세"
+      ],
+      "bbox_label_id": "visual_0218",
+      "source_detection_id": "visual_0218",
+      "source_text": "⑦② 종(전)근무지 1 소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 1/소득세",
+        "csv_column": "세액명세/⑦② 종(전)근무지 1/소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0220",
+      "label": "⑦② 종(전)근무지 1 지방소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 1",
+        "지방소득세"
+      ],
+      "bbox_label_id": "visual_0220",
+      "source_detection_id": "visual_0220",
+      "source_text": "⑦② 종(전)근무지 1 지방소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 1/지방소득세",
+        "csv_column": "세액명세/⑦② 종(전)근무지 1/지방소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0222",
+      "label": "⑦② 종(전)근무지 1 농어촌특별세",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 1",
+        "농어촌특별세"
+      ],
+      "bbox_label_id": "visual_0222",
+      "source_detection_id": "visual_0222",
+      "source_text": "⑦② 종(전)근무지 1 농어촌특별세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 1/농어촌특별세",
+        "csv_column": "세액명세/⑦② 종(전)근무지 1/농어촌특별세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0223",
+      "label": "⑦② 종(전)근무지 2 사업자등록번호",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 2",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0223",
+      "source_detection_id": "visual_0223",
+      "source_text": "⑦② 종(전)근무지 2 사업자등록번호",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 2/사업자등록번호",
+        "csv_column": "세액명세/⑦② 종(전)근무지 2/사업자등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0224",
+      "label": "⑦② 종(전)근무지 2 소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 2",
+        "소득세"
+      ],
+      "bbox_label_id": "visual_0224",
+      "source_detection_id": "visual_0224",
+      "source_text": "⑦② 종(전)근무지 2 소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 2/소득세",
+        "csv_column": "세액명세/⑦② 종(전)근무지 2/소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0226",
+      "label": "⑦② 종(전)근무지 2 지방소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 2",
+        "지방소득세"
+      ],
+      "bbox_label_id": "visual_0226",
+      "source_detection_id": "visual_0226",
+      "source_text": "⑦② 종(전)근무지 2 지방소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 2/지방소득세",
+        "csv_column": "세액명세/⑦② 종(전)근무지 2/지방소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0228",
+      "label": "⑦② 종(전)근무지 2 농어촌특별세",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 2",
+        "농어촌특별세"
+      ],
+      "bbox_label_id": "visual_0228",
+      "source_detection_id": "visual_0228",
+      "source_text": "⑦② 종(전)근무지 2 농어촌특별세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 2/농어촌특별세",
+        "csv_column": "세액명세/⑦② 종(전)근무지 2/농어촌특별세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0229",
+      "label": "⑦② 종(전)근무지 3 사업자등록번호",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 3",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0229",
+      "source_detection_id": "visual_0229",
+      "source_text": "⑦② 종(전)근무지 3 사업자등록번호",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 3/사업자등록번호",
+        "csv_column": "세액명세/⑦② 종(전)근무지 3/사업자등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0230",
+      "label": "⑦② 종(전)근무지 3 소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 3",
+        "소득세"
+      ],
+      "bbox_label_id": "visual_0230",
+      "source_detection_id": "visual_0230",
+      "source_text": "⑦② 종(전)근무지 3 소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 3/소득세",
+        "csv_column": "세액명세/⑦② 종(전)근무지 3/소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0232",
+      "label": "⑦② 종(전)근무지 3 지방소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 3",
+        "지방소득세"
+      ],
+      "bbox_label_id": "visual_0232",
+      "source_detection_id": "visual_0232",
+      "source_text": "⑦② 종(전)근무지 3 지방소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 3/지방소득세",
+        "csv_column": "세액명세/⑦② 종(전)근무지 3/지방소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0234",
+      "label": "⑦② 종(전)근무지 3 농어촌특별세",
+      "semantic_path": [
+        "세액명세",
+        "⑦② 종(전)근무지 3",
+        "농어촌특별세"
+      ],
+      "bbox_label_id": "visual_0234",
+      "source_detection_id": "visual_0234",
+      "source_text": "⑦② 종(전)근무지 3 농어촌특별세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦② 종(전)근무지 3/농어촌특별세",
+        "csv_column": "세액명세/⑦② 종(전)근무지 3/농어촌특별세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0237",
+      "label": "⑦③ 주(현)근무지 사업자등록번호",
+      "semantic_path": [
+        "세액명세",
+        "⑦③ 주(현)근무지",
+        "사업자등록번호"
+      ],
+      "bbox_label_id": "visual_0237",
+      "source_detection_id": "visual_0237",
+      "source_text": "⑦③ 주(현)근무지 사업자등록번호",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "table_text_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦③ 주(현)근무지/사업자등록번호",
+        "csv_column": "세액명세/⑦③ 주(현)근무지/사업자등록번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0238",
+      "label": "⑦③ 주(현)근무지 소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦③ 주(현)근무지",
+        "소득세"
+      ],
+      "bbox_label_id": "visual_0238",
+      "source_detection_id": "visual_0238",
+      "source_text": "⑦③ 주(현)근무지 소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦③ 주(현)근무지/소득세",
+        "csv_column": "세액명세/⑦③ 주(현)근무지/소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_visual_0240",
+      "label": "⑦③ 주(현)근무지 지방소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦③ 주(현)근무지",
+        "지방소득세"
+      ],
+      "bbox_label_id": "visual_0240",
+      "source_detection_id": "visual_0240",
+      "source_text": "⑦③ 주(현)근무지 지방소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦③ 주(현)근무지/지방소득세",
+        "csv_column": "세액명세/⑦③ 주(현)근무지/지방소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992303508",
+      "label": "근로소득 원천징수영수증 선택",
+      "semantic_path": [
+        "문서선택",
+        "근로소득_원천징수영수증"
+      ],
+      "bbox_label_id": "manual_1783992303508",
+      "source_detection_id": "manual_1783992303508",
+      "source_text": "근로소득 원천징수영수증 선택",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서선택/근로소득_원천징수영수증",
+        "csv_column": "문서선택/근로소득_원천징수영수증"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992306643",
+      "label": "근로소득 지급명세서 선택",
+      "semantic_path": [
+        "문서선택",
+        "근로소득_지급명세서"
+      ],
+      "bbox_label_id": "manual_1783992306643",
+      "source_detection_id": "manual_1783992306643",
+      "source_text": "근로소득 지급명세서 선택",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "문서선택/근로소득_지급명세서",
+        "csv_column": "문서선택/근로소득_지급명세서"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992309292",
+      "label": "소득자 보관용",
+      "semantic_path": [
+        "보관용구분",
+        "소득자_보관용"
+      ],
+      "bbox_label_id": "manual_1783992309292",
+      "source_detection_id": "manual_1783992309292",
+      "source_text": "소득자 보관용",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "보관용구분/소득자_보관용",
+        "csv_column": "보관용구분/소득자_보관용"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992312242",
+      "label": "발행자 보관용",
+      "semantic_path": [
+        "보관용구분",
+        "발행자_보관용"
+      ],
+      "bbox_label_id": "manual_1783992312242",
+      "source_detection_id": "manual_1783992312242",
+      "source_text": "발행자 보관용",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "보관용구분/발행자_보관용",
+        "csv_column": "보관용구분/발행자_보관용"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992315342",
+      "label": "발행자 보고용",
+      "semantic_path": [
+        "보관용구분",
+        "발행자_보고용"
+      ],
+      "bbox_label_id": "manual_1783992315342",
+      "source_detection_id": "manual_1783992315342",
+      "source_text": "발행자 보고용",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "보관용구분/발행자_보고용",
+        "csv_column": "보관용구분/발행자_보고용"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992322008",
+      "label": "관리번호",
+      "semantic_path": [
+        "관리",
+        "관리번호"
+      ],
+      "bbox_label_id": "manual_1783992322008",
+      "source_detection_id": "manual_1783992322008",
+      "source_text": "관리번호",
+      "value_type": "free_text.short",
+      "generator": "pattern:########",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "관리/관리번호",
+        "csv_column": "관리/관리번호"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992354658",
+      "label": "거주구분 비거주자2",
+      "semantic_path": [
+        "인적분류",
+        "거주구분",
+        "비거주자"
+      ],
+      "bbox_label_id": "manual_1783992354658",
+      "source_detection_id": "manual_1783992354658",
+      "source_text": "비거주자2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/거주구분/비거주자",
+        "csv_column": "인적분류/거주구분/비거주자"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992365459",
+      "label": "내외국인 외국인9",
+      "semantic_path": [
+        "인적분류",
+        "내외국인",
+        "외국인"
+      ],
+      "bbox_label_id": "manual_1783992365459",
+      "source_detection_id": "manual_1783992365459",
+      "source_text": "외국인9",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/내외국인/외국인",
+        "csv_column": "인적분류/내외국인/외국인"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992381925",
+      "label": "외국인단일세율적용 미해당2",
+      "semantic_path": [
+        "인적분류",
+        "외국인단일세율적용",
+        "미해당"
+      ],
+      "bbox_label_id": "manual_1783992381925",
+      "source_detection_id": "manual_1783992381925",
+      "source_text": "미해당2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/외국인단일세율적용/미해당",
+        "csv_column": "인적분류/외국인단일세율적용/미해당"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992386059",
+      "label": "외국법인 소속 파견근로자 여부 미해당2",
+      "semantic_path": [
+        "인적분류",
+        "외국법인소속파견근로자여부",
+        "미해당"
+      ],
+      "bbox_label_id": "manual_1783992386059",
+      "source_detection_id": "manual_1783992386059",
+      "source_text": "미해당2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/외국법인소속파견근로자여부/미해당",
+        "csv_column": "인적분류/외국법인소속파견근로자여부/미해당"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992388709",
+      "label": "종교관련종사자 여부 미해당2",
+      "semantic_path": [
+        "인적분류",
+        "종교관련종사자여부",
+        "미해당"
+      ],
+      "bbox_label_id": "manual_1783992388709",
+      "source_detection_id": "manual_1783992388709",
+      "source_text": "미해당2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/종교관련종사자여부/미해당",
+        "csv_column": "인적분류/종교관련종사자여부/미해당"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992403041",
+      "label": "거주지국",
+      "semantic_path": [
+        "인적분류",
+        "거주지국"
+      ],
+      "bbox_label_id": "manual_1783992403041",
+      "source_detection_id": "manual_1783992403041",
+      "source_text": "거주지국",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/거주지국",
+        "csv_column": "인적분류/거주지국"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992407526",
+      "label": "거주지국코드",
+      "semantic_path": [
+        "인적분류",
+        "거주지국코드"
+      ],
+      "bbox_label_id": "manual_1783992407526",
+      "source_detection_id": "manual_1783992407526",
+      "source_text": "거주지국코드",
+      "value_type": "free_text.short",
+      "generator": "pattern:########",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/거주지국코드",
+        "csv_column": "인적분류/거주지국코드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992413509",
+      "label": "국적",
+      "semantic_path": [
+        "인적분류",
+        "국적"
+      ],
+      "bbox_label_id": "manual_1783992413509",
+      "source_detection_id": "manual_1783992413509",
+      "source_text": "국적",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/국적",
+        "csv_column": "인적분류/국적"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992419125",
+      "label": "국적코드",
+      "semantic_path": [
+        "인적분류",
+        "국적코드"
+      ],
+      "bbox_label_id": "manual_1783992419125",
+      "source_detection_id": "manual_1783992419125",
+      "source_text": "국적코드",
+      "value_type": "free_text.short",
+      "generator": "pattern:########",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/국적코드",
+        "csv_column": "인적분류/국적코드"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992429276",
+      "label": "세대주여부 세대원2",
+      "semantic_path": [
+        "인적분류",
+        "세대주여부",
+        "세대원"
+      ],
+      "bbox_label_id": "manual_1783992429276",
+      "source_detection_id": "manual_1783992429276",
+      "source_text": "세대원2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/세대주여부/세대원",
+        "csv_column": "인적분류/세대주여부/세대원"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992442625",
+      "label": "연말정산구분 중도퇴사2",
+      "semantic_path": [
+        "인적분류",
+        "연말정산구분",
+        "중도퇴사"
+      ],
+      "bbox_label_id": "manual_1783992442625",
+      "source_detection_id": "manual_1783992442625",
+      "source_text": "중도퇴사2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "인적분류/연말정산구분/중도퇴사",
+        "csv_column": "인적분류/연말정산구분/중도퇴사"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992528776",
+      "label": "③-1 사업자단위과세자 여부 미해당2",
+      "semantic_path": [
+        "징수의무자",
+        "사업자단위과세자여부",
+        "미해당"
+      ],
+      "bbox_label_id": "manual_1783992528776",
+      "source_detection_id": "manual_1783992528776",
+      "source_text": "미해당2",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
+      "style_class": "choice_marker",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "징수의무자/사업자단위과세자여부/미해당",
+        "csv_column": "징수의무자/사업자단위과세자여부/미해당"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992630409",
+      "label": "주(현) 근무기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "주(현)",
+        "근무기간",
+        "시작"
+      ],
+      "bbox_label_id": "manual_1783992630409",
+      "source_detection_id": "manual_1783992630409",
+      "source_text": "주(현) 근무기간 시작",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/주(현)/근무기간/시작",
+        "csv_column": "근무처별소득명세/주(현)/근무기간/시작"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992634393",
+      "label": "주(현) 근무기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "주(현)",
+        "근무기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992634393",
+      "source_detection_id": "manual_1783992634393",
+      "source_text": "주(현) 근무기간 종료",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/주(현)/근무기간/종료",
+        "csv_column": "근무처별소득명세/주(현)/근무기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992640260",
+      "label": "주(현) 감면기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "주(현)",
+        "감면기간",
+        "시작"
+      ],
+      "bbox_label_id": "manual_1783992640260",
+      "source_detection_id": "manual_1783992640260",
+      "source_text": "주(현) 감면기간 시작",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/주(현)/감면기간/시작",
+        "csv_column": "근무처별소득명세/주(현)/감면기간/시작"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992644593",
+      "label": "주(현) 감면기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "주(현)",
+        "감면기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992644593",
+      "source_detection_id": "manual_1783992644593",
+      "source_text": "주(현) 감면기간 종료",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/주(현)/감면기간/종료",
+        "csv_column": "근무처별소득명세/주(현)/감면기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992648942",
+      "label": "종(전) 1 근무기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 1",
+        "근무기간",
+        "시작"
+      ],
+      "bbox_label_id": "manual_1783992648942",
+      "source_detection_id": "manual_1783992648942",
+      "source_text": "종(전) 1 근무기간 시작",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 1/근무기간/시작",
+        "csv_column": "근무처별소득명세/종(전) 1/근무기간/시작"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992654759",
+      "label": "종(전) 1 감면기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 1",
+        "감면기간",
+        "시작"
+      ],
+      "bbox_label_id": "manual_1783992654759",
+      "source_detection_id": "manual_1783992654759",
+      "source_text": "종(전) 1 감면기간 시작",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 1/감면기간/시작",
+        "csv_column": "근무처별소득명세/종(전) 1/감면기간/시작"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992660809",
+      "label": "종(전) 1 근무기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 1",
+        "근무기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992660809",
+      "source_detection_id": "manual_1783992660809",
+      "source_text": "종(전) 1 근무기간 종료",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 1/근무기간/종료",
+        "csv_column": "근무처별소득명세/종(전) 1/근무기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992666210",
+      "label": "종(전) 1 감면기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 1",
+        "감면기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992666210",
+      "source_detection_id": "manual_1783992666210",
+      "source_text": "종(전) 1 감면기간 종료",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 1/감면기간/종료",
+        "csv_column": "근무처별소득명세/종(전) 1/감면기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992693760",
+      "label": "종(전) 2 근무기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 2",
+        "근무기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992693760",
+      "source_detection_id": "manual_1783992693760",
+      "source_text": "종(전) 2 근무기간 종료",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 2/근무기간/종료",
+        "csv_column": "근무처별소득명세/종(전) 2/근무기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992699342",
+      "label": "종(전) 2 감면기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "종(전) 2",
+        "감면기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992699342",
+      "source_detection_id": "manual_1783992699342",
+      "source_text": "종(전) 2 감면기간 종료",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/종(전) 2/감면기간/종료",
+        "csv_column": "근무처별소득명세/종(전) 2/감면기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992719226",
+      "label": "⑯-1 납세조합 근무기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯-1 납세조합",
+        "근무기간",
+        "시작"
+      ],
+      "bbox_label_id": "manual_1783992719226",
+      "source_detection_id": "manual_1783992719226",
+      "source_text": "⑯-1 납세조합 근무기간 시작",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯-1 납세조합/근무기간/시작",
+        "csv_column": "근무처별소득명세/⑯-1 납세조합/근무기간/시작"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992725360",
+      "label": "⑯-1 납세조합 감면기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯-1 납세조합",
+        "감면기간",
+        "시작"
+      ],
+      "bbox_label_id": "manual_1783992725360",
+      "source_detection_id": "manual_1783992725360",
+      "source_text": "⑯-1 납세조합 감면기간 시작",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯-1 납세조합/감면기간/시작",
+        "csv_column": "근무처별소득명세/⑯-1 납세조합/감면기간/시작"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992737794",
+      "label": "⑯-1 납세조합 근무기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯-1 납세조합",
+        "근무기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992737794",
+      "source_detection_id": "manual_1783992737794",
+      "source_text": "⑯-1 납세조합 근무기간 종료",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯-1 납세조합/근무기간/종료",
+        "csv_column": "근무처별소득명세/⑯-1 납세조합/근무기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992742010",
+      "label": "⑯-1 납세조합 감면기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "⑯-1 납세조합",
+        "감면기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992742010",
+      "source_detection_id": "manual_1783992742010",
+      "source_text": "⑯-1 납세조합 감면기간 종료",
+      "value_type": "date.kr",
+      "generator": "date.kr",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/⑯-1 납세조합/감면기간/종료",
+        "csv_column": "근무처별소득명세/⑯-1 납세조합/감면기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992748761",
+      "label": "합계 근무기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "합계",
+        "근무기간",
+        "시작"
+      ],
+      "bbox_label_id": "manual_1783992748761",
+      "source_detection_id": "manual_1783992748761",
+      "source_text": "합계 근무기간 시작",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/합계/근무기간/시작",
+        "csv_column": "근무처별소득명세/합계/근무기간/시작"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992755427",
+      "label": "합계 감면기간 시작",
+      "semantic_path": [
+        "근무처별소득명세",
+        "합계",
+        "감면기간",
+        "시작"
+      ],
+      "bbox_label_id": "manual_1783992755427",
+      "source_detection_id": "manual_1783992755427",
+      "source_text": "합계 감면기간 시작",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/합계/감면기간/시작",
+        "csv_column": "근무처별소득명세/합계/감면기간/시작"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992760161",
+      "label": "합계 근무기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "합계",
+        "근무기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992760161",
+      "source_detection_id": "manual_1783992760161",
+      "source_text": "합계 근무기간 종료",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/합계/근무기간/종료",
+        "csv_column": "근무처별소득명세/합계/근무기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992764043",
+      "label": "합계 감면기간 종료",
+      "semantic_path": [
+        "근무처별소득명세",
+        "합계",
+        "감면기간",
+        "종료"
+      ],
+      "bbox_label_id": "manual_1783992764043",
+      "source_detection_id": "manual_1783992764043",
+      "source_text": "합계 감면기간 종료",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "근무처별소득명세/합계/감면기간/종료",
+        "csv_column": "근무처별소득명세/합계/감면기간/종료"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992899710",
+      "label": "⑦④ 납부특례세액 소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦④ 납부특례세액",
+        "소득세"
+      ],
+      "bbox_label_id": "manual_1783992899710",
+      "source_detection_id": "manual_1783992899710",
+      "source_text": "⑦④ 납부특례세액 소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦④ 납부특례세액/소득세",
+        "csv_column": "세액명세/⑦④ 납부특례세액/소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992903993",
+      "label": "⑦④ 납부특례세액 지방소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦④ 납부특례세액",
+        "지방소득세"
+      ],
+      "bbox_label_id": "manual_1783992903993",
+      "source_detection_id": "manual_1783992903993",
+      "source_text": "⑦④ 납부특례세액 지방소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦④ 납부특례세액/지방소득세",
+        "csv_column": "세액명세/⑦④ 납부특례세액/지방소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992907693",
+      "label": "⑦④ 납부특례세액 농어촌특별세",
+      "semantic_path": [
+        "세액명세",
+        "⑦④ 납부특례세액",
+        "농어촌특별세"
+      ],
+      "bbox_label_id": "manual_1783992907693",
+      "source_detection_id": "manual_1783992907693",
+      "source_text": "⑦④ 납부특례세액 농어촌특별세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦④ 납부특례세액/농어촌특별세",
+        "csv_column": "세액명세/⑦④ 납부특례세액/농어촌특별세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992911760",
+      "label": "⑦③ 주(현)근무지 농어촌특별세",
+      "semantic_path": [
+        "세액명세",
+        "⑦③ 주(현)근무지",
+        "농어촌특별세"
+      ],
+      "bbox_label_id": "manual_1783992911760",
+      "source_detection_id": "manual_1783992911760",
+      "source_text": "⑦③ 주(현)근무지 농어촌특별세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦③ 주(현)근무지/농어촌특별세",
+        "csv_column": "세액명세/⑦③ 주(현)근무지/농어촌특별세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992917177",
+      "label": "⑦⑤ 차감징수세액 소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦⑤ 차감징수세액",
+        "소득세"
+      ],
+      "bbox_label_id": "manual_1783992917177",
+      "source_detection_id": "manual_1783992917177",
+      "source_text": "⑦⑤ 차감징수세액 소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦⑤ 차감징수세액/소득세",
+        "csv_column": "세액명세/⑦⑤ 차감징수세액/소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992919627",
+      "label": "⑦⑤ 차감징수세액 지방소득세",
+      "semantic_path": [
+        "세액명세",
+        "⑦⑤ 차감징수세액",
+        "지방소득세"
+      ],
+      "bbox_label_id": "manual_1783992919627",
+      "source_detection_id": "manual_1783992919627",
+      "source_text": "⑦⑤ 차감징수세액 지방소득세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦⑤ 차감징수세액/지방소득세",
+        "csv_column": "세액명세/⑦⑤ 차감징수세액/지방소득세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992924694",
+      "label": "⑦⑤ 차감징수세액 농어촌특별세",
+      "semantic_path": [
+        "세액명세",
+        "⑦⑤ 차감징수세액",
+        "농어촌특별세"
+      ],
+      "bbox_label_id": "manual_1783992924694",
+      "source_detection_id": "manual_1783992924694",
+      "source_text": "⑦⑤ 차감징수세액 농어촌특별세",
+      "value_type": "money.krw",
+      "generator": "money.krw",
+      "style_class": "amount_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "세액명세/⑦⑤ 차감징수세액/농어촌특별세",
+        "csv_column": "세액명세/⑦⑤ 차감징수세액/농어촌특별세"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992958060",
+      "label": "징수(보고)의무자 서명 또는 인",
+      "semantic_path": [
+        "영수확인",
+        "징수_보고_의무자_서명"
+      ],
+      "bbox_label_id": "manual_1783992958060",
+      "source_detection_id": "manual_1783992958060",
+      "source_text": "징수(보고)의무자 서명 또는 인",
+      "value_type": "free_text.short",
+      "generator": "free_text.short",
+      "style_class": "body_default",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "영수확인/징수_보고_의무자_서명",
+        "csv_column": "영수확인/징수_보고_의무자_서명"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992975143",
+      "label": "영수(지급) 작성일자 연도",
+      "semantic_path": [
+        "영수확인",
+        "작성일자",
+        "연도"
+      ],
+      "bbox_label_id": "manual_1783992975143",
+      "source_detection_id": "manual_1783992975143",
+      "source_text": "영수(지급) 작성일자 연도",
+      "value_type": "date.year",
+      "generator": "date.year",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "영수확인/작성일자/연도",
+        "csv_column": "영수확인/작성일자/연도"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992977193",
+      "label": "영수(지급) 작성일자 월",
+      "semantic_path": [
+        "영수확인",
+        "작성일자",
+        "월"
+      ],
+      "bbox_label_id": "manual_1783992977193",
+      "source_detection_id": "manual_1783992977193",
+      "source_text": "영수(지급) 작성일자 월",
+      "value_type": "date.month",
+      "generator": "date.month",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "영수확인/작성일자/월",
+        "csv_column": "영수확인/작성일자/월"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
+    },
+    {
+      "field_id": "fin05_manual_1783992979060",
+      "label": "영수(지급) 작성일자 일",
+      "semantic_path": [
+        "영수확인",
+        "작성일자",
+        "일"
+      ],
+      "bbox_label_id": "manual_1783992979060",
+      "source_detection_id": "manual_1783992979060",
+      "source_text": "영수(지급) 작성일자 일",
+      "value_type": "date.day",
+      "generator": "date.day",
+      "style_class": "date_part_cell",
+      "render_policy": {
+        "align": "left",
+        "valign": "middle",
+        "fit": "shrink_to_fit",
+        "overflow": "shrink",
+        "checkbox_style": "v_mark",
+        "render": "true"
+      },
+      "export": {
+        "json_path": "영수확인/작성일자/일",
+        "csv_column": "영수확인/작성일자/일"
+      },
+      "required": true,
+      "notes": "",
+      "render_mode": "printed"
     }
   ],
   "groups": [],
-  "authoring_mode": "fin05_pipeline_ready_20260702_page1",
-  "quality_status": "pipeline_ready_candidate",
-  "bbox_source": {
-    "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/review/original_이승훈님_원천징수영수증(2023년)_page_001/review.json"
-  }
+  "updated_at": "2026-07-14T03:00:29.196674+00:00"
 }

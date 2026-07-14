@@ -1,0 +1,198 @@
+{
+  "schema_version": 2,
+  "doc_id": "FIN-04",
+  "as_of_date": "2026-07-14",
+  "overall_status": "pass2_complete_with_nonblocking_review_items",
+  "unresolved_fields": [
+    {
+      "uncertainty_id": "UNC-001",
+      "field_ids": [
+        "authenticity_date",
+        "authenticity_time",
+        "issue_datetime"
+      ],
+      "anchor_ids": [
+        "det_000005",
+        "det_000006",
+        "det_000014"
+      ],
+      "issue": "진본 스탬프 시각과 발급일시의 공식 관계가 확인되지 않았고 지원 constraint grammar에는 time/datetime 비교 타입이 없다.",
+      "current_decision": "각 fin04_profiles 레코드에서 진본 일자는 발급일자와 같고 진본 시각은 발급시각보다 약간 뒤인 유효한 합성값으로 제공한다. 별도 관계 constraint는 만들지 않는다.",
+      "fallback_generators": {
+        "authenticity_date": "date.kr",
+        "authenticity_time": "pattern:##:##:##",
+        "issue_datetime": "template:{{date.kr}} {{pattern:##:##}}"
+      },
+      "confidence": 0.84,
+      "review_required": true,
+      "blocking": false
+    },
+    {
+      "uncertainty_id": "UNC-002",
+      "field_ids": [
+        "np_report_received_date",
+        "hi_report_received_date",
+        "wc_report_received_date",
+        "ei_report_received_date"
+      ],
+      "anchor_ids": [
+        "det_000036",
+        "det_000043",
+        "det_000050",
+        "det_000057"
+      ],
+      "issue": "신고접수일은 괄호가 포함된 복합 문자열이라 date_not_before/date_order의 단일 date.kr 대상 계약으로 직접 연결할 수 없다.",
+      "current_decision": "지원되지 않는 자연어 constraint를 추가하지 않고 12개 fin04_profiles 레코드 각각에서 신고접수일이 취득일과 같거나 이후가 되도록 값을 작성했다.",
+      "fallback_generator": "template:({{date.kr}})",
+      "confidence": 0.93,
+      "review_required": false,
+      "blocking": false
+    },
+    {
+      "uncertainty_id": "UNC-003",
+      "field_ids": [
+        "wc_acquisition_date"
+      ],
+      "anchor_ids": [
+        "det_000044"
+      ],
+      "issue": "문서 유의사항은 산재보험 자진신고 사업장의 경우 자격취득일을 표기하지 않을 수 있다고 설명하지만 지원 문법에는 조건부 공란 constraint가 없다.",
+      "current_decision": "현재 filled sample과 확정 use anchor에는 값이 있으므로 날짜를 생성한다. 자진신고 사업장 공란 변형은 별도 schema/template 시나리오가 생기기 전까지 보류한다.",
+      "fallback_generator": "date.kr",
+      "confidence": 0.94,
+      "review_required": true,
+      "blocking": false
+    }
+  ],
+  "resolved_relationships": [
+    {
+      "relationship_id": "REL-001",
+      "fields": [
+        "document_confirmation_number",
+        "document_confirmation_line",
+        "subscriber_name"
+      ],
+      "resolution": "동일 fin04_profiles 레코드에서 번호와 신청인 성명을 선택해 상단 복합문구와 본문 성명을 일치시킨다.",
+      "constraint_type": "pick_record"
+    },
+    {
+      "relationship_id": "REL-002",
+      "fields": [
+        "subscriber_name",
+        "np_subscriber_name",
+        "hi_subscriber_name",
+        "wc_subscriber_name",
+        "ei_subscriber_name"
+      ],
+      "resolution": "본문 가입자 성명을 네 보험 행에 copy한다.",
+      "constraint_type": "copy"
+    },
+    {
+      "relationship_id": "REL-003",
+      "fields": [
+        "np_workplace_number",
+        "hi_workplace_number",
+        "wc_workplace_number",
+        "ei_workplace_number",
+        "np_workplace_name",
+        "hi_workplace_name",
+        "wc_workplace_name",
+        "ei_workplace_name"
+      ],
+      "resolution": "국민연금 행의 합성 사업장관리번호·명칭을 나머지 보험 행에 copy해 선택된 단일 사업장 시나리오를 유지한다.",
+      "constraint_type": "copy"
+    },
+    {
+      "relationship_id": "REL-004",
+      "fields": [
+        "issue_number",
+        "issue_datetime",
+        "authenticity_date",
+        "authenticity_time",
+        "np_acquisition_date",
+        "np_report_received_date",
+        "hi_acquisition_date",
+        "hi_report_received_date",
+        "wc_acquisition_date",
+        "wc_report_received_date",
+        "ei_acquisition_date",
+        "ei_report_received_date"
+      ],
+      "resolution": "기준일 이하 발급정보와 취득일 이상 신고접수일을 한 record에서 선택한다.",
+      "constraint_type": "pick_record"
+    }
+  ],
+  "conflicting_evidence": [
+    {
+      "uncertainty_id": "CONFLICT-001",
+      "scope": "personal_information_classification",
+      "request_evidence": "inputs.registry.hasPersonalInfo가 '미포함'으로 표시됨",
+      "visual_evidence": "전체 템플릿과 use anchor에 완전한 주민등록번호와 성명이 표시됨",
+      "decision": "시각 원본을 우선해 고정 schema를 유지하되 faker/value pool에는 원본 개인정보를 재사용하지 않는다.",
+      "remaining_risk": "registry 분류가 후속 데이터 취급 정책과 충돌할 수 있음"
+    },
+    {
+      "uncertainty_id": "CONFLICT-002",
+      "scope": "legacy_row_mapping",
+      "request_evidence": "기존 authoring/schema.json은 산재보험·고용보험 행 field_id를 시각 행과 반대로 연결함",
+      "visual_evidence": "전체 이미지와 pass 1 고정 schema_draft는 det_000044~050을 산재보험, det_000051~057을 고용보험으로 확정함",
+      "decision": "pass 1 고정 입력을 따르고 pass 2 faker 관계도 wc=세 번째 행, ei=네 번째 행으로 작성함",
+      "remaining_risk": "최종 적용 시 기존 final authoring과 draft 간 migration 검토 필요"
+    }
+  ],
+  "low_confidence_faker_rules": [
+    {
+      "field_id": "authenticity_time",
+      "generator": "pattern:##:##:##",
+      "limitation": "pattern은 시·분·초 범위를 보장하지 못한다.",
+      "mitigation": "최종 값은 유효 시각만 담은 fin04_profiles record가 덮어쓴다."
+    },
+    {
+      "field_id": "issue_datetime",
+      "generator": "template:{{date.kr}} {{pattern:##:##}}",
+      "limitation": "기본 generator만으로 관찰 형식과 기준일 제한을 완전히 보장하지 못한다.",
+      "mitigation": "최종 값은 YYYY-MM-DD HH:MM 형식이며 기준일 이하인 fin04_profiles record가 덮어쓴다."
+    },
+    {
+      "field_ids": [
+        "np_report_received_date",
+        "hi_report_received_date",
+        "wc_report_received_date",
+        "ei_report_received_date"
+      ],
+      "generator": "template:({{date.kr}})",
+      "limitation": "date.kr의 구분자가 관찰된 점 구분 형식과 다를 수 있다.",
+      "mitigation": "최종 값은 (YYYY.MM.DD) 형식의 fin04_profiles record가 덮어쓴다."
+    }
+  ],
+  "user_decisions_needed": [
+    {
+      "decision_id": "DEC-001",
+      "question": "산재보험 자진신고 사업장용 자격취득일 공란 변형을 별도 템플릿 시나리오로 지원할지",
+      "recommended_default": "현재 pass 2에서는 날짜가 있는 filled sample 시나리오만 승인",
+      "blocking": false
+    },
+    {
+      "decision_id": "DEC-002",
+      "question": "registry의 개인정보 미포함 분류를 실제 샘플의 주민등록번호·성명 존재에 맞게 별도 절차에서 정정할지",
+      "recommended_default": "draft 적용과 분리해 registry 품질 검토 대상으로 전달",
+      "blocking": false
+    }
+  ],
+  "validation_summary": {
+    "schema_binding_count": 33,
+    "field_generator_count": 33,
+    "record_pool_count": 1,
+    "record_pool_sizes": {
+      "fin04_profiles": 12
+    },
+    "constraint_counts": {
+      "pick_record": 1,
+      "copy": 10
+    },
+    "use_anchor_count": 32,
+    "bound_use_anchor_count": 32,
+    "unmapped_use_anchors": [],
+    "note": "최종 수치는 validation repair pass에서 재검증한다."
+  }
+}

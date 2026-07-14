@@ -1,0 +1,5663 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-07-14T02:09:17.709188+00:00",
+  "doc_id": "FIN-05",
+  "title": "근로소득 원천징수영수증",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/review/original_근로소득원천징수영수증_page_001/review.json",
+  "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/근로소득원천징수영수증_page_001.jpg",
+  "image": {
+    "width": 1190,
+    "height": 1682
+  },
+  "anchors": [
+    {
+      "anchor_id": "det_000004",
+      "source": "bbox_review",
+      "text": "거주자1",
+      "bbox": [
+        863,
+        107,
+        55,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "거주자1",
+      "confidence": 0.9975283741950989,
+      "binding": {
+        "field_id": "fin05_det_000004",
+        "semantic_path": "인적분류/거주구분/거주자",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "det_000009",
+      "source": "bbox_review",
+      "text": "내국인1",
+      "bbox": [
+        869,
+        148,
+        57,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "내국인1",
+      "confidence": 0.9994450807571411,
+      "binding": {
+        "field_id": "fin05_det_000009",
+        "semantic_path": "인적분류/내외국인/내국인",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "det_000012",
+      "source": "bbox_review",
+      "text": "해당1",
+      "bbox": [
+        908,
+        167,
+        37,
+        16
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "해당1",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_det_000012",
+        "semantic_path": "인적분류/외국인단일세율적용/해당",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "det_000015",
+      "source": "bbox_review",
+      "text": "해당1",
+      "bbox": [
+        909,
+        186,
+        36,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "해당1",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_det_000015",
+        "semantic_path": "인적분류/외국법인소속파견근로자여부/해당",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "det_000018",
+      "source": "bbox_review",
+      "text": "해당1",
+      "bbox": [
+        909,
+        206,
+        36,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "해당1",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_det_000018",
+        "semantic_path": "인적분류/종교관련종사자여부/해당",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "det_000023",
+      "source": "bbox_review",
+      "text": "세대주1",
+      "bbox": [
+        869,
+        247,
+        54,
+        14
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "세대주1",
+      "confidence": 0.9947475790977478,
+      "binding": {
+        "field_id": "fin05_det_000023",
+        "semantic_path": "인적분류/세대주여부/세대주",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "det_000024",
+      "source": "bbox_review",
+      "text": "세대주의 배우자3",
+      "bbox": [
+        869,
+        264,
+        119,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_initial",
+      "role": "value_region",
+      "suggested_schema_key": "세대주의 배우자3",
+      "confidence": 0.9599835872650146,
+      "binding": {
+        "field_id": "fin05_det_000024",
+        "semantic_path": "인적분류/세대주여부/세대주의_배우자",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "det_000026",
+      "source": "bbox_review",
+      "text": "계속근로1",
+      "bbox": [
+        858,
+        284,
+        64,
+        16
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "계속근로1",
+      "confidence": 0.9984513521194458,
+      "binding": {
+        "field_id": "fin05_det_000026",
+        "semantic_path": "인적분류/연말정산구분/계속근로",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "det_000034",
+      "source": "bbox_review",
+      "text": "해당1",
+      "bbox": [
+        411,
+        354,
+        57,
+        21
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "해당1",
+      "confidence": 0.9776415824890137,
+      "binding": {
+        "field_id": "fin05_det_000034",
+        "semantic_path": "징수의무자/사업자단위과세자여부/해당",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0031",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        306,
+        218,
+        22
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0031",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0031",
+        "semantic_path": "징수의무자/법인명_상호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0033",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        742,
+        306,
+        269,
+        22
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0033",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0033",
+        "semantic_path": "징수의무자/대표자_성명",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0034",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        332,
+        217,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0034",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0034",
+        "semantic_path": "징수의무자/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0037",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        742,
+        332,
+        269,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0037",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0037",
+        "semantic_path": "징수의무자/주민등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0038",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        793,
+        355,
+        218,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0038",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0038",
+        "semantic_path": "징수의무자/종사업장_일련번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0046",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        320,
+        379,
+        691,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0046",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0046",
+        "semantic_path": "징수의무자/소재지_주소",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0048",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        245,
+        402,
+        326,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0048",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0048",
+        "semantic_path": "소득자/성명",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0050",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        852,
+        402,
+        159,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0050",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0050",
+        "semantic_path": "소득자/주민등록번호_외국인등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0057",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        246,
+        425,
+        765,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0057",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0057",
+        "semantic_path": "소득자/주소",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0062",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        480,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0062",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0062",
+        "semantic_path": "근무처별소득명세/주(현)/근무처명",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0063",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        480,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0063",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0063",
+        "semantic_path": "근무처별소득명세/종(전) 1/근무처명",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0064",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        480,
+        127,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0064",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0064",
+        "semantic_path": "근무처별소득명세/종(전) 2/근무처명",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0066",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        480,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0066",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0066",
+        "semantic_path": "근무처별소득명세/⑯-1 납세조합/근무처명",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0067",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        480,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0067",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0067",
+        "semantic_path": "근무처별소득명세/합계/근무처명",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0069",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        511,
+        119,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0069",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0069",
+        "semantic_path": "근무처별소득명세/주(현)/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0070",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        511,
+        110,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0070",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0070",
+        "semantic_path": "근무처별소득명세/종(전) 1/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0071",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        511,
+        128,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0071",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0071",
+        "semantic_path": "근무처별소득명세/종(전) 2/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0073",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        511,
+        95,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0073",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0073",
+        "semantic_path": "근무처별소득명세/⑯-1 납세조합/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0074",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        511,
+        121,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0074",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0074",
+        "semantic_path": "근무처별소득명세/합계/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0080",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        605,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0080",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0080",
+        "semantic_path": "근무처별소득명세/⑬ 급여/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0081",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        605,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0081",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0081",
+        "semantic_path": "근무처별소득명세/⑬ 급여/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0082",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        605,
+        128,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0082",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0082",
+        "semantic_path": "근무처별소득명세/⑬ 급여/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0084",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        605,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0084",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0084",
+        "semantic_path": "근무처별소득명세/⑬ 급여/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0085",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        605,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0085",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0085",
+        "semantic_path": "근무처별소득명세/⑬ 급여/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0087",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        636,
+        119,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0087",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0087",
+        "semantic_path": "근무처별소득명세/⑭ 상여/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0088",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        636,
+        110,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0088",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0088",
+        "semantic_path": "근무처별소득명세/⑭ 상여/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0089",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        636,
+        128,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0089",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0089",
+        "semantic_path": "근무처별소득명세/⑭ 상여/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0091",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        636,
+        95,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0091",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0091",
+        "semantic_path": "근무처별소득명세/⑭ 상여/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0092",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        636,
+        121,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0092",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0092",
+        "semantic_path": "근무처별소득명세/⑭ 상여/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0094",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        668,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0094",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0094",
+        "semantic_path": "근무처별소득명세/⑮ 인정상여/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0095",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        668,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0095",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0095",
+        "semantic_path": "근무처별소득명세/⑮ 인정상여/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0096",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        668,
+        127,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0096",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0096",
+        "semantic_path": "근무처별소득명세/⑮ 인정상여/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0098",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        668,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0098",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0098",
+        "semantic_path": "근무처별소득명세/⑮ 인정상여/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0099",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        668,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0099",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0099",
+        "semantic_path": "근무처별소득명세/⑮ 인정상여/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0100",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        699,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0100",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0100",
+        "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0101",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        699,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0101",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0101",
+        "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0102",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        699,
+        127,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0102",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0102",
+        "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0104",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        699,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0104",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0104",
+        "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0105",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        699,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0105",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0105",
+        "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0106",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        730,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0106",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0106",
+        "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0107",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        730,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0107",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0107",
+        "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0108",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        730,
+        128,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0108",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0108",
+        "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0110",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        730,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0110",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0110",
+        "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0111",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        730,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0111",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0111",
+        "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0112",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        761,
+        119,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0112",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0112",
+        "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0113",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        761,
+        110,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0113",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0113",
+        "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0114",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        761,
+        128,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0114",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0114",
+        "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0116",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        761,
+        95,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0116",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0116",
+        "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0117",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        761,
+        121,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0117",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0117",
+        "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0119",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        793,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0119",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0119",
+        "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0120",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        793,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0120",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0120",
+        "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0121",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        619,
+        793,
+        126,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0121",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0121",
+        "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0123",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        793,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0123",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0123",
+        "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0124",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        793,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0124",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0124",
+        "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0127",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        824,
+        119,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0127",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0127",
+        "semantic_path": "근무처별소득명세/⑯ 계/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0128",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        824,
+        110,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0128",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0128",
+        "semantic_path": "근무처별소득명세/⑯ 계/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0129",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        824,
+        127,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0129",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0129",
+        "semantic_path": "근무처별소득명세/⑯ 계/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0131",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        824,
+        95,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0131",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0131",
+        "semantic_path": "근무처별소득명세/⑯ 계/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0132",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        824,
+        121,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0132",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0132",
+        "semantic_path": "근무처별소득명세/⑯ 계/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0133",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        856,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0133",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0133",
+        "semantic_path": "비과세및감면소득명세/⑱ 국외근로/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0134",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        856,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0134",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0134",
+        "semantic_path": "비과세및감면소득명세/⑱ 국외근로/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0135",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        856,
+        127,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0135",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0135",
+        "semantic_path": "비과세및감면소득명세/⑱ 국외근로/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0137",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        856,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0137",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0137",
+        "semantic_path": "비과세및감면소득명세/⑱ 국외근로/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0138",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        856,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0138",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0138",
+        "semantic_path": "비과세및감면소득명세/⑱ 국외근로/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0139",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        887,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0139",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0139",
+        "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0140",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        887,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0140",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0140",
+        "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0141",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        887,
+        127,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0141",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0141",
+        "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0143",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        887,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0143",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0143",
+        "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0144",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        887,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0144",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0144",
+        "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0145",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        918,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0145",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0145",
+        "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0146",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        918,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0146",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0146",
+        "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0147",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        619,
+        918,
+        126,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0147",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0147",
+        "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0149",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        918,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0149",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0149",
+        "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0150",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        918,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0150",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0150",
+        "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0151",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        949,
+        119,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0151",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0151",
+        "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0152",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        949,
+        110,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0152",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0152",
+        "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0153",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        949,
+        126,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0153",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0153",
+        "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0155",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        949,
+        95,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0155",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0155",
+        "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0156",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        949,
+        121,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0156",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0156",
+        "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0157",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        981,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0157",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0157",
+        "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0158",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        981,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0158",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0158",
+        "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0159",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        981,
+        126,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0159",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0159",
+        "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0161",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        981,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0161",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0161",
+        "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0162",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        981,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0162",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0162",
+        "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0165",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1012,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0165",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0165",
+        "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0166",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1012,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0166",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0166",
+        "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0167",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        1012,
+        127,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0167",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0167",
+        "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0169",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        1012,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0169",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0169",
+        "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0170",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1012,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0170",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0170",
+        "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0173",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1043,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0173",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0173",
+        "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/주(현)",
+        "review_required": true
+      }
+    },
+    {
+      "anchor_id": "visual_0174",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1043,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0174",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0174",
+        "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/종(전) 1",
+        "review_required": true
+      }
+    },
+    {
+      "anchor_id": "visual_0175",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        1043,
+        128,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0175",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0175",
+        "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/종(전) 2",
+        "review_required": true
+      }
+    },
+    {
+      "anchor_id": "visual_0177",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        1043,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0177",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0177",
+        "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/⑯-1 납세조합",
+        "review_required": true
+      }
+    },
+    {
+      "anchor_id": "visual_0178",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1043,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0178",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0178",
+        "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/합계",
+        "review_required": true
+      }
+    },
+    {
+      "anchor_id": "visual_0179",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1074,
+        119,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0179",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0179",
+        "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0180",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1074,
+        110,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0180",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0180",
+        "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0181",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        619,
+        1074,
+        126,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0181",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0181",
+        "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0183",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        1074,
+        95,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0183",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0183",
+        "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0184",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1074,
+        121,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0184",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0184",
+        "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0185",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1106,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0185",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0185",
+        "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0186",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1106,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0186",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0186",
+        "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0187",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        1106,
+        126,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0187",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0187",
+        "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0189",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        1106,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0189",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0189",
+        "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0190",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1106,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0190",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0190",
+        "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0192",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1137,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0192",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0192",
+        "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0193",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1137,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0193",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0193",
+        "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0194",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        1137,
+        129,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0194",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0194",
+        "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0196",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        1137,
+        95,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0196",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0196",
+        "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0197",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1137,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0197",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0197",
+        "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0199",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1168,
+        119,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0199",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0199",
+        "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/주(현)",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0200",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1168,
+        110,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0200",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0200",
+        "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/종(전) 1",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0201",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        618,
+        1167,
+        127,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0201",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0201",
+        "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/종(전) 2",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0203",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        1168,
+        95,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0203",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0203",
+        "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/⑯-1 납세조합",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0204",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1168,
+        121,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0204",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0204",
+        "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/합계",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0211",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1231,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0211",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0211",
+        "semantic_path": "세액명세/⑦ 결정세액/소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0213",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        667,
+        1231,
+        45,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0213",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0213",
+        "semantic_path": "세액명세/⑦ 결정세액/지방소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0215",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1231,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0215",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0215",
+        "semantic_path": "세액명세/⑦ 결정세액/농어촌특별세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0217",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1262,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0217",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0217",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 1/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0218",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1262,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0218",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0218",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 1/소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0220",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        667,
+        1262,
+        45,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0220",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0220",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 1/지방소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0222",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1262,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0222",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0222",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 1/농어촌특별세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0223",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1293,
+        119,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0223",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0223",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 2/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0224",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1293,
+        110,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0224",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0224",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 2/소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0226",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        667,
+        1293,
+        45,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0226",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0226",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 2/지방소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0228",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1293,
+        121,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0228",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0228",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 2/농어촌특별세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0229",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1325,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0229",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0229",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 3/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0230",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1325,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0230",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0230",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 3/소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0232",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        667,
+        1325,
+        45,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0232",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0232",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 3/지방소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0234",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        1325,
+        121,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0234",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0234",
+        "semantic_path": "세액명세/⑦② 종(전)근무지 3/농어촌특별세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0237",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        353,
+        1356,
+        119,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0237",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0237",
+        "semantic_path": "세액명세/⑦③ 주(현)근무지/사업자등록번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0238",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        504,
+        1356,
+        110,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0238",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0238",
+        "semantic_path": "세액명세/⑦③ 주(현)근무지/소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "visual_0240",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        667,
+        1356,
+        45,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "table_cell",
+      "text_source": "visual_line_detect",
+      "role": "value_region",
+      "suggested_schema_key": "visual_0240",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_visual_0240",
+        "semantic_path": "세액명세/⑦③ 주(현)근무지/지방소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992303508",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        241,
+        154,
+        39,
+        33
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992303508",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992303508",
+        "semantic_path": "문서선택/근로소득_원천징수영수증",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992306643",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        241,
+        195,
+        39,
+        29
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992306643",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992306643",
+        "semantic_path": "문서선택/근로소득_지급명세서",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992309292",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        235,
+        232,
+        22,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992309292",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992309292",
+        "semantic_path": "보관용구분/소득자_보관용",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992312242",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        383,
+        232,
+        25,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992312242",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992312242",
+        "semantic_path": "보관용구분/발행자_보관용",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992315342",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        535,
+        232,
+        26,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992315342",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992315342",
+        "semantic_path": "보관용구분/발행자_보고용",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992322008",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        119,
+        173,
+        73,
+        59
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992322008",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992322008",
+        "semantic_path": "관리/관리번호",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992354658",
+      "source": "bbox_review",
+      "text": "비거주자2",
+      "bbox": [
+        926,
+        109,
+        67,
+        17
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "비거주자2",
+      "confidence": 0.9974566698074341,
+      "binding": {
+        "field_id": "fin05_manual_1783992354658",
+        "semantic_path": "인적분류/거주구분/비거주자",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992365459",
+      "source": "bbox_review",
+      "text": "외국인9",
+      "bbox": [
+        936,
+        148,
+        55,
+        20
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "외국인9",
+      "confidence": 0.9995534420013428,
+      "binding": {
+        "field_id": "fin05_manual_1783992365459",
+        "semantic_path": "인적분류/내외국인/외국인",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992381925",
+      "source": "bbox_review",
+      "text": "미해당2",
+      "bbox": [
+        958,
+        168,
+        50,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "미해당2",
+      "confidence": 0.9899375438690186,
+      "binding": {
+        "field_id": "fin05_manual_1783992381925",
+        "semantic_path": "인적분류/외국인단일세율적용/미해당",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992386059",
+      "source": "bbox_review",
+      "text": "미해당2",
+      "bbox": [
+        957,
+        188,
+        52,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "미해당2",
+      "confidence": 0.9903697967529297,
+      "binding": {
+        "field_id": "fin05_manual_1783992386059",
+        "semantic_path": "인적분류/외국법인소속파견근로자여부/미해당",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992388709",
+      "source": "bbox_review",
+      "text": "미해당2",
+      "bbox": [
+        957,
+        206,
+        49,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "미해당2",
+      "confidence": 0.9905060529708862,
+      "binding": {
+        "field_id": "fin05_manual_1783992388709",
+        "semantic_path": "인적분류/종교관련종사자여부/미해당",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992403041",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        780,
+        128,
+        63,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992403041",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992403041",
+        "semantic_path": "인적분류/거주지국",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992407526",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        951,
+        128,
+        61,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992407526",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992407526",
+        "semantic_path": "인적분류/거주지국코드",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992413509",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        780,
+        227,
+        62,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992413509",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992413509",
+        "semantic_path": "인적분류/국적",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992419125",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        951,
+        226,
+        61,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "initial_kept",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992419125",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992419125",
+        "semantic_path": "인적분류/국적코드",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992429276",
+      "source": "bbox_review",
+      "text": "세대원2",
+      "bbox": [
+        936,
+        247,
+        55,
+        18
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "세대원2",
+      "confidence": 0.9964694380760193,
+      "binding": {
+        "field_id": "fin05_manual_1783992429276",
+        "semantic_path": "인적분류/세대주여부/세대원",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992442625",
+      "source": "bbox_review",
+      "text": "중도퇴사2",
+      "bbox": [
+        935,
+        285,
+        66,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "중도퇴사2",
+      "confidence": 0.9814866781234741,
+      "binding": {
+        "field_id": "fin05_manual_1783992442625",
+        "semantic_path": "인적분류/연말정산구분/중도퇴사",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992528776",
+      "source": "bbox_review",
+      "text": "미해당2",
+      "bbox": [
+        494,
+        356,
+        75,
+        19
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "paddle_recrop",
+      "role": "value_region",
+      "suggested_schema_key": "미해당2",
+      "confidence": 0.9849885106086731,
+      "binding": {
+        "field_id": "fin05_manual_1783992528776",
+        "semantic_path": "징수의무자/사업자단위과세자여부/미해당",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992630409",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        345,
+        543,
+        52,
+        29
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992630409",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992630409",
+        "semantic_path": "근무처별소득명세/주(현)/근무기간/시작",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992634393",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        420,
+        543,
+        53,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992634393",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992634393",
+        "semantic_path": "근무처별소득명세/주(현)/근무기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992640260",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        344,
+        574,
+        53,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992640260",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992640260",
+        "semantic_path": "근무처별소득명세/주(현)/감면기간/시작",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992644593",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        421,
+        574,
+        54,
+        29
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992644593",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992644593",
+        "semantic_path": "근무처별소득명세/주(현)/감면기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992648942",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        475,
+        543,
+        59,
+        29
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992648942",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992648942",
+        "semantic_path": "근무처별소득명세/종(전) 1/근무기간/시작",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992654759",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        475,
+        574,
+        59,
+        31
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992654759",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992654759",
+        "semantic_path": "근무처별소득명세/종(전) 1/감면기간/시작",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992660809",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        556,
+        543,
+        61,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992660809",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992660809",
+        "semantic_path": "근무처별소득명세/종(전) 1/근무기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992666210",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        555,
+        573,
+        62,
+        31
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992666210",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992666210",
+        "semantic_path": "근무처별소득명세/종(전) 1/감면기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992693760",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        692,
+        541,
+        56,
+        32
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992693760",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992693760",
+        "semantic_path": "근무처별소득명세/종(전) 2/근무기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992699342",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        691,
+        573,
+        57,
+        31
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992699342",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992699342",
+        "semantic_path": "근무처별소득명세/종(전) 2/감면기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992719226",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        748,
+        542,
+        58,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992719226",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992719226",
+        "semantic_path": "근무처별소득명세/⑯-1 납세조합/근무기간/시작",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992725360",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        749,
+        575,
+        58,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992725360",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992725360",
+        "semantic_path": "근무처별소득명세/⑯-1 납세조합/감면기간/시작",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992737794",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        829,
+        542,
+        61,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992737794",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992737794",
+        "semantic_path": "근무처별소득명세/⑯-1 납세조합/근무기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992742010",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        829,
+        573,
+        60,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992742010",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992742010",
+        "semantic_path": "근무처별소득명세/⑯-1 납세조합/감면기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992748761",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        542,
+        53,
+        31
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992748761",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992748761",
+        "semantic_path": "근무처별소득명세/합계/근무기간/시작",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992755427",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        890,
+        574,
+        54,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992755427",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992755427",
+        "semantic_path": "근무처별소득명세/합계/감면기간/시작",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992760161",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        964,
+        542,
+        56,
+        29
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992760161",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992760161",
+        "semantic_path": "근무처별소득명세/합계/근무기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992764043",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        965,
+        571,
+        56,
+        33
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992764043",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992764043",
+        "semantic_path": "근무처별소득명세/합계/감면기간/종료",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992899710",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        505,
+        1387,
+        161,
+        30
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992899710",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992899710",
+        "semantic_path": "세액명세/⑦④ 납부특례세액/소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992903993",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        667,
+        1387,
+        179,
+        31
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992903993",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992903993",
+        "semantic_path": "세액명세/⑦④ 납부특례세액/지방소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992907693",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        847,
+        1388,
+        174,
+        29
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992907693",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992907693",
+        "semantic_path": "세액명세/⑦④ 납부특례세액/농어촌특별세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992911760",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        847,
+        1354,
+        173,
+        32
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992911760",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992911760",
+        "semantic_path": "세액명세/⑦③ 주(현)근무지/농어촌특별세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992917177",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        503,
+        1419,
+        162,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992917177",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992917177",
+        "semantic_path": "세액명세/⑦⑤ 차감징수세액/소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992919627",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        668,
+        1419,
+        177,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992919627",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992919627",
+        "semantic_path": "세액명세/⑦⑤ 차감징수세액/지방소득세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992924694",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        848,
+        1420,
+        170,
+        28
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992924694",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992924694",
+        "semantic_path": "세액명세/⑦⑤ 차감징수세액/농어촌특별세",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992958060",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        495,
+        1499,
+        388,
+        33
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992958060",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992958060",
+        "semantic_path": "영수확인/징수_보고_의무자_서명",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992975143",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        790,
+        1471,
+        61,
+        27
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992975143",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992975143",
+        "semantic_path": "영수확인/작성일자/연도",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992977193",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        886,
+        1474,
+        33,
+        23
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992977193",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992977193",
+        "semantic_path": "영수확인/작성일자/월",
+        "review_required": false
+      }
+    },
+    {
+      "anchor_id": "manual_1783992979060",
+      "source": "bbox_review",
+      "text": "",
+      "bbox": [
+        951,
+        1469,
+        31,
+        26
+      ],
+      "bbox_format": "xywh",
+      "status": "use",
+      "auto_type": "field_value",
+      "text_source": "manual_override",
+      "role": "value_region",
+      "suggested_schema_key": "manual_1783992979060",
+      "confidence": null,
+      "binding": {
+        "field_id": "fin05_manual_1783992979060",
+        "semantic_path": "영수확인/작성일자/일",
+        "review_required": false
+      }
+    }
+  ],
+  "status": "schema_pass_bound",
+  "coverage": {
+    "use_anchor_count": 188,
+    "binding_count": 188,
+    "unmapped_use_anchors": [],
+    "all_use_anchors_mapped": true
+  },
+  "field_bindings": [
+    {
+      "anchor_id": "manual_1783992303508",
+      "field_id": "fin05_manual_1783992303508",
+      "semantic_path": "문서선택/근로소득_원천징수영수증",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992306643",
+      "field_id": "fin05_manual_1783992306643",
+      "semantic_path": "문서선택/근로소득_지급명세서",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992309292",
+      "field_id": "fin05_manual_1783992309292",
+      "semantic_path": "보관용구분/소득자_보관용",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992312242",
+      "field_id": "fin05_manual_1783992312242",
+      "semantic_path": "보관용구분/발행자_보관용",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992315342",
+      "field_id": "fin05_manual_1783992315342",
+      "semantic_path": "보관용구분/발행자_보고용",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992322008",
+      "field_id": "fin05_manual_1783992322008",
+      "semantic_path": "관리/관리번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "det_000004",
+      "field_id": "fin05_det_000004",
+      "semantic_path": "인적분류/거주구분/거주자",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992354658",
+      "field_id": "fin05_manual_1783992354658",
+      "semantic_path": "인적분류/거주구분/비거주자",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992403041",
+      "field_id": "fin05_manual_1783992403041",
+      "semantic_path": "인적분류/거주지국",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992407526",
+      "field_id": "fin05_manual_1783992407526",
+      "semantic_path": "인적분류/거주지국코드",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "det_000009",
+      "field_id": "fin05_det_000009",
+      "semantic_path": "인적분류/내외국인/내국인",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992365459",
+      "field_id": "fin05_manual_1783992365459",
+      "semantic_path": "인적분류/내외국인/외국인",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "det_000012",
+      "field_id": "fin05_det_000012",
+      "semantic_path": "인적분류/외국인단일세율적용/해당",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992381925",
+      "field_id": "fin05_manual_1783992381925",
+      "semantic_path": "인적분류/외국인단일세율적용/미해당",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "det_000015",
+      "field_id": "fin05_det_000015",
+      "semantic_path": "인적분류/외국법인소속파견근로자여부/해당",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992386059",
+      "field_id": "fin05_manual_1783992386059",
+      "semantic_path": "인적분류/외국법인소속파견근로자여부/미해당",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "det_000018",
+      "field_id": "fin05_det_000018",
+      "semantic_path": "인적분류/종교관련종사자여부/해당",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992388709",
+      "field_id": "fin05_manual_1783992388709",
+      "semantic_path": "인적분류/종교관련종사자여부/미해당",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992413509",
+      "field_id": "fin05_manual_1783992413509",
+      "semantic_path": "인적분류/국적",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992419125",
+      "field_id": "fin05_manual_1783992419125",
+      "semantic_path": "인적분류/국적코드",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "det_000023",
+      "field_id": "fin05_det_000023",
+      "semantic_path": "인적분류/세대주여부/세대주",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992429276",
+      "field_id": "fin05_manual_1783992429276",
+      "semantic_path": "인적분류/세대주여부/세대원",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "det_000024",
+      "field_id": "fin05_det_000024",
+      "semantic_path": "인적분류/세대주여부/세대주의_배우자",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "det_000026",
+      "field_id": "fin05_det_000026",
+      "semantic_path": "인적분류/연말정산구분/계속근로",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992442625",
+      "field_id": "fin05_manual_1783992442625",
+      "semantic_path": "인적분류/연말정산구분/중도퇴사",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0031",
+      "field_id": "fin05_visual_0031",
+      "semantic_path": "징수의무자/법인명_상호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0033",
+      "field_id": "fin05_visual_0033",
+      "semantic_path": "징수의무자/대표자_성명",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0034",
+      "field_id": "fin05_visual_0034",
+      "semantic_path": "징수의무자/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0037",
+      "field_id": "fin05_visual_0037",
+      "semantic_path": "징수의무자/주민등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "det_000034",
+      "field_id": "fin05_det_000034",
+      "semantic_path": "징수의무자/사업자단위과세자여부/해당",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992528776",
+      "field_id": "fin05_manual_1783992528776",
+      "semantic_path": "징수의무자/사업자단위과세자여부/미해당",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0038",
+      "field_id": "fin05_visual_0038",
+      "semantic_path": "징수의무자/종사업장_일련번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0046",
+      "field_id": "fin05_visual_0046",
+      "semantic_path": "징수의무자/소재지_주소",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0048",
+      "field_id": "fin05_visual_0048",
+      "semantic_path": "소득자/성명",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0050",
+      "field_id": "fin05_visual_0050",
+      "semantic_path": "소득자/주민등록번호_외국인등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0057",
+      "field_id": "fin05_visual_0057",
+      "semantic_path": "소득자/주소",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0062",
+      "field_id": "fin05_visual_0062",
+      "semantic_path": "근무처별소득명세/주(현)/근무처명",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0063",
+      "field_id": "fin05_visual_0063",
+      "semantic_path": "근무처별소득명세/종(전) 1/근무처명",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0064",
+      "field_id": "fin05_visual_0064",
+      "semantic_path": "근무처별소득명세/종(전) 2/근무처명",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0066",
+      "field_id": "fin05_visual_0066",
+      "semantic_path": "근무처별소득명세/⑯-1 납세조합/근무처명",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0067",
+      "field_id": "fin05_visual_0067",
+      "semantic_path": "근무처별소득명세/합계/근무처명",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0069",
+      "field_id": "fin05_visual_0069",
+      "semantic_path": "근무처별소득명세/주(현)/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0070",
+      "field_id": "fin05_visual_0070",
+      "semantic_path": "근무처별소득명세/종(전) 1/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0071",
+      "field_id": "fin05_visual_0071",
+      "semantic_path": "근무처별소득명세/종(전) 2/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0073",
+      "field_id": "fin05_visual_0073",
+      "semantic_path": "근무처별소득명세/⑯-1 납세조합/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0074",
+      "field_id": "fin05_visual_0074",
+      "semantic_path": "근무처별소득명세/합계/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992630409",
+      "field_id": "fin05_manual_1783992630409",
+      "semantic_path": "근무처별소득명세/주(현)/근무기간/시작",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992634393",
+      "field_id": "fin05_manual_1783992634393",
+      "semantic_path": "근무처별소득명세/주(현)/근무기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992640260",
+      "field_id": "fin05_manual_1783992640260",
+      "semantic_path": "근무처별소득명세/주(현)/감면기간/시작",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992644593",
+      "field_id": "fin05_manual_1783992644593",
+      "semantic_path": "근무처별소득명세/주(현)/감면기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992648942",
+      "field_id": "fin05_manual_1783992648942",
+      "semantic_path": "근무처별소득명세/종(전) 1/근무기간/시작",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992660809",
+      "field_id": "fin05_manual_1783992660809",
+      "semantic_path": "근무처별소득명세/종(전) 1/근무기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992654759",
+      "field_id": "fin05_manual_1783992654759",
+      "semantic_path": "근무처별소득명세/종(전) 1/감면기간/시작",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992666210",
+      "field_id": "fin05_manual_1783992666210",
+      "semantic_path": "근무처별소득명세/종(전) 1/감면기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992693760",
+      "field_id": "fin05_manual_1783992693760",
+      "semantic_path": "근무처별소득명세/종(전) 2/근무기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992699342",
+      "field_id": "fin05_manual_1783992699342",
+      "semantic_path": "근무처별소득명세/종(전) 2/감면기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992719226",
+      "field_id": "fin05_manual_1783992719226",
+      "semantic_path": "근무처별소득명세/⑯-1 납세조합/근무기간/시작",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992737794",
+      "field_id": "fin05_manual_1783992737794",
+      "semantic_path": "근무처별소득명세/⑯-1 납세조합/근무기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992725360",
+      "field_id": "fin05_manual_1783992725360",
+      "semantic_path": "근무처별소득명세/⑯-1 납세조합/감면기간/시작",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992742010",
+      "field_id": "fin05_manual_1783992742010",
+      "semantic_path": "근무처별소득명세/⑯-1 납세조합/감면기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992748761",
+      "field_id": "fin05_manual_1783992748761",
+      "semantic_path": "근무처별소득명세/합계/근무기간/시작",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992760161",
+      "field_id": "fin05_manual_1783992760161",
+      "semantic_path": "근무처별소득명세/합계/근무기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992755427",
+      "field_id": "fin05_manual_1783992755427",
+      "semantic_path": "근무처별소득명세/합계/감면기간/시작",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992764043",
+      "field_id": "fin05_manual_1783992764043",
+      "semantic_path": "근무처별소득명세/합계/감면기간/종료",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0080",
+      "field_id": "fin05_visual_0080",
+      "semantic_path": "근무처별소득명세/⑬ 급여/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0081",
+      "field_id": "fin05_visual_0081",
+      "semantic_path": "근무처별소득명세/⑬ 급여/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0082",
+      "field_id": "fin05_visual_0082",
+      "semantic_path": "근무처별소득명세/⑬ 급여/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0084",
+      "field_id": "fin05_visual_0084",
+      "semantic_path": "근무처별소득명세/⑬ 급여/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0085",
+      "field_id": "fin05_visual_0085",
+      "semantic_path": "근무처별소득명세/⑬ 급여/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0087",
+      "field_id": "fin05_visual_0087",
+      "semantic_path": "근무처별소득명세/⑭ 상여/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0088",
+      "field_id": "fin05_visual_0088",
+      "semantic_path": "근무처별소득명세/⑭ 상여/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0089",
+      "field_id": "fin05_visual_0089",
+      "semantic_path": "근무처별소득명세/⑭ 상여/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0091",
+      "field_id": "fin05_visual_0091",
+      "semantic_path": "근무처별소득명세/⑭ 상여/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0092",
+      "field_id": "fin05_visual_0092",
+      "semantic_path": "근무처별소득명세/⑭ 상여/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0094",
+      "field_id": "fin05_visual_0094",
+      "semantic_path": "근무처별소득명세/⑮ 인정상여/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0095",
+      "field_id": "fin05_visual_0095",
+      "semantic_path": "근무처별소득명세/⑮ 인정상여/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0096",
+      "field_id": "fin05_visual_0096",
+      "semantic_path": "근무처별소득명세/⑮ 인정상여/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0098",
+      "field_id": "fin05_visual_0098",
+      "semantic_path": "근무처별소득명세/⑮ 인정상여/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0099",
+      "field_id": "fin05_visual_0099",
+      "semantic_path": "근무처별소득명세/⑮ 인정상여/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0100",
+      "field_id": "fin05_visual_0100",
+      "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0101",
+      "field_id": "fin05_visual_0101",
+      "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0102",
+      "field_id": "fin05_visual_0102",
+      "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0104",
+      "field_id": "fin05_visual_0104",
+      "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0105",
+      "field_id": "fin05_visual_0105",
+      "semantic_path": "근무처별소득명세/⑮-1 주식매수선택권 행사이익/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0106",
+      "field_id": "fin05_visual_0106",
+      "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0107",
+      "field_id": "fin05_visual_0107",
+      "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0108",
+      "field_id": "fin05_visual_0108",
+      "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0110",
+      "field_id": "fin05_visual_0110",
+      "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0111",
+      "field_id": "fin05_visual_0111",
+      "semantic_path": "근무처별소득명세/⑮-2 우리사주조합 인출금/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0112",
+      "field_id": "fin05_visual_0112",
+      "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0113",
+      "field_id": "fin05_visual_0113",
+      "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0114",
+      "field_id": "fin05_visual_0114",
+      "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0116",
+      "field_id": "fin05_visual_0116",
+      "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0117",
+      "field_id": "fin05_visual_0117",
+      "semantic_path": "근무처별소득명세/⑮-3 임원 퇴직소득금액 한도초과액/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0119",
+      "field_id": "fin05_visual_0119",
+      "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0120",
+      "field_id": "fin05_visual_0120",
+      "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0121",
+      "field_id": "fin05_visual_0121",
+      "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0123",
+      "field_id": "fin05_visual_0123",
+      "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0124",
+      "field_id": "fin05_visual_0124",
+      "semantic_path": "근무처별소득명세/⑮-4 직무발명보상금/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0127",
+      "field_id": "fin05_visual_0127",
+      "semantic_path": "근무처별소득명세/⑯ 계/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0128",
+      "field_id": "fin05_visual_0128",
+      "semantic_path": "근무처별소득명세/⑯ 계/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0129",
+      "field_id": "fin05_visual_0129",
+      "semantic_path": "근무처별소득명세/⑯ 계/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0131",
+      "field_id": "fin05_visual_0131",
+      "semantic_path": "근무처별소득명세/⑯ 계/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0132",
+      "field_id": "fin05_visual_0132",
+      "semantic_path": "근무처별소득명세/⑯ 계/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0133",
+      "field_id": "fin05_visual_0133",
+      "semantic_path": "비과세및감면소득명세/⑱ 국외근로/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0134",
+      "field_id": "fin05_visual_0134",
+      "semantic_path": "비과세및감면소득명세/⑱ 국외근로/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0135",
+      "field_id": "fin05_visual_0135",
+      "semantic_path": "비과세및감면소득명세/⑱ 국외근로/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0137",
+      "field_id": "fin05_visual_0137",
+      "semantic_path": "비과세및감면소득명세/⑱ 국외근로/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0138",
+      "field_id": "fin05_visual_0138",
+      "semantic_path": "비과세및감면소득명세/⑱ 국외근로/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0139",
+      "field_id": "fin05_visual_0139",
+      "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0140",
+      "field_id": "fin05_visual_0140",
+      "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0141",
+      "field_id": "fin05_visual_0141",
+      "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0143",
+      "field_id": "fin05_visual_0143",
+      "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0144",
+      "field_id": "fin05_visual_0144",
+      "semantic_path": "비과세및감면소득명세/⑱-1 야간근로수당/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0145",
+      "field_id": "fin05_visual_0145",
+      "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0146",
+      "field_id": "fin05_visual_0146",
+      "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0147",
+      "field_id": "fin05_visual_0147",
+      "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0149",
+      "field_id": "fin05_visual_0149",
+      "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0150",
+      "field_id": "fin05_visual_0150",
+      "semantic_path": "비과세및감면소득명세/⑱-2 보육수당/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0151",
+      "field_id": "fin05_visual_0151",
+      "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0152",
+      "field_id": "fin05_visual_0152",
+      "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0153",
+      "field_id": "fin05_visual_0153",
+      "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0155",
+      "field_id": "fin05_visual_0155",
+      "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0156",
+      "field_id": "fin05_visual_0156",
+      "semantic_path": "비과세및감면소득명세/⑱-3 출산지원금/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0157",
+      "field_id": "fin05_visual_0157",
+      "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0158",
+      "field_id": "fin05_visual_0158",
+      "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0159",
+      "field_id": "fin05_visual_0159",
+      "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0161",
+      "field_id": "fin05_visual_0161",
+      "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0162",
+      "field_id": "fin05_visual_0162",
+      "semantic_path": "비과세및감면소득명세/⑱-4 연구보조비/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0165",
+      "field_id": "fin05_visual_0165",
+      "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0166",
+      "field_id": "fin05_visual_0166",
+      "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0167",
+      "field_id": "fin05_visual_0167",
+      "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0169",
+      "field_id": "fin05_visual_0169",
+      "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0170",
+      "field_id": "fin05_visual_0170",
+      "semantic_path": "비과세및감면소득명세/⑱-5 비과세 항목/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0179",
+      "field_id": "fin05_visual_0179",
+      "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0180",
+      "field_id": "fin05_visual_0180",
+      "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0181",
+      "field_id": "fin05_visual_0181",
+      "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0183",
+      "field_id": "fin05_visual_0183",
+      "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0184",
+      "field_id": "fin05_visual_0184",
+      "semantic_path": "비과세및감면소득명세/⑱-41 임원등 할인금액/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0185",
+      "field_id": "fin05_visual_0185",
+      "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0186",
+      "field_id": "fin05_visual_0186",
+      "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0187",
+      "field_id": "fin05_visual_0187",
+      "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0189",
+      "field_id": "fin05_visual_0189",
+      "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0190",
+      "field_id": "fin05_visual_0190",
+      "semantic_path": "비과세및감면소득명세/⑲ 수련보조수당/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0192",
+      "field_id": "fin05_visual_0192",
+      "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0193",
+      "field_id": "fin05_visual_0193",
+      "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0194",
+      "field_id": "fin05_visual_0194",
+      "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0196",
+      "field_id": "fin05_visual_0196",
+      "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0197",
+      "field_id": "fin05_visual_0197",
+      "semantic_path": "비과세및감면소득명세/⑳ 비과세소득 계/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0199",
+      "field_id": "fin05_visual_0199",
+      "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/주(현)",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0200",
+      "field_id": "fin05_visual_0200",
+      "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/종(전) 1",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0201",
+      "field_id": "fin05_visual_0201",
+      "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/종(전) 2",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0203",
+      "field_id": "fin05_visual_0203",
+      "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0204",
+      "field_id": "fin05_visual_0204",
+      "semantic_path": "비과세및감면소득명세/⑳-1 감면소득 계/합계",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0173",
+      "field_id": "fin05_visual_0173",
+      "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/주(현)",
+      "value_region": true,
+      "review_required": true
+    },
+    {
+      "anchor_id": "visual_0174",
+      "field_id": "fin05_visual_0174",
+      "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/종(전) 1",
+      "value_region": true,
+      "review_required": true
+    },
+    {
+      "anchor_id": "visual_0175",
+      "field_id": "fin05_visual_0175",
+      "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/종(전) 2",
+      "value_region": true,
+      "review_required": true
+    },
+    {
+      "anchor_id": "visual_0177",
+      "field_id": "fin05_visual_0177",
+      "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/⑯-1 납세조합",
+      "value_region": true,
+      "review_required": true
+    },
+    {
+      "anchor_id": "visual_0178",
+      "field_id": "fin05_visual_0178",
+      "semantic_path": "검토필요/비과세및감면소득명세_라벨없는_물결표행/합계",
+      "value_region": true,
+      "review_required": true
+    },
+    {
+      "anchor_id": "visual_0211",
+      "field_id": "fin05_visual_0211",
+      "semantic_path": "세액명세/⑦ 결정세액/소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0213",
+      "field_id": "fin05_visual_0213",
+      "semantic_path": "세액명세/⑦ 결정세액/지방소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0215",
+      "field_id": "fin05_visual_0215",
+      "semantic_path": "세액명세/⑦ 결정세액/농어촌특별세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0217",
+      "field_id": "fin05_visual_0217",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 1/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0218",
+      "field_id": "fin05_visual_0218",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 1/소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0220",
+      "field_id": "fin05_visual_0220",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 1/지방소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0222",
+      "field_id": "fin05_visual_0222",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 1/농어촌특별세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0223",
+      "field_id": "fin05_visual_0223",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 2/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0224",
+      "field_id": "fin05_visual_0224",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 2/소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0226",
+      "field_id": "fin05_visual_0226",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 2/지방소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0228",
+      "field_id": "fin05_visual_0228",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 2/농어촌특별세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0229",
+      "field_id": "fin05_visual_0229",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 3/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0230",
+      "field_id": "fin05_visual_0230",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 3/소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0232",
+      "field_id": "fin05_visual_0232",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 3/지방소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0234",
+      "field_id": "fin05_visual_0234",
+      "semantic_path": "세액명세/⑦② 종(전)근무지 3/농어촌특별세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0237",
+      "field_id": "fin05_visual_0237",
+      "semantic_path": "세액명세/⑦③ 주(현)근무지/사업자등록번호",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0238",
+      "field_id": "fin05_visual_0238",
+      "semantic_path": "세액명세/⑦③ 주(현)근무지/소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "visual_0240",
+      "field_id": "fin05_visual_0240",
+      "semantic_path": "세액명세/⑦③ 주(현)근무지/지방소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992911760",
+      "field_id": "fin05_manual_1783992911760",
+      "semantic_path": "세액명세/⑦③ 주(현)근무지/농어촌특별세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992899710",
+      "field_id": "fin05_manual_1783992899710",
+      "semantic_path": "세액명세/⑦④ 납부특례세액/소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992903993",
+      "field_id": "fin05_manual_1783992903993",
+      "semantic_path": "세액명세/⑦④ 납부특례세액/지방소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992907693",
+      "field_id": "fin05_manual_1783992907693",
+      "semantic_path": "세액명세/⑦④ 납부특례세액/농어촌특별세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992917177",
+      "field_id": "fin05_manual_1783992917177",
+      "semantic_path": "세액명세/⑦⑤ 차감징수세액/소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992919627",
+      "field_id": "fin05_manual_1783992919627",
+      "semantic_path": "세액명세/⑦⑤ 차감징수세액/지방소득세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992924694",
+      "field_id": "fin05_manual_1783992924694",
+      "semantic_path": "세액명세/⑦⑤ 차감징수세액/농어촌특별세",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992975143",
+      "field_id": "fin05_manual_1783992975143",
+      "semantic_path": "영수확인/작성일자/연도",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992977193",
+      "field_id": "fin05_manual_1783992977193",
+      "semantic_path": "영수확인/작성일자/월",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992979060",
+      "field_id": "fin05_manual_1783992979060",
+      "semantic_path": "영수확인/작성일자/일",
+      "value_region": true,
+      "review_required": false
+    },
+    {
+      "anchor_id": "manual_1783992958060",
+      "field_id": "fin05_manual_1783992958060",
+      "semantic_path": "영수확인/징수_보고_의무자_서명",
+      "value_region": true,
+      "review_required": false
+    }
+  ]
+}

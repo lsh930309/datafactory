@@ -85,6 +85,109 @@ def test_authoring_agent_execution_modes_have_bounded_stage_sequences() -> None:
     assert web_api._authoring_agent_execution_stages("schema_only") == ["schema"]
     assert web_api._authoring_agent_execution_stages("faker_only") == ["faker"]
     assert web_api._authoring_agent_execution_stages("validation_repair") == ["validation_repair"]
+    assert web_api._authoring_agent_execution_stages("targeted_revision") == ["targeted_revision"]
+
+
+def test_targeted_revision_reuses_only_selected_document_request(tmp_path: Path, monkeypatch) -> None:  # noqa: ANN001
+    doc_id = "APP-14"
+    request_dir = tmp_path / "workbench" / doc_id / "authoring" / "agent_requests" / "request1"
+    request_dir.mkdir(parents=True)
+    request_path = request_dir / "request.json"
+    request_path.write_text(
+        json.dumps({"schema_version": 2, "docId": doc_id, "title": "카드발급신청서", "instruction": "최초 생성"}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    drafts = {
+        "schema_draft.json": {
+            "schema_version": 1,
+            "doc_id": doc_id,
+            "title": "카드발급신청서",
+            "semantic_schema": {"성명": ""},
+            "fields": [{"field_id": "name", "key": "성명", "semantic_path": ["성명"], "anchor_id": "det_name", "value": ""}],
+        },
+        "stylesheet_draft.json": {"schema_version": 1},
+        "faker_profile_draft.json": {"schema_version": 1, "field_generators": {"name": "person.name_ko"}},
+        "value_pool_draft.json": {"schema_version": 1},
+        "research_report.json": {"schema_version": 1, "sources": []},
+        "uncertainty_report.json": {"schema_version": 1},
+        "anchor_map_draft.json": {"schema_version": 1, "anchors": [{"anchor_id": "det_name", "status": "use", "role": "value_region"}]},
+    }
+    for name, payload in drafts.items():
+        (request_dir / name).write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    (request_dir / "application_notes.md").write_text("초기 draft", encoding="utf-8")
+    untouched = tmp_path / "workbench" / "OTHER-1" / "authoring" / "schema.json"
+    untouched.parent.mkdir(parents=True)
+    untouched.write_text("do-not-touch", encoding="utf-8")
+    prompts: list[str] = []
+    commands: list[list[str]] = []
+
+    def fake_workbench_subdir(selected_doc_id: str, subdir: str) -> Path:
+        target = tmp_path / "workbench" / selected_doc_id / subdir
+        target.mkdir(parents=True, exist_ok=True)
+        return target
+
+    def fake_run(cmd, prompt, **kwargs):  # noqa: ANN001
+        commands.append(cmd)
+        prompts.append(prompt)
+        kwargs["stdout_path"].write_text("ok", encoding="utf-8")
+        kwargs["stderr_path"].write_text("tokens used\n9\n", encoding="utf-8")
+        Path(cmd[cmd.index("--output-last-message") + 1]).write_text("ok", encoding="utf-8")
+        return web_api._AgentProcessResult(returncode=0, stdout_tail="ok", stderr_tail="", pid=777)
+
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
+    monkeypatch.setattr(web_api, "update_manifest_artifact", lambda *args, **kwargs: None)
+    monkeypatch.setattr(web_api, "_run_codex_process", fake_run)
+
+    result = web_api.authoring_agent_run_payload(
+        {
+            "docId": doc_id,
+            "requestPath": web_api._display_path(request_path, tmp_path),
+            "instruction": "성명 필드의 글자 크기만 1px 줄여줘",
+            "options": {"executionMode": "targeted_revision"},
+        },
+        async_run=False,
+    )
+
+    updated_request = json.loads(request_path.read_text(encoding="utf-8"))
+    assert result["status"] == "succeeded"
+    assert result["executionMode"] == "targeted_revision"
+    assert result["passState"]["planned"] == ["targeted_revision"]
+    assert result["instruction"] == "성명 필드의 글자 크기만 1px 줄여줘"
+    assert updated_request["instruction"] == "최초 생성"
+    assert updated_request["revision_requests"][-1]["instruction"] == "성명 필드의 글자 크기만 1px 줄여줘"
+    assert len(prompts) == 1
+    assert "성명 필드의 글자 크기만 1px 줄여줘" in prompts[0]
+    assert "다른 문서" in prompts[0]
+    assert Path(commands[0][commands[0].index("--cd") + 1]) == request_dir
+    assert untouched.read_text(encoding="utf-8") == "do-not-touch"
+    snapshot = Path(web_api._resolve_workspace_path(result["runDir"])) / "pre_run_snapshot" / "schema_draft.json"
+    assert snapshot.exists()
+
+
+def test_targeted_revision_requires_existing_valid_draft_and_instruction(tmp_path: Path, monkeypatch) -> None:  # noqa: ANN001
+    request_dir = tmp_path / "workbench" / "APP-14" / "authoring" / "agent_requests" / "request1"
+    request_dir.mkdir(parents=True)
+    request_path = request_dir / "request.json"
+    request_path.write_text(json.dumps({"docId": "APP-14"}), encoding="utf-8")
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    monkeypatch.setattr(web_api, "workbench_subdir", lambda doc_id, subdir: tmp_path / "workbench" / doc_id / subdir)
+
+    with pytest.raises(ValueError, match="instruction"):
+        web_api.authoring_agent_run_payload(
+            {"docId": "APP-14", "requestPath": str(request_path), "options": {"executionMode": "targeted_revision"}},
+            async_run=False,
+        )
+    with pytest.raises(ValueError, match="existing valid draft"):
+        web_api.authoring_agent_run_payload(
+            {
+                "docId": "APP-14",
+                "requestPath": str(request_path),
+                "instruction": "성명 글자 크기만 줄여줘",
+                "options": {"executionMode": "targeted_revision"},
+            },
+            async_run=False,
+        )
 
 
 def test_agent_job_payload_streams_terminal_by_cursor(tmp_path: Path, monkeypatch) -> None:  # noqa: ANN001

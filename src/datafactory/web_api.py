@@ -122,7 +122,7 @@ DEFAULT_AUTHORING_AGENT_RECORD_POOL_MIN_SIZE = 12
 DEFAULT_AUTHORING_AGENT_MODEL = "gpt-5.6-terra"
 DEFAULT_AUTHORING_AGENT_REASONING_EFFORT = "medium"
 AUTHORING_AGENT_REASONING_EFFORTS = {"low", "medium", "high", "xhigh", "max", "ultra"}
-AUTHORING_AGENT_EXECUTION_MODES = {"two_pass", "single_pass", "schema_only", "faker_only", "validation_repair"}
+AUTHORING_AGENT_EXECUTION_MODES = {"two_pass", "single_pass", "schema_only", "faker_only", "validation_repair", "targeted_revision"}
 AUTHORING_AGENT_TERMINAL_CHUNK_SIZE = 64 * 1024
 _ACTIVE_AUTHORING_AGENT_JOBS: set[str] = set()
 _ACTIVE_AUTHORING_AGENT_JOBS_LOCK = threading.Lock()
@@ -602,7 +602,7 @@ def authoring_agent_capabilities(*, codex_home: Path | None = None) -> dict[str,
         "defaultModel": default_model,
         "defaultReasoningEffort": DEFAULT_AUTHORING_AGENT_REASONING_EFFORT,
         "models": models,
-        "executionModes": ["two_pass", "single_pass", "schema_only", "faker_only", "validation_repair"],
+        "executionModes": ["two_pass", "single_pass", "schema_only", "faker_only", "validation_repair", "targeted_revision"],
         "source": source,
         "fetchedAt": fetched_at,
     }
@@ -941,7 +941,7 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
     options = _authoring_agent_options(payload)
     execution_mode = str(options["executionMode"])
     request_path_value = str(payload.get("requestPath") or "").strip()
-    reuse_request = bool(request_path_value and execution_mode in {"schema_only", "faker_only", "validation_repair"})
+    reuse_request = bool(request_path_value and execution_mode in {"schema_only", "faker_only", "validation_repair", "targeted_revision"})
     if reuse_request:
         request_path = _resolve_workspace_path(request_path_value)
         if request_path.name != "request.json" or "agent_requests" not in request_path.parts:
@@ -950,6 +950,20 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
         doc_id = str(payload.get("docId") or request.get("docId") or "").strip()
         if not doc_id or doc_id != str(request.get("docId") or ""):
             raise ValueError("requestPath does not belong to docId")
+        expected_request_root = (workbench_subdir(doc_id, "authoring") / "agent_requests").resolve()
+        if expected_request_root not in request_path.resolve().parents:
+            raise ValueError("requestPath is outside the selected document authoring directory")
+        revision_instruction = str(payload.get("instruction") or "").strip()
+        if execution_mode == "targeted_revision":
+            if not revision_instruction:
+                raise ValueError("targeted_revision requires a non-empty instruction")
+            if not _validate_authoring_agent_outputs(request_path.parent)["ready"]:
+                raise ValueError("targeted_revision requires an existing valid draft; run validation_repair first")
+            revision_requests = request.get("revision_requests") if isinstance(request.get("revision_requests"), list) else []
+            request["revision_requests"] = [
+                *revision_requests,
+                {"createdAt": _utc_now(), "instruction": revision_instruction},
+            ]
         request["options"] = options
         if isinstance(request.get("contract"), dict):
             request["contract"]["inference_options"] = options
@@ -964,7 +978,7 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
         request_path.write_text(json.dumps(request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         request_payload = {"docId": doc_id, "paths": {"request": _display_path(request_path, ROOT)}, "request": request}
     else:
-        if execution_mode in {"faker_only", "validation_repair"}:
+        if execution_mode in {"faker_only", "validation_repair", "targeted_revision"}:
             raise ValueError(f"{execution_mode} requires an existing requestPath")
         request_payload = authoring_agent_request_payload({**payload, "options": options})
         doc_id = str(request_payload["docId"])
@@ -978,9 +992,16 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
     stdout_path = run_dir / "stdout.log"
     stderr_path = run_dir / "stderr.log"
     terminal_path = run_dir / "terminal.log"
-    prompt = _authoring_agent_exec_prompt(request_path=request_path, request_dir=request_dir, run_dir=run_dir)
-    prompt_path.write_text(prompt, encoding="utf-8")
     planned_stages = _authoring_agent_execution_stages(execution_mode)
+    instruction = str(payload.get("instruction") or "").strip()
+    prompt = _authoring_agent_exec_prompt(
+        request_path=request_path,
+        request_dir=request_dir,
+        run_dir=run_dir,
+        stage=planned_stages[0],
+        instruction=instruction,
+    )
+    prompt_path.write_text(prompt, encoding="utf-8")
     job = {
         "schema_version": 1,
         "jobId": run_dir.name,
@@ -1001,6 +1022,7 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
         "outputs": {},
         "validation": {"missing": list(AUTHORING_AGENT_REQUIRED_OUTPUTS), "invalidJson": [], "ready": False},
         "options": options,
+        "instruction": instruction,
         "executionMode": execution_mode,
         "passState": {"current": "queued", "completed": [], "planned": planned_stages},
     }
@@ -1338,7 +1360,7 @@ def _write_authoring_agent_anchor_review(
     return out_path
 
 
-def _authoring_agent_exec_prompt(*, request_path: Path, request_dir: Path, run_dir: Path, stage: str = "full") -> str:
+def _authoring_agent_exec_prompt(*, request_path: Path, request_dir: Path, run_dir: Path, stage: str = "full", instruction: str = "") -> str:
     if stage == "schema":
         return f"""# Codex authoring inference job — schema pass
 
@@ -1403,6 +1425,27 @@ The caller appends the exact machine validation errors to this prompt.
 - Never silence an error by dropping a use anchor, semantic leaf, generator, relationship, or evidence item.
 - Write only inside the request directory and verify the complete eight-file contract before finishing.
 - Return a short Korean summary after writing the repaired files.
+"""
+    if stage == "targeted_revision":
+        return f"""# Codex authoring inference job — targeted user revision
+
+Read the selected document request `{request_path.resolve()}` and the current eight draft files in `{request_dir.resolve()}`.
+Paths stored in the request package are relative to the read-only repository root `{ROOT.resolve()}` unless already absolute.
+
+## User revision request
+{instruction.strip()}
+
+## Hard scope boundary
+- This request applies only to document `{json.loads(request_path.read_text(encoding='utf-8')).get('docId', '')}` and only to the draft files inside `{request_dir.resolve()}`.
+- 다른 문서(other document)의 directory, request package, registry entry, manifest, sample, source code, or final authoring file을 inspect, edit, rename, or delete하지 않는다.
+- Preserve every valid field ID, semantic path, anchor, generator, pool, constraint, style, and evidence item that is unrelated to the user request.
+- Make the smallest changes that satisfy the user request. Do not regenerate the complete document and do not repeat broad web research.
+- Inspect the selected document's existing evidence only when necessary to resolve the requested change.
+- Keep all eight draft files parseable and mutually consistent. Never satisfy the request by dropping required use-anchor coverage or validation constraints.
+- Write only inside the selected request directory. The process sandbox does not permit writing to other document directories.
+
+## Completion
+Validate the complete eight-file contract after editing and return a short Korean summary of the files and fields changed.
 """
     stage_instruction = {
     }.get(stage, "## Current pass: full draft generation\n")
@@ -1473,6 +1516,7 @@ def _authoring_agent_execution_stages(execution_mode: str) -> list[str]:
         "schema_only": ["schema"],
         "faker_only": ["faker"],
         "validation_repair": ["validation_repair"],
+        "targeted_revision": ["targeted_revision"],
     }[execution_mode]
 
 
@@ -1678,6 +1722,7 @@ def _run_authoring_agent_job(
     reasoning_effort = str(options.get("reasoningEffort") or DEFAULT_AUTHORING_AGENT_REASONING_EFFORT).strip().lower()
 
     def command_for(message_path: Path) -> list[str]:
+        agent_root = request_dir if execution_mode == "targeted_revision" else ROOT
         command = [
             "codex",
             "--search",
@@ -1691,7 +1736,7 @@ def _run_authoring_agent_job(
             "fast_mode",
             "exec",
             "--cd",
-            str(ROOT),
+            str(agent_root),
             "--sandbox",
             "workspace-write",
             "--output-last-message",
@@ -1734,6 +1779,10 @@ def _run_authoring_agent_job(
             prerequisite = _validate_authoring_agent_outputs(request_dir)
             if prerequisite["ready"]:
                 raise ValueError("validation_repair is not needed because the draft is already valid")
+        if execution_mode == "targeted_revision":
+            prerequisite = _validate_authoring_agent_outputs(request_dir)
+            if not prerequisite["ready"]:
+                raise ValueError("targeted_revision requires an existing valid draft; run validation_repair first")
 
         for stage_index, stage in enumerate(planned_stages):
             live_job = _read_agent_job(job_path)
@@ -1751,6 +1800,7 @@ def _run_authoring_agent_job(
                 request_dir=request_dir,
                 run_dir=run_dir,
                 stage=stage,
+                instruction=str(job.get("instruction") or ""),
             )
             if stage == "validation_repair":
                 stage_prompt += "\n## Machine validation result to repair\n```json\n" + json.dumps(_validate_authoring_agent_outputs(request_dir), ensure_ascii=False, indent=2) + "\n```\n"

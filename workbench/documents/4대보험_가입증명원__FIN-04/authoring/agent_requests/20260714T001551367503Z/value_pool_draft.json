@@ -1,0 +1,84 @@
+{
+  "schema_version": 2,
+  "doc_id": "FIN-04",
+  "as_of_date": "2026-07-14",
+  "authoritative_runtime_source": "faker_profile_draft.json#/data_pools",
+  "pools": {
+    "fin04_profiles": {
+      "kind": "record_pool",
+      "value_source": "faker_profile_draft.json#/data_pools/fin04_profiles",
+      "record_count": 12,
+      "minimum_required": 12,
+      "status": "meets_minimum",
+      "usage": "문서확인번호·상단 복합문구·진본 스탬프·발급정보·가입자정보·보험별 취득일/신고접수일·국민연금 기준 사업장정보를 같은 레코드에서 선택한다.",
+      "record_keys": [
+        "document_confirmation_number",
+        "document_confirmation_line",
+        "authenticity_date",
+        "authenticity_time",
+        "issue_number",
+        "issue_datetime",
+        "subscriber_rrn",
+        "subscriber_name",
+        "page_counter",
+        "np_acquisition_date",
+        "np_subscriber_type",
+        "np_workplace_number",
+        "np_workplace_name",
+        "np_report_received_date",
+        "hi_acquisition_date",
+        "hi_subscriber_type",
+        "hi_report_received_date",
+        "wc_acquisition_date",
+        "wc_subscriber_type",
+        "wc_report_received_date",
+        "ei_acquisition_date",
+        "ei_subscriber_type",
+        "ei_report_received_date"
+      ],
+      "source_notes": [
+        "형식은 전체 템플릿 이미지의 실제 값 위치와 VIS-001~VIS-009를 우선 근거로 했다.",
+        "발급일시는 모두 고정 기준일 2026-07-14 이하이며, 보험별 신고접수일은 해당 취득일과 같거나 이후이다.",
+        "원본 인명·주민등록번호·사업장명·관리번호·문서번호는 재사용하지 않았다.",
+        "주민등록번호 모양 값은 렌더링 시험용 합성 문자열이며 실재 인물 식별에 사용할 수 없다."
+      ]
+    },
+    "observed_insurance_subscriber_types": {
+      "kind": "closed_reference_values",
+      "values": [
+        "사업장가입자",
+        "직장가입자"
+      ],
+      "runtime_usage": "not_referenced_as_pool",
+      "usage": "현재 템플릿에서 국민연금·산재보험·고용보험은 사업장가입자, 건강보험은 직장가입자로 관찰되어 field_generators에서는 literal로 고정한다.",
+      "source_notes": [
+        "VIS-006~VIS-009의 행별 가입자종별 값",
+        "WEB-004의 국민연금 가입자종별 설명",
+        "전체 템플릿 이미지 우선 정책"
+      ]
+    },
+    "observed_render_formats": {
+      "kind": "format_reference",
+      "runtime_usage": "not_referenced_as_pool",
+      "values": {
+        "document_confirmation_number": "####-####-####-####",
+        "authenticity_date": "YYYY/MM/DD",
+        "authenticity_time": "HH:MM:SS",
+        "issue_number": "YYYYMMDDHHMMSS 형태의 14자리 관찰값",
+        "issue_datetime": "YYYY-MM-DD HH:MM",
+        "acquisition_date": "YYYY.MM.DD",
+        "report_received_date": "(YYYY.MM.DD)",
+        "page_counter": "1 / 1"
+      },
+      "source_notes": [
+        "값 위치에 별도 단위는 없으며 KST만 진본 시각 아래 정적 suffix로 남는다.",
+        "신고접수일 괄호는 값 bbox 안에 있으므로 생성 값에 포함한다."
+      ]
+    }
+  },
+  "reuse_notes": [
+    "실제 렌더러 적용 기준은 faker_profile_draft.json의 data_pools와 constraints이다.",
+    "새 레코드를 추가할 때는 문서확인번호와 상단 복합문구의 번호·성명, 발급번호와 발급일시, 각 보험의 취득일과 신고접수일 순서를 함께 검증한다.",
+    "새 record pool은 12개 미만으로 줄이지 않으며 실제 개인정보 또는 실제 법인 식별정보를 넣지 않는다."
+  ]
+}

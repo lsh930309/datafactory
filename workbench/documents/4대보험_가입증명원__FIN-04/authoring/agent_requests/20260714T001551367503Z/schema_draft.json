@@ -1,0 +1,224 @@
+{
+  "schema_version": 2,
+  "doc_id": "FIN-04",
+  "title": "4대 사회보험 가입자 가입내역 확인서",
+  "semantic_schema": {
+    "문서정보": {
+      "문서확인번호": "",
+      "진본확인": {
+        "확인일자": "",
+        "확인시각": ""
+      },
+      "발급번호": "",
+      "발급일시": "",
+      "페이지": ""
+    },
+    "가입자": {
+      "주민(외국인)등록번호": "",
+      "성명": ""
+    },
+    "가입내역": {
+      "국민연금": {
+        "성명": "",
+        "가입자종별": "",
+        "사업장관리번호": "",
+        "사업장명칭": "",
+        "자격취득일": "",
+        "신고접수일": ""
+      },
+      "건강보험": {
+        "성명": "",
+        "가입자종별": "",
+        "사업장관리번호": "",
+        "사업장명칭": "",
+        "자격취득일": "",
+        "신고접수일": ""
+      },
+      "산재보험": {
+        "성명": "",
+        "가입자종별": "",
+        "사업장관리번호": "",
+        "사업장명칭": "",
+        "자격취득일": "",
+        "신고접수일": ""
+      },
+      "고용보험": {
+        "성명": "",
+        "가입자종별": "",
+        "사업장관리번호": "",
+        "사업장명칭": "",
+        "자격취득일": "",
+        "신고접수일": ""
+      }
+    }
+  },
+  "fields": [
+    {
+      "field_id": "document_confirmation_number",
+      "key": "문서확인번호",
+      "semantic_path": "문서정보/문서확인번호",
+      "anchor_id": "det_000001",
+      "value": "",
+      "value_type": "identifier",
+      "faker_rule": "pattern:####-####-####-####",
+      "style_class": "header_confirmation",
+      "render_policy": {"render": false},
+      "research_evidence_ids": ["VIS-001", "WEB-003"],
+      "visual_evidence": {"full_template": "workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg", "bbox": [198, 36, 619, 24], "note": "문서확인번호와 신청인 성명이 한 줄에 함께 인쇄됨"},
+      "confidence": 0.97
+    },
+    {
+      "field_id": "document_confirmation_line",
+      "key": "상단 문서확인문구",
+      "semantic_path": "렌더전용/상단 문서확인문구",
+      "anchor_id": "det_000001",
+      "value": "",
+      "value_type": "composite_text",
+      "faker_rule": "template:문서확인번호: {{pattern:####-####-####-####}} (신청인: {{person.name_ko}})",
+      "style_class": "header_confirmation",
+      "export": {"include": false},
+      "research_evidence_ids": ["VIS-001"],
+      "visual_evidence": {"full_template": "workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg", "crop": "workbench/documents/4대보험_가입증명원__FIN-04/authoring/agent_requests/20260714T001551367503Z/visual_evidence/crops/crop_0021_det_000001.png", "bbox": [198, 36, 619, 24], "prefix_suffix_policy": "prefix와 신청인 표기를 값에 포함"},
+      "confidence": 0.97
+    },
+    {
+      "field_id": "authenticity_date",
+      "key": "진본 확인일자",
+      "semantic_path": "문서정보/진본확인/확인일자",
+      "anchor_id": "det_000005",
+      "value": "",
+      "label_anchor_ids": ["det_000004"],
+      "value_type": "date",
+      "faker_rule": "date.kr",
+      "style_class": "stamp_timestamp",
+      "unit_policy": {"static_suffix": false, "format_observed": "YYYY/MM/DD"},
+      "research_evidence_ids": ["VIS-002"],
+      "visual_evidence": {"bbox": [77, 106, 73, 17], "context": "진본 스탬프 내부 상단 날짜"},
+      "confidence": 0.82
+    },
+    {
+      "field_id": "authenticity_time",
+      "key": "진본 확인시각",
+      "semantic_path": "문서정보/진본확인/확인시각",
+      "anchor_id": "det_000006",
+      "value": "",
+      "label_anchor_ids": ["det_000004", "det_000008"],
+      "value_type": "time",
+      "faker_rule": "free_text.short",
+      "style_class": "stamp_timestamp",
+      "unit_policy": {"static_suffix": true, "suffix": "KST", "include_suffix_in_value": false, "format_observed": "HH:MM:SS"},
+      "research_evidence_ids": ["VIS-002"],
+      "visual_evidence": {"bbox": [86, 118, 57, 17], "context": "진본 스탬프 내부 시각; KST는 별도 정적 텍스트"},
+      "confidence": 0.82
+    },
+    {
+      "field_id": "issue_number",
+      "key": "발급번호",
+      "semantic_path": "문서정보/발급번호",
+      "anchor_id": "det_000012",
+      "value": "",
+      "label_anchor_ids": ["det_000011"],
+      "value_type": "identifier",
+      "faker_rule": "pattern:##############",
+      "style_class": "metadata_value",
+      "research_evidence_ids": ["VIS-003", "WEB-002"],
+      "visual_evidence": {"bbox": [372, 361, 170, 24], "format_observed": "14 digits"},
+      "confidence": 0.99
+    },
+    {
+      "field_id": "issue_datetime",
+      "key": "발급일시",
+      "semantic_path": "문서정보/발급일시",
+      "anchor_id": "det_000014",
+      "value": "",
+      "label_anchor_ids": ["det_000013"],
+      "value_type": "datetime",
+      "faker_rule": "free_text.short",
+      "style_class": "metadata_value",
+      "unit_policy": {"static_suffix": false, "format_observed": "YYYY-MM-DD HH:MM"},
+      "research_evidence_ids": ["VIS-003", "WEB-002"],
+      "visual_evidence": {"bbox": [893, 361, 173, 24]},
+      "confidence": 0.99
+    },
+    {
+      "field_id": "subscriber_rrn",
+      "key": "주민(외국인)등록번호",
+      "semantic_path": "가입자/주민(외국인)등록번호",
+      "anchor_id": "det_000016",
+      "value": "",
+      "label_anchor_ids": ["det_000015"],
+      "value_type": "person.rrn",
+      "faker_rule": "person.rrn",
+      "style_class": "metadata_value",
+      "research_evidence_ids": ["VIS-004", "WEB-001"],
+      "visual_evidence": {"bbox": [382, 418, 168, 24], "format_observed": "######-#######"},
+      "confidence": 0.99
+    },
+    {
+      "field_id": "subscriber_name",
+      "key": "성명",
+      "semantic_path": "가입자/성명",
+      "anchor_id": "det_000018",
+      "value": "",
+      "label_anchor_ids": ["det_000017"],
+      "value_type": "person.name_ko",
+      "faker_rule": "person.name_ko",
+      "style_class": "name_value",
+      "research_evidence_ids": ["VIS-004", "WEB-001"],
+      "visual_evidence": {"bbox": [956, 413, 67, 34]},
+      "confidence": 0.99
+    },
+    {
+      "field_id": "page_counter",
+      "key": "페이지",
+      "semantic_path": "문서정보/페이지",
+      "anchor_id": "det_000020",
+      "value": "",
+      "label_anchor_ids": ["det_000019"],
+      "value_type": "page_counter",
+      "faker_rule": "literal:1 / 1",
+      "style_class": "page_counter",
+      "research_evidence_ids": ["VIS-005"],
+      "visual_evidence": {"bbox": [1011, 476, 75, 28], "format_observed": "current / total"},
+      "confidence": 0.98
+    },
+
+    {"field_id":"np_acquisition_date","key":"국민연금 자격취득일","semantic_path":"가입내역/국민연금/자격취득일","anchor_id":"det_000030","value":"","label_anchor_ids":["det_000031","det_000023"],"value_type":"date","faker_rule":"date.kr","style_class":"table_date","unit_policy":{"static_suffix":false,"format_observed":"YYYY.MM.DD"},"research_evidence_ids":["VIS-006","WEB-004"],"visual_evidence":{"bbox":[969,594,109,25]},"confidence":0.99},
+    {"field_id":"np_subscriber_name","key":"국민연금 성명","semantic_path":"가입내역/국민연금/성명","anchor_id":"det_000032","value":"","label_anchor_ids":["det_000031","det_000024"],"value_type":"person.name_ko","faker_rule":"same_as:subscriber_name","style_class":"table_name","research_evidence_ids":["VIS-006"],"visual_evidence":{"bbox":[255,604,70,36]},"confidence":0.99},
+    {"field_id":"np_subscriber_type","key":"국민연금 가입자종별","semantic_path":"가입내역/국민연금/가입자종별","anchor_id":"det_000033","value":"","label_anchor_ids":["det_000031","det_000025"],"value_type":"category","faker_rule":"free_text.short","style_class":"table_text","research_evidence_ids":["VIS-006","WEB-004"],"visual_evidence":{"bbox":[383,608,124,30]},"confidence":0.99},
+    {"field_id":"np_workplace_number","key":"국민연금 사업장관리번호","semantic_path":"가입내역/국민연금/사업장관리번호","anchor_id":"det_000034","value":"","label_anchor_ids":["det_000031","det_000022","det_000028"],"value_type":"identifier","faker_rule":"pattern:###########","style_class":"table_identifier","research_evidence_ids":["VIS-006","WEB-001"],"visual_evidence":{"bbox":[538,611,133,23]},"confidence":0.99},
+    {"field_id":"np_workplace_name","key":"국민연금 사업장명칭","semantic_path":"가입내역/국민연금/사업장명칭","anchor_id":"det_000035","value":"","label_anchor_ids":["det_000031","det_000027"],"value_type":"company.name_ko","faker_rule":"company.name_ko","style_class":"table_company","research_evidence_ids":["VIS-006","WEB-001"],"visual_evidence":{"bbox":[723,610,182,23]},"confidence":0.99},
+    {"field_id":"np_report_received_date","key":"국민연금 신고접수일","semantic_path":"가입내역/국민연금/신고접수일","anchor_id":"det_000036","value":"","label_anchor_ids":["det_000031","det_000029"],"value_type":"date","faker_rule":"template:({{date.kr}})","style_class":"table_date","unit_policy":{"static_prefix":false,"static_suffix":false,"include_parentheses_in_value":true,"format_observed":"(YYYY.MM.DD)"},"research_evidence_ids":["VIS-006"],"visual_evidence":{"bbox":[965,627,119,24]},"confidence":0.99},
+
+    {"field_id":"hi_acquisition_date","key":"건강보험 자격취득일","semantic_path":"가입내역/건강보험/자격취득일","anchor_id":"det_000037","value":"","label_anchor_ids":["det_000038","det_000023"],"value_type":"date","faker_rule":"date.kr","style_class":"table_date","unit_policy":{"static_suffix":false,"format_observed":"YYYY.MM.DD"},"research_evidence_ids":["VIS-007","WEB-004"],"visual_evidence":{"bbox":[969,661,109,25]},"confidence":0.99},
+    {"field_id":"hi_subscriber_name","key":"건강보험 성명","semantic_path":"가입내역/건강보험/성명","anchor_id":"det_000039","value":"","label_anchor_ids":["det_000038","det_000024"],"value_type":"person.name_ko","faker_rule":"same_as:subscriber_name","style_class":"table_name","research_evidence_ids":["VIS-007"],"visual_evidence":{"bbox":[258,675,67,30]},"confidence":0.99},
+    {"field_id":"hi_subscriber_type","key":"건강보험 가입자종별","semantic_path":"가입내역/건강보험/가입자종별","anchor_id":"det_000040","value":"","label_anchor_ids":["det_000038","det_000025"],"value_type":"category","faker_rule":"free_text.short","style_class":"table_text","research_evidence_ids":["VIS-007","WEB-004"],"visual_evidence":{"bbox":[394,675,104,28]},"confidence":0.99},
+    {"field_id":"hi_workplace_number","key":"건강보험 사업장관리번호","semantic_path":"가입내역/건강보험/사업장관리번호","anchor_id":"det_000041","value":"","label_anchor_ids":["det_000038","det_000022","det_000028"],"value_type":"identifier","faker_rule":"pattern:###########","style_class":"table_identifier","research_evidence_ids":["VIS-007","WEB-001"],"visual_evidence":{"bbox":[539,679,132,21]},"confidence":0.99},
+    {"field_id":"hi_workplace_name","key":"건강보험 사업장명칭","semantic_path":"가입내역/건강보험/사업장명칭","anchor_id":"det_000042","value":"","label_anchor_ids":["det_000038","det_000027"],"value_type":"company.name_ko","faker_rule":"company.name_ko","style_class":"table_company","research_evidence_ids":["VIS-007","WEB-001"],"visual_evidence":{"bbox":[724,678,182,24]},"confidence":0.99},
+    {"field_id":"hi_report_received_date","key":"건강보험 신고접수일","semantic_path":"가입내역/건강보험/신고접수일","anchor_id":"det_000043","value":"","label_anchor_ids":["det_000038","det_000029"],"value_type":"date","faker_rule":"template:({{date.kr}})","style_class":"table_date","unit_policy":{"static_prefix":false,"static_suffix":false,"include_parentheses_in_value":true,"format_observed":"(YYYY.MM.DD)"},"research_evidence_ids":["VIS-007"],"visual_evidence":{"bbox":[965,694,119,25]},"confidence":0.99},
+
+    {"field_id":"wc_acquisition_date","key":"산재보험 자격취득일","semantic_path":"가입내역/산재보험/자격취득일","anchor_id":"det_000044","value":"","label_anchor_ids":["det_000045","det_000023"],"value_type":"date","faker_rule":"date.kr","style_class":"table_date","unit_policy":{"static_suffix":false,"format_observed":"YYYY.MM.DD"},"research_evidence_ids":["VIS-008","WEB-004"],"visual_evidence":{"bbox":[968,729,110,25]},"confidence":0.99},
+    {"field_id":"wc_subscriber_name","key":"산재보험 성명","semantic_path":"가입내역/산재보험/성명","anchor_id":"det_000046","value":"","label_anchor_ids":["det_000045","det_000024"],"value_type":"person.name_ko","faker_rule":"same_as:subscriber_name","style_class":"table_name","research_evidence_ids":["VIS-008"],"visual_evidence":{"bbox":[258,743,66,29]},"confidence":0.99},
+    {"field_id":"wc_subscriber_type","key":"산재보험 가입자종별","semantic_path":"가입내역/산재보험/가입자종별","anchor_id":"det_000047","value":"","label_anchor_ids":["det_000045","det_000025"],"value_type":"category","faker_rule":"free_text.short","style_class":"table_text","research_evidence_ids":["VIS-008","WEB-004"],"visual_evidence":{"bbox":[385,745,121,25]},"confidence":0.99},
+    {"field_id":"wc_workplace_number","key":"산재보험 사업장관리번호","semantic_path":"가입내역/산재보험/사업장관리번호","anchor_id":"det_000048","value":"","label_anchor_ids":["det_000045","det_000022","det_000028"],"value_type":"identifier","faker_rule":"pattern:###########","style_class":"table_identifier","research_evidence_ids":["VIS-008","WEB-001"],"visual_evidence":{"bbox":[538,746,134,24]},"confidence":0.99},
+    {"field_id":"wc_workplace_name","key":"산재보험 사업장명칭","semantic_path":"가입내역/산재보험/사업장명칭","anchor_id":"det_000049","value":"","label_anchor_ids":["det_000045","det_000027"],"value_type":"company.name_ko","faker_rule":"company.name_ko","style_class":"table_company","research_evidence_ids":["VIS-008","WEB-001"],"visual_evidence":{"bbox":[724,746,182,24]},"confidence":0.99},
+    {"field_id":"wc_report_received_date","key":"산재보험 신고접수일","semantic_path":"가입내역/산재보험/신고접수일","anchor_id":"det_000050","value":"","label_anchor_ids":["det_000045","det_000029"],"value_type":"date","faker_rule":"template:({{date.kr}})","style_class":"table_date","unit_policy":{"static_prefix":false,"static_suffix":false,"include_parentheses_in_value":true,"format_observed":"(YYYY.MM.DD)"},"research_evidence_ids":["VIS-008"],"visual_evidence":{"bbox":[961,757,126,31]},"confidence":0.99},
+
+    {"field_id":"ei_acquisition_date","key":"고용보험 자격취득일","semantic_path":"가입내역/고용보험/자격취득일","anchor_id":"det_000051","value":"","label_anchor_ids":["det_000052","det_000023"],"value_type":"date","faker_rule":"date.kr","style_class":"table_date","unit_policy":{"static_suffix":false,"format_observed":"YYYY.MM.DD"},"research_evidence_ids":["VIS-009","WEB-004"],"visual_evidence":{"bbox":[969,796,108,24]},"confidence":0.99},
+    {"field_id":"ei_subscriber_name","key":"고용보험 성명","semantic_path":"가입내역/고용보험/성명","anchor_id":"det_000053","value":"","label_anchor_ids":["det_000052","det_000024"],"value_type":"person.name_ko","faker_rule":"same_as:subscriber_name","style_class":"table_name","research_evidence_ids":["VIS-009"],"visual_evidence":{"bbox":[258,810,66,29]},"confidence":0.99},
+    {"field_id":"ei_subscriber_type","key":"고용보험 가입자종별","semantic_path":"가입내역/고용보험/가입자종별","anchor_id":"det_000054","value":"","label_anchor_ids":["det_000052","det_000025"],"value_type":"category","faker_rule":"free_text.short","style_class":"table_text","research_evidence_ids":["VIS-009","WEB-004"],"visual_evidence":{"bbox":[385,812,121,25]},"confidence":0.99},
+    {"field_id":"ei_workplace_number","key":"고용보험 사업장관리번호","semantic_path":"가입내역/고용보험/사업장관리번호","anchor_id":"det_000055","value":"","label_anchor_ids":["det_000052","det_000022","det_000028"],"value_type":"identifier","faker_rule":"pattern:###########","style_class":"table_identifier","research_evidence_ids":["VIS-009","WEB-001"],"visual_evidence":{"bbox":[539,814,131,21]},"confidence":0.99},
+    {"field_id":"ei_workplace_name","key":"고용보험 사업장명칭","semantic_path":"가입내역/고용보험/사업장명칭","anchor_id":"det_000056","value":"","label_anchor_ids":["det_000052","det_000027"],"value_type":"company.name_ko","faker_rule":"company.name_ko","style_class":"table_company","research_evidence_ids":["VIS-009","WEB-001"],"visual_evidence":{"bbox":[722,810,186,29]},"confidence":0.99},
+    {"field_id":"ei_report_received_date","key":"고용보험 신고접수일","semantic_path":"가입내역/고용보험/신고접수일","anchor_id":"det_000057","value":"","label_anchor_ids":["det_000052","det_000029"],"value_type":"date","faker_rule":"template:({{date.kr}})","style_class":"table_date","unit_policy":{"static_prefix":false,"static_suffix":false,"include_parentheses_in_value":true,"format_observed":"(YYYY.MM.DD)"},"research_evidence_ids":["VIS-009"],"visual_evidence":{"bbox":[964,828,121,25]},"confidence":0.99}
+  ],
+  "coverage": {
+    "use_anchor_count": 32,
+    "bound_use_anchor_count": 32,
+    "coverage_percent": 100,
+    "unmapped_use_anchors": []
+  },
+  "field_id_contract": {
+    "frozen_for_pass_2": true,
+    "note": "pass 2는 이 fields 배열의 field_id를 추가·삭제·변경하지 않고 faker 및 관계만 작성한다."
+  }
+}

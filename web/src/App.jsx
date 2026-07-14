@@ -30,7 +30,7 @@ const DEFAULT_OCR_PRESET = 'precise';
 const DEFAULT_AUTHORING_AGENT_CAPABILITIES = {
   defaultModel: 'gpt-5.6-terra',
   defaultReasoningEffort: 'medium',
-  executionModes: ['two_pass', 'single_pass', 'schema_only', 'faker_only', 'validation_repair'],
+  executionModes: ['two_pass', 'single_pass', 'schema_only', 'faker_only', 'validation_repair', 'targeted_revision'],
   models: [
     {
       id: 'gpt-5.6-terra',
@@ -48,8 +48,10 @@ const AUTHORING_AGENT_EXECUTION_MODE_LABELS = {
   schema_only: 'Schema만 재실행',
   faker_only: 'Faker만 재실행',
   validation_repair: '검증 보정만',
+  targeted_revision: '요청 보정',
 };
 const AUTHORING_AGENT_TERMINAL_STATUSES = new Set(['succeeded', 'failed', 'needs_repair', 'cancelled', 'timed_out', 'interrupted']);
+const SELECTED_DOCUMENT_STORAGE_KEY = 'datafactory.selectedDocId';
 const VIEWPORT_MODES = [
   ['auto', '자동'],
   ['fit', '전체 맞춤'],
@@ -143,8 +145,17 @@ async function apiJson(path, options = {}) {
   } catch (err) {
     throw new Error(`API 응답 JSON 파싱 실패: HTTP ${response.status}`);
   }
-  if (!response.ok || payload.error) throw new Error(payload.error || `HTTP ${response.status}`);
+  if (!response.ok) throw new Error(payload.error || `HTTP ${response.status}`);
   return payload;
+}
+
+function storedSelectedDocumentId() {
+  if (typeof window === 'undefined') return '';
+  try {
+    return window.localStorage.getItem(SELECTED_DOCUMENT_STORAGE_KEY) || '';
+  } catch {
+    return '';
+  }
 }
 
 function delay(ms) {
@@ -502,7 +513,7 @@ function App() {
   const [finalExportResult, setFinalExportResult] = useState(null);
   const [assessmentPopover, setAssessmentPopover] = useState(null);
   const [seedScan, setSeedScan] = useState({ summary: {}, folders: [] });
-  const [selectedDocId, setSelectedDocId] = useState('');
+  const [selectedDocId, setSelectedDocId] = useState(storedSelectedDocumentId);
   const [selectedSample, setSelectedSample] = useState('');
   const [manualSeedFolder, setManualSeedFolder] = useState('');
   const [manualDocId, setManualDocId] = useState('');
@@ -548,6 +559,8 @@ function App() {
   const authoringAgentTerminalOffsetRef = useRef(0);
   const authoringAgentTerminalJobRef = useRef('');
   const authoringAgentTerminalPreRef = useRef(null);
+  const authoringAgentStatusRefreshInFlightRef = useRef(false);
+  const authoringAgentHydratedJobRef = useRef('');
   const [fontPayload, setFontPayload] = useState({ defaultFontId: '', fonts: [] });
   const [canvasMode, setCanvasMode] = useState('review');
   const [viewportMode, setViewportMode] = useState('auto');
@@ -565,6 +578,7 @@ function App() {
   const [reviewAudit, setReviewAudit] = useState(null);
   const [manualCleanupAudit, setManualCleanupAudit] = useState(null);
   const [authoringAgentInstruction, setAuthoringAgentInstruction] = useState('');
+  const [authoringAgentRevisionInstruction, setAuthoringAgentRevisionInstruction] = useState('');
   const [authoringAgentCapabilities, setAuthoringAgentCapabilities] = useState(DEFAULT_AUTHORING_AGENT_CAPABILITIES);
   const [authoringAgentModel, setAuthoringAgentModel] = useState(DEFAULT_AUTHORING_AGENT_CAPABILITIES.defaultModel);
   const [authoringAgentReasoning, setAuthoringAgentReasoning] = useState('medium');
@@ -1086,11 +1100,18 @@ function App() {
     setAuthoringAgentTerminalText('');
   }
 
-  async function runAuthoringAgentInference(mode = 'authoring', executionMode = authoringAgentExecutionMode) {
+  async function runAuthoringAgentInference(mode = 'authoring', executionMode = authoringAgentExecutionMode, instruction = authoringAgentInstruction) {
     if (!selectedDocId) return;
-    const requestPath = authoringAgentRun?.requestPath || authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest || '';
-    if (['faker_only', 'validation_repair'].includes(executionMode) && !requestPath) {
+    const requestPath = (authoringAgentRun?.docId === selectedDocId ? authoringAgentRun?.requestPath : '')
+      || (authoringAgentRequest?.docId === selectedDocId ? authoringAgentRequest?.paths?.request : '')
+      || selectedItem?.latestAuthoringAgentRequest
+      || '';
+    if (['faker_only', 'validation_repair', 'targeted_revision'].includes(executionMode) && !requestPath) {
       setError(`${AUTHORING_AGENT_EXECUTION_MODE_LABELS[executionMode]}에는 기존 Agent request가 필요합니다.`);
+      return;
+    }
+    if (executionMode === 'targeted_revision' && !instruction.trim()) {
+      setError('요청 보정 내용을 입력하세요.');
       return;
     }
     setBusy(mode === 'bbox_correction' ? 'authoringAgentBboxRun' : 'authoringAgentRun');
@@ -1103,14 +1124,15 @@ function App() {
         method: 'POST',
         body: JSON.stringify({
           docId: selectedDocId,
-          instruction: authoringAgentInstruction,
+          instruction,
           options: authoringAgentOptions(mode, executionMode),
-          ...(['schema_only', 'faker_only', 'validation_repair'].includes(executionMode) && requestPath ? { requestPath } : {}),
+          ...(['schema_only', 'faker_only', 'validation_repair', 'targeted_revision'].includes(executionMode) && requestPath ? { requestPath } : {}),
         }),
       });
       resetAuthoringAgentTerminal(payload.jobPath || '');
       setAuthoringAgentRequest({ docId: payload.docId, paths: { request: payload.requestPath }, request: null });
       setAuthoringAgentRun(payload);
+      if (executionMode === 'targeted_revision') setAuthoringAgentRevisionInstruction('');
       setMessage(`${mode === 'bbox_correction' ? 'BBox 보정 Agent' : AUTHORING_AGENT_EXECUTION_MODE_LABELS[executionMode] || 'Agent 추론'} job 시작: ${payload.jobPath}`);
       await refreshAll({ preserveSelection: true });
     } finally {
@@ -1118,46 +1140,57 @@ function App() {
     }
   }
 
-  async function refreshAuthoringAgentRunStatus(jobPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun) {
+  async function refreshAuthoringAgentRunStatus(jobPath = (authoringAgentRun?.docId === selectedDocId ? authoringAgentRun?.jobPath : '') || selectedItem?.latestAuthoringAgentRun) {
     if (!jobPath && !selectedDocId) return null;
+    if (authoringAgentStatusRefreshInFlightRef.current) return null;
+    authoringAgentStatusRefreshInFlightRef.current = true;
     if (jobPath && authoringAgentTerminalJobRef.current !== jobPath) resetAuthoringAgentTerminal(jobPath);
-    const query = new URLSearchParams(jobPath ? { jobPath } : { docId: selectedDocId });
-    query.set('terminalOffset', String(authoringAgentTerminalOffsetRef.current));
-    const payload = await apiJson(`/api/authoring/agent-run-status?${query.toString()}`);
-    if (payload.terminal) {
-      const chunk = String(payload.terminal.text || '');
-      authoringAgentTerminalOffsetRef.current = Number(payload.terminal.nextOffset || authoringAgentTerminalOffsetRef.current);
-      if (chunk) setAuthoringAgentTerminalText((current) => `${current}${chunk}`.slice(-500_000));
+    try {
+      let payload = null;
+      let chunkCount = 0;
+      do {
+        const query = new URLSearchParams(jobPath ? { jobPath } : { docId: selectedDocId });
+        query.set('terminalOffset', String(authoringAgentTerminalOffsetRef.current));
+        payload = await apiJson(`/api/authoring/agent-run-status?${query.toString()}`);
+        if (payload.terminal) {
+          const chunk = String(payload.terminal.text || '');
+          authoringAgentTerminalOffsetRef.current = Number(payload.terminal.nextOffset || authoringAgentTerminalOffsetRef.current);
+          if (chunk) setAuthoringAgentTerminalText((current) => `${current}${chunk}`.slice(-2_000_000));
+        }
+        chunkCount += 1;
+      } while (payload?.terminal?.hasMore && chunkCount < 32);
+      setAuthoringAgentRun(payload);
+      const terminalKey = `${payload.jobPath || jobPath || ''}:${payload.status}:${payload.finishedAt || ''}`;
+      if (payload.status === 'succeeded') {
+        if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
+          authoringAgentTerminalRefreshRef.current = terminalKey;
+          const scopeLabel = payload.validation?.scope === 'schema' ? 'Schema pass' : '전체 draft';
+          setMessage(`Agent 추론 완료: ${scopeLabel} ${payload.validation?.summary?.present || 0}/${payload.validation?.summary?.required || 0}개 생성`);
+          await refreshAll({ preserveSelection: true });
+        }
+      } else if (payload.status === 'needs_repair') {
+        if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
+          authoringAgentTerminalRefreshRef.current = terminalKey;
+          setMessage('Agent 추론은 끝났지만 draft 검증 보정이 필요합니다. 검증 보정만 재실행할 수 있습니다.');
+          await refreshAll({ preserveSelection: true });
+        }
+      } else if (['failed', 'cancelled', 'timed_out', 'interrupted'].includes(payload.status)) {
+        if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
+          authoringAgentTerminalRefreshRef.current = terminalKey;
+          setError(`Agent 추론 ${payload.status}: ${payload.error || '실행을 완료하지 못했습니다.'}`);
+          await refreshAll({ preserveSelection: true });
+        }
+      } else {
+        authoringAgentTerminalRefreshRef.current = '';
+      }
+      return payload;
+    } finally {
+      authoringAgentStatusRefreshInFlightRef.current = false;
     }
-    setAuthoringAgentRun(payload);
-    const terminalKey = `${payload.jobPath || jobPath || ''}:${payload.status}:${payload.finishedAt || ''}`;
-    if (payload.status === 'succeeded') {
-      if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
-        authoringAgentTerminalRefreshRef.current = terminalKey;
-        const scopeLabel = payload.validation?.scope === 'schema' ? 'Schema pass' : '전체 draft';
-        setMessage(`Agent 추론 완료: ${scopeLabel} ${payload.validation?.summary?.present || 0}/${payload.validation?.summary?.required || 0}개 생성`);
-        await refreshAll({ preserveSelection: true });
-      }
-    } else if (payload.status === 'needs_repair') {
-      if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
-        authoringAgentTerminalRefreshRef.current = terminalKey;
-        setMessage('Agent 추론은 끝났지만 draft 검증 보정이 필요합니다. 검증 보정만 재실행할 수 있습니다.');
-        await refreshAll({ preserveSelection: true });
-      }
-    } else if (['failed', 'cancelled', 'timed_out', 'interrupted'].includes(payload.status)) {
-      if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
-        authoringAgentTerminalRefreshRef.current = terminalKey;
-        setError(`Agent 추론 ${payload.status}: ${payload.error || '실행을 완료하지 못했습니다.'}`);
-        await refreshAll({ preserveSelection: true });
-      }
-    } else {
-      authoringAgentTerminalRefreshRef.current = '';
-    }
-    return payload;
   }
 
   async function cancelAuthoringAgentRun() {
-    const jobPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun;
+    const jobPath = (authoringAgentRun?.docId === selectedDocId ? authoringAgentRun?.jobPath : '') || selectedItem?.latestAuthoringAgentRun;
     if (!jobPath) return;
     setBusy('authoringAgentCancel');
     setError('');
@@ -1630,9 +1663,18 @@ function App() {
   }
 
   useEffect(() => {
-    run(() => refreshAll({ preserveSelection: false }));
+    run(() => refreshAll({ preserveSelection: true }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!selectedDocId) return;
+    try {
+      window.localStorage.setItem(SELECTED_DOCUMENT_STORAGE_KEY, selectedDocId);
+    } catch {
+      // Browser storage can be disabled without blocking the workbench.
+    }
+  }, [selectedDocId]);
 
   useEffect(() => {
     suppressRestoreDocRef.current = '';
@@ -1660,6 +1702,7 @@ function App() {
     setAuthoringPreviewStale(false);
     setAuthoringAgentRequest(null);
     setAuthoringAgentRun(null);
+    setAuthoringAgentRevisionInstruction('');
     resetAuthoringAgentTerminal();
     setAuthoringAgentTerminalOpen(false);
     setDocxPipelineResult(null);
@@ -3043,23 +3086,37 @@ function App() {
   const batchSummaryHref = batchSummaryPath ? fileUrl(batchSummaryPath, authoringVersion) : '';
   const batchManifestHref = batchManifestPath ? fileUrl(batchManifestPath, authoringVersion) : '';
   const batchFirstImageHref = batchFirstImagePath ? fileUrl(batchFirstImagePath, authoringVersion) : '';
-  const latestAgentRequestPath = authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest || '';
-  const latestAgentPromptPath = authoringAgentRequest?.paths?.prompt || selectedItem?.latestAuthoringAgentPrompt || '';
-  const latestAgentAnchorMapPath = authoringAgentRequest?.request?.generated_sidecars?.anchorMapDraft || selectedItem?.latestAuthoringAgentAnchorMap || '';
-  const latestAgentRunPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun || '';
-  const latestAgentRunStatus = authoringAgentRun?.status || (latestAgentRunPath ? 'unknown' : '');
-  const latestAgentRunReady = Boolean(authoringAgentRun?.validation?.ready && authoringAgentRun?.validation?.scope === 'full');
+  const selectedAgentRequest = authoringAgentRequest?.docId === selectedDocId ? authoringAgentRequest : null;
+  const selectedAgentRun = authoringAgentRun?.docId === selectedDocId ? authoringAgentRun : null;
+  const latestAgentRequestPath = selectedAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest || '';
+  const latestAgentPromptPath = selectedAgentRequest?.paths?.prompt || selectedItem?.latestAuthoringAgentPrompt || '';
+  const latestAgentAnchorMapPath = selectedAgentRequest?.request?.generated_sidecars?.anchorMapDraft || selectedItem?.latestAuthoringAgentAnchorMap || '';
+  const latestAgentRunPath = selectedAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun || '';
+  const latestAgentRunStatus = selectedAgentRun?.status || (latestAgentRunPath ? 'unknown' : '');
+  const latestAgentRunReady = Boolean(
+    selectedAgentRun?.validation?.ready
+    && selectedAgentRun?.validation?.scope !== 'schema'
+    && selectedAgentRun?.executionMode !== 'schema_only',
+  );
   const latestAgentRunPolling = Boolean(latestAgentRunPath && !AUTHORING_AGENT_TERMINAL_STATUSES.has(latestAgentRunStatus));
   const latestAgentRunCanCancel = ['queued', 'running', 'cancelling'].includes(latestAgentRunStatus);
+  const latestAgentValidation = selectedAgentRun?.validation || {};
+  const latestAgentValidationIssueCount = (latestAgentValidation.contractErrors || []).length
+    + (latestAgentValidation.missing || []).length
+    + (latestAgentValidation.invalidJson || []).length;
+  const latestAgentRunNeedsRepair = latestAgentRunStatus === 'needs_repair'
+    || (AUTHORING_AGENT_TERMINAL_STATUSES.has(latestAgentRunStatus) && latestAgentValidation.ready === false && latestAgentValidationIssueCount > 0);
+  const authoringAgentRetryBusy = ['authoringAgentRun', 'authoringAgentBboxRun', 'authoringAgentCancel'].includes(busy)
+    || latestAgentRunCanCancel;
   const selectedAgentModelCapability = authoringAgentCapabilities.models.find((model) => model.id === authoringAgentModel)
     || authoringAgentCapabilities.models[0]
     || DEFAULT_AUTHORING_AGENT_CAPABILITIES.models[0];
   const authoringAgentReasoningOptions = selectedAgentModelCapability.reasoningEfforts?.length
     ? selectedAgentModelCapability.reasoningEfforts
     : ['medium'];
-  const latestAgentElapsedSeconds = authoringAgentRun?.elapsedSeconds ?? (
-    authoringAgentRun?.startedAt
-      ? Math.max(0, (authoringAgentClock - new Date(authoringAgentRun.startedAt).getTime()) / 1000)
+  const latestAgentElapsedSeconds = selectedAgentRun?.elapsedSeconds ?? (
+    selectedAgentRun?.startedAt
+      ? Math.max(0, (authoringAgentClock - new Date(selectedAgentRun.startedAt).getTime()) / 1000)
       : 0
   );
 
@@ -3071,6 +3128,35 @@ function App() {
     ));
     if (!selectedAgentModelCapability.supportsFastMode) setAuthoringAgentFastMode(false);
   }, [authoringAgentModel, authoringAgentCapabilities]);
+
+  useEffect(() => {
+    const persistedJobPath = selectedItem?.latestAuthoringAgentRun || '';
+    if (!persistedJobPath) {
+      authoringAgentHydratedJobRef.current = '';
+      return;
+    }
+    if (authoringAgentHydratedJobRef.current === persistedJobPath) return;
+    authoringAgentHydratedJobRef.current = persistedJobPath;
+    resetAuthoringAgentTerminal(persistedJobPath);
+    setAuthoringAgentTerminalOpen(true);
+    let cancelled = false;
+    async function restorePersistedRun() {
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        const payload = await refreshAuthoringAgentRunStatus(persistedJobPath);
+        if (cancelled || payload) return;
+        await delay(150);
+      }
+      if (!cancelled) authoringAgentHydratedJobRef.current = '';
+    }
+    restorePersistedRun().catch((exc) => {
+      if (cancelled) return;
+      authoringAgentHydratedJobRef.current = '';
+      setError(`저장된 Agent 세션 복원 실패: ${exc.message || String(exc)}`);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedDocId, selectedItem?.latestAuthoringAgentRun]);
 
   useEffect(() => {
     if (!latestAgentRunPolling) return undefined;
@@ -3423,7 +3509,8 @@ function App() {
                   checked={finalExportHandwritingAsPrinted}
                   onChange={(event) => setFinalExportHandwritingAsPrinted(event.target.checked)}
                 />
-                <span>필기 문서도 인쇄체로 생성</span>
+                <span>필기 → 인쇄</span>
+                <small>임시</small>
               </label>
               <div className="final-export-controls">
                 <label>데이터 기준일
@@ -4036,143 +4123,194 @@ function App() {
           {!cleanroomEditing && <section className="panel-block authoring-control-panel">
             <h2>Authoring 작업</h2>
             <p className="muted">Schema / Style / Faker / Render를 분리해 다룹니다. 기존 파일 3종이 있으면 문서 선택 시 자동으로 불러와 최종 Pillow 렌더러 live preview를 표시합니다.</p>
-            <div className="authoring-step-label"><b>0. Agentic Authoring 추론</b><span>Codex exec가 문서 이미지/OCR/review + 웹 리서치 기반 draft를 실제 생성</span></div>
-            <textarea
-              className="agent-request-input"
-              placeholder="agent에게 전달할 생성 의도/주의사항을 적으세요. 예: 카드발급신청서 하단 체크박스는 날짜/카드종류/동의여부 의미를 이미지 기준으로 구분."
-              value={authoringAgentInstruction}
-              onChange={(event) => setAuthoringAgentInstruction(event.target.value)}
-            />
-            <div className="agent-options-grid">
-              <label className="agent-option-wide">실행 방식
-                <select value={authoringAgentExecutionMode} onChange={(event) => setAuthoringAgentExecutionMode(event.target.value)}>
-                  {(authoringAgentCapabilities.executionModes || DEFAULT_AUTHORING_AGENT_CAPABILITIES.executionModes).map((executionMode) => (
-                    <option
-                      key={executionMode}
-                      value={executionMode}
-                      disabled={['faker_only', 'validation_repair'].includes(executionMode) && !latestAgentRequestPath}
-                    >
-                      {AUTHORING_AGENT_EXECUTION_MODE_LABELS[executionMode] || executionMode}
-                    </option>
-                  ))}
-                </select>
-                <small>{authoringAgentExecutionMode === 'two_pass' ? 'Schema를 먼저 고정한 뒤 Faker만 별도 추론합니다.' : authoringAgentExecutionMode === 'single_pass' ? '한 세션에서 전체 draft를 생성해 호출 시간을 줄입니다.' : '기존 request를 재사용해 필요한 단계만 다시 실행합니다.'}</small>
-              </label>
-              <label className="agent-option-wide">모델
-                <select
-                  value={authoringAgentModel}
-                  onChange={(event) => {
-                    const nextModel = authoringAgentCapabilities.models.find((model) => model.id === event.target.value) || selectedAgentModelCapability;
-                    setAuthoringAgentModel(nextModel.id);
-                    setAuthoringAgentReasoning((current) => (nextModel.reasoningEfforts || []).includes(current) ? current : nextModel.defaultReasoningEffort || 'medium');
-                    if (!nextModel.supportsFastMode) setAuthoringAgentFastMode(false);
-                  }}
-                >
-                  {authoringAgentCapabilities.models.map((model) => <option key={model.id} value={model.id}>{model.label || model.id}</option>)}
-                </select>
-                {selectedAgentModelCapability.description && <small>{selectedAgentModelCapability.description}</small>}
-              </label>
-              <label>사고 레벨
-                <select value={authoringAgentReasoning} onChange={(event) => setAuthoringAgentReasoning(event.target.value)}>
-                  {authoringAgentReasoningOptions.map((effort) => <option key={effort} value={effort}>{effort}</option>)}
-                </select>
-              </label>
-              <label>데이터 기준일
-                <input type="date" value={authoringAsOfDate} onChange={(event) => setAuthoringAsOfDate(event.target.value)} />
-                <small>미래 시점 문서 생성을 막고 날짜·나이 관계를 이 시점에 고정합니다.</small>
-              </label>
-              <label>Scalar pool 최소
-                <input type="number" min="1" max="100" value={authoringAgentScalarPoolMinSize} onChange={(event) => setAuthoringAgentScalarPoolMinSize(clampNumber(event.target.value, 1, 100))} />
-              </label>
-              <label>Record pool 최소
-                <input type="number" min="1" max="100" value={authoringAgentRecordPoolMinSize} onChange={(event) => setAuthoringAgentRecordPoolMinSize(clampNumber(event.target.value, 1, 100))} />
-              </label>
-              <label className={`check-row ${authoringAgentFastMode ? 'on' : ''}`} title={selectedAgentModelCapability.supportsFastMode ? '' : '선택한 모델은 fast mode를 지원하지 않습니다.'}>
-                <input type="checkbox" checked={authoringAgentFastMode} disabled={!selectedAgentModelCapability.supportsFastMode} onChange={(event) => setAuthoringAgentFastMode(event.target.checked)} />
-                <span>fast mode</span>
-              </label>
-              <label className={`check-row ${authoringAgentTimeBudgetEnabled ? 'on' : ''}`}>
-                <input type="checkbox" checked={authoringAgentTimeBudgetEnabled} onChange={(event) => setAuthoringAgentTimeBudgetEnabled(event.target.checked)} />
-                <span>시간 제한</span>
-              </label>
-              {authoringAgentTimeBudgetEnabled && <label>최대 실행 시간(분)
-                <input type="number" min="5" max="60" value={authoringAgentTimeBudgetMinutes} onChange={(event) => setAuthoringAgentTimeBudgetMinutes(clampNumber(event.target.value, 5, 60))} />
-              </label>}
-            </div>
-            <div className="button-row compact-buttons">
-              <button
-                className="primary"
-                onClick={() => run(() => runAuthoringAgentInference('authoring', authoringAgentExecutionMode))}
-                disabled={!selectedDocId || isBusy || (['faker_only', 'validation_repair'].includes(authoringAgentExecutionMode) && !latestAgentRequestPath)}
-              >
-                {busy === 'authoringAgentRun' ? 'Agent 추론 시작 중...' : `${AUTHORING_AGENT_EXECUTION_MODE_LABELS[authoringAgentExecutionMode] || 'Agent 추론'} 실행`}
-              </button>
-              <button onClick={() => run(() => createAuthoringAgentRequest('authoring'))} disabled={!selectedDocId || isBusy}>
-                {busy === 'authoringAgentRequest' ? '요청 패키지 생성 중...' : '요청 패키지만 생성'}
-              </button>
-              <button onClick={() => run(() => refreshAuthoringAgentRunStatus())} disabled={!latestAgentRunPath || isBusy}>
-                Agent 상태 새로고침
-              </button>
-            </div>
-            {latestAgentRequestPath && <p className="mini-path">최근 Agent request: {latestAgentRequestPath}{latestAgentPromptPath ? ` · prompt: ${latestAgentPromptPath}` : ''}{latestAgentAnchorMapPath ? ` · anchor: ${latestAgentAnchorMapPath}` : ''}</p>}
-            {latestAgentRunPath && (
-              <div className={`audit-box agent-run-box ${latestAgentRunStatus}`}>
-                <b>Agent run: {latestAgentRunStatus} · {formatElapsedSeconds(latestAgentElapsedSeconds)}</b>
-                <small>{latestAgentRunPath}</small>
-                {latestAgentRunPolling && <small>상태 자동 갱신 중...</small>}
-                {authoringAgentRun?.passState && <small>pass {authoringAgentRun.passState.current} · 완료 {(authoringAgentRun.passState.completed || []).join(' → ') || '없음'}</small>}
-                {(authoringAgentRun?.stages || []).map((stage) => <small key={`${stage.stage}-${stage.startedAt}`}>{stage.stage} · {stage.status} · {formatElapsedSeconds(stage.durationSeconds)}{stage.tokensUsed != null ? ` · ${Number(stage.tokensUsed).toLocaleString()} tokens` : ''} · {stage.model}/{stage.reasoningEffort}{stage.fastMode ? '/fast' : ''}</small>)}
-                {authoringAgentRun?.validation?.summary && <small>draft {authoringAgentRun.validation.summary.present}/{authoringAgentRun.validation.summary.required} · missing {authoringAgentRun.validation.summary.missing} · invalid JSON {authoringAgentRun.validation.summary.invalidJson}</small>}
-                {authoringAgentRun?.repairSummary?.materializedCount > 0 && <small>누락 use bbox 자동 보강 {authoringAgentRun.repairSummary.materializedCount}건 · 검토필요 leaf 생성</small>}
-                {latestAgentRunReady && <small>schema/faker/research draft 생성 및 JSON 검증 완료</small>}
-                {authoringAgentRun?.validation?.scope === 'schema' && authoringAgentRun?.validation?.ready && <small>Schema 단계 검증 완료 · Faker 단계 실행 가능</small>}
-                {authoringAgentRun?.error && <small>{authoringAgentRun.error}</small>}
-              </div>
-            )}
-            {latestAgentRunPath && (
-              <div className="agent-terminal-box">
-                <div className="agent-terminal-head">
-                  <b>Codex CLI 터미널</b>
-                  <div className="agent-terminal-actions">
-                    <label className="check-row">
-                      <input type="checkbox" checked={authoringAgentTerminalAutoScroll} onChange={(event) => setAuthoringAgentTerminalAutoScroll(event.target.checked)} />
-                      <span>자동 스크롤</span>
-                    </label>
-                    <button onClick={() => setAuthoringAgentTerminalOpen((current) => !current)}>{authoringAgentTerminalOpen ? '접기' : '열기'}</button>
-                  </div>
+            <div className="authoring-step-label"><b>0. Agentic Authoring</b><span>선택 문서 전용 draft 생성·보정</span></div>
+            <div className="agent-workflow-shell">
+              <section className="agent-compose-card">
+                <div className="agent-card-head">
+                  <div><b>새 draft 생성</b><small>{selectedDocId} 문서만 대상으로 실행</small></div>
+                  <span className="agent-scope-badge">문서 격리</span>
                 </div>
-                {authoringAgentTerminalOpen && <>
-                  <pre ref={authoringAgentTerminalPreRef}>{authoringAgentTerminalText || (latestAgentRunPolling ? '터미널 출력을 기다리는 중...' : '표시할 터미널 출력이 없습니다.')}</pre>
-                  <div className="agent-terminal-footer">
-                    <button onClick={() => {
-                      setAuthoringAgentTerminalAutoScroll(true);
-                      if (authoringAgentTerminalPreRef.current) authoringAgentTerminalPreRef.current.scrollTop = authoringAgentTerminalPreRef.current.scrollHeight;
-                    }}>최신 위치</button>
-                    {authoringAgentRun?.terminalPath && <a href={fileUrl(authoringAgentRun.terminalPath)} target="_blank" rel="noreferrer">전체 로그 열기</a>}
-                    <small>{Number(authoringAgentTerminalOffsetRef.current).toLocaleString()} bytes</small>
+                <textarea
+                  className="agent-request-input"
+                  placeholder="생성 의도나 주의사항을 입력하세요. 예: 하단 체크박스는 이미지 기준으로 날짜·카드종류·동의여부를 구분."
+                  value={authoringAgentInstruction}
+                  onChange={(event) => setAuthoringAgentInstruction(event.target.value)}
+                />
+                <div className="agent-primary-options">
+                  <label>실행 방식
+                    <select value={authoringAgentExecutionMode} onChange={(event) => setAuthoringAgentExecutionMode(event.target.value)}>
+                      {(authoringAgentCapabilities.executionModes || DEFAULT_AUTHORING_AGENT_CAPABILITIES.executionModes)
+                        .filter((executionMode) => executionMode !== 'targeted_revision')
+                        .map((executionMode) => (
+                          <option
+                            key={executionMode}
+                            value={executionMode}
+                            disabled={['faker_only', 'validation_repair'].includes(executionMode) && !latestAgentRequestPath}
+                          >
+                            {AUTHORING_AGENT_EXECUTION_MODE_LABELS[executionMode] || executionMode}
+                          </option>
+                        ))}
+                    </select>
+                  </label>
+                  <label>모델
+                    <select
+                      value={authoringAgentModel}
+                      onChange={(event) => {
+                        const nextModel = authoringAgentCapabilities.models.find((model) => model.id === event.target.value) || selectedAgentModelCapability;
+                        setAuthoringAgentModel(nextModel.id);
+                        setAuthoringAgentReasoning((current) => (nextModel.reasoningEfforts || []).includes(current) ? current : nextModel.defaultReasoningEffort || 'medium');
+                        if (!nextModel.supportsFastMode) setAuthoringAgentFastMode(false);
+                      }}
+                    >
+                      {authoringAgentCapabilities.models.map((model) => <option key={model.id} value={model.id}>{model.label || model.id}</option>)}
+                    </select>
+                  </label>
+                  <label>사고 레벨
+                    <select value={authoringAgentReasoning} onChange={(event) => setAuthoringAgentReasoning(event.target.value)}>
+                      {authoringAgentReasoningOptions.map((effort) => <option key={effort} value={effort}>{effort}</option>)}
+                    </select>
+                  </label>
+                </div>
+                <small className="agent-mode-help">{authoringAgentExecutionMode === 'two_pass' ? 'Schema를 먼저 고정한 뒤 Faker를 생성합니다.' : authoringAgentExecutionMode === 'single_pass' ? '한 세션에서 전체 draft를 빠르게 생성합니다.' : '기존 request에서 선택한 단계만 다시 실행합니다.'}</small>
+                <details className="agent-settings-panel">
+                  <summary>세부 실행 설정 <span>기준일·pool·fast·시간 제한</span></summary>
+                  <div className="agent-options-grid compact">
+                    <label>데이터 기준일
+                      <input type="date" value={authoringAsOfDate} onChange={(event) => setAuthoringAsOfDate(event.target.value)} />
+                    </label>
+                    <label>Scalar pool 최소
+                      <input type="number" min="1" max="100" value={authoringAgentScalarPoolMinSize} onChange={(event) => setAuthoringAgentScalarPoolMinSize(clampNumber(event.target.value, 1, 100))} />
+                    </label>
+                    <label>Record pool 최소
+                      <input type="number" min="1" max="100" value={authoringAgentRecordPoolMinSize} onChange={(event) => setAuthoringAgentRecordPoolMinSize(clampNumber(event.target.value, 1, 100))} />
+                    </label>
+                    <label className={`check-row ${authoringAgentFastMode ? 'on' : ''}`} title={selectedAgentModelCapability.supportsFastMode ? '' : '선택한 모델은 fast mode를 지원하지 않습니다.'}>
+                      <input type="checkbox" checked={authoringAgentFastMode} disabled={!selectedAgentModelCapability.supportsFastMode} onChange={(event) => setAuthoringAgentFastMode(event.target.checked)} />
+                      <span>fast mode</span>
+                    </label>
+                    <label className={`check-row ${authoringAgentTimeBudgetEnabled ? 'on' : ''}`}>
+                      <input type="checkbox" checked={authoringAgentTimeBudgetEnabled} onChange={(event) => setAuthoringAgentTimeBudgetEnabled(event.target.checked)} />
+                      <span>시간 제한</span>
+                    </label>
+                    {authoringAgentTimeBudgetEnabled && <label>최대 실행 시간(분)
+                      <input type="number" min="5" max="60" value={authoringAgentTimeBudgetMinutes} onChange={(event) => setAuthoringAgentTimeBudgetMinutes(clampNumber(event.target.value, 5, 60))} />
+                    </label>}
                   </div>
-                </>}
-              </div>
-            )}
-            {latestAgentRequestPath && (
-              <div className="button-row compact-buttons agent-retry-buttons">
-                <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'schema_only'))} disabled={isBusy}>Schema 재실행</button>
-                <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'faker_only'))} disabled={isBusy}>Faker 재실행</button>
-                <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'validation_repair'))} disabled={isBusy || latestAgentRunStatus !== 'needs_repair'}>검증 보정</button>
-                {latestAgentRunCanCancel && <button className="danger" onClick={() => run(cancelAuthoringAgentRun)} disabled={isBusy || latestAgentRunStatus === 'cancelling'}>{busy === 'authoringAgentCancel' || latestAgentRunStatus === 'cancelling' ? '취소 처리 중...' : '실행 취소'}</button>}
-              </div>
-            )}
-            <div className="button-row compact-buttons">
-              <button onClick={() => run(() => runAuthoringAgentInference('bbox_correction', 'single_pass'))} disabled={!selectedDocId || isBusy}>
-                {busy === 'authoringAgentBboxRun' ? 'BBox 보정 시작 중...' : 'Agent BBox 보정 draft'}
-              </button>
-              <button onClick={() => run(loadAuthoringLibrary)} disabled={isBusy}>{busy === 'authoringLibrary' ? '라이브러리 로드 중...' : 'Faker/Profile 라이브러리'}</button>
-              <button onClick={() => run(approveAuthoringDraftsToLibrary)} disabled={!latestAgentRequestPath || isBusy}>{busy === 'authoringApproveDrafts' ? '승인 기록 중...' : 'Draft 라이브러리 승인 기록'}</button>
-              <button onClick={() => run(applyAuthoringAgentDrafts)} disabled={!latestAgentRunReady || isBusy}>{busy === 'authoringApplyAgentDrafts' ? '적용 중...' : 'Draft 최종 Authoring 적용'}</button>
+                </details>
+                <div className="button-row compact-buttons agent-main-actions">
+                  <button
+                    className="primary"
+                    onClick={() => run(() => runAuthoringAgentInference('authoring', authoringAgentExecutionMode))}
+                    disabled={!selectedDocId || isBusy || (['faker_only', 'validation_repair'].includes(authoringAgentExecutionMode) && !latestAgentRequestPath)}
+                  >
+                    {busy === 'authoringAgentRun' ? 'Agent 시작 중...' : `${AUTHORING_AGENT_EXECUTION_MODE_LABELS[authoringAgentExecutionMode] || 'Agent 추론'} 실행`}
+                  </button>
+                  <button onClick={() => run(() => refreshAuthoringAgentRunStatus())} disabled={!latestAgentRunPath || isBusy}>상태 새로고침</button>
+                  <button onClick={() => run(() => createAuthoringAgentRequest('authoring'))} disabled={!selectedDocId || isBusy}>
+                    {busy === 'authoringAgentRequest' ? '생성 중...' : '요청 파일만 생성'}
+                  </button>
+                </div>
+              </section>
+
+              {latestAgentRunPath && (
+                <section className={`audit-box agent-run-box ${latestAgentRunStatus}`}>
+                  <div className="agent-run-summary">
+                    <div><b>Agent {latestAgentRunStatus}</b><small>{formatElapsedSeconds(latestAgentElapsedSeconds)}{latestAgentRunPolling ? ' · 자동 갱신 중' : ''}</small></div>
+                    {selectedAgentRun?.validation?.summary && <span>draft {selectedAgentRun.validation.summary.present}/{selectedAgentRun.validation.summary.required}</span>}
+                  </div>
+                  {selectedAgentRun?.passState && <small>pass {selectedAgentRun.passState.current} · 완료 {(selectedAgentRun.passState.completed || []).join(' → ') || '없음'}</small>}
+                  {latestAgentRunReady && <small>전체 draft 생성 및 JSON 검증 완료</small>}
+                  {selectedAgentRun?.validation?.scope === 'schema' && selectedAgentRun?.validation?.ready && <small>Schema 검증 완료 · Faker 단계 실행 가능</small>}
+                  {(selectedAgentRun?.validation?.contractErrors || []).slice(0, 5).map((item, index) => <small className="agent-validation-error" key={`${item.code || 'validation'}-${item.field || index}`}>{item.code || 'validation_error'}{item.field ? ` · ${item.field}` : ''}{item.anchor_id ? ` · ${item.anchor_id}` : ''} — {item.message || '보정 필요'}</small>)}
+                  {latestAgentRunNeedsRepair && <small className="agent-repair-hint">검증 오류 {latestAgentValidationIssueCount || selectedAgentRun?.validation?.summary?.contractErrors || 0}건 · 검증 보정을 실행하세요.</small>}
+                  {selectedAgentRun?.error && <small>{selectedAgentRun.error}</small>}
+                  <details className="agent-run-details">
+                    <summary>실행 상세</summary>
+                    <small>{latestAgentRunPath}</small>
+                    {(selectedAgentRun?.stages || []).map((stage) => <small key={`${stage.stage}-${stage.startedAt}`}>{stage.stage} · {stage.status} · {formatElapsedSeconds(stage.durationSeconds)}{stage.tokensUsed != null ? ` · ${Number(stage.tokensUsed).toLocaleString()} tokens` : ''} · {stage.model}/{stage.reasoningEffort}{stage.fastMode ? '/fast' : ''}</small>)}
+                    {selectedAgentRun?.repairSummary?.materializedCount > 0 && <small>누락 use bbox 자동 보강 {selectedAgentRun.repairSummary.materializedCount}건</small>}
+                  </details>
+                </section>
+              )}
+
+              {latestAgentRunNeedsRepair && latestAgentRequestPath && (
+                <div className="button-row single-action-row">
+                  <button className="primary" onClick={() => run(() => runAuthoringAgentInference('authoring', 'validation_repair'))} disabled={authoringAgentRetryBusy}>검증 보정 실행</button>
+                </div>
+              )}
+
+              {latestAgentRequestPath && (
+                <section className={`agent-revision-card ${latestAgentRunReady ? 'ready' : ''}`}>
+                  <div className="agent-card-head">
+                    <div><b>요청으로 부분 보정</b><small>현재 {selectedDocId} draft에서 요청한 부분만 최소 수정</small></div>
+                    <span className="agent-scope-badge">다른 문서 미변경</span>
+                  </div>
+                  <textarea
+                    className="agent-revision-input"
+                    placeholder="예: 성명 필드의 글자 크기만 1px 줄이고, 그 외 필드·faker·bbox는 유지해줘."
+                    value={authoringAgentRevisionInstruction}
+                    disabled={!latestAgentRunReady || authoringAgentRetryBusy}
+                    onChange={(event) => setAuthoringAgentRevisionInstruction(event.target.value)}
+                  />
+                  <div className="agent-revision-footer">
+                    <small>{latestAgentRunReady ? '실행 전 draft는 run 폴더에 자동 백업됩니다. 완료 후 Draft 최종 Authoring 적용을 다시 실행하세요.' : '전체 draft 검증 완료 후 사용할 수 있습니다.'}</small>
+                    <button
+                      className="primary"
+                      onClick={() => run(() => runAuthoringAgentInference('authoring', 'targeted_revision', authoringAgentRevisionInstruction))}
+                      disabled={!latestAgentRunReady || !authoringAgentRevisionInstruction.trim() || authoringAgentRetryBusy}
+                    >요청 보정 실행</button>
+                  </div>
+                </section>
+              )}
+
+              {latestAgentRunPath && (
+                <div className="agent-terminal-box">
+                  <div className="agent-terminal-head">
+                    <b>Codex CLI 로그</b>
+                    <div className="agent-terminal-actions">
+                      <label className="check-row">
+                        <input type="checkbox" checked={authoringAgentTerminalAutoScroll} onChange={(event) => setAuthoringAgentTerminalAutoScroll(event.target.checked)} />
+                        <span>자동 스크롤</span>
+                      </label>
+                      <button onClick={() => setAuthoringAgentTerminalOpen((current) => !current)}>{authoringAgentTerminalOpen ? '접기' : '열기'}</button>
+                    </div>
+                  </div>
+                  {authoringAgentTerminalOpen && <>
+                    <pre ref={authoringAgentTerminalPreRef}>{authoringAgentTerminalText || (latestAgentRunPolling ? '터미널 출력을 기다리는 중...' : '표시할 터미널 출력이 없습니다.')}</pre>
+                    <div className="agent-terminal-footer">
+                      <small>{Number(authoringAgentTerminalOffsetRef.current).toLocaleString()} bytes</small>
+                      <button onClick={() => {
+                        setAuthoringAgentTerminalAutoScroll(true);
+                        if (authoringAgentTerminalPreRef.current) authoringAgentTerminalPreRef.current.scrollTop = authoringAgentTerminalPreRef.current.scrollHeight;
+                      }}>최신 위치</button>
+                      {selectedAgentRun?.terminalPath && <a href={fileUrl(selectedAgentRun.terminalPath)} target="_blank" rel="noreferrer">전체 로그</a>}
+                    </div>
+                  </>}
+                </div>
+              )}
+
+              <details className="agent-tools-panel">
+                <summary>재실행·적용 도구 <span>고급 작업</span></summary>
+                {latestAgentRequestPath && (
+                  <div className="button-row compact-buttons agent-retry-buttons">
+                    <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'schema_only'))} disabled={authoringAgentRetryBusy}>Schema 재실행</button>
+                    <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'faker_only'))} disabled={authoringAgentRetryBusy}>Faker 재실행</button>
+                    <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'validation_repair'))} disabled={authoringAgentRetryBusy || !latestAgentRunNeedsRepair}>검증 보정</button>
+                    {latestAgentRunCanCancel && <button className="danger" onClick={() => run(cancelAuthoringAgentRun)} disabled={isBusy || latestAgentRunStatus === 'cancelling'}>{busy === 'authoringAgentCancel' || latestAgentRunStatus === 'cancelling' ? '취소 처리 중...' : '실행 취소'}</button>}
+                  </div>
+                )}
+                <div className="button-row compact-buttons">
+                  <button onClick={() => run(() => runAuthoringAgentInference('bbox_correction', 'single_pass'))} disabled={!selectedDocId || isBusy}>{busy === 'authoringAgentBboxRun' ? '시작 중...' : 'BBox 보정 draft'}</button>
+                  <button onClick={() => run(loadAuthoringLibrary)} disabled={isBusy}>Faker 라이브러리</button>
+                  <button onClick={() => run(approveAuthoringDraftsToLibrary)} disabled={!latestAgentRequestPath || isBusy}>승인 기록</button>
+                  <button className={latestAgentRunReady ? 'primary' : ''} onClick={() => run(applyAuthoringAgentDrafts)} disabled={!latestAgentRunReady || isBusy}>Draft 최종 적용</button>
+                </div>
+                {latestAgentRequestPath && <details className="agent-paths"><summary>최근 request 경로</summary><p className="mini-path">{latestAgentRequestPath}{latestAgentPromptPath ? ` · prompt: ${latestAgentPromptPath}` : ''}{latestAgentAnchorMapPath ? ` · anchor: ${latestAgentAnchorMapPath}` : ''}</p></details>}
+                {authoringLibrary && <p className="mini-path">Library: profile {authoringLibrary.summary.profileTypeCount}종 · pool {authoringLibrary.summary.valuePoolCount}개 · approval {authoringLibrary.summary.approvalCount}건</p>}
+                {authoringApprovalResult?.approval && <p className="mini-path">최근 승인: {authoringApprovalResult.approval.path} · missing {authoringApprovalResult.summary.missing}</p>}
+              </details>
+              <p className="agent-scope-note">Agent는 선택 문서의 draft request 폴더만 수정합니다. 최종 authoring 파일은 별도 적용 전까지 유지됩니다.</p>
             </div>
-            {authoringLibrary && <p className="mini-path">Library: profile {authoringLibrary.summary.profileTypeCount}종 · pool {authoringLibrary.summary.valuePoolCount}개 · approval {authoringLibrary.summary.approvalCount}건</p>}
-            {authoringApprovalResult?.approval && <p className="mini-path">최근 승인: {authoringApprovalResult.approval.path} · missing {authoringApprovalResult.summary.missing}</p>}
-            <p className="warning-text">로컬 규칙 기반 schema 초안은 사용하지 않습니다. Agent 추론 실행은 로컬 Codex CLI를 별도 프로세스로 호출해 schema/faker/style/research/uncertainty draft 파일을 생성합니다. 최종 authoring 파일 덮어쓰기는 별도 승인/저장 단계에서만 수행합니다.</p>
             <div className="authoring-step-label"><b>1. Schema · Style · Faker</b><span>키/생성 규칙/스타일 편집</span></div>
             <div className="button-row">
               <button onClick={() => run(() => loadAuthoringBundle())} disabled={!canLoadAuthoring || isBusy}>

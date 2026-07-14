@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "doc_id": "FIN-04",
+  "search_date": "2026-07-14",
+  "document_name_searched": "4대 사회보험 가입자 가입내역 확인서",
+  "queries": [
+    "site:4insure.or.kr 가입자 가입내역 확인서",
+    "site:gov.kr 4대사회보험 가입자 가입내역 확인서",
+    "site:nps.or.kr 4대사회보험 가입내역 확인서 발급 신청",
+    "4대 사회보험 민원서류 접수 등에 관한 고시 가입내역 확인청구서",
+    "4대사회보험 정보연계센터 사용자 매뉴얼 PDF 증명서 발급",
+    "4대 사회보험 가입자 가입내역 확인서 자격취득일 신고접수일"
+  ],
+  "sources": [
+    {
+      "evidence_id": "WEB-001",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?flNm=%5B%EB%B3%84%EC%A7%80+1%5D+4%EB%8C%80+%EC%82%AC%ED%9A%8C%EB%B3%B4%ED%97%98+%EA%B0%80%EC%9E%85%EB%82%B4%EC%97%AD+%ED%99%95%EC%9D%B8%EC%B2%AD%EA%B5%AC%EC%84%9C&flSeq=129822289",
+      "source_type": "official_law_form",
+      "publisher": "국가법령정보센터",
+      "title": "4대 사회보험 가입내역 확인청구서",
+      "summary": "개인용 가입자 가입내역 확인서와 사업장용 확인서를 구분하고, 개인용 확인대상자의 성명·주민등록번호와 사업장 명칭·사업자등록번호·사업장관리번호를 작성 대상으로 설명한다. 발급은 국민연금공단·국민건강보험공단·근로복지공단에서 처리한다.",
+      "used_for": ["가입자 식별정보", "사업장명칭", "사업장관리번호", "개인용 문서 성격"]
+    },
+    {
+      "evidence_id": "WEB-002",
+      "url": "https://www.gov.kr/portal/ntcItm/107348?Mcode=11226",
+      "source_type": "official_government_notice",
+      "publisher": "정부24",
+      "title": "행정정보공동이용시스템 정기점검 안내",
+      "summary": "정부24가 '4대사회보험 가입자 가입내역 확인서 발급'을 실제 민원 서비스로 열거하고, 대체 발급처로 4대사회보험정보연계센터를 안내한다.",
+      "used_for": ["문서 공식 명칭", "정부24·4대사회보험정보연계센터 발급 경로"]
+    },
+    {
+      "evidence_id": "WEB-003",
+      "url": "https://nps.or.kr/html/download/insure_cal_download2013.pdf",
+      "source_type": "official_public_agency_manual",
+      "publisher": "국민연금공단",
+      "title": "국민연금 사업장 실무 안내 자료",
+      "summary": "4대사회보험 포털의 증명서 업무로 가입내역 확인서 발급 신청, 신청현황 조회·발급, 진위여부 확인을 구분해 안내한다.",
+      "used_for": ["발급번호·발급일시 문서정보", "문서확인번호 및 진위확인 기능"]
+    },
+    {
+      "evidence_id": "WEB-004",
+      "url": "https://www.nps.or.kr/pnsinfo/ntpsklg/getOHAF0110P0.do",
+      "source_type": "official_public_agency_glossary",
+      "publisher": "국민연금공단",
+      "title": "국민연금 용어사전",
+      "summary": "국민연금 가입자의 종류를 사업장가입자·지역가입자·임의가입자·임의계속가입자로 구분하고 자격취득 관련 용어를 설명한다. 템플릿의 가입자종별과 자격취득일 필드 해석을 보조한다.",
+      "used_for": ["가입자종별", "자격취득일"]
+    },
+    {
+      "evidence_id": "WEB-005",
+      "url": "https://www.npsonair.kr/notice/detail.html?strIdx=3192",
+      "source_type": "public_agency_news",
+      "publisher": "국민연금공단 국민연금 온에어",
+      "title": "국민연금, 4대사회보험 전자증명서 발급 서비스 개시",
+      "summary": "4대사회보험 전자증명서는 개인 또는 사업장의 국민연금·건강보험·고용보험·산재보험 가입내역을 한 번에 확인하는 증명서이며 정보연계센터에서 신청할 수 있다고 설명한다.",
+      "used_for": ["4개 보험 행 구조", "가입내역 확인서의 목적"]
+    }
+  ],
+  "visual_evidence": [
+    {"evidence_id":"VIS-001","source":"full_template_image","path":"workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg","summary":"상단에 문서확인번호와 신청인 성명이 하나의 복합 문구로 인쇄됨"},
+    {"evidence_id":"VIS-002","source":"full_template_image","path":"workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg","summary":"좌상단 진본 스탬프 내부에 YYYY/MM/DD, HH:MM:SS 값이 있고 KST는 정적 표기임"},
+    {"evidence_id":"VIS-003","source":"full_template_image","path":"workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg","summary":"본문 상단 표에서 발급번호와 발급일시 라벨·값 위치를 확인함"},
+    {"evidence_id":"VIS-004","source":"full_template_image","path":"workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg","summary":"주민(외국인)등록번호와 성명 라벨·값 위치를 확인함"},
+    {"evidence_id":"VIS-005","source":"full_template_image","path":"workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg","summary":"가입 내역 제목 오른쪽에 current / total 페이지 표기가 있음"},
+    {"evidence_id":"VIS-006","source":"full_template_image","path":"workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg","summary":"국민연금 행의 성명·가입자종별·사업장관리번호·사업장명칭·자격취득일·신고접수일을 확인함"},
+    {"evidence_id":"VIS-007","source":"full_template_image","path":"workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg","summary":"건강보험 행의 6개 값 영역을 확인함"},
+    {"evidence_id":"VIS-008","source":"full_template_image","path":"workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg","summary":"세 번째 표 행이 산재보험이며 det_000044~det_000050이 해당 행 값임을 확인함"},
+    {"evidence_id":"VIS-009","source":"full_template_image","path":"workbench/documents/4대보험_가입증명원__FIN-04/samples/original/4대보험가입확인서_page_001.jpg","summary":"네 번째 표 행이 고용보험이며 det_000051~det_000057이 해당 행 값임을 확인함"}
+  ],
+  "field_evidence_links": [
+    {"field_ids":["document_confirmation_number","document_confirmation_line"],"evidence_ids":["VIS-001","WEB-003"]},
+    {"field_ids":["authenticity_date","authenticity_time"],"evidence_ids":["VIS-002","WEB-003"]},
+    {"field_ids":["issue_number","issue_datetime"],"evidence_ids":["VIS-003","WEB-002","WEB-003"]},
+    {"field_ids":["subscriber_rrn","subscriber_name"],"evidence_ids":["VIS-004","WEB-001"]},
+    {"field_ids":["page_counter"],"evidence_ids":["VIS-005"]},
+    {"field_ids":["np_acquisition_date","np_subscriber_name","np_subscriber_type","np_workplace_number","np_workplace_name","np_report_received_date"],"evidence_ids":["VIS-006","WEB-001","WEB-004","WEB-005"]},
+    {"field_ids":["hi_acquisition_date","hi_subscriber_name","hi_subscriber_type","hi_workplace_number","hi_workplace_name","hi_report_received_date"],"evidence_ids":["VIS-007","WEB-001","WEB-005"]},
+    {"field_ids":["wc_acquisition_date","wc_subscriber_name","wc_subscriber_type","wc_workplace_number","wc_workplace_name","wc_report_received_date"],"evidence_ids":["VIS-008","WEB-001","WEB-005"]},
+    {"field_ids":["ei_acquisition_date","ei_subscriber_name","ei_subscriber_type","ei_workplace_number","ei_workplace_name","ei_report_received_date"],"evidence_ids":["VIS-009","WEB-001","WEB-005"]}
+  ],
+  "research_conclusion": "웹 근거는 문서의 공식 명칭, 개인용 가입내역 확인서 성격, 4개 보험 통합 확인 목적과 발급·진위확인 기능을 지지한다. 구체적인 필드 존재와 배치는 전체 템플릿 이미지 및 review bbox를 우선 근거로 확정했다."
+}

@@ -809,6 +809,148 @@ def test_apply_authoring_agent_drafts_writes_final_authoring_bundle(tmp_path: Pa
     assert any(key == "authoring_agent_applied_review" for _doc_id, key, _path in manifest_updates)
 
 
+def test_apply_authoring_agent_drafts_reconciles_review_conflicts_and_keeps_canonical_review(tmp_path: Path, monkeypatch) -> None:
+    class FakeDoc:
+        doc_id = "APP-15"
+        title = "충돌검증서"
+
+        def to_dict(self) -> dict[str, object]:
+            return {"docId": self.doc_id, "title": self.title}
+
+    fake_doc = FakeDoc()
+    fake_registry = SimpleNamespace(documents={fake_doc.doc_id: fake_doc})
+    doc_root = tmp_path / "workbench" / fake_doc.doc_id
+    authoring_dir = doc_root / "authoring"
+    request_dir = authoring_dir / "agent_requests" / "run-conflict"
+    review_dir = doc_root / "review" / "page1"
+    request_dir.mkdir(parents=True)
+    review_dir.mkdir(parents=True)
+    image_path = doc_root / "source.png"
+    image_path.parent.mkdir(parents=True, exist_ok=True)
+    Image.new("RGB", (120, 80), "white").save(image_path)
+
+    def review_payload(labels: list[dict[str, object]]) -> dict[str, object]:
+        return {
+            "schema_version": 1,
+            "created_at": "2026-07-14T00:00:00+00:00",
+            "source_engine": "test",
+            "source_detections": str(doc_root / "detections.json"),
+            "source_image": str(image_path),
+            "image": {"width": 120, "height": 80},
+            "labels": labels,
+        }
+
+    def label(label_id: str, bbox: list[int], text: str) -> dict[str, object]:
+        x, y, width, height = bbox
+        return {
+            "id": label_id,
+            "text": text,
+            "confidence": 0.9,
+            "bbox": bbox,
+            "polygon": [[x, y], [x + width, y], [x + width, y + height], [x, y + height]],
+            "status": "use",
+            "auto_type": "field_value",
+            "reason": "test",
+            "render_mode": "printed",
+        }
+
+    current_review_path = review_dir / "review.json"
+    current_review_path.write_text(json.dumps(review_payload([label("review_new", [60, 20, 25, 12], "신규")]), ensure_ascii=False), encoding="utf-8")
+    baseline_path = request_dir / "review_baseline.json"
+    baseline_path.write_text(json.dumps(review_payload([label("agent_old", [10, 20, 25, 12], "삭제")]), ensure_ascii=False), encoding="utf-8")
+    request_path = request_dir / "request.json"
+    request_path.write_text(
+        json.dumps(
+            {
+                "docId": fake_doc.doc_id,
+                "title": fake_doc.title,
+                "options": {"scalarPoolMinSize": 1, "recordPoolMinSize": 1},
+                "inputs": {"sampleKind": "filled_sample", "latestReview": str(current_review_path), "reviewBaseline": {"path": str(baseline_path)}},
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    (request_dir / "schema_draft.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "doc_id": fake_doc.doc_id,
+                "title": fake_doc.title,
+                "source_review": str(current_review_path),
+                "source_image": str(image_path),
+                "semantic_schema": {"삭제 필드": ""},
+                "fields": [{"field_id": "old_field", "label": "삭제 필드", "semantic_path": "삭제 필드", "anchor_id": "agent_old", "value": "", "value_type": "free_text.short"}],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    (request_dir / "anchor_map_draft.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_review": str(current_review_path),
+                "source_image": str(image_path),
+                "image": {"width": 120, "height": 80},
+                "anchors": [{"anchor_id": "agent_old", "text": "삭제", "bbox": [10, 20, 25, 12], "status": "use", "auto_type": "field_value", "role": "value_region"}],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    (request_dir / "stylesheet_draft.json").write_text(json.dumps({"schema_version": 1, "style_classes": [{"style_class": "body_default", "font_size": 12}], "field_styles": []}), encoding="utf-8")
+    (request_dir / "faker_profile_draft.json").write_text(json.dumps({"schema_version": 1, "field_generators": {"old_field": "free_text.short"}, "constraints": []}), encoding="utf-8")
+    (request_dir / "value_pool_draft.json").write_text("{}", encoding="utf-8")
+    (request_dir / "research_report.json").write_text('{"sources": []}', encoding="utf-8")
+    (request_dir / "uncertainty_report.json").write_text("{}", encoding="utf-8")
+    (request_dir / "application_notes.md").write_text("test", encoding="utf-8")
+    authoring_dir.mkdir(parents=True, exist_ok=True)
+    (authoring_dir / "schema.json").write_text(json.dumps({"source_image": str(image_path), "source_review": str(current_review_path), "semantic_schema": {"삭제 필드": ""}, "fields": [{"field_id": "old_field", "label": "삭제 필드", "bbox_label_id": "agent_old", "source_detection_id": "agent_old", "semantic_path": "삭제 필드", "style_class": "body_default"}]}), encoding="utf-8")
+    (authoring_dir / "stylesheet.json").write_text(json.dumps({"style_classes": [{"style_class": "body_default", "font_size": 12}]}), encoding="utf-8")
+    (authoring_dir / "faker_profile.json").write_text(json.dumps({"field_generators": {"old_field": "free_text.short"}}), encoding="utf-8")
+
+    def fake_workbench_subdir(doc_id: str, subdir: str) -> Path:
+        target = tmp_path / "workbench" / doc_id / subdir
+        target.mkdir(parents=True, exist_ok=True)
+        return target
+
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    monkeypatch.setattr(web_api, "load_registry", lambda: fake_registry)
+    monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
+    monkeypatch.setattr(
+        web_api,
+        "list_work_items",
+        lambda registry: [{"docId": fake_doc.doc_id, "latestReview": str(current_review_path), "latestInpainted": str(image_path), "samples": [str(image_path)]}],
+    )
+    manifest_updates: list[tuple[str, str, str]] = []
+    monkeypatch.setattr(web_api, "update_manifest_artifact", lambda doc_id, key, path: manifest_updates.append((doc_id, key, str(path))))
+
+    preflight = web_api.preflight_authoring_agent_drafts_payload({"docId": fake_doc.doc_id, "requestPath": str(request_path)})
+
+    assert {conflict["type"] for conflict in preflight["conflicts"]} == {"deleted_in_review_present_in_draft", "added_in_review_missing_in_draft"}
+    resolutions = {
+        next(conflict["id"] for conflict in preflight["conflicts"] if conflict["type"] == "deleted_in_review_present_in_draft"): "keep_review_deletion",
+        next(conflict["id"] for conflict in preflight["conflicts"] if conflict["type"] == "added_in_review_missing_in_draft"): "restore_to_authoring",
+    }
+    payload = web_api.apply_authoring_agent_drafts_payload(
+        {
+            "docId": fake_doc.doc_id,
+            "requestPath": str(request_path),
+            "preflightToken": preflight["preflightToken"],
+            "resolutions": resolutions,
+        }
+    )
+
+    saved_schema = json.loads((authoring_dir / "schema.json").read_text(encoding="utf-8"))
+    assert [field["bbox_label_id"] for field in saved_schema["fields"]] == ["review_new"]
+    assert Path(saved_schema["source_review"]).resolve() == current_review_path.resolve()
+    assert not (authoring_dir / "agent_applied_reviews" / request_dir.name / "review.json").exists()
+    assert payload["bboxReconciliation"]["resolvedCount"] == 2
+    assert {item.id for item in web_api.load_review_policy(current_review_path).labels} == {"review_new"}
+    assert any(key == "authoring_agent_bbox_reconciliation" for _doc_id, key, _path in manifest_updates)
+
+
 def test_authoring_agent_apply_regression_rejects_source_page_change(tmp_path: Path, monkeypatch) -> None:
     monkeypatch.setattr(web_api, "ROOT", tmp_path)
     previous = {

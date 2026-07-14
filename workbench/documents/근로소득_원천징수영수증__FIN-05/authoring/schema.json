@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "created_at": "2026-07-14T03:00:29.134015+00:00",
+  "created_at": "2026-07-14T07:02:09.377550+00:00",
   "doc_id": "FIN-05",
   "title": "근로소득 원천징수영수증",
-  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_applied_reviews/20260714T023807908619Z/review.json",
+  "source_review": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/review/original_근로소득원천징수영수증_page_001/review.json",
   "source_image": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/근로소득원천징수영수증_page_001.jpg",
   "source_inpainted": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/근로소득원천징수영수증_page_001.jpg",
   "image": {
@@ -12,7 +12,7 @@
   },
   "bbox_source": {
     "canonical": "review",
-    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_applied_reviews/20260714T023807908619Z/review.json"
+    "review_path": "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/review/original_근로소득원천징수영수증_page_001/review.json"
   },
   "anchor_map_ref": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/anchor_map_draft.json",
   "semantic_schema": {
@@ -130,8 +130,6 @@
         }
       },
       "합계": {
-        "근무처명": "",
-        "사업자등록번호": "",
         "근무기간": {
           "시작": "",
           "종료": ""
@@ -304,7 +302,6 @@
         "농어촌특별세": ""
       },
       "⑦③ 주(현)근무지": {
-        "사업자등록번호": "",
         "소득세": "",
         "지방소득세": "",
         "농어촌특별세": ""
@@ -872,8 +869,8 @@
       "bbox_label_id": "visual_0062",
       "source_detection_id": "visual_0062",
       "source_text": "⑨ 주(현) 근무처명",
-      "value_type": "company.name_ko",
-      "generator": "company.name_ko",
+      "value_type": "free_text.short",
+      "generator": "same_as:fin05_visual_0031",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -902,8 +899,8 @@
       "bbox_label_id": "visual_0063",
       "source_detection_id": "visual_0063",
       "source_text": "⑨ 종(전) 1 근무처명",
-      "value_type": "company.name_ko",
-      "generator": "company.name_ko",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -932,8 +929,8 @@
       "bbox_label_id": "visual_0064",
       "source_detection_id": "visual_0064",
       "source_text": "⑨ 종(전) 2 근무처명",
-      "value_type": "company.name_ko",
-      "generator": "company.name_ko",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -962,8 +959,8 @@
       "bbox_label_id": "visual_0066",
       "source_detection_id": "visual_0066",
       "source_text": "⑨ ⑯-1 납세조합 근무처명",
-      "value_type": "company.name_ko",
-      "generator": "company.name_ko",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -982,36 +979,6 @@
       "render_mode": "printed"
     },
     {
-      "field_id": "fin05_visual_0067",
-      "label": "⑨ 합계 근무처명",
-      "semantic_path": [
-        "근무처별소득명세",
-        "합계",
-        "근무처명"
-      ],
-      "bbox_label_id": "visual_0067",
-      "source_detection_id": "visual_0067",
-      "source_text": "⑨ 합계 근무처명",
-      "value_type": "money.krw",
-      "generator": "money.krw",
-      "style_class": "amount_cell",
-      "render_policy": {
-        "align": "left",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark",
-        "render": "true"
-      },
-      "export": {
-        "json_path": "근무처별소득명세/합계/근무처명",
-        "csv_column": "근무처별소득명세/합계/근무처명"
-      },
-      "required": true,
-      "notes": "",
-      "render_mode": "printed"
-    },
-    {
       "field_id": "fin05_visual_0069",
       "label": "⑩ 주(현) 사업자등록번호",
       "semantic_path": [
@@ -1023,7 +990,7 @@
       "source_detection_id": "visual_0069",
       "source_text": "⑩ 주(현) 사업자등록번호",
       "value_type": "free_text.short",
-      "generator": "business_reg_no",
+      "generator": "same_as:fin05_visual_0034",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -1053,7 +1020,7 @@
       "source_detection_id": "visual_0070",
       "source_text": "⑩ 종(전) 1 사업자등록번호",
       "value_type": "free_text.short",
-      "generator": "business_reg_no",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -1083,7 +1050,7 @@
       "source_detection_id": "visual_0071",
       "source_text": "⑩ 종(전) 2 사업자등록번호",
       "value_type": "free_text.short",
-      "generator": "business_reg_no",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -1113,7 +1080,7 @@
       "source_detection_id": "visual_0073",
       "source_text": "⑩ ⑯-1 납세조합 사업자등록번호",
       "value_type": "free_text.short",
-      "generator": "business_reg_no",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -1132,36 +1099,6 @@
       "render_mode": "printed"
     },
     {
-      "field_id": "fin05_visual_0074",
-      "label": "⑩ 합계 사업자등록번호",
-      "semantic_path": [
-        "근무처별소득명세",
-        "합계",
-        "사업자등록번호"
-      ],
-      "bbox_label_id": "visual_0074",
-      "source_detection_id": "visual_0074",
-      "source_text": "⑩ 합계 사업자등록번호",
-      "value_type": "money.krw",
-      "generator": "money.krw",
-      "style_class": "amount_cell",
-      "render_policy": {
-        "align": "left",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark",
-        "render": "true"
-      },
-      "export": {
-        "json_path": "근무처별소득명세/합계/사업자등록번호",
-        "csv_column": "근무처별소득명세/합계/사업자등록번호"
-      },
-      "required": true,
-      "notes": "",
-      "render_mode": "printed"
-    },
-    {
       "field_id": "fin05_visual_0076",
       "label": "종(전) 2 근무기간 시작",
       "semantic_path": [
@@ -1173,8 +1110,8 @@
       "bbox_label_id": "visual_0076",
       "source_detection_id": "visual_0076",
       "source_text": "종(전) 2 근무기간 시작",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "body_default",
       "render_policy": {
         "align": "left",
@@ -1204,8 +1141,8 @@
       "bbox_label_id": "visual_0078",
       "source_detection_id": "visual_0078",
       "source_text": "종(전) 2 감면기간 시작",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "body_default",
       "render_policy": {
         "align": "left",
@@ -1234,8 +1171,8 @@
       "bbox_label_id": "visual_0080",
       "source_detection_id": "visual_0080",
       "source_text": "⑬ 급여 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1264,8 +1201,8 @@
       "bbox_label_id": "visual_0081",
       "source_detection_id": "visual_0081",
       "source_text": "⑬ 급여 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1294,8 +1231,8 @@
       "bbox_label_id": "visual_0082",
       "source_detection_id": "visual_0082",
       "source_text": "⑬ 급여 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1324,8 +1261,8 @@
       "bbox_label_id": "visual_0084",
       "source_detection_id": "visual_0084",
       "source_text": "⑬ 급여 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1354,8 +1291,8 @@
       "bbox_label_id": "visual_0085",
       "source_detection_id": "visual_0085",
       "source_text": "⑬ 급여 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1384,8 +1321,8 @@
       "bbox_label_id": "visual_0087",
       "source_detection_id": "visual_0087",
       "source_text": "⑭ 상여 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1414,8 +1351,8 @@
       "bbox_label_id": "visual_0088",
       "source_detection_id": "visual_0088",
       "source_text": "⑭ 상여 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1444,8 +1381,8 @@
       "bbox_label_id": "visual_0089",
       "source_detection_id": "visual_0089",
       "source_text": "⑭ 상여 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1474,8 +1411,8 @@
       "bbox_label_id": "visual_0091",
       "source_detection_id": "visual_0091",
       "source_text": "⑭ 상여 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1504,8 +1441,8 @@
       "bbox_label_id": "visual_0092",
       "source_detection_id": "visual_0092",
       "source_text": "⑭ 상여 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1534,8 +1471,8 @@
       "bbox_label_id": "visual_0094",
       "source_detection_id": "visual_0094",
       "source_text": "⑮ 인정상여 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1564,8 +1501,8 @@
       "bbox_label_id": "visual_0095",
       "source_detection_id": "visual_0095",
       "source_text": "⑮ 인정상여 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1594,8 +1531,8 @@
       "bbox_label_id": "visual_0096",
       "source_detection_id": "visual_0096",
       "source_text": "⑮ 인정상여 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1624,8 +1561,8 @@
       "bbox_label_id": "visual_0098",
       "source_detection_id": "visual_0098",
       "source_text": "⑮ 인정상여 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1654,8 +1591,8 @@
       "bbox_label_id": "visual_0099",
       "source_detection_id": "visual_0099",
       "source_text": "⑮ 인정상여 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1684,8 +1621,8 @@
       "bbox_label_id": "visual_0100",
       "source_detection_id": "visual_0100",
       "source_text": "⑮-1 주식매수선택권 행사이익 주(현)",
-      "value_type": "bool.checkbox",
-      "generator": "checkbox.bool",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "choice_marker",
       "render_policy": {
         "align": "left",
@@ -1714,8 +1651,8 @@
       "bbox_label_id": "visual_0101",
       "source_detection_id": "visual_0101",
       "source_text": "⑮-1 주식매수선택권 행사이익 종(전) 1",
-      "value_type": "bool.checkbox",
-      "generator": "checkbox.bool",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "choice_marker",
       "render_policy": {
         "align": "left",
@@ -1744,8 +1681,8 @@
       "bbox_label_id": "visual_0102",
       "source_detection_id": "visual_0102",
       "source_text": "⑮-1 주식매수선택권 행사이익 종(전) 2",
-      "value_type": "bool.checkbox",
-      "generator": "checkbox.bool",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "choice_marker",
       "render_policy": {
         "align": "left",
@@ -1774,8 +1711,8 @@
       "bbox_label_id": "visual_0104",
       "source_detection_id": "visual_0104",
       "source_text": "⑮-1 주식매수선택권 행사이익 ⑯-1 납세조합",
-      "value_type": "bool.checkbox",
-      "generator": "checkbox.bool",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "choice_marker",
       "render_policy": {
         "align": "left",
@@ -1804,8 +1741,8 @@
       "bbox_label_id": "visual_0105",
       "source_detection_id": "visual_0105",
       "source_text": "⑮-1 주식매수선택권 행사이익 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "choice_marker",
       "render_policy": {
         "align": "left",
@@ -1834,8 +1771,8 @@
       "bbox_label_id": "visual_0106",
       "source_detection_id": "visual_0106",
       "source_text": "⑮-2 우리사주조합 인출금 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1864,8 +1801,8 @@
       "bbox_label_id": "visual_0107",
       "source_detection_id": "visual_0107",
       "source_text": "⑮-2 우리사주조합 인출금 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1894,8 +1831,8 @@
       "bbox_label_id": "visual_0108",
       "source_detection_id": "visual_0108",
       "source_text": "⑮-2 우리사주조합 인출금 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1924,8 +1861,8 @@
       "bbox_label_id": "visual_0110",
       "source_detection_id": "visual_0110",
       "source_text": "⑮-2 우리사주조합 인출금 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1954,8 +1891,8 @@
       "bbox_label_id": "visual_0111",
       "source_detection_id": "visual_0111",
       "source_text": "⑮-2 우리사주조합 인출금 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -1984,8 +1921,8 @@
       "bbox_label_id": "visual_0112",
       "source_detection_id": "visual_0112",
       "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2014,8 +1951,8 @@
       "bbox_label_id": "visual_0113",
       "source_detection_id": "visual_0113",
       "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2044,8 +1981,8 @@
       "bbox_label_id": "visual_0114",
       "source_detection_id": "visual_0114",
       "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2074,8 +2011,8 @@
       "bbox_label_id": "visual_0116",
       "source_detection_id": "visual_0116",
       "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2104,8 +2041,8 @@
       "bbox_label_id": "visual_0117",
       "source_detection_id": "visual_0117",
       "source_text": "⑮-3 임원 퇴직소득금액 한도초과액 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2134,8 +2071,8 @@
       "bbox_label_id": "visual_0119",
       "source_detection_id": "visual_0119",
       "source_text": "⑮-4 직무발명보상금 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2164,8 +2101,8 @@
       "bbox_label_id": "visual_0120",
       "source_detection_id": "visual_0120",
       "source_text": "⑮-4 직무발명보상금 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2194,8 +2131,8 @@
       "bbox_label_id": "visual_0121",
       "source_detection_id": "visual_0121",
       "source_text": "⑮-4 직무발명보상금 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2224,8 +2161,8 @@
       "bbox_label_id": "visual_0123",
       "source_detection_id": "visual_0123",
       "source_text": "⑮-4 직무발명보상금 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2254,8 +2191,8 @@
       "bbox_label_id": "visual_0124",
       "source_detection_id": "visual_0124",
       "source_text": "⑮-4 직무발명보상금 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2284,8 +2221,8 @@
       "bbox_label_id": "visual_0127",
       "source_detection_id": "visual_0127",
       "source_text": "⑯ 계 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2314,8 +2251,8 @@
       "bbox_label_id": "visual_0128",
       "source_detection_id": "visual_0128",
       "source_text": "⑯ 계 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2344,8 +2281,8 @@
       "bbox_label_id": "visual_0129",
       "source_detection_id": "visual_0129",
       "source_text": "⑯ 계 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2374,8 +2311,8 @@
       "bbox_label_id": "visual_0131",
       "source_detection_id": "visual_0131",
       "source_text": "⑯ 계 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2404,8 +2341,8 @@
       "bbox_label_id": "visual_0132",
       "source_detection_id": "visual_0132",
       "source_text": "⑯ 계 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2435,7 +2372,7 @@
       "source_detection_id": "visual_0133",
       "source_text": "⑱ 국외근로 주(현)",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -2465,7 +2402,7 @@
       "source_detection_id": "visual_0134",
       "source_text": "⑱ 국외근로 종(전) 1",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -2495,7 +2432,7 @@
       "source_detection_id": "visual_0135",
       "source_text": "⑱ 국외근로 종(전) 2",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -2525,7 +2462,7 @@
       "source_detection_id": "visual_0137",
       "source_text": "⑱ 국외근로 ⑯-1 납세조합",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -2554,8 +2491,8 @@
       "bbox_label_id": "visual_0138",
       "source_detection_id": "visual_0138",
       "source_text": "⑱ 국외근로 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2584,8 +2521,8 @@
       "bbox_label_id": "visual_0139",
       "source_detection_id": "visual_0139",
       "source_text": "⑱-1 야간근로수당 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2614,8 +2551,8 @@
       "bbox_label_id": "visual_0140",
       "source_detection_id": "visual_0140",
       "source_text": "⑱-1 야간근로수당 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2644,8 +2581,8 @@
       "bbox_label_id": "visual_0141",
       "source_detection_id": "visual_0141",
       "source_text": "⑱-1 야간근로수당 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2674,8 +2611,8 @@
       "bbox_label_id": "visual_0143",
       "source_detection_id": "visual_0143",
       "source_text": "⑱-1 야간근로수당 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2704,8 +2641,8 @@
       "bbox_label_id": "visual_0144",
       "source_detection_id": "visual_0144",
       "source_text": "⑱-1 야간근로수당 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2734,8 +2671,8 @@
       "bbox_label_id": "visual_0145",
       "source_detection_id": "visual_0145",
       "source_text": "⑱-2 보육수당 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2764,8 +2701,8 @@
       "bbox_label_id": "visual_0146",
       "source_detection_id": "visual_0146",
       "source_text": "⑱-2 보육수당 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2794,8 +2731,8 @@
       "bbox_label_id": "visual_0147",
       "source_detection_id": "visual_0147",
       "source_text": "⑱-2 보육수당 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2824,8 +2761,8 @@
       "bbox_label_id": "visual_0149",
       "source_detection_id": "visual_0149",
       "source_text": "⑱-2 보육수당 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2854,8 +2791,8 @@
       "bbox_label_id": "visual_0150",
       "source_detection_id": "visual_0150",
       "source_text": "⑱-2 보육수당 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -2885,7 +2822,7 @@
       "source_detection_id": "visual_0151",
       "source_text": "⑱-3 출산지원금 주(현)",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -2915,7 +2852,7 @@
       "source_detection_id": "visual_0152",
       "source_text": "⑱-3 출산지원금 종(전) 1",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -2945,7 +2882,7 @@
       "source_detection_id": "visual_0153",
       "source_text": "⑱-3 출산지원금 종(전) 2",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -2975,7 +2912,7 @@
       "source_detection_id": "visual_0155",
       "source_text": "⑱-3 출산지원금 ⑯-1 납세조합",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -3004,8 +2941,8 @@
       "bbox_label_id": "visual_0156",
       "source_detection_id": "visual_0156",
       "source_text": "⑱-3 출산지원금 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3035,7 +2972,7 @@
       "source_detection_id": "visual_0157",
       "source_text": "⑱-4 연구보조비 주(현)",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -3065,7 +3002,7 @@
       "source_detection_id": "visual_0158",
       "source_text": "⑱-4 연구보조비 종(전) 1",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -3095,7 +3032,7 @@
       "source_detection_id": "visual_0159",
       "source_text": "⑱-4 연구보조비 종(전) 2",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -3125,7 +3062,7 @@
       "source_detection_id": "visual_0161",
       "source_text": "⑱-4 연구보조비 ⑯-1 납세조합",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -3154,8 +3091,8 @@
       "bbox_label_id": "visual_0162",
       "source_detection_id": "visual_0162",
       "source_text": "⑱-4 연구보조비 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3185,7 +3122,7 @@
       "source_detection_id": "visual_0165",
       "source_text": "⑱-5 비과세 항목 주(현)",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -3215,7 +3152,7 @@
       "source_detection_id": "visual_0166",
       "source_text": "⑱-5 비과세 항목 종(전) 1",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -3245,7 +3182,7 @@
       "source_detection_id": "visual_0167",
       "source_text": "⑱-5 비과세 항목 종(전) 2",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -3275,7 +3212,7 @@
       "source_detection_id": "visual_0169",
       "source_text": "⑱-5 비과세 항목 ⑯-1 납세조합",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -3304,8 +3241,8 @@
       "bbox_label_id": "visual_0170",
       "source_detection_id": "visual_0170",
       "source_text": "⑱-5 비과세 항목 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3334,8 +3271,8 @@
       "bbox_label_id": "visual_0173",
       "source_detection_id": "visual_0173",
       "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3364,8 +3301,8 @@
       "bbox_label_id": "visual_0174",
       "source_detection_id": "visual_0174",
       "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3394,8 +3331,8 @@
       "bbox_label_id": "visual_0175",
       "source_detection_id": "visual_0175",
       "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3424,8 +3361,8 @@
       "bbox_label_id": "visual_0177",
       "source_detection_id": "visual_0177",
       "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3454,8 +3391,8 @@
       "bbox_label_id": "visual_0178",
       "source_detection_id": "visual_0178",
       "source_text": "검토필요 비과세 및 감면소득명세 라벨 없는 물결표 행 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3484,8 +3421,8 @@
       "bbox_label_id": "visual_0179",
       "source_detection_id": "visual_0179",
       "source_text": "⑱-41 임원등 할인금액 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3514,8 +3451,8 @@
       "bbox_label_id": "visual_0180",
       "source_detection_id": "visual_0180",
       "source_text": "⑱-41 임원등 할인금액 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3544,8 +3481,8 @@
       "bbox_label_id": "visual_0181",
       "source_detection_id": "visual_0181",
       "source_text": "⑱-41 임원등 할인금액 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3574,8 +3511,8 @@
       "bbox_label_id": "visual_0183",
       "source_detection_id": "visual_0183",
       "source_text": "⑱-41 임원등 할인금액 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3604,8 +3541,8 @@
       "bbox_label_id": "visual_0184",
       "source_detection_id": "visual_0184",
       "source_text": "⑱-41 임원등 할인금액 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3634,8 +3571,8 @@
       "bbox_label_id": "visual_0185",
       "source_detection_id": "visual_0185",
       "source_text": "⑲ 수련보조수당 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3664,8 +3601,8 @@
       "bbox_label_id": "visual_0186",
       "source_detection_id": "visual_0186",
       "source_text": "⑲ 수련보조수당 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3694,8 +3631,8 @@
       "bbox_label_id": "visual_0187",
       "source_detection_id": "visual_0187",
       "source_text": "⑲ 수련보조수당 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3724,8 +3661,8 @@
       "bbox_label_id": "visual_0189",
       "source_detection_id": "visual_0189",
       "source_text": "⑲ 수련보조수당 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3754,8 +3691,8 @@
       "bbox_label_id": "visual_0190",
       "source_detection_id": "visual_0190",
       "source_text": "⑲ 수련보조수당 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3784,8 +3721,8 @@
       "bbox_label_id": "visual_0192",
       "source_detection_id": "visual_0192",
       "source_text": "⑳ 비과세소득 계 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3814,8 +3751,8 @@
       "bbox_label_id": "visual_0193",
       "source_detection_id": "visual_0193",
       "source_text": "⑳ 비과세소득 계 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3844,8 +3781,8 @@
       "bbox_label_id": "visual_0194",
       "source_detection_id": "visual_0194",
       "source_text": "⑳ 비과세소득 계 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3874,8 +3811,8 @@
       "bbox_label_id": "visual_0196",
       "source_detection_id": "visual_0196",
       "source_text": "⑳ 비과세소득 계 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3904,8 +3841,8 @@
       "bbox_label_id": "visual_0197",
       "source_detection_id": "visual_0197",
       "source_text": "⑳ 비과세소득 계 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3934,8 +3871,8 @@
       "bbox_label_id": "visual_0199",
       "source_detection_id": "visual_0199",
       "source_text": "⑳-1 감면소득 계 주(현)",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3964,8 +3901,8 @@
       "bbox_label_id": "visual_0200",
       "source_detection_id": "visual_0200",
       "source_text": "⑳-1 감면소득 계 종(전) 1",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -3994,8 +3931,8 @@
       "bbox_label_id": "visual_0201",
       "source_detection_id": "visual_0201",
       "source_text": "⑳-1 감면소득 계 종(전) 2",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4024,8 +3961,8 @@
       "bbox_label_id": "visual_0203",
       "source_detection_id": "visual_0203",
       "source_text": "⑳-1 감면소득 계 ⑯-1 납세조합",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4054,8 +3991,8 @@
       "bbox_label_id": "visual_0204",
       "source_detection_id": "visual_0204",
       "source_text": "⑳-1 감면소득 계 합계",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4084,8 +4021,8 @@
       "bbox_label_id": "visual_0211",
       "source_detection_id": "visual_0211",
       "source_text": "⑦ 결정세액 소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4114,8 +4051,8 @@
       "bbox_label_id": "visual_0213",
       "source_detection_id": "visual_0213",
       "source_text": "⑦ 결정세액 지방소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4144,8 +4081,8 @@
       "bbox_label_id": "visual_0215",
       "source_detection_id": "visual_0215",
       "source_text": "⑦ 결정세액 농어촌특별세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4174,8 +4111,8 @@
       "bbox_label_id": "visual_0217",
       "source_detection_id": "visual_0217",
       "source_text": "⑦② 종(전)근무지 1 사업자등록번호",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -4204,8 +4141,8 @@
       "bbox_label_id": "visual_0218",
       "source_detection_id": "visual_0218",
       "source_text": "⑦② 종(전)근무지 1 소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4234,8 +4171,8 @@
       "bbox_label_id": "visual_0220",
       "source_detection_id": "visual_0220",
       "source_text": "⑦② 종(전)근무지 1 지방소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4264,8 +4201,8 @@
       "bbox_label_id": "visual_0222",
       "source_detection_id": "visual_0222",
       "source_text": "⑦② 종(전)근무지 1 농어촌특별세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -4294,8 +4231,8 @@
       "bbox_label_id": "visual_0223",
       "source_detection_id": "visual_0223",
       "source_text": "⑦② 종(전)근무지 2 사업자등록번호",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -4324,8 +4261,8 @@
       "bbox_label_id": "visual_0224",
       "source_detection_id": "visual_0224",
       "source_text": "⑦② 종(전)근무지 2 소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4354,8 +4291,8 @@
       "bbox_label_id": "visual_0226",
       "source_detection_id": "visual_0226",
       "source_text": "⑦② 종(전)근무지 2 지방소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4384,8 +4321,8 @@
       "bbox_label_id": "visual_0228",
       "source_detection_id": "visual_0228",
       "source_text": "⑦② 종(전)근무지 2 농어촌특별세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -4414,8 +4351,8 @@
       "bbox_label_id": "visual_0229",
       "source_detection_id": "visual_0229",
       "source_text": "⑦② 종(전)근무지 3 사업자등록번호",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -4444,8 +4381,8 @@
       "bbox_label_id": "visual_0230",
       "source_detection_id": "visual_0230",
       "source_text": "⑦② 종(전)근무지 3 소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4474,8 +4411,8 @@
       "bbox_label_id": "visual_0232",
       "source_detection_id": "visual_0232",
       "source_text": "⑦② 종(전)근무지 3 지방소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4504,8 +4441,8 @@
       "bbox_label_id": "visual_0234",
       "source_detection_id": "visual_0234",
       "source_text": "⑦② 종(전)근무지 3 농어촌특별세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "table_text_cell",
       "render_policy": {
         "align": "left",
@@ -4524,36 +4461,6 @@
       "render_mode": "printed"
     },
     {
-      "field_id": "fin05_visual_0237",
-      "label": "⑦③ 주(현)근무지 사업자등록번호",
-      "semantic_path": [
-        "세액명세",
-        "⑦③ 주(현)근무지",
-        "사업자등록번호"
-      ],
-      "bbox_label_id": "visual_0237",
-      "source_detection_id": "visual_0237",
-      "source_text": "⑦③ 주(현)근무지 사업자등록번호",
-      "value_type": "money.krw",
-      "generator": "money.krw",
-      "style_class": "table_text_cell",
-      "render_policy": {
-        "align": "left",
-        "valign": "middle",
-        "fit": "shrink_to_fit",
-        "overflow": "shrink",
-        "checkbox_style": "v_mark",
-        "render": "true"
-      },
-      "export": {
-        "json_path": "세액명세/⑦③ 주(현)근무지/사업자등록번호",
-        "csv_column": "세액명세/⑦③ 주(현)근무지/사업자등록번호"
-      },
-      "required": true,
-      "notes": "",
-      "render_mode": "printed"
-    },
-    {
       "field_id": "fin05_visual_0238",
       "label": "⑦③ 주(현)근무지 소득세",
       "semantic_path": [
@@ -4564,8 +4471,8 @@
       "bbox_label_id": "visual_0238",
       "source_detection_id": "visual_0238",
       "source_text": "⑦③ 주(현)근무지 소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4594,8 +4501,8 @@
       "bbox_label_id": "visual_0240",
       "source_detection_id": "visual_0240",
       "source_text": "⑦③ 주(현)근무지 지방소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -4739,8 +4646,8 @@
       "bbox_label_id": "manual_1783992315342",
       "source_detection_id": "manual_1783992315342",
       "source_text": "발행자 보고용",
-      "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "value_type": "bool.checkbox",
+      "generator": "checkbox.bool",
       "style_class": "body_default",
       "render_policy": {
         "align": "left",
@@ -4948,7 +4855,7 @@
       "source_detection_id": "manual_1783992403041",
       "source_text": "거주지국",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "choice:대한민국|미국|일본|중국|베트남|캐나다|독일|싱가포르",
       "style_class": "body_default",
       "render_policy": {
         "align": "left",
@@ -4977,7 +4884,7 @@
       "source_detection_id": "manual_1783992407526",
       "source_text": "거주지국코드",
       "value_type": "free_text.short",
-      "generator": "pattern:########",
+      "generator": "choice:410|840|392|156|704|124|276|702",
       "style_class": "body_default",
       "render_policy": {
         "align": "left",
@@ -5006,7 +4913,7 @@
       "source_detection_id": "manual_1783992413509",
       "source_text": "국적",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "choice:대한민국|미국|일본|중국|베트남|인도|독일|필리핀",
       "style_class": "body_default",
       "render_policy": {
         "align": "left",
@@ -5035,7 +4942,7 @@
       "source_detection_id": "manual_1783992419125",
       "source_text": "국적코드",
       "value_type": "free_text.short",
-      "generator": "pattern:########",
+      "generator": "choice:410|840|392|156|704|356|276|608",
       "style_class": "body_default",
       "render_policy": {
         "align": "left",
@@ -5279,8 +5186,8 @@
       "bbox_label_id": "manual_1783992648942",
       "source_detection_id": "manual_1783992648942",
       "source_text": "종(전) 1 근무기간 시작",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5310,8 +5217,8 @@
       "bbox_label_id": "manual_1783992654759",
       "source_detection_id": "manual_1783992654759",
       "source_text": "종(전) 1 감면기간 시작",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5341,8 +5248,8 @@
       "bbox_label_id": "manual_1783992660809",
       "source_detection_id": "manual_1783992660809",
       "source_text": "종(전) 1 근무기간 종료",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5372,8 +5279,8 @@
       "bbox_label_id": "manual_1783992666210",
       "source_detection_id": "manual_1783992666210",
       "source_text": "종(전) 1 감면기간 종료",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5403,8 +5310,8 @@
       "bbox_label_id": "manual_1783992693760",
       "source_detection_id": "manual_1783992693760",
       "source_text": "종(전) 2 근무기간 종료",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5434,8 +5341,8 @@
       "bbox_label_id": "manual_1783992699342",
       "source_detection_id": "manual_1783992699342",
       "source_text": "종(전) 2 감면기간 종료",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5465,8 +5372,8 @@
       "bbox_label_id": "manual_1783992719226",
       "source_detection_id": "manual_1783992719226",
       "source_text": "⑯-1 납세조합 근무기간 시작",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5496,8 +5403,8 @@
       "bbox_label_id": "manual_1783992725360",
       "source_detection_id": "manual_1783992725360",
       "source_text": "⑯-1 납세조합 감면기간 시작",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5527,8 +5434,8 @@
       "bbox_label_id": "manual_1783992737794",
       "source_detection_id": "manual_1783992737794",
       "source_text": "⑯-1 납세조합 근무기간 종료",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5558,8 +5465,8 @@
       "bbox_label_id": "manual_1783992742010",
       "source_detection_id": "manual_1783992742010",
       "source_text": "⑯-1 납세조합 감면기간 종료",
-      "value_type": "date.kr",
-      "generator": "date.kr",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5589,8 +5496,8 @@
       "bbox_label_id": "manual_1783992748761",
       "source_detection_id": "manual_1783992748761",
       "source_text": "합계 근무기간 시작",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5598,7 +5505,7 @@
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark",
-        "render": "true"
+        "render": "false"
       },
       "export": {
         "json_path": "근무처별소득명세/합계/근무기간/시작",
@@ -5620,8 +5527,8 @@
       "bbox_label_id": "manual_1783992755427",
       "source_detection_id": "manual_1783992755427",
       "source_text": "합계 감면기간 시작",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5629,7 +5536,7 @@
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark",
-        "render": "true"
+        "render": "false"
       },
       "export": {
         "json_path": "근무처별소득명세/합계/감면기간/시작",
@@ -5651,8 +5558,8 @@
       "bbox_label_id": "manual_1783992760161",
       "source_detection_id": "manual_1783992760161",
       "source_text": "합계 근무기간 종료",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5660,7 +5567,7 @@
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark",
-        "render": "true"
+        "render": "false"
       },
       "export": {
         "json_path": "근무처별소득명세/합계/근무기간/종료",
@@ -5682,8 +5589,8 @@
       "bbox_label_id": "manual_1783992764043",
       "source_detection_id": "manual_1783992764043",
       "source_text": "합계 감면기간 종료",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "date_part_cell",
       "render_policy": {
         "align": "left",
@@ -5691,7 +5598,7 @@
         "fit": "shrink_to_fit",
         "overflow": "shrink",
         "checkbox_style": "v_mark",
-        "render": "true"
+        "render": "false"
       },
       "export": {
         "json_path": "근무처별소득명세/합계/감면기간/종료",
@@ -5712,8 +5619,8 @@
       "bbox_label_id": "manual_1783992899710",
       "source_detection_id": "manual_1783992899710",
       "source_text": "⑦④ 납부특례세액 소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -5742,8 +5649,8 @@
       "bbox_label_id": "manual_1783992903993",
       "source_detection_id": "manual_1783992903993",
       "source_text": "⑦④ 납부특례세액 지방소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -5772,8 +5679,8 @@
       "bbox_label_id": "manual_1783992907693",
       "source_detection_id": "manual_1783992907693",
       "source_text": "⑦④ 납부특례세액 농어촌특별세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -5802,8 +5709,8 @@
       "bbox_label_id": "manual_1783992911760",
       "source_detection_id": "manual_1783992911760",
       "source_text": "⑦③ 주(현)근무지 농어촌특별세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "body_default",
       "render_policy": {
         "align": "left",
@@ -5832,8 +5739,8 @@
       "bbox_label_id": "manual_1783992917177",
       "source_detection_id": "manual_1783992917177",
       "source_text": "⑦⑤ 차감징수세액 소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -5862,8 +5769,8 @@
       "bbox_label_id": "manual_1783992919627",
       "source_detection_id": "manual_1783992919627",
       "source_text": "⑦⑤ 차감징수세액 지방소득세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -5892,8 +5799,8 @@
       "bbox_label_id": "manual_1783992924694",
       "source_detection_id": "manual_1783992924694",
       "source_text": "⑦⑤ 차감징수세액 농어촌특별세",
-      "value_type": "money.krw",
-      "generator": "money.krw",
+      "value_type": "free_text.short",
+      "generator": "literal:",
       "style_class": "amount_cell",
       "render_policy": {
         "align": "left",
@@ -5922,7 +5829,7 @@
       "source_detection_id": "manual_1783992958060",
       "source_text": "징수(보고)의무자 서명 또는 인",
       "value_type": "free_text.short",
-      "generator": "free_text.short",
+      "generator": "same_as:fin05_visual_0033",
       "style_class": "body_default",
       "render_policy": {
         "align": "left",
@@ -6032,5 +5939,5 @@
     }
   ],
   "groups": [],
-  "updated_at": "2026-07-14T03:00:29.196674+00:00"
+  "updated_at": "2026-07-14T07:02:34.983830+00:00"
 }

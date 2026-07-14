@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "jobId": "20260714T054025930831Z",
+  "docId": "FIN-05",
+  "status": "succeeded",
+  "createdAt": "2026-07-14T05:40:25.931670+00:00",
+  "startedAt": "2026-07-14T05:40:25.983968+00:00",
+  "finishedAt": "2026-07-14T05:49:44.164049+00:00",
+  "requestPath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/request.json",
+  "requestDir": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z",
+  "runDir": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z",
+  "promptPath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/codex_exec_prompt.md",
+  "lastMessagePath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/codex_last_message.md",
+  "stdoutPath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/stdout.log",
+  "stderrPath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/stderr.log",
+  "terminalPath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/terminal.log",
+  "requiredOutputs": [
+    "schema_draft.json",
+    "stylesheet_draft.json",
+    "faker_profile_draft.json",
+    "value_pool_draft.json",
+    "research_report.json",
+    "uncertainty_report.json",
+    "anchor_map_draft.json",
+    "application_notes.md"
+  ],
+  "outputs": {
+    "schema_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/schema_draft.json",
+    "stylesheet_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/stylesheet_draft.json",
+    "faker_profile_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/faker_profile_draft.json",
+    "value_pool_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/value_pool_draft.json",
+    "research_report.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/research_report.json",
+    "uncertainty_report.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/uncertainty_report.json",
+    "anchor_map_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/anchor_map_draft.json",
+    "application_notes.md": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/application_notes.md"
+  },
+  "validation": {
+    "ready": true,
+    "missing": [],
+    "invalidJson": [],
+    "contractErrors": [],
+    "outputs": {
+      "schema_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/schema_draft.json",
+      "stylesheet_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/stylesheet_draft.json",
+      "faker_profile_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/faker_profile_draft.json",
+      "value_pool_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/value_pool_draft.json",
+      "research_report.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/research_report.json",
+      "uncertainty_report.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/uncertainty_report.json",
+      "anchor_map_draft.json": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/anchor_map_draft.json",
+      "application_notes.md": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z/application_notes.md"
+    },
+    "repairSummary": {
+      "materializedUseAnchors": [],
+      "materializedCount": 0,
+      "removedUnmappedDeclaration": false
+    },
+    "summary": {
+      "required": 8,
+      "present": 8,
+      "missing": 0,
+      "invalidJson": 0,
+      "contractErrors": 0
+    },
+    "scope": "full"
+  },
+  "options": {
+    "model": "gpt-5.6-terra",
+    "reasoningEffort": "medium",
+    "fastMode": false,
+    "minPoolSize": 20,
+    "scalarPoolMinSize": 20,
+    "recordPoolMinSize": 12,
+    "asOfDate": "2026-07-14",
+    "mode": "authoring",
+    "executionMode": "targeted_revision",
+    "timeBudgetMinutes": null
+  },
+  "instruction": "현재 테이블 형태로 배치된 모든 bbox에 대해서 유효한 값을 모두 채워넣을 필요는 없고, 실제 근로소득 원천징수영수증의 각 부분이 나타내는 정보가 아귀가 잘 맞게끔 맞추는 게 가장 중요해. 또, 실제 '값'이 들어가야 하는데 'key 명칭'이 삽입되어 있는 경우들도 적지 않아. '발행자 보고용' 같은 경우는 체크박스 형식인데 잘못 지정되기도 했고. 이런 부분을 정확하게 개선하는 작업이 필요해.",
+  "executionMode": "targeted_revision",
+  "passState": {
+    "current": "completed",
+    "completed": [
+      "targeted_revision"
+    ],
+    "planned": [
+      "targeted_revision"
+    ]
+  },
+  "deadlineAt": null,
+  "pid": null,
+  "currentProcessStartedAt": "2026-07-14T05:40:26.058100+00:00",
+  "stages": [
+    {
+      "stage": "targeted_revision",
+      "status": "succeeded",
+      "startedAt": "2026-07-14T05:40:25.991830+00:00",
+      "finishedAt": "2026-07-14T05:49:44.139731+00:00",
+      "durationSeconds": 556.175,
+      "returnCode": 0,
+      "promptPath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/codex_targeted_revision_pass_prompt.md",
+      "lastMessagePath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/codex_targeted_revision_pass_last_message.md",
+      "stdoutPath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/targeted_revision_pass_stdout.log",
+      "stderrPath": "workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/targeted_revision_pass_stderr.log",
+      "command": [
+        "codex",
+        "--search",
+        "--ask-for-approval",
+        "never",
+        "--model",
+        "gpt-5.6-terra",
+        "-c",
+        "model_reasoning_effort=\"medium\"",
+        "--disable",
+        "fast_mode",
+        "exec",
+        "--cd",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z",
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/codex_targeted_revision_pass_last_message.md",
+        "-"
+      ],
+      "attemptCount": 1,
+      "model": "gpt-5.6-terra",
+      "reasoningEffort": "medium",
+      "fastMode": false,
+      "tokensUsed": 201564
+    }
+  ],
+  "elapsedSeconds": 556.207,
+  "returnCode": 0,
+  "command": [
+    "codex",
+    "--search",
+    "--ask-for-approval",
+    "never",
+    "--model",
+    "gpt-5.6-terra",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "--disable",
+    "fast_mode",
+    "exec",
+    "--cd",
+    "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_requests/20260714T023807908619Z",
+    "--sandbox",
+    "workspace-write",
+    "--output-last-message",
+    "/Users/lsh930309/projects/dataFatory/workbench/documents/근로소득_원천징수영수증__FIN-05/authoring/agent_runs/20260714T054025930831Z/codex_targeted_revision_pass_last_message.md",
+    "-"
+  ],
+  "repairSummary": {
+    "materializedUseAnchors": [],
+    "materializedCount": 0,
+    "removedUnmappedDeclaration": false
+  },
+  "error": null
+}

@@ -590,6 +590,9 @@ function App() {
   const [authoringAgentRecordPoolMinSize, setAuthoringAgentRecordPoolMinSize] = useState(12);
   const [authoringAgentRequest, setAuthoringAgentRequest] = useState(null);
   const [authoringAgentRun, setAuthoringAgentRun] = useState(null);
+  const [authoringAgentConflictPopover, setAuthoringAgentConflictPopover] = useState(null);
+  const [authoringAgentConflictResolutions, setAuthoringAgentConflictResolutions] = useState({});
+  const [focusedAuthoringAgentConflictId, setFocusedAuthoringAgentConflictId] = useState('');
   const [authoringAgentTerminalText, setAuthoringAgentTerminalText] = useState('');
   const [authoringAgentTerminalOpen, setAuthoringAgentTerminalOpen] = useState(false);
   const [authoringAgentTerminalAutoScroll, setAuthoringAgentTerminalAutoScroll] = useState(true);
@@ -804,6 +807,9 @@ function App() {
     if (reviewDirty && !window.confirm('저장하지 않은 BBox 리뷰 수정이 있습니다. 문서를 전환할까요?')) return;
     setAssessmentPopover(null);
     setReviewPrunePopover(null);
+    setAuthoringAgentConflictPopover(null);
+    setAuthoringAgentConflictResolutions({});
+    setFocusedAuthoringAgentConflictId('');
     setSelectedDocId(docId);
   }
 
@@ -1295,22 +1301,76 @@ function App() {
     }
   }
 
+  function focusAuthoringAgentConflict(conflict) {
+    if (!conflict) return;
+    setFocusedAuthoringAgentConflictId(conflict.id);
+    if (conflict.fieldId) selectAuthoringFields([conflict.fieldId]);
+    setCanvasMode('authoring');
+    setViewportMode('fit');
+  }
+
+  function setAuthoringAgentConflictResolution(conflictId, actionId) {
+    setAuthoringAgentConflictResolutions((current) => ({ ...current, [conflictId]: actionId }));
+  }
+
+  function useRecommendedAuthoringAgentConflictResolutions() {
+    const conflicts = authoringAgentConflictPopover?.conflicts || [];
+    setAuthoringAgentConflictResolutions(Object.fromEntries(conflicts.map((conflict) => [conflict.id, conflict.recommendedAction])));
+  }
+
+  function closeAuthoringAgentConflictPopover() {
+    setAuthoringAgentConflictPopover(null);
+    setAuthoringAgentConflictResolutions({});
+    setFocusedAuthoringAgentConflictId('');
+  }
+
+  async function commitAuthoringAgentDrafts(requestPath, preflight, resolutions = {}) {
+    setBusy('authoringApplyAgentDrafts');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/apply-agent-drafts', {
+        method: 'POST',
+        body: JSON.stringify({
+          docId: selectedDocId,
+          requestPath,
+          preflightToken: preflight?.preflightToken || '',
+          resolutions,
+        }),
+      });
+      closeAuthoringAgentConflictPopover();
+      setAuthoringBundle(payload);
+      setAuthoringDirty(false);
+      setAuthoringResult(null);
+      setAuthoringVersion((value) => value + 1);
+      const reconciliation = payload.bboxReconciliation;
+      const reconciliationText = reconciliation?.resolvedCount ? ` · BBox 충돌 ${reconciliation.resolvedCount}건 반영` : '';
+      setMessage(`Agent draft를 최종 Authoring에 적용했습니다: field ${payload.summary.field_count}개${reconciliationText}`);
+      await refreshAll({ preserveSelection: true });
+      return payload;
+    } finally {
+      setBusy('');
+    }
+  }
+
   async function applyAuthoringAgentDrafts() {
     const requestPath = authoringAgentRun?.requestPath || authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest;
     if (!selectedDocId || !requestPath) return;
     setBusy('authoringApplyAgentDrafts');
     setError('');
     try {
-      const payload = await apiJson('/api/authoring/apply-agent-drafts', {
+      const preflight = await apiJson('/api/authoring/apply-agent-drafts/preflight', {
         method: 'POST',
         body: JSON.stringify({ docId: selectedDocId, requestPath }),
       });
-      setAuthoringBundle(payload);
-      setAuthoringDirty(false);
-      setAuthoringResult(null);
-      setAuthoringVersion((value) => value + 1);
-      setMessage(`Agent draft를 최종 Authoring에 적용했습니다: field ${payload.summary.field_count}개`);
-      await refreshAll({ preserveSelection: true });
+      if (preflight.conflicts?.length) {
+        if (!authoringBundle) await loadAuthoringBundle({}, { silentBusy: true });
+        setAuthoringAgentConflictPopover(preflight);
+        setAuthoringAgentConflictResolutions({});
+        focusAuthoringAgentConflict(preflight.conflicts[0]);
+        setMessage(`Agent draft 적용 전에 BBox 변경 충돌 ${preflight.conflicts.length}건을 확인해 주세요.`);
+        return preflight;
+      }
+      return await commitAuthoringAgentDrafts(requestPath, preflight, {});
     } finally {
       setBusy('');
     }
@@ -1702,6 +1762,9 @@ function App() {
     setAuthoringPreviewStale(false);
     setAuthoringAgentRequest(null);
     setAuthoringAgentRun(null);
+    setAuthoringAgentConflictPopover(null);
+    setAuthoringAgentConflictResolutions({});
+    setFocusedAuthoringAgentConflictId('');
     setAuthoringAgentRevisionInstruction('');
     resetAuthoringAgentTerminal();
     setAuthoringAgentTerminalOpen(false);
@@ -3379,6 +3442,23 @@ function App() {
           })}
         />
       )}
+      {authoringAgentConflictPopover && (
+        <AuthoringAgentConflictPopover
+          data={authoringAgentConflictPopover}
+          resolutions={authoringAgentConflictResolutions}
+          focusedId={focusedAuthoringAgentConflictId}
+          busy={busy === 'authoringApplyAgentDrafts'}
+          onFocus={focusAuthoringAgentConflict}
+          onResolve={setAuthoringAgentConflictResolution}
+          onUseRecommended={useRecommendedAuthoringAgentConflictResolutions}
+          onCancel={closeAuthoringAgentConflictPopover}
+          onApply={() => run(() => commitAuthoringAgentDrafts(
+            authoringAgentConflictPopover.requestPath,
+            authoringAgentConflictPopover,
+            authoringAgentConflictResolutions,
+          ))}
+        />
+      )}
       {assessmentPopover && (
         <AssessmentPopover
           popover={assessmentPopover}
@@ -3714,6 +3794,12 @@ function App() {
                 qrBox={selectedIsHandwriting ? authoringQrBox : null}
                 qrEditMode={selectedIsHandwriting && authoringQrEditMode}
                 onQrBoxChange={updateAuthoringQrBox}
+                conflicts={authoringAgentConflictPopover?.conflicts || []}
+                conflictResolutions={authoringAgentConflictResolutions}
+                focusedConflictId={focusedAuthoringAgentConflictId}
+                onConflictSelect={(conflictId) => focusAuthoringAgentConflict(
+                  authoringAgentConflictPopover?.conflicts?.find((conflict) => conflict.id === conflictId),
+                )}
               />
             ) : showCleanupCanvas ? (
               <CleanupCanvas
@@ -4529,7 +4615,36 @@ function hasRenderableAuthoringBbox(field) {
   return Array.isArray(field?.bbox) && field.bbox.length === 4 && field.bbox.every((value) => Number.isFinite(Number(value)));
 }
 
-function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldIds, setSelectedFieldIds, viewportMode, qrBox = null, qrEditMode = false, onQrBoxChange = null }) {
+function authoringConflictBoxes(conflict) {
+  const normalize = (value) => (Array.isArray(value) && value.length === 4 ? value.map((item) => Number(item) || 0) : null);
+  const review = normalize(conflict?.review?.bbox);
+  const draft = normalize(conflict?.draft?.bbox);
+  if (conflict?.type === 'bbox_geometry_changed' && review && draft) {
+    return [
+      { role: 'review', label: '리뷰', bbox: review },
+      { role: 'draft', label: 'Agent', bbox: draft },
+    ];
+  }
+  const bbox = normalize(conflict?.canvasBbox) || review || draft || normalize(conflict?.baseline?.bbox);
+  return bbox ? [{ role: 'primary', label: '', bbox }] : [];
+}
+
+function AuthoringCanvas({
+  imagePath,
+  version = 0,
+  image,
+  fields,
+  selectedFieldIds,
+  setSelectedFieldIds,
+  viewportMode,
+  qrBox = null,
+  qrEditMode = false,
+  onQrBoxChange = null,
+  conflicts = [],
+  conflictResolutions = {},
+  focusedConflictId = '',
+  onConflictSelect = null,
+}) {
   const width = image?.width || 1200;
   const height = image?.height || 1600;
   const svgRef = useRef(null);
@@ -4575,6 +4690,12 @@ function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldI
       const start = eventPoint(event);
       setDragBox({ start, current: start, kind: 'qr' });
       event.currentTarget.setPointerCapture?.(event.pointerId);
+      return;
+    }
+    const conflictNode = event.target.closest?.('[data-authoring-conflict-id]');
+    if (conflictNode) {
+      const conflictId = conflictNode.getAttribute('data-authoring-conflict-id');
+      onConflictSelect?.(conflictId);
       return;
     }
     const fieldNode = event.target.closest?.('[data-authoring-field-id]');
@@ -4650,6 +4771,39 @@ function AuthoringCanvas({ imagePath, version = 0, image, fields, selectedFieldI
               </g>
             );
           })}
+          {conflicts.flatMap((conflict) => authoringConflictBoxes(conflict).map((entry) => {
+            const [x, y, boxWidth, boxHeight] = entry.bbox;
+            const resolved = Boolean(conflictResolutions[conflict.id]);
+            const focused = focusedConflictId === conflict.id;
+            return (
+              <g
+                key={`${conflict.id}-${entry.role}`}
+                data-authoring-conflict-id={conflict.id}
+                className="authoring-conflict-bbox-group"
+              >
+                <rect
+                  x={x}
+                  y={y}
+                  width={Math.max(1, boxWidth)}
+                  height={Math.max(1, boxHeight)}
+                  vectorEffect="non-scaling-stroke"
+                  className={`authoring-conflict-bbox conflict-${conflict.type} ${entry.role} ${resolved ? 'resolved' : 'unresolved'} ${focused ? 'focused' : ''}`}
+                />
+                {entry.label && (
+                  <text
+                    x={x + 3}
+                    y={Math.max(12, y - 4)}
+                    className={`authoring-conflict-label ${entry.role}`}
+                    vectorEffect="non-scaling-stroke"
+                    pointerEvents="none"
+                  >
+                    {entry.label}
+                  </text>
+                )}
+                <title>{`${conflict.message} · ${conflict.bboxLabelId}${resolved ? ` · 선택: ${conflictResolutions[conflict.id]}` : ' · 미해결'}`}</title>
+              </g>
+            );
+          }))}
           {qrBox && Array.isArray(qrBox) && qrBox.length === 4 && (
             <g className="authoring-qr-bbox-group">
               <rect
@@ -4844,6 +4998,7 @@ function AuthoringEditor({
                 <option value="symbol_box">☑/☐ 박스를 직접 그리기</option>
                 <option value="filled_box">채운 사각형</option>
                 <option value="dot">점/원 표시</option>
+                <option value="ellipse_mark">문구 둘레 타원</option>
               </select>
               {isMulti && <small>선택된 체크박스 bbox {selectedCheckboxFields.length}개에만 일괄 적용됩니다.</small>}
             </label>
@@ -5123,6 +5278,103 @@ function RecognitionPopover({ data, setChoice, onClose, onApply, onSaveWithoutRe
         </div>
       </div>
     </div>
+  );
+}
+
+const AUTHORING_CONFLICT_TYPE_LABELS = {
+  deleted_in_review_present_in_draft: '리뷰에서 삭제됨',
+  agent_added_bbox: 'Agent가 추가함',
+  present_in_review_missing_in_draft: 'Agent draft에서 누락',
+  added_in_review_missing_in_draft: '리뷰에서 새로 추가됨',
+  bbox_geometry_changed: '좌표 변경',
+};
+
+function AuthoringAgentConflictPopover({
+  data,
+  resolutions,
+  focusedId,
+  busy,
+  onFocus,
+  onResolve,
+  onUseRecommended,
+  onCancel,
+  onApply,
+}) {
+  const conflicts = data.conflicts || [];
+  const resolvedCount = conflicts.filter((conflict) => Boolean(resolutions[conflict.id])).length;
+  const unresolvedCount = conflicts.length - resolvedCount;
+  return (
+    <aside className="authoring-conflict-popover" role="dialog" aria-modal="false" aria-label="Agent BBox 변경 충돌 확인">
+      <div className="authoring-conflict-head">
+        <div>
+          <p className="eyebrow dark">Authoring 적용 전 확인</p>
+          <h2>BBox 변경 충돌 {conflicts.length}건</h2>
+          <p className="muted">카드를 누르면 캔버스의 pulse 영역을 확인할 수 있습니다. 다른 문서와 작업은 차단하지 않습니다.</p>
+        </div>
+        <button onClick={onCancel} disabled={busy} aria-label="충돌 확인 패널 닫기">닫기</button>
+      </div>
+      <div className="authoring-conflict-summary">
+        <span className={unresolvedCount ? 'warn' : 'complete'}>미해결 {unresolvedCount}</span>
+        <span>선택 완료 {resolvedCount}</span>
+        <button onClick={onUseRecommended} disabled={busy || !unresolvedCount}>추천안 일괄 선택</button>
+      </div>
+      <div className="authoring-conflict-list">
+        {conflicts.map((conflict, index) => {
+          const selectedAction = resolutions[conflict.id] || '';
+          const reviewBbox = conflict.review?.bbox?.join(', ');
+          const draftBbox = conflict.draft?.bbox?.join(', ');
+          return (
+            <section
+              key={conflict.id}
+              className={`authoring-conflict-card ${focusedId === conflict.id ? 'focused' : ''} ${selectedAction ? 'resolved' : 'unresolved'}`}
+              onClick={() => onFocus(conflict)}
+            >
+              <div className="authoring-conflict-card-head">
+                <div>
+                  <span className="authoring-conflict-index">{index + 1}</span>
+                  <b>{conflict.label || conflict.bboxLabelId}</b>
+                </div>
+                <span>{AUTHORING_CONFLICT_TYPE_LABELS[conflict.type] || conflict.type}</span>
+              </div>
+              <p>{conflict.message}</p>
+              <small>
+                bbox {conflict.bboxLabelId}
+                {conflict.fieldId ? ` · field ${conflict.fieldId}` : ''}
+                {conflict.semanticPath ? ` · ${conflict.semanticPath}` : ''}
+              </small>
+              {(reviewBbox || draftBbox) && (
+                <div className="authoring-conflict-coordinates">
+                  {reviewBbox && <code>리뷰 [{reviewBbox}]</code>}
+                  {draftBbox && <code>Agent [{draftBbox}]</code>}
+                </div>
+              )}
+              <div className="authoring-conflict-actions" onClick={(event) => event.stopPropagation()}>
+                {(conflict.actions || []).map((action) => (
+                  <button
+                    key={action.id}
+                    className={selectedAction === action.id ? 'active' : ''}
+                    onClick={() => onResolve(conflict.id, action.id)}
+                    disabled={busy}
+                  >
+                    {action.label}
+                    {action.id === conflict.recommendedAction && <small>추천</small>}
+                  </button>
+                ))}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+      <div className="authoring-conflict-footer">
+        <p>{unresolvedCount ? `${unresolvedCount}건의 처리 방식을 선택해야 적용할 수 있습니다.` : '모든 충돌의 처리 방식이 선택되었습니다.'}</p>
+        <div>
+          <button onClick={onCancel} disabled={busy}>취소</button>
+          <button className="primary" onClick={onApply} disabled={busy || unresolvedCount > 0}>
+            {busy ? '검증 후 적용 중...' : `선택대로 적용 (${resolvedCount})`}
+          </button>
+        </div>
+      </div>
+    </aside>
   );
 }
 

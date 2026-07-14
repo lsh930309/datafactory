@@ -100,6 +100,25 @@
       ]
     },
     {
+      "evidence_id": "web_form_2026_country_fields",
+      "source_type": "official_law_form",
+      "title": "소득세법 시행규칙 별지 제24호서식(1) 2026. 3. 20. 개정본",
+      "url": "https://www.law.go.kr/LSW/flDownload.do?bylClsCd=110202&flSeq=162572685&gubun=",
+      "accessed_at": "2026-07-14T06:17:43.421596Z",
+      "search_queries": [
+        "근로소득 원천징수영수증 거주지국코드 국적코드"
+      ],
+      "summary": "공식 별지 제24호서식(1) 1쪽에서 거주구분, 거주지국, 거주지국코드, 내ㆍ외국인, 국적, 국적코드가 함께 배치된 법정 입력 항목임을 재확인했다.",
+      "field_implications": [
+        "거주지국",
+        "거주지국코드",
+        "국적",
+        "국적코드",
+        "거주구분",
+        "내ㆍ외국인"
+      ]
+    },
+    {
       "evidence_id": "visual_template_page_1",
       "source_type": "local_visual_source_of_truth",
       "title": "근로소득원천징수영수증_page_001.jpg",
@@ -134,6 +153,14 @@
       "note": "원천징수의무자/소득자 라벨과 법인명, 사업자번호, 주민번호, 주소 값 칸을 이미지 기준으로 바인딩했다."
     },
     {
+      "binding_group": "거주지국 및 국적 코드 targeted revision",
+      "evidence_ids": [
+        "web_form_2026_country_fields",
+        "visual_template_page_1"
+      ],
+      "note": "법정 양식에서 함께 배치된 거주지국·코드와 국적·코드의 이름-코드 쌍 및 거주구분/내외국인 관계를 faker record로 보강했다."
+    },
+    {
       "binding_group": "근무처별 소득명세 및 비과세/감면소득",
       "evidence_ids": [
         "web_nts_withholding_income",
@@ -158,6 +185,13 @@
         "visual_template_page_1"
       ],
       "note": "근무처별 소득명세의 기간 행은 전체 이미지의 물결표 좌우 빈칸을 시작/종료 날짜 조각으로 해석했다. visual_0076, visual_0078은 종(전) 2 열의 시작일 셀로 추가했다."
+    },
+    {
+      "binding_group": "표 입력값 유형 및 합계 처리 targeted revision",
+      "evidence_ids": [
+        "visual_template_page_1"
+      ],
+      "note": "원본 1쪽에서 발행자 보고용은 체크박스, 소득·세액 표의 행 셀은 금액, 근무처명·사업자번호·기간의 합계 열은 비기입 셀로 재확인했다."
     }
   ]
 }

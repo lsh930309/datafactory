@@ -125,10 +125,10 @@ def _render_template_on_image(image: Image.Image, template: TemplateSpec, values
         if _is_checkbox_field(field):
             checked = _checkbox_checked(text)
             if field.checkbox_style == "symbol_box" or checked:
-                if field.clear_background:
+                if field.clear_background and field.checkbox_style != "ellipse_mark":
                     fill = field.background_color or sample_background(image, requested, padding=field.background_padding)
                     draw.rectangle([requested.x, requested.y, requested.right, requested.bottom], fill=fill)
-                actual = _draw_checkbox(draw, requested, checked, field)
+                actual = _draw_checkbox(draw, requested, checked, field).clipped(*image.size)
             else:
                 actual = BBox(requested.x, requested.y, 1, 1)
             # An unchecked checkbox may still draw its structural box, but it
@@ -221,6 +221,14 @@ def _draw_checkbox(draw: ImageDraw.ImageDraw, bbox: BBox, checked: bool, field: 
         _draw_text(draw, x, y, text, font, fill, field.letter_spacing)
         return _actual_bbox(draw, text, font, x, y, field.letter_spacing).clipped(bbox.right + 1, bbox.bottom + 1)
 
+    if style == "ellipse_mark":
+        if not checked:
+            return BBox(bbox.x, bbox.y, 1, 1)
+        ellipse = _checkbox_ellipse_bbox(bbox, field)
+        stroke = max(1, int(round(field.font_size * 0.08)))
+        draw.ellipse([ellipse.x, ellipse.y, ellipse.right, ellipse.bottom], outline=fill, width=stroke)
+        return ellipse
+
     square = _checkbox_square_bbox(BBox(bbox.x + field.x_shift, bbox.y, bbox.width, bbox.height))
     stroke = max(1, int(round(min(square.width, square.height) * 0.075)))
     if style in {"check_mark", "heavy_check_mark"}:
@@ -252,6 +260,17 @@ def _checkbox_square_bbox(bbox: BBox) -> BBox:
     x = bbox.x + max(0, (bbox.width - size) // 2)
     y = bbox.y + max(0, (bbox.height - size) // 2)
     return BBox(x, y, size, size)
+
+
+def _checkbox_ellipse_bbox(bbox: BBox, field: FieldSpec) -> BBox:
+    pad_x = max(2, int(round(field.font_size * 0.25)))
+    pad_y = max(2, int(round(field.font_size * 0.15)))
+    return BBox(
+        x=bbox.x - pad_x + field.x_shift,
+        y=bbox.y - pad_y + field.baseline_shift,
+        width=bbox.width + pad_x * 2,
+        height=bbox.height + pad_y * 2,
+    )
 
 
 def _draw_vector_check(draw: ImageDraw.ImageDraw, bbox: BBox, fill: tuple[int, int, int], stroke: int) -> None:

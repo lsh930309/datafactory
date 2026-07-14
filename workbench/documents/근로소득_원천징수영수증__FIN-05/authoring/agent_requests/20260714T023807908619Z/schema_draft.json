@@ -120,8 +120,6 @@
         }
       },
       "합계": {
-        "근무처명": "",
-        "사업자등록번호": "",
         "근무기간": {
           "시작": "",
           "종료": ""
@@ -294,7 +292,6 @@
         "농어촌특별세": ""
       },
       "⑦③ 주(현)근무지": {
-        "사업자등록번호": "",
         "소득세": "",
         "지방소득세": "",
         "농어촌특별세": ""
@@ -837,14 +834,14 @@
       "label_anchor_ids": [
         "det_000035"
       ],
-      "value_type": "date_part",
+      "value_type": "serial_number",
       "faker_rule": null,
       "generator": null,
-      "style_class": "date_part_cell",
+      "style_class": "table_text_cell",
       "unit_policy": {
-        "unit": "date_component",
+        "unit": "serial_number",
         "include_unit_in_value": false,
-        "reason": "연/월/일 또는 물결표가 정적 텍스트로 분리되어 있어 값에는 숫자 날짜 조각만 둔다."
+        "reason": "③-2는 종사업장 일련번호 입력란이며 날짜 구성요소가 아니다."
       },
       "research_evidence_ids": [
         "web_nts_withholding_income",
@@ -954,14 +951,14 @@
       "label_anchor_ids": [
         "det_000039"
       ],
-      "value_type": "choice",
+      "value_type": "personal_id",
       "faker_rule": null,
       "generator": null,
-      "style_class": "choice_marker",
+      "style_class": "table_text_cell",
       "unit_policy": {
-        "unit": "form_choice_code",
-        "include_unit_in_value": true,
-        "reason": "서식의 선택지는 라벨과 코드가 같은 값 영역에 보이므로 후속 faker pass에서 선택 표시/문구를 이 anchor 기준으로 결정한다."
+        "unit": "personal_identifier",
+        "include_unit_in_value": false,
+        "reason": "⑦은 소득자의 주민등록번호 또는 외국인등록번호를 적는 식별번호 입력란이다."
       },
       "research_evidence_ids": [
         "web_nts_withholding_income",
@@ -1183,46 +1180,6 @@
       "confidence": 0.86
     },
     {
-      "field_id": "fin05_visual_0067",
-      "key": "⑨ 합계 근무처명",
-      "label": "⑨ 합계 근무처명",
-      "semantic_path": "근무처별소득명세/합계/근무처명",
-      "anchor_id": "visual_0067",
-      "value": "",
-      "label_anchor_ids": [
-        "det_000048",
-        "det_000041"
-      ],
-      "value_type": "money_krw",
-      "faker_rule": null,
-      "generator": null,
-      "style_class": "amount_cell",
-      "unit_policy": {
-        "unit": "KRW",
-        "include_unit_in_value": false,
-        "reason": "금액 표는 단위 표기가 별도 인쇄되어 있지 않지만 원천징수영수증 금액란의 관행상 숫자 원 단위 값을 기입하는 영역이다."
-      },
-      "research_evidence_ids": [
-        "web_nts_withholding_income",
-        "web_nts_payment_statement",
-        "visual_template_page_1"
-      ],
-      "visual_evidence": {
-        "source_image": "workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/근로소득원천징수영수증_page_001.jpg",
-        "anchor_bbox": [
-          890,
-          480,
-          121,
-          27
-        ],
-        "bbox_format": "xywh",
-        "anchor_text": "",
-        "basis": "전체 템플릿 이미지와 OCR/review anchor 위치를 함께 확인했다. crops는 확대 보조로만 취급한다."
-      },
-      "review_required": false,
-      "confidence": 0.86
-    },
-    {
       "field_id": "fin05_visual_0069",
       "key": "⑩ 주(현) 사업자등록번호",
       "label": "⑩ 주(현) 사업자등록번호",
@@ -1373,46 +1330,6 @@
           748,
           511,
           95,
-          28
-        ],
-        "bbox_format": "xywh",
-        "anchor_text": "",
-        "basis": "전체 템플릿 이미지와 OCR/review anchor 위치를 함께 확인했다. crops는 확대 보조로만 취급한다."
-      },
-      "review_required": false,
-      "confidence": 0.86
-    },
-    {
-      "field_id": "fin05_visual_0074",
-      "key": "⑩ 합계 사업자등록번호",
-      "label": "⑩ 합계 사업자등록번호",
-      "semantic_path": "근무처별소득명세/합계/사업자등록번호",
-      "anchor_id": "visual_0074",
-      "value": "",
-      "label_anchor_ids": [
-        "det_000050",
-        "det_000041"
-      ],
-      "value_type": "money_krw",
-      "faker_rule": null,
-      "generator": null,
-      "style_class": "amount_cell",
-      "unit_policy": {
-        "unit": "KRW",
-        "include_unit_in_value": false,
-        "reason": "금액 표는 단위 표기가 별도 인쇄되어 있지 않지만 원천징수영수증 금액란의 관행상 숫자 원 단위 값을 기입하는 영역이다."
-      },
-      "research_evidence_ids": [
-        "web_nts_withholding_income",
-        "web_nts_payment_statement",
-        "visual_template_page_1"
-      ],
-      "visual_evidence": {
-        "source_image": "workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/근로소득원천징수영수증_page_001.jpg",
-        "anchor_bbox": [
-          890,
-          511,
-          121,
           28
         ],
         "bbox_format": "xywh",
@@ -2095,14 +2012,14 @@
       "label_anchor_ids": [
         "det_000073"
       ],
-      "value_type": "choice",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "choice_marker",
+      "style_class": "amount_cell",
       "unit_policy": {
-        "unit": "form_choice_code",
-        "include_unit_in_value": true,
-        "reason": "서식의 선택지는 라벨과 코드가 같은 값 영역에 보이므로 후속 faker pass에서 선택 표시/문구를 이 anchor 기준으로 결정한다."
+        "unit": "KRW",
+        "include_unit_in_value": false,
+        "reason": "주식매수선택권 행사이익의 근무처별 금액 칸이다."
       },
       "research_evidence_ids": [
         "web_nts_withholding_income",
@@ -2134,14 +2051,14 @@
       "label_anchor_ids": [
         "det_000073"
       ],
-      "value_type": "choice",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "choice_marker",
+      "style_class": "amount_cell",
       "unit_policy": {
-        "unit": "form_choice_code",
-        "include_unit_in_value": true,
-        "reason": "서식의 선택지는 라벨과 코드가 같은 값 영역에 보이므로 후속 faker pass에서 선택 표시/문구를 이 anchor 기준으로 결정한다."
+        "unit": "KRW",
+        "include_unit_in_value": false,
+        "reason": "주식매수선택권 행사이익의 근무처별 금액 칸이다."
       },
       "research_evidence_ids": [
         "web_nts_withholding_income",
@@ -2173,14 +2090,14 @@
       "label_anchor_ids": [
         "det_000073"
       ],
-      "value_type": "choice",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "choice_marker",
+      "style_class": "amount_cell",
       "unit_policy": {
-        "unit": "form_choice_code",
-        "include_unit_in_value": true,
-        "reason": "서식의 선택지는 라벨과 코드가 같은 값 영역에 보이므로 후속 faker pass에서 선택 표시/문구를 이 anchor 기준으로 결정한다."
+        "unit": "KRW",
+        "include_unit_in_value": false,
+        "reason": "주식매수선택권 행사이익의 근무처별 금액 칸이다."
       },
       "research_evidence_ids": [
         "web_nts_withholding_income",
@@ -2212,14 +2129,14 @@
       "label_anchor_ids": [
         "det_000073"
       ],
-      "value_type": "choice",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "choice_marker",
+      "style_class": "amount_cell",
       "unit_policy": {
-        "unit": "form_choice_code",
-        "include_unit_in_value": true,
-        "reason": "서식의 선택지는 라벨과 코드가 같은 값 영역에 보이므로 후속 faker pass에서 선택 표시/문구를 이 anchor 기준으로 결정한다."
+        "unit": "KRW",
+        "include_unit_in_value": false,
+        "reason": "주식매수선택권 행사이익의 근무처별 금액 칸이다."
       },
       "research_evidence_ids": [
         "web_nts_withholding_income",
@@ -2251,14 +2168,14 @@
       "label_anchor_ids": [
         "det_000073"
       ],
-      "value_type": "choice",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "choice_marker",
+      "style_class": "amount_cell",
       "unit_policy": {
-        "unit": "form_choice_code",
-        "include_unit_in_value": true,
-        "reason": "서식의 선택지는 라벨과 코드가 같은 값 영역에 보이므로 후속 faker pass에서 선택 표시/문구를 이 anchor 기준으로 결정한다."
+        "unit": "KRW",
+        "include_unit_in_value": false,
+        "reason": "주식매수선택권 행사이익 행의 합계 금액 칸이다."
       },
       "research_evidence_ids": [
         "web_nts_withholding_income",
@@ -3071,10 +2988,10 @@
         "det_000078",
         "det_000079"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3111,10 +3028,10 @@
         "det_000078",
         "det_000079"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3151,10 +3068,10 @@
         "det_000078",
         "det_000079"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3191,10 +3108,10 @@
         "det_000078",
         "det_000079"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3671,10 +3588,10 @@
         "det_000086",
         "det_000087"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3711,10 +3628,10 @@
         "det_000086",
         "det_000087"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3751,10 +3668,10 @@
         "det_000086",
         "det_000087"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3791,10 +3708,10 @@
         "det_000086",
         "det_000087"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3871,10 +3788,10 @@
         "det_000088",
         "det_000089"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3911,10 +3828,10 @@
         "det_000088",
         "det_000089"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3951,10 +3868,10 @@
         "det_000088",
         "det_000089"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -3991,10 +3908,10 @@
         "det_000088",
         "det_000089"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -4070,10 +3987,10 @@
       "label_anchor_ids": [
         "det_000091"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -4109,10 +4026,10 @@
       "label_anchor_ids": [
         "det_000091"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -4148,10 +4065,10 @@
       "label_anchor_ids": [
         "det_000091"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -4187,10 +4104,10 @@
       "label_anchor_ids": [
         "det_000091"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -5490,10 +5407,10 @@
         "det_000106",
         "det_000102"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -5649,10 +5566,10 @@
         "det_000106",
         "det_000102"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -5808,10 +5725,10 @@
         "det_000106",
         "det_000102"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
-      "style_class": "table_text_cell",
+      "style_class": "amount_cell",
       "unit_policy": {
         "unit": null,
         "include_unit_in_value": false,
@@ -5828,45 +5745,6 @@
           890,
           1325,
           121,
-          27
-        ],
-        "bbox_format": "xywh",
-        "anchor_text": "",
-        "basis": "전체 템플릿 이미지와 OCR/review anchor 위치를 함께 확인했다. crops는 확대 보조로만 취급한다."
-      },
-      "review_required": false,
-      "confidence": 0.86
-    },
-    {
-      "field_id": "fin05_visual_0237",
-      "key": "⑦③ 주(현)근무지 사업자등록번호",
-      "label": "⑦③ 주(현)근무지 사업자등록번호",
-      "semantic_path": "세액명세/⑦③ 주(현)근무지/사업자등록번호",
-      "anchor_id": "visual_0237",
-      "value": "",
-      "label_anchor_ids": [
-        "det_000115"
-      ],
-      "value_type": "business_reg_no",
-      "faker_rule": null,
-      "generator": null,
-      "style_class": "table_text_cell",
-      "unit_policy": {
-        "unit": null,
-        "include_unit_in_value": false,
-        "reason": "값 위치에 독립 단위 표기가 보이지 않는다."
-      },
-      "research_evidence_ids": [
-        "web_nts_withholding_income",
-        "web_nts_payment_statement",
-        "visual_template_page_1"
-      ],
-      "visual_evidence": {
-        "source_image": "workbench/documents/근로소득_원천징수영수증__FIN-05/samples/original/근로소득원천징수영수증_page_001.jpg",
-        "anchor_bbox": [
-          353,
-          1356,
-          119,
           27
         ],
         "bbox_format": "xywh",
@@ -6122,14 +6000,14 @@
       "label_anchor_ids": [
         "det_000019"
       ],
-      "value_type": "text",
+      "value_type": "choice",
       "faker_rule": null,
       "generator": null,
-      "style_class": "body_default",
+      "style_class": "choice_marker",
       "unit_policy": {
-        "unit": null,
+        "unit": "checkbox",
         "include_unit_in_value": false,
-        "reason": "값 위치에 독립 단위 표기가 보이지 않는다."
+        "reason": "문서 상단의 발행자 보고용 표시는 다른 보관용 구분과 같은 체크박스 선택지다."
       },
       "research_evidence_ids": [
         "web_nts_withholding_income",
@@ -7228,7 +7106,7 @@
       "label_anchor_ids": [
         "det_000053"
       ],
-      "value_type": "date_part",
+      "value_type": "non_applicable",
       "faker_rule": null,
       "generator": null,
       "style_class": "date_part_cell",
@@ -7255,6 +7133,10 @@
         "basis": "전체 템플릿 이미지와 OCR/review anchor 위치를 함께 확인했다. crops는 확대 보조로만 취급한다."
       },
       "review_required": false,
+      "render_policy": {
+        "render": false,
+        "reason": "합계 열의 근무기간 시작일은 실제 기입 또는 집계 대상이 아니다."
+      },
       "confidence": 0.86,
       "render_hint": "date_component_or_short_date"
     },
@@ -7268,7 +7150,7 @@
       "label_anchor_ids": [
         "det_000060"
       ],
-      "value_type": "date_part",
+      "value_type": "non_applicable",
       "faker_rule": null,
       "generator": null,
       "style_class": "date_part_cell",
@@ -7295,6 +7177,10 @@
         "basis": "전체 템플릿 이미지와 OCR/review anchor 위치를 함께 확인했다. crops는 확대 보조로만 취급한다."
       },
       "review_required": false,
+      "render_policy": {
+        "render": false,
+        "reason": "합계 열의 감면기간 시작일은 실제 기입 또는 집계 대상이 아니다."
+      },
       "confidence": 0.86,
       "render_hint": "date_component_or_short_date"
     },
@@ -7308,7 +7194,7 @@
       "label_anchor_ids": [
         "det_000053"
       ],
-      "value_type": "date_part",
+      "value_type": "non_applicable",
       "faker_rule": null,
       "generator": null,
       "style_class": "date_part_cell",
@@ -7335,6 +7221,10 @@
         "basis": "전체 템플릿 이미지와 OCR/review anchor 위치를 함께 확인했다. crops는 확대 보조로만 취급한다."
       },
       "review_required": false,
+      "render_policy": {
+        "render": false,
+        "reason": "합계 열의 근무기간 종료일은 실제 기입 또는 집계 대상이 아니다."
+      },
       "confidence": 0.86,
       "render_hint": "date_component_or_short_date"
     },
@@ -7348,7 +7238,7 @@
       "label_anchor_ids": [
         "det_000060"
       ],
-      "value_type": "date_part",
+      "value_type": "non_applicable",
       "faker_rule": null,
       "generator": null,
       "style_class": "date_part_cell",
@@ -7375,6 +7265,10 @@
         "basis": "전체 템플릿 이미지와 OCR/review anchor 위치를 함께 확인했다. crops는 확대 보조로만 취급한다."
       },
       "review_required": false,
+      "render_policy": {
+        "render": false,
+        "reason": "합계 열의 감면기간 종료일은 실제 기입 또는 집계 대상이 아니다."
+      },
       "confidence": 0.86,
       "render_hint": "date_component_or_short_date"
     },
@@ -7509,7 +7403,7 @@
         "det_000115",
         "det_000102"
       ],
-      "value_type": "text",
+      "value_type": "money_krw",
       "faker_rule": null,
       "generator": null,
       "style_class": "body_default",
@@ -7817,8 +7711,8 @@
     }
   ],
   "coverage": {
-    "use_anchor_count": 188,
-    "binding_count": 188,
+    "use_anchor_count": 187,
+    "binding_count": 187,
     "unmapped_use_anchors": [],
     "review_required_count": 5
   },

@@ -658,7 +658,7 @@ def _authoring_payload(schema: dict[str, Any], stylesheet: dict[str, Any], faker
         "supported_align": ["left", "center", "right"],
         "supported_valign": ["top", "middle", "bottom"],
         "supported_overflow": ["shrink", "clip", "allow", "wrap"],
-        "supported_checkbox_styles": ["v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot"],
+        "supported_checkbox_styles": ["v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot", "ellipse_mark"],
         "fonts": {"defaultFontId": default_font_id(), "items": list_font_faces()},
         "bbox_source": {"canonical": "review", "review_path": schema.get("source_review")},
     }
@@ -953,7 +953,7 @@ def _normalize_render_policy(value: Any) -> dict[str, str]:
     if overflow not in {"shrink", "clip", "allow", "wrap"}:
         overflow = "shrink"
     checkbox_style = str(raw.get("checkbox_style") or "v_mark").strip()
-    if checkbox_style not in {"v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot"}:
+    if checkbox_style not in {"v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot", "ellipse_mark"}:
         checkbox_style = "v_mark"
     fit_value = {"shrink": "shrink_to_fit", "clip": "clip", "allow": "allow_overflow", "wrap": "wrap"}[overflow]
     render_value = str(raw.get("render") if "render" in raw else raw.get("visible") if "visible" in raw else "true").strip().lower()

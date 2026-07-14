@@ -6,7 +6,7 @@ from datetime import date, datetime
 from pathlib import Path
 
 import pytest
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from datafactory.authoring import (
     authoring_review_prune_candidates,
@@ -435,6 +435,61 @@ def test_standalone_check_mark_styles_are_vector_drawn(tmp_path: Path) -> None:
     assert thin_dark > 0
     assert heavy_dark > thin_dark
     assert blank_dark == 0
+
+
+def test_ellipse_mark_preserves_template_text_and_uses_existing_style_adjustments(tmp_path: Path) -> None:
+    source = tmp_path / "ellipse_mark_base.png"
+    base = Image.new("RGB", (180, 90), "white")
+    base_draw = ImageDraw.Draw(base)
+    base_draw.rectangle((70, 35, 89, 44), fill=(210, 30, 30))
+    base.save(source)
+    field = FieldSpec(
+        name="selected",
+        bbox=BBox(40, 30, 80, 20),
+        type="bool.checkbox",
+        font_size=20,
+        color=(0, 0, 0),
+        baseline_shift=-3,
+        x_shift=5,
+        checkbox_style="ellipse_mark",
+        clear_background=True,
+    )
+    template = TemplateSpec(template_id="ellipse-mark", image_path=source, fields=[field])
+
+    checked_image, annotations = render_template(template, {"selected": "V"}, render_scale=1)
+    unchecked_image, unchecked_annotations = render_template(template, {"selected": ""}, render_scale=1)
+
+    assert FieldSpec.from_dict(field.to_dict()).checkbox_style == "ellipse_mark"
+    assert len(annotations) == 1
+    assert annotations[0].text == "V"
+    assert annotations[0].bbox == BBox(40, 24, 90, 26)
+    assert annotations[0].requested_bbox == BBox(40, 30, 80, 20)
+    assert checked_image.getpixel((85, 24)) == (0, 0, 0)
+    assert checked_image.getpixel((70, 39)) == (210, 30, 30)
+    assert unchecked_annotations == []
+    assert unchecked_image.tobytes() == base.tobytes()
+
+
+def test_authoring_preserves_ellipse_mark_as_supported_checkbox_style(tmp_path: Path) -> None:
+    review, base = _write_review(tmp_path)
+    draft = draft_authoring_bundle(review, base_image_path=base, out_dir=tmp_path / "authoring")
+    loaded = load_authoring_bundle(draft.schema, draft.stylesheet, draft.faker_profile).payload
+    schema = loaded["schema"]
+    schema["fields"][0]["value_type"] = "bool.checkbox"
+    schema["fields"][0]["render_policy"]["checkbox_style"] = "ellipse_mark"
+
+    saved = save_authoring_bundle(
+        draft.schema,
+        draft.stylesheet,
+        draft.faker_profile,
+        schema=schema,
+        stylesheet=loaded["stylesheet"],
+        faker_profile=loaded["faker_profile"],
+    )
+    reloaded = load_authoring_bundle(saved.schema, saved.stylesheet, saved.faker_profile).payload
+
+    assert reloaded["schema"]["fields"][0]["render_policy"]["checkbox_style"] == "ellipse_mark"
+    assert "ellipse_mark" in reloaded["supported_checkbox_styles"]
 
 
 def test_update_authoring_source_inpainted_only_for_matching_page(tmp_path: Path) -> None:

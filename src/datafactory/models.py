@@ -8,7 +8,7 @@ BBoxFormat = Literal["xywh"]
 Align = Literal["left", "center", "right"]
 Valign = Literal["top", "middle", "bottom"]
 Overflow = Literal["shrink", "clip", "allow", "wrap"]
-CheckboxStyle = Literal["v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot"]
+CheckboxStyle = Literal["v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot", "ellipse_mark"]
 
 
 @dataclass(frozen=True)
@@ -243,6 +243,6 @@ def _rgb_tuple(value: Any, name: str) -> tuple[int, int, int]:
 
 def _checkbox_style(value: Any) -> CheckboxStyle:
     text = str(value or "v_mark")
-    if text in {"v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot"}:
+    if text in {"v_mark", "check_mark", "heavy_check_mark", "symbol_box", "filled_box", "dot", "ellipse_mark"}:
         return text  # type: ignore[return-value]
     return "v_mark"

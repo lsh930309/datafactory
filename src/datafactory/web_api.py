@@ -838,6 +838,19 @@ def authoring_agent_request_payload(payload: dict[str, Any]) -> dict[str, Any]:
     latest_review = str(request["inputs"].get("latestReview") or "")
     if latest_review:
         try:
+            resolved_review = _resolve_workspace_path(latest_review)
+            baseline_path = request_dir / "review_baseline.json"
+            shutil.copy2(resolved_review, baseline_path)
+            baseline_policy = load_review_policy(baseline_path)
+            request["inputs"]["reviewBaseline"] = {
+                "path": _display_path(baseline_path, ROOT),
+                "sha256": file_sha256(baseline_path),
+                "useCount": sum(label.status == "use" for label in baseline_policy.labels),
+            }
+            generated_sidecars["reviewBaseline"] = _display_path(baseline_path, ROOT)
+        except Exception as exc:
+            generated_sidecars["reviewBaselineError"] = str(exc)
+        try:
             anchor_map_path = request_dir / "anchor_map_draft.json"
             review_anchor_map(_resolve_workspace_path(latest_review), out_path=anchor_map_path, doc_id=doc_id, title=doc.title)
             generated_sidecars["anchorMapDraft"] = _display_path(anchor_map_path, ROOT)
@@ -1082,16 +1095,634 @@ def cancel_authoring_agent_run_payload(payload: dict[str, Any]) -> dict[str, Any
     return _agent_job_payload(job_path)
 
 
-def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, Any]:
-    doc_id = str(payload.get("docId") or "")
-    if not doc_id:
-        raise ValueError("docId is required")
-    request_path_value = str(payload.get("requestPath") or "")
+def _authoring_agent_request_path(payload: dict[str, Any], doc_id: str) -> Path:
+    request_path_value = str(payload.get("requestPath") or "").strip()
     if request_path_value:
         request_path = _resolve_workspace_path(request_path_value)
     else:
         run_status = authoring_agent_run_status_payload({"docId": doc_id})
         request_path = _resolve_workspace_path(str(run_status.get("requestPath") or ""))
+    expected_root = (workbench_subdir(doc_id, "authoring") / "agent_requests").resolve()
+    request_path = request_path.resolve()
+    if request_path.name != "request.json" or request_path.parent.parent != expected_root:
+        raise ValueError("invalid authoring agent requestPath")
+    if not request_path.exists():
+        raise FileNotFoundError(request_path)
+    return request_path
+
+
+def _bbox_list(value: Any) -> list[int] | None:
+    if not isinstance(value, (list, tuple)) or len(value) != 4:
+        return None
+    try:
+        bbox = [int(round(float(item))) for item in value]
+    except (TypeError, ValueError):
+        return None
+    return bbox if bbox[2] > 0 and bbox[3] > 0 else None
+
+
+def _authoring_agent_baseline_labels(request_dir: Path, request: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], str]:
+    baseline_value = str(((request.get("inputs") or {}).get("reviewBaseline") or {}).get("path") or "")
+    candidates = [_resolve_workspace_path(baseline_value)] if baseline_value else []
+    candidates.append(request_dir / "review_baseline.json")
+    for path in candidates:
+        if not path.exists():
+            continue
+        policy = load_review_policy(path)
+        return {label.id: label.to_dict() for label in policy.labels if label.status == "use"}, _display_path(path, ROOT)
+    visual_manifest_path = request_dir / "visual_evidence_manifest.json"
+    if visual_manifest_path.exists():
+        manifest = json.loads(visual_manifest_path.read_text(encoding="utf-8"))
+        labels = {
+            str(item.get("anchor_id") or ""): {
+                "id": str(item.get("anchor_id") or ""),
+                "text": str(item.get("text") or ""),
+                "bbox": _bbox_list(item.get("bbox")),
+                "status": "use",
+                "auto_type": str(item.get("auto_type") or "field_value"),
+            }
+            for item in manifest.get("crops", [])
+            if isinstance(item, dict) and str(item.get("anchor_id") or "") and _bbox_list(item.get("bbox"))
+        }
+        return labels, _display_path(visual_manifest_path, ROOT)
+    return {}, ""
+
+
+def _existing_authoring_fields_by_anchor(doc_id: str) -> dict[str, list[dict[str, Any]]]:
+    schema_path = workbench_subdir(doc_id, "authoring") / "schema.json"
+    if not schema_path.exists():
+        return {}
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    result: dict[str, list[dict[str, Any]]] = {}
+    for field in schema.get("fields", []) if isinstance(schema.get("fields"), list) else []:
+        if not isinstance(field, dict):
+            continue
+        anchor_id = str(field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+        if anchor_id:
+            result.setdefault(anchor_id, []).append(field)
+    return result
+
+
+def _authoring_agent_conflict(
+    conflict_type: str,
+    common: dict[str, Any],
+    *,
+    recommended: str,
+    actions: list[tuple[str, str]],
+) -> dict[str, Any]:
+    messages = {
+        "deleted_in_review_present_in_draft": "BBox 리뷰에서 삭제됐지만 Agent draft에는 남아 있습니다.",
+        "agent_added_bbox": "Agent draft가 현재 BBox 리뷰에 없는 영역을 추가했습니다.",
+        "present_in_review_missing_in_draft": "BBox 리뷰에는 있지만 Agent draft에서 누락된 영역입니다.",
+        "added_in_review_missing_in_draft": "Agent 실행 후 BBox 리뷰에 새로 추가된 영역입니다.",
+        "bbox_geometry_changed": "동일한 BBox ID의 좌표가 리뷰와 Agent draft에서 다릅니다.",
+    }
+    review = common.get("review") if isinstance(common.get("review"), dict) else {}
+    draft = common.get("draft") if isinstance(common.get("draft"), dict) else {}
+    baseline = common.get("baseline") if isinstance(common.get("baseline"), dict) else {}
+    canvas_bbox = _bbox_list(review.get("bbox")) or _bbox_list(draft.get("bbox")) or _bbox_list(baseline.get("bbox"))
+    anchor_id = str(common.get("bboxLabelId") or "")
+    return {
+        "id": f"{conflict_type}:{anchor_id}",
+        "type": conflict_type,
+        **common,
+        "message": messages.get(conflict_type, "BBox source 사이의 변경을 확인해야 합니다."),
+        "recommendedAction": recommended,
+        "actions": [{"id": action_id, "label": label} for action_id, label in actions],
+        "canvasBbox": canvas_bbox,
+    }
+
+
+def _authoring_agent_preflight_token(review_path: Path | None, request_dir: Path) -> str:
+    digest = hashlib.sha256()
+    for path in [review_path, *[request_dir / name for name in ("request.json", "schema_draft.json", "anchor_map_draft.json", "stylesheet_draft.json", "faker_profile_draft.json")]]:
+        digest.update(str(path or "").encode("utf-8"))
+        digest.update(b"\0")
+        if path is not None and path.exists():
+            digest.update(path.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def _copy_path_for_backup(source: Path, backup_root: Path, key: str) -> Path | None:
+    if not source.exists():
+        return None
+    target = backup_root / key
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if source.is_dir():
+        shutil.copytree(source, target)
+    else:
+        shutil.copy2(source, target)
+    return target
+
+
+def _backup_authoring_agent_conflict_apply(doc_id: str, request_path: Path, review_path: Path) -> dict[Path, Path | None]:
+    authoring_dir = workbench_subdir(doc_id, "authoring")
+    backup_root = authoring_dir / "backups" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ") / "agent_bbox_reconciliation"
+    manifest_path = authoring_dir.parent / "manifest.json"
+    paths = [
+        request_path.parent / "schema_draft.json",
+        request_path.parent / "anchor_map_draft.json",
+        request_path.parent / "stylesheet_draft.json",
+        request_path.parent / "faker_profile_draft.json",
+        request_path.parent / "bbox_reconciliation.json",
+        authoring_dir / "schema.json",
+        authoring_dir / "semantic_schema.json",
+        authoring_dir / "stylesheet.json",
+        authoring_dir / "faker_profile.json",
+        authoring_dir / "review_sidecars",
+        authoring_dir / "agent_applied_reviews" / request_path.parent.name,
+        review_path,
+        review_path.parent / "review_overlay.png",
+        manifest_path,
+    ]
+    result: dict[Path, Path | None] = {}
+    for index, path in enumerate(paths):
+        resolved = path.resolve()
+        if resolved in result:
+            continue
+        result[resolved] = _copy_path_for_backup(resolved, backup_root, f"{index:02d}_{resolved.name}")
+    return result
+
+
+def _restore_authoring_agent_conflict_apply(backup: dict[Path, Path | None]) -> None:
+    for target, source in reversed(list(backup.items())):
+        if target.exists():
+            if target.is_dir():
+                shutil.rmtree(target)
+            else:
+                target.unlink()
+        if source is None:
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if source.is_dir():
+            shutil.copytree(source, target)
+        else:
+            shutil.copy2(source, target)
+
+
+def _semantic_schema_delete_leaf(root: dict[str, Any], path: list[str]) -> None:
+    if not path:
+        return
+    cursor: Any = root
+    parents: list[tuple[dict[str, Any], str]] = []
+    for part in path[:-1]:
+        if not isinstance(cursor, dict) or not isinstance(cursor.get(part), dict):
+            return
+        parents.append((cursor, part))
+        cursor = cursor[part]
+    if not isinstance(cursor, dict):
+        return
+    cursor.pop(path[-1], None)
+    for parent, key in reversed(parents):
+        child = parent.get(key)
+        if isinstance(child, dict) and not child:
+            parent.pop(key, None)
+        else:
+            break
+
+
+def _json_contains_string(value: Any, needles: set[str]) -> bool:
+    if isinstance(value, dict):
+        return any(_json_contains_string(item, needles) for item in value.values())
+    if isinstance(value, list):
+        return any(_json_contains_string(item, needles) for item in value)
+    return isinstance(value, str) and value in needles
+
+
+def _draft_anchor_from_review_label(label: dict[str, Any]) -> dict[str, Any]:
+    anchor_id = str(label.get("id") or "")
+    return {
+        "anchor_id": anchor_id,
+        "source": "bbox_review_reconciliation",
+        "text": str(label.get("text") or ""),
+        "bbox": _bbox_list(label.get("bbox")),
+        "bbox_format": "xywh",
+        "status": "use",
+        "auto_type": str(label.get("auto_type") or "field_value"),
+        "text_source": str(label.get("text_source") or "bbox_review"),
+        "role": "value_region",
+        "suggested_schema_key": str(label.get("text") or anchor_id),
+        "confidence": label.get("confidence"),
+        "mapping_status": "review_required",
+    }
+
+
+def _review_label_from_draft_anchor(anchor: dict[str, Any]) -> dict[str, Any]:
+    anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "")
+    bbox = _bbox_list(anchor.get("bbox"))
+    if not anchor_id or bbox is None:
+        raise ValueError("agent bbox cannot be restored without anchor_id and bbox")
+    x, y, width, height = bbox
+    text = str(anchor.get("text") or anchor.get("suggested_schema_key") or anchor_id)
+    auto_type = str(anchor.get("auto_type") or anchor.get("type") or "field_value")
+    if auto_type not in {"field_value", "static_label", "table_cell", "long_paragraph", "header_footer", "stamp_or_seal", "watermark", "unknown"}:
+        auto_type = "unknown"
+    return {
+        "id": anchor_id,
+        "text": text,
+        "confidence": anchor.get("confidence"),
+        "bbox": bbox,
+        "bbox_format": "xywh",
+        "polygon": [[x, y], [x + width, y], [x + width, y + height], [x, y + height]],
+        "status": "use",
+        "auto_type": auto_type,
+        "reason": "authoring agent bbox reconciliation",
+        "locked": False,
+        "notes": "Agent draft 적용 전 사용자 승인으로 canonical review에 반영됨",
+        "original_text": text,
+        "original_confidence": anchor.get("confidence"),
+        "text_source": str(anchor.get("text_source") or anchor.get("source") or "authoring_agent_anchor_map"),
+        "ocr_text_stale": False,
+        "rec_text": "",
+        "rec_confidence": None,
+        "rec_engine": "",
+        "rec_updated_at": "",
+        "render_mode": str(anchor.get("render_mode") or "printed") if str(anchor.get("render_mode") or "printed") in {"printed", "handwriting"} else "printed",
+    }
+
+
+def _remove_anchor_from_agent_drafts(
+    anchor_id: str,
+    schema: dict[str, Any],
+    anchor_map: dict[str, Any],
+    stylesheet: dict[str, Any],
+    faker_profile: dict[str, Any],
+) -> None:
+    fields = _schema_draft_bindings(schema) or []
+    removed = [
+        field for field in fields
+        if isinstance(field, dict)
+        and str(field.get("anchor_id") or field.get("bbox_label_id") or field.get("source_detection_id") or "") == anchor_id
+    ]
+    removed_field_ids = {str(field.get("field_id") or "") for field in removed if str(field.get("field_id") or "")}
+    removed_paths = {_binding_semantic_path(field) for field in removed if _binding_semantic_path(field)}
+    kept = [field for field in fields if field not in removed]
+    if isinstance(schema.get("fields"), list):
+        schema["fields"] = kept
+    else:
+        schema["field_bindings"] = kept
+    active_paths = {_binding_semantic_path(field) for field in kept if isinstance(field, dict) and _binding_semantic_path(field)}
+    semantic_schema = schema.get("semantic_schema") if isinstance(schema.get("semantic_schema"), dict) else {}
+    for semantic_path in removed_paths - active_paths:
+        _semantic_schema_delete_leaf(semantic_schema, [part for part in semantic_path.split("/") if part])
+    anchor_map["anchors"] = [
+        anchor for anchor in anchor_map.get("anchors", [])
+        if not isinstance(anchor, dict) or str(anchor.get("anchor_id") or anchor.get("id") or "") != anchor_id
+    ]
+    field_styles = stylesheet.get("field_styles")
+    if isinstance(field_styles, list):
+        stylesheet["field_styles"] = [item for item in field_styles if not isinstance(item, dict) or str(item.get("field_id") or "") not in removed_field_ids]
+    elif isinstance(field_styles, dict):
+        stylesheet["field_styles"] = {key: value for key, value in field_styles.items() if str(key) not in removed_field_ids}
+    generators = faker_profile.get("field_generators") if isinstance(faker_profile.get("field_generators"), dict) else {}
+    faker_profile["field_generators"] = {key: value for key, value in generators.items() if str(key) not in removed_field_ids}
+    field_rules = faker_profile.get("field_rules")
+    if isinstance(field_rules, dict):
+        faker_profile["field_rules"] = {key: value for key, value in field_rules.items() if str(key) not in removed_field_ids}
+    elif isinstance(field_rules, list):
+        faker_profile["field_rules"] = [item for item in field_rules if not _json_contains_string(item, removed_field_ids)]
+    for key in ("constraints", "scenario_rules"):
+        value = faker_profile.get(key)
+        if isinstance(value, list):
+            faker_profile[key] = [item for item in value if not _json_contains_string(item, removed_field_ids)]
+        elif isinstance(value, dict):
+            faker_profile[key] = {item_key: item for item_key, item in value.items() if not _json_contains_string(item, removed_field_ids)}
+
+
+def _apply_authoring_agent_bbox_resolutions(preflight: dict[str, Any], resolutions: dict[str, Any]) -> None:
+    request_path = _resolve_workspace_path(str(preflight.get("requestPath") or ""))
+    review_path = _resolve_workspace_path(str(preflight.get("reviewPath") or ""))
+    request_dir = request_path.parent
+    schema_path = request_dir / "schema_draft.json"
+    anchor_map_path = request_dir / "anchor_map_draft.json"
+    stylesheet_path = request_dir / "stylesheet_draft.json"
+    faker_path = request_dir / "faker_profile_draft.json"
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    anchor_map = json.loads(anchor_map_path.read_text(encoding="utf-8"))
+    stylesheet = json.loads(stylesheet_path.read_text(encoding="utf-8"))
+    faker_profile = json.loads(faker_path.read_text(encoding="utf-8"))
+    review_raw = json.loads(review_path.read_text(encoding="utf-8"))
+    labels = [item for item in review_raw.get("labels", []) if isinstance(item, dict)]
+    labels_by_id = {str(item.get("id") or ""): item for item in labels if str(item.get("id") or "")}
+    anchors = [item for item in anchor_map.get("anchors", []) if isinstance(item, dict)]
+    anchors_by_id = {str(item.get("anchor_id") or item.get("id") or ""): item for item in anchors if str(item.get("anchor_id") or item.get("id") or "")}
+
+    for conflict in preflight.get("conflicts", []):
+        if not isinstance(conflict, dict):
+            continue
+        conflict_id = str(conflict.get("id") or "")
+        action = str(resolutions.get(conflict_id) or "")
+        allowed = {str(item.get("id") or "") for item in conflict.get("actions", []) if isinstance(item, dict)}
+        if action not in allowed:
+            raise ValueError(f"invalid resolution for {conflict_id}: {action}")
+        anchor_id = str(conflict.get("bboxLabelId") or "")
+        current = conflict.get("review") if isinstance(conflict.get("review"), dict) else None
+        draft = anchors_by_id.get(anchor_id) or (conflict.get("draft") if isinstance(conflict.get("draft"), dict) else None)
+        if action in {"keep_review_deletion", "discard_agent_bbox"}:
+            _remove_anchor_from_agent_drafts(anchor_id, schema, anchor_map, stylesheet, faker_profile)
+            anchors_by_id.pop(anchor_id, None)
+        elif action == "remove_review_bbox":
+            labels = [item for item in labels if str(item.get("id") or "") != anchor_id]
+            labels_by_id.pop(anchor_id, None)
+        elif action == "restore_to_authoring":
+            if current is None:
+                raise ValueError(f"review bbox is unavailable for {anchor_id}")
+            restored_anchor = _draft_anchor_from_review_label(current)
+            anchor_map.setdefault("anchors", []).append(restored_anchor)
+            anchors_by_id[anchor_id] = restored_anchor
+        elif action in {"restore_agent_bbox", "use_agent_bbox"}:
+            if draft is None:
+                raise ValueError(f"agent bbox is unavailable for {anchor_id}")
+            restored_label = _review_label_from_draft_anchor(draft)
+            if anchor_id in labels_by_id:
+                index = next(index for index, item in enumerate(labels) if str(item.get("id") or "") == anchor_id)
+                labels[index] = restored_label
+            else:
+                labels.append(restored_label)
+            labels_by_id[anchor_id] = restored_label
+        elif action == "use_review_bbox":
+            if current is None or draft is None:
+                raise ValueError(f"review or agent bbox is unavailable for {anchor_id}")
+            draft["bbox"] = _bbox_list(current.get("bbox"))
+            draft["bbox_format"] = "xywh"
+            for field in _schema_draft_bindings(schema) or []:
+                if isinstance(field, dict) and str(field.get("anchor_id") or "") == anchor_id:
+                    evidence = field.get("visual_evidence") if isinstance(field.get("visual_evidence"), dict) else {}
+                    evidence["anchor_bbox"] = _bbox_list(current.get("bbox"))
+                    evidence["bbox_format"] = "xywh"
+                    field["visual_evidence"] = evidence
+
+    review_raw["labels"] = labels
+    policy = ReviewPolicy.from_dict(review_raw, base_dir=review_path.parent)
+    if policy.source_image.exists():
+        write_review_policy(policy, review_path.parent)
+    else:
+        review_path.write_text(json.dumps(policy.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    schema["source_review"] = _display_path(review_path, ROOT)
+    anchor_map["source_review"] = _display_path(review_path, ROOT)
+    schema_path.write_text(json.dumps(schema, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    anchor_map_path.write_text(json.dumps(anchor_map, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    stylesheet_path.write_text(json.dumps(stylesheet, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    faker_path.write_text(json.dumps(faker_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    _ensure_use_anchor_placeholders(
+        {
+            "schema_draft.json": schema,
+            "anchor_map_draft.json": anchor_map,
+            "faker_profile_draft.json": faker_profile,
+        },
+        request_dir,
+    )
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    anchor_map = json.loads(anchor_map_path.read_text(encoding="utf-8"))
+    fields_by_anchor = {
+        str(field.get("anchor_id") or ""): field
+        for field in _schema_draft_bindings(schema) or []
+        if isinstance(field, dict) and str(field.get("anchor_id") or "")
+    }
+    for anchor in anchor_map.get("anchors", []):
+        if not isinstance(anchor, dict):
+            continue
+        field = fields_by_anchor.get(str(anchor.get("anchor_id") or ""))
+        if field is not None:
+            anchor["mapped_field_id"] = str(field.get("field_id") or "")
+            anchor["semantic_path"] = _binding_semantic_path(field)
+            anchor["mapping_status"] = "mapped"
+    use_count = sum(str(anchor.get("status") or "").lower() == "use" for anchor in anchor_map.get("anchors", []) if isinstance(anchor, dict))
+    anchor_map["coverage_summary"] = {"total_use_anchors": use_count, "mapped_use_anchors": use_count, "unmapped_use_anchors": 0, "coverage_ratio": 1.0}
+    schema["coverage"] = {"total_use_anchors": use_count, "mapped_use_anchors": use_count, "unmapped_use_anchors": 0, "coverage_ratio": 1.0}
+    schema_path.write_text(json.dumps(schema, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    anchor_map_path.write_text(json.dumps(anchor_map, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    reconciliation_path = request_dir / "bbox_reconciliation.json"
+    reconciliation_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "resolved_at": _utc_now(),
+                "preflight_token": preflight.get("preflightToken"),
+                "review_path": preflight.get("reviewPath"),
+                "resolutions": resolutions,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ) + "\n",
+        encoding="utf-8",
+    )
+    doc_id = str(preflight.get("docId") or "")
+    update_manifest_artifact(doc_id, "review", review_path)
+    update_manifest_artifact(doc_id, "authoring_agent_bbox_reconciliation", reconciliation_path)
+    _write_review_sidecar_drafts(doc_id, review_path, load_review_policy(review_path))
+
+
+def _agent_anchor_map_matches_review(anchor_map: dict[str, Any], review_path: Path | None) -> bool:
+    if review_path is None or not review_path.exists():
+        return False
+    policy = load_review_policy(review_path)
+    review_use = {label.id: label.bbox.to_list() for label in policy.labels if label.status == "use"}
+    draft_use = {
+        str(anchor.get("anchor_id") or anchor.get("id") or ""): _bbox_list(anchor.get("bbox"))
+        for anchor in anchor_map.get("anchors", [])
+        if isinstance(anchor, dict) and str(anchor.get("status") or "use").strip().lower() == "use" and str(anchor.get("anchor_id") or anchor.get("id") or "")
+    }
+    return review_use == draft_use and all(bbox is not None for bbox in draft_use.values())
+
+
+def preflight_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "").strip()
+    if not doc_id:
+        raise ValueError("docId is required")
+    request_path = _authoring_agent_request_path(payload, doc_id)
+    request_dir = request_path.parent
+    schema_path = request_dir / "schema_draft.json"
+    anchor_map_path = request_dir / "anchor_map_draft.json"
+    for required in (schema_path, anchor_map_path):
+        if not required.exists():
+            raise FileNotFoundError(required)
+
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    anchor_map = json.loads(anchor_map_path.read_text(encoding="utf-8"))
+    registry = load_registry()
+    item = next((candidate for candidate in list_work_items(registry=registry) if candidate.get("docId") == doc_id), None)
+    review_value = str(
+        (item or {}).get("latestReview")
+        or (request.get("inputs") or {}).get("latestReview")
+        or anchor_map.get("source_review")
+        or schema.get("source_review")
+        or ""
+    )
+    review_path = _resolve_workspace_path(review_value) if review_value else None
+    current_labels: dict[str, dict[str, Any]] = {}
+    current_use: dict[str, dict[str, Any]] = {}
+    source_image = str(anchor_map.get("source_image") or schema.get("source_image") or "")
+    warnings: list[dict[str, Any]] = []
+    review_available = review_path is not None and review_path.exists()
+    if review_available:
+        policy = load_review_policy(review_path)
+        current_labels = {label.id: label.to_dict() for label in policy.labels}
+        current_use = {label_id: label for label_id, label in current_labels.items() if label.get("status") == "use"}
+        source_image = _display_path(policy.source_image, ROOT)
+    else:
+        warnings.append({"code": "authoring_agent_current_review_missing", "message": "current canonical bbox review is unavailable; agent anchors cannot be reconciled"})
+
+    baseline, baseline_source = _authoring_agent_baseline_labels(request_dir, request)
+    draft_anchors = {
+        str(anchor.get("anchor_id") or ""): anchor
+        for anchor in anchor_map.get("anchors", [])
+        if isinstance(anchor, dict) and str(anchor.get("anchor_id") or "").strip() and str(anchor.get("status") or "use").strip().lower() == "use"
+    }
+    draft_fields_by_anchor: dict[str, list[dict[str, Any]]] = {}
+    for field in _schema_draft_bindings(schema) or []:
+        if not isinstance(field, dict):
+            continue
+        anchor_id = str(field.get("anchor_id") or field.get("bbox_label_id") or field.get("source_detection_id") or "").strip()
+        if anchor_id:
+            draft_fields_by_anchor.setdefault(anchor_id, []).append(field)
+    existing_fields_by_anchor = _existing_authoring_fields_by_anchor(doc_id)
+
+    conflicts: list[dict[str, Any]] = []
+    all_ids = sorted(set(current_use) | set(draft_anchors)) if review_available else []
+    for anchor_id in all_ids:
+        current = current_use.get(anchor_id)
+        draft = draft_anchors.get(anchor_id)
+        baseline_label = baseline.get(anchor_id)
+        fields = draft_fields_by_anchor.get(anchor_id) or existing_fields_by_anchor.get(anchor_id) or []
+        field = fields[0] if fields else {}
+        common = {
+            "bboxLabelId": anchor_id,
+            "fieldId": str(field.get("field_id") or ""),
+            "label": str(field.get("label") or field.get("key") or anchor_id),
+            "semanticPath": _binding_semantic_path(field),
+            "review": current,
+            "draft": draft,
+            "baseline": baseline_label,
+        }
+        if draft is not None and current is None:
+            if baseline_label is not None:
+                conflicts.append(
+                    _authoring_agent_conflict(
+                        "deleted_in_review_present_in_draft",
+                        common,
+                        recommended="keep_review_deletion",
+                        actions=[
+                            ("keep_review_deletion", "리뷰의 삭제 유지"),
+                            ("restore_agent_bbox", "Agent BBox를 리뷰에 복구"),
+                        ],
+                    )
+                )
+            else:
+                conflicts.append(
+                    _authoring_agent_conflict(
+                        "agent_added_bbox",
+                        common,
+                        recommended="restore_agent_bbox",
+                        actions=[
+                            ("restore_agent_bbox", "Agent BBox를 리뷰에 추가"),
+                            ("discard_agent_bbox", "Agent BBox를 draft에서 제외"),
+                        ],
+                    )
+                )
+            continue
+        if current is not None and draft is None:
+            conflict_type = "present_in_review_missing_in_draft" if baseline_label is not None else "added_in_review_missing_in_draft"
+            conflicts.append(
+                _authoring_agent_conflict(
+                    conflict_type,
+                    common,
+                    recommended="restore_to_authoring",
+                    actions=[
+                        ("restore_to_authoring", "리뷰 BBox를 Authoring에 복원"),
+                        ("remove_review_bbox", "BBox를 리뷰에서도 삭제"),
+                    ],
+                )
+            )
+            continue
+        if current is not None and draft is not None and _bbox_list(current.get("bbox")) != _bbox_list(draft.get("bbox")):
+            conflicts.append(
+                _authoring_agent_conflict(
+                    "bbox_geometry_changed",
+                    common,
+                    recommended="use_review_bbox",
+                    actions=[
+                        ("use_review_bbox", "리뷰 좌표 사용"),
+                        ("use_agent_bbox", "Agent 좌표 사용"),
+                    ],
+                )
+            )
+
+    token = _authoring_agent_preflight_token(review_path, request_dir)
+    return {
+        "docId": doc_id,
+        "requestPath": _display_path(request_path, ROOT),
+        "reviewPath": _display_path(review_path, ROOT) if review_path is not None else "",
+        "sourceImage": source_image,
+        "baselineSource": baseline_source,
+        "preflightToken": token,
+        "ready": not conflicts,
+        "conflicts": conflicts,
+        "warnings": warnings,
+        "summary": {
+            "canonicalUseCount": len(current_use),
+            "draftUseCount": len(draft_anchors),
+            "conflictCount": len(conflicts),
+            "resolvedCount": 0,
+        },
+    }
+
+
+def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "").strip()
+    if not doc_id:
+        raise ValueError("docId is required")
+    preflight = preflight_authoring_agent_drafts_payload(payload)
+    conflicts = preflight.get("conflicts") if isinstance(preflight.get("conflicts"), list) else []
+    resolutions = payload.get("resolutions") if isinstance(payload.get("resolutions"), dict) else {}
+    backup: dict[Path, Path | None] | None = None
+    if conflicts:
+        expected_token = str(payload.get("preflightToken") or "")
+        if not expected_token or expected_token != str(preflight.get("preflightToken") or ""):
+            raise ValueError("authoring agent bbox conflicts changed; run preflight again")
+        unresolved = [conflict for conflict in conflicts if str(conflict.get("id") or "") not in resolutions]
+        if unresolved:
+            raise ValueError(f"authoring agent bbox conflicts require resolution ({len(unresolved)} unresolved)")
+        backup = _backup_authoring_agent_conflict_apply(doc_id, _resolve_workspace_path(preflight["requestPath"]), _resolve_workspace_path(preflight["reviewPath"]))
+        try:
+            _apply_authoring_agent_bbox_resolutions(preflight, resolutions)
+            authoring_dir = workbench_subdir(doc_id, "authoring")
+            review_policy = load_review_policy(_resolve_workspace_path(str(preflight["reviewPath"])))
+            prune_authoring_fields_by_review(
+                authoring_dir / "schema.json",
+                authoring_dir / "stylesheet.json",
+                authoring_dir / "faker_profile.json",
+                policy=review_policy,
+            )
+            validation = _validate_authoring_agent_outputs(_resolve_workspace_path(preflight["requestPath"]).parent)
+            if not validation["ready"]:
+                first = (validation.get("contractErrors") or validation.get("invalidJson") or [{"code": "unknown"}])[0]
+                raise ValueError(f"authoring agent reconciled draft validation failed: {first.get('code') or first.get('name')}")
+        except Exception:
+            _restore_authoring_agent_conflict_apply(backup)
+            raise
+    try:
+        result = _apply_authoring_agent_drafts_core(payload)
+    except Exception:
+        if backup is not None:
+            _restore_authoring_agent_conflict_apply(backup)
+        raise
+    result["bboxReconciliation"] = {
+        "preflightToken": preflight.get("preflightToken"),
+        "conflictCount": len(conflicts),
+        "resolvedCount": len(conflicts),
+        "resolutions": resolutions,
+    }
+    return result
+
+
+def _apply_authoring_agent_drafts_core(payload: dict[str, Any]) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "")
+    if not doc_id:
+        raise ValueError("docId is required")
+    request_path = _authoring_agent_request_path(payload, doc_id)
     request_dir = request_path.parent
     schema_draft_path = request_dir / "schema_draft.json"
     stylesheet_draft_path = request_dir / "stylesheet_draft.json"
@@ -1132,15 +1763,20 @@ def apply_authoring_agent_drafts_payload(payload: dict[str, Any]) -> dict[str, A
         )
     applied_review_path: Path | None = None
     if isinstance(anchor_map, dict) and isinstance(anchor_map.get("anchors"), list):
-        applied_review_path = _write_authoring_agent_anchor_review(
-            doc_id,
-            request_dir,
-            anchor_map,
-            source_review=source_review,
-            source_image=source_image,
-        )
-        schema["source_review"] = str(applied_review_path.resolve())
-        schema["bbox_source"] = {"canonical": "review", "review_path": str(applied_review_path.resolve())}
+        canonical_review_path = _resolve_workspace_path(source_review) if source_review else None
+        if _agent_anchor_map_matches_review(anchor_map, canonical_review_path):
+            schema["source_review"] = str(canonical_review_path.resolve())
+            schema["bbox_source"] = {"canonical": "review", "review_path": str(canonical_review_path.resolve())}
+        else:
+            applied_review_path = _write_authoring_agent_anchor_review(
+                doc_id,
+                request_dir,
+                anchor_map,
+                source_review=source_review,
+                source_image=source_image,
+            )
+            schema["source_review"] = str(applied_review_path.resolve())
+            schema["bbox_source"] = {"canonical": "review", "review_path": str(applied_review_path.resolve())}
         schema["anchor_map_ref"] = _display_path(anchor_map_path, ROOT)
     style_remap: dict[str, Any] | None = None
     if existing_schema is not None and existing_stylesheet_path.exists():
@@ -4319,6 +4955,9 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 approval = result["approval"]
                 approval = {**approval, "path": _display_path(approval["path"], ROOT), "request": _display_path(approval["request"], ROOT), "copied": [{**item, "path": _display_path(item["path"], ROOT)} for item in approval.get("copied", [])]}
                 self._send_json({**result, "library": _display_path(result["library"], ROOT), "index": _display_path(result["index"], ROOT), "approval": approval})
+                return
+            if parsed.path == "/api/authoring/apply-agent-drafts/preflight":
+                self._send_json(preflight_authoring_agent_drafts_payload(payload))
                 return
             if parsed.path == "/api/authoring/apply-agent-drafts":
                 self._send_json(apply_authoring_agent_drafts_payload(payload))

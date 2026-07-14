@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from .registry import FIRST_PRIORITY_SCOPE_ENTRIES, RegistryData, load_registry, slugify_title
+from .registry import UNCLASSIFIED_DOMAIN, RegistryData, load_registry, slugify_title
 from .workbench import WORKBENCH_ROOT, list_work_items
 
 DOCUMENT_TYPES: dict[str, str] = {
@@ -139,7 +139,7 @@ def list_first_priority_assessments(registry: RegistryData | None = None, root: 
             "hasAuthoring": bool(work.get("hasAuthoring")),
             "documentDir": str(work.get("documentDir") or ""),
             "scopeKind": scope_kind,
-            "isFirstPriority": scope_kind == "first_priority",
+            "isFirstPriority": False,
         }
         rows.append(row)
     return {
@@ -187,32 +187,21 @@ def _entry_from_saved(domain: str, doc_id: str, saved: Any) -> AssessmentEntry:
 
 def _assessment_scope_entries(registry: RegistryData) -> list[tuple[str, str, str]]:
     entries: list[tuple[str, str, str]] = []
-    first_priority_doc_ids: set[str] = set()
     seen: set[tuple[str, str]] = set()
-    for domain, doc_id in registry.first_priority_scope_entries:
-        if doc_id not in registry.documents:
-            continue
-        key = (domain, doc_id)
-        if key in seen:
-            continue
-        seen.add(key)
-        first_priority_doc_ids.add(doc_id)
-        entries.append((domain, doc_id, "first_priority"))
     for doc in sorted(registry.documents.values(), key=lambda item: (item.title, item.doc_id)):
-        if doc.doc_id in first_priority_doc_ids:
-            continue
-        domain = _default_assessment_domain(doc)
-        key = (domain, doc.doc_id)
-        if key in seen:
-            continue
-        seen.add(key)
-        entries.append((domain, doc.doc_id, "all_documents"))
+        domains = tuple(doc.po_domains) or (UNCLASSIFIED_DOMAIN,)
+        for domain in domains:
+            key = (domain, doc.doc_id)
+            if key in seen:
+                continue
+            seen.add(key)
+            entries.append((domain, doc.doc_id, "registry_domain"))
     return entries
 
 
 def _default_assessment_domain(doc: Any) -> str:
-    domains = list(getattr(doc, "po_domains", ()) or ()) or list(getattr(doc, "first_priority_domains", ()) or ()) or list(getattr(doc, "domains", ()) or ())
-    return str(domains[0] if domains else "미분류")
+    domains = list(getattr(doc, "po_domains", ()) or ()) or list(getattr(doc, "domains", ()) or ())
+    return str(domains[0] if domains else UNCLASSIFIED_DOMAIN)
 
 
 def _validate_scope(domain: str, doc_id: str, registry: RegistryData) -> None:

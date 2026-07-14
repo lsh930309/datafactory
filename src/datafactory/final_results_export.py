@@ -23,7 +23,7 @@ from .library_sample import (
     fields_with_generators,
     resolve_pii_keys,
 )
-from .registry import FIRST_PRIORITY_SCOPE_ENTRIES, RegistryData, load_registry, slugify_title
+from .registry import RegistryData, load_registry, slugify_title
 from .workbench import WORKBENCH_ROOT, list_work_items
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -222,10 +222,14 @@ def export_final_results(
 
 def _resolve_scope_entries(scope_entries: Any | None, *, registry: RegistryData) -> tuple[tuple[str, str], ...]:
     if scope_entries is None:
-        defaults = tuple(registry.first_priority_scope_entries or FIRST_PRIORITY_SCOPE_ENTRIES)
-        invalid_domains = sorted({domain for domain, _ in defaults if domain not in LIBRARY_SAMPLE_DOMAINS})
-        if invalid_domains:
-            raise ValueError(f"unsupported library-sample domains: {invalid_domains}")
+        defaults = tuple(
+            (domain, doc.doc_id)
+            for doc in sorted(registry.documents.values(), key=lambda item: (item.title, item.doc_id))
+            for domain in doc.po_domains
+            if domain in LIBRARY_SAMPLE_DOMAINS
+        )
+        if not defaults:
+            raise ValueError("registry has no documents in supported library-sample domains")
         return defaults
     if not isinstance(scope_entries, list):
         raise ValueError("scope_entries must be a list")
@@ -1233,7 +1237,7 @@ def _summary(rows: list[dict[str, Any]], errors: list[dict[str, Any]]) -> dict[s
 
 def _write_manifest_xlsx(path: Path, rows: list[dict[str, Any]], summary: dict[str, Any]) -> None:
     matrix: list[list[Any]] = [
-        ["1차 목표 최종 산출물 매니페스트"],
+        ["레지스트리 도메인별 최종 산출물 매니페스트"],
         [
             f"생성: {summary['generatedAt']} · scope {summary['scopeEntryCount']}건 / 고유 {summary['uniqueDocumentCount']}종 · "
             f"pipeline {summary['pipelineScopeCount']}건 · cleanroom {summary['cleanroomScopeCount']}건 · handwriting {summary.get('handwritingScopeCount', 0)}건 · "

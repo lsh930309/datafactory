@@ -14,7 +14,7 @@
 - `20260702_cleanroom_authoring_method.md`: cleanroom 문서 제작 방식
 - `20260703_final_results_export_implementation_plan.md`: 최종 산출물 export 설계
 - `20260703_pure_semantic_gt_export_plan.md`: metadata 없는 GT/BBox export 정책
-- `objectives/20260702_manual_authoring_objective.md`: 1차 목표 범위와 수작업 authoring 목표
+- `objectives/20260702_manual_authoring_objective.md`: 폐기된 과거 1차 범위 기록(현재 분류/진척도 기준으로 사용 금지)
 
 ## 제외한 문서
 

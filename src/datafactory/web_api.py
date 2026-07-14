@@ -51,6 +51,14 @@ from .library_sample import (
 )
 from .handwriting import QR_FORMAT, DEFAULT_WECHAT_QR_MODEL_DIR, create_handwriting_print_pack, intake_handwriting_scans, render_handwriting_authoring_preview
 from .docx_pipeline import analyze_docx_template, draft_docx_authoring, generate_docx_outputs
+from .deep_agent import (
+    DeepAgentError,
+    call_deep_agent_ocr,
+    deep_agent_credential_status,
+    file_sha256,
+    match_deep_ocr_fields,
+    normalize_deep_ocr_response,
+)
 from .inpaint import InpaintConfig, InpaintResult, inpaint_from_review_policy, lama_inpaint, render_mask_overlay
 from .inpaint_export import write_inpaint_result
 from .manual_cleanup import load_manual_mask, save_manual_mask
@@ -72,6 +80,7 @@ from .workbench import (
     save_uploaded_seed_files,
     scan_seed_samples,
     set_manifest_sample_kind,
+    summarize_work_items,
     trash_seed_folder,
     revert_seed_import,
     update_manifest_artifact,
@@ -1628,7 +1637,7 @@ def _authoring_bundle_consistency(schema: dict[str, Any], faker_profile: dict[st
     return {"ready": not errors, "errors": errors, "warnings": warnings, "summary": {"errorCount": len(errors), "warningCount": len(warnings), "fieldCount": len(field_ids), "semanticLeafCount": len(semantic_leaf_paths)}}
 
 
-def _library_sample_cleanroom_payload(doc_id: str) -> dict[str, Any]:
+def _library_sample_cleanroom_context(doc_id: str) -> dict[str, Any]:
     registry = load_registry()
     item = next((entry for entry in list_work_items(registry=registry) if entry.get("docId") == doc_id), None)
     if item is None:
@@ -1641,22 +1650,64 @@ def _library_sample_cleanroom_payload(doc_id: str) -> dict[str, Any]:
     if not pages:
         raise ValueError("cleanroom pages_dir has no image pages")
     document_root = _resolve_workspace_path(str(item["documentDir"]))
+    return {
+        "registry": registry,
+        "item": item,
+        "pagesDir": pages_dir,
+        "pages": pages,
+        "documentRoot": document_root,
+    }
+
+
+def _deep_ocr_page_root(document_root: Path, source_image: Path) -> Path:
+    return document_root / "ocr" / "deep_agent" / _safe_template_id(source_image)
+
+
+def _latest_deep_ocr_job(document_root: Path, source_image: Path) -> dict[str, Any] | None:
+    page_root = _deep_ocr_page_root(document_root, source_image)
+    job_paths = sorted(page_root.glob("*/job.json"), reverse=True) if page_root.exists() else []
+    for job_path in job_paths:
+        try:
+            job = _read_agent_job(job_path)
+        except (OSError, json.JSONDecodeError):
+            continue
+        return {
+            key: job.get(key)
+            for key in ("jobType", "jobId", "docId", "status", "createdAt", "startedAt", "finishedAt", "summary", "paths", "result", "error", "errorCode", "errorStatus")
+            if job.get(key) is not None
+        } | {"jobPath": _display_path(job_path, ROOT)}
+    return None
+
+
+def _library_sample_cleanroom_payload(doc_id: str) -> dict[str, Any]:
+    context = _library_sample_cleanroom_context(doc_id)
+    pages_dir = context["pagesDir"]
+    pages = context["pages"]
+    document_root = context["documentRoot"]
     annotation_path = cleanroom_annotation_path(document_root)
     annotation = load_cleanroom_annotation(annotation_path)
     fields = annotation.get("fields", []) if annotation else []
     semantic_schema = {str(field.get("key") or ""): "" for field in fields if isinstance(field, dict) and str(field.get("key") or "").strip()}
     privacy = privacy_payload(semantic_schema, privacy=annotation.get("privacy") if annotation else None) if semantic_schema else None
+    credential = deep_agent_credential_status()
+    credential["path"] = _display_path(credential["path"], ROOT)
     return {
         "docId": doc_id,
         "ready": bool(annotation),
         "pagesDir": _display_path(pages_dir, ROOT),
         "pages": [
-            {"name": page.name, "path": _display_path(page, ROOT), "url": f"/api/image?path={_display_path(page, ROOT)}"}
+            {
+                "name": page.name,
+                "path": _display_path(page, ROOT),
+                "url": f"/api/image?path={_display_path(page, ROOT)}",
+                "deepOcr": _latest_deep_ocr_job(document_root, page),
+            }
             for page in pages
         ],
         "annotationPath": _display_path(annotation_path, ROOT),
         "annotation": annotation,
         "privacy": privacy,
+        "deepOcrCredential": credential,
     }
 
 
@@ -1664,15 +1715,10 @@ def _save_library_sample_cleanroom_payload(payload: dict[str, Any]) -> dict[str,
     doc_id = str(payload.get("docId") or "").strip()
     if not doc_id:
         raise ValueError("docId is required")
-    registry = load_registry()
-    item = next((entry for entry in list_work_items(registry=registry) if entry.get("docId") == doc_id), None)
-    if item is None:
-        raise ValueError(f"unknown docId: {doc_id}")
-    pages_dir_value = item.get("latestCleanroomPagesDir")
-    if not pages_dir_value:
-        raise ValueError("cleanroom pages_dir is not available")
-    pages_dir = _resolve_workspace_path(str(pages_dir_value))
-    document_root = _resolve_workspace_path(str(item["documentDir"]))
+    context = _library_sample_cleanroom_context(doc_id)
+    registry = context["registry"]
+    pages_dir = context["pagesDir"]
+    document_root = context["documentRoot"]
     annotation_path = cleanroom_annotation_path(document_root)
     normalized_payload = {
         **payload,
@@ -1684,6 +1730,139 @@ def _save_library_sample_cleanroom_payload(payload: dict[str, Any]) -> dict[str,
     result = _library_sample_cleanroom_payload(doc_id)
     result["saved"] = saved
     return result
+
+
+def deep_ocr_status_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    job_path_value = str(payload.get("jobPath") or "").strip()
+    if not job_path_value:
+        raise ValueError("jobPath is required")
+    job_path = _resolve_workspace_path(job_path_value)
+    if job_path.name != "job.json" or "deep_agent" not in job_path.parts:
+        raise ValueError("invalid Deep OCR job path")
+    return _agent_job_payload(job_path)
+
+
+def deep_ocr_start_payload(payload: dict[str, Any], *, async_run: bool = True) -> dict[str, Any]:
+    doc_id = str(payload.get("docId") or "").strip()
+    if not doc_id:
+        raise ValueError("docId is required")
+    context = _library_sample_cleanroom_context(doc_id)
+    source_image = _resolve_workspace_path(str(payload.get("sourceImage") or ""))
+    page_paths = {page.resolve() for page in context["pages"]}
+    if source_image not in page_paths:
+        raise ValueError("sourceImage must be one of the cleanroom pages")
+    raw_policy = payload.get("policy")
+    if not isinstance(raw_policy, dict):
+        raise ValueError("policy must be an object")
+    policy = ReviewPolicy.from_dict(raw_policy, base_dir=ROOT)
+    if policy.source_image.resolve() != source_image:
+        raise ValueError("policy.source_image must match sourceImage")
+    run_dir = _deep_ocr_page_root(context["documentRoot"], source_image) / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    job_path = run_dir / "job.json"
+    job = {
+        "schema_version": 1,
+        "jobType": "deep_agent_cleanroom_ocr",
+        "jobId": run_dir.name,
+        "docId": doc_id,
+        "status": "queued",
+        "createdAt": _utc_now(),
+        "startedAt": None,
+        "finishedAt": None,
+        "sourceImage": _display_path(source_image, ROOT),
+        "request": {
+            "docId": doc_id,
+            "sourceImage": _display_path(source_image, ROOT),
+            "policy": policy.to_dict(),
+            "forceRefresh": _payload_bool(payload.get("forceRefresh")),
+        },
+        "result": None,
+        "error": None,
+    }
+    _write_agent_job(job_path, job)
+    update_manifest_artifact(doc_id, "deep_agent_ocr_job", job_path, registry=context["registry"])
+    if async_run:
+        threading.Thread(target=_run_deep_ocr_job, args=(job_path,), daemon=True).start()
+        return _agent_job_payload(job_path)
+    _run_deep_ocr_job(job_path)
+    return _agent_job_payload(job_path)
+
+
+def _cached_deep_ocr_artifacts(job_path: Path, source_sha256: str) -> tuple[Path, Path] | None:
+    for normalized_path in sorted(job_path.parent.parent.glob("*/normalized.json"), reverse=True):
+        if normalized_path.parent == job_path.parent:
+            continue
+        raw_path = normalized_path.parent / "raw.json"
+        if not raw_path.exists():
+            continue
+        try:
+            normalized = json.loads(normalized_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if normalized.get("sourceSha256") == source_sha256:
+            return raw_path, normalized_path
+    return None
+
+
+def _write_json_artifact(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _run_deep_ocr_job(job_path: Path) -> None:
+    job = _read_agent_job(job_path)
+    job["status"] = "running"
+    job["startedAt"] = _utc_now()
+    _write_agent_job(job_path, job)
+    try:
+        request = dict(job.get("request") or {})
+        source_image = _resolve_workspace_path(str(request.get("sourceImage") or ""))
+        raw_policy = request.get("policy")
+        if not isinstance(raw_policy, dict):
+            raise ValueError("job policy must be an object")
+        source_sha256 = file_sha256(source_image)
+        cached = None if _payload_bool(request.get("forceRefresh")) else _cached_deep_ocr_artifacts(job_path, source_sha256)
+        if cached:
+            raw_path, normalized_path = cached
+            normalized = json.loads(normalized_path.read_text(encoding="utf-8"))
+            cache_hit = True
+        else:
+            raw_path = job_path.parent / "raw.json"
+            normalized_path = job_path.parent / "normalized.json"
+            raw = call_deep_agent_ocr(source_image)
+            normalized = normalize_deep_ocr_response(raw, source_image=source_image, source_sha256=source_sha256)
+            _write_json_artifact(raw_path, raw)
+            _write_json_artifact(normalized_path, normalized)
+            cache_hit = False
+        matches = match_deep_ocr_fields(normalized, raw_policy)
+        matches_path = job_path.parent / "matches.json"
+        _write_json_artifact(matches_path, matches)
+        match_summary = dict(matches.get("summary") or {})
+        metadata = normalized.get("metadata") if isinstance(normalized.get("metadata"), dict) else {}
+        summary = {
+            "provider": "deep_agent",
+            "cacheHit": cache_hit,
+            "sourceSha256": source_sha256,
+            **match_summary,
+            "totalTime": metadata.get("total_time"),
+        }
+        paths = {
+            "raw": _display_path(raw_path, ROOT),
+            "normalized": _display_path(normalized_path, ROOT),
+            "matches": _display_path(matches_path, ROOT),
+        }
+        result = {"summary": summary, "fields": normalized.get("fields", []), "matches": matches.get("matches", []), "paths": paths}
+        job = _read_agent_job(job_path)
+        job.update({"status": "completed", "finishedAt": _utc_now(), "summary": summary, "paths": paths, "result": result, "error": None})
+        update_manifest_artifact(str(job.get("docId") or ""), "deep_agent_ocr_raw", raw_path)
+        update_manifest_artifact(str(job.get("docId") or ""), "deep_agent_ocr_normalized", normalized_path)
+        update_manifest_artifact(str(job.get("docId") or ""), "deep_agent_ocr_matches", matches_path)
+    except Exception as exc:  # pragma: no cover - defensive for external API runtime
+        job = _read_agent_job(job_path)
+        job.update({"status": "failed", "finishedAt": _utc_now(), "error": str(exc)})
+        if isinstance(exc, DeepAgentError):
+            job["errorCode"] = exc.code
+            job["errorStatus"] = exc.status
+    _write_agent_job(job_path, job)
 
 
 def _raise_if_authoring_inconsistent(schema: dict[str, Any], faker_profile: dict[str, Any], *, strict_review_coverage: bool = True) -> dict[str, Any]:
@@ -2961,18 +3140,7 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
             if parsed.path == "/api/work-items":
                 registry = load_registry()
                 items = list_work_items(registry=registry)
-                self._send_json(
-                    {
-                        "summary": {
-                            "total": len(items),
-                            "imported": len([item for item in items if item["status"] != "missing"]),
-                            "bboxDone": len([item for item in items if item["hasOcr"]]),
-                            "reviewDone": len([item for item in items if item["hasReview"]]),
-                            "inpaintDone": len([item for item in items if item["hasInpaint"]]),
-                        },
-                        "items": items,
-                    }
-                )
+                self._send_json({"summary": summarize_work_items(items, registry), "items": items})
                 return
             if parsed.path == "/api/first-priority/assessments":
                 self._send_json(list_first_priority_assessments(registry=load_registry()))
@@ -2985,6 +3153,10 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
             if parsed.path == "/api/library-sample/cleanroom":
                 query = parse_qs(parsed.query)
                 self._send_json(_library_sample_cleanroom_payload(_first_query_value(query, "docId")))
+                return
+            if parsed.path == "/api/library-sample/cleanroom/deep-ocr/status":
+                query = parse_qs(parsed.query)
+                self._send_json(deep_ocr_status_payload({"jobPath": _first_query_value(query, "jobPath")}))
                 return
             if parsed.path == "/api/cleanup-mask":
                 query = parse_qs(parsed.query)
@@ -3230,6 +3402,9 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 return
             if parsed.path == "/api/library-sample/cleanroom/save":
                 self._send_json(_save_library_sample_cleanroom_payload(payload))
+                return
+            if parsed.path == "/api/library-sample/cleanroom/deep-ocr/start":
+                self._send_json(deep_ocr_start_payload(payload), status=HTTPStatus.ACCEPTED)
                 return
             if parsed.path == "/api/handwriting/print-pack":
                 doc_id = str(payload.get("docId") or "")

@@ -19,13 +19,12 @@ from datafactory.final_results_export import (
 from datafactory.registry import RegistryData, RegistryDocument
 
 
-def test_resolve_scope_entries_defaults_to_registry_first_priority() -> None:
+def test_resolve_scope_entries_defaults_to_registry_domain_bindings() -> None:
     registry = RegistryData(
-        documents={"DOC-1": RegistryDocument(doc_id="DOC-1", title="테스트문서")},
+        documents={"DOC-1": RegistryDocument(doc_id="DOC-1", title="테스트문서", po_domains=("금융",))},
         workflows={},
         bindings=[],
         source_path=Path("registry.xlsx"),
-        first_priority_scope_entries=(("금융", "DOC-1"),),
     )
 
     assert _resolve_scope_entries(None, registry=registry) == (("금융", "DOC-1"),)

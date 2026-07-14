@@ -144,9 +144,7 @@ function sampleAvailabilityGroup(item) {
   return 'needs_synthesis';
 }
 function workStatusGroup(item) {
-  if (item?.isNonPipeline && !COMPLETED_WORK_STATUSES.has(item?.status)) return 'in_progress';
-  if (item?.hasPendingSeed || item?.needsCollection) return 'not_started';
-  return WORK_STATUS_TO_GROUP[item?.status] || 'not_started';
+  return item?.progressGroup || WORK_STATUS_TO_GROUP[item?.status] || 'not_started';
 }
 function matchesSampleAvailabilityFilter(item, selectedFilters = []) {
   return !selectedFilters.length || selectedFilters.includes(item?.sampleAvailability || sampleAvailabilityGroup(item));
@@ -481,7 +479,7 @@ function App() {
   const [domainFilters, setDomainFilters] = useState([]);
   const [statusFilters, setStatusFilters] = useState([]);
   const [sampleAvailabilityFilters, setSampleAvailabilityFilters] = useState([]);
-  const [activeTargetGroupId, setActiveTargetGroupId] = useState('first_priority');
+  const [activeTargetGroupId, setActiveTargetGroupId] = useState('domain_금융');
   const [targetGroupDraft, setTargetGroupDraft] = useState({ id: '', label: '', description: '', scopeEntries: [] });
   const [targetGroupDocId, setTargetGroupDocId] = useState('');
   const [targetGroupEditing, setTargetGroupEditing] = useState(false);
@@ -554,6 +552,8 @@ function App() {
   const [cleanroomEditing, setCleanroomEditing] = useState(false);
   const [cleanroomFields, setCleanroomFields] = useState([]);
   const [cleanroomPrivacy, setCleanroomPrivacy] = useState({ include_keys: [], exclude_keys: [] });
+  const [deepOcrPreview, setDeepOcrPreview] = useState(null);
+  const [deepOcrSelections, setDeepOcrSelections] = useState({});
   const [busy, setBusy] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -658,7 +658,7 @@ function App() {
     if (entries.length) return entries;
     for (const item of targetGroupFinalExportReadyItems) {
       const doc = item.registry || {};
-      const domain = doc.poDomains?.[0] || doc.firstPriorityDomains?.[0] || doc.domains?.[0] || '';
+      const domain = doc.poDomains?.[0] || doc.domains?.[0] || '';
       const key = `${domain}::${item.docId}`;
       if (seen.has(key)) continue;
       seen.add(key);
@@ -807,7 +807,7 @@ function App() {
     const poDomains = item?.registry?.poDomains || [];
     const active = domainFilters.filter((domain) => poDomains.includes(domain));
     if (active.length) return active;
-    return [poDomains[0] || item?.registry?.firstPriorityDomains?.[0] || item?.registry?.domains?.[0] || ''];
+    return [poDomains[0] || item?.registry?.domains?.[0] || ''];
   }
 
   function currentFilterLabel() {
@@ -1387,10 +1387,10 @@ function App() {
     try {
       const payload = await apiJson('/api/first-priority/export-xlsx', {
         method: 'POST',
-        body: JSON.stringify({ outDir: 'outputs/first_priority_assessment' }),
+        body: JSON.stringify({ outDir: 'outputs/document_assessment' }),
       });
       setAssessmentExport(payload);
-      setMessage(`1차 목표 판정표 XLSX 출력 완료: ${payload.path}`);
+      setMessage(`문서 판정표 XLSX 출력 완료: ${payload.path}`);
       await refreshAll({ preserveSelection: true });
     } finally {
       setBusy('');
@@ -1557,6 +1557,8 @@ function App() {
     setCleanroomEditing(false);
     setCleanroomFields([]);
     setCleanroomPrivacy({ include_keys: [], exclude_keys: [] });
+    setDeepOcrPreview(null);
+    setDeepOcrSelections({});
   }, [selectedDocId]);
 
   useEffect(() => {
@@ -1589,6 +1591,14 @@ function App() {
       }));
     });
   }, [cleanroomEditing, policy]);
+
+  useEffect(() => {
+    if (!cleanroomEditing || !selectedSample) return;
+    const page = (cleanroomLibrary?.pages || []).find((item) => item.path === selectedSample);
+    const result = page?.deepOcr?.status === 'completed' ? page.deepOcr.result : null;
+    setDeepOcrPreview(result);
+    setDeepOcrSelections(defaultDeepOcrSelections(result));
+  }, [cleanroomEditing, cleanroomLibrary?.pages, selectedSample]);
 
   useEffect(() => {
     if (!selectedItem || selectedItem.docId !== selectedDocId) return undefined;
@@ -2404,6 +2414,21 @@ function App() {
     setAuthoringDirty(true);
   }
 
+  function defaultDeepOcrSelections(result) {
+    return Object.fromEntries((result?.matches || []).map((match) => [
+      String(match.fieldIndex),
+      {
+        enabled: match.status === 'exact' && Boolean(match.bboxLabelId),
+        bboxLabelId: match.status === 'exact' ? (match.bboxLabelId || '') : '',
+      },
+    ]));
+  }
+
+  function setDeepOcrResult(result) {
+    setDeepOcrPreview(result || null);
+    setDeepOcrSelections(defaultDeepOcrSelections(result));
+  }
+
   async function loadCleanroomLibrary({ edit = false } = {}) {
     if (!selectedDocId) return null;
     setBusy('cleanroomLibraryLoad');
@@ -2422,6 +2447,8 @@ function App() {
         setCleanroomEditing(true);
         const sourceImage = annotation.source_image || payload.pages?.[0]?.path || '';
         setSelectedSample(sourceImage);
+        const page = (payload.pages || []).find((item) => item.path === sourceImage);
+        setDeepOcrResult(page?.deepOcr?.status === 'completed' ? page.deepOcr.result : null);
         setCanvasMode('review');
         if (annotation.review_path) await loadReview(annotation.review_path);
       }
@@ -2430,6 +2457,104 @@ function App() {
     } finally {
       setBusy('');
     }
+  }
+
+  async function waitForDeepOcrJob(jobPath) {
+    while (true) {
+      await delay(1000);
+      const status = await apiJson(`/api/library-sample/cleanroom/deep-ocr/status?jobPath=${encodeURIComponent(jobPath)}`);
+      if (status.status === 'completed') return status;
+      if (status.status === 'failed') {
+        const code = status.errorCode ? ` (${status.errorCode})` : '';
+        throw new Error(`${status.error || 'Deep OCR 작업 실패'}${code}`);
+      }
+      setMessage('Deep OCR key/value 추출 작업이 진행 중입니다. 외부 API 응답을 기다리는 중입니다.');
+    }
+  }
+
+  async function runDeepOcr({ forceRefresh = false } = {}) {
+    if (!selectedDocId || !selectedSample || !policy) return;
+    setBusy('deepOcr');
+    setError('');
+    setMessage(forceRefresh ? 'DeepAgent 외부 API를 다시 호출합니다.' : 'DeepAgent OCR 결과를 확인하고, 동일 이미지 캐시가 없으면 외부 API를 호출합니다.');
+    try {
+      const job = await apiJson('/api/library-sample/cleanroom/deep-ocr/start', {
+        method: 'POST',
+        body: JSON.stringify({
+          docId: selectedDocId,
+          sourceImage: selectedSample,
+          policy,
+          forceRefresh,
+        }),
+      });
+      const completed = await waitForDeepOcrJob(job.jobPath);
+      const result = completed.result || null;
+      setDeepOcrResult(result);
+      setCleanroomLibrary((current) => current ? {
+        ...current,
+        pages: (current.pages || []).map((page) => (page.path === selectedSample ? { ...page, deepOcr: completed } : page)),
+      } : current);
+      const summary = result?.summary || {};
+      const cacheText = summary.cacheHit ? ' · 동일 이미지 캐시 사용' : ' · 외부 API 호출';
+      setMessage(`Deep OCR 완료: ${summary.fieldCount || 0}개 · exact ${summary.exactCount || 0} · 확인 필요 ${(summary.ambiguousCount || 0) + (summary.unmatchedCount || 0)}${cacheText}`);
+      return completed;
+    } finally {
+      setBusy('');
+    }
+  }
+
+  function updateDeepOcrSelection(fieldIndex, patch) {
+    setDeepOcrSelections((current) => ({
+      ...current,
+      [String(fieldIndex)]: { ...(current[String(fieldIndex)] || { enabled: false, bboxLabelId: '' }), ...patch },
+    }));
+  }
+
+  function applyDeepOcrSelections() {
+    if (!policy || !deepOcrPreview) return;
+    const labelsById = new Map((policy.labels || []).map((label) => [label.id, label]));
+    const accepted = [];
+    const usedBboxIds = new Set();
+    const usedKeys = new Set(cleanroomFields.filter((field) => field.key).map((field) => field.key));
+    let skipped = 0;
+    for (const match of deepOcrPreview.matches || []) {
+      const selection = deepOcrSelections[String(match.fieldIndex)] || {};
+      const bboxLabelId = String(selection.bboxLabelId || '');
+      const key = String(match.key || '').trim();
+      if (!selection.enabled) continue;
+      const existing = cleanroomFields.find((field) => field.bboxLabelId === bboxLabelId);
+      const duplicateKey = key && usedKeys.has(key) && existing?.key !== key;
+      if (!bboxLabelId || !labelsById.has(bboxLabelId) || usedBboxIds.has(bboxLabelId) || duplicateKey) {
+        skipped += 1;
+        continue;
+      }
+      usedBboxIds.add(bboxLabelId);
+      if (key) usedKeys.add(key);
+      accepted.push({ bboxLabelId, key, value: String(match.value ?? '') });
+    }
+    if (!accepted.length) {
+      setMessage(skipped ? `적용 가능한 선택이 없습니다. 중복 key/BBox 또는 유효하지 않은 매핑 ${skipped}건을 확인하세요.` : '적용할 Deep OCR 행을 선택하세요.');
+      return;
+    }
+    const acceptedById = new Map(accepted.map((item) => [item.bboxLabelId, item]));
+    setEditedPolicy({
+      ...policy,
+      labels: (policy.labels || []).map((label) => (acceptedById.has(label.id) ? { ...label, status: 'use' } : label)),
+    });
+    setCleanroomFields((current) => {
+      const byId = new Map(current.map((field) => [field.bboxLabelId, field]));
+      for (const item of accepted) {
+        const existing = byId.get(item.bboxLabelId);
+        byId.set(item.bboxLabelId, {
+          bboxLabelId: item.bboxLabelId,
+          key: existing?.key || item.key,
+          value: existing?.value || item.value,
+        });
+      }
+      return [...byId.values()];
+    });
+    setSelectedIds(accepted.map((item) => item.bboxLabelId));
+    setMessage(`Deep OCR 매핑 ${accepted.length}건을 리뷰에 적용했습니다${skipped ? ` · 중복/오류 ${skipped}건 제외` : ''}. BBox 리뷰 저장 후 cleanroom 주석을 저장하세요.`);
   }
 
   function updateCleanroomField(bboxLabelId, patch) {
@@ -3050,8 +3175,9 @@ function App() {
         <div className="top-context">
           <span className="status-pill importable">자동 적재 {seedScan.summary?.importable || 0}</span>
           <span className="status-pill needsReview">확인 필요 {seedScan.summary?.needsReview || 0}</span>
-          <span>합성 필요 {needsCollectionItems.length}</span>
-          <span>샘플 적재 {workPayload.summary?.imported || 0}</span>
+          <span>워크벤치 미착수 {workPayload.summary?.progressCounts?.not_started || 0}</span>
+          <span>진행 {workPayload.summary?.progressCounts?.in_progress || 0}</span>
+          <span>완료 {workPayload.summary?.progressCounts?.done || 0}</span>
         </div>
         <div className="runtime-inline">
           <span className={health?.lama?.available ? 'ok' : 'warn'}>LaMa {health?.lama?.available ? '사용 가능' : '미설치'}</span>
@@ -3143,19 +3269,16 @@ function App() {
             <div className="final-export-card">
               <div className="final-export-head">
                 <b>최종 산출물 생성</b>
-                <span>{finalExportResult?.summary ? `OK ${finalExportResult.summary.okCount} · 오류 ${finalExportResult.summary.errorCount} · 경고 ${finalExportResult.summary.warningCount || 0}` : `${activeTargetGroup.label} · ${targetGroupFinalExportScopeEntries.length} scope`}</span>
+                <span>{finalExportResult?.summary ? `OK ${finalExportResult.summary.okCount} · 오류 ${finalExportResult.summary.errorCount} · 경고 ${finalExportResult.summary.warningCount || 0}` : `${activeTargetGroup.label} · 생성 가능 ${targetGroupFinalExportScopeEntries.length}건`}</span>
               </div>
-              <p className="muted mini-help">현재 선택 그룹 기준으로 `outputs/results`에 생성합니다. 출력 가능 {targetGroupFinalExportReadyItems.length}종 · 미준비 {targetGroupFinalExportMissingItems.length}종</p>
-              <label className="toggle-row final-export-toggle">
+              <p className="muted mini-help">`outputs/results` · 출력 가능 {targetGroupFinalExportReadyItems.length}종 · 미준비 {targetGroupFinalExportMissingItems.length}종</p>
+              <label className="final-export-toggle" title="필기 문서의 authoring 스타일과 faker를 사용해 인쇄체로 생성합니다. QR 코드는 자동 삽입하지 않습니다.">
                 <input
                   type="checkbox"
                   checked={finalExportHandwritingAsPrinted}
                   onChange={(event) => setFinalExportHandwritingAsPrinted(event.target.checked)}
                 />
-                <span>
-                  <b>수기체 문건 임시 인쇄체 렌더링</b>
-                  <small>켜면 수기 문건도 authoring stylesheet/faker로 최종 샘플을 생성합니다. QR 코드는 자동 삽입하지 않습니다.</small>
-                </span>
+                <span>필기 문서도 인쇄체로 생성</span>
               </label>
               <div className="final-export-controls">
                 <label>데이터 기준일
@@ -3200,7 +3323,6 @@ function App() {
                   <WorkItemProgress item={item} compact />
                   <span className="priority-doc-meta">
                     <span className={`writing-method ${writingMethodTone(item)}`}>{writingMethodLabel(item)}</span>
-                    {(item.registry?.firstPriorityDomains || []).length > 0 && <span className="priority-domain">{item.registry.firstPriorityDomains.join('·')}</span>}
                     <span className={workItemIsComplete(item) ? 'next-action complete' : 'next-action'}>{workItemNextAction(item)}</span>
                     <span>{item.statusLabel}</span>
                     {item.needsSynthesis && <span className="need-collect">합성 필요</span>}
@@ -3220,7 +3342,7 @@ function App() {
             <h2>문서 현황판</h2>
             <input placeholder="문서명/ID 검색" value={search} onChange={(event) => setSearch(event.target.value)} />
             <div className="checkbox-filter-block">
-              <div className="checkbox-filter-head"><b>PO 도메인</b><small>{domainFilters.length ? `${domainFilters.length}개 선택` : '전체'}</small></div>
+              <div className="checkbox-filter-head"><b>도메인</b><small>{domainFilters.length ? `${domainFilters.length}개 선택` : '전체'}</small></div>
               <div className="checkbox-filter-list">
                 {(registry?.poDomains || registry?.domains || []).map((domain) => (
                   <label key={domain} className="checkbox-filter-row">
@@ -3252,7 +3374,7 @@ function App() {
                 ))}
               </div>
             </div>
-            <p className="muted mini-help">PO 도메인은 PDF 1페이지 하단의 구축 대상 요약 축입니다. 사내 샘플 준비는 seed_samples 매칭을 포함하며, 워크벤치 적재 전이어도 합성 불필요 후보로 분리됩니다.</p>
+            <p className="muted mini-help">도메인은 `DEEP_Agent_문서분류_레지스트리_v2.2.xlsx`의 3번째 시트를 기준으로 분류합니다. 진척도는 seed 상태나 별도 문서가 아니라 workbench 산출물만으로 계산합니다.</p>
             <div className="button-row compact-buttons single-action-row">
               <button className="primary" onClick={createTargetGroupDraftFromFilteredItems} disabled={!filteredItems.length || isBusy}>
                 현재 필터 결과로 새 그룹
@@ -3272,7 +3394,6 @@ function App() {
                 <div><strong>{item.title}</strong><small>{item.docId}</small></div>
                 <WorkItemProgress item={item} />
                 <div className="doc-card-meta">
-                  {item.registry?.isFirstPriority && <span className="priority">1차</span>}
                   <span className={`writing-method ${writingMethodTone(item)}`}>{writingMethodLabel(item)}</span>
                   <span className={workItemIsComplete(item) ? 'next-action complete' : 'next-action'}>{workItemNextAction(item)}</span>
                   {item.hasPendingSeed && <span className="seed-ready">seed 발견</span>}
@@ -3294,7 +3415,7 @@ function App() {
           <section className="selected-context">
             <div>
               <h2>{selectedDoc?.title || '문서를 선택하세요'}</h2>
-              <p className="muted">{selectedDoc?.poDomains?.length ? `PO 도메인: ${selectedDoc.poDomains.join(' · ')}` : 'PO 도메인 정보 없음'}{(selectedDoc?.workflowDomains || selectedDoc?.domains || []).length ? ` / 업무: ${(selectedDoc.workflowDomains || selectedDoc.domains).join(' · ')}` : ''}</p>
+              <p className="muted">{selectedDoc?.poDomains?.length ? `도메인: ${selectedDoc.poDomains.join(' · ')}` : '도메인 정보 없음'}{(selectedDoc?.workflowDomains || selectedDoc?.domains || []).length ? ` / 업무: ${(selectedDoc.workflowDomains || selectedDoc.domains).join(' · ')}` : ''}</p>
             </div>
             <div className="context-chips">
               {selectedDoc?.issuer && <span>{selectedDoc.issuer}</span>}
@@ -3603,6 +3724,79 @@ function App() {
               <p className="muted">리뷰에서 `사용`으로 지정한 bbox마다 flat export key와 GT value를 지정합니다. PII는 공통 정책을 기본으로 하고 문서 예외만 선택합니다.</p>
               {!policy && <p className="warning-text">선택한 대표 페이지에서 BBox 검출을 먼저 실행하세요.</p>}
               {policy && stats.byStatus.use === 0 && <p className="warning-text">최종 값으로 내보낼 bbox를 `사용`으로 지정하세요.</p>}
+              <div className="deep-ocr-panel">
+                <div className="block-title-row">
+                  <h3>DeepAgent OCR key/value 보조</h3>
+                  <span className={`mode-pill ${cleanroomLibrary?.deepOcrCredential?.ready ? 'ready' : 'edit'}`}>
+                    {cleanroomLibrary?.deepOcrCredential?.ready ? 'API 준비됨' : 'API key 없음'}
+                  </span>
+                </div>
+                <p className="muted">DeepAgent가 key/value를 추출하고 PaddleOCR BBox 텍스트와 정규화 완전일치하는 값만 자동 선택합니다. DeepAgent 응답의 bbox가 없으므로 나머지는 직접 연결해야 합니다.</p>
+                {!cleanroomLibrary?.deepOcrCredential?.permissionSafe && (
+                  <p className="warning-text">API key 파일 권한이 {cleanroomLibrary.deepOcrCredential.permissionMode || '알 수 없음'}입니다. 로컬 사용자 전용(600)으로 제한하세요.</p>
+                )}
+                <div className="button-row compact-buttons">
+                  <button
+                    className="primary"
+                    onClick={() => run(() => runDeepOcr())}
+                    disabled={!policy || !cleanroomLibrary?.deepOcrCredential?.ready || isBusy}
+                  >
+                    {busy === 'deepOcr' ? 'Deep OCR 실행 중...' : 'Deep OCR key/value 추출'}
+                  </button>
+                  <button
+                    onClick={() => run(() => runDeepOcr({ forceRefresh: true }))}
+                    disabled={!policy || !cleanroomLibrary?.deepOcrCredential?.ready || isBusy}
+                    title="동일 이미지 캐시를 무시하고 외부 API를 다시 호출합니다."
+                  >외부 API 다시 호출</button>
+                </div>
+                {deepOcrPreview && (
+                  <>
+                    <div className="deep-ocr-summary">
+                      <b>추출 {deepOcrPreview.summary?.fieldCount || 0}개</b>
+                      <span>exact {deepOcrPreview.summary?.exactCount || 0}</span>
+                      <span>ambiguous {deepOcrPreview.summary?.ambiguousCount || 0}</span>
+                      <span>unmatched {deepOcrPreview.summary?.unmatchedCount || 0}</span>
+                      <span>{deepOcrPreview.summary?.cacheHit ? '캐시 사용' : '외부 API 응답'}</span>
+                    </div>
+                    <div className="deep-ocr-table-wrap">
+                      <table className="deep-ocr-table">
+                        <thead><tr><th>적용</th><th>Key / Value</th><th>판정</th><th>Paddle BBox</th></tr></thead>
+                        <tbody>
+                          {(deepOcrPreview.matches || []).map((match) => {
+                            const selection = deepOcrSelections[String(match.fieldIndex)] || { enabled: false, bboxLabelId: '' };
+                            return (
+                              <tr key={match.fieldIndex} className={`deep-ocr-${match.status}`}>
+                                <td><input type="checkbox" checked={Boolean(selection.enabled)} onChange={(event) => updateDeepOcrSelection(match.fieldIndex, { enabled: event.target.checked })} /></td>
+                                <td>
+                                  <b>{match.key || '(key 없음)'}</b>
+                                  <span>{match.value || '(빈 값)'}</span>
+                                  <small>{match.confidence == null ? 'confidence 없음' : `confidence ${Number(match.confidence).toFixed(3)}`}</small>
+                                </td>
+                                <td><span className={`match-pill ${match.status}`}>{match.status}</span></td>
+                                <td>
+                                  <select
+                                    value={selection.bboxLabelId || ''}
+                                    onChange={(event) => updateDeepOcrSelection(match.fieldIndex, { bboxLabelId: event.target.value, enabled: Boolean(event.target.value) })}
+                                  >
+                                    <option value="">BBox 직접 선택</option>
+                                    {(policy?.labels || []).map((label) => <option key={label.id} value={label.id}>{label.id} · {label.rec_text || label.text || '(텍스트 없음)'}</option>)}
+                                  </select>
+                                  {(match.candidates || []).length > 0 && <small>후보: {match.candidates.slice(0, 3).map((candidate) => `${candidate.bboxLabelId} ${Math.round(candidate.score * 100)}%`).join(' · ')}</small>}
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="button-row compact-buttons">
+                      <button className="primary" onClick={applyDeepOcrSelections} disabled={!Object.values(deepOcrSelections).some((item) => item.enabled && item.bboxLabelId) || isBusy}>선택 매핑을 BBox/주석에 적용</button>
+                      {Object.entries(deepOcrPreview.paths || {}).map(([name, path]) => <a key={name} className="result-link compact" href={fileUrl(path)} target="_blank" rel="noreferrer">{name}.json</a>)}
+                    </div>
+                    <p className="warning-text">적용은 선택한 BBox를 `사용` 상태로 바꾸고 Export key/GT value를 채우지만 자동 저장하지 않습니다. 리뷰 저장 후 주석 저장을 각각 확인하세요.</p>
+                  </>
+                )}
+              </div>
               <div className="cleanroom-field-list">
                 {cleanroomFields.map((field, index) => {
                   const privacyMode = (cleanroomPrivacy.include_keys || []).includes(field.key)

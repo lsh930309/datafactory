@@ -1,5 +1,7 @@
 # 2026-07-02 1차 납기: 수동 Authoring 1-cycle 작업 목표
 
+> **폐기된 과거 범위 문서**: 이 문서의 고정 1차 범위와 진행률 정의는 더 이상 사용하지 않는다. 현재 분류 원천은 `registry/DEEP_Agent_문서분류_레지스트리_v2.2.xlsx`이며, 도메인은 3번째 시트 `2.업무분류`, 진척도는 `workbench/documents/` 상태만을 기준으로 한다.
+
 작성일: 2026-06-29  
 범위 정정일: 2026-06-30  
 대상 프로젝트: DataFactory  
@@ -7,7 +9,7 @@
 
 > **범위 정정 원칙(중요)**  
 > 이 문서의 대상 범위는 더 이상 “이 문서가 처음 작성된 시점에 인페인팅이 완료되어 있던 문서”가 아니다.  
-> 대상 범위는 `src/datafactory/registry.py`의 `FIRST_PRIORITY_SCOPE_ENTRIES`와 웹 GUI 좌측의 `1차 목표 문서` 목록으로 고정한다. 이 목록은 `registry/데이터구축_UIUX_1차_금융제조.pdf` 2~3페이지의 금융/제조 1차 범위를 코드화한 것이다.  
+> 아래 고정 범위는 당시 기록 보존용이며 현재 코드나 운영 판단에는 사용하지 않는다.
 > 인페인팅 완료 여부는 **작업 가능 상태/우선순위**일 뿐, 목표 범위를 결정하지 않는다.
 
 ## 1. 배경과 의사결정
@@ -32,8 +34,8 @@ seed sample 적재
 
 ### 2.1 대상 범위: scope entry 30건 / unique 28종
 
-- 기준 소스: `src/datafactory/registry.py`의 `FIRST_PRIORITY_SCOPE_ENTRIES`
-- 원천 문서: `registry/데이터구축_UIUX_1차_금융제조.pdf` 2~3페이지
+- 기준 소스(폐기): 당시 수기 고정 범위
+- 현재 기준: `registry/DEEP_Agent_문서분류_레지스트리_v2.2.xlsx`와 `workbench/documents/`
 - scope entry: 금융 20건 + 제조 10건 = 30건
 - 중복 문서: `FIN-01`, `RPT-08` 2건이 금융/제조 양쪽에 중복 등장
 - 실제 unique 대상: **28종**

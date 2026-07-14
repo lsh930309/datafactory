@@ -1,10 +1,12 @@
 # 최종 산출물 Export 웹 기능 구현 계획
 
+> **현행 범위 기준**: 아래의 30건 고정 범위 설명은 최초 구현 당시 기록이다. 현재 UI의 export 범위는 XLSX 레지스트리에서 생성한 도메인별 목표 그룹 또는 사용자 정의 그룹이며, 준비 여부는 workbench 산출물로 판단한다.
+
 작성일: 2026-07-03
 
 ## 목표
 
-1차 목표 범위 30개 scope entry / 28개 고유 문서의 제출용 최종 산출물을 웹 GUI에서 한 번에 생성한다.
+선택한 도메인/사용자 정의 scope의 제출용 최종 산출물을 웹 GUI에서 한 번에 생성한다.
 
 - 작업 가능 문서: 완성된 authoring pipeline으로 `n`개 샘플을 생성한다.
 - 작업 불가/비파이프라인 문서: 검수된 cleanroom PDF 1건을 최종 샘플로 출력한다.
@@ -84,7 +86,7 @@ BBox JSON 원칙:
    - `POST /api/results/final-export`
    - runtime health feature flag 추가
 3. `web/src/App.jsx` UI 추가
-   - 1차 목표 패널에 n 입력 및 최종 산출물 생성 버튼
+   - 목표 그룹 패널에 n 입력 및 최종 산출물 생성 버튼
    - 결과 요약/manifest 링크 표시
 4. 테스트 추가
    - export plan 분류

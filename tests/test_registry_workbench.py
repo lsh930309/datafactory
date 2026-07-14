@@ -8,7 +8,7 @@ from xml.etree import ElementTree as ET
 
 from PIL import Image, ImageDraw
 
-from datafactory.registry import FIRST_PRIORITY_DOC_IDS, FIRST_PRIORITY_SCOPE_ENTRIES, load_registry, normalize_title, slugify_title
+from datafactory.registry import classification_domain, load_registry, normalize_title, slugify_title
 from datafactory.workbench import (
     delete_target_group,
     import_seed_batch,
@@ -20,6 +20,7 @@ from datafactory.workbench import (
     save_target_group,
     save_uploaded_seed_files,
     scan_seed_samples,
+    summarize_work_items,
     trash_seed_folder,
 )
 from datafactory.first_priority_assessment import export_first_priority_assessment_xlsx, list_first_priority_assessments, save_assessment_entry
@@ -27,7 +28,7 @@ from datafactory.models import BBox, FieldSpec, TemplateSpec
 from datafactory.render import render_template
 
 
-def test_registry_loads_title_first_documents_and_priority_flags() -> None:
+def test_registry_uses_workflow_sheet_as_the_only_domain_source() -> None:
     registry = load_registry()
 
     family = registry.documents["ID-05"]
@@ -36,24 +37,44 @@ def test_registry_loads_title_first_documents_and_priority_flags() -> None:
 
     assert family.title == "가족관계증명서"
     assert "임대차계약서" in lease.title
-    assert finance.is_first_priority
-    assert "FIN-01" in FIRST_PRIORITY_DOC_IDS
+    assert not finance.is_first_priority
     assert finance.workflow_ids
     assert finance.domains
-    assert finance.po_domains[:2] == ("금융", "제조")
+    assert finance.po_domains[:2] == ("금융", "공공")
     assert "공공·행정 (B2G)" in finance.domains
-    assert len(FIRST_PRIORITY_SCOPE_ENTRIES) == 30
-    assert len(FIRST_PRIORITY_DOC_IDS) == 28
     payload = registry.to_dict()
-    assert payload["summary"]["firstPriorityScopeEntryCount"] == 30
-    assert payload["summary"]["firstPriorityDocumentCount"] == 28
-    assert payload["domains"][:2] == ["금융", "제조"]
+    assert payload["summary"]["firstPriorityScopeEntryCount"] == 0
+    assert payload["summary"]["firstPriorityDocumentCount"] == 0
+    assert payload["summary"]["unclassifiedDocumentCount"] == 6
+    assert payload["domains"][:3] == ["금융", "보험", "공공"]
     assert "금융 - 은행 (여신·신용·외환)" in payload["workflowDomains"]
-    assert payload["poDomainSummary"][0] == {"id": "금융", "label": "금융", "total": 37, "active": 17, "inactive": 20}
-    assert payload["targetGroups"][0]["id"] == "first_priority"
-    assert len(payload["targetGroups"][0]["scopeEntries"]) == 30
-    assert finance.first_priority_domains == ("금융", "제조")
-    assert registry.documents["APP-13"].po_domains == ("금융",)
+    assert registry.workflows["BANK-01"].classification_domain == "금융"
+    assert payload["poDomainSummary"][0] == {"id": "금융", "label": "금융", "total": 34}
+    assert payload["domainSummary"] == payload["poDomainSummary"]
+    assert payload["targetGroups"] == []
+    assert finance.first_priority_domains == ()
+    assert registry.documents["APP-13"].po_domains == ()
+    assert registry.documents["FIN-07"].po_domains == ()
+
+
+def test_classification_domain_collapses_workflow_sheet_labels() -> None:
+    assert classification_domain("금융 - 은행 (여신·신용·외환)") == "금융"
+    assert classification_domain("공공·행정 (B2G)") == "공공"
+    assert classification_domain("인사·노무 (공통)") == "인사"
+
+
+def test_workbench_progress_summary_uses_only_workbench_status(tmp_path: Path) -> None:
+    registry = load_registry()
+    workbench_root = tmp_path / "workbench" / "documents"
+    items = list_work_items(registry=registry, root=workbench_root)
+
+    summary = summarize_work_items(items, registry)
+
+    assert summary["source"] == "workbench"
+    assert summary["progressCounts"] == {"not_started": len(registry.documents), "in_progress": 0, "done": 0}
+    assert summary["byDomain"][0] == {"domain": "금융", "total": 34, "not_started": 34, "in_progress": 0, "done": 0}
+    assert summary["byDomain"][-1]["domain"] == "미분류"
+    assert summary["byDomain"][-1]["total"] == 6
 
 
 def test_target_groups_store_custom_groups_without_touching_default(tmp_path: Path) -> None:
@@ -71,7 +92,7 @@ def test_target_groups_store_custom_groups_without_touching_default(tmp_path: Pa
     )
 
     groups = saved["groups"]
-    assert groups[0]["id"] == "first_priority"
+    assert groups[0]["id"] == "domain_금융"
     custom = next(group for group in groups if group["label"] == "카드/계좌 authoring")
     assert not custom["protected"]
     assert [entry["docId"] for entry in custom["scopeEntries"]] == ["APP-14", "APP-13"]
@@ -83,18 +104,18 @@ def test_target_groups_store_custom_groups_without_touching_default(tmp_path: Pa
     assert deleted["summary"]["customCount"] == 0
 
 
-def test_target_groups_can_hide_default_first_priority_group(tmp_path: Path) -> None:
+def test_target_groups_can_hide_default_registry_domain_group(tmp_path: Path) -> None:
     registry = load_registry()
     workbench_root = tmp_path / "workbench" / "documents"
 
     before = list_target_groups(registry=registry, root=workbench_root)
-    assert before["summary"]["defaultCount"] == 1
+    assert before["summary"]["defaultCount"] == 11
 
-    after = delete_target_group("first_priority", registry=registry, root=workbench_root)
+    after = delete_target_group("domain_금융", registry=registry, root=workbench_root)
 
-    assert after["summary"]["defaultCount"] == 0
+    assert after["summary"]["defaultCount"] == 10
     assert after["summary"]["hiddenDefaultCount"] == 1
-    assert all(group["id"] != "first_priority" for group in after["groups"])
+    assert all(group["id"] != "domain_금융" for group in after["groups"])
 
 
 def test_seed_revert_preview_lists_paths_before_move(tmp_path: Path) -> None:
@@ -485,7 +506,7 @@ def test_first_priority_assessment_save_requires_reason_for_impossible(tmp_path:
         root=workbench_root,
     )
     non_priority_row = next(item for item in payload["rows"] if item["domain"] == "금융" and item["docId"] == "FIN-10")
-    assert non_priority_row["scopeKind"] == "all_documents"
+    assert non_priority_row["scopeKind"] == "registry_domain"
     assert non_priority_row["feasibility"] == "possible"
 
 
@@ -503,10 +524,10 @@ def test_first_priority_assessment_exports_single_sheet_xlsx(tmp_path: Path) -> 
     )
 
     payload = list_first_priority_assessments(registry=registry, root=workbench_root)
-    assert payload["summary"]["scopeEntryCount"] == registry.to_dict()["summary"]["documentCount"] + 2
+    assert payload["summary"]["scopeEntryCount"] == sum(item["total"] for item in registry.to_dict()["domainSummary"]) + registry.to_dict()["summary"]["unclassifiedDocumentCount"]
     assert payload["summary"]["uniqueDocumentCount"] == registry.to_dict()["summary"]["documentCount"]
-    assert sum(1 for row in payload["rows"] if row["scopeKind"] == "first_priority") == 30
-    assert any(row["scopeKind"] == "all_documents" for row in payload["rows"])
+    assert all(row["scopeKind"] == "registry_domain" for row in payload["rows"])
+    assert not any(row["isFirstPriority"] for row in payload["rows"])
 
     result = export_first_priority_assessment_xlsx(out_dir=tmp_path / "outputs", registry=registry, root=workbench_root)
     workbook_path = Path(result["path"])

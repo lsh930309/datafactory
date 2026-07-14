@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from .registry import RegistryData, RegistryDocument, load_registry, normalize_title, slugify_title
+from .registry import UNCLASSIFIED_DOMAIN, RegistryData, RegistryDocument, load_registry, normalize_title, slugify_title
 
 ROOT = Path(__file__).resolve().parents[2]
 SEED_ROOT = ROOT / "seed_samples"
@@ -33,8 +33,16 @@ INTAKE_STATUS_LABELS = {
     "alreadyImported": "이미 적재됨",
 }
 SAMPLE_KINDS = {"filled_sample", "blank_template", "mixed_template"}
-
-PROTECTED_TARGET_GROUP_IDS = {"first_priority"}
+WORK_STATUS_TO_PROGRESS = {
+    "missing": "not_started",
+    "sample_imported": "in_progress",
+    "ocr_done": "in_progress",
+    "review_done": "in_progress",
+    "inpaint_done": "in_progress",
+    "cleanroom_sample_ready": "done",
+    "collection_done": "done",
+    "approved": "done",
+}
 
 
 @dataclass(frozen=True)
@@ -65,30 +73,43 @@ def target_groups_path(root: Path = WORKBENCH_ROOT) -> Path:
 
 
 def default_target_groups(registry: RegistryData) -> list[dict[str, Any]]:
-    return [
-        {
-            "id": "first_priority",
-            "label": "기존 1차 목표",
-            "description": "현재 authoring/생성 가능성 판정 기본 대상 그룹입니다.",
-            "protected": True,
-            "scopeEntries": [
-                {
-                    "domain": domain,
-                    "docId": doc_id,
-                    "title": registry.documents[doc_id].title if doc_id in registry.documents else "",
-                }
-                for domain, doc_id in registry.first_priority_scope_entries
-            ],
-        }
-    ]
+    domains = [*registry.domain_order]
+    if any(not doc.po_domains for doc in registry.documents.values()):
+        domains.append(UNCLASSIFIED_DOMAIN)
+    groups: list[dict[str, Any]] = []
+    for domain in domains:
+        docs = [
+            doc
+            for doc in registry.documents.values()
+            if (domain in doc.po_domains) or (domain == UNCLASSIFIED_DOMAIN and not doc.po_domains)
+        ]
+        groups.append(
+            {
+                "id": f"domain_{slugify_title(domain)}",
+                "label": domain,
+                "description": "레지스트리 XLSX 3번째 시트의 산업도메인 분류입니다.",
+                "protected": True,
+                "scopeEntries": [
+                    {"domain": domain, "docId": doc.doc_id, "title": doc.title}
+                    for doc in sorted(docs, key=lambda item: (item.title, item.doc_id))
+                ],
+            }
+        )
+    return groups
+
+
+def _protected_target_group_ids(registry: RegistryData) -> set[str]:
+    return {str(group["id"]) for group in default_target_groups(registry)}
 
 
 def list_target_groups(registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
     registry = registry or load_registry()
     payload = _load_target_groups_payload(root=root)
-    hidden_default_ids = set(payload.get("hidden_default_ids") or [])
+    default_groups = default_target_groups(registry)
+    default_ids = {str(group["id"]) for group in default_groups}
+    hidden_default_ids = set(payload.get("hidden_default_ids") or []) & default_ids
     custom = _load_custom_target_groups(registry, root=root)
-    defaults = [group for group in default_target_groups(registry) if group["id"] not in hidden_default_ids]
+    defaults = [group for group in default_groups if group["id"] not in hidden_default_ids]
     groups = [*defaults, *custom]
     return {
         "path": _display_path(target_groups_path(root)),
@@ -109,7 +130,7 @@ def save_target_group(payload: dict[str, Any], registry: RegistryData | None = N
         raise ValueError("target group label is required")
     group_id = str(payload.get("id") or "").strip() or f"grp_{slugify_title(label)}"
     group_id = _safe_group_id(group_id)
-    if group_id in PROTECTED_TARGET_GROUP_IDS:
+    if group_id in _protected_target_group_ids(registry):
         raise ValueError(f"protected target group cannot be modified: {group_id}")
     scope_entries = _normalize_target_scope_entries(payload.get("scopeEntries"), registry)
     if not scope_entries:
@@ -134,7 +155,7 @@ def save_target_group(payload: dict[str, Any], registry: RegistryData | None = N
 def delete_target_group(group_id: str, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> dict[str, Any]:
     registry = registry or load_registry()
     group_id = _safe_group_id(group_id)
-    if group_id in PROTECTED_TARGET_GROUP_IDS:
+    if group_id in _protected_target_group_ids(registry):
         payload = _load_target_groups_payload(root=root)
         hidden_default_ids = list(dict.fromkeys([*(payload.get("hidden_default_ids") or []), group_id]))
         custom = _load_custom_target_groups(registry, root=root)
@@ -175,7 +196,7 @@ def _load_custom_target_groups(registry: RegistryData, root: Path = WORKBENCH_RO
         if not isinstance(raw, dict):
             continue
         group_id = _safe_group_id(str(raw.get("id") or ""))
-        if not group_id or group_id in PROTECTED_TARGET_GROUP_IDS:
+        if not group_id or group_id in _protected_target_group_ids(registry):
             continue
         label = str(raw.get("label") or group_id).strip()
         scope_entries = _normalize_target_scope_entries(raw.get("scopeEntries"), registry)
@@ -612,7 +633,8 @@ def save_seed_mapping(folder_name: str, doc_id: str, registry: RegistryData | No
 def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> list[dict[str, Any]]:
     registry = registry or load_registry()
     items: list[dict[str, Any]] = []
-    for doc in sorted(registry.documents.values(), key=lambda item: (not item.is_first_priority, item.title, item.doc_id)):
+    domain_index = {domain: index for index, domain in enumerate(registry.domain_order)}
+    for doc in sorted(registry.documents.values(), key=lambda item: (min((domain_index.get(domain, len(domain_index)) for domain in item.po_domains), default=len(domain_index)), item.title, item.doc_id)):
         doc_root = document_dir(doc, root)
         manifest = _read_manifest(doc_root)
         samples = _sample_files(doc_root)
@@ -625,6 +647,7 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
                 "documentDir": _display_path(doc_root),
                 "status": status,
                 "statusLabel": STATUS_LABELS[status],
+                "progressGroup": WORK_STATUS_TO_PROGRESS[status],
                 "sampleCount": len(samples),
                 "samples": [_display_path(path) for path in samples],
                 "sampleKind": str(manifest.get("sample_kind") or "filled_sample"),
@@ -686,6 +709,45 @@ def list_work_items(registry: RegistryData | None = None, root: Path = WORKBENCH
             }
         )
     return items
+
+
+def summarize_work_items(items: list[dict[str, Any]], registry: RegistryData) -> dict[str, Any]:
+    status_counts = {status: 0 for status in STATUS_LABELS}
+    progress_counts = {"not_started": 0, "in_progress": 0, "done": 0}
+    by_doc_id = {str(item.get("docId") or ""): item for item in items}
+    for item in items:
+        status = str(item.get("status") or "missing")
+        status_counts[status] = status_counts.get(status, 0) + 1
+        progress = str(item.get("progressGroup") or WORK_STATUS_TO_PROGRESS.get(status, "not_started"))
+        progress_counts[progress] = progress_counts.get(progress, 0) + 1
+
+    domains = [*registry.domain_order]
+    if any(not doc.po_domains for doc in registry.documents.values()):
+        domains.append(UNCLASSIFIED_DOMAIN)
+    by_domain: list[dict[str, Any]] = []
+    for domain in domains:
+        domain_docs = [
+            doc for doc in registry.documents.values()
+            if domain in doc.po_domains or (domain == UNCLASSIFIED_DOMAIN and not doc.po_domains)
+        ]
+        counts = {"not_started": 0, "in_progress": 0, "done": 0}
+        for doc in domain_docs:
+            item = by_doc_id.get(doc.doc_id, {})
+            progress = str(item.get("progressGroup") or WORK_STATUS_TO_PROGRESS.get(str(item.get("status") or "missing"), "not_started"))
+            counts[progress] = counts.get(progress, 0) + 1
+        by_domain.append({"domain": domain, "total": len(domain_docs), **counts})
+
+    return {
+        "total": len(items),
+        "imported": len(items) - status_counts.get("missing", 0),
+        "bboxDone": len([item for item in items if item.get("hasOcr")]),
+        "reviewDone": len([item for item in items if item.get("hasReview")]),
+        "inpaintDone": len([item for item in items if item.get("hasInpaint")]),
+        "statusCounts": status_counts,
+        "progressCounts": progress_counts,
+        "byDomain": by_domain,
+        "source": "workbench",
+    }
 
 
 def update_manifest_artifact(doc_id: str, artifact: str, path: str | Path, registry: RegistryData | None = None, root: Path = WORKBENCH_ROOT) -> None:

@@ -10,6 +10,146 @@ import pytest
 from datafactory import web_api
 
 
+def test_authoring_agent_capabilities_follow_local_model_cache(tmp_path: Path) -> None:
+    (tmp_path / "models_cache.json").write_text(
+        json.dumps(
+            {
+                "fetched_at": "2026-07-14T00:43:57Z",
+                "models": [
+                    {
+                        "slug": "gpt-5.6-sol",
+                        "display_name": "GPT-5.6-Sol",
+                        "description": "frontier",
+                        "visibility": "list",
+                        "default_reasoning_level": "low",
+                        "supported_reasoning_levels": [{"effort": value} for value in ("low", "medium", "high", "xhigh", "max", "ultra")],
+                        "additional_speed_tiers": ["fast"],
+                    },
+                    {
+                        "slug": "gpt-5.6-luna",
+                        "display_name": "GPT-5.6-Luna",
+                        "description": "fast",
+                        "visibility": "list",
+                        "default_reasoning_level": "medium",
+                        "supported_reasoning_levels": [{"effort": value} for value in ("low", "medium", "high", "xhigh", "max")],
+                        "additional_speed_tiers": ["fast"],
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (tmp_path / "config.toml").write_text('model = "gpt-5.6-sol"\n', encoding="utf-8")
+
+    payload = web_api.authoring_agent_capabilities(codex_home=tmp_path)
+
+    assert payload["defaultModel"] == "gpt-5.6-terra"
+    assert payload["source"] == "models_cache"
+    luna = next(model for model in payload["models"] if model["id"] == "gpt-5.6-luna")
+    assert luna["reasoningEfforts"] == ["low", "medium", "high", "xhigh", "max"]
+    assert luna["supportsFastMode"] is True
+
+
+def test_authoring_agent_options_support_new_reasoning_and_optional_budget(monkeypatch) -> None:  # noqa: ANN001
+    monkeypatch.setattr(
+        web_api,
+        "authoring_agent_capabilities",
+        lambda: {
+            "defaultModel": "gpt-5.6-terra",
+            "models": [
+                {
+                    "id": "gpt-5.6-terra",
+                    "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+                    "supportsFastMode": True,
+                },
+                {"id": "gpt-5.6-luna", "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"], "supportsFastMode": True},
+            ],
+        },
+    )
+
+    options = web_api._authoring_agent_options(
+        {"options": {"model": "gpt-5.6-terra", "reasoningEffort": "ultra", "executionMode": "single_pass", "timeBudgetMinutes": 15}}
+    )
+
+    assert options["model"] == "gpt-5.6-terra"
+    assert options["reasoningEffort"] == "ultra"
+    assert options["executionMode"] == "single_pass"
+    assert options["timeBudgetMinutes"] == 15
+    with pytest.raises(ValueError, match="not supported"):
+        web_api._authoring_agent_options({"options": {"model": "gpt-5.6-luna", "reasoningEffort": "ultra"}})
+
+
+def test_authoring_agent_execution_modes_have_bounded_stage_sequences() -> None:
+    assert web_api._authoring_agent_execution_stages("two_pass") == ["schema", "faker"]
+    assert web_api._authoring_agent_execution_stages("single_pass") == ["full"]
+    assert web_api._authoring_agent_execution_stages("schema_only") == ["schema"]
+    assert web_api._authoring_agent_execution_stages("faker_only") == ["faker"]
+    assert web_api._authoring_agent_execution_stages("validation_repair") == ["validation_repair"]
+
+
+def test_agent_job_payload_streams_terminal_by_cursor(tmp_path: Path, monkeypatch) -> None:  # noqa: ANN001
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    run_dir = tmp_path / "workbench" / "documents" / "doc" / "authoring" / "agent_runs" / "run1"
+    run_dir.mkdir(parents=True)
+    terminal = run_dir / "terminal.log"
+    terminal.write_text("first\nsecond\n", encoding="utf-8")
+    job_path = run_dir / "job.json"
+    web_api._write_agent_job(job_path, {"status": "running", "terminalPath": web_api._display_path(terminal, tmp_path)})
+
+    first = web_api._agent_job_payload(job_path, terminal_offset=0)
+    second = web_api._agent_job_payload(job_path, terminal_offset=len("first\n".encode()))
+
+    assert first["terminal"]["text"] == "first\nsecond\n"
+    assert second["terminal"]["text"] == "second\n"
+
+
+def test_run_codex_process_streams_stdout_and_stderr_to_terminal(tmp_path: Path) -> None:
+    job_path = tmp_path / "job.json"
+    stdout_path = tmp_path / "stdout.log"
+    stderr_path = tmp_path / "stderr.log"
+    terminal_path = tmp_path / "terminal.log"
+    web_api._write_agent_job(job_path, {"status": "running"})
+
+    result = web_api._run_codex_process(
+        [
+            web_api.sys.executable,
+            "-u",
+            "-c",
+            "import sys; data=sys.stdin.read(); print('stdout:'+data); print('stderr:mirror', file=sys.stderr)",
+        ],
+        "prompt-body",
+        cwd=tmp_path,
+        stdout_path=stdout_path,
+        stderr_path=stderr_path,
+        terminal_path=terminal_path,
+        job_path=job_path,
+        deadline=None,
+    )
+
+    assert result.returncode == 0
+    assert "stdout:prompt-body" in stdout_path.read_text(encoding="utf-8")
+    assert "stderr:mirror" in stderr_path.read_text(encoding="utf-8")
+    terminal_text = terminal_path.read_text(encoding="utf-8")
+    assert "stdout:prompt-body" in terminal_text
+    assert "stderr:mirror" in terminal_text
+
+
+def test_cancel_authoring_agent_run_marks_request_and_terminates_process(tmp_path: Path, monkeypatch) -> None:  # noqa: ANN001
+    monkeypatch.setattr(web_api, "ROOT", tmp_path)
+    run_dir = tmp_path / "workbench" / "documents" / "doc" / "authoring" / "agent_runs" / "run1"
+    run_dir.mkdir(parents=True)
+    job_path = run_dir / "job.json"
+    web_api._write_agent_job(job_path, {"status": "running", "pid": 321})
+    terminated: list[tuple[object, bool]] = []
+    monkeypatch.setattr(web_api, "_terminate_process_group", lambda pid, *, force: terminated.append((pid, force)))
+
+    payload = web_api.cancel_authoring_agent_run_payload({"jobPath": str(job_path)})
+
+    assert payload["status"] == "cancelling"
+    assert payload["cancelRequestedAt"]
+    assert terminated == [(321, False)]
+
+
 def test_visual_line_detection_flag_is_explicit_opt_in() -> None:
     assert not web_api._visual_line_detection_requested({})
     assert not web_api._visual_line_detection_requested({"includeVisualLineDetection": False})
@@ -399,10 +539,10 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
         target.mkdir(parents=True, exist_ok=True)
         return target
 
-    def fake_run(cmd, *, input, cwd, text, capture_output, timeout, check):  # noqa: ANN001, A002
-        calls.append(str(input))
+    def fake_run(cmd, prompt, **kwargs):  # noqa: ANN001
+        calls.append(str(prompt))
         captured["cmd"] = cmd
-        captured["input"] = input
+        captured["input"] = prompt
         request_dirs = sorted((tmp_path / "workbench" / fake_doc.doc_id / "authoring" / "agent_requests").glob("*"))
         request_dir = request_dirs[-1]
         for name in web_api.AUTHORING_AGENT_REQUIRED_OUTPUTS:
@@ -423,14 +563,17 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
                 path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
             else:
                 path.write_text("생성 완료\n", encoding="utf-8")
-        return SimpleNamespace(returncode=0, stdout="ok", stderr="")
+        kwargs["stdout_path"].write_text("ok", encoding="utf-8")
+        kwargs["stderr_path"].write_text("tokens used\n123\n", encoding="utf-8")
+        Path(cmd[cmd.index("--output-last-message") + 1]).write_text("ok", encoding="utf-8")
+        return web_api._AgentProcessResult(returncode=0, stdout_tail="ok", stderr_tail="", pid=123)
 
     monkeypatch.setattr(web_api, "ROOT", tmp_path)
     monkeypatch.setattr(web_api, "load_registry", lambda: fake_registry)
     monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
     monkeypatch.setattr(web_api, "list_work_items", lambda registry: [{"docId": fake_doc.doc_id, "samples": [], "latestReview": "", "latestInpainted": ""}])
     monkeypatch.setattr(web_api, "update_manifest_artifact", lambda doc_id, key, path: manifest_updates.append((doc_id, key, str(path))))
-    monkeypatch.setattr(web_api.subprocess, "run", fake_run)
+    monkeypatch.setattr(web_api, "_run_codex_process", fake_run)
 
     payload = web_api.authoring_agent_run_payload({"docId": fake_doc.doc_id, "instruction": "원클릭 추론"}, async_run=False)
 
@@ -438,19 +581,20 @@ def test_authoring_agent_run_invokes_codex_and_validates_draft_outputs(tmp_path:
     assert payload["validation"]["ready"] is True
     assert payload["validation"]["summary"]["present"] == len(web_api.AUTHORING_AGENT_REQUIRED_OUTPUTS)
     assert captured["cmd"][:4] == ["codex", "--search", "--ask-for-approval", "never"]
+    assert captured["cmd"][captured["cmd"].index("--model") + 1] == "gpt-5.6-terra"
     assert "-c" in captured["cmd"]
     assert 'model_reasoning_effort="medium"' in captured["cmd"]
     assert "--disable" in captured["cmd"]
     assert captured["cmd"][captured["cmd"].index("--disable") + 1] == "fast_mode"
     assert "exec" in captured["cmd"]
     assert "--output-last-message" in captured["cmd"]
-    assert "Required output files" in str(captured["input"])
-    assert "Supported faker relationship constraint grammar" in str(captured["input"])
+    assert "Supported relationships" in str(captured["input"])
     assert "pick_record" in str(captured["input"])
     assert "constraint 내부 `records`" in str(captured["input"])
     assert len(calls) == 2
-    assert "Current pass: 1/2 schema" in calls[0]
-    assert "Current pass: 2/2 faker" in calls[1]
+    assert "schema pass" in calls[0]
+    assert "faker pass" in calls[1]
+    assert "Do not browse the web" in calls[1]
     assert payload["stages"][1]["frozenArtifactViolations"] == ["schema_draft.json"]
     restored_request_dir = sorted((tmp_path / "workbench" / fake_doc.doc_id / "authoring" / "agent_requests").glob("*"))[-1]
     restored_schema = json.loads((restored_request_dir / "schema_draft.json").read_text(encoding="utf-8"))
@@ -786,14 +930,16 @@ def test_authoring_agent_options_control_codex_command_and_pool_minimum(tmp_path
     fake_doc = FakeDoc()
     fake_registry = SimpleNamespace(documents={fake_doc.doc_id: fake_doc})
     captured: dict[str, object] = {}
+    prompts: list[str] = []
 
     def fake_workbench_subdir(doc_id: str, subdir: str):
         target = tmp_path / "workbench" / doc_id / subdir
         target.mkdir(parents=True, exist_ok=True)
         return target
 
-    def fake_run(cmd, *, input, cwd, text, capture_output, timeout, check):  # noqa: ANN001, A002
+    def fake_run(cmd, prompt, **kwargs):  # noqa: ANN001
         captured["cmd"] = cmd
+        prompts.append(prompt)
         request_dir = sorted((tmp_path / "workbench" / fake_doc.doc_id / "authoring" / "agent_requests").glob("*"))[-1]
         for name in web_api.AUTHORING_AGENT_REQUIRED_OUTPUTS:
             path = request_dir / name
@@ -810,23 +956,31 @@ def test_authoring_agent_options_control_codex_command_and_pool_minimum(tmp_path
                 path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
             else:
                 path.write_text("ok", encoding="utf-8")
-        return SimpleNamespace(returncode=0, stdout="ok", stderr="")
+        kwargs["stdout_path"].write_text("ok", encoding="utf-8")
+        kwargs["stderr_path"].write_text("tokens used\n42\n", encoding="utf-8")
+        Path(cmd[cmd.index("--output-last-message") + 1]).write_text("ok", encoding="utf-8")
+        return web_api._AgentProcessResult(returncode=0, stdout_tail="ok", stderr_tail="", pid=456)
 
     monkeypatch.setattr(web_api, "ROOT", tmp_path)
     monkeypatch.setattr(web_api, "load_registry", lambda: fake_registry)
     monkeypatch.setattr(web_api, "workbench_subdir", fake_workbench_subdir)
     monkeypatch.setattr(web_api, "list_work_items", lambda registry: [{"docId": fake_doc.doc_id, "samples": [], "latestReview": "", "latestInpainted": ""}])
     monkeypatch.setattr(web_api, "update_manifest_artifact", lambda *args, **kwargs: None)
-    monkeypatch.setattr(web_api.subprocess, "run", fake_run)
+    monkeypatch.setattr(web_api, "_run_codex_process", fake_run)
 
     payload = web_api.authoring_agent_run_payload(
-        {"docId": fake_doc.doc_id, "options": {"reasoningEffort": "high", "fastMode": True, "minPoolSize": 4}},
+        {"docId": fake_doc.doc_id, "options": {"reasoningEffort": "high", "fastMode": True, "minPoolSize": 4, "executionMode": "single_pass"}},
         async_run=False,
     )
 
     assert payload["status"] == "succeeded"
+    assert payload["executionMode"] == "single_pass"
+    assert payload["passState"]["planned"] == ["full"]
+    assert len(prompts) == 1
+    assert "full draft generation" in prompts[0]
     assert 'model_reasoning_effort="high"' in captured["cmd"]
-    assert "--disable" not in captured["cmd"]
+    assert "--enable" in captured["cmd"]
+    assert captured["cmd"][captured["cmd"].index("--enable") + 1] == "fast_mode"
 
 
 def test_business_registration_rule_and_fixed_as_of_date_are_agent_contract_inputs() -> None:

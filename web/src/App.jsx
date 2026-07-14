@@ -27,6 +27,29 @@ const AUTO_TYPE_LABELS = {
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tif', '.tiff'];
 const UPLOAD_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.pdf', '.docx'];
 const DEFAULT_OCR_PRESET = 'precise';
+const DEFAULT_AUTHORING_AGENT_CAPABILITIES = {
+  defaultModel: 'gpt-5.6-terra',
+  defaultReasoningEffort: 'medium',
+  executionModes: ['two_pass', 'single_pass', 'schema_only', 'faker_only', 'validation_repair'],
+  models: [
+    {
+      id: 'gpt-5.6-terra',
+      label: 'gpt-5.6-terra',
+      description: '',
+      defaultReasoningEffort: 'medium',
+      reasoningEfforts: ['low', 'medium', 'high', 'xhigh', 'max', 'ultra'],
+      supportsFastMode: true,
+    },
+  ],
+};
+const AUTHORING_AGENT_EXECUTION_MODE_LABELS = {
+  two_pass: '정밀 2패스',
+  single_pass: '빠른 1패스',
+  schema_only: 'Schema만 재실행',
+  faker_only: 'Faker만 재실행',
+  validation_repair: '검증 보정만',
+};
+const AUTHORING_AGENT_TERMINAL_STATUSES = new Set(['succeeded', 'failed', 'needs_repair', 'cancelled', 'timed_out', 'interrupted']);
 const VIEWPORT_MODES = [
   ['auto', '자동'],
   ['fit', '전체 맞춤'],
@@ -452,6 +475,15 @@ function localDateInputValue(now = new Date()) {
   const offset = now.getTimezoneOffset() * 60_000;
   return new Date(now.getTime() - offset).toISOString().slice(0, 10);
 }
+function formatElapsedSeconds(value) {
+  const total = Math.max(0, Math.round(Number(value) || 0));
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  const seconds = total % 60;
+  if (hours) return `${hours}시간 ${minutes}분 ${seconds}초`;
+  if (minutes) return `${minutes}분 ${seconds}초`;
+  return `${seconds}초`;
+}
 function pointDistance(left, right) {
   return Math.hypot((left?.x || 0) - (right?.x || 0), (left?.y || 0) - (right?.y || 0));
 }
@@ -513,6 +545,9 @@ function App() {
   const [authoringLivePreviewVersion, setAuthoringLivePreviewVersion] = useState(0);
   const authoringPreviewSeq = useRef(0);
   const authoringAgentTerminalRefreshRef = useRef('');
+  const authoringAgentTerminalOffsetRef = useRef(0);
+  const authoringAgentTerminalJobRef = useRef('');
+  const authoringAgentTerminalPreRef = useRef(null);
   const [fontPayload, setFontPayload] = useState({ defaultFontId: '', fonts: [] });
   const [canvasMode, setCanvasMode] = useState('review');
   const [viewportMode, setViewportMode] = useState('auto');
@@ -530,12 +565,21 @@ function App() {
   const [reviewAudit, setReviewAudit] = useState(null);
   const [manualCleanupAudit, setManualCleanupAudit] = useState(null);
   const [authoringAgentInstruction, setAuthoringAgentInstruction] = useState('');
+  const [authoringAgentCapabilities, setAuthoringAgentCapabilities] = useState(DEFAULT_AUTHORING_AGENT_CAPABILITIES);
+  const [authoringAgentModel, setAuthoringAgentModel] = useState(DEFAULT_AUTHORING_AGENT_CAPABILITIES.defaultModel);
   const [authoringAgentReasoning, setAuthoringAgentReasoning] = useState('medium');
   const [authoringAgentFastMode, setAuthoringAgentFastMode] = useState(false);
+  const [authoringAgentExecutionMode, setAuthoringAgentExecutionMode] = useState('two_pass');
+  const [authoringAgentTimeBudgetEnabled, setAuthoringAgentTimeBudgetEnabled] = useState(false);
+  const [authoringAgentTimeBudgetMinutes, setAuthoringAgentTimeBudgetMinutes] = useState(20);
   const [authoringAgentScalarPoolMinSize, setAuthoringAgentScalarPoolMinSize] = useState(20);
   const [authoringAgentRecordPoolMinSize, setAuthoringAgentRecordPoolMinSize] = useState(12);
   const [authoringAgentRequest, setAuthoringAgentRequest] = useState(null);
   const [authoringAgentRun, setAuthoringAgentRun] = useState(null);
+  const [authoringAgentTerminalText, setAuthoringAgentTerminalText] = useState('');
+  const [authoringAgentTerminalOpen, setAuthoringAgentTerminalOpen] = useState(false);
+  const [authoringAgentTerminalAutoScroll, setAuthoringAgentTerminalAutoScroll] = useState(true);
+  const [authoringAgentClock, setAuthoringAgentClock] = useState(Date.now());
   const [authoringLibrary, setAuthoringLibrary] = useState(null);
   const [authoringApprovalResult, setAuthoringApprovalResult] = useState(null);
   const [docxPipelineResult, setDocxPipelineResult] = useState(null);
@@ -697,7 +741,7 @@ function App() {
   }, [documents, uploadSearch]);
 
   async function refreshAll({ preserveSelection = true } = {}) {
-    const [nextHealth, nextRegistry, nextWork, nextAssessment, nextSeed, nextFonts, nextAuthoringLibrary] = await Promise.all([
+    const [nextHealth, nextRegistry, nextWork, nextAssessment, nextSeed, nextFonts, nextAuthoringLibrary, nextAgentCapabilities] = await Promise.all([
       apiJson('/api/health'),
       apiJson('/api/registry'),
       apiJson('/api/work-items'),
@@ -705,6 +749,7 @@ function App() {
       apiJson('/api/seed/scan'),
       apiJson('/api/fonts').catch(() => ({ defaultFontId: '', fonts: [] })),
       apiJson('/api/authoring/library', { method: 'POST', body: JSON.stringify({}) }).catch(() => null),
+      apiJson('/api/authoring/agent-capabilities').catch(() => DEFAULT_AUTHORING_AGENT_CAPABILITIES),
     ]);
     setHealth(nextHealth);
     setRegistry(nextRegistry);
@@ -713,6 +758,17 @@ function App() {
     setSeedScan(nextSeed);
     setFontPayload(nextFonts);
     if (nextAuthoringLibrary) setAuthoringLibrary(nextAuthoringLibrary);
+    const nextModels = Array.isArray(nextAgentCapabilities?.models) && nextAgentCapabilities.models.length
+      ? nextAgentCapabilities.models
+      : DEFAULT_AUTHORING_AGENT_CAPABILITIES.models;
+    const normalizedCapabilities = { ...DEFAULT_AUTHORING_AGENT_CAPABILITIES, ...nextAgentCapabilities, models: nextModels };
+    setAuthoringAgentCapabilities(normalizedCapabilities);
+    setAuthoringAgentModel((current) => {
+      const nextModel = nextModels.find((model) => model.id === current)
+        || nextModels.find((model) => model.id === normalizedCapabilities.defaultModel)
+        || nextModels[0];
+      return nextModel.id;
+    });
     setSelectedDocId((current) => {
       if (preserveSelection && current && nextWork.items.some((item) => item.docId === current)) return current;
       const pendingSeed = nextSeed.folders.find((folder) => folder.status === 'importable' && folder.matchedDocId);
@@ -970,11 +1026,14 @@ function App() {
     }
   }
 
-  function authoringAgentOptions(mode = 'authoring') {
+  function authoringAgentOptions(mode = 'authoring', executionMode = authoringAgentExecutionMode) {
     return {
       mode,
+      model: authoringAgentModel,
       reasoningEffort: authoringAgentReasoning,
       fastMode: authoringAgentFastMode,
+      executionMode,
+      timeBudgetMinutes: authoringAgentTimeBudgetEnabled ? clampNumber(authoringAgentTimeBudgetMinutes, 5, 60) : null,
       minPoolSize: clampNumber(authoringAgentScalarPoolMinSize, 1, 100),
       scalarPoolMinSize: clampNumber(authoringAgentScalarPoolMinSize, 1, 100),
       recordPoolMinSize: clampNumber(authoringAgentRecordPoolMinSize, 1, 100),
@@ -1021,19 +1080,38 @@ function App() {
     }
   }
 
-  async function runAuthoringAgentInference(mode = 'authoring') {
+  function resetAuthoringAgentTerminal(jobPath = '') {
+    authoringAgentTerminalJobRef.current = jobPath;
+    authoringAgentTerminalOffsetRef.current = 0;
+    setAuthoringAgentTerminalText('');
+  }
+
+  async function runAuthoringAgentInference(mode = 'authoring', executionMode = authoringAgentExecutionMode) {
     if (!selectedDocId) return;
+    const requestPath = authoringAgentRun?.requestPath || authoringAgentRequest?.paths?.request || selectedItem?.latestAuthoringAgentRequest || '';
+    if (['faker_only', 'validation_repair'].includes(executionMode) && !requestPath) {
+      setError(`${AUTHORING_AGENT_EXECUTION_MODE_LABELS[executionMode]}에는 기존 Agent request가 필요합니다.`);
+      return;
+    }
     setBusy(mode === 'bbox_correction' ? 'authoringAgentBboxRun' : 'authoringAgentRun');
     setError('');
     authoringAgentTerminalRefreshRef.current = '';
+    resetAuthoringAgentTerminal();
+    setAuthoringAgentTerminalOpen(true);
     try {
       const payload = await apiJson('/api/authoring/agent-run', {
         method: 'POST',
-        body: JSON.stringify({ docId: selectedDocId, instruction: authoringAgentInstruction, options: authoringAgentOptions(mode) }),
+        body: JSON.stringify({
+          docId: selectedDocId,
+          instruction: authoringAgentInstruction,
+          options: authoringAgentOptions(mode, executionMode),
+          ...(['schema_only', 'faker_only', 'validation_repair'].includes(executionMode) && requestPath ? { requestPath } : {}),
+        }),
       });
+      resetAuthoringAgentTerminal(payload.jobPath || '');
       setAuthoringAgentRequest({ docId: payload.docId, paths: { request: payload.requestPath }, request: null });
       setAuthoringAgentRun(payload);
-      setMessage(`${mode === 'bbox_correction' ? 'BBox 보정 Agent' : 'Agent 추론'} job 시작: ${payload.jobPath}`);
+      setMessage(`${mode === 'bbox_correction' ? 'BBox 보정 Agent' : AUTHORING_AGENT_EXECUTION_MODE_LABELS[executionMode] || 'Agent 추론'} job 시작: ${payload.jobPath}`);
       await refreshAll({ preserveSelection: true });
     } finally {
       setBusy('');
@@ -1042,26 +1120,57 @@ function App() {
 
   async function refreshAuthoringAgentRunStatus(jobPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun) {
     if (!jobPath && !selectedDocId) return null;
-    const query = jobPath ? `jobPath=${encodeURIComponent(jobPath)}` : `docId=${encodeURIComponent(selectedDocId)}`;
-    const payload = await apiJson(`/api/authoring/agent-run-status?${query}`);
+    if (jobPath && authoringAgentTerminalJobRef.current !== jobPath) resetAuthoringAgentTerminal(jobPath);
+    const query = new URLSearchParams(jobPath ? { jobPath } : { docId: selectedDocId });
+    query.set('terminalOffset', String(authoringAgentTerminalOffsetRef.current));
+    const payload = await apiJson(`/api/authoring/agent-run-status?${query.toString()}`);
+    if (payload.terminal) {
+      const chunk = String(payload.terminal.text || '');
+      authoringAgentTerminalOffsetRef.current = Number(payload.terminal.nextOffset || authoringAgentTerminalOffsetRef.current);
+      if (chunk) setAuthoringAgentTerminalText((current) => `${current}${chunk}`.slice(-500_000));
+    }
     setAuthoringAgentRun(payload);
     const terminalKey = `${payload.jobPath || jobPath || ''}:${payload.status}:${payload.finishedAt || ''}`;
     if (payload.status === 'succeeded') {
       if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
         authoringAgentTerminalRefreshRef.current = terminalKey;
-        setMessage(`Agent 추론 완료: draft ${payload.validation?.summary?.present || 0}/${payload.validation?.summary?.required || 0}개 생성`);
+        const scopeLabel = payload.validation?.scope === 'schema' ? 'Schema pass' : '전체 draft';
+        setMessage(`Agent 추론 완료: ${scopeLabel} ${payload.validation?.summary?.present || 0}/${payload.validation?.summary?.required || 0}개 생성`);
         await refreshAll({ preserveSelection: true });
       }
-    } else if (payload.status === 'failed') {
+    } else if (payload.status === 'needs_repair') {
       if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
         authoringAgentTerminalRefreshRef.current = terminalKey;
-        setError(`Agent 추론 실패: ${payload.error || '필수 draft 산출물 검증 실패'}`);
+        setMessage('Agent 추론은 끝났지만 draft 검증 보정이 필요합니다. 검증 보정만 재실행할 수 있습니다.');
+        await refreshAll({ preserveSelection: true });
+      }
+    } else if (['failed', 'cancelled', 'timed_out', 'interrupted'].includes(payload.status)) {
+      if (authoringAgentTerminalRefreshRef.current !== terminalKey) {
+        authoringAgentTerminalRefreshRef.current = terminalKey;
+        setError(`Agent 추론 ${payload.status}: ${payload.error || '실행을 완료하지 못했습니다.'}`);
         await refreshAll({ preserveSelection: true });
       }
     } else {
       authoringAgentTerminalRefreshRef.current = '';
     }
     return payload;
+  }
+
+  async function cancelAuthoringAgentRun() {
+    const jobPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun;
+    if (!jobPath) return;
+    setBusy('authoringAgentCancel');
+    setError('');
+    try {
+      const payload = await apiJson('/api/authoring/agent-run/cancel', {
+        method: 'POST',
+        body: JSON.stringify({ jobPath }),
+      });
+      setAuthoringAgentRun(payload);
+      setMessage(payload.status === 'cancelled' ? 'Agent 실행을 취소했습니다.' : 'Agent 실행에 취소 신호를 보냈습니다.');
+    } finally {
+      setBusy('');
+    }
   }
 
 
@@ -1549,6 +1658,10 @@ function App() {
     setAuthoringLivePreviewVersion(0);
     setAuthoringViewMode('template');
     setAuthoringPreviewStale(false);
+    setAuthoringAgentRequest(null);
+    setAuthoringAgentRun(null);
+    resetAuthoringAgentTerminal();
+    setAuthoringAgentTerminalOpen(false);
     setDocxPipelineResult(null);
     setCanvasMode('review');
     setBboxEditMode('select');
@@ -2935,18 +3048,50 @@ function App() {
   const latestAgentAnchorMapPath = authoringAgentRequest?.request?.generated_sidecars?.anchorMapDraft || selectedItem?.latestAuthoringAgentAnchorMap || '';
   const latestAgentRunPath = authoringAgentRun?.jobPath || selectedItem?.latestAuthoringAgentRun || '';
   const latestAgentRunStatus = authoringAgentRun?.status || (latestAgentRunPath ? 'unknown' : '');
-  const latestAgentRunReady = authoringAgentRun?.validation?.ready || false;
-  const latestAgentRunPolling = Boolean(latestAgentRunPath && !['succeeded', 'failed'].includes(latestAgentRunStatus));
+  const latestAgentRunReady = Boolean(authoringAgentRun?.validation?.ready && authoringAgentRun?.validation?.scope === 'full');
+  const latestAgentRunPolling = Boolean(latestAgentRunPath && !AUTHORING_AGENT_TERMINAL_STATUSES.has(latestAgentRunStatus));
+  const latestAgentRunCanCancel = ['queued', 'running', 'cancelling'].includes(latestAgentRunStatus);
+  const selectedAgentModelCapability = authoringAgentCapabilities.models.find((model) => model.id === authoringAgentModel)
+    || authoringAgentCapabilities.models[0]
+    || DEFAULT_AUTHORING_AGENT_CAPABILITIES.models[0];
+  const authoringAgentReasoningOptions = selectedAgentModelCapability.reasoningEfforts?.length
+    ? selectedAgentModelCapability.reasoningEfforts
+    : ['medium'];
+  const latestAgentElapsedSeconds = authoringAgentRun?.elapsedSeconds ?? (
+    authoringAgentRun?.startedAt
+      ? Math.max(0, (authoringAgentClock - new Date(authoringAgentRun.startedAt).getTime()) / 1000)
+      : 0
+  );
+
+  useEffect(() => {
+    setAuthoringAgentReasoning((current) => (
+      authoringAgentReasoningOptions.includes(current)
+        ? current
+        : selectedAgentModelCapability.defaultReasoningEffort || authoringAgentCapabilities.defaultReasoningEffort || 'medium'
+    ));
+    if (!selectedAgentModelCapability.supportsFastMode) setAuthoringAgentFastMode(false);
+  }, [authoringAgentModel, authoringAgentCapabilities]);
 
   useEffect(() => {
     if (!latestAgentRunPolling) return undefined;
     const pollPath = latestAgentRunPath;
-    const delayMs = latestAgentRunStatus === 'unknown' ? 500 : 3000;
+    const delayMs = latestAgentRunStatus === 'unknown' ? 500 : 1000;
     const timer = window.setInterval(() => {
       refreshAuthoringAgentRunStatus(pollPath).catch((exc) => setError(exc.message || String(exc)));
     }, delayMs);
     return () => window.clearInterval(timer);
   }, [latestAgentRunPath, latestAgentRunStatus, latestAgentRunPolling]);
+
+  useEffect(() => {
+    if (!latestAgentRunPolling) return undefined;
+    const timer = window.setInterval(() => setAuthoringAgentClock(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, [latestAgentRunPolling]);
+
+  useEffect(() => {
+    if (!authoringAgentTerminalAutoScroll || !authoringAgentTerminalOpen || !authoringAgentTerminalPreRef.current) return;
+    authoringAgentTerminalPreRef.current.scrollTop = authoringAgentTerminalPreRef.current.scrollHeight;
+  }, [authoringAgentTerminalText, authoringAgentTerminalAutoScroll, authoringAgentTerminalOpen]);
 
   useEffect(() => {
     function handleGlobalShortcuts(event) {
@@ -3898,16 +4043,43 @@ function App() {
               value={authoringAgentInstruction}
               onChange={(event) => setAuthoringAgentInstruction(event.target.value)}
             />
-              <div className="agent-options-grid">
-                <label>데이터 기준일
-                  <input type="date" value={authoringAsOfDate} onChange={(event) => setAuthoringAsOfDate(event.target.value)} />
-                </label>
+            <div className="agent-options-grid">
+              <label className="agent-option-wide">실행 방식
+                <select value={authoringAgentExecutionMode} onChange={(event) => setAuthoringAgentExecutionMode(event.target.value)}>
+                  {(authoringAgentCapabilities.executionModes || DEFAULT_AUTHORING_AGENT_CAPABILITIES.executionModes).map((executionMode) => (
+                    <option
+                      key={executionMode}
+                      value={executionMode}
+                      disabled={['faker_only', 'validation_repair'].includes(executionMode) && !latestAgentRequestPath}
+                    >
+                      {AUTHORING_AGENT_EXECUTION_MODE_LABELS[executionMode] || executionMode}
+                    </option>
+                  ))}
+                </select>
+                <small>{authoringAgentExecutionMode === 'two_pass' ? 'Schema를 먼저 고정한 뒤 Faker만 별도 추론합니다.' : authoringAgentExecutionMode === 'single_pass' ? '한 세션에서 전체 draft를 생성해 호출 시간을 줄입니다.' : '기존 request를 재사용해 필요한 단계만 다시 실행합니다.'}</small>
+              </label>
+              <label className="agent-option-wide">모델
+                <select
+                  value={authoringAgentModel}
+                  onChange={(event) => {
+                    const nextModel = authoringAgentCapabilities.models.find((model) => model.id === event.target.value) || selectedAgentModelCapability;
+                    setAuthoringAgentModel(nextModel.id);
+                    setAuthoringAgentReasoning((current) => (nextModel.reasoningEfforts || []).includes(current) ? current : nextModel.defaultReasoningEffort || 'medium');
+                    if (!nextModel.supportsFastMode) setAuthoringAgentFastMode(false);
+                  }}
+                >
+                  {authoringAgentCapabilities.models.map((model) => <option key={model.id} value={model.id}>{model.label || model.id}</option>)}
+                </select>
+                {selectedAgentModelCapability.description && <small>{selectedAgentModelCapability.description}</small>}
+              </label>
               <label>사고 레벨
                 <select value={authoringAgentReasoning} onChange={(event) => setAuthoringAgentReasoning(event.target.value)}>
-                  <option value="low">low</option>
-                  <option value="medium">medium</option>
-                  <option value="high">high</option>
+                  {authoringAgentReasoningOptions.map((effort) => <option key={effort} value={effort}>{effort}</option>)}
                 </select>
+              </label>
+              <label>데이터 기준일
+                <input type="date" value={authoringAsOfDate} onChange={(event) => setAuthoringAsOfDate(event.target.value)} />
+                <small>미래 시점 문서 생성을 막고 날짜·나이 관계를 이 시점에 고정합니다.</small>
               </label>
               <label>Scalar pool 최소
                 <input type="number" min="1" max="100" value={authoringAgentScalarPoolMinSize} onChange={(event) => setAuthoringAgentScalarPoolMinSize(clampNumber(event.target.value, 1, 100))} />
@@ -3915,14 +4087,25 @@ function App() {
               <label>Record pool 최소
                 <input type="number" min="1" max="100" value={authoringAgentRecordPoolMinSize} onChange={(event) => setAuthoringAgentRecordPoolMinSize(clampNumber(event.target.value, 1, 100))} />
               </label>
-              <label className={`check-row ${authoringAgentFastMode ? 'on' : ''}`}>
-                <input type="checkbox" checked={authoringAgentFastMode} onChange={(event) => setAuthoringAgentFastMode(event.target.checked)} />
-                <span>fast mode 사용</span>
+              <label className={`check-row ${authoringAgentFastMode ? 'on' : ''}`} title={selectedAgentModelCapability.supportsFastMode ? '' : '선택한 모델은 fast mode를 지원하지 않습니다.'}>
+                <input type="checkbox" checked={authoringAgentFastMode} disabled={!selectedAgentModelCapability.supportsFastMode} onChange={(event) => setAuthoringAgentFastMode(event.target.checked)} />
+                <span>fast mode</span>
               </label>
+              <label className={`check-row ${authoringAgentTimeBudgetEnabled ? 'on' : ''}`}>
+                <input type="checkbox" checked={authoringAgentTimeBudgetEnabled} onChange={(event) => setAuthoringAgentTimeBudgetEnabled(event.target.checked)} />
+                <span>시간 제한</span>
+              </label>
+              {authoringAgentTimeBudgetEnabled && <label>최대 실행 시간(분)
+                <input type="number" min="5" max="60" value={authoringAgentTimeBudgetMinutes} onChange={(event) => setAuthoringAgentTimeBudgetMinutes(clampNumber(event.target.value, 5, 60))} />
+              </label>}
             </div>
             <div className="button-row compact-buttons">
-              <button className="primary" onClick={() => run(() => runAuthoringAgentInference('authoring'))} disabled={!selectedDocId || isBusy}>
-                {busy === 'authoringAgentRun' ? 'Agent 추론 시작 중...' : 'Agent 추론 실행'}
+              <button
+                className="primary"
+                onClick={() => run(() => runAuthoringAgentInference('authoring', authoringAgentExecutionMode))}
+                disabled={!selectedDocId || isBusy || (['faker_only', 'validation_repair'].includes(authoringAgentExecutionMode) && !latestAgentRequestPath)}
+              >
+                {busy === 'authoringAgentRun' ? 'Agent 추론 시작 중...' : `${AUTHORING_AGENT_EXECUTION_MODE_LABELS[authoringAgentExecutionMode] || 'Agent 추론'} 실행`}
               </button>
               <button onClick={() => run(() => createAuthoringAgentRequest('authoring'))} disabled={!selectedDocId || isBusy}>
                 {busy === 'authoringAgentRequest' ? '요청 패키지 생성 중...' : '요청 패키지만 생성'}
@@ -3934,17 +4117,53 @@ function App() {
             {latestAgentRequestPath && <p className="mini-path">최근 Agent request: {latestAgentRequestPath}{latestAgentPromptPath ? ` · prompt: ${latestAgentPromptPath}` : ''}{latestAgentAnchorMapPath ? ` · anchor: ${latestAgentAnchorMapPath}` : ''}</p>}
             {latestAgentRunPath && (
               <div className={`audit-box agent-run-box ${latestAgentRunStatus}`}>
-                <b>Agent run: {latestAgentRunStatus}</b>
+                <b>Agent run: {latestAgentRunStatus} · {formatElapsedSeconds(latestAgentElapsedSeconds)}</b>
                 <small>{latestAgentRunPath}</small>
                 {latestAgentRunPolling && <small>상태 자동 갱신 중...</small>}
                 {authoringAgentRun?.passState && <small>pass {authoringAgentRun.passState.current} · 완료 {(authoringAgentRun.passState.completed || []).join(' → ') || '없음'}</small>}
+                {(authoringAgentRun?.stages || []).map((stage) => <small key={`${stage.stage}-${stage.startedAt}`}>{stage.stage} · {stage.status} · {formatElapsedSeconds(stage.durationSeconds)}{stage.tokensUsed != null ? ` · ${Number(stage.tokensUsed).toLocaleString()} tokens` : ''} · {stage.model}/{stage.reasoningEffort}{stage.fastMode ? '/fast' : ''}</small>)}
                 {authoringAgentRun?.validation?.summary && <small>draft {authoringAgentRun.validation.summary.present}/{authoringAgentRun.validation.summary.required} · missing {authoringAgentRun.validation.summary.missing} · invalid JSON {authoringAgentRun.validation.summary.invalidJson}</small>}
                 {authoringAgentRun?.repairSummary?.materializedCount > 0 && <small>누락 use bbox 자동 보강 {authoringAgentRun.repairSummary.materializedCount}건 · 검토필요 leaf 생성</small>}
                 {latestAgentRunReady && <small>schema/faker/research draft 생성 및 JSON 검증 완료</small>}
+                {authoringAgentRun?.validation?.scope === 'schema' && authoringAgentRun?.validation?.ready && <small>Schema 단계 검증 완료 · Faker 단계 실행 가능</small>}
+                {authoringAgentRun?.error && <small>{authoringAgentRun.error}</small>}
+              </div>
+            )}
+            {latestAgentRunPath && (
+              <div className="agent-terminal-box">
+                <div className="agent-terminal-head">
+                  <b>Codex CLI 터미널</b>
+                  <div className="agent-terminal-actions">
+                    <label className="check-row">
+                      <input type="checkbox" checked={authoringAgentTerminalAutoScroll} onChange={(event) => setAuthoringAgentTerminalAutoScroll(event.target.checked)} />
+                      <span>자동 스크롤</span>
+                    </label>
+                    <button onClick={() => setAuthoringAgentTerminalOpen((current) => !current)}>{authoringAgentTerminalOpen ? '접기' : '열기'}</button>
+                  </div>
+                </div>
+                {authoringAgentTerminalOpen && <>
+                  <pre ref={authoringAgentTerminalPreRef}>{authoringAgentTerminalText || (latestAgentRunPolling ? '터미널 출력을 기다리는 중...' : '표시할 터미널 출력이 없습니다.')}</pre>
+                  <div className="agent-terminal-footer">
+                    <button onClick={() => {
+                      setAuthoringAgentTerminalAutoScroll(true);
+                      if (authoringAgentTerminalPreRef.current) authoringAgentTerminalPreRef.current.scrollTop = authoringAgentTerminalPreRef.current.scrollHeight;
+                    }}>최신 위치</button>
+                    {authoringAgentRun?.terminalPath && <a href={fileUrl(authoringAgentRun.terminalPath)} target="_blank" rel="noreferrer">전체 로그 열기</a>}
+                    <small>{Number(authoringAgentTerminalOffsetRef.current).toLocaleString()} bytes</small>
+                  </div>
+                </>}
+              </div>
+            )}
+            {latestAgentRequestPath && (
+              <div className="button-row compact-buttons agent-retry-buttons">
+                <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'schema_only'))} disabled={isBusy}>Schema 재실행</button>
+                <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'faker_only'))} disabled={isBusy}>Faker 재실행</button>
+                <button onClick={() => run(() => runAuthoringAgentInference('authoring', 'validation_repair'))} disabled={isBusy || latestAgentRunStatus !== 'needs_repair'}>검증 보정</button>
+                {latestAgentRunCanCancel && <button className="danger" onClick={() => run(cancelAuthoringAgentRun)} disabled={isBusy || latestAgentRunStatus === 'cancelling'}>{busy === 'authoringAgentCancel' || latestAgentRunStatus === 'cancelling' ? '취소 처리 중...' : '실행 취소'}</button>}
               </div>
             )}
             <div className="button-row compact-buttons">
-              <button onClick={() => run(() => runAuthoringAgentInference('bbox_correction'))} disabled={!selectedDocId || isBusy}>
+              <button onClick={() => run(() => runAuthoringAgentInference('bbox_correction', 'single_pass'))} disabled={!selectedDocId || isBusy}>
                 {busy === 'authoringAgentBboxRun' ? 'BBox 보정 시작 중...' : 'Agent BBox 보정 draft'}
               </button>
               <button onClick={() => run(loadAuthoringLibrary)} disabled={isBusy}>{busy === 'authoringLibrary' ? '라이브러리 로드 중...' : 'Faker/Profile 라이브러리'}</button>

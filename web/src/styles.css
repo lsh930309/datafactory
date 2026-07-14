@@ -455,10 +455,13 @@ button.slim { padding: 7px 9px; font-size: 12px; white-space: nowrap; }
 .audit-box b { color: #344054; }
 .audit-box small { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
 .agent-request-input { min-height: 78px; resize: vertical; font-size: 12px; }
-.agent-options-grid { display: grid; grid-template-columns: minmax(0, 1fr) 92px minmax(0, 1fr); gap: 7px; align-items: end; background: #f8fbff; border: 1px solid #d8e5ff; border-radius: 10px; padding: 8px; }
-.agent-options-grid label { font-size: 11px; font-weight: 900; color: #344054; }
+.agent-options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(138px, 1fr)); gap: 8px; align-items: end; background: #f8fbff; border: 1px solid #d8e5ff; border-radius: 10px; padding: 9px; }
+.agent-options-grid label { display: grid; gap: 4px; font-size: 11px; font-weight: 900; color: #344054; }
+.agent-options-grid label.agent-option-wide { grid-column: span 2; }
+.agent-options-grid label small { color: #667085; font-size: 10px; font-weight: 700; line-height: 1.35; }
 .agent-options-grid select,
-.agent-options-grid input[type="number"] { width: 100%; padding: 7px 8px; }
+.agent-options-grid input[type="number"],
+.agent-options-grid input[type="date"] { width: 100%; padding: 7px 8px; }
 .agent-options-grid .check-row { min-height: 34px; align-items: center; }
 .status-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .cleanup-controls { display: grid; grid-template-columns: minmax(0, 1fr) 92px; gap: 7px; align-items: end; }
@@ -501,9 +504,22 @@ button.slim { padding: 7px 9px; font-size: 12px; white-space: nowrap; }
 .raw-json-section summary { cursor: pointer; color: #243b66; font-size: 12px; font-weight: 900; }
 .raw-json-section textarea { min-height: 120px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; line-height: 1.35; }
 .office-render-box { border-color: #c7d7fe; background: #f8fbff; }
-.agent-run-box.running, .agent-run-box.queued { border-color: #f6d78b; background: #fffbeb; }
+.agent-run-box.running, .agent-run-box.queued, .agent-run-box.cancelling { border-color: #f6d78b; background: #fffbeb; }
 .agent-run-box.succeeded { border-color: #a6dbbd; background: #f0fdf4; }
-.agent-run-box.failed { border-color: #f2b8b5; background: #fff5f5; }
+.agent-run-box.failed, .agent-run-box.timed_out, .agent-run-box.interrupted { border-color: #f2b8b5; background: #fff5f5; }
+.agent-run-box.needs_repair { border-color: #f6d78b; background: #fffbeb; }
+.agent-run-box.cancelled { border-color: #cfd4dc; background: #f8fafc; }
+.agent-retry-buttons { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+.agent-terminal-box { display: grid; gap: 7px; overflow: hidden; border: 1px solid #243b66; border-radius: 11px; background: #111827; padding: 8px; }
+.agent-terminal-head, .agent-terminal-footer, .agent-terminal-actions { display: flex; align-items: center; gap: 7px; }
+.agent-terminal-head { justify-content: space-between; color: #dbeafe; }
+.agent-terminal-actions { flex-wrap: wrap; justify-content: flex-end; }
+.agent-terminal-actions .check-row { color: #dbeafe; font-size: 11px; }
+.agent-terminal-actions button, .agent-terminal-footer button { padding: 5px 8px; font-size: 11px; }
+.agent-terminal-box pre { min-height: 100px; max-height: 360px; margin: 0; overflow: auto; border: 1px solid #334155; border-radius: 8px; background: #030712; color: #d1fae5; padding: 10px; font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; word-break: break-word; }
+.agent-terminal-footer { justify-content: flex-end; color: #94a3b8; }
+.agent-terminal-footer a { color: #93c5fd; font-size: 11px; font-weight: 850; }
+.agent-terminal-footer small { margin-right: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 .sample-kind-controls { display: grid; gap: 6px; border: 1px solid #e4e9f2; border-radius: 11px; background: #fbfcff; padding: 8px; }
 .check-row { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 900; color: #344054; }
 .check-row input { width: 14px; height: 14px; margin: 0; padding: 0; }

@@ -6,11 +6,15 @@ import hashlib
 import json
 import mimetypes
 import os
+import queue
+import signal
 import shutil
 import subprocess
 import sys
 import tempfile
 import threading
+import tomllib
+from dataclasses import dataclass
 from datetime import date, datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -100,9 +104,55 @@ AUTHORING_AGENT_REQUIRED_OUTPUTS = [
     "application_notes.md",
 ]
 AUTHORING_AGENT_JSON_OUTPUTS = {name for name in AUTHORING_AGENT_REQUIRED_OUTPUTS if name.endswith(".json")}
+AUTHORING_AGENT_SCHEMA_OUTPUTS = [
+    "schema_draft.json",
+    "stylesheet_draft.json",
+    "research_report.json",
+    "uncertainty_report.json",
+    "anchor_map_draft.json",
+]
+AUTHORING_AGENT_FAKER_OUTPUTS = [
+    "faker_profile_draft.json",
+    "value_pool_draft.json",
+    "uncertainty_report.json",
+    "application_notes.md",
+]
 DEFAULT_AUTHORING_AGENT_SCALAR_POOL_MIN_SIZE = 20
 DEFAULT_AUTHORING_AGENT_RECORD_POOL_MIN_SIZE = 12
-AUTHORING_AGENT_REASONING_EFFORTS = {"low", "medium", "high"}
+DEFAULT_AUTHORING_AGENT_MODEL = "gpt-5.6-terra"
+DEFAULT_AUTHORING_AGENT_REASONING_EFFORT = "medium"
+AUTHORING_AGENT_REASONING_EFFORTS = {"low", "medium", "high", "xhigh", "max", "ultra"}
+AUTHORING_AGENT_EXECUTION_MODES = {"two_pass", "single_pass", "schema_only", "faker_only", "validation_repair"}
+AUTHORING_AGENT_TERMINAL_CHUNK_SIZE = 64 * 1024
+_ACTIVE_AUTHORING_AGENT_JOBS: set[str] = set()
+_ACTIVE_AUTHORING_AGENT_JOBS_LOCK = threading.Lock()
+_AGENT_JOB_FILE_LOCK = threading.RLock()
+AUTHORING_AGENT_FALLBACK_MODELS = [
+    {
+        "id": "gpt-5.6-sol",
+        "label": "GPT-5.6-Sol",
+        "description": "Latest frontier agentic coding model.",
+        "defaultReasoningEffort": "low",
+        "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+        "supportsFastMode": True,
+    },
+    {
+        "id": "gpt-5.6-terra",
+        "label": "GPT-5.6-Terra",
+        "description": "Balanced agentic coding model for everyday work.",
+        "defaultReasoningEffort": "medium",
+        "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+        "supportsFastMode": True,
+    },
+    {
+        "id": "gpt-5.6-luna",
+        "label": "GPT-5.6-Luna",
+        "description": "Fast and affordable agentic coding model.",
+        "defaultReasoningEffort": "medium",
+        "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+        "supportsFastMode": True,
+    },
+]
 AUTHORING_AGENT_SUPPORTED_FAKER_RULES = [
     "literal:<고정 더미 문자열>",
     "choice:<값1>|<값2>|<값3>",
@@ -498,12 +548,80 @@ def _authoring_agent_prompt_markdown(request: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def authoring_agent_capabilities(*, codex_home: Path | None = None) -> dict[str, Any]:
+    home = codex_home or Path(os.environ.get("CODEX_HOME") or (Path.home() / ".codex"))
+    cache_path = home / "models_cache.json"
+    config_path = home / "config.toml"
+    models: list[dict[str, Any]] = []
+    fetched_at = ""
+    source = "fallback"
+    try:
+        cache = json.loads(cache_path.read_text(encoding="utf-8"))
+        fetched_at = str(cache.get("fetched_at") or "") if isinstance(cache, dict) else ""
+        raw_models = cache.get("models") if isinstance(cache, dict) and isinstance(cache.get("models"), list) else []
+        for raw in raw_models:
+            if not isinstance(raw, dict) or str(raw.get("visibility") or "list") != "list":
+                continue
+            model_id = str(raw.get("slug") or "").strip()
+            levels = [
+                str(level.get("effort") or "").strip()
+                for level in raw.get("supported_reasoning_levels", [])
+                if isinstance(level, dict) and str(level.get("effort") or "").strip() in AUTHORING_AGENT_REASONING_EFFORTS
+            ]
+            if not model_id or not levels:
+                continue
+            default_reasoning = str(raw.get("default_reasoning_level") or levels[0])
+            models.append(
+                {
+                    "id": model_id,
+                    "label": str(raw.get("display_name") or model_id),
+                    "description": str(raw.get("description") or ""),
+                    "defaultReasoningEffort": default_reasoning if default_reasoning in levels else levels[0],
+                    "reasoningEfforts": levels,
+                    "supportsFastMode": "fast" in (raw.get("additional_speed_tiers") or []),
+                }
+            )
+        if models:
+            source = "models_cache"
+    except (OSError, json.JSONDecodeError):
+        models = []
+    if not models:
+        models = [dict(model) for model in AUTHORING_AGENT_FALLBACK_MODELS]
+    else:
+        cached_model_ids = {str(model.get("id") or "") for model in models}
+        models.extend(dict(model) for model in AUTHORING_AGENT_FALLBACK_MODELS if model["id"] not in cached_model_ids)
+    configured_model = ""
+    try:
+        configured = tomllib.loads(config_path.read_text(encoding="utf-8"))
+        configured_model = str(configured.get("model") or "").strip()
+    except (OSError, tomllib.TOMLDecodeError):
+        configured_model = ""
+    model_ids = {model["id"] for model in models}
+    default_model = DEFAULT_AUTHORING_AGENT_MODEL if DEFAULT_AUTHORING_AGENT_MODEL in model_ids else configured_model if configured_model in model_ids else models[0]["id"]
+    return {
+        "defaultModel": default_model,
+        "defaultReasoningEffort": DEFAULT_AUTHORING_AGENT_REASONING_EFFORT,
+        "models": models,
+        "executionModes": ["two_pass", "single_pass", "schema_only", "faker_only", "validation_repair"],
+        "source": source,
+        "fetchedAt": fetched_at,
+    }
+
+
 def _authoring_agent_options(payload: dict[str, Any]) -> dict[str, Any]:
     raw_options = payload.get("options") if isinstance(payload.get("options"), dict) else payload
-    reasoning = str(raw_options.get("reasoningEffort") or raw_options.get("reasoning") or "medium").strip().lower()
-    if reasoning not in AUTHORING_AGENT_REASONING_EFFORTS:
-        reasoning = "medium"
+    capabilities = authoring_agent_capabilities()
+    models = {str(model.get("id") or ""): model for model in capabilities.get("models", []) if isinstance(model, dict)}
+    model = str(raw_options.get("model") or capabilities.get("defaultModel") or DEFAULT_AUTHORING_AGENT_MODEL).strip()
+    if model not in models:
+        raise ValueError(f"unsupported authoring agent model: {model}")
+    reasoning = str(raw_options.get("reasoningEffort") or raw_options.get("reasoning") or DEFAULT_AUTHORING_AGENT_REASONING_EFFORT).strip().lower()
+    supported_reasoning = {str(value) for value in (models[model].get("reasoningEfforts") or [])}
+    if reasoning not in supported_reasoning:
+        raise ValueError(f"reasoningEffort {reasoning} is not supported by {model}")
     fast_mode = bool(raw_options.get("fastMode", False))
+    if fast_mode and not bool(models[model].get("supportsFastMode", False)):
+        raise ValueError(f"fast mode is not supported by {model}")
     try:
         scalar_pool_min_size = int(raw_options.get("scalarPoolMinSize") or raw_options.get("minPoolSize") or raw_options.get("fakerMinPoolSize") or DEFAULT_AUTHORING_AGENT_SCALAR_POOL_MIN_SIZE)
     except (TypeError, ValueError):
@@ -517,8 +635,20 @@ def _authoring_agent_options(payload: dict[str, Any]) -> dict[str, Any]:
     mode = str(raw_options.get("mode") or "authoring").strip().lower()
     if mode not in {"authoring", "bbox_correction"}:
         mode = "authoring"
+    execution_mode = str(raw_options.get("executionMode") or "two_pass").strip().lower()
+    if execution_mode not in AUTHORING_AGENT_EXECUTION_MODES:
+        raise ValueError(f"unsupported authoring agent executionMode: {execution_mode}")
+    raw_time_budget = raw_options.get("timeBudgetMinutes")
+    if raw_time_budget in (None, "", False):
+        time_budget_minutes = None
+    else:
+        try:
+            time_budget_minutes = max(5, min(60, int(raw_time_budget)))
+        except (TypeError, ValueError) as exc:
+            raise ValueError("timeBudgetMinutes must be an integer between 5 and 60") from exc
     as_of_date = _parse_as_of_date(raw_options.get("asOfDate"))
     return {
+        "model": model,
         "reasoningEffort": reasoning,
         "fastMode": fast_mode,
         "minPoolSize": scalar_pool_min_size,
@@ -526,6 +656,8 @@ def _authoring_agent_options(payload: dict[str, Any]) -> dict[str, Any]:
         "recordPoolMinSize": record_pool_min_size,
         "asOfDate": as_of_date.isoformat(),
         "mode": mode,
+        "executionMode": execution_mode,
+        "timeBudgetMinutes": time_budget_minutes,
     }
 
 
@@ -806,9 +938,37 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
     approves/saves them.
     """
 
-    request_payload = authoring_agent_request_payload(payload)
-    doc_id = str(request_payload["docId"])
-    request_path = _resolve_workspace_path(request_payload["paths"]["request"])
+    options = _authoring_agent_options(payload)
+    execution_mode = str(options["executionMode"])
+    request_path_value = str(payload.get("requestPath") or "").strip()
+    reuse_request = bool(request_path_value and execution_mode in {"schema_only", "faker_only", "validation_repair"})
+    if reuse_request:
+        request_path = _resolve_workspace_path(request_path_value)
+        if request_path.name != "request.json" or "agent_requests" not in request_path.parts:
+            raise ValueError("requestPath must point to an authoring agent request.json")
+        request = json.loads(request_path.read_text(encoding="utf-8"))
+        doc_id = str(payload.get("docId") or request.get("docId") or "").strip()
+        if not doc_id or doc_id != str(request.get("docId") or ""):
+            raise ValueError("requestPath does not belong to docId")
+        request["options"] = options
+        if isinstance(request.get("contract"), dict):
+            request["contract"]["inference_options"] = options
+        if isinstance(request.get("agent_contract_summary"), dict):
+            request["agent_contract_summary"].update(
+                {
+                    "scalar_pool_min_size": options["scalarPoolMinSize"],
+                    "record_pool_min_size": options["recordPoolMinSize"],
+                    "as_of_date": options["asOfDate"],
+                }
+            )
+        request_path.write_text(json.dumps(request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        request_payload = {"docId": doc_id, "paths": {"request": _display_path(request_path, ROOT)}, "request": request}
+    else:
+        if execution_mode in {"faker_only", "validation_repair"}:
+            raise ValueError(f"{execution_mode} requires an existing requestPath")
+        request_payload = authoring_agent_request_payload({**payload, "options": options})
+        doc_id = str(request_payload["docId"])
+        request_path = _resolve_workspace_path(request_payload["paths"]["request"])
     request_dir = request_path.parent
     run_dir = workbench_subdir(doc_id, "authoring") / "agent_runs" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     run_dir.mkdir(parents=True, exist_ok=True)
@@ -817,9 +977,10 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
     last_message_path = run_dir / "codex_last_message.md"
     stdout_path = run_dir / "stdout.log"
     stderr_path = run_dir / "stderr.log"
-    options = request_payload.get("request", {}).get("options") if isinstance(request_payload.get("request"), dict) else _authoring_agent_options(payload)
+    terminal_path = run_dir / "terminal.log"
     prompt = _authoring_agent_exec_prompt(request_path=request_path, request_dir=request_dir, run_dir=run_dir)
     prompt_path.write_text(prompt, encoding="utf-8")
+    planned_stages = _authoring_agent_execution_stages(execution_mode)
     job = {
         "schema_version": 1,
         "jobId": run_dir.name,
@@ -835,10 +996,13 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
         "lastMessagePath": _display_path(last_message_path, ROOT),
         "stdoutPath": _display_path(stdout_path, ROOT),
         "stderrPath": _display_path(stderr_path, ROOT),
+        "terminalPath": _display_path(terminal_path, ROOT),
         "requiredOutputs": list(AUTHORING_AGENT_REQUIRED_OUTPUTS),
         "outputs": {},
         "validation": {"missing": list(AUTHORING_AGENT_REQUIRED_OUTPUTS), "invalidJson": [], "ready": False},
         "options": options,
+        "executionMode": execution_mode,
+        "passState": {"current": "queued", "completed": [], "planned": planned_stages},
     }
     _write_agent_job(job_path, job)
     update_manifest_artifact(doc_id, "authoring_agent_run", job_path)
@@ -846,12 +1010,12 @@ def authoring_agent_run_payload(payload: dict[str, Any], *, async_run: bool = Tr
     if async_run:
         thread = threading.Thread(
             target=_run_authoring_agent_job,
-            args=(job_path, request_path, request_dir, run_dir, prompt_path, last_message_path, stdout_path, stderr_path),
+            args=(job_path, request_path, request_dir, run_dir, prompt_path, last_message_path, stdout_path, stderr_path, terminal_path),
             daemon=True,
         )
         thread.start()
         return _agent_job_payload(job_path)
-    _run_authoring_agent_job(job_path, request_path, request_dir, run_dir, prompt_path, last_message_path, stdout_path, stderr_path)
+    _run_authoring_agent_job(job_path, request_path, request_dir, run_dir, prompt_path, last_message_path, stdout_path, stderr_path, terminal_path)
     return _agent_job_payload(job_path)
 
 
@@ -868,6 +1032,31 @@ def authoring_agent_run_status_payload(payload: dict[str, Any]) -> dict[str, Any
         if not job_paths:
             raise FileNotFoundError(f"no authoring agent run for {doc_id}")
         job_path = job_paths[-1]
+    terminal_offset = max(0, int(payload.get("terminalOffset") or payload.get("logOffset") or 0))
+    job = _read_agent_job(job_path)
+    if job.get("status") in {"running", "cancelling"}:
+        key = str(job_path.resolve())
+        with _ACTIVE_AUTHORING_AGENT_JOBS_LOCK:
+            locally_active = key in _ACTIVE_AUTHORING_AGENT_JOBS
+        if not locally_active and not _process_is_alive(job.get("pid")):
+            job.update({"status": "interrupted", "finishedAt": _utc_now(), "error": "agent runner is no longer active"})
+            _write_agent_job(job_path, job)
+    return _agent_job_payload(job_path, terminal_offset=terminal_offset)
+
+
+def cancel_authoring_agent_run_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    job_path = _resolve_workspace_path(str(payload.get("jobPath") or ""))
+    if job_path.name != "job.json" or "agent_runs" not in job_path.parts:
+        raise ValueError("invalid authoring agent jobPath")
+    job = _read_agent_job(job_path)
+    if job.get("status") in {"succeeded", "failed", "needs_repair", "cancelled", "timed_out", "interrupted"}:
+        return _agent_job_payload(job_path)
+    job["cancelRequestedAt"] = _utc_now()
+    job["status"] = "cancelling" if job.get("status") == "running" else "cancelled"
+    if job["status"] == "cancelled":
+        job["finishedAt"] = _utc_now()
+    _write_agent_job(job_path, job)
+    _terminate_process_group(job.get("pid"), force=False)
     return _agent_job_payload(job_path)
 
 
@@ -1150,24 +1339,72 @@ def _write_authoring_agent_anchor_review(
 
 
 def _authoring_agent_exec_prompt(*, request_path: Path, request_dir: Path, run_dir: Path, stage: str = "full") -> str:
+    if stage == "schema":
+        return f"""# Codex authoring inference job — schema pass
+
+You are running as a local Codex subprocess for the DataFactory workbench.
+
+## Scope
+- Read `{_display_path(request_path, ROOT)}` and the sample, OCR, review, existing authoring, and visual evidence files referenced by it.
+- Inspect the full template image as the primary visual source of truth. Crops are zoom aids only.
+- Use live web search for document meaning and official field evidence, then record sources in research_report.json.
+- Produce only: {', '.join(AUTHORING_AGENT_SCHEMA_OUTPUTS)}.
+- Freeze a complete metadata-free semantic_schema and 100% use-anchor binding coverage.
+- Every binding must have a stable field_id, semantic_path to an empty semantic leaf, and an anchor_id targeting a use value region.
+- Put uncertain use anchors under 검토필요, mark review_required, and explain them in uncertainty_report.json.
+- Record unit handling and research evidence on each binding so the later faker pass does not need to revisit the image or web.
+- Write only inside `{_display_path(request_dir, ROOT)}`. Do not edit final authoring files, source code, registry, manifests, or samples.
+
+## Completion
+Verify all five JSON files parse, every use anchor is mapped, semantic leaf values are empty, and research/style/anchor references are valid. Do not create faker_profile_draft.json, value_pool_draft.json, or application_notes.md.
+Return a short Korean summary after writing the files.
+
+Run logs and scratch notes may be written only under `{_display_path(run_dir, ROOT)}`.
+"""
+    if stage == "faker":
+        return f"""# Codex authoring inference job — faker pass
+
+You are running as a local Codex subprocess for the DataFactory workbench.
+
+## Fixed inputs
+- Request/options: `{_display_path(request_path, ROOT)}`
+- Read only schema_draft.json, stylesheet_draft.json, research_report.json, anchor_map_draft.json, and any existing faker draft in `{_display_path(request_dir, ROOT)}`.
+- Treat schema field_id, semantic_path, anchor_id, semantic_schema, stylesheet, and research evidence as frozen.
+- Do not browse the web. Do not reopen the sample, OCR, review, full-page image, or crops. If the frozen evidence is insufficient, record uncertainty instead of researching again.
+
+## Outputs
+- Produce or replace only: {', '.join(AUTHORING_AGENT_FAKER_OUTPUTS)}.
+- Every fixed binding must have exactly one renderer-supported field_generators rule.
+- Use request.options.asOfDate for all date and age relationships.
+- Open scalar pools must meet request.options.scalarPoolMinSize; pick_record object pools must meet request.options.recordPoolMinSize.
+- Only genuine legal/form closed sets may use the documented closed_set exception.
+- Write only inside `{_display_path(request_dir, ROOT)}` and never change final authoring files or fixed inputs.
+
+## Supported faker rules
+{chr(10).join(f'- `{rule}`' for rule in AUTHORING_AGENT_SUPPORTED_FAKER_RULES)}
+
+## Supported relationships
+{chr(10).join(f'- {rule}' for rule in AUTHORING_AGENT_SUPPORTED_CONSTRAINT_RULES)}
+
+## Completion
+Verify JSON parsing, full generator coverage, supported rules, pool minimums, constraint references, and date bounds. Return a short Korean summary after writing the files.
+
+Run logs and scratch notes may be written only under `{_display_path(run_dir, ROOT)}`.
+"""
+    if stage == "validation_repair":
+        return f"""# Codex authoring inference job — validation repair
+
+Read the request `{_display_path(request_path, ROOT)}` and the current draft files in `{_display_path(request_dir, ROOT)}`.
+The caller appends the exact machine validation errors to this prompt.
+
+- Make only changes required by those errors across the existing draft files.
+- Do not repeat web research or reopen source images unless an appended error explicitly says visual evidence is missing.
+- Preserve valid field IDs, semantic paths, anchors, style, research evidence, generators, pools, and constraints.
+- Never silence an error by dropping a use anchor, semantic leaf, generator, relationship, or evidence item.
+- Write only inside the request directory and verify the complete eight-file contract before finishing.
+- Return a short Korean summary after writing the repaired files.
+"""
     stage_instruction = {
-        "schema": """## Current pass: 1/2 schema and evidence freeze
-- Produce or replace only schema_draft.json, stylesheet_draft.json, research_report.json, uncertainty_report.json, and anchor_map_draft.json.
-- Do not author faker_profile_draft.json or value_pool_draft.json in this pass.
-- Freeze a complete primary semantic hierarchy and 100% use-anchor binding coverage. Field IDs written here are the immutable contract for pass 2.
-""",
-        "faker": """## Current pass: 2/2 faker and relationship expansion
-- Treat the existing schema_draft.json, anchor_map_draft.json, research_report.json, and stylesheet_draft.json from pass 1 as fixed inputs.
-- Do not rename field_id, change semantic_path, drop bindings, or restructure semantic_schema in this pass.
-- Produce or replace faker_profile_draft.json, value_pool_draft.json, uncertainty_report.json, and application_notes.md.
-- Expand realistic pools and supported relationships, then validate every fixed binding has exactly one supported field generator.
-""",
-        "validation_repair": """## Current pass: validation repair
-- Read the current draft files and the appended machine validation errors.
-- Make the smallest changes needed to satisfy the contract. Preserve the pass-1 semantic hierarchy, field IDs, semantic paths, anchors, and validated stylesheet unless a reported error explicitly requires changing them.
-- Never silence an error by dropping a use anchor, semantic leaf, generator, pool relationship, or research evidence.
-- Re-run JSON/coverage/pool/constraint checks before finishing.
-""",
     }.get(stage, "## Current pass: full draft generation\n")
     return f"""# Codex authoring inference job
 
@@ -1186,7 +1423,7 @@ You are running as a local Codex subprocess for the DataFactory workbench.
 - Write outputs only inside this request directory: `{_display_path(request_dir, ROOT)}`.
 - Do not overwrite final `schema.json`, `stylesheet.json`, or `faker_profile.json`.
 - Do not edit source code, registry files, workbench manifests, or samples.
-- Respect the current pass boundary. The outer job runner invokes separate Codex processes for schema/evidence and faker/relationship work.
+- Complete schema/evidence first, then faker/relationship work in this single Codex session without changing the finalized field IDs.
 - If a use anchor is uncertain, do not omit it. Create a `검토필요/<anchor_id or visible label>` primary schema leaf, bind the anchor, set `review_required:true`, use a conservative supported faker rule such as `free_text.short`, and record the uncertainty.
 - For blank templates, never use a static label/keep bbox as `schema_draft.fields[].anchor_id`. Use `label_anchor_ids` for label evidence and use only a confirmed value-region/checkbox/table-cell/manual/visual-line-detect anchor as the field target.
 
@@ -1229,6 +1466,183 @@ Use this run directory only for logs or scratch notes if needed: `{_display_path
 """
 
 
+def _authoring_agent_execution_stages(execution_mode: str) -> list[str]:
+    return {
+        "two_pass": ["schema", "faker"],
+        "single_pass": ["full"],
+        "schema_only": ["schema"],
+        "faker_only": ["faker"],
+        "validation_repair": ["validation_repair"],
+    }[execution_mode]
+
+
+@dataclass(frozen=True)
+class _AgentProcessResult:
+    returncode: int
+    stdout_tail: str
+    stderr_tail: str
+    pid: int
+    timed_out: bool = False
+    cancelled: bool = False
+
+
+def _snapshot_authoring_agent_drafts(request_dir: Path, run_dir: Path) -> Path | None:
+    existing = [request_dir / name for name in AUTHORING_AGENT_REQUIRED_OUTPUTS if (request_dir / name).exists()]
+    if not existing:
+        return None
+    snapshot_dir = run_dir / "pre_run_snapshot"
+    snapshot_dir.mkdir(parents=True, exist_ok=True)
+    for source in existing:
+        shutil.copy2(source, snapshot_dir / source.name)
+    return snapshot_dir
+
+
+def _process_is_alive(pid_value: Any) -> bool:
+    try:
+        pid = int(pid_value)
+    except (TypeError, ValueError):
+        return False
+    if pid <= 0:
+        return False
+    try:
+        os.kill(pid, 0)
+        return True
+    except (ProcessLookupError, PermissionError, OSError):
+        return False
+
+
+def _terminate_process_group(pid_value: Any, *, force: bool) -> None:
+    try:
+        pid = int(pid_value)
+    except (TypeError, ValueError):
+        return
+    if pid <= 0:
+        return
+    try:
+        os.killpg(pid, signal.SIGKILL if force else signal.SIGTERM)
+    except (ProcessLookupError, PermissionError, OSError):
+        return
+
+
+def _text_file_tail(path: Path, limit: int = 8000) -> str:
+    if not path.exists():
+        return ""
+    with path.open("rb") as handle:
+        handle.seek(0, os.SEEK_END)
+        size = handle.tell()
+        handle.seek(max(0, size - limit))
+        return handle.read().decode("utf-8", errors="replace")
+
+
+def _tokens_used_from_log(path: Path) -> int | None:
+    tail = _text_file_tail(path, 16000)
+    marker = "tokens used"
+    index = tail.rfind(marker)
+    if index < 0:
+        return None
+    for line in tail[index + len(marker):].splitlines():
+        raw = line.strip().replace(",", "")
+        if raw.isdigit():
+            return int(raw)
+    return None
+
+
+def _run_codex_process(
+    command: list[str],
+    prompt: str,
+    *,
+    cwd: Path,
+    stdout_path: Path,
+    stderr_path: Path,
+    terminal_path: Path,
+    job_path: Path,
+    deadline: float | None,
+) -> _AgentProcessResult:
+    stdout_path.parent.mkdir(parents=True, exist_ok=True)
+    output_queue: queue.Queue[tuple[str, str | None]] = queue.Queue()
+    process = subprocess.Popen(
+        command,
+        cwd=cwd,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        bufsize=1,
+        start_new_session=True,
+    )
+    live_job = _read_agent_job(job_path)
+    live_job.update({"pid": process.pid, "currentProcessStartedAt": _utc_now()})
+    _write_agent_job(job_path, live_job)
+
+    def pump(channel: str, stream: Any) -> None:
+        try:
+            for line in iter(stream.readline, ""):
+                output_queue.put((channel, line))
+        finally:
+            output_queue.put((channel, None))
+            stream.close()
+
+    readers = [
+        threading.Thread(target=pump, args=("stdout", process.stdout), daemon=True),
+        threading.Thread(target=pump, args=("stderr", process.stderr), daemon=True),
+    ]
+    for reader in readers:
+        reader.start()
+    assert process.stdin is not None
+    try:
+        process.stdin.write(prompt)
+        process.stdin.close()
+    except BrokenPipeError:
+        pass
+
+    completed_readers = 0
+    timed_out = False
+    cancelled = False
+    terminate_started: float | None = None
+    last_runtime_check = 0.0
+    with stdout_path.open("w", encoding="utf-8") as stdout_handle, stderr_path.open("w", encoding="utf-8") as stderr_handle, terminal_path.open("a", encoding="utf-8") as terminal_handle:
+        while completed_readers < 2 or process.poll() is None or not output_queue.empty():
+            try:
+                channel, text = output_queue.get(timeout=0.1)
+                if text is None:
+                    completed_readers += 1
+                else:
+                    target = stdout_handle if channel == "stdout" else stderr_handle
+                    target.write(text)
+                    target.flush()
+                    terminal_handle.write(text)
+                    terminal_handle.flush()
+            except queue.Empty:
+                pass
+            now = perf_counter()
+            if process.poll() is None and now - last_runtime_check >= 0.4:
+                last_runtime_check = now
+                try:
+                    runtime_job = _read_agent_job(job_path)
+                except (OSError, json.JSONDecodeError):
+                    runtime_job = {}
+                cancelled = bool(runtime_job.get("cancelRequestedAt"))
+                timed_out = bool(deadline is not None and now >= deadline)
+                if (cancelled or timed_out) and terminate_started is None:
+                    terminate_started = now
+                    _terminate_process_group(process.pid, force=False)
+                elif terminate_started is not None and now - terminate_started >= 3 and process.poll() is None:
+                    _terminate_process_group(process.pid, force=True)
+        process.wait()
+    for reader in readers:
+        reader.join(timeout=1)
+    return _AgentProcessResult(
+        returncode=int(process.returncode or 0),
+        stdout_tail=_text_file_tail(stdout_path),
+        stderr_tail=_text_file_tail(stderr_path),
+        pid=process.pid,
+        timed_out=timed_out,
+        cancelled=cancelled,
+    )
+
+
 def _run_authoring_agent_job(
     job_path: Path,
     request_path: Path,
@@ -1238,30 +1652,43 @@ def _run_authoring_agent_job(
     last_message_path: Path,
     stdout_path: Path,
     stderr_path: Path,
+    terminal_path: Path,
 ) -> None:
+    active_key = str(job_path.resolve())
+    with _ACTIVE_AUTHORING_AGENT_JOBS_LOCK:
+        _ACTIVE_AUTHORING_AGENT_JOBS.add(active_key)
     job = _read_agent_job(job_path)
-    job.update({
-        "status": "running",
-        "startedAt": datetime.now(timezone.utc).isoformat(),
-        "passState": {"current": "schema", "completed": [], "planned": ["schema", "faker", "validation_repair"]},
-    })
-    _write_agent_job(job_path, job)
     options = job.get("options") if isinstance(job.get("options"), dict) else {}
-    reasoning_effort = str(options.get("reasoningEffort") or "medium").strip().lower()
-    if reasoning_effort not in AUTHORING_AGENT_REASONING_EFFORTS:
-        reasoning_effort = "medium"
+    execution_mode = str(job.get("executionMode") or options.get("executionMode") or "two_pass")
+    planned_stages = _authoring_agent_execution_stages(execution_mode)
+    started_perf = perf_counter()
+    time_budget = options.get("timeBudgetMinutes")
+    deadline = started_perf + float(time_budget) * 60 if time_budget else None
+    job.update(
+        {
+            "status": "running",
+            "startedAt": _utc_now(),
+            "deadlineAt": datetime.fromtimestamp(datetime.now().timestamp() + float(time_budget) * 60, tz=timezone.utc).isoformat() if time_budget else None,
+            "passState": {"current": planned_stages[0], "completed": [], "planned": planned_stages},
+        }
+    )
+    _write_agent_job(job_path, job)
+    _snapshot_authoring_agent_drafts(request_dir, run_dir)
+    model = str(options.get("model") or DEFAULT_AUTHORING_AGENT_MODEL)
+    reasoning_effort = str(options.get("reasoningEffort") or DEFAULT_AUTHORING_AGENT_REASONING_EFFORT).strip().lower()
+
     def command_for(message_path: Path) -> list[str]:
         command = [
             "codex",
             "--search",
             "--ask-for-approval",
             "never",
+            "--model",
+            model,
             "-c",
             f'model_reasoning_effort="{reasoning_effort}"',
-        ]
-        if not bool(options.get("fastMode", False)):
-            command.extend(["--disable", "fast_mode"])
-        command.extend([
+            "--enable" if bool(options.get("fastMode", False)) else "--disable",
+            "fast_mode",
             "exec",
             "--cd",
             str(ROOT),
@@ -1270,30 +1697,24 @@ def _run_authoring_agent_job(
             "--output-last-message",
             str(message_path),
             "-",
-        ])
+        ]
         return command
-    def run_codex(command: list[str], stage_prompt: str) -> tuple[subprocess.CompletedProcess[str], int]:
-        completed: subprocess.CompletedProcess[str] | None = None
-        for attempt in range(1, 4):
-            completed = subprocess.run(
-                command,
-                input=stage_prompt,
-                cwd=ROOT,
-                text=True,
-                capture_output=True,
-                timeout=60 * 30,
-                check=False,
-            )
-            combined = f"{completed.stdout or ''}\n{completed.stderr or ''}".lower()
-            transient = "selected model is at capacity" in combined or "network error" in combined
-            if completed.returncode == 0 or not transient or attempt == 3:
-                return completed, attempt
-            sleep(5 * attempt)
-        assert completed is not None
-        return completed, 3
+
     try:
         stage_results: list[dict[str, Any]] = []
         frozen_artifacts: dict[str, tuple[str, Path]] = {}
+        final_validation: dict[str, Any] = {"ready": False, "summary": {}}
+        final_result: _AgentProcessResult | None = None
+
+        def freeze_schema_artifacts() -> None:
+            for name in ("schema_draft.json", "stylesheet_draft.json", "anchor_map_draft.json", "research_report.json"):
+                source = request_dir / name
+                if not source.exists():
+                    continue
+                frozen_copy = run_dir / f"frozen_{name}"
+                shutil.copy2(source, frozen_copy)
+                frozen_artifacts[name] = (hashlib.sha256(source.read_bytes()).hexdigest(), frozen_copy)
+
         def restore_frozen_artifacts() -> list[str]:
             violations: list[str] = []
             for name, (expected_hash, frozen_copy) in frozen_artifacts.items():
@@ -1304,8 +1725,23 @@ def _run_authoring_agent_job(
                     shutil.copy2(frozen_copy, source)
             return violations
 
-        completed = None
-        for stage in ("schema", "faker"):
+        if execution_mode == "faker_only":
+            prerequisite = _validate_authoring_agent_stage_outputs(request_dir, "schema")
+            if not prerequisite["ready"]:
+                raise ValueError("faker_only requires a valid frozen schema pass")
+            freeze_schema_artifacts()
+        if execution_mode == "validation_repair":
+            prerequisite = _validate_authoring_agent_outputs(request_dir)
+            if prerequisite["ready"]:
+                raise ValueError("validation_repair is not needed because the draft is already valid")
+
+        for stage_index, stage in enumerate(planned_stages):
+            live_job = _read_agent_job(job_path)
+            if live_job.get("cancelRequestedAt"):
+                final_result = _AgentProcessResult(-signal.SIGTERM, "", "", int(live_job.get("pid") or 0), cancelled=True)
+                break
+            stage_started_at = _utc_now()
+            stage_started_perf = perf_counter()
             stage_prompt_path = run_dir / f"codex_{stage}_pass_prompt.md"
             stage_message_path = run_dir / f"codex_{stage}_pass_last_message.md"
             stage_stdout_path = run_dir / f"{stage}_pass_stdout.log"
@@ -1316,134 +1752,149 @@ def _run_authoring_agent_job(
                 run_dir=run_dir,
                 stage=stage,
             )
+            if stage == "validation_repair":
+                stage_prompt += "\n## Machine validation result to repair\n```json\n" + json.dumps(_validate_authoring_agent_outputs(request_dir), ensure_ascii=False, indent=2) + "\n```\n"
             stage_prompt_path.write_text(stage_prompt, encoding="utf-8")
             command = command_for(stage_message_path)
-            completed, attempt_count = run_codex(command, stage_prompt)
-            stage_stdout_path.write_text(completed.stdout or "", encoding="utf-8")
-            stage_stderr_path.write_text(completed.stderr or "", encoding="utf-8")
-            stage_results.append(
-                {
-                    "stage": stage,
-                    "returnCode": completed.returncode,
-                    "promptPath": _display_path(stage_prompt_path, ROOT),
-                    "lastMessagePath": _display_path(stage_message_path, ROOT),
-                    "stdoutPath": _display_path(stage_stdout_path, ROOT),
-                    "stderrPath": _display_path(stage_stderr_path, ROOT),
-                    "command": command,
-                    "attemptCount": attempt_count,
-                }
-            )
-            if stage == "schema" and completed.returncode == 0:
-                for name in ("schema_draft.json", "stylesheet_draft.json", "anchor_map_draft.json", "research_report.json"):
-                    source = request_dir / name
-                    if not source.exists():
-                        continue
-                    frozen_copy = run_dir / f"frozen_{name}"
-                    shutil.copy2(source, frozen_copy)
-                    frozen_artifacts[name] = (hashlib.sha256(source.read_bytes()).hexdigest(), frozen_copy)
-            elif stage == "faker" and completed.returncode == 0:
-                violations = restore_frozen_artifacts()
-                if violations:
-                    stage_results[-1]["frozenArtifactViolations"] = violations
-            live_job = _read_agent_job(job_path)
-            completed_stages = [item["stage"] for item in stage_results if item["returnCode"] == 0]
-            live_job["passState"] = {
-                "current": "faker" if stage == "schema" and completed.returncode == 0 else "validation_repair" if stage == "faker" and completed.returncode == 0 else stage,
-                "completed": completed_stages,
-                "planned": ["schema", "faker", "validation_repair"],
+            attempt_count = 0
+            while True:
+                attempt_count += 1
+                final_result = _run_codex_process(
+                    command,
+                    stage_prompt,
+                    cwd=ROOT,
+                    stdout_path=stage_stdout_path,
+                    stderr_path=stage_stderr_path,
+                    terminal_path=terminal_path,
+                    job_path=job_path,
+                    deadline=deadline,
+                )
+                combined = f"{final_result.stdout_tail}\n{final_result.stderr_tail}".lower()
+                transient = "selected model is at capacity" in combined or "network error" in combined
+                if final_result.returncode == 0 or final_result.cancelled or final_result.timed_out or not transient or attempt_count >= 3:
+                    break
+                sleep(5 * attempt_count)
+            violations = restore_frozen_artifacts() if stage == "faker" and frozen_artifacts else []
+            stage_finished_at = _utc_now()
+            stage_entry = {
+                "stage": stage,
+                "status": "cancelled" if final_result.cancelled else "timed_out" if final_result.timed_out else "succeeded" if final_result.returncode == 0 else "failed",
+                "startedAt": stage_started_at,
+                "finishedAt": stage_finished_at,
+                "durationSeconds": round(perf_counter() - stage_started_perf, 3),
+                "returnCode": final_result.returncode,
+                "promptPath": _display_path(stage_prompt_path, ROOT),
+                "lastMessagePath": _display_path(stage_message_path, ROOT),
+                "stdoutPath": _display_path(stage_stdout_path, ROOT),
+                "stderrPath": _display_path(stage_stderr_path, ROOT),
+                "command": command,
+                "attemptCount": attempt_count,
+                "model": model,
+                "reasoningEffort": reasoning_effort,
+                "fastMode": bool(options.get("fastMode", False)),
+                "tokensUsed": _tokens_used_from_log(stage_stderr_path),
             }
-            live_job["stages"] = stage_results
-            _write_agent_job(job_path, live_job)
-            if completed.returncode != 0:
-                break
-        assert completed is not None
-        stdout_path.write_text("\n".join((run_dir / f"{stage['stage']}_pass_stdout.log").read_text(encoding="utf-8") for stage in stage_results), encoding="utf-8")
-        stderr_path.write_text("\n".join((run_dir / f"{stage['stage']}_pass_stderr.log").read_text(encoding="utf-8") for stage in stage_results), encoding="utf-8")
-        final_message = run_dir / f"codex_{stage_results[-1]['stage']}_pass_last_message.md"
-        if final_message.exists():
-            shutil.copy2(final_message, last_message_path)
-        validation = _validate_authoring_agent_outputs(request_dir)
-        if completed.returncode == 0 and not validation["ready"]:
-            stage = "validation_repair"
-            stage_prompt_path = run_dir / "codex_validation_repair_pass_prompt.md"
-            stage_message_path = run_dir / "codex_validation_repair_pass_last_message.md"
-            stage_stdout_path = run_dir / "validation_repair_pass_stdout.log"
-            stage_stderr_path = run_dir / "validation_repair_pass_stderr.log"
-            stage_prompt = _authoring_agent_exec_prompt(
-                request_path=request_path,
-                request_dir=request_dir,
-                run_dir=run_dir,
-                stage=stage,
-            ) + "\n## Machine validation result to repair\n```json\n" + json.dumps(validation, ensure_ascii=False, indent=2) + "\n```\n"
-            stage_prompt_path.write_text(stage_prompt, encoding="utf-8")
-            command = command_for(stage_message_path)
-            completed, attempt_count = run_codex(command, stage_prompt)
-            stage_stdout_path.write_text(completed.stdout or "", encoding="utf-8")
-            stage_stderr_path.write_text(completed.stderr or "", encoding="utf-8")
-            stage_results.append(
+            if violations:
+                stage_entry["frozenArtifactViolations"] = violations
+            stage_results.append(stage_entry)
+            if final_result.returncode == 0 and not final_result.cancelled and not final_result.timed_out:
+                final_validation = _validate_authoring_agent_stage_outputs(request_dir, "schema") if stage == "schema" else _validate_authoring_agent_outputs(request_dir)
+                if stage == "schema" and final_validation["ready"] and execution_mode == "two_pass":
+                    freeze_schema_artifacts()
+            completed_stages = [item["stage"] for item in stage_results if item["status"] == "succeeded"]
+            next_stage = planned_stages[stage_index + 1] if stage_index + 1 < len(planned_stages) else "completed"
+            live_job = _read_agent_job(job_path)
+            live_job.update(
                 {
-                    "stage": stage,
-                    "returnCode": completed.returncode,
-                    "promptPath": _display_path(stage_prompt_path, ROOT),
-                    "lastMessagePath": _display_path(stage_message_path, ROOT),
-                    "stdoutPath": _display_path(stage_stdout_path, ROOT),
-                    "stderrPath": _display_path(stage_stderr_path, ROOT),
-                    "command": command,
-                    "attemptCount": attempt_count,
+                    "pid": None,
+                    "stages": stage_results,
+                    "validation": final_validation,
+                    "passState": {
+                        "current": next_stage if final_result.returncode == 0 and final_validation.get("ready") else "needs_repair" if final_result.returncode == 0 else "failed",
+                        "completed": completed_stages,
+                        "planned": planned_stages,
+                    },
                 }
             )
-            violations = restore_frozen_artifacts()
-            if violations:
-                stage_results[-1]["frozenArtifactViolations"] = violations
-            validation = _validate_authoring_agent_outputs(request_dir)
-        stdout_path.write_text("\n".join((run_dir / f"{stage['stage']}_pass_stdout.log").read_text(encoding="utf-8") for stage in stage_results), encoding="utf-8")
-        stderr_path.write_text("\n".join((run_dir / f"{stage['stage']}_pass_stderr.log").read_text(encoding="utf-8") for stage in stage_results), encoding="utf-8")
-        final_message = run_dir / f"codex_{stage_results[-1]['stage']}_pass_last_message.md"
-        if final_message.exists():
-            shutil.copy2(final_message, last_message_path)
+            _write_agent_job(job_path, live_job)
+            if final_result.returncode != 0 or final_result.cancelled or final_result.timed_out or not final_validation.get("ready"):
+                break
+
+        stage_stdout_paths = [_resolve_workspace_path(str(item["stdoutPath"])) for item in stage_results]
+        stage_stderr_paths = [_resolve_workspace_path(str(item["stderrPath"])) for item in stage_results]
+        stdout_path.write_text("\n".join(path.read_text(encoding="utf-8") for path in stage_stdout_paths if path.exists()), encoding="utf-8")
+        stderr_path.write_text("\n".join(path.read_text(encoding="utf-8") for path in stage_stderr_paths if path.exists()), encoding="utf-8")
+        if stage_results:
+            final_message = _resolve_workspace_path(str(stage_results[-1]["lastMessagePath"]))
+            if final_message.exists():
+                shutil.copy2(final_message, last_message_path)
         job = _read_agent_job(job_path)
+        cancelled = bool(job.get("cancelRequestedAt")) or bool(final_result and final_result.cancelled)
+        timed_out = bool(final_result and final_result.timed_out)
+        return_code = final_result.returncode if final_result is not None else None
+        full_scope = execution_mode != "schema_only"
+        if cancelled:
+            status = "cancelled"
+        elif timed_out:
+            status = "timed_out"
+        elif return_code not in (0, None):
+            status = "failed"
+        elif final_validation.get("ready"):
+            status = "succeeded"
+        else:
+            status = "needs_repair"
+        completed_stages = [item["stage"] for item in stage_results if item["status"] == "succeeded"]
         job.update(
             {
-                "status": "succeeded" if completed.returncode == 0 and validation["ready"] else "failed",
-                "finishedAt": datetime.now(timezone.utc).isoformat(),
-                "returnCode": completed.returncode,
-                "command": stage_results[-1]["command"],
+                "status": status,
+                "finishedAt": _utc_now(),
+                "elapsedSeconds": round(perf_counter() - started_perf, 3),
+                "pid": None,
+                "returnCode": return_code,
+                "command": stage_results[-1]["command"] if stage_results else None,
                 "stages": stage_results,
-                "outputs": validation["outputs"],
-                "validation": validation,
-                "repairSummary": validation.get("repairSummary") or {},
-                "passState": {
-                    "current": "completed" if completed.returncode == 0 and validation["ready"] else "failed",
-                    "completed": list(dict.fromkeys([*[item["stage"] for item in stage_results if item["returnCode"] == 0], *(["validation_repair"] if validation["ready"] else [])])),
-                    "planned": ["schema", "faker", "validation_repair"],
-                },
+                "outputs": final_validation.get("outputs", {}),
+                "validation": {**final_validation, "scope": "full" if full_scope else "schema"},
+                "repairSummary": final_validation.get("repairSummary") or {},
+                "passState": {"current": "completed" if status == "succeeded" else status, "completed": completed_stages, "planned": planned_stages},
             }
         )
-        if completed.returncode != 0:
-            job["error"] = f"codex exec failed with exit code {completed.returncode}"
-        elif not validation["ready"]:
-            job["error"] = "codex exec finished but required draft outputs are missing or invalid"
+        if status == "failed":
+            job["error"] = f"codex exec failed with exit code {return_code}"
+        elif status == "needs_repair":
+            job["error"] = "draft validation requires a manual validation_repair pass"
+        elif status == "timed_out":
+            job["error"] = "authoring agent time budget exceeded"
+        elif status == "cancelled":
+            job["error"] = "authoring agent run cancelled by user"
+        else:
+            job["error"] = None
     except Exception as exc:  # pragma: no cover - defensive for manual job runtime
         stderr_path.write_text(str(exc), encoding="utf-8")
         validation = _validate_authoring_agent_outputs(request_dir)
         job = _read_agent_job(job_path)
+        cancelled = bool(job.get("cancelRequestedAt"))
         job.update(
             {
-                "status": "failed",
-                "finishedAt": datetime.now(timezone.utc).isoformat(),
+                "status": "cancelled" if cancelled else "failed",
+                "finishedAt": _utc_now(),
+                "elapsedSeconds": round(perf_counter() - started_perf, 3),
+                "pid": None,
                 "returnCode": None,
                 "outputs": validation["outputs"],
-                "validation": validation,
-                "error": str(exc),
+                "validation": {**validation, "scope": "full"},
+                "error": "authoring agent run cancelled by user" if cancelled else str(exc),
             }
         )
-    _write_agent_job(job_path, job)
+    finally:
+        _write_agent_job(job_path, job)
+        with _ACTIVE_AUTHORING_AGENT_JOBS_LOCK:
+            _ACTIVE_AUTHORING_AGENT_JOBS.discard(active_key)
     update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_run", job_path)
-    if job.get("status") == "succeeded":
+    if job.get("status") == "succeeded" and (job.get("validation") or {}).get("scope") == "full":
         update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_schema_draft", request_dir / "schema_draft.json")
         update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_faker_profile_draft", request_dir / "faker_profile_draft.json")
         update_manifest_artifact(str(job.get("docId") or ""), "authoring_agent_research_report", request_dir / "research_report.json")
-
 
 
 def _request_pool_min_sizes(request_dir: Path) -> tuple[int, int]:
@@ -1918,11 +2369,63 @@ def _validate_authoring_agent_outputs(request_dir: Path) -> dict[str, Any]:
     }
 
 
+def _validate_authoring_agent_stage_outputs(request_dir: Path, stage: str) -> dict[str, Any]:
+    if stage not in {"schema", "faker"}:
+        return _validate_authoring_agent_outputs(request_dir)
+    required = AUTHORING_AGENT_SCHEMA_OUTPUTS if stage == "schema" else AUTHORING_AGENT_REQUIRED_OUTPUTS
+    outputs: dict[str, str] = {}
+    missing: list[str] = []
+    invalid_json: list[dict[str, str]] = []
+    parsed_json: dict[str, Any] = {}
+    for name in required:
+        path = request_dir / name
+        if not path.exists():
+            missing.append(name)
+            continue
+        outputs[name] = _display_path(path, ROOT)
+        if name.endswith(".json"):
+            try:
+                parsed_json[name] = json.loads(path.read_text(encoding="utf-8"))
+            except Exception as exc:
+                invalid_json.append({"name": name, "error": str(exc)})
+    contract_errors: list[dict[str, Any]] = []
+    repair_summary = {"materializedUseAnchors": [], "materializedCount": 0, "removedUnmappedDeclaration": False}
+    if not invalid_json:
+        min_pool_size, min_record_pool_size = _request_pool_min_sizes(request_dir)
+        repair_summary = _ensure_use_anchor_placeholders(parsed_json, request_dir)
+        contract_errors.extend(
+            _validate_schema_draft_contract(
+                parsed_json,
+                min_pool_size=min_pool_size,
+                min_record_pool_size=min_record_pool_size,
+                include_faker=stage != "schema",
+            )
+        )
+        contract_errors.extend(_validate_blank_template_agent_contract(request_dir, parsed_json))
+    return {
+        "ready": not missing and not invalid_json and not contract_errors,
+        "scope": stage,
+        "missing": missing,
+        "invalidJson": invalid_json,
+        "contractErrors": contract_errors,
+        "outputs": outputs,
+        "repairSummary": repair_summary,
+        "summary": {
+            "required": len(required),
+            "present": len(outputs),
+            "missing": len(missing),
+            "invalidJson": len(invalid_json),
+            "contractErrors": len(contract_errors),
+        },
+    }
+
+
 def _validate_schema_draft_contract(
     parsed_json: dict[str, Any],
     *,
     min_pool_size: int = 1,
     min_record_pool_size: int = 1,
+    include_faker: bool = True,
 ) -> list[dict[str, Any]]:
     schema = parsed_json.get("schema_draft.json") if isinstance(parsed_json.get("schema_draft.json"), dict) else {}
     anchor_map = parsed_json.get("anchor_map_draft.json") if isinstance(parsed_json.get("anchor_map_draft.json"), dict) else {}
@@ -1978,14 +2481,15 @@ def _validate_schema_draft_contract(
         for evidence_id in _binding_research_evidence_ids(field):
             if research_source_ids and evidence_id not in research_source_ids:
                 errors.append({"code": "schema_field_unknown_research_evidence", "field": field_id, "research_evidence_id": evidence_id, "message": "research_evidence_ids must refer to research_report.sources[].id"})
-    errors.extend(
-        _validate_faker_profile_contract(
-            faker_profile,
-            fields,
-            min_pool_size=min_pool_size,
-            min_record_pool_size=min_record_pool_size,
+    if include_faker:
+        errors.extend(
+            _validate_faker_profile_contract(
+                faker_profile,
+                fields,
+                min_pool_size=min_pool_size,
+                min_record_pool_size=min_record_pool_size,
+            )
         )
-    )
     if anchors:
         use_anchor_ids = {anchor_id for anchor_id, anchor in anchors.items() if str(anchor.get("status") or "").strip().lower() == "use"}
         prohibited_unmapped = _unmapped_use_anchor_ids(schema)
@@ -2520,17 +3024,42 @@ def _run_ocr_detection_job(job_path: Path) -> None:
 
 
 def _read_agent_job(job_path: Path) -> dict[str, Any]:
-    return json.loads(job_path.read_text(encoding="utf-8"))
+    with _AGENT_JOB_FILE_LOCK:
+        return json.loads(job_path.read_text(encoding="utf-8"))
 
 
 def _write_agent_job(job_path: Path, job: dict[str, Any]) -> None:
-    job_path.parent.mkdir(parents=True, exist_ok=True)
-    job_path.write_text(json.dumps(job, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with _AGENT_JOB_FILE_LOCK:
+        job_path.parent.mkdir(parents=True, exist_ok=True)
+        temp_path = job_path.with_suffix(f"{job_path.suffix}.tmp")
+        temp_path.write_text(json.dumps(job, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        os.replace(temp_path, job_path)
 
 
-def _agent_job_payload(job_path: Path) -> dict[str, Any]:
+def _agent_job_payload(job_path: Path, *, terminal_offset: int | None = None) -> dict[str, Any]:
     job = _read_agent_job(job_path)
-    return {**job, "jobPath": _display_path(job_path, ROOT)}
+    payload = {**job, "jobPath": _display_path(job_path, ROOT)}
+    terminal_value = str(job.get("terminalPath") or "")
+    if terminal_offset is not None and terminal_value:
+        terminal_path = _resolve_workspace_path(terminal_value)
+        offset = max(0, int(terminal_offset))
+        size = terminal_path.stat().st_size if terminal_path.exists() else 0
+        if offset > size:
+            offset = 0
+        if terminal_path.exists():
+            with terminal_path.open("rb") as handle:
+                handle.seek(offset)
+                raw = handle.read(AUTHORING_AGENT_TERMINAL_CHUNK_SIZE)
+        else:
+            raw = b""
+        payload["terminal"] = {
+            "offset": offset,
+            "nextOffset": offset + len(raw),
+            "size": size,
+            "text": raw.decode("utf-8", errors="replace"),
+            "hasMore": offset + len(raw) < size,
+        }
+    return payload
 
 
 def _clear_manifest_artifacts(doc_id: str, artifact_keys: list[str]) -> None:
@@ -3196,6 +3725,9 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     }
                 )
                 return
+            if parsed.path == "/api/authoring/agent-capabilities":
+                self._send_json(authoring_agent_capabilities())
+                return
             if parsed.path == "/api/authoring/agent-run-status":
                 query = parse_qs(parsed.query)
                 payload: dict[str, Any] = {}
@@ -3203,6 +3735,8 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                     payload["jobPath"] = unquote(query["jobPath"][0])
                 if query.get("docId"):
                     payload["docId"] = unquote(query["docId"][0])
+                if query.get("terminalOffset"):
+                    payload["terminalOffset"] = unquote(query["terminalOffset"][0])
                 self._send_json(authoring_agent_run_status_payload(payload))
                 return
             if parsed.path == "/api/ocr/detect/status":
@@ -3581,6 +4115,9 @@ class DataFactoryRequestHandler(BaseHTTPRequestHandler):
                 return
             if parsed.path == "/api/authoring/agent-run-status":
                 self._send_json(authoring_agent_run_status_payload(payload))
+                return
+            if parsed.path == "/api/authoring/agent-run/cancel":
+                self._send_json(cancel_authoring_agent_run_payload(payload))
                 return
             if parsed.path == "/api/authoring/migrate-bboxes":
                 doc_id = str(payload.get("docId") or "")
